@@ -2,6 +2,7 @@ type Feed = {
   id: string;
   title: string;
   updatedAt: string;
+  author: string;
   generatedUrl?: string;
   entry: EntryData;
 };
