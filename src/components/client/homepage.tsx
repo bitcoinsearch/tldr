@@ -68,7 +68,7 @@ const Homepage = ({ data }: { data: FakeDataType }) => {
           <h2 className="text-4xl font-semibold">Active Discussions 🔥</h2>
           <div>
             {homepageData.map((entry, idx) => (
-              <Post key={idx} entry={entry} />
+              <Post key={entry.id} entry={entry} />
             ))}
           </div>
         </section>

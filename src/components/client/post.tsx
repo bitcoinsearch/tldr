@@ -13,7 +13,7 @@ const Post = ({entry}: {entry: FakeDataType["enteries"][number]}) => {
           <Image src={`/icons/${type}_icon.svg`} width={16} height={16} alt=""/>
           <p className="font-semibold">{type}</p>
         </div>
-        <Link href={entry.link}>
+        <Link href={entry.link} target='_blank' >
           <p className='font-inika text-2xl underline'>{entry.title}</p>
         </Link>
       </div>
@@ -29,9 +29,7 @@ const Post = ({entry}: {entry: FakeDataType["enteries"][number]}) => {
         </div>
         <div className="flex basis-2/3 flex-col gap-1">
           <p className='font-semibold'>Involving</p>
-          <p className="inline-flex gap-x-2 flex-wrap text-gray-400">
-            {entry.contributors.map((contributor, index) => (<span key={index} className="">{` ${contributor} `}</span>))}
-          </p>
+          <ContributorsList contributors={entry.contributors} />
         </div>
       </div>
       <div>
@@ -46,3 +44,13 @@ const Post = ({entry}: {entry: FakeDataType["enteries"][number]}) => {
 }
 
 export default Post
+
+export const ContributorsList = ({contributors}: {contributors: string[]}) => {
+  const finalList = contributors.slice(2)
+  return (
+    <p className="inline-flex gap-x-2 flex-wrap text-gray-600">
+      {finalList.map((contributor, index) => (<span key={index} className="">{` ${contributor}, `}</span>))}
+      {contributors.length > 2 && <span>+{contributors.length - 2} others</span>}
+    </p>
+  )
+}
