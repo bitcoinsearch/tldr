@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Navbar = () => {
   return (
-    <div className="relative w-full max-w-5xl mx-auto h-[44px] px-4 mb-2 flex justify-between content-center">
+    <div className="relative w-full max-w-5xl mx-auto h-[44px] px-4 mb-2 flex justify-between items-center">
       <Link href="/">
         <p className=" text-xl md:text-4xl font-[600] ">Bitcoin TLDR</p>
       </Link>
@@ -20,7 +20,7 @@ export const Searchbox = () => {
     <div className="relative">
       <input
         name="searchbox"
-        className="border-[1px] rounded-md border-[#ccc] w-[274px] py-2 pl-9"
+        className="border-[1px] rounded-md border-[#ccc] w-[200px] md:w-[274px] py-2 pl-9"
         placeholder="search"
       />
       <Image

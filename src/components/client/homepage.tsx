@@ -2,10 +2,8 @@
 import { FakeDataType } from "@/app/page";
 import { BITCOINDEV, LIGHTNINGDEV, MailingListType } from "@/helpers/types";
 import Image from "next/image";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import Post from "./post";
-
-type SeparatedMailingList = Record<MailingListType, FakeDataType["enteries"]>;
 
 const Homepage = ({ data }: { data: FakeDataType }) => {
   const [mailingListSelection, setMailingListSelection] = useState<
@@ -14,17 +12,6 @@ const Homepage = ({ data }: { data: FakeDataType }) => {
     [BITCOINDEV]: true,
     [LIGHTNINGDEV]: true,
   });
-  // const separatedMailingList = useMemo(() => {
-  //   const separatedList: SeparatedMailingList = {
-  //     [BITCOINDEV]: [],
-  //     [LIGHTNINGDEV]: [],
-  //   };
-  //   data.enteries.forEach((entry) => {
-  //     const dev_name = entry.dev_name as MailingListType;
-  //     separatedMailingList[dev_name].push(entry);
-  //   });
-  //   return separatedList;
-  // }, [data]);
 
   const getSelectionList = (data: FakeDataType) => {
     if (
@@ -53,7 +40,7 @@ const Homepage = ({ data }: { data: FakeDataType }) => {
   };
   return (
     <main className="">
-      <h1 className="font-inika my-20 text-2xl text-gray-800">
+      <h1 className="font-inika my-8 md:my-20 text-lg md:text-2xl text-gray-800">
         {data.header_summary}
       </h1>
       <div className="my-8">
@@ -63,17 +50,17 @@ const Homepage = ({ data }: { data: FakeDataType }) => {
           handleToggle={handleMailingListToggle}
         />
       </div>
-      <div className="flex gap-12">
+      <div className="flex flex-col md:flex-row gap-12">
         <section>
-          <h2 className="text-4xl font-semibold">Active Discussions 🔥</h2>
+          <h2 className="text-xl md:text-4xl font-semibold">Active Discussions 🔥</h2>
           <div>
-            {homepageData.map((entry, idx) => (
+            {homepageData.map((entry) => (
               <Post key={entry.id} entry={entry} />
             ))}
           </div>
         </section>
         <section>
-          <h2 className="text-4xl font-semibold">Recent Discussions 🪄</h2>
+          <h2 className="text-xl md:text-4xl font-semibold">Recent Discussions 🪄</h2>
           <div>
             {homepageData.map((entry, idx) => (
               <Post key={idx} entry={entry} />

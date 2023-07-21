@@ -8,16 +8,16 @@ const Post = ({entry}: {entry: FakeDataType["enteries"][number]}) => {
   const type = entry.dev_name
   return (
     <article className='flex flex-col gap-4 my-8'>
-      <div className='flex flex-col gap-2'>
+      <div className='flex flex-col md:gap-2'>
         <div className='flex items-center gap-2'>
           <Image src={`/icons/${type}_icon.svg`} width={16} height={16} alt=""/>
           <p className="font-semibold">{type}</p>
         </div>
         <Link href={entry.link} target='_blank' >
-          <p className='font-inika text-2xl underline'>{entry.title}</p>
+          <p className='font-inika text-lg md:text-2xl underline'>{entry.title}</p>
         </Link>
       </div>
-      <p className='font-inter text-base font-bold'>{entry.n_threads} replies</p>
+      <p className='font-inter text-sm md:text-base font-bold'>{entry.n_threads} replies</p>
       <div className="flex gap-8 text-sm">
         <div className="flex basis-1/3 flex-col gap-1">
           <p className='font-semibold'>Started by</p>
@@ -46,7 +46,7 @@ const Post = ({entry}: {entry: FakeDataType["enteries"][number]}) => {
 export default Post
 
 export const ContributorsList = ({contributors}: {contributors: string[]}) => {
-  const finalList = contributors.slice(2)
+  const finalList = contributors.slice(0, 2)
   return (
     <p className="inline-flex gap-x-2 flex-wrap text-gray-600">
       {finalList.map((contributor, index) => (<span key={index} className="">{` ${contributor}, `}</span>))}
