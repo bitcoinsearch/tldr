@@ -1,0 +1,48 @@
+import { FakeDataType } from '@/app/page'
+import { LIGHTNINGDEV, MailingListType } from '@/helpers/types'
+import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
+
+const Post = ({entry}: {entry: FakeDataType["enteries"][number]}) => {
+  const type = entry.dev_name
+  return (
+    <article className='flex flex-col gap-4 my-8'>
+      <div className='flex flex-col gap-2'>
+        <div className='flex items-center gap-2'>
+          <Image src={`/icons/${type}_icon.svg`} width={16} height={16} alt=""/>
+          <p className="font-semibold">{type}</p>
+        </div>
+        <Link href={entry.link}>
+          <p className='font-inika text-2xl underline'>{entry.title}</p>
+        </Link>
+      </div>
+      <p className='font-inter text-base font-bold'>{entry.n_threads} replies</p>
+      <div className="flex gap-8 text-sm">
+        <div className="flex basis-1/3 flex-col gap-1">
+          <p className='font-semibold'>Started by</p>
+          <Link href={entry.link}>
+            <p className="text-orange-300 underline">
+              {entry.authors[0]}
+            </p>
+          </Link>
+        </div>
+        <div className="flex basis-2/3 flex-col gap-1">
+          <p className='font-semibold'>Involving</p>
+          <p className="inline-flex gap-x-2 flex-wrap text-gray-400">
+            {entry.contributors.map((contributor, index) => (<span key={index} className="">{` ${contributor} `}</span>))}
+          </p>
+        </div>
+      </div>
+      <div>
+        <ul>
+          <li>
+            {entry.summary}
+          </li>
+        </ul>
+      </div>
+    </article>
+  )
+}
+
+export default Post

@@ -7,6 +7,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        inter: ['var(--font-inter)'],
+        inika: ['var(--font-inika)'],
+      },
+      colors: {
+        "brand-secondary": "#B06B03",
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

@@ -16,4 +16,9 @@ type EntryData = {
   published: string;
 };
 
-export type { Feed, EntryData };
+type MailingListType = typeof BITCOINDEV | typeof LIGHTNINGDEV
+
+export const BITCOINDEV = "bitcoin-dev"
+export const LIGHTNINGDEV = "lightning-dev"
+
+export type { Feed, EntryData, MailingListType };
