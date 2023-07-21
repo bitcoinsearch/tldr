@@ -12,7 +12,9 @@ module.exports = {
         inika: ['var(--font-inika)'],
       },
       colors: {
-        "brand-secondary": "#B06B03",
+        "brand": {
+          "secondary": "#B06B03",
+        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

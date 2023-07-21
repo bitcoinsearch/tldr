@@ -22,7 +22,7 @@ const Post = ({entry}: {entry: FakeDataType["enteries"][number]}) => {
         <div className="flex basis-1/3 flex-col gap-1">
           <p className='font-semibold'>Started by</p>
           <Link href={entry.link}>
-            <p className="text-orange-300 underline">
+            <p className="text-brand-secondary underline">
               {entry.authors[0]}
             </p>
           </Link>
