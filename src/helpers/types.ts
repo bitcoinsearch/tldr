@@ -2,7 +2,7 @@ type Feed = {
   id: string;
   title: string;
   updatedAt: string;
-  author: string;
+  authors: Record<string, string[]>;
   generatedUrl?: string;
   entry: EntryData;
 };
@@ -16,9 +16,30 @@ type EntryData = {
   published: string;
 };
 
-type MailingListType = typeof BITCOINDEV | typeof LIGHTNINGDEV
+type MailingListType = typeof BITCOINDEV | typeof LIGHTNINGDEV;
 
-export const BITCOINDEV = "bitcoin-dev"
-export const LIGHTNINGDEV = "lightning-dev"
+export const BITCOINDEV = "bitcoin-dev";
+export const LIGHTNINGDEV = "lightning-dev";
 
-export type { Feed, EntryData, MailingListType };
+type SearchIndexData = {
+  title: string;
+  authors: string[];
+  summary: string;
+  path: string;
+};
+
+type SearchDataParams = {
+  path?: string;
+  query: {
+    keyword?: string;
+    author?: string;
+  };
+};
+
+export type {
+  Feed,
+  EntryData,
+  MailingListType,
+  SearchIndexData,
+  SearchDataParams,
+};
