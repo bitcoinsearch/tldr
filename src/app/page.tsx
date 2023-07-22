@@ -6,7 +6,7 @@ import { SearchDataParams } from "@/helpers/types";
 export type FakeDataType = typeof FakeData;
 
 async function getSearchData({ path, query }: SearchDataParams) {
-  const directory = `public/statics${path ? "/" + path : "/"}`;
+  const directory = `public/static/static${path ? "/" + path : "/"}`;
   const data = await indexAndSearch(directory, query);
   if (data) {
     return data;
