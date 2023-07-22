@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Capping the size of locators [trivial protocol change BIP]</title>
+  <updated>2023-06-13T14:05:46.556421+00:00</updated>
+  <author>
+    <name>Eric Voskuil 2018-08-06 05:29:31</name>
+  </author>
+  <author>
+    <name>Eric Voskuil 2018-08-06 05:29:31</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2018-08-06 02:15:22</name>
+  </author>
+  <author>
+    <name>Eric Voskuil 2018-08-06 05:29:31</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2018-08-06 02:15:22</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2018-08-06 02:15:22</name>
+  </author>
+  <link href="bitcoin-dev/Aug_2018/016288_Capping-the-size-of-locators-trivial-protocol-change-BIP-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2018/016288_Capping-the-size-of-locators-trivial-protocol-change-BIP-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2018/016285_Capping-the-size-of-locators-trivial-protocol-change-BIP-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2018/016288_Capping-the-size-of-locators-trivial-protocol-change-BIP-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2018/016285_Capping-the-size-of-locators-trivial-protocol-change-BIP-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2018/016285_Capping-the-size-of-locators-trivial-protocol-change-BIP-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Capping the size of locators [trivial protocol change BIP]</title>
+    <updated>2023-06-13T14:05:46.556421+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-August/016288.html" rel="alternate"/>
+    <summary>The Bitcoin P2P protocol uses a data structure called a locator to reconcile blockchains between nodes. The locator communicates a list of known hashes that allows a peer to find a recent common ancestor between the best chains on two nodes. However, the original Bitcoin implementation had no explicit limit to the number of hashes in a locator message, allowing for wasteful uses such as including all hashes in a chain. This could potentially result in network splits if older nodes produce larger locators. To reduce the worst-case cost of processing a locator message, it would be useful if the size of locator messages were strictly bounded to sensible levels.Coinr8d raised concerns regarding the node software processing large locators without limits. Gregory Maxwell proposed limiting the locator messages used in the getblocks and getheaders to 64 entries and requiring them to be ordered by total work. This proposal reduces the worst-case cost of processing a locator message. Implementations that seek to handle larger numbers of blocks than afforded by this limit with an exponent of 2 can adaptively switch to a larger exponent as required to stay within the limit. The proposal is licensed under the 2-clause BSD license.A locator included in a getblock or getheaders message may include no more than 64 hashes, including the final hash_stop hash. Additionally, the blocks referenced by the locator must be in order of equal or decreasing total work. Sending a locator that violates these requirements may result in normal processing, the message being ignored, a disconnection, or a ban.Coinr8d pointed out that node software would process and respond to locators with about 125,000 hashes in them, but quick measurements indicated that it likely wasn't worse than many other protocol messages. A quick survey of node software indicated that no software could find would ever produce a locator with more than 42 hashes before encountering other limits, so a limit of 64 will be automatically compatible with all or virtually all nodes on the network.</summary>
+    <published>2018-08-06T05:29:31+00:00</published>
+  </entry>
+</feed>

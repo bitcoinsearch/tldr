@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP draft: Hardfork bit</title>
+  <updated>2023-06-10T03:51:12.639015+00:00</updated>
+  <author>
+    <name>jl2012 at xbt.hk 2015-07-23 19:26:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP draft: Hardfork bit</title>
+    <updated>2023-06-10T03:51:12.639015+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-July/009600.html" rel="alternate"/>
+    <summary>This discussion on the bitcoin-dev mailing list centers around the potential issues that could arise with a hard fork in the Bitcoin network. One concern is that full nodes and SPV nodes following original consensus rules may not be aware of a hard fork deployment, leading them to stick to an economic-minority fork and unknowingly accept devalued legacy tokens. The proposed solution is to kick these nodes off the main chain immediately when the fork activates. However, the change itself is a hard fork, so clients must be updated to receive its benefits.Another issue discussed is that users following the new chain may unexpectedly reorg back to the original chain if it grows faster than the new one, causing confirmed transactions to become unconfirmed and resulting in monetary loss. To address this problem, a flag block is proposed that would be constructed in a way that nodes with the original consensus rules must reject. Nodes with the new consensus rules must reject a block if it is not a flag block when it is meant to be. The flag block would have the hardfork bit set to 1, include a short predetermined unique description of the hardfork anywhere in its coinbase, and follow any other rules required by the hardfork. If these conditions are not fully satisfied, upgraded nodes will reject the block.Additionally, there is a proposal for an automatic warning system in which full nodes and SPV nodes would look into the coinbase of a flag block when found on the network. They would then alert their users or stop accepting incoming transactions if it is an unknown hardfork. A human warning system could also be implemented. However, this warning system could become a DoS vector if the attacker is willing to give up the block reward, so the warning may only be issued if a few blocks are built on top of the flag block in a reasonable time frame. Emergency hard forks may still have to take effect immediately, so it would need to be a custom, not a rule.</summary>
+    <published>2015-07-23T19:26:33+00:00</published>
+  </entry>
+</feed>

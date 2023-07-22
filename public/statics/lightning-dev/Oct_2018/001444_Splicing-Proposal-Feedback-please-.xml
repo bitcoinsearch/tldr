@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Splicing Proposal: Feedback please!</title>
+  <updated>2023-05-25T14:24:44.750629+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-10-12 04:21:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Splicing Proposal: Feedback please!</title>
+    <updated>2023-05-25T14:24:44.750629+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-October/001444.html" rel="alternate"/>
+    <summary>The Lightning Network is a decentralized system for instant and high-volume Bitcoin transactions, which has been designed as an overlay network to the Bitcoin Blockchain. Rusty Russell, a computer programmer from Australia, has proposed a new protocol for Lightning Network's splice-in feature, which enables users to add funds to an existing payment channel without closing it. The current process involves creating a new transaction with updated balances, but Russell's alternative method involves creating parallel funding transactions that can be merged at an agreed depth. Russell's proposed protocol involves preparing any output with script of specific form, type 40 (`splice_in`) and data such as channel ID, satoshis, TxID, TXoutnum, block height, and rescue public key. The recipient of `splice_in` checks if they are happy with the block height, and once the transaction referred to is buried to its own minimum depth, it checks the output claimed and sends an `update_splice_in_accept`. Similarly, for splice-out, the recipient checks if the output script is standard, and the amount can be afforded by the other side. In order to initiate a mutually-agreed broadcast of the current state, all inputs, spliced outputs, and a funding-style 2x2 which has all remaining funds must be included.  This is known as a 'reopen tx.' A back-and-forth until both sides agree on feerate must occur, and then a `reopen_accept` message is sent. Once this message is received and sent, the reopen tx can be signed with a `reopen_commitment_sig`. Finally, a 'reopen_locked' message can be added to indicate that both sides are happy with the reopen depth, if reopens back-to-back are not allowed.</summary>
+    <published>2018-10-12T04:21:01+00:00</published>
+  </entry>
+</feed>

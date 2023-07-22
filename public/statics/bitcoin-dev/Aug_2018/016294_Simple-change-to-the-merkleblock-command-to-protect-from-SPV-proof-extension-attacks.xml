@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Simple change to the "merkleblock" command to protect from SPV proof extension attacks</title>
+  <updated>2023-05-20T17:32:40.579806+00:00</updated>
+  <author>
+    <name>Sergio Demian Lerner 2018-08-10 00:21:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Simple change to the "merkleblock" command to protect from SPV proof extension attacks</title>
+    <updated>2023-05-20T17:32:40.579806+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-August/016294.html" rel="alternate"/>
+    <summary>The writer has come up with an idea to fix the MERKLEBLOCK command in order to prevent rogue peers from attacking SPV peers using Bitcoin's Merkle tree structure flaws. The most annoying attack is when a peer tries to confuse a victim peer into thinking a transaction is an inner node, extending such node with a new right-sided branch with a fake transaction. The old idea to soft-fork Bitcoin to make invalid 64-byte transactions is attractive but also a coordination problem that could be avoided with this new proposal.The writer proposes that instead of storing A, the merkleblock structure should store a pre-image of A, or SHA256(X). If the block only has the coinbase, nothing is done. The pre-image change could be done to both left and right hashes, but it's enough to do it to all left-side hashes that do not have children in the partial merkle tree structure (let's call them terminal hahes. to avoid confusion with leaf hashes). Verifiers (SPV nodes) would apply a single SHA256() operation to the left-sided terminal hashes before combining them. The cost to the verifier is in the worse case only 33% more.This basically limits the attacker's ability to supply chosen-hash digests in order to build a transaction. Because the left side contains most of the previn hash, the attacker would need to bruteforce a huge space (about 208 bits) in order to come up with a pre-image that maps to an owned previn. Meet-in-the-middle attacks would be expensive as UTXOs are not free.To implement this change, a new command MERKLEBLOCK2 could be implemented or the protocol version could be used to differentiate between the two modes of the MERKLEBLOCK command. If this idea gets community support, the writer may write the BIP/code or invite anyone to do it. The article on leaf node weakness in Bitcoin's Merkle tree design is linked for reference.</summary>
+    <published>2018-08-10T00:21:17+00:00</published>
+  </entry>
+</feed>

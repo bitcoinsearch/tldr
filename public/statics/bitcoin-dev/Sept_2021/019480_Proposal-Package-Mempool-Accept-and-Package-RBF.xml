@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Package Mempool Accept and Package RBF</title>
+  <updated>2023-06-15T02:15:19.279842+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2021-09-21 15:18:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Package Mempool Accept and Package RBF</title>
+    <updated>2023-06-15T02:15:19.279842+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019480.html" rel="alternate"/>
+    <summary>The proposal aims to make changes to the mempool policy in Bitcoin Core to enable package validation. Currently, transactions are considered one at a time for submission to the mempool, which creates limitations and poses security issues for applications and users relying on time-sensitive transactions. The proposal enables packages consisting of multiple parents and one child, allowing better propagation of transactions with the highest package feerates to miners and making fee-bumping tools more powerful for users.The proposed changes include allowing packages to contain already-in-mempool transactions, restricting the topology of packages to be Multi-Parent-1-Child, using the package feerate for fee-related checks, and enabling parents to RBF mempool transactions with a set of rules similar to BIP125. The CPFP rule requires transactions to have an ancestor score at least as high as the original ones, making the entire package a higher feerate mining candidate than each of the replaced transactions. The proposal also allows L2 applications to adjust their fees at broadcast time instead of overshooting or risking getting stuck/pinned. However, the proposal has some rules that need to be followed for package RBF. For example, a package cannot exceed `MAX_PACKAGE_COUNT=25` count and `MAX_PACKAGE_SIZE=101KvB` total size. Also, the package cannot replace more than 100 mempool transactions. The Package Mempool Accept project has proposed changes to the existing package rules, and a draft implementation of this proposal can be found in Bitcoin Core PR#22290. Feedback is welcome. Several pull requests have been made to update BIP125, including #22290, #16400, #21062, #22675, #22796, #20833, #21800, #16401, and #19621. Additional information on transaction size calculations can be found in BIP-0141, and policy.cpp provides further insight on incremental relay fees. The proposal aims to mitigate a pinning scenario in LN where a different commit tx is pinned, but you actually can't know which one. However, the proposal doesn't accommodate something like diagram B, where C is getting CPFP carve out and wants to bring a +1. It believes this case shouldn't be a concern. The proposal ensures that if a transaction would propagate successfully on its own now, it should still propagate regardless of whether it is included in a package.It is possible for only some of the package to make it into the mempool, but since transactions are evicted from the mempool by descendant score, and the package child is supposed to be sponsoring the fees of its parents, the most common scenario would be all-or-nothing. Transactions that have already been confirmed should not be relayed, and packages that contain already-confirmed transactions should not be relayed.</summary>
+    <published>2021-09-21T15:18:28+00:00</published>
+  </entry>
+</feed>

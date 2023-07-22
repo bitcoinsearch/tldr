@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+  <updated>2023-06-13T19:32:38.138346+00:00</updated>
+  <author>
+    <name>Jonathan Underwood 2019-06-29 00:19:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+    <updated>2023-06-13T19:32:38.138346+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-June/017064.html" rel="alternate"/>
+    <summary>During a discussion on the proposed field key format for PSBT, Dmitry Petukhov suggested replacing the signing public key with just a fingerprint of the master key to save 29 bytes per 0x02 field. However, it was pointed out that if someone other than the signer needed to verify that the xpub-package was signed by a certain cold key, they would need to know the signing_pubkey beforehand. It was ultimately decided to use the first 4 bytes of the hash160 of the pubkey as the fingerprint. There was also a suggestion to add a serial number to the xpub package to allow for a limited mechanism to 'revoke' previously signed packages that have compromised keys in them. However, this feature would be outside the scope of the current BIP and may require a separate BIP.Jonathan Underwood proposed a solution for verifying change with multisig using the 0x01 global type proposed by Andrew Chow. The proposal involved signing each other's xpubs and creating a wallet that requires the other pubkeys to have signatures via his 0x02 proposal. The signer will then check the other pubkeys via BIP32_DERIVATION to master fingerprint, then link that fingerprint to a 0x02 sig from his key, verifying all pubkeys. However, the drawback is having to include n! (of m-of-n) signatures in every PSBT.A proposal was made to extend PSBT (Partially Signed Bitcoin Transactions) to allow for a way to verify that the destination address in a transaction has not been compromised. In particular, the proposal addresses the problem of ensuring that an address is not swapped out by a hacker between unsigned transaction creation and the first signature. The proposal suggests adding an auxiliary message to the 'xpub package' of a multisig warm wallet which would be signed along with it. This message could include specific 'epoch' words or a serial number for xpub packages. However, given the large number of possible schemes that could require their own PSBT field type, it is suggested that this issue be dealt with outside of PSBT, either as 'PSBT metainformation', or using some form of 'vendor-specific' or 'metainformation-specific' PSBT field. The hope is that this will make it easier to implement PSBT for simple cases without causing the core specification to grow too large.The proposed key value specification would allow secure verification of the xpub of the warm/hot wallet, followed by signing the xpub with all cold keys using an airgap signing tool. The signature/xpub pairs are then uploaded to the online unsigned transaction generator, with one keyval pair per coldkey/xpub pairing. When offline signing, the wallet must verify that all outputs have BIP32_DERIVATION and that it can verify the outputs through the derivation, to the xpub, and to the signature.The proposal is still a rough draft, but feedback is being welcomed on the idea.</summary>
+    <published>2019-06-29T00:19:41+00:00</published>
+  </entry>
+</feed>

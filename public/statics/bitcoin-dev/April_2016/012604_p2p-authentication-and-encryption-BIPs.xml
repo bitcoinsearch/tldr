@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>p2p authentication and encryption BIPs</title>
+  <updated>2023-06-11T04:35:46.493684+00:00</updated>
+  <author>
+    <name>Lee Clagett 2016-04-09 19:40:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>p2p authentication and encryption BIPs</title>
+    <updated>2023-06-11T04:35:46.493684+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-April/012604.html" rel="alternate"/>
+    <summary>Jonas Schnelli, a bitcoin-dev, has submitted two draft versions of BIPs on GitHub. He updated the PR with another overhaul of the BIP and removed AES256-GCM as cipher suite while focusing on Chacha20-Poly1305. Two symmetric cipher keys must be calculated by HMAC_SHA512 from the ecdh secret. A session-ID must be calculated (HMAC_SHA256) for linking an identity authentication (ecdsa sig of the session-ID) with the encryption. Re-Keying ('=hash(old_key)') can be announced by the responding peer after x minutes and/or after x GB, local peer policy but not shorter than 10mins. AEAD tag is now the last element in the new message format. The encrypted message format may perform slightly better than the current message format. The requesting node could generate an ECDH secret from the long-term public key of the expected peer and its own session private-key to encrypt (no MAC) the signature with the same symmetric cipher agreed upon previously. The responding peer must ignore the requesting peer after a unsuccessfully authentication initialization to avoid resource attacks. To request encrypted communication, the requesting peer generates an EC ephemeral-session-keypair and sends an encinit message to the responding peer and waits for an encack message. The responding node must do the same encinit/encack interaction for the opposite communication direction.Chacha20-Poly1305 defined in an IETF draft and RFC 7539 both include the ciphertext length in the authentication tag generation. A single shared-secret could be used to generate keys for each direction. K_1 must be used to only encrypt the payload size of the encrypted message to avoid leaking information by revealing the message size. K_2 must be used in conjunction with poly1305 to build an AEAD. After a successful encinit/encack interaction from both sides, the messages format must use the 'encrypted messages structure'. Non-encrypted messages from the requesting peer must lead to a connection termination.A responding peer can inform the requesting peer over re-keying with an encack message containing 33 byte of zeros to indicate that all encrypted message following after this encack message will be encrypted with the next symmetric cipher key. The new symmetric cipher key will be calculated by SHA256(SHA256(old_symmetric_cipher_key)). Re-Keying interval is a peer policy with a minimum timespan of 600 seconds.</summary>
+    <published>2016-04-09T19:40:38+00:00</published>
+  </entry>
+</feed>

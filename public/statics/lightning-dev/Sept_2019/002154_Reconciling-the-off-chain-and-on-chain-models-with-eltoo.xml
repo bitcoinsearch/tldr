@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reconciling the off-chain and on-chain models with eltoo</title>
+  <updated>2023-06-02T20:14:34.629916+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-09-18 13:44:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reconciling the off-chain and on-chain models with eltoo</title>
+    <updated>2023-06-02T20:14:34.629916+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-September/002154.html" rel="alternate"/>
+    <summary>The Lightning Network is a payment protocol that allows for the faster and cheaper transfer of Bitcoin. It provides cooperative and uncooperative closing of channels, with the former optimized for privacy and low on-chain fees. Closing an update mechanism does not require the close of any hosted update mechanisms if the parties are not contractually bound to do so. Membership changes can be made by splicing a new channel to the layer one blockchain using a channel splicing transaction optimized for privacy and low on-chain fees paid by the parties entering or leaving the channel.However, there are issues with splice-in, including the need to place funds in a temporary n-of-n, while splice-out is considered unsafe, and uncooperative closes may require deep confirmation followed by a new mechanism open. Regarding mining, there is no equivalent concept for multi-party channels, and instead, fees are charged for each update, similar to how HTLC routing in Lightning implicitly pays forwarding nodes to cooperate with forwarding. Privacy can be maintained by disassociating a particular update from signers and their IP addresses, and using SIGHASH_ALL for cooperative closes.Liveness can be maintained if signers know they will be offline by pre-signing updates that commit only their own outputs instead of splicing out. Furthermore, contingent tap-leaf can also be used to ensure liveness. The Lightning Network team is discussing a new mechanism to splice out non-responsive signers. Participants could theoretically create two updates with the same state-number at each update; a normal one that just keeps them in the contract and a fallback splice that drops inactive participants and continues without them.A new mechanism-within-mechanism layer could be created if a signer knows they will be offline. For example, entities A, B, and C could have an offchain update mechanism called a "factory" containing an A-B channel, a B-C channel, an A-C channel, and some funds owned by B only. If A knows they will be offline for some time, before going offline, they can move from the current UTXO set to a new UTXO set that allows B and C to manage the B-C channels and B funds without cooperation from A. Later, when A returns online, the B-C offchain update mechanism is collapsed back to the parent A-B-C offchain update mechanism.However, this assumes A knows it will be offline, which it might do for regular maintenance or software updates. Mixing mechanisms may be needed to allow individual signers to disassociate their ownership of funds from their identity. The Lightning Network team is discussing various methods to increase privacy and liveness while minimizing on-chain fees and maintaining security.</summary>
+    <published>2019-09-18T13:44:47+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Hold fee rates as DoS protection (channel spamming and jamming)</title>
+  <updated>2023-05-23T14:38:53.126036+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2021-02-23 01:52:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Hold fee rates as DoS protection (channel spamming and jamming)</title>
+    <updated>2023-05-23T14:38:53.126036+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-February/002977.html" rel="alternate"/>
+    <summary>In a discussion on the Lightning-dev mailing list, concerns were raised about the issue of accidental channel closure and the need for devs to focus on fixing this problem instead of implementing an anti-Denial of Service (DoS) fee mechanism. The cost of closing and reopening a channel is significant compared to any anti-DoS fee, and it may deter nodes from operating. The deterrence of the channel jamming problem is economic, so if the anti-DoS fee is tiny, its deterrence will be insignificant as well. It was suggested that the very first solution proposed in 2015, which involves closing out the channel and sending back a proof of closure, may be more desirable from the point of view of enforcing tangible costs. Additionally, services that require long-lived Hashed Time-Locked Contracts (HTLCs) can flag them as such in the onion payload, allowing nodes to preferentially forward or reject them. There are concerns about how high a fee is considered "adequate" deterrence without dramatically increasing the cost of node operation in the average case. If an attacker has a budget of 20 BTC to blow with no direct gain, most parametrizations of attempt fees are likely insufficient. Furthermore, it's important to note that if the HTLC attempt/hold fees rise well above routing fees, then costs are also increased for senders in addition to routing nodes. It was also mentioned that decaying fee ideas need closer examination to ensure they don't increase the day-to-day operational cost of a routing node in order to defend against threats at the edges.It was suggested that efforts should be focused on ensuring that if there's "turbulence" in the network, it can gracefully degrade to a slightly more restricted operating mode until the storm passes. This could serve as a low-cost deterrence mechanism that won't tangibly increase operation/forwarding/payment costs within the network. It was also noted that if nodes wish to be compensated for committing capital to Lightning itself, markets such as Lightning Pool which reward them for allocating the capital (independent of use) for a period of time can help them scratch that itch.Finally, concerns were raised about privacy issues with incrementing hold fees along a payment path, as this could leak an upper bound on the distance to the payer and payee, making it easier to associate a single payment-part with the payer and payee.</summary>
+    <published>2021-02-23T01:52:49+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP Proposal: Wallet Labels Export Format</title>
+  <updated>2023-06-16T00:00:13.747136+00:00</updated>
+  <author>
+    <name>Craig Raw 2022-08-25 08:59:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP Proposal: Wallet Labels Export Format</title>
+    <updated>2023-06-16T00:00:13.747136+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-August/020894.html" rel="alternate"/>
+    <summary>The proposal of a BIP that specifies a format for the export and import of labels from a wallet has generated some discussion, including concerns about the use of CSV as the data format. The author of the proposal, Craig Raw, acknowledges that the proposal provides an opportunity for bike shedding but emphasizes that the proposed format is intended not only for developers but also for general users who are likely not well represented on the list. Raw spoke with several professional users of Sparrow Wallet who expressed a desire for the format to integrate with their business processes, which are driven by business tools such as Excel. Labelling provides an important function in UTXO and address management in these scenarios, and needs to be accessible and manageable outside of wallet software.Raw notes that if the proposed format is to be achieved, it immediately rules out JSON as a data format. Not only is JSON limited to editing only through specific software or text editors, but it is also fragile enough that a single missing character can cause an entire file to fail parsing. In this regard, CSV is more forgiving. With respect to comments about escaping, Raw expects that developers will be using a mature CSV library rather than handling character escaping themselves. He would rather propose a format that is generally usable, even if occasionally a label is escaped incorrectly.Raw also notes that CSV files are already common and uncontroversial in Bitcoin wallet software, with Bitcoin Core, Electrum, Sparrow, and others already exporting addresses and/or transactions with their labels as CSV files. This proposal simply attempts to create a standard for importing and exporting all the labels in a wallet.A commenter named Ryan strongly suggests against using CSV, stating that he has worked with it as an interchange format many times and it has always been a clusterfuck. He notes that there are issues with implementations doing things differently and not strictly defining escape rules. Ryan believes that JSON is the way to go and provides examples of how it could be used.The proposed format is a simple two-column CSV file, with the reference to a transaction, address, input, or output in the first column and the label in the second column. The CSV file may be compressed using the ZIP format and optionally encrypted using AES. The textual representation of the wallet's extended public key should be used as the password. When importing, a naive algorithm may simply match against any reference, but it is possible to disambiguate between transactions, addresses, inputs, and outputs. Overall, Raw's proposal seeks to create a standard for the export and import of labels from a wallet, allowing users to move easily between different wallets without experiencing lock-in to a particular wallet application. By using common formats, this BIP seeks to make manual or bulk management of labels accessible to users without specific technical expertise.</summary>
+    <published>2022-08-25T08:59:13+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>On Mempool Funny Games against Multi-Party Funded Transactions</title>
+  <updated>2023-06-03T04:00:14.980870+00:00</updated>
+  <author>
+    <name>Antoine Riard 2021-05-06 13:44:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>On Mempool Funny Games against Multi-Party Funded Transactions</title>
+    <updated>2023-06-03T04:00:14.980870+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-May/003033.html" rel="alternate"/>
+    <summary>The author of the post highlights two possible Denial of Service (DoS) attacks against multi-party Bitcoin protocols during their funding phases. The first issue is a timevalue DoS by exploiting standardness malleability, and the second one is a fee inflation one by exploiting Replace-By-Fee (RBF) policy rules. These attacks may cause severe nuisances to users and services providers. The post presents a rough model that applies to a wide set of Layer 2 (L2) bitcoin protocols such as Discreet Log Contracts (DLC), Coinjoin, Payjoin, dual-funded Lightning Network (LN) channel, and swaps. However, single-party funded, multi-party transactions are excluded from this discussion. The first issue is a timevalue DoS by exploiting standardness malleability. In this case, witness data might still succeed consensus checks while being non-compliant with stricter checks beyond the consensus one, like MINIMALIF or NULLFAIL. If a participant accepts such an input, the transaction finalization will fail to propagate and confirm. Participants of the multi-party funded transaction should verify the absence of standardness malleability of contributed witnessScripts. The second issue is a fee inflation one by exploiting RBF policy rules. Current bip125 RBF rules make signaling mandatory to enable replacement; otherwise, even a better-feerate candidate won't replace a conflicting transaction with a finalized nSequence field. If a participant double-spends its input with nSequence=0xffffffff, the funding transaction won't propagate on the network as it's an attempt to double-spend an RBF opt-out transaction. Currently, there is no mitigation against this simple pinning since it exploits the first-seen mempool behavior. In conclusion, multi-party bitcoin protocols offer a wider attack surface when considering actual mempool acceptance/tx-relay rules compared to simple bitcoin applications. Although these attacks may not be concerning for now since those protocols are currently under design or in the early deployment phase, they may become a major source of disruption for users and services providers of such advanced bitcoin protocols.</summary>
+    <published>2021-05-06T13:44:04+00:00</published>
+  </entry>
+</feed>

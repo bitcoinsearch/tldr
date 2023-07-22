@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New PSBT version proposal</title>
+  <updated>2023-05-21T00:09:06.890490+00:00</updated>
+  <author>
+    <name>Andrew Chow 2020-12-23 21:30:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New PSBT version proposal</title>
+    <updated>2023-05-21T00:09:06.890490+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-December/018326.html" rel="alternate"/>
+    <summary>Andrew Chow has proposed changes to the current version of Partially Signed Bitcoin Transactions (PSBT) to address its deficiencies. The changes include adding inputs and outputs in a proper way to allow PSBT to properly support them. The new version, PSBT v1, will have all input and output data for each map, disallowing PSBT_GLOBAL_UNSIGNED_TX and including new fields like PSBT_GLOBAL_TX_VERSION, PSBT_GLOBAL_PREFERRED_LOCKTIME, PSBT_GLOBAL_INPUT_COUNT, PSBT_GLOBAL_OUTPUT_COUNT, PSBT_IN_PREVIOUS_TXID, PSBT_IN_OUTPUT_INDEX, PSBT_IN_SEQUENCE, PSBT_IN_REQUIRED_LOCKTIME, PSBT_OUT_VALUE, and PSBT_OUT_OUTPUT_SCRIPT.These changes will allow PSBT to be used in the construction of transactions, and inputs and outputs can be added as needed. However, signatures must not be invalidated while adding new inputs and outputs. Finalizers must choose the maximum of all the *_LOCKTIME fields to choose the locktime for the transaction. There will be two lock time fields, one for a time-based lock time, and the other for height-based lock time.Andrew Chow clarifies that it is possible to downgrade and upgrade PSBTs between the two versions once all inputs and outputs have been decided and that compatibility with PSBTv0 is maintained. A new global field, PSBT_GLOBAL_UNDER_CONSTRUCTION, will signal whether inputs and outputs can be added to the PSBT. Chow also addresses concerns about backward compatibility and explains that these changes are necessary and backward-compatible.As the changes disallow the PSBT_GLOBAL_UNSIGNED_TX field, PSBT v1 needs the version number bump to enforce backward incompatibility. Once the inputs and outputs of a PSBT are decided, a PSBT could be "downgraded" back to v0 by creating the unsigned transaction from the above fields and then dropping these new fields. If the list finds the changes reasonable, Andrew Chow will write a PR to modify BIP 174 to incorporate them.Ultimately, adding new features while maintaining compatibility is key.</summary>
+    <published>2020-12-23T21:30:04+00:00</published>
+  </entry>
+</feed>

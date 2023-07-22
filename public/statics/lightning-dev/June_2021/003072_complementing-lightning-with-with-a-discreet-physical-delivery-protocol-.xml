@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>complementing lightning with with a discreet physical delivery protocol?</title>
+  <updated>2023-06-03T04:14:05.110570+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2021-06-29 01:56:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>complementing lightning with with a discreet physical delivery protocol?</title>
+    <updated>2023-06-03T04:14:05.110570+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-June/003072.html" rel="alternate"/>
+    <summary>In this email thread, the sender is exploring the possibility of mapping a vending machine into the courier role. However, there are concerns around extending this to a multi-courier situation, and hodl-invoices. The sender wonders how much "time preference liquidity" exists in the network. They provide an example of an on-demand furniture maker who takes 90 days to produce an item, and discuss how hodl invoices can align incentives for merchant, courier, and purchaser. However, since payments are routed through the lightning network and stuck in this hodling pattern for up to 90 days, routing nodes along the way may feel they are not being fairly compensated for having their funds locked up. The sender asks if moving to payment points instead of HTLCs can help reduce this concern by allowing each node along the route to earn a fee irrespective of whether the hodl invoice is settled or canceled. The receiver responds that this does not need payment points and that there are multiple proposed solutions to the hodl-payment-problem, none of which require payment points but should still be compatible with them. Payment points allow for certain escrows to be created in a low-trust way but they still involve holding PTLCs for long periods of time and locking up funds until the escrow conditions are satisfied. The generalized escrow services that are proposed in that series of blog posts is a strict superset of that, but they still involve PTLCs being unclaimed for long periods of time. The sender also asks if there is any way for a node operator to determine the likelihood of routing a 90-day hodl invoice. The receiver responds that most implementations impose a maximum limit on the timelocks HTLCs passing through them, which is far lower than 90 days. The receiver suggests considering an ahead-of-time furniture maker instead of just-in-time. The furniture maker can simply consign furniture to a Vendor and the Vendor releases the already-built furniture conditional on receiving the payment secret of an invoice issued by the Merchant. The payment secret could then use the payment point homomorphism, and the Vendor acts as a Retailer buying furniture at reduced prices. The Retailer+Merchant can probably afford to use a hodl PTLC directly onchain, instead of over Lightning since they make fewer but larger transactions, buying in bulk. However, this reduces flexibility, and buying the flexibility that just-in-time gives requires deep thinking over here in Lightning-land on how to implement this without sucking.</summary>
+    <published>2021-06-29T01:56:58+00:00</published>
+  </entry>
+</feed>

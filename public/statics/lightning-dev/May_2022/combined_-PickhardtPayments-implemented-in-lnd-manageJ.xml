@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - #PickhardtPayments implemented in lnd-manageJ</title>
+  <updated>2023-06-04T03:41:26.007808+00:00</updated>
+  <author>
+    <name>Vincent 2022-05-18 09:31:37</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2022-05-17 07:23:07</name>
+  </author>
+  <author>
+    <name>Carsten Otto 2022-05-17 10:46:08</name>
+  </author>
+  <author>
+    <name>Carsten Otto 2022-05-15 20:01:58</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2022-05-16 20:59:05</name>
+  </author>
+  <link href="lightning-dev/May_2022/003587_-PickhardtPayments-implemented-in-lnd-manageJ.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2022/003585_-PickhardtPayments-implemented-in-lnd-manageJ.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2022/003586_-PickhardtPayments-implemented-in-lnd-manageJ.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2022/003583_-PickhardtPayments-implemented-in-lnd-manageJ.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2022/003584_-PickhardtPayments-implemented-in-lnd-manageJ.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - #PickhardtPayments implemented in lnd-manageJ</title>
+    <updated>2023-06-04T03:41:26.008808+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-May/003587.html" rel="alternate"/>
+    <summary>The Lightning Network community is constantly seeking ways to improve payment efficiency, lower fees, and enhance scalability. One recent proposal is Carsten Otto's PickhardtPayments, which aims to minimize the number of transactions required for multi-path payments (MPP) while ensuring reliability. The approach uses a novel algorithm that reduces the number of shards needed to complete a payment. Otto's proposal has received positive feedback so far, with some calling it a significant improvement over current MPP implementations. René Pickhardt, who co-created the #PickhardtPayments approach, has also shown support for Otto's proposal and is interested in helping with experiments.Eclair has implemented a set of heuristics around channel scoring and a testing system for mainnet usage. They have also been working on channel liquidity estimation for over half a year. However, it is essential to run experiments with enough volume for the data to be statistically meaningful and to use A/B testing. In the Lightning Network, switching to a minimum-cost flow (MCF) routing algorithm can be useful for relaying large payments that need to be split aggressively to reach the destination. However, it is important to consider whether it is economical to make such payments on lightning, as payments above certain amounts may cost less on-chain than off-chain, depending on the fees. Additionally, the shape of the network should be considered when using an MCF algorithm, as different path-finding algorithms may be needed depending on the location.The latest version of lnd-manageJ now includes basic support for #PickhardtPayments, which allows for the optimal routing of multi-path payments (MPPs) on the Lightning Network (LN). The biggest challenge with sending payments on the LN is failure, especially with larger amounts. Splitting a large payment into smaller shards using MPP can be helpful, but the success probability drops exponentially with the number of channels included, and finding routes through the LN is tricky due to uncertain channel liquidity. #PickhardtPayments solves these problems by offering an approach that is optimal, based on the well-known minimum-cost flow problem in computer science, which considers both reliability and fee rates. It takes into account liquidity information obtained from previous failures to guide future attempts, and the underlying algorithm finds routes that may be long but have a high probability of success.The recent email thread on the Lightning-dev mailing list discussed various aspects of routing payments in the Lightning Network, including channel scoring, liquidity estimation, and path-finding algorithms. Bastien Teinturier from Eclair explained that they have been toying with channel liquidity estimation for more than half a year and using an MCF algorithm instead of Dijkstra is useful when relaying large payments that will need to be split aggressively to reach the destination. Vincent Palazzo added to the discussion, explaining that he is trying to abstract how to collect all necessary information in a common way so that research can be shared and verified across different implementations. Overall, the discussion highlighted how the design space is still quite large when it comes to routing payments in the Lightning Network, and there's likely to be even more innovation in the coming years.The latest version of lnd-manageJ also includes channels that charge a base fee. The worst-case scenario is assumed to make this work, whereby the smallest possible amount is used and the fee rate for route computation is adjusted accordingly. With default settings (quantization 10,000sat), channels charging a base fee of Xsat and a fee rate of Yppm are considered with a virtual fee rate of (Y+X*100)ppm. This penalty is linear in the quantization amount. A Dockerfile has been added by the developer to help with experiments, which requires a patched lnd. Users can tweak the lnd-manageJ.conf and review available options on GitHub. However, to avoid TLS issues with gRPC, users need to use "--network host" if they run lnd on localhost. PostgreSQL is booted on the default port 5432, so users should ensure it is available and not in use by their host. Route/hop hints provided in payment requests are now considered, so private/virtual channels are used for the route computation.In conclusion, the Lightning Network community is constantly researching and innovating new approaches to improve payment efficiency, lower fees, and enhance scalability. The recent discussions on the Lightning-dev mailing list highlighted various aspects of routing payments in the Lightning Network, including channel scoring, liquidity estimation, and path-finding algorithms. Eclair has implemented a set of heuristics around channel scoring and a testing system for mainnet usage, and they have been working on channel liquidity estimation for over half a year. The latest version of lnd-manageJ now includes basic support for #PickhardtPayments, which offers a potentially powerful solution to the challenge of routing MPPs on the LN.</summary>
+    <published>2022-05-18T09:31:37+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New tipe of outputs that saves space and give more privacy</title>
+  <updated>2023-06-14T15:16:13.116103+00:00</updated>
+  <author>
+    <name>Jeremy 2020-08-25 15:24:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New tipe of outputs that saves space and give more privacy</title>
+    <updated>2023-06-14T15:16:13.116103+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018143.html" rel="alternate"/>
+    <summary>Jule.Adka has proposed a new way to help Bitcoin's scalability while maintaining privacy. The proposal suggests replacing the current output list with a Mekelized Output Set and the p2mos (pay to Mekelized Output Set) standard. Instead of listing all the outputs, Alice only specifies a Markle root, and only when she tries to spend the coin, she shows a path into the Merkle from her transaction to the recorded root (a.k.a Merkle Path), and proof that her output exists. The extra data is stored into the witness structure, which can be stripped after verification. This saves space by reducing any transaction to a 49 bytes-wide output set, no matter how many outputs actually exist. Peers are the only ones who know the number and value of the outputs. The proposal also solves various privacy problems associated with outputs, like Equal-output CoinJoin and different outputs types. An opcode may be needed to make reference to p2mos, instructing the node to look at the witness data to find the actual output. The amount is preserved for compatibility as well for calculating mining fees, once the miner has no idea of the actual value locked into the output. The fee calculus doesn't change.Using the p2mos, one keeps private the information about the outputs until it has been spent, saving space into the block and making the transactions (without taking into account the witness data) smaller, decreasing the data used for SPV nodes. However, it requires more coordination between the wallets, is a bit harder to compute for a validator, and would require some extra bandwidth for downloading the witness data. Old nodes that don’t follow the new consensus rule can accept this kind of transaction if it’s made as anyone can spend in the current consensus, but at a second spend, the node will interpret it as a double spend, hence invalidating it. The main problem with this approach is to implement it as a soft-fork.</summary>
+    <published>2020-08-25T15:24:46+00:00</published>
+  </entry>
+</feed>

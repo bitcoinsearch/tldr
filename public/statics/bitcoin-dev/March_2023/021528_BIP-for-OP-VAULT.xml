@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP for OP_VAULT</title>
+  <updated>2023-06-16T15:36:55.466930+00:00</updated>
+  <author>
+    <name>Anthony Towns 2023-03-07 12:45:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP for OP_VAULT</title>
+    <updated>2023-06-16T15:36:55.466930+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-March/021528.html" rel="alternate"/>
+    <summary>In a Bitcoin-dev email chain, James O'Beirne discusses the concept of "forwarding" input amounts to specific outputs and restricting output script forms with the new "OP_VAULT" proposal. He notes that this approach makes it easier to get the logic right and facilitates spending multiple inputs to a single output. Four opcodes are considered interesting for this class: `OP_FORWARD_TARGET`, `OP_FORWARD_LEAF_UPDATE`, `OP_FORWARD_SELF`, and `OP_FORWARD_PARTIAL`. The `OP_VAULT` and `OP_VAULT_RECOVER` opcodes are named similarly to `OP_FORWARD_LEAF_UPDATE` and `OP_FORWARD_TARGET`, respectively. In the vault structure, coins are spent to an output with a taproot structure that includes `$recovery_leaf`, `$trigger_leaf`, and optional other leaves in the taptree. The trigger leaf script can include specific opcodes, such as `OP_FORWARD_SELF` and `OP_FORWARD_LEAF_UPDATE`.O'Beirne provides an example of how this might work. If someone has 2.0 BTC in a vault UTXO, they might spend 0.4 BTC by supplying witness data specifying output indices and providing a signature. The script would include `OP_FORWARD_PARTIAL`, `OP_FORWARD_SELF`, `OP_FORWARD_LEAF_UPDATE`, and `CHECKSIG`. Other inputs/outputs (for fees etc.) would still be committed to by , so nothing is malleable. The script is about 45 bytes, and the witness data is about 105 bytes.Finally, O'Beirne notes that `OP_FORWARD_LEAF_UPDATE` is equivalent to a very specific form of TLUV, which avoids introducing x-only pubkey complications and keeps things relatively simple.</summary>
+    <published>2023-03-07T12:45:34+00:00</published>
+  </entry>
+</feed>

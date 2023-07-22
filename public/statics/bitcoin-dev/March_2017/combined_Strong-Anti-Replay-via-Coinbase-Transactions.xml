@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Strong Anti-Replay via Coinbase Transactions</title>
+  <updated>2023-06-11T22:36:24.498608+00:00</updated>
+  <author>
+    <name>Cameron Garnham 2017-03-25 03:30:22</name>
+  </author>
+  <author>
+    <name>Luke Dashjr 2017-03-29 09:15:57</name>
+  </author>
+  <author>
+    <name>Cameron Garnham 2017-03-25 03:30:22</name>
+  </author>
+  <author>
+    <name>Cameron Garnham 2017-03-25 03:30:22</name>
+  </author>
+  <author>
+    <name>Luke Dashjr 2017-03-29 09:15:57</name>
+  </author>
+  <author>
+    <name>Luke Dashjr 2017-03-29 09:15:57</name>
+  </author>
+  <link href="bitcoin-dev/March_2017/013777_Strong-Anti-Replay-via-Coinbase-Transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2017/013845_Strong-Anti-Replay-via-Coinbase-Transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2017/013777_Strong-Anti-Replay-via-Coinbase-Transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2017/013777_Strong-Anti-Replay-via-Coinbase-Transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2017/013845_Strong-Anti-Replay-via-Coinbase-Transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2017/013845_Strong-Anti-Replay-via-Coinbase-Transactions.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Strong Anti-Replay via Coinbase Transactions</title>
+    <updated>2023-06-11T22:36:24.498608+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-March/013777.html" rel="alternate"/>
+    <summary>A proposal for a soft fork for the Bitcoin Network has been discussed in this document, which aims to protect users from potential loss of funds due to transaction replay attacks in case of a chain split. The soft fork includes new rules such as defining an unused NoOp as ‘OP_ANTI_REPLAY’ and only allowing it to be created in a coinbase transaction with the value of 1 Satoshi. Additionally, every block's coinbase transaction will be required to create exactly 1000 new OP_ANTI_REPLAY outputs up to the total of 100,000. If a OP_ANTI_REPLAY is spent in a block, a corresponding new OP_ANTI_REPLAY must be included in the same block. In case of a chain split after activation of this soft fork, miners should recycle all the OP_ANTI_REPLAY outputs via spending and recreating them in new blocks.The proposal is compatible with all existing bitcoin software, and upon activation, all deployed Bitcoin Full Nodes will enforce the anti-replay projections for Bitcoin Users. However, only upgraded nodes will enforce the other OP_ANTI_REPLAY requirements. The rationale behind this proposal is to guarantee that a transaction cannot be replayed by including an input that cannot exist, by definition, on the alternative chain, which is possible only through coinbase transactions. The proposed BIP is expected to have Opt-In-RBF enforcement, where in case of conflicting spends of OP_ANTI_REPLAY outputs, the higher-fee transaction should take priority, and users must compete for this resource.On March 25th, 2017, Cameron Garnham proposed the Bitcoin Improvement Proposal (BIP) which outlined the activation of new rules upon the implementation of a soft-fork. The proposal included the creation of a new OpCode called ‘OP_ANTI_REPLAY’, which would be defined as an unused NoOp. According to the specifications outlined in the proposal, this new OpCode must only be created in a coinbase transaction and must have a value of one Satoshi. Additionally, transactions must not include more than one OP_ANTI_REPLAY input, and if one is included, the transaction must be marked as Opt-In-RBF. In the event of a chain split after the implementation of this BIP, miners are expected to recycle all OP_ANTI_REPLAY outputs by spending and recreating them in new blocks.Although this would renew the protection for the new chain, this recycling process would be spammy and require constant updating due to regular chain splits. The proposal includes a reference implementation to be developed, although it is unclear if it can be implemented given the reasons mentioned above. The rationale behind the BIP is to make it convenient for wallets to automate the inclusion of new coinbase inputs into transactions that spend potentially repayable transactions. However, this convenience may not be possible due to the difficulty of checking if there are any competing transactions. Instead, a single reserved output could be used to recycle transactions. The document does not discuss SegWit Compatibility and is dual licensed as BSD 3-clause and Creative Commons CC0 1.0 Universal.</summary>
+    <published>2017-03-25T03:30:22+00:00</published>
+  </entry>
+</feed>

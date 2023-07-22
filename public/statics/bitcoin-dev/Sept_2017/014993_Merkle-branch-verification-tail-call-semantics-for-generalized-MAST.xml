@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Merkle branch verification &amp; tail-call semantics for generalized MAST</title>
+  <updated>2023-06-12T18:20:34.721821+00:00</updated>
+  <author>
+    <name>Karl Johan Alm 2017-09-12 23:27:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Merkle branch verification &amp; tail-call semantics for generalized MAST</title>
+    <updated>2023-06-12T18:20:34.721821+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-September/014993.html" rel="alternate"/>
+    <summary>In a recent discussion on the bitcoin-dev mailing list, Mark Friedenbach expressed his concerns over removing the block size limit in Bitcoin. He stated that without the limit, the system would be vulnerable to Denial of Service (DoS) attacks. He went on to explain that 4MB of secp256k1 signatures would take 10 seconds to validate on his 5 year old laptop, which is much less than bad blocks that can be constructed using other vulnerabilities.Friedenbach also proposed a solution to counteract this potential DoS attack. He suggested keeping a per UTXO tally and demanding additional fees when trying to respend a UTXO which was previously "spent" with an invalid op count. This means that if someone signs off on an input for a transaction that they know is bad, the UTXO in question will be penalized proportionately to the wasted operations when included in another transaction later. This would likely deter attackers as they would effectively lose bitcoin every time, even if the attack was postponed until they spent the UTXO.To implement this solution, clients would need to add a fee rate penalty ivar and a mapping of outpoint to penalty value, probably stored as a separate .dat file. While this proposal may not completely eliminate the risk of DoS attacks, it could significantly reduce the likelihood of such attacks succeeding.</summary>
+    <published>2017-09-12T23:27:36+00:00</published>
+  </entry>
+</feed>

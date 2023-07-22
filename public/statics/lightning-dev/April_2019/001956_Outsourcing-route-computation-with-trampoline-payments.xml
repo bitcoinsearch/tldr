@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Outsourcing route computation with trampoline payments</title>
+  <updated>2023-06-02T18:03:09.236168+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-04-01 13:06:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Outsourcing route computation with trampoline payments</title>
+    <updated>2023-06-02T18:03:09.236168+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-April/001956.html" rel="alternate"/>
+    <summary>The email thread discusses a proposal to use the upcoming "Multi-frame sphinx onion format" to trustlessly outsource the computation of payment routes. The proposal suggests two ways of using it. The first one is a simple variant in which the sender computes a route to a trampoline node that knows in its 2- or 3-neightborhood and creates an onion that describes this route. The payload for the trampoline node 't' then contains two parameters: 'receiver' and 'amount'. The more complex proposal involves nesting a smaller onion into the outer routing onion, called Multi-trampoline routing. For this, the sender generates a small onion of, for example, 10 hops whose length is only 650 bytes instead of the 20 hops for the outer routing onion. In the Multi-trampoline routing, the hops in the inner/smaller onion do not have to be adjacent to each other, they can be picked randomly from the set of known nodes, and there doesn't need to be a channel between two consecutive hops, unlike in the outer/routing onion. The hops in the smaller onion are called trampolines `t_1` to `t_10`. The construction of the smaller onion can be identical to the construction of the routing onion, just needs its size adjusted. Upon receiving an incoming payment with trampoline instructions, a trampoline unwraps the inner onion, which yields the next trampoline node_id.One potential downside of this proposal is that by introducing this two-level nesting of an outer routing onion and an inner trampoline onion, we increase the maximum length of a route to `num_outer_hops * num_inner_hops`, given that each layer of the inner onion may initiate a new `num_outer_hops` outer route. This may result in more funds being used to route a payment, but it may also increase chances of the payment succeeding. The proposal also brings us a lot closer to the structure of Tor on the public network, in which the nodes that are part of a circuit do not have to be direct neighbours in the network topology since end-to-end reachability is guaranteed by a base routing layer (TCP/IP) whereas sender/receiver obfuscation is tackled at a higher layer (Tor). In this case, the outer onion serves as the base routing layer that is used for point-to-point communication but unlike TCP/IP is also encrypted and routed anonymously, while the inner onion takes care of end-to-end reachability, also in encrypted fashion. Since the outer onion is created from scratch at each trampoline, a trampoline may actually retry a payment multiple times if an attempt failed, reducing the burden on the sender, and increasing chances of the payment succeeding. Overall, the proposal decreases the need for a complete network view at the endpoints, may delegate some of the burden of finding routes to in-network trampolines, may increase the success rate of our payments, and increases the total length of a possible route.</summary>
+    <published>2019-04-01T13:06:28+00:00</published>
+  </entry>
+</feed>

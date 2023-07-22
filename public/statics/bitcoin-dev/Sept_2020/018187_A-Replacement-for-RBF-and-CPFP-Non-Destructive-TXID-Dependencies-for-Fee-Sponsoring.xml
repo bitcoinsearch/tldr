@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Replacement for RBF and CPFP: Non-Destructive TXID Dependencies for Fee Sponsoring</title>
+  <updated>2023-06-14T15:25:53.371528+00:00</updated>
+  <author>
+    <name>Jeremy 2020-09-21 16:27:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Replacement for RBF and CPFP: Non-Destructive TXID Dependencies for Fee Sponsoring</title>
+    <updated>2023-06-14T15:25:53.371528+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-September/018187.html" rel="alternate"/>
+    <summary>A proposal was made to change sponsor vectors to point to input outpoints instead of txids. This would allow for miners to include a sponsor transaction in any block that has a transaction with an input of the specified outpoint. There is also the possibility of allowing sponsor vectors to point to either txids or input outpoints, but this would complicate serialization. While this seems like a reasonable suggestion, there are cases where TXID is necessary instead of output. For instance, if sponsoring a payment to a locktime'd cold storage wallet from an untrusted third party without CPFP, they could grift you into paying for an unrelated payment. The serialization to support both can be done in a way that permits future extensibility. Package relay based only on feerate does not solve RBF transaction pinning or ancestor/dependent limit pinning. However, package relay has the advantage over the proposed sponsor vector change in that it doesn't require any consensus changes. It is important to note that sponsor vectors and package relay solve different but related problems, and having both may be necessary. Simplifying package relay with sponsors can potentially be achieved by doing a sponsor-only package relay limited to two transactions: one sponsor and one sponsoree. This would not have some of the challenges with arbitrary-package package-relay, and would allow users to successfully get parents with insufficient fee into the mempool from a UX perspective.</summary>
+    <published>2020-09-21T16:27:09+00:00</published>
+  </entry>
+</feed>

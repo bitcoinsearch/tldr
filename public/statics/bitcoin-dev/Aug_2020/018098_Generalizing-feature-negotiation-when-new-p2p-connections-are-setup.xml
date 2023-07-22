@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Generalizing feature negotiation when new p2p connections are setup</title>
+  <updated>2023-05-20T23:43:47.156281+00:00</updated>
+  <author>
+    <name>Matt Corallo 2020-08-18 17:26:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Generalizing feature negotiation when new p2p connections are setup</title>
+    <updated>2023-05-20T23:43:47.156281+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018098.html" rel="alternate"/>
+    <summary>The Bitcoin P2P protocol has always expected clients to ignore unknown messages. However, Eric Voskuil argues that this is not true, as Bitcoin implemented version negotiation a long time ago. This means that the Libbitcoin's p2p protocol implementation immediately drops a peer that sends an invalid message according to the negotiated version. Historical precedent suggests that optional messages which are valid at the negotiated version have been implemented for post-handshake negotiations. Matt Corallo believes that a generalized versioning change can be implemented in or after the handshake as long as the peer’s version is sufficient to be aware of the behavior. He proposes that a single message should list the set of features which a node (optionally) wishes to support on the connection. In this way, they can negotiate different features without a global lock-step version number increase. Suhas Daftuar proposed a feature negotiation mechanism that should take place before the VERACK message is received by each side. His proposal is available on GitHub. He believes that Bitcoin network clients should ignore unknown messages received before the VERACK. If future protocol upgrades would benefit from feature negotiation at the time of connection, it would be nice to use the same method as proposed in BIP 339, without even needing to bump the protocol version.</summary>
+    <published>2020-08-18T17:26:36+00:00</published>
+  </entry>
+</feed>

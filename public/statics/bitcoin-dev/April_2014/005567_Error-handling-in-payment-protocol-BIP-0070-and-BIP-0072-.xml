@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Error handling in payment protocol (BIP-0070 and BIP-0072)</title>
+  <updated>2023-06-08T21:35:19.166649+00:00</updated>
+  <author>
+    <name>Andreas Schildbach 2014-04-25 22:33:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Error handling in payment protocol (BIP-0070 and BIP-0072)</title>
+    <updated>2023-06-08T21:35:19.166649+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005567.html" rel="alternate"/>
+    <summary>In an email thread from 2014, J Ross Nicoll expressed concern about the lack of specificity on handling error states in the payment protocol specifications. He proposed that for any transport failure or non-200 HTTP status code while sending the Payment message, the client should retry after a delay of 30-60 seconds. For 400 status codes, the request should not be repeated, and as such the user should be alerted and a copy of the Payment message saved to be resent later. Nicoll also suggested that Payment messages should have a fixed maximum size of 10MB to avoid merchant systems theoretically having to accept files of any size. Additionally, he recommended a defined maximum time to wait to avoid DDoS via connection holding. Merchant systems should handle repeatedly receiving the same Payment message and return an equivalent (if not identical) PaymentACK to each. Finally, Nicoll raised a question about potential timing issues with transactions. If a merchant system wants to see confirmation of a transaction before sending a PaymentACK, he wondered whether it should hold the connection, send a PaymentACK with a memo indicating payment has been seen on the relay network but is not yet confirmed, or do something else. The email thread ended with Nicoll offering to write up these suggestions as a new BIP if that was more appropriate than editing the original.</summary>
+    <published>2014-04-25T22:33:36+00:00</published>
+  </entry>
+</feed>

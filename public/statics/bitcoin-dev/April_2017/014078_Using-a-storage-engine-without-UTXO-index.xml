@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Using a storage engine without UTXO-index</title>
+  <updated>2023-06-11T23:55:17.719700+00:00</updated>
+  <author>
+    <name>Tomas 2017-04-07 21:14:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Using a storage engine without UTXO-index</title>
+    <updated>2023-06-11T23:55:17.719700+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/014078.html" rel="alternate"/>
+    <summary>The discussion on the bitcoin-dev mailing list revolves around the long term resource requirements of proposals with regards to unspent output data. Bram Cohen asks if the target of optimization should be about cramming as much as possible in memory and minimizing disk accesses, given that hard drive access isn't parallel and memory accesses are very fast. The minimal disk storage requirement is not something that BitCrust attempts to address, but the storage accessed during peak load (block validation with pre-synced transactions) is minimized by storing only the transaction index, the tip of the spend-tree, and the tip of the spend-index in a cache efficient way. Script validation is not something that BitCrust directly addresses, but uses libbitcoinconsensus for actual validation and lookups to outputs are mostly similar. The UTXO index has little drawbacks for this part and bitcrust seems to have a small advantage due to the awesomeness of Rayon's parallelization and the lock-free data structures.</summary>
+    <published>2017-04-07T21:14:51+00:00</published>
+  </entry>
+</feed>

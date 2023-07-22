@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BOLT Draft] Onion Routing Spec</title>
+  <updated>2023-05-24T00:06:40.688869+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-09-07 01:27:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BOLT Draft] Onion Routing Spec</title>
+    <updated>2023-05-24T00:06:40.688869+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-September/000608.html" rel="alternate"/>
+    <summary>The conversation between Christian Decker and Rusty Russell is about the onion routing protocol that they are aiming to implement. They agree on most parts of the spec, but some issues need to be deferred until later or to other specs. They discuss the costs of key rotation and how it would work for this protocol. Two potential key rotations were identified: rotating the key used in transactions that hit the Bitcoin network and rotating the public key used for the DH shared-secret generation for the onion routing protocol. The latter was deemed more important since it's the one required for communication through the node. They discuss the cost of rotating keys and suggest using a "comms" key for each node instead of its ID. They propose that nodes send out a new comms key signed by ID. This approach would require 33 bytes each to keep, which amounts to 8.25MB. To rotate a comms key, they would need the new key (33 bytes), a signature from the ID (64 bytes), and probably a timestamp (4 bytes). This would amount to 25.25MB. If they rotate daily, it wouldn't be too bad, but hourly would be too much. Christian suggests that a node's public key used for DH shared-secret generation exists independently of its channels. Therefore, they should not bind the rotation of the key they use to talk to that node to one of its channels. However, it makes sense to require that a node also has at least one active channel. He proposes an alternative method where nodes can derive the new key by showing a derivation path from the node's (fixed) public key and the new key. They discuss another case where endpoints could announce a channel's existence and send its rotation interval along. Every node would simply derive the new key and use that for the DH shared secret generation should they want to talk to this node. Nodes would have a switchover window in which they accept both keys, and the passive rotation incurs no communication overhead and can be bound to the node's channels. Rusty likes the zero-comms overhead of this method and suggests using block number to rotate. Key 1 would be used for the first N blocks, then key 2, etc., with old keys allowed X blocks late and new keys allowed X blocks early. They discuss having a mix of active and passive rotations, with the active rotation enabling emergency rotations in case a key was compromised.</summary>
+    <published>2016-09-07T01:27:47+00:00</published>
+  </entry>
+</feed>

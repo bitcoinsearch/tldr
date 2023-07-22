@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Merkle branch verification &amp; tail-call semantics for generalized MAST</title>
+  <updated>2023-06-12T18:19:40.453867+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2017-09-19 00:46:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Merkle branch verification &amp; tail-call semantics for generalized MAST</title>
+    <updated>2023-06-12T18:19:40.453867+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-September/015022.html" rel="alternate"/>
+    <summary>Mark Friedenbach presented the MAST proposal to the mailing list on September 6th. The outcome of the discussion held during the in-person CoreDev meetup in San Francisco was summarized by Mark in an email. An overview of the BIPs was presented to familiarize the audience with what they are attempting to accomplish and how they do so. During the discussion, it was suggested that there should be different opcodes for single vs multi-element MBV for the sake of script analysis. However, it was countered that static analyzability is maintained if the script encodes the number of elements as an integer push to the top of the stack immediately before the opcode. Mark was assigned the task of investigating an ideal serialization format for a multi-element proof, which is the only thing holding back a multi-element MBV proposal.It was pointed out that the non-clean-stack tail-call semantics are not compatible with segwit's consensus-enforcement of the clean stack rule. After the main discussion session, it was observed that tail-call semantics could still be maintained if the alt stack is used for transferring arguments to the policy script. The observation was made that single-layer tail-call semantics can be thought of as really being P2SH with user-specified hashing. Using script versioning to deploy a MAST template allows for saving 32 bytes of witness per input, as the root hash is contained directly in the output being spent. However, the downside is losing the permissionless innovation that comes with a programmable hashing mechanism. The discussion generally drifted into a wider discussion about script version upgrades and related issues.This feedback led to some minor tweaks to the proposal, as well as the major feature request of a multi-element MERKLE-BLOCK-VERIFY opcode which requires a little bit more effort to accomplish. Mark will report back to the list again when that work is done.</summary>
+    <published>2017-09-19T00:46:30+00:00</published>
+  </entry>
+</feed>

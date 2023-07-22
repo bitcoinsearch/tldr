@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Route finding and route generation</title>
+  <updated>2023-05-24T02:11:40.520094+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2017-08-22 01:08:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Route finding and route generation</title>
+    <updated>2023-05-24T02:11:40.520094+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2017-August/000750.html" rel="alternate"/>
+    <summary>The author is proposing a near-term approach for route discovery and generation in the Lightning Network. The proposal involves a protocol where each node knows its own local network topology, and to find a final route, a transaction originator queries a number of its connections for routes to the intended destination. Nodes are not receiving or storing the entire network topology, which makes route discovery less taxing on the network in terms of bandwidth and storage space. When a node joins the network, it broadcasts its information to all its channels and requests local network topology information from all its channels. It then requests topology information for channels 2 hops beyond until it has filled its cache to its satisfaction. The node also subscribes to topology changes for nodes at those distances. When a node receives an announcement message from a node joining the network, it stores that node's info in its cache and forwards that info to any node that's subscribed to topology changes that fall within the relevant distance.When a node wants to construct a route for a transaction, it checks to see if it has a path to that node in its cache. If it does, it finds the cost of the cheapest path it has. It asks all the channels on the edge of its cached local view for their cheapest path, specifying that it only cares about paths with a maximum cost of the cheapest path it has already found in its cache. When it gets all its responses, it constructs a path.When a node receives a path request from a node, it checks its cache for its cheapest cache-only path. It asks nodes on the edge of its cached local view for their cheapest path, specifying that it only cares about paths with a maximum cost of either its cheapest cache-only path or the max-cost specified by the requesting node minus the channel cost between it and the requesting node (whichever is cheaper). It reports the results that satisfy the max-cost requirements of the requesting node.All the route information can be encrypted and signed so relaying nodes can't read the information inside, and so the requesting source node can verify which nodes sent that information. This protocol should keep both node-announcement messages and route request messages highly localized.</summary>
+    <published>2017-08-22T01:08:50+00:00</published>
+  </entry>
+</feed>

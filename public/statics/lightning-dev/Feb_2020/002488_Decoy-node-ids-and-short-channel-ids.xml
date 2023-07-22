@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Decoy node_ids and short_channel_ids</title>
+  <updated>2023-06-02T22:42:51.705281+00:00</updated>
+  <author>
+    <name>Rusty Russell 2020-02-03 04:37:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Decoy node_ids and short_channel_ids</title>
+    <updated>2023-06-02T22:42:51.705281+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002488.html" rel="alternate"/>
+    <summary>Bastien Teinturier proposes a new scheme to improve the payment channel routing in Bitcoin's Lightning Network. The first problem with the current scheme is solved by using the payment secret in the improved scheme. Alice generates a decoy key and computes the corresponding decoy node ID. Then, she draws a random payment secret and computes the decoy short channel ID. Carol recovers decoy node ID from the invoice signature and includes payment_secret * decoy_node_id in the onion payload for Bob. Bob can compute short_channel_id as H(bob_private_key * P_I) xor decoy_short_channel_id. However, Bastien is not able to figure out how to solve the second problem. Bastien does not want a special marker on Carol's payment. He wants her to pay like normal, which means that Carol can use a custodial wallet without flagging the payment as special. According to Bastien, having Bob assign scids is the only viable way to solve this issue. The current proposal limits to one scid at a time, but it could be extended to allow multiple scids. However, Bastien cannot figure out how Bob can assign them and trivially tell which ID is assigned to which peer. Therefore, he suggests that Bob keeps a mapping and restricts each peer to 256 live scids.</summary>
+    <published>2020-02-03T04:37:56+00:00</published>
+  </entry>
+</feed>

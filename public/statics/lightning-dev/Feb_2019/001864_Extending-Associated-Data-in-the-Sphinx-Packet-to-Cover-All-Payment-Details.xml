@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Extending Associated Data in the Sphinx Packet to Cover All Payment Details</title>
+  <updated>2023-06-02T17:23:32.826906+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-02-08 11:13:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Extending Associated Data in the Sphinx Packet to Cover All Payment Details</title>
+    <updated>2023-06-02T17:23:32.827905+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-February/001864.html" rel="alternate"/>
+    <summary>The conversation centers around the commitment of more data and the issue of signaling in the onion packet version. The CLTV (Check Lock Time Verify) is committed through the outgoing CLTV value in the onion payload for both intermediate hops and final hops, and nodes will refuse any forward that has a CLTV value for the next leg that is not far enough in the future based on the incoming CLTV value. A node needs to keep a cache of shared secrets used until the outgoing_cltv_value from the onion dips below incoming_cltv_value - cltv_expiry_delta. The proposed solution to the problem of injecting a new HTLC with a fresher CLTV involves extending the associated data payload to cover the CLTV as well. However, this may need to be rolled out differently from the suggested method. Using new packet versions in the Sphinx packet may not work if the route contains nodes that do not understand the new version of the packet. Nodes prior to non-upgraded nodes would have to downgrade the packet version from v1 to v0 understood by the non-upgraded node, which could be done via an instruction in the per-hop payload itself. The suggestion of committing to the packet version is deemed unnecessary since if a node wants to cause rejection, it can tamper with anything in the payload, and it will fail with an HMAC failure. In the long term, payment details may end up being in the Sphinx packet. It is suggested that the serialized HTLC output could be used as it is the on-chain representation of the payment and therefore includes all relevant details.</summary>
+    <published>2019-02-08T11:13:05+00:00</published>
+  </entry>
+</feed>

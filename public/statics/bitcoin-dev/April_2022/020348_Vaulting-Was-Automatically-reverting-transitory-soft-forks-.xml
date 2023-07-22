@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Vaulting (Was: Automatically reverting ("transitory") &gt; soft forks)</title>
+  <updated>2023-06-15T19:41:39.233559+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2022-04-27 02:09:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Vaulting (Was: Automatically reverting ("transitory") &gt; soft forks)</title>
+    <updated>2023-06-15T19:41:39.233559+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-April/020348.html" rel="alternate"/>
+    <summary>The CTV vault is a type of wallet that aims to improve the management of hot and cold wallets. It allows funds to be moved from the cold side without requiring the retrieval of cold keys, which is a significant usability improvement over a traditional multisig wallet. However, the hot wallet funds are always at risk and could be stolen, making this setup vulnerable to theft. One solution to this problem would be to pre-program the spends so that the hot wallet can only spend a certain amount, and the rest would be sent back to create an additional usability improvement.While the CTV vault has advantages over a simple hot wallet, it also has significant trade-offs compared to a multisig wallet. If the hot wallet key is stolen, the thief could be lying in wait, ready to steal those funds upon them landing. Therefore, this setup has a clear theft vulnerability that should be considered a "security limitation". One way to solve this problem is to use MES vaults, which apply to a different scenario where the hot funds are inside the vault, and it is the hot key that unvaults the funds and sends them to customer's addresses after a delay.The MES vault scheme lies somewhere between "better" and "different" when compared to the CTV vault. If one is unwilling to use the MES vault on the hot side and have every withdrawal vetted, then using the MES design on the cold side like the CTV vault wouldn't really offer any advantages over a CTV vault. However, if you are interested in managing all your payments through a vault, then the CTV vault comes across as ineffective when compared to an MES style vault.There is also a benefit to using CTV vaults in tapleaves to secure specific spend conditions but can always fall back to other off-ramps. However, since CTV predefines all the transactions that can happen under its control, passed state like this cannot help because any dynamic state would change the template and render the CTV transaction invalid. Therefore, it is impossible to solve this problem for CTV.The discussion on the bitcoin-dev mailing list focused on the security assumptions of CTV-based vaults. The main concern was the possibility of an attacker outspending a user's transaction with their own if they wait for the user to unvault their funds. It was noted that a key security assumption of CTV-based vaults is to never withdraw more in one go than the hot wallet risk tolerance. However, if a hot wallet key is stolen, all CTV outputs must be rotated, and CTV outputs must never exceed the hot wallet risk tolerance amount. Additionally, there were concerns regarding fee management and the need for a less constrained design for covenants. Despite these limitations, some members expressed support for a less constrained covenants design. The discussion ended with a link to the bitcoin-dev mailing list for those interested in further participation.</summary>
+    <published>2022-04-27T02:09:03+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TXO bitfield size graphs</title>
+  <updated>2023-06-13T02:56:01.911238+00:00</updated>
+  <author>
+    <name>Bram Cohen 2018-05-24 02:43:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TXO bitfield size graphs</title>
+    <updated>2023-06-13T02:56:01.911238+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/016021.html" rel="alternate"/>
+    <summary>A discussion on compression ratios of TXO (transaction output) bitfields is presented in the context. The feasibility of committing to them with block headers is being explored for enabling UTXO (unspent transaction output) inclusion/exclusion proofs for light clients. A "proof of position" is required for each block, where a Merkle root over all newly created coins, including their output data, outpoint and absolute index of the output in the entire blockchain constitutes a proof of position. To compactly prove spentness in this bitfield to a client, one could chunk up the bitfield and construct a Merkle Mountain Range over the chunks. The compression ratios possible on a TXO bitfield split into 4 KiB chunks using gzip (level=9) and lz4 was analyzed. The compression ratio is much lower for older chunks and is worse for more recent blocks. Over the entire history, gzip achieves 34.4%, lz4 54.8%, and bz2 37.6%. Alternatively, bitfields stored separately by block are more compatible with constructions where an output's position is its block hash plus relative index. The per-block bitfield sizes are shown in the bottom graph. The compression ratios overall are 50% for gzip, 70% for lz4, and 61.5% for bz2.</summary>
+    <published>2018-05-24T02:43:44+00:00</published>
+  </entry>
+</feed>

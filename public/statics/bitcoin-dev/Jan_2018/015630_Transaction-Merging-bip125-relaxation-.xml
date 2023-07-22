@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Transaction Merging (bip125 relaxation)</title>
+  <updated>2023-06-12T23:58:48.015521+00:00</updated>
+  <author>
+    <name>Moral Agent 2018-01-23 21:56:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Transaction Merging (bip125 relaxation)</title>
+    <updated>2023-06-12T23:58:48.015521+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-January/015630.html" rel="alternate"/>
+    <summary>The idea of merging multiple unconfirmed transactions by stripping extraneous inputs and change has been proposed, but the bip125 rule currently makes it impossible. The bip125 rule states that "the replacement transaction pays an absolute fee of at least the sum paid by the original transactions." This rule cannot be observed because the size of the merged transaction is smaller than the original transactions, unless there is a considerable feerate bump. To make this possible, the rule would need to be relaxed or removed entirely. However, this would introduce DoS vectors by making it much cheaper to use relay bandwidth and allowing one to push others' transactions out of the mempool. The proposed solution is to limit abuse by requiring the fee rate to increase, which is similar to the spirit of RBF. For example, if you wished to replace transactions A and B with C which spends the same inputs as A and B, then the following must be true before C will be relayed: (Fee_A + Fee_B) / (Weight_A + Weight_B). From a "coin selection" point of view, implementing the rules for the proposed transaction merging was significantly easier than anticipated. However, tracking the mess becomes complicated, especially when dealing with confirmations, change, and safety in a reorg. One possible solution is to only consider a transaction "replaceable" if it has change, but this is not always feasible, and it opens up a pandora's box of complexity. Most transactions have change, so it is rare for the inputs to exactly match the requested payment. Despite this, the proposed change may make it cheaper to evict low-fee transactions from other node's mempool. A compromise could be to require that the absolute fee must be &gt;= half the original fees. Although everyone hates magic values, in practice, it will allow legitimate and useful use of "retroactive transaction merging" without much downside. Overall, the proposed solution is easy to implement, but the benefits are currently muted because of the higher absolute fee rule.</summary>
+    <published>2018-01-23T21:56:41+00:00</published>
+  </entry>
+</feed>

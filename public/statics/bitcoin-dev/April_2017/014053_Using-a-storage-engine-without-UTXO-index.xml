@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Using a storage engine without UTXO-index</title>
+  <updated>2023-06-11T23:50:49.122914+00:00</updated>
+  <author>
+    <name>Tomas 2017-04-07 00:17:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Using a storage engine without UTXO-index</title>
+    <updated>2023-06-11T23:50:49.122914+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/014053.html" rel="alternate"/>
+    <summary>Tomas has been working on a bitcoin implementation that uses a different approach to indexing for verifying the order of transactions. Instead of using an index of unspent outputs, double spends are verified by using a spend-tree where spends are scanned against spent outputs instead of unspent outputs. Eric Voskuil pointed out that this is the approach that genjix used in libbitcoin version2. With the exception of de-linking (not deleted) in the case of reorgs, the entire store is append only, implemented in a small set of memory mapped files. The downsides to the approach are higher than necessary storage space requirement due to storing the indexing data required for correlate the spends, and higher than necessary validation complexity and cost in terms of computing the spent-ness (including spender height) of an output. Eric Voskuil suggested that to resolve the above two problems, the version3 store does not use a spends table/index. Nor does it store any table of UTXOs. Yet validation is highly parallelized. Instead of additional indexes it uses the tx hash table, augmented with 32 bits per output for spender height. So there is a O(1) cost of finding the tx and a O(N) cost of finding the spender height where N is the number of outputs in the tx. But because the number of outputs in a tx is bounded (by block size) this is constant time in the number of transactions. This works out much faster than the spends table, and without the storage cost or complexity disadvantages. Tomas disagreed and pointed out that spends are simply scanned in the spend-tree (full tree, prunable, fully 5.6gb), or caught by the spend-index (bit index, non-prunable, fully 180mb). Neither impose significant storage requirements. He also stated that the spend-tree stores the spend information in a tree structure, no reorgs are required, and the resulting code is actually much less complex. Bitcrust simply scans the tree. Although earlier designs used a skip-list, it turns out that accompanied by a spent-index lagging a few blocks behind, raw scanning is faster than anything even though it needs to scan ~5 blocks times ~4000 inputs before reaching the first spent-index, the actual scan is highly cache efficient and little more than a "REP SCASQ", reaching sub-microsecond per input on each core including the lookup in the spend index. Tomas also stated that the spend tree grows per *input* of a transaction instead of per *output* of a transaction, because this is what is scanned on order validation. The spend tree can be pruned because the spend index (~200mb) catches early spends. Disregarding the baseload script validation, the peak load order validation of bitcrust is more negatively affected by a transaction with many inputs than by a transaction of many outputs. He encouraged Eric to check out the results at https://bitcrust.org.</summary>
+    <published>2017-04-07T00:17:47+00:00</published>
+  </entry>
+</feed>

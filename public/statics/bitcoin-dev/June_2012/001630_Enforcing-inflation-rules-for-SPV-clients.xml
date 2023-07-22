@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Enforcing inflation rules for SPV clients</title>
+  <updated>2023-06-06T05:55:45.872224+00:00</updated>
+  <author>
+    <name>Mike Hearn 2012-06-24 12:45:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Enforcing inflation rules for SPV clients</title>
+    <updated>2023-06-06T05:55:45.872224+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-June/001630.html" rel="alternate"/>
+    <summary>The discussion is about handling the possibility of a majority-miner conspiracy to raise inflation if most economic actors use SPV clients. Checking the coinbase of a transaction without knowing the fees in the block is not possible. The attack scenario is an attempted takeover of the economy by miners; attempting to put hints into the blocks won't work. The most obvious goal for a cartel of miners is to change the inflation formula, either for purely selfish reasons or due to coercion by governments/central banks who still subscribe to the "inflation is good" idea.Good nodes won't relay blocks that violate the rules no matter how hard they are. Still, in a situation where an SPV client hears about the bad best chain, it would switch to it automatically. d'aniel proposed having good nodes broadcast announcements when they detect a rule that breaks the rules, along with a proof that it did so. Checking the proof might be very expensive, but it would only have to be done for split points, limiting the potential for DoS.If a node announces that it has a weaker chain and that the split point is a rule-breaker, the SPV client would verify the split, download all the transactions in the split block along with all their inputs, and the merkle branches linking the inputs to the associated block headers. In this way, fee calculation can be done, the inflation formula applied, and the coinbase value checked. If the block is found to be a rule-breaker, it'd be blacklisted and chains from that point forward ignored.Miners may decide to allow themselves to create money with non-index-zero transactions to work around this. In that case, the good node can announce that a given tx in the rule-breaker block is invalid. The SPV node would then challenge nodes announcing the longer chain to provide the inputs for the bad tx all the way back to a pre-split coinbase. Doing these checks would be rather time-consuming with huge blocks, but it's a last resort only. In the absence of bugs, the mere presence of the mechanism should ensure it never has to be used.</summary>
+    <published>2012-06-24T12:45:53+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Bitcoin Secure Multisig Setup</title>
+  <updated>2023-06-14T17:25:09.880454+00:00</updated>
+  <author>
+    <name>Erik Aronesty 2021-04-10 13:53:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Bitcoin Secure Multisig Setup</title>
+    <updated>2023-06-14T17:25:09.880454+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-April/018771.html" rel="alternate"/>
+    <summary>The proposed Bitcoin Secure Multisig Setup (BSMS) aims to establish a standardized process for setting up multisig wallets securely across different vendors. The proposal addresses concerns such as whether the multisig configuration is correct and not tampered with, whether storage is tamper-proof, and whether the multisig configuration is used to generate and verify receive and change addresses. The proposal introduces two layers of protection, including a temporary secret token used to encrypt communication between signers and coordinators, and a descriptor checksum that helps prevent malicious members from being inserted into the set. The coordinator initiates the multisig setup, determines the type of multisig used and how many members and signatures are needed, and gathers information from the signers to generate a descriptor record. The signers are participating members in the multisig, and their responsibilities include providing their XPUB to the coordinator, verifying that their XPUB is included in the descriptor record, and persisting the descriptor record in their storage. The setup process includes two rounds of communication between the coordinator and signers. In round one, the coordinator creates a multisig wallet creation session, generates a secret token, shares the token with all participating signers over a secure channel, and the signers generate a key record by prompting the user for the token and a derivation path. In round two, the coordinator gathers key records from all participating signers, decrypts them using ENCRYPTION_KEY, verifies that the included signature is valid given the key, generates a descriptor record, encrypts this descriptor record with ENCRYPTION_KEY, and sends it to all participating signers. The signers import the descriptor record, decrypt it by prompting the user for the token, calculate and verify the descriptor's CHECKSUM, check whether one of the keys in the descriptor belongs to them, display the descriptor's CHECKSUM and other configurations, and persist the descriptor record in their storage if all checks pass. For signers that use QR codes to transmit data, key and descriptor records can be converted to QR codes, following the BCR standard. The proposal assumes that the parties in the multisig support BIP32, the descriptor language, and encryption. Finally, the proposal introduces multi-round DKG with appropriate commitments and verification of components to ensure that the setup is secure and there's no guarantee that you're not communicating with an attacker during setup.</summary>
+    <published>2021-04-10T13:53:20+00:00</published>
+  </entry>
+</feed>

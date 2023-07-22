@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Network probes</title>
+  <updated>2023-06-02T17:08:10.078856+00:00</updated>
+  <author>
+    <name>Andrea RASPITZU 2019-01-21 09:43:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Network probes</title>
+    <updated>2023-06-02T17:08:10.078856+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-January/001833.html" rel="alternate"/>
+    <summary>In an email exchange between Olaoluwa Osuntokun and Andrea Raspitzu, they discuss the concept of probing the Lightning Network to check for the liveliness of a path before sending out a payment. Currently, a random payment hash is used that is not redeemable by anyone, and if the destination (and the path) is lively, it will respond with an error. However, this method could be improved by using the padding of the per_hop field of the onion. By adding a single bit of padding, the final node can be informed that this is a probe and not an actual payment, saving the receiving node from doing a database lookup and avoiding revealing anything to intermediate nodes. Nodes may eventually use bloom filters to avoid most database lookups for incoming payment hashes, and hierarchical bloom filter usage by nodes would allow them to avoid almost all database lookups for incoming unknown payment hashes (probes or not). Furthermore, introducing probes that can be dropped and/or prioritized by intermediate nodes is an attractive idea. The sender can send out another different type of probe that would tell the intermediate nodes that the previous one was not actually a payment, allowing the network to free resources. However, introducing probes that can be dropped and/or prioritized by intermediate nodes is a privacy issue and can be abused, as it allows them to respond differently, thus the probe result cannot be trusted entirely. The idea of having a node policy where nodes would temporarily ban a peer that is adding too many unredeemable HTLCs is suggested as a solution for now.The email also mentions aj's prior post on making probe HTLCs identifiable to the receiver and allowing intermediate nodes to drop them. Allowing intermediate nodes to identify probe HTLCs has privacy implications, as it creates two path-level classes of HTLCs. On the other hand, this may help with QoS scheduling on the forwarding plane for nodes, they may want to prioritize actual payments over probes, with some nodes opting to not forward probes altogether.The email exchange includes links to relevant pull requests and prior posts for further information.</summary>
+    <published>2019-01-21T09:43:57+00:00</published>
+  </entry>
+</feed>

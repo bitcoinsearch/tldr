@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Pinning : The Good, The Bad, The Ugly</title>
+  <updated>2023-06-01T18:30:49.167302+00:00</updated>
+  <author>
+    <name>Antoine Riard 2020-06-29 00:13:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Pinning : The Good, The Bad, The Ugly</title>
+    <updated>2023-06-01T18:30:49.167302+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-June/002758.html" rel="alternate"/>
+    <summary>The Lightning Network's security model relies on unilateral enforcement of transactions by channel participants. To ensure timely confirmation of LN transactions, effective propagation is critical. However, malicious actors can manipulate network mempools, tx-relay topology, and miners' mempools to steal from users. Pinning attacks are an example of such manipulation, involving pinning low-feerate HTLC-preimage transactions in some network mempools to prevent an honest HTLC-timeout from confirming. Anchor outputs can solve this scenario, allowing parties to unilaterally bump the feerate of their HTLC-timeout transactions.However, there are more concerning scenarios of pinning at the commitment-tx level. A malicious party could update a channel until they obtain ~10k revoked commitment transactions and inflate the absolute fee of their own commitment during periods of mempool congestion. The attacker could broadcast one of the revoked commitment transactions to each base layer public peer, partitioning the network mempools into 10k subsets. Even with anchor output, an honest LN node won't be able to confirm the remote commitment through a CPFP as this won't cross subset boundaries.To address these issues, package relay support on the Core side is required. Package relay introduces a new class of p2p traffic to make commitment transactions and CPFP evaluated atomically by network mempools. In this way, any malicious remote commitment assuming a higher feerate can be evicted. Currently, there is no p2p/mempool mechanism to learn about conflicting transactions, making it difficult to detect these attacks.The article describes the flaws in the current mempool design and contracting applications with competing interests. It presents various scenarios, including a malicious counterparty leveraging network propagation rules to prevent miners' mempools from discovering the best feerate package. The article proposes several solutions, such as amending rules to enable mempool-convergence based on feerate, introducing outbound tx-relay peers rotation, making the tx-relay topology more dynamic and ad hoc privacy-preserving redundant tx-broadcast.Ensuring security requires heavy, long-term work at the base layer. The article suggests going forward with anchor proposal implementation and working on package relay to solve commitment-level pinning, studying the best base layer mechanism to ensure the best feerate package discovery by any miner's mempools, and increasing delta and deadline timelocks. The article concludes by emphasizing the need for significant study and long-term work at the base layer to ensure the security of LN peers against motivated attackers with knowledge of both layers.</summary>
+    <published>2020-06-29T00:13:03+00:00</published>
+  </entry>
+</feed>

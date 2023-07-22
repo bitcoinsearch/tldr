@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DRAFT: interactive tx construction protocol</title>
+  <updated>2023-06-02T23:04:48.272010+00:00</updated>
+  <author>
+    <name>darosior 2020-01-31 11:23:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DRAFT: interactive tx construction protocol</title>
+    <updated>2023-06-02T23:04:48.272010+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-January/002480.html" rel="alternate"/>
+    <summary>The discussion revolves around the use of JoinMarket's PoDLEs (Proof of discrete logarithm equality) to solve similar problems to those presented in dual-funded channel proposals. The protocol commits to a UTXO and includes proof that the creator of the PoDLE knows the secret key behind it while later being opened to reveal which UTXO the opener allocated. If the opener aborts, then the acceptor can gossip the UTXO and the revealed PoDLE to the rest of Lightning, making it challenging for the opener to reuse the same UTXO to probe other potential acceptors.JoinMarket has also solved the issue of allowing a UTXO to be used at most N times by appending a single byte to something that is hashed and ensuring its value is less than N. In this way, it can only be used from 0 to N - 1, thereby allowing a UTXO to be used at most N times. There is no clear way to determine when to safely delete old PoDLEs; JoinMarket never deletes but might if throughput increases.The use-case presented appears to be quite similar to a PayJoin, where the opener proposes to make a payment to a channel between the opener and the acceptor. The acceptor adds some UTXOs contributing to the payment output, and this mechanism can be later used for channel factories. PoDLE techniques would be useful as well for multi-funded channel factories. It would be a good idea to share PoDLE format with JoinMarket so we can share PoDLE with them. Finally, it is suggested that retaining PoDLE for at least a year or a month or two weeks or so should be mandated in some BOLT spec to slow down probe attempts.</summary>
+    <published>2020-01-31T11:23:31+00:00</published>
+  </entry>
+</feed>

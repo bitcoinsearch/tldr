@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving RBF policy</title>
+  <updated>2023-06-15T16:20:37.053722+00:00</updated>
+  <author>
+    <name>Eric Voskuil 2022-02-01 19:44:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving RBF policy</title>
+    <updated>2023-06-15T16:20:37.053722+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019850.html" rel="alternate"/>
+    <summary>In a recent email exchange between Bram Cohen and Eric Voskuil, the topic of RBF (replace-by-fee) was discussed. Bram suggested that disallowing RBF is a feature that is mostly there to appease some people's delusions that zeroconf is a thing. The conversation then shifted towards two different scenarios that result in different incentivized behavior for transactions in the mempool. In one scenario where there is more than a block's backlog in the mempool, the transaction with the higher fee rate should win. In the other scenario where there isn't a whole block's worth of transactions, the transaction with higher total value should win.Eric argues that these are not distinct scenarios and that the rational choice is the highest fee block-valid subgraph of the set of unconfirmed transactions, in both cases. He also notes that the assumption of RAM storage is an error and unrelated to network protocol. There is nothing "going on" in a set of unconfirmed valid transactions as they are logically unchanging. Furthermore, Eric explains that the only consideration is low-cost storage fill. The fee is a proof of spend which, like proof of work for headers/blocks, is the basis of DoS (denial-of-service) protection for unconfirmed transactions. The issue with two conflicting subgraphs is that one or the other is ultimately unspendable. As such, the fee on each is non-cumulative, and therefore only one (the highest) is providing DoS protection. Any subsequent conflicting subgraph must pay not only for itself but for all preceding conflicting subgraphs.</summary>
+    <published>2022-02-01T19:44:37+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>joinstr: coinjoin implementation using nostr</title>
+  <updated>2023-06-15T23:49:59.353240+00:00</updated>
+  <author>
+    <name>woltx 2022-09-09 21:05:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>joinstr: coinjoin implementation using nostr</title>
+    <updated>2023-06-15T23:49:59.353240+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-September/020911.html" rel="alternate"/>
+    <summary>The email thread discusses a proposal for an experiment called "joinstr" that aims to improve the current coinjoin implementations. The author has shared a gist with their ideas and welcomes opinions on the matter. They credit fiatjaf (Nostr), Andrew Chow (PSBT), Jeff Thibault (python-nostr), and existing coinjoin implementations. The developer has reviewed joinstr and found that the cryptographic scheme mentioned as an alternative to blind signatures isn't yet implemented, resulting in anyone being able to submit unrelated inputs and outputs. The developer suggests that PR #24058 for basic support BIP-322 can improve this scheme by implementing proof of ownership. Instead of clients sending descriptors to the relay and then verifying them using `scantxoutset`, it can send `txid:out` with a message signed with the address, verify using `verifymessage` and then use `gettxout` to retrieve the value. That way, only the owner can send the UTXO.The relay will share a random secret with clients for one round which should be present in output registration request although never gets published. If someone tries to register an output without registering any inputs, the request would get rejected or published as unverified. Relay would not be able to link inputs and outputs as the number is the same for all inputs in a round and they get registered at different times with new keys and IP addresses. Clients can use multiple relays at the same time to avoid trusting one relay. This would result in a different shared secret number but the same process. If a relay tries to cheat, users will not sign the transaction and avoid using it in the future. The developer mentions that there are a few DoS vectors that need fixing and also warns not to use this on mainnet as it might have bugs. They will continue the development with coinjoin transactions on signet for a few weeks until there is a stable release with no bugs. The developer has a few ideas in mind for various relay types that might be used concurrently to prevent numerous problems. Custom relays are supported by Nostr, and examples include paying a fee to register for a round, subscribing with a time limit, or using invite-only relays. They will run a free and open nostr relay for this project and try to fix the DoS issues before a mainnet version is released for python script(for nerds) and android app (for all users). The author plans to work on creating an Android app for joinstr in the coming week. The email was sent using Proton Mail secure email and is part of the bitcoin-dev mailing list hosted by lists.linuxfoundation.org. The developer provides links to some relevant repositories including fiatjaf/relayer, fiatjaf/expensive-relay and fiatjaf/relayer/tree/master/whitelisted. Overall, the developer's message provides insights into a coinjoin implementation using Nostr, the challenges and limitations of the current system, and potential improvements to make it more secure.</summary>
+    <published>2022-09-09T21:05:07+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Blinded channel observation</title>
+  <updated>2023-05-24T00:10:43.258591+00:00</updated>
+  <author>
+    <name>Tadge Dryja 2016-08-15 15:18:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Blinded channel observation</title>
+    <updated>2023-05-24T00:10:43.258591+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-August/000588.html" rel="alternate"/>
+    <summary>The author discusses two approaches to designing channels: encrypted and non-encrypted. While encrypted data can be decrypted with a key, non-encrypted data is obfuscated to prevent the observer from learning anything. However, HTLCs are passed through multiple nodes, so information about them can easily get to the observer. Therefore, HTLCs would need to be in some kind of encrypted blob to send to the observer. The author proposes using truncated TXIDs as the identifier for the observer and decryption keys to allow constant-time lookups into the observer's database. Non-HTLC data can be sent unencrypted, while HTLC data can be kept in a separate data store indexed by state number. Pointers to previous states can save space if HTLCs are added incrementally. The author believes that 2 bytes are enough to reference HTLCs since long-lived HTLCs wouldn't be referenced directly. Instead, later states that still had it would point to a previous state that also pointed to it.Nodes can omit or include HTLCs to the observer as they see fit, which seems useful for micropayments that might outstrip the abilities of the observer. Padding and timing make hiding the channel tricky, especially for HTLCs. With non-HTLC updates, it can be hard to know when two nodes are updating a channel state, but with HTLCs there are more nodes in the mix with more points for data to leak out to the observer.</summary>
+    <published>2016-08-15T15:18:24+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - RFC: Kicking BIP-322 (message signing) into motion</title>
+  <updated>2023-06-13T23:59:34.187229+00:00</updated>
+  <author>
+    <name>Karl-Johan Alm 2020-03-04 07:03:34</name>
+  </author>
+  <author>
+    <name>Luke Dashjr 2020-03-04 14:35:16</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2020-03-04 14:43:13</name>
+  </author>
+  <author>
+    <name>Karl-Johan Alm 2020-03-25 06:31:56</name>
+  </author>
+  <author>
+    <name>Karl-Johan Alm 2020-03-04 06:23:53</name>
+  </author>
+  <author>
+    <name>Luke Dashjr 2020-03-04 14:35:16</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2020-03-04 14:43:13</name>
+  </author>
+  <author>
+    <name>Karl-Johan Alm 2020-03-25 06:31:56</name>
+  </author>
+  <author>
+    <name>Karl-Johan Alm 2020-03-25 06:31:56</name>
+  </author>
+  <author>
+    <name>Luke Dashjr 2020-03-04 14:35:16</name>
+  </author>
+  <author>
+    <name>Karl-Johan Alm 2020-03-04 07:03:34</name>
+  </author>
+  <author>
+    <name>Karl-Johan Alm 2020-03-04 06:23:53</name>
+  </author>
+  <author>
+    <name>Karl-Johan Alm 2020-03-04 06:23:53</name>
+  </author>
+  <author>
+    <name>Karl-Johan Alm 2020-03-04 07:03:34</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2020-03-04 14:43:13</name>
+  </author>
+  <link href="bitcoin-dev/March_2020/017669_RFC-Kicking-BIP-322-message-signing-into-motion.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017671_RFC-Kicking-BIP-322-message-signing-into-motion.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017672_RFC-Kicking-BIP-322-message-signing-into-motion.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017712_RFC-Kicking-BIP-322-message-signing-into-motion.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017668_RFC-Kicking-BIP-322-message-signing-into-motion.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017671_RFC-Kicking-BIP-322-message-signing-into-motion.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017672_RFC-Kicking-BIP-322-message-signing-into-motion.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017712_RFC-Kicking-BIP-322-message-signing-into-motion.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017712_RFC-Kicking-BIP-322-message-signing-into-motion.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017671_RFC-Kicking-BIP-322-message-signing-into-motion.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017669_RFC-Kicking-BIP-322-message-signing-into-motion.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017668_RFC-Kicking-BIP-322-message-signing-into-motion.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017668_RFC-Kicking-BIP-322-message-signing-into-motion.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017669_RFC-Kicking-BIP-322-message-signing-into-motion.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017672_RFC-Kicking-BIP-322-message-signing-into-motion.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - RFC: Kicking BIP-322 (message signing) into motion</title>
+    <updated>2023-06-13T23:59:34.187229+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-March/017669.html" rel="alternate"/>
+    <summary>Karl-Johan Alm submitted a BIP-322 pull request to improve Bitcoin's signing message functionality. However, despite his PR being open for twice the time as another PR to Bitcoin Core, which touched on the same areas of complexity, the latter was merged without any consideration for BIP-322 compatibility. This leads him to believe that people dislike BIP-322 in its current form. Karl-Johan Alm lists several things he can do to make BIP-322 more appealing to people, including throwing out the sign message system and replacing it with a proof-of-funds system, using a transaction rather than a new format, using Trezor-style, introducing OP_MESSAGEONLY, and inviting suggestions for other solutions.In an email thread from the Bitcoin-dev mailing list, several proposals for improving the BIP-322 pull request are discussed. The first proposal involves replacing the signmessage system with a prove funds system to discourage the misleading use of signmessage as a way to prove funds. The second proposal suggests using a transaction instead of a new format and making the first input's txid the message hash to ensure that the transaction cannot be broadcasted. The third proposal involves using Trezor style, which has already been adopted but limits generic signing. The fourth proposal is to introduce OP_MESSAGEONLY, which would make "dumb" signers more difficult to support as they would have to do script interpretation to make sure they're not signing something real with funds. Finally, the email asks if anyone has any other suggestions for improving BIP-322.The document proposes a standard for interoperable generic signed messages based on the Bitcoin Script format. The current message signing standard only works for P2PKH (1...) addresses. By extending it to use a Bitcoin Script-based approach, it could be made more generic without causing too much burden on implementers, who most likely have access to Bitcoin Script interpreters already. A new structure SignatureProof is added, which is a simple serializable scriptSig &amp; witness container. The proof is deemed invalid if the system derives the address for the pubkey kG, and if it does not match A. The current message signing standard solves this via a cryptographic trick, wherein the signature S above is a special "recoverable signature" type. While this is a neat trick, it unnecessarily restricts and complicates the message signing mechanism; for instance, it is currently not possible to sign a message for a P2SH address because there is no pubkey to recover from the resulting signature.The BIP-322 pull request proposes a list of rules that indicate enforcement of rules. It simply lists the rules as they stand at the point of writing. Each flag is associated with some type of enforced rule (most often a soft fork). There are two sets of flags: consensus flags (which result in a block being rejected if violated), and policy flags (which result in a transaction being accepted only if it is contained within an actual block and rejected otherwise, if violated).</summary>
+    <published>2020-03-04T07:03:34+00:00</published>
+  </entry>
+</feed>

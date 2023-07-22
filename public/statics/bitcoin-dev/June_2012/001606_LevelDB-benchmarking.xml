@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>LevelDB benchmarking</title>
+  <updated>2023-06-06T05:41:42.266339+00:00</updated>
+  <author>
+    <name>Mike Hearn 2012-06-19 09:05:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>LevelDB benchmarking</title>
+    <updated>2023-06-06T05:41:42.266339+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-June/001606.html" rel="alternate"/>
+    <summary>In an email conversation, Gregory Maxwell suggests that ECDSA caching can be easily run on multiple cores which will provide a linear speedup. He further notes that even with the checking in place, once ECDSA is using multiple threads, the bottleneck would again be the DB for this kind of case. Upon reconsideration, he realizes that he may have been wrong about being IO bound in the last benchmark. The core running the main Bitcoin thread is still pegged and the LevelDB background thread is only spending around 20% of its time in iowait. An oprofile shows most of the time being spent inside a std::map.To make progress on this work, a few decisions need to be made, which Gavin is expected to take. These include deciding whether or not to go ahead with the work, deciding how to deal with LevelDB's minimalist build system, and how to handle the migration period necessary should they decide to make any tweaks to the db format. Currently, the key/values are the same as before, though using satoshi serialization for everything is a bit odd. UI for migration would also be needed if any changes were to be made. Maxwell suggests that they check the source into the main Bitcoin tree and link it statically rather than complicate the build.</summary>
+    <published>2012-06-19T09:05:20+00:00</published>
+  </entry>
+</feed>

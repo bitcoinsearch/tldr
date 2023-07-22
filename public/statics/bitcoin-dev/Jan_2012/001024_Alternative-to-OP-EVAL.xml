@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Alternative to OP_EVAL</title>
+  <updated>2023-06-05T01:28:53.255461+00:00</updated>
+  <author>
+    <name>Stefan Thomas 2012-01-02 17:10:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Alternative to OP_EVAL</title>
+    <updated>2023-06-05T01:28:53.255461+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-January/001024.html" rel="alternate"/>
+    <summary>A proposal has been made to create a new 'standard' transaction type called "pay to Script hash" that allows users to publish a short "funding address" that is the hash of an arbitrary redemption script which will be revealed upon spending the funds. The proposal is designed to be backwards-compatible-in-the-blockchain and doesn't require any change to the script interpreter; it can be implemented through static replacement between parsing and execution. It is two less bytes than the previous proposal, OP_EVAL, and allows for all urgent use cases without consuming a NOP. If ever recursion or something else is needed, OP_EVAL can still be added. There was some discussion on whether to make the script: OP_NOP1 HASH160 EQUAL to make it easier to identify as a special transaction but the consensus was that every byte matters and code replacement would be more common. Clients/miners will recognize this new transaction type and do additional validation including failing if there were any operations other than "push data" in the original scriptSig, deserializing the top item on the scriptSig stack, and running an additional validation on the deserialized script using the remaining items on the scriptSig stack and the deserialized script as the scriptPubKey. Overall, it is considered a cleaner and more straightforward implementation than OP_EVAL with no special cases.</summary>
+    <published>2012-01-02T17:10:25+00:00</published>
+  </entry>
+</feed>

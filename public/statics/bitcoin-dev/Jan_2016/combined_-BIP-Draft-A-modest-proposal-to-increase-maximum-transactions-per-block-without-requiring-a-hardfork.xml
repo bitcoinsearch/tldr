@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - [BIP Draft] A modest proposal to increase maximum transactions per block without requiring a hardfork</title>
+  <updated>2023-06-11T03:07:07.750971+00:00</updated>
+  <author>
+    <name>Robert Grosse 2016-01-16 18:20:13</name>
+  </author>
+  <author>
+    <name>Robert Grosse 2016-01-16 18:20:13</name>
+  </author>
+  <author>
+    <name>Robert Grosse 2016-01-16 18:20:13</name>
+  </author>
+  <link href="bitcoin-dev/Jan_2016/012246_-BIP-Draft-A-modest-proposal-to-increase-maximum-transactions-per-block-without-requiring-a-hardfork.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2016/012246_-BIP-Draft-A-modest-proposal-to-increase-maximum-transactions-per-block-without-requiring-a-hardfork.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2016/012246_-BIP-Draft-A-modest-proposal-to-increase-maximum-transactions-per-block-without-requiring-a-hardfork.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - [BIP Draft] A modest proposal to increase maximum transactions per block without requiring a hardfork</title>
+    <updated>2023-06-11T03:07:07.750971+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-January/012246.html" rel="alternate"/>
+    <summary>The proposed new transaction format aims to reduce the space that transactions occupy, allowing more transactions per block. A compressed transaction can only be used for non-coinbase transactions with 1-8 inputs and outputs that pay to pubkey hash only. The header byte of a compressed transaction has a specific bit format to identify it as compressed and save space by omitting version numbers and input/output count fields. Additionally, most transactions will not require lock_time, saving another four bytes.Compressed inputs and outputs have differences from normal inputs and outputs, such as the index byte being only one byte, the scriptSig length being completely omitted, and signature and public key being included directly. Compressed values are encoded in a specific format, allowing for savings in space when encoding smaller values. The new changes would only take effect after a consensus is reached among miners who increment the version code.To implement the new format with only a softfork, compressed transactions are hidden as extra data inside the coinbase transaction rather than replacing ordinary transactions in a block, and uncompressed transactions can hide compressed inputs and outputs using an unused opcode called OP_SHADOW. The blockchain must remain valid when all hidden data is ignored, and sending money back from the shadow chain involves specially marked anyone-can-spend outputs. Uncompressed transactions can include multiple inputs and up to eight shadow inputs and outputs. Validation rules ensure that the total amount of marked anyone-can-spend outputs being spent and created matches up with the total balance leaving and entering the shadow chain.The proposed solution is a true softfork, unlike generalized softfork proposals, as the new blockchain remains valid under old rules but interpreted differently.</summary>
+    <published>2016-01-16T18:20:13+00:00</published>
+  </entry>
+</feed>

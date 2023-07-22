@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Normal operation questions</title>
+  <updated>2023-06-03T07:37:46.494265+00:00</updated>
+  <author>
+    <name>Benjamin Weintraub 2022-02-16 21:01:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Normal operation questions</title>
+    <updated>2023-06-03T07:37:46.494265+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-February/003476.html" rel="alternate"/>
+    <summary>In an email exchange between Benjamin Weintraub and Olaoluwa Osuntokun, Weintraub asked two questions about the Normal Operation protocol regarding a single-hop payment between Alice and Bob over a single channel. Firstly, he asked why it was important for Alice to send the `commitment_signed` message after sending `update_add_htlc` before Bob. Osuntokun responded that while it is not absolutely necessary, delaying the signature allows Alice to batch/pipeline updates to the channel, especially if she has other HTLCs she wants to add to the commitment transaction. Concurrent signatures are not an issue, but will generate additional state transitions for both sides to have the exact same set of locked-in HTLCs. Secondly, Weintraub asked why both Alice and Bob need to exchange `commitment_signed` and `revoke_and_ack` messages again after Bob sends the `update_fulfill_htlc`. Osuntokun explained that this is necessary for both parties to update their commitment state off-chain, even though Bob is the one claiming the funds with the pre-image. Once Alice receives the pre-image, she can opt to pipeline the pre-image back upstream in the route instead of waiting for the full exchange, which reduces perceived user latency for payments.</summary>
+    <published>2022-02-16T21:01:52+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>More thoughts on NOINPUT safety</title>
+  <updated>2023-05-20T20:02:35.898186+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-03-13 01:41:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>More thoughts on NOINPUT safety</title>
+    <updated>2023-05-20T20:02:35.898186+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-March/016766.html" rel="alternate"/>
+    <summary>The article discusses the concerns surrounding the use of NOINPUT in the Taproot key path spending feature, specifically in eltoo. The implementation of NOINPUT reintroduces the possibility of third-party malleability to transactions. In case of a reorg, a transaction may no longer be valid if its inputs have been adjusted, which could cause problems for people doing NOINPUT signatures.The author presents two fundamental ways through which NOINPUT could cause problems for those doing NOINPUT sigs: applying signature to an unexpectedly different script and someone else sending money to the same address and reusing the prior signature to forward it on to the same destination without consent. To address the former, the author suggests using OP_MASK. However, the author is unsure about the realism of this problem.Regarding the latter issue, the author believes that naive users losing funds due to replays is concerning and could lead to enough lost funds that major exchanges may ban sending funds to any address capable of NOINPUT, which would also ban all taproot/schnorr addresses. To prevent this, the author suggests tagging addresses that can be spent via NOINPUT so that having an exchange ban those addresses doesn't impact regular taproot/schnorr addresses.The article presents two options to prevent replayable NOINPUT signatures on different transactions: ignore the concern or drop NOINPUT from normal taproot key path spending. If NOINPUT is dropped, it can still be done as a logically separate upgrade to taproot. The author introduces two ways to proceed with this: introducing a new NOINPUT-capable scriptPubKey format or requiring every script to have a valid signature that commits to the input.Output tagging does not provide a workable defense against third party malleability, but requiring a non-NOINPUT signature does. The article suggests putting more safety measures in place for NOINPUT rather than fewer. The "must have a sig that commits to the input tx" seems like it should be pretty safe, not too expensive, and keeps taproot's privacy benefits in the cases where NOINPUT is needed.</summary>
+    <published>2019-03-13T01:41:43+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-05-23T03:12:59.250590+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-04-22 04:18:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-05-23T03:12:59.250590+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002642.html" rel="alternate"/>
+    <summary>The Lightning protocol is facing a severe issue with RBF pinning HTLC transactions. If B broadcasts the commitment transaction, then C, who received the HTLC from B and received it from A, could spend an HTLC using the preimage with a low-fee, RBF-disabled transaction. To prevent this, any OP_CHECKSEQUENCEVERIFY should impose the requirement to be RBF-enabled. However, if there exists an out-of-band agreement with a small miner, then B's higher fee rate spend will win over. Before L+1, C has no incentive to bid since placing any bid at all will leak the preimage, which B can then turn around and use to spend from A, and A and C cannot steal from B. Thus, B should ensure that before L+1, the HTLC-Timeout has been committed on-chain, which outright prevents this bidding war from even starting. But this requires B to add fees to HTLC-Timeout.By adding an RBF carve-out output to HTLC-Timeout or by using SIGHASH_NOINPUT, we can make the C-side signature SIGHASH_NOINPUT|SIGHASH_SINGLE and allow B to re-sign the B-side signature for a higher-fee version of HTLC-Timeout. With this, B can exponentially increase the fee as L+1 approaches. If B can get HTLC-Timeout confirmed before L+1, then C cannot steal the HTLC value. B can run in blocksonly mode and as each block comes in from L to L+1, if HTLC-Timeout is not confirmed, feebump HTLC-Timeout.C can bribe a miner to prevent HTLC-Timeout from confirming between L and L+1. This sets up a bidding war between C requesting miners to censor, vs. B requesting miners to confirm. The additional output bloats the UTXO set and requires another transaction to claim later. If we have SIGHASH_NOINPUT, the Decker-Russell-Osuntokun sidesteps this issue as any timed-out HTLC can be claimed with a fee-bumpable transaction directly without RBF-carve-out.</summary>
+    <published>2020-04-22T04:18:29+00:00</published>
+  </entry>
+</feed>

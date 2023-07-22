@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP] Normalized Transaction IDs</title>
+  <updated>2023-06-09T20:59:39.570712+00:00</updated>
+  <author>
+    <name>Christian Decker 2015-05-19 08:28:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP] Normalized Transaction IDs</title>
+    <updated>2023-06-09T20:59:39.570712+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/008196.html" rel="alternate"/>
+    <summary>Christian Decker proposed a BIP to normalize transaction IDs in order to address transaction malleability and facilitate higher-level protocols. The normalized transaction ID is an alias used in parallel to the current (legacy) transaction IDs to address outputs in transactions. It is calculated by removing (zeroing) the scriptSig before computing the hash, which ensures that only data whose integrity is also guaranteed by the signatures influences the hash. Thus if anything causes the normalized ID to change it automatically invalidates the signature. When validating a client supporting this BIP would use both the normalized tx ID as well as the legacy tx ID when validating transactions.The proposal solves transaction malleability and simplifies higher-level protocols. Template transactions can now be used upon which sequences of transactions can be built before signing them. Although the proposal requires a hardfork, hardforks are no longer the dreaded boogeyman nobody talks about. The details of how the hardfork is to be done were left out, as it does not really matter, and a good mechanism may exist to apply a bunch of hardforks concurrently in the future.Stephen suggested considering how BIP34 affects normalized transaction ids since the height of the block is included in the scriptSig ensuring that the txid will be different. Normalized txids should strip the scriptSigs of all transactions except for coinbase transactions to prevent replay attacks in the form of spending coinbase outputs in the same way they were spent from a previous block. BIP 34 explicitly uses the scriptSig to make the coinbase transaction unique, so simply removing the scriptSig is not an option as it would potentially cause collisions. The blockchain height in the sequence number of the coinbase input or the locktime of the transaction can be put, restoring the uniqueness constraint in normalized transaction IDs (for both proposals).</summary>
+    <published>2015-05-19T08:28:58+00:00</published>
+  </entry>
+</feed>

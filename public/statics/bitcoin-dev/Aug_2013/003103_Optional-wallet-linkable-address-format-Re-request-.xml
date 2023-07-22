@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Optional "wallet-linkable" address format (Re-request)</title>
+  <updated>2023-06-07T15:40:21.297307+00:00</updated>
+  <author>
+    <name>Mike Hearn 2013-08-09 20:35:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Optional "wallet-linkable" address format (Re-request)</title>
+    <updated>2023-06-07T15:40:21.297307+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-August/003103.html" rel="alternate"/>
+    <summary>The Bitcoin-development mailing list recently discussed alternate address serialization in the payment protocol that could provide more information than the existing 25-byte hash160 form. This alternate encoding preserves privacy and allows the sender to send a reliable payment address for deposit without risk of MITM or any compromise. The particular use case could be set up between wallet software and an exchange, where the exchange would like to reliably send addresses to the user for deposit. The author of wallet software pre-verifies the public key portion of the service for security purposes.Developers are implementing multi-chain ideas, which requires much work to support compared to the simple alternate encoding. Developers of lightweight clients may find this prohibitive, and the multi-chain idea adds a little extra burden on users to maintain the organization of the wallet. BIP 32 specifies how to use the first three tree levels: M/i/j/k, i~wallet, j~Internal/External, k~address. The first level is actually type-1 derived, and thus we cannot create an arbitrary number of them without pre-computing them from the offline wallet.For generating new receive chains from a watch-only wallet, the options are to either keep a cache of PubKey/ChainCode for unused [m/i'] or simply increment 'j' past 1 for an existing [m/i'/j]. The default layout of BIP32 does not mean that implementations should not check for transactions with j &gt; 1. It might be helpful to add some minimum expectations about how a wallet should be probed when imported.In the same mailing list, developers also discussed the possibility of supporting separate ledgers and balances. Two proposals were suggested for generating and receiving payments into BIP32-style addresses. One proposal involved passing Kpar and cpar, and leaving 'k' out of it, while the other proposed passing the Kpar for [m/i'/0/k] and the result of CKD'((Kpar, cpar), k).Additionally, there was an interesting idea of using static public keys as a means for persistent identity and security from MitM attacks. The suggestion was to combine both ideas by making the data structure { ParentPubKey, Addend, ChainCode } where the ParentPubKey is a common value across multiple services, corresponding to the user's identity rooted in [m/i']. Each service gets their own 'j', and ParentPubKey + Addend gives you the PubKey of [m/i'/j]. With the ChainCode, the receiver can then generate [m/i'/j/k] for monotonically increasing 'k'. All transactions under [m/i'] can be presented in a single ledger or not, depending on the user perspective.The developers agreed that if designing for persistent long-term relationships, one could build in a mechanism for generating address chains so that no further communication is necessary after the initial exchange, and it need not complicate the wallet.</summary>
+    <published>2013-08-09T20:35:07+00:00</published>
+  </entry>
+</feed>

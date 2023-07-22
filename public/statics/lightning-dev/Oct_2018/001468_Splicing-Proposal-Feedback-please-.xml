@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Splicing Proposal: Feedback please!</title>
+  <updated>2023-05-25T14:10:12.235566+00:00</updated>
+  <author>
+    <name>Conner Fromknecht 2018-10-19 03:04:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Splicing Proposal: Feedback please!</title>
+    <updated>2023-05-25T14:10:12.235566+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-October/001468.html" rel="alternate"/>
+    <summary>The Lightning Network is currently discussing modifications to the `revoke_and_ack` or `channel_reestablish` messages. These modifications would apply the commitment secrets/points to the current channel and any pending splices. The proposal is to send a distinct message that references the active_channel_id and a splice_channel_id for the pending splice. This would allow remote nodes to locate the spliced channel, even if it is not populated in indexes containing active channels.In addition to this, both parties are suggested to send channel updates with the option_channel_moving bit set to avoid bloating gossip bandwidth. The network is also considering Shachain and agrees that the additional state isn't too burdensome, allowing them to drop watchtower state after some delay.A suggestion was made to allow multiple inputs in a single message for the splicing_add_* messages. This could be implemented with an upper limit on the size of witness and pkScripts. The channel's size should be allowed to modify parameters like CSV param, reserve, max accepted htlc's, max htlc size, etc., based on the expanding or contracting of the channel.To ensure that both parties cooperate to spend, a mechanism can be achieved by using Taproot address or having either party publishing a static address or publicly derivable address specific to the channel derived from their HD seed. However, both approaches can have equivalent amounts of [non-]interactivity. The primary purpose of using a 2-of-2+timeout to stage funds for splicing is to prevent the funds from being double-spent during the splice, but detecting double-spent inputs is still required for full correctness.The Lightning protocol uses transactions that are not on any block (are kept offchain), making it indistinguishable from 0-conf transactions, yet still accepted by the receiver. The Lightning protocol prevents transaction replacement, making it safe to use. However, under Poon-Dryja, a commitment (or update) transaction that has multiple inputs can be replaced with a commitment (or update) transaction that was created before the splice, leaving the other funding TXOs unusable.During a discussion on the Lightning-dev mailing list, it was noted that all commitment transactions signatures would have an extra signature, following the `commitment_signed`. Lisa raised concerns about parallel splice not working with Poon-Dryja channels. Despite various workarounds being suggested, none were deemed suitable. The conversation ended with Rusty returning to Plan A.</summary>
+    <published>2018-10-19T03:04:59+00:00</published>
+  </entry>
+</feed>

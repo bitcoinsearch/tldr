@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A blame ascribing protocol towards ensuring time limitation of stuck HTLCs in flight.</title>
+  <updated>2023-06-03T06:54:23.238267+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2021-12-16 07:45:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A blame ascribing protocol towards ensuring time limitation of stuck HTLCs in flight.</title>
+    <updated>2023-06-03T06:54:23.238267+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003414.html" rel="alternate"/>
+    <summary>The Lightning Network development team is working to address the issue of spam via HTLCs. In 2015, Rusty, AJ, and others proposed a solution that involved ascribing blame to malicious actors by triggering a force close and providing the force close transaction as proof of honesty. However, a new proposal has been put forward to mitigate HTLC spam in a cheaper way that could quickly ascribe blame to a malicious node. This proposed solution makes use of a new lightning message called "blame_channel" in combination with onion messages. The proposed mechanism requires a fixed time for reply after negotiating an HTLC, and if this does not occur, the downstream peer is considered malicious. The reply time is proportional to the cltv_delta of that hop, and the reply comes in the form of either an update_fulfill_htlc or an update_fail_htlc. If a node cannot send either of these messages, it must send a blame_channel message that includes proof that the node previously set up the HTLC with the next peer. A malicious node could potentially blame an honest one, so nodes might need to extend the message with their own signature to prevent spoofing.One limitation of the proposal is that being able to ascribe blame does not directly prevent spam via HTLCs. Another limitation is that with MPP, the short reply interval could be an issue if the recipient has not received enough parts of the payment yet. However, the proposal also presents several advantages, including preventing malicious actors on the network and allowing an honest sender of the payment to quickly discard a stuck HTLC and try another path without including the malicious node.Overall, the proposed solution offers a step towards mitigating HTLC spam. It is not a complete solution, but it presents a collection of observations to guarantee fast settlement of payments. The team is seeking feedback and criticism to further develop this mechanism.</summary>
+    <published>2021-12-16T07:45:29+00:00</published>
+  </entry>
+</feed>

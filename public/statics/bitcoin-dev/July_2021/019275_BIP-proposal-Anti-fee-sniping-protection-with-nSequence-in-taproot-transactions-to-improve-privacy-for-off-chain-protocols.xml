@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>BIP proposal: Anti-fee-sniping protection with nSequence in taproot transactions to improve privacy for off-chain protocols</title>
+  <updated>2023-05-21T03:20:37.429547+00:00</updated>
+  <author>
+    <name>Chris Belcher 2021-07-22 14:44:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>BIP proposal: Anti-fee-sniping protection with nSequence in taproot transactions to improve privacy for off-chain protocols</title>
+    <updated>2023-05-21T03:20:37.429547+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-July/019275.html" rel="alternate"/>
+    <summary>The author of the taproot privacy BIP proposal has written python-like pseudocode for clarification on the spec after receiving a review. The pseudocode implements the suggestion of choosing a random input instead of the first one. Wallet teams are already working on implementing taproot for their on-chain app, and the author urges wallet developers to include this BIP as well. This will improve the privacy and fungibility of off-chain protocols and will also improve the incentives for miners in the low-inflation future of Bitcoin. The pseudocode includes a function called "apply_anti_fee_sniping_fields" which sets the version of the transaction to 2 as required by bip68. If any of the transaction inputs have more confirmations than 65535 or are taproot inputs, it always sets nlocktime. Otherwise, it chooses either nlocktime or nsequence with 50% odds. If the condition is met, and randint(10) == 0, it sets transaction.nlocktime to max(0, transaction.nlocktime - randint(0, 99)). If not, it sets the input_index to randint(len(transaction.inputs)), and sets transaction.inputs[input_index].nsequence to transaction.inputs[input_index].confirmations(). If the condition is met, and randint(10) == 0, it sets transaction.inputs[input_index].nsequence to max(0, transaction.inputs[input_index].nsequence - randint(0, 99)). The latest version of the BIP can be found at https://gist.github.com/chris-belcher/903feab321bf41055c91eaec46581e89.</summary>
+    <published>2021-07-22T14:44:11+00:00</published>
+  </entry>
+</feed>

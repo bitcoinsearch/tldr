@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_CAT was Re: Continuing the discussion about noinput / anyprevout</title>
+  <updated>2023-06-02T20:45:19.275210+00:00</updated>
+  <author>
+    <name>Jeremy 2019-10-04 18:33:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_CAT was Re: Continuing the discussion about noinput / anyprevout</title>
+    <updated>2023-06-02T20:45:19.275210+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-October/002219.html" rel="alternate"/>
+    <summary>In a discussion on the Lightning-dev mailing list, several members proposed various solutions to improve the concatenation of data while hashing it. Jeremy Rubin suggested using `OP_SHA256STREAM` instead of `OP_CAT`, but ZmnSCPxj expressed concern about its potential obsolescence if SHA256 is ever broken. Ethan Heilman agreed with ZmnSCPxj and proposed increasing the size of inputs for `OP_CAT` to enhance performance and utility. The group also discussed the limitations of `OP_CAT` for building Merkle trees in Bitcoin blocks and considered implementing tagged SHA256 as a new opcode to address this issue.Furthermore, ZmnSCPxj proposed removing `SIGHASH` from signatures and putting them on public keys instead, which would improve security by ensuring that public keys determine the sighash algorithm rather than the signature itself. To achieve this, ZmnSCPxj suggested the addition of a new opcode called OP_SETPUBKEYSIGHASH. This opcode allows public keys to be indirectly committed to every output scriptPubKey, with an automatically output tagging to allow for a particular SIGHASH.The proposal includes guidelines for how to utilize different ways to hide public keys until they are needed, such as MAST-inside-Taproot. The OP_SETPUBKEYSIGHASH opcode would have several possible byte inputs, including 0x1 to signify "just use the Taproot internal pubkey," a 33-byte public key with the sighash byte prepended to it, or a 34-byte public key with the first byte replaced by the sighash byte. If the sighash byte is set to 0x00, the result is a 33-byte public key, implying SIGHASH_ALL. By default, public keys will not have an attached SIGHASH byte, disallowing non-SIGHASH_ALL options unless specifically allowed in the output script.The proposal aims to retain the old feature of selecting the sighash at time-of-spending while allowing the SCRIPT to form the witness stack after the signature.</summary>
+    <published>2019-10-04T18:33:09+00:00</published>
+  </entry>
+</feed>

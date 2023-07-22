@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Impact of eltoo loss of state</title>
+  <updated>2023-05-23T15:26:40.690785+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-07-12 08:17:49</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2021-07-21 06:39:13</name>
+  </author>
+  <link href="lightning-dev/July_2021/003127_Impact-of-eltoo-loss-of-state.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2021/003137_Impact-of-eltoo-loss-of-state.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Impact of eltoo loss of state</title>
+    <updated>2023-05-23T15:26:40.690785+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-July/003127.html" rel="alternate"/>
+    <summary>The context describes a scenario where payments are made through eltoo channels from Alice to Bob to Carol, but Bob's lightning node crashes and he recovers from an old backup. As a result, Alice and Carol end up dropping newer channel states onto the blockchain while the timeout for the payments is a few hours away. The author identifies four issues arising from this scenario. First, Carol will reveal the point preimages on-chain via adaptor signatures, but Bob won't be able to decode those adaptor signatures because those signatures will need to change for each state. Second, even if Bob knows the point preimages, he won't be able to claim the PTLC payments on-chain, as he needs newer adaptor signatures that he'll have lost with the state update. Third, for any payments that timeout, Carol doesn't have any particular incentive to make it easy for Bob to claim the refund, and Bob won't have the adaptor signatures for the latest state to do so. Fourth, Alice will be able to claim refunds easily. The author proposes some solutions to these problems. To fix the third issue, Carol should be given the ability to steal funds meant to have been refunded, provided she gives Bob the option of claiming them first. However, fixing the first and second issues aren't going against Alice or Carol's interests, so the author suggests that Carol loses nothing by allowing Bob to claim funds from Alice, and Alice has already indicated that knowing P is worth more to her than the PTLC's funds.The author also provides some general recommendations to mitigate such issues in the future. These include sharing state on reconnection, negotiating a mutual/cooperative close if possible, setting the channel state index based on real-time, accepting that losing connectivity to a channel partner may have financial consequences, and limiting the total value of inbound PTLCs that one is willing to accept at any one time.Finally, the author discusses the idea of layered commitments and its implications for channel factories. While there is no known way to avoid layered commitments, the author suggests that it may make channel factories complicated.</summary>
+    <published>2021-07-12T08:17:49+00:00</published>
+  </entry>
+</feed>

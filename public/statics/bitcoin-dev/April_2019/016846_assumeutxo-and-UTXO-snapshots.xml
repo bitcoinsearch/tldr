@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>assumeutxo and UTXO snapshots</title>
+  <updated>2023-06-13T17:57:41.033394+00:00</updated>
+  <author>
+    <name>Kulpreet Singh 2019-04-04 10:27:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>assumeutxo and UTXO snapshots</title>
+    <updated>2023-06-13T17:57:41.033394+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-April/016846.html" rel="alternate"/>
+    <summary>The email conversation between Kulpreet and Nicolas Dorier revolves around validating all blocks once FastSync is complete and BTCPayServer has started accepting payments. The proposed approach has two phases: FastSync from trusted UTXO set and start accepting payments in the first phase and validation of the entire blockchain in the second phase. Phase 2 involves IBD, but instead of writing to db, just verify that the validated block matches the one on the db and move on. However, leveldb doesn't allow multiple processes to open the db, so phase 2 could have been a different process altogether.Nicolas Dorier suggests a solution for verifying the utxoset independently without any change to bitcoin core by asking signers of by UTXOSet to sign the hash of the tarball of his UTXO Set instead of asking them to sign the utxoset hash from gettxoutsetinfo. He has created a new utxoset snapshot every 6 months, so people have time to verify it and add their signatures. The easiest thing that could be done at Bitcoin Core level does not require any code change, but a change in the release process.Nathan Worsley, CTO of LocalCoinSwap.com, has submitted a proposal to implement a new feature called assumeutxo that would allow nodes to initialize using a serialized version of the UTXO set rendered by another node at some predetermined height. This feature would enable fully validating clients to run on modest hardware with limited bandwidth constraints and transact under a security model that closely resembles full validation within minutes instead of hours or days. The proposed basic idea is that the initializing node syncs the headers chain from the network, then obtains and loads one of these UTXO snapshots. Assumeutxo has some security implications that must be considered. Under assumevalid, a user can be tricked into transacting under a false history if an attacker convinces them to start bitcoind with a malicious `-assumevalid` parameter, sybils their node, and then feeds them a bogus chain encompassing all of the hard-coded checkpoints. The same attack is made easier in assumeutxo because, unlike in assumevalid, the attacker need not construct a valid PoW chain to get the victim's node into a false state; they simply need to get the user to accept a bad `-assumeutxo` parameter and then supply them an easily made UTXO snapshot containing, say, a false coin assignment.Lastly, an email conversation between Nathan Worsley and htimSxelA discusses the proposal of having an "integrated address" in Bitcoin that resolves into a Bitcoin address and also a transaction message or some other kind of identifier. The proposed feature could enhance the security of exchange cold-wallet systems, simplify the process of setting up and managing exchange cold-wallet systems, and reduce fees for exchanges. However, there are concerns about increased resource requirements per transaction and embedding identifying information into the blockchain being generally bad for privacy.</summary>
+    <published>2019-04-04T10:27:02+00:00</published>
+  </entry>
+</feed>

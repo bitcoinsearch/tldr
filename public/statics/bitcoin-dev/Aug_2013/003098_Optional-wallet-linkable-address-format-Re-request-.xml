@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Optional "wallet-linkable" address format (Re-request)</title>
+  <updated>2023-06-07T15:37:10.440296+00:00</updated>
+  <author>
+    <name>Alan Reiner 2013-08-09 17:57:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Optional "wallet-linkable" address format (Re-request)</title>
+    <updated>2023-06-07T15:37:10.440296+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-August/003098.html" rel="alternate"/>
+    <summary>Alan Reiner has proposed an alternate address serialization in the payment protocol, which would preserve privacy but allow the sender to provide more information than currently contained in the 25-byte hash160 form. The proposed format is binary_to_base58(idbyte + parentpubkey + multiplier + checksum), where the recipient will multiply the pubkey by the multiplier and then hash it to get the 20-byte address to send to. This proposal is particularly useful for certain services set up between wallet software and a business or exchange. The exchange could send addresses to the user for deposit without risk of MITM, or even if their own public server is compromised. However, using this approach would require tracking and associating a matrix of addresses for each wallet, instead of a single linear list. In addition, automatic payments without requesting from the other party are being encouraged, though this is cause for concern among some users. Mike Hearn recommends defining an extension that lets you send payment requests containing public keys+chain codes, so further payments can be made push-style with no recipient interaction (e.g. for repeated billing). How apps choose to arrange their chains internally seems like an area for experimentation.Jeremy Spilman initially suggested sharing the public key and chain code from [m/i'/0] so that payments can be received at [m/i'/0/k], for a unique value of 'i' for each receive chain. For generating new receive chains from a watch-only wallet, the options are to either keep a cache of PubKey/ChainCode for unused [m/i'] or simply increment 'j' past 1 for an existing [m/i'/j]. Alan Reiner suggests using the same parent pubkey across multiple services as a form of identity. If a shared public key across multiple services is desired, both ideas could be combined by making the data structure {ParentPubKey, Addend, ChainCode}. The email discusses the confidentiality of the ChainCode in the context of designing for persistent long-term relationships. The ParentPubKey is a shared value across multiple services and corresponds to a user's identity rooted in [m/i']. Each service gets its own 'j', and ParentPubKey + Addend gives you the PubKey of [m/i'/j]. With the ChainCode, the receiver can generate [m/i'/j/k] for monotonically increasing 'k'. Transactions under [m/i'] can be presented in a single ledger from a user perspective. The email suggests that if designing for persistent long-term relationships, a mechanism for generating address chains could be built in so that no further communication is needed after the initial exchange, without complicating the wallet.</summary>
+    <published>2013-08-09T17:57:35+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Signing CHECKSIG position in Tapscript</title>
+  <updated>2023-05-20T21:11:42.960110+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-11-28 08:06:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Signing CHECKSIG position in Tapscript</title>
+    <updated>2023-05-20T21:11:42.960110+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-November/017497.html" rel="alternate"/>
+    <summary>Russell O'Connor proposed an amendment to the current tapscript proposal, which requires a signature on the last executed CODESEPRATOR position. He suggested that instead of signing the last executed CODESEPRATOR position, we should sign the position of the CHECKSIG (or other signing opcode) being executed. There is a discussion about this topic at http://www.erisian.com.au/taproot-bip-review/log-2019-11-28.html#l-65. If CODESEPARATOR is not explicitly used, there is no protection against attacks when there are multiple participants having signing conditions within a single UTXO or a single tapleaf in the case of tapscript. With taproot key path spending, the only other conditions that can be placed on a transaction are nSequence, nLockTime, and the annex, all of which are committed via the signature. The proposed sighashes for taproot script path spending all commit to the script being used, so you can't reuse the signature in a different leaf of the merkle tree of scripts for the UTXO, only in a separate execution path within the script you're already looking at.Alice's signature can be copied and used in another alternate path if Bob has masquaraded Alice's public key as his own and inserted a copy of Alice's pubkey into a different path of the Script template. To protect herself, Alice needs to inspect the script to see if her pubkey occurs in any other branch. The solution to this problem is to use CODESEPARATOR. Consider a "leaf path root OP_MERKLEPATHVERIFY" opcode, and a script that says "anyone in group A can spend if the preimage for X is revealed, anyone in group B can spend unconditionally." With the proposed semantics, if my pubkey is in both groups, my signature will sign for position 10, and still be valid on either path, even if the signature commits to the CHECKSIG position.As a side benefit, we get to eliminate CODESEPARATOR, removing a fairly awkward opcode from this script version. ANYPREVOUTANYSCRIPT proposes to not sign the script code but does continue signing the CODESEPARATOR position, allowing you to optionally restrict how flexibly you can reuse signatures. That seems like a better tradeoff than having ANYPREVOUTANYSCRIPT signatures commit to the CHECKSIG position which would make it a fair bit harder to design scripts that can share signatures, or not having any way to restrict which scripts the signature could apply to other than changing the pubkey.</summary>
+    <published>2019-11-28T08:06:59+00:00</published>
+  </entry>
+</feed>

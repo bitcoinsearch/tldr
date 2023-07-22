@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Imposing minimum 253 sat/ksipa feerate?</title>
+  <updated>2023-05-20T08:27:08.648538+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-06-06 01:06:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Imposing minimum 253 sat/ksipa feerate?</title>
+    <updated>2023-05-20T08:27:08.648797+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-June/001299.html" rel="alternate"/>
+    <summary>The Lightning Network is facing issues due to the difference in fee computation between Bitcoind and the BOLT spec. C-lightning, Eclair, and ucoin have all imposed a minimum of 253 sat/ksipa feerate to avoid rejection by Bitcoind. However, lnd uses vsize internally for all fee estimation and does not impose this minimum. The latest instance of Satoshi's client dynamically regulates its min fee rate, so setting a static fee floor is only a temporary measure that may cease to work at an unknown time. Utilizing a permanent op_true output seems to be the best candidate for managing these fee issues without liberal sighash flags. However, this solution has its own issues. A 250 sat/kweight feerate is too low for Bitcoin to broadcast and timely processing since it will never be put in a block. If an attack occurs or nodes are configured to have very small mempools, even a value of 253 may be too low. Nodes should fail the channel if the update_fee is too low for timely processing or unreasonably large. Unilateral closure causes C-lightning to waste on chain fees sweeping and also incurs the time lock delay.</summary>
+    <published>2018-06-06T01:06:13+00:00</published>
+  </entry>
+</feed>

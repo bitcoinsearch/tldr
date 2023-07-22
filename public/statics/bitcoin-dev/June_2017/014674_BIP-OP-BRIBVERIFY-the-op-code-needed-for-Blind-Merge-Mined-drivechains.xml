@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP: OP_BRIBVERIFY - the op code needed for Blind Merge Mined drivechains</title>
+  <updated>2023-06-12T03:02:11.131589+00:00</updated>
+  <author>
+    <name>Chris Stewart 2017-06-28 23:47:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP: OP_BRIBVERIFY - the op code needed for Blind Merge Mined drivechains</title>
+    <updated>2023-06-12T03:02:11.131589+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-June/014674.html" rel="alternate"/>
+    <summary>Chris Stewart has proposed a new opcode, OP_BRIBEVERIFY, in the Bitcoin scripting system that allows for a user to bribe a miner to include a hash in the coinbase transaction's output. The goal is to enable sidechains to be merged mined against bitcoin without burdening bitcoin miners with extra resource requirements. However, Russell O'Connor suggests that adding an opcode is not the best way to implement this bribe and instead suggests using a 0 output value with some currently non-standard OP_RETURN output script that specifies the critical hash (and the sidechain id). ZmnSCPxj also suggested an alternate proposal that sidechains and altcoins that want to do "blinded" merge mining can use without a softfork.The Blind Merge Mined Sidechains concept involves locking the miner's coinbase reward at index 0 in the coinbase transaction's output vector, and fixing the witness commitment output to be at index 1 of the same vector. This enables reliable identification of the corresponding vout for each drivechain. For example, the mimblewimble sidechain could correspond to index 2 of the vector outputs on the coinbase transaction. The commitment is recorded in a scriptPubKey of the coinbase transaction, with the first 34 bytes having a consensus meaning, and the 35th byte onwards having no consensus meaning. The Blind Merge Mined Sidechains also require the use of the OP_BRIBEVERIFY op code, which reads two arguments from the stack: the sidechain id and the block hash. The op code then checks the coinbase transaction's output vector at the given index (derived from the sidechain id) to see if the hash in the block matches the hash inside of the BRIBEVERIFY program. If the hashes match, the op code acts as an OP_NOP, but if the comparison fails, the script fails.A standard BRIBEVERIFY program has a format consisting of a 32-byte block hash, followed by a push operation (if the number can't be encoded as OP_0 - OP_16), the sidechain id, and the OP_BRIBEVERIFY op code. Further details and precise semantics of the Blind Merge Mined Sidechains and the OP_BRIBEVERIFY op code can be found in the reference implementation provided in the links. Deployment information is yet to be provided. Credits are given to Paul Sztorc for the original idea of Blind Merge Mined Sidechains and CryptAxe for writing the foundational software layer for drivechains that enabled the implementation of the OP_BRIBEVERIFY opcode. References to mailing list discussions and articles on the topic are also provided. This document is placed in the public domain.</summary>
+    <published>2017-06-28T23:47:57+00:00</published>
+  </entry>
+</feed>

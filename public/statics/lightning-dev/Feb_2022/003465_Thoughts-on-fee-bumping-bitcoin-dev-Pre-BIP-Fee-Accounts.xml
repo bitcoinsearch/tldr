@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Thoughts on fee bumping, [bitcoin-dev] [Pre-BIP] Fee Accounts</title>
+  <updated>2023-06-01T18:56:20.901150+00:00</updated>
+  <author>
+    <name>damian at willtech.com.au 2022-02-14 01:31:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Thoughts on fee bumping, [bitcoin-dev] [Pre-BIP] Fee Accounts</title>
+    <updated>2023-06-01T18:56:20.901150+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-February/003465.html" rel="alternate"/>
+    <summary>The Bitcoin community is currently discussing the growing complexity of fee management, specifically around fee-bumping. Gloria's recent post highlighted some issues and proposed solutions, but the increasing complexity of both the status quo and proposed remedies is causing concern among end-users, wallet developers, Core developers, and protocol designers. To address this, it may be helpful to focus on a few aims centered on improving the end-user experience.Firstly, any user should be able to add to the incentive to mine any transaction in an additive way, while spam prevention measures like min-relay-fee are necessary to prevent bandwidth and mempool space from being consumed with infinitesimal fee-bumps. Secondly, the bandwidth and chain space consumed by a fee-bump should be minimal, and instead of rebroadcasting the original transaction for replacement, broadcasting the "diff" makes more sense. Thirdly, a special transaction structure should not be required to bump fees, and fourthly, feerate bumps should be able to come from anywhere.One approach that satisfies these aims is transaction sponsors, which allow feerates to be bumped after a transaction's broadcast, regardless of the structure of the original transaction. The interface for end-users is straightforward: specify a transaction that contributes incrementally to package feerate for some txid. However, there are objections to this approach, such as the risk of a malicious actor executing a pinning-like attack or breaking the classic invariant. Despite these objections, the sponsors design has flexibility and merits further consideration.To simplify mempool policies and special cases, the Bitcoin developer community is discussing the idea of transaction sponsors. This would allow blocks to contain sponsor transactions for txids in the same block or already included in the chain, which seems preferable to adding more rules to an already complex mempool policy. While a soft-fork may be required for transaction sponsors, cleaning up the current fee management complexity is essential. Wallet implementers must abide by a maze of rules, which invites bugs and network behavior that is difficult to reason about. The use of Child Pays For Parent (CPFP) also risks unnecessary chain waste in the long-term.If a soft-fork is required to clean up this process, consideration should be given to paying it as a one-time cost. The sponsors interface is simple and easy to reason about for Core implementers and wallet developers. The current complexity in fee management is unsustainable, and fees are becoming an increasingly crucial part of the Bitcoin system.</summary>
+    <published>2022-02-14T01:31:33+00:00</published>
+  </entry>
+</feed>

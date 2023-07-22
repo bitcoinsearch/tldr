@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP Proposal: Receiving and Change Derivation Paths in a Single Descriptor</title>
+  <updated>2023-06-15T23:30:32.008795+00:00</updated>
+  <author>
+    <name>Craig Raw 2022-07-27 07:57:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP Proposal: Receiving and Change Derivation Paths in a Single Descriptor</title>
+    <updated>2023-06-15T23:30:32.008795+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-July/020799.html" rel="alternate"/>
+    <summary>Craig thanked Andrew for proposing a BIP that simplifies how descriptors for receiving and change addresses are represented. He finds a single descriptor important when backing up a wallet, especially a multisig wallet that requires a backup of all the xpubs. The proposed notation allows descriptors to have a single derivation path element specifying a pair of indexes. Parsers would then expand these into two almost identical descriptors with the difference being that the first uses the first of the pair of indexes, and the second uses the second. Andrew's BIP, called "multipath-descs," modifies key expressions of descriptors described in BIP 380 to indicate BIP 32 derivation path steps that can have multiple values. Wallets often require at least two descriptors for all of the scripts they watch for. The only differences between them are in the derivation path where one of the steps will be different between the descriptors. This modification allows a notation to represent both descriptors as a single descriptor where one of the derivation steps is a pair of values. The common use case for this is to represent descriptors for producing receiving and change addresses. When interpreting for this use case, wallets should use the first descriptor for producing receiving addresses and the second descriptor for producing change addresses. The addition to key expressions defined in BIP 380 is compatible with this modification, and parsers that implement this will still be able to parse such descriptors. However, older parsers will not be able to understand such descriptors.</summary>
+    <published>2022-07-27T07:57:19+00:00</published>
+  </entry>
+</feed>

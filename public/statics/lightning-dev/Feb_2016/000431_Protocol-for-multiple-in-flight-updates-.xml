@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Protocol for multiple in-flight updates.</title>
+  <updated>2023-05-23T22:30:07.232825+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-02-05 00:54:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Protocol for multiple in-flight updates.</title>
+    <updated>2023-05-23T22:30:07.232825+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-February/000431.html" rel="alternate"/>
+    <summary>The protocol for handling HTLC (Hash Time-Locked Contract) in Lightning Network involves different states. These states include ADD_PRESTAGE, ADD_STAGED, ADD_SIGNING_AND_REVOKING, ADD_COMPLETE, ADD_REJECTED, TIMEOUT_PRESTAGE, TIMEOUT_STAGED, TIMEOUT_SIGNING_AND_REVOKING, TIMEOUT_COMPLETE, SETTLE_PRESTAGE, SETTLE_STAGED, SETTLE_SIGNING_AND_REVOKING, and SETTLE_COMPLETE. Each side starts with a commit transaction with 0 HTLCs, and proposed changes are processed in order.Adding an HTLC involves sending "add request" with the HTLC details, and if accepted, the HTLC is in ADD_STAGED state. Removing an HTLC can be done through timeout or settle, with the only difference being that settle requires the R value. The HTLC must be in ADD_COMPLETE state before it can be removed, and after sending the settle/timeout request with the htlc id [r value], the other party sends an accept response.Committing involves moving all *_STAGED htlcs to *_SIGNING_AND_REVOKING, generating their commit tx using all the ADD_COMPLETE and ADD_SIGNING_AND_REVOKING htlcs, signing it, and sending "commit { staged-htlcs; sig }". The other party generates their commit tx using all the ADD_COMPLETE, and any TIMEOUT_PRESTAGE or SETTLE_PRESTAGE which are not listed in staged-htlcs. After checking the signature's validity, they send "commit revocation { old-revocation-preimage }" for the previous commit tx.Proposals suggest that there's no reason to accept anything except an add request, and thus, the states SETTLE_PRESTAGE and TIMEOUT_PRESTAGE are redundant. There are also other failures, which suggests a FAIL message, perhaps with a reason message that might be encrypted back to the payer. C-lightning only allows closes to be sent from the HTLC recipient, and TIMEOUT is defined as the responsibility of the HTLC proposer.In order to reduce latency, an HTLC can be staged on the outgoing channel before it's committed on the incoming one. However, this means an HTLC recipient can't commit to the HTLC until the HTLC sender does. To address this, a new "unstage request" is needed to unstage if the incoming HTLC fails to complete in reasonable time. It's not necessary to commit to adds and removes in order wrt each other, but a commit message always commits to all HTLCs proposed and committed by the other side, all removes staged by the other side up to some counter, all HTLCs proposed by this side up to some counter, and all removes sent by this side. This implies that htlcs and remove requests should be counted separately, and the htlc count could serve as an HTLC ID which makes timeout/fail/abort messages shorter than using R hashes. Finally, it should be illegal to send a noop commit (ie. one which doesn't change the commit tx).</summary>
+    <published>2016-02-05T00:54:14+00:00</published>
+  </entry>
+</feed>

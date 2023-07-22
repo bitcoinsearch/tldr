@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - SIGHASH_NOINPUT in Segregated Witness</title>
+  <updated>2023-05-18T16:45:08.109181+00:00</updated>
+  <author>
+    <name>Anthony Towns 2016-03-01 23:22:52</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2016-03-02 22:36:27</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2016-02-26 03:20:56</name>
+  </author>
+  <link href="lightning-dev/March_2016/000450_SIGHASH-NOINPUT-in-Segregated-Witness.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2016/000453_SIGHASH-NOINPUT-in-Segregated-Witness.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2016/000448_SIGHASH-NOINPUT-in-Segregated-Witness.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - SIGHASH_NOINPUT in Segregated Witness</title>
+    <updated>2023-05-18T16:45:08.110183+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-March/000450.html" rel="alternate"/>
+    <summary>In February and March 2016, Rusty Russell, a prominent Bitcoin developer, had a conversation with members of the lightning-dev community about using SIGHASH_NOINPUT in relation to HTLC outputs. They discussed how pre-signed transactions required users to send R/timeout values multiple times for each output, which becomes problematic for channels with long-lived HTLCs. However, SIGHASH_NOINPUT only requires one signature for the entire channel, making it more efficient for high-volume channels. The group also talked about recovering timeout/R values and the possibility of creating a new double-length script hash type. They concluded that while end-users can outsource payment transactions without using SIGHASH_NOINPUT, high-volume users may benefit from running their own bitcoin node and only doing signatures if and when someone cheats.On the Bitcoin-Dev mailing list, a discussion took place regarding sending information to a third party during transaction reclaiming and the potential privacy concerns. It was suggested that encoding the 4 byte commitment index in the commitment transaction's locktime could avoid this issue. MAST (Merkelized Abstract Syntax Trees) was also discussed as an improvement, but there is no way to prevent bloating the UTXO set with the "script is one of these hashes" form. However, since Lightning transactions are expected to be spent quickly, any bloat in the UTXO set would have minimal impact. Joseph Poon proposed a new BIP (Bitcoin Improvement Proposal), which involved constructing a new segwit script type. The plan included three transactions: anchor, commitment, and penalty. As long as the key used for spending each of the commitment transaction outputs is "single use," then it will be safe. However, the signature must commit to the outputs. There is also a risk of replay vulnerability if the channel is not closed correctly. Developers were reminded to call out the vulnerability to replay in bold blinking flaming text when writing the BIP.</summary>
+    <published>2016-03-01T23:22:52+00:00</published>
+  </entry>
+</feed>

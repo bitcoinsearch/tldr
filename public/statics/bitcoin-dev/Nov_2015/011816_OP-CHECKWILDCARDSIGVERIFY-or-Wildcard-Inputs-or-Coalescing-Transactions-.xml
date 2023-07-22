@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_CHECKWILDCARDSIGVERIFY or "Wildcard Inputs" or "Coalescing Transactions"</title>
+  <updated>2023-06-11T01:25:24.500334+00:00</updated>
+  <author>
+    <name>Dave Scotese 2015-11-25 17:03:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_CHECKWILDCARDSIGVERIFY or "Wildcard Inputs" or "Coalescing Transactions"</title>
+    <updated>2023-06-11T01:25:24.500334+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-November/011816.html" rel="alternate"/>
+    <summary>The email was sent to the bitcoin-dev mailing list. The message offers technical services for free and provides links to their projects, including Litmocracy and Meme Racing. They also mention being the webmaster for The Voluntaryist, which now accepts Bitcoin. Additionally, they state that they code for The Dollar Vigilante. In another email on the same mailing list, Chris Priest proposed a coalescing transaction which would clear out all funds associated with one address and sends them to another address belonging to the same owner. However, Jannes Faber raised issues regarding this proposal such as encouraging address reuse and being dangerous during reorgs. Dave Scotese suggested that this idea could be applied by having the wildcard signature apply to all UTXOs that are of a standard form and paid to a particular address, and be a signature of some kind of message to that effect. Bryan Bishop discussed the idea of OP_CHECKWILDCARDSIGVERIFY in -wizards earlier that day, while Chris Priest mentioned that most vanilla utxos have the formula: OP_DUP OP_HASH160 [a hash corresponding to your address] OP_EQUALVERIFY OP_CHECKSIG". Erik via bitcoin-dev identified several problems of using a wildcard transaction and proposed possible solutions to these problems. This transaction type would look like a time-limited offer to the network to reduce the UXTO set of an address, and some miners will then use a logic that prefers these types of TXes even if they are low-fee because, if they remove lots of UXTOs, they benefit the network.The message could contain a stib, txnCount, Indexes, and NewUTXO. The stib is a Script Template Index Bitfield, which must be 0x01 to indicate the "vanilla" script, but other scripts can be assigned to other bits in the future. The Indexes are a list of pairs that identify a block by its height and a list of indexes into the block, which puts the onus on the transactor to identify all the inputs instead of requiring the miner to scan for them. This reduces the per-input size cost by at least 100 bytes if block heights and transaction indexes are 32-bit integers, as stated by Erik via bitcoin-dev.</summary>
+    <published>2015-11-25T17:03:32+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Solving the Scalability Problem on Bitcoin</title>
+  <updated>2023-06-12T15:01:53.088957+00:00</updated>
+  <author>
+    <name>Thomas Guyot-Sionnest 2017-08-26 21:31:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Solving the Scalability Problem on Bitcoin</title>
+    <updated>2023-06-12T15:01:53.088957+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-August/014863.html" rel="alternate"/>
+    <summary>The proposal to solve the scalability issue for Bitcoin involves combining and pruning the blockchain every 999 blocks, leaving only the Genesis block. The network would wait for a special "pruned block" before accepting any new blocks. This pruned block would contain a summed up transaction of all transactions that occurred in the previous 999 blocks and its hash pointer would reference the Genesis block. The full nodes would verify this block and once accepted, a new block (block 1001) could be added with the pruned block as its hash pointer. The ledger would always be a maximum of 1000 blocks. However, implementing this solution is impossible due to the authenticity of the blockchain mid-way being difficult to determine, and the fact that it is not just addresses and balances that need to be saved but also unspent output block number, tx position, and script required for input validation. Additionally, saving all of this data every 1000 blocks does not guarantee that older blocks can be dropped, and there are issues around hard forks, large block sync/verification, and possible attack vectors opened by this proposal. The current implementation of node pruning already keeps only unspent inputs and most recent blocks when enabled, although there was also a proposal to include UTXO in some blocks for SPV clients to use.</summary>
+    <published>2017-08-26T21:31:11+00:00</published>
+  </entry>
+</feed>

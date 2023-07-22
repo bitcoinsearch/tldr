@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-05-20T22:01:43.224069+00:00</updated>
+  <author>
+    <name>Matt Corallo 2020-04-23 01:10:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-05-20T22:01:43.224069+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-April/017780.html" rel="alternate"/>
+    <summary>The email thread revolves around modifications to the state machine to address issues with HTLC spends. The suggested solution is for all HTLC spends to be 2-of-2 multi-sig and for B to provide an HTLC signature spending a commitment transaction before A can send a commitment_signed. However, concerns arise that this may not prevent a bidding war scenario. Participants also discuss pinning and the use of anchor outputs, with some concerns around RBF-replaceable transactions leading to a bidding war.There are also concerns about computational complexity and the choice of internal data structures that may arise when calculating evictions. Furthermore, monitoring the global mempool is suggested as a mitigation for lightning implementations, but it is considered complex. The earlier versions of lnd used the mempool for commitment broadcast detection, but it turned out to be a bad idea as it was not guaranteed to work, and during upgrade cycles, an attacker could exploit the upgraded/non-upgraded status to perform the same attack.Watching the mempool is a more complex process that requires a lot of CPU, bandwidth, and complexity which most lightning users were not expecting to face. However, watching the mempool can mitigate the class of attack assuming the anchor output format as described in the open lightning-rfc PR. By implementing the changes in #lightning-rfc/688, this issue can be mitigated today. Even though lnd 0.10 does not yet watch the mempool, it should be straightforward to add which resolves this issue altogether.The proposal to make the HTLC output spending more free-form with SIGHASH_ANYONECAN_PAY|SIGHASH_SINGLE is not immediately workable as it requires gaining signatures (new HTLC signatures) allowing us to spend HTLCs on their version of the commitment. If they broadcast that commitment (without revoking), then we're unable to redeem any of those HTLCs at all, possibly losing money. To counteract this, the revoke message now includes HTLC signatures for their new commitment allowing us to spend our HTLCs.This resolves things in a weaker security model but doesn't address the issue generally. Following this path would require an overhaul in the channel state machine to make presenting a new commitment actually takes at least two phases. The first phase would tender the commitment, but render them unable to broadcast it. The second phase would then scriptless scripts here enter a new sub-protocol which upon conclusion, gives the commitment proposer valid HTLC signatures, and gives the responder what they need to be able to broadcast their commitment and claim their HTCLs in an atomic manner.</summary>
+    <published>2020-04-23T01:10:47+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Payment Re-routing</title>
+  <updated>2023-05-23T17:58:15.983758+00:00</updated>
+  <author>
+    <name>Joseph Poon 2015-07-02 11:40:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Payment Re-routing</title>
+    <updated>2023-05-23T17:58:15.983758+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-July/000018.html" rel="alternate"/>
+    <summary>In this email conversation, Rusty Russell and Stephen explore the solution proposed by Joseph Poon for the problem of routing failure in a signed transaction. The proposed solution involves E routing a conditional refund back to A with a larger timeout via another route as a guarantee that E will not reveal the preimage required to take the stalled payment. This is only necessary if there is a routing failure when a signed transaction has been sent but not acknowledged or cancellation is refused. The reason A requires an additional preimage/hash when doing the "conditional refund" is in case the conditional refund itself fails. However, the most likely case is the routing fails cleanly. If B is unable to send to C because C has been offline or B otherwise refuses to route to C, B can undo the HTLC by cancelling the HTLC entirely. This cancellation can cascade back to the sender to free up the money. Joseph raises other questions such as who would pay E (and any other intermediate nodes) for locking up their money for such a time. It is assumed that the payment from A to E is split into many small payments. If the payment is too small to be split up, then it's probably cheap enough to not matter anyway. Resolving incomplete payments should be deferred until after the payment is sufficiently complete. The incentives are largely in favor of receiver being online and accepting since the recipient is increasing the amount of bitcoin they own.</summary>
+    <published>2015-07-02T11:40:19+00:00</published>
+  </entry>
+</feed>

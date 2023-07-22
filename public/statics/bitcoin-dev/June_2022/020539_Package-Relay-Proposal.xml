@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Package Relay Proposal</title>
+  <updated>2023-05-22T20:09:12.322219+00:00</updated>
+  <author>
+    <name>Gloria Zhao 2022-06-07 17:44:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Package Relay Proposal</title>
+    <updated>2023-05-22T20:09:12.322219+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-June/020539.html" rel="alternate"/>
+    <summary>The discussion in this context is focused on package relay in Bitcoin. One of the concerns raised is that dishonest peers could announce packages with incorrect information such as fee rate and parent transactions. To address this issue, it was suggested to provide fee and weight when announcing the package rather than only being asked for its info.Single tx broadcasts do not carry an advertised fee rate, but the feefilter message (BIP133) provides this distinction. A package is essentially a compact block announcement without the header. Compact block (BIP152) announcement is already established and implemented. Once a validated set of transactions within the package has been obtained with sufficient fee, a fee-optimal node would accept the largest subgraph of the package that conforms to fee constraints and drop any peer that provides a package for which the full graph does not.The proposed changes to names are sendpkg, MSG_CMPCT_PKG, cmpctpkg, getpkgtxn, and pkgtxn. The size is restricted in the same manner as block and transaction broadcasts, by consensus. Count is incorporated into BIP152 as 'shortids_length'. It was suggested in the discussion to use BIP152 without the 'header' field and an updated protocol version for packaging.It was also noted that sending a fee rate with every package is unnecessary and may result in peer dropping in case of validation failure, as is the case with single transactions. Thus, the fee + weight information should be removed from pkginfo for less complexity. Additionally, shortid calculation is not designed to prevent intentional individual collisions, which could lead to a censorship vector if used for deduplication.Encoding parent transactions as a short hash of the wtxid and including that in the inv announcement could avoid round trip delays while still providing enough information to deduplicate parents. However, this method is not suitable for package relay as it requires nodes to calculate shortids for every transaction in their mempools every time they receive a package, creating a DoS vector.Finally, it was clarified that the use of reconciliation in place of flooding to announce transactions as they arrive does not guarantee that offline nodes receive all announced transactions upon reconnecting, and this is not worsened by package relay. The overall discussion revolved around the tradeoffs in using BIP 152 shortids for package relay and the need to simplify the protocol for package relay. Adding versioning to individual protocols is a reflection of the insufficiency of the initial protocol versioning design. There is no reason to preclude any valid size up to what can be mined in one block (packaging across blocks is not economically rational under the assumption that one miner cannot expect to mine multiple blocks in a row).</summary>
+    <published>2022-06-07T17:44:45+00:00</published>
+  </entry>
+</feed>

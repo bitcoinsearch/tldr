@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - INV overhead and batched INVs to reduce full node traffic</title>
+  <updated>2023-06-11T04:10:07.453380+00:00</updated>
+  <author>
+    <name>Jonathan Toomim 2016-02-26 05:35:14</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2016-02-26 05:56:56</name>
+  </author>
+  <author>
+    <name>Jonathan Toomim 2016-02-27 09:08:22</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2016-02-26 05:56:56</name>
+  </author>
+  <author>
+    <name>Jonathan Toomim 2016-02-27 09:08:22</name>
+  </author>
+  <author>
+    <name>Jonathan Toomim 2016-02-26 05:35:14</name>
+  </author>
+  <author>
+    <name>Jonathan Toomim 2016-02-26 07:50:41</name>
+  </author>
+  <author>
+    <name>Jonathan Toomim 2016-02-26 07:50:41</name>
+  </author>
+  <author>
+    <name>Jonathan Toomim 2016-02-26 05:35:14</name>
+  </author>
+  <author>
+    <name>Jonathan Toomim 2016-02-27 09:08:22</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2016-02-26 05:56:56</name>
+  </author>
+  <author>
+    <name>Jonathan Toomim 2016-02-26 07:50:41</name>
+  </author>
+  <link href="bitcoin-dev/Feb_2016/012467_INV-overhead-and-batched-INVs-to-reduce-full-node-traffic.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012468_INV-overhead-and-batched-INVs-to-reduce-full-node-traffic.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012477_INV-overhead-and-batched-INVs-to-reduce-full-node-traffic.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012468_INV-overhead-and-batched-INVs-to-reduce-full-node-traffic.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012477_INV-overhead-and-batched-INVs-to-reduce-full-node-traffic.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012467_INV-overhead-and-batched-INVs-to-reduce-full-node-traffic.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012469_INV-overhead-and-batched-INVs-to-reduce-full-node-traffic.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012469_INV-overhead-and-batched-INVs-to-reduce-full-node-traffic.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012467_INV-overhead-and-batched-INVs-to-reduce-full-node-traffic.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012477_INV-overhead-and-batched-INVs-to-reduce-full-node-traffic.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012468_INV-overhead-and-batched-INVs-to-reduce-full-node-traffic.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012469_INV-overhead-and-batched-INVs-to-reduce-full-node-traffic.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - INV overhead and batched INVs to reduce full node traffic</title>
+    <updated>2023-06-11T04:10:07.453380+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-February/012467.html" rel="alternate"/>
+    <summary>Bitcoin developer Jonathan Toomim proposed implementing batched inventory (INV) on the Bitcoin network to increase efficiency by including the hashes for two transactions in one IP packet. This would result in an 88.8% marginal efficiency increase for each hash after the first. Waiting and accumulating several hashes together before sending as a batched INV could reduce Bitcoin node traffic by a factor of 2. However, this suggestion was already implemented since the early days of Bitcoin, with one INV now managing to batch many transactions effectively. The average batching size is about 5 seconds long and usually contains around 10 transactions per INV, as seen from debug measurements. While tweaking the system may improve efficiency, it is not expected to change the asymptotic efficiency of the network.To reduce the size of transaction hashes, one idea is to use a 4 to 6 byte shorthash with a low chance of resulting in collision with another transaction in a large mempool. Different salt values can be set up for each connection and a salted hash can be used instead of the full thing to protect against potential attacks. This technique could potentially reduce INV traffic by 5-8x in the asymptotic case or maybe 2-3x for a realistic case. The additional memory overhead per peer per tx would be about 12 bytes but would save up to 28 bytes per peer*tx of network bandwidth. Short hashes like this have been proposed many times before for block propagation, but using them in INV messages is a new idea. The INV scheme used by Bitcoin is inefficient due to the overheads of TCP, IP, ethernet, and ACKs. Each INV takes up to 193 bytes with only 16.5% efficiency for each of the payloads. An improvement could be the implementation of batched INVs where the hashes for two transactions per IP packet instead of one can be included. Waiting a short period of time to accumulate several hashes together and send them could reduce the traffic of running bitcoin nodes by a factor of 2 or more. However, if too many people used it, it could slow down the propagation of transactions across the bitcoin network slightly. This could be mitigated by choosing a different batch size for each peer based on their preferences.In an email exchange on Feb 25, 2016, Gregory Maxwell reported that the batching feature in versions 0.10 and 0.12 of a certain software was temporarily affected but has since been fully functional again. This feature enables the ability to batch many transactions per INV effectively. The response was prompted by examination of 0.11-series versions which rarely send out INV batches. In this examination, it was noted that about 85% of the packets had a single hash. The benefits of this improvement were acknowledged, and no other details were provided in the context.</summary>
+    <published>2016-02-26T05:35:14+00:00</published>
+  </entry>
+</feed>

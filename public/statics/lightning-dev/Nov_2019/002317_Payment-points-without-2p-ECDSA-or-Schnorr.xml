@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Payment points without 2p-ECDSA or Schnorr</title>
+  <updated>2023-06-02T21:50:02.618773+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-11-11 14:01:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Payment points without 2p-ECDSA or Schnorr</title>
+    <updated>2023-06-02T21:50:02.618773+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-November/002317.html" rel="alternate"/>
+    <summary>The Lightning Network has been exploring the use of "payment points" instead of hashes as the core lock mechanism for lightning. While 2p-ECDSA or 2p-Schnorr schemes are generally considered to be necessary for payment points, a method using only 2-of-2 OP_CHECKMULTISIG and a single signer ECDSA adaptor signature on one of the keys has been proposed by uSEkaCIO. The core discrete log based lock required to do payment points without a proper multisignature scheme involves Alice and Bob communicating their public keys A and B, respectively, calculating the txid of the fund transaction which spends Alice's inputs to an OP_CHECKMULTISIG 2-of-2 with A B as the keys, and transmitting signatures under B on a refund transaction from Bob to Alice and under A with "auxiliary point" Y on the redeem transaction from Alice to Bob. The single signer ECDSA adaptor signature algorithm presented requires a random k and the DLEQ proof. Using this scheme, anything that can be done with 2p-ECSA/Schnorr scriptless scripts is possible except that instead of a normal p2pkh/public key output, there is a 2-of-2 OP_CMS P2WSH output. This scheme has some nice advantages including simpler key exchange protocols than those required for 2pECDSA and 2pSchnorr, easier specification, and the ability to move towards ideal Schnorr-based endpoints, almost completely scriptless except for OP_CMS. The proposed scheme is practical but there are still a number of ways it could be executed.</summary>
+    <published>2019-11-11T14:01:59+00:00</published>
+  </entry>
+</feed>

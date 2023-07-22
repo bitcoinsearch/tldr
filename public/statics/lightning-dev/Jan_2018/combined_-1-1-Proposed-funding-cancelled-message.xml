@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - [1.1] Proposed `funding_cancelled` message</title>
+  <updated>2023-05-20T07:54:41.128540+00:00</updated>
+  <author>
+    <name>Matt Corallo 2018-01-15 23:25:24</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2018-01-15 01:00:20</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2018-01-08 14:42:01</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2018-01-15 02:33:39</name>
+  </author>
+  <link href="lightning-dev/Jan_2018/000934_-1-1-Proposed-funding-cancelled-message.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2018/000929_-1-1-Proposed-funding-cancelled-message.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2018/000907_-1-1-Proposed-funding-cancelled-message.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2018/000932_-1-1-Proposed-funding-cancelled-message.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - [1.1] Proposed `funding_cancelled` message</title>
+    <updated>2023-05-20T07:54:41.129501+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-January/000934.html" rel="alternate"/>
+    <summary>ZmnSCPxj proposed a new `funding_cancelled` message to be added in the Lightning Network protocol. The purpose of this message is to inform the fundee node that the funder node is sure that the channel funding transaction can never confirm. This message allows replace-by-fee funding transactions and multi-channel funding transactions.Matt expressed his concerns regarding the addition of messages that do not result in different node behavior and only make the protocol needlessly complex. However, ZmnSCPxj argued that not having a specified timeout for funding transactions could create problems with replaceable funding transactions as all versions need to be monitored on the blockchain.ZmnSCPxj suggested adding a minimum timeout to avoid these issues and double-spending via RBF instead. They also discussed the complexity involved in implementing replace-by-fee funding transactions due to miners having the choice of mining any version of the transaction.The implementation of this message should not be onerous as it triggers the code to forget the channel after the timeout if the node software already implements it. The message lets the funder node free up resources on the fundee node, which can be made arbitrarily high by a malicious node that keeps sending `open_channel` -&gt; `funding_created` with random numbers for transaction ID.ZmnSCPxj also suggested that the cost may be trivial for single channels, but it can be limited by a malicious node. Therefore, an honest party can free up the limited resource "number of pending channel opens" by using this message without having to wait for the timeout.In conclusion, they agreed that there might be some bikeshedding involved if this proposal gets implemented.</summary>
+    <published>2018-01-15T23:25:24+00:00</published>
+  </entry>
+</feed>

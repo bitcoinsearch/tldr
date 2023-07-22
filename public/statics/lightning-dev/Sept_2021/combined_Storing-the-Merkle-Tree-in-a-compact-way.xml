@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Storing the Merkle Tree in a compact way</title>
+  <updated>2023-06-04T02:18:34.148255+00:00</updated>
+  <author>
+    <name>shymaa arafat 2021-09-11 03:00:12</name>
+  </author>
+  <author>
+    <name>Vincent 2021-09-16 12:37:24</name>
+  </author>
+  <author>
+    <name>shymaa arafat 2021-09-16 15:05:24</name>
+  </author>
+  <link href="lightning-dev/Sept_2021/003227_Storing-the-Merkle-Tree-in-a-compact-way.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003228_Storing-the-Merkle-Tree-in-a-compact-way.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003248_Storing-the-Merkle-Tree-in-a-compact-way.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Storing the Merkle Tree in a compact way</title>
+    <updated>2023-06-04T02:18:34.149257+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-September/003227.html" rel="alternate"/>
+    <summary>Shymaa M Arafat has introduced a simple idea to save storage and simplify traversing of the UTXOS Merkle Tree/forest. This method is specially appealing when all trees are full (complete) in the forest but can work for any Merkle Tree. The idea is to use a 2D array with variable row size, which gets rid of all the pointers. R[j] is of length (N/2^j), where j represents the level of the tree. For example, when N=8 nodes, R[0]={0,1,2,...,7}, R[1]={8,9,10,11}, R[2]={12,13}, and R[3]={14}. The total storage needed is just 2N-1 nodes, and there is no need for pointers. Traversing could be done neatly in any direction with the right formula.Shymaa provided pseudo code to fetch proof[i], which involves determining the direction to move, fetching the sibling node, and adding the rest through a loop. This method transforms recursion to an iteration and can work for any Merkle Tree. Vincent replied to a message from Shymaa asking for clarification on where she wants to save space with this compression on the Merkle Tree.The tree can be viewed as a simple complete tree to 1D array with no pointers, as described in lecture 8 at MIT OpenCourseWare. This method saves approximately 76 million * 2 (size of pointer, probably 4 bytes) * ~600MB with almost no effort. Since all trees in Utreexo forest are full binary trees, this method is perfect to use. However, Shymaa suggests putting it in a 2D array to make it easier to handle the indexing math since they traverse in many ways, normally to delete or insert, and the parent siblings for the proofs.The idea proposed by Shymaa solves the issues with storing N internal nodes along with 2N pointers and additional pointers in special leaves nodes to handle different traversing options. Although the Utreexo team may have solved their problem differently, Arafat believes this approach is worth sharing as it can work for any Merkle Tree.</summary>
+    <published>2021-09-11T03:00:12+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Lowering confirmation requirements and preventing double spends</title>
+  <updated>2023-06-04T21:47:57.918955+00:00</updated>
+  <author>
+    <name>Andy Parkins 2011-12-08 10:47:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Lowering confirmation requirements and preventing double spends</title>
+    <updated>2023-06-04T21:47:57.918955+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-December/000806.html" rel="alternate"/>
+    <summary>The idea proposed by Dr. Andy Parkins is to include the hash of the block it wants to appear after when a transaction is first broadcast, which he calls the "basis block". The basis block can be anything the claimer wants but allows miners to add a condition that the transaction's output new transaction claims must be before the new transaction's basis block. With this change, if a transaction is based on block 2, it will never make it into block 4 since no miner would include a transaction based on block 2 in the block 4 chain, eliminating the possibility of an attacker arranging a reorganization and causing loss. Dr. Parkins illustrated this idea with an example of transferring coins from address A to Mt.Gox in block 2, transferring credit from address A to address B in block 1, and transferring credit from Mt.Gox's pool to address B in block 3. In the case where the chain at 3 races out first but eventually the chain at 5 becomes "the one," if Mt.Gox broadcasts the withdrawal in 3, there is nothing to stop that same withdrawal from making it into 4 since it comes from a pooled fund address. Therefore, Mt.Gox cannot allow such a fast turnaround and must wait for six confirmations of 2 before allowing use of the funds. However, with the proposed change, the transaction broadcast at 3 would include "block 2" as its basis block, ensuring that the transaction could never make it into block 4.This change would be optional and implied by the input transactions if it isn't present. Additionally, it would only need storing for the pending transactions, so no incompatible change is needed to the block format. Although Mt.Gox may not be a good example since they have problems with fiat to deal with too, for other online wallet accounts, this change would allow faster acceptance of received funds, as there is no danger of loss.</summary>
+    <published>2011-12-08T10:47:08+00:00</published>
+  </entry>
+</feed>

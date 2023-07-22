@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Bringing a nuke to a knife fight: Transaction introspection to stop RBF pinning</title>
+  <updated>2023-06-15T20:47:06.684653+00:00</updated>
+  <author>
+    <name>David A. Harding 2022-05-12 07:17:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Bringing a nuke to a knife fight: Transaction introspection to stop RBF pinning</title>
+    <updated>2023-06-15T20:47:06.684653+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020469.html" rel="alternate"/>
+    <summary>A proposal has been made to add OPTX_SELECT_WEIGHT to the "state" input's script in an update transaction to set an upper bound on the final transaction weight. Additionally, for each contract participant, there is a conditional commitment to the change output's scriptpubkey via OPTX_SELECT_OUTPUT_SCRIPTPUBKEY and OPTX_SELECT_OUTPUTCOUNT==2, which allows any participant to send change back to themselves. However, this proposal has been met with some skepticism due to concerns about mempool spending reintroducing pinning.Mallory, for example, can submit unencumbered UTXOs to the mempool to prevent update[-1] from being committed on-chain before its (H|P)TLC timeout. If `OPTX_SELECT_WEIGHT OP_TX` limits each update's weight to 1,000 vbytes and the default node relay/mempool policy of allowing a transaction and up to 24 descendants remains, Mallory can pin the unsubmitted update[-1] under 25,000 vbytes of junk. This proposal makes escaping the pinning at most 75% cheaper than today, but it does not eliminate the underlying concern. Moreover, depending on the mempool ancestor/descendant limits makes it harder to raise those limits in the future, which increases the risk of node memory/CPU DoS. Therefore, there is a need to ensure raising these limits won't increase the risk.</summary>
+    <published>2022-05-12T07:17:05+00:00</published>
+  </entry>
+</feed>

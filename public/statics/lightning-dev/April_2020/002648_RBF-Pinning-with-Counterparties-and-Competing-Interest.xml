@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-05-23T03:28:38.491777+00:00</updated>
+  <author>
+    <name>Matt Corallo 2020-04-22 16:50:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-05-23T03:28:38.491777+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002648.html" rel="alternate"/>
+    <summary>In an email thread, Olaoluwa Osuntokun critiques the limitation that is at the root of an issue in Bitcoin contracts that rely on nested trees of transactions to confirm and argues that the simplest heuristic for miners is to accept the higher fee rate package. The discussion moves onto the topic of monitoring the global mempool as a mitigation for lightning implementations to deploy today. However, it is concluded that having an active full node with an in-sync mempool is a lot more CPU, bandwidth, and complexity than most lightning users were expecting to face. Nonetheless, if nodes watch the mempool, then this class of attack assuming the anchor output format can be mitigated. Furthermore, Olaoluwa mentions how a base version of anchors is still useful as it eliminates the commitment fee guessing game, allowing users to pay less on force close, being able to coalesce 2nd level HTLC transactions with the same CLTV expiry, and actually being able to reliably enforce multi-hop HTLC resolution. The discussion shifts to the proposal of making the HTLC output spending more free-form with SIGHASH_ANYONECAN_PAY|SIGHASH_SINGLE, however, the idea is not immediately workable as it requires an overhaul in the channel state machine to make presenting a new commitment actually take at least two phases (at least a full round trip). The first phase would tender the commitment but render them unable to broadcast it. The second phase would then enter a new sub-protocol which upon conclusion gives the commitment proposer valid HTLC signatures and gives the responder what they need to be able to broadcast their commitment and claim their HTCLs in an atomic manner.</summary>
+    <published>2020-04-22T16:50:46+00:00</published>
+  </entry>
+</feed>

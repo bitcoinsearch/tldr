@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-05-20T22:07:29.309922+00:00</updated>
+  <author>
+    <name>Matt Corallo 2020-04-22 16:56:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-05-20T22:07:29.309922+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-April/017769.html" rel="alternate"/>
+    <summary>In a discussion on the Lightning protocol, ZmnSCPxj highlighted an issue with RBF Pinning HTLC Transactions. If a counterparty in a payment chain broadcasts a commitment transaction, they can spend an HTLC using the preimage via a low-fee RBF-disabled transaction, leaving the previous party short of the HTLC value. The vulnerability arises because the transaction is kept in the mempool but unconfirmed through RBF pinning, which prevents an alternative transaction from being confirmed. To prevent the bidding war that ensues once the timeout has been committed on-chain, B should ensure that the HTLC-Timeout has been committed before L+1. However, this requires a pre-signed HTLC-timeout preventing B from RBF-ing the HTLC-Timeout transaction. To solve the issue, B can add an RBF carve-out output to HTLC-Timeout or use SIGHASH_NOINPUT to make the C-side signature SIGHASH_NOINPUT|SIGHASH_SINGLE and allow B to re-sign the B-side signature for a higher-fee version of HTLC-Timeout. By feebumping HTLC-Timeout in blocksonly mode, if it is not confirmed as each block comes in from L to L+1, B can exponentially increase the fee as L+1 approaches. Though this only delays the bidding war, it sets up a mechanism to attract non-censoring miners to try their luck at mining and evict the censoring miner. The additional output bloats the UTXO set and requires another transaction to claim later. However, Decker-Russell-Osuntokun (DRO) sidesteps this issue with SIGHASH_NOINPUT, where any timed-out HTLC can be claimed with a fee-bumpable transaction directly without RBF-carve-out. With DRO, Poon-Dryja channels can also be upgraded without on-chain activity to sidestep the issue.</summary>
+    <published>2020-04-22T16:56:38+00:00</published>
+  </entry>
+</feed>

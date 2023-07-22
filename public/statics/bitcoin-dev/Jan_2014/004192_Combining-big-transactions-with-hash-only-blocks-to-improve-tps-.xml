@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Combining big transactions with hash-only blocks to improve tps.</title>
+  <updated>2023-06-08T00:37:25.620816+00:00</updated>
+  <author>
+    <name>bc 2014-01-22 22:20:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Combining big transactions with hash-only blocks to improve tps.</title>
+    <updated>2023-06-08T00:37:25.620816+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-January/004192.html" rel="alternate"/>
+    <summary>Jorge Timón is curious about how miners validate blocks, and wonders whether they would mine on top of a block when it's validity is unknown. Christophe Biocca admits that his idea doesn't offer any real advantage over pre-broadcasting of the tree and including only its header in a block. Meanwhile, Natanael points out that most of the block's content is important because he wants to know what changes to make to his local copy of the UTXO. Christophe Biocca also notes that ultimately, this helps with block propagation latency but not with the bandwidth constraints themselves since all transactions do need to be broadcast. He suggests that most of the benefits of Jorge's approach can be obtained simply by pre-broadcasting the entire merkle tree while working on it. Miners could reuse large chunks of each other's merkle trees if they had similar transaction selection policies.On a different note, bc proposes two optimizations for combining big transactions with hash-only blocks to improve tps. Firstly, he suggests keeping only hashes of transactions included in a block and transferring all tx separately. Secondly, he recommends using CoinJoin to merge transactions from many users for online shopping and banking. In addition, he proposes using Jumbo transactions as a fallback for applications where CoinJoin is inappropriate.  bc believes that keeping only hashes of tx in a block would remove redundancy since every tx has to be transmitted only once. This method could allow for more tps without increasing the block propagation time, which is critical for mining decentralization. He also thinks it leads to a more consistent bandwidth utilization and would not depend on the size of a transaction. However, selfish miners can keep a subset of transactions only for themselves and release them only with a new block. To mitigate this problem, nodes should verify all transactions before propagating a block.Regarding CoinJoin, bc notes that it allows many people to send coins with one transaction, which increases the effective transaction rate considerably. He also mentions that there would be an incentive for users to use CoinJoin by default, lowering tx fees per effective transaction and greatly increasing anonymity of the network.Lastly, bc proposes Jumbo transactions as a fallback where CoinJoin is not applicable. This method would remove CoinJoin induced delays while keeping transaction sizes big. However, Jumbo transactions don't mix coins, and there would be an incentive to use this transaction type by default compared to CoinJoin.</summary>
+    <published>2014-01-22T22:20:54+00:00</published>
+  </entry>
+</feed>

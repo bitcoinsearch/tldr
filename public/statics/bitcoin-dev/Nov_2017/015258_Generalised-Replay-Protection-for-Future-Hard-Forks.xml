@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Generalised Replay Protection for Future Hard Forks</title>
+  <updated>2023-05-20T04:16:35.883873+00:00</updated>
+  <author>
+    <name>Mats Jerratsch 2017-11-05 23:48:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Generalised Replay Protection for Future Hard Forks</title>
+    <updated>2023-05-20T04:16:35.883873+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-November/015258.html" rel="alternate"/>
+    <summary>This proposal presents a generalized way of providing replay protection for future hard forks, as well as fork-distinct addresses and potentially a way to opt-out of replay protection of any fork if necessary. This schema aims to prevent ad-hoc replay protection built within days with little review or no replay protection at all during hard forks. By integrating replay protection into the protocol, this proposal advocates the notion of non-hostile forks.In this schema, any hard fork is given a unique incremented id called `nForkId`. When project X decides to make an incompatible change to the protocol, it will get assigned a new unique `nForkId` for this fork. Additionally, payment addresses will contain the fork id, depending on which tokens a payee expects payments in. This would require a change on bech32 addresses, maybe to use a similar format used in lightning-rfc.When preparing the transaction for signing or validation, `nForkId` is appended to the final template as a 4B integer. For `nForkId=0`, this step is omitted, which immediately invalidates signatures for any other branch of the blockchain than this specific fork. To distinguish between `nForkId=0` and `nForkId` hardcoded into the software, another bit has to be set in the 1B SigHashId present at the end of signatures.Users are protected against accidentally sending coins on the wrong chain through the introduction of a fork-specific incompatible address space. The coin/token type is encoded in the address itself, removing some of the importance around the question "What is Bitcoin?". By giving someone an address, it is explicitly stated "I will only honour a payment of token X", enforcing the idea of validating the payment under the rules chosen by the payee.For light clients, this can be extended by enforcing the coinbase/block header to contain the `nForkId` of the block. Then the client can distinguish between different chains and tokens it received on each. Alternatively, a new P2P message type for sending transactions could be introduced, where prevOut and `nForkId` is transmitted, such that the lite client can check for himself, which token he received.Allowing signatures with `nForkId=1` can be achieved with a soft fork by incrementing the script version of SegWit, making this a fully backwards compatible change. The proposal suggests that this approach can be generalised in software to the point where replay protection *and* a new address space can be introduced for forks without breaking existing clients.</summary>
+    <published>2017-11-05T23:48:43+00:00</published>
+  </entry>
+</feed>

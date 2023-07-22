@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>libconsensus assertion fails if used in multiple threads</title>
+  <updated>2023-06-10T19:31:23.450245+00:00</updated>
+  <author>
+    <name>Cory Fields 2015-08-14 21:10:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>libconsensus assertion fails if used in multiple threads</title>
+    <updated>2023-06-10T19:31:23.450245+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/010222.html" rel="alternate"/>
+    <summary>A user named Tamas Blummer posted on the bitcoin-dev mailing list stating that while integrating libconsensus into bits of proof, it worked well in-line for all test cases with their Java engine and was about 50% faster on a single thread. However, there was an error that arose when executed on several threads simultaneously. The cause of the issue is believed to be that thread callbacks as advised for OpenSSL on https://www.openssl.org/docs/crypto/threads.html are not registered. Registering those would require access to OpenSSL functions, not exported from the library. Cory Field responded saying that this issue should be solved in future versions when they switch to the new libsecp256k1 lib for validation. For now, they have thrown together a quick hack to allow a user-specifiable callback for libbitcoinconsensus, which should be documented as an issue with the current version. A work-around has been provided at https://github.com/theuni/bitcoin/commits/openssl-consensus-threads. It should mimic the way they do it in Core. However, it's not pretty and one should give it serious testing before deploying it in any real way. It's noted that it's on top of current master, but it should be trivial to apply to release tags.</summary>
+    <published>2015-08-14T21:10:20+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+  <updated>2023-06-13T19:34:26.205016+00:00</updated>
+  <author>
+    <name>Dmitry Petukhov 2019-06-27 15:29:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+    <updated>2023-06-13T19:34:26.205016+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-June/017054.html" rel="alternate"/>
+    <summary>A proposal has been made to extend Partially Signed Bitcoin Transactions (PSBT) to include a key value specification which would help verify the address a transaction is being sent to. The proposal was made by Jonathan Underwood on the bitcoin-dev mailing list who stated that verifying the destination of a transaction was important to his exchange wallet. The proposed scheme would allow all signers of a transaction to sign each other's extended public keys (xpubs), which could then be used to verify the destination address. However, concerns were raised about its use in multisig wallets where some keys may be compromised. Hardware wallets can be shown a specific 'epoch' word or serial number for xpub packages to prevent compromised keys from invalidating transactions.These schemes could be included in PSBT as 'meta-information' or 'vendor-specific' fields. The proposal involves a process for securely verifying the xpub of the warm/hot wallet. The airgap signing tool is used to sign the xpub with all cold keys, and the signature/xpub pairs are uploaded to the online unsigned transaction generator. For offline signing, the wallet detects if there is a global keyval XPUB_SIGNATURE with its pubkey in the key and verifies that all outputs have BIP32_DERIVATION and that it can verify the outputs through the derivation, to the xpub, and to the signature. The author acknowledges that this proposal is a slightly altered version of their current system and invites feedback.</summary>
+    <published>2019-06-27T15:29:32+00:00</published>
+  </entry>
+</feed>

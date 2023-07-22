@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>deterministic transaction expiration</title>
+  <updated>2023-06-09T01:46:38.009514+00:00</updated>
+  <author>
+    <name>Kaz Wesley 2014-08-01 00:58:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>deterministic transaction expiration</title>
+    <updated>2023-06-09T01:46:38.009514+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-August/006396.html" rel="alternate"/>
+    <summary>Currently, there is a lack of transaction lifetime management in the network's mempools. The absence of such management has been identified as a significant factor hindering some mempool exchange. While expiry per-node after a specific amount of wall time has been proposed, this mechanism is fragile and could be exploited by a single node that keeps all relayable transactions alive forever. To address this issue, a proposal has been made to add finite and predictable lifespans to transactions in mempools using nLockTime and a new standardness rule. The proposal can be implemented in stages and would not necessarily require a soft fork, avoiding problems with reorgs. The first stage involves setting nLockTime to the current height by default in newly created transactions. Once users have upgraded to clients that set nLockTime, transactions without nLockTime will be discouraged, and a slightly higher fee may be required for relay. Relay of transactions without an nLockTime will then be rate-limited, which alone may achieve discouragement. Finally, a new IsStandard rule will be added, rejecting transactions with an nLockTime more than N blocks behind the current tip.Transactions will stop being relayed and drop out of mempools a fixed number of blocks from their creation. Once that window has passed, the sender's wallet could begin to expect that the transaction will not be confirmed. If a reorg displaces a transaction until after its expiry height, a miner can still put it back in the blockchain; the expiry height is just a relay rule. A user who needs to get their original "expired" transaction confirmed could still do so by submitting it directly to a miner with suitable policies.</summary>
+    <published>2014-08-01T00:58:23+00:00</published>
+  </entry>
+</feed>

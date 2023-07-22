@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Bitcoin at POS using BIP70, NFC and offline payments - implementer feedback</title>
+  <updated>2023-06-09T17:56:32.285107+00:00</updated>
+  <author>
+    <name>Eric Voskuil 2015-02-23 23:00:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Bitcoin at POS using BIP70, NFC and offline payments - implementer feedback</title>
+    <updated>2023-06-09T17:56:32.285107+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-February/007589.html" rel="alternate"/>
+    <summary>Mike Hearn and e are discussing the best way to transfer a session key for Bitcoin transactions. Mike suggests doing ECDH over secp256k1 to derive a session key, which allows for the reuse of the address already put in the URI for pre-BIP70 wallets. This is useful for QR codes, which have limited space. If the wallet is a watching wallet, this method won't work, and a separate key will need to be put into the URI. However, this key is ephemeral and does not need to be very strong. Therefore, a regular secp256k1 key can be generated, and 5-8 prefix bytes can be put into the URI as a new parameter. The public key can then be provided in full over Bluetooth connection, and the session key derived. By putting/reusing an identity key from the URI, the session keys are always unique and known only to both devices, even though the bootstrap data is public. Doing ECDHE to derive the keys also means that a MAC key can be derived as well as an AES key. For a small increase in session setup complexity, they potentially avoid troubling problems down the line where people want the same functionality from NFC and QR code-based bootstrap but cannot provide it.</summary>
+    <published>2015-02-23T23:00:29+00:00</published>
+  </entry>
+</feed>

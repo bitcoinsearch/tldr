@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Simulating Eltoo Factories using SCU Escrows (aka SCUE'd Eltoo)</title>
+  <updated>2023-06-03T02:04:05.097467+00:00</updated>
+  <author>
+    <name>Christian Decker 2020-09-22 09:38:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Simulating Eltoo Factories using SCU Escrows (aka SCUE'd Eltoo)</title>
+    <updated>2023-06-03T02:04:05.097467+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-September/002802.html" rel="alternate"/>
+    <summary>In a forum post, ZmnSCPxj discussed the possibility of merging watchtower and escrow functionality through the use of a Smart Contract Unchained Escrowed Decker-Russell-Osuntokun channel factory. However, there is an issue with the increased complexity of the `(halftxid, encrypted_blob)` scheme with Decker-Russell-Osuntokun. According to another user in the forum, for eltoo, the watchtower does not need to know the funding outpoint. Instead, any information that would allow a watchtower to collate encrypted updates would be sufficient for it to be able to discard earlier ones. The session-based collation that the lnd watchtower protocol uses can be one such collation key. Alternatively, Poon-Dryja style encryption with the trigger transaction hash can also be used as the encryption key. This transaction being the first step towards closing a channel unilaterally forces any cheating party to reveal the decryption key for the update txs that'll override its actions.Moreover, while encrypting all the reactions with the same encryption key may appear to leak information, it is only the update transaction that is passed to the watchtower, not the actual state (direct outputs and HTLCs) which is attached to the settlement transaction, kept by the endpoint. Therefore, all the watchtower gets from decrypting all prior update transactions is a set of semantically identical 1-input-1-output update transactions from which it can at most learn how many updates were performed. This last leak can also be addressed by simply randomizing the increment step for state numbers and not passing every state update to the watchtower. Since the watchtower will only ever need the last one, multiple updates can be coalesced and flushed to the watchtower after some time. A link to the lnd watchtower protocol documentation was provided.</summary>
+    <published>2020-09-22T09:38:45+00:00</published>
+  </entry>
+</feed>

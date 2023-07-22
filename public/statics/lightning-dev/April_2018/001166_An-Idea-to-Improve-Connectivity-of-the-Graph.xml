@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>An Idea to Improve Connectivity of the Graph</title>
+  <updated>2023-05-24T19:03:05.844881+00:00</updated>
+  <author>
+    <name>Christian Decker 2018-04-11 20:15:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>An Idea to Improve Connectivity of the Graph</title>
+    <updated>2023-05-24T19:03:05.844881+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-April/001166.html" rel="alternate"/>
+    <summary>In a Lightning-dev discussion, ZmnSCPxj shares a technique to create an output with indefinite lifetime while being protected against unresponsive counterparty. The technique involves using a sequence of `nSequence`d transactions off-chain wherein only the funding transaction is on-chain and kickoff, bit1, and bit0 transactions are all kept off-chain. The kickoff transaction triggers the countdown on the CSV encumbered scripts. To increment the counter, the bit0 is replaced with a new one having low `nSequence`. If it is already the low `nSequence`, replacing it with the next higher bit is carried out. This is equivalent to binary incrementation.  The branching factor of 2 technique described by ZmnSCPxj is different from the branching factor of 48 used in the paper. For a 32-bit counter for a maximum of 4,294,967,296 updates transactions in sequence, we need 33 transactions in sequence kept off-chain. In a unilateral close, all transactions are fed into the blockchain one-by-one. The drawback of this technique is the large number of transactions in sequence in a unilateral close. However, normal operation only keeps all transactions off-chain and touches the chain on unilateral or bilateral close. Christian points out that DMCs have a wider on-chain footprint for non-cooperative close scenarios but prefers them for some use-cases since they do not have the issue with more than two parties. They also have no toxic material that can result in funds being grabbed just because one was out of date. In addition, old HTLCs can be forgotten since there is no way for them to ever become relevant again.</summary>
+    <published>2018-04-11T20:15:41+00:00</published>
+  </entry>
+</feed>

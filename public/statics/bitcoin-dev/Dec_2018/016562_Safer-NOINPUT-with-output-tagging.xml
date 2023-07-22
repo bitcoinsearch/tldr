@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer NOINPUT with output tagging</title>
+  <updated>2023-05-20T18:53:10.710691+00:00</updated>
+  <author>
+    <name>Johnson Lau 2018-12-17 20:08:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer NOINPUT with output tagging</title>
+    <updated>2023-05-20T18:53:10.710691+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-December/016562.html" rel="alternate"/>
+    <summary>In an email discussion on December 17, 2018, Johnson Lau discussed the potential risks of signature replay associated with NOINPUT, and how to minimize these risks while enabling smart contract capacity. The proposed solution is to "tag" outputs that are spendable with NOINPUT, which must be explicitly set by the payer. There are two possible ways to tag outputs: setting a certain bit in the tx version or scriptPubKey. The design considerations for tagging must be explicit and configurable by the payer. If you don’t care about fungibility, you can always tag your setup output, and every update will need 2 signatures. However, if you care about fungibility, you can't tag your setup output, and every update will need 3 signatures.Lau used eltoo as an example, stating that the setup UTXO is a simple 2-of-2 multisig and should not be tagged, but the trigger transaction, which spends the setup UTXO, should be tagged so that update transactions can spend the trigger UTXO with NOINPUT. Similarly, all update transactions should be tagged so that they can be spent by other update transactions and settlement transactions with NOINPUT. In terms of payer's perspective, tagging means "I believe this address is for one-time-use only." Tagging with scriptPubKey has a clear advantage as it can tag outputs on a per-output basis. However, scriptPubKey tagging is only possible with native-segwit, not P2SH. As a result, NOINPUT would have to be disallowed in P2SH-segwit. Another problem with scriptPubKey tagging is that all existing bech32 implementations will not understand the special tag, and an upgrade would be needed for them to refuse sending to tagged addresses by default. On the other hand, tagging with tx version will also protect P2SH-segwit, and all existing wallets are protected by default. However, it is somewhat a layer violation and you could only tag all or none output in the same tx. An extension to the version tagging could make NOINPUT even safer.Lau mentioned that the ability to NOINPUT-spend a setup output should not be strictly needed as confirmed UTXOs are immutable. The philosophy behind output tagging is to "avoid NOINPUT at all cost, until it is truly unavoidable." Ruben Somsen added that output tagging should be compatible with Statechains since it pretty much mirrors Eltoo in setup. However, it is not completely clear how this affects fungibility if taproot gets added and the setup and trigger tx for Eltoo get combined into a single transaction.</summary>
+    <published>2018-12-17T20:08:55+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Removing BIP-125 Rule #5 Pinning with the Always-Replaceable Invariant</title>
+  <updated>2023-05-22T22:47:58.871959+00:00</updated>
+  <author>
+    <name>Peter Todd 2022-11-07 20:17:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Removing BIP-125 Rule #5 Pinning with the Always-Replaceable Invariant</title>
+    <updated>2023-05-22T22:47:58.871959+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021175.html" rel="alternate"/>
+    <summary>Bitcoin Core currently implements rule #5 of BIP-125 which limits the number of original transactions and their descendant transactions that can be replaced in the mempool to a total of 100. However, this rule has no justification beyond avoiding "too much work" and may not be necessary since the overall mempool size limits naturally limit the maximum number of possible replacements. To avoid rule #5 pinning, an invariant called the Replaceability Invariant can be implemented where no transaction is accepted into the mempool that would cause another transaction to be unable to be replaced due to Rule #5. This invariant is simple to implement: for each transaction maintain an integer, nReplacementCandidates. When a non-conflicting transaction is considered for acceptance to the mempool, verify that nReplacementCandidates + 1 does not exceed the MAX_REPLACEMENT_CANDIDATES limit. If the limit is exceeded, reject the new transaction. By ensuring that all transactions in the mempool are always replaceable, the problem of Rule #5 pinning can be removed.</summary>
+    <published>2022-11-07T20:17:29+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Covenant opcode proposal OP_CONSTRAINDESTINATION (an alternative to OP_CTV)</title>
+  <updated>2023-06-15T00:24:15.206532+00:00</updated>
+  <author>
+    <name>Zac Greenwood 2021-07-28 04:57:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Covenant opcode proposal OP_CONSTRAINDESTINATION (an alternative to OP_CTV)</title>
+    <updated>2023-06-15T00:24:15.206532+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-July/019286.html" rel="alternate"/>
+    <summary>Zac Greenwood inquired about the possibility of implementing a way to limit the maximum amount that can be sent from an address. Billy Tetrud responded by stating that he hasn't heard of any proposals for limiting the amount that can be sent from an address, but suggested a mechanism where coins would be combined in a single output and encumbered with a script that allows only a limited amount of coin to be sent to a destination address. Any other bitcoin will have to be returned to the sender in a new change output that is also timelocked. To ensure proper functionality, any deposit into the wallet would have to spend the wallet's single output, creating a new single output at that address. He added that such a wallet vault design using OP_CD could be used to create very usable and accessible but highly secure wallets that allow people to hold self-custody of their keys without fear of loss or theft and without the hassle of safe deposit boxes.Zac responded by further illustrating how this might work functionally in a typical use case scenario of a speculating user intending to hodl Bitcoin but who still wishes to be able to occasionally transact minor amounts. Ideally, the user should optionally be able to bypass the rate limit and spend the entire amount in a single transaction by signing with an additional private key (multisig). During the setup phase, a user sends all their to-be-rate-limited coin to a single address. When spending from this rate-limited address, any change sent to the change address must be rate-limited as well using identical parameters. A smart wallet should be able to set up and maintain multiple rate-limited addresses in such a way that their aggregate behavior meets any rate-limiting parameters desired by the user. Zac believes that user-enabled rate-limiting is superior to one that requires a third party. The options for the to-be-implemented rate-limiting parameters vary from completely arbitrary to more restrictive. Completely arbitrary parameters would allow users to set up a rate limit that basically destroys their funds, while more restrictive rate limits may require that only a combination of parameters are allowed such that all funds will be spendable within a set number of blocks. He proposed that the rate-limiting parameters, in addition to a per-transaction maximum of (minimum amount in satoshi or a percentage of the total amount stored at the address), must also limit the transaction frequency expressed as a number of blocks before a next transaction can be sent from the encumbered address(es).</summary>
+    <published>2021-07-28T04:57:33+00:00</published>
+  </entry>
+</feed>

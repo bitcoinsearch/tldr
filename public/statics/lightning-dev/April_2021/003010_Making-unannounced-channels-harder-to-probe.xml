@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Making unannounced channels harder to probe</title>
+  <updated>2023-06-03T03:59:14.097270+00:00</updated>
+  <author>
+    <name>Rusty Russell 2021-04-24 04:09:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Making unannounced channels harder to probe</title>
+    <updated>2023-06-03T03:59:14.097270+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-April/003010.html" rel="alternate"/>
+    <summary>In a recent discussion, it was pointed out that probing for a channel ID attached to node N by sending an HTLC and seeing whether the error reply comes from the N or the next hop is not the real answer. Blinded paths should be used instead. However, it was also noted by Joost that one needs to know the node_id of the next node. This is not entirely true as the spec says that if the node_id is wrong, then you should send an `update_fail_malformed_htlc` with failure code invalid_onion_hmac, which node N turns into its own failure message.While this error is not common on the modern network due to rock-solid onion implementations, it does not help if your node id has been revealed in other ways. For example, if someone offers you an invoice, they can probe the rest of the network to find all unannounced channels. In such cases, implementations could choose to return `update_fail_malformed_htlc` failure_code=invalid_onion_hmac as above on anything that comes through an unannounced channel but is not a successful payment. Further exploration of this topic can be found in a Twitter thread shared by Cycryptr.</summary>
+    <published>2021-04-24T04:09:18+00:00</published>
+  </entry>
+</feed>

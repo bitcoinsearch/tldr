@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving Payment Latency by Fast Forwards</title>
+  <updated>2023-06-02T18:24:45.076245+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2021-06-02 03:30:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving Payment Latency by Fast Forwards</title>
+    <updated>2023-06-02T18:24:45.076245+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-June/003048.html" rel="alternate"/>
+    <summary>In this context, ZmnSCPxj suggests a variant of the Decker-Russell-Osuntokun technique that does not require additional encumbrance at the outputs. The idea is to allow Bob, the receiver, to possess later states while Alice, the sender, only possesses an old state. Alice sends signatures for a new state whenever it offers an HTLC to Bob and whenever Bob fulfills the HTLC, but she does not wait for Bob to return signatures for a new state. Suppose Alice wants to close the channel unilaterally; she broadcasts the old update tx. Even though Alice broadcasted an old state, she does not lose money since Decker-Russell-Osuntokun is non-punitive. Bob can bring its privkey online to close the channel unilaterally with the latest state. This method does not require additional encumbrance at the "main" outputs. In this approach, the sender remains at an older state. ZmnSCPxj gives a concrete example in which Alice and Bob start at state 1: Alice = 50, Bob = 50. Alice offers an HTLC of value 10, and Bob fulfills, so Alice sends a new state which transfers the A-&gt;B HTLC value to Bob. Bob brings its privkey online because it wants to send out via Alice (a forwarder) and offers an HTLC B-&gt;A of value 20.One advantage of this approach is that unlike the Poon-Dryja Fast Forwards, there is no long chain of HTLC txes built up. At worst, an old update tx is superseded by a later update tx instead, thus the overhead is expected to be at most 1 extra update tx no matter how many HTLCs are offered while Bob has its privkey offline.</summary>
+    <published>2021-06-02T03:30:35+00:00</published>
+  </entry>
+</feed>

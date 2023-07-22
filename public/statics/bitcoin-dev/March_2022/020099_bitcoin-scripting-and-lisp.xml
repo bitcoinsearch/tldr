@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>bitcoin scripting and lisp</title>
+  <updated>2023-05-22T17:50:52.178196+00:00</updated>
+  <author>
+    <name>Anthony Towns 2022-03-10 06:47:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>bitcoin scripting and lisp</title>
+    <updated>2023-05-22T17:50:52.178196+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020099.html" rel="alternate"/>
+    <summary>On March 8th, 2022, Bram Cohen and Anthony Towns discussed the possibility of redoing the singleton pattern in Bitcoin's context. They discussed how to match the way bitcoin does things and suggested that the "list of extra conditions" be encoded explicitly in the transaction via the annex. However, the only thing missing was the assertion about one's own id, which could be added by passing in the scriptpubkey the transaction it's part of, along with the index of inputs that it itself is.Bram Cohen suggested that to redo the singleton pattern, it would be necessary to pass in both the full tx you're spending and the full tx of its parent, which seems klunky but at least possible. It would allow dropping the witness data at least, without which every tx would be including the entire history of the singleton.Anthony Towns stated that he did not think soft forking worked well if you want to allow the spender (the puzzle solution) to use opcodes introduced in a soft-fork. To solve this issue, they suggested using a lisp approach to pass in additional code fragments to execute. The spender can then create their signature hashes however they like; even ones that hadn't been thought of when the output was created.Later, they discussed what happens when there is a soft fork in bip118-txmsg for quick and easy ANYPREVOUT style-signatures, and you want to use that instead of custom lisp code. You cannot just stick (softfork C (bip118-txmsg 0xc3)) into the witness because it will evaluate to nil, and you won't be signing anything. However, you could change the script, and if you could tell the softfork op that you only wanted ops up-to-and-including the 118 softfork, then it could reject fakeopcode and fail the script, which gives the desirable behaviour.</summary>
+    <published>2022-03-10T06:47:17+00:00</published>
+  </entry>
+</feed>

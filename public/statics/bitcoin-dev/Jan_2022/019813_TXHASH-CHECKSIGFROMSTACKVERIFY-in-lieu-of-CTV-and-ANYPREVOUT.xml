@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+  <updated>2023-06-15T15:40:44.596925+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2022-01-26 17:20:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+    <updated>2023-06-15T15:40:44.596925+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-January/019813.html" rel="alternate"/>
+    <summary>There is a significant overlap in the functionality of CTV and ANYPREVOUT proposals, despite their distinct primary applications. ANYPREVOUT can mimic most of the properties of CTV by committing both a public key along with an ANYPREVOUT signature inside scriptPubKey. However, the cost of simulating CTV with ANYPREVOUT is higher as it requires 64 bytes for a signature, 32 bytes for some public key, plus a few more bytes for various flags. Additionally, CTV's transaction hash covers values such as the number of inputs in the transaction and their sequence numbers, which ANYPREVOUT does not cover. The proposed OP_TXHASH and OP_CHECKSIGFROMSTACKVERIFY would decompose the operations of CTV and ANYPREVOUT into their constituent pieces and reassemble their behavior programmatically. The proposal acknowledges that replicating the behavior of CTV and ANYPREVOUT does cost a few more bytes than using the custom purpose-built proposals themselves. However, it allows users to program their own use cases from components and get more applications out of fewer op codes.The proposal doesn't preclude the possibility of having CTV added to legacy script while having TXHASH added to tapscript. Unlike CTV, TXHASH cannot be implemented within legacy script and is not amenable to extending the set of txflags at a later date. Designing a robust set of TXHASH flags from the start can mitigate the difficulties with upgrading TXHASH in the future.The CHECKSIGFROMSTACKVERIFY opcode can verify signatures on arbitrary messages signed by oracles for oracle applications. In combination with multiple calls to TXHASH, it could be used to create signatures that commit to complex subsets of transaction data. The proposal also discusses the interactions of these opcodes with potential future opcodes such as CAT, rolling SHA256 opcodes, and how they might interface with other covenant opcodes that may do things like directly push input or output amounts onto the stack for computation purposes.</summary>
+    <published>2022-01-26T17:20:10+00:00</published>
+  </entry>
+</feed>

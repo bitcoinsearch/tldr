@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Ephemeral Anchors: Fixing V3 Package RBF againstpackage limit pinning</title>
+  <updated>2023-06-16T02:01:07.930428+00:00</updated>
+  <author>
+    <name>Johan Torås Halseth 2022-10-27 09:37:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Ephemeral Anchors: Fixing V3 Package RBF againstpackage limit pinning</title>
+    <updated>2023-06-16T02:01:07.930428+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021118.html" rel="alternate"/>
+    <summary>A proposal has been made to address the problem of package limit pinning in V3 transactions, which restricts the package limit of a V3 package to one parent and one child. This can lead to one party disallowing a spend from the other if the parent transaction includes two outputs that can be immediately spent by separate parties.The proposed solution is Ephemeral Anchors, which requires watermarked outputs with the bare script 'OP_TRUE' to be spent in a V3 package. This anchor must be spent, allowing any value without worrying about bloating the UTXO set. Since any spending of other outputs in the same parent transaction must double-spend prior spends of the ephemeral anchor, this removes the 1 block CSV timelock on outputs and magnifies smart contract composability.Anyone can bump the transaction without transaction key material, and lightning carve-out is superseded by this logic, making multi-party fee bumping possible. Change outputs can no longer be pinned, and RBF/CPFP becomes robust, benefiting traditional wallet scenarios as well. The proposal raises open questions about non-zero value in ephemeral outputs and SIGHASH_GROUP-like constructs.The context provided is a series of email exchanges on the bitcoin-dev mailing list, which is hosted on lists.linuxfoundation.org. The emails are formatted as replies to previous messages and contain links to the mailing list's subscription page.</summary>
+    <published>2022-10-27T09:37:01+00:00</published>
+  </entry>
+</feed>

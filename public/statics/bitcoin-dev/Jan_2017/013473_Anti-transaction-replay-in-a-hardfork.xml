@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Anti-transaction replay in a hardfork</title>
+  <updated>2023-05-20T00:36:20.821491+00:00</updated>
+  <author>
+    <name>Johnson Lau 2017-01-24 14:33:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Anti-transaction replay in a hardfork</title>
+    <updated>2023-05-20T00:36:20.821491+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-January/013473.html" rel="alternate"/>
+    <summary>This proposal aims to prevent replay attacks during a blockchain split and is designed to be backward-compatible. It allows anti-replay protection to be an option, not mandatory, for users on both the existing and new forks. Transactions created before the proposal will not be protected from anti-replay, as there is no guarantee that the existing fork will survive or maintain any value. This proposal does not require any consensus changes in the existing network, making it easier to avoid unnecessary debate. Additionally, this proposal offers a beneficial side effect of fixing the O(n^2) signature checking bug for non-segregated witness inputs. The rules in the new network state that if the network characteristic byte is non-zero and the new network characteristic bit is not set, the transaction is invalid in the new network. If the masked version is 2 or below, the new network must verify the transaction with the existing script rules. If the masked version is 3 or above, the new network must verify the signatures with a new SignatureHash algorithm, which is same as BIP143 except that 0x2000000 is added to the nHashType before the hash is calculated. The rules in the existing network do not include any consensus rule changes. If the network characteristic byte is non-zero and the existing network characteristic bit is not set, the transaction is not relayed nor mined by default. Wallets may provide an option for setting the existing network characteristic bit. Limitations of this proposal include being unable to protect transactions made before the proposal. Users should spend at least a relevant UTXO on the new network to invalidate replay transactions. Additionally, it is up to the designer of a hardfork to decide whether to respect this proposal. The size of network characteristic byte is limited to 8 bits, but bits might be reused if some networks are abandoned. A demo of this proposal is available on the forcenet2 branch on GitHub. As the DAO hardfork demonstrated the harmful effects of replay attacks, this proposal should be taken into account for all hardfork proposals except trivial and totally uncontroversial ones.</summary>
+    <published>2017-01-24T14:33:29+00:00</published>
+  </entry>
+</feed>

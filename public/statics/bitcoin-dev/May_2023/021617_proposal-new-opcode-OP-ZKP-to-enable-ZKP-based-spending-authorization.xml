@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>proposal: new opcode OP_ZKP to enable ZKP-based spending authorization</title>
+  <updated>2023-06-16T18:03:05.722508+00:00</updated>
+  <author>
+    <name>Weiji Guo 2023-05-05 23:06:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>proposal: new opcode OP_ZKP to enable ZKP-based spending authorization</title>
+    <updated>2023-06-16T18:03:05.722508+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-May/021617.html" rel="alternate"/>
+    <summary>The email exchange between Weiji and ZmnSCPxj discusses the potential attack vector of non-aggregated transactions in a pseudonymous network. An anonymous attacker can flood the fullnode mempool network with large numbers of non-aggregated transactions and then confirm a single aggregated transaction with a lower feerate than what it put in the several non-aggregated transactions. The attacker ends up paying less for the single confirmed transaction, but it costs the fullnode network a significant amount of CPU to process and validate all the non-aggregated transactions. To prevent this attack, transactions that could appear in the mempool should be made non-aggregatable with other transactions in the mempool. One solution is to arrange for aggregation before the blockchain-level transaction hits the mempool. Cross-input signature aggregation designs should be compared, and signature aggregation should be allowed only within a single blockchain-level transaction, not across transactions, to prevent the above attack. Similarly, cross-input ZKP aggregation would be acceptable, but not cross-transaction ZKP aggregation. It is recommended to disallow aggregation of ZKPs once a transaction is in a form that could potentially hit the mempool and to require paid services for aggregation outside of the unpaid, free mempool. The focus should be on the load on the mempool, not blocks, as the mempool is a free service that should not be abusable, while blockspace is a paid service.</summary>
+    <published>2023-05-05T23:06:51+00:00</published>
+  </entry>
+</feed>

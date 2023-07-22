@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>ANYPREVOUT in place of CTV</title>
+  <updated>2023-06-15T19:21:35.559527+00:00</updated>
+  <author>
+    <name>Nadav Ivgi 2022-04-29 11:40:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>ANYPREVOUT in place of CTV</title>
+    <updated>2023-06-15T19:21:35.559527+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-April/020380.html" rel="alternate"/>
+    <summary>The email thread discusses the tradeoffs between two proposed changes to Bitcoin, APO (SIGHASH_ANYPREVOUT) and CTV (CHECKTEMPLATEVERIFY). One point of discussion is the need for stable transaction IDs, particularly for use cases like channel factories. The APO proposal will only be available on Taproot, which might not be preferred for long-term multi-decade vault storage due to quantum computing concerns. However, the fear of quantum computers is prevalent enough to warrant taking it into consideration for features targeting long-term store-of-value use cases.The higher witness satisfaction cost of roughly 3x vbytes vs CTV-in-Taproot is discussed, but this is not considered a big deal as it can be seen as an optimization of (tweaked) APOAS, and CTV is mainly sold for its usage inside vaults. It is also noted that APO signatures are not more expensive to verify than existing signature verifications. However, APO-as-currently-spec'd suffers from the half-spend problem, which makes the simple-apo-vault implementation vulnerable to spending multiple vaulted outputs of the same denomination together and burning all but the first one. Fixing this requires amending BIP 118 with some new sigmsg flags and committing to the input index. This means that APO as-is isn't a CTV-replacement candidate without first going through some more design and review iterations.The discussion in the Bitcoin-dev mailing list revolves around the proposed changes to the SIGHASH_ANYPREVOUTANYSCRIPT flag, which can emulate CTV if its "ANYONECANPAY" behavior is made optional. While CTV advocates have been presenting vaults as the flagship use case, some participants doubt that CTV is necessary or sufficient for practical vault implementation. The APO-AS covenants could cover it instead, although it may be a bit more expensive to use and might not allow bare or Segwit v0 CTV.The author suggests that BIP118 is a soft fork candidate that could benefit most of the users since there is significant interest and demand for both simple covenants and better off-chain protocols. The email ends with a note that the APO-AS part of BIP118 may enable CTV's features and wonders if people would oppose it for the same reason they would oppose BIP119. The email includes links to the GitHub repository for BIP118 and the Anyprevout.xyz website that outlines the potential use cases for ANYPREVOUT.</summary>
+    <published>2022-04-29T11:40:05+00:00</published>
+  </entry>
+</feed>

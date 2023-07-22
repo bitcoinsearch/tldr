@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[ANN] High-speed Bitcoin Relay Network</title>
+  <updated>2023-06-07T19:46:09.993190+00:00</updated>
+  <author>
+    <name>Mike Hearn 2013-11-06 09:23:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[ANN] High-speed Bitcoin Relay Network</title>
+    <updated>2023-06-07T19:46:09.993190+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-November/003598.html" rel="alternate"/>
+    <summary>In November 2013, Matt Corallo proposed a system of peering between nodes in the Bitcoin network to create a system of high-speed relay nodes for miners and merchants/exchanges. The purpose of this system was to act as a fallback in the case that the public Bitcoin network encounters issues and decrease block propagation times between miners. This network was open to everyone via a few public relay nodes but also had nodes made available only to large miners and merchants/exchanges to mitigate the ability of malicious parties to DoS the network. To peer with the public relay nodes, users could select the closest region out of us-west (West Coast US), us-east (East Coast US), eu (Western Europe), au (Australia), or jpy (Japan) and add public.REGION.relay.mattcorallo.com to their addnode list.The relay nodes do some data verification to prevent DoS, but in order to keep relay fast, they do not fully verify the data they are relaying. Thus, users should never mine a block building on top of a relayed block without fully checking it with their own bitcoin validator. The relay nodes do not follow the standard inv-getdata-tx/block flow but instead relay transactions/blocks immediately after they have done their cursory verification. They do keep some track of whether or not user's nodes claim to have seen the transactions/blocks before relaying but users may see transactions/blocks being sent which they already have and have not requested. The relay nodes will all relay among themselves very quickly so there is no advantage to peering with as many relay nodes as one can find. The increased incoming bandwidth during block relay spikes may result in higher latency for user's nodes. The relay nodes are not designed to ensure that users never miss data and may fail to relay some transactions. Additionally, because the relay nodes do not respond to standard getdata requests, if users miss a relay and then reconnect, that data will not be sent again by the relay nodes. The relay nodes are not a replacement for having peers on the standard P2P network, they are only there to augment the existing P2P network.If users were a merchant/exchange/large miner/other important node operator and wish to gain access to additional domain names which map to relay nodes with fewer peers, they could fill out the form at https://docs.google.com/forms/d/1UL82QdcXXEhZwSHJAK04Sk_cWg4zLOu8a216nO7Mt8c/viewform. The source for the relay nodes was available at https://github.com/TheBlueMatt/RelayNode.</summary>
+    <published>2013-11-06T09:23:15+00:00</published>
+  </entry>
+</feed>

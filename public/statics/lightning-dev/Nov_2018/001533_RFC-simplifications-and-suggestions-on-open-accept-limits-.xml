@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RFC: simplifications and suggestions on open/accept limits.</title>
+  <updated>2023-05-25T14:37:14.576001+00:00</updated>
+  <author>
+    <name>Pierre 2018-11-07 04:51:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RFC: simplifications and suggestions on open/accept limits.</title>
+    <updated>2023-05-25T14:37:14.576001+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001533.html" rel="alternate"/>
+    <summary>The Lightning Network has set minimum and maximum standards for various aspects of its protocol. The suggested minimum funding_satoshi for c-lightning is 1000, Eclair requires a 100000 minimum, and lnd has no minimum. However, the author suggests that channels under three times the minimum dust limit should be rejected as too small. This is to prevent unilateral channel closings during network fee spikes. The dust_limit_satoshis is 546 for both c-lightning and Eclair, but can vary in future depending on the min_relay_fee and backlog. max_htlc_value_in_flight_msat is variable for each implementation, with c-lightning giving U64_MAX, Eclair giving 5000000000, and lnd accepting anything above 5 * htlc_minimum_msat. The author suggests removing the max value altogether. All implementations give a 1% channel_reserve_satoshis requirement, which the author agrees should be required. htlc_minimum_msat varies between implementations, with c-lightning allowing up to 0.1% of channel capacity, Eclair accepting any, and lnd accepting any amount above 1000. The author suggests making it zero since relay fees make it non-free anyway. To_self_delay is 144 for all implementations except lnd, which uses a proportional formula. The author suggests using lnd's formula instead. Lastly, max_accepted_htlcs varies between implementations, with c-lightning allowing 483, Eclair allowing 30, and lnd allowing five or more. The author suggests increasing Eclair's limit to 483. The minimum_depth field is only a suggestion, and the author suggests limiting it to three. They also mention other areas of hidden consensus such as who should force close when an error occurs and what the current feerate is, which are being addressed in a new commitment format proposal.</summary>
+    <published>2018-11-07T04:51:21+00:00</published>
+  </entry>
+</feed>

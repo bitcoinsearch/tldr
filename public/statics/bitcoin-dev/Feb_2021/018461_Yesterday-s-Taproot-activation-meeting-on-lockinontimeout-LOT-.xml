@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Yesterday's Taproot activation meeting on lockinontimeout (LOT)</title>
+  <updated>2023-05-21T00:58:51.098417+00:00</updated>
+  <author>
+    <name>Matt Corallo 2021-02-22 06:44:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Yesterday's Taproot activation meeting on lockinontimeout (LOT)</title>
+    <updated>2023-05-21T00:58:51.098417+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018461.html" rel="alternate"/>
+    <summary>In a recent discussion, it was suggested that skipping the headers issues by not persisting them can be a solution, but there are still other concerns. One of these concerns is whether information about a node feeding invalid headers and causing a ban is still persisted. Additionally, nodes on both sides of the fork need to find each other, which requires forking the address database, DNS seeds, and defining a new protocol magic. A previous statement that Bitcoin Core does not have the infrastructure to handle switching consensus rules with the same datadir was challenged in the discussion. With the current proposed bip8 code, lockinontimeout=true will cause headers to be marked as invalid, but they won't be added to the block index at all. So a node restart should always allow it to be reconsidered. The test case in the discussion's reference link tests that a node that had rejected a chain due to lockinontimeout=true will reorg to that chain after being restarted. However, if you switch from lockinontimeout=false to lockinontimeout=true and the tip of the current most work chain did not lockin, then you will continue following that chain until a taproot-invalid transaction is included, rather than immediately reorging to a shorter chain that complies with the lockinontimeout=true rules.</summary>
+    <published>2021-02-22T06:44:55+00:00</published>
+  </entry>
+</feed>

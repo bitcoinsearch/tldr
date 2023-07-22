@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Onion messages rate-limiting</title>
+  <updated>2023-06-03T09:15:46.515034+00:00</updated>
+  <author>
+    <name>Matt Corallo 2022-06-30 16:47:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Onion messages rate-limiting</title>
+    <updated>2023-06-03T09:15:46.515034+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-June/003642.html" rel="alternate"/>
+    <summary>During the recent Oakland Dev Summit, a group of lightning engineers discussed a scheme proposed by Rusty for DoS protection for onion messages. The scheme involves rate-limiting per-peer incoming onion messages that should be relayed. Nodes keep track of where the messages came from using the node_id of the peer who sent them and only need to store the last such node_id per outgoing connection. When an incoming onion message reaches the rate limit, the receiver sends an `onion_message_drop` message to the sender, containing a shared secret hash of the Sphinx shared secret of the rate-limiting peer. This lets the node that created the onion message know which part of the route is congested, allowing them to retry through a different path. However, when there is latency between nodes and many onion messages, `onion_message_drop` may be relayed to the incorrect incoming peer. This scheme will statistically penalize the right incoming peer with a probability depending on the volume of onion messages that the spamming peer is generating compared to the volume of legitimate onion messages. It is an interesting research problem to find formulas for those probabilities to evaluate how efficient this will be against various types of spam, and researchers are encouraged to look into it. Storing more data in the future could increase the accuracy of attributing `onion_message_drop`, but more research is needed to determine how much accuracy would be gained and whether it is worth making the protocol more complex.</summary>
+    <published>2022-06-30T16:47:32+00:00</published>
+  </entry>
+</feed>

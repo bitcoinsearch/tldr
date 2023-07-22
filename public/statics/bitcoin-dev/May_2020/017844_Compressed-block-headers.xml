@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Compressed block headers</title>
+  <updated>2023-06-14T01:25:40.405901+00:00</updated>
+  <author>
+    <name>Richard Myers 2020-05-11 11:46:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Compressed block headers</title>
+    <updated>2023-06-14T01:25:40.405901+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-May/017844.html" rel="alternate"/>
+    <summary>A proposal has been made for a compressed block header scheme for IBD and block announcements, with the aim of providing significant bandwidth savings for nodes with low bandwidth, supporting more header-only peers for IBD, protecting against eclipse attacks, and reducing block header bandwidth to support long-range block header broadcast via alternative communication modalities like radio where every byte counts.The proposed `block_header2` data type specification involves compressing some fields under certain conditions, resulting in a maximum reduction from an 81-byte header to a best-case 39-byte header. The Version field will usually be identical to one referenced in one of the previous 7 unique versions, as indicated by bits 0,1,2 of the Bitfield. The previous block hash will always be the `SHA256(SHA256())`, so it is redundant, presuming you have the previous header in the chain. The timestamp (in seconds) is consensus-bound and can be safely represented as an offset from the previous headers' timestamp using a 2-byte signed short int. NBits can also be transmitted according to the proposed specification above. Txn_count is included to make parsing of these messages compatible with parsing of `block` messages but can be removed for transmission of compact headers.A new service bit would be required so that the nodes can advertise their ability to supply compact headers, and three new messages would be used by nodes that enable compact block header support. The proposal could save up to 49% of bandwidth required for a continuous header sync from genesis.However, the proposal has some potential drawbacks. It will require higher computation and memory for caching the last few versions. There may also be complexity and bugs associated with implementing this compression scheme. Additionally, the use of low-bandwidth light clients should not be encouraged. The proposed `headers2` message is returned in response to a `getheaders2` or at new header announcement following a `sendheaders2` request. It contains both `length` and `headers` fields, where the `headers` field contains compressed block headers in format. The first header in the first `block_header2[]` vector to a newly-connected client must contain the full `nBits`, `timestamp`, `version` and `prev_block_hash` fields, along with a correctly populated `bitfield` byte. Subsequent headers in a contiguous vector should follow the compressed format. If subsequent compressed headers are supplied to an already-connected client requesting compressed headers, they should also follow the compressed format.</summary>
+    <published>2020-05-11T11:46:04+00:00</published>
+  </entry>
+</feed>

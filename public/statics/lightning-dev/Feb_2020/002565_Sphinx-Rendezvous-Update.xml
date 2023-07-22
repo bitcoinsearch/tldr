@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Sphinx Rendezvous Update</title>
+  <updated>2023-06-02T23:51:11.230354+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2020-02-24 09:33:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Sphinx Rendezvous Update</title>
+    <updated>2023-06-02T23:51:11.230354+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002565.html" rel="alternate"/>
+    <summary>In a message to the Lightning development mailing list, Bastien Teinturier discussed the issue of making HMACs check out with rendezvous. He explained that while there was a technicality to make the HMACs check out, previous emails on the mailing list didn't provide many details. The issue lies in the fact that filler generation needs to take into account some hops that will be added later by the payer. However, this can be easily worked around with a few space trade-offs. Teinturier suggested two ways to do it: Carol could either send the filler (650 bytes) via a TLV in update_add_htlc, which means every intermediate hop needs to forward it, or she could provide Bob with the rho keys used to generate her filler and the length used by each hop, which would leak an upper bound on the number of hops and the number of bytes sent to each hop. Teinturier provided ASCII art diagrams and sample code working in Eclair for those who can read Scala without getting headaches.Teinturier also pointed out that rendezvous on normal onions would be costly to integrate into invoices since it takes 1366 bytes to include one onion. However, doing rendezvous on the trampoline onion could have better properties. When doing that, having Carol transmit her filler data only to Bob via the outer onion payload becomes practical and doesn't leak information. Multi-part would work with a single trampoline onion in the invoice (~500 bytes), because nodes can do MPP between trampoline nodes thanks to the onion-in-onion construction.Finally, Teinturier noted that Hornet offers many features that Lightning will likely want in the future, including rendezvous and directed message support. While doing a custom rendezvous scheme may seem like a waste of time since they'll ditch it once/if they implement Hornet, Teinturier believes that if they're able to find a rendezvous scheme that isn't too much work to implement, it makes sense to have something available soon-ish.</summary>
+    <published>2020-02-24T09:33:33+00:00</published>
+  </entry>
+</feed>

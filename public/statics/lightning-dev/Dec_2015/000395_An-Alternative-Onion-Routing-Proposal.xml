@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>An Alternative Onion-Routing Proposal</title>
+  <updated>2023-05-23T21:56:16.977038+00:00</updated>
+  <author>
+    <name>Zooko Wilcox-OHearn 2015-12-17 19:33:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>An Alternative Onion-Routing Proposal</title>
+    <updated>2023-05-23T21:56:16.977038+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-December/000395.html" rel="alternate"/>
+    <summary>In an email exchange, Olaoluwa Osuntokun and Zooko discussed the current practice of node IDs taking two forms in code: either the hash160 of a node's current pub-key or the raw serialized pub-key itself. This is done to provide backwards compatibility for end wallets that are unable to establish a connection in a timely manner. Zooko requested further explanation on how this backwards-compatibility works and asked for documentation or a more detailed explanation if it is important. Osuntokun proposed that within the Sphinx mix-header, the hash160 should be safely truncated to 16-bytes, and in the case of a collision, the onion-route propagation across the incorrect node will fail as it won't be able to derive the shared secret properly. Zooko questioned the safety of this proposal, particularly in the case that an attacker knows a private key that maps to the same 128-bit nodeid as a user's private key does. Further, Osuntokun noted that if serialized pub-keys are used for node ID's in routing info, they would be forced to ditch chacha20+poly3015 for AES-CTR+SHA-256-HMAC within Sphinx. Zooko expressed confusion over why the use of entire public keys instead of possibly-truncated hashes of public keys would force a decision about which cipher and MAC to use.</summary>
+    <published>2015-12-17T19:33:45+00:00</published>
+  </entry>
+</feed>

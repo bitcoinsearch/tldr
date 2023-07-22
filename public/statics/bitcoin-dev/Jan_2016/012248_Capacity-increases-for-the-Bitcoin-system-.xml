@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Capacity increases for the Bitcoin system.</title>
+  <updated>2023-05-19T22:33:38.019477+00:00</updated>
+  <author>
+    <name>Anthony Towns 2016-01-18 12:02:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Capacity increases for the Bitcoin system.</title>
+    <updated>2023-05-19T22:33:38.019477+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-January/012248.html" rel="alternate"/>
+    <summary>The context discusses the potential benefits of implementing SegWit and key recovery in Bitcoin transactions. The use of SegWit with key recovery could result in a 25% increase in p2pkh transactions and a 50%-100% increase in 2-of-2 multisig transactions, depending on security preferences. Additionally, using ECDSA key recovery combined with 1/4 discounting could provide a substantial improvement for 2 of 3 multisig for escrow payments.The revised figures indicate that p2pkh scaling factors work out to be 170% with SegWit and can rise up to 190%, while multisig scaling factors can reach up to 250% or 300%. A hard fork of 2MB first could mean up to 8MB of total data per block, but it is currently infeasible. Without discounting, SegWit comes at a cost of 99% for p2pkh and 95% for 2/2 multisig.The effective block size for p2pkh with SegWit is estimated to be 1.7MB, which is higher than an earlier estimate of 1.6MB, while 2MB for 2/2 multisig still seems accurate. Additionally, post-SegWit soft-forked script improvements can increase the effective block size for p2pkh transactions to 1.9MB and for 2/2 multisig to 2.5MB or 3MB. Two additional soft-fork improvements possible with SegWit are ECDSA public key recovery and Schnorr signatures, which could make multisig and p2pkh more space efficient.The author notes that additional metadata, such as length for each witness signature or value of the input, may need to be accounted for but does not believe it would make a significant difference. The current byte count for inputs and outputs is provided for reference. Implementing SegWit would add two extra bytes per output script, and moving the signature script directly into the segregated witness would reduce the size of the scriptsig from 105 to 70 bytes.Allowing ECDSA recovery would require an additional soft-fork post segwit to change the CHECKSIG operation, but this would allow the scriptsig to be just the 70 byte signature without also including the 33 byte pubkey. The pubkey is automatically calculated from the signature and verified against the hash provided in the scriptpubkey to maintain security. The witness scriptpubkey is limited to 32 bytes for 128-bit security and requires version 1 segwit and p2sh-style construction.The byte count for inputs and outputs with SegWit and key recovery is provided, with a potential saving of 26 bytes of witness data by using key recovery on a MULTISIG op rather than 33 bytes per pubkey.</summary>
+    <published>2016-01-18T12:02:51+00:00</published>
+  </entry>
+</feed>

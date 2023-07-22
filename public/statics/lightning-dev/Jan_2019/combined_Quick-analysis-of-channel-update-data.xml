@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Quick analysis of channel_update data</title>
+  <updated>2023-06-03T21:27:20.314617+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-01-04 03:43:14</name>
+  </author>
+  <author>
+    <name>Fabrice Drouin 2019-01-08 17:22:23</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2019-01-08 23:44:06</name>
+  </author>
+  <author>
+    <name>Christian Decker 2019-01-02 17:26:07</name>
+  </author>
+  <author>
+    <name>Fabrice Drouin 2019-01-04 08:58:17</name>
+  </author>
+  <author>
+    <name>Fabrice Drouin 2019-02-18 15:34:47</name>
+  </author>
+  <author>
+    <name>Fabrice Drouin 2019-01-02 15:47:06</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2019-02-18 12:09:43</name>
+  </author>
+  <author>
+    <name>Fabrice Drouin 2019-01-02 19:46:42</name>
+  </author>
+  <author>
+    <name>Fabrice Drouin 2019-01-03 22:52:15</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2019-01-08 05:23:10</name>
+  </author>
+  <author>
+    <name>Christian Decker 2019-01-08 15:15:04</name>
+  </author>
+  <author>
+    <name>Christian Decker 2019-01-08 21:28:43</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2019-01-08 22:07:02</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2019-01-08 23:38:12</name>
+  </author>
+  <author>
+    <name>Fabrice Drouin 2019-01-20 19:53:56</name>
+  </author>
+  <link href="lightning-dev/Jan_2019/001789_Quick-analysis-of-channel-update-data.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001811_Quick-analysis-of-channel-update-data.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001815_Quick-analysis-of-channel-update-data.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001774_Quick-analysis-of-channel-update-data.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001790_Quick-analysis-of-channel-update-data.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2019/001874_Quick-analysis-of-channel-update-data.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001773_Quick-analysis-of-channel-update-data.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2019/001873_Quick-analysis-of-channel-update-data.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001775_Quick-analysis-of-channel-update-data.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001787_Quick-analysis-of-channel-update-data.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001803_Quick-analysis-of-channel-update-data.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001810_Quick-analysis-of-channel-update-data.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001812_Quick-analysis-of-channel-update-data.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001813_Quick-analysis-of-channel-update-data.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001816_Quick-analysis-of-channel-update-data.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001829_Quick-analysis-of-channel-update-data.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Quick analysis of channel_update data</title>
+    <updated>2023-06-03T21:27:20.314617+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-January/001789.html" rel="alternate"/>
+    <summary>The Lightning Network community has been discussing issues related to channel updates and routing tables via email exchanges. One of the main problems discussed is flapping updates, which can cause inconsistencies in routing tables. The community suggests different heuristics that could reduce gossip traffic and improve routing efficiency. Another issue discussed is set reconciliation schemes and how to reconcile channel parameters to avoid further communication rounds. Frequent channel updates even when fee parameters remain unchanged are also a concern. Many updates do not change anything except for a new timestamp and signatures, occurring several times a day for the same channel ID. Hourly backups of routing tables reveal this issue. Suggestions to improve routing table sync include using a basic checksum that covers only fees and HTLC min/max values. The community acknowledges that achieving consistency in views of the routing table may not be possible, but they continue to propose solutions that can be implemented as local policy without warranting any spec changes.Fabrice Drouin suggests that the Lightning Network's efficiency of collecting and querying routing tables and channel updates could be improved with a basic checksum that covers fees and HTLC min/max value. Rusty Russell suggested discarding the newer duplicate when a node is updated too fast or remembering the latest timestamp of the duplicate for future advanced reconstruction schemes. However, this method assumes a single update partner and still results in flaps, which might even lead to a stuck state for some channels. Christian Decker responds suggesting that building in-network deduplications is unnecessary and local policies at the senders of the update should be implemented to reduce flapping updates. In addition, the article discusses a scenario where a node in a network receives updates from another node through multiple paths, which can result in dropped updates and inconsistent states. Rusty suggests locally updating timestamps and signatures for identical updates and not broadcasting them if they were the only changes.The article also suggests "eager-disable" and "lazy-enable," where disables are sent right away, and enables are put on an exponential backoff timeout. The routing protocol should also be less chatty, and heuristics can be used to improve traffic. Flapping channels, possibly due to unreliable hosts, can cause issues with the efficiency of collecting and querying routing tables and channel updates. These heuristics would probably be used to close channels to unreliable nodes instead of filtering/delaying publishing updates for them.Finally, the article argues that lazy-disable is the current best practice since it assumes that the channel is still advertised as available, while eager-enable is used only when a disable message has been sent. The channel_update traffic does not primarily cause nodes to publish new updates when channels are about to become stale, and heuristics can be used to close channels to unreliable nodes instead of filtering/delaying publishing updates for them.</summary>
+    <published>2019-01-04T03:43:14+00:00</published>
+  </entry>
+</feed>

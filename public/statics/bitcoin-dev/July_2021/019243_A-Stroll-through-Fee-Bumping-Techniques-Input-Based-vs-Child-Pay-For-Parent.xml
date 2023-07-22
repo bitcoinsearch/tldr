@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+  <updated>2023-05-21T03:16:28.202809+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-07-08 11:17:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+    <updated>2023-05-21T03:16:28.202809+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-July/019243.html" rel="alternate"/>
+    <summary>In a recent email to the bitcoin-dev mailing list, Antoine Riard proposed a new sighash malleability flag called SIGHASH_IOMAP. This flag could allow transaction signers to commit to a map of inputs and outputs, which would allow for a more streamlined process and potentially redirect an overflowed fee value to an outgoing output. However, there are some potential issues with this approach that Riard addresses. Firstly, allowing partially overlapping sets of outputs could lead to theft. Secondly, a range specification or whole bitfield is much heavier than an extra bit to add to the sighash. Lastly, specifying lots of different ways of hashing the outputs can lead to quadratic behavior. To avoid these issues, Riard proposes a new approach where the tx is treated as being distinct bundles of x-inputs and y-outputs, using the annex for grouping since it is committed to by signatures. He suggests introducing a new SIGHASH_GROUP flag that commits to each output i, start num_outputs, signature, which would let you combine x-input and y-outputs fairly safely. Riard notes that without something like this, it will be very hard to incorporate fees into eltoo with layered commitments. As a new sighash mode, it would make sense to include it as part of ANYPREVOUT to avoid introducing many new "unknown key types".</summary>
+    <published>2021-07-08T11:17:16+00:00</published>
+  </entry>
+</feed>

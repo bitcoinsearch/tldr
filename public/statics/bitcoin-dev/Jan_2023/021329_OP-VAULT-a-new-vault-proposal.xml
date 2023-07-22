@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_VAULT: a new vault proposal</title>
+  <updated>2023-06-16T03:49:14.513374+00:00</updated>
+  <author>
+    <name>James O'Beirne 2023-01-10 13:35:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_VAULT: a new vault proposal</title>
+    <updated>2023-06-16T03:49:14.513374+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-January/021329.html" rel="alternate"/>
+    <summary>The author has received a suggestion from Greg about an improvement to the "output flow" of an expected vault use. In the existing draft implementation, all outputs except for the OP_UNVAULT trigger had the ability to hide their true script until spend. However, the OP_UNVAULT trigger had to be bare so that the script interpreter could inspect part of it for validity. Greg's suggestion is to put the script onto the witness stack when spending the OP_VAULT output, which would allow the script interpreter to construct the expected scriptPubKey and enable all outputs in vault lifecycles to be P2TR. This would conceal the operation of the vault and also allow the OP_VAULT/OP_UNVAULT opcodes to be implemented as Taproot-only OP_SUCCESSx opcodes if desired. However, the problem arises regarding enabling something similar for witness v0 outputs, specifically for (ii) and (iii) output scripts to live behind P2WSH. One potential solution is to have the script interpreter construct the expected OP_UNVAULT scriptPubKey based on what witness version it sees, such as using "OP_0 &lt;witnessScript&gt;" for a fitting P2WSH scriptPubKey or using "OP_1 &lt;NUMS&gt; {&lt;script&gt;}" for an expected Taproot-with-NUMS output. The author plans to modify the implementation accordingly and welcomes feedback from others.</summary>
+    <published>2023-01-10T13:35:04+00:00</published>
+  </entry>
+</feed>

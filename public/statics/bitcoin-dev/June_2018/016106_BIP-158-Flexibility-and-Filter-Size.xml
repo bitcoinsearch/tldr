@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 158 Flexibility and Filter Size</title>
+  <updated>2023-05-20T08:25:20.017426+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2018-06-09 15:45:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 158 Flexibility and Filter Size</title>
+    <updated>2023-05-20T08:25:20.017426+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-June/016106.html" rel="alternate"/>
+    <summary>The discussion centers on the cost of using the current filter, which allows clients to verify the filter if they want to. The cost of this design is that it increases the time until we can make these filters secure because it slows convergence on the design of what would get committed. The developer sees the addition of more commitments as a top priority for Bitcoin and suggests coordination on an "ultimate" extensible commitment once, rather than special case a bunch of distinct commitments. There is already an extensible commitment style via BIP141, so there is no need for a new one. The current filter format cannot be committed in this fashion as it indexes each of the coinbase output scripts, creating a circular dependency: the commitment is modified by the filter. This creates a concern about the length of the merkle proof path, which may be several hundred bytes (and grows with future capacity increases) to present a proof to the coinbase transaction. There is an old Tier Nolan proposal to create a "constant" sized proof for future commitments by constraining the size of the block and placing the commitments within the last few transactions in the block. However, this idea is viewed as a fairly ugly hack and requires downstream software not tinker with the transaction count. While some people are interested in implementing this proposal and doing the validation, others view it as too difficult to implement "full" validation. The argument against fetching down to the coinbase transaction to save a couple of hundred bytes per block makes it impossible to validate other things, including depth fidelity of returned proofs.</summary>
+    <published>2018-06-09T15:45:54+00:00</published>
+  </entry>
+</feed>

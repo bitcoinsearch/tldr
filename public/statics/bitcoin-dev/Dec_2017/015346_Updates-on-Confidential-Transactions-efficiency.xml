@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Updates on Confidential Transactions efficiency</title>
+  <updated>2023-06-12T22:09:41.130024+00:00</updated>
+  <author>
+    <name>Andrew Poelstra 2017-12-04 17:17:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Updates on Confidential Transactions efficiency</title>
+    <updated>2023-06-12T22:09:41.130024+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-December/015346.html" rel="alternate"/>
+    <summary>Andrew Poelstra has implemented the single-output version of Bulletproofs, a cryptographic proof system that can prove statements about encrypted data, with some performance numbers. The benchmarks were performed on one core of an Intel i7-6820MQ, and reflect verification of a single 64-bit rangeproof. By using GLV endomorphism supported by the curve secp256k1, which libsecp256k1 (supported by Bitcoin) supports but does not enable by default, speedup was observed. It reflects a 3.47x speedup over the verification speed of the old rangeproofs without the endomorphism. Even without aggregation, two rangeproofs are verified nearly 15% faster than verifying one twice. The old rangeproofs require only 128 multiplies for a 64-bit proof, then 256 for two, and so on, while at the same time the new Bulletproofs perform significantly better. The Bulletproof verification process is a recursive process which does not appear to be expressible as a single multiproduct, and in fact it appears to require nearly twice as many multiplications as claimed. There are still a few open issues that Andrew plans to help resolve in the coming month.</summary>
+    <published>2017-12-04T17:17:11+00:00</published>
+  </entry>
+</feed>

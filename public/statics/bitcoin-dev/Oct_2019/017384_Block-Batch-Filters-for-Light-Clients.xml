@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Block Batch Filters for Light Clients</title>
+  <updated>2023-06-13T21:25:49.254894+00:00</updated>
+  <author>
+    <name>Jonas Schnelli 2019-10-11 15:44:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Block Batch Filters for Light Clients</title>
+    <updated>2023-06-13T21:25:49.254894+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-October/017384.html" rel="alternate"/>
+    <summary>The conversation is about the limitations of BIP 157 as compared to BIP 37, which does not allow applying filters to mempool and checking zero confirmation transactions. The light client can process unconfirmed transactions only by loading the entire mempool transaction flow, which may lead to concerns regarding DOS and fingerprinting. One possible solution suggested is to retrieve a complete compact filter of the whole mempool using a maximum size of the filter ordered by feerate. To mitigate DOS concerns, dynamic filter construction could be used, and the update-interval of such a filter could also be time-based rather than on every new tx in the mempool. The expected process involves generating a mempool filter, connecting to the peer, requesting the mempool-filter, processing the filter for relevant transactions, and eventually sending getdata of relevant transactions. After the initial retrieve, the light client inspects all new txns received from peers from that point on (filterless unconfirmed tx detection). Alternatively, the mempool filter can be requested again after a timeout if the previous process is too bandwidth expansive. The conversation is focused on finding ways to make the light client process more efficient without compromising privacy and security.</summary>
+    <published>2019-10-11T15:44:54+00:00</published>
+  </entry>
+</feed>

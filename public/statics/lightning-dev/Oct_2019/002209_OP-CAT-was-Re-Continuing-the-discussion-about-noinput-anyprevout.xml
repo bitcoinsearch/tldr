@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_CAT was Re: Continuing the discussion about noinput / anyprevout</title>
+  <updated>2023-06-02T20:46:58.091604+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-10-06 08:46:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_CAT was Re: Continuing the discussion about noinput / anyprevout</title>
+    <updated>2023-06-02T20:46:58.091604+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-October/002209.html" rel="alternate"/>
+    <summary>In a recent email exchange on the Lightning-dev mailing list, Jeremy raised the question of whether using OP_SHA256STREAM for constructing midstate in scripts would be an advantage over using OP_CAT. While it is possible to compute using OP_SHA256STREAM and get the computation right with care, there may not be any actual advantage over OP_CAT. In fact, if the output size limit for OP_CAT is comparable to that of almost anything you could use SHA256STREAM on, then using OP_CAT followed by a single OP_SHA256 would be just as easy.However, theoretically, OP_CAT is less efficient than OP_SHASTREAM. In cases where memory areas used for data cannot be resized, new backing memory must be allocated elsewhere and existing data copied. This leads to possible O(n^2) behavior for OP_CAT. On the other hand, once the stream state is in place, OP_SHASTREAM would not require any copying or new allocations. The cost of executing OP_CAT may be reduced by limiting its maximum output. However, 64 bytes is too small when considering Merkle tree proofs due to issues of lack of typechecking. Overall, the discussion highlights the potential advantages and limitations of different options for constructing midstate in scripts.</summary>
+    <published>2019-10-06T08:46:59+00:00</published>
+  </entry>
+</feed>

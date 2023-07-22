@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_VAULT: a new vault proposal</title>
+  <updated>2023-05-22T23:18:51.449318+00:00</updated>
+  <author>
+    <name>Anthony Towns 2023-01-17 07:46:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_VAULT: a new vault proposal</title>
+    <updated>2023-05-22T23:18:51.449318+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-January/021352.html" rel="alternate"/>
+    <summary>In a discussion on the bitcoin-dev mailing list, Andrew Chow raises concerns about a proposal that would encourage address reuse for vaults. The proposal aims to allow a single vault scriptPubKey to receive multiple deposits. However, the current construction makes it impossible to spend these vaults together as OP_VAULT requires the recovery script of the unvault output to match what's provided in the input. Andrew Chow suggests that batched recovery could work fine if separate secrets are used for each recovery path. But the problem with this approach is that it prevents combining vaults when spending normally. If an identical OP_VAULT script is used for all the utxos in the vault, it would require only one transaction to spend all the vault utxos to a single OP_UNVAULT output. Andrew Chow proposes a potential solution: having the unvault path for OP_VAULT require the vout number for its corresponding OP_UNVAULT output on the stack. This would allow for both address reuse and avoiding address reuse by using multiple outputs and providing the mapping between inputs and outputs explicitly.</summary>
+    <published>2023-01-17T07:46:38+00:00</published>
+  </entry>
+</feed>

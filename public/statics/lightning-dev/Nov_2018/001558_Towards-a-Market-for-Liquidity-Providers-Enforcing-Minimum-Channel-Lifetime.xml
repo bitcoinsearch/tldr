@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Towards a Market for Liquidity Providers -- Enforcing Minimum Channel Lifetime</title>
+  <updated>2023-05-25T15:55:21.034498+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-11-12 00:15:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Towards a Market for Liquidity Providers -- Enforcing Minimum Channel Lifetime</title>
+    <updated>2023-05-25T15:55:21.034498+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001558.html" rel="alternate"/>
+    <summary>The conversation between Pierre and ZmnSCPxj revolves around adding an additional CLTV constraint that determines the minimum channel lifetime. It is mentioned that parties have to exchange the first commitment txes before the funding tx is published, which means the absolute CLTV delay would not really constrain the duration of the channel as the timer starts running before the channel is created. However, it is argued that if the funding transaction gets confirmed and it is possible for one party to broadcast the commitment transaction, then the same analysis applies. It is noted that the initiator of the channel pays onchain fees and controls how fast or slow the time is between both parties agreeing to a specific CLTV blockheight to when the channel opens. Any discrepancy between the time they agree and the time the channel gets confirmed and starts its onchain lifetime is equivalent to one party shutting down its node for that duration. The possibility of lowballing the onchain fee for the funding transaction and doubling-spending only one's own inputs to invalidate the funding transaction is discussed, which would mean Licky loses all ability to earn. The time from when both sides agree to open the channel and exchange signatures for the funding transaction to the time the funding transaction confirms may be sensitive due to the possibility of one side unilaterally RBFing their inputs.The contract in full is then provided: Mercy agrees to pay N satoshi to Licky, Licky agrees to have L satoshi locked for use in the channel until block height B, either side may void this contract by paying a miner fee until the funding transaction confirms, and Mercy is responsible for getting the funding transaction confirmed.</summary>
+    <published>2018-11-12T00:15:47+00:00</published>
+  </entry>
+</feed>

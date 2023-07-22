@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Jets (Was: `OP_FOLD`: A Looping Construct For Bitcoin SCRIPT)</title>
+  <updated>2023-06-15T17:48:24.421401+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2022-03-11 14:11:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Jets (Was: `OP_FOLD`: A Looping Construct For Bitcoin SCRIPT)</title>
+    <updated>2023-06-15T17:48:24.421401+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020114.html" rel="alternate"/>
+    <summary>ZmnSCPxj and Billy discussed the implementation of jets in Bitcoin. One suggestion was to add extra data onto the witness script, but this would increase the cost and disincentivize jet usage. The critical mass needed for a jet to be worth it depends on the size of the script and how much network bandwidth would be saved. A static lookup table is better than a dynamic one for pattern-matching on strings of specific length. Care needs to be taken to avoid hash collisions with Adler32 in an actual implementation.It was also suggested that individual jets may not require a soft fork to be useful, and different sections of the network could decide individually what jets they want to support without needing a soft fork for each one. Higher-order function ability could be added to jets, which would allow nodes to add OP_FOLD or similar functions as a jet without requiring additional soft forks.To improve the usefulness of jets, the language could be redesigned so that OP_PUSH is not in the opcode stream, but instead, a separate table of constants is attached/concatenated to the actual SCRIPT. However, the use of jets in bitcoin operations has been met with challenges, including increasing costs and the risk of hacks.To address these issues, ZmnSCPxj suggests replacing most of the "OP_PUSH" opcodes with variants that look up in a static table at the start of the executable script body. This would make it easier to incorporate existing jets into new scripts without manipulating the stack in a way that the jet expects. While this proposal adds some complexity, it could ultimately help reduce overhead costs and make the use of jets more palatable for users.</summary>
+    <published>2022-03-11T14:11:33+00:00</published>
+  </entry>
+</feed>

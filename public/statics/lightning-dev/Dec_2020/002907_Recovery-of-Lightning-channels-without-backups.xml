@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Recovery of Lightning channels without backups</title>
+  <updated>2023-06-03T03:20:31.587692+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2020-12-07 00:32:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Recovery of Lightning channels without backups</title>
+    <updated>2023-06-03T03:20:31.587692+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-December/002907.html" rel="alternate"/>
+    <summary>In a post on the mailing list, LL proposes a solution to the issue of recovering lightning channels after losing channel state in a boating accident. The current method is static channel backups which involves keeping a list of channel ids and nodes that the user had channels with. With this backup, users can remember who they had channels with, connect to them, and ask them to force close the channel. LL suggests a change to the lightning protocol that would allow for channel recovery without the need for a channel backup. The proposal involves using a deterministically randomized version of the node's static public key as the `funding_pubkey` in the open channel message, instead of the temporary_channel_id. By doing a Diffie-Hellman operation with the other party's public key, it is possible to deterministically produce scalars r1 and r2, which can be used to create 2-of-2(r1*G + P_local, r2*P_remote) as the script pubkey of funding output. This would allow users to figure out what their funding outputs with each node look like non-interactively, making it possible to find them in the UTXO set when channel state is lost. This solution could greatly improve user experience, especially for non-enterprise users who exclusively have channels with well-known and reliable public nodes whose public keys can be discovered through routing gossip or from public indexes. While there are concerns about the security implications of this approach, many members of the community support exploring this idea further.</summary>
+    <published>2020-12-07T00:32:27+00:00</published>
+  </entry>
+</feed>

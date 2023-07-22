@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CheckSigFromStack for Arithmetic Values</title>
+  <updated>2023-06-14T23:54:14.967358+00:00</updated>
+  <author>
+    <name>Jeremy 2021-07-03 04:01:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CheckSigFromStack for Arithmetic Values</title>
+    <updated>2023-06-14T23:54:14.967358+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-July/019184.html" rel="alternate"/>
+    <summary>Jeremy Rubin, a Bitcoin developer proposed using Lamport signatures in script for arithmetic values by using a binary expanded representation. This approach has not been discussed elsewhere. Rubin stated that if one uses op_add for arbitrary width integers or op_cat, it is possible to make a quantum proof signature by signing the signature made with checksig with the lamport. He added that there are a couple of gotchas regarding crypto assumptions on that. Rubin explained his approach through a python code, which he later translated to bitcoin script. The signer generates a key that is a list of pairs of hash images to create the script. To sign, the signer provides a witness of a list of preimages that match one or the other. During validation, the network adds up a weighted value per preimage and checks that there are no left-out values. A concrete use case for this approach is post-hoc signing a sequence lock. ZmnSCPxj, another Bitcoin developer, expressed his confusion over the syntax used in Rubin's code. He suggested replacing the ` operator with actual numbers to make it less confusing. ZmnSCPxj also stated that enabling something as innocuous as OP_ADD can implement Lamport signatures for arbitrary values representable in small binary numbers. He added that though Merkle signatures would make the pubkey much smaller, the signature would be much larger, making the SCRIPT much more complicated. Moreover, since both Lamport and Merkle are single-use-only, and pubkey reuse should be discouraged, the Merkle has a much larger signature size, making Merkle sigs more expensive.</summary>
+    <published>2021-07-03T04:01:01+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer NOINPUT with output tagging</title>
+  <updated>2023-05-20T18:54:53.729443+00:00</updated>
+  <author>
+    <name>Johnson Lau 2019-02-09 10:15:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer NOINPUT with output tagging</title>
+    <updated>2023-05-20T18:54:53.729443+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-February/016670.html" rel="alternate"/>
+    <summary>The concept of semi-cooperative channel closing (SCCC) is a solution to avoid fungibility loss in multiparty eltoo channels when one party becomes unresponsive. In such cases, the remaining participants can remove the unresponsive party by creating settlement transactions that pay them off and fund a new channel with the remaining participants. However, the funding output of the new channel must be NOINPUT tagged, which may cause a loss of fungibility if the remaining parties later settle cooperatively. To minimize this loss, it is suggested to make all outputs tagged as NOINPUT-spendable when signing with NOINPUT, as a social norm.However, the use of NOINPUT brings with it the risk of signature replay, due to key-pair reuse being a norm since the creation of Bitcoin. The proposed solution is to tag an output as spendable with NOINPUT, explicitly made by the payer. This can be done by setting a certain bit in the transaction version or scriptPubKey. ScriptPubKey tagging allows per-output basis tagging but is only possible with native-segwit, not P2SH, while version tagging will protect P2SH-segwit, and all existing wallets are protected by default. However, an extension to the version tagging could make NOINPUT even safer by requiring it to sign the version of the previous transaction using randomized tx version to make accidental replay unlikely.It should be noted that there is no similar eltoo-like protocol that works if the absence of a party cannot be predicted. Therefore, SCCC remains a useful solution for avoiding fungibility loss in multiparty eltoo channels when one party becomes unresponsive.</summary>
+    <published>2019-02-09T10:15:17+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP32/43-based standard for Schnorr signatures &amp; decentralized identity</title>
+  <updated>2023-06-14T17:23:27.330679+00:00</updated>
+  <author>
+    <name>Dr Maxim Orlovsky 2021-02-05 17:51:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP32/43-based standard for Schnorr signatures &amp; decentralized identity</title>
+    <updated>2023-06-14T17:23:27.330679+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018381.html" rel="alternate"/>
+    <summary>A proposal has emerged from a discussion in Bitcoin Core IRC between Peter Wuille and an unnamed author. The proposal suggests that a new BIP-43 based protocol is required with a new purpose field for keys used in Schnorr signatures. Purpose values under the proposal are suggested to be 340 for BIP340 signatures and to be determined for old-style ECDSA signatures. The blockchain field is introduced to prevent key re-use across blockchains and to get rid of using custom xpub prefixes and will be unhardened from this point until the end of the derivation path.The identity and scope hardened components signify the main identity or decentralized id and the scope under that id used in the context of a specific multisig wallet. The decentralized id can be used as a unique user login or a key for searching user metadata with different centralized or decentralized systems. A decentralized login string is designed in such a way that it can both be an id backup for the id owner and give context under which the id is valid. Multisig wallets creation requires parties to share their decentralized id strings either compactly or fully. Authentication requires the login string from the previous section, a random number within the unhardened BIP32 index range, and a signature created according to the signature algorithm specified as part of the login.Identity revocations are possible using single-use-seals mechanics based on the bitcoin blockchain. The proposed identity standard aims to provide a decentralized solution suitable for cypherpunk needs. The first part of this proposal focuses on revocation of identity scopes and full identities, allowing users like Alice to revoke specific scoped identities or completely revoke an identity without providing a new scope. Other parties monitoring the blockchain will be able to detect revocations by checking the spending of the revocation UTXO and verifying the two most significant bit values in `k` value computable from the signature in the spending input. If Alice needs to spend a UTXO previously marked as a revocation UTXO without revoking the identity, she can do so by setting the two most significant bits of `k` to `00`.The proposal is accompanied by layer-2 and 3 solutions that give users the ability to provide identity meta-information with features like decentralized non-blockchain database and search engine for metadata, partial meta-information disclosures, and multiple IDs under a root ID. This proposal has been narrowed down to the part which is relevant only in the context of Layer 1 stuff. The proposal was prepared by Dr Maxim Orlovsky, who is also the engineer behind RGB smart contracts.</summary>
+    <published>2021-02-05T17:51:27+00:00</published>
+  </entry>
+</feed>

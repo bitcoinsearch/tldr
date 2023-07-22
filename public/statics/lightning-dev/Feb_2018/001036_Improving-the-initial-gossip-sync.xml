@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving the initial gossip sync</title>
+  <updated>2023-05-24T20:41:58.651607+00:00</updated>
+  <author>
+    <name>Fabrice Drouin 2018-02-21 18:02:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving the initial gossip sync</title>
+    <updated>2023-05-24T20:41:58.651607+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/001036.html" rel="alternate"/>
+    <summary>On February 20, 2018 Rusty Russell shared updates on the lightning dev interop call. A new feature bitpair has been proposed in three parts. A prototype has been built with a new feature bit `channel_range_queries`. The logic is such that if a node sets `initial_routing_sync` and `channel_range_queries`, it sends a `query_channel_range`. If the node sets `initial_routing_sync` but not `channel_range_queries`, then it sends its routing table as before. Also, if the node supports `channel_range_queries`, it sends a `query_channel_range` message. This ensures that new and old nodes can understand each other.Two types were discussed: `query_short_channel_id` and `reply_channel_range`. It was suggested to add a `data` field containing zipped ids to `query_short_channel_id` similar to `reply_channel_range`. Additionally, an `encoding_type` field could be added before `data` or it could be the first byte of `data`.Rusty Russell also shared encoding sizes for various compression schemes. Four schemes were tried in increasing complexity order, Raw, gzip -9, splitgz, delta, and deltagz. Two corpuses were used to test these compression schemes, LN mainnet dump with 1830 channels and all P2SH outputs between blocks 508000-508999 with 790844 channels. Results showed that deltagz had the smallest size for both corpuses.</summary>
+    <published>2018-02-21T18:02:57+00:00</published>
+  </entry>
+</feed>

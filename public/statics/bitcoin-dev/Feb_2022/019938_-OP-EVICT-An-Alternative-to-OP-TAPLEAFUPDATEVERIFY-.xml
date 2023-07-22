@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>`OP_EVICT`: An Alternative to `OP_TAPLEAFUPDATEVERIFY`</title>
+  <updated>2023-06-15T17:05:05.539642+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2022-02-18 16:06:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>`OP_EVICT`: An Alternative to `OP_TAPLEAFUPDATEVERIFY`</title>
+    <updated>2023-06-15T17:05:05.539642+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019938.html" rel="alternate"/>
+    <summary>In a conversation between Erik and ZmnSCPxj, they discussed counterproposals for evicting participants in a channel. In one of the counterproposals, it was suggested that publishing one transaction per evicted participant would be required. However, this proposal was met with some concerns as it could lead to combinatorial explosion. It was also noted that each participant has to store `N!` possible orderings in which participants can be evicted. ZmnSCPxj proposed using multiple Tapleaves for each participant instead. This technique involves pre-signing the per-participant signature with `SIGHASH_SINGLE|SIGHASH_ANYONECANPAY` and the remainder is signed by others with default `SIGHASH_ALL`. If one participant goes offline, they can evict that participant and put the change into a new UTXO with a similar pre-signed scheme. This technique precludes pre-signing multiple evictions. Erik raised an objection to this proposal stating that multiple users cannot securely share a channel without `OP_CTV`. ZmnSCPxj countered this by saying that they could use pre-signed transactions just as in the previous proposal. It was noted that this proposal could also apply to channel factories.</summary>
+    <published>2022-02-18T16:06:39+00:00</published>
+  </entry>
+</feed>

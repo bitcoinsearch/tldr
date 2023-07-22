@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Extending Associated Data in the Sphinx Packet to Cover All Payment Details</title>
+  <updated>2023-06-03T21:37:50.060159+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2019-02-08 02:57:21</name>
+  </author>
+  <author>
+    <name>Christian Decker 2019-02-08 11:13:05</name>
+  </author>
+  <link href="lightning-dev/Feb_2019/001863_Extending-Associated-Data-in-the-Sphinx-Packet-to-Cover-All-Payment-Details.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2019/001864_Extending-Associated-Data-in-the-Sphinx-Packet-to-Cover-All-Payment-Details.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Extending Associated Data in the Sphinx Packet to Cover All Payment Details</title>
+    <updated>2023-06-03T21:37:50.060159+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-February/001863.html" rel="alternate"/>
+    <summary>The conversation revolves around the potential de-anonymization vector known as a "replay" attack and how to prevent it. The attack is possible if an adversary injects a stale packet into the network to observe its propagation. To prevent this, all implementations should keep a Sphinx reply cache of past shared secrets and reject packets with identical shared secrets already in the cache. The CLTV can serve as the lifetime of a payment circuit session since payments have clear expiration dates.The sphinx packet construction allows optional plaintext data to be authenticated alongside the packet, and in the current protocol, the payment hash is bound to the packet. If the pre-image has already been revealed, the victim can instantly pull the payment, attaching a cost to a replay attempt. However, it's possible to inject a new HTLC with a fresher CLTV since the CLTV isn't authenticated. To address this, the associated data payload can be extended to cover the CLTV and bind the adversary to using the same CLTV details, causing the victim node to reject the HTLC since it has already expired. Further payment details such as the HTLC amount can also be added to make the probing vector more expensive for the adversary. This can be done by using a new packet version in the Sphinx packet and signaling it with a global feature bit. Additionally, committing to the packet version to prevent nodes from swapping it out with another version is suggested. In the long term, all payment details may end up being in the Sphinx packet, with only link level details such as the HTLC ID outside in the update_add_htlc message. The proposed solution to the problem of injecting a new HTLC with a fresher CLTV involves extending the associated data payload to cover the CLTV as well. However, this may need to be rolled out differently from the suggested method. Using new packet versions in the Sphinx packet may not work if the route contains nodes that do not understand the new version of the packet. Nodes prior to non-upgraded nodes would have to downgrade the packet version from v1 to v0 understood by the non-upgraded node, which could be done via an instruction in the per-hop payload itself. The suggestion of committing to the packet version is deemed unnecessary since if a node wants to cause rejection, it can tamper with anything in the payload, and it will fail with an HMAC failure. In the long term, payment details may end up being in the Sphinx packet. It is suggested that the serialized HTLC output could be used as it is the on-chain representation of the payment and therefore includes all relevant details.</summary>
+    <published>2019-02-08T02:57:21+00:00</published>
+  </entry>
+</feed>

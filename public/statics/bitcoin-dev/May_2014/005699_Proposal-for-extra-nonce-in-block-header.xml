@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for extra nonce in block header</title>
+  <updated>2023-06-08T21:51:07.672888+00:00</updated>
+  <author>
+    <name>Timo Hanke 2014-05-04 15:32:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for extra nonce in block header</title>
+    <updated>2023-06-08T21:51:07.672888+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-May/005699.html" rel="alternate"/>
+    <summary>Mark Friedenbach has suggested serializing the nVersion field as a VarInt and using the remaining space of 4 bytes as the extra nonce. His suggestion would allow serialization of numbers up to 0x1020407f (slightly over 28 bits) before the 4-byte field is exhausted. For version numbers less than 0x204080 there will be at least one byte of padding space left over for extra-nonce usage. Timo Hanke proposed for miners a cheap constant-complexity method to create new work that does not require altering the transaction tree. This proposal reduces incentives for miners to find non-standard ways to generate new work which are not in the best interest of the protocol.The motivation of this proposal is to provide miners with an easy way to create new work that does not require altering the transaction tree. It also aims to protect the version and timestamp fields in the block header from abuse. Traditionally, the extra nonce is part of the coinbase field of the generation transaction, which is always the very first transaction of a block. After incrementing the extra nonce, the minimum amount of work a miner has to do to re-calculate the block header is to hash the coinbase transaction and re-calculate the left-most branch of the merkle tree to the merkle root. Timo Hanke suggests reducing the range of version numbers from 2^32 to 2^16 and declaring the third and fourth bytes of the block header as legitimate space for an extra nonce. This will reduce the incentive for a miner to abuse the shortened version number by a factor in the order of 2^16. As a side effect, this proposal greatly reduces the bandwidth requirements of a blind pool protocol by only submitting the block header to the miner. The old version of the client will accept blocks of this kind but will throw an alert at the user to upgrade.</summary>
+    <published>2014-05-04T15:32:25+00:00</published>
+  </entry>
+</feed>

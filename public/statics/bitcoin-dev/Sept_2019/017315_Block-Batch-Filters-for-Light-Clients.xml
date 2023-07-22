@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Block Batch Filters for Light Clients</title>
+  <updated>2023-06-13T21:26:21.888496+00:00</updated>
+  <author>
+    <name>admin at bitaps.com 2019-09-19 17:20:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Block Batch Filters for Light Clients</title>
+    <updated>2023-06-13T21:26:21.888496+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-September/017315.html" rel="alternate"/>
+    <summary>Aleksey Karpov has shared a draft BIP for compact probabilistic block filters, an alternative to BIP 158. While BIP 158 has a low false positive rate, it does not support filter batching due to the design of its parameters for siphash and Golomb coding. The proposed alternative uses delta coding and splits data into two bit string sequences, with one sequence containing data without prefixes and the second containing information about the bit length written to the first sequence. The second sequence is compressed using two rounds of the Huffman algorithm, resulting in an effectiveness of about 98% compared to Golomb with optimal parameters. Batching block filters reduces their size significantly, and separating filters by address type allows lite clients to avoid downloading redundant information without compromising privacy. The recommended strategy for lite client filters download is to get the biggest filter (smallest blocks/size rate) for a blocks range, then, in case of a positive test, get medium filters to reduce the blocks range, followed by getting block filters for the affected range and downloading affected blocks over TOR. An implementation of this can be found in Python at https://github.com/bitaps-com/pybtc/blob/bugfix/pybtc/functions/filters.py#L172. Aleksey Karpov plans to add exact information from mainnet about size for separated filters by address types and batch size within a few days. Feedback is welcome.</summary>
+    <published>2019-09-19T17:20:13+00:00</published>
+  </entry>
+</feed>

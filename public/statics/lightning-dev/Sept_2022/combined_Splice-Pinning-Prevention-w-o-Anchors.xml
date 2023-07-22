@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Splice Pinning Prevention w/o Anchors</title>
+  <updated>2023-06-04T04:00:35.759287+00:00</updated>
+  <author>
+    <name>Antoine Riard 2022-09-26 19:50:57</name>
+  </author>
+  <author>
+    <name>Dustin Dettmer 2022-08-09 20:14:59</name>
+  </author>
+  <author>
+    <name>Eugene Siegel 2022-08-10 16:20:10</name>
+  </author>
+  <author>
+    <name>Eugene Siegel 2022-08-10 15:34:44</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-08-10 16:31:20</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-09-26 20:46:37</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-08-10 16:06:05</name>
+  </author>
+  <author>
+    <name>Eugene Siegel 2022-08-10 18:03:14</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-08-10 18:11:36</name>
+  </author>
+  <link href="lightning-dev/Sept_2022/003699_Splice-Pinning-Prevention-w-o-Anchors.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2022/003665_Splice-Pinning-Prevention-w-o-Anchors.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2022/003669_Splice-Pinning-Prevention-w-o-Anchors.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2022/003667_Splice-Pinning-Prevention-w-o-Anchors.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2022/003670_Splice-Pinning-Prevention-w-o-Anchors.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2022/003700_Splice-Pinning-Prevention-w-o-Anchors.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2022/003668_Splice-Pinning-Prevention-w-o-Anchors.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2022/003671_Splice-Pinning-Prevention-w-o-Anchors.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2022/003672_Splice-Pinning-Prevention-w-o-Anchors.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Splice Pinning Prevention w/o Anchors</title>
+    <updated>2023-06-04T04:00:35.759287+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-September/003699.html" rel="alternate"/>
+    <summary>Dustin Dettmer and his team have proposed changes to address the issue of splice pinning in Lightning Network. Splice pinning occurs when a large "junk" transaction spends from an important pending one, causing transactions to be pushed to the bottom of the priority list without a practical way of bumping it up, leading to funds loss for HTLCs that have timed out for a pinned commitment transaction. While anchor outputs were introduced to mitigate the junk pinning vector, splices are still susceptible to bulk and junk pinning attacks. The team suggested modifying the v0 witness script and verifying the presence of proposed inputs before adding them to the splicing transaction.However, the proposal requires reliable access to the UTXO set, which may be a significant constraint for LN mobile clients relying on lightweight validation backends. Moreover, every output included directly in a splice transaction must be a v0 P2SH witness script that begins with a minimum of 1 CSV relative timelock, making it impossible to CPFP a splice transaction. Instead, all splices must be RBF'd to be fee-bumped, using the interactive tx protocol that already provides a protocol for initiating an RBF. The team also suggests building fan-out transactions for arbitrary splice out funds, while new channel outpoints should have the v0 witness script modified to start with [OP_1, OP_CHECKSEQUENCEVERIFY]. The risk of mempool pinning with splices that allow arbitrary script and input inclusion has been raised by @crypto-iq and @roasbeef. This can be done by building a very large “junk” transaction that spends from an important pending one, which pushes transactions to the bottom of the priority list without a practical way of bumping it up. To mitigate this, anchor outputs were introduced to lightning to mitigate the junk pinning vector. However, splice transactions are susceptible to both junk and bulk pinning attacks. The discussion revolves around the ancestor bulking variant of pinning and its relevance in certain situations. The primary scenario where this variant matters is when adding a new descendant is not possible due to the limitations of ancestor/descendant. In the given example, as all outputs are locked with `1 OP_CSV`, adding a descendant to the splice tx is not feasible. It is also noted that the ancestor bulking does not hold significance for RBF as it only replaces the splice tx, not the ancestors.The Lightning Network is facing the risk of being mempool-pinned by "ancestor bulking" and "junk pinning" attacks. These attacks can lead to griefing attacks and loss of funds for HTLCs that have timed out for a pinned commitment transaction. Although anchor outputs were introduced to mitigate junk pinning, splice transactions are still susceptible to both attacks. To address this issue, a proposed mitigation requires reliable access to the UTXO set. However, this may be problematic for mobile LN clients relying on lightweight validation backends. As a result, mobile clients might not be able to participate in splicing operations with their LSPs or without a decrease in trust-minimization. To mitigate the risks of junk and bulk pinning attacks for splice, every tx_add_input proposed by a peer must be included in the UTXO set, and every output included directly in a splice transaction must be a v0 P2SH witness script that begins with a minimum of 1 CSV relative timelock. No output on the splice transaction will be spendable until it is included in a block to prevent junk pinning. However, there are two side effects as you cannot CPFP a splice transaction, and arbitrary third-party scriptPubKeys are not permissible directly into the splice tx.The discussion also touches on bip125 rule#3 which requires the replacement transaction to pay an absolute fee of at least the sum paid by the original transactions. The email from Eugene Siegel is in response to the discussion about the ancestor bulking variant of pinning and its relevance. He notes that the variant matters only when trying to add a new descendant to a splice transaction that is already locked with `1 OP_CSV`, and it should not matter for RBF since only the splice transaction would be replaced, not any of the ancestors.However, he suggests that it might matter if the new funding output is not encumbered. According to Eugene, the new funding output cannot have `1 OP_CSV` unless the commit tx format changes, which may not work due to the disable bit set in nSequence. Enabling the bit may also be tricky since the commit tx may have a time-based or block-based locktime based on the lower bits of the obscured commitment number, and it must be block-based (and non-zero) for the sequence lock to work.This creates an opportunity for pinning to occur if the new funding output is not encumbered since an attacker can make a junk tree using the anchor output. However, the output</summary>
+    <published>2022-09-26T19:50:57+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Removal of reject network messages from Bitcoin Core (BIP61)</title>
+  <updated>2023-06-13T17:18:58.455639+00:00</updated>
+  <author>
+    <name>Wilmer Paulino 2019-03-08 00:09:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Removal of reject network messages from Bitcoin Core (BIP61)</title>
+    <updated>2023-06-13T17:18:58.455639+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-March/016727.html" rel="alternate"/>
+    <summary>In a recent email exchange, Bitcoin Core developer, Marco Falke, proposed removing the reject message feature from Bitcoin Core to make the codebase slimmer. However, it has been pointed out that Neutrino, which is a light client implementation that uses BIPs 157 and 158, currently relies on receiving reject messages from its peers when broadcasting a transaction to the network. Despite this, Falke believes that removing the feature would help in terms of comprehension and maintainability. Nodes in the network rely on the assumption that they are connected to at least one honest peer so that they can ban or disconnect any who send an invalid reject message for a valid transaction. However, the alternative recommended by Falke is not suitable for use cases where the main thing required is identification of whether a broadcasted transaction is valid or not. Reject messages are also useful when developing new light clients, as feedback from the network on why a transaction was rejected helps identify potential bugs in their transaction crafting logic. While Falke suggested testing the validity of a transaction through specific RPCs, such as `sendrawtransaction` and `testmempoolaccept`, these are not helpful for light clients. It is believed that disabling the reject message feature by default would hinder light clients' ability to realize they are broadcasting invalid transactions. Therefore, the feature should remain enabled by default to aid the light clients of the network.</summary>
+    <published>2019-03-08T00:09:01+00:00</published>
+  </entry>
+</feed>

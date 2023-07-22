@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Achieving Zero Downtime Splicing in Practice via Chain Signals</title>
+  <updated>2023-06-03T09:08:02.926134+00:00</updated>
+  <author>
+    <name>Rusty Russell 2022-06-29 01:40:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Achieving Zero Downtime Splicing in Practice via Chain Signals</title>
+    <updated>2023-06-03T09:08:02.926134+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-June/003622.html" rel="alternate"/>
+    <summary>Olaoluwa Osuntokun shared his thoughts on a proposal by Lisa that nodes add a delay between the time they see a channel closed on-chain to when they remove it from their local channel graph. This is meant to give the gossip message that indicates a splice is in process enough time to propagate through the network so that nodes can relate the old and new channels before the entire chain of transactions confirms on-chain. Olaoluwa noted that this sort of arbitrary delay won't address the issue in practice, and he suggested that we should instead rely on the primary splicing signal being sourced from the chain itself.He proposed that if a node sees a channel close and a closing transaction looks a certain way, then it knows it's a splice. This would be used in concert with any new gossip messages, as the chain signal is a 100% foolproof way of letting an aware peer know that a splice is actually happening, not a normal close. Assuming that a chain signal has some role in the ultimate plans for splicing, Olaoluwa suggested deciding on precisely what such a signal looks like. He presented several options, including using the anchors, reusing the same multi-sig output, using OP_RETURN, or fiddling with locktime+sequence somehow to make it identifiable to verifiers.Olaoluwa believes that option two makes the most sense since anchors are already in use for fee bumping after-the-fact for closing transactions. They make the splicing transaction slightly larger, and this may require using something else. The design space for spicing is extensive, and discussing isolated aspects of it at a time might be the most productive route.</summary>
+    <published>2022-06-29T01:40:21+00:00</published>
+  </entry>
+</feed>

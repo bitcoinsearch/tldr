@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+  <updated>2023-06-13T19:33:05.018899+00:00</updated>
+  <author>
+    <name>Jonathan Underwood 2019-06-27 05:07:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+    <updated>2023-06-13T19:33:05.018899+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-June/017048.html" rel="alternate"/>
+    <summary>The email exchange discusses a proposed extension of PSBT to solve the problem of verifying whether the address being sent to is not a hacker's address that was swapped in between unsigned tx creation and first signature. The proposal involves signing xpubs with cold keys, such that the cold keys can check destination addresses are trusted. However, Dmitry Petukhov raises concerns about how the scheme handles multisig wallets. He suggests signing the whole 'xpub package' of the multisig wallet, but there is also an issue of 'partial compromise', where some of the keys in a multisig warm wallet are compromised. His idea is to use an auxiliary message that would be signed along with the 'xpub package', and that message can include specific 'epoch' word that hardware wallet can show prominently before signing, or have 'serial number' for xpub packages. Jonathan Underwood proposes a key value specification to solve the verification problem and presents a rough draft of the proposal. The proposed solution involves securely verifying the xpub of the warm/hot wallet, signing the xpub with all cold keys using the airgap signing tool, uploading the signature/xpub pairs to the online unsigned transaction generator, including one keyval pair per coldkey/xpub pairing, and verifying that all outputs have BIP32_DERIVATION and that it can verify the outputs through the derivation, to the xpub, and to the signature while offline signing. Jonathan acknowledges the concern over the huge number of possible schemes that each may probably require its own PSBT field type, and suggests dealing with it outside of PSBT as 'PSBT metainformation', or using some form of 'vendor-specific', or 'metainformation-specific' PSBT field.</summary>
+    <published>2019-06-27T05:07:47+00:00</published>
+  </entry>
+</feed>

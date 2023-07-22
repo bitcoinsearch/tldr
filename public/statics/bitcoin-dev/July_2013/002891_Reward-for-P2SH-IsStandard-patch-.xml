@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reward for P2SH IsStandard() patch.</title>
+  <updated>2023-06-06T19:56:25.585659+00:00</updated>
+  <author>
+    <name>John Dillon 2013-07-14 19:40:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reward for P2SH IsStandard() patch.</title>
+    <updated>2023-06-06T19:56:25.585659+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-July/002891.html" rel="alternate"/>
+    <summary>Pieter Wuille and John Dillon discussed the use of P2SH with inner OP_CHECKSIG for most addresses as it saves one byte in the long term. Change addresses can have this done first, and the bitcoinj support will help so that satoshidice and similar sites can pay to P2SH change. As for multisig's P2SH overhead for a 1-of-2 and 2-of-2 and 3-of-3, is 10%, 8.6% and 6.2% respectively, all pretty minor, especially if you assume the blocksize limit will be raised. However, Pieter Wuille commented that the current implementation in the reference client uses a custom script encoder for the UTXO database, which stores every (valid) send-to-pubkey as 33 bytes and every send-to-pubkeyhash or send-to-scripthash as 21 bytes. So for "standard" address payment, there is no storage impact of using P2SH instead.The impact refers to the impact on transaction size and thus blockchain space and fees, not UTXO size as stored by nodes themselves. Specifically take the size of the txout and txin and compare the version using P2SH to the equivalent version not using it to get my numbers. But given how much uncompressed keys are still used, obviously fee pressure isn't even close to getting people to create efficient transactions.</summary>
+    <published>2013-07-14T19:40:21+00:00</published>
+  </entry>
+</feed>

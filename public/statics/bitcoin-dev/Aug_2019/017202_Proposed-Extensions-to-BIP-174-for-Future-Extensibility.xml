@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposed Extensions to BIP 174 for Future Extensibility</title>
+  <updated>2023-05-20T20:46:19.399258+00:00</updated>
+  <author>
+    <name>Andrew Chow 2019-08-01 19:01:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposed Extensions to BIP 174 for Future Extensibility</title>
+    <updated>2023-05-20T20:46:19.400263+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-August/017202.html" rel="alternate"/>
+    <summary>After speaking to some individuals, Andrew Chow has decided to simplify the implementation of proprietary types in Bitcoin by not using a prefix string. Instead, he suggests using {0xFC}|{private_type} with an optional prefix string that is strongly recommended. The concern was that people would use unused type values instead of following the specification for proprietary types, which would add complexity to the parser code. Since public parsers will not be enforcing the rules for proprietary types, it does not make sense to specify and enforce how they should be. The key is just an opaque data blob. Andrew also confirms that Compact Size Unsigned Integers will be used for the field types and will be minimally encoded CSUints. For proprietary types, there will only be one proprietary type, 0xFC, followed by a variable length string that serves as a unique identifier to prevent usage of proprietary types outside of private contexts. The actual type for data will then follow, defined by the user of the proprietary type. The prefix will just be a string, prefixed with a compact size unsigned integer. If no prefix is wanted, a single 0x00 byte can be used. It's important to note that for public software, these proprietary types don't need to be handled at all. Therefore, they do not need to check the string or the data type. Although it is not necessary to enforce the above rules about proprietary types, it is necessary to use the proprietary type value.</summary>
+    <published>2019-08-01T19:01:06+00:00</published>
+  </entry>
+</feed>

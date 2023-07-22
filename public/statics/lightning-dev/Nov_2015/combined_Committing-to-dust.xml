@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Committing to dust</title>
+  <updated>2023-05-18T19:11:15.774617+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-11-27 02:38:07</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2015-11-27 08:52:02</name>
+  </author>
+  <link href="lightning-dev/Nov_2015/000345_Committing-to-dust.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2015/000354_Committing-to-dust.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Committing to dust</title>
+    <updated>2023-05-18T19:11:15.774617+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000345.html" rel="alternate"/>
+    <summary>The lightning channel is currently facing an issue where the commitment transaction cannot be closed due to insufficient funds for fees. The issue is similar to sub 1-satoshi payments, and while there is a solution that represents them as soon as they complete, it may not be the most efficient option. One way to deal with it is to add dust to the commitment, but this can lead to a problem of not being able to access any funds if the channel counterparty goes away. Another option is to add two HTLCs to the commit, which increases fees significantly and may not translate well over many hops. In a discussion about lightning channels between Rusty Russell and Anthony Towns, Towns raised the issue of a problem with dust payments. If a payment is less than 546 satoshi, it cannot be represented as an HTLC output and can only be represented as soon as it completes. This can cause issues when trying to close the commitment transaction. One possible solution discussed was to weaken the dust protection in the network, allowing the dust to clear after three months if not claimed. However, this would add to the cost of the transaction by requiring payment to an actual script instead of a scripthash.Another issue discussed was the sustainability of adding up multiple dust outputs to increase the amount, as there will always be someone who finds a loophole to profit from it. The author also discusses how onion routing could be used to set up anonymous channels and route a whole bunch of dust payments to make a profit. In conclusion, it is suggested to tweak the dual HTLC approach to make attacks unattractive and more secure. The dust value has been increased to 5430, but there is still leeway under $20 for micropayments according to Visa.</summary>
+    <published>2015-11-27T02:38:07+00:00</published>
+  </entry>
+</feed>

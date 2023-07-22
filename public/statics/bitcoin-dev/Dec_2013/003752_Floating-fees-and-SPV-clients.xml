@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Floating fees and SPV clients</title>
+  <updated>2023-06-07T21:31:11.995159+00:00</updated>
+  <author>
+    <name>Mike Hearn 2013-12-01 11:51:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Floating fees and SPV clients</title>
+    <updated>2023-06-07T21:31:11.995159+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-December/003752.html" rel="alternate"/>
+    <summary>The author proposes a plan to make floating fees and SPV wallets work well together. The first step is to implement something simple, like a command to query what a node estimates and then clients just take the average, or cross-check a centralized estimate against the P2P network. This would be fast and simple but not very secure or decentralized. The second step involves bumping the protocol version and adding an optional protobuf buffer to the tx message. The first thing put in this protobuf is a list of the values of the inputs, which can be used to calculate the fee paid by a transaction. However, this data is unauthenticated.In step three, SPV wallets set themselves up to sync with the network in the background using scheduler capabilities built into most operating systems. When the wallet syncs with the network, it sets a noisy Bloom filter on its peers and waits around for 30-60 seconds. The wallet observes some of the broadcasts taking place and records the hashes and associated fees that were paid to disk. Next time it syncs, it includes the observed hashes into the Bloom filter used to download the chain, and thus learns how quickly they confirmed. It can calculate its own fee estimate from that.Finally, in the next hard fork, v2 transactions include the output value in the signature, same as the output script, allowing the fee data added in step two to be cross-checked against the signatures on the inputs, thus authenticating it.The author believes this is a small and easy set of steps that would make it quite hard to attack. One concern is what to do if nodes don't converge on very similar estimates. Wallets will always want to pay the lowest fee possible, so that means they'll always be riding the very edge of what's acceptable, opening up tx propagation to random flaky failures if fee estimates change whilst a transaction is in progress, or if some nodes don't calculate the same estimates as others. If a wallet gets a reject message for a tx that has a fee that is by its own estimates acceptable, it is unclear what it should do if only some nodes report that and others don't.</summary>
+    <published>2013-12-01T11:51:46+00:00</published>
+  </entry>
+</feed>

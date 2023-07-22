@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Missing fRelayTxes in version</title>
+  <updated>2023-06-06T19:12:28.075836+00:00</updated>
+  <author>
+    <name>Turkey Breast 2013-06-20 10:37:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Missing fRelayTxes in version</title>
+    <updated>2023-06-06T19:12:28.075836+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-June/002803.html" rel="alternate"/>
+    <summary>A discussion was held in 2013 amongst developers of the Bitcoin protocol regarding a proposed change to the message format. The proposed change would require an optional field, fRelayTxes, to be included in the version message. Some developers argued that this change would cause issues with existing code that relied on iterators and asserted the expected length of messages per protocol version. Without the fRelayTxes field being optional, this behavior would be lost, and deserialization could no longer be checked by serializing the deserialized message and comparing it to the original data. Others argued that using quirks of an implementation is bad form, and optional fields should have their own mechanisms that allow them to remain as optional fields between protocol version upgrades. Another developer suggested that the bitcoind software could be improved by checking that the length of the version message is consistent for the protocol version given by the connected node. This software currently makes no assumptions based on that which is a mistake. They suggested that the software should penalize hosts that broadcast older version messages that don't have all the fields required. In response to the proposal to require the fRelayTxes field, some developers argued that there's no problem with keeping things the way they are, as the number of fields in a message is like a little version number just for that message. It adds flexibility to keep it that way, and there's no downside, seeing as that bridge was already crossed and people with parsers that can't handle it need to fix their code anyway. In the end, the proposed change was not implemented, as it was felt that there was no benefit in locking the protocol into a potentially problematic guarantee.</summary>
+    <published>2013-06-20T10:37:05+00:00</published>
+  </entry>
+</feed>

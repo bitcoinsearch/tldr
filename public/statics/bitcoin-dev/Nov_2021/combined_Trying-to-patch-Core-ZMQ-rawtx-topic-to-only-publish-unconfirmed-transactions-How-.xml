@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Trying to patch Core ZMQ "rawtx" topic to only publish unconfirmed transactions: How?</title>
+  <updated>2023-06-15T03:04:07.705452+00:00</updated>
+  <author>
+    <name>Ali Sherief 2021-11-26 16:56:48</name>
+  </author>
+  <author>
+    <name>0xB10C 2021-11-29 09:32:15</name>
+  </author>
+  <author>
+    <name>Ali Sherief 2021-11-29 14:13:37</name>
+  </author>
+  <author>
+    <name>Ali Sherief 2021-11-26 16:56:48</name>
+  </author>
+  <author>
+    <name>Prayank 2021-11-27 13:42:38</name>
+  </author>
+  <author>
+    <name>0xB10C 2021-11-29 09:32:15</name>
+  </author>
+  <author>
+    <name>Ali Sherief 2021-11-29 14:13:37</name>
+  </author>
+  <author>
+    <name>LORD HIS EXCELLENCY JAMES HRMH 2021-11-29 14:10:11</name>
+  </author>
+  <author>
+    <name>0xB10C 2021-11-29 09:32:15</name>
+  </author>
+  <author>
+    <name>Ali Sherief 2021-11-29 14:13:37</name>
+  </author>
+  <author>
+    <name>Ali Sherief 2021-11-26 16:56:48</name>
+  </author>
+  <author>
+    <name>Prayank 2021-11-27 13:42:38</name>
+  </author>
+  <author>
+    <name>LORD HIS EXCELLENCY JAMES HRMH 2021-11-29 14:10:11</name>
+  </author>
+  <author>
+    <name>Prayank 2021-11-27 13:42:38</name>
+  </author>
+  <author>
+    <name>LORD HIS EXCELLENCY JAMES HRMH 2021-11-29 14:10:11</name>
+  </author>
+  <link href="bitcoin-dev/Nov_2021/019609_Trying-to-patch-Core-ZMQ-rawtx-topic-to-only-publish-unconfirmed-transactions-How-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2021/019611_Trying-to-patch-Core-ZMQ-rawtx-topic-to-only-publish-unconfirmed-transactions-How-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2021/019613_Trying-to-patch-Core-ZMQ-rawtx-topic-to-only-publish-unconfirmed-transactions-How-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2021/019609_Trying-to-patch-Core-ZMQ-rawtx-topic-to-only-publish-unconfirmed-transactions-How-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2021/019610_Trying-to-patch-Core-ZMQ-rawtx-topic-to-only-publish-unconfirmed-transactions-How-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2021/019611_Trying-to-patch-Core-ZMQ-rawtx-topic-to-only-publish-unconfirmed-transactions-How-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2021/019613_Trying-to-patch-Core-ZMQ-rawtx-topic-to-only-publish-unconfirmed-transactions-How-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2021/019612_Trying-to-patch-Core-ZMQ-rawtx-topic-to-only-publish-unconfirmed-transactions-How-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2021/019611_Trying-to-patch-Core-ZMQ-rawtx-topic-to-only-publish-unconfirmed-transactions-How-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2021/019613_Trying-to-patch-Core-ZMQ-rawtx-topic-to-only-publish-unconfirmed-transactions-How-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2021/019609_Trying-to-patch-Core-ZMQ-rawtx-topic-to-only-publish-unconfirmed-transactions-How-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2021/019610_Trying-to-patch-Core-ZMQ-rawtx-topic-to-only-publish-unconfirmed-transactions-How-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2021/019612_Trying-to-patch-Core-ZMQ-rawtx-topic-to-only-publish-unconfirmed-transactions-How-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2021/019610_Trying-to-patch-Core-ZMQ-rawtx-topic-to-only-publish-unconfirmed-transactions-How-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2021/019612_Trying-to-patch-Core-ZMQ-rawtx-topic-to-only-publish-unconfirmed-transactions-How-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Trying to patch Core ZMQ "rawtx" topic to only publish unconfirmed transactions: How?</title>
+    <updated>2023-06-15T03:04:07.705452+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-November/019609.html" rel="alternate"/>
+    <summary>On the Bitcointalk forum, a user named Ali Sherief is seeking help to patch Core ZMQ "rawtx" topic to only publish unconfirmed transactions. Currently, the ZeroMQ topic Ali is listening to, "rawtx", emits a raw transaction when it appears on the mempool and once it's already confirmed too. This causes his software to add txids, addresses, etc. a second time inside arrays, meaning that the same transaction is received twice in total. According to a Stack Exchange post, it is not possible to configure this from a configuration or command-line option. The source code must directly be edited.A draft PR has been opened to add a rawmempooltx publisher, but changes to the chain notifications in interfaces/chain.h would be required for a mempool transaction publisher with both the raw transaction and transaction fee. There is a discussion on which function should be patched in src/zmq/zmqnotificationinterface.cpp to only publish unconfirmed transactions, and Jonas Schnelli's suggestion of adding an `if (!pblock)` check from several years ago is no longer applicable as the function he was referencing no longer exists.In a Bitcoin Core pull request, a new function called NotifyMempoolTransaction() has been added to notify CZMQNotificationInterface about TransactionAddedToMempool. This function calls the publisher with the rawmempooltx topic. The author of the pull request mentions that a mempool transaction publisher with both the raw transaction and transaction fee would also be useful but would require changes to the chain notifications in interfaces/chain.h.Prayank suggested a solution to Ali, which involved saving zmqpubsequence=tcp://127.0.0.1:28332 in bitcoin.conf file, running bitcoind, and executing a Python script that can be found at https://pastebin.com/raw/tNp2x5y3. The results of the script execution were shared in two screenshots showing the status of accepted, connected (block), and removal transactions. Prayank recommended modifying the script to manage transaction duplication since transactions could be printed twice. Alternatively, he suggested using debug=mempool and reading debug.log for changes without polling.In summary, Ali Sherief is experiencing issues with Core ZMQ "rawtx" topic emitting a raw transaction not only when it appears on the mempool, but also once it's already confirmed. A draft PR has been opened to add a rawmempooltx publisher, but changes to the chain notifications in interfaces/chain.h would be required for a mempool transaction publisher with both the raw transaction and transaction fee. There is a discussion on which function should be patched in src/zmq/zmqnotificationinterface.cpp to only publish unconfirmed transactions. Prayank suggested a solution involving a Python script or using debug=mempool to manage transaction duplication.According to a Stack Exchange post, it is not possible to configure receiving only unconfirmed messages from the casino that must display the status of new deposits that are made. It is necessary to edit the source code directly. 0xB10C has opened a draft PR, adding a rawmempooltx publisher. In zmq/zmqnotificationinterface.cpp, the CZMQNotificationInterface is notified about TransactionAddedToMempool. Currently, this calls NotifyTransaction() and NotifyTransactionAcceptance(). 0xB10C has added a call to a new NotifyMempoolTransaction() function.Ali knows that something inside src/zmq/zmqnotificationinterface.cpp needs to be patched, but he's not sure which function or how to do it. He needs to patch one of these two functions for his own build: CZMQNotificationInterface::TransactionRemovedFromMempool or void CZMQNotificationInterface::BlockDisconnected. Both of these call NotifyTransaction() method, which fires a message on "rawtx" channel. Jonas Schnelli suggested adding an `if (!pblock)` check several years ago, but the function he was referencing no longer exists. Ali still wonders if the pblock check is still applicable in the present day (i.e. if it's indicating a block the transaction is inside).</summary>
+    <published>2021-11-26T16:56:48+00:00</published>
+  </entry>
+</feed>

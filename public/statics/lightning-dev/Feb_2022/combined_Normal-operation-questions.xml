@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Normal operation questions</title>
+  <updated>2023-05-23T17:05:28.230440+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-02-17 00:15:05</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-02-15 23:13:47</name>
+  </author>
+  <link href="lightning-dev/Feb_2022/003477_Normal-operation-questions.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2022/003473_Normal-operation-questions.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Normal operation questions</title>
+    <updated>2023-05-23T17:05:28.230440+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-February/003477.html" rel="alternate"/>
+    <summary>Olaoluwa Osuntokun and Benjamin Weintraub recently discussed the Lightning Network's update protocol in an email exchange. The focus of their conversation was on using recent research to improve the specification and understanding of the protocol. One topic they touched on was concurrent signatures, which generate additional messages that may not be strictly required but can help synchronize commitments.They also discussed the commitment state for the type of revocation channels used today, which is asymmetric. This means that parties have the option of going to the chain whenever if they hold onto the HTLC in the commitment transaction "forever," but this reduces the available throughput of a channel. Benjamin Weintraub, a PhD student at Khoury College of Computer Sciences, Northeastern University, asked some questions about the Normal Operation protocol. He wondered why Alice should send the `commitment_signed` after sending the `update_add_htlc`, and whether the order is important. Laolu explained that it isn't necessary for Alice to send a new signature immediately after adding a new HTLC to the pending set of HTLCs, but Alice may want to delay her signature if she has other HTLCs she wants to add to the commitment transaction, which allows her to batch/pipeline updates to the channel.Additionally, Benjamin asked why both Alice and Bob exchange `commitment_signed` and `revoke_and_ack` messages again after Bob sends the `update_fulfill_htlc`. Laolu explained that both sides exchange those messages to update their commitment state off-chain. Once Bob learns of the pre-image, he can go to chain if he wants to claim the HTLC, but that'll be slower and also cost more in chain fees than doing an update off-chain to settle the HTLC from the point of view of the commitment transaction of both parties.Finally, if Alice receives the pre-image (assuming a multi-hop scenario), she can opt not to wait for the full exchange and instead pipeline the pre-image back upstream in the route, reducing perceived user latency for payments.</summary>
+    <published>2022-02-17T00:15:05+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Compressed block headers</title>
+  <updated>2023-06-14T01:26:28.179952+00:00</updated>
+  <author>
+    <name>Richard Myers 2020-05-20 13:06:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Compressed block headers</title>
+    <updated>2023-06-14T01:26:28.179952+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-May/017881.html" rel="alternate"/>
+    <summary>The author proposes a compressed block header scheme for IBD and block announcements, which could provide significant bandwidth savings for low bandwidth nodes that are doing a headers-only sync. The motivation behind this proposal is to reduce the size of block headers, which are currently 81 bytes each, for low bandwidth nodes. By reducing header size, it provides significant bandwidth savings, and nodes can support more header-only peers for IBD and protection against eclipse attacks.The proposed specification includes a new service bit that would be required so that the nodes can advertise their ability to supply compact headers. Three new messages would be used by nodes that enable compact block header support, two query messages: getheaders2 and sendheaders2 and one response: headers2.The compression results in a maximum reduction from an 81-byte header to the best-case 39-byte header. With 629,474 blocks in the current blockchain, a continuous header sync from genesis has been tested to have its required bandwidth reduced from 50.98MB down to 25.86MB, a saving of 49%.According to the discussion on the Bitcoin-dev mailing list, the first header in the first `block_header2[]` vector to a newly-connected client must contain the full `nBits`, `timestamp`, `version`, and `prev_block_hash` fields, along with a correctly populated `bitfield` byte. The subsequent headers in a contiguous vector should follow the compressed format. Similarly, subsequent compressed headers supplied to an already-connected client requesting compressed headers should also follow the compressed format.This information is important for Decentralized Applications Engineers like Richard Myers at goTenna.</summary>
+    <published>2020-05-20T13:06:11+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Service bits for pruned nodes</title>
+  <updated>2023-05-19T16:49:33.857355+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2013-05-03 12:30:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Service bits for pruned nodes</title>
+    <updated>2023-05-19T16:49:33.857355+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-May/002493.html" rel="alternate"/>
+    <summary>The discussion is about how to make the P2P protocol not break in the presence of pruning nodes. The idea of allowing additional protocols for block exchange is interesting, but for now, it is better to focus on the immediate solution. Mike Hearn suggests representing the policy as "I keep the last N blocks," and adding a field to the version announcement that announces the actual first block served. The addr broadcasting mechanism cannot be relied upon for fast information exchange. DNS seeds cannot convey this information as well. To solve this, the suggestion is to add a field to addr messages that maintains the number of top blocks served, add a field to version message to announce the actual first block served, and add service bits to separately enable "relaying/verifying node" and "serves (part of) the historic chain." Disconnecting in case something is requested that isn't served seems like an acceptable behavior.The idea of splitting nodes into "storage/bandwidth nodes" and "validating nodes" is discussed. Pieter suggests that these are sufficiently independent functions to start thinking about them as such. With a "last N blocks" in addr messages, storage/bandwidth nodes could just set their advertised history to zero and not have to deal with serving blocks to nodes. It is also suggested that "serving historic data" and "relaying fresh data" are separate responsibilities and there is no need to require them to be combined.</summary>
+    <published>2013-05-03T12:30:19+00:00</published>
+  </entry>
+</feed>

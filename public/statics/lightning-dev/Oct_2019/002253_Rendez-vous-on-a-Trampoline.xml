@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Rendez-vous on a Trampoline</title>
+  <updated>2023-06-02T21:01:40.435885+00:00</updated>
+  <author>
+    <name>Antoine Riard 2019-10-28 02:01:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Rendez-vous on a Trampoline</title>
+    <updated>2023-06-02T21:01:40.435885+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-October/002253.html" rel="alternate"/>
+    <summary>Trampoline routing is designed to avoid lite nodes from having to store the entire network graph and compute long-hop routes. This is achieved by enabling a mechanism for route computation delegation, which trades hardware requirements against privacy leaks and higher fees. However, the current trampoline proposal enables legacy payee doxing without any opt-in from its side. To solve this issue, the receiver could implement trampoline routing and hide behind the feature flag. Trampoline routing also enables better rendezvous routing than normal payments. With Trampoline, Alice does the pre-encryption on a Trampoline onion (which is much smaller) instead of a normal onion. This allows rendezvous routing to benefit from Trampoline’s ability to do multi-part at each hop. Every Trampoline node in the route may aggregate an incoming multi-part payment and then decide on how to split the outgoing aggregated payment.However, Trampoline itself also has trade-offs that may impact privacy, such as when paying to legacy nodes that don't understand the Trampoline onion. Eclair is currently implementing it to identify all the places where it falls short so that they can converge on a spec that minimizes the trade-offs they need to make. Non-source rendezvous routing is getting closer to 2013 Amiko Pay, with the added experience of 2019 Lightning with Sphinx routing and AMP. The use of the term “Ripple” was a product of 2013's different time. Trampoline routing will only be done with payee flagging support to prevent potential logging of incoming payments by intermediate nodes. The implementation of Trampoline routing on top of the network requires re-designing the privacy mechanism to constitute an anonymous network. Rendez-vous is one of them, multiple-trampoline hops another one. AMP's interaction with Trampoline routing is a concern. Depending on the topology, a naive implementation using public channels and one-hop trampoline node would let the trampoline learn who the payer is by doing an intersection of the multiple payment paths. The trick is known but hard and complex to get right in practice. Long-term, this flexible tool can enable wide-scale networking without assessing huge routing tables for everyone, but the design and deployment should be carefully done to avoid another false promise of privacy like we have known on the base layer, e.g., bloom-filters.</summary>
+    <published>2019-10-28T02:01:31+00:00</published>
+  </entry>
+</feed>

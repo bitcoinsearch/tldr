@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>SIGHASH_SINGLE + update_fee Considered Harmful</title>
+  <updated>2023-06-03T02:06:00.345634+00:00</updated>
+  <author>
+    <name>Antoine Riard 2020-09-10 16:27:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>SIGHASH_SINGLE + update_fee Considered Harmful</title>
+    <updated>2023-06-03T02:06:00.345634+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-September/002796.html" rel="alternate"/>
+    <summary>The recent anchor output spec update related to the new usage of SIGHASH_SINGLE for HTLC transactions may have introduced a potential vulnerability that is harmful to funds' safety. This vulnerability combined with the currently deployed mechanism of `update_fee` could be exploited to partially escape the penalty. Anchor output switched the sighash type from SIGHASH_ALL to SIGHASH_SINGLE|SIGHASH_ANYONECANPAY for HTLC signatures sent to your counterparty, which allows non-cooperative spending of its HTLC outputs on its commitment transactions. By increasing the feerate using `update_fee`, a malicious party can inflate fees committed on HTLC input/output pairs and redirect this inflated fee to a single-controlled output attached to these malleable pairs. Alice gains 125600 sats in an example given in the post by exploiting the vulnerability. However, there are limitations to the attacker's success. Post-anchor HTLC outputs are CSV'ed by 1, which means in theory, an honest party can punish this output before the malicious spend them with the revoked HTLC txn. Channel policies could be tighter to countermeasure the vulnerability, like bounded further down `max_accepted_htlcs` or restraining acceptance of `update_fee`. Justice transactions can adopt a scorched earth approach binding their feerate to the max to increase odds of winning the feerate race and thus deter attackers. Patching current anchor spec to remove `feerate_per_kw` appliance on 2nd-stage transactions could also be a workable option.</summary>
+    <published>2020-09-10T16:27:37+00:00</published>
+  </entry>
+</feed>

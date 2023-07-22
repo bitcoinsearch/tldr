@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Newly introduced DoS</title>
+  <updated>2023-06-04T20:05:27.388686+00:00</updated>
+  <author>
+    <name>Gavin Andresen 2011-09-27 20:39:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Newly introduced DoS</title>
+    <updated>2023-06-04T20:05:27.388686+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-September/000606.html" rel="alternate"/>
+    <summary>The code in question is a "belt-and-suspenders just in case" case that should be impossible to trigger. AcceptBlock() is called from two places in the code: ProcessBlock, if the block is not an orphan, and recursively, in AcceptBlock(), processing orphans that link to the block being accepted. The mapBlockIndex.find(hashPrevBlock) in AcceptBlock can't fail. In case there is some subtle bug or edge case, keeping the check is appropriate. Attackers look for subtle bugs and edge cases that can be exploited.</summary>
+    <published>2011-09-27T20:39:32+00:00</published>
+  </entry>
+</feed>

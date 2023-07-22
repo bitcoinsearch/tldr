@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-05-20T18:03:40.454369+00:00</updated>
+  <author>
+    <name>Johnson Lau 2018-12-17 19:08:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-05-20T18:03:40.454369+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-December/016561.html" rel="alternate"/>
+    <summary>The bitcoin-dev thread is discussing the implementation of NOINPUT, which would allow for more flexible use of private keys and potentially reduce the likelihood of losing funds. However, Anthony Towns raises concerns about the added complexity of implementing NOINPUT and questions whether it's worth the potential benefit. Rusty Russell argues that effective security measures are often viewed as overkill until someone experiences a loss of funds and suggests that NOINPUT could still be valuable despite potential complexities.The development of the Bitcoin protocol involves a tradeoff between security, complexity, and functionality. While security is the most important factor, some contributors have been hesitant towards BIP148 due to its functionality. The debate over NOINPUT arises because it introduces a third way to lose funds with key reuse. Reusing revocation base points or payment hashes can also lead to loss of funds.Wallets in Bitcoin are currently in poor condition, so simplicity should be a key goal for minimal complexity for future wallets. NOINPUT couldn't function properly with OP_CODESEPARATOR but without OP_MASKEDPUSH. Once it's deployed, it has to be supported forever and cannot be soft forked away. Since modern wallets don't have to parse the scripts they sign, none of the new script versions will ever make bitcoind simpler since they have to support all prior ones.Script masking seems general enough to prevent footguns even if key and value reuse across eltoo channels were a requirement. Committing to a masked script is a huge improvement and could make things easier and safer. However, committing to dangerously little context, as NOINPUT does, doesn't really feel safe to include as a primitive. Reusing keys for multiple scripts of the same form makes you vulnerable, and masking the script can prevent this vulnerability. SIGHASH_NOINPUT is simply dangerous with key-reuse, and it's not worth it.</summary>
+    <published>2018-12-17T19:08:26+00:00</published>
+  </entry>
+</feed>

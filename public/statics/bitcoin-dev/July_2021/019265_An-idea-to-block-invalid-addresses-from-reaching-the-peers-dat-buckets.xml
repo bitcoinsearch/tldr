@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>An idea to block invalid addresses from reaching the peers.dat buckets</title>
+  <updated>2023-05-21T03:18:37.336291+00:00</updated>
+  <author>
+    <name>Ali Sherief 2021-07-12 23:33:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>An idea to block invalid addresses from reaching the peers.dat buckets</title>
+    <updated>2023-05-21T03:18:37.336291+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-July/019265.html" rel="alternate"/>
+    <summary>According to a post on bitcointalk.org, someone is spamming the bitcoin network with addr message pointing to invalid addresses and ports, which is causing issues with the peers.dat file and corresponding memory structure. The custom record type used in peers.dat makes it difficult to parse and determine specifics of IP addresses listed. However, the author suggests implementing changes to prevent this kind of attack from happening in the future. One solution is to change the AddrDb updating functionality so that it does not add nodes that are unreachable due to "connection refused" errors. These addresses can be stored in a new, separate database-like file or augmented in the peers.dat file under a new entry type. Invalid nodes can be immediately flushed from memory to avoid processing them. The check for unreachable nodes will only be made the first time the node is seen in the wild, to avoid blocking nodes that go offline. A new ZMQ message can also be created to send the node's list of ignored addresses, facilitating other nodes discovering blocked nodes. The author suggests introducing a new file or command-line/config option called "ignorelist" or something with a list of subnets that will not be read into the AddrDB buckets in any case. This would work differently from the banlist, which is used to block peers that send invalid messages, not peers that are unreachable. The author of the post is Ali Sherief.</summary>
+    <published>2021-07-12T23:33:16+00:00</published>
+  </entry>
+</feed>

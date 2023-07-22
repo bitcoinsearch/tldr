@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improvement on Blockbuilding</title>
+  <updated>2023-06-14T22:12:58.327756+00:00</updated>
+  <author>
+    <name>Antoine Riard 2021-05-29 06:32:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improvement on Blockbuilding</title>
+    <updated>2023-06-14T22:12:58.327756+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-May/019039.html" rel="alternate"/>
+    <summary>Mark and Clara have proposed an improvement to the current Bitcoin Core block building algorithm. Currently, Bitcoin Core uses a straightforward greedy algorithm which evaluates each transaction’s effective fee rate in the context of its unconfirmed ancestors. This overlooks situations in which multiple descendant transactions could be grouped with their shared ancestors to form a more attractive transaction set for block inclusion. Their suggested algorithm would also consider such scenarios, resulting in more efficient use of block space. Experimental data shows that their algorithm did better on more than 94% of blocks (99% for times of high congestion). However, Antoine raises some questions and concerns about the proposal. He wonders if CSB feerate performance will improve as transaction graphs with multiple disjunctive branches become more regular in the future, citing examples like OP_CTV's style congestion-tree, LN's splicing or chain of coinjoins. He also brings up the issue of malicious miners using hard-to-traverse CPFP constellations to prevent competitors from assembling block templates or slowing down their computation. It remains to be seen how much CSB makes that kind of DoS possible/efficient. From the point of view of global blockspace demand, if miners generally became DPFA-sensitive, it could encourage creation of additional transactions for the sole purpose of bumping stuck ancestors. As ASB's ancestor set and CSB's candidate set, a fee bidder would have to pay the feerate to cover the new transaction fields, high enough to catch up with the already-present feerate set. It might be more fee-rate efficient to RBF the first child, but there is a replacement feerate penalty to consider.</summary>
+    <published>2021-05-29T06:32:53+00:00</published>
+  </entry>
+</feed>

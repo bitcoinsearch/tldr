@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Time to worry about 80-bit collision attacks or not?</title>
+  <updated>2023-05-19T23:01:00.920039+00:00</updated>
+  <author>
+    <name>Anthony Towns 2016-01-08 15:33:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Time to worry about 80-bit collision attacks or not?</title>
+    <updated>2023-05-19T23:01:00.920039+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-January/012218.html" rel="alternate"/>
+    <summary>In January 2016, Gavin Andresen via bitcoin-dev discussed a specific collision attack in which an attacker creates the innocent fund-locking script and doesn't give it to the victim yet. Using Ethan Heilman's procedure, the attacker can create two scripts and find values A1 and A2 that hash the scripts to the same result with under 3*2**80 work. The approach suggests using the next private key as the result of RIPEMD(SHA256(script with pubkey)). This results in two different keys that can be used, but it doesn't change the script. However, making the form of the script a function of the attacker's key can increase the chances of finding a usable pair. With a 50% chance of hitting a usable pair, one can find the cycle with under 3*2**80 work. Five attempts should give a ~96% chance of hitting a usable pair, and it should take under 15*2**80 work ~= 2**84 work, with trivial memory use. Trying the approach in python with a weakened hash function works as expected, and a useful collision was obtained on the second try in about 7 seconds. The result obtained was 'ae94d9f908' for both scripts generated.</summary>
+    <published>2016-01-08T15:33:29+00:00</published>
+  </entry>
+</feed>

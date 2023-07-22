@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Trampoline Routing</title>
+  <updated>2023-06-03T22:22:08.087972+00:00</updated>
+  <author>
+    <name>fiatjaf 2019-08-02 16:29:22</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-08-03 03:48:48</name>
+  </author>
+  <author>
+    <name>fiatjaf 2019-08-09 02:35:41</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-08-09 04:41:17</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2019-08-02 09:29:25</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2019-08-05 07:37:52</name>
+  </author>
+  <author>
+    <name>fiatjaf 2019-08-05 12:15:45</name>
+  </author>
+  <link href="lightning-dev/Aug_2019/002102_Trampoline-Routing.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2019/002104_Trampoline-Routing.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2019/002112_Trampoline-Routing.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2019/002113_Trampoline-Routing.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2019/002100_Trampoline-Routing.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2019/002106_Trampoline-Routing.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2019/002110_Trampoline-Routing.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Trampoline Routing</title>
+    <updated>2023-06-03T22:22:08.087972+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-August/002102.html" rel="alternate"/>
+    <summary>Trampoline routing is a new payment method for Bitcoin's Lightning Network that allows users to send payments even if they do not know the full route to their destination. This is done by using trampoline nodes where the sender can reach and defers the calculation of the rest of the route to that node.The process involves building an onion with a small trampoline onion inside and sending it through the chosen trampoline nodes until it reaches the recipient. To estimate fees and cltv requirements, trampoline nodes need to route almost any other trampoline node, which may increase the fees paid by end-users. However, this comes at the cost of ease of use and payment reliability.To exchange fees and cltv, existing gossip infrastructure can be used to create a new node_update message that contains the trampoline fees and CLTV. Alice sends gossip filters to her peers to only receive updates that match those filters.To avoid the need for trampolines in future payments, it is possible to return the route calculated by trampoline nodes to the original caller. However, there are still questions regarding the feasibility of returning calculated routes to the original caller and whether trampoline nodes would be interested in cheating or not returning any route at all.As the network grows larger, maintaining a strongly connected network graph may not be possible. Therefore, hierarchical/packet switched routing architecture may be required in the future, and trampoline routing can be seen as a first step towards enabling this architecture. Bastien, a contributor to the Lightning Network, has proposed a new routing algorithm that could potentially reduce transaction fees. The algorithm uses a simple XOR or node distance comparison to determine the best route for a given transaction.On August 5th, 2019, ZmnSCPxj, a member of the Lightning Network mailing list, discussed the use of trampoline nodes in the network. The GitHub pull request linked in the post explains how trampoline nodes can impact privacy if only one node is used. If Alice uses only one node, it would assume that the next hop is always the payee, thus eroding privacy. To prevent this, ZmnSCPxj suggests using two trampoline nodes to have a 50/50 chance of knowing who the final payee is, reducing privacy erosion.In the future, we will see a public network that is too large to fit on most devices available to most people. Thus, it will eventually be required to hierarchicalize how we store information with a "myopic" detailed channel map and a "rough" global map with just trampoline-payee association mappings. ZmnSCPxj believes that each payer should define its own hierarchy or split, preferably with some random component. ZmnSCPxj acknowledges that his ramblings may be too indefinite and it would be better to see the network as it evolves.Overall, feedback on the concept of trampoline routing, as well as on the gossip and fee estimation parts, is welcomed.</summary>
+    <published>2019-08-02T16:29:22+00:00</published>
+  </entry>
+</feed>

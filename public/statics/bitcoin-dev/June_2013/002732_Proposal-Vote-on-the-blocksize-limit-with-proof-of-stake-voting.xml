@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Vote on the blocksize limit with proof-of-stake voting</title>
+  <updated>2023-06-06T18:43:09.565172+00:00</updated>
+  <author>
+    <name>Daniel Lidstrom 2013-06-10 06:34:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Vote on the blocksize limit with proof-of-stake voting</title>
+    <updated>2023-06-06T18:43:09.565172+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-June/002732.html" rel="alternate"/>
+    <summary>The email conversation discusses the implementation of a voting system for block size limit increases in Bitcoin. The proposed mechanism involves a Proof-of-Stake vote, with votes cast through a specific transaction output scriptPubKey format. The median, as opposed to the mean, would be used to compute the vote. Peter Todd points out that the rolling median code uses floating point and creates consensus critical code. An SPV-verifiable moving median could be done by binning the space of block size limits, and for each node in the UTXO tree, a value for each bin is stored which is the sum of the corresponding bins of each of the children. The childless nodes increment the appropriate bin of their parents according to the rules mentioned. The bin values in the root node of the UTXO tree would then be added to those, weighted appropriately, of the previous N blocks. The hash of a node would be that of the bin values concatenated with the child nodes' hashes. This method allows any step of the calculation of the median to produce a localized error in the UTXO tree that's easily verified. The number of bins would have to be kept relatively small to avoid adding too much data to the UTXO tree branches. Coercion and vote buying are possible in this system, but it ensures that any increase to the blocksize genuinely represents the desires of the Bitcoin community. Additionally, the process described ensures that any changes happen at a rate that gives all participants time to react. The process also gives a mechanism for the community to vote to decrease the limit if it turns out that the new one was in fact too high.</summary>
+    <published>2013-06-10T06:34:33+00:00</published>
+  </entry>
+</feed>

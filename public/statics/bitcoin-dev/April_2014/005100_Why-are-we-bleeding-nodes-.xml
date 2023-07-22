@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Why are we bleeding nodes?</title>
+  <updated>2023-06-08T18:49:13.610244+00:00</updated>
+  <author>
+    <name>Tamas Blummer 2014-04-07 19:50:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Why are we bleeding nodes?</title>
+    <updated>2023-06-08T18:49:13.610244+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005100.html" rel="alternate"/>
+    <summary>When loading headers, sequential loading is necessary for the connection and determination of the longest chain. However, once the order of blocks is given by the headers, they can be loaded in random order. The UTXO can be computed, but it may be necessary to temporarily store the blocks unless there is enough RAM available. A user who was working on a node project shared that headers can be downloaded and stored in any order and blocks do not have to be downloaded or saved to disk in any particular order. The UTXO is fully self-contained, which allows for the initial blockchain sync to occur in approximately six hours when using an SSD. Additionally, this approach requires enough disk space to store the UTXO and whatever amount of block data the user wants to store for network health. Tamas Blummer suggested that once headers are loaded first, sequential loading is no longer necessary. Validation does need to be sequential, but the step can be deferred until the blocks before a point are loaded and continuous. Gregory Maxwell expressed concerns about using a bitmap to advertise non-contiguous blocks due to high overhead and poor locality.</summary>
+    <published>2014-04-07T19:50:26+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>"network disruption as a service" and proof of local storage</title>
+  <updated>2023-06-09T18:39:28.585699+00:00</updated>
+  <author>
+    <name>Matt Whitlock 2015-03-27 15:16:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>"network disruption as a service" and proof of local storage</title>
+    <updated>2023-06-09T18:39:28.585699+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-March/007752.html" rel="alternate"/>
+    <summary>In a discussion thread on the Bitcoin-development mailing list, Matt Whitlock proposed an alternative challenge-response protocol to prove local possession of the blockchain. The proposed challenge is to send SHA256(SHA256(concatenation of N pseudo-randomly selected bytes from the block chain)), where N is chosen such that it would be infeasible for the responding node to fetch all of the needed blocks in a short amount of time. On spinning media, this is likely to take somewhere on the order of 15 seconds, assuming that blocks are averaging 500 KiB each and 1024 random reads from local disk are required. This protocol relies on the lack of a partial getdata command in the Bitcoin protocol, which means that nodes cannot ask for only part of a block; they must ask for an entire block.However, Robert McKay pointed out a potential problem with this proposal. He noted that someone could set up a single full node that has the blockchain and can answer those challenges and then a bunch of other non-full nodes that just proxy any such challenges to the single full node. In response to this, Sergio Lerner suggested two protocols to prove local possession. The first protocol involves the verifier sending a seed to derive some n random indexes, and the prover must respond with the encrypted blocks within a certain time bound. The verifier decrypts those blocks to check if they are part of the blockchain. The second protocol involves the verifier asking the prover to send a Merkle tree root of hashes of encrypted blocks with N indexes selected by a psudo-random function seeded by a challenge value, where each encrypted-block is previously prefixed with the seed before being hashed (e.g. N=100). The verifier receives the Markle Root and performs a statistical test on the received information. From the N hashes blocks, it chooses M &lt;&lt; N for the blocks at these indexes. The prover sends the blocks, the verifier validates the blocks by decrypting them and also verifies that the Merkle tree was well constructed for those block nodes. This proves with high probability that the Merkle tree was built on-the-fly and specifically for this challenge-response protocol.Finally, Lerner pointed out that not every node needs to implement the protocol, but only nodes that want to prove full-node-ness, such as the ones which want to receive bitnodes subsidy.</summary>
+    <published>2015-03-27T15:16:43+00:00</published>
+  </entry>
+</feed>

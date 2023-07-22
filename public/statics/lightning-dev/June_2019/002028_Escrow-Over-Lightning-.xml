@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Escrow Over Lightning?</title>
+  <updated>2023-06-02T18:52:17.107591+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-06-20 05:54:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Escrow Over Lightning?</title>
+    <updated>2023-06-02T18:52:17.107591+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-June/002028.html" rel="alternate"/>
+    <summary>The author is considering implementation of escrow over Lightning and suggests a non-custodial on-chain protocol using a 2-of-3 multisig contract for the two participants and the escrow. However, it cannot be safely hopped across channels as the escrow may take one side in one channel while taking the other side on the other channel, thus putting every hop node at risk. Escrow services are useful when Bitcoin needs to interact with other systems when trust in a brandless entity is difficult to procure. The author formulates a contract where a brandless buyer B pays a brandless seller S with tr*st in a common branded escrow E. In case of dispute, E decides whether B is refunded or S is paid. The escrow does not learn about an escrowed trade unless a dispute between buyer and seller occurs and intermediate hop nodes that are not the buyer, seller, or escrow, remain unaware of the escrowed trade. To implement this, E provides a public key as part of its brand, while B and S generate a short contract description of the service or product to be rendered, in a language that E understands. They tweak the escrow public key and generate a 2-of-3 address using their own keys, plus the tweaked escrow public key. If B and S come to an agreement, then they sign using their own keys, and the third key (the tweaked escrow key) remains tweaked and E cannot determine that it could have been used as the escrow. But if B and S come to a dispute, either can provide E with the agreed-upon description c that is committed to on-chain, and lets E judge where the payment should go.Under bip-taproot, this can be optimized somewhat in favor of the "no dispute" case by setting the taproot internal key to MuSig(B, S), and having separate MAST branches for MuSig(E + h(E | c) * G, B) and MuSig(E + h(E | c) * G, S). This use-case is important when escrow would be best done online with no requirement of physical presence.The author considers switching to payment points/scalars from payment hashes/preimages (a necessity for payment decorrelation) and using some kind of verifiable secret sharing. The author sketches a possible scheme where E publishes its escrow key E, B and S generate temporary payment points and scalars, and agree on the contract c describing their agreement in a language that E understands. B generates an ECDH shared secret between escrow and buyer, tweak(c, P) = P + h(P | c) * G, ecdh(a, B) = h(a * B), b' = ecdh(b, tweak(c, E)), B' = b' * G, and the payment point used in the payment route is S'. In the non-dispute case, E never learns that it could have been the escrow, but if a dispute occurs, E can determine b'.</summary>
+    <published>2019-06-20T05:54:16+00:00</published>
+  </entry>
+</feed>

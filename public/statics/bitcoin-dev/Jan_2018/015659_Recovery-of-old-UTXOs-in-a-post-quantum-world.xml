@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Recovery of old UTXOs in a post-quantum world</title>
+  <updated>2023-06-13T00:15:01.041935+00:00</updated>
+  <author>
+    <name>Tim Ruffing 2018-01-26 13:14:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Recovery of old UTXOs in a post-quantum world</title>
+    <updated>2023-06-13T00:15:01.042936+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-January/015659.html" rel="alternate"/>
+    <summary>In a discussion on the Bitcoin-dev mailing list, Tim Ruffing proposed a new way to spend a UTXO without revealing the public key. In this proposal, users have one or more single standard UTXOs with ECDSA public key classic_pk and corresponding secret key classic_sk. To spend an UTXO with a transaction tx, the user creates and publishes a "transaction" c that references the address SHA256(RIPEMD160((classic_pk)) and contains the following data: MAC(classic_pk,tx))||tx. The idea is to (ab)use the public key classic_pk as a key for the MAC. The user waits until c is confirmed before creating and publishing a transaction d with the following data: classic_pk||Sign(classic_sk, tx). The consensus rules state that a transaction d=classic_pk||sig spends all UTXOs with address SHA256(RIPEMD160(classic_pk)), applying the effects of tx if there exists a transaction c=mac||tx in the blockchain such that c is the first transaction (among all referencing the address) in the blockchain where mac is a valid MAC for message tx under correct key classic_pk and sig is valid ECDSA signature over tx under public key classic_pk. C-transactions never expire. The proposal does not include any form of expiration and should be secure against quantum attackers. However, Natanael replied stating that the weakness will remain as long as we need to allow any form of expiry and rely on publication of the vulnerable algorithms result for verification. He suggested using quantum-safe Zero-knowledge proofs to completely substitute the publication of the public key and signatures, which would require a hardfork to apply to old transactions. Without practical ZKP and presuming no powerful Quantum Computing attackers with the ability to control the network, he believes the Fawkes signature scheme is sufficient.</summary>
+    <published>2018-01-26T13:14:14+00:00</published>
+  </entry>
+</feed>

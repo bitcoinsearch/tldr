@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DRAFT: interactive tx construction protocol</title>
+  <updated>2023-06-02T22:56:46.529387+00:00</updated>
+  <author>
+    <name>darosior 2020-02-11 10:48:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DRAFT: interactive tx construction protocol</title>
+    <updated>2023-06-02T22:56:46.530390+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002518.html" rel="alternate"/>
+    <summary>The email discusses the use of PoDLE (Proof of DLE) and lightning. It explains that in order to use PoDLE, an 'H2' field must be included in the TLV of the initiating message, which is a 32-byte hash commitment to the P2 key. The `tx_add_input` message is also extended with a TLV type. If the proof is incorrect, the non-initiator may fail the transaction collaboration or respond with `tx_complete`. If the proof is correct, the non-initiator verifies that the commitment has not been communicated to them via gossip. If the proof IS in their gossip store, the transaction collaboration SHOULD reply with `tx_complete`. The PoDLE blacklist originates from the 'non-initiating' peer, and does not reveal the offending node's id. It is noted that it is possible for a malicious peer to fail to relay their `H2` entries in the blacklisted gossip set. Only nodes that have at least one public channel will be able to contribute to the public PoDLE blacklist. The email then poses some open questions such as whether PoDLE should be required for every collaborative transaction or only for opens. It also asks if fixing the generator point is too restrictive. JoinMarket, a bitcoin mixing service, uses a generator point called `J` which is created by appending a counter byte to `G`, hashing it, and then using a coerce-to-point. PoDLE, the proof of discrete logarithm equality, is used by JoinMarket to prove that the prover knows the private key corresponding to a given public key. Watermarks like `nLockTime`, `nSequence`, and `nVersion` are currently fixed values, but JoinMarket implements PayJoin, which is not obvious onchain, and does anti-fee-sniping emulation for PayJoin.The use-case of JoinMarket is similar to a PayJoin where the opener proposes to make a payment to a channel between the opener and acceptor, rather than outright giving control to the acceptor as in PayJoin. The interactive tx construction mechanism can be later used for channel factories, and PoDLE techniques would be useful as well to multi-funded channel factories.It would be a good idea to share PoDLE format with JoinMarket so that bridges can share PoDLE between JoinMarket makers and Lightning nodes. A BOLT spec could mandate retaining PoDLE for at least a year or a month or two weeks to slow down probe attempts.</summary>
+    <published>2020-02-11T10:48:34+00:00</published>
+  </entry>
+</feed>

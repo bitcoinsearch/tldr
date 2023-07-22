@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Statechain coinswap: assigning blame for failure in a two-stage transfer protocol.</title>
+  <updated>2023-05-20T23:51:41.837294+00:00</updated>
+  <author>
+    <name>Tom Trevethan 2020-09-13 22:14:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Statechain coinswap: assigning blame for failure in a two-stage transfer protocol.</title>
+    <updated>2023-05-20T23:51:41.837294+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-September/018165.html" rel="alternate"/>
+    <summary>A new off-chain coin-swap protocol is being designed to work with a statechain implementation that has been developed by CommerceBlock. The objective of the protocol is to enable coins deposited with a statechain entity to be transacted peer-to-peer off-chain, while ensuring that the statecoins always remain in the custody of their owners. The swapping service (conductor) will not have custody of the statecoins at any point. Instead, the conductor will coordinate the swap amongst a group of statecoins without being able to learn the link between owners and their provided addresses. A blind signature scheme similar to the zerolink protocol will be used to achieve this.The protocol works by having participants signal their participation by signing the swap_token with the proof-key of their input coin. Each participant then generates a new statecoin address where they want to receive the swapped coin, which they blind (encrypt) and sign with the proof key of their input coin. These blinded destination addresses are authenticated by the conductor, who signs each payload with a blinded signature scheme before returning them to the participants. Participants then reconnect over TOR with a new identity and send their unblinded destination address with the conductor signature to the conductor. The conductor then randomly assigns each address to one of the statecoins and requests each participant to initiate the transfer to the given address. Atomicity is guaranteed by the SCE; if any transfer fails, all transfers are reverted.One issue with the protocol is assigning blame in the case of a failed multi-party coinswap. In an on-chain coinjoin, whoever didn't sign their input is to blame, but in the statechain system, a statecoin transfer is a two-stage process, and either the sender or the receiver can cause the transfer to fail. One potential solution is to have each sender generate a zero knowledge proof that the encrypted value sent to the receiver is correct/valid, but this would add significant computational burden to user wallets. The team is currently working on a simpler solution.Comments on the protocol are welcome, and more details can be provided upon request.</summary>
+    <published>2020-09-13T22:14:50+00:00</published>
+  </entry>
+</feed>

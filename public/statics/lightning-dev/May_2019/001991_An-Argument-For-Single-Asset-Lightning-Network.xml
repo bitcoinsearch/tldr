@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>An Argument For Single-Asset Lightning Network</title>
+  <updated>2023-06-02T16:23:57.175559+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-05-06 04:51:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>An Argument For Single-Asset Lightning Network</title>
+    <updated>2023-06-02T16:23:57.175559+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-May/001991.html" rel="alternate"/>
+    <summary>In a recent post on the Lightning-dev mailing list, ZmnSCPxj proposed a generic solution to enable cross-currency swaps through multiple hops. This solution requires two hashlocks, one for the payee and another for the exchange. The payer acquires an exchange hash from the exchange along with collateral specifications. Using two hashlocks, the payer routes to the payee via the exchange, and then to the exchange again. The exchange onion hop includes information that the payment is a cross-currency swap and that it is allowed by pointing at the hashlock that the exchange hash is on. Once verified, the exchange releases the agreed-upon amount to the next hop, along with the collateral. The payee onion hop includes information that it should proceed to give a single hashlock to succeeding hops, as well as the agreed-upon collateral to the exchange. The exchange receives the payment with a single hashlock containing the value of the collateral. It verifies that the collateral value is equal to the agreed collateral for that payment, then releases the exchange preimage. The payee can then release its preimage once it has acquired the exchange preimage. However, this method still allows for a short time duration for American Option shenanigans.ZmnSCPxj also discusses the Route Maker solution by CJP, which is plausible only if the exchange and the Route Maker are the same, but it requires multiple secrets to be revealed. Another modification that is possible is to use point/scalar and require the sum of the payment scalar and the exchange scalar. This hides from intermediate nodes that multiple secrets are needed, however, this can make it difficult for protocols requiring proof-of-payment secrets. Lloyd Fournier responded, stating that he thinks the protocol is practical, and suggested calling it 'collateralized HTLCs.' He further explains the protocol and discusses how it is possible to modify it slightly so that the party receiving the option pays the premium regardless of whether they release x or not. This makes it a proper cross-chain option with guaranteed premium.</summary>
+    <published>2019-05-06T04:51:35+00:00</published>
+  </entry>
+</feed>

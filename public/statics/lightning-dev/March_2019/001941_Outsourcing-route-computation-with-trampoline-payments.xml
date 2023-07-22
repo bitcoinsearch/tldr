@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Outsourcing route computation with trampoline payments</title>
+  <updated>2023-06-02T18:05:42.363497+00:00</updated>
+  <author>
+    <name>René Pickhardt 2019-03-29 05:36:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Outsourcing route computation with trampoline payments</title>
+    <updated>2023-06-02T18:05:42.363497+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-March/001941.html" rel="alternate"/>
+    <summary>In a discussion on the Lightning-dev mailing list, Pierre-Marie proposed using the upcoming "Multi-frame sphinx onion format" to trustlessly outsource the computation of payment routes. The proposal involves A sending a payment to an intermediate node N, and in the onion payload, A provides the actual destination D of the payment and the amount. N then has to find a route to D and make a payment himself. Intermediate nodes have an incentive to cooperate because they are part of the route and will earn fees. This could significantly lessen the load on (lite) sending nodes both on the memory/bandwidth side and on the cpu side. However, one downside is that fee computation would have to be pessimistic.In response to this suggestion, Rene proposed another idea which involved using rendez-vous routing. The sender would have to provide a rendez-vous point from his local network and the recipient provides a route to him/herself. Only the recipient has to know the entire network topology. One problem with rendez-vous routing is that the routing fails if the route from the rendezvous point does not work. This again could be mitigated with JIT routing. Rene also presented two more general ideas that might help with routing. The first idea was a different fee mechanism where a sending node could offer a fee for successful routing and every routing node could decide how much fee it would collect for forwarding. Nodes could try to collect larger fees than the min they announce but that lowers the probability for the payment to be successful. The second idea was a virtual hierarchical address space which would allow any node to just have a pruned network view but still make smart routing decisions. This would be particularly useful if N also did not know the entire network and has to decide whom to forward for the final destination D.</summary>
+    <published>2019-03-29T05:36:36+00:00</published>
+  </entry>
+</feed>

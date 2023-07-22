@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Wallet related bug?</title>
+  <updated>2023-06-06T05:54:32.766453+00:00</updated>
+  <author>
+    <name>grarpamp 2012-06-22 11:01:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Wallet related bug?</title>
+    <updated>2023-06-06T05:54:32.766453+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-June/001628.html" rel="alternate"/>
+    <summary>The writer suspects a bug related to the order of operations in the context of rescanning, wallet upgrades/imports, and last block markers. They dropped an old wallet into a current blockchain and ran it in rescan mode, which gave an old wallet version message. The whole chain was then rescanned, with some blockhashes, blocks out of range and invalid/nonwallet txids added to the wallet that were already present as legit ones in the old logs. In plain mode, the new wallet version was logged and the last 20k blocks or so were rescanned, which may have been the marker for the old wallet's last use. Subsequent runs duplicated the second one, but never said 'upgrading wallet' as it sometimes does. The writer always ran detach=1. They question why the last 20k blocks need to be scanned every time if the whole chain was already done, and suggest that it should only happen once if not. Additionally, they suggest dumping the run params (bitcoin.conf, cmdline) to the log would be useful and not automatically truncating the log when big, but just appending or rolling it.</summary>
+    <published>2012-06-22T11:01:19+00:00</published>
+  </entry>
+</feed>

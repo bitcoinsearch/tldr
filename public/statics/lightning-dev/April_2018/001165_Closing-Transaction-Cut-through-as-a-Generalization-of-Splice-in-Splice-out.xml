@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Closing Transaction Cut-through as a Generalization of Splice-in/Splice-out</title>
+  <updated>2023-05-24T23:09:58.955318+00:00</updated>
+  <author>
+    <name>Christian Decker 2018-04-11 17:38:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Closing Transaction Cut-through as a Generalization of Splice-in/Splice-out</title>
+    <updated>2023-05-24T23:09:58.955318+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-April/001165.html" rel="alternate"/>
+    <summary>A proposal for implementing a more general "cut-through" for a channel close transaction has been suggested. Instead of implementing a splice-in/splice-out, both parties would provide signed normal transactions that spend the outputs and create a new close transaction that cuts through the original close transaction and the additional normal transactions. Both sides could also provide incomplete and unsigned stubs that would be applied to the closing transaction. Inputs in the stubs are added as inputs to the closing transaction, while outputs are added to the closing transaction, drawing from the balance of the party adding the new output. This way, any number of splice-in/-out operations can be performed in a single reseat operation. The generalization is useful if we want to "reseat" a channel to one peer to another peer. For example, if the node keeps payment statistics and notices that the channel with one peer always has a high probability of failing to forward to a destination, then it could decide to close that channel and open a channel to some other peer. This reseat operation could use the closing transaction cut-through to close the channel and open to another peer in a single onchain transaction. The proposal suggests that reseats can be done offchain if both the reseat-form peer and the reseat-to peer and the node belong to the same channel factory.It has been noted that the connection to channel factories is not essential as long as there is an invalidation scheme that allows us to invalidate a prior funding transaction, so reseat can be done without needing a cut-through. To simplify the process, the proposal suggests using tx formatted messages to transport the intent, reconnecting to the idea of cut-through, combining multiple transactions into one. Although this may complicate state tracking, it is believed that eventually, transactions will assume multiple roles anyway.</summary>
+    <published>2018-04-11T17:38:47+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>bitcoind -proxy=host:port doesn't work for unroutable	network</title>
+  <updated>2023-05-22T20:47:08.228193+00:00</updated>
+  <author>
+    <name>Anton Shevchenko 2022-07-23 13:00:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>bitcoind -proxy=host:port doesn't work for unroutable	network</title>
+    <updated>2023-05-22T20:47:08.228193+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-July/020771.html" rel="alternate"/>
+    <summary>Anton Shevchenko posted on the Bitcoin development mailing list regarding an unexpected behavior when using the -proxy setting with bitcoind. The -proxy option is used to connect to a SOCKS5 proxy that can access an internal network. When bitcoind is started with the -noconnect option, there is no network activity as expected. However, when Anton commands bitcoin-cli to connect to a node with a specific address, bitcoind attempts to connect without using the proxy, instead of initiating the connection through the proxy as expected.In the code, CConnman::ConnectNode calls GetProxy, and GetProxy returns false because CNetAddr::GetNetwork returns NET_UNROUTABLE. Anton argues that this is unexpected behavior at minimum and should be documented. He suggests introducing another option for unroutable addresses: connect locally (for compatibility reasons, default); connect through a proxy; or don't connect to unroutable addresses.Anton also raised an issue on GitHub regarding this implementation issue.</summary>
+    <published>2022-07-23T13:00:22+00:00</published>
+  </entry>
+</feed>

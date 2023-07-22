@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Ionization Protocol: Flood Routing</title>
+  <updated>2023-05-23T20:18:41.825259+00:00</updated>
+  <author>
+    <name>Mats Jerratsch 2015-09-21 14:06:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Ionization Protocol: Flood Routing</title>
+    <updated>2023-05-23T20:18:41.825259+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-September/000202.html" rel="alternate"/>
+    <summary>The proposed payment network uses a beacon node technique where a dozen nodes are chosen at random, and everyone propagates the cheapest route to and from those nodes. While this method is similar to other schemes, it raises concerns about potential attacks that could render the entire network unusable. However, if you know the entire graph, you don't need to give away any information about who you want to pay before sending the transaction. Knowing the fees others charge helps work out what fees should be charged, but just querying neighbouring routes is likely sufficient. Initially, the idea of a Node Directory was considered, which would have a central server collecting routing data sent by choice. The data would be verified with signatures and reputation/web-of-trust system byte added. However, as there isn't too much data, the author favours using a gossip-protocol. Both payer and payee can further work out a rendezvous node, and having this data distributed allows for making payments without leaving many visible traces on the network. The author suggests spreading data about how much can be spent and received with this route and fees for receiving and spending. This data can be vague and doesn't need to reflect the real world (e.g., supporting payments up to 10k satoshis, even though the channel has 5BTC in it). There is no current plan for how connections will be handled. The author is thinking of sending the current IP address with this update, such that nodes can connect to each other after one broke down again, and it would further support dynamic IPs as well. It is possible to extend this to hidden service notation, although this would require some more bytes to store. The protocol includes general beacon for our node and routing information. The two would be spread as one message, allowing us to keep two separate databases and bootstrap new nodes with this information, while not having to store old beacon data. Reputation will be stored for quite some time, so it's essential to save them with separate signatures. The author calculated two updates a day, with only 100k nodes. Each node would make a connection to around ten other nodes, resulting in 1.5kB per update. Each node would only use around 3kb/s up/down and would do around three signature verifications per second in idle mode while allowing everyone a full copy of the routing. The nodes themselves don't really need the routing information; they just need a way to transport the information to the clients that make payments. Nodes will obey orders given in the blob of data they'll receive. This design opens up to DDoS attacks as we don't want other nodes to spam information relayed through the complete network. One attacker can emulate a complete network vouching for him, and he can use those 'nodes' to push spam through the network.</summary>
+    <published>2015-09-21T14:06:32+00:00</published>
+  </entry>
+</feed>

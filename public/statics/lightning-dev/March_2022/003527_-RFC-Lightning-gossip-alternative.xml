@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>[RFC] Lightning gossip alternative</title>
+  <updated>2023-05-23T17:29:17.106267+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-03-23 01:38:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>[RFC] Lightning gossip alternative</title>
+    <updated>2023-05-23T17:29:17.106267+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-March/003527.html" rel="alternate"/>
+    <summary>The Lightning Network, a second layer payment protocol built on top of blockchain networks like Bitcoin, may soon be upgraded. The proposed upgrade has been suggested by Rusty Russell, an Australian software programmer and Bitcoin Lightning Network developer. The upgrade aims to simplify gossip and reduce UTXO (unspent transaction output) validation requirements from per-channel to per-node. To achieve this, the upgrade introduces node_announcement_v2 and channel_update_v2 messages, which replace timestamps with block heights. Nodes will send out weekly node_announcement_v2 to prove they own some UTXOs, entitling them to broadcast channels using channel_update_v2. If a channel_update_v2 is received from both peers, it confirms that the channel exists.Nodes do not need to monitor the existence of UTXOs after an initial check, since they will automatically prune them after a week. Taproot proofs are a signature of the v1 output over the `node_id`, `utxo`, and `blockheight` with prefix "lightingtaproot_utxo_proofsig", while legacy proofs are two signatures similar to existing channel_announcement.Node_announcement_v2 are discarded after a week (1000 blocks), and if two node_announcement_v2 claim the same UTXO, the first seen is used, and any others are discarded. The total proved UTXO value is multiplied by 10 to give the "announcable_channel_capacity" for that node. Channel_update_v2 has a capacity, cost, and min_msat, but it is not considered to exist until both peers have sent a channel_update_v2.If a node sets claim, the capacity of the channel is subtracted from the remaining announcable_channel_capacity for that node (minimum 10,000 sats). If there is insufficient total announcable_channel_capacity for a node, it is used by the lower channel_ids first. The proposed upgrade allows "leasing" of UTXOs, where someone can pay to sign their UTXO for your node_announcement, with some level of trust.They could spend the UTXO, which gives you a slow degradation as new nodes don't accept your channels but existing nodes don't check until it's due for refresh. Or they could sign one UTXO for multiple node_announcements, which is why preference is given to the first-seen. However, it's a weekly business so there's an incentive for them not to.Overall, the proposed upgrade simplifies gossip and reduces validation requirements while introducing new features such as leasing of UTXOs and taproot_utxo_delegated_proof where UTXOs can sign over to another key. The proposed upgrade has the potential to make the graph at the edge level far more dynamic.</summary>
+    <published>2022-03-23T01:38:40+00:00</published>
+  </entry>
+</feed>

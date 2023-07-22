@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP70 implementation guidance</title>
+  <updated>2023-06-08T22:14:11.656374+00:00</updated>
+  <author>
+    <name>Aaron Voisine 2014-05-02 19:21:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP70 implementation guidance</title>
+    <updated>2023-06-08T22:14:11.656374+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-May/005657.html" rel="alternate"/>
+    <summary>The email thread discusses the implementation and issues associated with BIP70, a payment protocol used in Bitcoin transactions. One of the concerns is error handling during signature checking. The email suggests that if PKI checking fails, we should treat the request as if it's unsigned. This is because there is no incentive for an attacker to break the signature instead of just removing it entirely. Moreover, someone who is signing their request with an unknown CA or using an upgraded version of the protocol that isn't entirely backwards compatible could trigger signature checking failure. Therefore, to make introducing new (possibly community run) CA's or new variations on signing possible, any errors should be treated as if there was no signature at all.In addition, wallets lack context compared to browsers, so GUIs should train users to expect signed payment requests. The email recommends showing the recipient name in future and telling users not to proceed if it doesn't appear. Extended validation certs are also discussed, which show the business name instead of the domain name, making them less phishable than domain names. However, bitcoinj nor Bitcoin Core don't have extra code to check whether a certificate really was subject to extended validation before showing the contents of the organization data field.The email also covers different types of certificates, such as S/MIME certs, and advises that they should be handled correctly. The importance of testing is also highlighted, with a test site provided for payment requests on the main network. Finally, memo contents should contain useful information about what is being purchased or the merchant's name. Expiry times should not be too aggressive since some users may need to coordinate payments from multi-party accounts.</summary>
+    <published>2014-05-02T19:21:41+00:00</published>
+  </entry>
+</feed>

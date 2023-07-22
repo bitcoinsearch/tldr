@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reduced signalling threshold activation of existing segwit deployment</title>
+  <updated>2023-06-12T01:10:04.342154+00:00</updated>
+  <author>
+    <name>Wang Chun 2017-05-24 16:02:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reduced signalling threshold activation of existing segwit deployment</title>
+    <updated>2023-06-12T01:10:04.342154+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-May/014412.html" rel="alternate"/>
+    <summary>On May 23, 2017, James Hilliard proposed an implementation that activates Segregated Witness (SegWit) at an 80% signaling threshold, using bit 4. The goal is to minimize chain split risks and network disruption while maximizing backward compatibility and still providing for rapid activation of SegWit at the 80% threshold using bit 4. By activating SegWit immediately and separately from any hard fork, it can scale quickly without risking a rushed combined SegWit+HF that would almost certainly cause widespread issues. This document specifies a method to activate the existing BIP9 SegWit deployment with a majority hashpower less than 95%. The proposal was discussed on the bitcoin-dev mailing list, where Andrew Chow raised some concerns about the compatibility of the proposal with the current SegWit implementation. There were worries that the implementation could cause network partitioning if the service bit were not changed and that the timeout date should be set before the BIP141 timeout to ensure enough time for SegWit to be locked in. However, James Hilliard responded that his proposal was compatible with the current SegWit implementation because it triggers a mandatory signaling period that will activate SegWit on existing nodes.The draft proposal provides a way for a simple majority of miners to coordinate activation of the existing SegWit deployment with less than 95% hashpower. For various reasons, a complete redeployment of SegWit is difficult to do until the existing deployment expires. A redeployment of SegWit will need to redefine all these things and doing so before expiry would greatly complicate testing. While this BIP is active, all blocks must set the nVersion header top 3 bits to 001 together with bit field (1&gt;&gt;&gt; existing segwit deployment). Blocks that do not signal as required will be rejected.This deployment is compatible with the existing "segwit" bit 1 deployment scheduled between midnight November 15th, 2016 and midnight November 15th, 2017. Miners will need to upgrade their nodes to support segsignal otherwise they may build on top of an invalid block. While this BIP is active users should either upgrade to segsignal or wait for additional confirmations when accepting payments. By orphaning non-signaling blocks during the BIP9 bit 1 "segwit" deployment, this BIP can cause the existing "segwit" deployment to activate without needing to release a new deployment.</summary>
+    <published>2017-05-24T16:02:09+00:00</published>
+  </entry>
+</feed>

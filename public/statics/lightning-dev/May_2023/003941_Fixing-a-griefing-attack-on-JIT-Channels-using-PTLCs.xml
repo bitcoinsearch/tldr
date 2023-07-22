@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fixing a griefing attack on JIT Channels using PTLCs</title>
+  <updated>2023-06-03T13:02:23.444473+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2023-05-10 00:00:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fixing a griefing attack on JIT Channels using PTLCs</title>
+    <updated>2023-06-03T13:02:23.444473+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-May/003941.html" rel="alternate"/>
+    <summary>In a Lightning-dev mailing list, benthecarman brought up a possible griefing attack on Just-In-Time channels provided by LSPs. The client could wait out the inbound PTLC of the LSP and force the LSP to perform an on-chain action to prevent giving a channel for free. To fix this, PTLCs were proposed, where instead of broadcasting the funding transaction to the mempool, the LSP can sign the funding transaction using adaptor signatures locked to the same secret as the invoice. However, SomberNight noted that PTLCs do not solve the problem entirely. Either the client or the LSP has to move first, but the only way they can assure that the other will actually do what they promised is if there is some arbiter who can ensure that the second mover actually performs their move. The default arbiter is the blockchain layer itself, but 0-conf just wants to avoid the blockchain layer for being too slow. Another wrinkle is that the LSP can attempt to coordinate with a miner (via e.g. full-RBF) to double-spend the funding transaction after the client has broadcasted the signed funding transaction on the mempool.</summary>
+    <published>2023-05-10T00:00:27+00:00</published>
+  </entry>
+</feed>

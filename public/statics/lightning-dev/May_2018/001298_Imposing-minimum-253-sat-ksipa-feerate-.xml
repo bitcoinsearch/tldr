@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Imposing minimum 253 sat/ksipa feerate?</title>
+  <updated>2023-05-25T01:03:15.094405+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-05-29 06:15:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Imposing minimum 253 sat/ksipa feerate?</title>
+    <updated>2023-05-25T01:03:15.094405+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-May/001298.html" rel="alternate"/>
+    <summary>C-lightning, a Lightning Network implementation, has imposed a minimum 253 sat/ksipa feerate due to differences in fee computation between BOLT specifications and bitcoind. The BOLT spec specifies a fee computation that is not identical to how bitcoind computes fees. Thus, the minimum 250 sat/ksipa feerate, if computed using the BOLT spec, will result in a fee which bitcoind will compute as less than the minimum 250 sat/ksipa it imposes. C-lightning will not accept an onchain feerate (from `update_fee`) of less than 253 sat/ksipa due to the above issue with the divergence in how BOLT and bitcoind compute fees. This has resulted in some issues in C-lightning where unilateral closure occurs when the counterparty proposes a 250sat/ksipa feerate. Although C-lightning has increased the ranges recently, the 253sat/ksipa limit remains a hard limit and will still cause C-lightning to unilaterally close if the counterparty gives an `update_fee` of less than 253 sat/ksipa.</summary>
+    <published>2018-05-29T06:15:55+00:00</published>
+  </entry>
+</feed>

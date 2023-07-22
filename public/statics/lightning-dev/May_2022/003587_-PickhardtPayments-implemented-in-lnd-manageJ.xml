@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>#PickhardtPayments implemented in lnd-manageJ</title>
+  <updated>2023-06-03T08:44:51.377804+00:00</updated>
+  <author>
+    <name>Vincent 2022-05-18 09:31:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>#PickhardtPayments implemented in lnd-manageJ</title>
+    <updated>2023-06-03T08:44:51.377804+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-May/003587.html" rel="alternate"/>
+    <summary>In a recent email thread on the Lightning-dev mailing list, members discussed the topic of routing payments in the Lightning Network. The discussion included various aspects such as channel scoring, liquidity estimation, and path-finding algorithms. Bastien Teinturier from Eclair explained that they have a large set of heuristics around channel scoring and have been toying with channel liquidity estimation for more than half a year. However, it's difficult to judge whether these heuristics work or not until they are tried on mainnet with real payments, so Teinturier strongly encouraged people to run such experiments.Teinturier also noted that using an MCF algorithm instead of Dijkstra is useful when relaying large payments that will need to be split aggressively to reach the destination. For cases where users are sending an amount which is "high" compared to available network liquidity, taking a minimum-cost-flow algorithm becomes important. However, it's important to also take a step back and look at whether it's economical to make such payments on Lightning.Vincent Palazzo added to the discussion, explaining that he is trying to abstract how to collect all necessary information in a common way so that research can be shared and verified across different implementations. Palazzo has already drafted an implementation where he's building a system to collect open data to create standard metrics. Overall, the discussion highlighted how the design space is still quite large when it comes to routing payments in the Lightning Network, and there's likely to be even more innovation in the coming years.In another post related to Lightning Network, the #PickhardtPayments approach was discussed. It offers an optimal and computationally feasible method for reliable and cheap-ish MPPs in the LN, assuming a uniform distribution of funds in each channel and zero base fee only. The implementation of #PickhardtPayments in lnd-manageJ needs to ignore non-zero base fee channels to avoid extremely slow computations, and certain aspects are approximated. The code in lnd-manageJ is highly experimental and only works with lnd.However, liquidity information, the proven optimal algorithm, and dealing with shared segments make #PickhardtPayments stand out. The underlying algorithm happily finds routes that may be very long, have a surprising number of shards, or rather odd amounts. The code doesn't handle all corner cases, especially the less-than-usual failure codes. Carsten, the author of this post, invites discussion on implementation details, and René Pickhardt is interested in helping with benchmarks and experiments.</summary>
+    <published>2022-05-18T09:31:37+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BOLT Draft] Onion Routing Spec</title>
+  <updated>2023-05-18T16:51:36.464581+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2016-08-04 18:47:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BOLT Draft] Onion Routing Spec</title>
+    <updated>2023-05-18T16:51:36.464581+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-August/000560.html" rel="alternate"/>
+    <summary>The discussion revolves around combining the "header" and "per-hop payload" into a single 40-byte field, as they are not meaningfully distinct for lightning. It's unclear what is gained by squashing them into one blob and the extensibility features remain the same regardless. The suggestion is to add/steal at least one byte for "realm," where 0 represents terminal, 1 represents bitcoin lightning, and 2 represents TBA, etc. The need for an equivalent of Bitcoin's "net magic" bytes within the onion blob itself is not necessary since the onion blob would be encapsulated within a fixed-length field within the "htlcAdd" message. Regarding multiple HTLCs with the same r hash, it's suggested that we wouldn't deny multiple HTLC's with the same r hash but rather deny a packet with a shared secret processed before. A node could still forward multiple HTLC's with identical r-hashes, and these HTLC's would have distinct (indistinguishable) onion packets. As a side note, better terminology than r-hash or H needs to be established. Lastly, switching from hash/preimage to the privkeys with point addition scheme eliminates the issue of accepting two HTLCs with the same pubkey, and we can refuse to accept them. However, the point addition derivation (P2CH style) scheme only applies to revocations, and it's unclear how one can switch to priv/pub key-based HTLCs without modifying Bitcoin Script. At the moment, key disclosure cannot be guaranteed/forced with Script's current capabilities.</summary>
+    <published>2016-08-04T18:47:34+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>#zerobasefee</title>
+  <updated>2023-05-23T15:30:57.857632+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-08-15 01:00:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>#zerobasefee</title>
+    <updated>2023-05-23T15:30:57.857632+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-August/003174.html" rel="alternate"/>
+    <summary>There have been discussions advocating for setting the BOLT#7 fee_base_msat value to zero, which has benefits including easier optimization since there is only one value to optimize when trying to collect the most fees. It also makes routing easier since you will never have to worry about paying more fees just as a result of splitting a payment. However, the cost is that there's no longer a fixed minimum fee. Instead of charging 1sat base fee and 0.02% proportional fee, it is suggested to set the 0.02% proportional fee and have a minimum payment size of 5000 sats. It is also suggested to treat the setting as minimum_fee=1sat rather than minimum_amount=5000 sat, so the advertised value is just calculated from the real settings, and nodes that want to send very small values despite having to pay high rates can just invert the calculation. Additionally, setting a minimum payment size of something like y/2/x**2 allows you to accept small payments when your channel is not busy but reserves the last slots for larger payments so that you don't end up missing out on profits because you ran out of capacity due to low-value spam.Lower value HTLCs do not need to be included in the commitment transaction, and having different base fees for microtransactions that incur fewer costs would be annoying, so amortizing that into the proportional fee might help. Eltoo can help by reducing the fixed costs, but there are still other fixed costs, so it would just lower the fixed costs, not remove them altogether, and isn't a fundamental change. The fixed costs for forwarding an HTLC are very small, including the cost of permanently storing HTLC info and compute and bandwidth cost for updating an HTLC. The opportunity cost of having HTLC slots or Bitcoin locked up until the HTLC succeeds/fails could be much more significant.</summary>
+    <published>2021-08-15T01:00:37+00:00</published>
+  </entry>
+</feed>

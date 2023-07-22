@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proof of payment (Re: AMP: Atomic Multi-Path Payments over Lightning)</title>
+  <updated>2023-05-24T21:04:16.654936+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-02-13 14:23:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proof of payment (Re: AMP: Atomic Multi-Path Payments over Lightning)</title>
+    <updated>2023-05-24T21:04:16.654936+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/001028.html" rel="alternate"/>
+    <summary>ZmnSCPxj has suggested using ZKCP to provide a stronger proof-of-payment, which involves creating a message indicating the payment amount and payee commitment, having the payee securely sign and encrypt it, and using the encryption key as the payment hash for a standard BOLT11. The encrypted message and signature are then provided to the payer through an end-to-end encrypted channel. To claim the payment on-Lightning, the payee provides the encryption key, which is propagated back to the payer by standard LN routing protocols. Only the payer can decrypt the message with the payment preimage, even if the preimage was propagated to multiple hops. Conner Fromknecht has expressed concerns regarding the soundness of using the current invoicing system to prove payments and suggests exploring proofs of payment on stronger statements that could utilize ephemeral keys in the onion packets or the onion as a witness. Without any modification to the spec, ZKBoo could be used to prove knowledge of a preimage without revealing it to the verifier. Christian Decker argues that atomic multipath payments using a single secret with future decorrelation mechanisms allow varying the secret in such a way that multiple paths cannot be collated. Corné Plooy suggests a different signed invoice stating several payment hashes with their corresponding amounts, the obligation of the signer to deliver Z if all payment keys are shown, and terms to handle partially successful payments. In case of partial failure, the payer should sign a declaration stating which transactions were canceled, which should be refunded, and replace the obligation to deliver Z with an obligation to refund the successful transactions. This construction requires changes only to the invoice format and not to the network protocol. The court is the final point of settlement for invoices in this use case, just like the blockchain is for other channels in the route. There is an assumption that the only way someone could get the preimage is by having made a payment, but this assumption is broken most directly by the proving mechanism. Similarly, any intermediary who acquires an invoice with the appropriate hash could also make this claim since they also have the preimage.</summary>
+    <published>2018-02-13T14:23:37+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Providing "non-inclusion proofs" to "append to the right Merkles" with minimized overhead</title>
+  <updated>2023-06-15T03:00:09.060033+00:00</updated>
+  <author>
+    <name>shymaa arafat 2021-11-11 22:28:39</name>
+  </author>
+  <author>
+    <name>shymaa arafat 2021-11-11 22:28:39</name>
+  </author>
+  <author>
+    <name>shymaa arafat 2021-11-11 22:28:39</name>
+  </author>
+  <link href="bitcoin-dev/Nov_2021/019596_Providing-non-inclusion-proofs-to-append-to-the-right-Merkles-with-minimized-overhead.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2021/019596_Providing-non-inclusion-proofs-to-append-to-the-right-Merkles-with-minimized-overhead.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2021/019596_Providing-non-inclusion-proofs-to-append-to-the-right-Merkles-with-minimized-overhead.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Providing "non-inclusion proofs" to "append to the right Merkles" with minimized overhead</title>
+    <updated>2023-06-15T03:00:09.060033+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-November/019596.html" rel="alternate"/>
+    <summary>The author proposes a modification to the UTXO Merkle structure in order to provide non-inclusion proofs. The proposed modification involves mapping the UTXOs to their positions as leaves given their hash value. To put the UTXO in a bucket according to its hash, a 2⁶⁴ pointer vector is allocated. It is expected that UTXO hashes should fall uniformly across all buckets, and each bucket is expected to contain 1-2 UTXOs. Insertion of a node is done by adding it (in order) to the bucket linked list, while deletion is done by deleting a node from the bucket list. In this process, the vector bucket pointer may be adjusted from or to a NULL value.To save computation time, the accumulated root value of this secondary tree is calculated and sent only once per block, either at the end if valid or when encountering an invalid UTXO to send the non-inclusion proof and abort the whole block. During batch preparation, a newly inserted UTXO will be flagged 1, a deleted UTXO is flagged -1, and 0 means value the same as the previous block. If the block is valid, the flags are updated and reset to 0 while computing the new root.If there is an invalid UTXO, there are two cases. In one case, the hash doesn't exist in any case (not even with a deleted flag), in which case the usual non-inclusion proof is sent considering the old status before any UTXO from this block. In the other case, the UTXO hash is there but has a deleted flag (it was spent before during this block). In this case, the author suggests that the previous inclusion proof is resent along with saying something like "TX ID ....spent it with proof....". However, this is an implementation detail of how to point out to a previous proof in the same block.</summary>
+    <published>2021-11-11T22:28:39+00:00</published>
+  </entry>
+</feed>

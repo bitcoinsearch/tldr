@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PSBT Addition (BIP 174) for authenticating source/output PSBT files</title>
+  <updated>2023-05-20T21:35:42.519066+00:00</updated>
+  <author>
+    <name>Andrew Chow 2020-01-13 23:18:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PSBT Addition (BIP 174) for authenticating source/output PSBT files</title>
+    <updated>2023-05-20T21:35:42.519066+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-January/017573.html" rel="alternate"/>
+    <summary>The Bitcoin-dev mailing list recently had a discussion on how to protect against man-in-the-middle (MiTM) attacks in partially-signed bitcoin transactions (PSBTs). One proposal was to add authentication signatures to the PSBT structure, with one signature over the source PSBT file and another over all the bytes of the resulting signed PSBT up to that point. However, some participants argued that this would add unnecessary complexity to the PSBT structure and suggested using out-of-band communication for MiTM protection instead. They also noted that if participants received the same PSBT at the start, they could check the signature by an authority on the 'correctness' of the original PSBT.During the discussion, Peter D. Gray proposed adding signatures in fixed-width without DER-encoding as a way to detect errors or attacks in PSBTs. He suggested putting signatures at the end of the file with fixed byte offset, which would allow for a conservative PSBT parser to verify the signature before parsing the rest of the file. Andrew Chow raised concerns about the threat model and what was being protected, questioning how useful the signature would be if the signer had bugs and parsing issues. He also pointed out that Gray's proposal only protects against specific legs of the entire protocol, and not every MiTM.Another suggestion was to separate the signature from the PSBT and send it along with the PSBT as part of the transport protocol. The proposal aimed to protect against PSBT parsing bugs by using byte-level signatures on the complete file content. It was suggested that pre-sharing a public key with the signer could help authenticate incoming PSBTs. Some participants suggested implementing the scheme with proprietary keys, while others recommended waiting for officially-assigned key numbers.The discussion also covered issues related to deserialization bugs and reconstruction of original fields in the PSBT. Finally, it was acknowledged that if an attacker controlled both directions of the PSBT, then the proposed solutions could not prevent the intended harm.</summary>
+    <published>2020-01-13T23:18:34+00:00</published>
+  </entry>
+</feed>

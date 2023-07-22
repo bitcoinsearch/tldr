@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Onion messages for probing scheme</title>
+  <updated>2023-06-04T04:49:40.571599+00:00</updated>
+  <author>
+    <name>Antoine Riard 2023-03-01 18:02:04</name>
+  </author>
+  <author>
+    <name>vwallace 2023-02-27 21:31:15</name>
+  </author>
+  <author>
+    <name>Aymeric Vitte 2023-03-06 16:39:42</name>
+  </author>
+  <link href="lightning-dev/March_2023/003870_Onion-messages-for-probing-scheme.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003869_Onion-messages-for-probing-scheme.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2023/003882_Onion-messages-for-probing-scheme.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Onion messages for probing scheme</title>
+    <updated>2023-06-04T04:49:40.571599+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-March/003870.html" rel="alternate"/>
+    <summary>Val Wallace suggested using onion messages (OMs) for payment probing in the Lightning Network, which was briefly discussed at the 2022 LN summit. Currently, payment reliability heavily depends on having sufficient payment volume to determine current liquidity balances of channels. Onion messages offer a convenient way to probe without risking locked liquidity along the route. However, sending onion message probes directly to individual nodes along the desired route could degrade privacy. Therefore, it is best to design a scheme that probes along channel paths, like HTLC probing.The proposed scheme involves constructing an onion message for the first hop, specifying the amount that can be forwarded to the next hop. If an intermediate node cannot forward the desired amount due to the stateless nature of OMs, they’ll fail the probe back to the previous node who will then fail the probe back to the original sender. While there is nothing stopping nodes from lying about their ability to forward, they may be negatively scored if they do so. Adopting a protocol like this could help routing nodes attract more forwarding traffic. The Lightning-dev mailing list has been discussing the use of onion messages for payment probing and an alternative to using DHT system for gossip. Routing hops could announce their liquidity balances through a new set of gossip messages, committing to a liquidity balance and duration. This approach would be more accurate than sender-side probing, which can be less accurate with higher rates of network liquidity congestion. Additionally, a routing hop could commit to "private" gossip sent back to HTLC senders during HTLC successful settlement, announcing "differentiated services" of channel liquidity levels. Val views this feature as a low priority enhancement, given there are a lot more pressing issues in LN. However, the proposal could be useful to spark ideas and highlight the flexibility of OMs.</summary>
+    <published>2023-03-01T18:02:04+00:00</published>
+  </entry>
+</feed>

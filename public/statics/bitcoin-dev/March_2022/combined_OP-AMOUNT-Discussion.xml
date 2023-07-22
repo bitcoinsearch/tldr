@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - OP_AMOUNT Discussion</title>
+  <updated>2023-06-15T17:50:45.792574+00:00</updated>
+  <author>
+    <name>Jeremy Rubin 2022-03-08 17:09:58</name>
+  </author>
+  <author>
+    <name>Jeremy Rubin 2022-03-08 17:09:58</name>
+  </author>
+  <author>
+    <name>Jeremy Rubin 2022-03-08 17:09:58</name>
+  </author>
+  <link href="bitcoin-dev/March_2022/020084_OP-AMOUNT-Discussion.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2022/020084_OP-AMOUNT-Discussion.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2022/020084_OP-AMOUNT-Discussion.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - OP_AMOUNT Discussion</title>
+    <updated>2023-06-15T17:50:45.792574+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020084.html" rel="alternate"/>
+    <summary>In a recent post, Jeremy Rubin discussed the possible variants of OP_AMOUNT opcode which include OP_PUSHAMOUNT, OP_AMOUNTVERIFY, OP_PUSHAMOUNTSPLIT and OP_SPLITAMOUNTVERIFY. The *VERIFY formats can be preferred for NOP upgrade while PUSH format can be used for SUCCESSX upgrade. SplitAmount format is required as amounts are &gt; 5 bytes (51 bits needed max), unless we also do some sort of OP_UPGRADEMATH semantic whereby presence of an Amount opcode enables 64 bit (or 256 bit?) math opcodes.OP_AMOUNT has several use cases, like creating a non-recursive covenant that there must be an output which exactly matches the sats in the input at the same index. This could be used for colored coins, statechains, TLUV/EVICT based payment pools, etc. It is also useful in making a static address / descriptor that disables low-security spends if more coins are the input. Another use case could be to enable pay-what-you-want options, where depending on how much gets paid into an address different behaviors are permitted. Lastly, it can be used to make a belt-and-suspenders value check in CTV contracts to enable a backup withdrawal should you send the wrong amount to a vault.Jeremy Rubin suggests that the most straightforward path would be to work only on tapscript and not legacy, then spec out upgraded math operations, and then use OP_PUSHAMOUNT, which is pretty straightforward &amp; low technical risk. However, upgraded math and exact semantics are highly bikesheddable. Blockstream liquid has some work in this regard that may be copyable for the math part but likely not the amount opcode. They chose to do only 64 bit arithmetic, but the community might prefer wider operations.Jeremy Rubin designed some logic for a split amount verifying opcode, which can be found at https://gist.github.com/JeremyRubin/d9f146475f53673cd03c26ab46492504. He also mentions that he would be happy to review/advise on this if anyone is interested in working on this.</summary>
+    <published>2022-03-08T17:09:58+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Protecting Bitcoin against network-wide DoS attack</title>
+  <updated>2023-06-06T19:58:48.721327+00:00</updated>
+  <author>
+    <name>John Dillon 2013-07-14 22:12:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Protecting Bitcoin against network-wide DoS attack</title>
+    <updated>2023-06-06T19:58:48.721327+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-July/002896.html" rel="alternate"/>
+    <summary>The Bitcoin network is vulnerable to a cheap attack due to the fact that incoming connections are limited and not required to meet any criteria. An attacker can exploit this by repeatedly querying DNS seeds for new addresses, creating enough incoming connections that nodes cannot accept further clients. With nMaxConnections defaulting to 125 and a limit on file descriptors, there is also possible limits by stateful firewalls. The cost to the attacker is minimal as it would only require an INV message per transaction and block and some gossiped peer addresses, on average 30 bytes a second. Peter estimated that an attack could be launched with just 200 well-distributed IP addresses. For SPV (Simplified Payment Verification) client attacks, attackers could pretend to be an SPV client, reducing their incoming bandwidth consumption while increasing resource usage on the node. Bandwidth isn't reusable, but an attacker with EC2 or a botnet have much lower costs for bandwidth than a user with an Android wallet on a phone. To counter this, SPV nodes must provide a way to prove they have sacrificed some limited resources to allow nodes to distinguish legit users from attackers. Failing that, attacks must become expensive enough to discourage bored script-kiddies. For non-SPV-mode clients, anti-DoS measures can be implemented by requiring peers to do "useful work". As incoming connection slots get used up, kick off incoming peers who have relayed the least fee-paying transactions and valid blocks, keeping the peers who have relayed the most. SPV nodes can simply create high-fee transactions with their own coins to get connection priority during an attack. Nodes can take into account how long it takes for another node to advertise the transactions when dealing with SPV peers. Better systems can be implemented later, such as micropayment channels and coinbase probabilistic payments, that don't result in blockchain transactions just for the sake of anti-DoS. A demo of the attack against would be useful, and Pieter Wuille's bitcoin-seeder code could probably be re-used as it already has the required functionality of making large numbers of connections. In fact, simply running multiple instances of it could do the trick.</summary>
+    <published>2013-07-14T22:12:00+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Recovery of Lightning channels without backups</title>
+  <updated>2023-06-03T03:20:03.685225+00:00</updated>
+  <author>
+    <name>Rusty Russell 2021-04-20 04:52:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Recovery of Lightning channels without backups</title>
+    <updated>2023-06-03T03:20:03.685225+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-April/002998.html" rel="alternate"/>
+    <summary>The email exchange between Bitcoin Lightning Network developers discusses an idea to eliminate all "basepoints" using something like SHA256(ss || counter || 0). This approach is accepted, and it is suggested that this be added to the DF spec. Nodes should set their funding_pubkey to a specified DH tweak of the nodeid so that nodes that want backup-free channel recovery can refuse to carry on the funding protocol if the funding_pubkey is not set the way it wanted.However, one issue with this approach is that you now can't sign the commitment_tx without knowing the node's secret key. The solution proposed is to use some hardened derivation from its privkey (e.g. SHA256(node_privkey || ss || counter)) to create `commit_basepoint` in a deterministic but still private manner. Another suggestion is to leave all the other points in and just replace the funding_pubkey.`Generation` is introduced, which is used to generate the points used for this pair of peers for automatic on-chain scanning for channels if all other information is lost. The email concludes by providing the spec diff for point derivation.In the Bitcoin Lightning Network, the `htlc_basepoint` is defined as the `node_id` + G*T(`htlc`). Additionally, the secret for `payment_basepoint` can also be derived similarly using the `generation`, node key, and peer `node_id`. However, since it may point to an address for a completely separate system, it is explicitly specified in the protocol.The `tx_add_input` message is used to add inputs to a channel. It includes information such as the funding transaction ID, the output index of the funding transaction that corresponds to this input, and the signature of the input. The `delayed_payment` is also included in the message, which specifies the time lock needed before the funds can be spent from this input.Overall, the `tx_add_input` message plays an important role in adding inputs to a channel in the Bitcoin Lightning Network. Proper specification and use of the `htlc_basepoint` and `payment_basepoint` are crucial in ensuring secure transactions within the network.</summary>
+    <published>2021-04-20T04:52:01+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Taproot activation proposal "Speedy Trial"</title>
+  <updated>2023-05-21T01:46:58.283016+00:00</updated>
+  <author>
+    <name>Matt Corallo 2021-03-06 18:11:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Taproot activation proposal "Speedy Trial"</title>
+    <updated>2023-05-21T01:46:58.283016+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-March/018596.html" rel="alternate"/>
+    <summary>Bitcoin developers have proposed a new activation mechanism for Taproot, called Speedy Trial. This proposal would enable miners to activate the Taproot upgrade within three months by signaling readiness. The nodes will start counting blocks towards the 90% threshold required to lock in Taproot soon after the release of software containing the proposed activation logic. If the lock-in threshold isn't reached within approximately three months, the activation attempt fails, and there is no mandatory activation.The proposed timeline includes the release of one or more full nodes with activation code at T+0, signal tracking beginning at T+14, earliest possible lock-in at T+28, locked in by T+104, and activation at T+194 (if lock-in occurred). One goal of Speedy Trial is to allow a Taproot activation attempt to either quickly succeed or quickly fail without compromising safety in either case.However, some people are unsure about the proposed three-month window as it may be long enough to organize and create a lot of noise around a potential effort to split the network with divergent consensus rules. Furthermore, the vocal UASF minority could pursue a route to avoid a significant delay if the activation failed. One alternative proposed is to reduce the signaling windows involved and start slightly later to ensure success remains likely. The proposal can be implemented on top of either Bitcoin Core's existing BIP9 code or its proposed BIP8 patchset. The proposal uses BIP9, which is already part of Bitcoin Core and involves using values for start time and timeout along with a time-based parameter for minimum activation delay. An alternative proposed is BIP8, which uses height-based parameters for miners to lock in Taproot within six retarget periods and a certain number of blocks.If Speedy Trial fails, BIP8 would likely be used, so it could be advantageous to base this proposal on BIP8 to gain experience running that code in production. The proposal has some concerns regarding false signaling where miners signal readiness to enforce rules that their nodes don't support. However, false signaling is possible with any other proposal, and the same problems can occur if miners fail to upgrade for any mandatory activation.Speedy Trial does not require mandatory signaling at any time, but it encourages it during locked-in periods. A benefit mentioned for flag day activation may also apply here: we could get up to six months advanced notice of taproot activation, allowing users, developers, and organizations to prepare software, announcements, and celebrations for that event. The implementation details and next steps of the proposal can be found in the ##taproot-activation log.</summary>
+    <published>2021-03-06T18:11:01+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Lightning in a Taproot future</title>
+  <updated>2023-06-02T22:14:10.762793+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-12-15 15:43:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Lightning in a Taproot future</title>
+    <updated>2023-06-02T22:14:10.762793+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-December/002375.html" rel="alternate"/>
+    <summary>The Lightning Network community is currently discussing how to update the network to take advantage of the upcoming taproot update to the base layer. There are two options being considered: updating the current Poon-Dryja mechanism to use Schnorr signatures or keeping the current Poon-Dryja mechanism with SegWit v0 only and only updating to Schnorr/SegWit v1 when Decker-Russell-Osuntokun can be implemented. If Poon-Dryja channels are constrained to only HTLCs, new modules could be added for Decker-Russell-Osuntokun with HTLCs and PTLCs, or alternatively, PTLCs could be added on Poon-Dryja channels. If the current Poon-Dryja mechanism is updated to use Schnorr, wrinkles need to be addressed. MuSig between the two channel participants is a good option as it potentially allows a channel close to be indistinguishable from an ordinary SegWit v1 spend of a UTXO. However, further discussion is needed before selecting an option due to various tradeoffs.The article also discusses the use of off-chain updateable cryptocurrency mechanisms such as Poon-Dryja or Decker-Russell-Osuntokun and their compatibility with relative locktimes. The desirable case is the relative-locktime branch in revocable outputs, but this cannot have good privacy since there is no current common use of activated relative locktimes for ordinary spends. Revocable outputs require a relative-timelock branch, which is the desirable branch, i.e., the latest commitment transaction is the one that got published and thus is not revoked. However, no wallet uses relative-timelock for ordinary spends, unlike absolute-locktime where Bitcoin Core always uses absolute-locktime `nLockTime` for ordinary spends.The discussion centers around Pointlocked Timelocked Contracts (PTLCs) and their implementation in the Lightning Network. The author goes into detail about creating "purely scriptless" PTLCs and the tradeoffs between using these and tapscripted timelock branch PTLCs. If a PTLC is instantiated on the commitment transaction of the payer A, then the absolute-locktime backout transaction must not pay to A only, but instead pays to a revocable output that will eventually pay to A after the relative locktime. This means that the privacy boost of purely-scriptless backout transactions would be lost by the later revelation of the use of a relative locktime. The tradeoffs between privacy and latency are explored throughout the discussion, with the author highlighting the need for further understanding about revocable PTLCs before deciding on the best option.In terms of reducing round trips, options include not using composable MuSig of any kind or using Multi-`R` composable MuSig. A limit may need to be imposed on the number of `R` commitments that can be sent. The conclusion states that further discussion may be warranted before selecting particular options to implement and evaluate in alpha software.</summary>
+    <published>2019-12-15T15:43:07+00:00</published>
+  </entry>
+</feed>

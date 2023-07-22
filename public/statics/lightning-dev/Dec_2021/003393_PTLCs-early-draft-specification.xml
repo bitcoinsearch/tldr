@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PTLCs early draft specification</title>
+  <updated>2023-06-03T06:45:27.224195+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2021-12-09 01:34:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PTLCs early draft specification</title>
+    <updated>2023-06-03T06:45:27.225196+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003393.html" rel="alternate"/>
+    <summary>In a Lightning-dev mailing list, a participant named Bastien TEINTURIER proposed a new commitment transaction procedure. The proposal aimed at reducing the number of messages required for the current protocol while ensuring that there could still be 2*483 pending (H|P)TLCs. Instead of adding a `remote_ptlcs_signed` message in both directions, the proposal suggested breaking down the data into several messages. This change would make the messages symmetrical and easier to reason about.Bastien added a theoretical note mentioning that the final message "Bob -&gt; Alice: revoke_and_ack" is not necessary. This change would skip sending messages you don't need to, which was usually both more performant and simpler. However, it introduced some asymmetry, so he wasn't sure if it was worth it. Anthony Towns raised concerns regarding any way of spending without an adaptor sig, as B wouldn't be able to recover the secret and would lose funds. This problem still existed even though fast-forwards make it rare, and it only applied to heavily used channels.The Lightning Network developers are proposing a new protocol for channel updates that would cut the number of round-trips between nodes by half. The proposed synchronous update of commitments to the channel state adds an extra half round-trip but reduces latency when forwarding. It works by having both parties agree to a new commitment, which includes adaptor signatures and signatures for spending HTLCs and PTLCs from their own commitment transaction.Once both sides have agreed, they send signatures for the other party to spend HTLCs and PTLCs to each other and the signature required for funding transactions. There is also the option of using a musig setup for the funding tx, though this requires more data to be sent between parties. The new protocol allows both peers to keep their commitments synchronised to a single channel state and should work with revocable signatures on a single tx approach. Fast forwards will reduce the 2 round-trip protocol to a 0.5 round-trip update, reducing forwarding latency. In summary, the proposed protocol reduces the number of messages required for channel updates, makes the messages symmetrical, and allows both peers to keep their commitments synchronised to a single channel state.</summary>
+    <published>2021-12-09T01:34:00+00:00</published>
+  </entry>
+</feed>

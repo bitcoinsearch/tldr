@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>HTLCs using OP_CHECKSEQUENCEVERIFY/OP_LOCKTIMEVERIFY and revocation hashes.</title>
+  <updated>2023-05-23T18:24:20.021379+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-02-10 01:15:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>HTLCs using OP_CHECKSEQUENCEVERIFY/OP_LOCKTIMEVERIFY and revocation hashes.</title>
+    <updated>2023-05-23T18:24:20.021379+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-February/000440.html" rel="alternate"/>
+    <summary>In a discussion on the Lightning Network, Rusty Russell suggests that all outputs to A in A's commit transaction must be delayed (via OP_CSV) and this includes HTLC outputs. He further explains that the "HTLC Receiver Redeemscript" is actually something like R-VALUE &amp; OP_CSV &amp; SIG-PAYEE OR HTLC-TIMEOUT &amp; SIG-PAYER OR REVOCATION-B &amp; SIG A. The problem arises when Eve becomes unresponsive on one channel and Alice has to broadcast her commit transaction containing the HTLC before the CLTV of the HTLC times out, or else Eve can try to claim the HTLC funds. Rusty explains that if A insists that B use a 30-day CSV, A can't ask B to accept an HTLC with less than 31 days lifetime.He further elaborates that even if we assume always-on, always connected nodes, systems can fail, and manual intervention may be needed to restore them. So, we need to take into account that downtime / DoS attack may cause theft escalation which we don't want. Finally, he suggests that c-lightning requests a CSV timeout of 1 day, allows requests of up to 2 days. It only allows HTLCS of up to 5 days in the future, but it wants a 6-hour window minimum. If we want to allow CSV timeouts of 5 days, HTLC timeout decrements of up to 1 day per node over 20 hops, that means we need to allow HTLC timeouts of 26 days.</summary>
+    <published>2016-02-10T01:15:16+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Future Feature Proposal - getgist</title>
+  <updated>2023-05-19T18:59:22.738158+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2014-06-05 19:34:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Future Feature Proposal - getgist</title>
+    <updated>2023-05-19T18:59:22.738862+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-June/005965.html" rel="alternate"/>
+    <summary>In an email exchange between Richard Moore and Pieter Wuille, the former suggests using the name "getcheckpoints()" which was already in use. However, he found it to be too long. He mentions using "getheaders()" to quickly grab headers before downloading full blocks. Even with "getblocks()", there is a case for a "getgist()" call. With a gist of segment_count 50, you could call getgist() then request 50 getblocks() each with a block_locator of 1 hash from the gist (and optimally the stop_hash of the next hash in the gist) to 50 different peers, providing 25,000 (50 x 500) block hashes. Pieter argues against the use of "getgist()" stating that much of the reference client's design is built around doing as much validation on received data as soon as possible, to avoid being misled by a particular peer. Getheaders() provides this: you receive a set of headers starting from a point you already know, in order, and can validate them syntactically and for proof-of-work immediately. That allows building a very-hard-to-beat tree structure locally already, at which point you can start requesting blocks along the good branches of that tree immediately - potentially in parallel from multiple peers. In fact, that's the planned approach for the headers-first synchronization.Pieter also highlights that based on earlier experimenting with his former experimental headersfirst branch, it's quite possible to have two mostly independent synchronization mechanisms going on. First, asking and downloading headers from every peer, and validating them. Second, asking and downloading blocks from multiple peers in parallel, for blocks corresponding to validated headers. Downloading the headers succeeds within minutes, and within seconds you have enough to start fetching blocks. After that point, you can keep a "download window" full with outstanding block requests, and as blocks go much slower than headers, the headers process never becomes a blocker for blocks to download. He concludes by saying that unless we're talking about a system with billions of headers to download, he doesn't think it's a worthwhile optimization.</summary>
+    <published>2014-06-05T19:34:15+00:00</published>
+  </entry>
+</feed>

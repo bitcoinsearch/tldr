@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Compact Block Relay BIP</title>
+  <updated>2023-05-19T23:20:28.509188+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2016-05-09 17:06:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Compact Block Relay BIP</title>
+    <updated>2023-05-19T23:20:28.509188+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-May/012645.html" rel="alternate"/>
+    <summary>Matt Corallo has designed a BIP-formatted design spec for compact block relay. The aim of the spec is to limit on wire bytes during block relay. Several new data structures have been added to the P2P network to relay compact blocks: PrefilledTransaction, HeaderAndShortIDs, BlockTransactionsRequest, and BlockTransactions. A new variable-length integer encoding has also been introduced for use in these data structures. CompactSize refers to the variable-length integer encoding used across the existing P2P protocol to encode array lengths, among other things, in 1, 3, 5 or 9 bytes. A HeaderAndShortIDs structure is used to relay a block header, the short transactions IDs used for matching already-available transactions, and a select few transactions which we expect a peer may be missing. Short transaction IDs are used to represent a transaction without sending a full 256-bit hash. An alternative would be using SipHash-1-3. Using SipHash-1-3 on modern hardware would take ~32 CPU cycles per txid.There are a few more heuristics that MAY be used to improve performance. Receivers should treat short txids in blocks that match multiple mempool transactions as non-matches, and request the transactions. When constructing a compact block to send, the sender can verify it against its own mempool to check for collisions, and if so, choose to either try another nonce, or increase the short txid length.</summary>
+    <published>2016-05-09T17:06:06+00:00</published>
+  </entry>
+</feed>

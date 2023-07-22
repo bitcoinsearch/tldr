@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_VAULT: a new vault proposal</title>
+  <updated>2023-06-16T03:50:13.767510+00:00</updated>
+  <author>
+    <name>Greg Sanders 2023-01-09 19:31:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_VAULT: a new vault proposal</title>
+    <updated>2023-06-16T03:50:13.767510+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-January/021320.html" rel="alternate"/>
+    <summary>James O'Beirne proposed a new design for vaults, called OP_VAULT, which aims to provide the safety benefits of vaults to users without getting hung up on trying to solve the general problem of covenants. This proposal requires a single additional witness data item during OP_VAULT spend (for unvault path), mandating it to be included in the witness stack as an input to OP_VAULT opcode, and transaction introspection then checks to make sure the witness item and the corresponding output script template matches the expected. However, currently there is no way to make this compatible with scripthashes of any kind, since the script interpreter has no insight into the OP_UNVAULT outputs' "execution script", and one of the arguments of OP_UNVAULT is freeform, resulting in an unpredictable output scriptpubkey.Earlier last year, James experimented with using OP_CTV, a limited covenant mechanism, to implement a "minimum-viable" vault design. He found that the inherent limitations of a precomputed covenant scheme left the resulting vault implementation wanting, even though it was an improvement over existing strategies that rely on presigned transactions and (hopefully) ephemeral keys. But he also found proposed "general" covenant schemes to be unsuitable for this use. Thus, he wanted to explore a middle way: a design solely concerned with making the best vault use possible, with covenant functionality as a secondary consideration.The proposed OP_VAULT design gets the best of both worlds because the destination SPKs aren’t committed to until the unvaulting process starts. This would be an incredibly useful tool for inheritance designs in wallets. The recovery path does not have any real encumbrances on it. If recovery is triggered, you probably do want it for all of your inflight unvaultings.James wrote a paper that summarizes his findings and the resulting proposal, along with an accompanying draft implementation. If there's interest, he might work on a BIP.</summary>
+    <published>2023-01-09T19:31:51+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[PROPOSAL] OP_TX: generalized covenants reduced to OP_CHECKTEMPLATEVERIFY</title>
+  <updated>2023-06-15T20:42:03.465628+00:00</updated>
+  <author>
+    <name>Brandon Black 2022-05-10 15:16:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[PROPOSAL] OP_TX: generalized covenants reduced to OP_CHECKTEMPLATEVERIFY</title>
+    <updated>2023-06-15T20:42:03.465628+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020454.html" rel="alternate"/>
+    <summary>Brandon has responded to a previous email from Rusty Russell regarding a proposal on v1 tapscript opcode for generic covenants. Brandon points out that one of the biggest limitations of CTV is that the script is specific to the amount of the input being spent. He suggests that OPTX_SELECT_IN_OUT_AMOUNT32x2 should be added to the initial set of flags so that a single script can be reused and a small script can be constructed for a relocatable, batchable construction. The proposed soft fork involves OP_TX, which is followed by 4 bytes of flags. Only those marked with an asterisk have to be defined for this soft fork; the others can have semantics later. The proposed flag combinations approximate OP_CHECKTEMPLATEVERIFY. All other flag combinations result in OP_SUCCESS. By enumerating exactly what can be committed to, it's absolutely clear what is and isn't committed. The bits which separate concatenation and hashing provide a simple mechanism for template-style commitments or for programmatic treatment of individual elements. The lack of double-hashing of scriptsigs and other fields means we cannot simply re-use hashing done for SIGHASH_ALL. The OP_SUCCESS semantic is only valid in tapscript v1, so this does not allow covenants for v0 segwit or pre-segwit inputs. If covenants prove useful, dedicated opcodes can be provided for those cases (a-la OP_CHECKTEMPLATEVERIFY).</summary>
+    <published>2022-05-10T15:16:10+00:00</published>
+  </entry>
+</feed>

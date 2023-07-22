@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Time to worry about 80-bit collision attacks or not?</title>
+  <updated>2023-05-19T23:01:29.574360+00:00</updated>
+  <author>
+    <name>Matt Corallo 2016-01-08 01:26:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Time to worry about 80-bit collision attacks or not?</title>
+    <updated>2023-05-19T23:01:29.574360+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-January/012208.html" rel="alternate"/>
+    <summary>The discussion on weakening the crypto used to protect other people's money is not comfortable for some, despite the possibility of other attacks. Gavin Andresen via bitcoin-dev expressed his perspective on the security of SHA256(SHA256) over RIPEMD160(SHA256) and simpler implementation of segwitness. He claimed that the difference in the security of both is small, with the risk of an implementation error being greater with multiple ways of interpreting the segwit hash in scriptPubKey. He further added that even if there is a risk of collision attack, wallets must be coded to mitigate this risk. From a security standpoint, a single 20-byte segwit in the scriptPubKey is the best design. Ethan Heilman responded to Gavin's post with an algorithm that can find targeted substrings. Although this algorithm requires much computation, an adversary can still find different targeted substrings that collide. He also mentioned length extension attacks on RIPEMD160, which raises concern about the security of cascading the same hash function twice. Research shows that cascading the same hash function twice is weaker than using HMAC but there are no results on cascading RIPEMD160(SHA256()). RIPEMD160(SHA256()) seems better than RIPEMD160(). However, security should not rest on the notion that an attacker requires much memory since many targeted collision attacks can work without much memory. Gavin asked whether RIPEMD160 will be broken before SHA256, and whether they will be so broken that the nested hash construction of RIPEMD160(SHA256()) will be vulnerable. This is because he suggests stopping exactly at the current status quo where RIPEMD160 is used for P2SH and P2PKH. Dave described a first preimage attack, which takes 2**160 CPU time and no storage.</summary>
+    <published>2016-01-08T01:26:22+00:00</published>
+  </entry>
+</feed>

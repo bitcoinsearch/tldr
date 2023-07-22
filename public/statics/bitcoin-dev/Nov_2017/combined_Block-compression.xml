@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Block compression</title>
+  <updated>2023-06-12T22:21:12.746524+00:00</updated>
+  <author>
+    <name>Jeff Johnson 2017-11-27 02:11:27</name>
+  </author>
+  <author>
+    <name>Jeff Johnson 2017-11-27 02:11:27</name>
+  </author>
+  <author>
+    <name>Jeff Johnson 2017-11-27 02:11:27</name>
+  </author>
+  <author>
+    <name>Marco Pontello 2017-11-27 12:08:05</name>
+  </author>
+  <author>
+    <name>Marco Pontello 2017-11-27 12:08:05</name>
+  </author>
+  <author>
+    <name>Jonas Schnelli 2017-11-27 20:49:07</name>
+  </author>
+  <author>
+    <name>Marco Pontello 2017-11-27 12:08:05</name>
+  </author>
+  <author>
+    <name>Jonas Schnelli 2017-11-27 20:49:07</name>
+  </author>
+  <author>
+    <name>Jonas Schnelli 2017-11-27 20:49:07</name>
+  </author>
+  <link href="bitcoin-dev/Nov_2017/015315_Block-compression.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015315_Block-compression.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015315_Block-compression.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015317_Block-compression.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015317_Block-compression.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015319_Block-compression.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015317_Block-compression.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015319_Block-compression.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015319_Block-compression.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Block compression</title>
+    <updated>2023-06-12T22:21:12.746524+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-November/015315.html" rel="alternate"/>
+    <summary>A new member of the Bitcoin-dev mailing list, Jeff Johnson, has suggested a possible solution to increase the amount of data in a block without increasing its size on disk. By applying various compression algorithms, he was able to achieve approximately a 50% compression ratio on a recent Bitcoin block. He tested the raw block alongside Gzip, LZMA, ZStandard and LZ4 methods. Decompression time would matter more than the compression time as blocks will be decompressed billions of times more than they will be compressed.The fastest decompression speed among all the above methods is for LZ4 at 3.3GB / second, which is slightly less than half the speed of memcpy. If this solution were implemented in the Bitcoin protocol, there would need to be a place to specify the compression type in a set of bits somewhere, so that future compression algorithms could potentially be added. Miners could choose how many transactions they want to stuff into the block, keeping the compressed size under the limit. The bitcoin client code would also need to be able to handle the appropriate compression bits, and limits of signature data, etc. modified to deal with the compression.Schnorr signatures are on the roadmap as a 25% compression gain. It is thought that they could compress even further when compressed with the compression methods mentioned by Johnson. If bandwidth is a concern, then on the fly gzip compression like apaches mod_deflate could be applied. Bandwidth may be a concern for historical blocks transmission. If disk space is a concern, then the database layer should handle the compression.There have been previous discussions about similar approaches. However, it is not clear whether compression should be built into the protocol and it is suggested that it should be built into different layers. In an email conversation, Jeff Johnson through bitcoin-dev sends a message with information regarding a raw block. The raw block is 998,198 bytes and when compressed using Gzip, it becomes 521,212 bytes with a 52% ratio. However, the recipient of the message responds saying that the raw block seems odd as every odd byte is 0, which explains the high compression ratio. It is unclear how the sender obtained the raw block.The link to Jeff's findings on a recent Bitcoin block can be found in the original message.</summary>
+    <published>2017-11-27T02:11:27+00:00</published>
+  </entry>
+</feed>

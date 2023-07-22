@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>SAS: Succinct Atomic Swap</title>
+  <updated>2023-06-14T01:28:38.245352+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-05-13 08:39:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>SAS: Succinct Atomic Swap</title>
+    <updated>2023-06-14T01:28:38.245352+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-May/017861.html" rel="alternate"/>
+    <summary>The conversation between Ruben and ZmnSCPxj is regarding the potential vulnerabilities in a proposed CoinSwap protocol. The concern is that if Bob misses the deadline, Alice will feel obligated to reclaim the funds. In Ruben's proposal, the transaction competition is between the secret-revealing success TX and the non-secret-revealing revoke tx. Whereas in ZmnSCPxj's counterproposal, the transaction competition is between the secret-revealing success tx and the secret-revealing backout tx. This means that both Alice and Bob end up competing over it, RBFing each other until the entire fund goes to miners. There is a discussion about Refund #1, which can only be safely used before the signed success tx is given to Bob. Refund #2 needs to be used after Bob receives the signed success tx. If Bob gives a copy of the revoke tx with signature directly to its favorite miner, then Alice will have to take three transactions to back out of the swap. Thus, there is no disincentive for trolling Bobs to exist whose sole life goal is to just grief possible Alices. Bob cannot safely perform step 2 before getting both signatures for the revoke tx. In ZmnSCPxj's context, where Bob is a CoinSwap server/maker, Bob can wait for new clients/takers, and if no new clients arrive, spend. Bob can run multiple servers, each of which are given the completed success transaction, and the servers can check that if the timeout is near, to spam the Bitcoin P2P network with the completed success transactions.</summary>
+    <published>2020-05-13T08:39:37+00:00</published>
+  </entry>
+</feed>

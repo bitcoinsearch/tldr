@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Rescuing funding mistakes</title>
+  <updated>2023-06-01T18:38:51.897179+00:00</updated>
+  <author>
+    <name>Rusty Russell 2021-03-11 00:24:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Rescuing funding mistakes</title>
+    <updated>2023-06-01T18:38:51.897179+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-March/002981.html" rel="alternate"/>
+    <summary>In a recent update, Christian Decker has suggested that Lightning Network can be used to resend funds lost in the event of an incorrect transaction ID being used. This is achieved through a temporary solution by adding feature 104/105 as OPT_SHUTDOWN_WRONG_FUNDING, and adding a TLV stream to the shutdown message. The recipient supports it (config setting is called 'experimental-shutdown-wrong-funding') and makes sure the channel is unused. They use these values as the input for the shutdown negotiation and continue normally. The peer will forget the channel 2016 blocks after proposal but it can still be fished out of the database. In addition, the Lightning Network team is considering a stub state for old channels to allow some limited interaction with such dead channels. However, this does not help in cases where users accidentally send all their funds to the channel 2of2 address because we do not allow variation of the amount, and only one shutdown flow is allowed. To improve the system, Christian suggested sending a signature for the last tx in the reestablish message. Alternatively, Lightning Network could sign anything they ask for dead channels. Rusty Russell also suggested giving them the private key in this case, which would allow late post-hoc rescue of any strangeness they did. However, revealing a secret key is not a decision taken lightly.</summary>
+    <published>2021-03-11T00:24:32+00:00</published>
+  </entry>
+</feed>

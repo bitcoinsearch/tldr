@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Encrypted Wallet Backward Compatibility</title>
+  <updated>2023-05-18T21:19:11.528494+00:00</updated>
+  <author>
+    <name>Matt Corallo 2011-07-04 20:39:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Encrypted Wallet Backward Compatibility</title>
+    <updated>2023-05-18T21:19:11.528494+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-July/000131.html" rel="alternate"/>
+    <summary>The conversation is about the security vulnerabilities of wallet.dat, a file that stores Bitcoin keys and transactions. Gavin Andresen expresses his concerns about an attack where an attacker packs the keypool with keypairs that they know about. However, if the keys are loaded but not added to mapAddressBook or setKeyPool, they won't be used for any new transactions, or shown to the user, but the user is still able to receive Bitcoins to those keys. In response to breaking backup scripts, Gavin suggests that 0.4 and later could create a wallet_e.dat (encrypted wallet), truncate wallet.dat, and set its file-permissions to 000 so that old versions of bitcoin OR any dumb wallet backup scripts try to read it and fail. However, this solution is only applicable for Linux and Mac. Moreover, renaming wallet.dat might cause issues as everything knows the filename and is used to it.To future-proof wallet.dat, Gavin proposes adding a nMinVersion that specifies "you must be at least THIS version to read this file." This would give users a reasonable message if they try to downgrade after an incompatible change, but this should only very rarely be a problem.</summary>
+    <published>2011-07-04T20:39:32+00:00</published>
+  </entry>
+</feed>

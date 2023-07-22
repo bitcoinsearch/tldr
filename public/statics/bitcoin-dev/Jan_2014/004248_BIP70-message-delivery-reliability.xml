@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP70 message delivery reliability</title>
+  <updated>2023-06-08T02:09:54.797526+00:00</updated>
+  <author>
+    <name>Chuck 2014-01-30 05:47:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP70 message delivery reliability</title>
+    <updated>2023-06-08T02:09:54.797526+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-January/004248.html" rel="alternate"/>
+    <summary>Peter (sipa) recommended forwarding a post to the mailing list for further discussion. The author of the post is curious about some things re BIP70 message delivery and the value of the PaymentACK message. The current BIP70 workflow designates PaymentACK as the final message in a payment exchange, but it doesn't appear that any mention is made of what happens if that delivery fails. The author assumes that re-delivery is left as a detail to the implementation. In case PaymentACK is never delivered, the author asks what would be necessary for sufficient proof of payment, say, to an arbiter. The author presumes the receipt R=(PaymentRequest,[transactions]) would suffice. The author questions the point of the Payment message if the PaymentRequest and broadcasted transactions are enough to prove payment. In the well-behaved case, the point is to help the merchant associate some arbitrary data with the purchase as well as provide a refunding address for the customer. The author proposes a slightly improved protocol. Required steps include Customer clicks "pay now," Merchant sends PaymentRequest/PaymentDetails, which should be signed, Customer builds a set of transactions and sends a new PaymentApprovalRequest message which includes a refund address and the unsigned transactions and their associated fully-signed transaction hash, the whole message signed with the private key of the refund address, and Merchant responds with PaymentApproved message, signing the PaymentApprovalRequest message with the same key from step 2. Optional steps include Customer can send a Payment message, which is only a set of signed transactions, and Merchant can respond with a PaymentACK message. After step 4, all the merchant needs is to do is watch for the transactions that were listed in PaymentApprovalRequest.The (PaymentApproved,[signed transactions]) pair is the customer's proof of payment and this proof of payment includes a refund address that the merchant has agreed to prior to payment, instead of after. Step 3 &amp; 4 also allow the merchant to verify transactions, providing an extra layer of redundancy. In Step 3, it's critical the customer sign the message with the private key of the refund address, so that the merchant can be confident the refund address is correct. In each step along the way until step 5, if a message delivery fails nobody is harmed because the purchase is incomplete. The author seeks thoughts regarding the proposed protocol.</summary>
+    <published>2014-01-30T05:47:51+00:00</published>
+  </entry>
+</feed>

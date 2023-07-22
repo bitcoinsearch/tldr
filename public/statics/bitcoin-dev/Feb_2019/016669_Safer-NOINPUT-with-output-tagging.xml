@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer NOINPUT with output tagging</title>
+  <updated>2023-06-13T16:14:09.399976+00:00</updated>
+  <author>
+    <name>Alejandro Ranchal Pedrosa 2019-02-09 10:01:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer NOINPUT with output tagging</title>
+    <updated>2023-06-13T16:14:09.399976+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-February/016669.html" rel="alternate"/>
+    <summary>In a Bitcoin-dev discussion, Johnson Lau raised concerns about the fungibility of multiparty eltoo channels when output tagging is used. He suggested that if one party becomes unresponsive, the remaining participants can remove them from the channel by creating settlement transactions, which pay off the unresponsive party and fund a new channel with the remaining participants. However, if the unresponsive party returns, fungibility is not reduced due to output tagging because the above scheme can be used off-chain until the original channel can be continued. Alejandro Ranchal-Pedrosa added that he was not able to come up with an eltoo-like protocol that works if you cannot predict in advance who will become absent. He suggested that a childchain for Bitcoin could provide a solution. The off-chain protocol can continue updating in the absence of other parties, meaning that other parties' signatures must not be required when they are not involved in the off-chain state update. If other parties' signatures are not required, there must be a way of having a common verifiable 'last state' to prevent a party from simultaneously 'forking' the state with two different parties and double-spending. Ranchal-Pedrosa further explained that transaction fragments allow an eltoo-like protocol even when one cannot predict in advance who will become absent or malicious (by publishing invalid states). Non-absent parties can unite their fragments and create a valid spendable factory-level transaction that effectively kicks out the malicious parties while leaving the rest of the factory as it was. He also suggested that NOINPUT brings more smart contract capacity and allows for dumb contracts. However, tagging means "I believe this address is for one-time-use only" and should never be done when paying to other people. Tagging in either scriptPubKey or tx version should not complicate the eltoo protocol in any way, nor bring extra block space overhead.</summary>
+    <published>2019-02-09T10:01:20+00:00</published>
+  </entry>
+</feed>

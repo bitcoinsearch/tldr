@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TAPLEAF_UPDATE_VERIFY covenant opcode</title>
+  <updated>2023-05-21T03:44:08.836668+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-09-10 07:42:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TAPLEAF_UPDATE_VERIFY covenant opcode</title>
+    <updated>2023-05-21T03:44:08.836668+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019429.html" rel="alternate"/>
+    <summary>The safety of the control byte is being questioned and it's asked if recursively applying a rule could burn out path E beyond the 128 Taproot depth limit. The fix for this would be to do a key path spend and rebalance the tree, or have X replace itself with (X, (X, A)) to keep the tree height at O(log(n)). Approving to burn E is possible as long as you have the key path. It's also asked if C = 4 is stable across all state transitions, and it seems that the location of C would not be stable across transitions. Dropping a sibling without replacing it or dropping the current script would mean that the only remaining ways of spending would be that script and the key path. If you want a utxo where some script paths are constant, don't construct the utxo with script paths that can modify them. The merkle path will always change unless you have the exact same set of scripts. The "lexical ordering" makes it commutative, so H(A,B) = H(B,A).</summary>
+    <published>2021-09-10T07:42:19+00:00</published>
+  </entry>
+</feed>

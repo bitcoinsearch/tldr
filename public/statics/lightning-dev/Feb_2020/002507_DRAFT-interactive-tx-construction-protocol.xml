@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DRAFT: interactive tx construction protocol</title>
+  <updated>2023-06-02T23:08:49.930467+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-02-07 00:23:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DRAFT: interactive tx construction protocol</title>
+    <updated>2023-06-02T23:08:49.930467+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002507.html" rel="alternate"/>
+    <summary>The context discusses the idea of using blockheight - 6 for funding transactions to prevent them from being rejected from the mempool in case of a re-org. However, there is concern about the increased incentive for potential deliberate reorgers to perform a reorg attack, which could delay confirmations even more. It is suggested that setting the locktime back a few blocks can make the funding transaction eligible for inclusion in any of the previous six blocks, increasing the probability that it will be included in the reorganization.There is a proposal to add serial IDs to inputs and outputs to improve the protocol messages for Lightning dual-funding. Each input addition must have a unique serial ID, which is used as a sorting heuristic for input ordering in the final transaction, replacing BIP69. All output scripts must be standard, and nLocktime is always set to 0x00000000. If a blockheight to be used as nLocktime is communicated in the initiation step, it is set to blockheight-6; otherwise, it is set to zero.However, there is concern about what happens if the initiator deliberately provides lousy serial IDs, but it is not an issue since both sides know which inputs and outputs are theirs. There was also a suggestion to add a secret-sharing round where the resulting key is XORed to each serial ID before sorting by the XORed serial ID, but this may be too overweight. Instead, using block headers could be a good solution to avoid block height disagreements.Overall, using block headers can be a better solution to avoid block height disagreements instead of setting block height to -6. Adding serial IDs to inputs and outputs can improve the protocol messages for Lightning dual-funding, and all output scripts must be standard. Collisions between peers in serial ids are considered a protocol error, with collision defined as "equal in all bits except the lowest bit."</summary>
+    <published>2020-02-07T00:23:15+00:00</published>
+  </entry>
+</feed>

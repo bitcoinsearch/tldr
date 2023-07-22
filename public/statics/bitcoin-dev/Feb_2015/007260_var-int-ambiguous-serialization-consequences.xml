@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>var_int ambiguous serialization consequences</title>
+  <updated>2023-05-19T19:48:12.069394+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2015-02-01 15:00:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>var_int ambiguous serialization consequences</title>
+    <updated>2023-05-19T19:48:12.069394+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-February/007260.html" rel="alternate"/>
+    <summary>Hashes are always computed by reserializing data structures, never by hashing wire data directly. This has been the case in every version of the reference client's code. However, a block of 999999 bytes with non-shortest length for the transaction count could be over the maximum block size, but still be valid. Recently, the approach of just failing to deserialize whenever a non-shortest form is used has been adopted. Tamas Blummer raises concerns about the consequences of using var_int in longer than necessary forms. This is already of interest if applying size limit to a block since the transaction count is var_int but is not part of the hashed header or the merkle tree. It could also be used to create variants of the same transaction message by altered representation of txIn and txout counts that would remain valid provided signatures validate with the shortest form. An implementation that holds mempool by raw message hashes could be tricked to believe that a modified encoded version of the same transaction is a real double spend. One could also mine a valid block with transactions that have a different hash if regularly parsed and re-serialized. An SPV client could be confused by such a transaction as it was present in the merkle tree proof with a different hash than it gets for the tx with its own serialization or from the raw message.</summary>
+    <published>2015-02-01T15:00:39+00:00</published>
+  </entry>
+</feed>

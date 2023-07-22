@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Hold fees: 402 Payment Required for Lightning itself</title>
+  <updated>2023-06-03T02:34:09.969360+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-10-23 15:26:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Hold fees: 402 Payment Required for Lightning itself</title>
+    <updated>2023-06-03T02:34:09.969360+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002869.html" rel="alternate"/>
+    <summary>In a conversation with Bastien on Lightning-dev mailing list, ZmnSCPxj discussed the possibility of C unfairly delaying D's refund by delaying its own `commitment_signed`. While D is the one who decides whether they will be refunded or not, as they are the first to send the `commit_sig` that removes the HTLC, C can still drop the previous commitment and delay the process by not revoking its previous commitment (`revoke_and_ack`) and not signing the D-side next commitment (`commitment_signed`). ZmnSCPxj suggested extending `commit_sig` with a TLV field indicating "I refunded myself for HTLC N" to help C compute the same commit tx and verify sigs. However, if C can only take the hold fee at this point by dropping on-chain, then on-chain fees and the loss of a viable channel might outweigh the benefits. Moreover, rules involving "SHOULD/MUST fail the channel" have caused issues in interoperability, as seen in the mass channel closes between C-Lightning and lnd nodes due to sudden on-chain fee movements. ZmnSCPxj shared an old post related to this topic for further reference.</summary>
+    <published>2020-10-23T15:26:57+00:00</published>
+  </entry>
+</feed>

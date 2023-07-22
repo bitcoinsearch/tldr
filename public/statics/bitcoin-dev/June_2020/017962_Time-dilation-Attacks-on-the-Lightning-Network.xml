@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Time-dilation Attacks on the Lightning Network</title>
+  <updated>2023-06-14T02:11:05.428440+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-06-10 23:34:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Time-dilation Attacks on the Lightning Network</title>
+    <updated>2023-06-14T02:11:05.428440+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-June/017962.html" rel="alternate"/>
+    <summary>The email suggests the idea of having a separate software daemon for de-eclipsing in Bitcoin fullnodes. The proposed setup involves running this deeclipser on the same hardware as the Bitcoin fullnode and having the deeclipser bind to port 8334, which would be connected to by the fullnode using normal P2P protocol. Periodically, every five minutes or so, the deeclipser would check the latest headers known by the fullnode via the P2P protocol connection. Any blocks with greater block height would then be discovered and sent unsolicited `block` or `header` messages to update the fullnode if any plugin discovers a block later than that known by the fullnode. The reason for having a separate deeclipser process is to provide some amount of process isolation in case some problem with the plugin system exists. Running a separate daemon from the fullnode also means it can be run by a completely different user, and multiple deeclipser daemons can be run in the same hardware, with different non-overlapping plugins. This ensures that an exploit of one plugin will only bring down one deeclipser, with other deeclipser daemons remaining functional and still protecting the fullnode. Using the P2P protocol also means the fullnode can be a non-Bitcoin-Core fullnode, such as btcd or rust-bitcoin.</summary>
+    <published>2020-06-10T23:34:53+00:00</published>
+  </entry>
+</feed>

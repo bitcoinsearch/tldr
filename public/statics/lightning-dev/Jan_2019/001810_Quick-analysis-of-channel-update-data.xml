@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Quick analysis of channel_update data</title>
+  <updated>2023-06-02T16:50:04.814003+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-01-08 15:15:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Quick analysis of channel_update data</title>
+    <updated>2023-06-02T16:50:04.814003+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-January/001810.html" rel="alternate"/>
+    <summary>Rusty Russell suggests discarding the newer duplicate in cases where a node updated too fast and the update caught up with it. He also suggests remembering the latest timestamp of the duplicate for future advanced reconstruction schemes. However, this method assumes a single update partner and still results in flaps, which might even lead to a stuck state for some channels. If a node receives updates from another node through two or more separate paths, there could be issues with flapping channels, which would be difficult to debug. To prevent this issue, Rusty suggests locally updating timestamps and signatures for identical updates and not broadcasting them if they were the only changes. However, this would still leave some nodes in an inconsistent state until a passive sync that compares routing tables is performed.Rusty also recommends adding a basic checksum to channel range queries, which would improve the system. This checksum could also be used in inventory-based gossip messages and set reconciliation schemes. Although he thinks that all the bolted-on things are overkill at this point, he suggests making efforts towards local policies at the senders of the update to reduce the number of flapping updates.</summary>
+    <published>2019-01-08T15:15:04+00:00</published>
+  </entry>
+</feed>

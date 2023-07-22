@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Stateless invoices with proof-of-payment</title>
+  <updated>2023-06-03T05:57:21.558438+00:00</updated>
+  <author>
+    <name>Joost Jager 2021-09-21 12:40:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Stateless invoices with proof-of-payment</title>
+    <updated>2023-06-03T05:57:21.558438+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-September/003242.html" rel="alternate"/>
+    <summary>The discussion is about generating stateless invoices in the Lightning Network. The proposal suggests that payees should be able to generate stateless invoices and give them to payers instead of the payer generating the preimage. The proposed scheme involves four steps: 1) the payer requests an invoice, 2) the payee computes a hash using sha256 and hmac, and encodes the invoice id into the invoice, 3) the payer sends payment with the arbitrary invoice id as tlv_record_a, and 4) upon receiving the HTLC, the payee computes the preimage using hmac and resolves it. One way to implement this scheme is via the payment_secret, which is an arbitrary invoice id that is already sent as a tlv record. The implementation of such a scheme on @lntxbot required low-level code in a c-lightning plugin and a hack with route hints. Since TLV payloads were not an option, a "shadow" route hint was used to a private channel that did not exist, so the preimage was generated on the payee using preimage = hmac(local_secret, next_channel_scid). This workaround is considered clever.</summary>
+    <published>2021-09-21T12:40:24+00:00</published>
+  </entry>
+</feed>

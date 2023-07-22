@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Scriptless Scripts with ECDSA</title>
+  <updated>2023-05-20T08:14:40.309221+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-05-08 00:14:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Scriptless Scripts with ECDSA</title>
+    <updated>2023-05-20T08:14:40.310242+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-May/001246.html" rel="alternate"/>
+    <summary>Olaoluwa Osuntokun discusses the potential of using Lindell's technique as a way to replace regular 2-of-2 multi-sig with a single p2wkh. This would lead to lower fees for opening/closing channels and smaller transactions. The advantage of this method is that it wouldn't require any end-to-end changes, as it would only be a link level change. Osuntokun also discusses the possibility of integrating randomized payment identifiers across the route using this technique. He explains that both parties need to complete an initial setup and verification phase before the signing process can take place. There are three proofs required for the setup phase, which include a proof that the Paillier public key is well-formed, a dlog proof for the signing keys themselves, and a proof that value encrypted (the Paillier ciphertext) is actually the dlog of the public key to be used for signing.Osuntokun suggests that the initial proof could be piggybacked onto the initial channel funding steps, while the third proof could be made non-interactive by replacing their custom range proofs with Bulletproofs. This would make the proof itself take 1.5 RTT and would only need to be done once at the start. Overall, this technique has the potential to replace regular multi-sig and allow for randomized payment identifiers across the route.In another email conversation, a member of the Lightning Network team proposed a new cryptographic scheme to improve the contract protocol. The proposal includes a scriptless version of the adaptor signatures and contracts using only two-party ECDSA signatures, which could be applied directly today without waiting for Schnorr signatures to be deployed in Bitcoin. The proposal would require modifications to the channel opening process, adding and settling HTLCs, and the onion payload. One of the sub-proofs can use bulletproofs to make the proof shorter and non-interactive. Adding an HTLC would take 2.5 RTTs, while settling is just as quick as before. The onion payload would either need to be hacked or extended to support packaging the point.The new scheme would require a new global feature bit and would effectively partition the network into paths that understand this new feature. Introducing new end-to-end contract types may be a strong point of synchronization with updates across the network. The proposal could start with the introduction of the OG 2PC scheme as a multi-sig replacement.</summary>
+    <published>2018-05-08T00:14:21+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Small Nodes: A Better Alternative to Pruned Nodes</title>
+  <updated>2023-05-20T02:05:56.304249+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2017-04-21 20:38:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Small Nodes: A Better Alternative to Pruned Nodes</title>
+    <updated>2023-05-20T02:05:56.304249+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/014227.html" rel="alternate"/>
+    <summary>David Vorick has proposed a new method to reduce the amount of storage required to run a full node on the Bitcoin network. Currently, running a full node requires over 100GB of disk space, which is one of the most significant barriers to more people running full nodes. Vorick suggested using Forward Error Correction (FEC) to break up the blockchain data into smaller parts and allow smaller subsets of data to be stored while still being able to reconstruct the entire chain if needed. However, there are limitations to this proposal such as a fixed fraction of data and computational performance of alternative erasure coding schemes. Vorick suggested using cryptographic checksums to ensure the integrity of the smaller subsets of data.Another suggestion made by an author on the email thread is to use Reed-Solomon (RS) codes to encode Bitcoin blocks. The concept is that after downloading a block, it would be divided into 255 fragments, and a hashtree over them would be computed. Every node remembers the root and membership proofs for their chunk(s), which adds 256 bytes of extra storage. When decoding, a majority decides what root you are trying to decode, and if it fails to result in valid blocks, you blacklist that root, ban all those peers, and try the next. The author believes that the result would be an increase in the percentage of users running full nodes and a healthier overall network. However, the RS coder stuff requires a non-trivial amount of code, and complexity may show up in the garbage input handling. Also, the coded blocks are not useful for things like bloom scanning or other lookups, but with the committed filter proposals, the committed filters could still be kept.Coding the blocks will make their encoding normative. The author suggested that perhaps it is not difficult to configure a global bandwidth limit within Bitcoin. Regarding fingerprinting, it is unavoidable, but transaction announcement privacy MUST be fixed. Vorick's idea is totally compatible with committed filters, and the filters can even be shared like the blocks are. Nodes would have the option to choose between pruned (UTXO + recent two weeks of blocks), 20%, 40%, 60%, 80%, and 100% (archive).Finally, the author expressed disappointment at the low SNR on the list and asked users to respect each other's time.</summary>
+    <published>2017-04-21T20:38:36+00:00</published>
+  </entry>
+</feed>

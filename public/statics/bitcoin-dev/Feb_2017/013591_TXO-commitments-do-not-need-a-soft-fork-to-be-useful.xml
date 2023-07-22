@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>TXO commitments do not need a soft-fork to be useful</title>
+  <updated>2023-05-20T01:00:49.103473+00:00</updated>
+  <author>
+    <name>Peter Todd 2017-02-23 01:11:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>TXO commitments do not need a soft-fork to be useful</title>
+    <updated>2023-05-20T01:00:49.103473+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-February/013591.html" rel="alternate"/>
+    <summary>The author has realized that TXO commitments can be useful without implementing them as a consensus protocol change, as they provide benefits for full nodes in allowing old UTXO data to be pruned and solving the UTXO bloat problem. A TXO commitment allows a data set to be securely provided by an untrusted third party, allowing the data to be discarded, and where a outpoint-indexed UTXO set has a uniform access pattern, an insertion-ordered TXO set has a deliberately non-uniform access pattern. By not committing the TXO commitment in the block itself, delayed TXO commitments become obsolete. The author proposes a deployment plan which involves implementing a TXO commitment scheme with the ability to efficiently store the last n versions of the commitment state for the purpose of reorgs, adding P2P support for advertising to peers what parts of the TXO set have been pruned, and adding P2P support to produce, consume, and update TXO unspentness proofs as part of transaction and block relaying.In addition, it is possible to produce serialized UTXO snapshots for bootstrapping new nodes, and the author argues that a snapshot with an attestation from known individuals that you trust is a better security model than having miners attest to validity. However, it is a weaker security model, and a compromise may be to use assumed valid TXO commitments, extending the author's suggestion of having nodes validate the chain backwards, to eventually validate 100% of the chain. The author provides references to related work on SPV bitcoind and the recently implemented -assumevalid scheme.</summary>
+    <published>2017-02-23T01:11:47+00:00</published>
+  </entry>
+</feed>

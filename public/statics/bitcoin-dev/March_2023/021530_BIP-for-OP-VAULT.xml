@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP for OP_VAULT</title>
+  <updated>2023-06-16T15:40:00.967529+00:00</updated>
+  <author>
+    <name>Greg Sanders 2023-03-09 18:45:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP for OP_VAULT</title>
+    <updated>2023-06-16T15:40:00.967529+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-March/021530.html" rel="alternate"/>
+    <summary>In this email exchange, Greg proposes the use of extended primitives to perform rate-limiting of the two-step unvaulting or single-step vault by committing to the partial values. The proposed opcodes include OP_FORWARD_TARGET, OP_FORWARD_LEAF_UPDATE, OP_FORWARD_SELF, and OP_FORWARD_PARTIAL. These opcodes allow for forwarding the input amount to specified outputs in a way that elegantly allows merging/splitting. The trigger_leaf script for spending some of the vaulted funds via the hot wallet can look like "OP_FORWARD_PARTIAL OP_FORWARD_SELF 1 "288 OP_CSV OP_DROP OP_CTV" OP_FORWARD_LEAF_UPDATE key CHECKSIG". If one has 2.0 BTC in a vault utxo, they can spend 0.4 BTC by supplying the witness data. Other inputs/outputs (for fees etc.) would still be committed to by , so nothing here is malleable. The script here is about 45 bytes (compared to 34 for a simple "key CHECKSIG") and the witness data is about 105 bytes (compared to 65 bytes for just a signature), which seems pretty nice.The proposal allows for multiple hot wallets or multiple watchtowers validating spends and recovering funds to cold wallets on a violation. It also notes that if the OP_CTV is calculated incorrectly, the spend path becomes invalid, and the funds can only be reclaimed via some other path such as a key path spend, recovery tapscript, or potentially an alternative hot wallet script path. Overall, the proposal seeks to introduce new opcodes that combine the concept of forwarding the input amount to specified outputs in a way that elegantly allows merging/splitting with various restrictions on the form of the output scripts. This approach makes it easy to get the logic right and reduces the risk of theft during a watchtower outage.</summary>
+    <published>2023-03-09T18:45:15+00:00</published>
+  </entry>
+</feed>

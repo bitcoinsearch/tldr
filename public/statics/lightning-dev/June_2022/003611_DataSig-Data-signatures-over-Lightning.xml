@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DataSig -- Data signatures over Lightning</title>
+  <updated>2023-06-03T09:06:55.575001+00:00</updated>
+  <author>
+    <name>John Carvalho 2022-06-17 07:19:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DataSig -- Data signatures over Lightning</title>
+    <updated>2023-06-03T09:06:55.575001+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-June/003611.html" rel="alternate"/>
+    <summary>The Lightning Network is being used by a few projects to transmit data over HTLC custom records. The purpose of the proposed DataSig spec is to describe a structure representing a signature over arbitrary data for assisting with data verification. The DataSig structure is placed inside a custom TLV record and allows the receiver to validate that the data were authored by the source node and intended for the receiving node.For transmitting data exceeding the maximum allowed size over a single HTLC, the proposed DataStruct spec defines a structure that describes fragmented data allowing for transmission over separate HTLCs and assisting reassembly on the receiving end. The fragmentation structure also allows out-of-order reception of fragments and uses a compact encoding mechanism with protobuf. The FragmentInfo fields describe the identifier indicating a fragment set common to all fragments of the same data, the total data size the fragment is part of, and the starting byte offset of the fragment's payload in the total data.While some are using this method, John Carvalho argues that it is unnecessary to put the whole internet &amp; web inside of Lightning and that using LN for broad communication use cases ends up crippling both the use case and LN. The article discusses the use of DataStruct for transmitting data in the Lightning Network. It explains how the `fragment` field should be omitted, and if it is set, the receiving node should wait for the full fragment set to be received before reconstruction. The sending node is responsible for fragmenting the data and transmitting the fragments towards the destination. In this example, the sender splits the data into 84 fragments of 512B size each. To transmit the data, a `DataStruct` instance is created for each fragment, which includes the version, payload, and `fragment` fields. The encoded `DataStruct` is then transmitted over the custom records of an HTLC. When receiving a fragment, the receiving node can execute certain steps to assemble the data, such as decoding the `DataStruct`, checking the `version` field, and retrieving the reconstruction buffer identified by `fragset_id`. The article provides several notes and remarks, including the fact that it is the responsibility of the sender to properly coordinate simultaneous transmissions to a destination node by using different `fragset_id` values for each fragment set. Additionally, there is room for optimization, such as signing larger chunks of data instead of each transmitted fragment. Finally, the article provides a link to a working proof of concept that utilizes DataSig and DataStruct over single path payments.</summary>
+    <published>2022-06-17T07:19:44+00:00</published>
+  </entry>
+</feed>

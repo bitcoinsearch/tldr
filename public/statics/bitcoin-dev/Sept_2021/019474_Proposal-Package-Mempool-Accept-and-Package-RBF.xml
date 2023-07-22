@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Package Mempool Accept and Package RBF</title>
+  <updated>2023-06-15T02:08:59.733231+00:00</updated>
+  <author>
+    <name>Antoine Riard 2021-09-19 23:16:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Package Mempool Accept and Package RBF</title>
+    <updated>2023-06-15T02:08:59.733231+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019474.html" rel="alternate"/>
+    <summary>The Bitcoin Core development team has proposed a new system to improve the validation and propagation of transactions called package relay. The proposed changes do not require consensus or P2P protocol modifications but will significantly affect transaction propagation. The system enables packages consisting of multiple parents and one child, allowing for better fee estimations and aiding transaction relay. A set of validation rules in addition to consensus will protect unconfirmed transactions against resource exhaustion and keep the highest fee transactions.The proposal introduces package feerate, which considers modified fees and virtual size of all transactions in the package. It also sets limitations on fee-bumping to prevent DoS vectors while recognizing when a new transaction is more economical to mine than the original ones. The proposal also introduces the concept of package-level RBF, requiring replacement transactions to have an ancestor score at least as high as the original ones.The package relay system has implications for Lightning Network (LN) requirements and other Layer 2 protocols/applications. The proposal suggests deploying it during a first phase of 1-parent/1-child to improve second-layer safety.The proposed system allows for CPFP within packages and enables fee-bumping tools for users. Package Mempool Accept initially uses RPC for testing purposes and accepts packages with multi-parent-1-child structure. Fee-related checks use the package feerate, which is the total modified fees divided by the total virtual size of all transactions in the package. Parents in the transaction can replace-by-fee mempool transactions, but the child cannot.The bitcoin-dev mailing list recently discussed a proposal for improving package replacement in the mempool. The discussion explored differences between the proposal and BIP125, potential scenarios that may affect package validation, and expected FAQs. One example showed how ancestor feerate can be lower than originally thought due to mining candidates and ancestors.Overall, the package relay system aims to enable package validation and relay in Bitcoin Core without requiring consensus or P2P protocol changes. The proposal has implications for LN requirements and other Layer 2 protocols/applications, allowing for better propagation of high-feerate transactions, more powerful fee-bumping tools for users, and adjustments to fees at broadcast time for L2 applications.</summary>
+    <published>2021-09-19T23:16:45+00:00</published>
+  </entry>
+</feed>

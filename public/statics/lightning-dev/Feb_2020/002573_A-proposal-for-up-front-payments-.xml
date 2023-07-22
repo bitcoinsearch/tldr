@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A proposal for up-front payments.</title>
+  <updated>2023-06-02T21:16:16.757294+00:00</updated>
+  <author>
+    <name>Rusty Russell 2020-02-28 03:41:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A proposal for up-front payments.</title>
+    <updated>2023-06-02T21:16:16.757294+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002573.html" rel="alternate"/>
+    <summary>In a recent message, Anthony Towns suggested the possibility of an attack on Lightning Network. He proposed that in order to carry out this attack, one would need to route thousands of HTLCs from node A1 to node A2 via different long paths and use up the total channel capacity of A1/A2 nodes with long timeouts. The user would then leave the HTLCs open until they time out, using up capacity from all the nodes in the 1000s of routes. It was suggested that this attack would increase the cost of the attack by one on-chain transaction per timeout period, and limit the attack surface by how many transactions you can get started/completed within whatever the grace period is. There was also discussion of a "reverse commitment signing" proposal which could render this type of attack impossible. Previously, the proposal was made to have a node simply send a (signed) list of up to N additional HTLCs. This reduces batching to N, so make it at least 16. One user suggests that the updated commitment has C paying B on-chain. If B does not receive that by the time the grace period is about over, B can cancel the HTLC with A, and then there's statemachine complexity for B to cancel it with C if C comes alive again a little later. However, someone else points out that C pays per unit time, so it wouldn't pay upfront. The suggestion was also made that the "keep open rate" should depend on how many nodes have already been in the route. Thus, the more hops it's gone through, the more funds/channels you're tying up by holding onto the HTLC, so the more you should pay. Meanwhile, the grace period should depend on how many nodes there are still to go in the route. It needs to be higher to let each of those nodes deduct their delta from it. However, another user suggests that one could lie about both, and it's very undesirable to communicate these things anyway.</summary>
+    <published>2020-02-28T03:41:32+00:00</published>
+  </entry>
+</feed>

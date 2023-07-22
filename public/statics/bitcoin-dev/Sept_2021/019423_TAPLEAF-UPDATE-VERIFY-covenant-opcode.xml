@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TAPLEAF_UPDATE_VERIFY covenant opcode</title>
+  <updated>2023-06-15T01:39:56.274720+00:00</updated>
+  <author>
+    <name>darosior 2021-09-09 12:56:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TAPLEAF_UPDATE_VERIFY covenant opcode</title>
+    <updated>2023-06-15T01:39:56.274720+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019423.html" rel="alternate"/>
+    <summary>The email thread primarily discusses the concept of TLUV, which is a new idea that enables policies on the Spend transaction in the Revault protocol. The Revault protocol is a multi-party "vault" protocol that allows partial delegation of funds and automated policies. However, it does not offer policies on the Spend transaction itself. To enable such policies, the managers need to disclaim the Spend transaction they are going to use before broadcasting the Unvault. TLUV fixes this by using Taproot with a branch containing the manager multisig and a TLUV that would replace the current branch being executed by CSV + CTV. This allows for more flexibility and creates problems that are not expanded on in this email.The email also goes into detail about the implementation complexities of IN_OUT_AMOUNT, which involves introducing OP_SUCCESS opcode to allow arbitrary redefinition of other opcodes. TLUV pops three items off the stack: C, H, and X, and the low bit of C indicates the parity of X. It also shows examples of what could be done with TLUV to control how the spending scripts can change between the input and output sPK.After discussing TLUV, the email moves on to discuss the implementation of the release/locked/available vault construct and the pooled scheme that updates the internal pubkey. However, there are concerns about what happens if certain conditions are not met when removing participants from the pool.The context then shifts to the challenges in designing a pool of funds that can be used by multiple parties while ensuring security. One challenge is dealing with odd-y values in internal public keys which can lead to incorrect signature requirements for key path spends. The author proposes several solutions, including ignoring the caveat for smaller pools or committing to parity in scriptPubKey or value. If hashes for new merkle steps are programmable, it could lead to interesting features such as allowing anyone to add themselves to a pool. Lastly, the author suggests using templates when constructing new scripts and being strict to prevent miners from bypassing covenant constraints. Overall, the email provides a detailed discussion of TLUV and its potential applications, as well as the challenges and proposed solutions in designing a secure pool of funds for multiple parties.</summary>
+    <published>2021-09-09T12:56:10+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>libcoin (HEAD) now supports boost &lt; 1.47 - please test</title>
+  <updated>2023-06-06T02:41:10.167182+00:00</updated>
+  <author>
+    <name>Michael Grønager 2012-02-02 22:43:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>libcoin (HEAD) now supports boost &lt; 1.47 - please test</title>
+    <updated>2023-06-06T02:41:10.167182+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-February/001187.html" rel="alternate"/>
+    <summary>Michael Grønager acknowledges a patch and says that enabling dynamic libraries was on his to-do list, but it's not yet supported on Windows. He explains that on Windows, you need to prepend class definitions with __declspec(dllexport) when you compile the dll and __declspec(dllimport) when you use the dll, which he finds annoying. He has the framework to automate this with CMake from a former project, but he hasn't tested it for libcoin yet, hence the static build. Michael also mentions that another issue with DLLs is that if you define a global variable, it is shared between all executables using this dll. Luke-Jr found that the problem in the code was that static libraries were being used instead of shared libraries, which is not best practice since most distros do not have static libraries installed by default. Luke-Jr patched the code to use shared libraries instead of static libraries. CoinQt stuff was also creating a problem, which was fixed in the patch. Finally, Michael provides his contact information at Ceptacle.</summary>
+    <published>2012-02-02T22:43:07+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Attack by modifying non-segwit transactions after segwit is accepted ?</title>
+  <updated>2023-06-11T19:55:37.470124+00:00</updated>
+  <author>
+    <name>Sergio Demian Lerner 2016-08-24 20:51:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Attack by modifying non-segwit transactions after segwit is accepted ?</title>
+    <updated>2023-06-11T19:55:37.471125+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-August/013071.html" rel="alternate"/>
+    <summary>The potential for malicious nodes to modify non-segwit transactions after segwit is activated has been discussed in a recent thread on Bitcoin Improvement Proposals (BIP). It has been suggested that a malicious node could receive a non-segwit transaction and re-format it into a segwit transaction with up to 400 Kbytes of segwit witness program data, resulting in both transactions having the same hash. The MAX_SCRIPT_ELEMENT_SIZE limit is only enforced on segwit execution, not old non-segwit execution, so witness program stack elements could be as large as 400 Kbytes. Although such a large modified transaction would likely not be properly relayed by the network due to low fees per byte, an attacker could modify the original transaction adding segwit witness program data only up to the point where the transaction is relayed but miners are discouraged to include it in blocks due to low fees/byte, successfully preventing the transaction from being mined.Another issue is that an attacker can encode arbitrary data, such as virus signatures or illegal content, into passing non-segwit transactions. One proposed solution is to increase the transaction version to 3 for segwit transactions, so a non-segwit transaction cannot be converted into a segwit transaction without changing the transaction hash. However, this does not solve all problems, as transactions having a mixture of segwit and non-segwit inputs could still suffer the same attack even if they are version 3.A simple check to prevent most of the problems would be to add a rule to IsStandardTX() that prevents witness programs from having a stack element of length greater than MAX_SCRIPT_ELEMENT_SIZE. However, a long-term solution would be to add the maximum size of the witness stack in bytes (maxWitnessSize) as a field for each input or as a field of the whole transaction.</summary>
+    <published>2016-08-24T20:51:47+00:00</published>
+  </entry>
+</feed>

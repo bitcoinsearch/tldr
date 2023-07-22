@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Overview of anti-covert-channel signing techniques</title>
+  <updated>2023-06-13T23:54:14.365006+00:00</updated>
+  <author>
+    <name>Marko Bencun 2020-03-21 20:29:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Overview of anti-covert-channel signing techniques</title>
+    <updated>2023-06-13T23:54:14.365006+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-March/017693.html" rel="alternate"/>
+    <summary>The discussion revolves around the security of hardware wallets against malicious attacks. The concern is not just limited to signing but also extends to key generation, where the PRG from which the seed is derived can be malicious. While there are several protocols for signing, there is not much research for key generation. One simple idea proposed is a commit-and-reveal protocol to generate a master public key pair with entropy contributions from both hardware and software. However, this idea comes with other drawbacks, most importantly, it is not compatible with hardened derivation, which creates a new security risk. Furthermore, the discussion examines the security property of protecting against a malicious SW with parallel signing sessions. To mitigate this issue, a solution is proposed by using AEAD encryption and authentication, where the state does not need to be confidential, and a simple MAC suffices. Additionally, SW can compute and send the challenge hash e, which HW can verify, thereby protecting against fault attacks in the computation of R and e.The proposed scheme for synthetic nonce involves two interactions, with stateless using MAC and verifying e. In the first interaction, SW generates a random t, computes h=H(t), and requests the R0 point that HW would use. In the second interaction, SW computes R=R0+tG, e=H(R,Q,m) and requests a signature. After verification, if all is good, HW computes s=k+H(R,Q,m)d and sends it to SW, which verifies that sG=R+eQ and publishes (R,s) if all is good.</summary>
+    <published>2020-03-21T20:29:26+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New BIP32 structure for P2SH multisig wallets [BIP-45]</title>
+  <updated>2023-06-10T23:43:02.461823+00:00</updated>
+  <author>
+    <name>Thomas Kerin 2015-10-04 17:24:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New BIP32 structure for P2SH multisig wallets [BIP-45]</title>
+    <updated>2023-06-10T23:43:02.461823+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-October/011364.html" rel="alternate"/>
+    <summary>The email thread is discussing privacy and security issues with BIP-45. In particular, the issue of reusing public keys when multi-signature addresses are restored from a seed is raised. A possible solution suggested by Jean Pierre is to take all public keys encoded in the purpose-specific extended public keys (m/45') of all co-signers and sort them lexicographically, according to BIP-45. Serialize this information and calculate its HASH160 (RIPEMD160 ∘ HASH256). Split the output into five 32-bit chunks, setting the MSB on all of them to 0. Use these 32-bit chunks to build a derivation path from the purpose-specific extended public keys. Treat this derivation path as if it was the purpose-specific extended public key in BIP-45.Tamas Blummer suggests amending BIP45 but notes that BIP's are not amended after the fact (however bad it may be in retrospect). He suggests writing a BIP specifying a "pseudo-random &amp; deterministic path generation for HD/multi-signature accounts." The reuse of public keys provides no defense against wallets that do not implement deterministic signing and use poor entropy for signature nonces.Jean-Pierre provides a detailed explanation of his proposal. The scheme will avoid public key sharing and ensures that all participants are equal. This minimalizes the data required for recovery because it's deterministic, and the (extended) public key is the first piece of metadata that will be requested from others. It eliminates the problem of reusing public keys.Finally, Tamas Blummer notes that unless users are expected to establish a single co-signing account, this scheme will result in reuse of public keys and degradation of privacy. He suggests that privacy and potential security degradation due to increased public key reuse in the case of users with multiple multi-signature accounts should get a mention in the BIP-45 document.</summary>
+    <published>2015-10-04T17:24:59+00:00</published>
+  </entry>
+</feed>

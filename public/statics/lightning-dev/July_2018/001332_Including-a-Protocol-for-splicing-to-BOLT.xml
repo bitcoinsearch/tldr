@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Including a Protocol for splicing to BOLT</title>
+  <updated>2023-05-25T01:38:31.959292+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-07-01 23:55:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Including a Protocol for splicing to BOLT</title>
+    <updated>2023-05-25T01:38:31.959292+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-July/001332.html" rel="alternate"/>
+    <summary>The Lightning-dev mailing list recently discussed the implementation of splice in and out features. Two ways to splice were proposed: broadcasting a spend which joins with one or more random outputs and then maintaining both old and new channels until it confirms deeply enough, or pre-committing by setting up another funding transaction and then joining the channels together once it's deep enough. However, the second option requires two on-chain transactions, so some prefer the original model despite its complexity. For version 1.1, it is suggested that only one concurrent change be allowed at a time, meaning for the 6 blocks or so, users cannot organize another splice in/out. This would reduce complexity. The gossip extension needed for this feature is difficult, as extending channel_announce would not propagate through old nodes until the new channel is six deep, and extending channel_update would not propagate once the new spend is seen on the bitcoin network. A new message type wouldn't propagate at all through old nodes. It may be possible to make the "splice information" sigs + old-chanid discardable.In terms of implementation, a splicing proposal should include a generic message for both splice in/out which allows both sides to schedule/queue up possible changes and most of the channel parameters can be re-negotiated at this point. There should also be fully async splice in/out to improve user experience. A sort of pre-announcement gossip messages would signal other nodes that the channel is about to change outpoints but they can still keep routing through it. Without these messages, nodes would interpret the action as a close then open of a channel rather than a re-allocation. While there are potential issues that need to be addressed, the discussion shows promising progress towards implementing the splice in/out feature.</summary>
+    <published>2018-07-01T23:55:48+00:00</published>
+  </entry>
+</feed>

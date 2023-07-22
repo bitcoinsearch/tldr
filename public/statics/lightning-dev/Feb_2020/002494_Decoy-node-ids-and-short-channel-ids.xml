@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Decoy node_ids and short_channel_ids</title>
+  <updated>2023-06-02T22:41:31.731084+00:00</updated>
+  <author>
+    <name>Rusty Russell 2020-02-04 04:04:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Decoy node_ids and short_channel_ids</title>
+    <updated>2023-06-02T22:41:31.731084+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002494.html" rel="alternate"/>
+    <summary>Bastien Teinturier suggested that if Alice opens multiple channels to each of her Bobs, she should use Tor and a different node_id each time for better privacy. Rusty Russell, on the other hand, started implementing two new uses for this feature. The first one is to always use a temporary id to obscure an onchain footprint when having a private channel. The second one is to apply a new temporary id and new nodeid on every invoice, which applies only to that invoice, for an extra layer of transience.However, implementing the second option securely is difficult. It requires brute-forcing the onion against N keys and using a temporary key. If not done properly, Mallory can get an invoice, send malformed payments to Alice using the transient key in the invoice, and see if she decrypts it. To prevent this, ALL code paths between the two must return WIRE_INVALID_ONION_HMAC.Moreover, Alice cannot do this properly without Bob telling her what the scid he used to route was. Otherwise, Mallory gets two invoices and wants to know if they're actually the same node. To solve this problem, update_add_htlc needs a new scid field. Rusty suggested adding a new channel_flag, which assigns a random SCID from the peer in funding_locked if set (and feature flag is offered).This overrides the funding-transaction-based SCID and covers the first case for new channels without adding much complexity at all. For existing channels, a new "give me a replacement scid" msg and reply are needed, but it can be idempotent (you only ever get one replacement).</summary>
+    <published>2020-02-04T04:04:31+00:00</published>
+  </entry>
+</feed>

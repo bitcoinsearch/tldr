@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Idea: Efficient bitcoin block propagation</title>
+  <updated>2023-05-19T21:13:34.288943+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2015-08-06 18:42:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Idea: Efficient bitcoin block propagation</title>
+    <updated>2023-05-19T21:13:34.288943+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/009968.html" rel="alternate"/>
+    <summary>In a discussion thread on Bitcoin-dev mailing list, Tom Harding inquired about whether the relay network would validate block version numbers in the future. It was clarified that the relay network already validates block version numbers and only relays valid transactions. However, the block relaying itself is explicitly "unvalidated", and the software client can only be used with a mempool maintaining full node, meaning many stateless checks are performed. Sergio Demian Lerner asked if there was any up-to-date documentation about TheBlueMatt relay network, including what kind of block compression it was currently doing. In response, it was mentioned that Matt did not have an extensive write-up, but the basic optimization performed by the network was trivial. This optimization involves relaying transactions verified by a local node and keeping a FIFO (first-in-first-out) of the relayed transactions in both directions, which is synchronous on each side. When a block is received, it replaces transactions with their indexes in the FIFO and relays it along. Transactions not in the FIFO are escaped and sent whole. On the other side, the block is reconstructed using the stored data and handed to the node. There is some elaboration for resource management, such as multiple queues for different transaction sizes, and more recently, using block templates to learn transaction priority to be a bit more immune to spam attacks. However, better management of queues or efficient transmission of membership sets could be done, and it's just basically the simplest thing that isn't completely stupid.</summary>
+    <published>2015-08-06T18:42:38+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New transaction policies (nVersion=3) for contracting protocols</title>
+  <updated>2023-06-16T00:26:21.008981+00:00</updated>
+  <author>
+    <name>Greg Sanders 2022-09-26 16:01:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New transaction policies (nVersion=3) for contracting protocols</title>
+    <updated>2023-06-16T00:26:21.008981+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-September/020942.html" rel="alternate"/>
+    <summary>The Bitcoin community has proposed new rules for version 3 (V3) transactions to prevent pinning attacks. Pinning attacks can stop a transaction from being replaced by adding many descendant transactions that aren't fee-bumping. The V3 proposal would first de-duplicate the ParentTx based on what is in the mempool, then look at the "rest" of the transactions as a package. The proposal solves Rule 3 pinning and may allow us to get rid of CPFP carve-out. Transactions with nVersion=3 are currently non-standard in Bitcoin Core. Anything that was standard before this policy change would still be standard afterward.The transactions can be replaced even if they do not signal BIP125 replaceability, and any descendant of an unconfirmed V3 transaction must also be V3. These rules apply to commitment transactions in the Lightning Network, which should be V3 and have one anchor output. If the commitment transaction needs to be broadcast, the desired feerate is determined at broadcast time, and the anchor output is spent in a high-feerate transaction.The V3 proposal allows the creation of presigned transactions paying zero fees and one output for attaching a child pays for parent (CPFP) at broadcast time. Without package replace-by-fee (RBF), multiple anchor outputs would be required. A V3 transaction that has an unconfirmed V3 ancestor cannot be larger than 1000 virtual bytes, and all package transactions with mempool conflicts must be V3.</summary>
+    <published>2022-09-26T16:01:54+00:00</published>
+  </entry>
+</feed>

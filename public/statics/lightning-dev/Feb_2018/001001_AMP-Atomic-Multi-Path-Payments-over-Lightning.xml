@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>AMP: Atomic Multi-Path Payments over Lightning</title>
+  <updated>2023-05-24T20:53:24.738926+00:00</updated>
+  <author>
+    <name>Conner Fromknecht 2018-02-07 02:14:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>AMP: Atomic Multi-Path Payments over Lightning</title>
+    <updated>2023-05-24T20:53:24.739007+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/001001.html" rel="alternate"/>
+    <summary>The Atomic Multi-Path (AMP) payment protocol can be experimented with on Lightning network with a new feature bit. AMP requires no fundamental changes to the existing protocol as negotiation is strictly end-to-end between sender and receiver. Modifications to the fee schedule may make it cheaper to send payments over multiple flows rather than one giant flow, but the existence of per-hop fees means splitting the payment over multiple flows will very likely be more expensive compared to using a single flow. Using smaller payments increases the set of possible paths a partial payment could have taken, reducing the effectiveness of static analysis techniques involving channel capacities and plaintext values being forwarded. To include the three tuple within the per-hop payload for the final destination, the first byte of the unused padding bytes in the payload is repurposed to signal version 0x01 of the AMP protocol. The `realm` byte controls the interpretation of the rest of the 65-byte packet. Supporting AMP only at final payees might be enough and redefining the entire 64 bytes of the final hop data would reduce route length by one. AMP at intermediate nodes might not matter much because taking advantage of it seems more complex than just asking your routing algorithm to provide multiple routes to a destination. Paths of sufficient capacity to the destination were scarce, which resulted in paying a needlessly high proportional fee to begin with. In an AMP world, there will be an abundance of channels that can route small, partial payments, which may itself drive down the competitive fee rate for smaller payments. The current proposal allows the paths of partial payments to overlap. For the first n-1 partial payments, sending (0, s_i), and then (n, s_i) on the final one would maintain order invariance on the receiving end. The receiver can verify they've received the correct BP and n.</summary>
+    <published>2018-02-07T02:14:45+00:00</published>
+  </entry>
+</feed>

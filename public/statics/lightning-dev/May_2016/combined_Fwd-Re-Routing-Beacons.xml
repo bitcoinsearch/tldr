@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Fwd: Re: Routing &amp; Beacons</title>
+  <updated>2023-05-23T23:39:05.828347+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-05-02 23:27:56</name>
+  </author>
+  <author>
+    <name>laurentmt 2016-05-01 16:26:50</name>
+  </author>
+  <author>
+    <name>laurentmt 2016-05-04 16:00:46</name>
+  </author>
+  <link href="lightning-dev/May_2016/000531_Fwd-Re-Routing-Beacons.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2016/000528_Fwd-Re-Routing-Beacons.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2016/000533_Fwd-Re-Routing-Beacons.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Fwd: Re: Routing &amp; Beacons</title>
+    <updated>2023-05-23T23:39:05.828862+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-May/000531.html" rel="alternate"/>
+    <summary>In an email conversation between Rusty Russell and LaurentMT, they discussed the best approach for implementing routing tables in the Lightning Network. They considered capacity as the most dynamic variable, which could be stored in routing tables but keeping them up to date would be a challenge. To reduce flapping and retries, prices were indicated as base + per-satoshi cost, and nodes were ratelimited on their pricing updates. Price changes were phased in over time to prevent abrupt changes. False advertising was handled by broadcasting the response from a node that refused to route a payment.LaurentMT proposed a scenario where landmark nodes periodically sent messages to their neighbors every 30 seconds, initiating a new temporal frame that computed the best route to the landmark node. After a delay, the node forwards the message to its neighbors, repeating the process until every node knows the best route to/from a given landmark. When a node needs to send a payment, the receiver sends her best routes to each landmark node, allowing the sender to compute the best route to reach the receiver and enable onion routing.They also consider the "base+per-satoshi" fee model handling micropayments and suggest using nominal values to determine the best route. Additionally, fees seem conceptually associated with the node, and there's no distinction related to the direction of the payment. There's a related question of how fees are collected, and the simplest option is that the node pushing the HTLC into the channel collects the fee.Finally, they discuss having simulations to gain insight into the implementation of routing tables.</summary>
+    <published>2016-05-02T23:27:56+00:00</published>
+  </entry>
+</feed>

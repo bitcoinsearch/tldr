@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Payment channel without timeout protected from malleability</title>
+  <updated>2023-05-23T21:45:07.568844+00:00</updated>
+  <author>
+    <name>Nicolas Dorier 2015-11-27 21:46:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Payment channel without timeout protected from malleability</title>
+    <updated>2023-05-23T21:45:07.569825+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000362.html" rel="alternate"/>
+    <summary>In this conversation, the speakers are discussing a protocol for creating a Bitcoin channel between two parties, A and B. A sends an unsigned commitment to B, who verifies that it's in the right format and hashes to the hash that he signed. However, if A passes the unsigned commitment to B, then B can malleate the anchor, so this step needs to happen after the anchor's confirmed in the blockchain and A's told B about the anchor. They also discuss the issue of pubkeys and redeem hashes being reused between different channels. If A does reuse a key, then B can guess the redeem hash and identify the transaction to malleate at broadcast time before A's announcement. However, B will be providing a signature for a tx that has the anchor as input and a single refund output payable to (A &amp;&amp; OP_CSV) | (B &amp;&amp; OP_HASH  OP_EQUALVERIFY). B won't be able to guess what the hash is, so won't be able to correlate with potential anchor transactions at all, even if pubkeys and redeem hashes are both known to B.The speakers express concerns about random vandalism, but opening the channel as described is a good enough workaround until segregated witness is implemented. They also note that B won't be able to guess the hash, so won't be able to correlate with potential anchor transactions.</summary>
+    <published>2015-11-27T21:46:34+00:00</published>
+  </entry>
+</feed>

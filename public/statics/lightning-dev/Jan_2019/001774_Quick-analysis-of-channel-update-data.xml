@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Quick analysis of channel_update data</title>
+  <updated>2023-06-02T16:53:16.550420+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-01-02 17:26:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Quick analysis of channel_update data</title>
+    <updated>2023-06-02T16:53:16.550420+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-January/001774.html" rel="alternate"/>
+    <summary>In a recent email exchange on the Lightning-dev mailing list, Fabrice Drouin shared his findings about the steady stream of channel updates, even when fee parameters don't seem to change. He had made hourly backups of the routing table of one of their nodes and compared these tables to see what exactly was being modified. His observations revealed that there were many disable/enable/disable updates which are just sent when a channel is disabled then enabled again (when nodes go offline for example). This can happen several times a day for the same channel ID. Additionally, there are also many updates that don't change anything except a new timestamp and signatures, which leads to syncing info that is already present in the routing table.Christian Decker responded to the email and explained that the second observation is likely due to the staggered broadcast merging multiple updates. He suggested that locally updating the timestamp and signature for the old `channel_update` would be a better option rather than forwarding the update. For the ones that flap with a period long enough for disabling and enabling updates being flushed, we are presented with a tradeoff. They currently hold back disabling `channel_update`s until someone actually attempts to use the channel at which point they fail the HTLC and send out the stashed `channel_update` thus reducing the publicly visible flapping. Christian further added that they could think about a local policy on how much to delay a `channel_update` depending on the past stability of that peer. These policies can be tried out to see which ones work best. Overall, the email exchange discussed the issue of syncing redundant information in routing tables due to frequent channel updates and proposed solutions that can be implemented as local policy without warranting any spec changes.</summary>
+    <published>2019-01-02T17:26:07+00:00</published>
+  </entry>
+</feed>

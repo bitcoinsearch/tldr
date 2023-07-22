@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Nonce blinding protocol for hardware wallets and airgapped signers</title>
+  <updated>2023-06-13T23:49:38.404909+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-02-28 13:31:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Nonce blinding protocol for hardware wallets and airgapped signers</title>
+    <updated>2023-06-13T23:49:38.404909+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-February/017660.html" rel="alternate"/>
+    <summary>The topic of hardware wallets and air-gapped computers being compromised is discussed in detail, with the acknowledgement that they can be attacked through supply chain attacks or malicious firmware updates. Even if the signer is isolated, it can still leak private keys by choosing nonces for signatures in a particular way. Deterministic nonce generation can only be verified if private keys are used somewhere else, which doubles the attack surface. To fix this issue, a protocol is suggested for signing a message `m` which involves the host picking a random number `n`, sending it to the signer along with the hash of the message `m`, and then the signer computing a nonce `k`. It is highlighted that using a deterministic scheme, taking as input the message `m` and the privkey only, would be unsafe in certain scenarios. For instance, if the hardware signer has its power supply coming from USB and the communication channel is over USB as well, the host can selectively turn on/off the hardware signer, making it vulnerable to targeted attacks. Therefore, it's recommended to derive `k` from the message `m` plus the `sha256(n)` and the privkey, mixed together using a suitable hashing function `f()`. It's also noted that a completely-random `k` would be better, but the signer might not have enough resources to gather sufficient entropy.</summary>
+    <published>2020-02-28T13:31:29+00:00</published>
+  </entry>
+</feed>

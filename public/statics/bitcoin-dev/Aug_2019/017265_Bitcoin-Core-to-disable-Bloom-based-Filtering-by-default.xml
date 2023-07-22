@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Bitcoin Core to disable Bloom-based Filtering by default</title>
+  <updated>2023-05-20T20:40:14.331535+00:00</updated>
+  <author>
+    <name>Matt Corallo 2019-08-14 15:07:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Bitcoin Core to disable Bloom-based Filtering by default</title>
+    <updated>2023-05-20T20:40:14.331535+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-August/017265.html" rel="alternate"/>
+    <summary>In a thread on the bitcoin-dev mailing list, Matt Corallo announced that bloom filter serving will be turned off by default in the next Bitcoin Core release. Bloom filter serving has been an option for many releases, and it has been a well-known DoS vector for some time. As other DoS vectors have slowly been closed, this has become increasingly an obvious low-hanging fruit. Those who are using it should already have long been filtering for NODE_BLOOM-signaling nodes, and it is not anticipated that this will result in a significant lack of availability of NODE_BLOOM-enabled nodes in the coming years. However, clients which rely on the availability of NODE_BLOOM-supporting nodes on the P2P network should consider the process of migrating to a more modern (and less trustful and privacy-violating) alternative over the coming years. Will Madden expressed a strong NACK on the proposal, stating that this breaks several established SPV implementations (such as early breadwallet for sure and possibly current BRD wallets) and he has yet to see quantitative prioritization or even a rational justification for this change. Requiring SPV wallets to communicate with trusted nodes is centralization, and breaking functionality and implementations that enable this without a thoroughly researched rationale is highly suspect. In response, Matt reminded Will that he did not bother to read other mails in this thread and provided him with a few links. The links provided were to previous discussions on the mailing list regarding the proposal. The announcement made by Matt was a heads-up for those watching the list who may be using it. The release notes will likely read that the default value for the -peerbloomfilters configuration option (and, thus, NODE_BLOOM support) has been changed to false. This resolves well-known DoS vectors in Bitcoin Core, especially for nodes with spinning disks. Overall, the proposal to turn off bloom filter serving by default in the next Bitcoin Core release has been met with mixed reactions on the mailing list. While some agree with the move, others have expressed concerns about its impact on SPV implementations and centralization.</summary>
+    <published>2019-08-14T15:07:19+00:00</published>
+  </entry>
+</feed>

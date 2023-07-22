@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_CHECKSPVPROOFVERIFY</title>
+  <updated>2023-05-23T18:46:24.368209+00:00</updated>
+  <author>
+    <name>Eric Lombrozo 2015-08-01 04:29:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_CHECKSPVPROOFVERIFY</title>
+    <updated>2023-05-23T18:46:24.368209+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-August/000090.html" rel="alternate"/>
+    <summary>The context discusses minor script corrections, with a focus on creating commitment transactions and scripts for Prover and Verifier parties. The Prover wants to receive one currency unit from the Verifier for an SPV proof, but due to its high cost, they need to negotiate how to split the risk. They create commitment transactions with different signatures, timeouts, and revocation possibilities. A script for [ProverSig + VerifierRevocation || ProverSig + SPV proof || VerifierSig + timeout] is introduced, which uses OP_IF and OP_ELSE statements. It checks if the hash of the public key equals a given value, then verifies the signature. Alternatively, it drops three stack items and verifies the signature or checks the locktime. To redeem this output using the SPV proof, the Prover uses OP_CHECKSPVPROOFVERIFY OP_DROP.Once the commitment transactions are created, the Verifier receives the SPV proof, and both parties negotiate settlement transactions and exchange revocations. Eric Lombrozo suggests using the OP_CHECKSPVPROOFVERIFY OP_DROP script command to incentivize nodes to construct SPV proofs, but Rusty Russell notes that OP_CAT is disabled, and the txlen limit may pose a problem.</summary>
+    <published>2015-08-01T04:29:24+00:00</published>
+  </entry>
+</feed>

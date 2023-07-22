@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>On the scalability issues of onboarding millions of LN mobile clients</title>
+  <updated>2023-06-03T01:16:53.278965+00:00</updated>
+  <author>
+    <name>Antoine Riard 2020-05-06 08:27:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>On the scalability issues of onboarding millions of LN mobile clients</title>
+    <updated>2023-06-03T01:16:53.278965+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-May/002686.html" rel="alternate"/>
+    <summary>In a recent email exchange between Antoine Riard and Andrés G. Aragoneses, Riard discusses the challenges of designing a mobile-first Lightning Network (LN) experience, particularly in terms of security and privacy. He notes that while there are light client protocols for LN, their privacy and security guarantees with regards to implementation on the client-side may still be an object of concern. One of the bottlenecks is likely the number of full-nodes being willing to dedicate resources to serve those clients. Riard argues that unless your light client protocol is so cheap as to rely on niceness of a subset of node operators offering free resources, it won't scale.Assuming 10M light clients each consuming ~100MB/month for filters/headers, that means you're asking 1PB/month of traffic to the backbone network. If you assume 10K public nodes, like today, assuming all of them opt-in to signal BIP 157, that's an increase of 100GB/month for each. Which is consequent with regards to the estimated cost of 350GB/month for running an actual public node. He argues that it may be wise to dedicate more resources to increasing the health and security of the backbone network like deploying more outbound connections instead of relying on cheaper, more efficient protocols like BIP 157. Furthermore, the LN security model diverges hugely from basic on-chain transactions. The worst-case attack on-chain is a malicious light client server showing a longest, invalid, PoW-signed chain to double-spend the user. On LN, the liveliness requirement means the entity owning your view of the chain can lie to you on whether your channel has been spent by a revoked commitment, the real tip of the blockchain or even dry-up block announcement to trigger unexpected behavior in the client logic. Riard suggests introducing monetary compensation in exchange for servicing filters. Light client not dedicating resources to maintain the network but free-riding on it, you may use their micro-payment capabilities to price chain access resources. This proposition may suit within the watchtower paradigm, where another entity is delegated some part of protocol execution, alleviating client onliness requirement. In conclusion, Riard argues that it may be good to consider a reasonable alternative to just relying on a few thousand full-node operators being nice and servicing friendly millions of LN mobiles clients.</summary>
+    <published>2020-05-06T08:27:45+00:00</published>
+  </entry>
+</feed>

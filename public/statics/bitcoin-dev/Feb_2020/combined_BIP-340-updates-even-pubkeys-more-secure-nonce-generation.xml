@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - BIP 340 updates: even pubkeys, more secure nonce generation</title>
+  <updated>2023-06-13T23:41:37.238106+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2020-02-26 04:20:58</name>
+  </author>
+  <author>
+    <name>Jonas Nick 2020-02-26 15:34:04</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-03-22 05:51:59</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-03-22 05:51:59</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2020-02-24 04:26:17</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-02-26 04:20:58</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-02-26 04:20:58</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-02-27 04:55:21</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-03-22 05:51:59</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-02-27 04:55:21</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2020-02-24 04:26:17</name>
+  </author>
+  <author>
+    <name>Jonas Nick 2020-02-26 15:34:04</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2020-02-24 04:26:17</name>
+  </author>
+  <author>
+    <name>Jonas Nick 2020-02-26 15:34:04</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-02-27 04:55:21</name>
+  </author>
+  <link href="bitcoin-dev/Feb_2020/017650_BIP-340-updates-even-pubkeys-more-secure-nonce-generation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017651_BIP-340-updates-even-pubkeys-more-secure-nonce-generation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017694_BIP-340-updates-even-pubkeys-more-secure-nonce-generation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017694_BIP-340-updates-even-pubkeys-more-secure-nonce-generation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017639_BIP-340-updates-even-pubkeys-more-secure-nonce-generation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017650_BIP-340-updates-even-pubkeys-more-secure-nonce-generation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017650_BIP-340-updates-even-pubkeys-more-secure-nonce-generation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017657_BIP-340-updates-even-pubkeys-more-secure-nonce-generation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017694_BIP-340-updates-even-pubkeys-more-secure-nonce-generation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017657_BIP-340-updates-even-pubkeys-more-secure-nonce-generation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017639_BIP-340-updates-even-pubkeys-more-secure-nonce-generation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017651_BIP-340-updates-even-pubkeys-more-secure-nonce-generation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017639_BIP-340-updates-even-pubkeys-more-secure-nonce-generation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017651_BIP-340-updates-even-pubkeys-more-secure-nonce-generation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017657_BIP-340-updates-even-pubkeys-more-secure-nonce-generation.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - BIP 340 updates: even pubkeys, more secure nonce generation</title>
+    <updated>2023-06-13T23:41:37.238106+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-February/017650.html" rel="alternate"/>
+    <summary>BIP 340-342, a set of updates intended to improve the security of bitcoin transactions, has been discussed on the bitcoin-dev mailing list. One notable change is the introduction of new tagged hash tags in BIP 340 to ensure compatibility and improve security. The Y coordinate of 32-byte public keys has also been changed to implicitly even, simplifying integration with existing key generation infrastructure and making signing slightly faster. Verification becomes negligibly slower as a result.The update emphasizes the importance of non-deterministic signatures in many cases and recommends including signing-time randomness to protect against fault injection attacks. However, deterministic signatures and how to produce them may not be enough as "reasonably secure" includes misuse resistance which would be violated if the pubkey was not input to the nonce generation function. To mitigate the risk of trivial leakage of private keys, the update suggests including the public key in the nonce generation process.The discussion around BIP 340-342 revolves around protecting against differential power analysis, a method used to extract sensitive information from cryptographic systems by analyzing their power consumption. The traditional way of mixing randomness was found to be vulnerable, so a different approach is used - completely masking the private key with randomness before continuing. The writer suggests that citing this method in the specification would be beneficial. In addition to the above changes, nonce exfiltration protection and MuSig standards are suggested as important for ensuring compatibility across wallets. Despite being included in the alternative signing section, LL suggests having test vectors for these alternative methods and even having their own BIP. It is noted that hardware wallets may be vulnerable to these attacks during key derivation, as getting side channel information from hashes in nonce derivation means getting it from hashes in HD key derivation as well, and it might be easier since the master seed is hashed for all necessary hardware device operations, including signing. Overall, while these changes were not initially expected, they are believed to be worth making as they would improve the security of the specification.</summary>
+    <published>2020-02-26T04:20:58+00:00</published>
+  </entry>
+</feed>

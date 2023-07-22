@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DRAFT: interactive tx construction protocol</title>
+  <updated>2023-06-02T23:04:21.347427+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-01-30 23:31:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DRAFT: interactive tx construction protocol</title>
+    <updated>2023-06-02T23:04:21.347427+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-January/002479.html" rel="alternate"/>
+    <summary>In this communication, the author suggests using PoDLE as used in JoinMarket to solve a similar problem. PoDLE commits to a UTXO without being trivially grindable from the UTXO set and includes a proof that the creator of the PoDLE knows the secret key behind it. It can later be opened to reveal which UTXO the opener allocated. If the opener aborts, then the acceptor can gossip the UTXO and the revealed PoDLE to the rest of Lightning, so that the opener cannot reuse the same UTXO to probe other potential acceptors. The issue of allowing a UTXO to be used at most N times is solved by appending a single byte to something that is hashed and ensuring its value is less than N. The author also mentions that JoinMarket implements PayJoin, which is not obvious on-chain and does anti-fee-sniping emulation for PayJoin. JoinMarket also strives to make similar fee rates across users. The use-case is quite similar to a PayJoin, where the opener proposes to make a payment, and the acceptor adds some UTXOs which will contribute to the payment output. The author suggests that later on, they may want to consider nLockTime anti-fee-sniping as well in multi-funded channel opens. Additionally, the author notes that this interactive tx construction mechanism can be used for channel factories. PoDLE techniques would also be useful to multi-funded channel factories. Sharing PoDLE format with JoinMarket is suggested so that they can share PoDLE with them. Finally, the author suggests mandating in some BOLT spec to retain PoDLE for at least a year or a month or two weeks or so, which should be enough to slow down probe attempts.</summary>
+    <published>2020-01-30T23:31:59+00:00</published>
+  </entry>
+</feed>

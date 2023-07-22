@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Probing final receiver with refund timeout</title>
+  <updated>2023-05-23T22:37:37.866485+00:00</updated>
+  <author>
+    <name>Mats Jerratsch 2016-03-02 11:29:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Probing final receiver with refund timeout</title>
+    <updated>2023-05-23T22:37:37.866485+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-March/000452.html" rel="alternate"/>
+    <summary>It has been discovered that it is possible to attack the onion routing with probing too short of an absolute CLTV refund timeout. When accepting a payment, one will check if the remaining timeout &gt; MIN_TIMEOUT. When relaying the payment to the next node, one can either decide to check directly if the next node would accept it or just relay and see what happens. Checking directly is equivalent to checking for 2 * MIN_TIMEOUT before accepting it. However, as the next node will check for 2 * MIN_TIMEOUT again, this is running in circles and just blindly increasing the final MIN_TIMEOUT. For an attacker, it is now possible to choose a timeout that is lower than 2 * MIN_TIMEOUT.If the payment succeeds, the attacker knows that the next node was the final receiver, and if it doesn't, he can redo the payment with a larger timeout without any drawback, basically probing all payments once. Testing for a larger timeout before accepting / relaying does not solve this problem. If all nodes only accept payments with timeout &gt; 10 * MIN_TIMEOUT, you can still probe with 10.5 * MIN_TIMEOUT. The only way to solve this would be to include the timeout the previous node should have sent you and the timeout you should use for the next node into the onion object and test it accordingly.If you discover that the previous node messed with the timeout, you directly refund it. It further complicates routing though, as the source of the payment needs to know all MIN_TIMEOUT of the nodes in the route. It also needs more coordination when doing RP-routing, as the receiver has to include the timeout he chose for the first hop of his route. It probably also opens up another attack vector for attacking the network with unroutable payments.</summary>
+    <published>2016-03-02T11:29:39+00:00</published>
+  </entry>
+</feed>

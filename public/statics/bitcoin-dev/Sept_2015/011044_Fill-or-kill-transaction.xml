@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fill-or-kill transaction</title>
+  <updated>2023-06-10T22:41:50.317657+00:00</updated>
+  <author>
+    <name>Btc Drak 2015-09-17 19:12:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fill-or-kill transaction</title>
+    <updated>2023-06-10T22:41:50.317657+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-September/011044.html" rel="alternate"/>
+    <summary>In a Bitcoin-dev mailing list thread, jl2012 discussed the idea of a fill-or-kill transaction system. The concept of fill-or-kill is to either get a transaction confirmed within a few confirms or drop it from the mempool so that it won't be considered for inclusion anymore. In Satoshi's implementation of nLockTime, a large amount of timestamp (from 1970 to 2009) goes unused, and this could be repurposed to build a fill-or-kill system with a soft fork. Two new parameters, nLockTime2 and nKillTime, are defined, and a bit flag in tx nVersion will activate the new rules.The resolution is four blocks or 2048s (34m), and the maximum confirmation window is 8188 blocks (56.9 days) or 16,769,024s (48.5 days). For example, with nLockTime2 = 20 and nKillTime = 100, a tx could be confirmed only between block 420,080 and 420,480. With nLockTime2 = 730,000 and nKillTime = 1000, a tx could be confirmed only between median time-past of 1,495,042,048 and 1,497,090,048.The growth of nLockTime will never catch up nLockTime2. At nLockTime2 = 719,999 and nKillTime = 2047, nLockTime = 1,974,559,999, which means 2016-09-22. However, the new rule will not allow confirmation until block 3,299,996, which is decades to go. For time-based nLockTime2 (&gt; 720,000), for every nLockTime2 value greater than or equal to 720,000, the lock time with the new rule must be one to 2048 seconds later than the original rule. A user wants his tx either filled or killed in about three hours. He will set a time-based nLockTime2 according to the current median time-past and set nKillTime = 5. A user wants his tx to get confirmed in the block 630000, the first block with a reward below 10BTC. He is willing to pay a high fee but doesn't want it to get into another block. He will set nLockTime2 = 210,000 and nKillTime = 0.Time-based OP_CLTV could be upgraded to support time-based nLockTime2. However, height-based OP_CLTV is not compatible with nLockTime2. To spend a height-based OP_CLTV output, the user must use the original nLockTime. We may need a new OP_CLTV2 that could verify both nLockTime and nLockTime2.The height-based nLockTime2 will overflow in 55 years. It's very likely that a hard fork will happen to implement a better fill-or-kill system. If not, everything could be rebooted with another tx nVersion for another 55 years.</summary>
+    <published>2015-09-17T19:12:08+00:00</published>
+  </entry>
+</feed>

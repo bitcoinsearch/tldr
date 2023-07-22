@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PTLCs early draft specification</title>
+  <updated>2023-05-23T16:55:24.840861+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-12-09 05:00:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PTLCs early draft specification</title>
+    <updated>2023-05-23T16:55:24.840861+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003394.html" rel="alternate"/>
+    <summary>In a mailing list conversation, Lloyd Fournier pointed out that the final message "Bob -&gt; Alice: revoke_and_ack" is not necessary if Alice is only sending new transactions paying Bob. However, it's intended to cover all update messages, and if Alice is also including any `update_fulfill_htlc` or `update_fail_htlc` messages in the commitment, she's potentially gaining funds. As an alternative to the `option_simplified_update` approach, aj suggested an approach where each node can unilaterally send various messages that always update the state asynchronously and nodes can track the state by having a list of htlcs/ptlcs/balances, etc for state (n), and a list of unapplied update messages for themselves and the other party (a+1,...,a') and (b+1,...,b'), and apply them in order when constructing the new state (n+1) for a new commitment signing round. The proposal message should just include both update values (a') and (b'). Though Bob's new commit tx can use the same revocation key as the previous one, fail/fulfill messages break it. Nonetheless, avoiding sending unnecessary messages is usually more performant and simpler, and the extra message from Bob allows Alice to discard the adaptor sigs associated with the old state.</summary>
+    <published>2021-12-09T05:00:16+00:00</published>
+  </entry>
+</feed>

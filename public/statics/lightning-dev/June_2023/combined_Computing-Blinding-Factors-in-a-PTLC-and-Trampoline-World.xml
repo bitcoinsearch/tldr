@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Computing Blinding Factors in a PTLC and Trampoline World</title>
+  <updated>2023-07-13T17:35:32.129730+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2023-07-03 12:25:57+00:00</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj  + 2023-06-28 20:34:37+00:00</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2023-07-04 20:55:34+00:00</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj  + 2023-06-28 20:34:37+00:00</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj  + 2023-06-28 20:34:37+00:00</name>
+  </author>
+  <link href="lightning-dev/July_2023/004002_Computing-Blinding-Factors-in-a-PTLC-and-Trampoline-World.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2023/003999_Computing-Blinding-Factors-in-a-PTLC-and-Trampoline-World.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2023/004003_Computing-Blinding-Factors-in-a-PTLC-and-Trampoline-World.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2023/003999_Computing-Blinding-Factors-in-a-PTLC-and-Trampoline-World.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2023/003999_Computing-Blinding-Factors-in-a-PTLC-and-Trampoline-World.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Computing Blinding Factors in a PTLC and Trampoline World</title>
+    <updated>2023-07-13T17:35:32.129805+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-July/004002.html" rel="alternate"/>
+    <summary>In this context, Bastien is addressing ZmnSCPxj and expressing confusion about the mechanism being used in the schnorr multi-hop locks proposal. Bastien refers to a construction from a specific source [1] and suggests that using a trampoline doesn't have any impact on the protocol. Bastien offers to create a diagram to show that the math checks out.ZmnSCPxj responds to the confusion and provides a mathematical demonstration of a method for computing blinding factors. The demonstration shows how the sender can securely communicate with the receiver and intermediate nodes without revealing unnecessary information. In the simplest case, the sender chooses a random scalar 'e' as the error blinding factor and constructs an onion with 'e' encrypted for the receiver. The sender also offers a PTLC with the point 'e * G + R' for the receiver to claim by revealing 'e + r'.When there are intermediate nodes involved, such as Carol, the sender needs to generate additional scalars 'c' and 'd' such that 'c + d = e'. The sender encrypts the onion with 'e' for the receiver and 'd' for Carol. Each intermediate non-Trampoline node adds its per-hop blinding factor times 'G' to the input point and uses the result as the output point to the next hop. The receiver still sees 'e * G + R' and cannot differentiate between direct and indirect paths.If Carol is a trampoline node and does not know that the ultimate receiver is the final trampoline hop, the sender encrypts 'e' for the receiver, 'd' for Carol, and the next trampoline hop to Carol. Carol then searches for a route to the ultimate receiver and creates an onion with 'b' encrypted for Alice. Alice decrypts the onion, learns 'b', and forwards the PTLC to the next hop. Again, the ultimate receiver sees 'e * G + R' and cannot distinguish whether it reached via a trampoline or directly.In conclusion, this method allows for secure communication between nodes while preserving privacy and ensuring that unnecessary information is not revealed. The ultimate sender knows the necessary information to recover the secret value 'r', but intermediate nodes only have enough information to claim their incoming PTLCs. The proposal aligns with the scheme described in the schnorr multi-hop locks proposal [1].In a mathematical demonstration, the author presents a method for computing blinding factors that enables secure communication between multiple nodes while maintaining privacy. The scenario involves an ultimate receiver who possesses a secret value 'r' and provides the ultimate sender with the point 'R', which is equal to 'r * G'. In the absence of intermediate nodes, the sender selects a random scalar 'e' as the error blinding factor and constructs an onion with 'e' encrypted for the receiver. Additionally, the sender offers a Point-Time Locked Contract (PTLC) with the point 'e * G + R' for the receiver to claim by revealing 'e + r'. This ensures that only the receiver can claim the PTLC.However, when there is an intermediate node, such as Carol, in the communication path, the sender needs to generate additional scalars 'c' and 'd' such that 'c + d = e'. The sender encrypts the onion with 'e' for the receiver and 'd' for Carol. The PTLC sent to Carol is 'c * G + R'. Carol adds 'd * G' to this point and sends a PTLC with 'c * G + R + d * G' to the next hop. In both the direct case and the indirect case involving Carol, the receiver still perceives 'e * G + R' and remains unable to differentiate between the two scenarios.If Carol acts as a trampoline node and lacks knowledge about being the final trampoline hop for the ultimate receiver, the sender encrypts 'e' for the receiver, 'd' for Carol, and the next trampoline hop to Carol. Subsequently, Carol searches for a route to the ultimate receiver and creates an onion with 'b' encrypted for Alice. Upon decryption by Alice, she learns 'b' and forwards the PTLC to the next hop. Again, the ultimate receiver observes 'e * G + R' and is unable to distinguish whether the communication occurred via a trampoline or directly.In all cases, each intermediate node possesses sufficient information to claim its incoming PTLC, while only the ultimate sender knows 'c' and can recover 'r'. This methodology allows for secure communication between nodes, ensuring privacy and preventing unnecessary information disclosure.</summary>
+    <published>2023-07-03T12:25:57+00:00</published>
+  </entry>
+</feed>

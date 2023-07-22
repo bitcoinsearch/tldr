@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Christian Deckers Duplex Micropayment Channels vs Lightning networks revocation key solution</title>
+  <updated>2023-05-24T21:30:38.833615+00:00</updated>
+  <author>
+    <name>René Pickhardt 2018-03-03 23:30:23</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-03-05 13:50:10</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-03-05 13:28:49</name>
+  </author>
+  <link href="lightning-dev/March_2018/001065_Christian-Deckers-Duplex-Micropayment-Channels-vs-Lightning-networks-revocation-key-solution.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001070_Christian-Deckers-Duplex-Micropayment-Channels-vs-Lightning-networks-revocation-key-solution.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001069_Christian-Deckers-Duplex-Micropayment-Channels-vs-Lightning-networks-revocation-key-solution.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Christian Deckers Duplex Micropayment Channels vs Lightning networks revocation key solution</title>
+    <updated>2023-05-24T21:30:38.833615+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-March/001065.html" rel="alternate"/>
+    <summary>Rene Pickhardt, a new Lightning dev asked about the rational for the lightning spec to go with revocation key system instead of Christian Decker's solution. The revocation system was already in the whitepaper and at the time of writing the whitepaper the work by Christian Decker wasn't out yet. Potential third-party observing service to detect cheaters is needed with the key revocation system which is complex to handle. However, ZmnSCPxj thinks that watchtowers under Poon-Dryja need only store the shachain and the funding txid, whereas watchtowers under Decker-Wattenhofer would have to store entire relative-timelocked transactions, leaking economic information at each update to a Decker-Wattenhofer watchtower. The main issue with duplex channels is that the maximum lockup period for funds in the worst case is proportional to the number of updates the channel can have. With Poon-Dryja (revocation) channels, there is no limit on the number of updates possible on a channel, especially when using Rusty Russell's "shachain" concept, where you get O(1) lockup time and O(1) transactions for n update limit under Poon-Dryja rather than O(log n) lockup time and O(log n) transactions for Decker-Wattenhofer. Every payment requires two updates: one to get payer funds to an HTLC, and the other to get the HTLC funds to the payee (or to revert the HTLC funds to the payer in case of routing failure). The potential thief trying to reuse old invalid state could make sure you will be offline for a few days, then broadcast (and hope it confirms) the kickoff transaction, wait for the old invalid state to be valid, and then broadcast the old invalid commitment transaction. Decker-Wattenhofer does have the advantage that its construction can be extended to any number of participants per channel, while Poon-Dryja does not seem like it can be easily extended beyond two per channel. The Burchert-Decker-Wattenhofer channel factories are where a Decker-Wattenhofer multiparticipant channel construction terminates into multiple two-participant Poon-Dryja channels.</summary>
+    <published>2018-03-03T23:30:23+00:00</published>
+  </entry>
+</feed>

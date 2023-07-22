@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving the initial gossip sync</title>
+  <updated>2023-05-24T20:36:31.119449+00:00</updated>
+  <author>
+    <name>Christian Decker 2018-02-09 11:41:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving the initial gossip sync</title>
+    <updated>2023-05-24T20:36:31.119449+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/001016.html" rel="alternate"/>
+    <summary>Christian Decker and Fabrice Drouin are trying to decide on the best approach for synchronizing nodes in the Lightning Network. Rusty Russell suggests using a timestamp mechanism as a simpler option, but Christian and Fabrice plan to simulate both mechanisms to determine which one consumes less bandwidth. They are particularly concerned about zombie channels and missing channels during synchronization. Christian and Rusty discuss deployment suggestions, including using a feature bit pair and appending an optional 4 byte `routing_sync_timestamp` field to the `init` message. Christian also proposes a new message instead of using the `init` message to avoid parseability issues for non-supporting nodes. He suggests that the `timestamp_routing_sync` feature should override `initial_routing_sync`, and they can append the optional `routing_sync_timestamp` field to the `init` message without any issues. However, Rusty argues that this would still require the peer to know that it has to skip 4 bytes to get any future fields. Regarding the proposal specifics, Rusty dislikes the re-transmission of all old `channel_announcement` and `node_announcement` messages just because there's been a recent `channel_update`. Christian proposes keeping a filter of the messages received from the peer to solve this issue. Christian explains that c-lightning keeps a tree of gossip in the order it receives them, but this is not the same as timestamp order. Therefore, they need to actively filter and skip over entries less than the `routing_sync_timestamp`. However, there is an implementation detail regarding when to stop retransmitting announcements and whether to remember which ones have been sent to each peer. In c-lightning, they can remember the index at which the initial sync started and send announcements until the index is larger than the initial sync index. Christian proposes having two timestamps, one highwater and one lowwater mark, to forward messages and announcements within a certain time window. This approach would also allow them to send multiple `timestamp_routing_sync` messages for different time windows, giving the syncing node control over what timewindow to send.</summary>
+    <published>2018-02-09T11:41:42+00:00</published>
+  </entry>
+</feed>

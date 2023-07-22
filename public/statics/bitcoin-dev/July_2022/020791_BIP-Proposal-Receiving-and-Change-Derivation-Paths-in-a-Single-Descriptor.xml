@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP Proposal: Receiving and Change Derivation Paths in a Single Descriptor</title>
+  <updated>2023-05-22T20:48:53.320326+00:00</updated>
+  <author>
+    <name>Andrew Chow 2022-07-26 21:41:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP Proposal: Receiving and Change Derivation Paths in a Single Descriptor</title>
+    <updated>2023-05-22T20:48:53.320326+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-July/020791.html" rel="alternate"/>
+    <summary>Andrew Chow has proposed a BIP that simplifies how descriptors for receiving and change addresses are represented. The proposal allows for a single derivation path element to specify a pair of indexes, which parsers can then expand into two almost identical descriptors. This works for descriptors involving multiple keys as well. The full text of the BIP can be found on Github, and an implementation is available on Bitcoin Core. The motivation for this proposal is that wallets often require at least two descriptors for all the scripts they watch for, with one descriptor for producing receiving addresses and another for change addresses. These descriptors are often extremely similar, with the only differences being in the derivation path where one of the steps will be different between them. Thus, it would be useful to have a notation that represents both descriptors as a single descriptor where one of the derivation steps is a pair of values.The specification for this proposal modifies the Key Expressions of Descriptors described in BIP 380. When a / is encountered, parsers should produce two descriptors where the first descriptor uses the first NUM, and a second descriptor uses the second NUM. The common use case for this modification is to represent descriptors for producing receiving and change addresses. When interpreting for this use case, wallets should use the first descriptor for producing receiving addresses, and the second descriptor for producing change addresses. This modification to Key Expressions is compatible with the format described in BIP 380, and older parsers will not accidentally mistake the new characters introduced for indicating something else.</summary>
+    <published>2022-07-26T21:41:12+00:00</published>
+  </entry>
+</feed>

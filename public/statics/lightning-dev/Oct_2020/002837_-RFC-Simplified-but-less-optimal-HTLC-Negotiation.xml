@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+  <updated>2023-06-03T02:48:56.363446+00:00</updated>
+  <author>
+    <name>Christian Decker 2020-10-13 11:58:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+    <updated>2023-06-03T02:48:56.363446+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002837.html" rel="alternate"/>
+    <summary>Rusty Russell proposed a simpler protocol for the HTLC state machine in the Lightning Network that eliminates turn changes and reduces the state that needs to be tracked. The new protocol is half-duplex, with each side taking turns; opener first. A new message pair "turn_request" and "turn_reply" let you request when it's not your turn. If you get an update in reply to your turn_request, you lost the race and have to defer your own updates until after peer is finished. On reconnect, you send two flags: send-in-progress (if you have sent the initial commitsig but not the final revocation) and receive-in-progress (if you have received the initial commitsig not not received the final revocation). If either is set, the sender retransmits the entire sequence. The pros of this protocol include simplicity, deterministic fee changes, and dynamic changes can probably happen more simply. The cons are that it adds 1 RTT latency if it's not your turn. The database accesses remain unchanged, and the same state machine can be used as before. However, one day, when this would be compulsory, the state machine will need to record the index at which HTLCs were changed (added/removed) in case peer wants you to rexmit though. Overall, this proposal aims to make the protocol simpler by reducing the state that needs to be tracked while maintaining optimal efficiency.</summary>
+    <published>2020-10-13T11:58:49+00:00</published>
+  </entry>
+</feed>

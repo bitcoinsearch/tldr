@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+  <updated>2023-06-03T02:51:02.044052+00:00</updated>
+  <author>
+    <name>Rusty Russell 2021-04-24 05:55:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+    <updated>2023-06-03T02:51:02.044052+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-April/003013.html" rel="alternate"/>
+    <summary>Matt Corallo, a Bitcoin Core developer, suggested using a fuzzer to catch message-non-delivery-and-resending production desync bugs. A fuzzer has been used for several years and it tests precisely these types of bugs, but it forced several rewrites of parts of the state machine when it initially landed. Though it quickly exhausted the bug fruit, it still catches other classes of bugs occasionally. The state machine here is not that big and simplifying it where possible is nice, but ripping things out to replace them with fresh code, which would need similar testing, is probably not the most obvious decrease in complexity. The protocol has historically had more bugs than anything else, and they literally found another one in feerate negotiation since the last c-lightning release. Rusty Russell, a developer at Blockstream, revisited the protocol because it makes things like splicing easier. The current draft requires stopping changes while splicing is being negotiated, which is not entirely trivial. With the simplified method, you don't have to wait at all. Instead, both sides have to send a splice message to synchronize, and they can only do so once all in-flight changes have cleared. You have to resolve simultaneous splice attempts by using "highest feerate" tiebreak by node_id, and keep track of this stage while you clear in-flight changes. There are several requirements from the draft which relate to this, including that the sender must not send another splice message while a splice is being negotiated, must not send a splice message after sending uncommitted changes, and must not send other channel updates until splice negotiation has completed. Similarly, the receiver must respond with a `splice` message of its own if it has not already, must not reply with `splice` until all commitment updates are resolved by both peers, must use the higher of the two `funding_feerate_perkw` as the feerate for the splice, and must not send other channel updates until splice negotiation has completed.</summary>
+    <published>2021-04-24T05:55:55+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Increase channel-jamming capital requirements by not counting dust HTLCs</title>
+  <updated>2023-06-03T03:58:13.288121+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2021-04-24 08:01:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Increase channel-jamming capital requirements by not counting dust HTLCs</title>
+    <updated>2023-06-03T03:58:13.288121+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-April/003015.html" rel="alternate"/>
+    <summary>The discussion on the Lightning-dev mailing list revolves around a proposal by Eugene Siegel to increase the capital requirement of channel-jamming attacks. He suggests that in a commitment transaction, dust HTLC outputs should be trimmed as they do not appear in the commit tx and thus their exclusion from the 483 HTLC limit would not affect non-dust throughput of the channel. Matt Corallo clarifies that update_fee message does not change the dust limit for outputs in a channel, although he has suggested such a change. Bastien Teinturier points out that dust HTLCs count towards the 483 HTLC limit because if they are not counted and one exceeds the limit, it becomes impossible to lower the fee anymore, which may result in more than 483 HTLC outputs in the commitment and open the door to other kinds of attacks. Despite this, Eugene's proposal could still make sense as dust HTLCs will never appear in the commit tx regardless of subsequent update_fees. Overall, the proposal is a free mitigation without any downsides (besides code-writing), and can raise the capital requirement of channel-jamming so that each HTLC must be non-dust, rather than spamming 1 sat payments.</summary>
+    <published>2021-04-24T08:01:28+00:00</published>
+  </entry>
+</feed>

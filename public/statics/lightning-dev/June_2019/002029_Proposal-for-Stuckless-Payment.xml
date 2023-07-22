@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for Stuckless Payment</title>
+  <updated>2023-06-02T18:56:37.193853+00:00</updated>
+  <author>
+    <name>Hiroki Gondo 2019-06-25 08:20:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for Stuckless Payment</title>
+    <updated>2023-06-02T18:56:37.193853+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-June/002029.html" rel="alternate"/>
+    <summary>The proposal is designed to reduce the possibility of payments getting stuck. It allows both the payee and the payer to provide keys to settle payments, which means that it is safe to retry each phase of a payment. This can be done without involving intermediate nodes. However, this proposal cannot be used with BOLT 1.x and will only apply to future specifications.If payments do get stuck, additional trusted operations will be required by the final node's implementation, the application or the service operator. For example, if a payment gets stuck when a payer orders a cup of coffee and attempts to pay for the invoice, what needs to be done to correct the problem?If an 'update_add_htlc' gets stuck on an intermediate node, the payer cannot ignore the issue. If it is fulfilled or failed, the payer may have to wait until the 'cltv_expiry', which is not practical for user experience. Attempting to retry payment using different routes using the same invoice presents problems because if the previous payment that was stuck begins moving again after a successful retry and succeeds, the payer will end up paying twice for the same invoice. The payer cannot obtain information to prove that he has paid twice as he only has a single preimage. However, the payer can provide the key (preimage). In this case, the HTLCs and the preimage(key) are sent together. This means that the HTLCs can be fulfilled in unintended timing for the payer. If the payer receives another invoice from the payee and pays again, he must obtain a refund from the payee for the extra payment, which requires additional trusted operations dependent on the application or the service operator.</summary>
+    <published>2019-06-25T08:20:12+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Committing to extra block data/a better merge-mine standard</title>
+  <updated>2023-06-07T19:16:38.543475+00:00</updated>
+  <author>
+    <name>Peter Todd 2013-11-15 22:06:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Committing to extra block data/a better merge-mine standard</title>
+    <updated>2023-06-07T19:16:38.543475+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-November/003696.html" rel="alternate"/>
+    <summary>In an email conversation, Mark Friedenbach proposed using per-purpose UUIDs to validate data committed to a jagged tree structure. The UUID bits are interpreted as allowed paths (0 = left, 1 = right) from the top of the tree, and when building the tree, everything that is going to be committed must use its allowed path. If everyone picks their random per-purpose UUIDs, the paths won't collide for very many levels on average, and path lengths will remain short. Validating that some given data was committed properly is simple and easy: just check the path and ensure that the directions from the top of the tree followed the spec. Peter Todd suggested using a hash256-to-UUID mechanism explicitly for this purpose. After previously proposing to this list, he’s now leaning towards using the hash of the genesis block directly to identify aux chains since level compression will allow longer keys with the same path length. Peter mentions that any large randomly picked integer is fine. He also suggests running the idea past forrestv, given p2pool will be affected as it'd need to adopt the standard and he's run into some oddness with mining hardware and nonces that would be good to understand (note how p2pool blocks don't commit to a fully random hash - there's some extra bytes in there due to stratum or something IIRC).</summary>
+    <published>2013-11-15T22:06:48+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>An implementation of BIP102 as a softfork.</title>
+  <updated>2023-06-11T02:49:14.037611+00:00</updated>
+  <author>
+    <name>joe2015 at openmailbox.org 2015-12-30 05:46:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>An implementation of BIP102 as a softfork.</title>
+    <updated>2023-06-11T02:49:14.037611+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-December/012153.html" rel="alternate"/>
+    <summary>A proof-of-concept implementation of BIP102 as a softfork has been developed. The unofficial codename for this is BIP102s. Normally, BIP102 is a hardfork, but the softfork version uses an idea where post-fork blocks are constructed in such a way that they can be mapped to valid blocks under the pre-fork rules. This means that post-fork miners are still creating a valid chain under the old rules, albeit indirectly. From the point of view of non-upgraded clients, BIP102s circumvents the block-size limit by moving transaction validation data "outside" of the block. From the point of view of upgraded clients, the block layout is unchanged, except that there is a larger 2MB block-size limit and the header Merkle root has a new interpretation.Aside from this, blocks maintain their original format, i.e. a block header followed by a vector of transactions. This keeps the implementation simple and is distinct from Segregated Witness and Extension Blocks (both softfork proposals). Since BIP102s is a softfork, it means that a miner majority (e.g. 75%, 95%) force miner consensus (100%). This reduces fraud risk significantly (6-conf unlikely depending on activation threshold).This implementation should address some of the concerns with deploying a block-size increase using a hardfork. The same basic idea could be adapted to any of the other proposals such as BIP101, 2-4-8, BIP202, etc. Jeff Garzik's BIP102 implementation was used, which is incomplete. The activation logic is left unchanged. The developer is not a Bitcoin dev so hopefully no embarrassing mistakes are made in the code.</summary>
+    <published>2015-12-30T05:46:01+00:00</published>
+  </entry>
+</feed>

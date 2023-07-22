@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP70/71 issue, RFD</title>
+  <updated>2023-06-08T00:47:45.930646+00:00</updated>
+  <author>
+    <name>Gavin 2014-01-27 02:05:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP70/71 issue, RFD</title>
+    <updated>2023-06-08T00:47:45.930646+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-January/004213.html" rel="alternate"/>
+    <summary>Gavin Andresen suggests that message encoding, length, terminator, checksum or error correction should be included in the transport protocol. Andreas Schildbach is experimenting with BIP70/71 (payment protocol) usage in face-to-face payments and encountered an issue with the protobuf format which is not self-delimiting. This creates a problem when reading from an undelimited stream because it would read endlessly without knowing how much to read. The current BIP70 implementations probably work because they are reading either from a file or from an HTTP resource which sets the Content-Length header; however, this header is optional and there are many kinds of streams that don't have this built-in delimiting mechanism. The Java protobuf API solves this by offering delimited I/O which writes the size of the message as a varint before writing the data. However, this leading varint is an incompatible change and would need to be added to the spec. PaymentRequest, Payment, and PaymentACK do not require embedded messages to have length prefixes. If necessary to retrofit messages with length prefixes, new mime-types will have to be used as prefixes are always at the start, which rules out simply incrementing a protocol version number. Bluetooth, Wifi Direct, HTTP request/responses via broken proxies, smoke signals, etc. are all mediums affected by this issue except NFC NDEF and QR codes.Mike Hearn thinks that protobuf varint length prefixes should be used for binding the payment protocol to those transports but is unnecessary for all cases. Gavin Andresen thinks that it might be better to be consistent everywhere, but changing the spec and code may delay the release of 0.9rc1. Finally, both Andreas Schildbach and Mike Hearn agree that adding these length prefixes is open for discussion.</summary>
+    <published>2014-01-27T02:05:31+00:00</published>
+  </entry>
+</feed>

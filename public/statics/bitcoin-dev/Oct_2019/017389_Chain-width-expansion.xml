@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Chain width expansion</title>
+  <updated>2023-06-13T21:48:24.754126+00:00</updated>
+  <author>
+    <name>Tier Nolan 2019-10-12 20:46:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Chain width expansion</title>
+    <updated>2023-06-13T21:48:24.754126+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-October/017389.html" rel="alternate"/>
+    <summary>Joachim Strömbergson discussed a new idea of backwards syncing in blockchain technology. According to him, first the proof of the best block height via coinbase is provided, and then sync backwards which solves several related problems including knowing how much can be expected from the given peer and identifying which nodes are on the same chain. He suggested that if you ask 8 peers for their 8 best, they should agree on most of them and you can then ask each of them to start sending headers backwards from one of the 8 seeds. They will split the chain into roughly 8 equal pieces based on work rather than header height. If there is any disagreement, priority can be given to the node(s) with the lowest headers until they complete download. However, it requires a network protocol change to allow reverse block downloads and messages to indicate lowest headers. On another note, Joachim pointed out the timewarp attack as a problem that hasn't been mentioned yet in the proposed solutions. This could produce a longer chain without having multiple branches by generating a much longer chain with superslow timestamp increase (~5 blocks in 1 second) without increasing the difficulty. The timewarp bug can be fixed by a basic soft fork by limiting the maximum difference between the timestamp for the first header in a period and the last header in the previous period. An alternative solution could be to soft fork in a maximum block rate of 1 block every 2 minutes, which shouldn't activate normally.</summary>
+    <published>2019-10-12T20:46:40+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Exploring: limiting transaction output amount as a function of total input value</title>
+  <updated>2023-06-15T00:33:34.324592+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2021-08-10 00:41:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Exploring: limiting transaction output amount as a function of total input value</title>
+    <updated>2023-06-15T00:33:34.324592+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-August/019323.html" rel="alternate"/>
+    <summary>The author proposes implementing new scripting capabilities in Bitcoin that would enable limiting the output amount of a transaction based on the total value of its inputs. This would allow rate-limiting of the amount that can be sent during a certain period. The proposal includes two use cases: one for individual users who wish to add additional protection to their funds, and one for exchanges wishing to add warm- or hot-wallet functionality to cold-storage addresses.The proposed system involves using multisig with two sets of private keys, one for sending with rate-limiting restrictions and one for sending without restrictions. The concept of rate-limiting transactions is defined with four parameters: the first and last block height of an epoch, the maximum amount allowed to be sent in any epoch, and the maximum amount allowed to be sent within the current epoch. These parameters ensure that it takes a certain number of transactions and blocks to spend a given amount of sats, with users retaining the option to transact the entire amount using a second set of private keys.The proposal suggests the ability for users to precisely define the length and starting block of rate-limiting period (epoch) by explicitly specifying the start and end block of an epoch. This would provide more flexibility in shifting and increasing the epoch length. Using a UTXO will spend the full UTXO; however, the same address should be used as the change address for the change output. Transactions with rate-limiting must have only a single rate-limited output.In order to properly enforce rate limiting, any change output created by a transaction from a rate-limited address must also be rate-limited. The rate limiting parameters are part of the transaction and chosen by the user or their wallet, and must be validated to ensure they do not violate the intended constraints. Transactions that attempt to shift the epoch forward to enable overspending are not allowed. Specifying the rate-limiting parameters explicitly at every transaction allows the user to tighten the spending limit or enforce not spending more during an epoch.The system can fully validate the transaction without considering any previous transactions within an epoch. The proposed system allows for further restricting spending or disabling any additional spending within the current epoch by setting the remaining balance to zero. The author acknowledges that the proposal requires additional work to define how to represent the parameters within transactions or outputs, and welcomes feedback and assistance from others in the Bitcoin community. Further work includes defining all validations and describing aggregate behavior of multiple rate-limited inputs.</summary>
+    <published>2021-08-10T00:41:12+00:00</published>
+  </entry>
+</feed>

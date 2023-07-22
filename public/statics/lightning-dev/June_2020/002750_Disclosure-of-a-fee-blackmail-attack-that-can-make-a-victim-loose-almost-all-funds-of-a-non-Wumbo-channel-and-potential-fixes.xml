@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Disclosure of a fee blackmail attack that can make a victim loose almost all funds of a non Wumbo channel and potential fixes</title>
+  <updated>2023-05-23T04:00:31.544869+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-06-22 01:09:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Disclosure of a fee blackmail attack that can make a victim loose almost all funds of a non Wumbo channel and potential fixes</title>
+    <updated>2023-05-23T04:00:31.544869+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-June/002750.html" rel="alternate"/>
+    <summary>The Lightning Network protocol has been found to be vulnerable to a new attack known as "flood and blackmail." This attack involves flooding the network with simultaneous, large transactions that cause the channels between nodes to freeze, preventing further payments from being made. An attacker could demand blackmail payments from victims in exchange for unfreezing the channel and returning part of the lost funds.To execute the attack, an attacker can game the autopilot and create many channels, making them a highly likely channel partner for autopilot users. To mitigate the attack, eclaire has set a constant cap of 483 htlcs per channel, while c-lightning and lnd did not have a default hard cap until recently. Lowering the maximum number of concurrent HTLCs seems to be a reasonable start towards fixing this issue. Anchor commitments can also help mitigate the attack by letting initiators select a very low starting fee and also bump the fees of second-level HTLC transactions.It's worth noting that if the attacker attempts this with minimal setup, then they'll need to be the ones that open the channel, which would render this attempt moot since they'll actually be the ones paying the fees. Alternatively, they could use something like Lightning Loop to gain the outbound bandwidth needed to attempt this attack, but they'll need to pay for that bandwidth, adding a further cost to the attack. The attack isn't costless as they'll need to acquire outbound liquidity for an incoming channel and also need to pay fees independent of the "success" of their attack.Several ideas for fixes have been proposed, including not using the maximum value of htlc's, implementing bitcoin core PR #15681, not overpaying fees in commitment transactions, not adding htlcs for which the on-chain fee is higher than the htlc's value, finding a way to aggregate htlcs, and splitting on-chain fees differently. Additionally, it is suggested that there should be a hint in the readme file about how to disclose attacks and vulnerabilities.Overall, the Lightning Network vulnerability highlights the need for continued development and improvement of second-layer solutions for Bitcoin transactions.</summary>
+    <published>2020-06-22T01:09:28+00:00</published>
+  </entry>
+</feed>

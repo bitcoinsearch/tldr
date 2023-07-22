@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-05-20T18:07:14.328203+00:00</updated>
+  <author>
+    <name>Anthony Towns 2018-11-23 06:04:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-05-20T18:07:14.328203+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-November/016501.html" rel="alternate"/>
+    <summary>In a message thread on bitcoin-dev, a suggestion was made to remove the `hashSequence` blanking from BIP118 since it is not necessary for eltoo transactions to work. The removal of this redundant blanking would limit the ability to change the number of inputs to a NOINPUT transaction and thus make sense. However, some feel that committing to just the sequence numbers does not make much sense since you could still replace any input that was supposed to be there by almost any arbitrary other transaction. If it were done, it might only make sense if it committed to the values of each input's outpoint.Committing to anything else about the other inputs seems impractical. Txids of other transactions wouldn't work if there are other NOINPUT txes, and scriptPubKeys wouldn't really work for eltoo-like constructions that want to vary the scripts but apply the same sig, but might work sometimes. Witness scripts for the other inputs could be unknown at your signing time or arbitrarily large and thus a pain to have to send to a hardware wallet. Some suggest treating NOINPUT as a subset of ANYONECANPAY.The proposal of sighash_scriptmask is liked along with committing to the fees (with the nofee escape hatch) as a nice fix. The only concern is that introducing a new opcode to mask things in the sighash looks like a similar layering violation as codeseparator was. However, OP_MASK seems okay as far as layering goes, if you think of it as a (set of) multibyte "OP_MASKED_PUSH" opcode(s). As long as OP_MASK only applies to a PUSH and it's an error for OP_MASK not to be immediately followed by that PUSH, then it should work out fine.</summary>
+    <published>2018-11-23T06:04:04+00:00</published>
+  </entry>
+</feed>

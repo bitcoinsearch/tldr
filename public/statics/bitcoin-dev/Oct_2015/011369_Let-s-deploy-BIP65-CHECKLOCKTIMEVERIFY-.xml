@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Let's deploy BIP65 CHECKLOCKTIMEVERIFY!</title>
+  <updated>2023-06-10T23:18:55.044708+00:00</updated>
+  <author>
+    <name>Mike Hearn 2015-10-05 10:59:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Let's deploy BIP65 CHECKLOCKTIMEVERIFY!</title>
+    <updated>2023-06-10T23:18:55.044708+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-October/011369.html" rel="alternate"/>
+    <summary>The author proposes a new flag to be introduced to Core, --scriptchecks=[all,standardonly,none], with the default being 'all'. When set to 'standardonly', non-standard scripts are not checked but others are; this is similar to the behavior during a soft fork. If set to 'none', it would resemble SPV mode, but still calculate the UTXO set. An unused opcode would then be used for CLTV, making it a hard fork. The advantages of this proposal include nodes having the option to opt-in to pseudo-SPV soft fork behavior if they want it to prioritize availability over correctness. Otherwise, nodes will prioritize correctness by default, which is how things should be in financial software where money is at risk. Undefined behavior is acceptable only if opted into. SPV wallets would do the right thing by default, and IsStandard wouldn't silently become part of the consensus rules. All other software also becomes simpler, with block explorers needing to add just one line to their opcode map. With a soft fork, they have to implement the entire soft fork logic to figure out when an opcode transitioned from OP_NOP to CLTV and ensure that old scripts get rendered differently from new ones. Hard forks are proposed to be conceptually cleaner and prioritize correctness of results over availability of results, but the argument that hard forks require everyone to upgrade while soft forks don't has never been explained, according to the author. The level of support required to trigger the change is no different. If someone can't or won't upgrade their full node but can no longer verify the change, they can restart with -scriptchecks=standardonly and get the soft fork behavior or upgrade and get their old security level back. Hard forks are also not necessarily bad or immoral or lead to "schisms." People who lose the vote might start a civil war and refuse to accept the change, but this can happen with soft forks as well. Finally, they can decide that any output containing OP_CLTV doesn't make it into the UTXO set, and eventually coins tracing back to such an output will become unusable in the section of the economy that decided to pick a fight.</summary>
+    <published>2015-10-05T10:59:54+00:00</published>
+  </entry>
+</feed>

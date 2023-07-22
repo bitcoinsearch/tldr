@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Deriving channel keys deterministically from seed, musig, and channel establishment v2</title>
+  <updated>2023-06-04T02:19:17.494268+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2021-10-13 07:04:46</name>
+  </author>
+  <author>
+    <name>SomberNight 2021-09-17 16:14:22</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-09-21 00:59:10</name>
+  </author>
+  <author>
+    <name>SomberNight 2021-09-21 01:36:24</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-09-21 03:43:42</name>
+  </author>
+  <link href="lightning-dev/Oct_2021/003310_Deriving-channel-keys-deterministically-from-seed-musig-and-channel-establishment-v2.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003229_Deriving-channel-keys-deterministically-from-seed-musig-and-channel-establishment-v2.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003232_Deriving-channel-keys-deterministically-from-seed-musig-and-channel-establishment-v2.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003233_Deriving-channel-keys-deterministically-from-seed-musig-and-channel-establishment-v2.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003235_Deriving-channel-keys-deterministically-from-seed-musig-and-channel-establishment-v2.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Deriving channel keys deterministically from seed, musig, and channel establishment v2</title>
+    <updated>2023-06-04T02:19:17.494268+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-October/003310.html" rel="alternate"/>
+    <summary>The article discusses the challenges of implementing anchor output support in Electrum and the difficulty of restoring from seed words when the to_remote output is no longer a simple p2wpkh. The article proposes three solutions to the problem, including deriving a static key to be used as payment_basepoint, deriving a new bip32 chain/sequence of pubkeys used as payment_basepoint for channels, and extracting some entropy from the blockchain to use as a nonce to be combined with a static private secret derived from the seed. The article also explores using the funding pubkey itself as a nonce, which can be recovered from the witness of the commitment tx. The article concludes by proposing whether such a change or something similar might be useful, and if so, whether it could/should be incorporated into the current channel establishment v2 proposal.In further conversations between ZmnSCPxj and SomberNight, they discuss the privacy implications of reusing a static key as payment_basepoint for all channels and suggest tweaking the static_payment_basepoint_key using hash(seed | counterparty_node_id) for each channel. However, this requires a counter to avoid reuse between multiple channels with the same counterparty, which may be problematic as users need to open new channels after restoring from seed. An OP_RETURN containing the encrypted counterparty node id is also mentioned as an optional solution, but it is not ideal. Additionally, changing the actual commitment scheme to use MuSig1/MuSig2/MuSig-DN is a lower priority than deploying PTLCs since PTLCs can be used perfectly fine with the current commitment scheme.</summary>
+    <published>2021-10-13T07:04:46+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Smaller Transactions with PubRef</title>
+  <updated>2023-06-14T03:10:33.727764+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-08-02 14:22:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Smaller Transactions with PubRef</title>
+    <updated>2023-06-14T03:10:33.727764+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018068.html" rel="alternate"/>
+    <summary>In an email exchange, ZmnSCPxj addressed the issue with SCRIPT re-evaluation and reorgs. They explained that reorgs cause more processing to be done by nodes, even with the use of Floating-point Nakamoto Consensus. This is because a node can still observe a reorg if it first receives a lower-scored block before a higher-scored block. This situation increases the processing load on validating fullnodes and prevents any kind of pruning from working for them.Moreover, miners can still mount a DoS on validating fullnodes with `OP_PUBREF` and Floating-Point Nakamoto Consensus by re-mining the same block and broadcasting a block if it has a higher score than the previous chain tip. This locks the blockchain and increases the load on fullnodes, which have to re-validate uses of `OP_PUBREF` that might refer to the chain tip.ZmnSCPxj also responded to Micahel's suggestion that re-orgs should be solved in a different way by saying "Hard NAK." They pointed out important problems with Micahel's proposal, such as encouraging address reuse, hurting fungibility and privacy; preventing pruning; requiring the creation of another index to previous block data, increasing requirements on fullnodes; and needing SCRIPT to be re-evaluated on transactions arriving in new blocks to protect against reorgs of the chaintip, particularly `OP_PUBREF` references to near the chaintip. ZmnSCPxj noted that none of these issues were addressed in Micahel's proposal and that the proposal only looked at clients without considering what validators would have to implement to validate new blocks with this opcode.</summary>
+    <published>2020-08-02T14:22:30+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Proposal for skip channel confirmation.</title>
+  <updated>2023-05-23T14:25:57.399242+00:00</updated>
+  <author>
+    <name>Matt Corallo 2020-08-24 19:22:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Proposal for skip channel confirmation.</title>
+    <updated>2023-05-23T14:25:57.399242+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-August/002781.html" rel="alternate"/>
+    <summary>The ability to skip a channel funding transaction confirmation, thereby making the channel fully operational before its on-chain confirmation (a zero-conf channel), is discussed by Roei Erez. While this protocol doesn't capture unidirectional 0-conf, there are cases where it makes sense to support this behavior. One example is when both parties decide to trust each other or buying a pre-loaded channel from a service like Bitrefill. The motivation behind this is gained from the "Immediate on-boarding" use case. Different implementations support zero-conf channels in different ways, but some changes to the funding flow can make it possible. Erez suggests four changes to the funding flow to support this: accepting the channel message, sending the minimum_depth=0 if fundee wants to skip confirmation, no change in funding signed message, and funding locked message. If the fundee has sent the minimum_depth=0, then both parties send funding_locked while the channel_id is derived using a convention agreed upon by both. When the channel is confirmed, gossip messages such as channel_update are re-broadcasted and refer to the confirmed channel_id. A PR in LND that implements these changes is created by Erez.</summary>
+    <published>2020-08-24T19:22:33+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>LN Summit 2022 Notes &amp; Summary/Commentary</title>
+  <updated>2023-06-03T08:56:05.001027+00:00</updated>
+  <author>
+    <name>Christian Decker 2022-06-28 13:05:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>LN Summit 2022 Notes &amp; Summary/Commentary</title>
+    <updated>2023-06-03T08:56:05.002028+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-June/003619.html" rel="alternate"/>
+    <summary>In a discussion on Bitcoin StackExchange, the issue of latency with regards to nested/recursive MuSig2 or nested FROST for threshold was brought up by Rene Pickhardt. However, Olaoluwa Osuntokun believes that this is more of an implementation level concern. As an example, more nodes are starting to use replicated database backends instead of a local embedded database which means that network latency is now also a factor as committing new states requires round trips between the DBMS that'll increase the perceived latency of payments in practice. In the multi-signature setting for LN, system designers will also need to factor in the added latency due to adding more signers into the mix. Osuntokun further explains that the LN protocol is generally not very latency sensitive and can easily handle very slow signers without causing too many issues. Routing node signers are expected to be well below the 1-second mark, even when implementing more complex signer logic, including MuSig2 or nested FROST. The LN protocol implements a batch mechanism where changes are applied to the commitment transaction as a batch. Not every change requires a commitment and thus a signature. This means that while a slow signer may impact payment latency, it should not have an impact on throughput on the routing nodes.</summary>
+    <published>2022-06-28T13:05:46+00:00</published>
+  </entry>
+</feed>

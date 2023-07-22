@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>More thoughts on NOINPUT safety</title>
+  <updated>2023-05-20T20:03:14.973194+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-03-21 09:06:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>More thoughts on NOINPUT safety</title>
+    <updated>2023-05-20T20:03:14.973194+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-March/016794.html" rel="alternate"/>
+    <summary>A Lightning-dev member, ZmnSCPxj, responded to an earlier post suggesting that either of two scripts would be okay for eltoo. They then asked if it would be safe for Watchtower to know about the SIGHASH_NOINPUT and q private key in the blob sent to them by Alice/Bob. The author believes it is safe since NOINPUT sig ensures they control their money from Alice/Bob's point-of-view and Q private key being shared makes the tx no worse than a 1-of-n multisig setup from the network's point-of-view.The update transaction pays out to a script with OP_IF, OP_ELSE, and OP_ENDIF. The author suggests shortening this using IF OP_CODESEPARATOR and OP_CHECKDLSVERIFY OP_CHECKDLS. Signing with NOINPUT,NOSCRIPT and codeseparatorpos=1 enforces CLTV and allows binding to any prior update tx while signing with codeseparatorpos=-1 and NOINPUT but committing to the script code and nSequence(for CSV delay) allows binding to only that update tx so works for the settlement tx. This requires two pubkeys, two sigs, and the taproot point reveal.</summary>
+    <published>2019-03-21T09:06:14+00:00</published>
+  </entry>
+</feed>

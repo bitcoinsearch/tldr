@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TAPLEAF_UPDATE_VERIFY covenant opcode</title>
+  <updated>2023-05-21T03:54:01.439749+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-09-09 06:53:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TAPLEAF_UPDATE_VERIFY covenant opcode</title>
+    <updated>2023-05-21T03:54:01.439749+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019420.html" rel="alternate"/>
+    <summary>In the provided context, Anthony Towns discusses Taproot and proposes splitting the discussion into two parts. The first part focuses on IN_OUT_AMOUNT, which is complicated by the fact that script only allows 32-bit maths while amounts in satoshis require up to 51 bits to represent them. To resolve this issue, Towns suggests upgrading ADD, SUB, and the comparison operators to support 64-bit values.In the second part of the discussion, Towns addresses TLUV, which controls how spending scripts can change between input sPK and output sPK. He provides examples of what could be done with TLUV to achieve different results and proposes a script for implementing the release/locked/available vault construct. Additionally, he explores the issue of TLUV's parity in taproot addresses and suggests various approaches to solve it.The context also mentions constructing hashes programmatically with "OP_CAT" or similar enabled, which could lead to interesting behavior such as allowing anyone to add themselves to a pool if they contribute at least 10 BTC. While constructing the script can be more efficient than hardcoding it, using templates is necessary when constructing a new script programmatically. However, there is a serious caveat that people could bypass covenant constraints if allowed to add arbitrary opcodes.Towns further discusses the pooled scheme and updating the internal pubkey, which becomes complicated due to the use of 32-byte x-only pubkeys for the scriptPubKey and the internal public key. He provides an example scenario where removing C from the pool might result in switching from the scriptPubKey Qabc to the scriptPubKey Qab. However, if B then removes himself from the pool, it could lead to an internal public key that has odd-y, causing issues when doing key path spends.Overall, the context provides a detailed discussion of various aspects of Taproot and potential issues that may arise when constructing a new script programmatically. While Towns proposes solutions to these issues, there are still caveats to consider.</summary>
+    <published>2021-09-09T06:53:30+00:00</published>
+  </entry>
+</feed>

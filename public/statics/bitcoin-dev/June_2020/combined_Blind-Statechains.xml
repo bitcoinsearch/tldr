@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Blind Statechains</title>
+  <updated>2023-06-14T02:30:34.265257+00:00</updated>
+  <author>
+    <name>Ruben Somsen 2020-06-12 20:35:37</name>
+  </author>
+  <author>
+    <name>Tom Trevethan 2020-06-12 18:11:52</name>
+  </author>
+  <author>
+    <name>Tom Trevethan 2020-06-12 18:11:52</name>
+  </author>
+  <author>
+    <name>Tom Trevethan 2020-06-14 22:24:47</name>
+  </author>
+  <author>
+    <name>Tom Trevethan 2020-06-14 22:24:47</name>
+  </author>
+  <author>
+    <name>Ruben Somsen 2020-06-12 20:35:37</name>
+  </author>
+  <author>
+    <name>Ruben Somsen 2020-06-12 20:35:37</name>
+  </author>
+  <author>
+    <name>Tom Trevethan 2020-06-12 18:11:52</name>
+  </author>
+  <author>
+    <name>Tom Trevethan 2020-06-14 22:24:47</name>
+  </author>
+  <link href="bitcoin-dev/June_2020/017974_Blind-Statechains.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017973_Blind-Statechains.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017973_Blind-Statechains.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017982_Blind-Statechains.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017982_Blind-Statechains.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017974_Blind-Statechains.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017974_Blind-Statechains.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017973_Blind-Statechains.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017982_Blind-Statechains.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Blind Statechains</title>
+    <updated>2023-06-14T02:30:34.265257+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-June/017974.html" rel="alternate"/>
+    <summary>The email exchange discusses the implementation of blind signatures in a statechain, which can offer significant privacy benefits but may lead to bloated wallets. Statechains involve co-signing off-chain transactions to transfer ownership of an unspent transaction output (UTXO) from one owner to the next. Blind statechains offer significant privacy benefits such as enabling more private off-chain coin-swaps and making collusion more difficult. However, the downside of a blind statechain entity (SE) is that it can no longer enforce rules governing the sequence of backup transactions it co-signs as owners can ask the SE to cosign any transaction.In the case of a multisig, and Schnorr signatures, existing blind Schnorr protocols could be used to implement a blind SE. But the team is opting to use two-party Elliptic Curve Digital Signature Algorithm (ECDSA) because there is no Schnorr yet. There is no current 2P ECDSA protocol that enables one of the two signers to be completely blinded, but it seems that this would require only minor modifications to an existing 2P ECDSA scheme.Each new owner of a UTXO must receive, store and verify the full sequence of previous owner backup transactions to ensure that no previous owner has asked the SE to sign a transaction that could be used to steal the UTXO. This may end up making wallets more bloated and clunky, given that ownership of a UTXO could change hands thousands of times off-chain. Feedback on the matter is welcome. The email also suggests introducing a secondary "blinding key" to achieve the above-described functionality.The original idea was to use the transitory key to derive secrets that blind the signatures, and the SE would store and serve blind signatures. Any new owner would download and unblind/verify them using the transitory key without extensive peer-to-peer transfer. All transactions are exposed to anyone who learns the transitory key, although there doesn't seem to be much to learn from the history of each statechain. In Schnorr signatures, the statechain entity wouldn't even learn the address for the funding transaction, so it wouldn't be able to tell which UTXO it controls by watching the blockchain. However, pruning will be impossible if you don't know when a statechain has been pegged out.The email also discusses the need for users to validate the history of the chain and verify the uniqueness of the ownership of the previous owner. Additionally, in the case of a blinded SE, a new owner would need to check that there are exactly as many backup transactions as the SE had signed. Another thing to consider is that you won't know when a statechain has been pegged out, so pruning will be impossible.</summary>
+    <published>2020-06-12T20:35:37+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Probing final receiver with refund timeout</title>
+  <updated>2023-05-23T22:38:43.408979+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-03-22 01:14:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Probing final receiver with refund timeout</title>
+    <updated>2023-05-23T22:38:43.408979+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-March/000499.html" rel="alternate"/>
+    <summary>Mats Jerratsch proposes a proposal for the Lightning Network. The proposal consists of three steps. Firstly, each node publishes its MIN_TIMEOUT. Secondly, the payer sums the MIN_TIMEOUT to the payee and adds some random value (keeping it under the max value allowed by protocol) to give the initial HTLC timeout. Finally, the payer puts the 'expected_timeout' in each layer of the onion by subtracting the last hops' MIN_TIMEOUT from the initial timeout. In an example provided by Mats Jerratsch, say maximum allowed timeout is 20 * 12 hours, and route is: A (12 hours) -&gt; B (6 hours) -&gt; C (6 hours) -&gt; D (4 hours). Initial timeout has to be at least 12+6+6+4 == 28 hours, plus some padding for transmission delays, say 29 hours. It picks a random timeout between 29 and 240 hours, say now+100 hours, and onion looks like: [A: now+100 [B: now+88 [C: now+82 [D: now+76]]]]. Mats Jerratsch suggests to use MIN_TIMEOUT as the minimum time deducted each hop and add some randomness into it. Two values are needed in the onion object: (1) the value expected to receive and (2) the value used for the next hop (and therefore the (1) value of the next hop). This can be saved in a less redundant way. Rusty asks if the randomness adds anything useful and Mats Jerratsch suggests he needs another coffee to see it.</summary>
+    <published>2016-03-22T01:14:15+00:00</published>
+  </entry>
+</feed>

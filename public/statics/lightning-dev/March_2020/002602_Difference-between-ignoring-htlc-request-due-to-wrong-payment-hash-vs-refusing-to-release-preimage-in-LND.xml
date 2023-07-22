@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Difference between ignoring htlc request due to wrong payment hash vs refusing to release preimage in LND</title>
+  <updated>2023-06-03T00:12:25.385241+00:00</updated>
+  <author>
+    <name>Subhra Mazumdar 2020-03-24 08:56:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Difference between ignoring htlc request due to wrong payment hash vs refusing to release preimage in LND</title>
+    <updated>2023-06-03T00:12:25.385241+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-March/002602.html" rel="alternate"/>
+    <summary>In this conversation, Subhra Mazumdar seeks clarification on a proposal from ZmnSCPxj regarding delaying the acceptance of an HTLC. Specifically, she asks about the release of preimage or just an acknowledgment by B reaching to the point of irrevocably committed. ZmnSCPxj explains that A and B form an HTLC, and it is recommended that nothing be done until an incoming HTLC reaches "irrevocably committed" state. If B knows the preimage to the payment hash, it claims the HTLC immediately as soon as it is irrevocably committed. If B does not know the preimage, it checks if there is forwarding data. If there is no forwarding data (B is the final hop) then B responds with "incorrect or unknown payment details", then A waits for the channel state to advance so that the HTLC getting removed reaches "irrevocably committed", then reports the failure to the user.Subhra also asks how one can mimic griefing attack scenario (B refusing to release the correct preimage) in LND, to which ZmnSCPxj suggests modifying LND code directly or asking LND devs if there are any such hooks available. In C-Lightning, a plugin needs to be installed, devise some way for the plugin to know of what payment hash you want to grief, then have the plugin hook into `htlc_accepted`. In `htlc_accepted` handler, if the incoming HTLC has a payment hash matching what you want to grief, you then perform a `waitblockheight` command to wait for the target block height you want to grief for, then return from the `htlc_accepted` handler.</summary>
+    <published>2020-03-24T08:56:05+00:00</published>
+  </entry>
+</feed>

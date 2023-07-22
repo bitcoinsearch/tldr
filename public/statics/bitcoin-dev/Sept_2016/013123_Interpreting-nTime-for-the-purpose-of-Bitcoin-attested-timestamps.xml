@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Interpreting nTime for the purpose of Bitcoin-attested timestamps</title>
+  <updated>2023-06-11T20:00:37.147346+00:00</updated>
+  <author>
+    <name>Peter Todd 2016-09-19 17:56:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Interpreting nTime for the purpose of Bitcoin-attested timestamps</title>
+    <updated>2023-06-11T20:00:37.147346+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-September/013123.html" rel="alternate"/>
+    <summary>In a thread on bitcoin-dev, Tom Harding pointed out that the probability of dishonest miners finding N blocks in a row immediately is different than the probability they can build a chain N blocks long, taking the random walk into account. In response to this, Peter Todd suggested using Satoshi's formula from bitcoin.pdf, section 11, which gives remarkably different results. If a timestamp doesn't contain actual block headers, but rather just a block height, then there is no risk if the Bitcoin node is in sync with the most-work work chain. However, if the verifier isn't in sync with the most-work chain, an attacker can sybil attack the verifier's node and cause them to think that the blocks committing the invalid timestamp are actually the most-work chain. This case is no different than a payee being sybil attacked, so the same analysis applies. It's also important to note that timestamps shouldn't contain the block headers of the blocks allegedly confirming them, as this is an extremely weak proof given the relative ease of creating a block. OpenTimestamps doesn't do this, but it wouldn't hurt to make this point 100% clear.</summary>
+    <published>2016-09-19T17:56:15+00:00</published>
+  </entry>
+</feed>

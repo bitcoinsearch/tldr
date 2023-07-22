@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>On the scalability issues of onboarding millions of LN mobile clients</title>
+  <updated>2023-06-03T01:22:21.636926+00:00</updated>
+  <author>
+    <name>Braydon Fuller 2020-05-08 19:33:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>On the scalability issues of onboarding millions of LN mobile clients</title>
+    <updated>2023-06-03T01:22:21.636926+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-May/002696.html" rel="alternate"/>
+    <summary>On May 5th, 2020 Olaoluwa Osuntokun via bitcoin-dev wrote about BIP 157, which is a protocol that makes serving light clients stateless. This means the full node doesn't need to perform any unique work for each client. The entire protocol could be served over HTTP, taking advantage of all established CDNs and anycast serving infrastructure, which can reduce syncing time and more widely distribute the load of light clients using the existing web infrastructure. With HTTP/2's server-push capabilities, those serving this data can still push out notifications for new headers, etc.Antoine claims that even with cheaper, more efficient protocols like BIP 157, there is still a huge discrepancy between what is asked and what is offered. Assuming 10M light clients, each consuming ~100MB/month for filters/headers, that means there is a demand for 1PB/month of traffic to the backbone network. If you assume 10K public nodes, opting in to signal BIP 157, that's an increase of 100GB/month for each. Which is consequent with regards to the estimated cost of 350GB/month for running an actual public node.The statelessness of compact block filters looks useful. Bloom filters for blocks can be inefficient during a scan with a BIP37 wallet. It's necessary to discard already received merkle blocks as the filter has been updated and the previous results may have missed transactions. Both bitcoinj and breadwallet-core handle it using a similar method. With compact block filters, a separate wallet process (from the full node) can make adjustments necessary to what it needs to filter without having to communicate with the full node. Links to both GitHub repositories for bitcoinj and breadwallet-core are provided.</summary>
+    <published>2020-05-08T19:33:55+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Multi party Schnorr Rust implementation</title>
+  <updated>2023-06-13T15:46:50.769767+00:00</updated>
+  <author>
+    <name>Jonas Nick 2018-11-28 16:43:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Multi party Schnorr Rust implementation</title>
+    <updated>2023-06-13T15:46:50.769767+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-November/016515.html" rel="alternate"/>
+    <summary>The discussion on the Bitcoin-dev mailing list regarding non-interactive threshold signatures and their suitability for air-gapped use cases has revealed a workaround that could be used to achieve almost true non-interactivity. For interactive multisignatures, the protocol involves producing a secret nonce r and calculating a public nonce R=r*G, sharing H(R), sharing R, checking received values match received hashes, and then calculating s=r+H(R',P',m)*p and sharing s. However, for deterministic nonces, r=H(p,m) is generated based on the message being signed and your private key, so the process can only start when you begin signing, making it interactive. To avoid this, you would need to keep some state to ensure that the same nonce isn't used with a different message. The workaround involves doing phases 1-3 once, producing secret nonces r1..r1024 and calculating R1..R1024, sharing H(R1)..H(R1024), storing other parties' hashes (e.g., H1..H1024), sharing R1..R1024, and checking received nonces match. Then, when a request is made to sign msg m with nonce n, if nonce n has already been used, the process aborts. The signer looks up other signers' nonces n and sums them to get R', calculates s = rn + H(R',P',m)*p, and shares s. This way, phases 1-3 are done once, and 1024 signatures can be done during the month on whatever your current timetable is.You could also combine these phases so that when you receive a signing request, you receive the message to sign m, n=4, everyone else's R4, and H(R5). You check that H(R4) matches previously received "H(R4)," calculate R4' by summing up your and everyone's R4s, bump state to n=5, do the signature, and send sig=(s,R4), R5, H(R6). This way, you can have an untrusted app that does the coordination and shares the nonces and nonce-hashes, getting all the needed air-gapped communication in a single round. It is almost as good as true non-interactivity if your signing hardware is capable of securely storing (and updating) a few kB of state.</summary>
+    <published>2018-11-28T16:43:12+00:00</published>
+  </entry>
+</feed>

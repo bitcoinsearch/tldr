@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-06-13T15:26:27.789663+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2018-11-22 22:10:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-06-13T15:26:27.789663+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-November/016499.html" rel="alternate"/>
+    <summary>Johnson Lau discusses the computation time and memory usage for scripts in a Bitcoin transaction. He estimates that for a script size of 128 bytes, including SHA256 padding, 2^20 scripts is 134MB and doubling it to 268MB for the merkle branch hashes. With roughly 100MB/s, this should take 2.5s or 42min for 30 levels. However, memory use is not considered. The issue of recomputing #5 scriptCode from BIP 143 each time with OP_CODESEPARATOR / OP_CHECKSIG pair is also discussed. While deprecating OP_CODESEPARATOR may be an option, given the combinatorial explosion in SIGHASH flag combinations and existing SigOp limitations, this may not be necessary. Additionally, MASTification can be used for more than 30 layers of sequential OP_IFs. One suggestion is to add an internal counter that increments on every control flow operator. Johnson favors using OP_CODESEPARATOR over adding more lines to the consensus code.</summary>
+    <published>2018-11-22T22:10:11+00:00</published>
+  </entry>
+</feed>

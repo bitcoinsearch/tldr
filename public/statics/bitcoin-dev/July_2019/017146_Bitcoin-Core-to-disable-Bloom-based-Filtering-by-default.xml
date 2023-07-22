@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Bitcoin Core to disable Bloom-based Filtering by default</title>
+  <updated>2023-06-13T20:14:41.421040+00:00</updated>
+  <author>
+    <name>Andreas Schildbach 2019-07-21 22:56:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Bitcoin Core to disable Bloom-based Filtering by default</title>
+    <updated>2023-06-13T20:14:41.421040+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-July/017146.html" rel="alternate"/>
+    <summary>The NODE_BLOOM feature in Bitcoin is relied upon by over 10 million wallets, and there currently are no alternatives except for reading all transactions and full blocks. Disabling this feature would be a disastrous idea for the adoption of Bitcoin as it is a well-known DoS vector that is supposedly used by attackers to set an overly blurry filter and cause useless traffic. However, this is believed to be a myth as it never exceeds just drinking from the full firehose and an attacker can switch filtering off or has never used it. While it is not anticipated that the removal of NODE_BLOOM will result in a significant lack of availability of NODE_BLOOM-enabled nodes in the coming years, this is not expected to be the case as people rarely change defaults, and release notes recommend updating to the latest version. This could reduce the number of nodes usable by a large enough amount so that the feature will become unstable. Clients relying on the availability of NODE_BLOOM-supporting nodes on the P2P network should consider migrating to a more modern alternative over the coming years. However, there is currently no such alternative available yet. It is strongly recommended to postpone this change until an alternative exists and developers have enough time to implement, test, and roll out the new feature.In the meantime, it is suggested to improve the current filtering for segwit by testing scripts themselves and each scriptPubKey spent by any input against the filter, which also fixes the main privacy issue with server-side filtering as wallets have to add two items per address to the filter.</summary>
+    <published>2019-07-21T22:56:33+00:00</published>
+  </entry>
+</feed>

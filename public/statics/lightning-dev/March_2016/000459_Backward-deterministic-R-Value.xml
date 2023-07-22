@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Backward deterministic R Value</title>
+  <updated>2023-05-23T22:54:24.237529+00:00</updated>
+  <author>
+    <name>Nicolas Dorier 2016-03-07 12:35:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Backward deterministic R Value</title>
+    <updated>2023-05-23T22:54:24.237529+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-March/000459.html" rel="alternate"/>
+    <summary>The proposal discusses a new method for deterministic RValue generation which offers a solution to the problem of saving off-chain one signature per commitment. The proposal suggests keeping the actual HTLC/Payment channel contracts, but making the "RValues" backward deterministic. The RValue is chosen in such a way that RValue(n+1) = PreImage(RValue(n)), where n is the commitment index. In case Alice cheats Bob at commitment 100 by sending revocated commitment 50, Bob only has to remember RValue(99) from the 99th revocation and then hash this value 49 times to find out RValue(50). However, Bob doesn't know RValue(100) because RValue(100) = PreImage(99).For Alice, she generates a random number, then generates let's say, 1000 hashes. Then she uses hashes 1000 for RValue(0), hashes 999 for RValue(1), etc. Commitment Revocation is only accepted by the party if RValue(n+1) = PreImage(RValue(n)). The only downside is that Alice needs to regenerate all hashes every time she needs a new commitment. This can be mitigated by her storing some pre-computed values along the path.</summary>
+    <published>2016-03-07T12:35:30+00:00</published>
+  </entry>
+</feed>

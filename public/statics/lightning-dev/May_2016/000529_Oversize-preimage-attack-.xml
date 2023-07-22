@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Oversize preimage attack.</title>
+  <updated>2023-05-23T23:39:37.902657+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-05-02 05:07:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Oversize preimage attack.</title>
+    <updated>2023-05-23T23:39:37.902657+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-May/000529.html" rel="alternate"/>
+    <summary>Rusty, a developer, plans to modify the HTLC (Hash Time Lock Contract) scripts for the first time in a while. He intends to prepend "OP_SIZE 32 OP_EQUALVERIFY" to the scripts, which will mean that timing out an HTLC requires a 32-byte value. This change will define the length of a scriptsig that redeems a transaction, which was previously ill-defined. The wire protocol mandates a 32-byte R preimage to redeem an HTLC, but there was no such on-chain restriction. Due to this limitation, an attacker could create an HTLC that requires a different-sized preimage to redeem, then drop the commit tx to the blockchain and redeem it. Moreover, Rusty plans to drop the per-side HTLC limit from 1500 to 450 in BOLT #2. This means that a single "steal" transaction that spends all the inputs is still under 400k cost, simplifying the protocol. If the limit remained at 1500, stealing the inputs would have cost more than 1 MB, and the resulting transaction would be non-standard, meaning it may not propagate.</summary>
+    <published>2016-05-02T05:07:22+00:00</published>
+  </entry>
+</feed>

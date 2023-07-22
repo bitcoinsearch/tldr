@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP proposal: No chaining off replaceable transactions</title>
+  <updated>2023-06-12T03:16:06.686410+00:00</updated>
+  <author>
+    <name>Rhavar 2017-07-05 13:52:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP proposal: No chaining off replaceable transactions</title>
+    <updated>2023-06-12T03:16:06.686410+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-July/014700.html" rel="alternate"/>
+    <summary>The email thread is discussing a proposal for BIP125 transactions, which currently allow users to increase fees of unconfirmed transactions. The issue at hand is that receivers of these transactions may spend from the unconfirmed output, which exposes the sender to having to pay an effectively unbounded amount of money as per the BIP125 rules, or not fee bump at all. This is especially problematic in batched sends where there are multiple independent receivers. To support a healthy fee marketplace, the proposal aims to increase the utility of BIP125 by making transactions that spend an unconfirmed BIP125 output non-standard. This would specify a max chain depth of 1 for any BIP125 transactions. As a result, receivers of BIP125 transactions will need to wait until the transaction has confirmed before spending from it. If senders want to make further transactions before the BIP125 transaction confirms and need to utilize the change of the transaction, they will need to replace the transaction with one that makes the other send in "pass through" style or first finalize the BIP125 transaction and then chain from the spend normally. A rule was suggested that to spend from an unconfirmed BIP125 output, the transaction feerate needs to be higher than its unconfirmed parent's effective feerate, which could potentially solve most of the problematic low feerate sweeps and preserve the ability for receivers to use CPFP if they wish.</summary>
+    <published>2017-07-05T13:52:53+00:00</published>
+  </entry>
+</feed>

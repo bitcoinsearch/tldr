@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Sidechain headers on mainchain (unification of drivechains and spv proofs)</title>
+  <updated>2023-06-12T18:00:46.732828+00:00</updated>
+  <author>
+    <name>Chris Stewart 2017-09-05 17:06:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Sidechain headers on mainchain (unification of drivechains and spv proofs)</title>
+    <updated>2023-06-12T18:00:46.732828+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-September/014915.html" rel="alternate"/>
+    <summary>In the case of a sidechain fork, the mainchain considers the longest chain to be valid if it is longer by the SPV proof required length. The mainchain nodes can validate this rule because the sidechain headers are embedded in the mainchain block's coinbase. However, if the provided merkle tree hash has an invalid transaction, the mainchain nodes would think the longest work chain is the valid chain and kill off any consensus valid chain that sidechain miners are trying to construct. This could be a concern if a malicious miner extends the chain to whatever the SPV proof block height is. To prevent such situations, it is recommended that the coinbase maturity period on the sidechain be longer than 288 (or whatever parameter is decided upon). This incentivizes the sidechain miners to work together to extend the chain by working with other miners. If they do not work together, they will not be able to claim their bribes or spend their s:coinbase_tx outputs until they extend their own sidechain by 288 blocks. Another interesting thing to consider might be to use the OP_WITHDRAWPROOFVERIFY op code used in the elements project. This allows for providing a merkle proof to the bitcoin blockchain to initiate a withdrawal from the sidechain and prove that a transaction occurred on the sidechain to lock up those funds.</summary>
+    <published>2017-09-05T17:06:32+00:00</published>
+  </entry>
+</feed>

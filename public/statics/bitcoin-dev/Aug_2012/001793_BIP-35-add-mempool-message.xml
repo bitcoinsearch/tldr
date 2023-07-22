@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 35: add mempool message</title>
+  <updated>2023-06-06T07:02:12.280747+00:00</updated>
+  <author>
+    <name>Amir Taaki 2012-08-16 17:40:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 35: add mempool message</title>
+    <updated>2023-06-06T07:02:12.280747+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-August/001793.html" rel="alternate"/>
+    <summary>Jeff Garzik proposed a BIP 35 for all P2P changes. The goal is to make a network node's transaction memory pool accessible via a new "mempool" message. The existing "getdata" message behavior is to be extended to permit accessing the transaction memory pool. The aim behind this is to enable several use cases like SPV clients, miners downloading existing network transactions after a restart, and remote network diagnostics. Upon receipt of a "mempool" message, the node will respond with an "inv" message containing MSG_TX hashes of all the transactions in the node's transaction memory pool. An "inv" message is always returned, even if empty. The typical node behavior in response to an "inv" is "getdata". However, the reference Satoshi implementation ignores requests for transaction hashes outside that which is recently relayed. To support "mempool", an implementation must extend its "getdata" message support to querying the memory pool. Feature discovery is enabled by checking two "version" message attributes: a) Protocol version &gt;= 60002 b) NODE_NETWORK bit set in nServices.Older clients remain 100% compatible and interoperable after this change. For the implementation, Jeff Garzik suggests referring to https://github.com/bitcoin/bitcoin/pull/1641.</summary>
+    <published>2012-08-16T17:40:53+00:00</published>
+  </entry>
+</feed>

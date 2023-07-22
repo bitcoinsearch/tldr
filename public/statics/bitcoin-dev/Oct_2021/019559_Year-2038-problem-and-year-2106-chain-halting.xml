@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Year 2038 problem and year 2106 chain halting</title>
+  <updated>2023-06-15T02:47:12.467147+00:00</updated>
+  <author>
+    <name>yanmaani at cock.li 2021-10-17 15:14:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Year 2038 problem and year 2106 chain halting</title>
+    <updated>2023-06-15T02:47:12.467147+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-October/019559.html" rel="alternate"/>
+    <summary>The context discusses the issue of timestamp overflow in bitcoin transactions due to the limitation of a 32-bit timestamp. The proposed solution suggests introducing a new variable 'k' representing the most significant 32 bits of a 64-bit timestamp, to be stored in all cases where time is used. However, there is a concern that skipping 'k' could cause problems related to OP_CHECKLOCKTIMEVERIFY or nLockTime. Therefore, it is recommended to add the 'k' value to the coinbase transaction and combine the lower bits from the block header and higher bits from the coinbase transaction. Moreover, adding the 'k' value to the transaction nLockTime field is necessary because, after reaching 0x0000000100000000, all off-chain transactions with timelocks around 0x00000000ffffffff will be additionally timelocked for the next N years. The same is needed for each OP_CHECKLOCKTIMEVERIFY. It is suggested to push high 32 bits before the currently used value, assuming zero if there is only some 32-bit value. Although this proposal is a hardfork, it kicks in way into the future, and anything can be done as long as it doesn't change anything now. In very special cases, extra logic for locktime may be required, but worst-case, block time locking in the years around the switch or softfork in 64-bit locking can be used. The proposed solution solves the problem of chain halting, and after the switchover, everything would be back to normal.</summary>
+    <published>2021-10-17T15:14:41+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Rolling UTXO set hashes</title>
+  <updated>2023-05-20T02:19:44.548892+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2017-05-15 20:01:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Rolling UTXO set hashes</title>
+    <updated>2023-05-20T02:19:44.548892+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-May/014337.html" rel="alternate"/>
+    <summary>In this discussion, an efficient way of computing a UTXO set hash that supports comparing two UTXO sets but not compact proofs of existence or non-existence is presented. Several approaches to hashing unordered data through incremental hashing are discussed, including XHASH, AdHash, and MuHash. While AdHash and XHASH have security issues, MuHash using multiplication modulo a sufficiently large safe prime and ECMH using elliptic curve group provide provable security under the DL assumption.Addition and deletion of set elements in any order are supported by both MuHash and ECMH. For MuHash, the addition and deletion of elements is very efficient due to the use of a bitset. Meanwhile, ECMH uses binary elliptic curves to hash onto a curve point and supports both constant-time algorithms and probabilistic algorithms to hash onto a curve point. Finally, AdHash-like constructions with a sufficiently large intermediate hash can be made secure against Wagner's algorithm.The author presents a proposal for maintaining a rolling cryptographic checksum of the unspent transaction output (UTXO) set in Bitcoin Core. The proposal involves using either MuHash or ECMH approaches to add up the hashes or binary elliptic curve points respectively, and maintain a running total for the UTXO set. The author discusses the pros and cons of each approach, including their complexity and security assumptions.Based on preliminary benchmarks, the author finds that both approaches are sufficiently fast that it would be reasonable for full nodes and/or other software to always maintain one of them. The rolling set hash can replace the current gettxoutsetinfo RPC's hash computation, which currently requires minutes of I/O and CPU, as it serializes and hashes the entire UTXO set. The rolling set hash would make this instant, making the whole RPC much more usable for sanity checking. Additionally, the rolling set hash can assist in implementation of fast sync methods with known good blocks/UTXO sets, and database consistency checking.</summary>
+    <published>2017-05-15T20:01:14+00:00</published>
+  </entry>
+</feed>

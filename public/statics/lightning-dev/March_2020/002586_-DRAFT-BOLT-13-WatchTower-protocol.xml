@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[DRAFT] BOLT 13(?): WatchTower protocol</title>
+  <updated>2023-06-02T22:00:37.536738+00:00</updated>
+  <author>
+    <name>Sergi Delgado Segura 2020-03-09 17:49:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[DRAFT] BOLT 13(?): WatchTower protocol</title>
+    <updated>2023-06-02T22:00:37.536738+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-March/002586.html" rel="alternate"/>
+    <summary>The Watchtower protocol specification (BOLT DRAFT REV.1) has been revised to include user accounts, payment methods, and message signing. The revision also includes improvements over the original proposal. The document focuses on hiring a third party watching service (Watchtower) to watch the blockchain and respond to channel breaches on behalf of the customers.The client sends an encrypted penalty transaction and a transaction locator to the Watchtower every time there is a new transfer in the lightning channel. The Watchtower can identify a breach with the locator and decrypt the penalty transaction using the commitment transaction ID. Extensions can be offered by the Watchtower to provide stronger guarantees to the clients, such as a signed receipt for every new job to build an accountable Watchtower.Upon establishing the first connection with the tower, the client needs to register a public key. Freeing expired appointment from the tower after a channel closure or breach should be beneficial for both parties. The deletion_accepted message contains information about the acceptance of an appointment deletion by the Watchtower. The data must match with delete_appointment message before sending a deletion accepted message. Implementations should compute the locator, encryption_key, and encryption_iv from the commitment transaction. Users and servers should use ChaCha20-Poly1305 to encrypt/decrypt blobs. The sample code for the client to prepare the encrypted_blob has also been provided in the document.The article discusses the different payment modes for Watchtowers, which are entities responsible for monitoring Bitcoin Lightning Network channels and taking action in case of a breach. The three payment modes are on-chain bounty, micropayments, and subscription. The on-chain bounty approach pays the tower only if the job is done but allows multiple towers to be hired with only one receiving the reward. The micropayment and subscription approaches are favorable for Watchtowers, with the ideal approach being a combination of both.The article also explains the data serialization and signing process for requests and receipts made to Watchtowers. Signatures are zbase32 encoded and performed over the sha256d of the message prefixed by "Lightning Signed Message". Additionally, the article discusses the vulnerability of Watchtowers to attacks and precautions that can be taken to prevent them, such as subscriptions instead of single appointments.Lastly, the article mentions some possible improvements to the current hiring protocol and acknowledges areas for further development, such as defining proper tower discovery and error handling. The document does not include Watchtower server discovery. There's a list discussion topics at the end of the document with things that need opinions.</summary>
+    <published>2020-03-09T17:49:47+00:00</published>
+  </entry>
+</feed>

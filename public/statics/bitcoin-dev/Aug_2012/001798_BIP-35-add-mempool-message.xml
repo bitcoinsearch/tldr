@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 35: add mempool message</title>
+  <updated>2023-06-06T07:01:44.036701+00:00</updated>
+  <author>
+    <name>Stefan Thomas 2012-08-16 19:21:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 35: add mempool message</title>
+    <updated>2023-06-06T07:01:44.036701+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-August/001798.html" rel="alternate"/>
+    <summary>Pieter Wuille has suggested allocating an extra service bit for the memory pool refill command. Currently, it is enabled by checking two "version" message attributes: Protocol version greater than or equal to 60002 and NODE_NETWORK bit set in nServices. BitcoinJS will implement the feature as it's useful and no reason not to support it. A suggestion was made to use a new inv_type for MSG_MEMTX that can help save a few milliseconds by querying the right storage right away, and also help with things like telling apart broadcast/relayed transactions from the response to a mempool request for purposes like DoS scoring. The clients would treat MSG_TX and MSG_MEMTX interchangeably. Another comment suggests that if a node doesn't have anything in its mempool, instead of sending back an empty inv message, it should respond with an inv message containing a single element of type MSG_MEMTX and hash 0. This would be a direct way to indicate that this response is associated with a mempool request. The author emphasizes that sometimes Bitcoin's protocol leaves out a lot of information not for space reasons, but because the reference client's implementation doesn't need it and making the protocol richer might help some implementation down the road make a neat optimization.</summary>
+    <published>2012-08-16T19:21:14+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-05-20T18:10:11.804838+00:00</updated>
+  <author>
+    <name>Johnson Lau 2018-12-14 13:55:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-05-20T18:10:11.804838+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-December/016557.html" rel="alternate"/>
+    <summary>A new sighash proposal has been introduced that will sign the hash of the full script and commit to the position of the last executed OP_CODESEPARATOR. This is necessary because without signing the script or masked script, OP_CODESEPARATOR becomes unusable or insecure with NOINPUT. If NOINPUT doesn't commit to the masked script, it would blindly commit to a random OP_CODESEPARATOR position, which a wallet wouldn't know what codes are actually being executed. Rusty Russell has questioned the worth and safety of the mask complexity, but Anthony Towns believes that committing to a masked script is a huge improvement. There is also discussion about the safety of including SIGHASH_NOINPUT as a primitive, with some suggesting adding "_UNSAFE" or similar to its name due to the fact that it commits to dangerously little context. Anthony Towns suggests that committing to a masked script is a safer alternative. The possibility of committing to more information than script masking does for use cases where you want to be able to spend different scripts with the same signature was also discussed. However, it was concluded that this may not be feasible. Script masking seems general enough to prevent footguns even if key and value reuse across eltoo channels were a requirement, rather than prohibited.</summary>
+    <published>2018-12-14T13:55:43+00:00</published>
+  </entry>
+</feed>

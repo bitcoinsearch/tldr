@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Bitcoin Secure Multisig Setup</title>
+  <updated>2023-06-14T17:34:00.023150+00:00</updated>
+  <author>
+    <name>Hugo Nguyen 2021-02-09 09:45:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Bitcoin Secure Multisig Setup</title>
+    <updated>2023-06-14T17:34:00.023150+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018389.html" rel="alternate"/>
+    <summary>The proposed Bitcoin Secure Multisig Setup (BSMS) aims to offer a mechanism to set up multisig wallets securely across different vendors. The proposal is designed to mitigate the risk of tampering during the initial setup phase and define an interoperable multisig configuration format. The BSMS assumes that parties in the multisig support BIP32, the descriptor language, and encryption.The Coordinator is responsible for initiating the multisig setup, determining what type of multisig is used, how many members and signatures are needed, and generating a secret token for secure communication if encryption is enabled. The Signer provides its XPUB to the Coordinator, verifies its XPUB is included in the descriptor record, and persistently stores the descriptor record in its storage.The security of the proposal is ensured through two layers of protection: a temporary, secret token used to encrypt the communication between the Signers and the Coordinator and the descriptor checksum with visual inspection of the descriptor itself. The shared secret (the TOKEN) is necessary to guarantee that the devices connected are legitimate members of the multisig wallet. The use of an output descriptor is a standardized approach, albeit one without the wallet name included. For signers that use QR codes to transmit data, key and descriptor records can be converted to QR codes following the BCR standard. However, there are some concerns regarding the proposal. The lack of support on some devices should not prevent us from setting a good standard here. Cosigner registration on the device is crucial as it does not rely on everything being included in the PSBT, which also adds mental overhead as the user has to verify each transaction. Supporting this could be a big ask for vendors, so it has been made optional. Some devices, such as Trezor and Ledger, do not store multisig setups, which could make the process confusing.The Bitcoin protocol allows for changes to be made to the membership set by adding, removing or changing an existing member. However, it is important for all participating Signers to check that their membership is intact in the descriptor, as even one Signer failing to do so could compromise the setup. If a malicious member is inserted into the set, the only way to guard against it is through the descriptor checksum and visual inspection of the descriptor itself.It is crucial to ensure the security of the membership set to prevent potential attacks on the system.</summary>
+    <published>2021-02-09T09:45:48+00:00</published>
+  </entry>
+</feed>

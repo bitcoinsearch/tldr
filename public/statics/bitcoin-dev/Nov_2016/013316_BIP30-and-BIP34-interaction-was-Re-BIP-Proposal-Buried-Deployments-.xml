@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP30 and BIP34 interaction (was Re: [BIP Proposal] Buried Deployments)</title>
+  <updated>2023-05-20T00:08:24.408315+00:00</updated>
+  <author>
+    <name>Johnson Lau 2016-11-18 14:43:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP30 and BIP34 interaction (was Re: [BIP Proposal] Buried Deployments)</title>
+    <updated>2023-05-20T00:08:24.408315+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-November/013316.html" rel="alternate"/>
+    <summary>The post discusses a vulnerability in Bitcoin node implementation where an attacker could repeatedly send the same block/transaction, causing the node to download it again and implement the “first seen” rule. This raises concerns over whether the node can ban a peer just because it receives an invalid transaction from them, as they may be referring to a hash-colliding UTXO that the node doesn’t know and needs to verify by requesting the parent transaction. Eric Voskuil argues that any implementation that invalidates blocks based on the order of arrival is broken, as consensus must be verifiable independently by all nodes.Voskuil explains three hash collision scenarios that cause Core to declare blocks invalid based on ordering but are not part of consensus rules and therefore should be classified as bugs. Libbitcoin is deterministic in all three cases, and nodes must implement optimizations without altering consensus. Voskuil also mentions that the BIP30 regression hard fork is not a determinism bug but a hard fork that produces undesired consequences, such as the destruction of all unspent outputs in the replaced transaction. Fixing/preventing these bugs is responsible development behavior that does not require forks or BIPs since Bitcoin doesn't inherently contain any such bugs.The post also discusses two issues related to consensus forks in Bitcoin. The first issue concerns the ability to produce a block that mutates another block and forces a reorg all the way back to the mutated block. The second issue is the introduction of another hard fork with some odd behaviors without any justification other than tidying up the necessary code. The author argues that optimizing before producing a clean conceptual model architecture and design is a software development anti-pattern (premature optimization). It is possible to produce deterministic code that abides by consensus and outperforms Core without any optimization breaks, even avoiding the utxo set optimization. The proposed fork is therefore considered a premature optimization. In addition, the author recommends people contemplate the difference between unlikely and impossible. While colliding hashes are extremely difficult, they are not impossible. Bitcoin relies on difficulty for correct behavior, not impossibility. If hash operations remain difficult, Bitcoin is undeterred, and collisions will have no impact, even if they happen with unexpected frequency. However, with the unnecessary problems described above, a single hash collision can be catastrophic.Finally, the post includes a discussion between Johnson Lau and Eric Voskuil regarding the banning of an invalid block hash. Banning an invalid block hash is not a pure p2p protocol issue, and it is unclear whether permanent blocking of the hash would be a consensus issue.</summary>
+    <published>2016-11-18T14:43:03+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Package Relay Proposal</title>
+  <updated>2023-06-15T20:50:03.460041+00:00</updated>
+  <author>
+    <name>Gloria Zhao 2022-05-17 16:01:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Package Relay Proposal</title>
+    <updated>2023-06-15T20:50:03.461042+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020493.html" rel="alternate"/>
+    <summary>The author proposes changes to the p2p protocol that would enable package relay. The proposal includes two components - Package Mempool Accept and Package Relay. Its aim is to allow nodes to consider packages of transactions as a unit rather than individual transactions for submission to the mempool, creating a more fee-based market for block space. This would also allow contracting protocols to adjust fees at broadcast time. Furthermore, the proposal addresses the issue of pinning attacks, which can prevent a transaction from being relayed or getting mined. To achieve this, the proposal contains two main ideas - download and validate packages of transactions together and provide information to help peers decide whether to request and/or how to validate transactions which are part of a package. Two types of packages are proposed - child-with-unconfirmed-parents packages and tx-with-unconfirmed-ancestors packages. To support package relay, new messages have been added to the protocol. Nodes should send a "sendpackages" message during version handshake, indicating their support for package relay and the maximum number of transactions per package they are willing to accept. A "getpckgtxns" message is used to request all or some of the transactions previously announced in a "pckginfo" message. Both peers must agree to send packages in the version.A new protocol for package relay is proposed that enables the use case in which a child pays for its otherwise-too-low-fee parents and their mempool conflict(s). The protocol defines a new message, "pckgtxns", which should contain the transaction data requested using "getpckgtxns". A "pckgtxns" message should only be sent to a peer that requested the package using "getpckgtxns". The proposal suggests using the child's wtxid to refer to the package instead of having a package information round. When introducing a new type of package, assign it a version number "n" and use an additional "sendpackages" message during version handshake to negotiate support for it. Clients implementing this protocol will only attempt to send and request packages if agreed upon during the version handshake.The proposal is extensible and can support multiple types of packages based on future desired use cases. Two flavors of versioning were considered, with the second option being favored because it allows different parameters for different versions. The author thanks many others for their input on the design and desired interface for contracting protocols. Links to related resources, such as previous discussions and pull requests, are also provided in the context. The author has created a slidedeck exploring various alternative designs for this proposal and encourages others to suggest alternatives.</summary>
+    <published>2022-05-17T16:01:04+00:00</published>
+  </entry>
+</feed>

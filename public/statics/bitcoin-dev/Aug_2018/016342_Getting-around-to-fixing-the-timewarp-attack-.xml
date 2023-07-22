@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Getting around to fixing the timewarp attack.</title>
+  <updated>2023-06-13T14:12:00.880011+00:00</updated>
+  <author>
+    <name>Bram Cohen 2018-08-30 20:55:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Getting around to fixing the timewarp attack.</title>
+    <updated>2023-06-13T14:12:00.880011+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-August/016342.html" rel="alternate"/>
+    <summary>Bitcoin's non-overlapping difficulty calculation has been known to be vulnerable to gaming with inaccurate timestamps since 2012. Several proposals have been suggested, which are fully compatible with existing behavior and only trigger in the presence of exceptional circumstances such as a timewarp attack. One proposal being discussed is to require the timestamp of block (2016x) not smaller than its parent block by t-seconds, with 0 ≤ t ≤ infinity. With t=86400 (one day), a timewrap attacker may bring down the difficulty by about 1/14 = 7.1% per round. Reducing the value of t is a softfork. The aim is to find a t which is small-enough-to-prohibit-time-wrap-attack but also big-enough-to-avoid-split. With this fix, it is worth thinking about the principle of distinction between soft forks that cause orphaning on non-upgraded miners and those that don't. Soft forks are better when they don't cause orphaning on non-upgraded miners. However, in general, a soft fork is likely to cause non-upgraded miners to get orphaned.The problem arises from the difference between the timestamps at the end of a period and the block right after it. Soft forking to force those to be 'close enough' together sounds like a solid approach. Let's say three hours backward jump plus some safety parameter. It also feels like a good idea to not allow a jump of more than three hours forwards either, just on principle. That should result in minimal code changes, and rarely any orphaning of non-upgraded miners at all, and still only 1/2016 blocks when they do. This solution suffers from still allowing the attack a little bit, but three hours out of every two weeks seems like no big deal.A chain-split would happen even without any attack if a naive fix is adopted, which requires every block (2016x) to have a timestamp not smaller than that of its parent block. This fix involves mandatory upgrade of pool software and will cause a chain split unless super-majority of miners are enforcing the new rules. The best way is to do it with something like BIP34, which also requires new pool software.Before dusting off old fixes, it would be useful to ask the list if anyone else was aware of a favorite backward-compatible timewarp fix proposal they want to point out.</summary>
+    <published>2018-08-30T20:55:17+00:00</published>
+  </entry>
+</feed>

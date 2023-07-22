@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Dual Funding Proposal</title>
+  <updated>2023-06-02T15:14:52.119362+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-11-30 02:58:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Dual Funding Proposal</title>
+    <updated>2023-06-02T15:14:52.119362+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001700.html" rel="alternate"/>
+    <summary>Lisa Neigut proposes a draft for the new dual funding flow which involves creating a new channel open protocol set (v2) with three new message types. The proposal includes a quick overview of the message exchange for v2. The willingness to use v2 is flagged in init via `option_dual_fund`. The proposal also includes details about the various messages involved such as `accept_channel2`, `funding_puts2`, and `commitment_signed2`. The requirements for sending and receiving nodes are also mentioned. The proposal aims to allow each node to have a complete set of transaction inputs/outputs to derive the funding transaction hash while mitigating any asymmetry between the nodes.The context goes on to describe the requirements and rationale for RBF (Replace-By-Fee) for Channel Establishment v2. The first step is `init_rbf`, which is sent by the initiator after the funding transaction has been broadcast but before the `funding_locked2` has been exchanged. The sending node must set a larger `feerate_per_kw` than the most recent funding tx, and may update other parameters like amount, fee rate, dust limit, or channel reserve for the channel. The receiving node may reject the RBF request if there are any unreasonable demands or errors. If there are no errors or unreasonable demands, it should send an `accept_rbf` message.Exchanging witness data via `funding_signed2` allows either side to broadcast the funding transaction while maintaining information symmetry between the nodes. The sender must remember the details of this funding transaction and send one `witness_stack` for each `output_info` it sent in `funding_puts2`. The receiver should check that the number of witnesses sent matches the number of inputs. If a `witness_stack` length exceeds the corresponding `max_extra_witness_len`, it may error.If the receiving node has not received a valid `commitment_signed2` message, it must not send its `funding_signed2` message. The receiving node must verify the commitment signature is valid for the funding transaction-commitment transaction that it has derived independently. If this signature is invalid, it must fail the channel. If it has not sent a `commitment_signed2` message, it must send its `commitment_signed2` message.In the previous channel establishment protocol, the commitment signature was compressed into `funding_created`/`funding_signed`. With dual funding, the requirement is interaction to build the funding transaction and commitment signature exchange is now a separate step.A dual-funding node (B) should broadcast its funding transaction if it does not see the transaction broadcast after a reasonable timeout. The channel id that becomes fixed for this node will be determined by the `funding_locked2` message. Once an `init_rbf` has been accepted by the dual-funding node, the message flow returns to `commitment_signed2`.</summary>
+    <published>2018-11-30T02:58:39+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - New opcodes and transaction version numbers (was 'relax the IsStandard rules for P2SH transactions')</title>
+  <updated>2023-06-09T02:48:40.767491+00:00</updated>
+  <author>
+    <name>Peter Todd 2014-09-29 02:35:53</name>
+  </author>
+  <author>
+    <name>Alan Reiner 2014-09-29 04:30:11</name>
+  </author>
+  <author>
+    <name>Alan Reiner 2014-09-29 04:30:11</name>
+  </author>
+  <author>
+    <name>Peter Todd 2014-09-29 05:35:26</name>
+  </author>
+  <author>
+    <name>Alan Reiner 2014-09-29 04:30:11</name>
+  </author>
+  <author>
+    <name>Peter Todd 2014-09-29 05:35:26</name>
+  </author>
+  <author>
+    <name>Peter Todd 2014-09-29 02:35:53</name>
+  </author>
+  <author>
+    <name>Peter Todd 2014-09-29 05:35:26</name>
+  </author>
+  <author>
+    <name>Peter Todd 2014-09-29 02:35:53</name>
+  </author>
+  <link href="bitcoin-dev/Sept_2014/006659_New-opcodes-and-transaction-version-numbers-was-relax-the-IsStandard-rules-for-P2SH-transactions-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2014/006660_New-opcodes-and-transaction-version-numbers-was-relax-the-IsStandard-rules-for-P2SH-transactions-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2014/006660_New-opcodes-and-transaction-version-numbers-was-relax-the-IsStandard-rules-for-P2SH-transactions-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2014/006661_New-opcodes-and-transaction-version-numbers-was-relax-the-IsStandard-rules-for-P2SH-transactions-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2014/006660_New-opcodes-and-transaction-version-numbers-was-relax-the-IsStandard-rules-for-P2SH-transactions-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2014/006661_New-opcodes-and-transaction-version-numbers-was-relax-the-IsStandard-rules-for-P2SH-transactions-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2014/006659_New-opcodes-and-transaction-version-numbers-was-relax-the-IsStandard-rules-for-P2SH-transactions-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2014/006661_New-opcodes-and-transaction-version-numbers-was-relax-the-IsStandard-rules-for-P2SH-transactions-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2014/006659_New-opcodes-and-transaction-version-numbers-was-relax-the-IsStandard-rules-for-P2SH-transactions-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - New opcodes and transaction version numbers (was 'relax the IsStandard rules for P2SH transactions')</title>
+    <updated>2023-06-09T02:48:40.767491+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-September/006659.html" rel="alternate"/>
+    <summary>The discussion is centered around the process of soft-forks bumping version numbers in Bitcoin. Gavin Andresen's proposal to turn this into an informational BIP has received consensus, but there are concerns raised by another user regarding the unclear definition of "use" of a new opcode. This could lead to non-upgraded clients creating scriptPubKeys whose contents can be spent by anyone. The "Relax IsStandard rules for P2SH transactions" pull-req is incomplete as it doesn't blacklist usage of the upgradable NOPx opcodes, which could lead to false confirmations. A fix has been suggested by blacklisting the NOPx opcodes if they are executed.In a discussion regarding the addition of new opcodes to P2SH, Alan Reiner suggested updating the address format to include a transaction version number, but Peter Todd argued that this would require new addresses for every new opcode, defeating the purpose of P2SH. He also criticized Satoshi's implementation of a per-block sigop limit, stating that it allows for the creation of blocks that pass the sigop limit, yet execute millions of expensive signature operations by being filled with scriptSigs spending txouts with large numbers of sigops in their scriptPubKeys. Although P2SH improves on this situation somewhat, it misses the opportunity to count all sigops in all scriptSigs directly.BIP62 proposes increasing the transaction version # to indicate that the sender wants anti-malleability rules to be applied, which is an appropriate usage of tx version numbers. However, care needs to be taken when using version numbers to enable new opcodes as opposed to enabling them globally based on block version numbers. Additionally, when a wallet creates a transaction, the scriptPubKeys in the transaction outputs are specified by the receiver(s) and aren't executed until they are spent, so there is no reason why the wallet should care about the contents of those scriptPubKeys.</summary>
+    <published>2014-09-29T02:35:53+00:00</published>
+  </entry>
+</feed>

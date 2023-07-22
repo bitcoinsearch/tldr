@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New BIP32 structure</title>
+  <updated>2023-06-08T16:03:56.853130+00:00</updated>
+  <author>
+    <name>Thomas Voegtlin 2014-03-27 10:57:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New BIP32 structure</title>
+    <updated>2023-06-08T16:03:56.853130+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-March/004833.html" rel="alternate"/>
+    <summary>On March 27, 2014, Andreas Schildbach started a discussion on finding a better structure for Bitcoin wallets. The most important thing was to have wallets that were either 100% interoperable or 0%. One issue with Electrum and Mycelium was bandwidth, as the servers could not handle too many addresses being watched at once. As a result, Electrum had to impose a constraint on the number of virgin addresses provided to users. Although this strategy could be improved, it would not scale up to having every client watching thousands of addresses. For bloom-filter clients, the distinction between merchant accounts and regular user accounts is not necessary because watching addresses is cheap. However, Multibit should provide hundreds or even thousands of virgin addresses to the user if they decide to create them. This will not generally be recoverable in Electrum unless the user helps the recovery procedure. Andreas suggested that merchant accounts should behave differently from regular user accounts as merchants need to generate an unlimited number of receiving addresses. Mike Hearn proposed a BIP32 wallet structure acceptable to everyone. The proposed structure was /m/cointype/reserved'/account'/change/n. Cointype is zero for Bitcoin and is here to support two things, alt coins based off the same root seed and distinguishing between keys intended for multisig outputs. Reserved is for "other stuff", account is for keeping wallets-within-a-wallet to avoid mixing of coins, change is 0 for receiving addresses, and 1 for change addresses, and n is the actual key index. The goal was to have the same seed written down once and meet all users' needs while still allowing some drift between what wallets support. Pieter made the point that you can't really encode how keys are meant to be used into just an HDW hierarchy and normally you'd need some metadata as well. However, interop between wallets is more important than arriving at the most perfect possible arrangement.</summary>
+    <published>2014-03-27T10:57:42+00:00</published>
+  </entry>
+</feed>

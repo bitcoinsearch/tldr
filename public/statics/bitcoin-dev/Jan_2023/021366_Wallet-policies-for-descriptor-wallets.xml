@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Wallet policies for descriptor wallets</title>
+  <updated>2023-06-15T20:24:06.051655+00:00</updated>
+  <author>
+    <name>darosior 2023-01-23 19:53:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Wallet policies for descriptor wallets</title>
+    <updated>2023-06-15T20:24:06.051655+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-January/021366.html" rel="alternate"/>
+    <summary>The document discusses the challenges of implementing descriptors and miniscript support in hardware wallets. These languages are very general and flexible, but they pose security issues due to the limitations of embedded devices such as limited RAM and computational power, inability to import additional private keys, and absence of permanent storage. These challenges make it impossible for an attacker to modify the policy surreptitiously, therefore stealing or burning user's funds. To address these challenges, the author proposes a solution of wallet policies that contains enough information to generate all the relevant addresses/scripts, and for the hardware wallet to identify the keys that it controls and that are needed to spend the funds sent to those addresses. The registration process involves the software wallet initiating a wallet policy registration on the hardware wallet; the information should include the wallet policy, but also a unique name that identifies the policy. The hardware wallet shows the wallet policy to the user using the secure screen. After inspecting the policy and comparing it with a trusted source, the user approves the policy. Furthermore, the document suggests minimizing the amount of information shown on-screen and reducing the number of times the user has to validate such information to ensure good user experience. Additionally, the document recommends avoiding blowup in descriptor size by reusing the same xpub in multiple places. The proof of registration is executed securely using message authentication codes on a hash committing to the wallet policy, its name, and any additional metadata. Finally, the document proposes the possibility of signing devices displaying plain English verification to the user from a Miniscript semantic policy. Users can check their backup against the policy registered on the device by having the user-friendly policy checked first and having an option to show the raw descriptor for them to cross-check it with their backup.The proposed language targets only a stricter subset of the output descriptors language and attempts to generalize the approach that is already used for single-signature accounts or in multisignature setups. Supporting only a reduced feature set when compared to output descriptors helps in implementations, while attempting to capture all the common use cases by keeping the structure of the wallet policy language very close to that of descriptors. A wallet policy is composed of a wallet descriptor template, together with a vector of key information items. Implementations must not necessarily implement all of the possible wallet policies defined by this standard, but it is recommended to clearly document any limitation.</summary>
+    <published>2023-01-23T19:53:18+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>bitcoind multiplexing proxy - request/response routing problem</title>
+  <updated>2023-06-04T19:00:42.087432+00:00</updated>
+  <author>
+    <name>Steve diy-eco-life 2011-09-08 02:11:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>bitcoind multiplexing proxy - request/response routing problem</title>
+    <updated>2023-06-04T19:00:42.087432+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-September/000479.html" rel="alternate"/>
+    <summary>The author of the post is planning to create a proof of concept for the multiplexing proxy that Gavin and Mike spoke about. The initial plan is to make it a dumb as doornails proxy between one local bitcoind and one remote node. However, the problem arises when dealing with request-response exchanges from multiple remote nodes. There are three approaches suggested in the post to deal with this problem. The first approach is generating a unique key from both the request and the response. The unique key should be identical for similar requests from different clients, allowing recycling responses. However, this approach may require large keys to obtain guaranteed uniqueness, and there are risks of sending back the wrong response to a request.The second approach is modifying bitcoind to accept sequence numbers for request/response type messages, like the 'id' field in json-rpc. This approach is more reliable but invasive to the bitcoin protocol. Moreover, it loses the inherent de-duplication of requests that were present in the first approach. The third approach is making the proxy intelligent enough to handle these requests itself. The proxy maintains its own local cache of headers, and when a getheaders message comes in, it checks if it has all the requested headers. If not, it requests the missing ones from the local daemon, adds them to its cache, and builds a headers response itself. Though this approach achieves the best combination of request/response matching reliability and de-duplication of work, it requires far more protocol awareness, creating maintenance dependency for future protocol changes.The author is inclined towards the first approach for an easy initial implementation with a view to moving to the third option ultimately. Before studying the protocol, the author thought that the third approach would be impossible. However, the depth of protocol awareness for the first and third approaches is not much different. Option two allows for a much dumber and thinner proxy but loses a lot of potential efficiencies. Ultimately, option three is where the proxy should progress to in the future, but the routing problem needs to be solved from the beginning. The author welcomes suggestions for a simpler approach to the request/response routing problem.</summary>
+    <published>2011-09-08T02:11:42+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reason for having HMACs in Sphinx</title>
+  <updated>2023-06-02T15:19:14.851561+00:00</updated>
+  <author>
+    <name>Corné Plooy 2018-12-04 10:23:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reason for having HMACs in Sphinx</title>
+    <updated>2023-06-02T15:19:14.851561+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-December/001711.html" rel="alternate"/>
+    <summary>A potential attack on the Lightning network involving an intermediate node guessing that the next node in the route is the final node can be prevented by including a shared secret in the onion message to the final node. The payee would generate the shared secret as part of the invoice and pass it to the payer, who would include it in the per-hop data to the payee. On receiving the incoming message, the payee would check whether the received shared secret corresponds to the generated one. If it does not, the payment hash is unrecognized, and the payee behaves in the same way as when the payment hash is unrecognized (including timing). The shared secret does not need to be very large, and if encrypted like the rest of the per-hop data, the attacker cannot learn the shared secret and cannot include it in their own replacement onion. With this protocol in place, a final node can no longer be distinguished from a non-final node with this attack. However, this type of attack can be generalized to test whether a certain second-degree neighbor, third-degree neighbor, etc. is the final node, which scales poorly with increasing network distance.Adding HMACs to the Lightning network ensures that the next hop will return an error if anything was changed, removing the leak about which node would have failed the route. An attacker could learn the path length by messing with different per-hop payloads. This problem arises because the HMAC prevents a hop from modifying the packet before forwarding, and the next node not detecting that modification. If an attacker can do 100 attempts per second, then a 32-bit shared secret will take (on average) 2^31 / (100*3600*24) = 248 days to crack, for a single guess of which node is the final node.</summary>
+    <published>2018-12-04T10:23:28+00:00</published>
+  </entry>
+</feed>

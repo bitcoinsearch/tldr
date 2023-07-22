@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>How to do Proof of Micro-Burn?</title>
+  <updated>2023-06-15T22:58:22.939423+00:00</updated>
+  <author>
+    <name>Ruben Somsen 2022-07-17 20:40:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>How to do Proof of Micro-Burn?</title>
+    <updated>2023-06-15T22:58:22.939423+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-July/020746.html" rel="alternate"/>
+    <summary>Veleslav posted on the bitcoin-dev mailing list seeking a solution to the problem of proof of burn. He suggested using OP_RETURN with some application-specific data as the current working solution but noted that block space is finite and thus, scalability is a fundamental constraint. Veleslav proposed using a second layer protocol similar to Lightning Network, but with public evidence of burns. He considered pre-committing a larger OP_RETURN burn in the blockchain with an additional output that would include a merkel tree with sparse summation. However, he hasn't found a solution to the double-spend problem. Ruben responded to Veleslav's post by suggesting that what Veleslav needs is a basic merkle sum tree (not sparse) that commits to the intent/recipient of the burn. Ruben also suggested outsourcing the burn to an aggregating third party but warned that it won't be atomic, so they could walk away with the payment without actually following through with the burn. Ruben noted that while an op_return is needed to burn, you don't necessarily have to put the hash there and can save some bytes. One possible place to commit the root hash is in a double taproot commitment in the change output. Finally, Ruben suggested performing the burn on a spacechain, a "sidechain" that has burned BTC as its native token, in order to avoid using mainchain block space altogether, making it more scalable. It's worth noting that this fully supports SPV proofs, so the third party you're proving the burn to doesn't have to run a full node. Ruben believes that this seems like a possible way to revitalize the original hashcash use case, e.g., by only accepting emails that have an SPV proof of some burned sats attached, or any other place where spam is an issue.</summary>
+    <published>2022-07-17T20:40:33+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Schnorr and taproot (etc) upgrade</title>
+  <updated>2023-05-20T19:37:45.522500+00:00</updated>
+  <author>
+    <name>Anthony Towns 2018-12-18 04:58:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Schnorr and taproot (etc) upgrade</title>
+    <updated>2023-05-20T19:37:45.522500+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-December/016566.html" rel="alternate"/>
+    <summary>In a discussion between Russell O'Connor and Johnson Lau, it was suggested that if CHECKSIG* and CHECKMULTISIG* were disabled in favor of CHECKDLS, CHECKDLSVERIFY, and CHECKDLSADD with different names and opcodes, copying a script template opcode-for-opcode from v0 to v1 would always fail. However, with taproot, this may not result in a loss of money even if the script is impossible to ever satisfy, since recovery may be possible via the direct signature path. Johnson Lau also suggested popping the stack after OP_CLTV and OP_CSV, which would save 1 WU per OP_CSV if implemented, as nearly every instance of OP_CSV is followed by an OP_DROP. While these suggestions are considered bikeshedding, it was noted that having precisely the same semantics for identical opcodes in v0 and v1.0 scripts would make things easier for everyone. However, constructions such as "CLTV CHECKSIGVERIFY" that avoid the DROP and work when a true value is expected on the stack will not work if an empty stack is required at the end.</summary>
+    <published>2018-12-18T04:58:26+00:00</published>
+  </entry>
+</feed>

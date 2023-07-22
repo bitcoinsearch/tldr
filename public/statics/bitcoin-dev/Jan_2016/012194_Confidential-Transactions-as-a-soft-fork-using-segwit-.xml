@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Confidential Transactions as a soft fork (using segwit)</title>
+  <updated>2023-06-11T02:56:39.309451+00:00</updated>
+  <author>
+    <name>Felix Weis 2016-01-06 15:18:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Confidential Transactions as a soft fork (using segwit)</title>
+    <updated>2023-06-11T02:56:39.309451+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-January/012194.html" rel="alternate"/>
+    <summary>The proposal suggests an upgrade to Pieter Wuille's segregated witness (segwit), which aims to reduce the blockchain to a utxo changeset, while placing cryptographic proofs for inputs into a witness part. This upgrade aims to add support for transactions with both witnessIns and witnessOuts. The proposal also introduces three new transaction types: blinding, unblinding and confidential. Valid blocks containing these transactions must include a mandatory special output in their coinbase transaction and a new special confidential base transaction. Blinding transactions use 0 value inputs and outputs, while the encrypted amounts are stored in the witnessOut part. For blinding, unblinding and miner fees, a single anyone-can-spend output is used, which will be updated in every block containing confidential transactions. The last output of the blinding transaction script acts as a marker of the transaction being a blinding tx, indicating that a block is invalid if the miner claims the fees for himself instead of putting it into a special coinbase output. Unblinding transactions remove confidential outputs from the utxo set. The outpoint itself is not spendable, but the same block will contain a confidential base transaction created by the miner that will satisfy the amount and p2sh-destination, refunded using GCTXO. Confidential transactions have all inputs and outputs with amount 0 and are everyone can spend V2 segwit, thus valid under old rules. All inputs and outputs have amount 0 and are everyone can spend V2 segwit, thus are valid under old rules. Confidential base transaction is a special transaction in the last position in every block that contains at least one of the new transaction types. Created by the miner of the block and used to do the actual unblinding and redeeming transaction fees for all confidential transactions. There will always be only 1 GCTXO in the utxo set to allow for full accountability for 21 million bitcoin. A block is only valid if all amounts/commitments/range-proofs match. If a miner tries to use GCTXO other than allowed in the single confidential base transaction, it will be orphaned.</summary>
+    <published>2016-01-06T15:18:56+00:00</published>
+  </entry>
+</feed>

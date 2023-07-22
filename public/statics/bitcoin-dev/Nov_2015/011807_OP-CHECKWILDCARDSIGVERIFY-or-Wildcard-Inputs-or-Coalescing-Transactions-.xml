@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_CHECKWILDCARDSIGVERIFY or "Wildcard Inputs" or "Coalescing Transactions"</title>
+  <updated>2023-06-11T01:25:39.363332+00:00</updated>
+  <author>
+    <name>Chris Priest 2015-11-24 21:01:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_CHECKWILDCARDSIGVERIFY or "Wildcard Inputs" or "Coalescing Transactions"</title>
+    <updated>2023-06-11T01:25:39.363332+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-November/011807.html" rel="alternate"/>
+    <summary>The proposal suggests a way to achieve coalescing transaction which is the same size as normal transaction, but includes only one UTXO, while the rest are implied based on the presence of the OP_CHECKWILDCARDSIGVERIFY opcode. The code that determines if a UTXO is spent or not will need modification to include a check to see if any matching coalescing transactions exist in any later block. A "coalescing pool" containing all coalescing transactions could be created to make such a check faster. However, the "wildcard signature" part is not too clear yet and needs more work. One way to achieve this would be to inject a flag into the signing process that can be verified later. Initially, the proposal suggested expressing the "wildcardness" of the transaction through the transaction version number, but the concern was raised that someone could modify the transaction from version 1 to version 2 and steal funds. Hence, the "wildcardness" must be expressed in the signature so that the private key holder intended all inputs to be included, hence the need for a new opcode. Gavin Andresen responded to the proposal, stating that every input has a 32-byte hash (transaction being spent), a 4-byte output (output being spent), a 4-byte sequence number, plus the scriptSig, which is at least two serialized bytes. To coalesce scriptSigs, all-but-the-first scriptSig should be zero-length. An OP_RINGSIGVERIFY is probably the right way to do this. The funding transactions would be OP_RINGSIGVERIFY, which might be redeemed with for one input and then... uhh... maybe just for the other inputs that are part of the same ring signature group (OP_0 if the first input has the signature that is good for all the other public keys, which would be the common case).</summary>
+    <published>2015-11-24T21:01:26+00:00</published>
+  </entry>
+</feed>

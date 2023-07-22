@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New transaction policies (nVersion=3) for contracting protocols</title>
+  <updated>2023-06-16T00:30:21.666894+00:00</updated>
+  <author>
+    <name>Antoine Riard 2022-09-25 23:59:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New transaction policies (nVersion=3) for contracting protocols</title>
+    <updated>2023-06-16T00:30:21.666894+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-September/020939.html" rel="alternate"/>
+    <summary>A new set of mempool/transaction relay policies have been proposed to aid L2/contract protocols. The proposal includes a set of additional policy rules applying to V3 transactions, modifications to package RBF rules and an implementation for Bitcoin Core.Existing standardness rules apply to V3 transactions including a V3 transaction can be replaced even if it does not signal BIP125 replaceability. Any descendant of an unconfirmed V3 transaction must also be V3, and an unconfirmed V3 transaction cannot have more than 1 descendant. A V3 transaction that has an unconfirmed V3 ancestor cannot be larger than 1000 virtual bytes. The minimum between package feerate and ancestor feerate of the child is not lower than the individual feerates of all directly conflicting transactions and the ancestor feerates of all original transactions. All package transactions with mempool conflicts must be V3, which means the sponsoring child transaction must be V3. This effectively means that only V3 transactions can pay to replace their ancestors' conflicts, and only V3 transactions' replacements may be paid for by a descendant.The bitcoin-dev mailing list recently featured a post by Gloria Zhao that proposed an update to the Lightning Network's transaction policies. The proposal includes using V3 descendant limits to ensure transactions are applied correctly, with rules and guidelines for commitment and fee-bumping transactions. Commitment transactions should have 1 anchor output and can be signed with 0 fees or 1sat/vbyte.If broadcasted, the commitment transaction is referred to as "the parent," and the attached fee-bumping transaction is called "the child." Rules include using only one child per batched fee-bumping and replacing the child with a higher-feerate transaction for additional fee-bumps instead of attaching a grandchild. In response to expected questions, Gloria clarified that this proposal fixes Rule 3 Pinning and eliminates the need to bump a counterparty's commitment transaction using CPFP. The proposal also addressed concerns about privacy issues, backward compatibility, and whether V2 or V3 transactions could replace each other, stating that V3 transactions would not be in widespread use outside of L2, making it unrealistic to assume it would allow fingerprinting LN transactions based on nVersion.Gloria welcomes feedback and review of the proposal.</summary>
+    <published>2022-09-25T23:59:22+00:00</published>
+  </entry>
+</feed>

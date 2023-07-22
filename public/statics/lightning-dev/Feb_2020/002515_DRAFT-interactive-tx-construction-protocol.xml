@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DRAFT: interactive tx construction protocol</title>
+  <updated>2023-06-02T22:53:28.521286+00:00</updated>
+  <author>
+    <name>lisa neigut 2020-02-10 21:53:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DRAFT: interactive tx construction protocol</title>
+    <updated>2023-06-02T22:53:28.521286+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002515.html" rel="alternate"/>
+    <summary>The context provided discusses technical details regarding the implementation of a subtype called "witness_element". It specifies that witness_element data must be less than 32 bytes in length and must have a standard output script. Additionally, it is recommended that nLocktime be set to zero to allow for greater flexibility.One issue with the current protocol is that the blockheight - 6 restriction on funding transactions may not be sufficient to prevent deliberate reorg attacks. As a solution, it is suggested that the locktime be set back a few blocks, allowing the transaction to be eligible for inclusion in any of the previous six blocks. However, this introduces the possibility of fee-sniping, where an analyst can correctly guess that a blockheight - 5 transaction is a Lightning funding if more than 0.1% of onchain transactions are dual-funded.To improve the protocol messages for managing block height disagreements, Rusty suggests adding a serial_id to inputs and outputs, which can also be used for deletions. The serial id would serve as a sorting heuristic for input ordering in the final transaction, replacing BIP69. Peers must choose serial ids randomly, and collisions between peers are considered a protocol error.In conclusion, the context provides technical guidance for implementing witness_element and addresses potential issues with the current protocol's handling of block heights and funding transactions. It also proposes solutions for managing these issues through the use of locktimes and serial ids.</summary>
+    <published>2020-02-10T21:53:28+00:00</published>
+  </entry>
+</feed>

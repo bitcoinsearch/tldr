@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[Pre-BIP] Fee Accounts</title>
+  <updated>2023-06-15T03:55:47.277380+00:00</updated>
+  <author>
+    <name>Jeremy 2022-01-19 07:32:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[Pre-BIP] Fee Accounts</title>
+    <updated>2023-06-15T03:55:47.278380+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-January/019783.html" rel="alternate"/>
+    <summary>In a recent Bitcoin-dev email thread, Jeremy Rubin proposed an extension block that would act as an account system for Bitcoin. The proposal suggests creating a separate UTXO database for fee accounts with anyone-can-spend outputs that have a redeeming key and associated amount but are ultimately anyone can spend. Deposits to these outputs would be committed in an extension block merkle tree that would allow fee accounts to sign only two kinds of transactions: a fee amount and a TXID or Outpoint, or a withdraw amount, a fee, and an address.These transactions would be committed in an extension block merkle tree. In any block, deposits could be released into fees if there is a corresponding transaction, consolidated together to reduce the number of UTXOs, or released into fees and paid back into the requested withdrawal key encumbered by a 100-block timeout. Although accounts are generally considered bad, this proposal's fee accounts are not bad because any funds withdrawn from the fee extension are locked for 100 blocks as a coinbase output, so there should be no issues with any series of reorgs.The design is fundamentally 'decent' for scalability because adding fees to a transaction does not require adding inputs or outputs and does not require tracking substantial amounts of new state. Furthermore, this type of design works really well for channels because the addition of fees to channel states does not require any sort of pre-planning (e.g., anchors) or transaction flexibility (SIGHASH flags). The proposal could be modified to implement something like Tornado.cash so that the fee account paying can be unlinked from the transaction being paid for, improving privacy at the expense of being a bit more expensive. Other operations could be added to allow a trustless mixing to be done by miners automatically where groups of accounts with similar values are trustlessly split into a common denominator and change, and keys are derived via a verifiable stealth address like protocol. The LN can also be used with PTLCs to have another individual paid to sponsor a transaction on your behalf only if they reveal a valid signature from their fee paying account, although under this model it's hard to ensure that the owner doesn't pay a fee and then 'cancel' by withdrawing the rest.The email thread also discusses a potential design for a federated network that could bribe miners and prove the concept works before a consensus upgrade is deployed. This approach, however, would create a centralizing layer that interferes with normal mining. The email concludes with a happy new year greeting from Jeremy Rubin.</summary>
+    <published>2022-01-19T07:32:36+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Changing the transaction version number to be varint</title>
+  <updated>2023-05-20T00:35:32.414426+00:00</updated>
+  <author>
+    <name>Tom Zander 2017-01-20 14:02:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Changing the transaction version number to be varint</title>
+    <updated>2023-05-20T00:35:32.414426+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-January/013489.html" rel="alternate"/>
+    <summary>In the given context, it is mentioned that in a transaction, the version field is always 4 bytes while the rest of the integer encoding is variable-sized to save on bytes. This means that almost all transactions have bytes 2, 3 and 4 set to zero. The author ponders about the impact of changing the way the version number is serialized to be var int when accepting a new version of transaction format. The benefit would be that each transaction loses three bytes which can be used differently in v1 transactions and are not needed at all for newer formats. Another secondary benefit is that 100% of all integers in the transaction are following exactly the same encoding (var-int encoding) at least for FlexTrans. Currently, there is no consensus rule that rejects transactions which lie about their version. Hence, this rule cannot be introduced retroactively and will only apply from a certain block-height.The proposed way to implement this is to label bytes 2, 3 &amp; 4 as unused from a certain block-height while interpreting the first byte as varint. Additionally, a new rule will be added that only transactions that do not lie about their version number are valid, meaning version 1. This could be done as a soft fork. However, the author seeks feedback if anyone sees any problems with this proposal. It is also worth noting that although almost all transactions have bytes 2, 3 &amp; 4 set to zero, there is no transaction version defined that sets them to non-zero. Links to the Bitcoin Classic website and the author's blog and vlog are provided at the end of the context.</summary>
+    <published>2017-01-20T14:02:22+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Why should funders always pay on-chain fees?</title>
+  <updated>2023-06-03T02:21:29.693300+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2020-10-08 15:30:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Why should funders always pay on-chain fees?</title>
+    <updated>2023-06-03T02:21:29.693300+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002815.html" rel="alternate"/>
+    <summary>In a Lightning-dev mailing list, Bastien Teinturier proposed a change to the current "funder pays all the commit tx fees" rule, which he believes exists solely for simplicity. He suggested that in some cases, fundees should be paying a portion of the commit-tx on-chain fees, otherwise, there may be a web-of-trust network where channels would only exist between peers that trust each other. Routing nodes may be at risk when they receive HTLCs, and all the attacks that steal funds come from the fact that a routing node has paid downstream but cannot claim the upstream HTLCs. Thus, he would like nodes to pay for the on-chain fees of the HTLCs they offer while they're pending in the commit-tx, regardless of whether they're funder or fundee. Bastien proposes two possible solutions: Firstly, deducting the HTLC cost (172 * feerate) from the offerer's primary output instead of the funder's primary output while keeping the base commit tx weight paid by the funder, and secondly, tying the total commit-tx fee to the channel usage. This model uses the on-chain fee as collateral for the usage of the channel. Antoine Riard agreed with Bastien's proposal of using a minimal relay fee; however, he also raised concerns about the issue of not being able to cancel HTLC on-time to force the honest counterparty to pay on-chain fees to close the channel. Bastien responded that there's no silver bullet here where you can completely avoid being bitten by such malicious nodes, but you can reduce exposure and ban them after the fact. Bastien also mentioned that if on-chain fees are always high and layer 1 is consistently busy, even the minimal relay fee will be costly. Therefore, he believes it's worth exploring moving slightly away from the "funder pays all" model to split the on-chain fee more fairly. Lastly, Bastien emphasized that he doesn't take his claims for granted and welcomes challenges as there may be negative side-effects he's completely missing.</summary>
+    <published>2020-10-08T15:30:34+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Even simpler minimum fee calculation formula: f &gt; bounty*fork_rate/average_blocksize</title>
+  <updated>2023-06-07T20:07:37.991357+00:00</updated>
+  <author>
+    <name>Michael Gronager 2013-11-13 12:34:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Even simpler minimum fee calculation formula: f &gt; bounty*fork_rate/average_blocksize</title>
+    <updated>2023-06-07T20:07:37.991357+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-November/003638.html" rel="alternate"/>
+    <summary>The average fee for bitcoin transactions over the last 90 days is approximately 0.0003BTC/txn, which is not too far behind the theoretical minimum of 0.00037BTC/txn. However, this may be due to old clients and fee settings rather than network wisdom. Michael Gronager posted a write-up on the optimal block size and why transaction fees are too low. He used different pool sizes in his calculations and found that things can actually be calculated even simpler. The measured fork rate will mean out all the different pool sizes and network latencies and will provide a simple number to estimate the minimum fee. The key assumption is that the latency will depend on block size (# txns) and the fork rate will depend on latency.Using formulas from last week, Gronager was able to get a measure for alpha as a function of the average fork rate and an average block size. By inserting the formula for alpha into the formula for the minimum fee, he found that the minimum fee should be f &gt; P_fork*E_bounty/S_average. Gronager discovered that blockchain.info keeps historical graphs of the number of orphaned blocks per day, averaging 1.5 over the past year. The average number of blocks per day over the last year is 169, which yields a P_fork of ~1/113. The average block size during that same time is 134kBytes, which results in a minimum fee of f &gt; 0.00165XBT/kb or 0.00037XBT/txn.Looking at the trend over the last 12 months, Gronager found that if you only look at the last 90 days, the average block size has been 131kBytes, and the fork rate has been ~1/118, resulting in a minimum fee of f &gt; 0.00162XBT/kb or 0.00037XBT/txn. Gronager also found that the optimal revenue block size is a function of the transaction fee, which means that a 4 times increase is still sufficient for the current load.Overall, the all-important number in this case is alpha, the network latency that is dependent on various things such as interconnectivity, bandwidths, and software quality. The latter is within our hands to bring down the fee. Standard clients can be set up to choose a better fee, as all parameters in the formula are easily measured.</summary>
+    <published>2013-11-13T12:34:07+00:00</published>
+  </entry>
+</feed>

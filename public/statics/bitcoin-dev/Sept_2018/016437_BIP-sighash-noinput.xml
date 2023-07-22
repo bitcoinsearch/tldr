@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP sighash_noinput</title>
+  <updated>2023-05-20T05:31:06.469301+00:00</updated>
+  <author>
+    <name>Johnson Lau 2018-09-26 19:45:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP sighash_noinput</title>
+    <updated>2023-05-20T05:31:06.469301+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-September/016437.html" rel="alternate"/>
+    <summary>The discussion on the bitcoin-dev mailing list is about whether or not to sign the sequence of other inputs in addition to the nSequence of the same input in BIP143. Jonas Nick suggests that NOINPUT should zero out the hashSequence for consistency with ANYONECANPAY. However, this would cause problems when trying to use eltoo update scripts with OP_CSV. Eltoo update transactions have two branches (update and settlement), and removing OP_CSV could allow them to be taprootified. The settlement branch is a 2-of-2 multisig with a relative timelock using OP_CSV. Both parties' signatures are required to spend the update transaction, which can be signed with SINGLE since it doesn't use relative timelocks.Since the hashSequence includes the sequence numbers of all transaction inputs, NOINPUT combined with SINGLE should zero it out. This is what a minimal change to the current NOINPUT implementation would do, but it's error-prone in other contexts. Instead, NOINPUT should only sign the sequence number of the corresponding input. One downside of this approach is that you can't rebind to an output with an OP_CSV that requires a larger sequence number unless you also sign with SIGHASH_SINGLE, but this is unlikely to be an issue. A modification to the NOINPUT implementation has been proposed to make eltoo unilateral closes taprootifiable.</summary>
+    <published>2018-09-26T19:45:49+00:00</published>
+  </entry>
+</feed>

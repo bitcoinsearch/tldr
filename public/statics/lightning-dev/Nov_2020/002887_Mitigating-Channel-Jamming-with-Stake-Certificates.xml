@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Mitigating Channel Jamming with Stake Certificates</title>
+  <updated>2023-06-03T03:09:10.591815+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-11-27 06:45:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Mitigating Channel Jamming with Stake Certificates</title>
+    <updated>2023-06-03T03:09:10.591815+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-November/002887.html" rel="alternate"/>
+    <summary>A proposed solution to channel jamming in the Lightning Network involves using UTXO ownership proofs (Stake Certificates) to prevent malicious actors from announcing channels they don't control. These certificates are used to provide routing credit balance, which is decremented by nodes as HTLCs are relayed to prevent liquidity abuse. However, this naive protocol is a privacy nightmare because routing nodes can easily assign every HTLC they forward to the sender's UTXO.To address this, zero-knowledge proofs of UTXO ownership can be used instead to avoid pointing to a specific UTXO. This requires more complex cryptography but preserves privacy. Evaluating solutions based on economic feasibility, integration and UX, and protocol complexity suggests that Stake Certificates and upfront payments are both best-effort ideas to increase attack cost, but there is no equivalent to PoW in Bitcoin.Stake Certificates are proposed as a solution to channel jamming. They provide better privacy at a lower cost by relying on zero-knowledge. The design of Stake Certificates may vary in terms of UX burden, from completely automatic to requiring custom actions with private keys from users. There are trade-offs and interesting questions that need to be addressed for the implementation of Stake Certificates. One of the issues discussed is whether credit spending should be gossiped across the entire network or only the routing nodes involved in the payment know. Economically, these two approaches are likely to be equivalent, but announcing credit spending to the network results in a privacy leak and imposes bandwidth and CPU overhead on the routing nodes. The best credit-to-value-transferred function should not just be linear to provide maximum security against malicious channel jammers. Stake Certificates can be valid for N blocks after proof generation, but an attacker would have to pay an on-chain fee for this. To avoid a privacy leak, spending a UTXO should not reveal all Stake Certificates generated from it. The problem of malicious Sybil routing nodes failing payments causing other honest routing nodes to reduce the credit of an honest payment sender can be addressed by reducing the reputation of faulty links and routing nodes on the payment sender node.Stake-based protocols can solve Sybil challenges in the Bitcoin ecosystem, and discussing Stake Certificates is even more useful since it might be useful in other contexts such as Sybil-resistance of many kinds, proof-of-ownership. Further discussions on the design questions mentioned above and choosing a cryptosystem are required for the implementation of Stake Certificates.</summary>
+    <published>2020-11-27T06:45:59+00:00</published>
+  </entry>
+</feed>

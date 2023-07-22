@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Splice Pinning Prevention w/o Anchors</title>
+  <updated>2023-06-03T09:40:28.327022+00:00</updated>
+  <author>
+    <name>Greg Sanders 2022-08-10 18:11:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Splice Pinning Prevention w/o Anchors</title>
+    <updated>2023-06-03T09:40:28.327022+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-August/003672.html" rel="alternate"/>
+    <summary>The conversation is about the issue of feerate/total fee pinning and how it can be mitigated. The rule#6 in Bitcoin Core's mempool-replacements.md document discusses the exact replacement behavior implemented by the Core. It is suggested that ensuring inputs are confirmed completely mitigates the issue, making it less of a concern. The conversation then shifts to discussing a function in bitcoind called PaysMoreThanConflicts, which checks if a transaction pays a higher feerate than the replaced tx. This is not a BIP125 rule and may lead to issues with a high feerate splice tx at the bottom of the mempool, requiring a higher feerate to replace it. There is then a discussion on the ancestor bulking variant of pinning and how it matters when trying to add a new descendant or when using RBF. In this example, since all outputs are locked with 1 OP_CSV, adding a descendant to the splice tx is not possible. Additionally, the commit tx format prevents the new funding output from having 1 OP_CSV, which could lead to pinning if an attacker makes a junk tree using the anchor output. However, it is replaceable using RBF since one has their own commit tx with an anchor to broadcast.</summary>
+    <published>2022-08-10T18:11:36+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Detailed protocol design for routed multi-transaction CoinSwap</title>
+  <updated>2023-06-14T03:16:16.459455+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-08-21 04:20:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Detailed protocol design for routed multi-transaction CoinSwap</title>
+    <updated>2023-06-14T03:16:16.459455+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018113.html" rel="alternate"/>
+    <summary>The CoinSwap protocol is a privacy-focused solution that allows two parties to exchange coins without revealing their identities. To ensure privacy and fungibility, it is recommended that a single UTXO be spent to two outputs - the CoinSwap 2-of-2 and the change output. A taker can also multipath its CoinSwap by spending any number of UTXOs and creating two outputs, which are two separate CoinSwap 2-of-2s to different makers.Regarding miner fees, makers have no incentive to pay any miner fees, only transactions that earn them an income. The taker will have to set limits on how large the maker's transactions are to prevent abuse. Having the taker pay for just one UTXO would cause the maker's money to split up into a large number of UTXOs, so perhaps the taker could pay for 2-3 UTXOs to counteract this.Contract transactions are those that may spend from the 2-of-2 multisig outputs, transferring coins into a contract where they can be spent either by waiting for a timeout or providing a hash preimage value. The rationale for relative timelocks is that it makes private key turnover slightly more useable, ensuring that after private key turnover, it is possible to wait indefinitely to spend the UTXO it received.A simple 1-maker swap was explained to illustrate that they would be spending miner fees *from the funds being stolen*, thus still costless. While CoinSwap provides a high degree of privacy, there are still concerns about potential attacks and accidents. To address these issues, participants can use the EC tweak trick to reduce one round trip and agree on public keys. The protocol can also be enhanced with PayJoin-with-CoinSwap and 2p-ECDSA with Scriptless Script for even greater privacy.To initiate the swap, the taker waits for an incoming HTLC-spend to confirm and then broadcasts a pre-signed contract transaction in the hope that the maker is offline. If successful, the taker gets the private coin it paid for, and the maker cannot retaliate except by spending via the hashlock branch. However, if the maker is offline for too long, the taker can steal the funds using a timelock and the scriptless script 2p-ECDSA.</summary>
+    <published>2020-08-21T04:20:23+00:00</published>
+  </entry>
+</feed>

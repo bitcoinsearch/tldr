@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>CTV Meeting Notes #3</title>
+  <updated>2023-05-22T17:18:32.514827+00:00</updated>
+  <author>
+    <name>Jeremy Rubin 2022-02-09 08:53:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>CTV Meeting Notes #3</title>
+    <updated>2023-05-22T17:18:32.515827+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019874.html" rel="alternate"/>
+    <summary>On Tuesday, February 8th, 2022, the third CTV (Consensus Technology Verification) meeting was held by Bitcoin Developers. The meeting log can be found at gnusha.org/ctv-bip-review/2022-02-08.log. According to the best-effort summary, not much new was reported on the Bounty. Non Interactive Lightning Channel Opens (NI-LCOs) were discussed, and it seems they work. However, there are questions around being able to operate a channel in a "unipolar" way for routing with the receiver's key offline, as HTLCs might require sync revocation. This is orthogonal to the opening of the channels. DLCs (Discreet Log Contracts) built with CTV do seem to be a "key enabler" for DLCs. Non-interactivity provides a dramatic speedup (30x - 300x depending on multi-oracle setup). Changes in the client/server setup enable new use cases to explore and simplify the spec substantially. Backfilling lets clients commit to the DLC faster and lazily backfill at the cost of state storage. For M-N oracles, precompiling N choose M groups + musig'ing the attestation points can possibly save some witness space because log2(N)*32 + N*32 &gt; log2(N*(N choose M))*32 for many values of N and M. Pathcoin is not yet well understood concretely. It seems like the API of a "coin that 1-of-N can spend" shared by N is new/unique and not something LN (Lightning Network) can do (which always requires N online to sign txns). Binary expansion of coins could allow arbitrary value transfer (binary expansion can live in a CTV tree too). The best way to think of Pathcoin at this point is an important theoretical result that should open up new exploration/improvement. TXHash was discussed, and the main concerns were more complexity, potential for recursion, and script size overhead. Soft Forks, Generally, was also discussed, specifically addressing the question: Are the fork processes themselves (e.g., BIP9/8/ST activations) riskier than the upgrades (CTV)? On the one hand, validation rules are something we have to live with forever so they should be riskier. Soft fork rules and coordination might be bad, but after activation, they go away. On the other hand, we can "prove" a technical upgrade correct, but soft-fork signaling requires unprovable user behavior and coordination (e.g., actually upgrading). If you perceive the forking mechanism as high risk, it makes sense to make the upgrades have as much content as possible since you need to justify the high risk. If you perceive the forking mechanism as low risk, it is fine to make the upgrades smaller and easier to prove safe since there's not a high cost to forking.Lastly, Elements CTV Emulation was discussed, which seems to be workable. However, it is questionable if any of the use cases one might want CTV for (Lightning, DLCs, Vaults) would have much demand on Liquid today.</summary>
+    <published>2022-02-09T08:53:12+00:00</published>
+  </entry>
+</feed>

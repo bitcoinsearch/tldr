@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[DRAFT] Multi-cell-hop onion with TLV (and example for multi-part-payment)</title>
+  <updated>2023-06-02T15:09:51.210031+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-11-28 03:51:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[DRAFT] Multi-cell-hop onion with TLV (and example for multi-part-payment)</title>
+    <updated>2023-06-02T15:09:51.210031+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001683.html" rel="alternate"/>
+    <summary>ZmnSCPxj has proposed a concrete proposal for the intersection between the "use TLV" and "multi-cell-onion" ideas. The multi-cell structure includes the following: 1) `realm` or `per_hop_type` meaning expanded, 2) lower 4 bits is `num_extra_cells` to use (total of 1-17 cells), 3) upper 4 bits reserved and if set, drop, 4) HMAC on end covers that many per-hops, and 5) padding is thus 12 bytes + 64 * `num_extra_cells`. The structure of padding changes, making onion `padding` contain TLV and renamed to `tlv`, followed by the TLVs in lexicographical order with the shortest-wins on tiebreak rule. There is no 0-type, which terminates backwards compatibility with 0-filled padding. A new onion error value is introduced as type: PERM|22 (`tlv_element_invalid`) and `2`:`offset`. The TLVs defined for the initial onion include type 2: `switch_chain` with length 32 and value: chain_id of the new chain used to switch chains during transit or at the final hop, and type 4: `total_payment` with variable length and value: amount of the total payment, in msat (big-endian of course). The writer must only use it for the final hop, and only if bolt11 flagged it as available (bolt11-multi_part_available). Additionally, ZmnSCPxj suggests using the existence of this tlv to signal the use of base AMP instead of a separate flags byte. They also propose two new types, type 6: `application_data` and type 8: `spontaneous_payment`. Type 6 is used for the final hop only, and only if it knows that the final hop has a specific application that it is compatible with. Type 8 is used only for the final hop, and sacrifices proof-of-payment. ZmnSCPxj prefers 'multi-part-payment' to 'base AMP' in the spec as it's more explicit and leaves the namespace clear for more atomicy AMPs. However, he suggests that "base" AMP is sufficiently atomic to merit the full name of "atomic multipath payment".</summary>
+    <published>2018-11-28T03:51:04+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_VAULT: a new vault proposal</title>
+  <updated>2023-06-16T03:48:38.355048+00:00</updated>
+  <author>
+    <name>James O'Beirne 2023-01-18 23:37:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_VAULT: a new vault proposal</title>
+    <updated>2023-06-16T03:48:38.355048+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-January/021358.html" rel="alternate"/>
+    <summary>The discussion revolves around the verification process of a node for the destination of a spend using an OP_VAULT output and its corresponding OP_UNVAULT script. The implementation is referenced in the last section of the paper with a link to Github. The recovery address with every key to the vault can be stored optionally, but the recovery path can be gated by an arbitrary scriptPubKey. The functionality is optional in OP_VAULT, and one can specify OP_TRUE to disable any signing necessary for recovery. It would not be reasonable to allow recovery outputs with any recovery address to be batched since the space savings are negligible, and it makes the implementation complicated. If wallet vaults become the standard wallet construct, users may not want to have a non-vault wallet just for use in unvaulting. There are concerns about compatibility with SIGHASH_GROUP. The proposal for efficient wallet vaults was designed to meet all the criteria and allows batching as well. The use of OP_BEFOREBLOCKVERIFY opcode to verify that the block the transaction is within has a block height below a particular number breaks fundamental reorgability of transactions. The intermediate address used does not have any values unique to a particular vault. The proposal requires dynamic unvaulting targets or, if there are any, the vaulted coins need to be spent into this intermediate output. If the intermediate address does not have any values unique to a particular vault, it becomes challenging to authorize recoveries from it. A full implementation of the proposal would be valuable to assess its viability.</summary>
+    <published>2023-01-18T23:37:51+00:00</published>
+  </entry>
+</feed>

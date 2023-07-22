@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Blind paths revisited</title>
+  <updated>2023-06-03T00:00:12.756898+00:00</updated>
+  <author>
+    <name>Rusty Russell 2020-03-10 00:19:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Blind paths revisited</title>
+    <updated>2023-06-03T00:00:12.756898+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-March/002587.html" rel="alternate"/>
+    <summary>Rusty Russell has been exploring a scheme for blinded paths proposed by t-bast, which can be used to simplify the rendezvous routing process. The problem with rendezvous routing is that it requires single-use, making it unsuitable for static and reusable offers. In the scheme proposed by t-bast, Alice can present Mallory with a path (Carol, Bob, Alice) for which he can create an onion that is obscured in some way but can be unobscured by various nodes, forcing Mallory to use the entire path. To establish shared secrets with Bob and Carol, Alice can give Mallory two ECDH blobs to place inside the per-hop payload. However, Bob needs the secret before he can unwrap the onion, so the ECDH blob for the next peer needs to be sent alongside the onion itself. Rusty suggests using the secret to XOR the scid, but Christian suggests encrypting a general payload instead. The proposed solution includes a new invoice letter `b` that encodes one or more pubkey/feebase/feeprop/cltvdelta/features/encblob, an additional (tlv of course) field to update_add_htlc, `blinding`, a new `tlv_payload` field `encblob` (varlen), and ECDH on incoming `blinding` to get a shared secret that tells this node how to tweak its nodeid to decrypt onion, and also how to decrypt `encblob`. If you get an error from downstream and you sent `blinding`, turn it into your own error for maximum obfuscation. Perhaps a new "blinded_path_error"?  The proposed scheme does not include a channel_update.</summary>
+    <published>2020-03-10T00:19:03+00:00</published>
+  </entry>
+</feed>

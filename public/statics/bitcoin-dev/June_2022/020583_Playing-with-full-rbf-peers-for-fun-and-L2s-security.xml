@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Playing with full-rbf peers for fun and L2s security</title>
+  <updated>2023-06-15T22:01:30.255559+00:00</updated>
+  <author>
+    <name>alicexbt 2022-06-17 04:54:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Playing with full-rbf peers for fun and L2s security</title>
+    <updated>2023-06-15T22:01:30.255559+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-June/020583.html" rel="alternate"/>
+    <summary>Antoine Riard has submitted a patch to enable full-replace-by-fee (full-rbf) as a policy in Bitcoin Core. This proposal aims to address the security concerns of multi-party funded transactions such as coinjoins, dual-funded lightning network channels, and on-chain DLCs. Currently, there is no full-rbf transaction-relay topology on the p2p network, making it vulnerable to a low-cost denial-of-service (DoS) attack against the funding flow of any such construction.To solve this issue, Antoine proposes a partial deployment of full-rbf to enable propagation of honest multi-party transactions to interested miners, replacing potential non-signaling double-spends from malicious parties. However, there are concerns about the security and reliability of use-cases that did not exist a few years ago. The mempool DoS vector can affect various applications, including dual-funded channels, on-chain DLCs, p2p coinjoins, and batched submarine swaps.Antoine suggests users try Bitcoin Knots instead, which already has an option to disable all RBF policies if required, opt-in, and full RBF policy. However, selecting a full-node for serious Bitcoin infrastructure or securing a significant stack of coins should undergo a decision-making process considering various factors such as the level of activity of the contributor community, chain of trust with dependencies, security incident track records, quality of documentation, and exhaustivity and robustness of features.Developers should provide basic RBF policy options rather than attempting to define what constitutes a good policy and removing the ability to disable something when necessary. Antoine proposes a "good" policy for a Lightning node without seeking to change the default. It is essential to attach a solid manual explaining all the corner cases and rough edges to critical software and enshrine the manual directly in the software API to minimize footgun behaviors.Antoine provides links to articles that give more details about the DoS vector and the interaction of the mempool with upper-layers and applications. He encourages those interested in advancing policy options in Bitcoin Core to utilize available resources and communities to contribute to the codebase. Full-rbf is far from solving the known set of problems affecting L2s due to interactions with network mempools.</summary>
+    <published>2022-06-17T04:54:11+00:00</published>
+  </entry>
+</feed>

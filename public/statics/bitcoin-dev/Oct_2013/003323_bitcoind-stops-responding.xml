@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>bitcoind stops responding</title>
+  <updated>2023-06-07T17:12:25.285793+00:00</updated>
+  <author>
+    <name>Olivier Langlois 2013-10-04 03:52:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>bitcoind stops responding</title>
+    <updated>2023-06-07T17:12:25.285793+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-October/003323.html" rel="alternate"/>
+    <summary>The context is a log from Bitcoin, where the `getinfo` RPC function takes more than two seconds to return. The circumstances leading to this delay include receiving a block, committing 1015 changed transactions to the coin database, and setting a new best chain. During this process, `ThreadFlushWalletDB` locks the wallet database, causing `getinfo` to wait until it completes to finish calling `GetOldestKeyPoolTime()`. The author suggests some ideas to reduce the time taken by `getinfo`, including closing and reopening the database asynchronously rather than synchronously, removing unnecessary options from BDB, and experimenting with an optional boolean parameter for `getinfo` that could skip gathering information that may prolong the call.</summary>
+    <published>2013-10-04T03:52:18+00:00</published>
+  </entry>
+</feed>

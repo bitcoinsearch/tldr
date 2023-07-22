@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>proposal for Lightning Network improvement proposals</title>
+  <updated>2023-05-25T01:50:41.274118+00:00</updated>
+  <author>
+    <name>Mr Hodlen 2018-07-23 19:15:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>proposal for Lightning Network improvement proposals</title>
+    <updated>2023-05-25T01:50:41.275118+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-July/001369.html" rel="alternate"/>
+    <summary>A new developer has expressed confusion about the process of implementing BOLTs and testing new features. The main issue appears to be the assignment of values for types and feature bits, as well as ensuring that new features do not conflict with those already implemented by other developers. The developer suggests using a unique identifier for each feature instead of centralized number assignment, such as a hash of the feature name, to simplify independent testing before creating new pull requests for a BOLT assignment.The proposed solution is a new protocol called Experimental Features Protocol, which is intended for testing protocol features that may not become standard BOLTs. The protocol includes lightning base protocol messages and general experiment messages. The experiment message has a unique ID for each feature supported, and the payload should have the same format as a regular Lightning message described in BOLT #1. The sending node must send the `init_experiments` message with `experiment_name_hash` set to 0 before any other `experiment` message is sent. The receiving node must fail the channel if the `experiment_name_hash` is unknown or disabled and must fail all channels if `channel_id` is 0.The experimental features protocol aims to eradicate the chance of conflicting implementations by moving all experimental features to a new message where they are wrapped in a unique feature name. Additionally, this message can serve as a generic transport mechanism between any two lightning nodes who have agreed to support the `experiment_name_hash`, as there is no restriction on the format of the payload. This may make it possible to serve HTTP over Lightning.In addition, there is a suggestion to start having Lightning Network Improvement Proposals (LIPs) placed on the github.com/lightning account in a repo called lips, which would fill the gap between distributed ideas within the community and a centralized place to collect future enhancements for BOLT1.1. Some potential LIPs could include Watchtowers, Autopilot, AMP, Splicing, Routing Protocols, Broadcasting past Routing statistics, eltoo, and more.</summary>
+    <published>2018-07-23T19:15:28+00:00</published>
+  </entry>
+</feed>

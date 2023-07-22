@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_LOOKUP_OUTPUT proposal</title>
+  <updated>2023-06-13T20:55:12.693311+00:00</updated>
+  <author>
+    <name>Runchao Han 2019-08-10 13:01:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_LOOKUP_OUTPUT proposal</title>
+    <updated>2023-06-13T20:55:12.693311+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-August/017252.html" rel="alternate"/>
+    <summary>The email conversation between Runchao Han and ZmnSCPxj discusses the problem of arbitrage in atomic swaps where the profit can be as high as 1% to 2.3%. While several studies have proposed solutions such as using a flipped payout, this introduces a new problem where Bob can get the premium without paying anything by never participating. However, ZmnSCPxj proposes a solution that makes premium payment contingent on Bob's participation, which requires the destination coin to support SegWit. The proposal involves Alice and Bob agreeing on swap parameters, with Alice exchanging 1 BTC for 1,000,000 WJT from Bob and paying 10,000 WJT as premium to Bob. Alice locks BTC for 48 hours, and Bob locks WJT for 24 hours, with the protocol starting at a particular time T. Alice generates a preimage+hash and pays 1 BTC to a HTLC with hashlock going to Bob and timelocked at T+48 going to Alice. Alice presents the UTXO to Bob and reveals the WJT UTXOs to be spent to pay for the 10,000 WJT premium to Bob. Alice and Bob then generate a funding transaction but do not sign it, which spends some of Bob coin as well as the premium coin from Alice and pays out to 1,010,000 WJT (the value plus the premium) HTLC. The hashlock branch requires not just Alice but also Bob, while the timelock branch at T+24 only requires Bob. Alice and Bob generate the claim transaction, which spends the funding transaction HTLC output and pays out 1,000,000 WJT to Alice and 10,000 WJT to Bob. Alice and Bob sign the claim transaction, which does not allow Bob to make the claim transaction valid by itself as it still requires the preimage, and at this point, only Alice knows the preimage. Alice and Bob sign the funding transaction and broadcast it. Alice completes the claim transaction by adding the preimage and broadcasting it. If Bob stalls at step 8, then there is no way to claim the premium as the funding transaction, which is the source of the claim transaction that pays the premium, is not valid yet. After step 9, Bob has been forced to participate and cannot back out and claim the premium only. The proposal does not require `OP_LOOKUP_OUTPUT`.</summary>
+    <published>2019-08-10T13:01:41+00:00</published>
+  </entry>
+</feed>

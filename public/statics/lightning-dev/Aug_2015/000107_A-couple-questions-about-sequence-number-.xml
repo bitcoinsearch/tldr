@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A couple questions about sequence number:</title>
+  <updated>2023-05-23T19:09:34.389359+00:00</updated>
+  <author>
+    <name>Jeremy Rubin 2015-08-10 18:09:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A couple questions about sequence number:</title>
+    <updated>2023-05-23T19:09:34.389359+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-August/000107.html" rel="alternate"/>
+    <summary>The email thread discusses the use of sequence numbers in Lightning, a payment channel network built on top of Bitcoin. Mark Friedenbach clarifies that Lightning uses the sequence number field of the transaction format to achieve relative lock-time. BIP 68 specifies a new consensus rule by which the sequence number field can mandate a required minimum age for each input. This allows Lightning to use relative lock-times. A sequence number of MAX_INT confirms on the blockchain in the same block or later as its parent. A sequence number one less than that cannot confirm any earlier than one block after its parent. A sequence number two less than MAX_INT requires two blocks to elapse, etc. Jeremy Rubin asks questions about the use of sequence numbers in Lightning. He queries if someone can better outline what the race conditions are and how it is addressed. Section 9.5 of the paper seems unsatisfactory. Secondly, he points out that using sequence numbers to select the right transaction to include may leak information about how many LN transactions took place. This could make it meterable by external parties, and miners could make the fee for settling proportional to it. He suggests incrementing by a random amount would alleviate the ability to reliably meter. Jorge Timón opines that the number inversion to "preserve the old nSequence semantics" is not worth it. It's less usable and harder to understand. Renaming nSequence to nMaturity and "check sequence verify" to "verify input maturity" may greatly simplify the documentation. However, he believes it may not be the right thread to repeat this.</summary>
+    <published>2015-08-10T18:09:33+00:00</published>
+  </entry>
+</feed>

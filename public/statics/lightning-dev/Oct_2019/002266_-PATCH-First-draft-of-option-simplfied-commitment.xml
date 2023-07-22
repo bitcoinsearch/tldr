@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[PATCH] First draft of option_simplfied_commitment</title>
+  <updated>2023-05-20T09:12:49.060491+00:00</updated>
+  <author>
+    <name>Matt Corallo 2019-10-30 16:08:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[PATCH] First draft of option_simplfied_commitment</title>
+    <updated>2023-05-20T09:12:49.060491+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-October/002266.html" rel="alternate"/>
+    <summary>In a mailing list conversation between Rusty Russell and Joost Jager, they discussed some proposed changes to the Bitcoin rules for Lightning Network's commitment transactions. One suggestion was to add `1 OP_CHECKSEQUENCEVERIFY OP_DROP` to the non-revocation clause of the HTLC outputs. However, there were concerns about the proposal to have an unconditional additional spending path for anchor outputs except for a 10 block csv lock. This could open up possibilities for an attacker to use up the cpfp carve-out after those 10 blocks and leave important htlc unconfirmed while it expires. Another suggestion was to introduce new addresses that both parties communicate in the `open_channel` and `accept_channel` messages for the keys to use for `to_remote_anchor` and `to_local_anchor`. However, this was deemed spammy by Rusty Russell as it could lead to one unilateral close every three blocks. Additionally, there were issues raised on who pays if either party can't afford it and how to handle cases where either party may push_msat everything to the other side.There was also a discussion on the value of anchors within each version of the commitment transaction. It was suggested that both anchors always have equal values paid for by the initiator. However, Rusty Russell raised concerns about having to care about the other side's dust limit, and as an accepter, wanting this much higher since they would get those funds instantly. He suggested picking a number between 1000 and 10,000 sat instead.Finally, there was a debate on whether to rotate keys or not. If key rotation is not used, watchtowers can brute-force history if they see a unilateral close. Three options were presented: abandoning privacy from watchtowers and not rotating keys, removing HTLC output key rotation and assuming watchtowers don't handle HTLCs, or changing to-local key rotation to use BIP32 (unhardened).</summary>
+    <published>2019-10-30T16:08:41+00:00</published>
+  </entry>
+</feed>

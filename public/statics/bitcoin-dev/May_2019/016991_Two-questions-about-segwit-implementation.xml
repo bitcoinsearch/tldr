@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Two questions about segwit implementation</title>
+  <updated>2023-06-13T19:09:12.397167+00:00</updated>
+  <author>
+    <name>Thomas Kerin 2019-05-26 19:34:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Two questions about segwit implementation</title>
+    <updated>2023-06-13T19:09:12.397167+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-May/016991.html" rel="alternate"/>
+    <summary>The Bitcoin scriptSig populates the stack so that opcodes can operate on them. Witnesses are similar to the script stack and are passed in as the script stack. OP_0 pushes a zero length value onto the stack, while OP_1 pushes 0x01 to the stack, which would be serialized as 0101. The witness structure can be considered as vector&gt; and its length must equal the number of inputs. Non-segwit inputs should have a zero-sized witness.Aymeric Vitte realized that his segwit implementation was not correct, as he had wrongly read the specs and thought that scriptsig would go into witness data as it was. However, op_pushdata is replaced by varlen. The first question raised is why OP_0 is represented as 00 in witness data instead of 0100, and whether this applies to other op_codes. The second question is about the presence of a 00 length in segwit data for non-segwit inputs and what the rationale behind it is. The correctness of the specs is also questioned. A discussion on the bitcoin-dev mailing list follows.</summary>
+    <published>2019-05-26T19:34:55+00:00</published>
+  </entry>
+</feed>

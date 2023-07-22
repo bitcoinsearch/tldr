@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improve Lightning payment reliability through better error attribution</title>
+  <updated>2023-06-02T18:43:57.239530+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-06-14 08:24:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improve Lightning payment reliability through better error attribution</title>
+    <updated>2023-06-02T18:43:57.239530+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-June/002020.html" rel="alternate"/>
+    <summary>The Lightning Network is dependent on the reliability of the chosen route, and previous payment attempts can help select better routes to improve the payment experience. However, non-ideal payment attempts, including successful payments that take a long time to receive the `htlc_fulfill` message, make it difficult to determine which node should be penalized. To solve this problem, a potential solution is to change the failure message such that every hop along the backward path adds an hmac to the message. This allows the source of a corruption to be narrowed down to a pair of nodes, which is enough to properly apply a penalty.In addition, all hops could add two timestamps to the failure message, the htlc add time and the htlc fail time. This information would allow the sender of the payment to identify the source of the delay down to a pair of nodes. The challenge here is to design the failure message format in such a way that hops cannot learn their position in the path. A fixed-length message does not work because earlier nodes calculate their hmac over data that is shifted out and cannot be recovered anymore by the sender.An alternative solution is to use a variable length message, but have the error source add a seemingly random length padding. The actual length could be deterministically derived from the shared secret, so that the erring node cannot just not add padding. This obfuscates the distance to the error source somewhat, but still reveals some information. Another idea involves having each node add some padding along the way, with the erring node's padding being bigger than intermediate nodes' padding. This could mitigate the possibility of intermediate nodes figuring out their approximate position.However, if a malicious node reduces the padding so that previous nodes don't have enough space to include their own macs and timestamps, then the padding solution becomes complex. Furthermore, probing is another option, but it requires more attempts and more complex processing of the outcomes. There is also a level of indirectness because not all information is gathered in a single roundtrip, and a malicious node may act differently if it recognizes the probes.</summary>
+    <published>2019-06-14T08:24:30+00:00</published>
+  </entry>
+</feed>

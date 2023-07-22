@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Return to the Layered Commit Transactions?</title>
+  <updated>2023-05-23T21:41:57.844191+00:00</updated>
+  <author>
+    <name>Rusty Russell 2015-11-25 00:02:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Return to the Layered Commit Transactions?</title>
+    <updated>2023-05-23T21:41:57.844191+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000341.html" rel="alternate"/>
+    <summary>While working on the payment layer and experimenting with timeouts for CSV and CLTV, Mats Jerratsch discovered some issues. The design of single output of scripts and commit transaction does not allow HTLCs to have a long revocation time and a short refund time simultaneously. In such cases, there are problematic race conditions where both parties can technically claim the payment depending on the propagation time of the transaction. As the absolute CLTV timeout has to increase with each hop, it can give insight into position within the route even with onion routing. Mats played with numbers but did not see any way out of this problem, as anything lower than one day might be dangerous for DDoS attacks, but 20 hops may result in 30-40 days for a refund. One possible solution is to separate 'claiming-a-payment-using-R' and 'revoking-an-output' into two layers, enforced by revealing R within a separate timeframe than the revocation timeframe.</summary>
+    <published>2015-11-25T00:02:54+00:00</published>
+  </entry>
+</feed>

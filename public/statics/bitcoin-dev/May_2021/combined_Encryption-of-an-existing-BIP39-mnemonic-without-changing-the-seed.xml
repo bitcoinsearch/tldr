@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Encryption of an existing BIP39 mnemonic without changing the seed</title>
+  <updated>2023-06-14T20:41:45.394912+00:00</updated>
+  <author>
+    <name>Peter D. Gray 2021-05-06 12:56:37</name>
+  </author>
+  <author>
+    <name>Tobias Kaupat 2021-05-06 14:10:31</name>
+  </author>
+  <author>
+    <name>yanmaani at cock.li 2021-05-08 22:49:01</name>
+  </author>
+  <author>
+    <name>Tobias Kaupat 2021-05-05 17:32:05</name>
+  </author>
+  <author>
+    <name>Tobias Kaupat 2021-05-06 14:10:31</name>
+  </author>
+  <author>
+    <name>Peter D. Gray 2021-05-06 12:56:37</name>
+  </author>
+  <author>
+    <name>yanmaani at cock.li 2021-05-08 22:49:01</name>
+  </author>
+  <author>
+    <name>Tobias Kaupat 2021-05-05 17:32:05</name>
+  </author>
+  <author>
+    <name>Peter D. Gray 2021-05-06 12:56:37</name>
+  </author>
+  <author>
+    <name>Erik Aronesty 2021-05-06 13:19:31</name>
+  </author>
+  <author>
+    <name>Erik Aronesty 2021-05-06 13:19:31</name>
+  </author>
+  <author>
+    <name>Tobias Kaupat 2021-05-05 17:32:05</name>
+  </author>
+  <author>
+    <name>Erik Aronesty 2021-05-06 13:19:31</name>
+  </author>
+  <author>
+    <name>Tobias Kaupat 2021-05-06 14:10:31</name>
+  </author>
+  <author>
+    <name>yanmaani at cock.li 2021-05-08 22:49:01</name>
+  </author>
+  <link href="bitcoin-dev/May_2021/018891_Encryption-of-an-existing-BIP39-mnemonic-without-changing-the-seed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2021/018894_Encryption-of-an-existing-BIP39-mnemonic-without-changing-the-seed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2021/018904_Encryption-of-an-existing-BIP39-mnemonic-without-changing-the-seed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2021/018889_Encryption-of-an-existing-BIP39-mnemonic-without-changing-the-seed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2021/018894_Encryption-of-an-existing-BIP39-mnemonic-without-changing-the-seed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2021/018891_Encryption-of-an-existing-BIP39-mnemonic-without-changing-the-seed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2021/018904_Encryption-of-an-existing-BIP39-mnemonic-without-changing-the-seed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2021/018889_Encryption-of-an-existing-BIP39-mnemonic-without-changing-the-seed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2021/018891_Encryption-of-an-existing-BIP39-mnemonic-without-changing-the-seed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2021/018892_Encryption-of-an-existing-BIP39-mnemonic-without-changing-the-seed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2021/018892_Encryption-of-an-existing-BIP39-mnemonic-without-changing-the-seed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2021/018889_Encryption-of-an-existing-BIP39-mnemonic-without-changing-the-seed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2021/018892_Encryption-of-an-existing-BIP39-mnemonic-without-changing-the-seed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2021/018894_Encryption-of-an-existing-BIP39-mnemonic-without-changing-the-seed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2021/018904_Encryption-of-an-existing-BIP39-mnemonic-without-changing-the-seed.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Encryption of an existing BIP39 mnemonic without changing the seed</title>
+    <updated>2023-06-14T20:41:45.394912+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-May/018891.html" rel="alternate"/>
+    <summary>Tobias Kaupat has proposed a solution on the bitcoin-dev mailing list to password-protect an existing mnemonic for a hardware wallet by saving it in encrypted form on a paper backup, while still maintaining backup properties like error correction. His suggested solution involves taking the existing mnemonic and extracting the related entropy, creating a SHA526 hash from a user-defined password, using the key as input for an AES CTR to encrypt the entropy, and deriving a new mnemonic from the encrypted entropy to be stored on a paper backup.To restore the original mnemonic, one must know the password and follow the process again with the correct password. Erik Aronesty suggested stretching the password with pbkdf2 or argon2 with 30k rounds first rather than just hashing it. The proposal uses provably secure algorithms instead of a "rot23 derivation," which is less secure. Existing solutions like "Seedshift" were found but considered less secure than the proposed solution. Kaupat's proposal needs a security review, and all encryption parameters are up for discussion. He notes that BIP-39 passphrases don't work for an existing mnemonic without a passphrase, but if a new mnemonic is needed, PBKDF2 like in the BIP-39 specification or something like scrypt could be used instead of raw SHA-256. The author provides an example implementation in GoLang and welcomes feedback from the community. The existing BIP-39 passphrase cannot be used for an existing mnemonic without a passphrase, but PBKDF2 or scrypt could be used to derive a new mnemonic if needed. The post also mentions the Coldcard release's new feature called "Seed XOR," which allows standard BIP-39 compatible seed phrases to be bitwise XOR'ed together to make a new seed. This feature enables the splitting of an existing seed into multiple new phrases or creating a new random seed phrase and wallet by XOR-in with a new seed phrase. Each part of the XOR result has a checksum and is a fully functional decoy wallet. Tobias found an existing solution called "Seedshift," but he considers it less secure and would prefer a solution based on provably secure algorithms rather than a "rot23 derivation."</summary>
+    <published>2021-05-06T12:56:37+00:00</published>
+  </entry>
+</feed>

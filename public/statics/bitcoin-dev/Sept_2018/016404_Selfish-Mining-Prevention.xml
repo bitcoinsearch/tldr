@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Selfish Mining Prevention</title>
+  <updated>2023-06-13T14:39:02.119092+00:00</updated>
+  <author>
+    <name>Andrew 2018-09-14 17:30:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Selfish Mining Prevention</title>
+    <updated>2023-06-13T14:39:02.119092+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-September/016404.html" rel="alternate"/>
+    <summary>A developer, Andrew, has proposed a new idea to bitcoin-dev mailing list to prevent subtle attacks like block withholding, and other similar tactics that drive out the competition in order to increase hashrate fraction. Andrew's proposal is to add the concept of "reserve fees". When a user makes a transaction, for each txout script, they can add parameters that specify the fraction of the total fee that is held in "reserve" and the time it is held in "reserve" (can set a limit of 2016 blocks). This "reserve" part of the fee will be paid to miners if the hashrate rises. If hashrate is currently h and peak hashrate (from past year) is p, then for each period (1 day), a new hashrate is calculated h1, and if h1 &gt; h, then the fraction (h1-h)/p from the reserve fees created in the past 2016 blocks will be released to miners for that period (spread out over the 144 blocks in that period). This should incentivize miners to not drive out the competition since if they do, there will be less of these reserve fees given to miners. Andrew believes this change would not force anything but would be voluntary by each user, and miners have to agree to it with a soft fork (so they don't spend from the anyone-can-spend outputs used for reserve fees). Resource requirements for validation are quite small, according to Andrew.Earlier, Moral Agent had proposed a similar idea where when a block is solved, it randomly selects one satoshi from the utxo set and gives whoever controls that satoshi the power to generate a “Helper Block”. The Helper Block commits to a subset of transactions for inclusion in the next block. A miner can accept the Helper Block by including the suggested transactions and giving the associated transaction fees to a payment address specified in the Helper Block. Miners who do not use a Helper Block must satisfy a 25% higher difficulty.Andrew believes the introduction of "reserve fees" would prevent subtle attacks like block withholding and other tactics that drive out the competition in order to increase hashrate fraction. He proposes that this change wouldn't force anything but would be voluntary by each user, and miners have to agree to it with a soft fork (so they don't spend from the anyone-can-spend outputs used for reserve fees). According to Andrew, resource requirements for validation are quite small.</summary>
+    <published>2018-09-14T17:30:02+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Decoy node_ids and short_channel_ids</title>
+  <updated>2023-06-02T22:43:48.571229+00:00</updated>
+  <author>
+    <name>Rusty Russell 2020-02-04 04:29:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Decoy node_ids and short_channel_ids</title>
+    <updated>2023-06-02T22:43:48.571229+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002495.html" rel="alternate"/>
+    <summary>In a discussion thread, Rusty Russell and Bastien Teinturier were discussing the implementation of an extra layer of transience for privacy in Bitcoin Lightning Network. Russell suggests using temporary ids to obscure onchain footprint and applying a new one on every invoice for added protection. However, implementing this securely is challenging as it requires brute-forcing the onion against N keys and returning WIRE_INVALID_ONION_HMAC for all code paths between them. It is essential to do so; otherwise, malicious actors can send malformed payments to Alice, using the transient key in the invoice to decrypt and steal funds. However, Russell later realizes that payment_hash can be used as a fast path to improve this process. By looking up an invoice using payment_hash and checking if it has a temporary id, Alice can try to use it to decrypt the onion. If successful, she can go back and use the temporary key to decrypt the onion. Nonetheless, he acknowledges that the implementation of this approach will still require complex coding.</summary>
+    <published>2020-02-04T04:29:09+00:00</published>
+  </entry>
+</feed>

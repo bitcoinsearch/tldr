@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Clearing process in BOLT #2</title>
+  <updated>2023-05-23T23:32:16.672818+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-04-30 10:15:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Clearing process in BOLT #2</title>
+    <updated>2023-05-23T23:32:16.672818+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-April/000527.html" rel="alternate"/>
+    <summary>In an email sent to Bitcoin developers, Pierre brings up a few issues with the clearing process as described in BOLT #2. They note that there is a contradiction between §4.1 and §3.3: 4.1 states that a node must respond with update_fail_htlc to any HTLC received after it sent close_clearing, while 3.3 says that a node must check that id corresponds to an HTLC in its current commitment transaction. The writer suggests that 4.1 should say that a node must fail to route any HTLC received after it sent close_clearing. Pierre also points out that in this version of the protocol an HTLC can only be accepted, then committed, then removed. There is no way to decline an HTLC; the receiver must always accept it except when the sender doesn't have the money or there are too many pending HTLCs. Additionally, they bring up the issue that if the sender of a close_clearing message subsequently receives an update_add_htlc, there's no way to tell if the other party had received the close_clearing prior to sending the HTLC since the update_add_htlc message doesn't have an 'ack' field. Furthermore, there is potentially the same issue with the signature process: when node A sends an update_commit message to B, it is expecting an update_revocation rather sooner than later. But what if B just ignores the update_commit message and keeps sending new HTLCs? There is no way for A to be sure that B indeed received the update_commit. In response, Rusty proposes a patch to clarify that B can't get more than one step ahead. At some point, it has to send update_commit to A, and then A sends update_revocation. While B could ignore update_commit, it cannot send another update_commit before receiving the previous update_revocation.</summary>
+    <published>2016-04-30T10:15:54+00:00</published>
+  </entry>
+</feed>

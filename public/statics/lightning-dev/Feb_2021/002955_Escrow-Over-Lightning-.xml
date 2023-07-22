@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Escrow Over Lightning?</title>
+  <updated>2023-06-02T18:48:43.739138+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2021-02-11 06:00:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Escrow Over Lightning?</title>
+    <updated>2023-06-02T18:48:43.739138+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-February/002955.html" rel="alternate"/>
+    <summary>In this email, ZmnSCPxj suggests a new twist to an old idea of smart contracts. The logic of the contract to the seller is represented by 'SELLER &amp;&amp; (BUYER || ESCROW)'. However, the simple '&amp;&amp;' is trivial for PTLCs, while '||' requires ECDH and proof that the ECDH was done correctly. Therefore, one possible solution is to invert the logic by making two payments of the same amount. The first payment is from Seller to Buyer, claimable by BUYER &amp;&amp; ESCROW key, while the second payment is from Buyer to Seller, claimable by SELLER key. If the Buyer is satisfied with the product, they fail the Seller-&gt;Buyer payment after the Seller claims the Buyer-&gt;Seller payment, so the Seller is paid and has no more obligations. On the other hand, if the Buyer is dissatisfied, they want the Escrow to judge. If the Escrow judges that the Buyer is right, they reveal the ESCROW key to the Buyer, who then clawbacks the payment to the seller. If the Escrow judges that the Seller is right, they delete the ESCROW privkey ("not ESCROW"), and the Seller-&gt;Buyer payment eventually times out, ending the obligation of the Seller. In addition, in the case where the Buyer is satisfied, the Escrow is never involved, and thus does not know about the trade, except that some trade was requested. This even provides a simple BUYER + ESCROW keypair that gives the seller a proof-of-refund, and of course, the simple SELLER gives the buyer a proof-of-payment as well. It only just requires twice as much Bitcoins getting locked.</summary>
+    <published>2021-02-11T06:00:58+00:00</published>
+  </entry>
+</feed>

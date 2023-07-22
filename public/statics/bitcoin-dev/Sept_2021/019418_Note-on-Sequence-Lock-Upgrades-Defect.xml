@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Note on Sequence Lock Upgrades Defect</title>
+  <updated>2023-06-15T01:28:11.607404+00:00</updated>
+  <author>
+    <name>Jeremy 2021-09-09 01:04:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Note on Sequence Lock Upgrades Defect</title>
+    <updated>2023-06-15T01:28:11.607404+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019418.html" rel="alternate"/>
+    <summary>Jeremy Rubin proposed a patch to fix the flaw in the Sequence lock implementation with respect to upgradability. The current patchset proposed can be seen at https://github.com/bitcoin/bitcoin/pull/22871/commits. Two separate things are happening, fixing the semantics of arg in OP_CHECKSEQUENCEVERIFY and fixing the semantics on nSequence in each tx input. Jeremy thinks that there is no sense in conditioning part 1 on RBF or anything else since it's only loosely related to 2, and it should be a class-2 rollout as it's a rule tightening. He further suggests that the way the patches handle part 2 currently (which is defining 1 byte type prefix followed by 3 bytes application data) is sufficient for immediate deployment.Regarding SEQUENCE_ROOT_TYPE::UNCHECKED_METADATA, it is a special type of metadata required for the counterparty to efficiently respond to a unilateral channel closure. It obscures the number of commitments made on the channel, yet still provides a useful index for both nodes. Antoine Riard agreed on the general principle to not blur mempool policies signaling in committed transaction data. He explained how taking back the `nSequence` field for consensus-semantic sounds deprives the application-layer from a discrete, zero-cost payload. He suggested introducing a new field to signal policy within p2p packages. He further talked about flag day activation to smooth policy deployment, where he distinguished between three types of policy deployments. He suggested that full-rbf should be deployed first, then give a time buffer to higher applications to free up the `nSequence` field and finally start to discourage the usage. Otherwise, by introducing new discouragement waivers, e.g not rejecting the usage of the top 8 bits, he thinks they're moving away from the policy design principle they're trying to establish (separation of mempool policies signaling from consensus data).</summary>
+    <published>2021-09-09T01:04:53+00:00</published>
+  </entry>
+</feed>

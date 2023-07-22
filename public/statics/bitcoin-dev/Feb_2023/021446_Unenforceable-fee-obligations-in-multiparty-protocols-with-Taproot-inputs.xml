@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Unenforceable fee obligations in multiparty protocols with Taproot inputs</title>
+  <updated>2023-06-16T15:15:15.781193+00:00</updated>
+  <author>
+    <name>Nadav Ivgi 2023-02-07 09:36:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Unenforceable fee obligations in multiparty protocols with Taproot inputs</title>
+    <updated>2023-06-16T15:15:15.781193+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-February/021446.html" rel="alternate"/>
+    <summary>The discussion on the bitcoin-dev mailing list revolves around the issue of variable size spends in Taproot, which could potentially allow a fee extraction attack. The attack scenario involves one of the participants in a multiparty transaction with a P2TR output having a large script spend path, such as an ordinal inscription commitment transaction output. This participant, referred to as Mallory, registers this coin as an input into the multiparty transaction with a fee obligation calculated on the basis of a key spend. When all other participants have provided signatures, the script spend path can be used. Since the absolute fee amount is already committed to by the provided (SIGHASH_ALL) signatures but the total transaction weight is not, Mallory can broadcast any valid signatures up to the maximum standard weight and minimum relay fees, or in collusion with a miner, up to consensus limits, effectively stealing a fee from the other participants. Several mitigations are proposed to counteract this attack. One solution is to negotiate a lower feerate ahead of time, giving a lower bound minimum feerate that Mallory can force. Another solution is to enforce a minimal weight for all non-witness data in the transaction before it is considered fully constructed, limiting the effectiveness of the attack. In the centralized setting, where BIP-322 ownership proofs are required for participation and the server can be trusted not to collude with Mallory, the server can reject signatures that do not exercise the same spend path as the ownership proof, making the ownership proof a commitment to the spend weight of the input. Multiparty protocols with publicly verifiable protocol transcripts can also provide weak evidence of a history of honest participation in multiparty transactions. In addition, requiring a minimum feerate for the previous transaction or a minimum confirmation age can make such attacks less lucrative. Finally, signatures from potentially exploitative inputs can be required ahead of legacy or SegWit v0 ones, with the prescribed order determined based on reputation or costliness.</summary>
+    <published>2023-02-07T09:36:58+00:00</published>
+  </entry>
+</feed>

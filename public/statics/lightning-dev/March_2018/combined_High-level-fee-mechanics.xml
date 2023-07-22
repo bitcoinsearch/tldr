@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - High level fee mechanics</title>
+  <updated>2023-05-24T22:11:30.179883+00:00</updated>
+  <author>
+    <name>Thomas Steenholdt 2018-04-10 15:02:39</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-04-12 04:49:23</name>
+  </author>
+  <author>
+    <name>Benjamin Mord 2018-04-12 20:37:17</name>
+  </author>
+  <author>
+    <name>Thomas Steenholdt 2018-03-19 11:30:35</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-04-11 03:04:09</name>
+  </author>
+  <author>
+    <name>Alejandro Ranchal Pedrosa 2018-04-11 08:01:02</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-04-13 13:26:15</name>
+  </author>
+  <author>
+    <name>Benjamin Mord 2018-04-13 16:13:18</name>
+  </author>
+  <author>
+    <name>Thomas Steenholdt 2018-03-18 22:24:07</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-04-11 09:17:15</name>
+  </author>
+  <author>
+    <name>Benjamin Mord 2018-04-11 16:00:47</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-03-18 23:48:57</name>
+  </author>
+  <link href="lightning-dev/April_2018/001154_High-level-fee-mechanics.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2018/001171_High-level-fee-mechanics.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2018/001174_High-level-fee-mechanics.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001101_High-level-fee-mechanics.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2018/001156_High-level-fee-mechanics.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2018/001158_High-level-fee-mechanics.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2018/001177_High-level-fee-mechanics.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2018/001179_High-level-fee-mechanics.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001098_High-level-fee-mechanics.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2018/001160_High-level-fee-mechanics.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2018/001164_High-level-fee-mechanics.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001099_High-level-fee-mechanics.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - High level fee mechanics</title>
+    <updated>2023-05-24T22:11:30.179883+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-April/001154.html" rel="alternate"/>
+    <summary>Lightning fees in multi-hop routed payments are determined by each channel, which has `fee_base_msat` and `fee_proportional_millionths` values used to calculate fees for routing payments. The sender of a payment calculates the fee to reach the recipient by adding the `fee_base_msat` to the `fee_proportional_millionths` multiplied by the value of the payment, then adds that to the payment amount. However, adjusting the on-Lightning fees of channels to hint at their suitability for routing is not currently implemented, and privacy concerns prevent revealing the balance of each peer on a channel.ZmnSCPxj suggests that adding a nonlinear component to pricing could improve economic efficiency, but it would be difficult to incorporate into the protocol currently. Real-life implementations such as c-lightning use a brute-force trial-and-error algorithm to discover payment routes, which can be expensive at scale and reduces the privacy of the sender. Probing to discover capacities in each path is possible, but the sender risks having their money locked for some blocks if a node along the selected route stalls. The highest value at the source ultimately pays the entire fee, and the recipient is only aware of how much they are receiving, not the full amount including fees. The BOLT spec contains detailed information on Lightning fees, and it explains that established channels between nodes contain `fee_base_msat` and `fee_proportional_millionths` values that are used to calculate fees for routing payments. Each published channel has a short channel ID composed of block height, transaction index within block, and output index within transaction. The exact failure TEMPORARY_CHANNEL_FAILURE can mean that the other node is currently down rather than the channel not having enough capacity in that direction.In addition, ZmnSCPxj mentions the importance of thinking about short and long-term goals simultaneously while building systems. The earlier AMP proposal by Roasbeef uses hashlocked contingent payments, whereas Benjamin Mord's style of AMP requires scriptless script contingent payments. The conversation also touches on Benjamin Mord's skepticism of discrete logarithm hardness, which may prove misplaced or lead to alternative ways of achieving the AMP proposal.</summary>
+    <published>2018-04-10T15:02:39+00:00</published>
+  </entry>
+</feed>

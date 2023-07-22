@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+  <updated>2023-05-22T16:45:42.210276+00:00</updated>
+  <author>
+    <name>Anthony Towns 2022-01-28 01:34:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+    <updated>2023-05-22T16:45:42.210276+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-January/019819.html" rel="alternate"/>
+    <summary>In a recent Bitcoin development discussion, the relationship between CTV and ANYPREVOUT was recapped. Although ANYPREVOUT cannot mimic CTV, it can be used to fund eltoo channels or updated lightning penalty channels signed with APO signatures.An alternative proposal suggests baking in TXHASH from day 0 by making it a multibyte opcode with a serialize.h:VarInt as the version number. The proposal also suggests that the CHECKSIGVERIFY operation can be simulated by TXHASH CHECKSIGFROMSTACKVERIFY. However, there is some disagreement about whether decomposing operations into primitive pieces is useful in the bitcoin script language. Some argue that higher-level languages are more useful on the blockchain, while others suggest that such languages should exist on layers above consensus. The author suggests the creation of a new opcode called "POP_SIGDATA". This opcode would add a new register called "sigdata", which would be added to the message being signed. The author thinks that POP_SIGDATA makes for an interesting counterpart to PUSH_ANNEXITEM, as it would allow you to require data that's the result of calculations and not explicitly spelled out in the witness be signed. The author also proposes the implementation of CTV as an extension to CHECKSIG, defining a new pubkey type that's just the constant "0x0000" and having the signature be valid if it's an exact match for the corresponding message hash. The author discusses the key tradeoff between "x POP_SIGDATA p CHECKSIG" and "CHECKSIGFROMSTACK" and suggests that there wouldn't be any practical use cases that wouldn't be covered if we had CTV, POP_SIGDATA, and SIGHASH_NO_TX_DATA_AT_ALL but no OP_CAT. The author notes that the difference between TXHASH EQUALVERIFY and CTV is that because the idea for TXHASH is to be compatible with CHECKSIGFROMSTACK, then the messages it hashes should be distinct from anything else one might ever sign.In summary, the author proposes the creation of a new opcode called "POP_SIGDATA," which would add a new register called "sigdata" to the message being signed. Additionally, the author suggests implementing CTV as an extension to CHECKSIG, defining a new pubkey type that's just the constant "0x0000" and having the signature be valid if it's an exact match for the corresponding message hash.</summary>
+    <published>2022-01-28T01:34:36+00:00</published>
+  </entry>
+</feed>

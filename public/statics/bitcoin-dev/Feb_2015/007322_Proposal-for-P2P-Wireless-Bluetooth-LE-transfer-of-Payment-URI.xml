@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for P2P Wireless (Bluetooth LE) transfer of Payment URI</title>
+  <updated>2023-06-09T16:37:27.571650+00:00</updated>
+  <author>
+    <name>Andreas Schildbach 2015-02-05 13:46:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for P2P Wireless (Bluetooth LE) transfer of Payment URI</title>
+    <updated>2023-06-09T16:37:27.571650+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-February/007322.html" rel="alternate"/>
+    <summary>Paul Puey has developed a protocol for peer-to-peer wireless transfer of a URI request using an open broadcast or advertisement channel such as Bluetooth, Bluetooth Low Energy, or WiFi Direct. This protocol is aimed at eliminating the disadvantages for a merchant and customer to exchange a URI request using QR codes. The current QR code scan method is cumbersome and difficult for users. A wireless local broadcast allows the merchant to just enter the payment and wait. The tablet and smartphone are not maneuvered to align in any way. The customer observes broadcast listings, selects the appropriate one from possible simultaneous broadcasts from other POS stations nearby, examines the URI request details such as amount, and decides whether to send funds, initiating a bitcoin network transfer.The URI and other broadcast identification only contain public information. However, a copycat broadcaster acting as MITM might duplicate the broadcast simultaneously as the merchant, attempting to lure the customer to send funds to the copycat. That attack is mitigated with this broadcast method because of the partial address in the broadcast. Paul suggests that for a BIP standard, we should skip "bitcoin:" URIs entirely and publish BIP70 payment requests instead. URIs mainly stick around because of QR codes limited capacity. BIP70 would partly address the "copycat" problem by signing payment requests.In the Motivation section, some words about NFC are missed. NFC already addresses all of the usability issues mentioned and is supported by mobile wallets since 2011. That doesn't mean Paul's method doesn't make sense in some situations, but it should be explained why to prefer broadcasting payment requests over picking them up via near field radio. The proposed specification uses Bluetooth Smart (Low Energy), where the Requestor generates a bitcoin URI request of variable length, and a limited descriptive identifier string. Requester then broadcasts the URI’s partial public address plus identifier over a publicly visible wireless channel. Sender scans for broadcasts on their device, examines and selects the desired request by the identifier and partial address. This connects a data channel to Requester. Requester sends full URI back over the data channel. Sender device ensures the partial public address is part of the full URI public address and checks the full address integrity. Checking the broadcast and full URI integrity prevents a copycat device within range from copying the partial address and fooling the customer into sending funds to the copycat instead.The proposed specification is compatible with existing BIPs. There are no prior BIPs covering this. An example of Airbitz iOS Bluetooth Low Energy to Bluetooth Low Energy request transfer is also provided.</summary>
+    <published>2015-02-05T13:46:44+00:00</published>
+  </entry>
+</feed>

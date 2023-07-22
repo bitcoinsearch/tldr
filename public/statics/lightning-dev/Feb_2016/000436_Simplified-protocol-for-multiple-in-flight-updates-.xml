@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Simplified protocol for multiple in-flight updates.</title>
+  <updated>2023-05-23T22:33:15.865918+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-02-09 04:30:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Simplified protocol for multiple in-flight updates.</title>
+    <updated>2023-05-23T22:33:15.865918+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-February/000436.html" rel="alternate"/>
+    <summary>In a discussion between Joseph Poon and Rusty Russell, the matter of acknowledging messages when adding Hashed Time-Lock Contracts (HTLCs) was brought up. Eliminating acknowledgements makes for a simpler protocol but it also means that it is uncertain whether the other party has received the message. Removing HTLCs securely requires removing them, committing, and then the other party revokes the prior commitment. If the ratio of success/failure is high enough, this method can be worth it but it may have some disadvantages with intermittently connected nodes. Poon is optimizing against payment failure on the ADD side since failure may require a re-route in the opposite direction to do a full cancel with a non-responsive node in multi-hop payments. However, Russell is not convinced that the re-route scheme will be used in practice. Routing in the opposite direction ties up funds for a long time with no actual likely redemption requiring a large upfront fee. Furthermore, if a node goes down with possibly-live HTLCs, those HTLCs get delayed and the node loses channels which is not free either. Russell believes that if both nodes are well-connected, then eliminating acknowledgements is more optimal if latency is the primary concern. This offers 3x inter-node latency, which is optimal. There was uncertainty on the commitment scheme, so Russell wonders if he's missing a trick.</summary>
+    <published>2016-02-09T04:30:24+00:00</published>
+  </entry>
+</feed>

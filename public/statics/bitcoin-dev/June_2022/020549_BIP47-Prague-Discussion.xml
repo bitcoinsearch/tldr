@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>BIP47 Prague Discussion</title>
+  <updated>2023-05-22T20:34:15.510358+00:00</updated>
+  <author>
+    <name>Ruben Somsen 2022-06-11 10:01:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>BIP47 Prague Discussion</title>
+    <updated>2023-05-22T20:34:15.510358+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-June/020549.html" rel="alternate"/>
+    <summary>At Pizza Day Prague 2022, a discussion took place regarding the improvement of BIP47, focusing on minimizing on-chain space required and outsourcing the notification transaction to break the sender/recipient link. The current implementation of BIP47 requires an input key for blinding, the blinded sender payment code in an op_return, and the recipient key in an output. It was suggested that forego the requirement for the recipient to learn the payment code of the sender since it is not necessary and could potentially save space. The minimum notification payload required is a fresh sender key and a static recipient key. The next idea was to put multiple notifications in a single transaction, which can be outsourced to a third party, who could be paid over the Lightning Network for their services to break the sender/recipient link. One solution was to use the taproot annex to insert the notification payload as discounted witness data, but this requires custom software for the recipient to notice the notification. Alternatively, the sender keys could be put there while still creating an output for each recipient key. One interesting point that came up was that you could represent the recipient key using only 4 bytes, leaving a window of 1 in ~4.3 billion for a collision, but the extra work that needs to be performed when it does happen is negligible. It should be noted that using the annex makes the transaction non-standard and it could either be standardized as the first use case for the annex or an alternative method should be considered. Overall, the discussion had participants Alekos Filini, Martin Habovštiak, Daniela Brozzoni, Eric Sirion, Pavol Rusnak, Salvatore Ingala, and others. Links to relevant materials such as Silent Payments and BIP47 were also provided.</summary>
+    <published>2022-06-11T10:01:58+00:00</published>
+  </entry>
+</feed>

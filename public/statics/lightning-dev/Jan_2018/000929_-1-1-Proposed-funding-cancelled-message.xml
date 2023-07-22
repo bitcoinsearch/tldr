@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[1.1] Proposed `funding_cancelled` message</title>
+  <updated>2023-05-20T07:52:47.060709+00:00</updated>
+  <author>
+    <name>Matt Corallo 2018-01-15 01:00:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[1.1] Proposed `funding_cancelled` message</title>
+    <updated>2023-05-20T07:52:47.060709+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-January/000929.html" rel="alternate"/>
+    <summary>The lack of a protocol-required minimum timeout for unopened channels is causing issues with replaceable funding transactions. While it may seem trivial to track an unopened channel, there is always the possibility that the winning miner got older versions of the funding transaction. It is necessary for a receiving node to keep a channel ready to be used for at least a week prior to funding transaction confirmation. This will allow a node creating a funding transaction to double-spend and make unconfirmable a funding transaction which has not confirmed prior to a week. This can even be slipped into the spec today prior to v1.1.To implement replace-by-fee funding transactions, one would need to keep track of all versions of the funding transaction and state of each version. The funder needs to keep track of all versions of the funding transaction broadcasted and delete such entries from its database that can never confirm. Sending `funding_cancelled` in this case is simply "being nice", and the fundee ignores this at its own detriment, wasting resources each block to check for a transaction that logically can never confirm.</summary>
+    <published>2018-01-15T01:00:20+00:00</published>
+  </entry>
+</feed>

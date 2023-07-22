@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Using OP_VAULT to improve DLCs</title>
+  <updated>2023-06-16T03:55:54.240319+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2023-01-19 22:42:43</name>
+  </author>
+  <author>
+    <name>Billy Tetrud 2023-01-19 22:42:43</name>
+  </author>
+  <author>
+    <name>Ben Carman 2023-01-12 12:32:06</name>
+  </author>
+  <author>
+    <name>Ben Carman 2023-01-12 12:32:06</name>
+  </author>
+  <author>
+    <name>Billy Tetrud 2023-01-19 22:42:43</name>
+  </author>
+  <author>
+    <name>Ben Carman 2023-01-12 12:32:06</name>
+  </author>
+  <link href="bitcoin-dev/Jan_2023/021359_Using-OP-VAULT-to-improve-DLCs.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2023/021359_Using-OP-VAULT-to-improve-DLCs.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2023/021339_Using-OP-VAULT-to-improve-DLCs.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2023/021339_Using-OP-VAULT-to-improve-DLCs.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2023/021359_Using-OP-VAULT-to-improve-DLCs.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2023/021339_Using-OP-VAULT-to-improve-DLCs.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Using OP_VAULT to improve DLCs</title>
+    <updated>2023-06-16T03:55:54.240319+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-January/021359.html" rel="alternate"/>
+    <summary>A new proposal has been introduced to create not-so-simple covenants using the OP_UNVAULT opcode. The idea is to restrict the script using OP_UNVAULT to only contain that one opcode call, which can be used for Jeremy Rubin's congestion control transactions. However, with the addition of a scriptPubKey for authorizing recovery, more general covenants can be created by setting unvault-target-hash to an unsatisfiable number and placing arbitrary conditions on spending the utxo to the "recovery address." This approach could be used as a general CTV-like covenant.The proposal was suggested by Ben Carman after reading James O'Beirne's OP_VAULT proposal. It would use more blockchain space but should have all the same computational savings as the original CTV proposal. The main downside is that the final spending script will be slightly larger. A similar construction could be done by creating a taproot tree similar to Lloyd's construction, with each leaf looking like `0 OP_UNVAULT CHECKSIG`. Compared to the original CTV proposal, this should get all the same computational savings but would use more blockchain space. Instead of just having `OP_CTV`, it will be replaced with `0 OP_UNVAULT` (34 bytes extra, not including the witness discount). However, this may be negligible in the case of a DLC with many outcomes as a lot of the input size will be coming from the control block. The proposal credits Lloyd Fournier for the original idea.</summary>
+    <published>2023-01-19T22:42:43+00:00</published>
+  </entry>
+</feed>

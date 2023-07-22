@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[patch] Switching Bitcoin Core to sqlite db</title>
+  <updated>2023-05-19T22:19:42.922477+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2015-10-30 04:28:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[patch] Switching Bitcoin Core to sqlite db</title>
+    <updated>2023-05-19T22:19:42.922477+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-October/011636.html" rel="alternate"/>
+    <summary>In a discussion about the consensus mechanism in Bitcoin Core, the question was raised about how nodes using different database technologies might determine different answers to whether a given transaction is valid or invalid. The response was that if all unspent outputs can be found in the database and if relevant information about each output can be retrieved without corruption, then there should not be a problem. However, databases sometimes have errors that cause them to fail to return records or to return stale data, which could lead to inconsistencies in consensus state and potential theft. An example was provided of a bug in leveldb that caused it to consistently return "not found" on records that were really there. Leveldb fixed this bug with a minor update, but deploying such a fix in an uncontrolled manner in the Bitcoin network would potentially cause a fork in consensus state. It was noted that multiple implementations of something like the UTXO database are not unreasonable, but great care is required around the specifics. Bitcoin consensus implements a mathematical function that defines the operation of the system, and all systems must agree for the state to not diverge and permit double-spends. If a component behaves identically under all inputs to another function, it can be replaced without concern. However, this cannot be done generally for all software, and proving equivalence even in special cases is an open area of research. The storage engine for the UTXO database in Bitcoin Core is fully internally abstracted, making it relatively straightforward for someone to drop something else in to experiment with. However, the application and needs of the system are very specialized, and off-the-shelf key value stores may not be suitable in all cases. In the future, if Bitcoin Core adopts a merkelized commitment for the UTXO, it may need to stop using any off-the-shelf key value store entirely to avoid write inflation from updating hash tree paths.</summary>
+    <published>2015-10-30T04:28:47+00:00</published>
+  </entry>
+</feed>

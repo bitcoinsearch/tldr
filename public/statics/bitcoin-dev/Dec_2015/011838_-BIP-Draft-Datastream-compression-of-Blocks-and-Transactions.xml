@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>[BIP Draft] Datastream compression of Blocks and	Transactions</title>
+  <updated>2023-05-19T22:27:16.758706+00:00</updated>
+  <author>
+    <name>Matt Corallo 2015-12-01 05:28:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>[BIP Draft] Datastream compression of Blocks and	Transactions</title>
+    <updated>2023-05-19T22:27:16.758706+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-December/011838.html" rel="alternate"/>
+    <summary>Bitcoin developers have proposed a new method of transaction compression that could save up to 20% in bandwidth for transactions not compressible otherwise. The proposal suggests concatenating multiple small transactions into one larger transaction before compressing them. This method reduces network chatter and speeds up transmission time. The developers chose to use the LZO compression library over Zlib due to its scalability and ability to set compression levels.Compression can be tailored to suit different systems, and if compression fails, blocks and transactions can still be sent uncompressed. By abstracting the compression/decompression code into class "CDataStream," compression can be easily applied to any datastream. The LZO1x-1 library is less efficient than Zlib but provides very good compression, yielding up to a 20% compression using LZO1x-1 and up to 27% when using LZO1x-999. Furthermore, there is a marked performance improvement when there is latency on the network, with almost 30% improvement in performance when comparing LZO1x-1 compressed blocks with uncompressed blocks.Transactions don't compress well below 500 bytes but do very well beyond 1KB where there are many large spam-type transactions. However, most transactions happen to be in the smaller range. Doing concatenation of transactions yielded some very good compression results. For example, when 175 transactions were concatenated before being compressed, it yielded a 20% compression ratio.While a member of the community expressed concern about adding a compression library to financial software directly accessible to the network, the author of the proposal suggested using a service bit to turn compression on or off. Blocks and transactions would be compressed and concatenated when possible, and compression levels could be specified in "bitcoin.conf." Compression and decompression could also be turned off completely. The code for compressing and decompressing would be located in class CDataStream, and LZO1x would be used as the compression library.The proposal provides test results in two tables showing sync times for the first 200,000 blocks with various compression methods across different latencies. The results show that LZO1x-999 provides the best compression ratio at the highest cost. Older clients will continue to receive uncompressed data due to the inability to present the correct service bit. However, the change is fully compatible, and only one peer needs to set "compressionlevel=0" to turn off compression and decompression entirely. A permanent service bit will be necessary, but no hard or soft fork will be required. The document is available on GitHub and placed in the public domain.</summary>
+    <published>2015-12-01T05:28:42+00:00</published>
+  </entry>
+</feed>

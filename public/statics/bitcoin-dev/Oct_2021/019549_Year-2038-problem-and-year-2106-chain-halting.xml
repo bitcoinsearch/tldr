@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Year 2038 problem and year 2106 chain halting</title>
+  <updated>2023-06-15T02:47:27.146003+00:00</updated>
+  <author>
+    <name>yanmaani at cock.li 2021-10-15 15:44:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Year 2038 problem and year 2106 chain halting</title>
+    <updated>2023-06-15T02:47:27.146003+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-October/019549.html" rel="alternate"/>
+    <summary>Bitcoin's timestamp rules state that the block timestamp cannot be less than the median of the last 11 blocks, nor greater than the current time plus two hours. Additionally, the block timestamp cannot exceed 2^32, which will cause Bitcoin to "die" on or around February 7, 2106, when there is no timestamp below 2^32 that exceeds the median of the last 11 blocks. A proposed solution suggests changing the rules so that the block timestamp plus k*2^32 may not be lower than the median of the last 11 blocks and cannot be greater than the current time plus two hours, where k is an integer with the same value for both calculations. This would cause a hardfork in 2106, approximately 85.5 years from now, by which time 95% of nodes are expected to have updated. Another proposed solution involves using 64-bit timestamps, but this would break compatibility with other software that has specific expectations of header fields, like ASICs' firmware, and would also cause a hardfork before the date of timestamp overflow. The proposal was made earlier, but nobody showed interest. The issue of Bitcoin Core stopping working in 2038 due to assertion checking if the current time is non-negative was raised, as well as the whole chain halting after reaching median time 0xffffffff in 2106. It was wondered whether these issues could be fixed in a soft-fork way.</summary>
+    <published>2021-10-15T15:44:59+00:00</published>
+  </entry>
+</feed>

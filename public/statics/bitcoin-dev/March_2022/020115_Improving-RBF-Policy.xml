@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving RBF Policy</title>
+  <updated>2023-06-15T16:05:44.719083+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2022-03-11 16:22:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving RBF Policy</title>
+    <updated>2023-06-15T16:05:44.719083+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020115.html" rel="alternate"/>
+    <summary>The Bitcoin-dev mailing list has been discussing various ideas for preventing denial-of-service (DoS) attacks on the network. Two main concepts discussed were transaction relay rate limiting and staggered broadcast of replacement transactions. However, concerns were raised about the potential for these solutions to delay transactions and negatively impact propagation.An alternative idea proposed was a transaction replacement broadcast cooldown, which would limit unnecessary data transmission while still allowing higher-fee-rate transactions to propagate. Another proposal was to add a policy rule allowing users to specify descendant limits on their transactions, which would solve the pinning problem with package RBF. Additionally, there was discussion around the concept of "mining score" as a way to prioritize transactions based on their likelihood of being included in a block.While some concerns were raised about the potential downsides of these proposals, they were generally well-received and open for feedback. Overall, the goal is to prevent DoS attacks while maintaining the fee-rate relay rule that already mitigates spam. Another topic discussed in the email thread is whether or not to exclude low fee transactions from being relayed and included in blocks. The concern raised is that this approach would result in missing out on good fees. However, it's noted that this is a special case and there are other factors to consider, such as trusting that a lower fee transaction won't replace a higher fee transaction and the number of transactions bidding for a spot in the next block.The email also mentions that rate limiting is already done via INVENTORY_BROADCAST_MAX and *_INVENTORY_BROADCAST_INTERVAL. An alternative approach suggested is to track the "effective fee rate" to better manage the ancestor fee rate. This could potentially be achieved through Murch and Clara's candidate set blockbuilding ideas.Another topic discussed is the idea of keeping high-feerate evicted transactions around in case they get mined by someone else to improve compact block relay. It's noted that replaced transactions are already added to vExtraTxnForCompact. However, there are concerns that the 100 tx LRU cache may not be sufficient and a rate limit could be applied only to replacement transactions.Finally, the conversation touches on the idea that it's better to have a split between mempool acceptance rules and spam prevention rules. This would allow transactions to be sent to miners through an alternate route if they are blocked by anti-spam rules.</summary>
+    <published>2022-03-11T16:22:07+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Assurance contracts to fund the network with OP_CHECKLOCKTIMEVERIFY</title>
+  <updated>2023-06-09T20:01:34.652969+00:00</updated>
+  <author>
+    <name>Jeff Garzik 2015-05-08 10:00:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Assurance contracts to fund the network with OP_CHECKLOCKTIMEVERIFY</title>
+    <updated>2023-06-09T20:01:34.652969+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/007988.html" rel="alternate"/>
+    <summary>In May 2015, Tier Nolan suggested that assurance contracts could be used to avoid the problem of fees going to zero. By using this method, users such as large merchants or exchanges could pay to support the network. However, Mike Hearn's method did not create an assurance contract, as miners could exploit the system to convert pledges into donations. Nolan proposed a transaction with one input and one output signed using SIGHASH_ANYONE_CAN_PAY. The output pays to OP_TRUE, meaning anyone can spend it. If enough pledges are made, then a valid transaction can be created. It is in the miner's interests to maintain a notice board system for these pledges. The problem with this system is that it counts as a pure donation, and even if only a small amount has been pledged, a miner can add their own money to finish the transaction. They would net the pledged amount if they win the block, but if they lose, nobody sees their transaction. This does not push up the total hashing power being committed to the blockchain, which is the whole point of the assurance contract. OP_CHECKLOCKTIMEVERIFY could be used to solve this problem. Instead of paying to OP_TRUE, the transaction should pay 50 BTC to "million&gt; OP_CHECKLOCKTIMEVERIFY OP_TRUE" and 0.01BTC to "OP_TRUE". This means that the transaction could be included well in advance of the 1 million block point, and any miner would be able to spend the 50 BTC once block 1 million arrives. For high-value transactions, it isn't just the POW of the next block that matters but all the blocks built on top of it. A pledger might want to say "I will pay 1BTC if the next 100 blocks all have at least an effective minting fee of 50BTC".</summary>
+    <published>2015-05-08T10:00:37+00:00</published>
+  </entry>
+</feed>

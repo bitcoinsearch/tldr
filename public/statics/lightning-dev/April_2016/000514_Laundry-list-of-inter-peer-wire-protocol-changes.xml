@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Laundry list of inter-peer wire protocol changes</title>
+  <updated>2023-05-23T22:02:53.126889+00:00</updated>
+  <author>
+    <name>CJP 2016-04-07 20:21:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Laundry list of inter-peer wire protocol changes</title>
+    <updated>2023-05-23T22:02:53.126889+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-April/000514.html" rel="alternate"/>
+    <summary>The concept of reserving before locking in payment channels is an optimization aimed at reducing the risk of locking funds in a part of the route, which might not exist anymore. The purpose of reserving is to informally lock funds for use in the transaction, which can be done and undone quickly without channel operations. It is done alongside route searching and establishment. The reserving stage used to be important for channel types where bi-directional payments are made possible with decreasing lock times. However, this issue has become less important as a large part of the community has put its hope on Lightning, so it's more likely that the extensions required for better channel types will be included in Bitcoin. The "reserving" stage is necessary for bi-directional routing, where both payer and payee need to route to a meeting point, and for setting tighter values on the HTLC time-outs. If routing is done together with locking, then routing has to go in the payer-&gt;payee direction, and the time-out has to be reduced on every hop. Assuming the payer does not know the number of hops in advance, the time-out has to be set to a very high value by the payer to maximize chances of a successful transaction. If routing is done in the reverse direction (payee-&gt;payer), you can start with a very low time-out and increment it on every hop. This will generally result in lower time-out values, which is desirable.Non-source routing has the advantage that nodes do not need a map of the entire network, which improves privacy and could help keep the network open to new participants, even against the will of many powerful existing participants. In the end, a system where a mix of source-routing and non-source routing can be used to get the best of both worlds is imagined.</summary>
+    <published>2016-04-07T20:21:53+00:00</published>
+  </entry>
+</feed>

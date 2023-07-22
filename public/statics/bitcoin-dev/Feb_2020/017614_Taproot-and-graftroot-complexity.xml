@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Taproot (and graftroot) complexity</title>
+  <updated>2023-05-20T21:42:46.703948+00:00</updated>
+  <author>
+    <name>Bryan Bishop 2020-02-09 20:19:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Taproot (and graftroot) complexity</title>
+    <updated>2023-05-20T21:42:46.703948+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-February/017614.html" rel="alternate"/>
+    <summary>A group of anonymous developers have raised concerns about the Taproot upgrade proposed for Bitcoin. They aim to keep the discussion focused on the technical issues rather than personal politics and their goal is not to cause a schism but to help figure out what the path forward is with Taproot. The developers are excited about what Taproot has to offer, but after their review, they are perplexed about its development.In essence, Taproot is fundamentally the same as doing https://github.com/bitcoin/bips/blob/master/bip-0114.mediawiki and Schnorr signatures separately. The main reason for putting them together is efficiency which pre-supposes a specific use case and probability distribution of use cases. Taproot may just be a probability assumption about the frequency and likelihood of the signature case over the script case, but the BIP does not make representations about how likely that N of N case would be in practice compared to the script paths.On privacy, the developers are also confused as to the goal of Taproot over MAST and Schnorr. They presented a design with MAST which is very close to Taproot. It would also be possible to just add {schnorr_checksig} to the set {a,b,c,d,e,f,g,h}, shuffle them, and compute some MAST structure on them. This has the effect of not having much additional fees for adding the extra Schnorr path at redeem time. They argue that this is more private than Taproot because there's no distinction between the Schnorr key case and other cases by default, so chain analyzers can't tell if the signature came from the Taproot case or from one of the Script paths.The developers suggest that Taproot could be fixed simply by allowing the witness type to be either a MAST hash OR a schnorr key (but not a Taproot) which decreases extra fees. They also propose an alternative plan to deploying the technologies proposed in BIP-340, BIP-341, and BIP-342, which includes a separate soft-fork for Merkle Branch Witnesses based on Taproot, a separate soft-fork for Schnorr Signatures, and a follow-up soft-fork that enables Taproot and Graftroot. They propose this approach as a more conservative option while waiting to see if the Taproot frequency of use assumption holds.The developers suggest that the Taproot Public NUMS Optimization may be worth considering but believe it's their duty to raise these concerns and suggestions for the benefit of the community.</summary>
+    <published>2020-02-09T20:19:55+00:00</published>
+  </entry>
+</feed>

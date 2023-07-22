@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for syncing channel updates</title>
+  <updated>2023-05-25T14:02:20.014320+00:00</updated>
+  <author>
+    <name>Fabrice Drouin 2018-10-04 12:46:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for syncing channel updates</title>
+    <updated>2023-05-25T14:02:20.014320+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-October/001426.html" rel="alternate"/>
+    <summary>Fabrice proposes an extension of the current "channel queries" for nodes to properly sync their outdated channel updates in Lightning Network. He has opened an issue on the RFC's Github repo and posted on the forum to have a less constrained discussion. Lightning Network is a p2p network of nodes where nodes are vertices and channels are edges, and payments can be made to any node with a route. To send a payment, nodes use their local routing table to compute a route to the destination, and send an onion-like message to the first node on that route, which will forward it to the next node until it reaches its destination. The routing table includes static information such as channel announcements and dynamic information such as channel updates. Channel updates include edge parameters like cost and max capacity and can change often. Nodes need a way to keep their routing table up-to-date, which is called "routing table sync" or "routing sync." A LN wallet that is mostly used to send payments will not work very well if its routing table is missing info or contains outdated info, so routing sync is a crucial issue for LN wallets. One problem is that offline nodes cannot sync their channel updates correctly, leading to outdated information. There are currently two schemes to improve routing table sync. Nodes can request peers to send them a complete dump of their entire routing table, or they can ask peers for all their channel IDs in a given block range and query the ones they're missing. However, these schemes still have issues with offline nodes. Fabrice proposes a timestamp-based channel update sync scheme to extend query parameters to include channel update timestamps. When a node connects to another node, it asks for a list of [channel id | channel update timestamp #1 | channel update timestamp #2] in a given block range. This allows the offline node to know how far behind it is and display a "sync progress" indicator as it receives requested items. This scheme has been tested on a mobile wallet with positive results.</summary>
+    <published>2018-10-04T12:46:19+00:00</published>
+  </entry>
+</feed>

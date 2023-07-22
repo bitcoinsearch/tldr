@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Hold fees: 402 Payment Required for Lightning itself</title>
+  <updated>2023-06-03T02:33:47.952076+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2020-10-23 13:06:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Hold fees: 402 Payment Required for Lightning itself</title>
+    <updated>2023-06-03T02:33:47.952076+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002868.html" rel="alternate"/>
+    <summary>In a technical discussion, ZmnSCPxj explains the process of revoking and acknowledging a channel in case of a griefing attack. The `revoke_and_ack` function drops the channel on-chain with the HTLC instantiated. The start time has to be the C-&gt;`commitment_signed`-&gt;D that contains the new HTLC. The D grace period imposes two smaller grace periods that protect against C-side griefing.However, concerns were raised about the possibility of amounts being too high for honest users or certain uses in a proposal for backwards upfront payments in Lightning Network. Nonetheless, it was noted that this wouldn't be a concern for the proposal as the payments can be made somewhat big without any negative impact on honest nodes. The proposal allows for refunds within a grace period and in case the grace period has expired, the node is earning money downstream and paying upstream. The only node that can end up losing money is the last node in the route.The discussion also considered the possibility of controlled spam, where the attacker pays the fee at the beginning of the route but has it refunded at the end of the route. This gives an opportunity for legitimate payments to use the HTLC slots, but it's a race between the attacker and the legitimate users. It was noted that penalizing this kind of attack could be done if the forward fee decrements at each hop, but it needs to be in the onion and the delta needs to be high enough to actually penalize the attacker.There was also a discussion about potential griefing attacks in the implementation of the grace period. It was noted that C can delay the refund to D to after the grace period even if D settled the HTLC quickly, which could lead to C trivially grieving D by delaying its own commitment_signed containing the removal of the HTLC. However, D has a defense against this by dropping the channel onchain if the time between D-&gt;`update_fail_htlc`-&gt;C and the corresponding C-&gt;`commitment_signed`-&gt;D becomes too long. For the success case `update_fulfill_htlc`, C can immediately propagate this back to its upstream since it can now, and the timer can stop at the `update_fulfill_htlc`. For the start point of the grace period, C-&gt;`commitment_signed`-&gt;D containing the HTLC would work as the start point, and in case C deliberately defers its own C-&gt;`revoke_and_ack`-&gt;D, D can use the same defense. ZmnSCPxj apologized for delving into details but had not thought of any other griefing attack so far.</summary>
+    <published>2020-10-23T13:06:45+00:00</published>
+  </entry>
+</feed>

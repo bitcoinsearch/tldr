@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>REQ BIP # / Discuss - Sweep incoming unconfirmed transactions with a bounty.</title>
+  <updated>2023-06-10T01:59:36.588090+00:00</updated>
+  <author>
+    <name>Dan Bryant 2015-07-06 04:14:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>REQ BIP # / Discuss - Sweep incoming unconfirmed transactions with a bounty.</title>
+    <updated>2023-06-10T01:59:36.588090+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-July/009357.html" rel="alternate"/>
+    <summary>In a Bitcoin-development mailing list discussion, Mark Friedenbach introduced the concept of CPFP or “child pays for parent”. This feature allows miners to prioritize transactions in a block based on the fees attached to them. A pull request from 2015, PR#1647, implemented this feature which indicated that certain trees could bloom the TX selection latency as miners would need to be more dependency aware. However, it only addressed miner policy and did not offer a user-facing side of functionality. Matt Whitlock pointed out that the BIP proposal for CPFP mining policy does very little good if wallets don't offer any way for users to goose up incoming transactions.Mark Friedenbach acknowledged that sweep transaction UI was out of scope for a BIP and suggested talking with wallet authors, and if agreement can be found, writing a pull request. The risks associated with not enabling CPFP included the possibility that child transactions may enter the blockchain without their parent transactions. Spending the child might look good, as it might have many confirmations, while its parent has few.Peter Todd proposed RPF or “replace-by-fee scorched-earth without child-pays-for-parent” as a countermeasure to address the risks associated with CPFP. In the “countermeasure” form, spender gives receiver a partially signed "countermeasure" transaction with juiced-up fees. In the "anyonecanpay" form, spender signs the transaction with ANYONECANPAY bit allowing the receiver to add fees at will.One question raised about RBF is whether the spender sends the incomplete "countermeasure" transaction to the network, and if they do, wouldn't they get flagged on DoS code banning them from peers? Another question was whether the "countermeasure" transaction is broadcast and sent to the receiver via back channel (email, etc). Mark Friedenbach agreed to clean up the draft BIP to include CPFP dependencies and RBF capabilities, but noted that it may take some time as it was just a doc to outline his thoughts at this point.</summary>
+    <published>2015-07-06T04:14:14+00:00</published>
+  </entry>
+</feed>

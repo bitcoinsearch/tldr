@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Anti DoS for tx replacement</title>
+  <updated>2023-06-06T15:01:12.207947+00:00</updated>
+  <author>
+    <name>Mike Hearn 2013-04-18 09:28:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Anti DoS for tx replacement</title>
+    <updated>2023-06-06T15:01:12.208892+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002425.html" rel="alternate"/>
+    <summary>The context discusses the possibility of a denial-of-service (DoS) attack on a contract with a 12-hour time window that is adjusted once per second. The attacker broadcasts adjustments that look like part of an attack and try to roll back the contract to an earlier time before the latest version, which gives them the least money, ends up not being included in the chain. The multi-signature transaction input means it would take over four seconds to process every adjustment created. The attacker has less than a four-second window to roll back the contract to an earlier time before reaching the last version. Bandwidth is also an issue as the attack requires approximately 29 megabytes of data, which would take about 23 seconds to transfer on a normal 10mbit connection. However, the time window of the attack is still quite small compared to the block-solving window.Additionally, the discussion touches on the possibility of determining which input was responsible for a replacement and concludes that it is possible by looking at the definition of IsNewerThan(), where each input has its sequence number. Multiple inputs are needed for this scheme, which uses non-final transactions relayable again only to nodes that advertise a high enough version number. Finally, the amount of work required to implement this feature depends on the use case, and if done with Bitcoin-Qt, it would be easier but may not run in places that cannot afford a few hundred megs of RAM, such as Wi-Fi hotspots.</summary>
+    <published>2013-04-18T09:28:48+00:00</published>
+  </entry>
+</feed>

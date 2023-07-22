@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Escrow Over Lightning?</title>
+  <updated>2023-06-02T18:45:24.341934+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-06-27 22:33:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Escrow Over Lightning?</title>
+    <updated>2023-06-02T18:45:24.341934+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-June/002052.html" rel="alternate"/>
+    <summary>The conversation between ZmnSCPxj and Nadav involves the idea of sending a key (`b'`) from the buyer (payer) to the seller (payee) over the Lightning Network (LN). The proposal also includes Stuckless Payments, which involves sending a key from payer to payee. The question arises if it is possible to reuse the same key for both escrow and stuckless payment while separating the scalars used for decorrelation from the final key used in stuckless / escrow. The main concern is how the seller can verify that `B'` is indeed `ecdh(b, tweak(c, E))*G` since absent this authentication, the Escrow will be unable to provide the Seller with the necessary information to claim funds during a dispute.One solution proposed involves adding a salt to the `tweak` function's hash, agreed upon by the buyer and seller, to ensure that the escrow gains as little knowledge as possible. In this way, the escrow can validate for the seller that `B'` is what it should be, while learning only a random hash and a temporary public key, neither of which appear in any traceable way during a routed payment. Although it would be better to have the escrow not even learn that they are being used, this seems like an acceptable amount of information for them to learn and has the potential benefit of ensuring that being a trustworthy Escrow platform remains a sustainable (and competitive) endeavor, even in the absence of disputes. Overall, the proposal seems feasible to both parties involved in the conversation.</summary>
+    <published>2019-06-27T22:33:45+00:00</published>
+  </entry>
+</feed>

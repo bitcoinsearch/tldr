@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PTLCs early draft specification</title>
+  <updated>2023-06-03T06:43:42.306660+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2021-12-06 17:21:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PTLCs early draft specification</title>
+    <updated>2023-06-03T06:43:42.306660+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003377.html" rel="alternate"/>
+    <summary>The lightning network mailing list recently discussed how to implement PTLCs on the network, which involves heavy changes to the transaction structure and update protocol. However, a minimal set of changes is being explored to enable deployment as soon as possible. The proposed solution involves obtaining adaptor signatures before sending commit_sig and using a pre-signed HTLC-success transaction not only with local commit but also remote commit. This introduces more round-trips whenever commitment is updated, so finding a design trade-off that minimizes additional changes in the protocol while minimizing the number of extra round-trips is necessary. The current messages exchanged between parties work well because each commit_sig sent contains signatures for the other party's transactions and both parties do not need anything else to spend outputs from either commitment. However, with PTLCs, Bob requires Alice's signature to fulfill a PTLC from her commitment, and Alice needs an adaptor signature from Bob before providing hers. The designs that keep the current messages and just insert new ones are either too costly or too complex. Therefore, changing the commit_sig/revoke_and_ack protocol is necessary to find a sweet spot. Ideas are being collected from participants on how to achieve this without changing the transaction structure (beyond adding PTLC outputs). The protocol changes must work for both HTLCs and PTLCs and should be bundled with option_simplified_commitment or at least serve as a first step towards the required protocol.</summary>
+    <published>2021-12-06T17:21:12+00:00</published>
+  </entry>
+</feed>

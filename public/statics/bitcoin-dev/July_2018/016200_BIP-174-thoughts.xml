@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 174 thoughts</title>
+  <updated>2023-06-13T03:23:57.128519+00:00</updated>
+  <author>
+    <name>matejcik 2018-07-04 13:19:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 174 thoughts</title>
+    <updated>2023-06-13T03:23:57.128519+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-July/016200.html" rel="alternate"/>
+    <summary>The email author expresses concerns about the strictness and security properties of Bitcoin Improvement Proposal (BIP). They suggest changing the strategy for choosing from duplicate keys when combining or providing a detailed explanation of why picking at random is safe. The author advises signers not to sign an input with unknown fields present. They propose that if a field definition states that the key data is empty, an implementation must enforce this and reject Partially Signed Bitcoin Transactions (PSBTs) that contain non-empty data.The author also proposes changes to the wording around the Combiner's ability to detect inconsistencies. In response to another email, they argue against using protobuf for BIP and instead want to modify and improve the current format. The author suggests that conflicting values for the same key are invalid, and receiving two different values for the same key is a fatal condition with no recovery. They propose that the handling at the consumer should be permissive or restrictive, and consumers must not operate on inputs or outputs unless they understand all included fields.Finally, the author wants to clarify the role of the Combiner and the scenarios in which it can be used. The discussion on the bitcoin-dev mailing list revolves around using protobuf as a standard format for BIP 174. The primary concern is about the uniqueness of the record, which can be handled at the application level. Protobuf provides awareness of repeated fields and implements "pick last" resolution strategy for duplicates. A simple protobuf-based Combiner will assume all fields are repeating, concatenate and parse, deduplicate and reserialize. More knowledgeable Combiner will intelligently handle non-repeating fields, but still has to assume that unknown fields are repeating and use the above algorithm. A consumer can simply parse the message and perform appropriate application-level checks for "pick last" strategy. For "hard-fail" strategy, it must parse all fields as repeating and check that there's only one of those that are supposed to be unique.Despite not being perfectly suited for this task, protobuf provides advantages in terms of standardization, well description, wide implementation, and availability of an implementation for every conceivable platform.</summary>
+    <published>2018-07-04T13:19:11+00:00</published>
+  </entry>
+</feed>

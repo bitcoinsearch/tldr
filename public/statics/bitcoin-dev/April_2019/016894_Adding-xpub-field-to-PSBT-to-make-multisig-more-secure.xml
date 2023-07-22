@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Adding xpub field to PSBT to make multisig more secure</title>
+  <updated>2023-06-13T18:24:21.397580+00:00</updated>
+  <author>
+    <name>Stepan Snigirev 2019-04-26 15:21:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Adding xpub field to PSBT to make multisig more secure</title>
+    <updated>2023-06-13T18:24:21.397580+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-April/016894.html" rel="alternate"/>
+    <summary>Stepan Snigirev has raised a concern regarding the bip174 PSBT specs, stating that with current specifications, there is a way to steal user funds in M of N setup with M ≤ N/2. He suggests adding an xpub field to the inputs and outputs metadata, so signers can verify that the same xpubs are used for public keys in inputs and outputs, which will ensure the output is indeed a change. Currently, in PSBT, there is no reliable way to say whether the output uses the keys derived from the same root keys as the inputs aside from the key owned by the signer. Therefore, an attacker can replace half of the keys in the change address by his/her own keys and still get the transaction signed. He proposes adding two key-value pairs to PSBT: Type: BIP 32 public key `PSBT_IN_BIP32_XPUB = 0x10` and Type: BIP 32 public key `PSBT_OUT_BIP32_XPUB = 0x03`. Derivation paths are in the key of the key-value pair as they are used for lookup, and xpub itself is the actual value being looked up. Snigirev also mentions that Trezor doesn't suffer from this problem as they use xpubs to verify change outputs. Therefore, it may be beneficial to go through the communication protocols of existing hardware/multisignature wallets to see if there is something else missing. If everyone agrees with the proposal, Snigirev plans to prepare a pull request to the bip.</summary>
+    <published>2019-04-26T15:21:06+00:00</published>
+  </entry>
+</feed>

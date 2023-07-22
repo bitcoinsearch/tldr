@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New PSBT version proposal</title>
+  <updated>2023-06-14T16:29:10.635175+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2021-03-10 00:20:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New PSBT version proposal</title>
+    <updated>2023-06-14T16:29:10.635175+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-March/018612.html" rel="alternate"/>
+    <summary>The bitcoin-dev mailing list recently discussed a proposal by Andrew Chow to address some deficiencies in the current PSBT v0 and create a new version, v1, which is backwards incompatible. The primary change is that all input and output data for each will be contained in their respective maps rather than having to parse an unsigned transaction and lookup some data from there. Additionally, PSBT_GLOBAL_UNSIGNED_TX will no longer be allowed in this new version. Several new fields will be added including PSBT_GLOBAL_TX_VERSION, PSBT_GLOBAL_PREFERRED_LOCKTIME, PSBT_GLOBAL_INPUT_COUNT, and PSBT_GLOBAL_OUTPUT_COUNT. Other new fields include PSBT_IN_PREVIOUS_TXID, PSBT_IN_OUTPUT_INDEX, PSBT_IN_SEQUENCE, PSBT_IN_REQUIRED_LOCKTIME, PSBT_OUT_VALUE, and PSBT_OUT_OUTPUT_SCRIPT. This change allows for PSBT to be used in constructing transactions with inputs and outputs that can be added as needed. However, there is no longer a unique transaction identifier so more care must be taken when combining PSBTs. Finalizers must choose the maximum of all *_LOCKTIME fields to choose the locktime for the transaction, and PSBT_IN_REQUIRED_LOCKTIME is added because some inputs require a specific minimum locktime to be set.If these changes are deemed reasonable, Andrew Chow will write a pull request to modify BIP 174 to incorporate them. One member of the group, LL, agreed with the change of removing the global tx and the input/output data stored together, but wondered how output descriptors could fit into PSBTs since they allow determining the maximum satisfaction weight for inputs so fees can be properly aligned. They asked if it was simply a matter of time before they make it into a subsequent PSBT spec or if there was something they were missing conceptually. There was no discussion of including output descriptors in this revision.</summary>
+    <published>2021-03-10T00:20:58+00:00</published>
+  </entry>
+</feed>

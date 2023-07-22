@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BOLT Draft] Onion Routing Spec</title>
+  <updated>2023-05-23T23:58:45.031429+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-09-05 02:25:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BOLT Draft] Onion Routing Spec</title>
+    <updated>2023-05-23T23:58:45.031429+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-September/000604.html" rel="alternate"/>
+    <summary>In a discussion about the onion routing protocol, Christian Decker mentions that most of the spec is agreed upon, with some issues to be deferred till later. One of these issues is key-rotation policies. Rusty Russell responds with his thoughts on the costs of key-rotation. He makes some assumptions about using a single pubkey for a node's ID and a medium-scale public network with 250,000 nodes and 1 million channels, where every node knows the entire public network. He calculates that each node would have to keep 22.25MB of data, which includes 33 bytes for each node ID and another 8 bytes per channel to associate channels with IDs. In addition, he says that proofs are larger and require merkle proofs, pubkeys, and signatures of the ID using those pubkeys. This would take up an additional 800M per node for it to completely validate. To address this issue, Rusty suggests using a "comms" key for each node instead of its ID, and having nodes send out a new comms key signed by their ID. This would take up another 33 bytes per node or 8.25MB. To rotate a comms key, they would need the new key, a signature from the ID, and probably a timestamp. Rusty estimates this would take up 25.25MB, which he thinks is not too bad if they rotate daily but possibly problematic if done hourly.</summary>
+    <published>2016-09-05T02:25:22+00:00</published>
+  </entry>
+</feed>

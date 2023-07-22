@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Packaged Transaction Relay</title>
+  <updated>2023-05-22T20:27:37.539485+00:00</updated>
+  <author>
+    <name>eric at voskuil.org 2022-06-08 22:43:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Packaged Transaction Relay</title>
+    <updated>2023-05-22T20:27:37.539485+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-June/020544.html" rel="alternate"/>
+    <summary>In a bitcoin-dev discussion, the participants discussed the Package Relay Proposal for Bitcoin. The main objective of this proposal is to propagate transactions that are incentive-compatible to mine, even if they don't meet minimum feerate alone. However, this approach creates a set of problems without good solutions and is not a proper analogy to those atomic structures. The proposed packaged transaction relay model involves nodes packaging transactions that satisfy peer.feerate and operating over its transaction (input-&gt;output) DAG and the feerate of its own node and that of the peer. This model requires maintenance of a transaction DAG with tx.feerate on each tx to avoid dead-ending packages and a non-caching algorithm to chase each package external input to a confirmed tx.During the discussion, Suhas Daftuar pointed out that the topological rule in version 1 (v1) package relay may not always be useful because peers cannot always validate if a set of package transactions is fully sorted topologically. In response, Gloria Zhao explained why it would be impractical to use BIP 152 shortids to save bandwidth in package relay due to computational complexity and potential DoS and censorship vectors. She also agreed with Eric Voskuil's suggestion to remove fee and weight information from pkginfo.Anthony Towns raised concerns about dishonest peers announcing packages with false information. Eric Voskuil suggested providing the fee and weight when announcing the package rather than only being asked for its info. A fee-optimal node would accept the largest subgraph of the package that conforms to fee constraints and drop any peer that provides a package for which the full graph does not. They also discussed the possibility of encoding parent transactions as a short hash of the wtxid and including it in the inv announcement. However, there was concern about overhead. They also talked about adding versioning to individual protocols and the insufficiency of the initial protocol versioning design.The conversation highlights the challenges of optimizing package relay while minimizing complexity and maintaining network integrity. Overall, the discussion provided valuable insight into the technicalities of implementing the Package Relay Proposal for Bitcoin.</summary>
+    <published>2022-06-08T22:43:57+00:00</published>
+  </entry>
+</feed>

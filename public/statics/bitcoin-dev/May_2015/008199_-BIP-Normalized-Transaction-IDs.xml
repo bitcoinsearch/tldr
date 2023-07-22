@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP] Normalized Transaction IDs</title>
+  <updated>2023-06-09T20:57:39.419992+00:00</updated>
+  <author>
+    <name>Christian Decker 2015-05-19 10:43:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP] Normalized Transaction IDs</title>
+    <updated>2023-06-09T20:57:39.419992+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/008199.html" rel="alternate"/>
+    <summary>In a Bitcoin development mailing list, Christian Decker raises the concern of addressing BIP 34 and avoiding hashed transactions in different ways. Tier Nolan responds that normalized TXID cannot depend on height for other transactions as it would cause mutation when added to the chain. In the case of coinbase transactions, they want them to be dependent on the height they are included in. The height is proposed to be included in the scriptSig for all transactions, but for non-coinbase transactions, the height used is zero. Adding an extra field to the transaction just to include the height is not necessary. A rule can be added that the height specified in the scriptSig in coinbase transactions is copied into the locktime of the transaction before computing the normalized transaction ID, leaving the locktime untouched for all normal transactions. Nolan further suggests that the normalized txid could add the height to the txids of all inputs, whereas non-coinbase transactions would have heights of zero. The scriptSig in the coinbase is specifically intended to be "random" bytes/extra nonce, so putting a restriction on it was guaranteed to be backward compatible.</summary>
+    <published>2015-05-19T10:43:39+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+  <updated>2023-06-02T15:28:07.301080+00:00</updated>
+  <author>
+    <name>Bob McElrath 2018-12-02 15:08:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+    <updated>2023-06-02T15:28:07.301080+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-December/001703.html" rel="alternate"/>
+    <summary>The Lightning Network has been facing problems with the security model around Child Pays for Parent (CPFP) as it requires predicting or using CPFP and dependent transaction relay to broadcast low-feerate transactions. This issue has led to channel failures in practice, and it is difficult to prevent third parties from delaying the confirmation of the commitment transaction. The commitment transaction needs to be confirmed timely for HTLCs to not time out, and counterparties can claim the timeout-refund before HTLC can be claimed using the hash-preimage. To address this issue, Matt Corallo suggests tweaking Lightning's commitment transaction to have two small-value outputs that are immediately spendable, one by each channel participant, allowing them to chain children off without allowing unrelated third-parties to chain children.To achieve this, they need to make a small tweak to the anti-DoS CPFP rules in Bitcoin Core/BIP 125. The last transaction added to a package of dependent transactions in the mempool must have no more than one unconfirmed parent and be of size no greater than 1K in virtual size. For contracting applications like lightning, this means that as long as the transaction has only two immediately-spendable outputs, where each output is only spendable by one counterparty, and is no larger than MAX_PACKAGE_VIRTUAL_SIZE - 1001 Vsize, each counterparty will always be able to independently CPFP the transaction in question.Another alternative proposal is to mark transactions as "likely-to-be-RBF'ed," which could enable a relay policy where children of such transactions would be rejected unless the resulting package would be "near the top of the mempool." This would theoretically imply such attacks are not possible to pull off consistently. However, it is possible to execute this attack with low probability in case of feerate spikes right after broadcast.</summary>
+    <published>2018-12-02T15:08:39+00:00</published>
+  </entry>
+</feed>

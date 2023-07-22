@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>`OP_FOLD`: A Looping Construct For Bitcoin SCRIPT</title>
+  <updated>2023-06-15T17:21:12.808883+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2022-03-07 17:26:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>`OP_FOLD`: A Looping Construct For Bitcoin SCRIPT</title>
+    <updated>2023-06-15T17:21:12.808883+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020076.html" rel="alternate"/>
+    <summary>The context discusses the possibility of implementing a jet-like system in Bitcoin. The author presents three possibilities: A) implementing jets without requiring all nodes to upgrade, B) implementing lighter weighting by using a soft fork to hide jets from unupgraded nodes, and C) implementing jet registration in a soft fork. For case A, upgraded nodes would query connections for support of jets and send transactions verbatim with the jet included in the script to upgraded nodes that support it. For non-upgraded nodes, the jet opcode call would be replaced with some data that contains the original jet opcode to be swapped back in when the transaction data reaches an upgraded node. For case B, upgraded nodes would hide jets from unupgraded nodes by telling them that the script always succeeds and has weight 0. If a new jet is released but nobody else has upgraded, a user of a new jet has no security. For case C, after the initial soft fork, nodes could register jets that can take advantage of relay-cost weight savings without requiring any nodes to do any upgrading. In order to allow scripts to weigh less if they use a jet, upgraded nodes must hide them from unupgraded nodes, or else the weight calculations of unupgraded nodes will hit consensus checks. However, if the script does not weigh less if it uses a jet, there is no incentive for end-users to use a jet. Nonetheless, even if no end-users use a jet, full nodes could recognize jettable code and insert them automatically on transport. A lookup table for this could potentially be large once there are many jets, and jettable code could start at arbitrary offsets of the original script. The author proposes allowing anyone to add a new jet, which would require a consensus change to implement a mechanism that allows any jet to be registered in userspace. Afterward, each node can have its own policy to determine which registered jets it wants to keep an index of and use. This would be able to do the same kind of script compression as op_fold and inform what jets are worth building an optimized function for.</summary>
+    <published>2022-03-07T17:26:13+00:00</published>
+  </entry>
+</feed>

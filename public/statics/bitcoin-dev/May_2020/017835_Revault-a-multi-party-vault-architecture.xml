@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Revault: a multi-party vault architecture</title>
+  <updated>2023-06-14T01:01:41.611588+00:00</updated>
+  <author>
+    <name>darosior 2020-05-08 10:34:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Revault: a multi-party vault architecture</title>
+    <updated>2023-06-14T01:01:41.611588+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-May/017835.html" rel="alternate"/>
+    <summary>Revault is a new multiparty vault architecture designed to secure shared storage of coins without relying on a trusted third party and disincentivizing theft attempts while not restricting the usage of funds for day-to-day operations. The system uses pre-signed and revocable transactions, using N-of-N multisigs. This means it doesn't protect against intentional locking of funds, but assumes users to be able to solve blockage outside the Bitcoin network through legal contracts. Revault relies on six transaction types with N stakeholders: Vault Transaction, Emergency Transaction, Unvault Transaction, Unvault Emergency Transaction, Cancel Transaction, and Spend Transaction. The stakeholders exchange the signatures of all the revaulting transactions after receiving a new vault utxo and then exchange the signatures of the unvaulting transaction before doing so. Before that, the coins are not available to be spent. In order to avoid weak security assumptions, stakeholders exchange SINGLE | ANYONECANPAY signatures for the revaulting transactions and append their own as SIGHASH_ALL before broadcasting. They can add another input (and potentially output) to bump the fees before doing so. The protection from the bug is leveraged by the fact that revaulting transactions only have strictly one input and one output. The change being part of the spend transaction. Revaulting transactions may signal for RBF to cover a feerate increase after the broadcast. The fee bumping construction is potentially vulnerable to transaction pinning. Therefore, ALL | ANYONECANPAY signatures are now exchanged for revaulting transactions to restrict the creation of a new output only spendable by one party. The fee bumping is now done in two stages to avoid consuming an entire UTXO. If anything nasty happens, any stakeholder can trigger an emergency transaction at any point.</summary>
+    <published>2020-05-08T10:34:49+00:00</published>
+  </entry>
+</feed>

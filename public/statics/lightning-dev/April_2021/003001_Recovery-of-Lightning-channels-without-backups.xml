@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Recovery of Lightning channels without backups</title>
+  <updated>2023-06-03T03:15:57.125258+00:00</updated>
+  <author>
+    <name>Rusty Russell 2021-04-23 04:29:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Recovery of Lightning channels without backups</title>
+    <updated>2023-06-03T03:15:57.125258+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-April/003001.html" rel="alternate"/>
+    <summary>Rusty Russell, the developer of c-lightning, has shared his thoughts regarding a new channel establishment workflow and expressed concerns with its implementation. He believes that removing the ability to update a channel without access to the node's secret key is not ideal, as it is currently only needed for gossip and to DH to set up a new peer connection. The proposed method does not get rid of temporary_channel_id, and because a generation counter is required, it is not easily scannable.Russell proposes an alternative method, which involves using an encrypted blob served by peers, assuming that at least one peer is honest. Lloyd Fournier, another developer, suggests eliminating all "basepoints" using something like this, but Russell notes that signing the commitment_tx or htlc_tx would require knowing the node's secret key.While c-lightning currently requires a round-trip to the signing daemon to sign the commitment tx, Russell wants to avoid requiring this and added 'commit_basepoint' from which the other points are derived. Alternatively, he suggests leaving all the other points in and just replacing funding_pubkey. Fournier proposes an opt-in manner for the feature, but Russell notes that it would not work unless your peer does it too. The proposed method involves setting the `funding_pubkey` to a specified DH tweak of the nodeid. Nodes that want backup-free channel recovery can refuse to carry on the funding protocol if the `funding_pubkey` is not set the way it wanted. However, Russell notes that we expect everyone to want to do this, so it's clearer to force everyone to calculate this and not have redundant and confusing fields in the message.The funding composition for channel establishment v2 makes use of the Interactive Transaction Construction protocol, with additional caveats. The point derivation process involves deriving a shared secret, `SS`, using ECDH on two node ids, `N1` and `N2`. Tweaks `T` are then defined for each peer using `SHA256(SS || generation || node_id || name)`, where `generation` is the larger of the two `generation` fields from `open_channel2` and `accept_channel2`, `node_id` is the SEC1-encoded compressed public key of the peer, and `name` is a non-terminated ASCII string.The `funding_pubkey` is defined as the `node_id` added to G*T(`funding`) and the `delayed_payment_basepoint` is defined as `node_id` added to G*T(`delayed_payment`). The `htlc_basepoint` is defined as the `node_id` added to G*T(`htlc`). If the secret for `payment_basepoint` is derived in a similar manner, it too can be easily recovered from just the `generation`, node key, and peer `node_id`. However, it may also point to an address for a completely separate system, such as cold storage, so it is specified explicitly in the protocol.The `tx_add_input` message is also discussed in the context, but no further information is provided.</summary>
+    <published>2021-04-23T04:29:30+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 158 Flexibility and Filter Size</title>
+  <updated>2023-06-13T02:28:00.061931+00:00</updated>
+  <author>
+    <name>Conner Fromknecht 2018-05-24 01:04:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 158 Flexibility and Filter Size</title>
+    <updated>2023-06-13T02:28:00.061931+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/016018.html" rel="alternate"/>
+    <summary>In a Bitcoin-dev mailing list, Jim Posen presented some results of checking filter sizes for each of the sub-filters. The results showed that if you look at the ratio of the combined size of the separated filters vs the size of a filter containing all of them (currently known as the basic filter), they are pretty much the same size. The mean of the ratio between them after block 150,000 is 99.4%. This made Conner concerned about splitting up the filters, which might be at odds with the other goal of the proposal in offering improved privacy. Allowing clients to choose individual filter sets trivially exposes the type of data that client is interested in, which alone might be enough to fingerprint the function of a peer and reduce anonymity set justifying their potential behavior. Furthermore, if a match is encountered, and block requested, full nodes have more targeted insight into what caused a particular match. They could infer that the client received funds in a particular block, e.g., if they are only requesting output scripts.  Conner agrees that saving on bandwidth is an important goal, but bandwidth and privacy are always seemingly at odds. He states that strictly comparing the bandwidth requirements of a system that heavily weighs privacy to existing ones, e.g. BIP39, that don't is a losing battle IMO. Conner is not fundamentally opposed to splitting the filters, but he wants to ensure they are considering the second order effects that fall out of optimizing for one metric when others exist. Jim Posen suggests constructing entirely separate filters for the different types of elements and allowing clients to download only the ones they care about. If there are enough elements per filter, the compression ratio shouldn't be much worse by splitting them up. This prevents the exponential blowup in the number of filters that was mentioned before and it works nicely with service bits for advertising different filter types independently. Therefore, three separate filter types were created: one for output scripts, one for input outpoints, and one for TXIDs, each signaled with a separate service bit. There is a question of whether to separate or combine the headers. Jim leans towards keeping them separate because it's simpler that way.  Gregory Maxwell wants a graph of input-scripts instead of input outpoints.</summary>
+    <published>2018-05-24T01:04:34+00:00</published>
+  </entry>
+</feed>

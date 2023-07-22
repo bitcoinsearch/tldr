@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Yesterday's Taproot activation meeting on lockinontimeout (LOT)</title>
+  <updated>2023-06-14T17:56:09.811236+00:00</updated>
+  <author>
+    <name>Ariel Lorenzo-Luaces 2021-02-20 17:20:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Yesterday's Taproot activation meeting on lockinontimeout (LOT)</title>
+    <updated>2023-06-14T17:56:09.811236+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018456.html" rel="alternate"/>
+    <summary>On the Bitcoin-dev mailing list, a discussion was held regarding the tradeoffs of implementing a BIP8(false, ∞) option. Bitcoin Core does not have infrastructure to handle switching consensus rules with the same datadir, meaning that additional development would need to occur to enable switching back to uasf=false. However, this can be worked around by maintaining two `datadir`s and running two clients. One "external" client can run an LOT=X (where X is whatever the user prefers) and an "internal" client that is at most 0.21.0, which will not impose any LOT rules. The internal client then uses `connect=` directive to connect locally to the external client and connects only to that client, using it as a firewall. The general idea came from gmax, but the below use is from ZmnSCPxj.If Taproot is not MASF-activated and LOT=!U is what dominates later, the user can decide to just destroy the external node and connect the internal node directly to the network (optionally upgrading the internal node to LOT=!U) as a way to "change their mind in view of the economy". The internal node will then follow the dominant chain. Instead of treating the option as a separate chain, the only practical way to ship such an option would be to treat it as a separate chain (the same way regtest, testnet, and signet are treated), including its own separate datadir.However, Bitcoin Core has a long-standing policy of not shipping options which shoot yourself in the foot. Developers recommend courses of action which they believe have reasonable levels of consensus and are technically sound. There is strong historical precedent for people deciding to run other software around forks, so misinterpretation is not very common. The work Bitcoin Core maintainers and developers do is to recommend courses of action which they believe have reasonable levels of consensus and are technically sound.</summary>
+    <published>2021-02-20T17:20:27+00:00</published>
+  </entry>
+</feed>

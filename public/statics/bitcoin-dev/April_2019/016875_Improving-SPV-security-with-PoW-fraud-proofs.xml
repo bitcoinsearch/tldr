@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving SPV security with PoW fraud proofs</title>
+  <updated>2023-06-13T18:19:35.372813+00:00</updated>
+  <author>
+    <name>Ethan Heilman 2019-04-18 20:12:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving SPV security with PoW fraud proofs</title>
+    <updated>2023-06-13T18:19:35.372813+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-April/016875.html" rel="alternate"/>
+    <summary>The Simplified-Payment-Verification (SPV) is secure under the assumption that the chain with the most Proof-of-Work (PoW) is valid. However, many have pointed out that this is not a safe assumption and attacks like Segwit2x have shown this. A proposed solution to improve this assumption is suggested by Ruben Somsen via bitcoin-dev. The idea is that a fork is an indication of potential misbehavior -- its block header can serve as a PoW fraud proof. Conversely, the lack of a fork is an indication that a block is valid. If a fork is created from a block at height N, this means a subset of miners may disagree on the validity of block N+1. If SPV clients download and verify this block, they can judge for themselves whether or not the chain should be rejected. Of course, it could simply be a natural fork, in which case, we continue following the chain with the most PoW. It is impossible to verify the validity of block N+1 without knowing the Unspent Transaction Output (UTXO) set at block N, even if you are willing to assume that block N (and everything before it) is valid. This would change with the introduction of UTXO set commitments, allowing block N+1 to be validated by verifying whether its inputs are present in the UTXO set that was committed to in block N.An open question is whether a similar result can be achieved without a soft fork that commits to the UTXO set. If an invalid block is created and only 10% of the miners are honest, on average, it would take 100 minutes for a valid block to appear. During this time, the SPV client will follow the invalid chain and see roughly nine confirmations before the chain gets rejected. It may, therefore, be prudent to wait for a number of confirmations that corresponds to the time it may take for the conservative percentage of miners that you think may behave honestly to create a block (including variance).However, if a minority miner wants to disrupt the network, they could simply create a valid block at block N+1 and deliberately ignore every other valid block at N+1, N+2, N+3, etc. that it did not create itself. If this minority miner has greater than 10% of network hash rate, then the rule of thumb above would, on average, give it the ability to disrupt the SPV-using network. It is helpful to consider that every rule imposed is potentially a loophole by which a new attack is possible.</summary>
+    <published>2019-04-18T20:12:20+00:00</published>
+  </entry>
+</feed>

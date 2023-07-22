@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>On the optimal block size and why transaction fees are 8 times too low (or transactions 8 times too big)</title>
+  <updated>2023-05-19T17:49:53.323823+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2013-11-07 15:00:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>On the optimal block size and why transaction fees are 8 times too low (or transactions 8 times too big)</title>
+    <updated>2023-05-19T17:49:53.323823+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-November/003617.html" rel="alternate"/>
+    <summary>In a Bitcoin development mailing list, Michael Gronager discussed the possibility of proper estimates of transaction fee size and optimal block size. Gronager used an article on block propagation by Decker et al. to determine that the propagation of a block depends on and is roughly proportional to its size. The slower a block propagates, the higher the risk of a fork, so miners are juggling the risk of a fork vs the opportunity for including more transactions and hence also getting those fees. Gronager simplified the work by Decker et al. and used several equations to calculate the expected average earning. He concluded that the current fee was too small and that there is no need to keep a maximum block size, as the fork probability will automatically provide an incentive to not let block grows into infinity. Gronager suggested two ways forward from here: raise the minimum fee or make transactions smaller. Switching to broadcasting transactions in blocks as only their hash would decouple fee size from transaction size. Gronager determined that the current optimal block size is an empty block, meaning without other transactions than the coinbase. The current optimal transaction fee size should be 0.00076 or assuming a standard transaction size of 0.227kb, f_tx &gt; 0.00076. Gronager further indicated that if they implement the change and raise the minimum fee to 0.00015, the optimal block size (dE/dS = 0) would be 1083kb for a bounty of 25 and 2417kb for a bounty of 12.5. Optimal size in case of no bounty or an infinite fee is 3750MB. Finally, Gronager noted that calculations should be done using the proper integrals and simulations, but he would leave that for academia.</summary>
+    <published>2013-11-07T15:00:01+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>How to exchange of Revocation preimage atomically ?</title>
+  <updated>2023-05-23T21:41:04.788702+00:00</updated>
+  <author>
+    <name>Tadge Dryja 2015-11-24 03:14:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>How to exchange of Revocation preimage atomically ?</title>
+    <updated>2023-05-23T21:41:04.788702+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000335.html" rel="alternate"/>
+    <summary>In the context, Nicolas Dorier asked about a potential attack in the Lightning Network where both parties must revoke their previous transaction states and share their revocations but someone has to go first. Tadge replied that there's not really an attack since every update of a channel state has an initiator. All the payments are "push" payments; if Alice wants to allocate more to Bob, she initiates, and if Bob wants to allocate more to Alice, he initiates. With revocations, the user initiating the channel state change goes first. It is not atomic so the payer goes first. In the case where Alice sends more coin to Bob, Alice signs new state, sends half signed tx to Bob. Bob signs new state, sends half signed tx to Alice. Alice revokes old state by sending preimage to Bob. Bob revokes old state by sending preimage to Alice. If Bob fails to perform the last step, the payment can be considered to not have gone through. But Bob doesn't have much motivation to fail there. He can leave the channel in an indeterminate state by failing to revoke with Alice, but that indeterminate state is worse for him than a fully determined state where he has more money.</summary>
+    <published>2015-11-24T03:14:16+00:00</published>
+  </entry>
+</feed>

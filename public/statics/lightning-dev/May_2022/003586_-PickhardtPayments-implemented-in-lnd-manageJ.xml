@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>#PickhardtPayments implemented in lnd-manageJ</title>
+  <updated>2023-06-03T08:42:11.199933+00:00</updated>
+  <author>
+    <name>Carsten Otto 2022-05-17 10:46:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>#PickhardtPayments implemented in lnd-manageJ</title>
+    <updated>2023-06-03T08:42:11.199933+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-May/003586.html" rel="alternate"/>
+    <summary>The latest version of lnd-manageJ now includes channels that charge a base fee. The worst-case scenario is assumed to make this work, whereby the smallest possible amount is used and the fee rate for route computation is adjusted accordingly. With default settings (quantization 10,000sat), channels charging a base fee of Xsat and a fee rate of Yppm are considered with a virtual fee rate of (Y+X*100)ppm. This penalty is linear in the quantization amount.A Dockerfile has been added by the developer to help with experiments, which requires a patched lnd. Users can tweak the lnd-manageJ.conf and review available options on GitHub. However, to avoid TLS issues with gRPC, users need to use "--network host" if they run lnd on localhost. PostgreSQL is booted on the default port 5432, so users should ensure it is available and not in use by their host. Route/hop hints provided in payment requests are now considered, so private/virtual channels are used for the route computation. This only works for "route hints" containing a single hop. Each "hint" channel is added with a capacity of 50 BTC, and the algorithm believes that 100% of that is available. The known liquidity is not displayed in the streaming NDJSON output received via HTTP, but is just a display issue that does not affect the route computation. Users are advised to issue a test payment before measuring the time it takes to send out any real payment, as lnd-manageJ needs to request the LN graph from lnd, which takes a few seconds. The graph is cached for up to two minutes and refreshed before it times out.</summary>
+    <published>2022-05-17T10:46:08+00:00</published>
+  </entry>
+</feed>

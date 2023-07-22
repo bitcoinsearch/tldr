@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Acknowledgements in BOLT #2</title>
+  <updated>2023-05-23T23:23:30.925732+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-04-04 02:04:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Acknowledgements in BOLT #2</title>
+    <updated>2023-05-23T23:23:30.925732+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-April/000512.html" rel="alternate"/>
+    <summary>The discussion revolves around the introduction of htlc ids in Rusty, which uses 64-bit unique identifiers for HTLCs instead of relative "order-I-added-them-in" ids. This change is necessary to distinguish two HTLCs with the same R value, and if an attacker tries to probe, it will be easier to find out if they have seen an HTLC. The use of keypair-based contracts will also simplify the process. There are different levels at which cases can be handled, but using the acknowledge field may not be optimal as it could lead to redundancy, while using the HTLC id at the protocol level would make more sense. At the transport level, the acknowledge field can still be relied upon to determine which messages should be replayed. Additionally, the even/odd differentiation of htlc ids is used to quickly determine the direction of a given htlc, and this helps to catch bugs. The latest spec leaves this open, but the current implementation uses a different number from other nodes, making it easier to eyeball.</summary>
+    <published>2016-04-04T02:04:34+00:00</published>
+  </entry>
+</feed>

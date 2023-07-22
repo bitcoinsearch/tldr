@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>BIP Number request for a simple payjoin proposal</title>
+  <updated>2023-05-20T23:20:29.614658+00:00</updated>
+  <author>
+    <name>Nicolas Dorier 2020-05-16 19:46:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>BIP Number request for a simple payjoin proposal</title>
+    <updated>2023-05-20T23:20:29.614658+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-May/017878.html" rel="alternate"/>
+    <summary>The payjoin proposal is a method to enhance the privacy of Bitcoin transactions. It involves two parties cooperatively constructing a Bitcoin transaction, which makes it difficult for blockchain analysis to identify them. This proposal also solves the privacy issues caused by common-input, change-scriptpubkey, and change-round-amount heuristics.The sender creates a signed, finalized PSBT with witness UTXO or previous transactions of inputs, and the receiver replies with a signed PSBT containing their own signed inputs/outputs and those of the sender. The sender verifies the proposal, re-signs inputs, and broadcasts the transaction to the Bitcoin network. This proposal allows the receiver to consolidate their UTXOs while also batching their payments without creating a new transaction. It invalidates the three heuristics mentioned above, thus improving the privacy of parties who are not using it by making the three heuristics unreliable to the network as a whole. The proposed protocol is already being implemented by several services and wallets and incorporates feedback from the community. It is related to BIP79 (Bustapay), but the authors decided to deviate from it for several reasons.The errors that may occur in the protocol have been listed, and all responses must contain the HTTP header Access-Control-Allow-Origin: *. The validation of the original transaction is optional, allowing non-interactive receivers like Wasabi Wallet to still receive payjoin transactions. Furthermore, small change inside wallets can compromise privacy, but donating those spare changes through payjoin can help make such transactions appear normal.The receiver has the freedom to change the output paying to themselves, which can impact certain blockchain heuristics. However, to prevent malicious attacks, the receiver is allowed to return implementation-specific errors that may assist the sender to diagnose any issue. The sender should check the payjoin proposal before signing it to prevent a malicious receiver from stealing money. There are potential attack vectors to consider, such as UTXO probing attacks on the receiver's side and double payment risks for hardware wallets on the sender's side.Several implementations of payjoin are already underway, including in BlueWallet, BTCPay Server, Wasabi Wallet, and Join Market. The development of payjoin was made possible thanks to the feedback and contributions of various individuals and groups in the Bitcoin community.</summary>
+    <published>2020-05-16T19:46:35+00:00</published>
+  </entry>
+</feed>

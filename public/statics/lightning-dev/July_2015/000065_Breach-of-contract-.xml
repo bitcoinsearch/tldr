@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Breach of contract?</title>
+  <updated>2023-05-23T18:41:22.529667+00:00</updated>
+  <author>
+    <name>Joseph Poon 2015-07-26 14:57:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Breach of contract?</title>
+    <updated>2023-05-23T18:41:22.529667+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-July/000065.html" rel="alternate"/>
+    <summary>In an email conversation, Christopher Jamthagen expresses concern over the design of HTLCs and how they can be invalidated. According to a whitepaper, if three days have elapsed, the clearing process is invalidated and both parties must not attempt to settle or claim payment after three days. However, there is nothing stopping Bob from taking the HTLC output when Alice is forced to broadcast the commitment transaction, even if it is supposed to be null and void. Joseph Poon responds by explaining that the design of HTLCs has a contestation period built-in where the party broadcasting the Commitment Transaction must wait before the payment goes back to themselves. He also mentions the implications of Rusty's dual anchor/funding version which requires both OP_CLTV and OP_CSV. Furthermore, using OP_CSV for HTLC without a transaction chained two levels deep will require greater time delay between each hop in the payment to account for the relative time it takes to prove whether the Commitment has been revoked. This increased time creates a tradeoff where each channel participant (for every hop) must watch the blockchain at a more frequent interval as the OP_CSV value is linked to the payment. On the other hand, with a SIGHASH_NOINPUT (or similar) model having transactions two-deep, this contestation period can be independent of the actual HTLC payments. In effect, the first transaction spending from the HTLC validates whether the preimages are known, the second is whether the Commitment itself is invalidated. With separated anchor/funding, those two steps are combined inside the Commitment Transaction.</summary>
+    <published>2015-07-26T14:57:53+00:00</published>
+  </entry>
+</feed>

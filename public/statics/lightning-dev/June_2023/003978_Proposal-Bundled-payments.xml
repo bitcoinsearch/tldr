@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Bundled payments</title>
+  <updated>2023-07-14T02:59:44.919903+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2023-06-14 02:56:54+00:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Bundled payments</title>
+    <updated>2023-07-14T02:59:44.919950+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-June/003978.html" rel="alternate"/>
+    <summary>In a proposal by Thomas Voegtlin, an extension to BOLT-11 is suggested to include two bundled payments with distinct preimages and amounts in an invoice. This proposal addresses the use case of services that require prepayment of a mining fee for non-custodial exchanges, such as submarine swaps and JIT channels. These services receive HTLCs for which they do not have the preimage and need to send funds on-chain, waiting for the client to reveal the preimage when claiming payment.Currently, some services can ask for prepayment due to their dedicated client software's ability to handle it. However, competitors like Boltz exchange that do not require a dedicated wallet find it impractical to show two invoices simultaneously to users whose wallets are agnostic about the swap. This vulnerability exposes Boltz to DoS attacks where attackers force them to pay on-chain fees.Similarly, providers of JIT channels who want to protect themselves against mining fee attacks need to ask for the preimage of the main payment before opening the channel. However, this makes their service custodian, subject to legal regulations like the European MICA regulation. Competitors like Electrum, who refuse to offer custodian services, are excluded from this game.To address these issues, Voegtlin proposes bundling the prepayment and main payment in the same BOLT-11 invoice. The semantics of bundled payments involve waiting for all HTLCs of both payments to arrive before fulfilling the HTLCs of the prepayment. If the main payment fails to arrive, the pre-payment is failed with a MPP timeout. Once all HTLCs have arrived, the receiver fulfills the HTLCs of the prepayment and broadcasts the on-chain transaction.Voegtlin acknowledges that this proposal does not prevent service providers from stealing the prepayment but emphasizes that this risk already exists. Implementing this change in BOLT-11 would level the playing field for competition between lightning service providers. It would allow competitors without an established user base running a dedicated client to be protected from mining fee attacks. ACINQ, in particular, could benefit by making their pay-to-open service fully non-custodial and avoiding potential regulatory issues.Voegtlin suggests implementing this change in BOLT-11 rather than using BOLT-12 or onion messages, as it does not require the exchange of new messages and can be done in a non-interactive way.</summary>
+    <published>2023-06-14T02:56:54+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-06-03T00:45:39.469384+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-04-22 06:08:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-06-03T00:45:39.469384+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002643.html" rel="alternate"/>
+    <summary>The context discusses the vulnerability of HTLC funds to a lightning counterparty, who can steal the funds by broadcasting a low-fee transaction using the preimage. Party A can then claim the HTLC from party B via the timeout mechanism, and after a few days, party C can get the HTLC-claiming transaction mined via an out-of-band agreement with a small miner.To prevent this scenario, the email suggests adding an RBF carve-out output to HTLC-Timeout or using SIGHASH_NOINPUT for C-side signature. This allows B to re-sign the B-side signature for a higher-fee version of HTLC-Timeout, exponentially increasing the fee as L+1 approaches. If B can get HTLC-Timeout confirmed before L+1, then C cannot steal the HTLC value at all since the UTXO it could steal from has already been spent. However, if C bribes a miner to prevent HTLC-Timeout from confirming between L and L+1, it becomes a censorship attack.The email also discusses the issue of a bidding war between parties C and B in regards to censorship and confirmation of transactions by miners. It highlights that this creates a disadvantage for party C as they must continuously bribe miners to censor from L to L+1 and confirm their transaction after L+1, while party B can offer their bribe as something miners can claim immediately without waiting.The email suggests that the issue of additional output that bloats the UTXO set and requires another transaction to claim later can be sidestepped with `SIGHASH_NOINPUT`. Furthermore, the email proposes upgrading a Poon-Dryja channel to a Decker-Russell-Osuntokun channel without onchain activity, which would allow HTLCs to sidestep the previously mentioned issue.Overall, the email was sent to the bitcoin-dev mailing list and is signed by ZmnSCPxj.</summary>
+    <published>2020-04-22T06:08:06+00:00</published>
+  </entry>
+</feed>

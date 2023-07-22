@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Consensus-enforced transaction replacement via sequence numbers</title>
+  <updated>2023-06-09T21:39:46.793875+00:00</updated>
+  <author>
+    <name>s7r 2015-05-28 16:22:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Consensus-enforced transaction replacement via sequence numbers</title>
+    <updated>2023-06-09T21:39:46.793875+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/008322.html" rel="alternate"/>
+    <summary>The discussion between Tier Nolan and Peter Todd on the Bitcoin-development mailing list revolves around a proposal to change the 4-byte field in Bitcoin transactions. Peter Todd suggests treating this change as a feature flag rather than a version change, but Tier Nolan believes it is still a version change because the 4 bytes currently refer to the sequence number while they would mean something else after the proposed change. The proposed change would allow for relative locktime verification, which could be block count-based and doesn't need to count very high. The main benefit of this change is that protocols can have one party trigger a step while giving the other party guaranteed time to respond. The discussion then turns to the concept of Fast Channel Close, assuming malleability is fixed. Alice creates a transaction (TXA) and sends it to Bob, who signs it and sends it back to Alice. If the channel is closed, Alice is the only one who can take the coins back after a relative locktime of 150 blocks. Bob is not able to do this. However, if Alice sends some money to Bob, he has 150 blocks to sign the transaction that pays him the most money and broadcast it, after which Alice gets the remainder of the deposit.The proposal also allows Alice to send money to Bob by creating a transaction which spends the output of the refund transaction, splitting the output x-b for Alice and b for Bob. Alice can force Bob to close the channel by broadcasting the refund transaction, and if Bob doesn't act, Alice gets the channel deposit 150 blocks later. However, if Alice sends Bob a transaction that spends the output of the refund transaction and gives it to Bob, he can claim his slice of the output without necessarily shipping the goods or delivering the services to Alice. The proposal eliminates the need for a defined end date for the channel, allowing either party to close the channel whenever they want, but with some risks involved. The proposed change could also protect TXA against malleability by adding a locktime path, but it's unclear how to apply a locktime path to a transaction in the current network consensus.</summary>
+    <published>2015-05-28T16:22:46+00:00</published>
+  </entry>
+</feed>

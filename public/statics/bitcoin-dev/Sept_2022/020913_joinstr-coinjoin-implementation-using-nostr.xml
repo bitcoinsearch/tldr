@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>joinstr: coinjoin implementation using nostr</title>
+  <updated>2023-06-15T23:51:02.827808+00:00</updated>
+  <author>
+    <name>alicexbt 2022-09-10 10:17:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>joinstr: coinjoin implementation using nostr</title>
+    <updated>2023-06-15T23:51:02.827808+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-September/020913.html" rel="alternate"/>
+    <summary>A developer named alicexbt has created a proof-of-concept python script to implement coinjoin using nostr, which is a decentralized network based on cryptographic keypairs. This implementation uses several Bitcoin Core wallet and RPCs such as `listunspent`, `getnewaddress`, `scantxoutset`, `createpsbt`, `combinepsbt`, `finalizepsbt` and `sendrawtransaction`. The python-nostr library is required since coordination between peers is done using nostr. The process involves 5 peers coordinating to create, sign, and broadcast a coinjoin transaction. Every step of the process is published as an event using a nostr relay, and users can use multiple relays simultaneously to avoid trusting a single relay. If a relay attempts to cheat, users will not sign the transaction and avoid using it in the future. However, there is a vulnerability of denial of service that exists in the implementation. A malicious user can register multiple outputs with the same secret, causing an ongoing free denial of service attack without attribution or defense.To address this issue, PR #24058 (basic support BIP-322) can be implemented to add proof of ownership. Instead of clients sending descriptors to the relay and then verifying them using `scantxoutset`, they can send `txid:out` with a message signed with the address, verify using `verifymessage`, and then use `gettxout` to retrieve the value. That way, only the owner can send the UTXO.The cryptographic scheme mentioned as an alternative to blind signatures isn't implemented yet, as it requires a NIP and at least one relay using it. The author plans to continue developing coinjoin transactions on signet for a few weeks until there is a stable release with no bugs. Custom relays are supported by Nostr, examples include paying a fee to register for a round, subscribing with a time limit, or using invite-only relays. The author will run a free and open nostr relay for this project and try to fix the Dos issues before a mainnet version is released for python script (for nerds) and android app (for all users).The email is sent using Proton Mail secure email, and the author invites opinions on the experiment. The context provides the mailing list details for Bitcoin-dev. The author credits Fiatjaf, Andrew Chow, Jeff Thibault, and existing coinjoin implementations for their contributions. Finally, the given context contains two event IDs and a Coinjoin transaction ID, and the author mentions the creation of an Android app for joinstr next week.</summary>
+    <published>2022-09-10T10:17:37+00:00</published>
+  </entry>
+</feed>

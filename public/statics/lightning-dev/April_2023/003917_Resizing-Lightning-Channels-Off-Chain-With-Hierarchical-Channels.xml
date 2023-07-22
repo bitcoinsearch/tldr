@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Resizing Lightning Channels Off-Chain With Hierarchical Channels</title>
+  <updated>2023-06-03T12:20:22.087221+00:00</updated>
+  <author>
+    <name>jlspc 2023-04-28 15:57:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Resizing Lightning Channels Off-Chain With Hierarchical Channels</title>
+    <updated>2023-06-03T12:20:22.087221+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-April/003917.html" rel="alternate"/>
+    <summary>The discussion revolves around the Lightning Network (LN) paper, which proposes routing to a "channel" instead of a node. The terms user, node, channel, and party are defined, and an alternative term "routing node" is proposed for entities in the routing network. Logical Channel is defined as a layer 2 construct consisting of all physical channels owned by a specific pair of parties. It is proposed to write a BOLT/BLIP for routing a payment through a logical channel where the payment traverses multiple physical channels at the same time.The rebalancing channels are not considered useful for routing payments as they require three or more signatures and may not be publicly connected to any of the level-1 nodes. However, there are reasons for wanting to include multi-user parties when making regular LN payments. To connect the level-2 routing nodes with the level-1 routing nodes, at least some channels that consist of a multi-user party and a single-user party are required. Hierarchical channels are believed to solve the problem of resizing channels off-chain, but it's noted that it may be harder in practice than in theory.The hierarchical channels paper proposes using active HTLCs funded by resolved (successful or failed) HTLCs. This allows for the same capital to be used for routing at two different levels in the hierarchy simultaneously, potentially doubling the routing fees generated from a given unit of capital and enabling off-chain rebalancing. The challenge is making this work atomically, which can be addressed by defining states for each step in the process. There are several details that need to be addressed in the hierarchical channel protocol, such as determining the payee for an HTLC when paying to a lower-level HTLC and defining a secret for PTLCs that depends on multiple potential payees' secrets.Despite the complexity, the potential benefits of using active HTLCs funded by a pair of active HTLCs make it a compelling idea worth exploring further. The speaker believes that talking about hierarchical/factory things in advance of when they could reasonably be implemented is fun. It is hoped that a good understanding of what is possible without changing Bitcoin, plus what's enabled with changes like CTV and/or APO, will help inform any future changes to Bitcoin's consensus rules.</summary>
+    <published>2023-04-28T15:57:57+00:00</published>
+  </entry>
+</feed>

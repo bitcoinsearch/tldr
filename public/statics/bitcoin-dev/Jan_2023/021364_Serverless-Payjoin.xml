@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Serverless Payjoin</title>
+  <updated>2023-05-22T23:23:57.442503+00:00</updated>
+  <author>
+    <name>Dan Gould 2023-01-22 20:50:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Serverless Payjoin</title>
+    <updated>2023-05-22T23:23:57.442503+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-January/021364.html" rel="alternate"/>
+    <summary>Dan Gould has published a payjoin upgrade that allows the payjoin receiver to receive bitcoin transfers without running a public server. Instead, this new scheme uses a TURN relay for connectivity and symmetric cryptography for security. The recipient requests that the relay allocate them an endpoint at which they may be reached by UDP. They then generate a 256-bit key, psk. Out of band, they share a BIP 21 payjoin uri including their unique relay allocation endpoint in the pj query parameter and psk in a new psk query parameter. The sender constructs their request containing an original PSBT as in BIP 78, and they follow the noise framework NNpsk0 pattern instead of TLS or Tor. The resulting ciphertext ensures message secrecy and integrity when relayed to the recipient by the pj endpoint. This work raises a greater problem which is that payjoin assumes synchronous communication while it’s an asynchronous world. It may be possible for a relay to hold a request for an offline payjoin peer until that peer comes online. However, the BIP 78 spec recommends broadcasting request PSBTs in the case of an offline counterparty. Doing so exposes a naïve, surveillance-vulnerable transaction which payjoin intends to avoid. More research needs to be done before such a protocol can be recommended.Since TURN relays can be used for any kind of internet traffic, they are vulnerable to the tragedy of the commons. Relay operators may impose authentication requirements for endpoint allocation provisions. Peers will only see the IP address of the TURN relay but not their peer's. TURN relays may be made available via Tor hidden service in addition to IP to allow either of the peers to protect their IP with Tor without forcing the other to use it too.Dan Gould has published working proof-of-concept sender, receiver clients, and relay code in Rust. The GitHub link to the full write-up is provided for more details and improved formatting.</summary>
+    <published>2023-01-22T20:50:44+00:00</published>
+  </entry>
+</feed>

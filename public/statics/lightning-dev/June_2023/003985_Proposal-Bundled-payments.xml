@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Bundled payments</title>
+  <updated>2023-07-14T03:00:00.290048+00:00</updated>
+  <author>
+    <name>David A. Harding 2023-06-19 20:29:34+00:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Bundled payments</title>
+    <updated>2023-07-14T03:00:00.290075+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-June/003985.html" rel="alternate"/>
+    <summary>In an email conversation between Thomas Voegtlin and Dave, the topic of bundled payments and the semantics of BOLT-11 invoices is discussed. Voegtlin explains that the BOLT-11 invoice for bundled payments contains two preimages and two amounts: a prepayment and a main payment. He further explains that the receiver should wait for all the HTLCs (Hash Time-Locked Contracts) of both payments to arrive before fulfilling the HTLCs of the pre-payment. If the main payment does not arrive, the receiver should fail the pre-payment with a MPP (Multi-Path Payments) timeout. Once the HTLCs of both payments have arrived, the receiver can fulfill the HTLCs of the prepayment and broadcast their on-chain transaction. However, Voegtlin notes that the main payment can still fail if the sender never reveals the preimage of the main payment.Dave then asks if it is necessary for a BOLT11 invoice to contain a payment hash for the prepayment, or if it would be acceptable to use a keysend payment with an onion message payload indicating what payment hash to associate with the prepayment. He provides an example where Alice wants to receive 1 BTC to a specific hash with a prepayment of 10k sats. The 10k sats would be sent via keysend with metadata indicating that the receiver shouldn't claim it until they receive the 1 BTC HTLC to the specified hash.Dave suggests extending BOLT11 invoices with an extra_fee_via_keysend field, which would make the invoice smaller. He also mentions that this field could be encoded in an existing BOLT11 field like the description or the metadata field. This would allow for immediate implementation until an updated version of BOLT11 or an alternative using offers becomes widely deployed.The email exchange provides insights into the semantics of bundled payments and discusses a possible modification to BOLT11 invoices to accommodate keysend payments and associated payment hashes.</summary>
+    <published>2023-06-19T20:29:34+00:00</published>
+  </entry>
+</feed>

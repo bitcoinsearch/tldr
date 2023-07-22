@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Extension block proposal by Jeffrey et al</title>
+  <updated>2023-06-11T23:34:14.680379+00:00</updated>
+  <author>
+    <name>Luke Dashjr 2017-04-04 18:03:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Extension block proposal by Jeffrey et al</title>
+    <updated>2023-06-11T23:34:14.680379+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/013981.html" rel="alternate"/>
+    <summary>A work-in-progress extension block proposal by Christopher Jeffrey, Joseph Poon, Fedor Indutny, and Steven Pair has been reviewed, even though it hasn't been formally posted on the ML yet. The proposal is available on Github at https://github.com/tothemoon-org/extension-blocks. Extension blocks create additional technical debt and complexity in comparison to both BIP 141 and hard forks without offering any actual benefits beyond them. Hard forks can provide the same benefits of an extension block, but without the false expectation and pointless complexity. Extension blocks are a risk of creating two classes of "full nodes": those which verify the full block (and are therefore truly full nodes), and those which only verify the "base" block. However, because the extension is consensus-critical, the latter are in fact not full nodes at all, and are left insecure like pseudo-SPV nodes. The WIP has several problems and questions that need addressing, including breaking the ability to spend unconfirmed funds, having no commitment to the extension block's transaction count cryptographically, the maximum extension size being intentionally high, and why output script code aside from witness programs, p2pkh or p2sh is considered invalid in extension blocks. BIPs must be in MediaWiki format, not Markdown, and should be submitted for discussion to the bitcoin-dev mailing list, not social media and news. Extension blocks seem more of a hard-fork than a soft-fork. BIPs may not be "public domain" due to non-recognition in some jurisdictions. Extension blocks leverage several features of BIP141, BIP143, and BIP144 for transaction opt-in, serialization, verification, and network services, and as such, extension block activation entails BIP141 activation. Extension blocks should be compatible with BIP 141, there doesn’t appear to be any justification for not making them compatible. Transactions within the extended transaction vector may include a witness vector using BIP141 transaction serialization. Note that canonical blocks containing entering outputs MUST contain an extension block commitment (all zeroes if nothing is present in the extension block). A consensus dust threshold is now enforced within the extension block.</summary>
+    <published>2017-04-04T18:03:56+00:00</published>
+  </entry>
+</feed>

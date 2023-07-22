@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Quick analysis of channel_update data</title>
+  <updated>2023-06-02T16:47:31.877483+00:00</updated>
+  <author>
+    <name>Fabrice Drouin 2019-02-18 15:34:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Quick analysis of channel_update data</title>
+    <updated>2023-06-02T16:47:31.877483+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-February/001874.html" rel="alternate"/>
+    <summary>In a recent email exchange, Rusty Russell and Fabrice Drouin discussed the issue of channel update traffic on their Lightning Network. Based on daily backups of routing tables over the last two weeks, nearly all channels get at least one new update every day, meaning that channel_update traffic is not primarily caused by nodes publishing new updates when channels are about to become stale. Instead, it could be caused by "flapping" channels, probably because the hosts that are hosting them are not reliable (as in often offline). Heuristics can be used to improve traffic but it's orthogonal to the problem of improving the current sync protocol. However, reducing gossip traffic using the checksum extension still significantly reduces it. Russell also presented some statistics from his snapshot of the gossip store from two weeks back. The majority of updates he saw two weeks ago were actually refreshes, not spam. He proposed getting even more conservative with flapping (120-second delay if they've just sent an update) and slowing down refreshes to every 12 days instead of seven. This would only cause a marginal change as the majority of updates are actually refreshes. If users have opened channels to unreliable nodes, then they should eventually close these channels, but delaying how they publish updates that disable/enable them has an impact on everyone, especially if they mostly send payments (as opposed to relaying or receiving them). Finally, Fabrice mentioned that this issue is not just obsessing over bandwidth, but also startup time and payment UX. It matters a lot for mobile users, and they would like to push the current gossip design as far as it can go. The same issue will also arise when designing inventory messages for channel update messages.</summary>
+    <published>2019-02-18T15:34:47+00:00</published>
+  </entry>
+</feed>

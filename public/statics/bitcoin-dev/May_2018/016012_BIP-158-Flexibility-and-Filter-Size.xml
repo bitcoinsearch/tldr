@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 158 Flexibility and Filter Size</title>
+  <updated>2023-05-20T08:22:48.455906+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2018-05-23 17:28:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 158 Flexibility and Filter Size</title>
+    <updated>2023-05-20T08:22:48.455906+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/016012.html" rel="alternate"/>
+    <summary>In a conversation on the Bitcoin-dev mailing list, Jim Posen shared a graph showing filter sizes as a proportion of block size for each of the sub-filters. He explained that the first ~120,000 blocks are so small that the Golomb-Rice coding can't compress the filters that well, which is why the filter sizes are so high proportional to the block size. However, after block 120,000 or so, the filter compression converges pretty quickly to near the optimal value. He noted that if you look at the ratio of the combined size of the separated filters vs the size of a filter containing all of them (currently known as the basic filter), they are pretty much the same size. The mean of the ratio between them after block 150,000 is 99.4%. Basically, not much compression efficiently is lost by separating the basic filter into sub-filters.Jim Posen also suggested constructing entirely separate filters for different types of elements and allowing clients to download only the ones they care about. This would prevent an exponential blowup in the number of filters. If three separate filter types were created, one for output scripts, one for input outpoints, and one for TXIDs, each signaled with a separate service bit, it would work nicely with advertising different filter types independently. There is also the question of whether to separate or combine the headers, but Jim Posen leans towards keeping them separate because it's simpler that way.</summary>
+    <published>2018-05-23T17:28:29+00:00</published>
+  </entry>
+</feed>

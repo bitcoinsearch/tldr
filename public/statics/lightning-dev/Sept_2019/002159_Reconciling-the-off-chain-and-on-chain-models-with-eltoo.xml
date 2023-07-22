@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reconciling the off-chain and on-chain models with eltoo</title>
+  <updated>2023-06-02T20:16:59.715322+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-09-19 10:26:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reconciling the off-chain and on-chain models with eltoo</title>
+    <updated>2023-06-02T20:16:59.715322+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-September/002159.html" rel="alternate"/>
+    <summary>ZmnSCPxj suggests an escape hatch in the scripts that allows to spend any output attached to the settlement transaction by n-1 participants, which could be reclaimed into a new open right away. However, careful design would be required as the entire point of requiring an n-of-n signature is to protect against Sybil attacks. Any m-of-n signatory where strictly m &lt; n can be Sybil attacked, and processing power is cheap nowadays. As such, any multiparty construction when Sybilled, devolves to a 2-of-2 channel. Therefore, the n-1 participants would have to be very limited in what they can do, and if the only "right" the n-1 participants can do is to force the nth participant to claim its funds on-chain, then that is implementable with a transaction doing just that, pre-signed by the nth participant and given to participants 1..n-1. The speaker notes that they do not want to support uncooperative splice-outs, due to their need to either pre-sign a splice-out of the party or encumber whatever they build on top in order to do a fast-reopen. However, they think it's important to explore the available options. The privacy guarantees are identical to Bitcoin on-chain, with the one caveat that we may identify the proposing participant, but this can be defended against by mixing. If later combined with allowing multiilateral kick-out of a member that is unresponsive, each member would have to honestly claim which UTXOs it is interested in keeping after it is kicked out of the membership set, defeating the purpose. The speaker further explains that claiming ownership would involve providing a valid input script that could spend the output under some condition, and others would have to verify this proof-of-ownership before accepting the node's self-splice-out. However, this adds complexity for little benefit.</summary>
+    <published>2019-09-19T10:26:13+00:00</published>
+  </entry>
+</feed>

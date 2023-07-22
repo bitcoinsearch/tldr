@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP: OP_BRIBVERIFY - the op code needed for Blind Merge Mined drivechains</title>
+  <updated>2023-06-12T03:03:08.158487+00:00</updated>
+  <author>
+    <name>Chris Stewart 2017-06-28 00:37:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP: OP_BRIBVERIFY - the op code needed for Blind Merge Mined drivechains</title>
+    <updated>2023-06-12T03:03:08.158487+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-June/014663.html" rel="alternate"/>
+    <summary>This document is a draft proposal for a new opcode, named OP_BRIBEVERIFY, to be added to the Bitcoin scripting system. The proposed opcode allows a user to bribe a miner to include a hash in the coinbase transaction's output. This feature would enable Blind Merge Mining, which allows sidechains to be merged mined against Bitcoin without burdening Bitcoin miners with extra resource requirements. The motivation behind this proposal stems from the contentious political climate of Bitcoin where many community members have different visions of what Bitcoin is. With this proposal, various factions of the community can realize their vision on their own separate blockchain that is interoperable with the Bitcoin blockchain. This allows those factions to use Bitcoin as a 'reserve currency' for their own network.The commitment structure of this proposal involves adding a new block rule that requires the miner's coinbase reward to be at index 0 in the coinbase transaction's output vector. Additionally, the witness commitment output is fixed to be at index 1 of the coinbase transaction's output vector. The commitment is recorded in a scriptPubKey of the coinbase transaction and must be at least 34 bytes in size. The 35th byte and onward have no consensus meaning.The proposed OP_BRIBEVERIFY opcode reads two arguments from the stack - the stack top is expected to be a sidechain ID for which the user is attempting to blind merge mine for, and the next element on the stack is expected to be a block hash. This opcode then looks into the coinbase transaction's output vector at the given index (derived from the sidechain ID) and checks to see if the hash in the block matches the hash inside of the BRIBEVERIFY program. If the hashes match, the OP_BRIBEVERIFY acts as an OP_NOP. If the comparison between the two hashes fails, the script fails.A standard BRIBEVERIFY program has the format: 1-byte - Push the following 32 bytes (0x20), 32-byte - block hash, 1 byte - Push operation? (needed if number can't be encoded as OP_0 - OP_16), 1 byte - sidechain ID, 1 byte - OP_BRIBEVERIFY opcode. Overall, this proposal would enable sidechains to be created on the Bitcoin blockchain while allowing different factions of the community to realize their own visions on their own separate blockchain that is interoperable with the Bitcoin blockchain.</summary>
+    <published>2017-06-28T00:37:13+00:00</published>
+  </entry>
+</feed>

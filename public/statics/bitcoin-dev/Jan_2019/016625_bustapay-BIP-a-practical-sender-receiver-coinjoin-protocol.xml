@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>bustapay BIP :: a practical sender/receiver coinjoin protocol</title>
+  <updated>2023-06-13T14:28:24.460142+00:00</updated>
+  <author>
+    <name>Adam Gibson 2019-01-25 14:47:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>bustapay BIP :: a practical sender/receiver coinjoin protocol</title>
+    <updated>2023-06-13T14:28:24.460142+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-January/016625.html" rel="alternate"/>
+    <summary>A proposal has been suggested to standardize the Bustapay protocol, which allows for hiding transaction information and increasing privacy. Although initially thought impractical, the idea of steganographic hiding is considered worth pursuing as both Joinmarket and Samourai have already begun implementing the protocol. The aim is to create a cross-wallet standard that can be included in a project like BTCPayServer. Generic comments on protocol versioning, naming conventions, and the need for standards for x-wallet compatibility are discussed.The Bustapay payment system involves a series of steps for sending and receiving Bitcoin transactions. In step one, the sender creates a "template transaction" with input and output amounts and sends it to the receiver via HTTP POST request. In step two, the sender signs the template transaction and sends it back to the receiver. The HTTP body should be the raw transaction hex encoded as text.In step three, the receiver processes the transaction and returns a partially signed coinjoin. The receiver validates the transaction's validity, pays himself, and adds one of his own inputs known as the "contributed input." This increases the output that pays the receiver by the contributed input amount, invalidating the original input signatures of the template transaction. The sender needs to return this partial transaction back to the receiver to sign.In step four, the receiver validates, re-signs, and propagates the transaction on the Bitcoin network. The client must be aware that the server can reorder inputs and outputs. In step five, the receiver observes the finalized transaction on the Bitcoin network. Once the receiver has seen the finalized transaction on the network with enough confirmations, it can process it like a normal payment for the sent amount.For anyone wanting to implement Bustapay payments, there are implementation notes for receivers. The HTTP response must not be trusted and should be fully validated to ensure that no unexpected changes have been made to the transaction. Additionally, the sender should be aware that the original "template transaction" may be propagated at any time, and in fact can intentionally be done so for the purpose of RBF as it should have a slightly higher fee rate.The Bustapay payment system is based on Dr. Maxwell's seminal CoinJoin proposal and was inspired by a simplification of the "pay 2 endpoint" blog post by Blockstream. Specific comments include that the text should indicate the receiver's contributed input(s) should be chosen to avoid triggering the Unnecessary Input Heuristic where possible, and it is strongly preferable that the receiver makes an effort to pick a contributed input of the same type as the other transaction inputs if possible.</summary>
+    <published>2019-01-25T14:47:34+00:00</published>
+  </entry>
+</feed>

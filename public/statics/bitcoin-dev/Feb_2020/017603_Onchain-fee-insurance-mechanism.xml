@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Onchain fee insurance mechanism</title>
+  <updated>2023-06-13T23:19:35.545698+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-02-01 00:39:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Onchain fee insurance mechanism</title>
+    <updated>2023-06-13T23:19:35.545698+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-February/017603.html" rel="alternate"/>
+    <summary>The email conversation between ZmnSCPxj and David on Bitcoin development proposes a mechanism for feerate insurance against onchain feerate spikes. The proposal involves Alice and Ingrid arranging a series of transactions with a specific locktime and sequence, but the plan has a flaw as Ingrid can rescind the pre-signed transactions at any time before confirmation by double spending her UTXO via an RBF fee bump. A patch is suggested that allows the Ingrid-input to be under the control of both Ingrid and Alice using a 2-of-2 mechanism, but this leads to new problems of denial of service. A possible insurance policy for Lightning channel closures is proposed where Alice prepays Ingrid using a CoinJoined transaction for the combined premium plus Ingrid inputs value locked to Alice &amp;&amp; Ingrid. At each commitment transaction signing, there is an additional unencumbered tiny output that Alice can claim immediately. Ingrid and Alice create an insurance transaction with high feerate that spends the tiny output and the Alice&amp;&amp;Ingrid output, deducting the fees from the Alice&amp;&amp;Ingrid output and returning what is left to Ingrid. Alice can claim the tiny output itself if fees are low at the time of unilateral close, or sacrifice it and attach the insurance transaction with high feerate if fees are high. If Ingrid does not cooperate on a new commitment transaction, Alice can drop onchain and punish Ingrid by dropping the previous commitment and broadcasting the insurance transaction. The upper bound for what Alice will pay to ensure its channel is closeable at any time very quickly is the entire point of this proposal.</summary>
+    <published>2020-02-01T00:39:36+00:00</published>
+  </entry>
+</feed>

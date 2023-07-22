@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 118 and SIGHASH_ANYPREVOUT</title>
+  <updated>2023-05-20T23:33:29.593399+00:00</updated>
+  <author>
+    <name>Richard Myers 2020-08-03 19:27:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 118 and SIGHASH_ANYPREVOUT</title>
+    <updated>2023-05-20T23:33:29.593399+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018069.html" rel="alternate"/>
+    <summary>In a discussion on the Lightning Dev mailing list, ZmnSCPxj summarized his thoughts on how a Taproot version of Decker-Russell-Osuntokun (eltoo) would work. He suggested that a channel between A and B could have only a single internal taproot pubkey, `P = MuSig(A,B)`. The funding outpoint would be spent with a taprooted P + a single tapscript `OP_CHECKSIG`, while update transactions would be signed with the internal taproot pubkey using `SIGHASH_ANYPREVOUTANYSCRIPT`. Each update transaction would have a monotonically-increasing `nLockTime`. A state transaction would be signed with the internal taproot pubkey using `SIGHASH_ANYPREVOUT`, which commits to the exact script including ``, unique for each update transaction. This means a state transaction can only spend the specific update transaction, but the update transaction can spend the funding outpoint or any update transaction outpoint. State transaction input would have an `nSequence` requiring a relative locktime of the agreed-upon unilateral close delay. Richard, who was part of the discussion, sketched out the protocol described by ZmnSCPxj to help himself understand it better, and asked some questions such as whether key-path spending could be used instead of script-path spending in collaborative close, whether there needed to be separate 1.5 round trips for each signature produced for each state update, whether the 1.5 round trips for signing could be combined with the 1.5 round trips required to update the channel, and whether AJ's formulation included an additional sig(X).</summary>
+    <published>2020-08-03T19:27:13+00:00</published>
+  </entry>
+</feed>

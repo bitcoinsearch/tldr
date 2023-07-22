@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Detailed protocol design for routed multi-transaction CoinSwap</title>
+  <updated>2023-06-14T03:18:56.488996+00:00</updated>
+  <author>
+    <name>Chris Belcher 2020-08-29 22:03:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Detailed protocol design for routed multi-transaction CoinSwap</title>
+    <updated>2023-06-14T03:18:56.488996+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018146.html" rel="alternate"/>
+    <summary>Chris Belcher, a Bitcoin privacy advocate, is currently working on implementing CoinSwap to improve Bitcoin's privacy and fungibility. The design of the first CoinSwap protocol version includes multi-transaction CoinSwaps, routed CoinSwaps, liquidity market, private key handover, and fidelity bonds. Each single CoinSwap is made up of multiple transactions to avoid amount correlation. Makers have no incentive to pay any miner fees, but takers want to create transactions more urgently and thus pay all the miner fees.In the example provided by Chris, one CoinSwap has six regular-sized transactions that use approximately the same amount of block space as a single JoinMarket coinjoin with six parties. Yet, the privacy provided by this one CoinSwap would be far greater. Only the taker knows the entire route, and each maker only knows their previous and next transactions. However, there are various vulnerabilities in the current design, including fee model vulnerability, preimage release phase vulnerability, and transaction pinning vulnerability. To fix these vulnerabilities, Chris suggested having just one contract transaction which includes anchor outputs or separating the timelock and hashlock cases into two separate transactions. He also recommended encumbering the output with a `1 OP_CSV`, which stops that output from being spent while unconfirmed.The document further discusses the process of CoinSwap, which involves multiple contract transactions that are broadcast and mined with varying miner fees, creating a delay between the funding and final transaction. Each party has a multi-signature output that can be spent either by waiting for a relative timelock or providing a hash preimage value. The balances before and after CoinSwap are provided in a table, along with potential failure cases and attacks.The document also describes the parties involved in the CoinSwap process and how they ensure that the transaction is successful. If one maker in the coinswap route is the victim of a denial-of-service (DOS) attack, they retaliate by DOSing the previous maker in the route to produce a concrete cost every time a DOS happens. The section on the analysis of deviations discusses what happens if one party deviates from the protocol by doing something else.The multisig outputs of the funding transactions can stay unspent indefinitely, but the parties must always be watching the network and ready to respond with their own sweep using a preimage because the other party still possesses a fully-signed contract tx. The document concludes by stating that the protocol and aborts of the protocols and deviations from the protocol were analyzed thoroughly.</summary>
+    <published>2020-08-29T22:03:09+00:00</published>
+  </entry>
+</feed>

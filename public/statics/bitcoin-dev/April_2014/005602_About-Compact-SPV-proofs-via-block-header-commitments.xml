@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>About Compact SPV proofs via block header commitments</title>
+  <updated>2023-06-08T21:46:36.420546+00:00</updated>
+  <author>
+    <name>Sergio Lerner 2014-04-27 01:08:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>About Compact SPV proofs via block header commitments</title>
+    <updated>2023-06-08T21:46:36.420546+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005602.html" rel="alternate"/>
+    <summary>A proposal has been made to solve the problem of simple payment verification (SPV) proofs requiring every intervening block header to be provided between two blocks in order to establish both connectivity and proof of work. The author argues that this is not necessary, as a non-interactive SPV proof only needs to prove that a transaction belongs to the best chain. While connectivity does provide some practical evidence that an attacker did not have much time to prepare an attack, it is not necessary for the proof to know the interleaving proof-of-work or have a certain number of confirmations. However, confirmations do provide evidence that the prover has either spent money creating the fake block or took a genuine block. The proposal addresses the problem of parallel synchronized attacks and suggests that at least one peer should be assumed to be honest. If that is the case, the client can ask every peer to give them the blocks of their best-chains at the same heights of the presented proof without the need for back-links. This would be rare so the back-links are not very useful. The proposed use case is for an SPV client that has just come online to ask peers what the last block height/time is. If a peer replies with an old block, then that peer is still downloading the blockchain and is ignored. For the remaining peers, the client starts asking for parent blocks until all parents agree, which is the last common parent. If (U)TxO hash-tree commitments are available, then the wallet is updated using this data from the common parent block. At the same time, the client retrieves compact non-interactive proofs-of-inclusion (possibly orphan) for its transactions without having to download every intervening block header.</summary>
+    <published>2014-04-27T01:08:15+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Probe cancellation</title>
+  <updated>2023-05-25T15:52:51.440660+00:00</updated>
+  <author>
+    <name>Anthony Towns 2018-11-10 03:26:06</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-11-12 00:17:31</name>
+  </author>
+  <link href="lightning-dev/Nov_2018/001554_Probe-cancellation.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001559_Probe-cancellation.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Probe cancellation</title>
+    <updated>2023-05-25T15:52:51.440660+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001554.html" rel="alternate"/>
+    <summary>In a message to the Lightning-dev mailing list, Anthony Towns suggested that probing routes regularly could help ensure network reliability. However, there is a risk involved as if the probe discovers a failing node/channel, the probe HTLC will get stuck and gradually timeout, using up HTLC slots and memory for each of the well-behaved nodes. In addition, if the probe has a realistic value rather than just a few (milli)satoshis, it might lock up real money too. Therefore, he suggests an interesting approach to allow cancelling stuck probes from the sending direction as well as the receiving direction by generating a 128b random number X, calculating H=bitwise-not(SHA256(X)) and making a probe payment over path P, hash H, amount V. He further proposes that if the payment hash wasn't generated as SHA256("something") but rather as SHA256("something") XOR 0xFF..FF or similar, everyone can safely drop the incoming transaction because they know that even if they forwarded the tx, it will be refunded eventually anyway (or otherwise sha256 is effectively broken and they're screwed anyway). So all he has to do is send a packet saying this was a probe, and telling you the "something" to verify, and he can free up the slot/funds from his probe, as can everyone else except for the actual failing nodes. However, ZmnSCPxj replied that an attacker can still take the option not to do this, but at least someone making an honest effort to probe the network does not inadvertently attack it in case a probe fails.</summary>
+    <published>2018-11-10T03:26:06+00:00</published>
+  </entry>
+</feed>

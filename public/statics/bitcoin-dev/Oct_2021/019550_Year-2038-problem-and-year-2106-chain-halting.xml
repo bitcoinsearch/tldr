@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Year 2038 problem and year 2106 chain halting</title>
+  <updated>2023-06-15T02:46:06.033348+00:00</updated>
+  <author>
+    <name>vjudeu at gazeta.pl 2021-10-15 22:22:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Year 2038 problem and year 2106 chain halting</title>
+    <updated>2023-06-15T02:46:06.033348+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-October/019550.html" rel="alternate"/>
+    <summary>Bitcoin's timestamp rules state that the block timestamp may not be greater than 2^32 (Sun, 07 Feb 2106 06:28:16 +0000), which means that Bitcoin will "die" on or about 2106-02-07, when there is no timestamp below 2^32 that exceeds the median of the last 11 blocks. A proposed solution to solve this problem is to add a new rule where the block timestamp plus k*2^32 may not be greater than the current time plus two hours, with k being an integer whose value must be the same for the calculations of Rule 1 and Rule 2. However, this would cause a hardfork in the year 2106, which is approximately 85.5 years from now, by which time 95% of nodes would hopefully have updated. Another proposed solution is 64-bit timestamps, but they would break compatibility with other software that has specific expectations of header fields, like ASICs' firmware. They would also cause a hardfork before the date of timestamp overflow.If the proposed solution is implemented, there could be issues related to OP_CHECKLOCKTIMEVERIFY or nLockTime because if some transaction was timestamped to 0xbadc0ded, then that transaction will be valid in 0x00000000badc0ded, invalid in 0x0000000100000000, and valid again in 0x00000001badc0ded, the same for timelocked outputs. To address this, the "k" value representing the most significant 32 bits of 64-bit timestamp has to be stored in all cases where time is used. If there is no "k", then zero should be used for backward compatibility. One suggestion is to add the "k" value to the coinbase transaction, allowing for the combination of two 32-bit values, the lower bits from the block header and the higher bits from the coinbase transaction. Additionally, adding the "k" value to the transaction nLockTime field is needed, maybe in a similar way as transaction witness was added in Segwit, because after reaching 0x0000000100000000 all off-chain transactions with timelocks around 0x00000000ffffffff will be additionally timelocked for the next N years. The same is needed for each OP_CHECKLOCKTIMEVERIFY, maybe pushing high 32 bits before the currently used value will solve that (and assuming zero if there is only some 32-bit value).</summary>
+    <published>2021-10-15T22:22:00+00:00</published>
+  </entry>
+</feed>

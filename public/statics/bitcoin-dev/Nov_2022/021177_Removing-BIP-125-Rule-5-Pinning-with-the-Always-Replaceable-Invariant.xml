@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Removing BIP-125 Rule #5 Pinning with the Always-Replaceable Invariant</title>
+  <updated>2023-05-22T22:47:41.334255+00:00</updated>
+  <author>
+    <name>Suhas Daftuar 2022-11-07 21:21:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Removing BIP-125 Rule #5 Pinning with the Always-Replaceable Invariant</title>
+    <updated>2023-05-22T22:47:41.334255+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021177.html" rel="alternate"/>
+    <summary>The Replaceability Invariant is a proposed solution to the pinning problem caused by Rule #5 of BIP-125, which limits the number of original transactions and their descendant transactions that can be replaced and evicted from the mempool to 100 transactions. The proposal seeks to ensure that all transactions in the mempool are always replaceable, thus removing the need for this rule. The Replaceability Invariant involves maintaining an integer, nReplacementCandidates, for each transaction, which is incremented by 1 for each unconfirmed parent when a non-conflicting transaction is accepted into the mempool. Conflicting transactions do not require verification as the invariant has already guaranteed that every transaction in the mempool is replaceable. When a block is mined, the nReplacementCandidates of all unconfirmed transactions remains unchanged because a confirmed transaction cannot spend an unconfirmed txout. A special case is required to handle reorgs that change a transaction from confirmed to unconfirmed, where setting nReplacementCandidates to MAX_REPLACEMENT_CANDIDATES would suffice. The proposal also acknowledges that diamond tx graphs are even more unusual than unconfirmed children, and there's no reason to accommodate them.</summary>
+    <published>2022-11-07T21:21:11+00:00</published>
+  </entry>
+</feed>

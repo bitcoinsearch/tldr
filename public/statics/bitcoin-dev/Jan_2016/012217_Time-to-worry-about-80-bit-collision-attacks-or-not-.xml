@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Time to worry about 80-bit collision attacks or not?</title>
+  <updated>2023-06-11T02:59:05.648428+00:00</updated>
+  <author>
+    <name>Adam Back 2016-01-08 15:26:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Time to worry about 80-bit collision attacks or not?</title>
+    <updated>2023-06-11T02:59:05.648428+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-January/012217.html" rel="alternate"/>
+    <summary>The discussion on the vulnerability of bitcoin's 128-bit security target has raised concerns over its crypto rule of thumb, which states that odd weak points must be avoided to maintain a balanced crypto format. RIPEMD, which is believed to be less well reviewed than SHA2 has been identified as one of the exceptions to the security target. While SHA1 has problems and SHA2 is an improvement on it, SHA3 has been designed to fix the design flaw in SHA1 and SHA2. The discussion then shifted to segregated-witness itself, which writes down a tidily organised by lines of code robust fix to a bunch of long-standing problems. Doing a 2MB hard-fork in comparison fixes nothing really. In software projects, disguising the cost of tech-debt as non-negotiable baked into estimates without a line item is common practice. Segregated-witness offers an intriguing next step of being able to do 2 of 2, 3 of 3 and N of N which give size of one sig multisig as well as K of N key tree sigs, which are also significantly more compact. Also, there are still some fixable bloat things going on like sending pubKey in the signature vs recovery (modulo interference with Schnorr batch verify compatibility), using the PubKey instead of PKH in the ScriptPubKey, though that loses the nice property of not having the key to do DL attacks on until the signed transaction is broadcast and a way to combine hash &amp; PubKey to keep the delayed PubKey publication property and yet still save the bloat of having both. Variable-sized hashes (and a few pubkey size choices) could also be considered. Combining has been known to be fragile to bad interactions or unexpected behaviors. However, the bigger picture should be focused on IBLT/weak-blocks and bigger wins like MAST, multiSig Schnorr &amp; key tree sigs. It has been noted that combining hashes misses a cleanup opportunity to store it up for the future when there is a reasonable opportunity to fix it. The discussion ended with a quote from Adam- "Pragmatism vs refactoring as you go".</summary>
+    <published>2016-01-08T15:26:50+00:00</published>
+  </entry>
+</feed>

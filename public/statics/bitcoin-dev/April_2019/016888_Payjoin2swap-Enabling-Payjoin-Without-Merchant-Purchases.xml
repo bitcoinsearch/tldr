@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Payjoin2swap: Enabling Payjoin Without Merchant Purchases</title>
+  <updated>2023-05-20T20:12:56.007458+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-04-22 00:07:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Payjoin2swap: Enabling Payjoin Without Merchant Purchases</title>
+    <updated>2023-05-20T20:12:56.007458+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-April/016888.html" rel="alternate"/>
+    <summary>The article discusses Payjoin, a proposed payment method that allows two parties to exchange Bitcoin value without revealing identifying information. It breaks the common-input heuristic, making it difficult for blockchain analysts to pinpoint which transaction broke their analysis. However, Payjoin is planned to be used for payments rather than hodling as it requires a transfer of value from one participant to another. Hodlers want to retain their privacy too, but they are not interested in purchasing items and therefore cannot utilize Payjoin directly.To address this issue, the article suggests that hodlers can still use Payjoin by using bitcoins in a Payjoin to buy bitcoins of similar value. This technique is similar to Lightning Network-to-onchain swap services. Additionally, the article introduces Payjoin2swap, a protocol that enables participants to exchange Bitcoin value without revealing identifying information.In a Payjoin2swap, what is visible on the blockchain is two transactions that occur at about the same time. They appear to pay two different addresses, and each has a change output. The payment addresses are then spent almost immediately, while the change output may or may not get spent any time soon. Participants in a Payjoin2swap need to own two UTXOs onchain; the values need not be equal. The article provides examples of how Payjoin2swap works, including exchanging Bitcoin value between Alice and Bob and paying Carol without reducing the privacy of mix participants.Participants in Payjoin2swap must agree on various parameters for the swap, including the amount to be swapped, a safe confirmation depth for anchoring, two future block heights, and the exchange of private keys. To ensure plausible transactions, one output should always be larger than the sum of all inputs except the smallest input. If both parties have two UTXOs each, they can impose additional rules, such as generating pre-swap transactions using the smaller UTXO and checking if their other coin plus the swap amount is greater than the UTXO consumed in the pre-swap transaction from the other side.Finally, the article discusses Linking (and Overlinking) Payjoin2swap, which involves monitoring the mempool for two-input two-output/one-output transactions and computing an "apparent swap value" from the difference of an input and the lower input or 0 if one-output. One side can synthesize a UTXO of value V - S + S' by spending a larger UTXO and splitting out that value. This leads to a swap transaction where the existing mempool transaction with apparent swap value S' becomes potentially linked to this transaction, even though it is completely unrelated. Overall, Payjoin2swap is a privacy-enhancing protocol that allows two parties to swap their bitcoin without revealing any information about their transactions.</summary>
+    <published>2019-04-22T00:07:20+00:00</published>
+  </entry>
+</feed>

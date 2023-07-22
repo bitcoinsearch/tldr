@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Removing the Dust Limit</title>
+  <updated>2023-05-23T15:29:01.860012+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-08-12 22:03:39</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2021-09-30 22:07:08</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2021-08-08 21:14:23</name>
+  </author>
+  <link href="lightning-dev/Aug_2021/003169_Removing-the-Dust-Limit.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003268_Removing-the-Dust-Limit.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2021/003147_Removing-the-Dust-Limit.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Removing the Dust Limit</title>
+    <updated>2023-05-23T15:29:01.860012+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-August/003169.html" rel="alternate"/>
+    <summary>The recent discussion on the bitcoin-dev mailing list has highlighted concerns regarding the dust limit, a parameter that restricts the minimum amount of bitcoin that can be sent in a transaction. Several contributors have argued that the dust limit is too low and that it should be raised to reflect the increasing fee rates associated with mining. One suggestion was to increase the limit from 3 satoshis per byte (sat/vB) to around 20 sat/vB. The purpose of the dust limit is to discourage the creation of uneconomic outputs, which add to the size of the unspent transaction output (UTXO) set, thereby increasing the computational burden on full nodes and miners. Dust-sized HTLCs in Lightning Network channels can force the parties to operate in a semi-trusted mode, which could have regulatory implications, especially if they involve cross-border payments.While some argue that removing the dust limit would allow users greater flexibility in creating transactions, others counter that it is necessary to prevent spam and fingerprinting attacks. However, the ultimate decision may depend on whether the focus is on saving every satoshi or avoiding unnecessary computational overhead for node operators. For instance, if fees rise above 167 sat/vB, then it becomes economically irrational to create an output that requires a pubkey reveal and signature to spend. On the other hand, if one is not trying to save every satoshi, adding 305 satoshis to the output can avoid the dust limit. Colored coin protocols that make use of thinly divisible sats as value markers for transactions are also likely to benefit from raising the dust limit.Another issue raised by the participants in the thread is how to balance the tension between allowing users to create arbitrary outputs and maintaining the scalability of the system. As proposals like assume-utxo/background history sync gain traction, the UTXO set size is becoming a fundamental scalability constraint of the system. Since consensus rules cannot deal with hardcoded prices/feerates, there are possibilities with designs like transactions getting a size/weight bonus/penalty, but they are both hardforky and difficult to get right without introducing bad incentives. Therefore, it seems that a relay policy that avoids economically irrational behavior while allowing for flexibility in creating outputs could be a good interim solution.</summary>
+    <published>2021-08-12T22:03:39+00:00</published>
+  </entry>
+</feed>

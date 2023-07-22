@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Anti DoS for tx replacement</title>
+  <updated>2023-06-06T15:07:03.724554+00:00</updated>
+  <author>
+    <name>Peter Todd 2013-04-16 18:43:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Anti DoS for tx replacement</title>
+    <updated>2023-06-06T15:07:03.724554+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002416.html" rel="alternate"/>
+    <summary>Bitcoin developer Mike Hearn has proposed a way of mitigating the risks associated with transaction replacement, which he says are preventing the activation of the feature on the main Bitcoin network. Being non-final means not having reached the nLockTime threshold, and having at least one input with a sequence number. The purpose of tx replacement is to implement high frequency trading. To see why this is the case please review the micropayment channel protocol here. The obvious problem is that even though the feature is only intended to be used occasionally or never, nothing in the existing code stops you using it as fast as possible and exhausting nodes CPU time and bandwidth. Most proposed solutions will not work; requiring higher fees for each replacement means that a channel/contract has to be torn down and rebuilt much faster than before because otherwise the amount of money lost to fees quickly becomes the entire size of the channel (or you can't update it very often). Refusing to update the transaction after certain thresholds are reached, having cooldown periods etc also won't work because the replacement mechanism is there to protect each counter-party in the HFT contract.  Handling DoS as a prioritisation problem has a number of advantages, most obviously not introducing new hard coded magic numbers that may or may not stay up to date with changing conditions. This setup means someone can force CPU/bandwidth usage to whatever the node operators have configured as their max allowed across the network for a while, but doing so won't actually disrupt normal transactions. It'll just result in the replacements getting dropped.</summary>
+    <published>2013-04-16T18:43:56+00:00</published>
+  </entry>
+</feed>

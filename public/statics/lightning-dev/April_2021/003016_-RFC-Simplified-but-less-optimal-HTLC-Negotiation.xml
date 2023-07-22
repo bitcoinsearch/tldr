@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+  <updated>2023-05-23T14:41:04.633426+00:00</updated>
+  <author>
+    <name>Matt Corallo 2021-04-24 14:11:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+    <updated>2023-05-23T14:41:04.633426+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-April/003016.html" rel="alternate"/>
+    <summary>In a recent email thread, Matt Corallo suggested that fuzzing could help catch message-non-delivery-and-resending production desync bugs in the protocol. Corallo noted that there is already a fuzzer that aggressively tests for these types of bugs and that it has caught many in the past. While simplifying the state machine where possible is nice, replacing code with fresh code would require similar testing and is not necessarily the most obvious decrease in complexity. Rusty Russell expressed concern about the number of bugs historically found in the protocol and suggested that avoiding bugs entirely is preferable to catching them all. He recommended using splice messages instead of turn-based messages to improve the protocol. Under this system, both sides have to send a splice message to synchronize, and they can only do so once all in-flight changes have cleared. The sender must not send another splice message while a splice is being negotiated, while the receiver must respond with a splice message of its own if it has not already. Similar requirements exist for other major channel changes.</summary>
+    <published>2021-04-24T14:11:33+00:00</published>
+  </entry>
+</feed>

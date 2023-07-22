@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving the initial gossip sync</title>
+  <updated>2023-05-24T20:38:38.931247+00:00</updated>
+  <author>
+    <name>Fabrice Drouin 2018-02-05 15:08:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving the initial gossip sync</title>
+    <updated>2023-05-24T20:38:38.931247+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/000992.html" rel="alternate"/>
+    <summary>In this email conversation between Christian Decker and Fabrice, they have proposed a solution to fix initial sync issues while waiting for a real sync protocol. They suggest using an optional feature bit to group channel announcements by "buckets" and create filters for each bucket to exchange and use them to filter out channel announcements. A new `use_channel_announcement_filters` optional feature bit (7 for example) and a new `channel_announcement_filters` message would be added. When a node that supports channel announcement filters receives an `init` message with the `use_channel_announcement_filters` bit set, it sends back its channel filters. When a node that supports channel announcement filters receives a `channel_announcement_filters` message, it uses it to filter channel announcements before sending them. The filters they have in mind are simple: sort announcements by short channel id, compute a marker height, which is `144 * ((now - 7 * 144) / 144)` (we round to multiples of 144 to make sync easier), group channel announcements that were created before this marker by groups of 144 blocks, group channel announcements that were created after this marker by groups of 1 block, and for each group, sort and concatenate all channel announcements short channel ids and hash the result. The new `channel_announcement_filters` would then be a list of (height, hash) pairs ordered by increasing heights. This approach can easily sort announcements by short channel id. An additional step could be to send all short channel ids for all groups for which the group hash did not match. Alternatively, smarter filters could be used. The use case they have in mind is mobile nodes or nodes that are often offline and need to resync very often.</summary>
+    <published>2018-02-05T15:08:22+00:00</published>
+  </entry>
+</feed>

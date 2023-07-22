@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Towards a gridlike Lightning Network</title>
+  <updated>2023-05-24T22:23:07.890392+00:00</updated>
+  <author>
+    <name>Benjamin Mord 2018-04-18 23:56:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Towards a gridlike Lightning Network</title>
+    <updated>2023-05-24T22:23:07.890392+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-April/001204.html" rel="alternate"/>
+    <summary>The Lightning-dev mailing list has been discussing the idea of using cyclic superhubs to organize the Lightning Network. However, coordination is required in order to set up these hubs, and it is difficult for a node acting alone to form them. To address this issue, an algorithm has been proposed that, given a set of nodes extracted from node gossip, returns a peer to try connecting and funding a channel to. The algorithm involves starting with a 32-bit number i = 0 and getting hash = H(i || pubkey) for each node, where H is some standard hash algorithm, and pubkey is the public key of the node. Our own node should be part of the original working set. Successive filtering is performed until the set is at least 3 or more nodes. The nodes are then sorted according to hash, and the candidate is identified as the next node in the list, or if we are the last node, then the first node in the list. If the candidate already has a channel with us, or has no address info and cannot be found by DNS seed or so on, or cannot be contacted, or refuses incoming channels or some other error, then increment i and try finding again.ZmnSCPxj has also proposed a better termination condition for searching for a cyclic superhub. The algorithm starts with `i` = 0 and a set of known nodes, including our own node. Iterate over `i` and compute hash = H(i || pubkey) for each node. Also compute our_hash = H(i || our_pubkey) for ourselves and put this in a working set. Iterate over bits and split the working set into two sets, the matching set and the non-matching set, where the bit in the hash matches the bit in our_hash. If the non-matching set is empty, skip to the next bit. If the matching set is 1 or 2 members, or the non-matching set is 1 or 2 members, merge the two sets together into the working set and exit this loop: we have found a cyclic superhub. Else, set the working set to the matching set. The set should be sorted according to hash (treat the hash as a 160-bit big-endian number). We should open a channel to the node after us in the sorted list; if we are the last, wrap around to the first node in the list.The algorithm has been implemented by Igor Cota and can be found on GitHub. It may sometimes be useful to empirically test aggregate effects of different routing heuristics, however naive or artificial the underlying assumptions may need to be. Therefore, it is asked if there is a simulation platform yet for experimenting with ideas such as this. Additionally, it is asked if there is an API, perhaps implementation agnostic, to separate such strategies from the protocol itself. Finally, it is asked if there is a place yet to specify such heuristics where tight coordination on details are of mutual benefit, such as a bolt.</summary>
+    <published>2018-04-18T23:56:17+00:00</published>
+  </entry>
+</feed>

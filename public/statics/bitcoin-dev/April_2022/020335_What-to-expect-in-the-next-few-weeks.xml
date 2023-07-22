@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>What to expect in the next few weeks</title>
+  <updated>2023-05-22T19:36:52.699637+00:00</updated>
+  <author>
+    <name>Anthony Towns 2022-04-26 10:47:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>What to expect in the next few weeks</title>
+    <updated>2023-05-22T19:36:52.699637+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-April/020335.html" rel="alternate"/>
+    <summary>In a recent Bitcoin mailing list, Jeremy Rubin pointed out that there are already scripts available to support a URSF (User-Activated Soft Fork) with the source code provided on his blog. However, the point of running a client with a validation requirement of "blocks must (not) signal" is to handle the possibility of a chain split where your preferred ruleset ends up on the less-work side. Forkd isn't quite enough to do that reliably, so bip8 recommends clients "should either use parameters that do not risk there being a higher work alternative chain or specify a mechanism for implementations that support the deployment to preferentially peer with each other."To have other nodes reorg to your chain when it has more work, you don't want to exclusively connect to likeminded peers, but being able to see the other chain has more work might be valuable in order to add some sort of user warning signal. Using the `BLOCK_RECENT_CONSENSUS_CHANGE` flag to indicate unwanted signalling might make sense; then you could theoretically trigger on that to avoid disconnecting inbound peers that are following the wrong chain.If there is a non-trivial chain split, then everyone has to deal with splitting their coins across the different chains, which is already annoying. For lightning funds, every channel in the network would need to be immediately closed on-chain, as otherwise accepting state updates risks losing the value of your channel balance on whichever chain your lightning node is not following. It's pretty hard to do all that stuff in a separate script without updating the node software itself.While forkd is pretty much the state of the art, it doesn't come close to addressing all the problems that a chain split would create. Without some sort of existential threat, it seems better to take things slowly and hold off on changes until either pretty much everyone who cares is convinced that the change is a good idea and ready to go or until someone has done the rest of the work to smooth over all the disruption a non-trivial chain split could cause, which probably requires consensus changes itself.</summary>
+    <published>2022-04-26T10:47:51+00:00</published>
+  </entry>
+</feed>

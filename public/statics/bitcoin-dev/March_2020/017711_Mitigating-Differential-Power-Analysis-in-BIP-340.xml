@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Mitigating Differential Power Analysis in BIP-340</title>
+  <updated>2023-05-20T21:54:56.094032+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2020-03-24 18:56:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Mitigating Differential Power Analysis in BIP-340</title>
+    <updated>2023-05-20T21:54:56.094032+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-March/017711.html" rel="alternate"/>
+    <summary>On March 24, 2020, Lloyd Fournier via bitcoin-dev wrote a message to the mailing list regarding BIP-340. The post announced a new PR to change BIP-340 in several ways, including adding random auxiliary data into the nonce derivation function. The claim made in the mailing list post is that this is more secure against "differential power analysis" (DPA) attacks than just doing the simpler and more efficient method. Pieter Wuille responded to the email, stating that he agreed with Lloyd but also tried to summarize the discussion that led to the choice of using a non-standard scheme. Pieter addressed what he believed Lloyd was overlooking in a BIP32/Taproot like scenario; the private key that goes into the signing algorithm functions as both secret and known to the attacker. This means interactions between bits inside the hash operation that all come from x itself can leak bit-level information of x. XORing (or any other simple mix operation that does not expose bit-level information) into the private key before giving it to a hash function seems like it would address this. However, DPA issues are hard to reason about, as it's difficult to find a realistic attack model that leaks some information but doesn't obviously leak the entire key immediately. There are a number of other concerns discussed in the linked thread, such as efficiency, the risk of having a midstate in the hash function leak, and the issue with public keys that are input to the signing algorithm which come directly from an attacker.The solution they came up with (H(priv XOR H(aux) || pub || msg)) is the only one that ticks most of the boxes, but a different prioritization may lead to a different conclusion. In conclusion, Pieter welcomes input and suggestions on the matter.</summary>
+    <published>2020-03-24T18:56:38+00:00</published>
+  </entry>
+</feed>

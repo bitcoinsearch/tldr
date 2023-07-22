@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Error Codes for LN</title>
+  <updated>2023-06-03T03:48:56.538510+00:00</updated>
+  <author>
+    <name>Rusty Russell 2021-07-07 00:36:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Error Codes for LN</title>
+    <updated>2023-06-03T03:48:56.538510+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-July/003110.html" rel="alternate"/>
+    <summary>In a recent spec meeting, Carla Kirk-Cohen raised the idea of adding more specific error codes. It was suggested that error codes could be added by using TLV fields after the data field, and nodes that haven't been upgraded could include the error code in the data field or introduce a feature bit. Older nodes should ignore extra fields, and all defined types are now assumed to have an optional TLV appended. While not every possible error can be enumerated, many cases in the spec where explicit error codes could be introduced. However, some errors are "your implementation is broken" and don't provide anything actionable. A straw proposal was made to include 1. `tlv_stream`: `error_tlvs`, 2. types: 1. type: 1 (`erroneous_message`), 2. data: [`...*byte`:`message`], 1. type: 3 (`erroneous_fieldnum`), 2. data: [`tu64`:`fieldnum`], 1. type: 5 (`suggested_value`), 2. data: [`...*byte`:`value`]. This new kind of error provides an error code that tells exactly what has gone wrong and metadata pointing to the htlc with an invalid sig. The vast majority of errors are "contact your developer, peer says we did something illegal".  Exceptions are funding process timeout, fees out of range, funding tx spent, funding params unacceptable, HTLC timeout, update fee too low/high. Additionally, a special TLV case for timeouts in the message may be worth considering.</summary>
+    <published>2021-07-07T00:36:37+00:00</published>
+  </entry>
+</feed>

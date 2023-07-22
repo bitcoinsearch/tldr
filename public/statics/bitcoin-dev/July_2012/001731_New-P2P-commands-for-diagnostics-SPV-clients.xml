@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New P2P commands for diagnostics, SPV clients</title>
+  <updated>2023-06-06T05:03:22.353514+00:00</updated>
+  <author>
+    <name>Mike Hearn 2012-07-24 08:16:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New P2P commands for diagnostics, SPV clients</title>
+    <updated>2023-06-06T05:03:22.353514+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-July/001731.html" rel="alternate"/>
+    <summary>Ultra-lightweight clients like Bitcoincard, Electrum-style shared private keys clients, or brainwallets often ask supernodes for the list of unspent outputs given their public keys/addresses. However, ultra-lightweight clients have a fundamentally different security model than SPV clients and cannot connect directly to the P2P network, regardless of added commands or database indexes. To connect to the P2P network, one must understand how to walk the block chain and handle re-orgs to avoid being lied to by random arbitrary nodes. The block chain is a self-proving data structure, so nodes cannot lie about it or make one believe in garbage unless they can outrun all miners combined. Asking a remote node to tell what coins are available can be dangerous since that node can simply say "guess what, you're a millionaire!" and one has no way to confirm it's wrong. This can lead to issues where one thinks they received payment but did not, especially if internet connection got tampered with in some way. SPV clients have the same issue for zero-confirmed transactions, but once confirmations are seen at high speeds, one can be confident that the network accepted the transaction. For clients that don't understand the block chain, confirmations don't have any meaning. Electrum requires a trusted server and connects to it via SSL for this reason.Regarding classic bloom filters, the server doesn't have a method of indexing his data for the expected requests. Bloom filtering of blocks is very cheap CPU-wise and can be trivially parallelized if necessary. Although serving a Bloom filtered chain to an SPV client may be expensive due to moving the disk head into the right position and waiting for the platter to rotate, requesting 1 or 2000 blocks is not significantly different since blocks are stored sequentially, and modern hard disks transfer data once positioned at gigabit speeds.</summary>
+    <published>2012-07-24T08:16:12+00:00</published>
+  </entry>
+</feed>

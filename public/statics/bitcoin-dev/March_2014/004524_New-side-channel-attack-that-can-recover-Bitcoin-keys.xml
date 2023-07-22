@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New side channel attack that can recover Bitcoin keys</title>
+  <updated>2023-06-08T04:03:39.798604+00:00</updated>
+  <author>
+    <name>Eric Lombrozo 2014-03-05 21:31:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New side channel attack that can recover Bitcoin keys</title>
+    <updated>2023-06-08T04:03:39.798604+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-March/004524.html" rel="alternate"/>
+    <summary>A technique has been developed that can recover secp256k1 private keys after observing OpenSSL calculate as little as 200 signatures. This attack is based on the FLUSH+RELOAD technique published last year, which works by observing L3 CPU cache timings and forcing cache line flushes using the clflush opcode. To avoid such side-channel leaks, we can use a constant-time implementation of secp256k1 for signing. Multiprecision arithmetic can be implemented branch-free by assuming fixed sized limbs and always performing dummy carry operations even when they aren't needed. The most critical field operation that could potentially leak data is the modular inverse. A simple constant-time implementation involves exponentiation by the field modulus minus two. For group operations in secp256k1, the main sources of leaks are the branchings that exist in typical implementations, but we can use Point Addition in a branchless manner to avoid leaking any information. Branchless swaps can be performed using bitwise operations. Signature verification is where performance optimization is really helpful, and here there are no risks of side-channel leaks, so we can use the most optimal implementations. However, for signing, constant-time implementations will be more than adequate on typical hardware.</summary>
+    <published>2014-03-05T21:31:01+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Let's deploy BIP65 CHECKLOCKTIMEVERIFY!</title>
+  <updated>2023-05-19T21:59:00.014021+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-10-07 15:00:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Let's deploy BIP65 CHECKLOCKTIMEVERIFY!</title>
+    <updated>2023-05-19T21:59:00.014021+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-October/011467.html" rel="alternate"/>
+    <summary>The email thread on the Bitcoin-dev mailing list discusses the use of soft fork and hard fork for feature deployment. Mike Hearn objects to using a soft fork as it would result in SPV wallets becoming less reliable during the rollout period, resulting in problems similar to other soft forks. He suggests using a hard fork instead. Gregory Maxwell counters this by explaining that in a hard fork, non-upgraded nodes will experience total breakage while upgraded nodes work fine. In contrast, a soft fork results in partial breakage for SPV nodes that track invalid blocks for 1-2 confirmations until the set of "non-upgraded bitcoin miners willing to produce newly unacceptable txs" becomes vanishingly few. Maxwell argues that a hard fork would be less harmful to users in general than a soft fork. However, he suggests that a soft fork that only forbids transactions that would previously not have been mined should be the best approach as it reduces the likelihood of old miners building newly invalid blocks. BIP65 achieves this, as will similar OP_NOP* replacements like BIP112. Maxwell concludes that consensus (IsValid) is always less restrictive than policy (previously IsStandard), so choosing a new consensus rule will be less restrictive than consensus (hard fork), more restrictive than consensus but less restrictive than policy (safe soft fork), or more restrictive than IsStandard (damaging soft fork). In particular, the discussion focuses on whether BIP68 is less restrictive than current policy and whether it poses a damaging soft fork problem. If a majority of miners use it, but a minority of ~5% does not upgrade, then someone could construct an tx with nSequence set to sometime in the future without using OP_CSV. This tx would get relayed by old nodes (but not upgraded nodes due to CheckLockTime), and non-upgraded miners would mine it into a block immediately, which would then get orphaned by majority hashpower. Before it gets orphaned, non-upgraded nodes and SPV clients would be misled and vulnerable to double-spend attacks of txs with 0, 1 or maybe 2 confirmations. However, BIP65 with OP_CLTV and BIP112 with OP_CSV do not have this problem, as they both redefine a non-standard opcode and would not get relayed or mined by old, non-upgraded nodes, making them "safe soft forks."</summary>
+    <published>2015-10-07T15:00:14+00:00</published>
+  </entry>
+</feed>

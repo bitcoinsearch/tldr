@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Link-level payment splitting via intermediary rendezvous nodes</title>
+  <updated>2023-05-25T15:43:09.260003+00:00</updated>
+  <author>
+    <name>Conner Fromknecht 2018-11-13 20:21:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Link-level payment splitting via intermediary rendezvous nodes</title>
+    <updated>2023-05-25T15:43:09.260003+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001582.html" rel="alternate"/>
+    <summary>A proposal has been made to use HORNET, which supports rendezvous routing and is formally proven in a model. This seems to be the logical path forward given that there has already been considerable work towards implementing HORNET via Sphinx. A discussion was had regarding a mechanism for introducing re-routing or rendezvous routing on the Lightning Network. In one scenario, C is the payer and creates a route from itself to D (via channel C-&gt;D or via C-&gt;A-&gt;D) with E providing the onion-wrapped route D-&gt;E with ephemeral key and other necessary data. In another scenario, B knows the entire route B-&gt;C-&gt;D-&gt;E and knows that payee is C but the CD channel is low capacity or down, so B has provided the onion-wrapped route D-&gt;E with ephemeral key and other necessary data to C. A problem was raised with the mechanism proposed during the spec meeting as it violates the wrap-resistance property of the ideal onion routing scheme defined in [1]. Christian Decker proposes a solution involving rendez-vous RV receiving an onion, performing ECDH like normal to get the shared secret, decrypting its payload, simultaneously encrypting the padding, extracting the per-hop payload and shifting the entire packet over, then noticing that it should perform an ephemeral key switch, zero-filling the padding that it just added and performing ECDH with the switched in ephemeral key to get a new shared secret that which is then used to unwrap one additional layer of encryption, and most importantly encrypt the padding so the next hop doesn't see the zero-filled padding.</summary>
+    <published>2018-11-13T20:21:28+00:00</published>
+  </entry>
+</feed>

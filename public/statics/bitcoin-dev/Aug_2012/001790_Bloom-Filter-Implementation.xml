@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Bloom Filter Implementation</title>
+  <updated>2023-05-19T04:06:11.490498+00:00</updated>
+  <author>
+    <name>Matt Corallo 2012-08-15 00:26:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Bloom Filter Implementation</title>
+    <updated>2023-05-19T04:06:11.490498+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-August/001790.html" rel="alternate"/>
+    <summary>The author of this post has implemented a new bloom filter and block relay type in response to the "New P2P commands for diagnostics, SPV clients" thread. This implementation allows for faster relay for clients that already have transactions in memory pool. In order to request that all future MSG_TX inv messages and blocks are filtered, SPV clients will send a filterload message with a serialized bloom filter. Nodes can also send filteradd messages which add particular data blocks to the filter (not recommended for anonymity) and call filterclear which disables filtering on a node's connection until re-enabled.The filter will match any tx which has a script data element in either a scriptPubKey or scriptSig which matches the filter, spends an input who's COutPoint is in the filter, has a hash in the filter, or has a script data element in a prevout's scriptPubKey. Matching of prevouts only occurs on free txes, not those in blocks. Thus, before requesting a block, SPV clients should update the remote node's filter, if required, to be sure it includes the hash of any transaction which would not otherwise match the filter so that the node knows when its transactions are included in blocks.While the author is not a big fan of requiring SPV nodes constantly update the filter when they learn about new transactions, he does not think it's worth loading all prevouts when a node is in IBD to fix it. The branch of this implementation can be found at https://github.com/TheBlueMatt/bitcoin/compare/master...bloom.</summary>
+    <published>2012-08-15T00:26:31+00:00</published>
+  </entry>
+</feed>

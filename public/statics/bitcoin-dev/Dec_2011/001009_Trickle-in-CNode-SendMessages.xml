@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Trickle in CNode::SendMessages</title>
+  <updated>2023-06-05T01:35:40.584918+00:00</updated>
+  <author>
+    <name>Michael Grønager 2011-12-30 07:38:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Trickle in CNode::SendMessages</title>
+    <updated>2023-06-05T01:35:40.584918+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-December/001009.html" rel="alternate"/>
+    <summary>In an email dated 29th December 2011, Michael Grønager points out the flaw in the trickle algorithm used in CNode::SendMessages. The algorithm chooses a new (random) trickle node at each update round with an average round time of 100ms. When a node is the trickle node, it gets to send all its pending addresses to its corresponding peer. However, when a node is not trickle node, only one-fourth of the transaction-invs are sent and the rest are pushed to wait for the next round. The problem lies in the fact that hashSalt is constant and hence, the other three-fourths of invs will never get sent. Michael suggests changing the algorithm and pushing tx'es into a multimap. He proposes choosing the first 25% in each round or removing the redundant vInvWait stuff. He also points out that this implementation divides the inv forwarding hash space into four, along the same lines as discussed last week for DHTs. Michael clarifies that if a node is the trickle node, it receives all invs, not just the special quarter. In conclusion, the suggested changes can fix the issue.</summary>
+    <published>2011-12-30T07:38:22+00:00</published>
+  </entry>
+</feed>

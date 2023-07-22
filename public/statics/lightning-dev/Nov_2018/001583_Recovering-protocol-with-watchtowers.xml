@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Recovering protocol with watchtowers</title>
+  <updated>2023-05-25T16:08:25.454034+00:00</updated>
+  <author>
+    <name>Margherita Favaretto 2018-11-13 20:30:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Recovering protocol with watchtowers</title>
+    <updated>2023-05-25T16:08:25.454034+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001583.html" rel="alternate"/>
+    <summary>Margherita Favaretto has provided an update on her thesis project, which focuses on the recovering mechanism of false positives in the Lightning network while paying particular attention to privacy and security. Her solution involves using watchtowers instead of other connected nodes for backup, as watchtowers are full nodes that are online 24/7 and can guarantee service. In her design, watchtowers have two functions: monitoring the status channel and acting as a backup mechanism. The payment channels are created ad-hoc for the backup mechanism, and the commitment transaction between the node A and the Watchtower needs to include a new field containing the current nonce-time and payload. The payload is encrypted by the public key of node A, so watchtowers cannot decrypt the payload or modify it. To send data to watchtowers, Alice and Bob change their status channel, and Alice sends the new status to the watchtowers W0 and shares the current nonce-time with W1 and W2. When Alice sends this information to the three watchtowers, they memorize the node, current nonce-time, and payload. Alice must ask all her watchtowers for information connected to her node when she needs the backup of all her data. Margherita's solution protects the privacy of the node because the payload contains information of a status channel and nonce-time that are encrypted on the public key of A. Therefore, watchtowers cannot decrypt the payload or modify it. The payload must contain the channel ID between A and the specific watchtower, and this information is not known by the other nodes of the network. Margherita defines two new concepts: nonce-time Tn, which is the current value of nonce-time, and payload P, which consists of a zip of all status channels of a node A at a specific time T1. The nonce time corresponds to the time T1 of the status contained in the zip, and channel_id of the channel with A. This payload is encrypted by the public key of node A. The idea is not to send all data to all watchtowers, but instead, Alice sends the actual nonce-time and payload to one watchtower and just sends the new nonce-time to the others. Margherita suggests using more than one watchtower to mitigate the risk that a single watchtower is attacked and all data inside it is deleted. Every time node A requests data for backup from the watchtower, she sends a small fee through the Lightning channel. Margherita asks if it makes sense to overlap the concept of watchtower with the mechanism of backup.</summary>
+    <published>2018-11-13T20:30:20+00:00</published>
+  </entry>
+</feed>

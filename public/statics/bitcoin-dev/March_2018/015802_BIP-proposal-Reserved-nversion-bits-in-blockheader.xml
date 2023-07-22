@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP proposal: Reserved nversion bits in blockheader</title>
+  <updated>2023-06-13T00:55:47.311900+00:00</updated>
+  <author>
+    <name>Luke Dashjr 2018-03-07 14:43:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP proposal: Reserved nversion bits in blockheader</title>
+    <updated>2023-06-13T00:55:47.311900+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-March/015802.html" rel="alternate"/>
+    <summary>A proposal has been made to reduce the number of version-bits that can be used for parallel soft-fork signalling, in order to reserve 16 bits for non-specific use. The proposal aims to prevent node software from emitting false warnings about unknown signalling bits under the versionbits signalling system (BIP8/9). The scope of the proposal is deliberately limited to reserving bits for general use without specifying specific uses for each bit. It is hoped that this will allow mining manufacturers to play in the designated area without causing disruption or inconvenience. Specific use cases are not important for this proposal.The current draft integrates the work of Timo and Sergio, who had proposed something similar years ago. As such, it should be based on their work instead of outright not-invented-here respecification. The specification should be complete, including updates for GBT and the Stratum mining protocol. These updates are included in the current draft. It is not appropriate to begin using a draft BIP on mainnet before any discussion or consensus has been reached. Doing so seems quite malicious. The author hopes DragonMint miners can still operate using the current Bitcoin protocol. The proposal reserves 16 bits of the block header nVersion field for general purpose use and removes their meaning for the purpose of version bits soft-fork signalling. By reserving bits from the nVersion field for general use, node software can be updated to ignore those bits and therefore will not emit false warnings. Reserving 16 bits for general use leaves enough for 13 parallel soft-forks using version bits. There are a variety of things that miners may desire to use some of the nVersion field bits for. Rolling more bits from nTime is not ideal because it may distort the timestamps over a longer period. Version-rolling AsicBoost requires two bits from the nVersion field to calculate 4-way collisions. Any two bits can be used and mining equipment can negotiate which bits are to be used with mining pools via the Stratum "version-rolling" extension. Sixteen bits from the block header nVersion field, starting from 13 and ending at 28 inclusive (0x1fffe000), are reserved for general use and removed from BIP8 and BIP9 specifications. A mask of 0xe0001fff should be applied to nVersion bits so bits 13-28 inclusive will be ignored for soft-fork signalling and unknown soft-fork warnings. This specification does not reserve specific bits for specific purposes. The proposal is backwards compatible and does not require a soft fork to implement.</summary>
+    <published>2018-03-07T14:43:11+00:00</published>
+  </entry>
+</feed>

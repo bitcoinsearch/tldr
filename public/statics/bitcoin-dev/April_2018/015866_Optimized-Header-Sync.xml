@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Optimized Header Sync</title>
+  <updated>2023-06-13T01:13:06.137358+00:00</updated>
+  <author>
+    <name>Jim Posen 2018-04-03 05:34:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Optimized Header Sync</title>
+    <updated>2023-06-13T01:13:06.137358+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-April/015866.html" rel="alternate"/>
+    <summary>The email thread discusses the use of nBits versus chain work as a short specifier in Bitcoin's consensus protocol. By using nBits, there is a 16% savings in the size of a checkpts message, but it requires checkpoints to be fetched at intervals of 2016 and is tightly coupled to a specific parameter in Bitcoin's consensus protocol. On the other hand, using total chain work instead of nBits is the right tradeoff and is worth the extra 1KB. The checkpoints message is only fetched once per peer per download from genesis, and subsequent catchups only fetch checkpoints from the locator fork point. Additionally, numbers on the space savings from the omission of nVersion were pulled. Three bits in the encoding indicator represent a value 1-7 of the distance in block height since another block with the same version. Looking at the current Bitcoin main chain, this is a table of the occurrences of these values. Given this information, it may be possible to consider only allocating 2 bits in the encoding header rather than 3. Finally, the email suggests that checkpoints and compressed headers streams should be handled in chunks of 2016 headers and queried by chunk number instead of height, falling back to current method if the chunk is not full yet for cache-friendly purposes.</summary>
+    <published>2018-04-03T05:34:39+00:00</published>
+  </entry>
+</feed>

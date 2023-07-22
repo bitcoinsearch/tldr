@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Should Graftroot be optional?</title>
+  <updated>2023-05-20T16:23:52.016209+00:00</updated>
+  <author>
+    <name>Johnson Lau 2018-05-25 09:46:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Should Graftroot be optional?</title>
+    <updated>2023-05-20T16:23:52.016209+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/016027.html" rel="alternate"/>
+    <summary>The context is a discussion on bitcoin-dev mailing list about the problems with SIGHASH_NOINPUT and graftroot that break blind signature schemes. Andrew Poelstra initially expressed concerns about the issue until he came up with a solution where graftroot signatures would not be valid for more than one UTXO if modified to sign (outpoint | script) instead of signing only the script. He later rescinded his concern after realizing that as long as graftroot (and NOINPUT) sigs commit to the public key, it is possible for a server to have unique keys for every output while retaining the same private key and ensuring that "one sig can spend only one output" holds. He proposed a simple scheme involving a blind signer using the private key x who could sign not only for xG but also for any publicly-derived child keys of (xG, cc). The challenger would compute bip32 tweak h, choose blinders alpha and beta, and compute R' = R + alpha*G + beta*P, e  = H(P + hG || R' || tx), and e' = e + beta before sending e' to the signer. The signer would then reply with s = k + xe', and the challenger would unblind this as s' = s + alpha + he. This blind signature scheme is vulnerable to Wagner's attack, but Schnorr 2004 provides mitigations compatible with this modified BIP32ish scheme.There was also a discussion about whether key-prefixing was necessary, but it made the security argument clearer since the messagehash contained some data that could be made unique per-utxo and was committed in the chain. The concern still holds for aggregate sigs, which interact badly with blind signatures. Overall, the discussion revolved around finding solutions to the issues with SIGHASH_NOINPUT and graftroot that break blind signature schemes.</summary>
+    <published>2018-05-25T09:46:29+00:00</published>
+  </entry>
+</feed>

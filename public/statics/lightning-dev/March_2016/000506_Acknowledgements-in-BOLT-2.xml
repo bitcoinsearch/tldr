@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Acknowledgements in BOLT #2</title>
+  <updated>2023-05-23T23:24:11.374955+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-03-31 23:49:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Acknowledgements in BOLT #2</title>
+    <updated>2023-05-23T23:24:11.374955+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-March/000506.html" rel="alternate"/>
+    <summary>Pierre had raised concerns about the placement of acknowledgements in BOLT #2, which Rusty agrees with, and wants to document. The current draft has an "acknowledge" field in the header, indicating the number of non-"authenticate" messages received and processed so far. This helps know what the other side has received when they send an "update_commit" message and to restart the conversation after reconnecting through the "authenticate" message. However, the current spec requires that acks never go backwards, meaning an implementation needs to write persistently to disk before every new packet sent. To avoid this, Rusty suggests moving the "ack" back into the update_commit/authenticate messages. Doing so would allow retransmission from previous received update_revocation on reconnect, and fee updates should work too. An implied "ack" is already present in the update_revocation message, which corresponds to the update_commit. One will need to be added to the "authenticate" message, used for connection re-establishment. Rusty states that this change is not significant and can be implemented easily through callbacks when a packet is acked. It will fire all at once when receiving an update_commit/update_revocation packet. Rusty plans to implement this and report back if anything is missed.</summary>
+    <published>2016-03-31T23:49:26+00:00</published>
+  </entry>
+</feed>

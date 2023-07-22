@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP sighash_noinput</title>
+  <updated>2023-06-13T01:48:48.180567+00:00</updated>
+  <author>
+    <name>Jonas Nick 2018-09-26 09:36:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP sighash_noinput</title>
+    <updated>2023-06-13T01:48:48.180567+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-September/016434.html" rel="alternate"/>
+    <summary>The discussion is about whether NOINPUT should also zero out the hashSequence. If NOINPUT would sign the hashSequence, it would be possible to get rid of OP_CSV in eltoo update scripts and taprootify update scripts. Eltoo update transaction outputs consist of two branches where the settlement branch is a 2-of-2 multisig with a relative timelock using OP_CSV. Removing OP_CSV is possible because both parties' signatures are required to spend the update transaction. However, there is a catch that hashSequence includes the sequence numbers of all transaction inputs. This can be solved by zeroing out the hashSequence whenever NOINPUT is combined with SINGLE. The modification to the current NOINPUT implementation has been provided. Although this approach has some downsides, such as not being able to rebind to an output with an OP_CSV that requires a larger sequence number unless signed with SIGHASH_SINGLE, it makes eltoo unilateral closes taprootifiable. The proposal for SIGHASH_NOINPUT removes the commitment to the previous output and enables simple watch-towers, and is meant to enable some off-chain use-cases. It is suggested to use contract-specific key-pairs to avoid unwanted rebinding opportunities. The implementation details are still under discussion, but the proposal is well-received in general.</summary>
+    <published>2018-09-26T09:36:57+00:00</published>
+  </entry>
+</feed>

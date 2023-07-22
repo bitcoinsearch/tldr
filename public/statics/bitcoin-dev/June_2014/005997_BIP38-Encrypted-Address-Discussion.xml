@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP38 Encrypted Address Discussion</title>
+  <updated>2023-06-08T23:51:53.142374+00:00</updated>
+  <author>
+    <name>Richard Moore 2014-06-09 18:13:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP38 Encrypted Address Discussion</title>
+    <updated>2023-06-08T23:51:53.142374+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-June/005997.html" rel="alternate"/>
+    <summary>The author is implementing BIP38 wallets, but is worried about future attacks on the system. The scrypt pbkdf currently used is (16384, 8, 8) for (N, r, p). To include an extra byte in the address that would encode the parameters used could help to vastly secure more important master keys. One idea is to use one byte, c, and a formula of N = 2 ** (c + 11), r = 2 ** c, and p = r. Even though a full byte is overkill, the space available could be used for other things. For example, with five bits, the space becomes:c = 0 =&gt; (1024, 1, 1) (same as scrypt mining, albeit requires twice the dkLength)c = 3 =&gt; (16384, 8, 8) (current specs)c = 31 =&gt; (2199023255552,2147483648, 2147483648) (highest difficulty, requiring (5.6 * 10 ** 12) Gigabytes of memory per hash)The biggest issue would be backwards compatibility. The 6P should stay the same, as it “requires something extra” and the thing required is a passphrase. But maybe one of the reserved bits could indicate that the address is adaptive? The decoded length of the address will also change though, which could pose issues if bounds checks aren’t being done. Otherwise, we could use “6A” for adaptive or “6p”. However, the author does not like polluting the namespace for a minor tweak.</summary>
+    <published>2014-06-09T18:13:19+00:00</published>
+  </entry>
+</feed>

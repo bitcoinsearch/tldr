@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Payment Point Feature Family (MultiSig, DLC, Escrow, ...)</title>
+  <updated>2023-06-02T20:50:48.814370+00:00</updated>
+  <author>
+    <name>Jonas Nick 2019-10-11 11:49:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Payment Point Feature Family (MultiSig, DLC, Escrow, ...)</title>
+    <updated>2023-06-02T20:50:48.814370+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-October/002228.html" rel="alternate"/>
+    <summary>On 10/9/19, Nadav Kohen shared a series of new ideas about Payment Points and their applicability in various scenarios. He suggested that payment point addition allows for cool things while maintaining the Proof of Payment (PoP) property. These include Payment De-correlation, "Stuckless" Payments, High AMP, Selling Signatures, Selling Pedersen De-commitment and Escrow Contracts.The idea of using point S + ECDH(B, E) where S is the seller's point, B is the buyer's point, and E is the escrow's point was highlighted as a means to generalize payments conditioned on arbitrary AND/OR circuits. According to Kohen, AND is straightforward as two conditions A and B are added together to get a point that requires both of their scalars to be discoverable, except under certain circumstances. OR is harder but can be achieved in the two-party case by ECDH and in the n-party case by multi-party key exchanges.Kohen also discussed two potential applications: MultiSignature Lightning Contracts and DLCs Routed over Lightning. Regarding MultiSignature Lightning Contracts, Kohen explained that any m-of-n party agreement to a payment can be represented as a bunch of ANDs and ORs. For example, a 2-of-3 multisig between parties A, B, and C can be represented as (A AND B) OR (B AND C) OR (C AND A). If a seller has a point S and three parties have points A, B, and C, where a payment must go through if any two of them think it should, then the payment point used for the payment should be S + KE(A + B, B + C, C + A).In the case of DLCs Routed over Lightning, Kohen suggested that Alice and Bob enter into a contract under which Alice wins some amount if s_A is broadcasted and Bob if s_B is broadcasted. Alice has a point A and Bob has a point B. They each send the other a payment with the amount that party must receive if they win with the payment point A + S_A for Bob's payment to Alice and B + S_B for Alice's payment to Bob.The email discusses a scheme for a trustworthy escrow that does not reveal information about the contract. The author suggests that this scheme can be extended to more events through the use of multiple payments being set up in both directions, but notes that this may be complicated. The author also mentions that DLC oracles can be composed and potentially even threshold multi-oracles can be supported under this scheme, although this would require the oracles to attest to some shared key's points with other oracles which is not necessarily optimal.The email was sent to the Lightning-dev mailing list.</summary>
+    <published>2019-10-11T11:49:44+00:00</published>
+  </entry>
+</feed>

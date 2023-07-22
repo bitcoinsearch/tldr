@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-05-23T03:19:36.431924+00:00</updated>
+  <author>
+    <name>Matt Corallo 2020-04-22 23:20:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-05-23T03:19:36.431924+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002656.html" rel="alternate"/>
+    <summary>On April 22, 2020, Olaoluwa Osuntokun and Matt Corallo had a discussion about potential solutions to address issues related to Bitcoin contracts. The current system relies on nested trees of transactions to confirm and has limitations that need to be addressed. One proposed idea was to pre-sign HTLC spends with an off-chain 2-of-2 multi-sig covenant to reduce restrictions on how parties can spend their output. However, this may not be workable as it could lead to losing money in case of a broadcasted commitment without revoking.The conversation also focused on the issues surrounding the global mempool and its safety concerns when monitoring it to pull a pre-image as soon as possible. Watching one's own mempool is not guaranteed to work and could be exploited during upgrade cycles. Additionally, they considered the implications of requiring active full nodes with in-sync mempools, which would only be necessary for Lightning nodes seeking to participate in the public routing network with a desire to forward HTLCs.There is a need for more innovative solutions to address complex issues and improve Bitcoin contract functionality. One proposed solution is to watch the mempool, which would mitigate certain class of attacks and resolve issues related to commitment fee guessing games, force close, multi-hop HTLC resolution, and coalescing 2nd level HTLC transactions with the same CLTV expiry. However, it is still unclear whether watching the mempool alone is enough to fix the issue.Another proposal involves pre-signing all HTLC output spends. To counteract the risk of losing money in case of a broadcasted commitment without revoking, an overhaul in the channel state machine may be required to make presenting a new commitment take at least two phases, rendering them unable to broadcast it in the first phase and giving the commitment proposer valid HTLC signatures and the responder what they need to be able to claim their HTCLs in the second phase.Overall, the conversation highlighted the need for more innovative solutions to address these complex issues and improve Bitcoin contract functionality. They discussed the possibility of having a "proper" routing node on the network backed by a full-node and explored various ideas to address the limitations of the current system.</summary>
+    <published>2020-04-22T23:20:03+00:00</published>
+  </entry>
+</feed>

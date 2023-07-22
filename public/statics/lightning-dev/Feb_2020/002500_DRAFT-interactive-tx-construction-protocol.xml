@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DRAFT: interactive tx construction protocol</title>
+  <updated>2023-06-02T23:07:14.854947+00:00</updated>
+  <author>
+    <name>lisa neigut 2020-02-04 23:22:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DRAFT: interactive tx construction protocol</title>
+    <updated>2023-06-02T23:07:14.854947+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002500.html" rel="alternate"/>
+    <summary>Rusty has suggested improvements to the protocol messages for transactions. This involves adding a serial_id to inputs and outputs, which can also be used for deletions. The addition of each input must have a unique serial id, with no repeated id numbers. Serial ids are used as a sorting heuristic for input ordering in the final transaction, replacing BIP69. Initiator's serial ids must be odd, while non-initiator's serial ids must be even. For output additions, a distinct counter set is used. The serial id is used for ordering the transactions' outputs, replacing BIP69. Input and output removals are identified by the serial id, not by txid and index or output script and amount, respectively. The `tx_complete` type counts total removals from the transaction, and the `tx_sigs` type exchanges the txid in the `witness_stack`, serving as a checksum for the transaction. Witnesses are ordered implicitly by serial_id, and all output scripts must be standard. Other notes include setting nLocktime to 0x00000000, or blockheight-6 if communicated during initiation, choosing serial ids randomly, and flipping the bottom bit of any received inputs before relaying them to a peer for multiparty constructions. Collisions of serial ids between peers is a protocol error.</summary>
+    <published>2020-02-04T23:22:28+00:00</published>
+  </entry>
+</feed>

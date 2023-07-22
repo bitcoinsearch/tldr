@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Free Rebalancing Proposals</title>
+  <updated>2023-05-25T02:10:57.088329+00:00</updated>
+  <author>
+    <name>Robert Olsson 2018-08-11 23:31:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Free Rebalancing Proposals</title>
+    <updated>2023-05-25T02:10:57.088329+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-August/001389.html" rel="alternate"/>
+    <summary>The author, Robert Olsson, has proposed a new function for the network called "Free Rebalancing Proposals" which is a fee-less, omni-beneficial rebalancing scheme. Currently, he balances his nodes by identifying channels that have too low remote_balance and too low local_balance for being of any use (in that direction). He then finds potential routes and amounts between all channels A and all channels B that would optimize at least one of them. Finally, he sends a payment along those possible routes for different amounts, sorted after fee, until one succeeds.However, he proposes a better solution wherein a proposal-for-balancing-message is sent over channel A, and the max amount you would propose to balance in that direction is analyzed by each node. The max can only be adjusted down, and this function could be as simple as checking how near "in" is to 100ksat local_balance and "out" is to 100ksat remote_balance. The node passes that message with new max value on to the next node, much like a normal payment.When this packet comes back to the origin, it will know how much the intermediate nodes are willing to let you balance or if someone is reluctant to balance (and the final max value would be 0). If everyone is happy (i.e., max&gt;0), the origin node sends a payment along this node without dropping off any fees along the way, since all nodes agreed and benefit from the rebalancing act.Since all intermediate nodes benefit, they are happy to do this without fees. Since they adjust max values to their desire, it will stop multiple attempts from different nodes from starting to oscillate the balances in the channels but will instead reach some kind of equilibrium as long as the node suggesting proposal uses its freeBalancerMax when proposing and accepting proposals.The intermediate nodes might not need to keep track of any agreements to balancing proposals; it can simply call the freeBalancerMax function, and if the payment is lower, it passes on the payment even if it didn't get any fees. Otherwise, it fails as usual. If someone tries to send a non-agreed payment without fees, but it coincides with the node's desire to rebalance, there is no harm done. The only problem with that is that senders might flood a path with creative attempts trying to find a path with a fee-free hop. Things like that will be stopped by a general throttle functionality which probably will be needed anyhow.</summary>
+    <published>2018-08-11T23:31:52+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_SECURETHEBAG (supersedes OP_CHECKOUTPUTSVERIFY)</title>
+  <updated>2023-05-20T20:36:38.838950+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-06-20 22:05:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_SECURETHEBAG (supersedes OP_CHECKOUTPUTSVERIFY)</title>
+    <updated>2023-05-20T20:36:38.838950+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-June/017036.html" rel="alternate"/>
+    <summary>In an email conversation, Russell O'Connor expressed his thoughts on OP_SECURETHEBAG and mentioned that he does not see any reason to complicate the spec to ensure the digest is precommitted as part of the opcode. He suggested that it could be simulated with an ANYPREVOUT (NOINPUT) sighash using "CHECKSIG" instead of constructing a Hash_BagHash for the script. The script would calculate an ANYPREVOUT sighash for SIGHASH_ANYPREVOUTANYSCRIPT | SIGHASH_ALL and calculate a signature sig = Schnorr(P,m) for some pubkey P, and make the script "CHECKSIG". This method loses the ability to commit to the number of inputs or restrict the nsequence of other inputs but is otherwise similar to constructing Hash_BagHash. Both scripts are automatically satisfied when revealed with the correct set of outputs and don't need additional witness data. To construct "X" via script instead of hardcoding a value because it got you generalised covenants or whatever, one can get the same effect with CAT, LEFT, and RIGHT. The process involves constructing Y in much the same way as X, but then turning that into a signature using pubkey P=G and nonce R=G. One needs to calculate s=1+hash(G,G,Y)*1, and there are overflow issues that can be worked around either by allowing different locktimes or using more complicated scripts.</summary>
+    <published>2019-06-20T22:05:52+00:00</published>
+  </entry>
+</feed>

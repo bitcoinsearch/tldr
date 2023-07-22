@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Request: OP_CHECKTXOUTSCRIPTHASHVERIFY</title>
+  <updated>2023-05-20T17:57:04.989748+00:00</updated>
+  <author>
+    <name>kim juan 2018-10-17 04:26:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Request: OP_CHECKTXOUTSCRIPTHASHVERIFY</title>
+    <updated>2023-05-20T17:57:04.989748+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-October/016448.html" rel="alternate"/>
+    <summary>There is discussion about the possibility of a new opcode for the Bitcoin scripting system that would allow a transaction output to be only spendable in a predefined manner. The proposed opcode, called OP_CHECKTXOUTSCRIPTHASHVERIFY, would mark a transaction as invalid if the txoutScriptHash is not equal to the top stack item and the value of the txoutScript is not equal to OP_HASH160 ThisRedeemScriptHash OP_EQUAL. There are challenges to generalizing this as a script hash due to cyclic reference, but if implemented, it could improve security by making attacks less rewarding.A sample use case is presented where Acme has an ordinary key pair and a secure key pair, with the ordinary key pair assumed to be in a less secure environment. The private key of the secure key pair will never be exposed until the moment it needs to revoke the transaction of the ordinary key pair. The proposed redeemScript allows outputs to be spent only by forwarding them to the NextRedeemScript, even if the original key pair is compromised. The combination of the two key pairs as one multisig can spend the output immediately regardless of the timelock.The use case demonstrates the need for a primitive opcode to influence how the output can be spent. If implemented, this could provide a deeper defense to deter attacks, particularly if an attack is costly to pull off. However, there are still other attack vectors if Acme's original key pair is compromised, such as draining the output as transaction fees. To reduce this risk, Acme should submit the transaction before the 12-hour timelock and leave it in the mempool, waiting for nSequence to elapse. Attacker's transactions submitted after this point should be rejected by the network, while those submitted before it will be caught by the monitoring function.Overall, the proposed opcode could improve the retroactive invalidation of Bitcoin transactions and provide a useful tool for preventing attacks. However, there are also possible privacy concerns and the use case assumes P2SH is an exceptional case for custodians like e-commerce merchants and exchanges.</summary>
+    <published>2018-10-17T04:26:34+00:00</published>
+  </entry>
+</feed>

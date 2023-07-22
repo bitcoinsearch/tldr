@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>On adaptor security (in protocols)</title>
+  <updated>2023-06-16T18:08:26.481334+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2023-05-11 11:41:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>On adaptor security (in protocols)</title>
+    <updated>2023-06-16T18:08:26.481334+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-May/021665.html" rel="alternate"/>
+    <summary>On May 11th, 2023, AdamISZ sent an email to Lloyd Fournier discussing a potential variant of the canonical adaptor based swap. He suggests that Alice can encrypt the single-key signature for her payment to Bob with the encryption key being T = sG, where s is the partial signature of Bob on the payout from a multisig to Alice. However, Lloyd points out that Alice could still move the funds even if Bob decrypts and broadcasts by revealing s if she gets confirmed first. He notes that a multisig is always necessary in these situations, but it need not be a key aggregated multisig like MuSig. Lloyd also mentions that there is no useful use of a single signer adaptor signature in Bitcoin without some kind of other spending constraint.On May 8th, 2023, Lloyd and AdamISZ had a conversation discussing the usefulness of single signer adaptors. Lloyd argues that they do provide a way to create enforcement that the publication of signature on a pre-defined message will reveal a secret. He gives an example of holding a secret key for X and creating a signature adaptor with some encryption key Y with message m. If he does not create any further signatures on m, then any signature on m that is published necessarily reveals the secret on Y to him. This property can be useful in practice and has already been used for years by DLCs in production. However, AdamISZ struggles to understand this point and references Dryja's construct and single key Schnorr, stating that they are missing and therefore making them useless. Lloyd clarifies that he was not referencing the DLC oracle attestation protocol but rather pointing out that DLC client implementations have been using single signer adaptor signatures as signature encryption in practice for years for transaction signatures. There are even channel implementations using them as well as atomic swaps doing this.</summary>
+    <published>2023-05-11T11:41:14+00:00</published>
+  </entry>
+</feed>

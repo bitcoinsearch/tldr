@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP-0322 (generic signmessage) improvements</title>
+  <updated>2023-06-14T16:48:59.644618+00:00</updated>
+  <author>
+    <name>Karl-Johan Alm 2020-12-21 05:37:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP-0322 (generic signmessage) improvements</title>
+    <updated>2023-06-14T16:48:59.644618+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-December/018314.html" rel="alternate"/>
+    <summary>A developer has rewritten the text of BIP-0322, a standard for interoperable signed messages based on the Bitcoin Script format, to simplify and clarify the protocol. The changes include merging "consensus" and "upgradeable" rules into one set of rules consisting of consensus checks plus additional restrictions that must be included.Additionally, the BIP specifies three formats for signing messages: legacy, simple, and full, with a variant of the full format used to demonstrate control over a set of UTXOs. Validators must output one of four states: valid, valid at time t and age s, consensus-valid, or inconclusive, and the signature must pass all checks described in the detailed specification.The BIP outlines additional states that can be output instead of "valid" or "invalid" to ease implementation. The first additional state discussed is "valid at time t and age s," which is output if the nLockTime of to_sign is set to "t" and the nSequence of the first input of to_sign is set to "s." If both values are 0, "valid" must be outputted. Users may interpret this state as valid or invalid relative to the state of the current blockchain.Another additional state is "inconclusive," which should be outputted by validators who cannot execute the scripts used by to_sign due to only supporting specific script templates or Miniscript. While users should interpret this state as invalid, it should also serve as a sign to find more capable software.Validators that are unable to check the additional restrictions imposed by this BIP but can check consensus-correctness of witnesses may output "consensus-valid" to indicate that a signature has passed all consensus and structural checks. However, other software may fail to validate the same signature.The BIP is backward-compatible with the legacy signmessage/verifymessage specification through a special case described in the document. The document is licensed under the Creative Commons CC0 1.0 Universal license. Test vectors have not yet been provided, and there is currently no reference implementation.The BIP's author acknowledges David Harding, Jim Posen, Kalle Rosenbaum, Pieter Wuille, Andrew Poelstra, and many others for their feedback on the specification. The new text can be found on Github and comments are welcome.</summary>
+    <published>2020-12-21T05:37:38+00:00</published>
+  </entry>
+</feed>

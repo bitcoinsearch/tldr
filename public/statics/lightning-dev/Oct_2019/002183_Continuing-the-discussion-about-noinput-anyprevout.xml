@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Continuing the discussion about noinput / anyprevout</title>
+  <updated>2023-06-02T20:29:27.101538+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-10-01 14:26:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Continuing the discussion about noinput / anyprevout</title>
+    <updated>2023-06-02T20:29:27.101538+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-October/002183.html" rel="alternate"/>
+    <summary>ZmnSCPxj, a Bitcoin developer, has proposed an alternative to the `SIGHASH_NOINPUT` flag. The proposal involves creating a new opcode called `OP_CHECKSIG_WITHOUT_INPUT`. This opcode would ignore any `SIGHASH` flags present on a signature and instead hash the current transaction without input references, then check that hash to the signature. It would be equivalent to `SIGHASH_NOINPUT`, but as an opcode, it could be embedded in a Taproot script. ZmnSCPxj suggests that this would be useful for a Decker-Russell-Osuntokun script with an internal Taproot point being a 2-of-2, then having a script `OP_1 OP_CHECKSIG_WITHOUT_INPUT`. Unilateral closes would expose the hidden script, but cooperative closes would use the 2-of-2 directly. ZmnSCPxj also notes that any special SCRIPT would already be supportable by Taproot, including ones that may potentially lose funds for the user. There is concern about `SIGHASH_NOINPUT` abuse, and ZmnSCPxj questions why there is not the same level of concern about Taproot abuse. However, there are advantages and disadvantages to both the sighash flag and the proposed opcode. With the sighash flag, the spender is in charge of specifying the flags, whereas with an opcode, the output dictates the signature verification modalities. The downside of the opcode is the increased design space. The proposal is open for discussion amongst other developers.</summary>
+    <published>2019-10-01T14:26:39+00:00</published>
+  </entry>
+</feed>

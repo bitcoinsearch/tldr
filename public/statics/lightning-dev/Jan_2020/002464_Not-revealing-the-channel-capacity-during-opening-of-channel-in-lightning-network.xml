@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Not revealing the channel capacity during opening of channel in lightning network</title>
+  <updated>2023-06-02T22:51:56.511778+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-01-27 15:55:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Not revealing the channel capacity during opening of channel in lightning network</title>
+    <updated>2023-06-02T22:51:56.511778+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-January/002464.html" rel="alternate"/>
+    <summary>In a thread-hijack, ZmnSCPxj discusses the possibility of route-hijacking, where someone provides routing for a lower fee and users happily take it. This creates a catch-22 situation: If users notice lower fees and go to lower-fee channels, then route-hijacking is possible and surveillors can pay via sacrificed fees for better surveillance. But if users ignore lower fees, then forwarding nodes will jack up their prices to 21 million Bitcoin `fee_base`, because users are going to go through their nodes with equal probability as lower-priced nodes. The traits that make one a good forwarding node, such as having a large number of channels, cheap fees, central location, high uptime, low latency, also makes one a good surveillance node. Fortunately, this second-layer Lightning network remains censorship-resistant, just like on the blockchain layer, and censors can be evicted by jacking up willingness to pay fees, including on-chain fees to move channels away from the censoring node and towards the node the user wants to pay.A subsequent email from Matt Corallo further explains that there's no real reason lightning nodes have to have confidence in proof-of-funds locked, as long as a node routes the payment to the next hop, how they do it doesn't really matter. Allowing things like non-lightning channels would actually be quite compelling. The reason that lightning nodes today require proof-of-funds-locked is largely for DoS resistance, effectively rate-limiting flooding the global routing table with garbage, but such rate-limiting could be accomplished via other means.In another email, Ugam Kamat explains that in order to have faith that the channel announced by the nodes is actually locked on the Bitcoin mainchain, we need to have the outpoint (txid and vout) of the funding transaction. If we do not verify that the funding transaction has been confirmed, nodes can cheat us that a particular transaction is confirmed when it is not the case. This information is broadcasted in the channel_announcement message in the short_channel_id field which includes the block number, transaction number and vout. Since Bitcoin does not allow confidential transactions, we can query the blockchain and find out the channel capacity even when the amounts are never explicitly mentioned. Subhra Mazumdar asked what could be the potential problem if a channel is opened whereby the channel capacity is not revealed publicly but just a range proof of the attribute (capacity &gt;0 and capacity &lt; some maximum). He thinks that revealing channel capacity make the channels susceptible to channel exhaustion attack or a particular node might be targeted for node isolation attack.</summary>
+    <published>2020-01-27T15:55:21+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Making fee estimation better</title>
+  <updated>2023-06-07T18:12:33.888982+00:00</updated>
+  <author>
+    <name>Gavin Andresen 2013-10-24 20:39:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Making fee estimation better</title>
+    <updated>2023-06-07T18:12:33.888982+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-October/003436.html" rel="alternate"/>
+    <summary>In an email exchange in 2013, Peter Todd revealed that Eligius had contracts to do transaction mining and was currently responsible for 10% of the hashing power. However, it was confirmed that only a small percentage of this was Out-Of-Band (OOB) fee payments which would not affect fee estimation code. There were multiple layers of reasons why OOB fee payments would not disrupt the estimates. For example, if the transactions were not broadcast, then they would have no impact on the estimates. Similarly, if the transactions were broadcast but not relayed because their priority and fee were way below current estimates, they would also have little effect. If the OOB transaction was zero-fee or zero-priority, then it would have no effect on the estimates at all. If they made up less than 40% of broadcast transactions, they would have minimal impact on the fee estimate. The only situation where the estimation code could be slightly affected is when estimating the priority required to enter a block if there are many zero-fee, low-but-not-zero-priority OOB transactions being broadcast. Even then, the failure would be mild, resulting in free transactions needing to build up more priority than estimated before successfully entering a block. If this became a significant problem, Pieter's idea of keeping track of memory pool transactions that are NOT getting mined would fix it. All of this was completely unrelated to child-pays-for-parent and/or replace-with-higher-fee. Gavin Andresen requested that people stop saying things like "Regarding the transaction fee estimate code, it's not very well thought out."</summary>
+    <published>2013-10-24T20:39:34+00:00</published>
+  </entry>
+</feed>

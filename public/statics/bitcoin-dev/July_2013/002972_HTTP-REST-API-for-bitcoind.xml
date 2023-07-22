@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>HTTP REST API for bitcoind</title>
+  <updated>2023-05-19T17:08:10.546063+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2013-07-23 10:19:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>HTTP REST API for bitcoind</title>
+    <updated>2023-05-19T17:08:10.546063+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-July/002972.html" rel="alternate"/>
+    <summary>The conversation is about the use of REST API for SPV clients. The author opines that it would make it easier for lightweight clients if they could use it. However, increasing resource usage by SPV clients on full nodes is undesirable. The other person in the conversation suggests that making it easier and easier to store a partial blockchain would result in lower demand on full nodes. But, a partial blockchain is quite useless as you can't build an UTXO set from it. It is suggested that old blocks remain available for new full nodes to bootstrap. As soon as we get to a few protocol changes that would allow new full nodes to find specific peers with the data they need, we can have fully-verifying yet (partially) pruning nodes. The author disagrees strongly, stating that miners would still be keeping the entire chain. The rules of the network are enforced by full nodes, not by miners. There is no way to do some "partial validation" using just the blocks you care about. Storing some blocks doesn't matter here - it is all about whether you can maintain the UTXO set or not.It is mentioned that UTXO data currently requires full trust in whomever is providing it, and that situation will continue until UTXO commitments are implemented. It is also suggested that maintaining a headers-only block chain is far easier. When you fetch your relevant block subset, you can easily see that they are real blocks in your headers-only blockchain, so it's pretty much impossible to lie to "give me the block containing transaction X". However, assuming there is no powerful enough attacker that can benefit from doing a sybil attack on you. If SPV nodes rely on unauthenticated UTXO set data, there is no such limitation, and they can let you believe *anything*.</summary>
+    <published>2013-07-23T10:19:58+00:00</published>
+  </entry>
+</feed>

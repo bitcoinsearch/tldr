@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Version bytes</title>
+  <updated>2023-05-26T19:16:26.164541+00:00</updated>
+  <author>
+    <name>John Smith 2011-07-08 08:16:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Version bytes</title>
+    <updated>2023-05-26T19:16:26.164578+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-July/000154.html" rel="alternate"/>
+    <summary>The email conversation between Pieter Wuille and Stefan Thomas discusses the standardization of version bytes used by Bitcoin for different applications. The three components that are significant in this regard are network, data class, and version. There is no technical reason why different networks and data classes would require separate version bytes, but it is a good practice to prevent confusion. Bit 16 in the version byte is reserved for alternate chains, and when set, everything is up to the network itself, and no further semantics are defined. When bit 16 isn't set, the rest of the network remains. Testnet already uses version 111, which is not a single bit, but they can use bit 1 for testnet and XOR the rest of the version number with 111 when bit 1 is set. They can also reset testnet by changing its addresses slightly and stating odd=testnet and even=realnet. They have six more bits to play with - 128, 64, 32 and 8, 4, 2. As 128 is used for private keys, they may use (128, 64, 32) for data classes and (8, 4, 2) for versions. In this format, bits 128/64/32 define data class, bits 8/4/2 define version number, and bit 1 defines testnet. This discussion started when Stefan wanted to define a format for master keys from which to derive deterministic wallet keys, and Pieter suggested using data class 192 for that, leaving the lower numbers for more basic data like public keys.</summary>
+    <published>2011-07-08T08:16:46+00:00</published>
+  </entry>
+</feed>

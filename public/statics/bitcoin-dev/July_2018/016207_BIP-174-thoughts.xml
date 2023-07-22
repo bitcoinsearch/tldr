@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 174 thoughts</title>
+  <updated>2023-06-13T03:20:49.364448+00:00</updated>
+  <author>
+    <name>William Casarin 2018-07-05 19:20:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 174 thoughts</title>
+    <updated>2023-06-13T03:20:49.364448+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-July/016207.html" rel="alternate"/>
+    <summary>The concern raised in this context is regarding the format of PSBT (partially signed Bitcoin transaction). The writer points out that the format is confusing and can only be parsed by deserializing the transaction. They explain that there is no "length" field for the key-value map arrays, which means that the number of kv maps to parse must be counted based on the number of transaction input/outputs. This process is brittle because if a Combiner writes the wrong number of key-value maps that do not align with the number of inputs and outputs in the transaction, then the PSBT will not be able to be deserialized properly, but it will still be a valid PSBT. The writer suggests making changes such as adding an array length prefix or making all (global/input/output) types share the same enum to address this issue. They also suggest making it explicit in the BIP that the number of key-value maps must match the number of inputs/outputs. There is no mention of whether this requirement is implied or not. Overall, the writer's concern revolves around the lack of clarity in the PSBT format, which could lead to errors during parsing and deserialization.</summary>
+    <published>2018-07-05T19:20:32+00:00</published>
+  </entry>
+</feed>

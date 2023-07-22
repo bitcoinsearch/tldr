@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - `htlc_maximum_msat` as a valve for flow control on the Lightning Network</title>
+  <updated>2023-06-04T04:07:57.758636+00:00</updated>
+  <author>
+    <name>Matt Corallo 2022-09-23 08:43:41</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2022-09-26 00:29:24</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2022-09-26 01:26:57</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2022-09-27 00:23:38</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2022-09-28 02:07:51</name>
+  </author>
+  <author>
+    <name>René Pickhardt 2022-09-22 06:40:30</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2022-09-29 03:45:39</name>
+  </author>
+  <author>
+    <name>René Pickhardt 2022-09-23 10:27:03</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2022-09-24 12:12:03</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2022-09-26 23:26:24</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2022-09-28 18:58:16</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2022-09-29 00:41:44</name>
+  </author>
+  <link href="lightning-dev/Sept_2022/003690_-htlc-maximum-msat-as-a-valve-for-flow-control-on-the-Lightning-Network.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2022/003697_-htlc-maximum-msat-as-a-valve-for-flow-control-on-the-Lightning-Network.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2022/003698_-htlc-maximum-msat-as-a-valve-for-flow-control-on-the-Lightning-Network.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2022/003702_-htlc-maximum-msat-as-a-valve-for-flow-control-on-the-Lightning-Network.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2022/003703_-htlc-maximum-msat-as-a-valve-for-flow-control-on-the-Lightning-Network.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2022/003686_-htlc-maximum-msat-as-a-valve-for-flow-control-on-the-Lightning-Network.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2022/003706_-htlc-maximum-msat-as-a-valve-for-flow-control-on-the-Lightning-Network.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2022/003691_-htlc-maximum-msat-as-a-valve-for-flow-control-on-the-Lightning-Network.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2022/003695_-htlc-maximum-msat-as-a-valve-for-flow-control-on-the-Lightning-Network.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2022/003701_-htlc-maximum-msat-as-a-valve-for-flow-control-on-the-Lightning-Network.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2022/003704_-htlc-maximum-msat-as-a-valve-for-flow-control-on-the-Lightning-Network.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2022/003705_-htlc-maximum-msat-as-a-valve-for-flow-control-on-the-Lightning-Network.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - `htlc_maximum_msat` as a valve for flow control on the Lightning Network</title>
+    <updated>2023-06-04T04:07:57.759638+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-September/003690.html" rel="alternate"/>
+    <summary>René Pickhardt, a Lightning Network developer, proposed a mechanism to mitigate channel depletion through the use of `htlc_maxium_msat` as a control valve to regulate drain pressure. This proposal suggests that channels set their value so that payment flow is balanced on average, resulting in rare depletion and usually successful payments. It relies on senders paying higher fees for long-term benefits and depends on cooperation. The proposal has limitations regarding collecting forwarding fees, but it is better than the fee rate cards idea in several ways.In another forum, users discussed monetization and the undercutting of fees by CLBOSS, with the consensus being that the software should be modified to raise fees and preserve liquidity supply. The author discusses the challenges in creating a reliable forwarding node for Lightning Network payments while optimizing for low fees. One challenge is creating fake payment flows to rebalance channels requires reserving capital, which could become prohibitively capital intensive if there is high demand at X's fee rate along the path. Additionally, max_msat creates another challenge as forwarding nodes may split their rebalancing into quanta of N millisats.The Lightning Network is a payment protocol that operates on top of Bitcoin. The discussion revolves around the issue of unbalanced flow in Lightning Network. Forwarding nodes sell IPpvHg or liquidity, and if they run out of stock, they cannot forward against the balance, leading to no profit. A forwarding node's stock of IPpvHg can be depleted by "mostly a drain" peers, and the stock received from "mostly a source" peers is less valuable.In this context, there are three individuals - A, B, and Z - involved in the Lightning network. A and B have channels with each other and are collecting $0.90 in routing fees per day, while Z has a channel through which $10,000 is flowing from A to B, but his channel runs out after 5 days, at which point he has collected $200 and has to spend $200 rebalancing on-chain. Each person paying $5 to B pays $0.002045 in fees, while each person paying $1000 to A pays $0.01 in fees.To break even, Z must reduce his fee rate below 0.4% and increase his channel capacity above $50k. However, increasing the B-&gt;A channel flow would lead X and Y's flows to be unbalanced, causing payers to have to route more flow through Z. Therefore, it is necessary to have a mechanism to move funds outside of the Lightning network, so that every published node should have onchain/offchain swap capability. This will allow for better management of channels and reduce the risk of running out of funds.Additionally, ZmnSCPxj notes that rebalancing is a strategy used by forwarding nodes to buy cheaper liquidity and resell it at a higher price. However, this can occur at any time and may lead to channel saturation due to being cheaper by 0.0001%. In another conversation, participants debated the concept of "stock of liquidity" as a metaphor for the network's ability to handle transactions. The thread also touched on rebalancing channels and the issue of private information, as well as the proposal of an alternative to splicing.Another issue facing the Lightning Network is the disparity in fees paid by users due to routing issues and latency. To address this issue, one proposal is max_msat throttling which avoids channel depletion cases, but it has flaws and requires continuous payment flow/payment size curve. René Pickhardt proposes using `htlc_maximum_msat` as a control valve to regulate the pressure coming from drained channels and mitigate their depletion. He provides theoretical models and experimental algorithmic ideas for node operators to find decent `htlc_maximum_msat` values in a greedy fashion. In response to questions raised by Matt Corallo, René addresses the gossip overhead generated by this type of protocol and its privacy implications. Finally, the discussion highlights the importance of considering market forces while implementing any mechanism for throttling payment traffic.Overall, it is important to consider both on-chain and off-chain solutions when working with the Lightning Network.</summary>
+    <published>2022-09-23T08:43:41+00:00</published>
+  </entry>
+</feed>

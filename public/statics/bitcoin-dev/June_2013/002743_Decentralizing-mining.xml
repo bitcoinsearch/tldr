@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Decentralizing mining</title>
+  <updated>2023-06-06T18:17:47.855962+00:00</updated>
+  <author>
+    <name>Melvin Carvalho 2013-06-10 21:31:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Decentralizing mining</title>
+    <updated>2023-06-06T18:17:47.855962+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-June/002743.html" rel="alternate"/>
+    <summary>On June 10, 2013, Peter Todd shared his ideas for the implementation of pooled mining and solo mining in Bitcoin-development mailing list. According to him, the miner should make two connections: to their pool and a local bitcoind. They should always work on the subset of transactions common to both the pool's getblocktemplate and the local one. If they find a share that does not meet difficulty, they hand it over to the pool. However, if the share meets difficulty, they hand it over to both the pool and the local bitcoind. Todd suggests optimizing this process by handing over only transaction hashes where possible.To reduce bandwidth, he proposed passing only the block header for normal shares, and having the pool randomly pick a subset of transactions to audit. Any fraud would cancel the user's shares. This approach would require persistent share storage so that users could provide the pool with the full share later if their connection disconnects. Todd also noted that miners can do the reverse by picking random block headers and challenging the pool to prove that they correspond to a valid block.Todd suggested flooding the network with block headers separately via UDP to optimize block propagation and avoid orphaning slow-to-propagate blocks. He recommended building a block extending the one that is not known about, which is more rational but poses major risks to Bitcoin. In terms of pool work, Todd asked whether eliopool already accepts arbitrary shares like this and adjusts share amount based on fees. He also proposed some possible protocol extensions. For miner work, he suggested that the code to merge the two block templates together be implemented first in bfgminer, followed by libblkmaker and python-blkmaker. Additionally, an automatic fallback to local solo mining should be included if the pool cannot be contacted.</summary>
+    <published>2013-06-10T21:31:18+00:00</published>
+  </entry>
+</feed>

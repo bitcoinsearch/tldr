@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Comments on BOLT#11</title>
+  <updated>2023-05-24T03:31:39.851707+00:00</updated>
+  <author>
+    <name>Jonathan Underwood 2017-12-11 12:17:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Comments on BOLT#11</title>
+    <updated>2023-05-24T03:31:39.851707+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2017-December/000822.html" rel="alternate"/>
+    <summary>In a conversation between Jonathan Underwood and ZmnSCPxj, they discuss the use of UTF-8 encoding for descriptions in Bitcoin transactions. Underwood argues that naive implementations that do not follow the UTF-8 spec should be mentioned to avoid mojibake corruption but this is an issue as old as the internet itself, with some Japanese websites still using shift-JIS encoding. Normalization is only an issue when hashing or comparing hashed data so it is not relevant for the description where the goal is to relay information to the user. Regarding the purpose commit hash, there is no specified way to relay the data, so specifying the data to be fetched from a URL and having the data encoded as a binary-stream with the exact bytes that were hashed could solve the issue. Protocols like BIP39 require normalization because different IMEs could represent the same data with different unicode codepoints and we need to ensure the same human readable phrase always has the same hash. However, this is not necessary for the description field since it does not involve losing money. ZmnSCPxj agrees that full Unicode support via UTF8 should be supported but warns about being precise which variant of UTF8 is used. A naive implementation that specially treats 0 bytes should work correctly without caring if the encoding is UTF8 or plain 7-bit ASCII. The use of Modified UTF8 or disallowing null characters may be considered. Pulling in UTF8 brings in the issue of Unicode normalization, and multiple different byte-sequences in UTF8 may lead to the same sequence of human-readable glyphs. Specifying ASCII avoids this issue, but GUI should try to impose this normalization.</summary>
+    <published>2017-12-11T12:17:19+00:00</published>
+  </entry>
+</feed>

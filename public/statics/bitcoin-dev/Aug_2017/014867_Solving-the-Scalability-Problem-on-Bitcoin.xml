@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Solving the Scalability Problem on Bitcoin</title>
+  <updated>2023-06-12T15:02:52.391868+00:00</updated>
+  <author>
+    <name>Adam Tamir Shem-Tov 2017-08-26 22:32:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Solving the Scalability Problem on Bitcoin</title>
+    <updated>2023-06-12T15:02:52.391868+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-August/014867.html" rel="alternate"/>
+    <summary>The email thread discusses a proposal to solve the scalability issue in Bitcoin. The proposal involves combining and pruning the blockchain in its entirety every 999 blocks to one block (not including the Genesis block), which would be verified by full nodes and used as a reference for the next 1000 blocks. This would limit the ledger to a maximum of 1000 blocks. The idea is to reduce the size of the blockchain, which is currently around 140GB and growing exponentially with the number of users and transactions created, which could reach a Terrabyte sooner than expected. The problem with node pruning is that it is not standardized, and for a new node to enter the network and to verify the data, it needs to download all data and prune it by itself. The proposal suggests adding a Genesis Account which will be the new sender to fix the issue of removing all intermediate origins and making funds untraceable and hence unverifiable. The way bitcoin works is that the funds are verified by showing that they have an origin, this "origin" needs to provide a signature, otherwise the transaction won't be accepted. Hence the Genesis Account, which is not really an account, would replace old ones and allow any node creating this Exodus Block to sign with it. In response to the proposal, Thomas Guyot-Sionnest argues that implementing the solution is impossible because there is no way to determine authenticity of the blockchain mid way. The proof that a block hash leads to the genesis block is also a proof of all the work that's been spent on it (the years of hashing). At the very least, all blocks until a hard-coded checkpoint in the code would have to be kept, which also means that as nodes upgrades and prune more blocks older nodes will have difficulty syncing the blockchain. He also points out that it's not just the addresses and balance that need to be saved, but also each unspent output block number, tx position and script that are required for validation on input. That's a lot of data to save every 1000 blocks, and it doesn't even guarantee being able to drop older blocks.</summary>
+    <published>2017-08-26T22:32:17+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP Proposal: Compact Client Side Filtering for Light Clients</title>
+  <updated>2023-05-20T02:37:28.009573+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2017-06-01 19:01:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP Proposal: Compact Client Side Filtering for Light Clients</title>
+    <updated>2023-05-20T02:37:28.009573+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-June/014474.html" rel="alternate"/>
+    <summary>Laolu and Alex Akselrod have proposed a new light client BIP that describes a concrete specification for the much-discussed client-side filtering reversal of BIP-37. The proposal implements a new light-client mode that uses client-side filtering based on Golomb-Rice coded sets. Full nodes maintain an additional index of the chain, serving this compact filter to light clients that request them. Light clients then fetch these filters, query them locally, and possibly fetch the block if a relevant item matches. Blocks can be fetched from any source once the light client deems it necessary. The primary motivation behind this work was enabling a light client mode for lnd to support a more lightweight back end paving the way for the usage of Lightning on mobile phones and other devices.The proposal uses a fixed false-positive rate of P = 1/2^20, unlike BIP-37, which allows clients to dynamically tune their false-positive rate. One specific area they seek feedback on is the parameter selection. Alex has made a JS calculator that allows users to explore the effect of tweaking the false positive rate in addition to other variables such as the number of items the wallet is scanning for, the size of the blocks, number of blocks fetched, and the size of the filters themselves. The calculator calculates the expected bandwidth utilization using the CDF of the Geometric Distribution.Karl Johan Alm (kallewoof) has done some analysis of his own, focusing on a distinct encoding type. The key difference in their encodings is that Karl's filters use a binomial encoding directly on the filter contents, while they create a Golomb-Coded set with the contents being hashes of the filter items.Using a fixed fp=20, Laolu provides statistics detailing the total index size, as well as averages for both mainnet and testnet. For mainnet, using the filter contents as currently described in the BIP (basic + extended), the total size of the index comes out to 6.9GB. For testnet, the total size is 2.75GB. The max filter sizes are a bit larger due to some of the habitual blocks created last year when testing segwit.Laolu has uploaded a CSV file of raw data for each block (mainnet + testnet) for those interested in the raw data. They look forward to receiving feedback from everyone.</summary>
+    <published>2017-06-01T19:01:14+00:00</published>
+  </entry>
+</feed>

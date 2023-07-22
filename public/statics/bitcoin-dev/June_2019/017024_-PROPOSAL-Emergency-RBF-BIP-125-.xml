@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[PROPOSAL] Emergency RBF (BIP 125)</title>
+  <updated>2023-06-13T19:22:26.033710+00:00</updated>
+  <author>
+    <name>rhavar at protonmail.com 2019-06-10 16:34:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[PROPOSAL] Emergency RBF (BIP 125)</title>
+    <updated>2023-06-13T19:22:26.033710+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-June/017024.html" rel="alternate"/>
+    <summary>The discussion on the bitcoin-dev mailing list involves proposed changes to the rules for replacing unconfirmed transactions with fee-bumped replacements. One proposal is to store a relay bandwidth used (RBU) value with each transaction in the mempool, which is defined as the size of the transaction plus RBU of all transactions it has evicted. A replacement would be valid only if its feerate is higher than that of the transaction it's evicting and its fee is greater than minRelayFee multiplied by RBU. The thread includes a scenario where an attacker creates two transactions, one small and one large. Under current rules, if the attacker wants to fee-bump the small transaction, they also have to pay for eviction of the large child transaction. Under the new proposed rule 6, the attacker's cost to get the small transaction near the top of the mempool would be less, resulting in approximately a 95% reduction in the cost paid by an attacker for wasting 400,000 bytes of bandwidth per node. Another point of discussion concerns rule 5, which limits the number of unconfirmed transactions that are accepted by bitcoind. The BIP125 limit is 100, but Bitcoin Core's current default is 25. The proposed changes could make it harder for wallet software to determine whether or not transactions have successfully been relayed, especially for LN wallets that need to guess where the next-block feerate boundary is in other nodes' individual mempools. Overall, the proposed changes introduce added complexity and require more client-side knowledge, possibly resulting in extremely high feerates. However, paying lots of fees may not be the optimal solution to the problem of having to pay lots of fees.</summary>
+    <published>2019-06-10T16:34:33+00:00</published>
+  </entry>
+</feed>

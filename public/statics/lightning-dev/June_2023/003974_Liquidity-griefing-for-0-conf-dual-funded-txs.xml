@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Liquidity griefing for 0-conf dual-funded txs</title>
+  <updated>2023-07-07T02:46:17.015105+00:00</updated>
+  <author>
+    <name>Antoine Riard 2023-06-07 00:41:12+00:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Liquidity griefing for 0-conf dual-funded txs</title>
+    <updated>2023-07-07T02:46:17.015133+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-June/003974.html" rel="alternate"/>
+    <summary>The context of the email is a discussion about liquidity griefing attacks in dual-funded transactions in the Lightning Network. The issue arises when one party locks their UTXOs in a shared transaction, but the other party goes silent, leaving the locked liquidity unusable. It's not feasible to unlock the UTXOs after detecting a fishy node because the liquidity would still be locked for a duration, and the attacker could repeat the attack with different node IDs.To address this issue, an elegant solution is proposed: never locking UTXOs used in dual-funded transactions. If a remote node goes silent, the UTXOs will automatically be reused in another instance of the protocol. However, this solution falls short when using 0-conf (zero-confirmation) channels because accidental double-spending can result in loss of funds. Nodes offering 0-conf services expose themselves to liquidity griefing.Another related issue is that nodes offering 0-conf channels must ensure that the UTXOs used for 0-conf are isolated from those used for non 0-conf. Otherwise, double-spending can occur if a non 0-conf transaction accidentally confirms before the 0-conf transaction.A potential fix for this is implementing a "soft lock" when selecting UTXOs for non 0-conf funding attempts. Soft locked UTXOs should be ignored for 0-conf funding attempts while still being reusable for non 0-conf funding attempts.In the current implementation of Eclair, they use opportunistic 0-conf if certain conditions are met. However, this approach cannot be used when mixing 0-conf and non 0-conf funding attempts due to soft locked UTXOs. The author seeks ideas to improve the situation and offer better protections against liquidity griefing for nodes offering 0-conf services.The email includes links to relevant discussions and proposals related to the Lightning Network and liquidity griefing attacks.</summary>
+    <published>2023-06-07T00:41:12+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BOLT Draft] Onion Routing Spec</title>
+  <updated>2023-05-23T23:56:33.664174+00:00</updated>
+  <author>
+    <name>Christian Decker 2016-08-04 17:05:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BOLT Draft] Onion Routing Spec</title>
+    <updated>2023-05-23T23:56:33.664174+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-August/000561.html" rel="alternate"/>
+    <summary>The email thread discusses the modifications made to the encryption scheme of the end-to-end payload. They ultimately decide on using ChaCha20-Poly1305 on the last hop and normal ChaCha20 on all preceding hops. The group contemplates including the payloads in the header HMAC computation or just using an encryption scheme that also verifies the integrity. Christian explains the pros and cons of each option.Olaoluwa proposes adding a per-hop payload for future information such as limits on the per-hop absolute timeout and fee information, which Christian likes. They also discuss the addition of a version byte for future modifications to the mix-header format. Christian amends the spec to specify that unroutable packets are dropped, and the sender will be signaled.The context discusses the specifications and limitations of version 0 packets in a routing protocol. It is suggested that packets with non-zero version bytes should be rejected, and packets that are not exactly 2258 bytes (or 1234 bytes if the end-to-end payload is dropped) should also be rejected. Replay protection and key rotation are under-specified within the current draft, and potential solutions are proposed.The Lightning Network employs key rotation, where nodes periodically change their onion keys that are used for encrypting and decrypting the packets. A proposed key rotation scheme suggests that nodes publish two keys, along with a block hash of a block beyond a "safe" re-org distance, and a signature covering the advertisement. The first key is intended for use until N blocks after the specified block hash, with nodes switching to the second key afterwards.Furthermore, the Lightning Network proposes using Sphinx, which specifies a format for constructing encrypted messages to be routed through a network of nodes. The per-hop payload is used to give instructions to individual hops, i.e., how many coins to forward to the next hop. This means that the end-to-end payload, i.e., the message in the Sphinx protocol, is currently unused and could be omitted. In Sphinx, intermediate nodes cannot reply to a packet, e.g., if capacities are insufficient or the next node is unreachable, by recycling the routing info. Therefore, a mechanism is proposed to tell the node the total blinding factor along the path so that it can encrypt something in the routing info for the return path.</summary>
+    <published>2016-08-04T17:05:04+00:00</published>
+  </entry>
+</feed>

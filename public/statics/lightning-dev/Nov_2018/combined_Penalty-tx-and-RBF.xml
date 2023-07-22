@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Penalty tx and RBF</title>
+  <updated>2023-06-03T20:37:36.886999+00:00</updated>
+  <author>
+    <name>Cezary Dziemian 2018-11-23 20:31:20</name>
+  </author>
+  <author>
+    <name>Cezary Dziemian 2018-11-23 17:29:48</name>
+  </author>
+  <author>
+    <name>René Pickhardt 2018-11-23 18:07:17</name>
+  </author>
+  <author>
+    <name>Cezary Dziemian 2018-11-23 19:34:38</name>
+  </author>
+  <author>
+    <name>René Pickhardt 2018-11-23 20:03:59</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-11-23 23:17:34</name>
+  </author>
+  <link href="lightning-dev/Nov_2018/001663_Penalty-tx-and-RBF.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001659_Penalty-tx-and-RBF.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001660_Penalty-tx-and-RBF.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001661_Penalty-tx-and-RBF.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001662_Penalty-tx-and-RBF.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001664_Penalty-tx-and-RBF.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Penalty tx and RBF</title>
+    <updated>2023-06-03T20:37:36.886999+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001663.html" rel="alternate"/>
+    <summary>A member of the Lightning-dev mailing list, Cezary Dziemian, raised concerns about outdated commitment transactions that could be used by attackers to spam the bitcoin mempool with transactions and increase fees. He questioned whether it is possible to RBF (replace-by-fee) penalty transactions and if this is a default behavior in popular LN implementations: clightning, eclair, lnd. Another member of the mailing list, René Pickhardt, responded saying that while RBF may be possible for penalty transactions, it may not be practical due to the need for a signature from the former channel partner. He also noted that there is currently no way to CPFP (child-pays-for-parent) the output of a commitment transaction because of the timelock on the output. However, a proposal has been made for BOLT1.1 to add a third output in the commitment transactions that anyone can spend (OP_TRUE) and which has no timelock, allowing anyone to CPFP it.Cezary had two questions related to penalty transactions. Firstly, he was unsure what happens if fees suddenly increase and if his node can use RBF to increase the fee. Secondly, he asked if there is a common approach among the major three implementations and if there is a set amount of time or blocks his node has to commit the penalty transaction. In response, René explained that RBF is unlikely in the case of a unilateral (force) close because the signature of the former channel partner is required. He went on to explain that developers have agreed to have a third output in the commitment transactions for BOLT1.1, which anyone can spend (OP_TRUE) and which is just above the dust level with no timelock so that anyone can CPFP it. During a discussion on the Lightning-dev mailing list, Cezary sought clarification on how commitment and penalty transactions work in Lightning Network. René provided insights into the issue of unilateral force close, stating that RBF would require a signature of one's former channel partner, which may be unlikely to obtain if force close was initiated. Additionally, CPFP would necessitate spending one's output, which may not be possible because there is a timelock on it. However, for BOLT 1.1, a third output in commitment transactions would be added, which anyone can spend (OP_TRUE) and which has no timelock so that anyone can use CPFP.In an email exchange between Cezary and René, Cezary asked about penalty transactions and how to increase fees when they suddenly rise. René explained that RBF is not possible in the case of a unilateral force close because the signature of the former channel partner is required. He also explained that for BOLT1.1, developers have agreed to have a third output in the commitment transactions, which anyone can spend (OP_TRUE) and which is just above the dust level with no timelock so that anyone can CPFP it. Finally, ZmnSCPxj discussed the importance of having RBF-able punishment transactions in preventing theft attempts. He plans to review c-lightning code to see if onchaind does RBF for breach claim transactions.</summary>
+    <published>2018-11-23T20:31:20+00:00</published>
+  </entry>
+</feed>

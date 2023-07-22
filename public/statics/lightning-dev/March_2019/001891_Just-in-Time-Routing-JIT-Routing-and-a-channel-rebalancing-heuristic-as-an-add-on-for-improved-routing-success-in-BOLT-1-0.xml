@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Just in Time Routing (JIT-Routing) and a channel rebalancing heuristic as an add on for improved routing success in BOLT 1.0</title>
+  <updated>2023-06-02T17:43:16.395058+00:00</updated>
+  <author>
+    <name>René Pickhardt 2019-03-05 13:47:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Just in Time Routing (JIT-Routing) and a channel rebalancing heuristic as an add on for improved routing success in BOLT 1.0</title>
+    <updated>2023-06-02T17:43:16.395058+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-March/001891.html" rel="alternate"/>
+    <summary>Just in Time Routing (JIT) schema is introduced as an alternative to the current source-based routing used by the Lightning Network. JIT Routing reduces the need for guessing the route that has enough liquidity in each channel and makes the routing process more like IP-forwarding. The proposed heuristic for rebalancing channels efficiently has been implemented but needs to be tested with a simulation. JIT Routing can be implemented without protocol modification, and it seems to be logically equivalent to AMP Routing. JIT Routing allows local channel balance information to be part of the path-finding process without decreasing node privacy. However, JIT Routing may not be economically incentivized for a routing node in every situation, and the routing process might take a longer time as sub-routing processes are initiated. Additionally, while doing JIT routing, capacity for channels should be reserved before HTLCs are set up to prevent hostile recursive chains of rebalancing operations.Base AMP is suggested to be put into BOLT 1.1 to help resolve the challenge of routing single big payments. Smaller payments have a higher chance to be routed successfully, but the downside is that there will be more payments, increasing the likelihood of payment failure. Base AMP is still a source-based routing protocol putting the sender in a tough spot as it has to guess which routes can work. The recommendation for 'How to JIT Routing?' is given, and an example of how JIT Routing works is provided. JIT Routing allows nodes to quickly rebalance their channels and pass the original onion with a value designed for the route. However, JIT Routing may trigger another JIT operation at another node or make a later stage of the original onion harder to be forwarded. A promising heuristic for rebalancing channels is proposed, where the friend-of-a-friend network is analyzed, and the node that wants to rebalance is removed from the graph. The resulting graph is small, and several cheap rebalancing suggestions can be found in this network. The code for the rebalancing schema will be released soon, but feedback is welcomed while working on it.</summary>
+    <published>2019-03-05T13:47:18+00:00</published>
+  </entry>
+</feed>

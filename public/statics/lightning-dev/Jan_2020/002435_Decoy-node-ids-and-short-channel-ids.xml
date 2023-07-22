@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Decoy node_ids and short_channel_ids</title>
+  <updated>2023-06-02T22:45:28.555821+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2020-01-20 16:44:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Decoy node_ids and short_channel_ids</title>
+    <updated>2023-06-02T22:45:28.555821+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-January/002435.html" rel="alternate"/>
+    <summary>In this email, the author explores some enhancements for unannounced (sometimes called private) channels in the Lightning Network. Unannounced channels are useful for mobile nodes that won't be online often enough to route payments, and they help break linkability between on-chain and off-chain payments. However, the current implementation is broken as invoices leak both the node_id and short_channel_id. The author proposes an alternative design with different trade-offs that can use unique short_channel_ids and node_ids for each invoice, but Carol needs to add a new record in the onion.The proposed design involves using decoy node_ids and short_channel_ids to prevent leakage of real information. For decoy node_ids, Alice signs all invoices with the private key associated with her node_id, but when providing routing hints, she generates a one-time private key and signs the invoice with it instead. For decoy short_channel_ids, Alice draws a random invoice_key, computes the corresponding public key, and then computes the decoy_short_channel_id. When Carol wants to pay, she includes P_I in the onion payload for Bob. Bob can compute short_channel_id and forward the payment to Alice without negotiation.Improvements to the proposed scheme involve leveraging the payment_secret to get rid of the 33 bytes used in the invoice. The improved scheme involves drawing a random decoy_key, computing the corresponding decoy_node_id, drawing a random payment_secret, and computing decoy_short_channel_id. Carol recovers decoy_node_id from the invoice signature and includes P_I in the onion payload for Bob. However, there is no way to get rid of the 33 bytes used in the onion payload for Bob.</summary>
+    <published>2020-01-20T16:44:53+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - BIP0032</title>
+  <updated>2023-06-06T18:07:21.461051+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2013-05-27 20:45:30</name>
+  </author>
+  <author>
+    <name>Tamas Blummer 2013-05-28 05:16:41</name>
+  </author>
+  <author>
+    <name>Michael Gronager 2013-05-27 09:41:04</name>
+  </author>
+  <author>
+    <name>Michael Gronager 2013-05-27 09:41:04</name>
+  </author>
+  <author>
+    <name>Michael Gronager 2013-05-27 13:10:04</name>
+  </author>
+  <author>
+    <name>Michael Gronager 2013-05-27 13:39:19</name>
+  </author>
+  <author>
+    <name>Tamas Blummer 2013-05-28 05:16:41</name>
+  </author>
+  <author>
+    <name>Michael Gronager 2013-05-27 09:41:04</name>
+  </author>
+  <author>
+    <name>Michael Gronager 2013-05-27 13:39:19</name>
+  </author>
+  <author>
+    <name>Amir Taaki 2013-05-27 17:21:04</name>
+  </author>
+  <author>
+    <name>Michael Gronager 2013-05-27 13:39:19</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2013-05-27 20:45:30</name>
+  </author>
+  <author>
+    <name>Tamas Blummer 2013-05-28 05:16:41</name>
+  </author>
+  <author>
+    <name>Amir Taaki 2013-05-27 17:21:04</name>
+  </author>
+  <author>
+    <name>Michael Gronager 2013-05-27 13:10:04</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2013-05-27 20:45:30</name>
+  </author>
+  <author>
+    <name>Michael Gronager 2013-05-27 13:10:04</name>
+  </author>
+  <author>
+    <name>Amir Taaki 2013-05-27 17:21:04</name>
+  </author>
+  <link href="bitcoin-dev/May_2013/002672_BIP0032.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002673_BIP0032.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002668_BIP0032.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002668_BIP0032.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002669_BIP0032.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002670_BIP0032.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002673_BIP0032.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002668_BIP0032.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002670_BIP0032.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002671_BIP0032.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002670_BIP0032.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002672_BIP0032.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002673_BIP0032.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002671_BIP0032.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002669_BIP0032.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002672_BIP0032.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002669_BIP0032.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002671_BIP0032.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - BIP0032</title>
+    <updated>2023-06-06T18:07:21.461051+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-May/002672.html" rel="alternate"/>
+    <summary>In an email thread discussing Bitcoin Improvement Proposal (BIP) 32, Michael Gronager suggests using better terminology such as type-1 and type-2 derivation. He explains that the motivation for private derivation is to avoid revealing known values like K, c, and k_i since they could lead to other values being discovered as well. Tamas Blummer has shared a JSON-ed version of test vectors on GitHub along with Bits of Proof code matching with them, and he attached a signature.asc file to the message.In an email to Pieter, Michael discusses his concerns about BIP0032 and the equations used for private and public derivation. He notes that there can only be one HMAC function used for both types of derivation. Following the formulas for private derivation, he suggests using CDK((k_par, c_par), i) -&gt; (k_i, c_i), where I = HMACSHA512(c_par, X(k_par*G)||i), and splitting I into I_L and I_R (256 bits each). For pure public derivation, he suggests using CDK'((K_par, c_par), i) -&gt; (K_i, c_i), where I = HMACSHA512(c_par, X(K_par)||i), I is split into I_L and I_R, and K_i = K_par + I_L*G (= k_par*G + I_L*G = (k_par+I_L)*G = k_i*G), and c_i = I_R.In another email, Michael discusses the private derivation in the BIP and concludes that it is intentional. He expresses concern that many people may fall into a trap of revealing known values like K, c, and k_i. A member of the bitcoin-development mailing list explains that sharing the master public extended key with an auditor would allow them to see all transactions from and to the wallet, in all accounts, but not a single secret key. Additionally, there are already other implementations available such as the Python one and Java code in Bits of Proof. Implementing a deterministic wallet involves more than just key derivation, including detecting new keys/chains being used, lookahead, how to use accounts (if at all), and internal/external subchains.A recent email sent to the bitcoin-dev mailing list proposed a new concept for securing bitcoins in wallets. The proposal suggested that instead of storing secret keys on devices, users should store them in their memory. The email stated that this would increase security and decrease the risk of theft from hacks or physical attacks. The original poster had attempted to implement this idea using documentation and code from sipa's repo on GitHub, but was waiting for further implementation before proceeding.It is unclear whether this proposal will gain traction among developers and users, but it does raise interesting questions about the future of bitcoin wallet security. In addition to the proposal, the email also included an advertisement for New Relic's application performance monitoring service. While this may seem out of place, it highlights the importance of maintaining good security practices in all aspects of technology. As the use of bitcoin and other cryptocurrencies continues to grow, it is imperative that users and developers prioritize security measures to protect against potential threats.</summary>
+    <published>2013-05-27T20:45:30+00:00</published>
+  </entry>
+</feed>

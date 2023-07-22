@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving SPV security with PoW fraud proofs</title>
+  <updated>2023-06-13T18:19:08.202379+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-04-18 16:55:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving SPV security with PoW fraud proofs</title>
+    <updated>2023-06-13T18:19:08.202379+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-April/016874.html" rel="alternate"/>
+    <summary>Ruben Somsen proposed an improvement to Simplified-Payment-Verification (SPV) mechanism which is secure under the assumption that the chain with the most Proof-of-Work (PoW) is valid. He suggested that invalid blocks will be rejected as long as there are enough honest miners to create a block within a reasonable time frame. This improves SPV clients against dishonest miners and is compatible with the privacy improvements of BIP157. The idea is that a fork is an indication of potential misbehavior, and its block header can serve as a PoW fraud proof. Conversely, the lack of a fork is an indication that a block is valid. If a fork is created from a block at height N, this means a subset of miners may disagree on the validity of block N+1. If SPV clients download and verify this block, they can judge for themselves whether or not the chain should be rejected.Bitcoin currently cannot verify the validity of block N+1 without knowing the UTXO set at block N, even if you are willing to assume that block N (and everything before it) is valid. This would change with the introduction of UTXO set commitments, allowing block N+1 to be validated by verifying whether its inputs are present in the UTXO set that was committed to in block N. However, an open question is whether a similar result can be achieved without a soft fork that commits to the UTXO set.It is important to note that if an invalid block is created and only 10% of the miners are honest, on average it would take 100 minutes for a valid block to appear. During this time, the SPV client will be following the invalid chain and see roughly 9 confirmations before the chain gets rejected. It may therefore be prudent to wait for a number of confirmations that corresponds to the time it may take for the conservative percentage of miners that you think may behave honestly to create a block (including variance). A minority miner that wants to disrupt the network could simply create a valid block at block N+1 and deliberately ignore every other valid block at N+1, N+2, N+3 etc., which it did not create itself. If this minority miner has more than 10% of network hashrate, then the rule of thumb above would give it the ability to disrupt the SPV-using network. However, 10% of network hashrate to disrupt the SPV-using nodes would be a rather low bar to disruption, considering that SPV-using nodes would be disrupted, without this rule, only by more than 50% network hashrate.</summary>
+    <published>2019-04-18T16:55:10+00:00</published>
+  </entry>
+</feed>

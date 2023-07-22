@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Error handling in payment protocol (BIP-0070 and BIP-0072)</title>
+  <updated>2023-06-08T21:35:42.831587+00:00</updated>
+  <author>
+    <name>Ross Nicoll 2014-04-26 16:45:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Error handling in payment protocol (BIP-0070 and BIP-0072)</title>
+    <updated>2023-06-08T21:35:42.831587+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005584.html" rel="alternate"/>
+    <summary>In this email correspondence, Ross suggests standardization for error handling as positive for consistency of user experience. While Gavin Andresen agrees with the need for consistency, he also believes that wallet software should be free to do whatever gives the user the best experience. Ross has taken the main points and created two pull requests (BIP-0070 and BIP-0072) on GitHub for further feedback. The main area of concern is handling unexpected problems while sending the Payment message or receiving the corresponding PaymentACK message. For transport failures or 500 status codes, the client retries after a delay of 30-60 seconds, while for 400 status codes, the request should not be repeated, and the user should be alerted with a copy of the Payment message saved to be resent later. For 300 status codes, it is considered safe to follow redirects. On the merchant's side, Ross suggests that Payment messages should have a fixed maximum size of 10MB and a defined maximum time to wait to avoid DDoS via connection holding. Gavin suggests that PaymentRequests are limited to 50,000 bytes, which seems practical. Regarding repeatedly receiving the same Payment message, Gavin thinks this should be left to implementations to work out. Lastly, there is a potential timing issue with transactions if a merchant system wants to see confirmation of a transaction before sending a PaymentACK. Gavin believes this is not a good idea since the user should get feedback right away, and waiting more than a second or three to get "your payment has been received and is being processed" is terrible UI.</summary>
+    <published>2014-04-26T16:45:49+00:00</published>
+  </entry>
+</feed>

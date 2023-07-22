@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PoDLEs revisited</title>
+  <updated>2023-06-03T03:30:45.893432+00:00</updated>
+  <author>
+    <name>Rusty Russell 2021-01-20 01:10:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PoDLEs revisited</title>
+    <updated>2023-06-03T03:30:45.893432+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-January/002936.html" rel="alternate"/>
+    <summary>Lloyd Fournier proposes changing PoDLE to give it an advantage in parallel attacks. The weakness of the lightning proposal is that the h2 point is not broadcast immediately, instead, participants wait for a failure before broadcasting. Participants should broadcast h2 as soon as they agree to create a transaction with the initiator. If at any time during the transaction creation protocol, they receive the same h2 from someone else, they cancel and don't reveal their UTXOs. They wait about 10 seconds after broadcasting before revealing any UTXOs. However, there are several downsides to this scheme, such as everyone knowing what the participant is doing since they see the signalling tx and Bitcoind doesn't tell if it encounters a conflicting tx from a peer, so we'd probably need to gossip this via lightning instead. Also, if tx fees are low, the signalling tx might be mined. Despite the downsides, it has better protection against parallel attacks than others.To break the "middleman" idea, every initiator needs to provide an h2, and it has to be their own. Participants can't know if there's an h2 for another input too. If Alice wants to initiate an open with Carol while Bob is initiating an opening with her, she's got to provide her own UTXO &amp; PoDLE. The accepting node would sign the gossip msg, and only known nodes would be allowed to do so. This gives easy anti-spam, meaning if Alice starts spamming a giant pile of h2s, they start randomly dropping them.</summary>
+    <published>2021-01-20T01:10:07+00:00</published>
+  </entry>
+</feed>

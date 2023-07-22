@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 118 and SIGHASH_ANYPREVOUT</title>
+  <updated>2023-06-14T02:52:13.854592+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-08-04 14:59:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 118 and SIGHASH_ANYPREVOUT</title>
+    <updated>2023-06-14T02:52:13.854592+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018076.html" rel="alternate"/>
+    <summary>ZmnSCPxj wrote to Matt about the current crop of relay-based attacks discovered recently, which can compromise HTLC security. He explained an attack where the attacker connects twice to the Lightning Network (LN) and arranges for most funds in the victim's side. The attacker broadcasts a low-fee old-state transaction of the victim-attacker channel just before the HTLC timeout. Relay shenanigans prevent the latest commitment from being broadcast, and the attacker waits for the incoming HTLC to timeout before getting back their outgoing funds. After re-seating the latest update transaction, the attacker claims the victim-outgoing HTLC with the hashlock branch and doubles their money. ZmnSCPxj also suggested that forwarding nodes could drop channels on-chain early to bump up fees for the commitment transaction, but this might not work against other relay attacks. In another email, he discussed the need for p2p protocol layer optimization to relay transactions to a full node without knowing which input transaction the full node has in its mempool/active chain. Matt proposed a feasible attack without this optimization and explained how victims could avoid such attacks by monitoring on-chain events and ignoring mempool events. They should implement scorch-the-earth, keep-bumping-the-fee strategies and keep rebroadcasting new versions of spending transactions while spending from a confirmed transaction.</summary>
+    <published>2020-08-04T14:59:52+00:00</published>
+  </entry>
+</feed>

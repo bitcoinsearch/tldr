@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New BIP32 structure for P2SH multisig wallets [BIP-45]</title>
+  <updated>2023-06-10T23:43:40.784498+00:00</updated>
+  <author>
+    <name>Jean-Pierre Rupp 2015-10-03 12:42:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New BIP32 structure for P2SH multisig wallets [BIP-45]</title>
+    <updated>2023-06-10T23:43:40.784498+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-October/011356.html" rel="alternate"/>
+    <summary>The author of the email is reviewing BIP-45 and has identified a privacy issue with it. The problem arises when using the same extended public key for all multisig activity while dealing with different cosigners in separate multisig accounts. When public keys are reused, all cosigners from all accounts can monitor multisig activity from every other cosigner, in every other account. Reuse of public keys also degrades privacy and provides less defense against wallets that do not implement deterministic signing or use poor entropy for signature nonces. The author suggests that privacy and potential security degradation due to increased public key reuse in case of users with multiple multisig accounts should be mentioned in the BIP-45 document. They acknowledge that having a single extended public key for convenience makes setting up accounts or recovering from data loss easier, but privacy should not be compromised. The email then delves into the team's approach to building copay, a multisignature P2SH HD wallet. They outline their assumptions, which include N parties sharing an m-of-n wallet, each party generating their master private keys independently, using multisig P2SH for all addresses, and utilizing BIP32 to derive public keys. They also explain their general address generation procedure for both receive and change address cases. When creating a transaction, one of the parties creates a Transaction Proposal which is sent to the other parties who decide whether they want to sign. If approved, they generate their needed private key and sign it. Once the proposal reaches m signatures, any cosigner can broadcast it to the network, becoming final. Finally, the team outlines some final comments regarding lexicographically sorting public keys, using separate branches for each cosigner to avoid two of them generating the same address, and the need for a non-hardened version of purpose for the path. The email concludes with an invitation for feedback on their approach to building copay.</summary>
+    <published>2015-10-03T12:42:24+00:00</published>
+  </entry>
+</feed>

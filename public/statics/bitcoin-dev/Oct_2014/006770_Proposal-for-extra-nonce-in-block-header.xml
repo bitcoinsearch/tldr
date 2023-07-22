@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for extra nonce in block header</title>
+  <updated>2023-06-08T21:53:07.988848+00:00</updated>
+  <author>
+    <name>Timo Hanke 2014-10-18 18:25:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for extra nonce in block header</title>
+    <updated>2023-06-08T21:53:07.988848+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-October/006770.html" rel="alternate"/>
+    <summary>Timo Hanke has proposed a draft of a BIP (Bitcoin Improvement Proposal) to reduce incentives for miners to find cheap ways to create new work which are not necessarily in the best interest of the protocol. This proposal suggests re-assigning 2 bytes from the version field of the block header to a new extra nonce field. The updated BIP draft is available on Github. A reference implementation is also available as pull request #5102. This introduces a new version number (3) to properly distinguish the interpretation of the version number and allow for a clean upgrade process. Unittests are included. Mike Hearn expressed his concern about arbitrarily exploiting what is IMHO a missing rule in the rule set to shave a bit more profit. He suggested that if this change was introduced through a proper process and software was properly upgraded to understand the new header format, it would be acceptable. Timo Hanke explained that incrementing the version number is unnecessary as old clients already recognize the new block headers as something new and there is no reason to ever phase out blocks that have zero in the MSBs of the version. Traditionally, the extra nonce is part of the coinbase field of the generation transaction, which is always the very first transaction of a block. After incrementing the extra nonce, the minimum amount of work a miner has to do to re-calculate the block header is to hash the coinbase transaction and to re-calculate the left-most branch of the merkle tree all the way to the merkle root. Timo Hanke's proposal suggests reducing the range of version numbers from 2^32 to 2^16 and declaring the third and forth bytes of the block header as legitimate space for an extra nonce. This will reduce the incentive for a miner to abuse the shortened version number by a factor in the order of 2^16. As a side effect, this proposal greatly reduces the bandwidth requirements of a blind pool protocol by only submitting the block header to the miner. The proposal is backwards compatible and old versions of the client will accept blocks of this kind but will throw an alert at the user to upgrade.</summary>
+    <published>2014-10-18T18:25:59+00:00</published>
+  </entry>
+</feed>

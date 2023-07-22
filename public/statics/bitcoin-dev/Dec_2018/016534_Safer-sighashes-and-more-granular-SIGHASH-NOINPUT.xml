@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-06-13T15:22:17.524266+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2018-12-06 16:57:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-06-13T15:22:17.524266+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-December/016534.html" rel="alternate"/>
+    <summary>The proposed addition of "signature covers witness weight" would make it easier to compute the final witness weight prior to signing, especially in complex multi-party signing protocols where the final witness weight may not be known at signing time for everyone involved. While signing the witness weight doesn't completely eliminate witness malleability, it does eliminate the worst kind of witness malleability from the user's perspective. Generally, users should strive to construct their Bitcoin Scripts in such a way that witness malleability isn't possible, but this can be quite difficult to achieve as scripts become more complex and might not even be possible for some complex scripts.The proposal also includes the addition of three new sighash flags: SIGHASH_NOINPUT, SIGHASH_NOFEE, and SIGHASH_SCRIPTMASK, as well as a new opcode OP_MASK, which acts as a NOP during execution. The sighash is computed like in BIP143, with the addition of several modifications. For example, if SIGHASH_SCRIPTMASK is present, for every OP_MASK in scriptCode, the subsequent opcode/push is removed. Additionally, the scriptPubKey being spent is added to the sighash, unless SIGHASH_SCRIPTMASK is set, and the transaction fee is added to the sighash, unless SIGHASH_NOFEE is set. The proposal also suggests signing the amounts of all inputs, as that would cause default sighashes to sign all input and output amounts, which might remove the need for NOFEE. There is also a discussion about preventing signatures from being rebound to a different script/path/checksig. An alternative is to simply make every CHECKSIG sign the opcode position of the last executed CODESEPARATOR, which gives a simple (but somewhat limited) way for scripts that need to prevent certain kinds of cross-execution-trace rebinding. Other suggestions include using an intermediary hash for commitments to the scriptPubKey and scriptCode, and prefixing sighashes (and all new hashes that are introduced) with a fixed 64-byte array as "tag" to prevent signatures from being re-interpretable as something else.</summary>
+    <published>2018-12-06T16:57:09+00:00</published>
+  </entry>
+</feed>

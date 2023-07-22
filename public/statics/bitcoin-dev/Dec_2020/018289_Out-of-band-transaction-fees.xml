@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Out-of-band transaction fees</title>
+  <updated>2023-06-14T16:23:16.051313+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-12-01 15:49:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Out-of-band transaction fees</title>
+    <updated>2023-06-14T16:23:16.052316+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-December/018289.html" rel="alternate"/>
+    <summary>Sebastian Geisler, a developer, has suggested the possibility of out-of-band transactions in a recent email to the Bitcoin developers' mailing list. Such transactions allow for fees to be paid externally, which can be useful in some cases such as tumbling and CoinJoin-type protocols that require privacy preservation. However, this would rely on Lightning Network or other Layer 2 mechanisms which themselves are dependent on Layer 1 and require a facility to bump up fees for commitment transactions. This brings up the possibility of getting into a bootstrapping problem where the security of L2 is dependent on the existence of a reliable fee-bumping mechanism at L1, but the fee-bumping mechanism at L1 is dependent on the security of L2.Geisler pointed out that the potential use cases for out-of-band transaction fees have seen little interest so far. One such use case is sending UTXOs "intact". If Bitcoin becomes primarily a settlement layer for Layer 2 systems, these systems might want to keep UTXOs of common sizes for certain settlement applications which can be transferred as a whole. The problem with adding another input for fees which will introduce taint could be solved by paying fees externally in a privacy preserving way. Geisler believes that having a standard for out-of-band transactions is preferable to having every pool implement their own API making it harder for small pools to get into the market. He suggests that each service would need to announce which means of payment it supports and allow users and miners to choose when paying/redeeming fees. Miners that included a transaction need a way to authenticate when claiming the bounty. One possibility would be to optionally include a unique public key in the coinbase scriptsig after the height push.However, there are concerns about the centralizing effects of such a proposal. A trusted third party is hard to get out of, and if there are only a few of them, it becomes easy to co-opt and a part of the mining infrastructure is now controllable from central points of failure. If there are many of them, evaluating which ones cheat and which ones do not will take a lot of effort, and the system as a whole may not provide benefits commensurate to the overall system cost in finding good third parties.</summary>
+    <published>2020-12-01T15:49:49+00:00</published>
+  </entry>
+</feed>

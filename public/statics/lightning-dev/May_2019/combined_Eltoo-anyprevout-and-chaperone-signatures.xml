@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Eltoo, anyprevout and chaperone signatures</title>
+  <updated>2023-06-03T21:58:45.358999+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-05-16 01:48:51</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2019-05-16 15:37:48</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2019-05-15 09:23:09</name>
+  </author>
+  <author>
+    <name>Christian Decker 2019-05-15 20:36:32</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2019-05-16 07:55:57</name>
+  </author>
+  <author>
+    <name>Christian Decker 2019-05-20 13:03:24</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-05-18 16:45:07</name>
+  </author>
+  <link href="lightning-dev/May_2019/001994_Eltoo-anyprevout-and-chaperone-signatures.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2019/001996_Eltoo-anyprevout-and-chaperone-signatures.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2019/001992_Eltoo-anyprevout-and-chaperone-signatures.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2019/001993_Eltoo-anyprevout-and-chaperone-signatures.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2019/001995_Eltoo-anyprevout-and-chaperone-signatures.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2019/002000_Eltoo-anyprevout-and-chaperone-signatures.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2019/001997_Eltoo-anyprevout-and-chaperone-signatures.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Eltoo, anyprevout and chaperone signatures</title>
+    <updated>2023-06-03T21:58:45.358999+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-May/001994.html" rel="alternate"/>
+    <summary>The Lightning Network's Eltoo update mechanism was discussed in several forums and mailing lists, with participants proposing ways to optimize it using taproot/tapscript. One suggestion was to use a shared private key to collapse 1-of-2 multisigs into a single-sig, while MuSig could be employed to reduce the need for `OP_CHECKMULTISIG`/`OP_CHECKSIGADD`. Additionally, there may not be a requirement for an explicit `OP_CHECKSEQUENCEVERIFY`, or separate keys for state and update paths. The chaperone signature was also debated, with suggestions made to modify the update transactions by using the proposed OP_IF/OP_ELSE structure. In this structure, Alice and Bob would exchange their anyprevoutanyscript signatures, and the chaperone signature could be provided by either party at transaction broadcast time. However, the chaperone idea might not play nice with taproot collaborative spends that require anyprevout/anyprevoutanyscript/noinput. ZmnSCPxj questioned the use of the "collaborative path" mentioned in a previous message, which refers to using the taproot-tweaked public key to sign without revealing any scripts. The bip-taproot proposal disallows all `SIGHASH` flags except for the current set of valid ones when using this path, which means it does not include `SIGHASH_NOINPUT`/`SIGHASH_ANYPREVOUT`. Participants suggested that the collaborative path is only useful unless parties are cooperatively closing anyway, since they don't need to require `SIGHASH_ANYPREVOUT` once they agree to spend the funding txo. Finally, Bastien Teinturier discussed the separation between anyprevout and anyprevoutanyscript, noting that it simplifies funding transactions and removes the need for a trigger transaction. However, integrating the chaperone signature is more complicated. Christian Decker proposed using a shared private key to collapse 1-of-2 multisigs into a single-sig, while also acknowledging that the chaperone idea might not be compatible with taproot collaborative spends that require anyprevout/anyprevoutanyscript/noinput. He concluded by noting the importance of ensuring Eltoo can support chaperone signatures, even though it is uncertain if they will eventually be needed.</summary>
+    <published>2019-05-16T01:48:51+00:00</published>
+  </entry>
+</feed>

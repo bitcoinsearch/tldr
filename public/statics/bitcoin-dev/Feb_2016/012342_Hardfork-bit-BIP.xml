@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Hardfork bit BIP</title>
+  <updated>2023-06-11T03:36:24.563779+00:00</updated>
+  <author>
+    <name>jl2012 2016-02-04 17:14:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Hardfork bit BIP</title>
+    <updated>2023-06-11T03:36:24.563779+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-February/012342.html" rel="alternate"/>
+    <summary>This proposal aims at introducing a mechanism to indicate the deployment of hardforks in Bitcoin block headers as a way to alleviate risks related to these hardforks. Hardforks are considered difficult and risky due to the support required from miners and supermajority support from the Bitcoin economy, which is not enough for introducing hardforks safely. Additionally, full nodes and SPV nodes following original consensus rules may not be aware of the deployment of a hardfork, which can lead to users unknowingly accepting devalued legacy tokens and reorg back to the original chain if it grows faster than the new one. To alleviate these risks, this proposal specifies a change to the semantics of the sign bit of the "version" field in Bitcoin block headers, introducing an explicit "point of no return" in the blockchain.The proposed mechanism involves using the sign bit in nVersion as the hardfork bit, with blocks having this header bit setting to 1 being invalid. Any planned hardfork must have one and only one flag block that serves as the "point of no return," determined by block height or as the first block with GetMedianTimePast() greater than a threshold. The flag block should be constructed in a way that nodes with the original consensus rules must reject while nodes with the new consensus rules must reject a block if it is not a flag block while it is supposed to be. To avoid confusion and unexpected behavior, a flag block should signify the deployment of only one hardfork, and a hardfork proposal has to make sure that its flag block threshold is not clashing with other ongoing hardfork proposals.When a flag block for an unknown hardfork is found on the network, full nodes and SPV nodes should alert their users and/or stop accepting/sending transactions. This document is placed in the public domain, and the proposed mechanism is compatible with the BIP9, with the version bits mechanism employed to measure miner support towards a hardfork proposal and to determine the height or time threshold of the flag block. After the flag block is generated, a miner may support either the original rules or the new rules but not both.</summary>
+    <published>2016-02-04T17:14:49+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Opening balanced channels using PSBT</title>
+  <updated>2023-06-04T02:23:59.555672+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2021-09-22 06:58:18</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2021-09-22 23:30:56</name>
+  </author>
+  <author>
+    <name>Ole Henrik Skogstrøm 2021-09-21 18:42:54</name>
+  </author>
+  <author>
+    <name>Ole Henrik Skogstrøm 2021-09-25 12:06:21</name>
+  </author>
+  <author>
+    <name>Ole Henrik Skogstrøm 2021-09-25 11:40:21</name>
+  </author>
+  <link href="lightning-dev/Sept_2021/003249_Opening-balanced-channels-using-PSBT.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003251_Opening-balanced-channels-using-PSBT.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003247_Opening-balanced-channels-using-PSBT.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003267_Opening-balanced-channels-using-PSBT.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003266_Opening-balanced-channels-using-PSBT.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Opening balanced channels using PSBT</title>
+    <updated>2023-06-04T02:23:59.555672+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-September/003249.html" rel="alternate"/>
+    <summary>Ole Henrik Skogstrøm has discovered a way of opening balanced channels using LND's psbt option when opening channels, which essentially involves joining funded PSBTs before signing and submitting them. He is wondering whether this is somehow unsafe or for some other reason a bad idea. Collaboration among nodes is required for efficient operation, and the process can be automated through a client. The balanced-ness of a channel is a transitory state, and opening channels like these only serves to allow the channel to start in that state. If fees and channel policies are not set accordingly, then it's possible that a normal payment or balance flow shifts the channel away from equilibrium shortly after the channel is open.To do this efficiently, nodes need to collaborate by sending PSBTs back and forth to each other, and automating it through a client would be best. Ole Henrik provided an example of the complete flow for a single channel and a ring of channels between multiple nodes. The complete flow for a single channel involves Node A generating a new address and sending it to Node B, starting an Interactive channel with Node B using psbt, funding the channel address, joining the two PSBTs, verifying and signing the joined PSBT, and completing channel open by publishing the fully signed PSBT. In the case of a ring of channels between multiple nodes, Node A starts an Interactive open channel with Node B using psbt and funds the channel address. Node B starts an Interactive open channel with Node C using psbt and funds the channel address. Node C starts an Interactive open channel with Node A using psbt and funds the channel address. Nodes B and C send their PSBTs to Node A, who joins all the PSBTs using bitcoin-cli joinpsbts. Node A verifies and signs the PSBT and sends it to Node B, who verifies and signs the PSBT and sends it to Node C, who verifies and signs the PSBT and sends it back to Node A and B to complete channel open. Finally, Node C completes channel open and publishes the transaction.Bastien TEINTURIER responded to Ole Henrik's email and informed him that the dual funding proposal provides exactly what he was looking for. Bastien also shared a link to the proposal on Github. Olaoluwa Osuntokun notes that the popular 'balanceofsatoshis' tool has a command that packages up the interaction ('open-balanced-channel') into an easier-to-use format. He further explains that the balanced-ness of a channel is a transitory state and opening channels like these only serves to allow the channel to start in that state. Lightning Pool also uses a little trick to allow users to purchase channels that are 50/50 balanced, and also purchase channel leases for a third party (called sidecar channels) to help onboard them onto Lightning. If doing so manually, he cautions that by default lnd will only lock the UTXOs allocated for the funding attempt for a few minutes, and therefore, one needs to make sure the process is finalized during that interval or the UTXOs will be unlocked and you risk accidentally double spending yourself.In conclusion, Ole Henrik Skogstrøm's discovery of opening balanced channels using LND's psbt option involves joining funded PSBTs before signing and submitting them. Collaboration among nodes is required for efficient operation, and the process can be automated through a client. The balanced-ness of a channel is a transitory state, and opening channels like these only serves to allow the channel to start in that state. The dual funding proposal provides exactly what Ole Henrik was looking for, and the 'balanceofsatoshis' tool can package up the interaction into an easier-to-use format. Lightning Pool also uses this trick to allow users to purchase channels that are 50/50 balanced. However, one needs to make sure the process is finalized during the short interval of UTXO lock or risk accidentally double spending.</summary>
+    <published>2021-09-22T06:58:18+00:00</published>
+  </entry>
+</feed>

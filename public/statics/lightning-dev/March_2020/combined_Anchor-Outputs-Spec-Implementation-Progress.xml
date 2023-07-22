@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Anchor Outputs Spec &amp; Implementation Progress</title>
+  <updated>2023-05-23T03:01:44.034977+00:00</updated>
+  <author>
+    <name>Matt Corallo 2020-04-17 03:07:37</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-03-30 19:00:12</name>
+  </author>
+  <link href="lightning-dev/April_2020/002638_Anchor-Outputs-Spec-Implementation-Progress.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2020/002607_Anchor-Outputs-Spec-Implementation-Progress.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Anchor Outputs Spec &amp; Implementation Progress</title>
+    <updated>2023-05-23T03:01:44.034977+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002638.html" rel="alternate"/>
+    <summary>The implementation of anchor outputs has been fully supported in the master branch of lnd. Nodes running with the --protocol.anchors flag will use feature bit 1337 for negotiation. The feature will be included in the upcoming 0.10 release, and an entry in the wiki will declare the usage of this feature bit. Anchors in lnd implement the spec as currently defined: two anchors at all times, with each anchor utilizing 330 satoshis. During the last spec meeting, concerns were raised about having two anchors at all times compared to one and reusing the to_remote output. Two anchors add extra bytes to the commitment transaction, increasing the fee burden for force closing. However, these commitments are only slightly more expensive, and nodes can recover funds if they choose. The extra cost may seem large when looking at a 1 sat/byte commitment transaction. Still, fees today in the system are on the rise, and if one needs to resolve HTLCs on-chain, they'll likely require a higher fee rate for timely confirmation. Re-purposing the to_remote output as an anchor is arguably worse; only a single party in the channel can spend that output to remove its impact on the UTXO set. On the other hand, using two anchors with their special scripts allows anyone to sweep these outputs several blocks after the confirmation. In the case where the remote party has no balance, but a single incoming HTLC, the channel initiator must either create a new anchor output for this special case or always create a to_remote output for the other party, donating the 330 satoshis. Using two anchors seems to leave the thread open for a comprehensive solution, as the dual anchor format is fully decoupled from the rest of the commitment.If we want to deploy an upgrade, the commitment transaction format will change. The vast majority of the effort is the upgrade, not the diff of having an extra anchor. The final factor to consider is whether to re-introduce a CSV delay to the to_remote party to remedy some game theoretical issues with forcing one party to close early without a cost to the instigator. In the past, headway was made in this direction, but then reverted as previously unknown gaming vectors were discovered even with a symmetrical delay. If two anchors are kept as they are, this thread will remain open to a comprehensive solution.</summary>
+    <published>2020-04-17T03:07:37+00:00</published>
+  </entry>
+</feed>

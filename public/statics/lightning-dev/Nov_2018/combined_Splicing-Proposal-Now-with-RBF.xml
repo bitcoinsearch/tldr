@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Splicing Proposal: Now with RBF</title>
+  <updated>2023-05-25T17:20:55.046651+00:00</updated>
+  <author>
+    <name>lisa neigut 2018-11-21 20:43:15</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-11-16 08:37:07</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2018-11-22 01:29:29</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2018-11-16 04:16:20</name>
+  </author>
+  <link href="lightning-dev/Nov_2018/001648_Splicing-Proposal-Now-with-RBF.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001624_Splicing-Proposal-Now-with-RBF.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001653_Splicing-Proposal-Now-with-RBF.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001621_Splicing-Proposal-Now-with-RBF.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Splicing Proposal: Now with RBF</title>
+    <updated>2023-05-25T17:20:55.046651+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001648.html" rel="alternate"/>
+    <summary>The Lightning Network developer discussion has proposed a new protocol called 'splice_confirm' for splicing transactions. The proposal includes subtypes for `splice_init`/`splice_accept`, script and wscript in inputs, initiator pays fees, other side gets to add the same number of inputs+outputs if they want, RBF at initiator's discretion, and every still-negotiable parameter is renegotiated.Observations were made by other developers regarding this proposal. One developer identified the signature field in the data section as unnecessary while another raised concerns about what happens if fees outstrip the value of updated splice transactions. It was suggested that closing the channel would be the only solution in such cases.In terms of message changes during splicing, it was suggested that CPFP could be used instead of RBF as it would simplify HTLC/commitment transaction management, avoid fee rate negotiation, and make the single-payer (initiator) less burdened. However, using RBF is better for on-chain space. ZmnSCPxj suggested defining a dual-funding RBF protocol first to practice for splice RBF.The proposal also includes details about `splice_init` and `splice_accept`, where the sender of `splice_init` must ensure each `splice_input` refers to an existing UTXO, ensure each `splice_output` is a standard script, set `feerate_per_kw` to 253 or more. The receiver of `splice_init` must discard its own `splice_init` if it has also sent one and respond as specified in `accept_channel`. Moreover, the `splice_accept` message contains several conditions that need to be met before acceptance. If the number of `splice_input` and/or `splice_output` exceeds `splice_limit`, it MUST error. If the total `splice_output` `satoshis` is greater than the sender's current balance minus reserve plus the total `splice_input` `satoshis`, it MUST error.The `splice_commitment_signature` message contains various data fields such as channel ID, commitment signature, and htlc signature, which must be set as done for `commitment_signed`, but spending the funding output of the splice transaction. In case of reconnection between sending and receiving `splice_confirm` or `splice_closed`, there is an uncertain status of the peer, for which a new field in `channel_reestablish` is introduced to flag splicing.The author suggests setting the `option_data_loss_protect` fields if `option_splice` is used. There is no reason not to do so, and it can be done using TLV. Finally, the `splice_closed` message is used to complete a splice. Both nodes MUST follow the requirements for `announcement_signatures` as if this were a new channel.</summary>
+    <published>2018-11-21T20:43:15+00:00</published>
+  </entry>
+</feed>

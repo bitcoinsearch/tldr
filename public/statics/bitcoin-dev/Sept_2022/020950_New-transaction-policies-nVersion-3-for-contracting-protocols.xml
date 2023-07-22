@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New transaction policies (nVersion=3) for contracting protocols</title>
+  <updated>2023-06-16T00:32:52.214492+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2022-09-29 09:15:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New transaction policies (nVersion=3) for contracting protocols</title>
+    <updated>2023-06-16T00:32:52.214492+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-September/020950.html" rel="alternate"/>
+    <summary>The discussion among developers is centered around proposed mempool and transaction relay policies to aid L2/contract protocols. The proposed update, called BIP-325, aims to improve the replace-by-fee (RBF) feature by adding version 3 transactions (V3). The V3 transactions have a descendant size limit no larger than 1000 virtual bytes, which is intended to limit the amount of vbytes that need to be replaced, thereby reducing costs for fee-bumping transactions. The proposal involves making OP_TRUE standard and allowing outputs below dust, which can be added later since they won't be standard until we start allowing them. There are concerns about utxo set bloat with 0-value outputs in the utxo set, but it is argued that it would be better than what is currently being done. Additionally, some suggest allowing for a single dust-value output that is immediately spent by the package to make anchors easier to design. The package RBF modifications include adding a new rule that requires all package transactions with mempool conflicts to be V3, and modifying the original rule around unconfirmed inputs to ensure that the replacement transactions are not less incentive-compatible to mine. Commitment transactions in the Lightning Network should be V3 and have one anchor output. The child must also be V3, at most 1000vB, and may fund fees for multiple commitment transactions. To do a second fee-bump to add more fees, replace the child with a higher-feerate transaction instead of trying to attach a grandchild. There are concerns regarding the pinning attacks possible under the proposal. Gloria Zhao clarifies that the proposal is tailored for LN Penalty and doesn't close all pinning attacks possible. She also explains that replacing a transaction with something that will confirm slower is not allowed under the proposal, but there are still some imperfections that need to be addressed. The proposal doesn't fix situations where the parent transaction can be "inflated" by tacking on additional inputs, and it also doesn't fix batch transactions that need to accelerate some and not others. Bastien Teinturier suggests that the main improvement that could be made to the current proposal is restricting the size of the whole V3 package via a specific value in the taproot annex. However, this would make relay policy stricter, so it may need to be done separately. Bastien notes that it's quite desirable to make the single anchor spendable by both participants (or even anyone), so if you see your counterparty's commitment in your mempool, you can bump it without publishing your own commitment.Overall, the proposed policies aim to solve Rule 3 pinning and potentially allow for the removal of CPFP carve-out, and feedback from users is encouraged. V3 transactions are replaceable even if they don't signal BIP125 replaceability, and V2 transactions can replace V3 transactions and vice versa. Feedback and review of the proposed update is welcomed.</summary>
+    <published>2022-09-29T09:15:02+00:00</published>
+  </entry>
+</feed>

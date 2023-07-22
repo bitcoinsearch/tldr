@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Inbound channel routing fees</title>
+  <updated>2023-06-03T09:33:25.790091+00:00</updated>
+  <author>
+    <name>Joost Jager 2022-07-01 10:34:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Inbound channel routing fees</title>
+    <updated>2023-06-03T09:33:25.790091+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-July/003643.html" rel="alternate"/>
+    <summary>Currently, routing nodes on the Lightning Network charge fees based on the outgoing channel only, which limits their control over the flow of traffic. This does not match the reality of not all inbound liquidity being equal. One solution to this is to add two additional fields to the `channel_update` message: `inbound_fee_base_msat` and `inbound_fee_proportional_millionths`. With the previously introduced tlv message extensions, it should be possible to let these fields propagate throughout the network without any upgrades required. Senders must pay each routing node the sum of its advertised inbound and outbound fee for the channels used. The inbound fee is calculated based on the actual balance change in the incoming channel. This includes the amount to forward as well as the outbound fee. It is important that any solution deployed in an existing network is backwards compatible, so one mitigation is to charge zero inbound fees until a sufficiently large portion of the senders have upgraded. Another option could be to set negative inbound fees during the transitory phase, effectively providing a discount for using specific inbound channels. Path-finding algorithms currently in use generally don’t support negative fees. However, the sum of inbound and outbound fees is still positive and therefore not a problem. If routing nodes set their policies accidentally or intentionally so that the sum of fees turns out negative, senders can just round up to zero and find a path as normal. Overall, this change may lead to better capital placement on the network and lower routing fees. Feedback is currently being sought from both Lightning devs and routing node operators.</summary>
+    <published>2022-07-01T10:34:54+00:00</published>
+  </entry>
+</feed>

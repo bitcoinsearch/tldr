@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Revisiting NODE_BLOOM: Proposed BIP</title>
+  <updated>2023-05-19T21:36:58.456888+00:00</updated>
+  <author>
+    <name>Matt Corallo 2015-08-22 01:08:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Revisiting NODE_BLOOM: Proposed BIP</title>
+    <updated>2023-05-19T21:36:58.456888+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/010589.html" rel="alternate"/>
+    <summary>In this email thread, Peter Todd and Matt Corallo discuss the risks associated with relying on seed nodes for starting nodes. Instead, they consider returning any node that responds to getaddr from DNS seeds to allow clients to connect to a few DNS seeds by name, then disconnect after selecting peers based on nServices.  They also discuss the need to "shard" the blockchain, though Peter Todd dismisses this as a future problem which does not require immediate attention.The email then introduces a new BIP titled NODE_BLOOM service bit, which extends BIP 37, Connection Bloom filtering. It suggests adding a service bit to allow nodes to advertise that they support bloom filters explicitly. The protocol version is increased from 70002 to 70011 in the reference implementation to identify old nodes which allow bloom filtering of the connection despite lacking the new service bit. The motivation behind this proposal is to provide a much-needed feature to disable connection bloom filtering, which has been shown to provide little to no privacy, as well as being a large DoS risk on some nodes. While outside the scope of this proposal, it is suggested that DNS seeds and other peer discovery mechanisms support the ability to specify the services required.Lastly, the email references a DoS attack currently being directed only at XT nodes, which involves repeated Bloom filter requests to soak up disk IO bandwidth, potentially affecting Core nodes as well. Therefore, it is critical that miners are not affected by these attacks, and nodes serving SPV wallet clients should be less latency-sensitive, so a good DoS attack mitigation strategy would be to have two classes of nodes out there "in the wild."</summary>
+    <published>2015-08-22T01:08:13+00:00</published>
+  </entry>
+</feed>

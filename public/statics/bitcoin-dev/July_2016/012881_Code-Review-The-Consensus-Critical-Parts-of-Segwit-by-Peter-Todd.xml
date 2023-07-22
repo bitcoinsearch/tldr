@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Code Review: The Consensus Critical Parts of Segwit by Peter Todd</title>
+  <updated>2023-05-19T23:32:30.459488+00:00</updated>
+  <author>
+    <name>Johnson Lau 2016-07-02 19:20:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Code Review: The Consensus Critical Parts of Segwit by Peter Todd</title>
+    <updated>2023-05-19T23:32:30.459488+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-July/012881.html" rel="alternate"/>
+    <summary>The discussion revolves around the odd result that occurs when a transaction spends a witness output with an unknown version, which is valid even if the transaction doesn't have any witnesses. One suggestion is to leave unknown witness programs as any-one-can-spend without looking at the witness. However, this approach creates a special case in the code, allowing spending of a witness output without a witness. It is possible to softfork a new rule requiring the witness not be empty for a witness output, but it might not make the code simpler. There is a debate on whether to make it possible to use 160-bit commitments for multisig, which may need 256-bit security, but still special-case pubkeys to save a few bytes. One participant suggests using shorter hash and pubkey for storing 1 BTC for a few months since it does not require the high level of P2PKH security. The concern raised was that signatures for the new signature hash might be reused for the old signature hash, leading to a hash collision. However, the problem lies in the fact that the actual bytes signed can be interpreted in two different ways by different types of signature hashes. This issue is similar to the signmessage functionality, which prepends the message being signed with the "Bitcoin Signed Message:\n" magic string. The BIP143 sig uses the first four bytes as nVersion, followed by the next 32 bytes (hashPrevouts), which is a hash of all prevouts. In the original sig, the first four bytes are nVersion, followed by the next four bytes, which is the number of inputs, and the next 32 bytes is a txid. For a signature to be valid for both schemes, the last 28 bytes of the hashPrevouts must also be the first 28 bytes of a valid txid. This is already impossible, and many such collisions are required for SHA256 to be insecure. Adding a zero after the nVersion would not be helpful in such a scenario.</summary>
+    <published>2016-07-02T19:20:42+00:00</published>
+  </entry>
+</feed>

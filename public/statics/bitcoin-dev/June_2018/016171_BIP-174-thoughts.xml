@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 174 thoughts</title>
+  <updated>2023-06-13T03:19:57.326507+00:00</updated>
+  <author>
+    <name>Achow101 2018-06-26 21:56:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 174 thoughts</title>
+    <updated>2023-06-13T03:19:57.326507+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-June/016171.html" rel="alternate"/>
+    <summary>In an email to the Bitcoin-dev mailing list, Andrew Poelstra responded to a colleague's proposed changes for BIP 174, which is a draft for Partially Signed Bitcoin Transactions (PSBT). In general, Poelstra agreed with the proposed changes but pointed out some minor issues that he discovered. For example, one of the valid test vectors in the proposal was broken due to a misplaced or corrupted delimiter in its hex version, and the Transaction format table needed updating. Poelstra also disagreed with the key-value model in the proposal and argued for a more generic approach. He believed that the key-value model was unnecessary and could confuse future implementers. Instead, Poelstra suggested using a "repeatable" flag or the high bit of "type" to specify whether a record can be repeated. Poelstra also questioned the role of the Combiner in the proposal, which is used to combine two PSBTs that contain different data such as signatures. He suggested that a Combiner could combine based on whole-record uniqueness and leave duplicate detection to the Finalizer. However, Poelstra acknowledged that a combiner would still need to understand what types are involved to avoid producing an invalid PSBT. Additionally, Poelstra expressed his disagreement with having type-specific rules like "only one redeemScript" where a more generic rule would suffice. Regarding breaking changes, Poelstra reminded his colleagues that existing code would need to be touched regardless, even without changing the format itself. Therefore, changing `parse_keyvalue` to `parse_record` should be a small matter. However, Poelstra believed that changing to a set of typed records model would require more significant changes and complete restructuring of the format. He also noted that the current model was fairly easy to hand parse and that moving to Protobuf would make it harder to hand parse, especially with varints. Finally, Poelstra highlighted that with the key-value model, one does not need to know the types to determine whether something is valid, making it easier to interpret the data.</summary>
+    <published>2018-06-26T21:56:26+00:00</published>
+  </entry>
+</feed>

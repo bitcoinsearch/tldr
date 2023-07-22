@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>On mempool policy consistency</title>
+  <updated>2023-06-16T02:25:47.372294+00:00</updated>
+  <author>
+    <name>email at yancy.lol 2022-11-09 12:05:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>On mempool policy consistency</title>
+    <updated>2023-06-16T02:25:47.372294+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021194.html" rel="alternate"/>
+    <summary>On 2022-11-08 15:54, Yancy via bitcoin-dev raised two attack vectors on Bob and Alice's payment channel. In the first vector, Alice double-spends the same inputs with a very low feerate, resulting in a stalemate where neither can spend the UTXOs. The transaction that creates the payment channel with Bob will not be mined since the mining pool sees the double spend. In the second vector, Alice spams the network with a double spend wide enough to make it into a block before the remainder of the network sees the first spend. Bob could solve the issue with an opt-in RBF in the first vector. He could create a replacement transaction with enough fee to get back his UTXO. However, in the second vector, neither full-RBF nor opt-in RBF resolves the issue, although it is a probabilistic attack and requires spamming many nodes. Full-RBF improves the situation even if it does not solve the problem completely. With Full-RBF, the higher fee-paying transaction replaces the lower fee one, regardless of who saw what transaction first. Due to limitations in today's mempool implementation, sometimes we cannot fully evaluate which transaction pays the higher fee. For example, if Alice spams the network with very large numbers of transactions spending that input, the current mempool code does not even try to figure out if a replacement is better. However, those limitations are likely to be fixable, and even right now, without fixing them, Alice still has to use a lot more money to pull off these attacks with full-RBF.</summary>
+    <published>2022-11-09T12:05:16+00:00</published>
+  </entry>
+</feed>

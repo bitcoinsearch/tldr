@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Swap-in-Potentiam: Moving Onchain Funds "Instantly" To Lightning</title>
+  <updated>2023-06-03T11:21:44.644021+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2023-01-03 13:57:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Swap-in-Potentiam: Moving Onchain Funds "Instantly" To Lightning</title>
+    <updated>2023-06-03T11:21:44.644021+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-January/003810.html" rel="alternate"/>
+    <summary>The article discusses the new protocol called swap-in-potentiam, which aims to solve the slow process of moving funds from an onchain-only address to the Lightning Network, particularly for mobile use-cases. This protocol enables immediate transfer of already-confirmed-received onchain funds to Lightning and minimizes trust requirements.The contract has two participants, Alice (the funds owner) and Bob (its potential swap partner), with only two branches: the onchain/channel branch and the timelock branch. Trust is required only to the extent that Alice trusts Bob to be cooperative so that Alice can dispose of its funds immediately. However, there are also disadvantages, such as requiring a cooperating LSP and having a timeout period.Bob must ensure that each unspent transaction output (UTXO) is asked to sign either an arbitrary onchain transaction or offered an onchain hash time-locked contract (HTLC). Further, the article explains how LSPs can provide special services to improve receiving mobile wallets. If LSPs keep track of statistics, they can commit funds to a swap-in-potentiam with their mobile clients and initiate a swap when the client comes online.The message protocol for swap-in-potentiam involves several messages sent between Alice and Bob. The messages include `request_swap_in` from Alice to Bob, which contains the Alice-&gt;Bob channel direction, the channel to move into, and (optionally) a change address for Alice. To reduce pollution of the limited BOLT1 message ID space and allow more flexibility for swap-in-potentiam to expand to new messages inside its own message ID space, the plan is to reserve only one odd BOLT1 message ID and embed the actual swap-in-potentiam message ID as the first two bytes of the BOLT1 message.For a richer future protocol, the combination of swap-in and splice-in should be considered. This would allow for the addition of funds to the channel via splice-in while immediately crediting the swap-in, which is limited to the current total capacity. The article suggests using Taproot with Schnorr signatures for the implementation of swap-in-potentiam. An explicit 2-of-2 branch rather than a MuSig is recommended for initial deployment to allow Alice to send the signature in a single half-round without engaging in a 2-round MuSig2 signing ritual.The steps to execute the swap-in-potentiam message protocol using existing channels include `open_channel` from Alice to Bob, `accept_channel` from Bob to Alice, `request_swap_in` from Alice to Bob with the "change address" being the funding address of the channel, and `accept_swap_in` from Bob to Alice providing the TXID of the funding transaction.Overall, the swap-in-potentiam protocol has potential benefits but also some limitations. Further research and development are needed to refine and improve the protocol for wider adoption and use cases.</summary>
+    <published>2023-01-03T13:57:58+00:00</published>
+  </entry>
+</feed>

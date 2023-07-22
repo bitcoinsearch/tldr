@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Ultimate Blockchain Compression w/ trust-free lite nodes</title>
+  <updated>2023-06-06T05:40:58.165881+00:00</updated>
+  <author>
+    <name>Alan Reiner 2012-06-17 18:39:28</name>
+  </author>
+  <author>
+    <name>Peter Todd 2012-06-17 19:05:11</name>
+  </author>
+  <author>
+    <name>Alberto Torres 2012-06-17 22:46:47</name>
+  </author>
+  <author>
+    <name>Alberto Torres 2012-06-17 22:46:47</name>
+  </author>
+  <author>
+    <name>Peter Todd 2012-06-17 19:05:11</name>
+  </author>
+  <author>
+    <name>Alan Reiner 2012-06-17 18:39:28</name>
+  </author>
+  <author>
+    <name>Peter Todd 2012-06-17 19:05:11</name>
+  </author>
+  <author>
+    <name>Peter Todd 2012-06-18 10:14:41</name>
+  </author>
+  <author>
+    <name>Alan Reiner 2012-06-17 18:39:28</name>
+  </author>
+  <author>
+    <name>Alberto Torres 2012-06-17 22:46:47</name>
+  </author>
+  <author>
+    <name>Alan Reiner 2012-06-17 23:17:23</name>
+  </author>
+  <author>
+    <name>Peter Todd 2012-06-18 10:14:41</name>
+  </author>
+  <author>
+    <name>Alan Reiner 2012-06-17 23:17:23</name>
+  </author>
+  <author>
+    <name>Peter Todd 2012-06-18 10:14:41</name>
+  </author>
+  <author>
+    <name>Alan Reiner 2012-06-17 23:17:23</name>
+  </author>
+  <link href="bitcoin-dev/June_2012/001589_Ultimate-Blockchain-Compression-w-trust-free-lite-nodes.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001590_Ultimate-Blockchain-Compression-w-trust-free-lite-nodes.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001593_Ultimate-Blockchain-Compression-w-trust-free-lite-nodes.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001593_Ultimate-Blockchain-Compression-w-trust-free-lite-nodes.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001590_Ultimate-Blockchain-Compression-w-trust-free-lite-nodes.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001589_Ultimate-Blockchain-Compression-w-trust-free-lite-nodes.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001590_Ultimate-Blockchain-Compression-w-trust-free-lite-nodes.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001603_Ultimate-Blockchain-Compression-w-trust-free-lite-nodes.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001589_Ultimate-Blockchain-Compression-w-trust-free-lite-nodes.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001593_Ultimate-Blockchain-Compression-w-trust-free-lite-nodes.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001595_Ultimate-Blockchain-Compression-w-trust-free-lite-nodes.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001603_Ultimate-Blockchain-Compression-w-trust-free-lite-nodes.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001595_Ultimate-Blockchain-Compression-w-trust-free-lite-nodes.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001603_Ultimate-Blockchain-Compression-w-trust-free-lite-nodes.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001595_Ultimate-Blockchain-Compression-w-trust-free-lite-nodes.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Ultimate Blockchain Compression w/ trust-free lite nodes</title>
+    <updated>2023-06-06T05:40:58.165881+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-June/001589.html" rel="alternate"/>
+    <summary>In January 2012, Alberto Torres wrote about a similar idea that he had proposed earlier and linked to his prototype. He suggested that Armory would be the ideal client for implementing such an idea but wanted to wait until it could run on his laptop with 2GB of RAM. He disagreed with Peter Todd's recommendation that it should be implemented in the Satoshi client instead of Armory. Alberto hoped to help after summer if this was still not done. The proposal needs miner support to work, and miners generally run either the Satoshi client as a daemon or some other custom code.In a forum post on bitcointalk.org, Alan proposed the use of a special tree data structure to organize all unspent-TxOuts on the network and communicate its "signature" between nodes. This could be implemented without disrupting the main network. The leaves of this tree correspond to addresses/scripts, and the data at the leaf is a root of the unspent-TxOut list for that address/script. To maintain the security of the tree signatures, it will be included in the header of an alternate blockchain, which will be secured by merged mining. This provides the same compression as the simpler unspent-TxOut merkle tree. Nodes can download just the unspent-TxOut list for each address in their wallet and verify that list directly against the blockheaders. Therefore, lightweight nodes can get full address information from any untrusted peer with only a few kB of downloaded data. In response to this, Peter Todd commented on Alan Reiner's Bitcointalk post regarding the same topic. Reiner's proposal suggests using a tree data structure to organize all unspent-TxOuts on the network. The root of this tree would communicate its "signature" between nodes, while the leaves of this tree would correspond to addresses/scripts. The data at the leaf is actually a root of the unspent-TxOut list for that address/script.Todd questioned how people can prevent others from deliberately unbalancing the tree with addresses with chosen hashes. He proposed a new rule stating that any *new* address whose hash happens to be deeper in the tree than, say, 10*log(n), indicating it was probably chosen to be unbalanced, gets discarded. This rule would only affect those playing games and would not impact unrelated people. Todd also mentioned that with the popularity of firstbits, it may be a good idea to use a comparison function that works last bit first.In an email correspondence, Alan Reiner clarified the differences between his proposal and Alberto Torres's earlier proposal for a similar idea. He explained that there are two major pieces to both proposals: (1) the method for creating unspent-TxOut-tree roots/fingerprints for verification, and (2) using an alternate blockchain to maintain and distribute those fingerprints. While Torres proposed a different tree structure and putting the fingerprints in the main chain header, Reiner's proposal avoids inducing a blockchain fork by using a separate blockchain. This can be done non-disruptively and offers almost the same security as changing the protocol without hard-forking.Using the hash tree is something that can be implemented in any client, but a lot of the code will be shared between calculating it and using it anyway, so implementing in the Satoshi client makes sense. Suppose we're trying to make a tree consisting of real numbers. If the numbers are evenly distributed, as will happen with hashes of arbitrary data, any number will be at most log(n) steps away from the head of the tree. However, if some malicious actor adds some numbers to that tree, the balance of the tree will be upset. Peter Todd raised concerns about how people could deliberately unbalance the tree with addresses with chosen hashes. One solution could be to discard any new address whose hash happens to be deeper in the tree than a certain level, indicating it was probably chosen to be unbalanced. Nonetheless, this rule would only mean that anyone playing games would find they couldn't spend their money, and the coins can always be spent with a non-pruning client to an acceptable address which can later re-spend on a pruning client.</summary>
+    <published>2012-06-17T18:39:28+00:00</published>
+  </entry>
+</feed>

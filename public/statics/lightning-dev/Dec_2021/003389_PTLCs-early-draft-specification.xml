@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PTLCs early draft specification</title>
+  <updated>2023-06-03T06:43:17.482220+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2021-12-08 15:02:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PTLCs early draft specification</title>
+    <updated>2023-06-03T06:43:17.482220+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003389.html" rel="alternate"/>
+    <summary>In a Lightning-dev mailing list discussion, Bastien Teinturier has proposed a new update protocol for commitment transactions to address the problem that arises when updating commitment transactions and PTLCs in the payment-forwarding path collapse. The proposed solution involves modifying the protocol messages by splitting the data into several messages. This includes adding a new message before the commit/revoke dance and ensuring that adaptor signatures are in commitment_proposed instead of commitment_signed. These changes make the messages symmetrical and easier to reason about.One notable change in the proposal is the reversal of the order in which participants sign new commitments. Previously, Alice signed first, but now if Alice initiates, Bob will sign the updated commitment first. However, this only adds 0.5 RTT instead of 1 RTT compared to the current protocol. The proposal can also bundle with `option_simplified_update` without the adaptor sigs, and simply add the adaptor sigs as tlvs when PTLCs occur.Another topic discussed in the conversation was a musig setup for a funding transaction that would require the supply of 64B of musig2 nonces along with adaptor sigs in one direction and the other side's 64B of musig2 nonces back along with the partial signature for spending the funding tx. This amounts to a total of 256B of nonce data. The protocol should work fine with revocable signatures on a single tx approach too, which would keep both peers' commitments synchronized to a single channel state. Finally, it was noted that fast forwards would reduce the 2 round-trip protocol to update the state commitment to a 0.5 round-trip update, thereby reducing latency when forwarding by the same amount as before (1.5 round-trips to 0.5 round-trips).</summary>
+    <published>2021-12-08T15:02:02+00:00</published>
+  </entry>
+</feed>

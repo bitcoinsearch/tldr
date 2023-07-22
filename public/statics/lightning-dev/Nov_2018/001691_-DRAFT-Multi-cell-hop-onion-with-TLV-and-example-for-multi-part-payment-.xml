@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[DRAFT] Multi-cell-hop onion with TLV (and example for multi-part-payment)</title>
+  <updated>2023-06-02T15:10:35.685676+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-11-29 06:33:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[DRAFT] Multi-cell-hop onion with TLV (and example for multi-part-payment)</title>
+    <updated>2023-06-02T15:10:35.685676+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001691.html" rel="alternate"/>
+    <summary>The Lightning Network specification will include a multi-cell structure for onion routing that uses TLV, according to a proposal by Rusty Russell. The structure includes a realm or per-hop type, which expands on the current four bits for 'per_hop_type' to allocate 1-16 cells. An upper four bits are reserved to drop invalid messages. A HMAC is applied to cover the number of per-hops and padding is expanded to 12 bytes plus 65 bytes per extra cell. The padding will contain TLVs in lexicographical order with shortest winning on tiebreaks. The proposal also extends the use of multi-part payments, which allow payments to be split into smaller amounts and sent as separate payments. Type 4 creates a variable-length 'total_payment' field, which specifies the amount of total payment in milli-satoshis. It must only be used for the final hop, if flagged as available, and the reader should reject it if not the final hop. Rusty also suggested using the existence of this field to signal the use of base AMP, instead of a separate flags byte.In addition, he suggested two new types of payment: one for spontaneous payment and another for application data. Spontaneous payments would sacrifice proof-of-payment, while application data could be used for identifying the sender or enabling non-provable games of chance. From a nomenclature standpoint, Rusty suggested using "multi-part-payment" over "base AMP," which he believed was too specific and might limit future developments.</summary>
+    <published>2018-11-29T06:33:06+00:00</published>
+  </entry>
+</feed>

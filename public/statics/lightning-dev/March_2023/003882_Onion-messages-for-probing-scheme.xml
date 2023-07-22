@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Onion messages for probing scheme</title>
+  <updated>2023-06-03T12:13:26.464655+00:00</updated>
+  <author>
+    <name>Aymeric Vitte 2023-03-06 16:39:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Onion messages for probing scheme</title>
+    <updated>2023-06-03T12:13:26.464655+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-March/003882.html" rel="alternate"/>
+    <summary>The Lightning-dev mailing list has been discussing the use of onion messages for payment probing and an alternative to using DHT system for gossip. The proposal suggests that routing hops could announce their liquidity balances through a new set of gossip messages, committing to a liquidity balance and duration. This approach would be more accurate than sender-side probing, which can be less accurate with higher rates of network liquidity congestion. Additionally, a routing hop could commit to "private" gossip sent back to HTLC senders during HTLC successful settlement, announcing "differentiated services" of channel liquidity levels.The current method of HTLC payment probing risks channel liquidity being locked up if a peer along the route goes offline, while the proposed onion message (OM) method presents a convenient way to probe without risking locked liquidity along the route. However, sending onion message probes directly to individual nodes along the desired route, including those to which you don’t have a direct channel, could enable monitoring of arbitrary nodes across the network without having to have a channel path to them, degrading privacy. Therefore, it is probably best to design a scheme that probes along channel paths, like HTLC probing.The proposed scheme involves constructing an onion message for the first hop, which specifies the amount that can be forwarded to the next hop. If an intermediate node cannot forward the desired amount due to the stateless nature of OMs, they’ll fail the probe back to the previous node who will then fail the probe back to the original sender. While there is nothing stopping nodes from lying about their ability to forward, they may be negatively scored if they do so. Adopting a protocol like this could help routing nodes attract more forwarding traffic.Overall, the proposal is viewed as a low priority enhancement given that there are more pressing issues in LN, but it could be useful to spark ideas and highlight the flexibility of OMs.</summary>
+    <published>2023-03-06T16:39:42+00:00</published>
+  </entry>
+</feed>

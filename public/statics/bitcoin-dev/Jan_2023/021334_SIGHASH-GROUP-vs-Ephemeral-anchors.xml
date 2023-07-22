@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>SIGHASH_GROUP vs Ephemeral anchors</title>
+  <updated>2023-05-22T23:22:45.762335+00:00</updated>
+  <author>
+    <name>Anthony Towns 2023-01-11 08:00:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>SIGHASH_GROUP vs Ephemeral anchors</title>
+    <updated>2023-05-22T23:22:45.762335+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-January/021334.html" rel="alternate"/>
+    <summary>The comparison between SIGHASH_GROUP and Ephemeral anchors is an interesting topic. SIGHASH_GROUP allows inputs to divide outputs into non-overlapping groups. This means that a signature can link set of inputs and outputs via a signature in a way that's more general than SIGHASH_ANYONECANPAY, SIGHASH_SINGLE, and SIGHASH_ALL. On the other hand, Ephemeral anchors are a policy level rule that a transaction may create a single 0-value output with sPK of OP_TRUE, which won't be rejected as being dust. To some extent, ephemeral anchors provide an alternative way of getting the same benefits of SIGHASH_GROUP. The detailed proposed rules for Ephemeral anchors state that the transaction must have one or more CScript([OP_2]) output and must be 0-fee while having the ephemeral anchor output spent in the same mempool relay package. It must also have nversion==3, and it cannot have more than one such output.However, ephemeral anchors aren't a complete replacement for SIGHASH_GROUP. If i1 had two signatures, one signing with SIGHASH_GROUP but the other signing with SIGHASH_ALL, then it's difficult to duplicate that behavior exactly with ephemeral anchors. Additionally, if the value of i1+i2+i3 was less than o1 or i4 was less than o2+o3, then the introduction of f is too late to compensate for that with ephemeral anchors, but would have been fine with SIGHASH_GROUP.In theory, Ephemeral anchors get most of the potential benefits of SIGHASH_GROUP, particularly if the (v3.4b) rule can be removed or loosened somehow. And it's obviously much less costly to implement: it's relay policy only, rather than a consensus change; and it only operates at the transaction level, so we don't have to start worrying about pinning of inputs vs whole transactions.</summary>
+    <published>2023-01-11T08:00:14+00:00</published>
+  </entry>
+</feed>

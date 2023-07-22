@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Ultraprune merged in mainline</title>
+  <updated>2023-05-19T15:55:55.376766+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2012-10-20 22:33:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Ultraprune merged in mainline</title>
+    <updated>2023-05-19T15:55:55.376766+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-October/001928.html" rel="alternate"/>
+    <summary>Pieter Wuille, a Bitcoin Core developer has announced the merging of his "ultraprune" branch into mainline including Mike's LevelDB work. The idea behind ultraprune is to use an ultra-pruned copy of the block chain for validation instead of a transaction index into the block chain. This means that it only contains unspent transaction outputs in a custom compact format. It still keeps all blocks around for serving them to other nodes, for rescanning, and for reorganisations. As such, it is still a full node. Some small changes have been made such as changing the blk000?.dat to blocks/blk000??.dat files of max 128 MiB, pre-allocated per 16 MiB. Instead of a Berklely DB blkindex.dat, there is now a LevelDB directory blktree/ which only contains a block index, no transaction index. A new LevelDB directory coins/, has also be added which contains data about the current unspent transaction output set. New files blocks/rev000??.dat contain undo data for blocks (necessary for reorganization). Additionally, two new RPC calls are added: gettxout and gettxoutsetinfo.The most noticeable change should be performance: LevelDB deals much better with slow I/O than BDB does, and the working set size for validation is an order of magnitude smaller. Overall, the changes made would prepare for pruning in the future and also facilitate separation between validation nodes and archive nodes.  However, this may have profound effects on the network, so discussion may be needed before implementation.</summary>
+    <published>2012-10-20T22:33:12+00:00</published>
+  </entry>
+</feed>

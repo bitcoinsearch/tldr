@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Conjectures on solving the high interactivity issue in payment pools and channel factories</title>
+  <updated>2023-06-15T19:58:53.110069+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2022-05-12 17:36:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Conjectures on solving the high interactivity issue in payment pools and channel factories</title>
+    <updated>2023-06-15T19:58:53.110069+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020476.html" rel="alternate"/>
+    <summary>In a discussion between Antoine and Billy, the former raised concerns about predicting liquidity needs in sub-pools. Billy noted that this was still preferable to not being able to use the pool at all when someone is offline. There were also concerns about fan-out transactions interfering with confirmation of simple withdrawal transactions and whether sub-pool states could be used honestly and structured trustlessly. An accumulator committing directly to balances was suggested as a possible solution, but the challenge was finding a compact one with those properties. It was also noted that third-party providers would likely be delegated to handle this operation, though there would still be minor privacy downsides. The issue of how to prevent an always-online service from using the receiving key in spending mode if the balance stacked there becomes relevant was discussed, with the possibility of funds being stolen. However, it was noted that this would only occur if both the service and the channel partner(s) were malicious. The gitlab.com/lightning-signer/docs was mentioned as a work in progress in this direction. The possibility of a malicious pool participant committing off-chain balance in two partitions and sending spends to the hosting "receiving-keys" entities without their knowledge was discussed. Billy suggested that all always-online services holding a receive-only key would be online, so there would still be agreement among all participants on pool state changes. ZmnSCPxj noted that this was essentially just channel factories and suggested having each sub-pool have only two participants to reduce disruption if any one pool participant is down. The benefit of the pool over individual two-person channels was that the structure of the channels within the pool could be changed without doing on-chain transactions. The discussion ended with the idea that large multi-participant pools with sub-pools are just a channel factory for a bunch of channels, with good tradeoffs.</summary>
+    <published>2022-05-12T17:36:25+00:00</published>
+  </entry>
+</feed>

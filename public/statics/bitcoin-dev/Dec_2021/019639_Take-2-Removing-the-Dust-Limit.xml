@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Take 2: Removing the Dust Limit</title>
+  <updated>2023-06-15T03:24:28.627075+00:00</updated>
+  <author>
+    <name>Jeremy 2021-12-08 17:18:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Take 2: Removing the Dust Limit</title>
+    <updated>2023-06-15T03:24:28.627075+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-December/019639.html" rel="alternate"/>
+    <summary>The discussion is centered around the use of Decker Channels and SIGHASH_ALL / APO. The issue with Decker Channels is that either you can't add outs which protects against certain RBF pinning on the root with bloated wtxid data, but it allows anchor outputs, or you allow them and then are RBF pinnable but can have change. If you use anchor outs, dust-threshold outputs can't be used as it either breaks the ratcheting update validity or it allows many non-latest updates to fully drain the UTXO of any value.One solution proposed is to have a congestion-control tree set up where only log(n) data is needed for one bumper and 1.25x the data if all N want to bump. This could be a nice trade-off between letting everyone bump or not. Since these could be chains of IUTXO, they don't need to carry any weight directly. The carve-out would just ensure that CPFP 0 values are known how to be spent.</summary>
+    <published>2021-12-08T17:18:49+00:00</published>
+  </entry>
+</feed>

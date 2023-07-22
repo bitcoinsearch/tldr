@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Dynamic Commitments Part 2: Taprooty Edition</title>
+  <updated>2023-05-23T17:37:35.382926+00:00</updated>
+  <author>
+    <name>Matt Corallo 2022-11-01 22:59:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Dynamic Commitments Part 2: Taprooty Edition</title>
+    <updated>2023-05-23T17:37:35.382926+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-November/003735.html" rel="alternate"/>
+    <summary>The Lightning Network team is currently considering the implementation of a dynamic commitment update protocol that would allow existing multi-sig outputs in the chain to be future-proofed and hard-coded parameters to be removed from the protocol. Olaoluwa Osuntokun proposed the use of dynamic commitments to upgrade all 80k+ public channels to taproot without any on-chain transactions. He previously suggested the idea of dynamic commitments as a way to upgrade channel types on-the-fly and remove hard-coded limits such as the in-flight limit for HTLCs. Rusty proposed upgrading the commitment type upon channel re-establishment, but it does not allow both sides to adjust values like dust limit or max in flight. Instead, Osuntokun proposes a two-phase dynamic commitment update protocol inspired by the Raft consensus protocol that would allow upgrading nearly all channel/commitment related values (dust limit, max in flight, etc). The main edge case they will need to consider is cases where the new params make older HTLCs invalid for some reason.Johan Torås Halseth suggests dividing the taprootyness of a channel into two - taproot funding output and taproot commitment outputs, which would enable upgrading existing channels only on the commitment level. Matt Corallo questions the need for taproot commitment outputs as they do not provide materially new features compared to taproot funding outputs that provide a Bitcoin-wide privacy improvement and potential future ability of channel participants to use multisig for their own channel funds transparently. Antoine Riard points out the downside of adapter commitment, which is the uncertainty of the fee overhead at closing time.The proposal includes the use of adapter commitments with a protocol for updating commitments on-the-fly, potentially enabling all SegWit v0 channels to be updated to the base level of Taprooty channels without any on-chain transactions. The protocol introduces two new messages: `commitment_update_propose` and `commitment_update_apply`. Either party can propose a commitment/channel param update, but only the initiator can actually apply it. The messages have an opaque nested TLV field, making them extensible to add other features like tweaking max HTLCs, current dust values, and min/max HTLCs.The Lightning Network team is working on a protocol for updating channel commitments dynamically. Using the adapter commitment idea combined with a protocol for updating commitments on-the-fly would potentially allow all 80k+ SegWit v0 channels to be updated to the base level of Taprooty channels without any on-chain transactions. The two transactions (open+close) must happen eventually, but holding another layer of spends off-chain defers them indefinitely. Deploying a generalised on-the-fly dynamic commitment update protocol gives us a tool to future proof the existing anchored multi-sig outputs in the chain, and also a way to remove many of the hard coded parameters we have today in the protocol.</summary>
+    <published>2022-11-01T22:59:08+00:00</published>
+  </entry>
+</feed>

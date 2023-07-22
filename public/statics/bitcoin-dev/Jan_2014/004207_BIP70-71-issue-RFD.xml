@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP70/71 issue, RFD</title>
+  <updated>2023-06-08T00:46:06.381023+00:00</updated>
+  <author>
+    <name>Mike Hearn 2014-01-26 21:24:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP70/71 issue, RFD</title>
+    <updated>2023-06-08T00:46:06.381023+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-January/004207.html" rel="alternate"/>
+    <summary>In 2014, Andreas Schildbach was experimenting with BIP70/71 (payment protocol) usage in face to face payments and encountered an issue with the protobuf format. Protobufs are not self-delimiting, which means if someone is reading from an undelimited stream, they will read endlessly because they don't know how much to read. Though current BIP70 implementations work because they're reading either from a file or from an HTTP resource which sets the Content-Length header, this header is optional and there are many kinds of streams that don't have this built-in delimiting mechanism. The Java protobuf API solves this by offering delimited I/O. However, this leading varint is an incompatible change and would need to be added to the spec. PaymentMessage and PaymentACK were specifically encountered with this issue, but it might be a good idea to apply this to all messages if any. It is open for discussion.</summary>
+    <published>2014-01-26T21:24:35+00:00</published>
+  </entry>
+</feed>

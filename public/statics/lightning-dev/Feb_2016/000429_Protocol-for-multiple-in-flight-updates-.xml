@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Protocol for multiple in-flight updates.</title>
+  <updated>2023-05-23T22:28:19.258153+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-02-04 04:08:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Protocol for multiple in-flight updates.</title>
+    <updated>2023-05-23T22:28:19.258153+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-February/000429.html" rel="alternate"/>
+    <summary>In this email exchange between Rusty Russell and Joseph Poon, they discuss the use of a signature that covers a certain range of values for HTLCs (Hashed Time-Locked Contracts) in the Lightning Network. They note that this signature works more like a request "staging" ID rather than an HTLC ID, as requests can include removing HTLCs as well. They also mention that the counter aspect requires two counters- one for each originator of the request- to allow for simultaneous action on accept/reject/etc. Additionally, they discuss the importance of ensuring that all messages sent are in order, and if the replyer skips the requester's Add Requests when replying, the skipped requests are assumed to be request rejections or an outright channel closeout since it should never happen. They mention this is to enforce accept/reject order and to ensure that modifications included in the signature/transaction do not change after-the-fact. Joseph suggests disallowing skipping as a protocol violation, which could lead to a gentler close protocol where sending a close message implies the initiator would send no more adds and reject all received. While it may take some time to clean out all the remaining HTLCs for mutual close, at least the other side knows what is happening and can replace capacity by opening new channels if needed. Rusty thanks Joseph and mentions he will try to document the protocol in another email.</summary>
+    <published>2016-02-04T04:08:35+00:00</published>
+  </entry>
+</feed>

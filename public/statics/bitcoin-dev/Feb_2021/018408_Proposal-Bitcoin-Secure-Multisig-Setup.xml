@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Bitcoin Secure Multisig Setup</title>
+  <updated>2023-06-14T17:31:26.763766+00:00</updated>
+  <author>
+    <name>Hugo Nguyen 2021-02-12 16:55:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Bitcoin Secure Multisig Setup</title>
+    <updated>2023-06-14T17:31:26.763766+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018408.html" rel="alternate"/>
+    <summary>The proposed encryption scheme is updated based on the feedback received. PBKDF2 would be used as the key derivation function with PRF = SHA512, which is readily available on today's hardware and mimics BIP39. The length of HUMAN_READABLE_TITLE, in ASCII format, is between 8 to 20 characters, while NONCE is a 64-bit number. The encryption key takes about ~3 seconds to derive on an 80Mhz MCU. A secure session is assumed to be needed temporarily for a few hours or up to one day. The Coordinator and Signers exchange these two secrets before the setup, and the NONCE can be converted into a 6-word phrase using BIP39 wordlist, a 20-digit decimal number, or a QR code depending on the vendor. The flexibility in the data format allows each vendor to customize the UX based on their respective device capabilities. Dmitry Petukhov suggested that if TOKEN has the characteristics of a password, then it would be better to use a key derivation function designed for passwords such as PBKDF2 instead of ENCRYPTION_KEY = SHA256(SHA256(TOKEN)), which might be vulnerable to rainbow table attacks. The counter-argument is that this adds another code dependency for vendors if the device firmware does not already have the required key derivation function. To solve this issue, the shared key for multisig setup could be entered in the same way as the main key, with additional visual check via some fingerprint. However, there might be potential confusion between the two procedures, and measures need to be taken to prevent such confusion. The approaches can be combined by specifying a key derivation function suitable for passwords and sharing a password and/or the derived key via a secure channel. If the hww supports the derivation function, it can derive the key from the password, and if it only supports keys, the key can be entered raw or via mnemonic.</summary>
+    <published>2021-02-12T16:55:55+00:00</published>
+  </entry>
+</feed>

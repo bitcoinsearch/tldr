@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Mitigations for loop attacks</title>
+  <updated>2023-05-25T00:43:31.871950+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-05-18 05:27:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Mitigations for loop attacks</title>
+    <updated>2023-05-25T00:43:31.871950+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-May/001289.html" rel="alternate"/>
+    <summary>The reputation of the upstream peer is increased by the fee earned if the payment succeeds after T time. On the other hand, the downstream peer's reputation is increased by the fee earned but decreased by T times the reputation_loss_rate. However, if the payment fails, the upstream peer's reputation does not change and the downstream peer's reputation decreases by T times the reputation_loss_rate. There is no financial fee on failure, just a reputation fee. The reputation_loss_rate is an explicit thing in HTLC and a private per-node thing. For instance, when a 1000 satoshi HTLC with a 10ppm fee and a 1ppm-per-second reputation_loss_rate succeeds in 1 second, then the reputation of the source and destination nodes would increase by 10 and decrease by 1, respectively. If it succeeds in 10 seconds, then the destination node's reputation would be reduced by 10. However, if it fails in 10 seconds or falls onto the chain and fails after 144 blocks, then the destination node's reputation would decrease by 10 and 86400, respectively. Mallory can destroy N reputation points in 18 nodes for cost N in this scheme by sending a payment to Mallory2, which takes a day to resolve, after paying a crapload of fees to Node18 to pay Mallory3, getting great reputation. This is why ramped reputation_loss_rate is necessary. Suppose Mallory1-&gt;Node1 has a 1ppm reputation_loss_rate while Mallory2 has a 19ppm rate; in that case, Mallory can only destroy 9*N total reputation points, not 18*N. Exponential reputation_loss_rate can fix this issue, but Node1 may never get the 262144x reputation needed to make the payment in the first place.</summary>
+    <published>2018-05-18T05:27:15+00:00</published>
+  </entry>
+</feed>

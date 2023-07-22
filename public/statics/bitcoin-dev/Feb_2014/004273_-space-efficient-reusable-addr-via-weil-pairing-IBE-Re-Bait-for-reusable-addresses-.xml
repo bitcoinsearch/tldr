@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>(space) efficient reusable addr via weil pairing IBE (Re: Bait for reusable addresses)</title>
+  <updated>2023-06-08T00:41:46.397510+00:00</updated>
+  <author>
+    <name>Peter Todd 2014-02-02 12:26:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>(space) efficient reusable addr via weil pairing IBE (Re: Bait for reusable addresses)</title>
+    <updated>2023-06-08T00:41:46.397510+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-February/004273.html" rel="alternate"/>
+    <summary>In this context, the discussion is about a method of securely and efficiently delegating block searching by computing the private key for the IBE pub key that any sender would use for that block, and sending it as a query to a random node. The node can decrypt the encrypted bloom baits with it but remains powerless to correlate with bloom baits to other payments received by the same user in bother blocks. The payor needs two separate pub keys, the "Filter" and "Recover" pub keys. From those two pub keys, two separate shared secrets are derived. The payor can give the secret key corresponding to that pubkey to a semi-trusted third party who can then trial decrypt all filter bait seen in transactions in the blockchain. Every time the decrypted string has a sufficient number of zeros, it's considered a filter pass, and the transaction is given to the payor. The full node uses this private key to decrypt the same byte in all the transactions in that epoch/block which match the expected layout/template. For example, given a certain length OP_RETURN, pull the specific byte and decrypt. This decrypted byte is then used as bloom bait which may or may not cause the transaction to be sent back to the SPV client. XOR with the ECDH-calculated nonce is fine. (run the nonce though a hash function first). Interestingly both schemes can be used at once - a short public prefix combined with a second private filter. There's no bloom filters involved; as said earlier, "bloom bait" is a misleading name. "Filter bait" is a better term given it's a generic concept.</summary>
+    <published>2014-02-02T12:26:10+00:00</published>
+  </entry>
+</feed>

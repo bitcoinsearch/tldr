@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New BIP32 structure for P2SH multisig wallets</title>
+  <updated>2023-06-08T21:42:19.920139+00:00</updated>
+  <author>
+    <name>Alan Reiner 2014-04-26 03:02:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New BIP32 structure for P2SH multisig wallets</title>
+    <updated>2023-06-08T21:42:19.920139+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005568.html" rel="alternate"/>
+    <summary>A team building a multisignature P2SH HD wallet called Copay has shared their approach for a new standard in response to discussions on standardizing the structure for branches. The team's assumptions are that N parties want to share an m-of-n wallet, each party must generate their master private keys independently, use multisig P2SH for all addresses and transaction creation plus signing requires communication between parties. The team will be using BIP43 and defines the following levels: m / purpose' / cosigner_index / change / address_index. Each level has a special meaning detailed, including the index of the party creating this address, whether it is for change or receive address, and addresses numbered from index 0 in sequentially increasing manner. Each cosigner generates their own extended master keypair and shares the extended purpose' public key with the others, which is stored encrypted. When generating an address, each party can independently generate the N needed public keys. They do this by deriving the public key in each of the different trees, but using the same path. One of the n cosigners wants to receive a payment to the shared wallet. He knows the last used index in his own branch because only he generates addresses there. Thus, he can generate the public keys for all of the others using the next index and calculate the needed script for the address. When creating a transaction, first one of the parties creates a Transaction Proposal. This is a transaction that spends some output stored in any of the p2sh multisig addresses (corresponding to any of the copayers' branches). This proposal is sent to the other parties, who decide if they want to sign. If they approve the proposal, they can generate their needed private key for that specific address (using the same path that generated the public key in that address, but deriving the private key instead), and sign it. Once the proposal reaches m signatures, any cosigner can broadcast it to the network, becoming final.</summary>
+    <published>2014-04-26T03:02:21+00:00</published>
+  </entry>
+</feed>

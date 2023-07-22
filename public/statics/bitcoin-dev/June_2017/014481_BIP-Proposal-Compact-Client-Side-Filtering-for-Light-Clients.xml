@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP Proposal: Compact Client Side Filtering for Light Clients</title>
+  <updated>2023-05-20T02:44:40.412015+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2017-06-02 04:49:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP Proposal: Compact Client Side Filtering for Light Clients</title>
+    <updated>2023-05-20T02:44:40.412987+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-June/014481.html" rel="alternate"/>
+    <summary>A proposal for a new light client BIP has been introduced by Alex Akselrod and Olaoluwa Osuntokun, which describes a concrete specification for the much discussed client-side filtering reversal of BIP-37. The new light-client mode uses client-side filtering based off of Golomb-Rice coded sets. Full-nodes maintain an additional index of the chain, and serve this compact filter (the index) to light clients which request them. Light clients then fetch these filters, query the locally and _maybe_ fetch the block if a relevant item matches. The primary motivation behind this is enabling a light client mode for lnd in order to support a more light-weight back end paving the way for the usage of Lightning on mobile phones and other devices. One specific area they are seeking feedback on is the parameter selection. The proposal uses a fixed false-positive rate of P = 1/2^20 unlike BIP-37 which allows clients to dynamically tune their false positive rate. They have done a bit of analysis and optimization attempting to optimize the following sum: filter_download_bandwidth + expected_block_false_positive_bandwidth. Using a fixed fp=20, some stats detailing the total index size have been shared. For mainnet, using the filter contents as currently described in the BIP (basic + extended), the total size of the index comes out to 6.9GB while the testnet stats take into account the increase in the maximum filter size due to segwit's block-size increase.They have also provided additional data, including the total size, average, median and max for both regular and extended sizes. In order to consider the average+median filter sizes in a world worth larger blocks, they ran the index for testnet and provided the corresponding data. They also shared raw data for each block (mainnet + testnet), which can be found in the links shared in the post. They look forward to feedback from the community.</summary>
+    <published>2017-06-02T04:49:16+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP: Using Median time-past as endpoint for locktime calculations</title>
+  <updated>2023-06-10T20:16:28.113423+00:00</updated>
+  <author>
+    <name>Btc Drak 2015-08-27 22:08:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP: Using Median time-past as endpoint for locktime calculations</title>
+    <updated>2023-06-10T20:16:28.113423+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/010683.html" rel="alternate"/>
+    <summary>A pull request has been submitted for BIP 113, with a link to the discussion surrounding it. The discussion took place in 2013 in the #bitcoin-wizards chat, where concerns were raised about miners manipulating nLockTime with time-based locks. This could create incentives for miners to mine blocks at the limit of the two-hour window and allow them to include high-fee nLockTimes in the blocks they create. Several solutions were proposed to fix this issue. A soft-forking fix was suggested, which would use the last block's ntime instead of the current one. However, this solution would only work if mining power was well-distributed, as miners with more hashing power would still have an incentive to manipulate the system. Other solutions were proposed, such as using timestamping to provide a way for nodes to detect if their clocks are off or using nLockTime based on the previous block timestamp. The discussion also touched upon the idea of delaying relaying the block to increase the risk of it being stale and incentivizing always setting nTime to the minimum. Ultimately, timestamping was seen as the best solution as it provided a way for all users to set their clocks to what the majority of hashing power thinks nTime is, sidestepping the problem of manipulation. BIP 113 was assigned number 113, and the text has been updated accordingly with credits given to Gregory Maxwell.In a Bitcoin-dev mailing list conversation, developers discussed the trade-offs between two options for setting nLockTime in transactions. The first option is minimum time, which is stronger because it involves more hashing power and is easier for users to understand why the transaction is not getting mined. The second option is adding a constant offset, which sidesteps the problem but creates an inflation attack. It was noted that this sidestepping only truly solves the problem when there is enough hashing power setting their clocks back. Without timestamping, nodes have consensus failures which can be attacked. The conclusion seemed to be that minimum time is probably the best option if hash power is well distributed. The conversation took place on July 16th, 2013, and the full transcript is available at download.wpsoftware.net.</summary>
+    <published>2015-08-27T22:08:32+00:00</published>
+  </entry>
+</feed>

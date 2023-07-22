@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Optimized Header Sync</title>
+  <updated>2023-06-13T01:14:01.187334+00:00</updated>
+  <author>
+    <name>Jim Posen 2018-03-27 23:31:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Optimized Header Sync</title>
+    <updated>2023-06-13T01:14:01.187334+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-March/015851.html" rel="alternate"/>
+    <summary>A new P2P extension has been proposed to allow faster header sync mechanisms. This protocol proposes compressing the header data and downloading evenly spaced checkpoints throughout history from all peers first. The proposed compressed header format is versioned by a 256-bit unsigned integer. The proposed messages enable sync strategies that are resilient against attacks. The P2P messages are designed to be flexible, supporting multiple header sync strategies, and leaving room for future innovations while also being compact.The proposed messages include a new service bit, NODE_HEADERS_V2, and two new messages, getcheckpts, and checkpts. The new VarInt encoding is introduced to support greater range of numbers than the standard CompactSize. The checkpoint is defined for a block as a tuple of its hash and the chain work.The Bitcoin protocol defines the getheaders2 and headers2 messages, which are used to request and respond with compressed block headers, respectively. When requesting headers with getheaders2, a node must not send the message unless the peer has set the NODE_HEADERS_V2 service bit. The height of the block with hash end_hash must be greater than or equal to start_height, and the difference must be strictly less than 3,000.The end_hash should match one in a previously received checkpts message; otherwise, the receiving node may disconnect. The first header must be encoded with a 0-byte indicator, and the length of the headers vector must be less than or equal to 3,000. The headers must be sequential and ordered by height, and each header should be optimally compressed. If the 0th bit of the flags field is unset, the start_block_coinbase_tx and start_block_coinbase_branch fields must be omitted.The general header sync protocol for clients involves requesting checkpoints from peers with getcheckpts, then deciding which peers to fetch ranges of headers from and downloading them with getheaders2. Clients can use different sync strategies to download block headers, such as forward sequential syncing, parallel header download, and random sampling proof-of-work.The inclusion of the coinbase transaction in the headers messages is primarily for cryptographic commitments to a block’s height in the chain after BIP 34 activation at block height 227,835. This mitigates certain attacks during header sync, and the getheaders2 message can be used to request a coinbase transaction for a single header. The compression is designed to permit full decompression of all headers in a headers2 message without requiring any other chain context, allowing proofs of work to be validated for arbitrary header ranges. This proposal could reduce bandwidth usage by 40%-50% and supports downloading headers ranges from multiple peers in parallel, which is not possible with the current mechanism.</summary>
+    <published>2018-03-27T23:31:58+00:00</published>
+  </entry>
+</feed>

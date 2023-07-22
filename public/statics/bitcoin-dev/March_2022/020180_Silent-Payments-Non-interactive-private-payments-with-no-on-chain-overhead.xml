@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Silent Payments – Non-interactive private payments with no on-chain overhead</title>
+  <updated>2023-05-22T18:41:31.140676+00:00</updated>
+  <author>
+    <name>Ruben Somsen 2022-03-28 15:27:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Silent Payments – Non-interactive private payments with no on-chain overhead</title>
+    <updated>2023-05-22T18:41:31.140676+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020180.html" rel="alternate"/>
+    <summary>Ruben Somsen has proposed a new scheme for private non-interactive address generation without on-chain overhead. The recipient generates a silent payment address and makes it publicly known while the sender uses a public key from one of their chosen inputs for the payment and derive a shared secret that is then used to tweak the silent payment address. Compared to previous schemes, this scheme avoids using the Bitcoin blockchain as a messaging layer and requires no interaction between sender and recipient other than needing to know the silent payment address.However, the main downsides are the scanning requirement, the lack of light client support, and the requirement to control your own input(s). Silent payments aim to prevent input linkage in Bitcoin transactions, which is essential for preserving privacy but can introduce other weaknesses, such as revealing the intended recipient to other coinjoin users. To mitigate this weakness, the proposal includes a blinding scheme that allows hiding the silent payment address from other participants.The article compares Silent Payments with other protocols offering similar functionality, such as Payment Code Sharing, Xpub sharing, and Regular Address Sharing. Payment Code Sharing involves sending an OP_RETURN message on-chain to the recipient to establish a shared secret prior to making payments. Xpub Sharing involves handing out an xpub instead of an address upon first payment to enable repeat payments. Regular Address Sharing requires interaction for every single payment, whereas Silent Payments do not.The proposal raises open questions about the implementation of Silent Payments, such as database lookups, light client support, single input tweaking, security issues, and added complexity. Improvements to the basic scheme include UTXO set scanning, a variant using all inputs, scanning key, and address reuse prevention. Light clients cannot easily be supported due to the need for scanning.One side-benefit of silent payments is that BIP32 HD keys won't be needed for address generation, since every address will automatically be unique. Overall, the idea of Silent Payments has never been seriously considered before and may be reasonably viable, particularly if we limit ourselves to detecting only unspent payments by scanning the UTXO set. The article provides references to several related articles and proposals, and Ruben Somsen recommends reading the gist for improved formatting and in order to benefit from potential future edits.</summary>
+    <published>2022-03-28T15:27:56+00:00</published>
+  </entry>
+</feed>

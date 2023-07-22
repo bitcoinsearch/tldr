@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>how to disable segwit in my build?</title>
+  <updated>2023-05-20T03:22:13.149313+00:00</updated>
+  <author>
+    <name>Anthony Towns 2017-07-13 01:48:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>how to disable segwit in my build?</title>
+    <updated>2023-05-20T03:22:13.150314+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-July/014773.html" rel="alternate"/>
+    <summary>In a recent email discussion, Dan Libby expressed his desire to have some of the more recent features without activating SegWit until he chooses to do so. However, this terminology isn't quite precise. The options available are that miners or mining pool owners can signal support for SegWit activation while running nodes can choose to enforce or not enforce the additional consensus rules associated with SegWit. It is the latter option that Dan is talking about. Activation is the collective action of the Bitcoin ecosystem to start enforcing the SegWit consensus rules after a sufficient majority of miners are signaling support. To disable enforcement of SegWit rules, even if a majority of mining power signals activation, one can change the code and recompile it. For instance, by changing the nTimeout setting for DEPLOYMENT_SEGWIT from 1510704000 (Nov 15, 2017) to 1493596800 (May 1, 2017, already expired). However, this may cause an individual to risk accepting blocks that nobody else in the network will accept, opening them up to a higher risk of double spends. Additionally, it may cause them to be unable to peer with SegWit-enabled nodes after SegWit is activated if their node is rejecting blocks with witness data because they think SegWit is not enabled while others think it is enabled. To avoid such complications, one would also need to stop setting the NODE_WITNESS p2p bit which might be possible by setting the nTimeout above to 0 instead of just a date in the past. Finally, when asked how to avoid unwanted side-effects, Andrew Jones explained that the unwanted side-effects are precisely the reasons not to do it. If one doesn't understand what they are, they won't be able to avoid them.</summary>
+    <published>2017-07-13T01:48:26+00:00</published>
+  </entry>
+</feed>

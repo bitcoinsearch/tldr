@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A proposal for up-front payments.</title>
+  <updated>2023-05-23T02:21:01.460999+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-11-05 11:24:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A proposal for up-front payments.</title>
+    <updated>2023-05-23T02:21:01.460999+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-November/002283.html" rel="alternate"/>
+    <summary>In an email exchange between Rusty Russell and aj on November 5, 2019, they discussed a proposed payment scheme for Lightning Network. Rusty explained how he sent a 0-value HTLC to ZmnSCPxj, who had a balance of 10000msat in a channel with Rusty, and added extra fields to the onion. He then sent the HTLC to Rusty along with 25x50 msat, causing his balance with Rusty to drop to 8750msat. Rusty decrypted the onion and read the prepay field that said 14, LLLLL. He checked the hash of the onion and block which had the top 8 bits cleared, so the cost was indeed 16 - 8/2 == 14. He then hashed LLLLL 14 times and confirmed that it was ZZZZZ as ZmnSCPxj had instructed. aj questioned the idea of lucky hashing resulting in a discount, stating that it gives "a linear discount for exponentially more luck in hashing which also seems odd." aj suggested a simpler payment scheme where Alice sends HTLC(k,v) + 1250 msat to Bob, who forwards HTLC(k,v) + 500 msat to Carol, who forwards HTLC(k,v) + 250 msat to Dave. Dave redeems the HTLC, claims an extra 300 msat, and refunds 200 msat to Carol, who then refunds 200 msat to Bob, who finally refunds 200 msat to Alice. In case of failure, Alice loses the 1250 msat and someone in the path steals the funds. aj suggested making individuals accountable by having Alice provide "Hash(AAAA, refund=200)" to everyone, encoding AAAA in the onion to Dave, and then each hop reveals AAAA and refunds 200msat to demonstrate their honesty. They also discussed the idea of paying tiny amounts for bandwidth and how successful attempts pay for the bandwidth while unsuccessful ones result in a channel closure, making it unprofitable to cheat the system.</summary>
+    <published>2019-11-05T11:24:19+00:00</published>
+  </entry>
+</feed>

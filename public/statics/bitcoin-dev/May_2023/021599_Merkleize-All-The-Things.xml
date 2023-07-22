@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Merkleize All The Things</title>
+  <updated>2023-06-16T03:04:54.983232+00:00</updated>
+  <author>
+    <name>Salvatore Ingala 2023-05-01 13:11:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Merkleize All The Things</title>
+    <updated>2023-06-16T03:04:54.983232+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-May/021599.html" rel="alternate"/>
+    <summary>The email conversation shared on the bitcoin-dev mailing list discusses a construction on top of the fact that f is committed to in a contract. It is explained that different data and branches would lead to symmetric states, but since f is generic, it can be chosen as a universal Turing machine for executing a program on input data. Fraud proofs can be done on statements "f(code, data) == output", allowing contracts where the code itself is chosen later.The email proposes building a universal state channel where parties can enter any contract among themselves entirely inside the channel. This approach may have useful applications worth exploring further, such as supercharging lightning. The idea is to create a platform where people can use any contract they want without publishing it on the blockchain. This would allow them to keep their contract private and secure while ensuring that fraud proofs can be used if necessary.In a message exchange, Salvatore Ingala proposed using rock-paper-scissors as an academic example for the MATT (Miniscript + adaptor signatures + taproot) smart contract. The protocol is simple: Alice chooses and publishes her move, Bob chooses his move, and the pot is adjudicated per the rules. To prevent Bob from waiting for Alice's move to play accordingly, Alice publishes a commitment to her move and reveals it later. Using CICV/COCV, the game can be played with three transactions, and the possible payout options are fully known when the game starts. There are three possible outcomes that are efficiently described by their CTV hashes, allowing them to avoid explicit amount introspection. To implement this game, they both put one coin each, and they send it to an output whose script is the start of the game.The output has two spending conditions: after a certain time, Alice takes the money, and Bob posts m_B, which is 0, 1, or 2. The next output is the second state, where Alice reveals m_A and r_A compatible with c_A. In general, the witness elements' malleability could be an issue in MATT contracts, but here, the value of m_A is committed to the output thanks to COCV, so Bob's signature prevents malleability for m_B.In conclusion, the rock-paper-scissors game is a simple example of how MATT smart contracts can be implemented using CICV/COCV and CTV hashes. By embedding the information in the Script of the corresponding state, the computation step can be hard-coded into the contract itself. The email concludes with a suggestion to start by implementing testnet rock-paper-scissors in MATT.</summary>
+    <published>2023-05-01T13:11:08+00:00</published>
+  </entry>
+</feed>

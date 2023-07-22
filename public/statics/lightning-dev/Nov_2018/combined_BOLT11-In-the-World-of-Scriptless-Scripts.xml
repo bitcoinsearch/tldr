@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - BOLT11 In the World of Scriptless Scripts</title>
+  <updated>2023-05-20T08:56:59.734134+00:00</updated>
+  <author>
+    <name>Anthony Towns 2018-11-05 02:47:18</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2018-11-03 04:43:32</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2018-11-05 02:18:04</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2018-11-04 04:26:13</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2018-11-02 03:19:45</name>
+  </author>
+  <link href="lightning-dev/Nov_2018/001510_BOLT11-In-the-World-of-Scriptless-Scripts.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001494_BOLT11-In-the-World-of-Scriptless-Scripts.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001509_BOLT11-In-the-World-of-Scriptless-Scripts.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001496_BOLT11-In-the-World-of-Scriptless-Scripts.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001490_BOLT11-In-the-World-of-Scriptless-Scripts.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - BOLT11 In the World of Scriptless Scripts</title>
+    <updated>2023-05-20T08:56:59.734134+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001510.html" rel="alternate"/>
+    <summary>A discussion about the future of Lightning payment flow has taken place on the Lightning-dev mailing list. One thread discusses the need for a continuous path of channels with the same feature, while another considers the possibility of generating unique invoice hashes dynamically.Rusty Russell and Anthony Towns discussed experimental/optional support for using secp256k1 public/private keys for payment hashes/preimages. However, every intermediary needs to support it before committing to it in 1.1. The components required for it to work would be invoices with two 'p' fields, one for the current 256-bit payment hash and another for a new variant of different length. Channel announcements would need to specify support for secp256k1 or just sha256. They also talked about sending multiple payments with the same hash and how vendors/payees need to check the HTLC amount matches what they expect already.Additionally, they suggested including a URL for the website where users can enter their details and receive a personalized BOLT 11 v1.1 "invoice" back with payment-hash/nonce/signature/whatever. Rusty Russell also mentioned that payees should include their own crypto key in the invoice for generating an on-chain fallback payment directly between payer/payee that reveals proof-of-payment on acceptance.The discussion revolves around the concept of proof-of-payment in Lightning Network for recurrent payments. To solve this, an extended verification algorithm is suggested that involves including the postimage X = H(pre,1000), which indicates "pre" has been hashed 1000 times, so X = H(H(pre,1000-n),n). This approach is independent of using sha256/secp256k1 for preimages over lightning too.The lightning network is considering using secp256k1 public/private keys for payment hashes/preimages. This will enable payment decorrelation, AMP, and third-party verifiable proof-of-payment. Rusty Russell suggests creating one invoice which can be paid arbitrary many times by different individuals, and the ability to prove that the payment has been made. The receipt must be a signature with the vendor's public key.The Schnorr sig requires R and s with the vendor choosing R and not revealing R's preimage as that would reveal their private key. If both vendor and customer know R, then to get the signature, you need the private key holder to reveal s. Even if you calculate r differently, it is not possible to do this without Bob and Alice interacting to get the nonce R prior to sending the transaction.Finally, the group discussed a proposed scheme for creating unique invoices using Schnorr nonces. Three levels of implementation are proposed: laolu/conner, just sending multiple payments with the same hash, and secp256k1. The details of implementing secp256k1 AMP are discussed, which involves sending through the payment for the court to validate the invoice and signature. AMP splits and joins are just ensuring you can claim the incoming payment from any outgoing payments' secret.</summary>
+    <published>2018-11-05T02:47:18+00:00</published>
+  </entry>
+</feed>

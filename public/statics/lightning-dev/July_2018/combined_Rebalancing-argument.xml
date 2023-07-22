@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Rebalancing argument</title>
+  <updated>2023-05-20T08:34:11.145161+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-07-03 19:33:22</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-07-03 19:13:55</name>
+  </author>
+  <link href="lightning-dev/July_2018/001344_Rebalancing-argument.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2018/001343_Rebalancing-argument.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Rebalancing argument</title>
+    <updated>2023-05-20T08:34:11.145161+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-July/001344.html" rel="alternate"/>
+    <summary>The Lightning Network's fee structure may benefit from modification to punish flows that unbalance channels further. This would simplify the problem, as heuristics could target the fee rate alone. The suggestion was first made by Tadge in 2015 and aims to keep nodes' channels relatively balanced while charging a payment amount that scales super-linearly when flows consume most of their available balance. In the current fee schedule, base_fee + amt*rate, clighting, and lnd use a "risk factor" to factor in the impact of the time lock on the "weight" of an edge when path finding. In the future, nodes may be able to signal how they wish the fee to scale with the absolute CLTV of the HTLC extend to factor in their conception of the time value of their BTC. A "balance disruption" factor could also be implemented to penalize unbalancing a channel.In a discussion about rebalancing argument, it was noted that the setting in the Lightning Network is not exactly comparable to that described in a 2010 paper. Routing fees in the Lightning Network invalidate the cycle-reachability relation that forms the basis of the results of the paper. Additionally, in the Lightning Network, the weights of the directed edges are unknown, only the sum of two opposing edges is known. While theoretically the flow in the network depends on the liquidity of the nodes, in practice, well-balanced channels increase the probability of finding a working route. Furthermore, HTLCs create a situation where funds are locked up while routing takes place, which can have an impact on the entire flow of the network. There is a need for Atomic Multipath Payments in response to these scientific results.Dmytro Piatkivskyi, an academic who has been working on the Lightning Network, asked a question on the mailing list about the necessity of rebalancing the network through cycle transactions. While some papers suggest a smart mechanism to do the re-balancing, others argue that the distribution of funds in channels does not really affect the network liquidity. Passive rebalancing refers to rebalancing a node carries out independent of needing to send/receive payments themselves, in order to ensure an equilibrium state amongst the available balances of their channels.One relevant detail w.r.t to the necessity of active rebalancing is the directionality of payment flows in the network. If payment flows are more or less balanced, then it's possible passive rebalancing isn't really necessary. However, if a few sources/sinks dominate, then channels may regularly become biased requiring more maintenance. Overall, although there are arguments for and against rebalancing, it is important to maintain a balanced network for cheaper fees or shorter paths. Moving to HORNET would allow nodes to ask for an initial "quote" for a set of payment ranges during the setup phase, then use that quote for all payments sent. This would allow nodes to keep their fee schedules private and change them at a whim if they wish. It was suggested that BOLT 1.x+ may want to move towards a cycle transaction system as it allows nodes to quantify their apprehension to time locks and channel balance equilibrium affinity. A smart fee strategy may also help in maintaining balance.</summary>
+    <published>2018-07-03T19:33:22+00:00</published>
+  </entry>
+</feed>

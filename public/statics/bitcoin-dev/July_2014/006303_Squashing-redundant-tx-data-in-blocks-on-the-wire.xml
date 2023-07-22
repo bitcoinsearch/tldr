@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Squashing redundant tx data in blocks on the wire</title>
+  <updated>2023-06-09T01:10:46.939263+00:00</updated>
+  <author>
+    <name>Kaz Wesley 2014-07-18 17:39:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Squashing redundant tx data in blocks on the wire</title>
+    <updated>2023-06-09T01:10:46.939263+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-July/006303.html" rel="alternate"/>
+    <summary>The proposal is to exchange priority policies in peer introductions and assign unique sequential IDs for transactions. Upon receiving a getdata for a transaction, the last-known-peer-received inventory will be updated to all inventories up to the referenced one. The sparse block will include ID-last-received and last-known-peer-received. Transactions will be referenced in the sparse block by index in receiver's prioritization with peer's sent inventories up to ID-last-received and sender's prior inventories up to last-known-peer-received. Possible new messages include sparseblock, invack message that a node can send when it has received multiple inventories already, and gettx which uses a new sequential ID to save 28 bytes per transaction. It is important for ordering policies to have as much detail as possible with parameters such as total inputs, total outputs, bytes, coin days destroyed, net UTXO size change, sigops, is data carrier, is output raw multisig, age in mempool, and other extensible parameters.Ordering policies should allow arbitrary algebraic combinations of their parameters, thresholds, and Boolean combinations of sub-policies. This could be implemented with a tx-script-like stack-based language. Coin-days-destroyed changes require peers to agree on when it's recalculated. Age in mempool seems difficult to calculate in terms of time, but it can be done in terms of "how many transactions old is this sequential ID."One potential pitfall is that it allows for a heterogeneous mempool policy environment. To avoid this situation, a parallel mechanism for relay policies may be added to differentiate between what a node would keep in its mempool versus what it wouldn't even relay and doesn't want to see at all. Relay policies could be specified just like prioritization policies, but with the final stack value evaluated in a boolean context.Policy-scripts could provide a standardized way for miners to include a policy script in a coinbase and advertise their relative price of sigops versus bytes. Nodes may choose to take this information into account to optimize their mempool policies for likelihood of consistency with future blocks. Policy scripts only provide relative information on prices of different transaction properties rather than an absolute fee, so it should not allow miners to "vote fees up."</summary>
+    <published>2014-07-18T17:39:38+00:00</published>
+  </entry>
+</feed>

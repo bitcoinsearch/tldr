@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Lightning over taproot with PTLCs</title>
+  <updated>2023-05-23T16:18:31.334421+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-10-12 03:08:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Lightning over taproot with PTLCs</title>
+    <updated>2023-05-23T16:18:31.334421+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-October/003293.html" rel="alternate"/>
+    <summary>In a discussion thread on layering payments, Anthony Towns questioned whether the current payment system would work if Alice forwarded a payment to Bob with timeout T. In such a scenario, Alice can either reclaim the funds or know the preimage by time T only by closing the channel on-chain at time T-to_self_delay. However, Lloyd Fournier pointed out that this problem may not be as bad as it seems, and suggested breaking down the delays into three categories: refund delay, channel recovery delay, and payment recovery delay. If you allow payments up to the total channel balance, there's not really any meaningful distinction between channel recovery delay and payment recovery delay, at least in the worst case. Layered transactions can solve the issue of different recovery delays. If Bob's node fails near the timeout, then both Alice and Carol drop to the blockchain, and Carol knows the preimage, Bob may have as little as the channel "delay" parameter to extract the preimage from Carol's layered commitment tx to be able to post a layered commitment on top of Alice's unilateral close to avoid being out of pocket. However, if you're willing to accept that "worst-case" happening more often, you could then retain the low latency forwarding.The proposed transaction structure for low-latency forwarding includes a commitment tx, low-latency inflight tx, Bob claim, and too-slow. Alice sends the low-latency inflight tx which Bob then forwards immediately. Bob then tries to update the base channel state with Alice, so both sides have a commitment to the new payment, and the low-latency inflight tx is voided (since it's based on a revoked channel state). If this succeeds, everything is fine as usual. However, if Alice is unavailable to confirm that update, Bob closes the channel prior to (payment-timeout - payment-recover-delay), and posts "Bob claim". After an additional payment recovery delay (and prior to payment-timeout) Bob posts Bob claim, ensuring that the only way Alice can claim the funds is if he had posted a revoked state.In this case, Alice has at least one payment-recovery-delay period prior to the payment-timeout to notice the transaction on-chain and recover the preimage. If Bob posted the low-latency inflight tx later than (payment-timeout - payment-recovery-delay), then Alice will have payment-recovery-delay time to notice and post the "too-slow" tx and claim the funds via the timeout path. If Bob posted a revoked state, Alice can also claim the funds via Bob claim, provided she notices within the channel-recovery-delay. This approach only allows for one low-latency payment to be inflight, which may not be interesting, but it's a complicated solution that doesn't cover both low-latency and offline cases.</summary>
+    <published>2021-10-12T03:08:21+00:00</published>
+  </entry>
+</feed>

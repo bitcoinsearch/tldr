@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New opcodes and transaction version numbers (was 'relax the IsStandard rules for P2SH transactions')</title>
+  <updated>2023-06-09T02:47:56.368740+00:00</updated>
+  <author>
+    <name>Peter Todd 2014-09-29 02:35:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New opcodes and transaction version numbers (was 'relax the IsStandard rules for P2SH transactions')</title>
+    <updated>2023-06-09T02:47:56.368740+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-September/006659.html" rel="alternate"/>
+    <summary>The discussion is regarding the process of soft-forks bumping version numbers in Bitcoin. There is consensus that this is the way it will be done, and a proposal by Gavin Andresen on Github has been suggested to turn into an informational BIP. However, another user points out an issue with the proposal where the definition of "use" of a new opcode is unclear. If evaluation of a scriptPubKey is done according to the transaction version number of the transaction creating the scriptPubKey, non-upgraded clients sending funds to a P2SH address whose redeemScript makes use of a new opcode will create scriptPubKeys whose contents can be spent by anyone. On the other hand, if scriptPubKey evaluation is done according to the version of the transaction spending the scriptPubKey, outputs using the new opcode can be easily spent. The common assertion that "P2SH should have been done by upgrading the tx version #" is also incorrect for future opcode upgrades. The "Relax IsStandard rules for P2SH transactions" pull-req is incomplete as it doesn't blacklist usage of the upgradable NOPx opcodes. After a future soft-fork redefining a NOPx opcode's behavior non-upgraded nodes will accept and mine transactions that may now be invalid, thus creating false confirmations. A pull-req has been created to fix this issue by specifically blacklisting the NOPx opcodes if they are executed. Furthermore, the "Blockchain Rule Update Process" gist above should be rewritten to say that new opcodes will be enabled for all scripts by the block nVersion upgrade mechanism. BIP62 proposes increasing the transaction version # to indicate that the sender wants anti-malleability rules to be applied. This is appropriate usage of tx version numbers as the creator of the transaction wants the anti-malleability rules applied, while the person creating the scriptPubKey's being spent does not care. The new owners of the txouts being created don't generally care how they were created.</summary>
+    <published>2014-09-29T02:35:53+00:00</published>
+  </entry>
+</feed>

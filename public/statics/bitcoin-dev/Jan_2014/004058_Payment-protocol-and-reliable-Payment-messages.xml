@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Payment protocol and reliable Payment messages</title>
+  <updated>2023-05-19T18:00:25.100478+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2014-01-13 16:43:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Payment protocol and reliable Payment messages</title>
+    <updated>2023-05-19T18:00:25.100478+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-January/004058.html" rel="alternate"/>
+    <summary>In a discussion about the use cases for stealth addresses, Pieter brings up the issue with the "payment_url" field in BIP70. The current specification says that it is a secure location where a Payment message may be sent to obtain a PaymentACK. However, the fact that this field is optional renders the "memo", "refund", and "merchant_data" fields useless as merchants cannot rely on them. Thus, there is a need to provide an alternative. Pieter suggests getting rid of these fields altogether and just sending the transaction. However, he also notes that having bi-directional communication in the protocol is one of the nicest things the payment protocol can add. He proposes formulating the field as "location where a Payment message must be attempted to be sent to", and storing the message in the client if it fails to send. For anonymous senders, not sending the Payment message could result in funds being transferred without a way to know who to refund it to if something goes wrong. Pieter believes that having bi-directional communication would prevent this scenario. As an optimization, Pieter suggests that if a payment_url is present, the payment should only be sent there and not broadcasted on the P2P network to minimize the risk of the transaction confirming without the payment being received.</summary>
+    <published>2014-01-13T16:43:41+00:00</published>
+  </entry>
+</feed>

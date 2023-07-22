@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Supporting a custodial user who wishes to withdraw all sats from the account...</title>
+  <updated>2023-06-03T09:43:31.130353+00:00</updated>
+  <author>
+    <name>Martin Habovštiak 2022-08-31 17:22:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Supporting a custodial user who wishes to withdraw all sats from the account...</title>
+    <updated>2023-06-03T09:43:31.130353+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-August/003677.html" rel="alternate"/>
+    <summary>In the Lightning-dev mailing list, a discussion was held regarding a problem faced by users of a custodial wallet where they could not withdraw the full amount from the service. This was because the custodial service required a fee budget of 1%, resulting in leftover amounts that repeated on the residual amount. The proposal for a solution to this specific problem was `option_recipient_pays_routing_fees`, which would be a new flag in invoices signaling that the recipient is willing to pay for the routing fees by releasing the preimage even if the full amount has not been arrived in htlcs at the recipient. The workflow for this proposal involves Alice creating an invoice for 10k sats and setting the `option_recipient_pays_routing_fees` flag. The onion is then constructed in a way that the first HTLC will be for 10k sats, and the following HTLCs will be of decreasing value so that routing nodes are compensated properly. When the HTLC(s) arrive at Alice, she will release the preimage only if not too many sats (e.g. 1% of the amount) are missing.A suggestion was made that trampoline routes could fix this issue as well, where the receiver provides an encrypted route from some node to itself, and the onus is on the receiver to deduct the fees from its received funds. Any level-1-selfish custodial service will always keep the remaining fee budget and always ensure that the receiver gets 99% of the value (or 100%-whatever_setting_they_chose), paying fees, and keeping the remaining 1% for itself. The receiver in this case cannot audit the route anyway, and thus cannot determine how much the true fees are; whereas in the trampoline case, the route is specifically selected by the receiver. Overall, there was a discussion on whether such solutions could be implemented and enforced by the custodial service providers, as they could refuse to implement them, and if they are already custodial, they could steal.</summary>
+    <published>2022-08-31T17:22:52+00:00</published>
+  </entry>
+</feed>

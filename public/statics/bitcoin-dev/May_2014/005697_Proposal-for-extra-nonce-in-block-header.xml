@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for extra nonce in block header</title>
+  <updated>2023-06-08T21:52:01.746468+00:00</updated>
+  <author>
+    <name>Timo Hanke 2014-05-04 15:14:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for extra nonce in block header</title>
+    <updated>2023-06-08T21:52:01.746468+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-May/005697.html" rel="alternate"/>
+    <summary>The discussion is about a draft of a BIP that intends to reduce the incentives for miners in finding cheaper ways to create new work, which are not necessarily in the best interest of the protocol. The proposal re-assigns two bytes from the version field of the block header to a new extra nonce field to provide miners with a cheap constant-complexity method to create new work that does not require altering the transaction tree. This proposal also protects the version and timestamp fields in the block header from abuse. Traditionally, the extra nonce is part of the coinbase field of the generation transaction, which is always the very first transaction of a block. After incrementing the extra nonce, the minimum amount of work a miner has to do to re-calculate the block header is to hash the coinbase transaction and re-calculate the left-most branch of the merkle tree all the way to the merkle root. This process leads to a new block header from the same transaction set called pre-hashing.The current proposal reduces the range of version numbers from 2^32 to 2^16 by declaring the third and fourth bytes of the block header as legitimate space for an extra nonce, which will reduce the incentive for a miner to abuse the shortened version number by a factor in the order of 2^16. As a side effect, this proposal greatly reduces the bandwidth requirements of a blind pool protocol by only submitting the block header to the miner. Old versions of the client will accept blocks of this kind but will throw an alert at the user to upgrade. There is no need to introduce a new block version number or to phase-out old block versions. There is no need to increment the version number to 3 because it has no purpose in this case. Old clients already recognize the new block headers as something new because they look like very high version numbers to them. And there is no reason to ever phase out blocks that have zero in the MSBs of the version.</summary>
+    <published>2014-05-04T15:14:51+00:00</published>
+  </entry>
+</feed>

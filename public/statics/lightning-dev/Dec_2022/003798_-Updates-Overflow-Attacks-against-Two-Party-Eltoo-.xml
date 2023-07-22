@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>"Updates Overflow" Attacks against Two-Party Eltoo ?</title>
+  <updated>2023-06-03T11:12:58.028404+00:00</updated>
+  <author>
+    <name>Antoine Riard 2022-12-13 01:38:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>"Updates Overflow" Attacks against Two-Party Eltoo ?</title>
+    <updated>2023-06-03T11:12:58.028404+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-December/003798.html" rel="alternate"/>
+    <summary>The eltoo-based Lightning channels might be vulnerable to an "update overflow" attack, according to a post on the mailing list. The eltoo 2-stage proposal relies on pre-signed update transactions, and if one of them is confirmed, the other ones would fail. The attack vector could be mitigated by adopting an adequate fee-bumping strategy. However, if it holds, the attack could be economically opportunistic as long as the sum of the chain of update transactions weight multiplied by the spent feerate is inferior to the sum of HTLC values stolen. A mitigation could be a scorched approach when the HTLC-timeout is approaching, and there is a corresponding incoming HTLC. This would burn 100% of the HTLC value in update transaction fees. The implications of this attack are more in the way fee-bumping is implemented by Lightning softwares rather than directly on eltoo-based constructions. LDK justice transactions are bumped by 25% every block according to a height timer schedule. Assuming the attack holds, and scorched approach are adopted by default to mitigate this concern, there is a second-order concern that we might open Lightning channels to miner-harvesting attacks where the confirmation of the update transactions are deferred to kick-out the scorched earth reaction of the fee-bumping engine. If the update transaction can be malleable, i.e SIGHASH_SINGLE|ANYONECANPAY, update transactions across Lightning channels could be aggregated by the attacker, changing the economy in a way defavorable to the victims. Antoine suggests that variants playing with mempool descendant limits may be tried to address the issue. However, he doesn't see an immediate way to address it by the construction itself.</summary>
+    <published>2022-12-13T01:38:43+00:00</published>
+  </entry>
+</feed>

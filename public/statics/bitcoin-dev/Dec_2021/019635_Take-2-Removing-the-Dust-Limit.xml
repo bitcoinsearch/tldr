@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Take 2: Removing the Dust Limit</title>
+  <updated>2023-05-22T16:23:54.708182+00:00</updated>
+  <author>
+    <name>Jeremy 2021-12-08 01:28:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Take 2: Removing the Dust Limit</title>
+    <updated>2023-05-22T16:23:54.708182+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-December/019635.html" rel="alternate"/>
+    <summary>Jeremy Rubin, a Bitcoin developer, has proposed allowing 0 value outputs in transactions. This proposal was previously shot down for various reasons earlier this year. However, Rubin believes that there can be a simple carve-out now that package relay is being launched, based on his research into covenants from 2017. He suggests that if 0 value outputs are allowed but require as a matter of policy (or consensus) to be used as an Intermediate Output, it would not allow 0 value utxos to proliferate long. Additionally, the parent must have a higher feerate after CPFP'ing the parent than the parent alone. Rubin's proposal has several benefits. It would allow 0 value outputs for things like Anchor Outputs, which is beneficial for not getting eltoo/Decker channels pinned by junk witness data using Anchor Inputs and not getting channels drained by at-dust outputs. It would also still be valid for a 0 value that somehow gets created to be spent by the fee-paying transaction later. Furthermore, it may be helpful for CTV-based contracts (like vault continuation hooks) as well as things like spacechains.Rubin believes that introducing this rule as a mempool policy has the benefit of not introducing any new validation rules. Although the IUTXO concept is attractive, it complicates mempool. He acknowledges that his proposal presupposes a fully working package relay system. He concludes by saying that this proposal addresses all the issues with allowing 0 value outputs to be created for the narrow case of immediately spendable outputs.</summary>
+    <published>2021-12-08T01:28:42+00:00</published>
+  </entry>
+</feed>

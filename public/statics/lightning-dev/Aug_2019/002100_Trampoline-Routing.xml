@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Trampoline Routing</title>
+  <updated>2023-06-02T19:45:29.639983+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2019-08-02 09:29:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Trampoline Routing</title>
+    <updated>2023-06-02T19:45:29.640066+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-August/002100.html" rel="alternate"/>
+    <summary>Trampoline routing is a way to defer calculation of the route for a payment in lightning network by using trampoline nodes. Alice can send a payment to Bob through trampoline nodes. In this process, she builds a small onion that describes the route and puts it into a normal onion to send a payment to the first trampoline node. The trampoline node peels one layer of the trampoline onion and forward the payment to the next trampoline node until it reaches Bob. The important details are how trampoline nodes specify their fees and cltv requirements and how Alice syncs the fees and cltv requirements for her remote trampoline nodes. To estimate a fee and cltv, trampoline nodes need to route to almost any other trampoline node, which may increase the fees paid by end-users. However, users are trading fees for ease of use and payment reliability. To exchange trampoline fees and cltv, we can reuse existing gossip infrastructure and create a filter system similar to BIP37. Alice sends gossip filters to her peers, and peers only forward updates that match these filters. This doesn't have the issues BIP37 has for Bitcoin because it has a cost for Alice: she has to open a channel to get a connection to a peer. Peers can refuse to serve filters if they are too expensive to compute, but the filters proposed in the PR are very cheap. For more technical details, see the PR at [1]. Feedback is welcome on the concept itself and especially on the gossip and fee estimation parts.</summary>
+    <published>2019-08-02T09:29:25+00:00</published>
+  </entry>
+</feed>

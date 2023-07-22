@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reworking the policy estimation code (fee estimates)</title>
+  <updated>2023-06-09T03:37:18.484470+00:00</updated>
+  <author>
+    <name>Alex Morcos 2014-10-27 19:33:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reworking the policy estimation code (fee estimates)</title>
+    <updated>2023-06-09T03:37:18.484470+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-October/006817.html" rel="alternate"/>
+    <summary>The existing code for estimating fees was found to have issues that resulted in estimates being too high. The previous approach of calculating median fees for each possible block confirmation time was statistically incorrect and skewed results. Additionally, transactions with missing input data were not excluded from calculations. The new approach involves dividing all possible fee rates logarithmically into buckets and updating them with the number of blocks it takes to confirm transactions in each bucket. The lowest fee rate that confirms a relatively high percentage (80%) of transactions within Y blocks is then used to estimate fees. A graph comparing the old and new estimates shows that the new code produces the same estimates for 2 and 3 confirmations, while smartfees.py was also completely reworked. A real-world test was run sending transactions of various fee rates and measuring how long they took to confirm. The results showed an average number of blocks needed for confirmation for different fee rates.</summary>
+    <published>2014-10-27T19:33:45+00:00</published>
+  </entry>
+</feed>

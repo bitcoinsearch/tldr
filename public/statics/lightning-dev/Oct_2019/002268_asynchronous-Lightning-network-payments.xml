@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>asynchronous Lightning network payments</title>
+  <updated>2023-06-02T21:04:49.107067+00:00</updated>
+  <author>
+    <name>Yaacov Akiba Slama 2019-10-30 17:16:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>asynchronous Lightning network payments</title>
+    <updated>2023-06-02T21:04:49.107067+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-October/002268.html" rel="alternate"/>
+    <summary>The email exchange is discussing how to enable asynchronous payments in the Lightning Network. The goal is to have only two states: before B receives payment and after B receives payment. In state 1, A still has control of the amount and S can help B be paid or cancel the transfer without A losing the amount. In state 2, they want to ensure that no money is lost by S. They are improving the specification to use several Rod nodes, chosen by both the payer and payee, who are almost always online, so standard https can be used to communicate with them and between them.Konstantin Ketterer proposes a solution where the payer A pre-signs a transaction and sends it to the payee B in an end-to-end encrypted communication channel. B can sell the signature to S using pay-for-signature made possible by payment points and scalars. They will be using eltoo because they don't have to worry about toxic channel states. A and S commit and exchange the R part of the Schnorr Signature for the update and settlement transaction. Then, A and S sign the settlement transaction increasing the balance between them. A sends the update transaction to B using an end-to-end encrypted asynchronous communication channel. When B comes online, they decrypt the update transaction and sell the signature to S for amt. When A comes back online, S gives A the invoice signed by B, the corresponding scalar s, and signature from S for the update transaction. In addition to enabling asynchronous payments, this outsources the routing to S. Privacy is a potential issue, but they can split the payment multiple times between public routing nodes. Locked up capital is also a potential issue, but A and S can overwrite the payment or re-balance their channel A-S. Communication channel must be end-to-end encrypted, and the invoice by B with the payment point s*G and s are not sufficient as PoP because S can give A the invoice and A already knows s. Konstantin also proposes another solution where B signs a new settlement transaction increasing balance in favor of B by amt, then encrypts it and sends it together with the settlement transaction to A. When A decrypts the transactions, A pays S to sign the update transaction which makes this new channel state valid/enforceable, and A essentially acts like a watchtower while B is offline. This enables truly asynchronous Lightning network payments and is yet another reason to move to payment points and scalars.</summary>
+    <published>2019-10-30T17:16:55+00:00</published>
+  </entry>
+</feed>

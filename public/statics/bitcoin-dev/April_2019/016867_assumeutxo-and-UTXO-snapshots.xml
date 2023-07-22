@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>assumeutxo and UTXO snapshots</title>
+  <updated>2023-06-13T18:04:11.408004+00:00</updated>
+  <author>
+    <name>Omar Shibli 2019-04-14 13:16:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>assumeutxo and UTXO snapshots</title>
+    <updated>2023-06-13T18:04:11.408004+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-April/016867.html" rel="alternate"/>
+    <summary>The Bitcoin Core developer, James O'Beirne, proposed a complementary alternative to Simplified Payment Verification (SPV) modes called assumeutxo. The proposal is aimed at allowing modest clients to transact under a security model that closely resembles full validation within minutes instead of hours or days. The basic idea is to allow nodes to initialize using a serialized version of the Unspent Transaction Output (UTXO) set rendered by another node at some predetermined height. Based on the snapshot, the node can quickly reconstruct its chain state and compares a hash of the resulting UTXO set to a preordained hash hard-coded in the software a la assumevalid. This all takes ~23 minutes, not accounting for download of the 3.2GB snapshot. The node then syncs to the network tip and afterward begins a simultaneous background validation up to the base height of the snapshot in order to achieve full validation. Crucially, even while the background validation is happening, the node can validate incoming blocks and transact with the benefit of the full (assumed-valid) UTXO set. Snapshots could be obtained from multiple separate peers in the same manner as block download, but it does not matter too much where the snapshots come from since their validity is determined via content hash.James highlighted that an exciting use-case for assumeutxo is the possibility of mobile devices functioning as fully validating nodes with access to the complete UTXO set as an alternative to SPV models. The total resource burden needed to start a node from scratch based on a snapshot is currently a ~(3.2GB + blocks_to_tip * 4MB) download and a few minutes of processing time, which sounds manageable for many mobile devices currently in use. A mobile user could initialize an assumed-valid bitcoin node within an hour, transact immediately, and complete a pruned full validation of their assumed-valid chain over the next few days, perhaps only doing the background IBD when their device has access to suitable high-bandwidth connections.James also noted that while the assumeutxo proposal is in the spirit of assumevalid, there are practical attacks that need consideration. If an attacker convinces the user to accept a bad `-assumeutxo` parameter and then supply them an easily made UTXO snapshot containing say, a false coin assignment, it could trick the user into transacting under a false history. Therefore, he recommends not allowing the specification of assumeutxo via commandline argument. James has submitted a draft implementation of snapshot usage via RPC and opened a related issue on Bitcoin Core's Github repository for further discussion.</summary>
+    <published>2019-04-14T13:16:53+00:00</published>
+  </entry>
+</feed>

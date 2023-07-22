@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Extension for BIP-0070 to support recurring payments</title>
+  <updated>2023-06-08T01:52:27.605995+00:00</updated>
+  <author>
+    <name>Stephane Brossier 2014-02-08 02:57:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Extension for BIP-0070 to support recurring payments</title>
+    <updated>2023-06-08T01:52:27.605995+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-February/004295.html" rel="alternate"/>
+    <summary>Two developers, Stephane Brossier and Pierre Valade, have committed a prototype implementation of the recurring payment protocol using bitcoinj. The code can be found on their fork on Github: https://github.com/killbill/bitcoinj/commit/40c657c4191498f12539c60316116aa68af368a7. They did not write the server (merchant side), but wanted feedback before going deeper into merchant implementation and tests. The protocol is built on top of the existing BIP-0070 protocol with only a few additions in the messages and no new calls or uri scheme. A new package 'recurring' was created where most of the new code lives. The high-level proposal for the protocol involves enabling recurring payments in bitcoins by having the customer subscribe to a service and then having the wallet make recurring payments without intervention from the customer as long as the payments match what the customer agreed on paying. The protocol provides advantages over traditional payment methods including user control over subscriptions and opens the door for subscription management tools in wallets.The creation of the subscription involves a message being sent to the merchant when the customer clicks 'subscribe'. The merchant sends back a message to the wallet with the details of the subscription such as the amount to be paid, the wallet prompts the customer for authorization, the customer authorizes (or denies) it, the wallet sends confirmation to the merchant and the merchant confirms the subscription was created. The ongoing payments process requires the wallet to poll the merchant for due payments associated with that subscription. Payments are made without asking for explicit approval from the customer if they match the subscription contract, and the flow is similar to BIP-0070. The protocol also includes optional subscription change and cancellation processes. The upgrade/downgrade scenario allows customers to change the ongoing subscription by sending a message to the merchant who sends back a message to the wallet with the detail of the new subscription. The wallet prompts the customer for authorization, the customer authorizes (or denies) it, the wallet sends confirmation to the merchant and the merchant confirms the change in the subscription. The cancellation process involves the customer clicking 'cancel', the wallet informing the merchant about the cancellation and the merchant confirming that the subscription was cancelled.</summary>
+    <published>2014-02-08T02:57:40+00:00</published>
+  </entry>
+</feed>

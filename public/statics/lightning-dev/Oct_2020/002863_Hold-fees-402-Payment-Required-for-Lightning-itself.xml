@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Hold fees: 402 Payment Required for Lightning itself</title>
+  <updated>2023-06-03T02:29:31.982328+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-10-22 17:56:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Hold fees: 402 Payment Required for Lightning itself</title>
+    <updated>2023-06-03T02:29:31.982328+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002863.html" rel="alternate"/>
+    <summary>The proposed solution for bidirectional upfront payments to address issues with previous proposals is explained in detail. The proposal involves adding a `hold_grace_period_delta` field to `channel_update`, two new fields in the TLV extension of `update_add_htlc`, and an `outgoing_hold_grace_period` field in the onion per-hop payload. Nodes receiving an HTLC verify that fees and grace periods are reasonable and that the difference between the hold grace period and the outgoing hold grace period is greater than the delta value. A forward upfront payment of 1 msat is made unconditionally when offering an HTLC, and a backwards upfront payment of hold fees is required when receiving an HTLC. If the HTLC is settled before the hold grace period ends, the backwards upfront payment is refunded. The writer also presents scenarios involving quick settlements, delays in settling, or channel closures. However, they note that this proposal may allow intermediate nodes to deanonymize sender/recipient, so the base grace period and hold fees should be randomized. The most significant challenge will be handling the grace period, including when to start counting, accounting for disconnections, and dealing with remote refunds after the grace period.In another context, the writer suggests that there should be some leeway given to those who make mistakes but record their actions. However, if they continue to perform the same actions repeatedly, channels should be closed and they should be banned. Additionally, the writer discusses the risk of communication latency delaying responses and introduces a fixed upfront payment instead of a scaling approach. They believe that this approach is less complex and reduces potential griefing against honest nodes. The forward upfront payment is set at a constant 1 msat, which the writer acknowledges may not deter anyone. They humorously mention that a small amount like a satoshi would not even buy a single piece of fish ball.</summary>
+    <published>2020-10-22T17:56:12+00:00</published>
+  </entry>
+</feed>

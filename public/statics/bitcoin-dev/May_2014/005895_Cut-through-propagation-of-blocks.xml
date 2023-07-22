@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Cut-through propagation of blocks</title>
+  <updated>2023-06-08T23:24:05.216162+00:00</updated>
+  <author>
+    <name>Ashley Holman 2014-05-24 03:57:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Cut-through propagation of blocks</title>
+    <updated>2023-06-08T23:24:05.216162+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-May/005895.html" rel="alternate"/>
+    <summary>The discussion around techniques to speed up block propagation while reducing the extra orphan risk carried by larger blocks has been ongoing. The current store-and-forward method results in larger blocks propagating with higher latency, leading to one proposed solution of broadcasting two separate messages: a fast fixed-size header message and a slower body message containing the full block. However, this creates a new area of uncertain delay between receiving the header and receiving the body. As an alternative solution, skipping the inv/getdata sequence for new blocks and pushing them out directly to save one roundtrip per hop would help reduce the latency gap between large and small blocks. Upon receiving a new block from a peer, as soon as the first 80 bytes (header) are received, validation of PoW can be done. With only a low-level change to the networking code, the block can then be streamed to peers. This change should not affect game theory or incentives, and invalid blocks that meet the PoW will still be broadcast to everyone. Network DoS should not be a possibility since it is expensive to make invalid blocks that meet network PoW.</summary>
+    <published>2014-05-24T03:57:05+00:00</published>
+  </entry>
+</feed>

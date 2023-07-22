@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Optional "wallet-linkable" address format - Payment Protocol</title>
+  <updated>2023-06-06T18:55:58.358507+00:00</updated>
+  <author>
+    <name>Timo Hanke 2013-06-20 07:48:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Optional "wallet-linkable" address format - Payment Protocol</title>
+    <updated>2023-06-06T18:55:58.358507+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-June/002796.html" rel="alternate"/>
+    <summary>On June 19, 2013, Adam Back raised a concern about the proposed multiplier address. He pointed out that although one cannot do discrete log, they can do y-th root. To elaborate, if P = xG is a parent public key (x private key, G base point), then the proposed multiplier address is the hash of Q=yP. However, finding another P such that Q=zP' is easy by just "dividing by z" (EC multiply by z^-1 mod n, where n is the order of the curve). Therefore, P'=z^-1.Q will work because Q=zP', and substituting P' results in Q=z.z^-1.Q, which equals Q.The owner of the parent P can create another pair (P',z) such that yP=Q=zP' in addition to y, and use that second pair maliciously later on, such as claiming the payment went to identity P' instead of P. Since the owner of P knows the private key for P' (x*y*z^-1), he can also produce proof of knowledge for discrete log for P'. Adding proof of knowledge or signatures on the multiplier does not help to eliminate all possible concerns, which could involve proving something to a third party that has not seen the communication between payer and payee. If you consider only the payer and the payee, then Alan's original proposal is fine. Only when using it in a payment protocol or interpreting P as an identity(as Alan suggested in subsequent posts) _and_ this identity is a public/global one rather than a local one that only the payer uses, then reasons can pop up to eliminate ambiguity about which identity each payment went to.</summary>
+    <published>2013-06-20T07:48:30+00:00</published>
+  </entry>
+</feed>

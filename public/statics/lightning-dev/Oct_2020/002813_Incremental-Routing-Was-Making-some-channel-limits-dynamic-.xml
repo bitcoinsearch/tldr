@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Incremental Routing (Was: Making (some) channel limits dynamic)</title>
+  <updated>2023-06-03T02:23:15.007759+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2020-10-08 12:32:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Incremental Routing (Was: Making (some) channel limits dynamic)</title>
+    <updated>2023-06-03T02:23:15.007759+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002813.html" rel="alternate"/>
+    <summary>The Lightning-dev mailing list is discussing the complications of using an upfront payment system for relay nodes in forwarding HTLCs. One proposal being considered is to use "incremental routing," where the route of pending HTLCs doubles as an encrypted bidirectional tunnel. This would allow for incremental building of a route until reaching the destination.In terms of upfront payments, on the timelock branch, part of the fund value is given forward to the next peer. The direct peer requires an upfront payment before making an outgoing HTLC based on the incoming one. The upfront payment can only be stolen by the direct peer for a single hop that is being built out next in the incremental routing. The proposal provides an example of how numbers would work with this system.Incremental routing is a new idea that allows for a more secure way to send payments over the Lightning Network. With incremental routing, you only need to offer the upfront fee of one node, as opposed to offering the upfront payment of all the nodes along the route to the direct peer. The direct peer can then claim the entire upfront payment earmarked for the entire route. One advantage of incremental routing is that the time risk of your money being locked up can be managed easier. You can start with an HTLC with the minimum time and then bump up the time of the first HTLC (with time bumps rippling out along the incremental route) as you build up the incremental route until you reach the destination.However, there are some drawbacks to incremental routing. It requires a lot more communication rounds and cryptographic operations than traditional routing methods. Also, intermediate nodes can guess the distance from the source by measuring timing of a previous response to the next message from the payer. The idea is completely imaginary at this point, and there may be actual cryptographic or practical problems with the idea. Overall, incremental routing offers a potentially more secure way to send payments on the Lightning Network, but it has some challenges that need to be addressed.</summary>
+    <published>2020-10-08T12:32:44+00:00</published>
+  </entry>
+</feed>

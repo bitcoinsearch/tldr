@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[DRAFT] BOLT 13(?): WatchTower protocol</title>
+  <updated>2023-06-02T21:59:19.028972+00:00</updated>
+  <author>
+    <name>Sergi Delgado Segura 2019-12-05 16:21:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[DRAFT] BOLT 13(?): WatchTower protocol</title>
+    <updated>2023-06-02T21:59:19.028972+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-December/002367.html" rel="alternate"/>
+    <summary>The WatchTower protocol specification (BOLT DRAFT) proposes a protocol for client/server communication involving a third party watching service called WatchTower that watches the blockchain and responds to channel breaches on behalf of clients. The document describes the requirements for an appointment between a client and a WatchTower, which is hired to watch for breaches in the Bitcoin Lightning Network.Antoine Riard provided feedback on the proposed interoperable watchtower protocol. He suggested adding information in the motivation section about how having an interoperable watchtower protocol increases liveness reliability. He also recommended defining another TCP port than the LN one of 9735 to avoid leaking p2p messages to the watchtower. Antoine proposed using the TLV format for messages, which would remove *_len fields and allow QoS to be a tlv_record in `appointment`.Regarding `appointment_hiring`, Antoine questioned why QoS parameters couldn't be stable for the lifetime of client-server interaction. The proposed `appointment_firing` would let the client cut its subscription and authorize the server to clean storage. Antoine suggested extending the 3 block window for `start_block` to ensure mobile clients with high latency could use the watchtower effectively. They also discussed specifying limits on minimum_viable_transaction_size and maximum_viable_transaction_size to create a valid transaction and including some kind of ack for justice transactions. Antoine recommended removing the `transaction_size` field, as it could leak information on how much payment traffic is going through the client without any channel breach.They also noted that every watchtower following this protocol should handle dynamic fees, and they like the idea of using SIGHASH_ANYONECANPAY to bump the fees. Finally, Antoine mentioned that even if a customer fakes values, it should break ToS between the client and the server, releasing the WatchTower of any liability.The document defines various parameters like a transaction locator, start and end block, encrypted blob length, cipher, auth token length, qos length, etc., and also includes open discussion topics at the end. Quality of Service (qos) builds on top of the basic service provided by a tower and optionally provides different kinds of QoS, with accountability being one of them.API for WatchTower is defined in this document. The API includes the appointment message, which consists of several fields, such as transaction_size and transaction_fee, and offers accountability if required. The server will reject the appointment if any of the fields are missing or if transaction_size is unreasonable. Additionally, the server should reject the appointment if dispute_delta is too small or fee_rate is too low.</summary>
+    <published>2019-12-05T16:21:10+00:00</published>
+  </entry>
+</feed>

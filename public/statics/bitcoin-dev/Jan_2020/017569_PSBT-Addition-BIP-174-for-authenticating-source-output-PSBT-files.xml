@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PSBT Addition (BIP 174) for authenticating source/output PSBT files</title>
+  <updated>2023-06-13T23:07:02.515304+00:00</updated>
+  <author>
+    <name>Peter D. Gray 2020-01-13 20:29:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PSBT Addition (BIP 174) for authenticating source/output PSBT files</title>
+    <updated>2023-06-13T23:07:02.515304+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-January/017569.html" rel="alternate"/>
+    <summary>The Bitcoin-dev mailing list discussed adding signature fields to partially signed Bitcoin transactions (PSBTs) to protect against man-in-the-middle attacks. Participants expressed concerns about bugs in PSBT signers that could reveal private keys or corrupt the transaction display while also noting that currently, it is challenging to determine what is signed without a complete understanding of the transaction, input UTXO, and PSBT file contents. One proposed solution is to add byte-level signatures on the whole file content to safeguard against PSBT parsing bugs. Another suggestion was to pre-share a public key with the signer to reduce the chance of MiTM attacks. However, critics argue that a signature separate from the PSBT could be used for MiTM protection, making additional fields unnecessary.The discussion focused on adding two signatures to PSBT for MiTM protection. One signature would cover all the bytes of the original PSBT file in the PSBT globals section, while the second would be added to the last key/value pair in the output section. However, some participants proposed placing these signatures in a container separate from the PSBT itself.There are concerns about adding complexity to the basic level of PSBT and increasing the chance of bugs. Additionally, if there is a MiTM who can modify the PSBT, they can modify the result of the signed PSBT to drop the auth signatures. Therefore, one should already have a signature covering everything one's auth signature would cover when processing a PSBT. Participants agreed that verification of these signatures is crucial. Lastly, some suggested doing the protection via out-of-band communication such as PGP signing the PSBT or sending the signature separately. The participants discussed the pros and cons of adding signatures to PSBT for MiTM protection, highlighting different perspectives.</summary>
+    <published>2020-01-13T20:29:11+00:00</published>
+  </entry>
+</feed>

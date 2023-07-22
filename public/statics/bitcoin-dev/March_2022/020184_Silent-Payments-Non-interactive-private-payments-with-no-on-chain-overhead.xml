@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Silent Payments – Non-interactive private payments with no on-chain overhead</title>
+  <updated>2023-06-15T18:23:10.772602+00:00</updated>
+  <author>
+    <name>Billy 2022-03-30 05:58:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Silent Payments – Non-interactive private payments with no on-chain overhead</title>
+    <updated>2023-06-15T18:23:10.772602+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020184.html" rel="alternate"/>
+    <summary>Ruben Somsen has proposed a new scheme for private transactions called "Silent Payments." The scheme allows recipients to generate a static address for private payments from anyone without requiring any interaction or on-chain overhead. The recipient publishes their silent payment address, and the sender uses one of their chosen inputs to derive a shared secret, which is then used to tweak the silent payment address. The recipient detects the payment by scanning every transaction in the blockchain.Compared to previous schemes, Silent Payments avoids using the Bitcoin blockchain as a messaging layer and requires no interaction between sender and recipient. However, the main downsides are the scanning requirement, the lack of light client support, and the need to control your input(s). The basic scheme involves the recipient publishing their silent payment address, the sender picking an input containing a public key, and the sender tweaking the silent payment address with the public key of their input.Several improvements have been made to the basic scheme, including UTXO set scanning, which limits the protocol to only scanning the transactions that are part of the UTXO set when restoring from backup, making it faster. Another variant involves tweaking the silent payment address with the combination of all input keys of a transaction, which reduces the scanning cost but requires the cooperation of other participants if you want to combine your inputs with those of others.The bitcoin-dev mailing list has discussed the implementation of silent payments, which allows for private transactions without requiring a scanning process. One potential issue is input linkage, where coins from multiple inputs can be traced back to the sender. However, a blinding protocol exists that hides the silent payment address from other participants. Another limitation is that the sender must control one of the inputs to be fully private.Other protocols with similar functionality include Payment code sharing (BIP47), Xpub sharing, and Regular address sharing. Each has its tradeoffs, such as inefficiency and privacy leaks. The author acknowledges previous schemes and contributors including Kixunil, Calvin Kim, Jonas Nick, holihawt, and Lloyd Fournier. The references provided include sources on stealth payments, BIP47 payment codes, reusable taproot addresses, BIP32 HD keys, and blind Diffie-Hellman key exchange.While Silent Payments offer a promising solution for private transactions, it still lacks light client support due to the need for scanning. One possible solution is to give up on address reuse prevention, only consider unspent taproot outputs, and download a standardized list of relevant input keys for each block over wifi each night when charging. The bitcoin-dev mailing list provides a space for discussion and collaboration on Bitcoin development.</summary>
+    <published>2022-03-30T05:58:18+00:00</published>
+  </entry>
+</feed>

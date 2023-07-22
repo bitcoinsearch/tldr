@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP draft: Hard fork opt-in mechanism for SPV nodes</title>
+  <updated>2023-06-11T03:39:16.163257+00:00</updated>
+  <author>
+    <name>jl2012 2016-02-05 18:40:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP draft: Hard fork opt-in mechanism for SPV nodes</title>
+    <updated>2023-06-11T03:39:16.163257+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-February/012357.html" rel="alternate"/>
+    <summary>The proposed BIP (Bitcoin Improvement Proposal) specifies a new algorithm for the transaction commitment in block header, to ensure that SPV (Simplified Payment Verification) nodes will not automatically follow a planned hard fork without explicit opt-in consent. It is expected that this proposal will be implemented with other backward-incompatible consensus rule changes at the same time. The calculation of Merkle root remains unchanged. Instead of directly committing the Merkle root to the header, we commit Double-SHA256(zero|merkle_root|zero), where zero is 0x0000....0000 with 32 bytes. Since the header structure is not changed, non-upgraded SPV nodes will still be able to verify the proof-of-work of the new chain, and they will follow the new chain if it has most proof-of-work. However, they will not be able to accept any incoming transactions on the new chain since they cannot verify them with the new commitment format.The hardfork bit BIP tells full and SPV that a planned hardfork (instead of a softfork) has happened. On the other hand, this BIP makes sure SPV nodes won't lose any money in a hardfork, even if they do not check the hardfork bit. As a mechanism to indicate hard fork deployment, this BIP breaks backward compatibility intentionally. However, without further changes in the block header format, non-upgraded full nodes and SPV nodes could still verify the proof-of-work of upgraded blocks.A fraud proof system is full nodes that will generate compact proofs to testify invalid blocks on the blockchain, verifiable by SPV nodes. Hard forks without any malicious intention may also be considered as a "fraud" among non-upgraded nodes. This may not be desirable, as the SPV node may accept devalued tokens on the old chain with less proof-of-work. With this BIP, non-upgraded SPV nodes will always believe the new chain is valid (since they cannot verify any fraud proof), while cannot be defrauded as they will not see any incoming transactions.The proposed BIP is authored by Johnson Lau and is in draft mode. It is placed in the public domain. The compatibility of this proposal may need to be evaluated case-by-case, and changing the padding value may not be needed in some cases, as it may cause unnecessary disruption.</summary>
+    <published>2016-02-05T18:40:57+00:00</published>
+  </entry>
+</feed>

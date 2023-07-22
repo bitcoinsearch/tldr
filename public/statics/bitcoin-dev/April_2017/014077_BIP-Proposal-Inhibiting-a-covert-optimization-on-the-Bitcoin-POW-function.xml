@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP Proposal: Inhibiting a covert optimization on the Bitcoin POW function</title>
+  <updated>2023-06-12T00:05:20.614970+00:00</updated>
+  <author>
+    <name>Sergio Demian Lerner 2017-04-07 20:52:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP Proposal: Inhibiting a covert optimization on the Bitcoin POW function</title>
+    <updated>2023-06-12T00:05:20.614970+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/014077.html" rel="alternate"/>
+    <summary>This proposal aims to inhibit the covert use of an optimization in the Bitcoin Proof of Work function that could allow a miner to save up to 30% of their energy costs. The authors applied for a patent on this optimization which has been marketed under the trade-name ASICBOOST. There are two ways of taking advantage of this optimization; one highly detectable way and another covert way that can interfere with the Bitcoin protocol. The use of this optimization could potentially result in a big payoff but also presents a danger to the Bitcoin system. The optimization is based on the fact that SHA2-256 is a merkle damgard hash function which consumes 64 bytes of data at a time. If a miner is able to prepare a block header with multiple distinct first 64-byte chunks but identical 16-byte second chunks, they can reuse the computation of the initial expansion for multiple trials, thus reducing power consumption. A new consensus rule is proposed to inhibit this final optimization, beginning block X until block Y, the coinbase transaction of each block must either contain a BIP-141 segwit commitment or a correct WTXID commitment with ID 0xaa21a9ef. The commitment in the left side of the tree to all transactions in the right side completely prevents the final square root speedup. It is suggested that a stronger inhibition of the covert optimization in the form of requiring the least significant bits of the block timestamp to be equal to a hash of the first 64-bytes of the header could increase the collision space from 32 to 40 or more bits. The proposed rule automatically sunsets if no longer needed or can be extended with a new softfork that sets longer date ranges. It is noted that there is also an overt version of the optimization that does not generally interfere with improvements in the protocol. A BIP for avoiding erroneous warning messages when miners use the overt version was proposed several years ago but was rejected. The document is placed in the public domain and acknowledges Greg Maxwell for the original report that contained several errors corrected in this proposal.</summary>
+    <published>2017-04-07T20:52:17+00:00</published>
+  </entry>
+</feed>

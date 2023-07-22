@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving the initial gossip sync</title>
+  <updated>2023-05-24T20:40:33.686661+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-02-12 01:45:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving the initial gossip sync</title>
+    <updated>2023-05-24T20:40:33.686661+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/001018.html" rel="alternate"/>
+    <summary>The Lightning Network developers are discussing the implementation of a timestamp-based approach to synchronize routing tables between nodes. The proposed approach is aimed at reducing bandwidth consumption while maintaining synchronization accuracy. Christian Decker and Fabrice Drouin are testing both the timestamp mechanism and an Invertible Bloom Lookup Table (IBLT) approach to see which consumes less bandwidth. Rusty Russell prefers the IBLT approach since it allows for easy maintenance and updating of data. Deployment suggestions include using a feature bit pair, where even means 'support this or disconnect' and odd means 'ok even if you don't understand'. The proposal also includes appending a `routing_sync_timestamp` field to the `init` message without any issues since all lengths in there are explicit. A separate message would be awkward. The proposal specifies that all old `channel_announcement` and `node_announcement` messages should be retransmitted because of recent `channel_update`. However, Rusty Russell suggests that it is simpler to say 'send anything &gt;= `routing_sync_timestamp`.' Also, c-lightning internally keeps a tree of gossip in the order received, but it is not quite the same as timestamp order. Therefore, we cannot just set the 'current' pointer based on the first entry &gt;= `routing_sync_timestamp`; we need to actively filter. Regarding retransmitting announcements, in c-lightning, the index at which the initial sync started can be remembered, and announcements can be sent along until the index is larger than the initial sync index. In the more general approach, two timestamps, a highwater and lowwater mark, could be used. Anything between these marks will be forwarded together with all associated announcements. Anything newer than that will only forward the update. This approach combined with a new message would allow us to send multiple `timestamp_routing_sync` messages.</summary>
+    <published>2018-02-12T01:45:55+00:00</published>
+  </entry>
+</feed>

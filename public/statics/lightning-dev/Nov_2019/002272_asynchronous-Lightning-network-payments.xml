@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>asynchronous Lightning network payments</title>
+  <updated>2023-06-02T21:05:17.104109+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-11-04 07:31:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>asynchronous Lightning network payments</title>
+    <updated>2023-06-02T21:05:17.104109+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-November/002272.html" rel="alternate"/>
+    <summary>The email thread discusses the issue of asynchronous payments on the Lightning Network. Currently, both parties need to be online at the same time to send/receive money, but this can be avoided by using something like the Lightning Rod Protocol by Breez. However, funds have to be locked up longer than usual. The proposed solution is that the payer A pre-signs a transaction handing over money to their local channel partner S and sends the transaction to payee B in an end-to-end encrypted communication channel. B can then sell the signature for the transaction to S using pay-for-signature made possible by payment points and scalars. This enables truly asynchronous Lightning network payments and is yet another reason to move to payment points and scalars. While B hasn't yet claimed its money, the funds in the channel between A and S are essentially locked up. However, A and S could simply overwrite the payment (new update + settlement transaction), then A could send multiple payments with the remaining balance and before going offline, A would do the procedure again. To improve privacy, they plan to use several Rod nodes: a list of nodes chosen by the payer and another list by the payee. The Rod nodes are supposed to be almost always online, so standard https can be used to communicate with them and between them. Additionally, Trampoline implementations might actually just implement the polling behavior automatically without a `please_poll` flag; this might be viable especially if the Trampoline is given a substantial fee and time budget anyway.In conclusion, the proposed solution would allow asynchronous payments and outsource routing to S. However, there are potential issues such as privacy concerns, locked up capital, communication channel security, and proof of payment. Therefore, they must ensure proper safeguards and protocols to make it effective and secure.</summary>
+    <published>2019-11-04T07:31:56+00:00</published>
+  </entry>
+</feed>

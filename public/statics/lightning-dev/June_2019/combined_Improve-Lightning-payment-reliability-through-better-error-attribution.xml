@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Improve Lightning payment reliability through better error attribution</title>
+  <updated>2023-06-03T22:00:55.084367+00:00</updated>
+  <author>
+    <name>Joost Jager 2019-06-14 10:59:26</name>
+  </author>
+  <author>
+    <name>Joost Jager 2019-06-14 09:10:26</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-06-14 09:38:31</name>
+  </author>
+  <author>
+    <name>Joost Jager 2019-06-15 06:52:30</name>
+  </author>
+  <author>
+    <name>Joost Jager 2019-06-12 12:59:40</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2019-06-13 11:14:39</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-06-14 08:24:30</name>
+  </author>
+  <author>
+    <name>Joost Jager 2019-06-14 13:50:16</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-06-15 02:53:16</name>
+  </author>
+  <link href="lightning-dev/June_2019/002024_Improve-Lightning-payment-reliability-through-better-error-attribution.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002022_Improve-Lightning-payment-reliability-through-better-error-attribution.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002023_Improve-Lightning-payment-reliability-through-better-error-attribution.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002027_Improve-Lightning-payment-reliability-through-better-error-attribution.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002015_Improve-Lightning-payment-reliability-through-better-error-attribution.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002016_Improve-Lightning-payment-reliability-through-better-error-attribution.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002020_Improve-Lightning-payment-reliability-through-better-error-attribution.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002025_Improve-Lightning-payment-reliability-through-better-error-attribution.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002026_Improve-Lightning-payment-reliability-through-better-error-attribution.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Improve Lightning payment reliability through better error attribution</title>
+    <updated>2023-06-03T22:00:55.085367+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-June/002024.html" rel="alternate"/>
+    <summary>The Lightning Network is a payment system that relies on reliable routes for payments, with implementations tracking past performance of nodes and channels. However, non-ideal payment attempts, including failed payments and long delays, can make it difficult to determine which node should be penalized. Proposed solutions include changing the failure message to add an HMAC and timestamps, adding padding along the way to obfuscate the distance to the error source, and using probing to locate bad nodes.Joost suggests penalizing the channel between nodes responsible for delays, while ZmnSCPxj proposes active probing to record total imposed delay and number of attempts for more accurate cost adjustments. The challenge is designing the failure message format so that hops cannot learn their position in the path. In addition, Joost proposes adding timestamps for certain events to ensure accuracy of nodes in recording events. However, concerns are raised about strong synchronization of all nodes' clocks to a global clock and the possibility of errors if any node's clock is off. Joost suggests that the held duration is enough to identify a pair of nodes from which one node is responsible for the delay. The conversation also discusses the need to wait for `revoke_and_ack` before propagating an error report upstream and the potential limitations of background probing. Another issue is accurately reporting payment times due to the potential for nodes to drop previous channel states. A proposed solution involves only propagating `update_fail_htlc` after downstream `update_fail_htlc` has been committed by `revoke_and_ack`. Joost also proposes adding padding along the way to prevent intermediate nodes from learning their position in the payment path, but this may not be feasible. Instead, padding with a random length could reveal an upper bound for the distance to the error node. When a payment fails due to an `update_fail_htlc` message, it is important that the message is sent promptly to all parties involved to prevent further complications. If not, this could cause B to lose funds. On the other hand, `update_fulfill_htlc` message does not require waiting for `revoke_and_ack` for payment fulfillment since it is always reported immediately upstream. To avoid such issues during real payments, ZmnSCPxj suggests conducting background probing. This would provide more information about potential problems before they affect actual transactions. While fat errors provide more information when a problem occurs during a payment, they still decrease the user experience. Background probing, however, provides the same information before any real payment issues arise.</summary>
+    <published>2019-06-14T10:59:26+00:00</published>
+  </entry>
+</feed>

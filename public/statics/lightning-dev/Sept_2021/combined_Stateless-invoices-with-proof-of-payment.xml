@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Stateless invoices with proof-of-payment</title>
+  <updated>2023-06-04T02:22:58.955557+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2021-09-21 11:44:16</name>
+  </author>
+  <author>
+    <name>Joost Jager 2021-09-21 12:40:24</name>
+  </author>
+  <author>
+    <name>fiatjaf 2021-09-21 13:05:48</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2021-09-21 15:47:12</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2021-09-22 23:40:55</name>
+  </author>
+  <author>
+    <name>Joost Jager 2021-09-23 09:48:06</name>
+  </author>
+  <author>
+    <name>Joost Jager 2021-09-21 10:08:06</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-09-21 11:11:10</name>
+  </author>
+  <author>
+    <name>Joost Jager 2021-09-21 11:25:41</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-09-21 11:40:37</name>
+  </author>
+  <author>
+    <name>fiatjaf 2021-09-21 12:03:44</name>
+  </author>
+  <author>
+    <name>Joost Jager 2021-09-21 13:17:10</name>
+  </author>
+  <author>
+    <name>Joost Jager 2021-09-21 17:12:52</name>
+  </author>
+  <link href="lightning-dev/Sept_2021/003240_Stateless-invoices-with-proof-of-payment.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003242_Stateless-invoices-with-proof-of-payment.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003243_Stateless-invoices-with-proof-of-payment.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003245_Stateless-invoices-with-proof-of-payment.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003252_Stateless-invoices-with-proof-of-payment.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003253_Stateless-invoices-with-proof-of-payment.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003236_Stateless-invoices-with-proof-of-payment.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003237_Stateless-invoices-with-proof-of-payment.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003238_Stateless-invoices-with-proof-of-payment.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003239_Stateless-invoices-with-proof-of-payment.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003241_Stateless-invoices-with-proof-of-payment.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003244_Stateless-invoices-with-proof-of-payment.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003246_Stateless-invoices-with-proof-of-payment.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Stateless invoices with proof-of-payment</title>
+    <updated>2023-06-04T02:22:58.955557+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-September/003240.html" rel="alternate"/>
+    <summary>The Lightning Network is a payment protocol that proposes the use of Hash Time-Locked Contracts (HTLCs) to facilitate seamless and frictionless payments. However, there is a need to protect against unbounded generation of payment requests. To solve this problem, Joost Jager proposes a solution in the form of stateless invoices. The proposal suggests that payees should be able to generate stateless invoices and give them to payers instead of the payer generating the preimage.Stateless invoices can solve the issue of invoice storage as a denial-of-service vector for merchants/hubs. Two issues arise when the payment arrives at the recipient: the recipient does not know whom or what the payment is for and does not know the preimage that is needed to settle the htlc(s). To solve these problems, several options are suggested, including attaching additional custom tlv records to the htlc and using part of the payment_secret to encode order details. In an email exchange between fiatjaf and Joost, two proposals related to Lightning Network payments were discussed. The first proposal suggests that implementations should offer a "stateless invoice" API for receiving payments using the payment_secret, while the second proposal involves attaching TLV records with encoded order details when sending payments. Both proposals aim to improve the Lightning Network payment process.Another mechanism is suggested where the receiver knows two scalars A=a*G and B=b*G. To make a payment, the sender adds A+B and locks an outgoing PTLC to that point. The proof-of-payment is the sum a+b. If keyed to the recipient pubkey, proof-of-payment is a signature of a message attesting that the recipient has been paid a certain amount with encoded_order_details.Joost Jager also suggests using a deterministic preimage based on a recipient node key-derived secret to settle the htlc(s). The proposal suggests that payees should be able to generate stateless invoices and give them to payers instead of the payer generating the preimage. In another email exchange between Bastien TEINTURIER and Joost Jager, they discuss the potential dangers of invoice storage as a vector for DoS attacks for merchants/hubs. They also discuss the usefulness of metadata and its impact on payment success rates. Joost suggests that metadata could be attached to Lightning Network payments in the future, leading to the rethinking of design patterns for ecommerce applications. Redis can be used as an alternative to storing invoices together with order details in a database.The email thread discusses the implementation of a "stateless invoice" API and the use of encoded order details to address the issue of invoice storage. A new tag for bolt11 and node implementations is needed to carry over the contents of the encoded order details field to a tlv record, which would require senders to support this feature. Stateless invoices can be a simple way to improve the resiliency of systems that deal with lightning invoices. The proposed payment scheme involves the sender locking an HTLC to a preimage that is computed using several inputs including the payment amount and encoded order details. The preimage also serves as proof of payment and is returned to the sender.It is suggested that any secure single-round multisignature Schnorr scheme can be adapted for this problem. The Lightning Network proposes a payment protocol using Hash Time-Locked Contracts (HTLCs), which involves the sender locking an HTLC to a hash of a preimage constructed using node_secret, payment_secret, payment_amount and encoded_order_details. The recipient reconstructs the preimage upon receiving the HTLC and settles the payment if H(preimage) matches the HTLC hash.</summary>
+    <published>2021-09-21T11:44:16+00:00</published>
+  </entry>
+</feed>

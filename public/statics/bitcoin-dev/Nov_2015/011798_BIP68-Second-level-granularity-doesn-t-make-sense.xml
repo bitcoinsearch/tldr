@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP68: Second-level granularity doesn't make sense</title>
+  <updated>2023-06-11T01:19:27.384962+00:00</updated>
+  <author>
+    <name>Peter Todd 2015-11-24 04:36:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP68: Second-level granularity doesn't make sense</title>
+    <updated>2023-06-11T01:19:27.384962+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-November/011798.html" rel="alternate"/>
+    <summary>BIP68 is a representation of lock-time values, allowing for transactions to be locked for a specific period or until a certain block height. By-height locks are represented as a 16-bit integer while by-time locks are represented as a 25-bit integer with a granularity of 1 second. However, this granularity does not align with BIP113, which uses the median time-past as the endpoint for lock-time calculations and may pose problems for future upgrades. There are two cases to consider when using lock-time values: no competing transactions and competing transactions. In the former case, exact miner behavior is irrelevant and granularity below an hour or two has little significance. In the latter case, miners are expected to prefer lower sequence numbers, allowing for bidirectional payment channels to decrement nSequence for each change of direction. BIP113 calculates the median time-past by taking the median time of the previous 11 blocks, meaning miners have no control over it. This renders granularity below a block interval ineffective in determining which transaction the miner includes. Therefore, users will want to use significantly larger than 1 block interval granularity in protocols. The downside of BIP68 is that unused bits in nSequence present an awkward situation if new meanings need to be added and more than five bits are required. The recommendation is to modify BIP68 to make by-time locks have the same number of bits as by-height locks and multiply the by-time lock field by the block interval.</summary>
+    <published>2015-11-24T04:36:18+00:00</published>
+  </entry>
+</feed>

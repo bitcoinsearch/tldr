@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Scaling at the end user level</title>
+  <updated>2023-06-06T02:47:46.538841+00:00</updated>
+  <author>
+    <name>grarpamp 2012-02-08 07:21:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Scaling at the end user level</title>
+    <updated>2023-06-06T02:47:46.538841+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-February/001209.html" rel="alternate"/>
+    <summary>The issue of artificial slowdown linked to database file locking and flushing has not been tracked down. The problem is not related to the age of the computer or anything else but in how truthfully the database file is written to disk. It seems that on some operating systems, it caches the writes and flies through it at thousands of blocks per second, while on others, it slows down to the point where it will never catch up. To track this down, one can try building their own libs and comparing different operating systems on the same hardware. The problem is not within bitcoin itself but may have something to do with the default settings of the db lib, which seems to default to different things on different version/operating systems/filesystems. The issue is similar to what's mentioned here: http://www.sqlite.org/faq.html#q19. When flushed to disk every block like Bitcoin does, it is impossible to get more than 50-60 blocks per second due to rotational latency. On some systems, the block chain gets fully done in 10-20 minutes, while on others, it takes much longer. It is unclear if all the data in blkindex and blk0001 should be the same across instances given a certain height. The system below is not zippy, and it is buried in crypto at 8MB/sec.  Comparing the format of blk0001.dat would help with the pursuit of comparison. It is possible that the problem lies in the fs and cpu, and a lot could be tied to them. It seems to take its time and roll up all but the last database file (of a hundred or more) on receiving sigterm. Currently, it is running with 853716 databases, 747881 blk0001.dat, 290601 blkindex.dat, 4361 addr.dat, 137 __db.005, 137 __db.004, 137 __db.003, 137 __db.002, 41 __db.006, and 25 __db.001 in KiB. After receiving sigterm, it has 750569 blk0001.dat, 291497 blkindex.dat, 8465 database/log.0000000nnn, and 4361 addr.dat. The file database/log.0000000133 is Berkeley DB (Log, version 16, native byte-order).</summary>
+    <published>2012-02-08T07:21:51+00:00</published>
+  </entry>
+</feed>

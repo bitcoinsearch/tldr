@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP Proposal: Wallet Labels Export Format</title>
+  <updated>2023-06-16T00:03:30.287291+00:00</updated>
+  <author>
+    <name>Ali Sherief 2022-08-24 19:10:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP Proposal: Wallet Labels Export Format</title>
+    <updated>2023-06-16T00:03:30.287291+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-August/020891.html" rel="alternate"/>
+    <summary>This Bitcoin Improvement Proposal (BIP) introduces a format to export and import labels attached to transactions, addresses, inputs, and outputs in a wallet. The purpose of this proposal is to provide a standardized way for users to export labels, preventing them from being locked into a specific wallet application. It also aims to make manual or bulk management of labels more accessible to users without technical expertise.The proposed format uses the comma-separated values (CSV) format, which is widely supported by consumer, business, and scientific applications. The exported file must be a UTF-8 encoded text file containing one record per line with two fields delimited by a comma. The first field contains a reference to the transaction, address, input, or output in the wallet, while the second field contains the label applied to the reference. Files exported should use the .csv file extension, and the CSV file may be compressed using the ZIP file format, optionally encrypted using AES-128 or AES-256 encryption.A test vector is provided, but a reference implementation is yet to be determined. Feedback on the proposal is requested, and Ali provides feedback on several aspects of the proposal. Ali suggests adding a version byte, making the header line mandatory, removing the optional compression specs, adding a 3rd column for item type, requiring double quotes around the label, sorting the records according to the order they are stored in the wallet implementation, considering getting rid of input and output item types, and writing a more robust importer algorithm for the example given in the BIP. Ali argues that the proposed importing code is too naive and needs to utilize a dedicated item type field to identify items unambiguously. When importing, a naive algorithm may simply match against any reference, but it is possible to disambiguate between transactions, addresses, inputs, and outputs. Importing applications may truncate labels if necessary.</summary>
+    <published>2022-08-24T19:10:04+00:00</published>
+  </entry>
+</feed>

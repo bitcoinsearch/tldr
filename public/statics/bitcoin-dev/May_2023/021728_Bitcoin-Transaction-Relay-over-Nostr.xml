@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Bitcoin Transaction Relay over Nostr</title>
+  <updated>2023-06-16T18:40:03.703648+00:00</updated>
+  <author>
+    <name>Greg Sanders 2023-05-30 13:30:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Bitcoin Transaction Relay over Nostr</title>
+    <updated>2023-06-16T18:40:03.703648+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-May/021728.html" rel="alternate"/>
+    <summary>Greg proposes the benefit of weak blocks to improve block relay by giving PoW-hints on what is in a miner's mempool. Weak blocks can also cache non-standard transactions, even if not validated until block inclusion. This would tolerate more heterogeneity in policies without drastically increasing relay times. It could also have the side effect of gossiping better transaction packages but it would be a lot of work to take advantage of that. At present, Greg thinks energy would be best spent writing a weak blocks BIP proposal since one has never been written before, and it would be fairly trivial to swap out p2p things with RPC calls if so desired for fast experimentation over alternative relays.  Joost finds the idea interesting, as it makes it easy for external services to try to do the best possible block building using advanced algorithms. Miners would just select the best template available from various sources, including nostr. A weak block is a block whose header doesn't quite hash to low enough of a value to be included on the chain. If miners are producing blocks that include transactions not seen by typical relay nodes, that can reduce the efficiency and effectiveness of BIP152 compact block relay. To compensate, miners could relay weak blocks through Nostr to full nodes and other miners so that they could quickly relay and accept complete blocks that later included the same custom transactions. This would also help fee estimation and provide valuable insights to those trying to get their transactions included into the next block. Regarding size, the block template and weak block could both be sent in BIP152 compact block format as a diff against the expected contents of a typical node, allowing Alice to send just a small amount of additional data for relay over what she'd have to send anyway for each transaction in a package. If nothing else, Joost thinks Nostr could provide an interesting playground for experimenting with various relay and mining ideas they've talked about for years. There is a bit of a chicken-egg problem here with users and miners possibly waiting for each other to adopt.</summary>
+    <published>2023-05-30T13:30:32+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Relative CHECKLOCKTIMEVERIFY (was CLTV proposal)</title>
+  <updated>2023-06-09T18:48:37.207385+00:00</updated>
+  <author>
+    <name>Jorge Timón 2015-04-26 12:20:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Relative CHECKLOCKTIMEVERIFY (was CLTV proposal)</title>
+    <updated>2023-06-09T18:48:37.207385+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-April/007823.html" rel="alternate"/>
+    <summary>The email conversation between Jorge Timón and an unknown person discusses the possibility of keeping utxo out of Script verification by modifying class CTxIn. The suggestion is to replace the deprecated nSequence with nHeight, which would require all new CTxIn to set nHeight to the correct height in which its corresponding prevout got into the chain. However, this implementation is not reorg-safe. Nonetheless, it can be made backwards-compatible and reorg-safe by introducing a new validation rule at the tx validation level. Existing transactions that have used the deprecated nSequence for something else will not be affected if they've used low nSequences. The only concern would be breaking some colored coins kernels as there are many others implemented that don't rely on CTxIn::nSequence. Transactions that want to use OP_MATURITY just have to set the corresponding CTxIn::nHeight and CTransaction::nLockTime properly. This way op_maturity wouldn't require anything from the utxo. Finally, the final interface could be defined as int bitcoinconsensus_verify_script(const unsigned char* scriptPubKey, unsigned int scriptPubKeyLen,const unsigned char* txTo, unsigned int txToLen, unsigned int nIn, unsigned int nHeight,unsigned int flags, secp256k1_context_t* ctx,bitcoinconsensus_error* err).</summary>
+    <published>2015-04-26T12:20:04+00:00</published>
+  </entry>
+</feed>

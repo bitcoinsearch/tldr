@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+  <updated>2023-05-21T03:17:16.605438+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-07-10 01:47:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+    <updated>2023-05-21T03:17:16.605438+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-July/019260.html" rel="alternate"/>
+    <summary>A proposal was made on the Bitcoin-dev mailing list to avoid O(n^2) behavior in transaction processing, by disallowing partial overlaps. The proposal suggests treating each transaction as distinct bundles of inputs and outputs, using the annex field "sig_group_count" to group them together since it is committed to by signatures. When evaluating an input, the proposal suggests setting up a new state pair, (start, end), initially (0,0), and looking up sig_group_count. If sig_group_count is not present, then set start := end. If it's present and 0, leave start and end unchanged. Otherwise, if it's present and greater than 0, set start := end, and then set end := start + sig_group_count. The proposal suggests that "sig_group_count" lockdowns the hashing of outputs for a given input, thus allowing midstate reuse across signatures input. However, there would be no need for midstates, as the message being signed would simply replace SIGHASH_SINGLE's sha_single_output with sha_group_outputs, which is the SHA256 of the serialization of the group outputs in CTxOut format.The proposal uses an example of combining transactions {x_1, y_1} and {x_2, y_2}, where {x, y} denotes bundles of Lightning commitment transactions. In this example, x_1 is dual-signed by Alice and Bob under the SIGHASH_GROUP flag with sig_group_count=3, and x_2 is dual-signed by Alice and Caroll under the SIGHASH_GROUP flag, with sig_group_count=2. y_1 and y_2 are disjunctive. However, at broadcast, Alice cannot combine {x_1,y_1} and {x_2, y_2} because x_1 and x_2 are colliding on the absolute output position. The proposal suggests that the sha256 of the span of the group doesn't commit to start and end, but rather serializes a vector, committing to the number of elements, the order, and the elements themselves. For instance, serialize(y_1) and serialize(y_2) are taken, and each of x_1 signs against the former, and each of x_2 signs against the latter. The annex for x_1_0 specifies sig_group_count=len(y_1), and the annex for x_1_{1..} specifies sig_group_count=0, for "reuse previous input's group," and the signatures for each input commit to the annex anyway.The proposal notes that the "end &gt; num_outputs" semantic is only there to ensure the span doesn't go out of range, so it does not make sense to skip it. Finally, the proposal suggests that while this SIGHASH_GROUP proposal may solve other use-cases, it does not appear to achieve the batch fee-bumping of multiple Lightning commitment with O(1) on-chain footprint that was being considered for IOMAP.</summary>
+    <published>2021-07-10T01:47:32+00:00</published>
+  </entry>
+</feed>

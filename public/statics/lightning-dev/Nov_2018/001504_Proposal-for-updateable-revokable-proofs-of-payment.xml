@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for updateable / revokable proofs of payment</title>
+  <updated>2023-05-25T15:17:44.738617+00:00</updated>
+  <author>
+    <name>CJP 2018-11-04 21:08:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for updateable / revokable proofs of payment</title>
+    <updated>2023-05-25T15:17:44.738617+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001504.html" rel="alternate"/>
+    <summary>The description field in BOLT11 is only defined as a "complete description of the purpose of the payment," which may be vague. However, a BOLT11 payment request can also be seen as an option contract, where the payee is bound to the terms and conditions in the description if the payment is made and proven by showing the preimage. The issue with this is that the payer is not identified in the contract, so it is unclear who the payee has an obligation to. The only way to fix this is through two-way communication, where the payer sends some data to the payee, and then the payee makes the payment request, including this data. This establishes a proof that payee has an obligation to the payer.While proofs of payment are useful, they may be too inflexible for real-life applications. For example, there may be cases where agreements need to be updated or revoked, even after payment. In such cases, a "contract update" format may be necessary, which includes new obligations of the two parties to each other, a secure hash of the previous contract version that is replaced by this one, signatures from both parties, and optionally, a payment hash. The contract update is considered valid only if the signatures correspond to the pubkeys in the original contract, the signatures are valid signatures on this contract, the previous contracts in the chain are all valid (except for being invalidated by contract updates), there is no known valid contract that replaces this one, and if a payment hash is included, a corresponding payment preimage is provided as well. Whenever one payee has obligations to another, the pubkey of the party with obligations has to be verified through some PKI. There is some conceptual similarity between an updateable proof of payment and a payment channel. A potential issue is that the "contract update chain" can fork, but either party can stop it from happening by not signing the forking update.</summary>
+    <published>2018-11-04T21:08:17+00:00</published>
+  </entry>
+</feed>

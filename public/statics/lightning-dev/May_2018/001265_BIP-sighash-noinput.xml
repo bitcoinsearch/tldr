@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP sighash_noinput</title>
+  <updated>2023-05-20T08:20:53.054176+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-05-09 23:01:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP sighash_noinput</title>
+    <updated>2023-05-20T08:20:53.054176+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-May/001265.html" rel="alternate"/>
+    <summary>One of the concerns with the proposed SIGHASH_NOINPUT feature is that it has a large failure case. If someone uses the same key for multiple inputs and signs one of them with NOINPUT, then all the inputs will be spent. While the current proposal commits to the previous amount, it still seems like a large risk for people who reuse addresses. However, this type of address reuse would not apply to contracts on Bitcoin. Furthermore, wallet authors have been slow to adopt new features in the past, even if they solve issues like malleability and lower fees. It has been suggested that having NOINPUT be a flag to a signature for an OP_CHECK_SIG_FOR_SINGLE_USE_KEY opcode instead may be more realistic. This would mean that it's fundamentally not possible to trick someone who regularly reuses keys to sign something for one input that accidentally authorizes spends of other inputs as well. Additionally, using an OP_CHECKSIG_1USE or OP_CHECKMULTISIG_1USE could ensure that a NOINPUT signature is only valid for keys intended to be single-use and not potentially valid for every key. While this approach would be ~34 witness bytes worse than spending a Schnorr aggregate key directly, it's not worse than the normal taproot tradeoff. The aggregate key would be spent directly in the cooperative case and reserved for the more expensive/NOINPUT case in uncooperative cases. A different opcode may make sense at a "philosophical" level since normal signatures sign a spend of a particular coin while NOINPUT signatures are signing a spend of an entire wallet. Perhaps, this could be encoded in different addresses by having a new opcode for NOINPUT. A new opcode would also have the theoretical advantage of being deployed into the existing segwit v0 address space rather than waiting for segwit v1.</summary>
+    <published>2018-05-09T23:01:39+00:00</published>
+  </entry>
+</feed>

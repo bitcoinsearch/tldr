@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - A blame ascribing protocol towards ensuring time limitation of stuck HTLCs in flight.</title>
+  <updated>2023-06-04T02:46:53.958354+00:00</updated>
+  <author>
+    <name>lightning developer 2021-12-15 01:07:42</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2021-12-15 08:01:37</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2021-12-16 07:45:29</name>
+  </author>
+  <author>
+    <name>lightning developer 2021-12-16 00:50:11</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-12-16 14:12:43</name>
+  </author>
+  <link href="lightning-dev/Dec_2021/003408_A-blame-ascribing-protocol-towards-ensuring-time-limitation-of-stuck-HTLCs-in-flight-.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2021/003409_A-blame-ascribing-protocol-towards-ensuring-time-limitation-of-stuck-HTLCs-in-flight-.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2021/003414_A-blame-ascribing-protocol-towards-ensuring-time-limitation-of-stuck-HTLCs-in-flight-.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2021/003413_A-blame-ascribing-protocol-towards-ensuring-time-limitation-of-stuck-HTLCs-in-flight-.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2021/003416_A-blame-ascribing-protocol-towards-ensuring-time-limitation-of-stuck-HTLCs-in-flight-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - A blame ascribing protocol towards ensuring time limitation of stuck HTLCs in flight.</title>
+    <updated>2023-06-04T02:46:53.958354+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003408.html" rel="alternate"/>
+    <summary>A Lightning Network developer has proposed a protocol to address the issue of HTLC spam via onions. The proposal involves setting a fixed time for reply after negotiating an HTLC, and if this does not occur, the downstream peer is considered malicious. A new lightning message called "blame_channel" in combination with onion messages is used to ascribe blame to malicious actors. The reply time is proportional to the cltv_delta of that hop. If a node cannot send either an update_fulfill_htlc or an update_fail_htlc message, it must send a blame_channel message that includes proof that the node previously set up the HTLC with the next peer. One limitation of the proposal is that being able to ascribe blame does not directly prevent spam via HTLCs. Another limitation is that with MPP, the short reply interval could be an issue if the recipient has not received enough parts of the payment yet. However, the proposal also presents several advantages, including preventing malicious actors on the network and allowing an honest sender of the payment to quickly discard a stuck HTLC and try another path without including the malicious node.The proposed solution offers a step towards mitigating HTLC spam, but it is not a complete solution. The team is seeking feedback and criticism to further develop this mechanism. The Lightning Network development team is working to address the issue of spam through HTLCs by proposing solutions such as triggering a force close and providing the force close transaction as proof of honesty. The team acknowledges that the suggestions in this proposal may not be as secure as needed, but believes it is a step towards mitigating nodes abusing the possibilities of onion routing and HTLCs spam. There are limitations to the proposal, such as the potential for a malicious node to blame an honest one, which is a serious limitation. Constructing the blame proofs might also be tricky. However, the proposal presents a useful approach to mitigate some of the issues in the network. Once PTLCs and a protocol for stuckless payments are available, an honest sender of the payment may quickly discard the stuck HTLC (PTLC) and try another path without including the malicious node.In a conversation with Bastien, ZmnSCPxj explains that it is impossible for a node to prove that it did not receive a message. While it is possible to prove knowledge, proving the lack of knowledge is much harder, if not impossible. If a proof-of-lack-of-knowledge were to exist, then an individual could generate the proof by running a virtual machine that knows everything except for that specific piece of information. This leads to a contradiction as the individual actually knows the fact but can present the proof-of-lack-of-knowledge by pretending to be ignorant.</summary>
+    <published>2021-12-15T01:07:42+00:00</published>
+  </entry>
+</feed>

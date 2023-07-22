@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Impact of eltoo loss of state</title>
+  <updated>2023-06-03T05:11:24.180947+00:00</updated>
+  <author>
+    <name>Christian Decker 2021-07-20 10:57:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Impact of eltoo loss of state</title>
+    <updated>2023-06-03T05:11:24.180947+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-July/003136.html" rel="alternate"/>
+    <summary>In a discussion on the Lightning-dev mailing list, Christian Decker proposed two options to deal with loss-of-state on eltoo channels in case of node crashes. The first option is to do nothing and keep the incentive to keep up-to-date backups. The second option involves using peer-storage, where an encrypted bundle is deposited with peers, which are expected to return it. The latter option can ensure that peers always return the latest snapshot of whatever has been given to them, hiding the fact that some state has been forgotten until the data has been exchanged. The encrypted-blob idea that Rusty has been proposing for a while now is an example of this option. The discussion was initiated by Anthony Towns' question, which was about what would happen if a lightning node crashed and recovered from an old backup when payments were going from Alice to Bob to Carol with eltoo channels. In this scenario, Carol would reveal the point preimages on-chain via adaptor signatures, but Bob wouldn't be able to decode those adaptor signatures because those signatures would need to change for each state. Even if Bob knew the point preimages, he wouldn't be able to claim the PTLC payments on-chain because he needs newer adaptor signatures that he would have lost with the state update. For any payments that timeout, Carol doesn't have any particular incentive to make it easy for Bob to claim the refund, and Bob wouldn't have the adaptor signatures for the latest state to do so. However, Alice would be able to claim refunds easily. To fix the issue, nodes should share state on reconnection, and negotiation of mutual/cooperative close should be done if possible to avoid using the eltoo protocol on-chain. Nodes should accept that if they lose connectivity to a channel partner, they will have to pay any PTLCs that were going to them and won't be able to claim the PTLCs that were funding them. Layered commitments seem to make channel factories complicated, and there is no apparent way to avoid them.</summary>
+    <published>2021-07-20T10:57:17+00:00</published>
+  </entry>
+</feed>

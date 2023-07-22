@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Turbo channels spec?</title>
+  <updated>2023-06-04T01:26:27.716519+00:00</updated>
+  <author>
+    <name>Rusty Russell 2021-06-30 00:09:27</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2021-07-01 18:07:29</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-07-05 02:20:01</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2021-07-05 06:38:42</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2021-08-12 05:04:58</name>
+  </author>
+  <author>
+    <name>Bitcoin Error Log 2021-06-29 07:53:23</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-08-14 02:09:18</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2021-06-29 05:34:18</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2021-06-29 07:41:35</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2021-06-30 07:10:56</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2021-07-05 01:21:46</name>
+  </author>
+  <author>
+    <name>Martin Habovštiak 2021-07-12 08:19:13</name>
+  </author>
+  <link href="lightning-dev/June_2021/003083_Turbo-channels-spec-.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2021/003095_Turbo-channels-spec-.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2021/003108_Turbo-channels-spec-.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2021/003109_Turbo-channels-spec-.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2021/003166_Turbo-channels-spec-.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2021/003076_Turbo-channels-spec-.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2021/003170_Turbo-channels-spec-.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2021/003074_Turbo-channels-spec-.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2021/003075_Turbo-channels-spec-.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2021/003085_Turbo-channels-spec-.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2021/003107_Turbo-channels-spec-.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2021/003128_Turbo-channels-spec-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Turbo channels spec?</title>
+    <updated>2023-06-04T01:26:27.716519+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-June/003083.html" rel="alternate"/>
+    <summary>The Lightning Network protocol is constantly evolving, and recent email exchanges reveal ongoing discussions about proposals to handle zero-confirm channels and updates to terminology and specifications for channel funding and routing. One proposal is the implementation of a "don't route from non-locked-in channels" option to minimize risks for funders and fundees.For funders, the risk is that the channel never confirms, but they can close on-chain if necessary. For fundees or DF channels, the risk is that the funder double-spends, so HTLCs must not be routed out to others unless there's a reason to trust the peer. Another proposal suggests adding one more bit to signal whether zero-conf channels are fully operational or only push-only. This is meant for instances when there is a trusted exchange, such as trading fiat for sats using an ATM, where only the push amount is spendable and receiving more is disabled. However, some implementations have made zero-conf channels completely operational, which Martin, the creator of the proposal, is not against but would like to differentiate between the two cases.To implement these proposals, several adjustments to the Lightning Network protocol are being discussed. One proposal is to create a new set of channel types that allow nodes to send update_add_htlc before funding_locked without upsetting the peer. Another suggestion is to use a `channel_type` that sets `option_zeroconf` rather than setting `min_depth = 0` for channels. In addition to these proposals, discussions have also focused on updates to terminology and specifications for channel funding and routing. ZmnSCPxj suggested not using "funder" and "fundee" in BOLT's rationale section for dual-funding, and Lisa has already created a patch for this. A new text has been proposed for `funding_locked_tlvs` in the lightning-rfc pull request #895, allowing funding_locked to be sent early without any feature needed. However, it is important to note that payments cannot be accepted or routed without short_channel_id, and the sender should wait until the funding transaction reaches minimum_depth before sending this message. Overall, these discussions highlight the ongoing efforts to improve and refine the Lightning Network protocol for better security and functionality.</summary>
+    <published>2021-06-30T00:09:27+00:00</published>
+  </entry>
+</feed>

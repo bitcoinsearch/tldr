@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP OP_CHECKTEMPLATEVERIFY</title>
+  <updated>2023-06-13T22:28:25.911096+00:00</updated>
+  <author>
+    <name>Jeremy 2020-02-14 19:16:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP OP_CHECKTEMPLATEVERIFY</title>
+    <updated>2023-06-13T22:28:25.911096+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-February/017627.html" rel="alternate"/>
+    <summary>The email thread discusses the potential implications of the 'revocation utxo' feature enabled by OP_CTV committing to scriptSig, which may change Bitcoin's behavior as a system. The email discusses how "during reorgs of depth less than 100, it is always possible to eventually replay transactions from the old branch into the new branch as long as no double spends are attempted," and how this principle can be violated with RBF. The 'revocation utxo' feature enables a manually triggered 'inverse timelock,' which could be useable in various schemes with covenants, like the vaults with access revocable by spending the 'revocation utxo,' or in trustless lending schemes where the covenant scripts can enforce different amounts of interest paid to the lender based on the point in time when the loan is returned, and the obsolete script paths (with smaller interest paid) can be disabled by inverse timelock.Additionally, the email discusses the ability to commit to scriptSig of a non-segwit input for on-chain control of spending authorization (revoking the spending authorization), where CTV ensures that certain input is present in the transaction. Spending such prevout makes it impossible to spend the input with CTV that commits to such scriptSig, in effect revoking an ability to spend this input via CTV path, and alternate spending paths should be used (like another taproot branch).The email also mentions the possibility of introducing new rules that violate the principle of replayability during reorgs of depth less than 100, and how the absence of an 'automatic inverse timelock' mechanism in Bitcoin hints that it was not seen as desirable historically. However, the 'revocation utxo' feature is entirely opt-in and should not cause issues with CTV. Finally, the email notes that revocation is part of what CTV is designed to do (absent reorgs) and allows for pruning spending conditions by playing a transaction forward.</summary>
+    <published>2020-02-14T19:16:26+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Dynamic Commitments: Upgrading Channels Without On-Chain Transactions</title>
+  <updated>2023-05-23T14:25:18.306092+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-07-21 01:18:19</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-07-21 22:55:54</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-07-21 22:45:03</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-07-21 22:31:45</name>
+  </author>
+  <link href="lightning-dev/July_2020/002763_Dynamic-Commitments-Upgrading-Channels-Without-On-Chain-Transactions.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2020/002768_Dynamic-Commitments-Upgrading-Channels-Without-On-Chain-Transactions.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2020/002767_Dynamic-Commitments-Upgrading-Channels-Without-On-Chain-Transactions.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2020/002766_Dynamic-Commitments-Upgrading-Channels-Without-On-Chain-Transactions.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Dynamic Commitments: Upgrading Channels Without On-Chain Transactions</title>
+    <updated>2023-05-23T14:25:18.306092+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-July/002763.html" rel="alternate"/>
+    <summary>The Lightning Network (LN) has proposed a new protocol modification that allows for on-the-fly commitment type changes without any on-chain transactions. This means users can upgrade their existing channels to new safer types, without generating tens of thousands of on-chain transactions. The proposal introduces a new concept called "dynamic commitments," which allows for upgrading of commitment types after the fact, creating another point of extensibility in the protocol so that variants on channels can be explored.To support this feature, some modifications to the protocol have been proposed, including adding two new messages for the double-opt-in commit switch: `commit_switch` and `commit_switch_reply`. Further channel type parameterization was done to handle "simple" upgrades, where some/all of the parameters of the channel are hard coded and/or have been negotiated out of band. The ability to upgrade commitments after the fact lessens the pressure of newer possibly experimental channel types to get all the details correct up front. Once Taproot rolls around, the funding output can be updated, then all the details on the possibly new channel type(s) that take advantage of all the new tools can be hashed out. To make the channel type used for funding explicit, a new 'channel_type' TLV would be added, which makes the channel type used in funding explicit, with the existing feature bit advertisement system being kept in place. With these changes, the dynamic portion of the proposal was implemented through a series of small changes to the `commit_sig`, and `revoke_and_ack` messages.More complex channel types may require the exchange of additional keys or parameters, which need to be known in order to reconstruct the new commitment format and verify the new signature. This additional information can be piggy-backed on the `commit_sig` message in the form of a nested TLV type. The Lightning Labs squad has committed to exploring this direction so that all existing lnd-involved channels can be upgraded to the new anchor commitment format, which is the safest format yet.The proposal allows for channel types to be upgraded on the fly, letting network users update to the new safer channel types in a de-synchronized, distributed manner that doesn't require any on-chain transactions. However, certain transitions may be disallowed, and it is important for implementations to be able to handle holding heterogeneous types of unrevoked commitments. The post also briefly discusses an off-topic idea for an upgrade transaction that is a cut-through of a mutual close of the Poon-Dryja, and a funding open of a Decker-Russell-Osuntokun.Overall, this post presents an early version of an extension to the Lightning Network specification and channel state machine that enables on-the-fly commitment format/type changes, which could greatly benefit the safety and flexibility of the Lightning Network protocol.</summary>
+    <published>2020-07-21T01:18:19+00:00</published>
+  </entry>
+</feed>

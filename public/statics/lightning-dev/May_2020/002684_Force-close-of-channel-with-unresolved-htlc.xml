@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Force close of channel with unresolved htlc</title>
+  <updated>2023-06-03T01:25:03.106031+00:00</updated>
+  <author>
+    <name>René Pickhardt 2020-05-05 18:40:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Force close of channel with unresolved htlc</title>
+    <updated>2023-06-03T01:25:03.106031+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-May/002684.html" rel="alternate"/>
+    <summary>As per the conversation between Subhra and Rene Pickhardt, if suppose A and B have a channel with 4 tokens and 6 tokens respectively, and A offers an HTLC of 2 tokens which B accepts, then both A and B have negotiated the HTLC output in the most recent commitment transaction. If A becomes unresponsive and B has to force close the channel, then a commitment transaction with three UTXOs will hit the chain. One UTXO with 2 tokens spendable by A, another one with 6 tokens spendable by B and the received HTLC output with 2 tokens. In such a case, there are two different conditions to spend the output. Firstly, before the timelock of the HTLC has passed, B can spend the output if B knows his to_local HTLC secret AND the preimage. Secondly, after the timelock, A can spend the output if A knows the to_remote HTLC secret. The mechanism with HTLCs can be read upon in BOLT 2 and the scripts can be seen in BOLT 3. A less technical summary that is more focused on explaining the concepts is currently being developed in the routing chapter of mastering the lightning network.</summary>
+    <published>2020-05-05T18:40:46+00:00</published>
+  </entry>
+</feed>

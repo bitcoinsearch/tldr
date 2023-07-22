@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Protocol extensions</title>
+  <updated>2023-06-05T00:42:40.817255+00:00</updated>
+  <author>
+    <name>Michael Grønager 2011-12-17 13:13:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Protocol extensions</title>
+    <updated>2023-06-05T00:42:40.817255+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-December/000902.html" rel="alternate"/>
+    <summary>Eric Lombrozo, a developer of cryptocurrency-related software and libraries, suggests that the bitcoin protocol has several unused features. He believes that breaking up different tasks into separate components that can run as independent services on different types of devices is crucial. One of the issues he is dealing with pertains to block chain storage. Currently, it is implemented as sequential disk files using Berkeley DB in the satoshi client. Eric proposes an extension to the bitcoin protocol to provide methods for performing more sophisticated queries such as "Give me an inventory of transactions involving this particular public key", or "Give me an inventory all transactions in the last n blocks with unredeemed outputs." The ability to query for transactions belonging to pubkeys or bitcoin addresses is supported today by several implementations including blockexplorer.com, bitcoin-js, and libBTC. To query for transactions, one needs to use json-rpc and not the bitcoin protocol. The reason for not having these queries part of the standard protocol is that they break anonymity and encourage people to participate in the p2p.Furthermore, Eric proposes a new network services type for nodes that serve as block chain/transaction pool storage. Any peer that wishes to verify the integrity of the block chain would still have to download at least all the block headers and also all the blocks themselves and verify everything. But it would be nice to be able to run thin services that can rely on other network peers to do this work. It is still possible to attain a high level of confidence in the integrity by querying multiple peers for similar objects and comparing. Eric proposes moving the storage of the blockchain into a DHT-based storage that could be a way to integrate the smaller clients into the network without breaking the anonymity. But it should be thought out quite carefully. If each client only stores a fraction of the blockchain, we should work out what fraction that needs to be to ensure a similar service level. Eric offers to work with anyone who is interested in developing these ideas further and help put together some specs.</summary>
+    <published>2011-12-17T13:13:02+00:00</published>
+  </entry>
+</feed>

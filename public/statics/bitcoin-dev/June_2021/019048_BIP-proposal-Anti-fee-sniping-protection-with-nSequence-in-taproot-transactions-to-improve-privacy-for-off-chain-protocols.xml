@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP proposal: Anti-fee-sniping protection with nSequence in taproot transactions to improve privacy for off-chain protocols</title>
+  <updated>2023-06-14T22:28:57.057622+00:00</updated>
+  <author>
+    <name>Chris Belcher 2021-06-10 12:56:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP proposal: Anti-fee-sniping protection with nSequence in taproot transactions to improve privacy for off-chain protocols</title>
+    <updated>2023-06-14T22:28:57.057622+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-June/019048.html" rel="alternate"/>
+    <summary>This document proposes a new type of wallet behavior that uses BIP341 taproot, which provides greater anonymity for off-chain protocols that use point-time-locked contracts (PTLCs) such as CoinSwap, Lightning, and Discrete Log Contracts. By using nSequence in taproot transactions, on-chain wallets like Bitcoin Core can improve the privacy and fungibility of bitcoin. The proposal suggests that nSequence should be used instead of nLockTime anti-fee-sniping protection, as nSequence values are not very common today and would mark off-chain settlement transactions as ordinary spend transactions. The community and wallet developers should act now to implement this so that the anonymity set of nSequence transactions starts to build up as soon as taproot itself becomes adopted by wallets.Fee sniping is a hypothetical outcome of bad incentives to bitcoin mining in the low-inflation future. Anti-fee-sniping protection using nLockTime or nSequence adds to the incentive to move the blockchain forward. Currently, nLockTime is being used, but it is an absolute lock time, whereas many off-chain protocols commonly use relative lock times. Therefore, both nLockTime and nSequence should be used, with wallets setting either an nLockTime value or nSequence values to discourage fee sniping.When creating transactions spending UTXOs protected by BIP341 taproot, wallets should also have a second random branch that sets the nLockTime or nSequence value even further back, so that transactions that are delayed after signing for whatever reason (e.g., high-latency mix networks) have better privacy. Wallets should use nLockTime instead of nSequence if the UTXOs being spent have more than 65535 confirmations.This proposal does not require any consensus changes and can be adopted unilaterally and gradually by wallets. However, for greater privacy, it would be good for software to adopt it as soon as possible, ideally during the process of developers implementing their taproot wallets, so that when taproot starts to be used, it will already include the nSequence code. The references are provided for more information on this proposal.</summary>
+    <published>2021-06-10T12:56:46+00:00</published>
+  </entry>
+</feed>

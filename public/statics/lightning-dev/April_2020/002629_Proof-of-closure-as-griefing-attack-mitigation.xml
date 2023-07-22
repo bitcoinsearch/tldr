@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proof-of-closure as griefing attack mitigation</title>
+  <updated>2023-06-03T00:24:12.637214+00:00</updated>
+  <author>
+    <name>Subhra Mazumdar 2020-04-13 03:39:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proof-of-closure as griefing attack mitigation</title>
+    <updated>2023-06-03T00:24:12.637214+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002629.html" rel="alternate"/>
+    <summary>The article discusses the issue of "griefing attacks" in multi-hop offchain payment attempts, which can cause long delays in payment delivery. Griefing attacks occur when a node delays forwarding or failing an incoming HTLC, causing the payment to be in a "pending" state for extended periods.The Lightning Network has proposed a new solution called "proof-of-closure" to prevent griefing attacks. This solution aims to protect intermediate nodes against payer/payee collusions by implementing a soft timeout in addition to the hard block-based timeout. Each node on the network advertises a timeout_delta, and each invoice contains a final_timeout measured in fractions of a second. The soft timeout is not enforceable on-chain but is enforced by putting the channel state on-chain.The major drawback of proof-of-closure is that enforcement of the soft timeout is a channel closure, which is generally negative for the network. However, it is not a remote attack vector since a node can only trigger this closure if it can stall the fulfillment or failure of an HTLC on a channel.The Lightning Network's proof-of-closure mechanism is designed to ensure that in case of a payment failure due to a delay by one of the parties involved, the party causing the delay has been punished. The proof-of-closure commits to a particular payment attempt and no other.The Lightning Network would require agreement from the entire network and implementations able to assess whether a transaction is valid or not in a Bitcoin-consensus-compatible way. Payment points will be used to fix the privacy loss from having a single payment hash for the entire payment attempt, with a blinding scalar added at each hop for payment decorrelation. In the future, there will be no HTLC, but instead a PTLC, with the payment point changing at each hop to prevent decorrelation.C needs to provide proofs that the apparent singlesig on the unilateral close output is in fact a PTLC and that the PTLC belongs to the same payment attempt as what B offered to C. When B needs to propagate the proof-of-closure back to A, it simply adds its own blinding factor to the reported blinding factor to convince A that this is the same payment attempt.In conclusion, while proof-of-closure has properties that protect intermediate nodes against payer/payee collusions, we must be reluctant to use it due to its up-front strict-evaluation behavior. Nonetheless, the solution is something that we can consider as it provides a softer timeout that is measurable in fractions of a second.</summary>
+    <published>2020-04-13T03:39:44+00:00</published>
+  </entry>
+</feed>

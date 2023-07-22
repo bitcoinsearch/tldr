@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Making Electrum more anonymous</title>
+  <updated>2023-06-10T03:06:53.920132+00:00</updated>
+  <author>
+    <name>Eric Voskuil 2015-07-22 16:30:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Making Electrum more anonymous</title>
+    <updated>2023-06-10T03:06:53.920132+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-July/009513.html" rel="alternate"/>
+    <summary>In an email to the bitcoin-dev mailing list, Thomas Voegtlin, the creator of Electrum, has suggested creating an anonymous routing layer between Electrum servers and clients. Inspired by TOR, the system would create a set of anonymous entry nodes {M} and exit nodes {S}, with each server S publishing a RSA public key, KS, and each client receiving a list of available servers and their pubkeys. For each wallet address, addr_i, a client chooses a server S_i, and a RSA keypair (K_addr_i, k_addr_i), creates a list of encrypted requests which contains addr_i and K_addr_i, and is encrypted with the pubkey KS_i of S_i. The client then chooses a main server M, and sends the list of encrypted requests to M. M dispatches the client's requests to the corresponding servers S_i (without the client's IP address). Each server decrypts the requests it receives, performs the request, and encrypts the result with K_addr_i. M receives encrypted responses, and forwards them to the client. Finally, the client decrypts the encrypted response with k_addr_i. The weaknesses of this scheme are similar to those seen in TOR implementations; lack of relay nodes make collaboration between any subset of {M} and {S} trivial, as OR is a mixnet, so the size of the network matters a lot; the directory is a perpetual weakness, and content is visible to the exit node (or the final service), meaning each address must be passed via a distinct route to prevent correlation.</summary>
+    <published>2015-07-22T16:30:36+00:00</published>
+  </entry>
+</feed>

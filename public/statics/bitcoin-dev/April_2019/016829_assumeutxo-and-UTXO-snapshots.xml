@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>assumeutxo and UTXO snapshots</title>
+  <updated>2023-06-13T17:58:43.087587+00:00</updated>
+  <author>
+    <name>Jonas Schnelli 2019-04-03 06:37:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>assumeutxo and UTXO snapshots</title>
+    <updated>2023-06-13T17:58:43.087587+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-April/016829.html" rel="alternate"/>
+    <summary>A proposal for assumeutxo has been presented by James O'Beirne in bitcoin-dev mailing list. The idea is to allow nodes to initialize using a serialized version of the UTXO set rendered by another node at some predetermined height. The initializing node syncs the headers chain from the network, then obtains and loads one of these UTXO snapshots. Based upon the snapshot, the node is able to quickly reconstruct its chainstate, and compares a hash of the resulting UTXO set to a preordained hash hard-coded in the software a la assumevalid. This all takes ~23 minutes, not accounting for download of the 3.2GB snapshot. The longer it takes for a fully validating client to start up, the more difficult it becomes to get people to use them. The proposal aims to help modest clients transact under a security model that closely resembles full validation within minutes instead of hours or days. Even while the background validation is happening the node can validate incoming blocks and transact with the benefit of the full (assumed-valid) UTXO set. However, there are some security implications due consideration. Under assumevalid, a user can be tricked into transacting under a false history if an attacker convinces them to start bitcoind with a malicious `-assumevalid` parameter, sybils their node, and then feeds them a bogus chain encompassing all of the hard-coded checkpoints. The same attack is made easier in assumeutxo because, unlike in assumevalid, the attacker need not construct a valid PoW chain to get the victim's node into a false state. If the goal is to run a full node on a consumer device that is also been used for other CPU intense operations (like a phone, etc.), this proposal may not lead to a satisfactory user experience. The total resource burden needed to start a node from scratch based on a snapshot is, at time of writing, a ~(3.2GB + blocks_to_tip * 4MB) download and a few minutes of processing time, which sounds manageable for many mobile devices currently in use. A related issue has been created at the Github repository and a draft implementation of snapshot usage via RPC has been submitted. The proposal may be reviewed as a sketch of the specific software changes necessary.</summary>
+    <published>2019-04-03T06:37:31+00:00</published>
+  </entry>
+</feed>

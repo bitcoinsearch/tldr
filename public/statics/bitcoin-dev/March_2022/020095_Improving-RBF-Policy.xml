@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving RBF Policy</title>
+  <updated>2023-06-15T15:51:06.119211+00:00</updated>
+  <author>
+    <name>Gloria Zhao 2022-03-09 15:09:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving RBF Policy</title>
+    <updated>2023-06-15T15:51:06.119211+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020095.html" rel="alternate"/>
+    <summary>The RBF discussions at coredev have mainly revolved around transaction relay rate-limiting, user-elected descendant limit as a temporary solution to unblock package RBF, and mining score. One major concept discussed was baking DoS protection into the p2p level rather than at the policy level. Two ideas were proposed: Transaction relay rate limiting with a feerate-based priority queue and staggered broadcast of replacement transactions. Feedback is solicited on these ideas and the concept in general. A concern raised about this idea is that it would be possible to impact the propagation of another person's transaction if an attacker sends enough transactions to fill up the rate limit. Suhas and Matt proposed adding a policy rule allowing users to specify descendant limits on their transactions. Gloria has implemented a new "mining score" calculator, which takes the transaction in question, grabs all of the connected mempool transactions, and builds a "block template" using the current mining algorithm. The mining score of a transaction is the ancestor feerate at which it is included. It has also been suggested to add a “mining score” calculator, which could be helpful for something like ancestor-aware funding and fee-bumping in the wallet. If a rate-limited priority queue for transaction relay is implemented, it is recommended to use the mining score as the priority value. For RBF, it is proposed to require that a replacement have a higher mining score than the original transaction. An issue raised is whether it is okay to prioritize transactions by ancestor feerate in this scheme. This can be quite different from the actual feerate we would consider a transaction in a block for. The proposed user-elected descendant limit flag on commitment transactions can solve the pinning problem with package RBF where the attacker's package contains a very large and high-fee descendant. It solves the problem of blocking package RBF until a more comprehensive solution to the pinning attack is found. The mempool acceptance rule is considered to be better if it only considers economic incentives, and the spam prevention is only about "shall I tell my peers about this?" A corollary of that is that it's better to have the mempool acceptance rule only consider economic incentives, and have the spam prevention only be about "shall I tell my peers about this?"</summary>
+    <published>2022-03-09T15:09:55+00:00</published>
+  </entry>
+</feed>

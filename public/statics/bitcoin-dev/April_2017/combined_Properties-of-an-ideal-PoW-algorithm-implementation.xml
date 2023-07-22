@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Properties of an ideal PoW algorithm &amp; implementation</title>
+  <updated>2023-06-12T00:30:21.233524+00:00</updated>
+  <author>
+    <name>Natanael 2017-04-18 10:34:04</name>
+  </author>
+  <author>
+    <name>Bram Cohen 2017-04-19 17:43:03</name>
+  </author>
+  <author>
+    <name>Tim Ruffing 2017-04-19 11:08:15</name>
+  </author>
+  <author>
+    <name>Bram Cohen 2017-04-19 17:43:03</name>
+  </author>
+  <author>
+    <name>Bram Cohen 2017-04-19 17:43:03</name>
+  </author>
+  <author>
+    <name>Natanael 2017-04-18 10:34:04</name>
+  </author>
+  <author>
+    <name>Tim Ruffing 2017-04-19 11:08:15</name>
+  </author>
+  <author>
+    <name>praxeology_guy 2017-04-18 19:14:05</name>
+  </author>
+  <author>
+    <name>Tim Ruffing 2017-04-19 11:08:15</name>
+  </author>
+  <author>
+    <name>praxeology_guy 2017-04-18 19:14:05</name>
+  </author>
+  <author>
+    <name>Natanael 2017-04-18 10:34:04</name>
+  </author>
+  <author>
+    <name>praxeology_guy 2017-04-18 19:14:05</name>
+  </author>
+  <link href="bitcoin-dev/April_2017/014196_Properties-of-an-ideal-PoW-algorithm-implementation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014211_Properties-of-an-ideal-PoW-algorithm-implementation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014205_Properties-of-an-ideal-PoW-algorithm-implementation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014211_Properties-of-an-ideal-PoW-algorithm-implementation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014211_Properties-of-an-ideal-PoW-algorithm-implementation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014196_Properties-of-an-ideal-PoW-algorithm-implementation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014205_Properties-of-an-ideal-PoW-algorithm-implementation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014209_Properties-of-an-ideal-PoW-algorithm-implementation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014205_Properties-of-an-ideal-PoW-algorithm-implementation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014209_Properties-of-an-ideal-PoW-algorithm-implementation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014196_Properties-of-an-ideal-PoW-algorithm-implementation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014209_Properties-of-an-ideal-PoW-algorithm-implementation.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Properties of an ideal PoW algorithm &amp; implementation</title>
+    <updated>2023-06-12T00:30:21.233524+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/014196.html" rel="alternate"/>
+    <summary>In April 2017, Natanael proposed changing the proof-of-work (PoW) algorithm to one that is moderately processing-heavy, resists partial state reuse, and has an existing reference implementation for hardware. The cost of producing a chip depends on correctly computed hashes per joule, which is related to the number of transistor activations per computed hash. An optimal implementation should be near optimal with a minimum number of necessary transistor activations per computed hash, not allow much internal state reuse, and have the PoW step as the most expensive part of creating a complete block candidate. It should also have cryptographic strength, predictable and close to constant PoW computation performance, no significant reusable state, no meaningful precomputation possible, and rely only on transistors for implementation.To prevent ASICBOOST-style optimization, the algorithm should not allow much internal state reuse and the PoW step should always be the most expensive part of creating a complete block candidate. Any proof of an implementation being near optimal must consider the possibility of designs that deliberately allow errors just to reduce the total count of transistor activations per a certain amount of computed hashes. Additionally, internal state reuse should be avoided through measures such as "whitening" and pre-hashing. A slower hash function or iterating the hash function multiple times could also be used for practical purposes. PoW verification will still be fast enough, and memory-hard functions are currently the best option for PoW functions.The author suggests using a repeated hashing method with blake2b for commodity mining hardware, despite the use of hard forks being a bad idea. Furthermore, to minimize asicboost-like optimizations, there needs to be early nonce mixing with variable-length input that has near-constant work. A hash algorithm with more linear computation time versus input size would be ideal, with a first-stage Merkle tree hash to pre-lossy-mix-compress the variable length input stream to the size of the second-stage state vector. Each bit of input should have about equal influence on each of the output bits, and then there would be multi-round mixing of the second stage, which would be significantly more work than the first stage. The cost of producing a chip is dependent on the number of metal layers required to route interconnects in a particular area, and fewer layers mean quicker and easier manufacturing. To support very large input sizes, there is a tradeoff between memory/parallelization and die space.</summary>
+    <published>2017-04-18T10:34:04+00:00</published>
+  </entry>
+</feed>

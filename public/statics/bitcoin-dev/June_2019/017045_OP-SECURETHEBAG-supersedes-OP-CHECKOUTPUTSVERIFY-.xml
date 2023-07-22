@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_SECURETHEBAG (supersedes OP_CHECKOUTPUTSVERIFY)</title>
+  <updated>2023-06-13T19:12:29.914461+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2019-06-25 17:05:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_SECURETHEBAG (supersedes OP_CHECKOUTPUTSVERIFY)</title>
+    <updated>2023-06-13T19:12:29.914461+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-June/017045.html" rel="alternate"/>
+    <summary>The discussion centers on proposed changes to Bitcoin Core's tapscript implementation. The first suggested change involves updating the tapscript implementation to prepare it for new uses of OP_SUCCESSx and parsing should halt when an OP_SUCCESSx is encountered. This requires GetScriptOp to know what version of script it is expected to be parsing, which could be done by sending down some versioning flags or adding a versioning field to CScript. These changes around OP_SUCCESS should be implemented regardless of whether the proposed change involving OP_SECURETHEBAG is implemented or not.The second proposed change involves patching the parser to handle multi-byte opcodes. Two approaches were considered: adding flags to GetOp or adding a completely new interpreter for Tapscript. The latter approach is likely better as it can clean up various semantics, separate parsing the script from executing it, improve versioning techniques, and be more compatible with templated script. However, it would also increase the amount of code substantially.To implement the second proposal, the plan would involve two components: the architecture of script parser versioning and the actual new script version. The architecture question is more around code structure while the second component would involve modifying one of the versions substantially. Suggestions for cleanups include multibyte opcodes, templated scripts, Huffman encoding opcodes, and OP_IF handling. It is important to note that because future script versions can be added fairly easily, the proposed changes are sufficient.</summary>
+    <published>2019-06-25T17:05:39+00:00</published>
+  </entry>
+</feed>

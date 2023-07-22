@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_VAULT: a new vault proposal</title>
+  <updated>2023-06-16T03:49:40.831175+00:00</updated>
+  <author>
+    <name>James O'Beirne 2023-01-18 22:45:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_VAULT: a new vault proposal</title>
+    <updated>2023-06-16T03:49:40.831175+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-January/021357.html" rel="alternate"/>
+    <summary>The author has implemented three changes based on suggestions from Greg Sanders and AJ Towns. The changes have been segmented into commits that are reasonable to follow, despite the possibility of rearranging the commit structure later on. The first change is based on Greg's suggestion that OP_UNVAULT outputs can now live behind scripthashes. This means that the lifecycle of a vault can live entirely within Taproot, with only the content of the witness stack revealing the operation of the vault when triggering an unvault or recovering. While there may not be any real privacy benefits over the previous scheme, there are certainly some efficiency ones as more content is moved from scriptPubKey into the witness. The second change is based on AJ's suggestion that unvault trigger transactions can now have an extra "revault" output that redeposits some balance to the same vault scriptPubKey from which it came. This is useful when the delay period is long and users want to manage a remaining vault balance separately while the spent balance is pending an unvault. The third change is also based on AJ's suggestion, which introduces a replacement parameter instead of specifying . The replacement parameter contains the same target recovery sPK hash as before, but the remaining bytes contain a scriptPubKey that functions as authorization for the recovery process. This allows users to avoid the risk of "recovery replays" at the expense of having to maintain a recovery key. Users can opt-out of this by passing OP_TRUE for the recovery sPK, and they can even support just omitting an sPK altogether for the legacy behavior.The author believes that the suggestions were good ones and have improved the proposal. Minor updates will be made to the paper, and a BIP draft will be written soon. The author thanks achow for their valuable feedback, which is still being considered.</summary>
+    <published>2023-01-18T22:45:01+00:00</published>
+  </entry>
+</feed>

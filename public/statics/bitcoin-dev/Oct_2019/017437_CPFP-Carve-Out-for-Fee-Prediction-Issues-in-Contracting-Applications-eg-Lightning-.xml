@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+  <updated>2023-06-13T15:49:01.103384+00:00</updated>
+  <author>
+    <name>Johan Torås Halseth 2019-10-28 09:45:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+    <updated>2023-06-13T15:49:01.103384+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-October/017437.html" rel="alternate"/>
+    <summary>The discussion revolves around the limitations and issues of the current mempool acceptance code in bitcoind. The proposed change to relax the current rules by allowing to add a child to each output as long as it has a single unconfirmed parent would still only allow free relay of O(size of parent) extra data, which might not be that bad. However, this would be enough for the current Lightning Network use case but not for OP_SECURETHEBAG. The issues with mempool limits for OP_SECURETHEBAG are related but have distinct solutions. One is relay cost, and the other is mempool walking. To solve the issue of relay cost, appropriately assessing Replace By Fee update fees to encapsulate all descendants can be done. But there are some tricky edge cases that make this non-obvious to do. The walking issue can be solved by caching it with a set to avoid re-expanding a node.OP_SECURETHEBAG can help with the LN issue by putting all HTLCS into a tree where they are individualized leaf nodes with a preceding CSV. Then, the above fix would ensure each HTLC always has time to close properly as they would have individualized lockpoints. This is desirable for some additional reasons and not for others, but it should "work". By doing so, every output of the commitment could be hidden within OP_STB, which could either allow bypassing the fee-pinning attack entirely (if the output cannot be spent unconfirmed) or adding fees to the commitment using SIGHASH_SINGLE|ANYONECANPAY.</summary>
+    <published>2019-10-28T09:45:39+00:00</published>
+  </entry>
+</feed>

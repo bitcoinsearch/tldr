@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Improving RBF policy</title>
+  <updated>2023-05-22T16:58:59.436185+00:00</updated>
+  <author>
+    <name>Eric Voskuil 2022-02-01 00:08:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Improving RBF policy</title>
+    <updated>2023-05-22T16:58:59.436185+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019843.html" rel="alternate"/>
+    <summary>On January 31, 2022, Bram Cohen took to the Bitcoin-dev forum to suggest that it's time to respect the Replace-By-Fee (RBF) flag and assume that it's always on. He argues that RBF is normal behavior and disallowing it is the feature, which is mostly there to appease some people's delusions that zeroconf is a thing. One of the issues raised in the discussion is related to Incentive Compatibility. The goal is to ensure that the RBF policy does not accept replacement transactions that would decrease fee profits of a miner. In general, if the mempool policy deviates from what is economically rational, it's likely that the transactions in our mempool will not match the ones in miners' mempools, making fee estimation, compact block relay, and other mempool-dependent functions unreliable. Incentive-incompatible policy may also encourage transaction submission through routes other than the p2p network, harming censorship-resistance and privacy of Bitcoin payments.The suggestion was made to consolidate logic that handles both scenarios involving more than a block's backlog in the mempool or less than a whole block's worth of transactions. The rational choice is the highest fee block-valid subgraph of the set of unconfirmed transactions regardless of the scenario.When collecting pooled txs, the only issue is DoS protection, which is simply a question of what any given miner is willing to pay, in terms of disk space, to archive conflicts for the opportunity to optimize block reward.</summary>
+    <published>2022-02-01T00:08:30+00:00</published>
+  </entry>
+</feed>

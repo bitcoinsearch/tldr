@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-06-03T00:43:39.659867+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-04-23 04:50:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-06-03T00:43:39.659867+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002662.html" rel="alternate"/>
+    <summary>The email by ZmnSCPxj discusses a problem that arises when a payment forwarding is made to three parties (A-&gt;B-&gt;C), and B does not want to maintain a mempool. If C triggers an event causing the channel between B and C to drop, the dropped channel will have an HTLC which can be claimed by either C or B and C together. B holds a signature from C that can claim the timelock branch of the HTLC. However, C can 'pin' the HTLC output by spending it using the hashlock branch and creating a large fee, low fee-rate tree of transactions, making it difficult for B to get its timelock-branch transaction in the mempools of miners. In such a case, C waits until the A-&gt;B HTLC times out and contacts miners with an out-of-band proposal to replace its transaction with an alternative that has a low fee but much better feerate. ZmnSCPxj suggests that the root cause of this problem is the difficulty involved in evicting low fee-rate transactions, which prevents miners from getting more lucrative alternatives. He proposes a solution where the size of a package with low fee-rate can be limited, thereby preventing incoming transactions from extending a low-fee-rate tree of transactions. This will prevent attackers from sending thousands of low fee-rate transactions building off some low fee-rate root transaction. As a result, it will be easier to evict such transactions without much impact. ZmnSCPxj believes that this solution will prevent DoS attacks and suggests that the "cannot evict high absolute fee" rule can be retained.</summary>
+    <published>2020-04-23T04:50:09+00:00</published>
+  </entry>
+</feed>

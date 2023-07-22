@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP Proposal: Compact Client Side Filtering for Light Clients</title>
+  <updated>2023-05-20T02:44:08.522465+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2017-06-09 03:03:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP Proposal: Compact Client Side Filtering for Light Clients</title>
+    <updated>2023-05-20T02:44:08.522465+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-June/014549.html" rel="alternate"/>
+    <summary>In a discussion thread on bitcoin-dev mailing list, Karl suggested the idea of retaining multiple blocks in digests to reduce space costs and speed up syncing for clients. This idea was not initially considered but it was later seen as a considerable bandwidth savings for clients doing a historical sync or catching up to the chain after being inactive for months/weeks. Karl proposed that an additional "Level" field should be added to the `getcfilter` message so that the range of blocks to be included in the returned filter would be Level^2. Similarly, the `getcfheaders` message would also gain a similar field with identical semantics. The implementation detail of whether to keep all the filters on disk or dynamically re-generate a particular range (possibly most of the historical data) is yet to be decided. Karl also suggested that creating digests for empty blocks only takes a few bytes and sometimes zero when the coinbase output is a burn that doesn't push any data. In order to provide digests on demand instead of keeping them around indefinitely, they can be pruned if desired, as long as the header chain is kept.The results of Karl's experiment showed that he created digests for all blocks up until block #469805 and ended up with 5.8 GB, which is 1.1 GB lower than what was obtained by Alex. The time required to create these digests varied with the size of the block, taking ~10-20ms for larger blocks while smaller blocks quickly dipped down to the nano to micro second range. It was also noted that those numbers include the fixed 4-byte value for "N" that's prepended to each filter once it's serialized.</summary>
+    <published>2017-06-09T03:03:51+00:00</published>
+  </entry>
+</feed>

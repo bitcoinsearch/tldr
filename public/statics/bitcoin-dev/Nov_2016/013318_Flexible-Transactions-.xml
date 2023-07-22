@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Flexible Transactions.</title>
+  <updated>2023-06-11T20:39:33.593826+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2016-11-21 15:54:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Flexible Transactions.</title>
+    <updated>2023-06-11T20:39:33.593826+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-November/013318.html" rel="alternate"/>
+    <summary>In an email to bitcoin-dev, a proposal was made to change the semantics of OP_CHECKSIG in version 2 of script. The proposal suggested changing the data signed so that it is equivalent to the transaction-id, which would simplify the process. However, this proposal has been criticized for being too naive as the SIGHASH data used in both Bitcoin script and Segwit script contains data indicating which input is being signed. By signing only the transaction id, the proposed signature does not include the data that tells which input of the transaction is being signed. Thus, if different inputs share the same public key due to key reuse, then the signatures on those different inputs will be identical. Additionally, the Flexible Transactions proposal opens up a new line of attack against Bitcoin that doesn't currently exist. A simple example is given where two individuals are jointly preparing a transaction with one input from each person. If one individual lies and uses the outpoint from the other person's transactions, which has the same public key as their chosen input, they can copy the signature provided by the other person and fund both inputs to the "jointly" funded purchase. This flaw is rated to be about the same caliber as the transaction malleability that is being fixed. Vigilance is required to avoid this trap, which requires a bunch of unexpected work. It is better not to open this line of attack. Therefore, it is important to understand why things are the way they are before proposing changes.</summary>
+    <published>2016-11-21T15:54:19+00:00</published>
+  </entry>
+</feed>

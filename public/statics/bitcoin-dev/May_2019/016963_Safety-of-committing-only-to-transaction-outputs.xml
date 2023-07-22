@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safety of committing only to transaction outputs</title>
+  <updated>2023-05-20T20:32:52.959230+00:00</updated>
+  <author>
+    <name>Johnson Lau 2019-05-23 20:54:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safety of committing only to transaction outputs</title>
+    <updated>2023-05-20T20:32:52.959230+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-May/016963.html" rel="alternate"/>
+    <summary>The discussion revolves around the approach that enables witnesses to commit only to transaction outputs, but not inputs. The existing bitcoin script system offers three options: committing to both inputs and outputs, committing to only inputs but not outputs, or not committing to any input nor output. However, the last option is unsafe as it allows relay/mining nodes to redirect payment to any output of their choice. Additionally, the witness/scriptSig is replayable, making it easy for future payments to be swept immediately.  SIGHASH_NONE with ANYONECANPAY also allows redirection of payment, but the signature is not replayable. Nonetheless, not committing to outputs is inherently insecure. To address this, there are currently three active proposals for committing only to outputs: CAT and CHECKSIGFROMSTACK (CSFS), ANYPREVOUT (aka NOINPUT), and CHECKOUTPUTSHASHVERIFY (COHV). These proposals ensure that redirecting payment is impossible. However, not committing to any input means that the witness is replayable without the consent of the address owner. The ANYPREVOUT proposal addresses this by requiring a chaperone signature that commits to input. Nevertheless, if the rationale for a chaperone signature holds, it should apply to all proposals listed above. A more general approach would be to always require a "safe" signature that commits to at least one input. This interacts poorly with the unknown public key type upgrade path described in bip-tapscript since it would require a hardfork to turn an unknown type sig into a safe sig. Despite this, a new leaf version could be used every time a new sighash type is introduced to create a new definition for a "safe sig". Customized sighash policies could be implemented with CAT/CSFS.</summary>
+    <published>2019-05-23T20:54:01+00:00</published>
+  </entry>
+</feed>

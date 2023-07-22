@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Lightning Distributed Routing</title>
+  <updated>2023-06-03T03:12:57.252989+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-12-01 11:29:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Lightning Distributed Routing</title>
+    <updated>2023-06-03T03:12:57.252989+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-December/002899.html" rel="alternate"/>
+    <summary>In a discussion between Joao, Bastien and ZmnSCPxj, it was noted that the `feeadjuster` plugin for C-Lightning created by Darosior already adjusts channel fees according to balance. The plugin signals whether or not to use a channel based on its capacity in that direction. This is done without requiring substantial changes to existing algorithms and implementations. CLBoSS, another C-Lightning plugin, implements similar logic as one of the many things it does, with some differing details but with substantially the same fee-adjustment curve. The discussion also raised concerns about nodes gossiping biased or invalid information to their peers in order to attract more payments through their nodes. For example, a node could dishonestly share with another node knowing a path to another node with capacity although it only has a fraction of that amount currently available. This would cause the routing table of the other node to be updated incorrectly. However, this issue can be addressed by changing the way nodes choose the next best hop for a certain destination. Joao proposed randomizing the best next hop from the group of next hops for that destination where the maximum volume allowed is higher than the payment’s volume. This would diminish the incentive attacking nodes have to share fake gossip by not allowing them to set themselves as first in line to be chosen as next hop. A maximum fee that a node is willing to pay would also need to be set.</summary>
+    <published>2020-12-01T11:29:48+00:00</published>
+  </entry>
+</feed>

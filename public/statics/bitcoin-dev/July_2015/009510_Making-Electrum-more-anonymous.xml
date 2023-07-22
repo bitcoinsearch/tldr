@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Making Electrum more anonymous</title>
+  <updated>2023-06-10T03:06:21.842427+00:00</updated>
+  <author>
+    <name>Thomas Voegtlin 2015-07-22 15:51:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Making Electrum more anonymous</title>
+    <updated>2023-06-10T03:06:21.842427+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-July/009510.html" rel="alternate"/>
+    <summary>The Electrum client typically requests address balances and histories from a single server, which means that the chosen server knows that a given set of addresses belong to the same wallet. There have been various proposals to improve anonymity, but none of them have convinced the author so far. One proposal was to create subsets of wallet addresses and send them to separate servers, but this would require trusting more servers and wouldn't necessarily improve anonymity. Inspired by TOR, the author proposes creating an anonymous routing layer between Electrum servers and clients. Each server publishes an RSA public key, and each client receives a list of available servers and their pubkeys. For each wallet address, the client chooses a server and a RSA keypair, and creates a list of encrypted requests containing the address and keypair, which are encrypted with the pubkey of the chosen server. The client sends the list of encrypted requests to a main server, which dispatches the requests to the corresponding servers without revealing the client's IP address. Each server decrypts the requests it receives, performs the request, and encrypts the result with the keypair. The main server then receives encrypted responses and forwards them to the client, who decrypts them with the keypair. This approach would not work if all servers or a large fraction of them were controlled by the same entity that controls the main server. The author is seeking feedback on this idea and wants to know the costs and benefits of such an approach.</summary>
+    <published>2015-07-22T15:51:02+00:00</published>
+  </entry>
+</feed>

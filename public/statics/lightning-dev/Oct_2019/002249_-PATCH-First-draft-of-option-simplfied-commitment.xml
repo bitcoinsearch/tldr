@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[PATCH] First draft of option_simplfied_commitment</title>
+  <updated>2023-05-25T17:48:47.955203+00:00</updated>
+  <author>
+    <name>Joost Jager 2019-10-26 07:19:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[PATCH] First draft of option_simplfied_commitment</title>
+    <updated>2023-05-25T17:48:47.955203+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-October/002249.html" rel="alternate"/>
+    <summary>The Lightning Network is a protocol that allows for the establishment of payment channels between two parties and their use off-chain. To generate the commitment transaction, both peers must agree on `option_simplified_commitment`. This option simplifies the transaction and ensures minimal fees.Developers are considering adding a CSV time lock to every non-anchor output on the commitment transaction. This would involve adding 'to_remote_delay OP_CHECKSEQUENCEVERIFY OP_DROP' to the 'to_remote' output, and '1 OP_CHECKSEQUENCEVERIFY OP_DROP' to the non-revocation clause of the HTLC outputs. The anchor outputs will have new addresses that both parties communicate in the `open_channel` and `accept_channel` messages. Moreover, the anchor outputs will always have equal values and be paid for by the initiator.Once the funding transaction has reached the minimum depth asked for in `accept_channel`, the `funding_locked` message indicates this, and the channel enters normal operating mode. Each commitment transaction uses a unique `localpubkey` and a `remotepubkey`. The expected weight of a commitment transaction is calculated based on its various outputs, such as the local and remote nodes' main output, the local and remote nodes' push output, and the htlc_output.There are two types of HTLCs in the commitment transaction: local node's offered HTLCs and remote node's offered HTLCs. Without `option_simplified_commitment`, the two commitment transactions are not identical, but they are with this option applied. The `revocationpubkey` is a blinded key derived by the local node when creating a new commitment transaction. The document aims to ensure the safety and security of the Lightning Network protocol. Other flags assigned to `globalfeatures` include `initial_routing_sync`, `option_upfront_shutdown_script`, and `gossip_queries`. A node may monitor the blockchain for unspent `to_local_pushme` and `to_remote_pushme` outputs and try to spend them after 10 confirmations.</summary>
+    <published>2019-10-26T07:19:43+00:00</published>
+  </entry>
+</feed>

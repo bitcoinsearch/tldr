@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Ephemeral Anchors: Fixing V3 Package RBF against package limit pinning</title>
+  <updated>2023-06-16T01:58:13.158093+00:00</updated>
+  <author>
+    <name>Greg Sanders 2022-10-18 13:52:46</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-10-19 13:22:08</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2022-10-19 00:33:13</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-10-19 13:22:08</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2022-10-19 00:33:13</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-10-18 13:52:46</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2022-10-19 00:33:13</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-10-18 13:52:46</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-10-19 13:22:08</name>
+  </author>
+  <link href="bitcoin-dev/Oct_2022/021036_Ephemeral-Anchors-Fixing-V3-Package-RBF-against-package-limit-pinning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021052_Ephemeral-Anchors-Fixing-V3-Package-RBF-against-package-limit-pinning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021046_Ephemeral-Anchors-Fixing-V3-Package-RBF-against-package-limit-pinning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021052_Ephemeral-Anchors-Fixing-V3-Package-RBF-against-package-limit-pinning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021046_Ephemeral-Anchors-Fixing-V3-Package-RBF-against-package-limit-pinning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021036_Ephemeral-Anchors-Fixing-V3-Package-RBF-against-package-limit-pinning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021046_Ephemeral-Anchors-Fixing-V3-Package-RBF-against-package-limit-pinning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021036_Ephemeral-Anchors-Fixing-V3-Package-RBF-against-package-limit-pinning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021052_Ephemeral-Anchors-Fixing-V3-Package-RBF-against-package-limit-pinning.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Ephemeral Anchors: Fixing V3 Package RBF against package limit pinning</title>
+    <updated>2023-06-16T01:58:13.159093+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021036.html" rel="alternate"/>
+    <summary>In an email thread on the Bitcoin-dev mailing list, a group of individuals were discussing V3 transactions and pinning attacks. Greg Sanders proposed a solution called "Ephemeral Anchors", which involves marking an output as an anchor that must be spent within a V3 package with a 0-fee parent transaction. This method simplifies mempool reasoning and allows anyone to bump the transaction without any transaction key material. The Lightning Carve-out is superseded by this logic, allowing for robust multi-party fee bumping. However, there are concerns about whether allowing non-zero value in ephemeral outputs would open up MEV concerns and how SIGHASH_GROUP like constructs would work.Sanders pointed out that V3 transactions may solve some pinning attacks, but they do not solve package limit pinning. He suggested two solutions: expand a carveout for "sibling eviction" or implement Ephemeral Anchors. With sibling eviction, a new child that pays enough to bump spends from the same parent would knock its sibling out of the mempool and take the one child slot. However, this mechanism might lead participants to overbid far beyond the top mempool block fees. Ephemeral Anchors would allow for more robust multi-party fee bumping, superseding the Lightning Carve-out. Change outputs would no longer be pinned, and RBF/CPFP would become more robust. The proposal also magnifies composability of smart contracts by removing the 1 block CSV timelock on outputs in certain situations.Gloria proposed a solution for ln-penalty, reducing the number of anchors per commitment transaction to 1 and each version of the commitment transaction has a unique party's key on it worked around the problem. Antoine Riard suggested that package relay should be included in addition to package RBF, otherwise if Lightning transactions are still relayed one by one, the version of the commitment transaction won't replace the counterparties's commitments sleeping in network mempools. If non-zero value is allowed in ephemeral outputs, it could modify the incentives games of the channels counterparties.Open questions include whether allowing non-zero value in ephemeral outputs opens up a MEV and whether SIGHASH_GROUP-like constructs would allow uncommitted ephemeral anchors to be added at spend time, depending on spending requirements. Overall, Ephemeral Anchors have potential as a solution to some pinning attacks, but further discussion and testing are needed to address remaining concerns.</summary>
+    <published>2022-10-18T13:52:46+00:00</published>
+  </entry>
+</feed>

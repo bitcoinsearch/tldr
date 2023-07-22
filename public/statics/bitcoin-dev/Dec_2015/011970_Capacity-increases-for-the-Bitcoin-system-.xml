@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Capacity increases for the Bitcoin system.</title>
+  <updated>2023-06-11T01:42:00.771780+00:00</updated>
+  <author>
+    <name>Adam Back 2015-12-14 12:44:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Capacity increases for the Bitcoin system.</title>
+    <updated>2023-06-11T01:42:00.771780+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-December/011970.html" rel="alternate"/>
+    <summary>In a discussion thread on bitcoin-dev, it was suggested that the relay issue with Segregated Witness (SW) would likely be transitory as many things would be quickly upgraded in practice from previous deployment experience. It was also noted that there is an excess connectivity and capacity in the p2p network versus a connected network of various versions, and supporting Simplified Payment Verification (SPV) client load. Even if two classes of network node and connectivity persisted, the higher capacity better-run nodes are more likely to upgrade due to having more clued-in power user, miner, pool or company operators. One participant noted that a server supporting SW might only hear of the transaction data and not get the signature data for some transactions, depending on how the relay rules worked (e.g. if the SW peers had higher minrelaytxfee settings than the legacy peers). This could complicate fast block relay code like IBLTs since we now have to check to see that the recipient has both the tx data and the witness/sig data. Block relay might also face similar issues if SW is done as a soft fork. A SW node may see a block inv from a legacy node first and start downloading the block from that node. This block would then be marked as in-flight, and the witness data might not get downloaded. However, this issue can be fixed by creating an inv for the witness data as a separate object, so that a node could download the block from one peer and the segwit data from another. It was proposed that the code would be simpler if SW was done as a hard fork and everyone on the segwit fork supported the segwit data. However, it was also suggested that the interfaces should be written in a way that supports some nodes not downloading the segwit data anyway, just because not every node will want that data. In response to a question about how this issue is dealt with in sipa's code, it was noted that there hasn't been time to read it yet. Another participant noted that a segwit supporting server would be required to support relaying segwit transactions, although a non-segwit server could still inform a wallet of segwit txns observed, even if it doesn't relay all information necessary to validate. Non-segwit servers and wallets would continue operations as if nothing had occurred. If this means essentially that a soft fork deployment of SegWit will require SPV wallet servers to change their logic or risk not being able to send payments, then a hard fork to deploy this non-controversial change is cleaner (on the data structure side) and safer in terms of the potential to affect the user experience.</summary>
+    <published>2015-12-14T12:44:57+00:00</published>
+  </entry>
+</feed>

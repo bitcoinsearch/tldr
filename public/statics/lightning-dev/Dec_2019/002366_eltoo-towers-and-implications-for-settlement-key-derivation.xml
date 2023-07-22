@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>eltoo towers and implications for settlement key derivation</title>
+  <updated>2023-06-02T21:55:56.601808+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-12-04 13:53:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>eltoo towers and implications for settlement key derivation</title>
+    <updated>2023-06-02T21:55:56.601808+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-December/002366.html" rel="alternate"/>
+    <summary>A discussion on the Lightning-dev mailing list about the eltoo paper and its impact on channel construction brought up an issue with watchtowers. Due to NOINPUT, any update transaction can spend from any other, so in theory, the tower only needs the most recent update txn to resolve any dispute. However, in order to spend, the tower must also produce a witness script which when hashed matches the witness program of the input. To ensure settlement transactions can only spend from exactly one update txn, each update txn uses unique keys for the settlement clause, meaning that each state has a unique witness program. The discussion suggested alternatives such as adding a taproot branch with an `OP_RETURN` tapscript or using BIP32 derivation. The original poster questioned the issue and argued that update_tx and settlement_tx are self-contained, and there is no need to recover the prevout scriptPubKey or any value therein. They also argued that it's not a watchtower's job to finalize the entire off-chain contract, but rather to watch the blockchain and react should anything trigger it.</summary>
+    <published>2019-12-04T13:53:39+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Request review: drop misbehaving peers</title>
+  <updated>2023-06-04T19:42:49.125195+00:00</updated>
+  <author>
+    <name>Gavin Andresen 2011-09-15 01:57:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Request review: drop misbehaving peers</title>
+    <updated>2023-06-04T19:42:49.125195+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-September/000533.html" rel="alternate"/>
+    <summary>The pull request being reviewed is about punishing peers who send obviously wrong information by dropping the connection to them and banning their IP address so they cannot immediately reconnect. The severity of the punishment depends on how potentially wasteful/damaging the peer's behavior is. For instance, sending an extra 'version' message is a minor transgression that is usually tolerated while sending a more-than MAX_BLOCK_SIZE block is a major transgression that gets the peer disconnected immediately. Misbehavior/ban information is stored only in memory, and information about misbehaving peers is never broadcast.The proposal aims to eliminate a lot of potential denial-of-service attacks and could be a good framework for responding to other potential attacks. However, there is a danger if something goes wrong, an attacker might leverage the DoS prevention code to split or shatter the network. To prevent this, Gavin Andresen relies on TCP to prevent IP address spoofing, and peers are only penalized for sending messages that won't, and shouldn't, get relayed. The author specifically does not punish peers for relaying what looks like double-spend transactions as it would allow an attacker to segment the network into two pieces by broadcasting a series of double-spends from two halves of the network.</summary>
+    <published>2011-09-15T01:57:00+00:00</published>
+  </entry>
+</feed>

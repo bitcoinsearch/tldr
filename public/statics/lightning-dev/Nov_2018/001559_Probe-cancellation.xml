@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Probe cancellation</title>
+  <updated>2023-05-25T15:52:09.568255+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-11-12 00:17:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Probe cancellation</title>
+    <updated>2023-05-25T15:52:09.568255+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001559.html" rel="alternate"/>
+    <summary>The email thread is discussing a potential solution to freeing up scarce resources on the network. The proposed solution involves making probing routes more efficient and cancelling stuck probes from both the sending and receiving direction. The risk of probing is that if the probe discovers a failing node/channel, the probe HTLC will get stuck, using up HTLC slots and memory for each of the well-behaved nodes, but if the probe has a realistic value rather than just a few (milli)satoshis, it might lock up real money too.The proposed solution suggests allowing for cancelling stuck probes from the sending direction as well as the receiving direction. This would involve generating a 128b random number X, calculating H=bitwise-not(SHA256(X)), making a probe payment over path P, hash H, amount V, and waiting for response. The response could either be success or error, unknown hash, routing failure, or timeout. Overall, this solution provides an option for someone making an honest effort to probe the network to not inadvertently attack it in case a probe fails. However, an attacker may still take the option to not do this.</summary>
+    <published>2018-11-12T00:17:31+00:00</published>
+  </entry>
+</feed>

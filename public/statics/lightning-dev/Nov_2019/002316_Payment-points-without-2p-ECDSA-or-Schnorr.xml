@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Payment points without 2p-ECDSA or Schnorr</title>
+  <updated>2023-06-02T21:49:38.787877+00:00</updated>
+  <author>
+    <name>uSEkaCIO 2019-11-11 08:12:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Payment points without 2p-ECDSA or Schnorr</title>
+    <updated>2023-06-02T21:49:38.787877+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-November/002316.html" rel="alternate"/>
+    <summary>The author presents an idea for enabling "payment points" without the need for a proper multisignature scheme, using 2-of-2 OP_CHECKMULTISIG with a single signer ECDSA adaptor signature on one of the keys. This would allow for features such as payment points to be implemented without waiting for BIP-Schnorr/Taporoot or specifying a 2p-ECDSA protocol. The core discrete log based lock required can be created by Alice giving Bob 1 BTC if he reveals y, the discrete log of Y to her. From here, the process involves the exchange of public keys and signatures under A and B, with Y and y never going on-chain. The author also provides their own version of the single signer ECDSA adaptor algorithms, which are based on Pedro and Aniket's original work. The author notes that while there is a security flaw in the scheme, it is unlikely to affect any proposal in practice. The author believes that this scheme can do anything that can be done with 2p-ECSA/Schnorr scriptless scripts except that instead of a normal p2pkh/public key output, there is a 2-of-2 OP_CMS P2WSH output. The key exchange protocol is simpler than 2pECDSA and simpler even than 2pSchnorr, making it a natural step up from current HTLCs towards Schnorr. The simplicity of the protocol makes it easier to specify and a single BOLT spec could cover the key generation, transaction structure, and signing. The actual transaction structure can be moved towards the ideal Schnorr-based endpoint or the pre-image spending path in script can be replaced with OP_CMS. The author invites feedback on their idea.</summary>
+    <published>2019-11-11T08:12:46+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Hold fees: 402 Payment Required for Lightning itself</title>
+  <updated>2023-06-03T02:35:30.639099+00:00</updated>
+  <author>
+    <name>Joost Jager 2020-10-12 15:28:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Hold fees: 402 Payment Required for Lightning itself</title>
+    <updated>2023-06-03T02:35:30.639099+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002828.html" rel="alternate"/>
+    <summary>There are two proposed options for implementing hold fees in Lightning Network. Option A involves the node paying an amount to its channel peer through keysend, and the channel peer deducts the hold fees from that prepaid balance until it is at zero. At that point, the channel peer communicates Lightning's version of http 402 to ask for more money. However, if the node has already forwarded the HTLC onward, there is no enforcement hold on the sender of the incoming HTLC. On the other hand, option B is tightly integrated with the htlc add/fail/settle messages. When an htlc is added, the maximum cost for holding is deducted from the sender's channel balance. When the htlc settles, a refund is given based on the actual lock time. In both cases, the sender needs to trust its peer to not steal the payment and/or artificially delay the forwarding to inflate the hold fee.It is argued that there is already considerable trust between peers in Lightning Network, even in high on-chain fee conditions. The added risk of being scammed out of prepay sats may not be significant. However, there are concerns about adding trust, as one might trust someone to keep an eye on snacks but not on a hardware wallet. Ultimately, the preferred option for implementing hold fees may come down to implementation effort.</summary>
+    <published>2020-10-12T15:28:49+00:00</published>
+  </entry>
+</feed>

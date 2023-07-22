@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Simple lock/unlock mechanism</title>
+  <updated>2023-06-13T00:52:33.735748+00:00</updated>
+  <author>
+    <name>アルム　カールヨハン 2018-03-01 05:11:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Simple lock/unlock mechanism</title>
+    <updated>2023-06-13T00:52:33.735748+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-March/015798.html" rel="alternate"/>
+    <summary>There are discussions within the bitcoin-dev community regarding the possibility of a software-only time-lock vault. One concern raised is that Graftroot may break the system since someone could just sign the time-locked output with a script that has no time-lock. To address this, some suggest making the graftroot key a 2-of-2 muSig with an independent third party that commits to only signing CLTV scripts. However, some argue that this defeats the purpose and that it might be better to use multisig instead and skip the freezing part entirely.Adam Back suggests creating a TX1 with a CSV timelock, discarding privkey A after broadcasting TX1, and using graftroot and privkey B with a script without timelock to spend B. However, this method has a drawback as the robber can force the user to execute step 3 since they have the privkey to B. It is pointed out that deleting keys may be difficult to assure with HD wallet seeds setup-time backup model. Therefore, it is suggested to include as part of 'freezing' a send to a new ephemeral key as 'initialization'. A simpler though less robust model would be to have a third party refuse to co-sign until a pre-arranged time, which would have the advantage of not requiring two on-chain transactions. Some users were hoping for a way to easily lock-up the major portion of their coins. As a sidenote, a security firm could have a service where seeing an unfreeze transaction which the user has told them about without giving a heads up beforehand is equal to alarm going off.</summary>
+    <published>2018-03-01T05:11:54+00:00</published>
+  </entry>
+</feed>

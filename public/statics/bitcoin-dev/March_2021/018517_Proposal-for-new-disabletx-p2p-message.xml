@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for new "disabletx" p2p message</title>
+  <updated>2023-06-14T17:03:26.372227+00:00</updated>
+  <author>
+    <name>John Newbery 2021-03-01 20:58:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for new "disabletx" p2p message</title>
+    <updated>2023-06-14T17:03:26.372227+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-March/018517.html" rel="alternate"/>
+    <summary>Suhas Daftuar, a Bitcoin developer, has proposed the addition of an optional peer-to-peer (p2p) message called "disabletx." This message allows peers to communicate that they do not want to send or receive loose transactions for the lifetime of a connection. The purpose of this message is to facilitate low-resource connections on the network over which only block-related data are relayed, which strengthens network security against partition attacks.For nearly a year, software has been deployed that initiates connections on the Bitcoin network and sets the transaction relay field to false, preventing transaction relay from occurring on the connection. Additionally, address messages received from the peer are ignored by this software. These connections' purpose is twofold: strengthening the robustness of a node to network partitioning attacks and reducing the ability of an adversary to learn the complete network graph.The proposal suggests adding a new P2P message to communicate that loose transactions will not be sent or received for the lifetime of a connection. It also recommends using the existing "fRelay" field in the version message to indicate no transaction relay can happen for the entire lifetime of the connection. Bitcoin Core can postpone allocating resources for transaction relay data structures until after the version message has been received to minimize resource usage for incoming block-relay-only connections.The proposal also suggests updating the inbound eviction logic to protect more inbound peers which do not have transaction relay data structures. Additionally, it recommends initializing addr data structures for inbound connections only when an "addr", "addrv2" or "getaddr" message is received on the connection and only considering a connection for addr relay if its addr data structures are initialized. Finally, it proposes modestly increasing the number of outbound block-relay-only connections.The Bitcoin Improvement Proposal (BIP) 324 suggests disabling address relay between peers to prevent network analysis attacks. The BIP recommends software not to relay addresses to accommodate existing software behavior, but it is not required. Address relay can be disabled to allow for future protocol extensions that might specify how address relay should be negotiated. All messages specified in BIP 152 are allowed between peers that have sent/received a disabletx message, subject to the feature negotiation of BIP 152. Bitcoin Core has implemented this functionality since version 0.19.0.1, released in November 2019. The BIP is licensed under the 2-clause BSD license.Overall, these proposals aim to strengthen network security against partition attacks and network analysis attacks while minimizing resource usage for incoming block-relay-only connections.</summary>
+    <published>2021-03-01T20:58:46+00:00</published>
+  </entry>
+</feed>

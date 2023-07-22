@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Gossip Propagation, Anti-spam, and Set Reconciliation</title>
+  <updated>2023-06-03T08:25:01.805013+00:00</updated>
+  <author>
+    <name>Rusty Russell 2022-04-27 06:53:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Gossip Propagation, Anti-spam, and Set Reconciliation</title>
+    <updated>2023-06-03T08:25:01.805013+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-April/003568.html" rel="alternate"/>
+    <summary>Matt Corallo and Rusty are discussing the issue of ratelimiting in the context of minisketch. According to Matt, there is a good reason for everyone to do ratelimiting because otherwise it would cause problems. However, Rusty argues that if anyone does ratelimiting, then the same problem will occur unless everyone does so. Rusty suggests that keeping all the ratelimited differences per peer and canceling them out on every receive or send is not feasible with minisketch. Instead, LND and core-lightning pick three peers to gossip with and tell everyone else to shut up.Rusty points out that the point of minisketch is robustness, and we could define a preferred ratelimit to prevent spamming past a certain point from propagating. At present, LND has no effective ratelimit at all, so it's a race to the bottom. Rusty thinks that we need that limit eventually, and defining a preferred ratelimit makes it more of a priority.Matt suggests taking the "send updates since the last sync in the minisketch" approach to reduce the damage inconsistent policies cause. Rusty disagrees, saying that rate-limited junk overwhelms the sketch really fast, making it unfeasible. However, Rusty acknowledges that we can change the ratelimit in the future by running two sketches or changing the rate slowly enough that they can handle the small differences.</summary>
+    <published>2022-04-27T06:53:50+00:00</published>
+  </entry>
+</feed>

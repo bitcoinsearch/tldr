@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP: OP_BRIBVERIFY - the op code needed for Blind Merge Mined drivechains</title>
+  <updated>2023-06-12T02:57:30.059379+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2017-07-04 07:21:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP: OP_BRIBVERIFY - the op code needed for Blind Merge Mined drivechains</title>
+    <updated>2023-06-12T02:57:30.059379+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-July/014687.html" rel="alternate"/>
+    <summary>The discussion between Paul, Chris, and CryptAxe is centered around the development of a secure sidechain. The conversation begins with a comparison between Paul's and CryptAxe's methods for enforcing bribes on a sidechain. CryptAxe notes that Paul's method does not refund the briber if the sidechain reorganizes, creating additional risk. Paul argues that his scheme prevents sidechains from reorganizing unless the mainchain reorganizes since the consensus loop only considers valid blocks. CryptAxe provides an example to support his argument, which Paul refutes with pseudocode. They discuss mutability in sidechains, and CryptAxe suggests using bribelocked timelocked contracts instead of hashlocked timelocked contracts, which can be provided off-chain as proof of existence in a mainblock coinbase. Chris raises a concern about attackers who pay large fees to have their invalid block hash included in the bitcoin mainchain, which could cause it to be included in the sidechain blockchain forever. In response, CryptAxe explains that in his scheme, a block list node is only valid if its block is valid, and OP_RETURN data represents sidechain block headers stored on the mainchain. The sidechain block headers are reduced to only the previous-block-header commitment and the current-block-data commitment to save space. If the current-block-data is invalid, the sidechain block header is also invalid, and another sidechain block header based on the previous block header will be searched for.CryptAxe describes the ratchet system, which links h* data from bribes to sidechain blocks. H* represents sidechain block hashes and is added to the ratchet system if it moves the sidechain forward or starts a split. A sidechain can request verification of the headers it has downloaded from sidechain peers and form the side chain. However, ZmnSCPxj proposes that his OP_RETURN scheme is superior as the sidechain block headers are visible directly on the mainchain and the mainchain node does not even need to be local, and a ratchet structure is not required.</summary>
+    <published>2017-07-04T07:21:23+00:00</published>
+  </entry>
+</feed>

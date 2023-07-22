@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Signature and Script Independent Hierarchy for Deterministic Wallets.</title>
+  <updated>2023-06-14T19:26:22.817529+00:00</updated>
+  <author>
+    <name>Robert Spigler 2021-03-18 20:44:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Signature and Script Independent Hierarchy for Deterministic Wallets.</title>
+    <updated>2023-06-14T19:26:22.817529+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-March/018693.html" rel="alternate"/>
+    <summary>David Harding commented on Craig Raw's post about the proposed standard for Bitcoin wallet backup. In his comment, he stated that most wallets today allow for restoration with just a seed, which means that the burden of wallet backup is not shifted to the user. He also mentioned that the new proposal would be useful in handling multisigs where the user needs to record the other signers' keys anyway.Ghost43 raised concerns about the amount of work required when restoring a wallet from seed under the new proposal and how it is more than under the current BIP44-style paths. David Harding explained that the scanning work in both cases is essentially the same and that there is no actual key reuse between different scripts.Ghost43 then gave an example of Carol creating multiple accounts with different script types and how it could be an issue when restoring from seed under the new proposal. The discussion in the post centered around the wallet software, including BIP44/49/84, and the new BIP XY.When restoring using BIP44/49/84, the wallet scans for different script types and account indices. It stops scanning at the last used index, which may result in missing subsequent accounts. The total number of accounts worth of addresses scanned is around 9, matching the number of accounts created by the user.However, when using the new BIP XY, the wallet might end up scanning 9*n accounts worth of addresses as it tries all script types until it finds p2pkh. Ghost43 clarified that using BIPXY, the user has used account indices 0-4 for p2pkh, index 5 for p2wpkh, index 6 for p2wpkh-p2sh, and indices 7-8 for p2wpkh.If an older wallet does not support p2wpkh but only p2pkh and p2wpkh-p2sh, it will miss account index 6, which is a regression compared to BIP44/49. This poses a risk of reusing keys for older wallet software that is unaware of newer versions' actions.</summary>
+    <published>2021-03-18T20:44:48+00:00</published>
+  </entry>
+</feed>

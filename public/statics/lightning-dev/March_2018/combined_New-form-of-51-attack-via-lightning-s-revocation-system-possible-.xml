@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - New form of 51% attack via lightning's revocation system possible?</title>
+  <updated>2023-05-24T21:56:54.157747+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-03-14 03:46:11</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2018-03-13 18:30:19</name>
+  </author>
+  <author>
+    <name>René Pickhardt 2018-03-13 13:30:21</name>
+  </author>
+  <author>
+    <name>Christian Decker 2018-03-13 14:55:10</name>
+  </author>
+  <author>
+    <name>René Pickhardt 2018-03-13 17:07:48</name>
+  </author>
+  <author>
+    <name>Christian Decker 2018-03-13 19:23:10</name>
+  </author>
+  <link href="lightning-dev/March_2018/001085_New-form-of-51-attack-via-lightning-s-revocation-system-possible-.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001083_New-form-of-51-attack-via-lightning-s-revocation-system-possible-.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001080_New-form-of-51-attack-via-lightning-s-revocation-system-possible-.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001081_New-form-of-51-attack-via-lightning-s-revocation-system-possible-.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001082_New-form-of-51-attack-via-lightning-s-revocation-system-possible-.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001084_New-form-of-51-attack-via-lightning-s-revocation-system-possible-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - New form of 51% attack via lightning's revocation system possible?</title>
+    <updated>2023-05-24T21:56:54.157747+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-March/001085.html" rel="alternate"/>
+    <summary>The Lightning Network is a payment channel network built on top of the Bitcoin blockchain. It offers faster and cheaper transactions than on-chain transactions, making it popular among Bitcoin users. However, the Lightning Network's revocation system is vulnerable to a new form of 51% attack that could lead to the loss of an arbitrary amount of funds.This attack is executed by secretly mining on one's own and not broadcasting any successfully mined block while spending all fraudulent commitment transactions in the first block of the secret mining endeavor. The attacker could steal up to 99% of all the bitcoins allocated in the sum of all payment channels they were connected to. This amount could be way higher than just double-spending their own funds.René Pickhardt has highlighted the potential for this 51% attack to steal more Bitcoin on the Lightning network than through double-spending. He illustrated a hypothetical scenario where he was an attacker owning 1000 BTC and had 1000 nodes open payment channels with him, all funded by the other side with 999 BTC in each channel (and 1 BTC from him). Using this scheme, René could have old commitment transactions in every channel that could be spent when starting his secret mining endeavor, resulting in a gain of 1M BTC.Assuming an attacker has 51% of the hash power, they could open several lightning channels and accept any incoming payment channel. Since the attacker already has a lot of hash power, it is reasonable to assume that the attacker already has a lot of bitcoins and is well-known to honest nodes in the network, which makes it even more likely to have many open channels. The attack would be interesting, especially for power nodes created by the Barabasi-Albert model of LND's autopilot.There is currently no reasonable way of preventing this form of a 51% attack other than creating payment channels that don't offer the possibility of revocation, as it abuses exactly the core idea of lightning to do something in secret without broadcasting it. The attack follows the philosophy of Lightning: "If a tree falls in the forest and no one is around to hear it. Does it make a sound?" In the context of the attack, this question translates to: "If a 51% attacker secretly mines enough blocks after fraudulently spending old commitment transactions and no one sees it during the to_self_delay period, have the commitment transactions been spent? (How) Can they be revoked?"The attack is more harmful than a successful 51% attack on the Bitcoin network because an attacker using Lightning could steal an arbitrary amount of funds as long as they have enough payment channels with enough balance open. There are currently no reasonable ways of preventing this form of a 51% attack other than creating payment channels that don't offer the possibility of revocation.The block size limit and the channel capacity limit are vital protections against this attack. If both limits were imposed, it would require approximately 20 days to close 6 million channels. The main limitation is that it still only allows a 51% miner to steal funds from channels they participate in, so creating channels with identifiable entities with whom you have an existing relationship is a defense against this attack. Also, if 51% of hashpower is mining in secret for an extended period, that may be detectable, which may allow countermeasures to be taken.Such attacks are deadly to any blockchain technology, and Lightning is no different. Therefore, it is essential to find solutions to prevent such attacks in the future.</summary>
+    <published>2018-03-14T03:46:11+00:00</published>
+  </entry>
+</feed>

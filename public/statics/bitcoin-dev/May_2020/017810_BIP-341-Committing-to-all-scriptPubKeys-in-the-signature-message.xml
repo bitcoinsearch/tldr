@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP-341: Committing to all scriptPubKeys in the signature message</title>
+  <updated>2023-06-14T01:04:43.083453+00:00</updated>
+  <author>
+    <name>Jeremy 2020-05-02 04:35:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP-341: Committing to all scriptPubKeys in the signature message</title>
+    <updated>2023-06-14T01:04:43.083453+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-May/017810.html" rel="alternate"/>
+    <summary>The proposal to amend BIP-341 suggests that the signature message should commit to the scriptPubKeys of all transaction inputs, instead of only the output being spent. This is because in certain applications like CoinJoin, a wallet has to deal with transactions containing external inputs and needs to reliably determine for each input whether it belongs to the wallet or not. Without such a mechanism, an adversary can fool the wallet into displaying incorrect information about the amount being spent, resulting in theft of user funds. However, a side effect of this proposal is that it would seem to make it not possible to produce a signature for a transaction without having access to the inputs. This is limiting for cases where you don't care about that data. There are many use cases where you don't want to have SIGHASH_ALL behavior, and having to sign the scriptpubkeys breaks that. So at the very least it should respect other flags.It is suggested that this sort of data can easily go into the proprietary use area in PSBT, so that hardware devices can get easy access to it. All they have to do to verify is to finalize the hash against that buffer and match to the correct input. As an alternative proposal, it is suggested that a separate BIP be made for some new sigash flags that can be reviewed separately from taproot. There's a lot of value in investing in figuring out more granular controls over what the signature hash is you sign, which may have some exciting contracting implications!Furthermore, Greg Sanders mentions that this measure had been discussed as a lightweight way of informing offline signers if inputs were segwit or not for malleability analysis reasons. Additionally, Russell O'Connor suggests separating the hashes of the ScriptPubKeys from the hashes of the input values to make it easier for applications interested only in input values to check them.</summary>
+    <published>2020-05-02T04:35:41+00:00</published>
+  </entry>
+</feed>

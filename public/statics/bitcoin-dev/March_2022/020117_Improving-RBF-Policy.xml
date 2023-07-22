@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving RBF Policy</title>
+  <updated>2023-06-15T15:52:09.220791+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2022-03-12 08:18:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving RBF Policy</title>
+    <updated>2023-06-15T15:52:09.220791+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020117.html" rel="alternate"/>
+    <summary>The bitcoin-dev mailing list recently discussed the addition of rate-limiting in transaction relay to prevent resource exhaustion and spam, as well as RBF DoS protection. One idea proposed was a transaction relay rate limit with a feerate-based priority queue. Another idea suggested staggered broadcast of replacement transactions. Suhas and Matt proposed adding a policy rule allowing users to specify descendant limits on their transactions to solve the pinning problem with package RBF, and the mining score calculator was proposed as a solution for ancestor-aware funding and fee-bumping in the wallet.There were concerns raised about possible impact on propagation and recycling of fees. DOS concerns were deemed overblown, and the goal of eliminating "extra data" caused by careless or malicious actors is to design a system where spam is manageable. The discussion also revolved around implementing outbound transaction relay size-based rate-limiting and prioritizing transaction relay by feerate. This would prevent spammers from wasting network-wide bandwidth while allowing high feerate transactions to propagate as they should, regardless of how busy traffic is. However, there is concern regarding prioritizing transactions by ancestor feerate as it can be quite different from the actual feerate considered in a block. Regarding wallets, AJ's idea that all that is needed is for there to be a path that follows the new relay rules and gets from a node/wallet to perhaps 10% of hashpower makes sense. It is suggested that it may be better to have the mempool acceptance rule only consider economic incentives, while spam prevention only concerns whether to inform peers about the transaction.It is noted that miners may choose to have no rate limit and always relay, but this could still be a potential problem for whoever made the transaction if they do not hear about it at all. Additionally, it is suggested that outbound rate limits only be applied as you cannot sensibly defer receiving INV, GETDATA, and TX messages beyond the existing queues that build up while processing other things first. In terms of keeping high-feerate evicted transactions around for a while to improve compact block relay, they are already added to vExtraTxnForCompact. However, there is concern that the 100 tx LRU cache may not be sufficient. It is suggested that a rate limit applies only to replacement transactions. Murch and Clara's candidate set blockbuilding ideas could provide insight into whether a smarter approach to tracking the "effective fee rate" would be possible.</summary>
+    <published>2022-03-12T08:18:39+00:00</published>
+  </entry>
+</feed>

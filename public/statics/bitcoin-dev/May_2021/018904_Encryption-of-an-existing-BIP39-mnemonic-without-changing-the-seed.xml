@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Encryption of an existing BIP39 mnemonic without changing the seed</title>
+  <updated>2023-06-14T20:40:51.309256+00:00</updated>
+  <author>
+    <name>yanmaani at cock.li 2021-05-08 22:49:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Encryption of an existing BIP39 mnemonic without changing the seed</title>
+    <updated>2023-06-14T20:40:51.309256+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-May/018904.html" rel="alternate"/>
+    <summary>Tobias Kaupat recently posted on the bitcoin-dev mailing list, looking for feedback on a proposed solution to a use case he has. He wants to password-protect an existing mnemonic for a hardware wallet by saving it in encrypted form on a paper backup, while still maintaining backup properties like error correction. His suggested solution involves taking the existing mnemonic and extracting the related entropy, creating a SHA526 hash from a user-defined password, using the key as input for an AES CTR to encrypt the entropy, and deriving a new mnemonic from the encrypted entropy to be stored on a paper backup. To restore the original mnemonic, one must know the password and follow the process again. Kaupat's proposed solution is based on provably secure algorithms rather than a "rot23 derivation" like Seedshift, which he considers less secure. While BIP-39 passphrases are used to derive entropy when generating a mnemonic with passphrase, they don't work for an existing mnemonic without a passphrase. Kaupat suggests that if a new mnemonic is needed, PBKDF2 like in the BIP-39 specification or something like scrypt could be used instead of raw SHA-256. However, this would require changing the storage format and storing a salt too, making the mnemonic bigger. Kaupat's proposal needs a security review, and all encryption parameters are up for discussion. He welcomes feedback and suggestions from the community. The GoLang implementation of his proposal can be found on GitHub.</summary>
+    <published>2021-05-08T22:49:01+00:00</published>
+  </entry>
+</feed>

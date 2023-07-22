@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Rebatable fees &amp; incentive-safe fee markets</title>
+  <updated>2023-05-20T04:05:46.291188+00:00</updated>
+  <author>
+    <name>Matt Corallo 2017-09-29 01:53:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Rebatable fees &amp; incentive-safe fee markets</title>
+    <updated>2023-05-20T04:05:46.291188+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-September/015097.html" rel="alternate"/>
+    <summary>The article "Redesigning Bitcoin's fee market" proposes a new approach to the current auction model for transaction fees. The authors suggest moving to a "pay lowest winning bid" model, where all transactions pay only the smallest fee rate paid by any transaction in the block. This would simplify the user experience and remove the need for fee estimate mechanisms or replace-by-fee mechanisms if the mempool grows. The proposed mechanism could be soft-forked in easily.The proposal also has additional benefits such as allowing pre-signed transactions to provide sufficient fee for confirmation without knowledge of future rates or overpaying, allowing explicit fees in multi-party transaction creation protocols, and enabling applications with expensive network access to pay reasonable fees.Another proposal has been made for a new feature called "rebateable fees" which would allow transactions to specify an implicit fee as well as one or more explicit rebateable fees. The Fee Rate of a transaction is calculated as the combined implicit and rebateable fee divided by the size/weight of the transaction. The smallest fee rate of any non-coinbase transaction (or transaction group) is the marginal fee rate for the block and is included in the witness for the block.For each transaction or transaction group, the Required Fee is calculated to be the marginal fee rate times the size/weight of the transaction. Implicit fee is applied towards this required fee and added to the Miner's Fee Tally. Any excess implicit fee remaining is added to the Implicit Fee Tally. For each transaction (group), the rebateable fees contribute proportionally towards meeting the remaining marginal fee requirement, if the implicit fee failed to do so. If greater than or equal to the dust threshold is remaining in a specific rebateable fee, a requirement is added that an output be provided in the coinbase paying the remaining fee to a scriptPubKey equal to the push value. The miner builds a transaction claiming ALL of these explicit fees, and with a single zero-valued null/data output, thereby forwarding the fees on to the coinbase, as far as old clients are concerned.The miner is allowed to claim subsidy + the miner's fee tally + the explicit fee tally for themselves in the coinbase. The coinbase is also required to contain all rebated fees above the dust threshold. All transactions have the same actual fee rate equal to the minimum fee rate that went into the creation of the block, which is basically the marginal fee rate for transaction inclusion.A variant of this proposal suggests carrying forward the excess non-rebateable fees beyond the required minimum from block to block in the final transaction and allowing the miner to claim some average of past fees. This proposed feature, called "rebateable fees," has the potential to improve the efficiency and fairness of Bitcoin's transaction fee market.</summary>
+    <published>2017-09-29T01:53:55+00:00</published>
+  </entry>
+</feed>

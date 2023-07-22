@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP174 / PSBT extensions</title>
+  <updated>2023-05-20T19:49:23.175733+00:00</updated>
+  <author>
+    <name>Andrew Poelstra 2019-03-06 18:08:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP174 / PSBT extensions</title>
+    <updated>2023-05-20T19:49:23.175733+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-March/016713.html" rel="alternate"/>
+    <summary>Andrew Poelstra, Director of Research at Blockstream, has initiated a discussion on extending BIP174. The proposal is to add some fields to the current PSBT (Partially Signed Bitcoin Transactions) protocol. Poelstra suggests adding more fixed data fields such as an additional field to PSBT_GLOBAL_UNSIGNED_TX to the global table just containing a txid of the unsigned transaction for bandwidth savings in case signers have already seen the tx or can construct it themselves. Another suggestion is to add a version field to the global table and fields to the per-input tables for confirmed depth of the referenced txout. This would be useful for finalizers trying to create optimized witnesses, for example, when CSV timeouts expire and some signatures become unnecessary. Poelstra also proposes a map from SHA2 hashes to their 32-byte pre-images, allowing writing finalizers that work with all of Miniscript. Moreover, Poelstra suggests adding a map from public keys to 32-byte "tweaks" that are used in the pay-to-contract construction. Poelstra wants this to be a variable-length bytestring with the semantics that the first 33 bytes represent an untweaked pubkey, and the HMAC-SHA256 of the whole thing, when multiplied by G and added to the untweaked pubkey, result in the target key. Maps from public keys to partial nonce commitments, partial nonces, and partial signatures for MuSig support, and a map from signatures (or signature nonces?) to sign-to-contract tweaks could also be included. Poelstra states that the last two suggestions are probably premature and need further development and standardization of the related protocols.Finally, Poelstra proposes adding fields to the per-output tables for pay-to-contract and adding a field (or rather, family of fields) to every table which is "proprietary use" and guaranteed not to be defined by any future PSBT extension. Specifically, every field with key-type 0xFF could be considered "proprietary". The special field in the global table whose key is only 0xFF should be a "proprietary version field" with unspecified semantics but an understanding that specific users might stick a GUID or something in there as a way to recognize their own PSBTs.</summary>
+    <published>2019-03-06T18:08:00+00:00</published>
+  </entry>
+</feed>

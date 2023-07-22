@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>BIP Proposal: Bitcoin nodes could be used as a trusted third party that broadcasts encrypted transactions</title>
+  <updated>2023-05-20T04:33:21.767144+00:00</updated>
+  <author>
+    <name>Nathan Broadbent 2017-12-13 22:08:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>BIP Proposal: Bitcoin nodes could be used as a trusted third party that broadcasts encrypted transactions</title>
+    <updated>2023-05-20T04:33:21.767144+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-December/015401.html" rel="alternate"/>
+    <summary>The proposal is to use full Bitcoin nodes as simple trusted third parties (TTPs) in a secure multi-party computation (MPC). To achieve fairness, a randomly selected Bitcoin node would serve as a TTP. The MPC would generate an encrypted Bitcoin transaction that could only be decrypted and broadcast by the selected node, ensuring that no players gain any information about the outcome until they saw the unconfirmed transaction in the mempool. The protocol involves Alice and Bob choosing a random full Bitcoin node that supports this new protocol. After the selection of the node, Alice sends the request to the randomly selected node, which generates a one-time-use key pair and encrypts the one-time private key using its static public key. The node then sends Alice the fee amount, an address where she should send the fee, the node's static public key, and the one-time public key/encrypted private key/signature.Alice and Bob play a round of decentralized poker, at the end of which they use MPC to create an encrypted Bitcoin transaction that sends the money to the winner and has an output for the encrypted showdown (the cards that are revealed at the end of the round). One of them sends this encrypted transaction to the node, plus the encrypted showdown, and the one-time key data. The node decrypts and verifies the Bitcoin transaction, broadcasts it to its peers, and decrypts the one-time private key using the decrypted metadata that was sent.The example protocol uses a single TTP node, but it would be more secure if the parties randomly select a large number of nodes. Shamir's Secret Sharing could be used so that n of t nodes are needed to decrypt the transaction, and the MPC could encrypt the individual key parts using each node's public key. People could anonymously vote on the distribution of funds without revealing their vote to anyone, and there would also be the possibility to create a fully decentralized Bitcoin lottery.</summary>
+    <published>2017-12-13T22:08:05+00:00</published>
+  </entry>
+</feed>

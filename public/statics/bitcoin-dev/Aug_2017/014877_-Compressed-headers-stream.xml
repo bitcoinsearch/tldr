@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>"Compressed" headers stream</title>
+  <updated>2023-06-12T15:09:00.908142+00:00</updated>
+  <author>
+    <name>Greg Sanders 2017-08-28 16:13:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>"Compressed" headers stream</title>
+    <updated>2023-06-12T15:09:00.909155+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-August/014877.html" rel="alternate"/>
+    <summary>In a recent Bitcoin-dev post, Riccardo Casatta proposed an optimization for the transmission of block headers to save bandwidth. He suggests that when sending a stream of continuous block headers, after the first one, subsequent headers could avoid transmitting the previous hash because the receiver could compute it by double hashing the previous header. This operation is necessary anyway to verify PoW. In a long stream of 2016 headers, the savings in bandwidth are about 40%. OpenTimestamps calendars plan to use this compression to give lite-clients reasonable secure proofs. To speed up sync of a new client Electrum starts with the download of a file ~36MB containing the first 477637 headers. For these types of clients, a common http API with fixed position chunks could be useful to leverage http caching. For example, /headers/2016/0 returns the headers from the genesis to the 2015 header included while /headers/2016/1 gives the headers from the 2016th to the 4031. Other endpoints could have chunks of 20160 blocks or 201600 such that with about 10 http requests, a client could fast sync the headers.</summary>
+    <published>2017-08-28T16:13:11+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Covenants and feebumping</title>
+  <updated>2023-06-15T18:17:07.086672+00:00</updated>
+  <author>
+    <name>darosior 2022-03-12 18:08:39</name>
+  </author>
+  <author>
+    <name>Jeremy Rubin 2022-03-13 02:33:48</name>
+  </author>
+  <author>
+    <name>darosior 2022-03-14 14:49:30</name>
+  </author>
+  <author>
+    <name>darosior 2022-03-12 18:08:39</name>
+  </author>
+  <author>
+    <name>darosior 2022-03-21 12:06:54</name>
+  </author>
+  <author>
+    <name>darosior 2022-03-14 14:49:30</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2022-03-16 23:29:42</name>
+  </author>
+  <author>
+    <name>Jeremy Rubin 2022-03-13 02:33:48</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2022-03-16 23:29:42</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2022-03-16 23:29:42</name>
+  </author>
+  <author>
+    <name>darosior 2022-03-21 12:06:54</name>
+  </author>
+  <author>
+    <name>darosior 2022-03-14 14:49:30</name>
+  </author>
+  <author>
+    <name>darosior 2022-03-12 18:08:39</name>
+  </author>
+  <author>
+    <name>Jeremy Rubin 2022-03-13 02:33:48</name>
+  </author>
+  <author>
+    <name>darosior 2022-03-21 12:06:54</name>
+  </author>
+  <link href="bitcoin-dev/March_2022/020122_Covenants-and-feebumping.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2022/020123_Covenants-and-feebumping.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2022/020125_Covenants-and-feebumping.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2022/020122_Covenants-and-feebumping.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2022/020155_Covenants-and-feebumping.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2022/020125_Covenants-and-feebumping.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2022/020138_Covenants-and-feebumping.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2022/020123_Covenants-and-feebumping.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2022/020138_Covenants-and-feebumping.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2022/020138_Covenants-and-feebumping.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2022/020155_Covenants-and-feebumping.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2022/020125_Covenants-and-feebumping.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2022/020122_Covenants-and-feebumping.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2022/020123_Covenants-and-feebumping.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2022/020155_Covenants-and-feebumping.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Covenants and feebumping</title>
+    <updated>2023-06-15T18:17:07.087634+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020122.html" rel="alternate"/>
+    <summary>Recently, there has been discussion around using a soft fork to fix dynamic fee bumping in Bitcoin due to the complexity of designing fee bumping with current primitives. One solution proposed is using covenants for fee bumping, which has attractive properties. Antoine Riard proposed a covenant-based approach to fee bumping in multi-party vault setups on the Bitcoin-Dev mailing list. The proposal suggests creating a Taproot tree with a depth of 7 and using covenants for the revocation transaction with varying feerates and timelocks. This approach is smaller in size than other fee-bumping primitives and has a smaller footprint on the UTXO set.Jeremy Rubin shares his thoughts on using transaction sponsors as a form of covenant for fee bumping. He emphasizes the efficiency of pre-committed levels and fancier covenants, as well as the capital efficiency of sponsors. Additionally, he highlights how sponsorships can help with protocol design concerns and RBF pinning issues. Antoine proposed using covenants for fee bumping in Bitcoin contracts, which would require a soft fork. Covenant-based fee bumping has attractive properties, but finding a solution as neat for other protocols as it is for vaults has proven difficult. However, there are still some drawbacks, such as third-party trust, time-bound DLCs, and the inability to invoke the oracle at any time for hot dynamic protocols.To work around the limitations of the timelocked-covenant approach, different covenants per participant can be used. While this requires a private key or secret to be committed to in advance, it is more optimal and usable than CPFP or adding a pair of input/output. Paying fees from internal funds offers benefits like no need to decide on an amount to be refilled and no need to bother the user to refill the fee-bumping wallet. However, it also opens up the possibility of blackmail for multi-party contracts. Precommitted levels of fee bumping might work, but they have substantial costs. Sponsors are similar to CPFP in usage and get rid of the complexity of managing transaction chains in the mempool.In summary, various proposals have been made for fee bumping in Bitcoin, including using covenants, transaction sponsors, and DLC oracles. While each approach has its advantages and disadvantages, covenant-based fee bumping using Taproot trees and shared funds offers a more efficient and usable solution for many use cases, particularly for multi-party vault contracts.Bitcoin's Lightning Network has been considered a potential solution to the scalability issue faced by the cryptocurrency. It allows for faster and cheaper transactions, making microtransactions feasible. The network uses smart contracts called "micropayment channels" to enable off-chain transactions. However, there are some limitations to the current system. One of them is that in case of disputes, the latest transaction needs to be broadcasted to the Bitcoin blockchain. This can result in higher fees and longer processing times.To address this issue, a new proposal called "eltoo" has been put forward. It allows for the updating of channel states without the need to broadcast each update to the blockchain. This means that in case of disputes, the most recent state will always be accepted, resulting in lower fees and faster processing times. Eltoo has been welcomed by the Bitcoin community, as it solves one of the biggest issues with the Lightning Network.Another proposal called "discreet log contracts" (DLCs) has also been gaining attention. It allows for trustless execution of smart contracts on Bitcoin's blockchain. This means that parties can enter into agreements without needing to trust a third party. However, DLCs have some limitations, such as being time-bound and not allowing for hot dynamic protocols.Despite these proposals, there are still some drawbacks to the Lightning Network, such as the need for third-party trust and the inability to invoke the oracle at any time for hot dynamic protocols. Nevertheless, the ongoing development of solutions like eltoo and DLCs shows that the Bitcoin community is committed to improving the scalability and functionality of the Lightning Network.</summary>
+    <published>2022-03-12T18:08:39+00:00</published>
+  </entry>
+</feed>

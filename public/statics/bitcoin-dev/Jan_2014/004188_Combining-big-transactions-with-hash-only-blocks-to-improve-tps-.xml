@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Combining big transactions with hash-only blocks to improve tps.</title>
+  <updated>2023-06-08T00:35:43.531137+00:00</updated>
+  <author>
+    <name>Natanael 2014-01-22 21:43:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Combining big transactions with hash-only blocks to improve tps.</title>
+    <updated>2023-06-08T00:35:43.531137+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-January/004188.html" rel="alternate"/>
+    <summary>The proposal to improve transaction per second (tps) by combining big transactions with hash-only blocks is presented in a post by bc. The proposal suggests keeping only hashes of transactions included in a block, transferring all tx separately, using CoinJoin to merge transactions from many users for online shopping and banking, and using jumbo transactions as a fallback for applications where CoinJoin is inappropriate. By keeping only hashes in a block, the current 1MB block can contain about 31000tx = 50tps instead of 3300tx = 5.5tps. This method allows achieving more tps without increasing the block propagation time, which is critical for mining decentralization. CoinJoin is used to allow many people to send coins with one transaction, increasing the effective transaction rate considerably. For example, if the transaction size limit is 50KB, it allows for a CoinJoin transaction between 170 participants. So for a block of 1MB, it would allow for 8500tps. There would be an incentive for users to use CoinJoin by default, lower tx fees per effective transaction, which would greatly increase the anonymity of the network.Jumbo transactions type proposed as a backup when CoinJoin is not applicable. It would remove the CoinJoin-induced delays while keeping transaction sizes big. Jumbo pubkey prevents the transaction from being modified. A service that collects transactions from clients and publishes them as a Jumbo transaction joins the transaction. Transaction joiner sends a Jumbo pubkey hash to the client. The client creates a transaction, includes a Jumbo pubkey hash, and signs it. The transaction joiner waits until there are enough transactions and releases a Jumbo transaction to the network. Jumbo transactions do not mix coins, so anonymity of the network is not increased. There would be an incentive to use this transaction type by default compared to CoinJoin. To mitigate this problem, the Jumbo transaction size limit can be lower than CoinJoin, making fees for these transactions higher, thus creating an incentive to use them only when necessary. The proposal suggests using a bigger CoinJoin user base for online payments with smaller fees and a smaller one for POS payments with larger fees.</summary>
+    <published>2014-01-22T21:43:44+00:00</published>
+  </entry>
+</feed>

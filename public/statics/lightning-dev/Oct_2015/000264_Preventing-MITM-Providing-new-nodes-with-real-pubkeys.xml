@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Preventing MITM - Providing new nodes with real pubkeys</title>
+  <updated>2023-05-23T21:01:32.163523+00:00</updated>
+  <author>
+    <name>Rusty Russell 2015-10-16 20:50:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Preventing MITM - Providing new nodes with real pubkeys</title>
+    <updated>2023-05-23T21:01:32.163523+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-October/000264.html" rel="alternate"/>
+    <summary>The next layer after encryption and authentication is to figure out how nodes will broadcast their existence and open channels. The blockchain can only be used with additional techniques until the malleability issue has been fixed. Anchor transactions are P2SH but we need to expose the script for others to verify if there is an anchor tx on the blockchain. The anchor TX output looks like P2SH (2 KEYA KEYB 2 OP_CHECKMULTISIG) where to prove we control KEYA, we simply sign something with it (our nodePubKey): KEYA NODE-PUBKEY TXID SIGNATURE. Schnorr signatures can do multisig by addition where both parties cooperate to form: KEYA KEYB NODE-PUBKEYA NODE-PUBKEYB TXID DUAL-SIGNATURE where it is 33+33+33+33+32+64 = 228 bytes per channel.This information must be stored in case a new node joins a network, similar to the blockchain. New nodes can then check against the blockchain whether this data is present there. For 100k nodes and 10 open channels per node, this adds up to 220MB. This information is pretty static, however, we want everyone to have a decently consistent view of the network, so some rebroadcasting would take place every few days just to ensure everyone knows about it.Since the implementation of broadcast messages is done for other purposes as well, the second option seems the most expensive to attack and the least on-chain spam.</summary>
+    <published>2015-10-16T20:50:30+00:00</published>
+  </entry>
+</feed>

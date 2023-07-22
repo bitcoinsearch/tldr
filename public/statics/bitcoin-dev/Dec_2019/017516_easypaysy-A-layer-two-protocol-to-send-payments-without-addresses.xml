@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>easypaysy - A layer-two protocol to send payments without addresses</title>
+  <updated>2023-06-13T22:49:01.939819+00:00</updated>
+  <author>
+    <name>Jose Femenías Cañuelo 2019-12-06 18:47:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>easypaysy - A layer-two protocol to send payments without addresses</title>
+    <updated>2023-06-13T22:49:01.939819+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-December/017516.html" rel="alternate"/>
+    <summary>The conversation between Bitcoin developers, Jose and ZmnSCPxj, centers around the implementation of master accounts in the easypaysy protocol. While master accounts are included as a feature for future releases, they are not yet well-defined. The protocol aims to provide a trustless way of delegating control over funds from the user to a service provider. According to the white paper, the service provider has no control over the funds in the master account, and there is no trust involved in the delegation process. However, concerns have been raised about control transactions on top of the funding transaction output (txo) and who can make further control transactions. If the service provider retains even partial control, it can refuse to cooperate with the user, making it impossible for the user to update their account.Jose suggests creating a sub-account that can 'detach' itself from the master account in case of an uncooperative service provider. This would involve funding the multisig 2-of-2 address, included in the common JSON file, not the Master TX, and publishing his own update to unlock it. The account ID will always point to the original place where it appeared on the blockchain, and user wallets would have to query for the multisig address of a particular account to check whether it is detached or not.ZmnSCPxj raises concerns about control transactions on top of the funding txo and suggests using sign-to-contract instead of `OP_RETURN`. Sign-to-contract reduces the cost on the blockchain layer, but requires a different layer/overlay network to broadcast messages. Adding the output index in the account ID was also discussed, but by definition, easypaysy accounts must have exactly one input and two outputs, so adding the output index in the account ID is unnecessary.The white paper suggests the creation of mirror servers to mitigate the issue of service providers disappearing. The service provider would create a JSON document containing the information of all the sub-accounts included in the pack, make that JSON document publicly available, probably with a https: URL, and finally, create and publish a TX that contains a pointer to the Authoritative server and the Merkle root of the set of accounts. The account's TX won't ever disappear from the blockchain, so account info will always be there.Jose clarifies that the easypaysy identifier refers to the funding txo that roots the further control transactions, which may not necessarily be a one-input two-output transaction.</summary>
+    <published>2019-12-06T18:47:38+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP-341: Committing to all scriptPubKeys in the signature message</title>
+  <updated>2023-06-14T01:06:02.479353+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2020-05-01 12:23:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP-341: Committing to all scriptPubKeys in the signature message</title>
+    <updated>2023-06-14T01:06:02.479353+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-May/017808.html" rel="alternate"/>
+    <summary>In a proposal to amend BIP-341, Andrew Kozlik suggested that the signature message should commit to the scriptPubKeys of all transaction inputs instead of just the output being spent. This is particularly important in applications like CoinJoin where wallets have to deal with transactions containing external inputs, and need to reliably determine for each input whether it belongs to the wallet or not. Without such a mechanism, an adversary can fool the wallet into displaying incorrect information about the amount being spent, which can result in theft of user funds. To ascertain non-ownership of an input which is claimed to be external, the wallet needs the scriptPubKey of the previous output spent by this input. However, this poses an obstacle in the implementation of lightweight air-gapped wallets and hardware wallets in general. If the signature message would commit to the scriptPubKeys of all transaction inputs, then the wallet would only need to acquire the scriptPubKey of the output being spent without having to acquire and verify the hash of the entire previous transaction. The obvious way to implement this is to add another hash to the signature message: sha_scriptPubKeys (32): the SHA256 of the serialization of all scriptPubKeys of the previous outputs spent by this transaction. Keeping the hashes of the ScriptPubKeys separate from the hashes of the input values would be a better option so that anyone only interested in input values does not have to wade through arbitrarily long ScriptPubKeys to check the input values. Similarly, separating the hashing of the output values from the output ScriptPubKeys in `sha_outputs` would benefit applications interested only in summing the values of the outputs.</summary>
+    <published>2020-05-01T12:23:07+00:00</published>
+  </entry>
+</feed>

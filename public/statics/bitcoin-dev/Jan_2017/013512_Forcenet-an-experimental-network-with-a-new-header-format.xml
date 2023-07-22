@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Forcenet: an experimental network with a new header format</title>
+  <updated>2023-05-20T00:13:24.123698+00:00</updated>
+  <author>
+    <name>Matt Corallo 2017-01-28 03:02:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Forcenet: an experimental network with a new header format</title>
+    <updated>2023-05-20T00:13:24.123698+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-January/013512.html" rel="alternate"/>
+    <summary>In a Bitcoin-dev mailing list, Johnson Lau shared details of a "second version" of forcenet with experimental features. Matt Corallo responded with some comments, suggesting that the header size should be minimized and one merkle tree for transactions is sufficient. He also questioned the need for variable-length header fields. Matt suggested that the transaction merkle root of the "old-style" header should simply be the hash of the new header to save space. Johnson Lau's second point was anti-tx-replay, which will add 0x2000000 to the nHashType if the tx nVersion is &gt;=3. The third point discussed was block sighashlimit, while the fourth point described a new way to define tx weight. Matt called this too complicated and suggested using max(serialized size with some input discount, nSigOps * X).The bitcoin-dev mailing list has released a proposal for Bitcoin Improvement Proposal (BIP) 157, titled "Client Side Block Filtering". BIP157 provides an alternative to the current method of block downloading, which requires clients to download the entire blockchain and verify each transaction's validity. The new proposal would allow clients to filter blocks based on specific criteria, such as UTXO creation or spendability. This could reduce the amount of data that needs to be downloaded and verified by clients, potentially improving network scalability.In addition to filtering blocks, BIP157 includes several other proposals. One is to require pre-payment of the majority of the fee for spending an unspent transaction output (UTXO). This would make creating a UTXO more expensive, but spending it cheaper, and create an incentive to limit the growth of the UTXO set. Another proposal is to take the maximum of different metrics to set an upper block resource for every metric, while making the transaction fee estimation a linear function. The proposal also includes a new coinbase transaction format, with BIP34 removed and multiple inputs allowed. Spending previous coinbase outputs in a coinbase transaction is exempted from the 100 block maturity requirement, allowing miners to pay other miners to confirm their blocks. Additionally, a merkle sum tree would allow the generation of fraud-proof for fee and weight. A softfork is defined to enable this feature, and when activated, full nodes will not validate the sum tree. Finally, BIP157 proposes a smooth halving of the reward for the last 2016 blocks in a halving cycle, reducing it by 25% and contributing it to the first 2016 blocks of the new cycle. However, one commenter suggests that this may not be sufficient to prevent slow block times around halvings in the distant future. The codes for joining and mining are available on GitHub.</summary>
+    <published>2017-01-28T03:02:21+00:00</published>
+  </entry>
+</feed>

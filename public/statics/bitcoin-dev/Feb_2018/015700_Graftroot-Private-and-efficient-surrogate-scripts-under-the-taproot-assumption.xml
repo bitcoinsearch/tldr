@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Graftroot: Private and efficient surrogate scripts under the taproot assumption</title>
+  <updated>2023-05-20T05:07:41.949140+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2018-02-05 05:58:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Graftroot: Private and efficient surrogate scripts under the taproot assumption</title>
+    <updated>2023-05-20T05:07:41.949140+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-February/015700.html" rel="alternate"/>
+    <summary>The Taproot protocol for Bitcoin suffers from a limitation that only provides for one alternative natively. However, with the Graftroot protocol, an unlimited number of alternatives can be provided while maintaining efficiency and privacy. The participants establish a threshold key, optionally with a taproot alternative, just as they do with Taproot. At any time, they can delegate their ability to sign to a surrogate script by signing that script (and just the script) with their taproot key and sharing that delegation with whomever they choose. Later, when it comes time to spend the coin, if the signers aren't available and the script must be used, the redeeming party does whatever is required to satisfy the script and presents that information along with the signer's signature of the script. A naive implementation of this idea requires a complete signature every time a surrogate is used, which means 64 bytes of data. This is higher overhead than taproot. However, the non-interactive schnorr aggregation trick can be applied to merge the S values of all graftroots and signatures in a transaction into a single aggregate. With this approach, only a single R value for each graftroot need be published, lowering the overhead to ~32 bytes-- the same as taproot. The primary limitation of this approach compared to taproot alternatives and trees is that it requires that anyone who wants to make use of a particular surrogate to interact with the participants and store the resulting signature because a single party couldn't compute it again on their own from public data. For trees and taproot alternatives, the alternatives can be set up without any interaction with the participants. The primary advantage is that it scales to any number of alternatives with small constant overhead, can be delegated after the fact, and can still be spent by the participants without overhead. In cases where the taproot assumption doesn't hold, taproot can still be used by setting the public key to a NUMS point, which preserves privacy. A similar thing can be done for graftroot if the signature is not a proof of knowledge (commits to the public key). The primary benefit of Graftroot is that it allows delegation to take place before or after the fact and requires storage. The potential for unexpected surrogate replay if keys are reused in foolish ways also needs to be kept in mind, though it may be somewhat mitigated by aggregation. The existence of unused surrogates is completely hidden.</summary>
+    <published>2018-02-05T05:58:43+00:00</published>
+  </entry>
+</feed>

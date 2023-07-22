@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Schnorr signatures BIP</title>
+  <updated>2023-06-13T03:44:07.585229+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2018-07-06 21:05:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Schnorr signatures BIP</title>
+    <updated>2023-06-13T03:44:07.585229+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-July/016211.html" rel="alternate"/>
+    <summary>Pieter Wuille has proposed a BIP (Bitcoin Improvement Proposal) for 64-byte elliptic curve Schnorr signatures, over the same curve currently used in ECDSA. The draft specification only concerns the signature scheme itself and not consensus rules, aggregation or any other integration into Bitcoin. Standardizing the signature scheme is a first step towards that, and it may be useful in other contexts to have a common Schnorr scheme available. The proposal is joint work with several people listed in the document, and if accepted, there will be more production-ready reference implementations and tests. The signing process of the proposed BIP requires a few steps, including letting *k = int(hash(bytes(d) || m)) mod n*, where n is the order of the curve, R = kG, and checking if *jacobi(y(R)) ≠ 1*. If jacobi(y(R)) = -1, then let k' = n-k which ensures that jacobi(y(k'G)) = 1. To avoid mutable variables, the proposed BIP uses k' instead of k when jacobi(y(R)) = 1 and k' = n-k when jacobi(y(R)) = -1. If k=0, then the current specification produces an invalid signature. One solution is to let k = 1 + int(hash(bytes(d) || m)) mod (n-1). Alternatively, k' could be set to 1 when k = 0 or a note could be added that signature generation fails with this message and private key pair when k=0.The proposed BIP also notes that P=dG should be mentioned somewhere in the text, as this signature is generated for the public key P=dG. In addition, reordering the inputs to hash as *hash(bytes(dG) || bytes(x(R)) || m)* could provide a little benefit, especially when multiple signatures for a single public key need to be generated and/or verified. The signature is *bytes(x(R)) || bytes(k + ex mod n)*, and it is noted that 'x' is not defined and the author assumes the use of 'd' instead.Regarding optimizations, the proposed BIP suggests that *oncurve(P)* can be implemented as *y2 = x3 + 7z6 mod p*, but another condition should be added to ensure that P is not infinity.</summary>
+    <published>2018-07-06T21:05:03+00:00</published>
+  </entry>
+</feed>

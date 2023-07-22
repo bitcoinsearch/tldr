@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - BIP draft: HTLC transactions</title>
+  <updated>2023-06-11T19:10:13.149564+00:00</updated>
+  <author>
+    <name>Luke Dashjr 2016-07-20 06:17:39</name>
+  </author>
+  <author>
+    <name>Johnson Lau 2016-08-17 10:00:37</name>
+  </author>
+  <author>
+    <name>Peter Todd 2016-08-09 00:46:33</name>
+  </author>
+  <author>
+    <name>Johnson Lau 2016-08-17 10:00:37</name>
+  </author>
+  <author>
+    <name>Sean Bowe 2016-07-20 04:35:39</name>
+  </author>
+  <author>
+    <name>Sean Bowe 2016-07-20 04:35:39</name>
+  </author>
+  <author>
+    <name>Peter Todd 2016-08-09 00:46:33</name>
+  </author>
+  <author>
+    <name>Peter Todd 2016-08-09 00:46:33</name>
+  </author>
+  <author>
+    <name>Peter Todd 2016-07-20 05:46:54</name>
+  </author>
+  <author>
+    <name>Johnson Lau 2016-08-17 10:00:37</name>
+  </author>
+  <author>
+    <name>Peter Todd 2016-07-20 05:46:54</name>
+  </author>
+  <author>
+    <name>Luke Dashjr 2016-07-20 06:17:39</name>
+  </author>
+  <author>
+    <name>Sean Bowe 2016-07-20 04:35:39</name>
+  </author>
+  <author>
+    <name>Peter Todd 2016-07-20 05:46:54</name>
+  </author>
+  <author>
+    <name>Luke Dashjr 2016-07-20 06:17:39</name>
+  </author>
+  <link href="bitcoin-dev/July_2016/012896_BIP-draft-HTLC-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2016/013036_BIP-draft-HTLC-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2016/012963_BIP-draft-HTLC-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2016/013036_BIP-draft-HTLC-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012894_BIP-draft-HTLC-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012894_BIP-draft-HTLC-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2016/012963_BIP-draft-HTLC-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2016/012963_BIP-draft-HTLC-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012895_BIP-draft-HTLC-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2016/013036_BIP-draft-HTLC-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012895_BIP-draft-HTLC-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012896_BIP-draft-HTLC-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012894_BIP-draft-HTLC-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012895_BIP-draft-HTLC-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012896_BIP-draft-HTLC-transactions.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - BIP draft: HTLC transactions</title>
+    <updated>2023-06-11T19:10:13.149564+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-July/012896.html" rel="alternate"/>
+    <summary>On July 20, 2016, Sean Bowe requested feedback for Hash Time-Locked Contract (HTLC) transactions in Bitcoin. HTLC transactions allow payment for the preimage of a hash, with CSV/CLTV being used to recover funds if the other party is uncooperative. However, because HTLCs hash the top item on the stack, scriptSig's that satisfy them are malleable. Peter Todd noted this issue and stated that it can be resolved by using one of two scripts. Both scripts are compatible with Todd's proposal for fixing the OP_IF/NOTIF malleability in segwit ("MINIMALIF"). The overall witness size is the same for these scripts as they were for Luke Dashjr's original script, although the new ones are one byte larger if MINIMALIF is not enforced. It should be noted that the OP_DROP after TIMEOUTOP is missing in Luke's script. Luke Dashjr, Peter Todd and Sean Bowe discussed Hash Time-Locked Contract (HTLC) transactions in Bitcoin on bitcoin-dev mailing list. HTLC transactions allow payment for the preimage of a hash with CSV/CLTV used to recover funds if the other party is not cooperative. The script takes a general form of [HASHOP] OP_EQUAL OP_IF ... OP_ELSE ... [TIMEOUTOP] OP_DROP ... OP_ENDIF OP_CHECKSIG. However, since the top item on the stack is hashed, scriptSig's that satisfy HTLC's are malleable. Luke Dashjr proposed using OP_SIZE to overcome this issue and Peter Todd applauded his idea as brilliant.The writer is requesting feedback on Hash Time-Locked Contract (HTLC) transactions in Bitcoin. HTLC transactions allow payment for the preimage of a hash and can be recovered using CSV/CLTV if the other party is uncooperative. These scripts have a specific form and can be useful for both the Lightning network and in zero-knowledge contingent payments. The author's 'pay-to-sudoku' ZKCP demo earlier this year used the same script which was implemented using CLTV and SHA256. Members of the community have expressed interest in submitting a BIP for these transactions to be supported in the wallet with changes to Bitcoin Core. The discussion presents a thorough examination of the potential vulnerabilities of HTLC transactions and offers suggestions for improving their security. Todd notes that these scripts are malleable, as the top stack item can be changed in the digest-not-provided case and the script still passes. Additionally, Todd suggests using the OP_SIZE opcode as a way to make it difficult for attackers to manipulate the transaction. This would involve adding an extra conditional requirement to the script: OP_SIZE OP_2 OP_PICK OP_HASH160 [PUBKEYHASH] OP_EQUALVERIFY. Todd also highlights the importance of taking into account different scenarios, such as a malicious party attempting to execute a double-spend attack.Overall, the discussion on HTLC transactions provides valuable insights for developers working on Bitcoin and its related technologies.</summary>
+    <published>2016-07-20T06:17:39+00:00</published>
+  </entry>
+</feed>

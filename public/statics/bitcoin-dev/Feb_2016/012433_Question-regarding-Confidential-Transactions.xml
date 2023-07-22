@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Question regarding Confidential Transactions</title>
+  <updated>2023-06-11T03:54:32.101873+00:00</updated>
+  <author>
+    <name>Jeremy Papp 2016-02-10 16:39:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Question regarding Confidential Transactions</title>
+    <updated>2023-06-11T03:54:32.101873+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-February/012433.html" rel="alternate"/>
+    <summary>In this conversation between Henning Kopp and Jeremy Papp, they discuss the blinding factor used in range proofs. They consider how the blinding factor would be included in the extra data that is incorporated into the ring signatures used in range proof. One possibility they suggest is encrypting the blinding factor with the public key of the receiver so that it is only visible for the receiver who can then check that the correct amount has been sent. However, they note that ECC works differently from RSA and you can't encrypt directly with a public key. Instead, you generate a shared secret between sender and receiver using ECDH. The shared secret can then be used as the basis for the key to some symmetric algorithm. Jeremy suggests that adding extraneous data isn't much of a problem since using it will pretty much require segwit. He also notes that the blinding factor would be protected from outside examination via some form of shared secret generation. However, this would require the sender to know the recipient's unhashed public key, which is normally not used in Bitcoin transactions. Instead, transactions are made to the hash of a public key because once the public key is known, it becomes easier to break it if we ever develop quantum computers. Since you can't do a shared secret with a public key hash, you'd have to know the public key of your recipient to be able to do ECDH. Overall, the discussion revolves around the technicalities of using blinding factors and shared secrets in Bitcoin transactions.</summary>
+    <published>2016-02-10T16:39:25+00:00</published>
+  </entry>
+</feed>

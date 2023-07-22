@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Payment points without 2p-ECDSA or Schnorr</title>
+  <updated>2023-06-03T23:06:38.459491+00:00</updated>
+  <author>
+    <name>uSEkaCIO 2019-11-12 07:32:11</name>
+  </author>
+  <author>
+    <name>uSEkaCIO 2019-11-11 08:12:46</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-11-11 14:01:59</name>
+  </author>
+  <link href="lightning-dev/Nov_2019/002320_Payment-points-without-2p-ECDSA-or-Schnorr.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2019/002316_Payment-points-without-2p-ECDSA-or-Schnorr.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2019/002317_Payment-points-without-2p-ECDSA-or-Schnorr.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Payment points without 2p-ECDSA or Schnorr</title>
+    <updated>2023-06-03T23:06:38.459491+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-November/002320.html" rel="alternate"/>
+    <summary>The Lightning Network has been exploring the use of "payment points" instead of hashes as the core lock mechanism for lightning. A method using only 2-of-2 OP_CHECKMULTISIG and a single signer ECDSA adaptor signature on one of the keys has been proposed by uSEkaCIO for enabling payment points without needing a proper multisignature scheme. The scheme involves Alice and Bob communicating their public keys, calculating the txid of the fund transaction which spends Alice's inputs to an OP_CHECKMULTISIG 2-of-2 with A B as the keys, and transmitting signatures under B on a refund transaction from Bob to Alice and under A with "auxiliary point" Y on the redeem transaction from Alice to Bob. The single signer ECDSA adaptor signature algorithm presented requires a random k and the DLEQ proof.While there is a security flaw in the scheme, the author believes it is unlikely to affect any proposal in practice. Using this scheme, anything that can be done with 2p-ECSA/Schnorr scriptless scripts is possible except that instead of a normal p2pkh/public key output, there is a 2-of-2 OP_CMS P2WSH output. The core discrete log based lock required to do payment points without a proper multisignature scheme involves Alice giving Bob 1 BTC if he reveals y, the discrete log of Y to her.The proposed scheme is practical but there are still a number of ways it could be executed. Additionally, a proposal has been made for a new key exchange protocol based on the Computational Diffie-Hellman assumption. This proposed scheme is simpler than 2pECDSA and even 2pSchnorr, making it a natural step up in complexity from current HTLCs towards Schnorr. The simplicity of the protocol makes it easier to specify and a single BOLT spec could cover the key generation, transaction structure, and signing. The actual transaction structure can be moved towards the ideal Schnorr-based endpoint or the pre-image spending path in script can be replaced with OP_CMS. The author notes that X and Y are usually both transient keys, so learning a DDH key does not help an attacker at all. The proposed method involves applying the 2pECDSA adaptor signature to single signer ECDSA and OP_CHECKMULTISIG to fill the gap. The author invites feedback on their idea.</summary>
+    <published>2019-11-12T07:32:11+00:00</published>
+  </entry>
+</feed>

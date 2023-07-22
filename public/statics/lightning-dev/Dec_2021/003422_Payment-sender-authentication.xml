@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Payment sender authentication</title>
+  <updated>2023-06-03T07:02:42.547432+00:00</updated>
+  <author>
+    <name>Joost Jager 2021-12-17 10:37:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Payment sender authentication</title>
+    <updated>2023-06-03T07:02:42.547432+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003422.html" rel="alternate"/>
+    <summary>In the Lightning network, sender authentication is not a requirement, but there are some cases where it may be useful. For instance, in chat over lightning, the sender of a text message is necessary information. To address this issue, a custom record containing an ECDSA signature over `sender | recipient | timestamp | msg` has been added to whatsat, a chat protocol on lightning. Sender authentication can also be beneficial for regular payments, especially for donations, where a donor may want to reveal themselves. Additionally, sender authentication offers another field that can be used to retrieve lost payment information. On the receiver side, sender authentication enhances protection and opens up new possibilities, like creating an invoice locked to a specific source node. However, the current method using an ECDSA signature has limitations, such as non-repudiation property and the risk of data reuse. An alternative approach suggested by Joost involves deriving a shared secret using ECDH with the sender and receiver node keys and attaching a custom record to the payment containing the sender node key and an HMAC of the payment hash using the shared secret as a key. Joost seeks opinions from people more knowledgeable in cryptography on the best technical way to implement sender authentication.</summary>
+    <published>2021-12-17T10:37:12+00:00</published>
+  </entry>
+</feed>

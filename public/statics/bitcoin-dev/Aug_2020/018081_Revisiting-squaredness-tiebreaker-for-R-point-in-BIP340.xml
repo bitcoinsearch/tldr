@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Revisiting squaredness tiebreaker for R point in BIP340</title>
+  <updated>2023-05-20T23:40:43.227208+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2020-08-12 18:49:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Revisiting squaredness tiebreaker for R point in BIP340</title>
+    <updated>2023-05-20T23:40:43.227208+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018081.html" rel="alternate"/>
+    <summary>The current BIP340 draft uses two different tiebreakers for conveying the Y coordinate of points. The R point inside signatures uses squaredness while for public keys evenness is used. The reason for choosing squaredness as tiebreaker was performance but it slows down signing and is a less conventional choice. Recent developments show that using evenness may in fact be a somewhat better choice than squaredness. Computing evenness requires converting points to affine coordinates first, and that needs a modular inverse. It appears now that this assumption is incorrect, and the justification for picking the squaredness tiebreaking doesn't really exist. Performance on current hardware with optimized algorithms is the best approximation we have. In well optimized cryptographic code speedups as large as a couple percent are difficult to come by, so we would usually consider changes of this magnitude relevant. It is hard to make very generic statements here, as BIP340 will hopefully be used for a long time, and hardware advancements and algorithmic improvements may change the balance. The percentages for signing speed are larger, but they are not what is unexpected here. The choice for the square tiebreaker was intended to improve verification speed at the cost of signing speed. As it turns out that it doesn't actually benefit verification speed, this is a bad trade-off.There are some changes required in the BIP, libsecp256k1 and Bitcoin Core. The proposed change involves changing both invocations of has_square_y to has_even_y and changing the lift_x_square_y invocation to lift_x_even_y. The impact of changing the standard at this stage has to be weighed against the relatively simple change to address this.</summary>
+    <published>2020-08-12T18:49:56+00:00</published>
+  </entry>
+</feed>

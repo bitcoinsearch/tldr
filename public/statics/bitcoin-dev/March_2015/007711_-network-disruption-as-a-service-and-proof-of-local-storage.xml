@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>"network disruption as a service" and proof of local storage</title>
+  <updated>2023-06-09T18:41:36.101037+00:00</updated>
+  <author>
+    <name>Sergio Lerner 2015-03-16 16:29:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>"network disruption as a service" and proof of local storage</title>
+    <updated>2023-06-09T18:41:36.101037+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-March/007711.html" rel="alternate"/>
+    <summary>The problem of pseudo-nodes is a major concern for the Bitcoin network. One potential solution to this issue is to require each peer to demonstrate resource consumption before being allowed to connect to other peers. To address this, Gmaxwell proposed Proof of Storage, while Sergio introduced a protocol called "Proof of Local Storage." Unlike Gmaxwell's proposal, Proof of Local Storage does not require additional data storage and allows peers to prove that they are maintaining a full copy of the blockchain. The main idea behind Proof of Local Storage is to use asymmetric-time-encoding. The blockchain is encoded in such a way that it takes 100 times longer to write than to read. Each node must xor each block with a pseudo-random mask derived from the public IP and the block index. For instance, BlockEncryptIndex(i) = E(IP+i,block(i))^inv(3) (mod p), where inv(3) is 3^-1 mod (p-1). Two protocols can be used to prove local possession, with varying levels of cost for both the prover and verifier. Protocol 1 requires both parties to pay a small cost. The verifier sends a seed to derive some n random indexes, and the prover must respond with the hash of the decrypted blocks within a certain time bound. Protocol 2 requires the prover to pay a high cost, while the verifier pays a negligible cost. The verifier chooses a seed n, pre-computes the encrypted blocks derived from the seed using the prover's IP, and sends the seed to the prover. The prover must respond with the hash of the encrypted blocks within a certain time bound.Both protocols can be made available by the client, under different states. New nodes are only allowed to request protocol 2, after which they are allowed to periodically perform protocol 1. It is also possible to restrict the challenge-response to a portion of the block-chain. In Gmaxwell's proposal, each peer builds a table for each other peer. In Sergio's proposal, each peer builds a single table (the encrypted blockchain), so it could be possible to establish thousands of connections to the network from a single peer. However, an attacker's IP will be easily detected and it is possible to restrict the challenge-response to a portion of the block-chain.</summary>
+    <published>2015-03-16T16:29:03+00:00</published>
+  </entry>
+</feed>

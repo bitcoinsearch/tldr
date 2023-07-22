@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[patch] Switching Bitcoin Core to sqlite db</title>
+  <updated>2023-06-11T00:37:10.580421+00:00</updated>
+  <author>
+    <name>Peter R 2015-11-15 01:02:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[patch] Switching Bitcoin Core to sqlite db</title>
+    <updated>2023-06-11T00:37:10.580421+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-November/011759.html" rel="alternate"/>
+    <summary>In an email exchange between Peter R and Gregory Maxwell, they discussed the issue of using multiple database technologies in Bitcoin. While one node may say a block is valid, another node may say "I don't know," creating inconsistencies that need to be addressed for consensus. The old version of LevelDB ran out of locks and couldn't execute properly, leading to the fear of "bug-for-bug" compatibility with multiple implementations. However, this fear is largely unfounded as it is more important to track consensus than maintain compatibility. Bitcoin Unlimited is exploring the idea of "meta-cognition" to decentralize development and promote bottom-up governance. Maxwell provides an example of a bug in LevelDB that caused it to return "not found" on records that were really there. Fixing this bug would cause a fork in the consensus state if rolled out in an uncontrolled manner. Although it's not unreasonable to have multiple implementations of something like the UTXO database, great care must be taken to ensure equivalence under all inputs to prevent divergence in consensus state. The storage engine for the UTXO database in Bitcoin Core is fully internally abstracted, making it relatively straightforward for someone to experiment with other options. People may fall into the trap of thinking there's a one-size-fits-all solution, but the needs of Bitcoin are very specialized. The cryptographic consensus algorithm has a slot where a pre-existing high-performance key-value store fits, so it's being used to save effort. However, if Bitcoin Core adopts a merkelized commitment for the UTXO in the future, it may need to stop using any off-the-shelf key-value store entirely to avoid write inflation from updating hash tree paths.</summary>
+    <published>2015-11-15T01:02:33+00:00</published>
+  </entry>
+</feed>

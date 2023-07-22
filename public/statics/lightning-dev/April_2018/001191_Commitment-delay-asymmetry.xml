@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Commitment delay asymmetry</title>
+  <updated>2023-05-24T23:13:52.008225+00:00</updated>
+  <author>
+    <name>Jim Posen 2018-04-16 04:42:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Commitment delay asymmetry</title>
+    <updated>2023-05-24T23:13:52.008225+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-April/001191.html" rel="alternate"/>
+    <summary>The writer argues that adding an entire new attack vector to mitigate another attack vector is not a good trade-off because the new attack seems easier to perform. The current attack can make the other side close the channel unilaterally, but in a symmetric-delay world, the lockup period can be triggered immediately in the active attack. The two attacks in the symmetric case are not different from each other. In 1.1, the attacker forces a unilateral close by becoming unresponsive and forcing the other side to eventually broadcast the commitment. In this case, the other party's channel balance is wasted for the full time of the delay plus the additional time they wait around to determine if the attacker is ever going to come online. In 1.2, the attacker forces a unilateral close by broadcasting, which is actually a weaker attack because the other party only has to wait for the delay period, and there is no uncertainty about when they will get access to funds. Therefore, there is no reason for an attacker to choose 1.2 over 1.1.The writer believes that 2.1 is a worse DOS than 1.1 because the attacker does not get penalized and can quickly use any remaining channel balance to open a new channel with someone else and start over. The writer also disagrees with classifying 1.1 and 2.1 as passive attacks. The attacker is proactively rebalancing the victim's channel balances to waste the maximal amount of time-money. Passive attacks are where an attacker does not directly interact with the victim and just eavesdrops or tries to observe and extract information.Regarding the example of unilateral closing of the channel, the writer likes Daniel's suggestion to scale the delay in proportion to the time-money lost by the broadcasting party. The delay serves as punishment, so we should ensure that the punishment delivered is no greater than the time-value lost by the initiator of the unilateral close. The commitment delays do not need to be the same in both commitment transactions with this scaling strategy. The delay for the local output is always the to_local_delay, as it is in the BOLT 3 spec today. When assigning the delay on the remote output, however, instead of using 0 as BOLT specifies now or to_remote_delay as the writer originally proposed, a better rule might be min(to_remote_delay, to_local_delay * to_local_value / to_remote_value). So the delay is never worse than what the opposite side would get by broadcasting themselves, but the punishment duration is reduced if the attacker broadcasts a commitment transaction in which the balance of funds is skewed towards the victim's end of the channel. However, the writer argues that an attacker should always prefer to become unresponsive rather than broadcast the commitment themselves.</summary>
+    <published>2018-04-16T04:42:49+00:00</published>
+  </entry>
+</feed>

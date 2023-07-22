@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New P2P commands for diagnostics, SPV clients</title>
+  <updated>2023-06-06T05:01:19.335144+00:00</updated>
+  <author>
+    <name>Amir Taaki 2012-06-15 18:42:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New P2P commands for diagnostics, SPV clients</title>
+    <updated>2023-06-06T05:01:19.335144+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-June/001556.html" rel="alternate"/>
+    <summary>Mike Hearn, a Bitcoin developer, suggested adding three steps to enhance the block propagation process in June 2012. First, he suggested adding the mempool command so that nodes synchronize their mempools on startup. Second, if protocol version is greater than or equal to X, the "block" message consists of a header + num transactions + vector instead of the full transactions themselves. Upon receiving such a block, each node goes to see which transactions they're missing from the mempool and request them with getdata. Once all transactions in the block message are in memory, the block is assembled and verified as per normal. This should speed up block propagation, and miners have an incentive to upgrade because it should reduce wasted work. Third, he suggested introducing a new message called getmerkletx that takes a vector and returns a merkletx message for each requested transaction. The filtering commands are added so that the block message now only lists transaction hashes that match the filter which can then be requested with getmerkletx. Matt's point that a branch-per-transaction may duplicate data is well-made, but Mike suspects a format that tries to fix this would be much more complicated. In conclusion, Mike proposed a few ways to improve Bitcoin's block propagation process, which included adding the mempool command, changing the "block" message, and introducing getmerkletx to filter transaction hashes.</summary>
+    <published>2012-06-15T18:42:32+00:00</published>
+  </entry>
+</feed>

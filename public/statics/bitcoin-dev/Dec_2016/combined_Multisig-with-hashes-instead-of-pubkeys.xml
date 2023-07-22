@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Multisig with hashes instead of pubkeys</title>
+  <updated>2023-06-11T20:58:49.550586+00:00</updated>
+  <author>
+    <name>Andrew 2016-12-22 18:29:07</name>
+  </author>
+  <author>
+    <name>Nick ODell 2016-12-23 17:35:49</name>
+  </author>
+  <author>
+    <name>Matthew Roberts 2016-12-23 18:21:43</name>
+  </author>
+  <author>
+    <name>Nick ODell 2016-12-23 17:35:49</name>
+  </author>
+  <author>
+    <name>Andrew 2016-12-22 18:29:07</name>
+  </author>
+  <author>
+    <name>Nick ODell 2016-12-23 17:35:49</name>
+  </author>
+  <author>
+    <name>Matthew Roberts 2016-12-23 18:21:43</name>
+  </author>
+  <author>
+    <name>Andrew 2016-12-22 18:29:07</name>
+  </author>
+  <author>
+    <name>Matthew Roberts 2016-12-23 18:21:43</name>
+  </author>
+  <link href="bitcoin-dev/Dec_2016/013394_Multisig-with-hashes-instead-of-pubkeys.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2016/013395_Multisig-with-hashes-instead-of-pubkeys.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2016/013396_Multisig-with-hashes-instead-of-pubkeys.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2016/013395_Multisig-with-hashes-instead-of-pubkeys.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2016/013394_Multisig-with-hashes-instead-of-pubkeys.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2016/013395_Multisig-with-hashes-instead-of-pubkeys.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2016/013396_Multisig-with-hashes-instead-of-pubkeys.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2016/013394_Multisig-with-hashes-instead-of-pubkeys.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2016/013396_Multisig-with-hashes-instead-of-pubkeys.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Multisig with hashes instead of pubkeys</title>
+    <updated>2023-06-11T20:58:49.550586+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-December/013394.html" rel="alternate"/>
+    <summary>A user named Andrew requested a worked out scriptPubKey for doing multisig with just hashes of the participants, believing it to be more secure than a compromised ECDSA. However, there were several issues with the proposed script including two OP_SWAP's in a row and all of the hashes ending up hashing the same key, making it easily spent by anyone on the network. It was suggested that P2SH scripts would provide better security and prevent public keys from being exposed until spending. In cryptography, Lamport Signatures can be used to sign a message using only hash functions. This algorithm is elegant and quantum safe but using only the hashes in this scheme won't work since anyone can pluck out those values and double spend the original transaction to a new destination. Regarding hash protected M of N multi-sig, there is already a similar smart contract algorithm called "atomic cross-chain contracts" that relies on hash values to be released as part of the protocol to swap coins across blockchains but uses ECDSA public keys to prevent the transactions from being double-spent. In Bitcoin Multi-sig using hash values will work - though you still need to include an ECDSA pub key to protect them from attackers on the network.The poster also requested confirmation or a link to the worked out script for the scriptSig. If one wants to use Lamport Signatures in their consensus system, it must understand Lamport signature operations in the "scriptPubKey." Ethereum could potentially do this now, although the intended use-case for this is not specified. The email included a resource link to learn more about opcodes and simulators.</summary>
+    <published>2016-12-22T18:29:07+00:00</published>
+  </entry>
+</feed>

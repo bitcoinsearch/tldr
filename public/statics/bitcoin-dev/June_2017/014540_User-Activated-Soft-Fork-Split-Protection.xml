@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>User Activated Soft Fork Split Protection</title>
+  <updated>2023-06-12T01:44:31.481498+00:00</updated>
+  <author>
+    <name>Jared Lee Richardson 2017-06-07 23:43:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>User Activated Soft Fork Split Protection</title>
+    <updated>2023-06-12T01:44:31.481498+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-June/014540.html" rel="alternate"/>
+    <summary>The discussion is centered around the BIP148 proposal to activate SegWit on the Bitcoin network and its potential risks. One concern is the lack of replay protection, which could lead to an unlikely fee market as users would find it difficult to force transactions onto one chain or the other. There are also concerns that the BIP148 chain could be abandoned or face slow block times, making it unprofitable without replay protection. Additionally, the bundling of SegWit2x makes it challenging for BIP91 to be activated in time to cooperate with BIP148.Some argue that economic support and hash power will make a permanent split unlikely, although there may be lag time initially if there is an economic majority but not a hashpower majority. To address these concerns, James Hilliard has proposed the "splitprotection" BIP, which uses BIP8 instead of BIP9 with a lower activation threshold and immediate mandatory signalling lock-in. This allows miners to respond to market forces quickly ahead of BIP148 activation by signaling for split protection, and any miners already running BIP148 should use split protection.This document proposes the activation of a soft fork called 'split protection' within the Bitcoin network, which is compatible with the existing 'segwit' bit 1 deployment scheduled between November 15th, 2016, and November 15th, 2017, as well as the existing BIP148 deployment. However, miners will need to upgrade their nodes to support split protection, otherwise they may build on top of an invalid block. Users are recommended to upgrade to split protection or wait for additional confirmations when accepting payments while this bip is active.The rationale behind the deployment is to use the IsSuperMajority() technique to activate soft forks, such as BIP66, which has a mandatory signalling requirement for miners once activated. By orphaning non-signalling blocks during the BIP9 bit 1 'segwit' deployment, this BIP can cause the existing 'segwit' deployment to activate without needing to release a new deployment. References provided include mailing list discussions, P2SH flag day activation, and various BIPs related to SegWit.The lack of replay protection is also compared to the ETC-ETH hard fork comparison, with some arguing that ETC added replay protection because it was already a hardfork, while BIP148 lacks this protection, and adding it would make it a hardfork too. The proposed calendar for the SegWit2x agreement is deemed too slow to activate SegWit mandatory signalling ahead of BIP148 using BIP91, which means that there is a risk of an extended chain split.</summary>
+    <published>2017-06-07T23:43:57+00:00</published>
+  </entry>
+</feed>

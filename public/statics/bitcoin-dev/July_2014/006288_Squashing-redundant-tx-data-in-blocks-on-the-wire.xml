@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Squashing redundant tx data in blocks on the wire</title>
+  <updated>2023-06-09T01:08:55.326628+00:00</updated>
+  <author>
+    <name>Kaz Wesley 2014-07-17 21:35:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Squashing redundant tx data in blocks on the wire</title>
+    <updated>2023-06-09T01:08:55.326628+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-July/006288.html" rel="alternate"/>
+    <summary>To improve block propagation, a new block message that doesn't include transactions the peer is known to have is proposed. For peers advertising support for squashed blocks, a node tracks what transactions it knows each peer has seen and pushes block contents as transactions-not-already-known plus transaction ids-known. A node should be able to forget invs it has seen without invalidating what peers know about its known transactions. To allow for this, a node assembles a bloom filter of a set of transactions it is going to forget and sends it to peers. The node can erase the transactions as soon as no blocks requested before the filter was pushed are in flight. When a node receives a forgotten-filter, it ORs it into its forgotten-filter for that peer. Any transactions matching the forgotten-filter are always included in full with a block. Bloom filtering is used to keep overhead more restricted than the bloom filtering done for SPV. Nodes currently forget transactions rarely, so the bloom filters would only need to be used at all under conditions that are not currently common. Assuming a fairly typical 500 tx block with transaction sizes averaging 300b (both on the low side), for a 150kb block, even in the case of a small block with only 25% known-known transactions, total network bandwidth saved is greater than the bloom filters transmitted unless a node is forgetting transactions so rapidly that it pushes new maximum-size forget-filters every block. If there's support for this proposal, the specific implementation details, such as the bloom filters, message format, and capability advertisement will be worked on, and a BIP will be drafted once a concrete proposal for what those would look like and a corresponding precise cost/benefit analysis are available.</summary>
+    <published>2014-07-17T21:35:35+00:00</published>
+  </entry>
+</feed>

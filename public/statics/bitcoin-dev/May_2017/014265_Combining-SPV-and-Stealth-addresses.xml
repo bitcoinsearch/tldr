@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Combining SPV and Stealth addresses</title>
+  <updated>2023-06-12T00:38:23.585404+00:00</updated>
+  <author>
+    <name>Chris Pacia 2017-05-04 16:23:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Combining SPV and Stealth addresses</title>
+    <updated>2023-06-12T00:38:23.585404+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-May/014265.html" rel="alternate"/>
+    <summary>A discussion on combining Stealth addresses with SPV (Simplified Payment Verification) was initiated by Henning Kopp via bitcoin-dev mailing list. SPV is a mechanism in which a thin client puts his public keys in a bloom filter and asks a full node to give him Merkle proofs of all transactions whose pubkey are in the bloom filter. This gives privacy to the thin client, as the full node cannot detect if a specific transaction belongs to the thin client. Meanwhile, Stealth addresses enable receiver privacy, where the sender of a transaction derives a one-time pubkey to which he sends the money and the receiver can check if the money was sent to him and recover the one-time private key. Henning Kopp's idea was to combine stealth addresses with SPV so that he could use stealth addresses on his smartphone without losing privacy. However, checking if a payment belongs to a pubkey (Q,R) requires the full node to check if R' = R + H(dP)*G for each transaction, for which it needs the private scanning key d. This would compromise privacy as providing the private scanning key would link all transactions. Various ideas were presented, such as modifying the scheme to ensure that d is kept private or applying multiparty computation, but they were deemed costly. Another idea involved search functionality without leaking the search pattern, but it was also believed to be unfeasible since the full node still needs to compute on the data it has found and retrieve the whole Merkle proofs. While it was suggested that using two pushes in op_return may offer decent privacy, filter matches on outgoing transactions are still needed to build a functioning wallet.</summary>
+    <published>2017-05-04T16:23:27+00:00</published>
+  </entry>
+</feed>

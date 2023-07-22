@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[1.1] Proposed `funding_cancelled` message</title>
+  <updated>2023-05-24T18:20:32.207882+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-01-09 05:44:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[1.1] Proposed `funding_cancelled` message</title>
+    <updated>2023-05-24T18:20:32.207882+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-January/000910.html" rel="alternate"/>
+    <summary>The Lightning Development mailing list has proposed a 'funding_cancelled' message that would inform the fundee node that the funder node is sure that the channel funding transaction cannot be confirmed. However, if the deprecated tx initially sent funds to the fundee via push_msat, then the fundee may not want to trust the funder on this. For multi-channel funding transactions, the proposal would not work easily. As an example, suppose the funder node A wants to make two channels with two other nodes B and C using a single funding transaction. It initiates the open_channel on both B and C in parallel. B and C respond with accept_channel, and A can now create the funding transaction. In parallel, it sends the funding_created to both B and C. B responds with funding_signed, but C suddenly disconnects instead of responding with funding_signed. A cannot safely broadcast the funding transaction, so it does funding_cancelled to B instead. It is not safe for A to send the funding transaction to B because B can turn around and broadcast the funding transaction itself, forcing A to push_msat more funds to C. Of course, A can double-spend the inputs it used for the multi-channel funding transaction to an address it controls solely, but that just adds an otherwise-unnecessary transaction with the cost paid by A. Instead, A would prefer to silently forget the AB and AC channels and let B waste its resources hopelessly scanning each block for a transaction that A will never want to broadcast. The proposal of implementing 'funding_cancelled' lets the funder free up the imposed resource limit on the fundee side. To prevent this, a fundee node might restrict the number of pending channel opening attempts that a peer can have with it.</summary>
+    <published>2018-01-09T05:44:14+00:00</published>
+  </entry>
+</feed>

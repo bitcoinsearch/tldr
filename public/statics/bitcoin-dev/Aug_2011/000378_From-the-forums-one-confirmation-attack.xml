@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>From the forums: one-confirmation attack</title>
+  <updated>2023-05-18T22:10:27.125758+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2011-08-18 16:46:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>From the forums: one-confirmation attack</title>
+    <updated>2023-05-18T22:10:27.125758+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-August/000378.html" rel="alternate"/>
+    <summary>In a discussion about improving the metric of Bitcoin confirmations, Gavin Andresen mentions that simply waiting for a number of blocks is an excellent metric. This provides robustness against almost all attack patterns and equates to real difficulty in a way that can't be faked. However, if this causes people to wait less than the 6 blocks that the software currently waits for before leaving unconfirmed status then that would be concerning.Andresen goes on to describe an attack pattern where an attacker runs many widely distributed sybil nodes and takes advantage of the fact the bitcoin won't connect to /16s that have already connected to it to further isolate nodes. The attacker creates normal looking probe transactions which his own nodes won't forward and detects network partitions which he is able to create. He searches for a cut which causes there to be at least two partitions which contain significant mining power. The attacker creates two accounts at MoronBank, makes deposits in both partitions, and conflicting transactions in the opposite partitions while carefully filtering out these transactions from crossing the boundary. After the funds show up in MoronBank, he withdraws and drops the partitioning. The bad thing about this attack is that it doesn't require the attacker to have any hash power at all: he captures miners as unwilling participants. The lost income from orphaned blocks is externalized to the victimized miners. The good thing about it is that it's killed dead by nodes adding in a few manually configured peerings. At a minimum, all major miners should be fully meshed. Unfortunately, there is currently no software for this as addnode doesn't worry about keeping the links up, and the major pools also don't seem to be interested in participating.</summary>
+    <published>2011-08-18T16:46:17+00:00</published>
+  </entry>
+</feed>

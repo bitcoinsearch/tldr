@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Proposal for Adding Bandwidth Metered Payment to Onion Messages</title>
+  <updated>2023-06-03T07:39:34.116424+00:00</updated>
+  <author>
+    <name>Rusty Russell 2022-02-24 04:37:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Proposal for Adding Bandwidth Metered Payment to Onion Messages</title>
+    <updated>2023-06-03T07:39:34.116424+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-February/003499.html" rel="alternate"/>
+    <summary>Olaoluwa Osuntokun, the CEO of Lightning Labs, has proposed a way for nodes to get paid for forwarding onion messages by adding an upfront session creation phase that uses AMP tender messaging. In this email, he proposes a way to address the issues with the current proposal and expand the scope of the Lightning Network beyond "just" a decentralized p2p payment system. He suggests adding explicit onion messaging session creation as well as a way for nodes to be (optionally) paid for any onion messages they forward. This would introduce an explicit session creation phase, with the receiver being able to accept/deny the session. If the session is accepted, then all nodes that comprise the session route are compensated for allotting a certain amount of bandwidth to the session.To allow nodes to signal that they want to be paid to forward onion messages and also specify their pricing, Olaoluwa suggests adding two new TLVs to the node_ann message: sats_per_byte and sats_per_block. The sats_per_byte field allows nodes to price their bandwidth, ensuring that they get paid for each chunk of allocated bandwidth. As sessions have a fixed time frame and nodes need to store additional data within that time frame, the sats_per_block allows nodes to price this cost, as they'll hold onto the session identifier information until the specified block height. After session creation succeeds, nodes will forward onion messages that include that onion_session_id. When forwarding an onion message that includes an onion_session_id, nodes do the necessary bookkeeping to tally how much bandwidth if left in this session, and also check that the session hasn't expired before forwarding.</summary>
+    <published>2022-02-24T04:37:46+00:00</published>
+  </entry>
+</feed>

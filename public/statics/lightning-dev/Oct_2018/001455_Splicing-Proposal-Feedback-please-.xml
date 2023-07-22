@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Splicing Proposal: Feedback please!</title>
+  <updated>2023-05-20T08:45:14.771147+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-10-15 19:04:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Splicing Proposal: Feedback please!</title>
+    <updated>2023-05-20T08:45:14.771147+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-October/001455.html" rel="alternate"/>
+    <summary>The Lightning Network proposal suggests allowing for channel splicing as a solution to the increasing number of c-lightning users who are unable to open multiple channels. However, the author notes that this is not a substitute for allowing multiple channels, as it limits a node's ability to create distinct channels with different policies and mix public and non-advertised channels. Additionally, splicing also has limitations in terms of maximum HTLC amounts and channel sizes.The proposed splicing negotiation involves three types: splice_add_input, splice_add_output, and splice_all_added. Both parties send 0 or more splice_add_input and 0 or more splice_add_output, followed by spice_all_added to complete the splice proposal. The scriptpubkey must be empty or of form 'HASH160 EQUAL,' and the satoshis amount cannot wrap on addition for splice_add_input. For splice_add_output, the satoshis amount must be less than or equal to the amount owing to proposer minus the current reserve and greater than or equal to the dust_limit_satoshis in the open_channel/accept_channel messages. The splice_all_added message is checked for several conditions, including sufficient average feerate_per_kw, affordability of fees from post-splice funds, and at least one splice_add_input or splice_add_output. The post-splice reserve is 1% of post-splice capacity (rounded down), which should be re-negotiated at the time of splice creation. The Lightning Network allows for two existing channels to be combined into one through the process of creating and signing both the splice transaction and the first commitment transaction which spends it. The splice transaction includes inputs that spend the current funding transaction output, as well as additional inputs for each splice_add_input, and outputs for the new funding transaction and each splice_add_output. Once a node has sent splice_commitment_signature, it should remember the splice proposal across reconnects. During splicing, "post-splice" values are tracked alongside current values. The fees for the splicing transaction itself are divided into parts by the number of splice_add_input plus splice_add_output, rounded up. Each side pays as many parts as it proposed splice_add_input plus splice_add_output. All update_add_htlc must be valid for both the current and post-splice balances.Once both sides have seen the required confirmations of the splice transaction, they can complete the splice by sending splice_closed. Once sent and received, announcement_signatures for the new channel can be sent as per normal rules, and everything about the old channel can be forgotten.</summary>
+    <published>2018-10-15T19:04:23+00:00</published>
+  </entry>
+</feed>

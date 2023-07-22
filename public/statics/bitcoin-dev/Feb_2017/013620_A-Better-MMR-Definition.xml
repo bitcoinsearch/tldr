@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Better MMR Definition</title>
+  <updated>2023-06-11T21:41:18.694948+00:00</updated>
+  <author>
+    <name>Bram Cohen 2017-02-24 22:20:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Better MMR Definition</title>
+    <updated>2023-06-11T21:41:18.694948+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-February/013620.html" rel="alternate"/>
+    <summary>The discussion revolves around clustering entries in a UTXO set by entry time. The proposal is to use position entries instead of hashes for the values being stored. An example of how it works is given where the first entry gets a value of all zeros, the next one a one followed by all zeros and so on. It is suggested that doing it two bits at a time is better than one. However, the efficacy of this approach is not clear, and a plain vanilla UTXO set solution should be optimized first before trying out the insertion ordering trick. The conversation then shifts to UTXO commitments scheme requiring random access. The ordering is by the bits in the hash, and it is a Patricia Trie. The order of things in the set is unspecified in the implementation. A 256-bit value is taken, which is presumably a hash of something, and the simplest thing would be to hash together the txid and output number. The issue is that lost UTXOs are also uniformly distributed, which means that updating will require more digests than if they had not existed. It is suggested that an insertion-ordered TXO commitment scheme is better from a L1/L2/etc cache perspective because almost none of the existing data needs to be touched to add new UTXOs. In contrast, with UTXO commitments, each new coin added to the dataset requires updating log2(n) inner nodes. This approach could also make transactions smaller in many circumstances since it is just an 8-byte max index rather than a 40 byte outpoint.</summary>
+    <published>2017-02-24T22:20:19+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Why the BIP-72 Payment Protocol URI Standard is Insecure Against MITM Attacks</title>
+  <updated>2023-06-12T19:20:44.294163+00:00</updated>
+  <author>
+    <name>Omar Shibli 2017-09-29 04:21:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Why the BIP-72 Payment Protocol URI Standard is Insecure Against MITM Attacks</title>
+    <updated>2023-06-12T19:20:44.294163+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-September/015113.html" rel="alternate"/>
+    <summary>The BIP-70 payment protocol has significant overhead and requires back and forth, which is why emailing a bitcoin address or printing it on an invoice is much easier. However, the BIP-72 URI's used by the payment protocol are insecure, as payment QR codes don't cryptographically commit to the identity of the merchant. This means that a MITM attacker can redirect the payment if they can obtain an SSL cert that the wallet accepts. The wallet should use this address for integrity checks to mitigate risk. Additionally, the BIP could be improved by deriving the bitcoin address from the merchant pub key and hash, which would allow both the customer and merchant to generate addresses independently. In short, while a browser may have gotten the correct URL with the correct Bitcoin address, by using the payment protocol, the wallet is discarding that information and giving MITM attackers a second chance at redirecting the payment to them. This is because wallets are likely using off-the-shelf SSL libraries with infrequently updated sets of root certificates. As-is BIP-72 is very dangerous and should be deprecated, with a new BIP made to replace it. Android Wallet for Bitcoin supports a h= parameter with a hash commitment to what the payment request should be, and will reject the MITM attacker if that hash doesn't match. However, that's not actually in the standard itself, and as far as can be told has never been made into a BIP.</summary>
+    <published>2017-09-29T04:21:09+00:00</published>
+  </entry>
+</feed>

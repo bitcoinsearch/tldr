@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>CHECKSIGFROMSTACK/{Verify} BIP for Bitcoin</title>
+  <updated>2023-05-21T03:12:43.569638+00:00</updated>
+  <author>
+    <name>Jeremy 2021-07-03 16:31:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>CHECKSIGFROMSTACK/{Verify} BIP for Bitcoin</title>
+    <updated>2023-05-21T03:12:43.569638+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-July/019192.html" rel="alternate"/>
+    <summary>The Bitcoin Cash specification for "CheckDataSig" has been compared to Element's implementation. The specification can be used as a starting point for discussion regarding the adaptation of this text and implementation for a BIP for Bitcoin using 2 OP_SUCCESSX opcodes. However, sophisticated covenants are not enabled without OP_CAT. There are certain design questions that need to be taken into consideration when implementing the specification. For instance, whether CSFS should require some sort of tagged hash or support a cheap way to reference the taproot internal or external key. Additionally, invalid public keys types may also be a NOP to support future extended pubkey types.The OP_CHECKDATASIGVERIFY opcode is equivalent to OP_CHECKDATASIG followed by OP_VERIFY. It uses the opcode number 187 and each use of OP_CHECKDATASIGVERIFY is counted as one (1) SigOp. The opcode has several unit tests, including failing if the protocol upgrade is not yet activated, or if there are fewer than three items on the stack. It also fails if the public key or signature are not validly encoded, or if the signature does not pass the Low S check or signature validation.If the transaction containing OP_CHECKDATASIGVERIFY is included in a block where the median timestamp of the prior 11 blocks is less than 1542300000, unless occurring in an unexecuted OP_IF branch, the transaction will be invalidated. The specification is based on Andrew Stone's OP_DATASIGVERIFY proposal but modified based on peer-review and feedback.An example implementation is provided in C++ from Bitcoin ABC. References to other related concepts and proposals such as OP_CHECKSIG, Strict DER Encoding, Low-S and Nullfail Specification, and Andrew Stone's article on Scripting are also provided.</summary>
+    <published>2021-07-03T16:31:57+00:00</published>
+  </entry>
+</feed>

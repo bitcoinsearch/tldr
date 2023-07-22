@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Removal of reject network messages from Bitcoin Core (BIP61)</title>
+  <updated>2023-06-13T17:16:29.255407+00:00</updated>
+  <author>
+    <name>Sjors Provoost 2019-03-07 13:59:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Removal of reject network messages from Bitcoin Core (BIP61)</title>
+    <updated>2023-06-13T17:16:29.255407+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-March/016716.html" rel="alternate"/>
+    <summary>Reject messages are a feature in Bitcoin Core that has been disabled by default since version 0.18.0. These messages are sent by a network peer in response to a "tx", "block", or "version" message that could not be accepted. However, nodes on the network cannot always be trusted to send valid ("reject") messages, so this feature should only ever be used when connected to a trusted node. As of now, there is no software known to require this feature. Testing or debugging of implementations of the Bitcoin P2P network protocol should be done by inspecting the log messages produced by a recent version of Bitcoin Core. Bitcoin Core logs debug messages to a stream or file. Testing the validity of a block can be achieved by specific RPCs such as `submitblock` and `getblocktemplate`. Testing the validity of a transaction can be achieved by specific RPCs like `sendrawtransaction` and `testmempoolaccept`.Wallets should not use the absence of "reject" messages to indicate a transaction has propagated the network, nor should they use "reject" messages to set transaction fees. Instead, wallets should use fee estimation to determine transaction fees and set replace-by-fee if desired. They could wait until the transaction has confirmed or listen for the transaction announcement by other network peers to check for propagation.Andreas Schildbach via bitcoin-dev recommends re-enabling reject messages by default before version 0.18. Marco Falke via bitcoin-dev proposes to remove "reject" messages from Bitcoin Core 0.19.0 unless there are valid concerns about its removal. Reject messages cannot be replaced for debugging user problems unless logfiles are made available via the P2P protocol (which is not recommended). In the typical case, a wallet logfile with reject messages is mailed to Andreas Schildbach, but he cannot access the bitcoind logfile(s) of the node(s) that generated the reject message in the first place, nor can he access their RPC interface.</summary>
+    <published>2019-03-07T13:59:47+00:00</published>
+  </entry>
+</feed>

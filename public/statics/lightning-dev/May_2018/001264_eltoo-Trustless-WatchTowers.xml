@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>eltoo Trustless WatchTowers</title>
+  <updated>2023-05-20T08:26:45.914035+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-05-09 22:51:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>eltoo Trustless WatchTowers</title>
+    <updated>2023-05-20T08:26:45.914035+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-May/001264.html" rel="alternate"/>
+    <summary>In a Lightning-dev discussion, ZmnSCPxj proposed a trustless, blinded WatchTower approach for eltoo channels using the "encrypted blob" used in Poon-Dryja channels. However, update transactions in Decker-Russell-Osuntokun channels have no txid that can be used as a key for encrypted blobs, making it possible for the WatchTower to correlate the timing and number of updates of each channel. To mitigate this, clients can add randomization via a timer drawn from a particular distribution, although this comes with the downside of a window of opportunity wherein a new state is at play, but the watchtower hasn't yet been updated.The scalability tradeoff of using the "swap this blob" approach in Decker-Russell-Osuntokun channels is much more scalable, as each watchtower only consumes a bounded amount of space, which watchtowers can easily plan out the storage requirements. It is desirable to retain the property that the WatchTower cannot correlate our updates to our channels and under Decker-Russell-Osuntokun channels, when a new update is made, every WatchTower who is watching should be informed of that update since only the latest update transaction is valid.The email discusses a proposed solution for WatchTowers to monitor and prevent theft attempts on SegWit transactions. It proposes that WatchTowers pair the hash of the message being signed with a blob, rather than just the txid as in previous methods. This allows for more flexibility and generalization across different types of channels. The WatchTower verifies each transaction, and if it matches a watched blob, it decrypts the blob and proceeds to take appropriate action depending on the type of channel. The proposed method retains anonymity sets while transitioning from Poon-Dryja to Decker-Russell-Osuntokun channels. For Decker-Russell-Osuntokun channels, the blob would contain state number, pubkeys, signatures, settlement details, and payment information. The WatchTower generates future update transactions iteratively until it finds the last channel update or reaches the maximum state number. It can then publish the latest update transaction and corresponding settlement transaction to provide justice.However, the proposed method requires a large amount of grinding on the WatchTower's part. In case of a theft attempt, the WatchTower may be able to correlate blobs to a specific channel and reduce privacy leakage by not giving all updates to a single WatchTower.</summary>
+    <published>2018-05-09T22:51:55+00:00</published>
+  </entry>
+</feed>

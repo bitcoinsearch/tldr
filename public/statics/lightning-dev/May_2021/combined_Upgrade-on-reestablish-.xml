@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Upgrade on reestablish.</title>
+  <updated>2023-06-04T01:21:49.722995+00:00</updated>
+  <author>
+    <name>Rusty Russell 2021-05-07 03:22:33</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2021-05-09 05:22:40</name>
+  </author>
+  <link href="lightning-dev/May_2021/003035_Upgrade-on-reestablish-.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2021/003036_Upgrade-on-reestablish-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Upgrade on reestablish.</title>
+    <updated>2023-06-04T01:21:49.722995+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-May/003035.html" rel="alternate"/>
+    <summary>The Lightning Network has developed a way to upgrade channels using `option_static_remotekey` and has created a pull request on GitHub. Upgrading channels is possible at reconnection time if both implementations support it. During reconnection, both peers indicate what upgrades are available, and if they both offer an upgrade either peer wants, then the upgrade is performed following any reestablish retransmissions and corresponding commitments which bring the channel into a symmetrical state with no updates outstanding.However, if there is a disconnection, it is possible that one peer will consider the channel upgraded while the other does not. To avoid this, they indicate what the current channel features are on reconnect, where the more upgraded one applies immediately in this case. Channel features are currently defined as `option_static_remotekey` and `option_anchor_outputs`.Once both peers indicate that things are quiescent by sending `update_upgrade`, the channel features are considered upgraded, and a normal `commitment_signed` cycle occurs with the new upgrade in place. There are specific requirements for nodes when sending and receiving `channel_reestablish`. For instance, if a node sends `channel_reestablish`, it must set the channel features that currently apply to the channel.Rusty has made a significant simplification of something he hasn't specified, and he mentions that he disliked the earlier implementation. He will finish implementing the new one before posting the specification. A node receiving `update_upgrade` must fail the upgrade if the `features` is not the same as the one it sent or will send.</summary>
+    <published>2021-05-07T03:22:33+00:00</published>
+  </entry>
+</feed>

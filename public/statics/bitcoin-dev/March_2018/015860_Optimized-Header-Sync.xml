@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Optimized Header Sync</title>
+  <updated>2023-06-13T01:14:15.516318+00:00</updated>
+  <author>
+    <name>Riccardo Casatta 2018-03-30 08:06:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Optimized Header Sync</title>
+    <updated>2023-06-13T01:14:15.516318+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-March/015860.html" rel="alternate"/>
+    <summary>In a recent bitcoin-dev discussion, the topic of handling checkpoints and compressed header streams was brought up. It was suggested that these items should be handled in chunks of 2016 headers and queried by chunk number instead of height. This method is cache-friendly and avoids using bit 0 and bit 1 in the bitfield. Another suggestion made during the discussion was to treat checkpoints as commitments to chain work. The idea was to have a checkpoint every 2016 blocks and include the corresponding bits value for that set of blocks. This would allow every node to commit to approximately how much work their entire chain has by sending something like 10kB of data. Verifying the deltas in each node's chain's target could be done by downloading the 2016 headers between those checkpoints (~80kB with the proposed compact encoding?) and checking the timestamps and proof of work match both the old target and the new target from adjacent checkpoints. It was noted that this method would still work fine even if there's a hardfork that allows difficulty to adjust more frequently. A bits value at block n*2016 will still enforce some lower limit on how much work blocks n*2016+{1..2016} will have to contribute and allow an estimate of how much work will have been done; it may just be less precise than the estimate generated now.</summary>
+    <published>2018-03-30T08:06:24+00:00</published>
+  </entry>
+</feed>

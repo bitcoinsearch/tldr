@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>bloom filtering, privacy</title>
+  <updated>2023-06-09T17:31:45.094324+00:00</updated>
+  <author>
+    <name>Adam Back 2015-02-21 14:30:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>bloom filtering, privacy</title>
+    <updated>2023-06-09T17:31:45.094324+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-February/007523.html" rel="alternate"/>
+    <summary>The discussion revolves around privacy concerns for Bitcoin transactions and the use of Tor to mitigate them. The proposal is to use block bloom filters to index non-p2sh but non-simple transactions containing checksig, while still keeping the address visible. However, there are technical issues with this proposal as Bloom filtering protocol already does this server-side. Additionally, downloading per-block Bloom filter and testing against thousands of transactions in each block will not be efficient. Furthermore, a node round-trip for every block traversal must occur if the user cannot scan the chain in parallel. This latency kills performance, making it a non-starter. Although it is possible to work around this issue by ignoring OP_CHECKSIG outputs, this method does not solve any real problems. There are concerns about commercial fraudsters stealing money, but collecting Bloom filters off the wire does not help with this. Spies such as NSA/GCHQ are building databases of IP addresses to Bitcoin addresses, but requesting data from different nodes via Tor does not solve this problem either.Using Tor presents several practical issues, including booting up slowly without a warm consensus, Bitcoin Core's DoS strategy blocking all of Tor, trolls tampering with wire traffic, and the uncertainty of relying on Tor sticking around. A simpler solution would be to add opportunistic encryption to the wire protocol. Mid-term, some basic request tunneling as part of Bitcoin, that may not be Tor, could be added to avoid sharing their fate if Tor controversies are a risk to Tor service, and store-and-forward message bus with privacy and strong reliability via redundancy could be used.</summary>
+    <published>2015-02-21T14:30:15+00:00</published>
+  </entry>
+</feed>

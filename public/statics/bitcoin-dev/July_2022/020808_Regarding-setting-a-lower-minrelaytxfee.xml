@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Regarding setting a lower minrelaytxfee</title>
+  <updated>2023-06-15T23:22:56.885722+00:00</updated>
+  <author>
+    <name>David A. Harding 2022-07-29 03:38:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Regarding setting a lower minrelaytxfee</title>
+    <updated>2023-06-15T23:22:56.885722+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-July/020808.html" rel="alternate"/>
+    <summary>In a recent discussion on Bitcoin-dev mailing list, Aaradhya Chauhan had suggested lowering the dust limit as it was set in the early days of Bitcoin and now seems high. However, Peter Todd has stated that reducing the dust limit is a good way to ensure the entire ecosystem is prepared to deal with such conditions. Dave, another contributor, clarified that the minimum output amount policy (dust limit) and the minimum transaction relay feerate policy (min tx relay fee) are two different things. Transactions with outputs below a node's configured dust limit will not be relayed by that node regardless of how high of a feerate it pays. Transactions with feerates below a node's minimum relay feerate will also not be relayed by that node, even if there is unused space in its mempool and peers that use BIP133 feefilters to advertise that they would accept low feerates.Removing the dust limit was discussed in detail a year ago and again eight months ago. Four years ago, lowering the minimum relay feerate was seriously proposed in a patch to Bitcoin Core, but not all related PRs have been merged yet, and the original PR was closed. It was challenging to lower the minimum relay fees because it could reduce the cost of DoS attacks, impact BIP152 compact blocks and erlay efficiency, worsen transaction pinning, and increase IBD time due to more blockchain data, among other adverse effects. Lowering the minimum feerate could also create problems for people who prepared for eventual feerate rises.Dave believes that compared to the complexity of lowering the minimum feerate, preventing denial/degradation-of-service attacks, and dealing with a fragmented userbase, the economic benefit of reducing the feerates for the bottom of the mempool seems small. If the minimum relay fee is lowered to 1/10th of its current value, resulting in an extra 10 blocks of transactions getting mined per day, users would save a total of 0.09 BTC (~$1,800 USD) per day, and miners would earn an extra 0.01 BTC ($200 USD) per day (assuming all other things remain equal).</summary>
+    <published>2022-07-29T03:38:19+00:00</published>
+  </entry>
+</feed>

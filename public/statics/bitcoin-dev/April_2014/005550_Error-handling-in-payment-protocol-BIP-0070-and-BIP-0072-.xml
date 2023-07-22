@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Error handling in payment protocol (BIP-0070 and BIP-0072)</title>
+  <updated>2023-06-08T21:36:05.881081+00:00</updated>
+  <author>
+    <name>J Ross Nicoll 2014-04-25 19:54:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Error handling in payment protocol (BIP-0070 and BIP-0072)</title>
+    <updated>2023-06-08T21:36:05.881081+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005550.html" rel="alternate"/>
+    <summary>In an email to Gavin and others, Ross has expressed concern over the lack of specificity in handling error states in the payment protocol specifications. He suggests formalising processes to ensure consistency by either editing the existing BIP or writing up a new one. The main area of concern is handling unexpected problems while sending or receiving the Payment message. Ross proposes that for any transport failure or 500 status code, the client retries after a delay (suggested at 30-60 seconds). For 400 status codes, the request should not be repeated, and the user should be alerted with a copy of the Payment message saved to be resent later. For 300 status codes, Ross thinks it’s safe to follow redirects, but feels clarity on this matter would be useful.On the merchant's side, Ross suggests having guidance for handling errors processing Payment messages. Payment messages should have a fixed maximum size of 10MB, and a defined maximum time to wait might be useful too, although measurements would need to be taken to find tolerable values. Ross also wants the protocol to state that merchant systems should handle repeatedly receiving the same Payment message and send an equivalent PaymentACK to each.Lastly, Ross raises potential timing issues with transactions and asks for thoughts on whether a merchant system should hold the connection or send a PaymentACK with a memo indicating payment has been seen on the relay network but is not yet confirmed. Ross is willing to write this up as a new BIP if necessary and requests feedback on anything he may have missed.</summary>
+    <published>2014-04-25T19:54:05+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>libconsensus assertion fails if used in multiple threads</title>
+  <updated>2023-06-10T19:31:32.232100+00:00</updated>
+  <author>
+    <name>Cory Fields 2015-08-18 05:03:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>libconsensus assertion fails if used in multiple threads</title>
+    <updated>2023-06-10T19:31:32.232100+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/010351.html" rel="alternate"/>
+    <summary>Cory Fields, a Bitcoin developer, has discovered an issue in OpenSSL relating to the secp256k1 curve, which is used by Bitcoin and other cryptocurrencies. The problem is that OpenSSL uses a global error variable and this could cause multiple crashes within a few seconds if multi-threaded. It's therefore important for libbitcoinconsensus to be as bullet-proof as possible. Fields has prepared a patch for anyone who may run into the issue, although since Bitcoin Core and libbitcoinconsensus are switching away from OpenSSL in the near future, it's not seen as much of an issue. Fields notes that the problem manifests as a controlled assertion failure/abort. On the whole, the issue is regarded as obscure; however, it is still possible to hit the reversed order in the defined(OPENSSL_BN_ASM_MONT) case. That's easily tested by building OpenSSL with the -no-asm config option. It's probably also the case for obscure architectures and OSs, but Fields hasn't looked deeply into that.</summary>
+    <published>2015-08-18T05:03:40+00:00</published>
+  </entry>
+</feed>

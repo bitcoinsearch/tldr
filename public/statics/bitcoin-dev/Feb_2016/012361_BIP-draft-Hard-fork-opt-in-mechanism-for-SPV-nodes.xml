@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP draft: Hard fork opt-in mechanism for SPV nodes</title>
+  <updated>2023-06-11T03:39:35.536986+00:00</updated>
+  <author>
+    <name>Luke Dashjr 2016-02-05 23:25:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP draft: Hard fork opt-in mechanism for SPV nodes</title>
+    <updated>2023-06-11T03:39:35.536986+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-February/012361.html" rel="alternate"/>
+    <summary>On Friday, February 5th, 2016, Johnson Lau proposed a new algorithm for the transaction commitment in block header to ensure that Simplified Payment Verification (SPV) nodes will not automatically follow a planned hard fork without explicit opt-in consent. A hard fork is a consensus rule change where previously invalid blocks become valid. While migration to the new fork requires conscious action for operators of fully validating nodes, this may not be true for SPV nodes, as many consensus rules are transparent to them. SPV nodes may follow the chain with most proof-of-work, even if operators do not agree with the economical or ideological properties of the chain.To address this problem, Lau's proposal commits Double-SHA256(zero|merkle_root|zero), where zero is 0x0000....0000 with 32 bytes, instead of directly committing the Merkle root to the header. Since the header structure is not changed, non-upgraded SPV nodes will still be able to verify the proof-of-work of the new chain. However, they will not accept any incoming transactions on the new chain since they cannot verify them with the new commitment format. At the same time, SPV nodes will not accept any new transactions on the old chain either, as they find it has less proof-of-work. This effectively stops SPV nodes from accepting any transactions until their operators take further actions.While this mechanism intentionally breaks backward compatibility, non-upgraded full nodes and SPV nodes can still verify the proof-of-work of upgraded blocks. A fraud-proof system generates compact proofs to testify invalid blocks on the blockchain, verifiable by SPV nodes. Hard forks without any malicious intentions may also be considered as a "fraud" among non-upgraded nodes. With this proposal, non-upgraded SPV nodes will always believe the new chain is valid (since they cannot verify any fraud proof), while they cannot be defrauded as they will not see any incoming transactions.Lau's proposal is a supplement, instead of a replacement, to the hardfork bit BIP. The hardfork bit tells full and SPV nodes that a planned hard fork (instead of a soft fork) has happened. On the other hand, this proposal makes sure SPV nodes won't lose any money in a hard fork, even if they do not check the hardfork bit.</summary>
+    <published>2016-02-05T23:25:14+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CLTV/CSV/etc. deployment considerations due to XT/Not-BitcoinXT miners</title>
+  <updated>2023-06-10T20:30:05.229795+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2015-08-20 17:42:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CLTV/CSV/etc. deployment considerations due to XT/Not-BitcoinXT miners</title>
+    <updated>2023-06-10T20:30:05.230793+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/010510.html" rel="alternate"/>
+    <summary>This email thread discusses the implementation of nVersion mask and IsSuperMajority() in the Bitcoin protocol. The nVersion bits set by XT/Not-Bitcoin-XT miners would be masked away before applying standard IsSuperMajority() logic. This means that CLTV/CSV/etc. miners running Bitcoin Core would create blocks with nVersion=8. For the purpose of soft-fork warnings, the highest known version can remain nVersion=8, which is triggered by both XT/Not-Bitcoin-XT blocks as well as a future nVersion bits implementation. When nVersion bits are implemented by the Bitcoin protocol, the plan of setting the high bits to 0b001 still works. The three lowest bits will be unusable for some time but will be eventually recoverable as XT/Not-Bitcoin-XT mining ceases. Further IsSuperMajority() softforks can be accomplished with the same masking technique. However, this option does complicate the XT-coin protocol implementation in the future. The idea of masking all bits except the 4th bit is also proposed. It is clarified that the masking is applied only during the voting stage, and after the softfork is fully enforced with 95% support, the nVersion will be simply &gt;=8 without any masking.</summary>
+    <published>2015-08-20T17:42:45+00:00</published>
+  </entry>
+</feed>

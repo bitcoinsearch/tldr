@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DRAFT: interactive tx construction protocol</title>
+  <updated>2023-06-02T22:59:42.913657+00:00</updated>
+  <author>
+    <name>lisa neigut 2020-02-11 18:12:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DRAFT: interactive tx construction protocol</title>
+    <updated>2023-06-02T22:59:42.913657+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002523.html" rel="alternate"/>
+    <summary>The proposed addition of a second commitment requirement to the PoDLE used by JoinMarket is suggested to limit the use of a commitment's validity between an initiator and a single peer. This would prevent a "pouncing venus-flytrap attack" where verification by any node that is not the intended recipient will fail since they will use the wrong node_id. The commitment H(P2) could be altered to include the receiving node, making it unnecessary to commit to the utxo since the pubkey pair effectively does that. However, it is imperative to verify that the pubkey provided is locked to the utxo script. The 'grindability' of a proof can be useful for finding the originator of an attack. One of the goals of implementing PoDLEs was to be compatible with JoinMarket, which extends only as far as the H2 construction and not the proof. In JoinMarket, takers always send out to 5-12 makers at once, and the HP2 only needs to get broadcast by one to stop any reuse. A malicious counterparty can choose to blacklist, but the system works fine in practice. The Maker side tries to create herd immunity, assuming some level of honest participation. The mechanism is not strong, but it serves to stop trivial global snooping and doesn't cost anything in terms of identity or locked funds. There could be a small time window between one maker receiving !auth and at least one other honest maker getting to broadcast step at !ioauth, but this is not practical in their use case. Removing this concern could be either slightly or extremely important in another use case.</summary>
+    <published>2020-02-11T18:12:48+00:00</published>
+  </entry>
+</feed>

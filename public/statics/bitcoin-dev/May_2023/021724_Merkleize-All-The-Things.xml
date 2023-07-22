@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Merkleize All The Things</title>
+  <updated>2023-06-16T03:05:46.192667+00:00</updated>
+  <author>
+    <name>Salvatore Ingala 2023-05-28 10:24:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Merkleize All The Things</title>
+    <updated>2023-06-16T03:05:46.192667+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-May/021724.html" rel="alternate"/>
+    <summary>In an email conversation, Johan shared his excitement about the implementation of merkleization. He suggested making OP_CICV and OP_COCV symmetrical to simplify the process. Salvatore agreed with the suggestion and added that he was exploring a similar method for bringing externally signed data onto the stack in order to allow eltoo-style replacement. The workaround involves producing a separate UTXO signed with ANYONECANPAY, with the required data embedded as usual. Spending the UTXO together with the channel's UTXO allows one to get that data on the stack with its signature already checked by consensus rules. Salvatore drafted this idea in a gist.Salvatore proposed that OP_CHECKINPUTCONTRACTVERIFY could have a possible semantics that is exactly symmetrical to that of OP_CHECKOUTPUTCONTRACTVERIFY, with the exception that the special input index -1 would represent the current input. He also suggested another option that could be worth exploring, which is to have a single OP_CHECK_IN_OUT_CONTRACT_VERIFY opcode, with the same semantics as OP_CHECKOUTPUTCONTRACTVERIFY, but with an additional 'flags' argument.Johan also mentioned that fully functioning CoinPools would require functionality similar to OP_MERKLESUB in order to remove some data from the merkle tree and remove a key from the aggregated internal key. Salvatore stated that efficient use of the taproot internal pubkey with "dynamic key aggregation" might not be possible with the current semantics. However, he suggested that there could be reasonable CoinPools designs without additional opcodes. The pubkeys of the members could also be stored in the embedded data, having a single "unilateral withdrawal" tapleaf.</summary>
+    <published>2023-05-28T10:24:14+00:00</published>
+  </entry>
+</feed>

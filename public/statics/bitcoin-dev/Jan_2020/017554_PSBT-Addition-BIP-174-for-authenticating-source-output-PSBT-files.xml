@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PSBT Addition (BIP 174) for authenticating source/output PSBT files</title>
+  <updated>2023-06-13T23:07:17.859641+00:00</updated>
+  <author>
+    <name>Peter D. Gray 2020-01-11 17:29:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PSBT Addition (BIP 174) for authenticating source/output PSBT files</title>
+    <updated>2023-06-13T23:07:17.859641+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-January/017554.html" rel="alternate"/>
+    <summary>The PSBT Signer is proposing the addition of two optional signatures to PSBT files in transit to protect against MiTM changes. The first signature would be added to the PSBT globals section and cover all bytes in the original PSBT file, while the second signature would be added to the last key/value pair of the last output of the transaction and cover all bytes of the signed PSBT up to that point. These signatures can only be made by a PSBT processor in the Signer role. Tools that read in a PSBT with a signature in the final output section should verify it by checking the signature over a digest of the PSBT file up to the last X bytes, ensuring that the file ends at that point with only the signature following it, and checking that the key used for the signature is one of the input's keys. PSBT processors in the "combining" role should preserve the signatures in the global section and validate them if they have the original PSBT on hand. The Finalizer should check that all Signers worked from the same PSBT file and verify the signature in the output section.For the message digest, the proposal suggests using simple SHA256(SHA256(bytes of PSBT)). The serialization of the signature is still uncertain but should be DER-encoded and variable length for consistency with the rest of the file. The next steps are to get two officially-assigned BIP-174 key numbers assigned for these two signatures and add them to Coldcard's firmware, write a BIP for this, and/or make an addition to BIP-174.</summary>
+    <published>2020-01-11T17:29:06+00:00</published>
+  </entry>
+</feed>

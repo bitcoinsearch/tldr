@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Splice Pinning Prevention w/o Anchors</title>
+  <updated>2023-06-03T09:39:48.655230+00:00</updated>
+  <author>
+    <name>Greg Sanders 2022-08-10 16:06:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Splice Pinning Prevention w/o Anchors</title>
+    <updated>2023-06-03T09:39:48.655230+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-August/003668.html" rel="alternate"/>
+    <summary>The discussion revolves around the ancestor bulking variant of pinning and its relevance. It is noted that this variant matters not only when trying to add a new descendant but also when attempting to replace-by-fee (RBF) a transaction with low feerate ancestor junk. This is because such transactions are pushed to the bottom of the mempool, making it necessary to pay "full freight" to replace them via bip125 rule#3 even though they may have high feerates. However, it is unclear whether this applies in the current scenario. The email from Eugene Siegel is in response to the discussion. He notes that the ancestor bulking variant of pinning matters only if one is trying to add a new descendant to a splice transaction that is already locked with `1 OP_CSV`. In this case, it is impossible to add a descendant since the ancestor/descendant limits are already reached. He further notes that the variant should not matter for RBF since only the splice transaction would be replaced, not any of the ancestors. However, he suggests that it might matter if the new funding output is not encumbered.According to Eugene, the new funding output cannot have `1 OP_CSV` unless the commit tx format is changed, which may not work. This is because the commit tx has the disable bit set in nSequence, making it incompatible with the sequence lock. Enabling the bit may also be tricky since the commit tx may have a time-based or block-based locktime based on the lower bits of the obscured commitment number, and it must be block-based (and non-zero) for the sequence lock to work. This creates an opportunity for pinning to occur if the new funding output is not encumbered since an attacker can make a junk tree using the anchor output. However, the output would be replaceable using RBF since the user has their own commit tx (with anchor) to broadcast.</summary>
+    <published>2022-08-10T16:06:05+00:00</published>
+  </entry>
+</feed>

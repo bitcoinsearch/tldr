@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CLTV/CSV/etc. deployment considerations due to XT/Not-BitcoinXT miners</title>
+  <updated>2023-06-10T20:31:27.749200+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2015-08-19 16:32:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CLTV/CSV/etc. deployment considerations due to XT/Not-BitcoinXT miners</title>
+    <updated>2023-06-10T20:31:27.749200+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/010438.html" rel="alternate"/>
+    <summary>The discussion on the bitcoin-dev mailing list regarding version bits for BIP 65, 68 and other upgrades continues. One proposal is to modify IsSuperMajority to take an optional mask field; in this proposal, bits set in that mask are zeroed for the purpose of the IsSuperMajority calculation. For the current vote, bits 0x20000007 would be masked. To signal support for CLTV/CSV/etc., bit 4 would need to be set, which on Core would mean a minimum version of 0x8, and on XT/not-XT, a minimum version of 0x20000008. However, it is important to note that the vote is still over whether to enforce BIP 65, 68, etc. for blocks with nVersion&gt;=4, so when this all clears up, an additional bit will not have been needlessly wasted. Another proposal suggests using nVersion &amp; 0x8 to signal support while keeping the consensus rule as nVersion &gt;= 4, in order to avoid wasting a bit after the situation has cleared up. However, there were concerns that if XT gets 40% and the BIP gets 55%, then 95% of nodes would accept the upgrade, and version 3 and lower blocks would need to be rejected after that. Additionally, advertising 0x7 for the last 3 bits could lead to XT claiming to support the check locktime verify BIPs even though they don't have the code. A possible solution was proposed that would involve setting N (the height at which the rule is active) one year from now or so, and giving a period of time after lock that bit 8 will be kept and another period where it is guaranteed to be zero. This would allow software that is only watching the bit time to be upgraded and a similar amount of time where the bit is set to zero before it can be reused.</summary>
+    <published>2015-08-19T16:32:49+00:00</published>
+  </entry>
+</feed>

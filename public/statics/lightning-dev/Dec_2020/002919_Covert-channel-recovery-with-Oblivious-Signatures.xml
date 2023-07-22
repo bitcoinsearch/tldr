@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Covert channel recovery with Oblivious Signatures</title>
+  <updated>2023-06-03T03:23:21.700673+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-12-15 10:21:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Covert channel recovery with Oblivious Signatures</title>
+    <updated>2023-06-03T03:23:21.701673+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-December/002919.html" rel="alternate"/>
+    <summary>The context discusses the possible options when a channel state has HTLCs in flight, specifically whether to put them onto the settlement transaction or to gift the money to the party offering the recovery settlement. However, gifting the money is not recommended as all the claimable value could potentially be in an outgoing HTLC, which can cause problems if the node is a forwarding node and funds are in various HTLCs. In this case, it is suggested to "bind" incoming and outgoing HTLCs if the node was a forwarding node. The context further provides a hypothetical situation where a forwarding node forward a payment whose outgoing expires in 1 day and whose incoming expires in 2 days. If the node loses memory and cannot recover the outgoing channel, it becomes impossible to recover the outgoing channel since the peer has already closed it and resolved everything it is interested in. To address this issue, using static-key channels (i.e. channel keys are our node keys) allows us to recover even the outgoing channel with outgoing HTLC that has been forgotten by the outgoing peer. However, using static-key channels does have slightly weaker privacy concerns.The privacy concerns include published nodes revealing all their channels with other published nodes on the blockchain and unpublished nodes risking revealing their channels with published nodes via the blockchain. Invoices created by unpublished nodes currently reveal their public key, which can allow payers to uncover all the channels of that node. Unpublished nodes could use a faked node id, by combining the payment hash/point with its privkey to generate a new keypair to use as faked node id, but this technique is potentially risky and may lead to loss of funds and privacy.</summary>
+    <published>2020-12-15T10:21:09+00:00</published>
+  </entry>
+</feed>

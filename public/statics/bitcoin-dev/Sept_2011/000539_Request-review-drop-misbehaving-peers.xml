@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Request review: drop misbehaving peers</title>
+  <updated>2023-06-04T19:44:39.781193+00:00</updated>
+  <author>
+    <name>Stefan Thomas 2011-09-15 13:00:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Request review: drop misbehaving peers</title>
+    <updated>2023-06-04T19:44:39.781193+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-September/000539.html" rel="alternate"/>
+    <summary>The discussion revolves around the idea of adjusting DoS (Denial of Service) protection if a node has less than a minimum number of connections. The proposal is aimed at identifying if there is something wrong with the protections of the node. It is suggested that if a node seems to be kicking everybody off the roster, then it is a concern. Another suggestion is to send a message to the banned peer indicating the reason for the ban. The idea is to make debugging easier if there are some weird bans happening in the wild and we cannot figure out why. Though logging the reason is probably fine in most cases, providing the cause of the ban to the banned peer can potentially improve the debugging process.The discussion also focuses on whether or not sending lots of messages that do not pass the protocol-level checksum test should be a bannable offense. The attacks discussed involve cross-protocol attacks, where an attacker puts an iframe on a website with a URL like http://victim.com:8333, so lots of people's browsers connect to it. Additionally, the attacker could use something like [magic-bytes]tx\0[...][valid orphan transaction] in the URL, so the browser would send GET /[magic-bytes], etc., and the Bitcoin node would interpret it. The point system for badness assigned to a peer sending non-standard transactions is a matter of debate. While some argue that assigning a point or two of badness is reasonable, others disagree. They suggest that what is considered a non-standard transaction today may become a standard transaction tomorrow. Gavin Andresen thanks Mike for the detailed review and simplifies his approach. He adds a -banscore option (default 100), and if a node accumulates more than -banscore misbehavior points, it will get dropped and banned for -bantime (default 60*60*24) seconds. Bad signatures are made a banning offense, and the number-of-sigops and non-standard-transaction penalties are removed. Andresen used a mutable field with const setter to avoid modifying a bunch of methods to take non-const blocks/transactions instead of const because a block/transaction's DoS score is meta-data and not part of its state. He also makes GetTime() unit-test friendly as suggested.</summary>
+    <published>2011-09-15T13:00:06+00:00</published>
+  </entry>
+</feed>

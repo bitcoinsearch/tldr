@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Bitcoin Secure Multisig Setup</title>
+  <updated>2023-06-14T17:32:12.926386+00:00</updated>
+  <author>
+    <name>Hugo Nguyen 2021-02-12 17:54:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Bitcoin Secure Multisig Setup</title>
+    <updated>2023-06-14T17:32:12.926386+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018411.html" rel="alternate"/>
+    <summary>The email thread discusses the encryption aspect of a multisig setup. The proposed key derivation function is PBKDF2 with PRF = SHA512, which should be readily available on today's hardware and takes about ~3 seconds to derive the encryption key on an 80Mhz MCU. The password will be replaced with HUMAN_READABLE_TITLE string in ASCII format, minimum length = 8, maximum length = 20, and the nonce will be a 64-bit number. The coordinator and signers agree and exchange these two secrets prior to the setup. The NONCE can be converted to either (a) a 6-word phrase using BIP39 wordlist, (b) a 20-digit decimal number, or (c) a QR code depending on the vendor. This flexibility in the data format allows each vendor to customize the UX based on their respective device capabilities.If there is no need for extra entropy, the HUMAN_READABLE_TITLE string can be fixed, such as "No SPOF" (No Single Point Of Failure). If the coordinator feels that 64 bit of entropy is not enough, they can allow bigger entropy (more than 6 mnemonic words).Dmitry Petukhov questioned if the additional secret defeats the advantage in UX gained by using (relatively) short nonce. He also suggested choosing the number of rounds to use in PBKDF2 instead of using a variable password. Allowing variable iteration count is probably better UX-wise, and the more money at stake, the higher number of rounds could the coordinator choose (taking into account the characteristics of the participant devices).The email also discusses the vulnerability of the previously proposed scheme of ENCRYPTION_KEY = SHA256(SHA256(TOKEN)) to rainbow table attack. It was suggested to make the token even longer, use the mnemoic, or specify a key derivation function suitable for passwords. The approaches can be combined - specify a key derivation function suitable for passwords; via secure channel, share a password and/or the derived key.</summary>
+    <published>2021-02-12T17:54:57+00:00</published>
+  </entry>
+</feed>

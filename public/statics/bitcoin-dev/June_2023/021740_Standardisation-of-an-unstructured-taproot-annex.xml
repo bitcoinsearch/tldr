@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Standardisation of an unstructured taproot annex</title>
+  <updated>2023-06-16T18:46:29.387555+00:00</updated>
+  <author>
+    <name>Greg Sanders 2023-06-03 12:05:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Standardisation of an unstructured taproot annex</title>
+    <updated>2023-06-16T18:46:29.387555+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-June/021740.html" rel="alternate"/>
+    <summary>The email conversation between Joost Jager and Greg discusses the use of annex in LN-Symmetry to force the publication of a missing piece of control block for the new taproot output while maintaining the node's O(1) state and keeping 0.5RTT channel updates. The annex trick can also be replaced with a dangling OP_RETURN, but it comes with restrictions on which sighashes one can use as committing to multiple outputs disallows SIGHASH_SINGLE. A fair exchange protocol using signature adapters can obviate the need for the annex, but requisite APIs do not exist yet. The issue of malleability vector arises where a counter-party decides to put in a strictly worse transaction for miners by bloating the weight of it without adding fees, leading to denial of entry of someone's transaction into the mempool entirely. The solution lies in bridging the gap between node anti-DoS and an entity's ability to pay miners more via feerate-ordered queue, without zeroing out all ability to limit the sizes of multi-party, multi-input transactions for speculative use cases. It may be more prudent to permit the utilization of the annex without restrictions, inform developers of its inherent risks, and acknowledge that Bitcoin, in its present state, might not be ideally suited for certain types of applications. The email also mentions the removal of the need for a commitment transaction enabling the inclusion of data within a single transaction that relies on its own transaction identifier (txid), which is possible because the txid calculation does not incorporate the annex, where the data would be housed. This feature can be beneficial in scenarios that require the emulation of covenants through the use of presigned transactions involving an ephemeral signer.</summary>
+    <published>2023-06-03T12:05:59+00:00</published>
+  </entry>
+</feed>

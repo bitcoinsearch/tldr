@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Generalizing feature negotiation when new p2p connections are setup</title>
+  <updated>2023-06-14T15:06:37.705008+00:00</updated>
+  <author>
+    <name>Eric Voskuil 2020-08-18 18:11:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Generalizing feature negotiation when new p2p connections are setup</title>
+    <updated>2023-06-14T15:06:37.705008+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018100.html" rel="alternate"/>
+    <summary>Bitcoin is a diverse network with different features implemented in each client, and the Bitcoin protocol has not fully evolved to capture this reality. While the Bitcoin protocol initially had a simple numerical version field, it is wholly impractical for any diverse network. A number of Bitcoin protocol changes have been made via new dummy "negotiation" messages, which take advantage of the fact that the Bitcoin protocol has always expected clients to ignore unknown messages. A proposal was put forth by Suhas Daftuar for a generalized feature negotiation to take place prior to the VERACK message being received by each side. In thinking about the mechanism used there, it was suggested that it would be helpful to codify in a BIP the idea that Bitcoin network clients should ignore unknown messages received before a VERACK. The exact way of doing this does not matter much, and sending it as a stream of messages which each indicate support for a given protocol feature perfectly captures the pattern that has been used in several recent network upgrades, keeping consistency.While Eric Voskuil supports creating a simpler system, eliminating extra messages, he disagrees with the proposal to send individual messages instead of one message. He suggests that extension of the verack is the simplest change possible to implement the desired behavior. Each peer simply supplies the matrix of sub-protocols it supports and only those supported by both are allowed. The existing numeric version can be reserved exclusively for “must” implement, and can be used to signal an extension to the verack. The verack can then carry a list of “may” or “should” sub-protocols for final negotiation. Matt Corallo believes that ultimately, some kind of negotiation which is flexible in allowing different software to negotiate different features without a global lock-step version number increase is needed. He suggests that a single message that lists the set of features which a node optionally wishes to support on the connection would be ideal. This proposal is fully equivalent to that, instead opting to list them as individual messages instead of one message, which is a bit nicer in that they can be handled more independently or by different subsystems including even the message hashing.</summary>
+    <published>2020-08-18T18:11:12+00:00</published>
+  </entry>
+</feed>

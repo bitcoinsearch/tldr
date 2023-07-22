@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Chain pruning</title>
+  <updated>2023-06-08T19:33:25.162125+00:00</updated>
+  <author>
+    <name>Brian Hoffman 2014-04-10 16:23:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Chain pruning</title>
+    <updated>2023-06-08T19:33:25.162125+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005210.html" rel="alternate"/>
+    <summary>The email thread discusses the possibility of nodes compressing and storing earlier transaction sets as archive sets to conserve disk space and network activity. The idea is that nodes could serve up these archive sets conditionally, with only a certain number open at any given time while the others sit on disk compressed and unavailable to the network. This would allow nodes to have all full transactions but still not respond about every possible transaction. The archival process could be based on a rotational request period, based on request count, or done periodically. Once considered active, an archive set would be expected to uncompress and make it available to the network. Clients would have to piece together archive sets from different nodes, but if there weren't enough archive nodes to cover the chain, they could increase the number of required open archive sets when the node was active.The use case for this is that nodes could burn the node implementation + block data + a live operating system on a read-only medium. There would be no consensus code to keep up to date with protocol developments because it wouldn't take an active part in it. It could be useful when nodes that host all history become rare and allow distributing 'pieces of history' in a self-contained form. In terms of peer selection, nodes could seek nodes that have the least rare-ness in the ranges they offer. For example, if a node is looking for a block 50 from the tip, it should probably not prefer to fetch it from someone with blocks 100000-150000 if it's one of only 100 nodes that has that range. In general, it would be best to request blocks from a node that only serves the last N (N&gt;~50) blocks, rather than a history node that could use the same bandwidth to serve earlier, rarer blocks to others.</summary>
+    <published>2014-04-10T16:23:40+00:00</published>
+  </entry>
+</feed>

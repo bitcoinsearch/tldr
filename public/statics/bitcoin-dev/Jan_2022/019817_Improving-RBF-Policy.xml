@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving RBF Policy</title>
+  <updated>2023-06-15T16:01:38.200970+00:00</updated>
+  <author>
+    <name>Gloria Zhao 2022-01-27 13:42:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving RBF Policy</title>
+    <updated>2023-06-15T16:01:38.200970+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-January/019817.html" rel="alternate"/>
+    <summary>This post discusses the current limitations of Bitcoin Core's Replace-by-Fee (RBF) policy and seeks to start a conversation on how it can be improved. The RBF policy allows conflicting unconfirmed transactions to be replaced, but there are concerns around its implementation.Firstly, there are issues around pinning attacks where attackers may take advantage of limitations in the RBF policy to prevent other users' transactions from being mined or accepted as a replacement. Secondly, there are user interface issues, such as only allowing confirmed UTXOs for funding a fee-bump, which can hurt users trying to fee-bump their transactions. Lastly, there have been updates to mempool and mining logic since RBF was implemented, and improvements to the RBF policy should be made to align with these updates.The desired changes to the RBF policy include removing rule #3, eliminating the SIGHASH_ANYONECANPAY pinning attack, allowing new unconfirmed inputs, and creating a more helpful interface that helps wallets fund replacement transactions that aim for a feerate and fee. Additionally, there are suggestions to consider different formulations for incentive compatibility, such as whether the fees expected to be paid in the next (N?) blocks higher or lower if we process this transaction.An idea is also proposed to find out what the "mining score" of a transaction in the mempool is and how subsets of a transaction's ancestor set can be included without it. Overall, the goal is to make a replacement policy that results in a useful interface for users and safe policy for node operators.In addition, the article discusses the challenges of accurately calculating a transaction's mining score in Bitcoin's mempool and proposes various heuristics to estimate it, including ancestor feerate, individual and ancestor scores, and maximum ancestor score with descendants. The author also explores potential improvements to the replace-by-fee (RBF) mechanism, such as requiring replacements to have higher ancestor scores or rates, using fee-only rules for smaller transactions, and limiting the number of replacements per prevout. To better assess the economic gain of replacing transactions in the mempool, the author suggests tooling options like caching a block template or dividing the mempool into high and low feerate layers. The proposed ideas are based on feedback from various experts in the Bitcoin community.</summary>
+    <published>2022-01-27T13:42:09+00:00</published>
+  </entry>
+</feed>

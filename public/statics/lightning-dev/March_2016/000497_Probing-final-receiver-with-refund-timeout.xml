@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Probing final receiver with refund timeout</title>
+  <updated>2023-05-23T22:36:58.796573+00:00</updated>
+  <author>
+    <name>Mats Jerratsch 2016-03-21 09:42:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Probing final receiver with refund timeout</title>
+    <updated>2023-05-23T22:36:58.797607+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-March/000497.html" rel="alternate"/>
+    <summary>The proposal is about each node publishing its MIN_TIMEOUT along with other information. The payer sums the MIN_TIMEOUT to the payee and adds some random value to give the initial HTLC timeout, keeping it under the max value allowed by protocol. The payer puts the 'expected_timeout' in each layer of the onion, subtracting the last hops' MIN_TIMEOUT from the initial timeout. For instance, if the maximum allowed timeout is 20 * 12 hours and the route is A (12 hours) -&gt; B (6 hours) -&gt; C (6 hours) -&gt; D (4 hours), then the initial timeout has to be at least 12 + 6 + 6 + 4 == 28 hours plus some padding for transmission delays, say 29 hours.A factor around two is taken as a multiply of the MIN_TIMEOUT. A random timeout between 29 and 240 hours is picked, say now+100 hours, and onion looks like [ A: now+100 [ B: now+88 [ C: now+82 [ D: now+76 ] ] ] ]. However, the author suggests not using the MIN_TIMEOUT here but using it as the minimum time deducted each hop and adding some randomness into it. It also means that two values are needed in the onion object: the value expected to receive and the value to use for the next hop (and therefore the value of the next hop).Finally, the onion object can be saved in a less redundant way.</summary>
+    <published>2016-03-21T09:42:35+00:00</published>
+  </entry>
+</feed>

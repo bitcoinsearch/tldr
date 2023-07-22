@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving SPV security with PoW fraud proofs</title>
+  <updated>2023-06-13T18:17:04.793432+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-04-19 02:53:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving SPV security with PoW fraud proofs</title>
+    <updated>2023-06-13T18:17:04.793432+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-April/016878.html" rel="alternate"/>
+    <summary>The email thread discusses the vulnerability of Simplified Payment Verification (SPV) clients, which assume that the chain with the most Proof-of-Work is valid. ZmnSCPxj explains that a minority miner can disrupt SPV clients so that they download two blocks for every block the minority miner finds, not one. This can be achieved by making multiple 1-block chainsplits and alternating split-off and non-split-off. With over 33% hashrate, this can force SPV clients to download every block, making them a full node anyway. Ethan Heilman suggests that when a minority miner generates an alternate block at S+1, the SPV node should download blocks S+1 and S+2 from the dishonest chain B. If S+1 has an invalid coinbase, the SPV node will learn that Chain B is invalid and abandon it. ZmnSCPxj gives an example where a mining supermajority decides to increase inflation by imposing a hardfork rule. At height S+1, they begin the rule, and this implies that at heights S+1, S+11, S+21, s+31, the coinbase violates the pre-hardfork rules. At around height S+9, the minority miners generate an alternate block at height S+1 and at around height S+18, they generate an alternate block at height S+2. With a "rare enough" inflation event, miners may even spend some coinbases on SPV nodes, making them unwilling to revert to the minority pre-hardfork chain, economically locking in the post-hardfork inflation.The email thread also discusses how an attacker could use forks to force SPV clients to download more blocks. The proposal is that whenever a chainsplit occurs, SPV clients should download and validate the "longest chain" up to more than one block greater than the height of the losing chain. An attacker can use this to force SPV clients to download one block per block the attacker mines, which is weaker security than provided by a full node since chain B will only be validated if the client knows chain A exists. The email thread concludes that every rule imposed is potentially a loophole by which new attacks are possible, and it is essential to consider this when imposing rules. The suggested solution is to become a full node anyway since there exist pools with &gt;33% hashrate, making the above attack possible.</summary>
+    <published>2019-04-19T02:53:49+00:00</published>
+  </entry>
+</feed>

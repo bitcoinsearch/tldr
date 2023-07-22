@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Capping the size of locators [trivial protocol change BIP]</title>
+  <updated>2023-06-13T04:07:06.492395+00:00</updated>
+  <author>
+    <name>Eric Voskuil 2018-08-06 05:29:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Capping the size of locators [trivial protocol change BIP]</title>
+    <updated>2023-06-13T04:07:06.492395+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-August/016288.html" rel="alternate"/>
+    <summary>The Bitcoin P2P protocol uses a data structure called a locator to reconcile blockchains between nodes. The locator communicates a list of known hashes that allows a peer to find a recent common ancestor between the best chains on two nodes. The original Bitcoin implementation had no explicit limit to the number of hashes in a locator message, allowing for wasteful uses such as including all hashes in a chain. Common implementations have implicit limitations of 2^32 blocks and an exponent of 2 after the first 10 locators and so could never request more than 42 hashes in any case. To reduce the worst-case cost of processing a locator message, it would be useful if the size of locator messages were strictly bounded to sensible levels. Coinr8d raised concerns regarding the node software processing large locators without limits, which could potentially result in network splits if older nodes produce larger locators. Gregory Maxwell proposed limiting the locator messages used in the getblocks and getheaders to 64 entries and requiring them to be ordered by total work. This proposal reduces the worst-case cost of processing a locator message. Implementations that seek to handle larger numbers of blocks than afforded by this limit with an exponent of 2 can adaptively switch to a larger exponent as required to stay within the limit. The proposal is licensed under the 2-clause BSD license.</summary>
+    <published>2018-08-06T05:29:31+00:00</published>
+  </entry>
+</feed>

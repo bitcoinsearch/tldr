@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Using the same public keys, the p2sh returned by `addmultisigaddress` differs from the one	returned by `createmultisigaddress`</title>
+  <updated>2023-05-20T20:10:57.724197+00:00</updated>
+  <author>
+    <name>Andrew Chow 2019-04-19 14:30:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Using the same public keys, the p2sh returned by `addmultisigaddress` differs from the one	returned by `createmultisigaddress`</title>
+    <updated>2023-05-20T20:10:57.724197+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-April/016883.html" rel="alternate"/>
+    <summary>Michele Federici wrote to the bitcoin-dev mailing list, stating that he was working on a function to derive the pay-to-script-hash from a multisig script and noticed a discrepancy between `addmultisigaddress` and `createmultisigaddress` methods. He checked his implementation and found it was correct, but his output address was different from the `addmultisigaddress` output. However, when he tried the `createmultisigaddress` method, using the same public keys, the output matched his. The `redeemScript` was the same for both methods, only the addresses were different. The reason for this discrepancy is due to the address types in use. `addmultisigaddress` uses the default address type of the wallet, which is p2sh-segwit. On the other hand, `createmultisig` uses a default address type of legacy. To have `createmultisig` get `addmultisigaddress`'s result, one needs to add the string "p2sh-segwit" to the end of the command. Similarly, to have `addmultisigaddress` get `createmultisig`'s result, one needs to add the string "legacy" to the end of the command.</summary>
+    <published>2019-04-19T14:30:03+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Improving the initial gossip sync</title>
+  <updated>2023-05-20T08:04:01.889046+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-02-25 23:23:54</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-02-24 00:45:27</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-02-07 00:24:02</name>
+  </author>
+  <link href="lightning-dev/Feb_2018/001050_Improving-the-initial-gossip-sync.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2018/001043_Improving-the-initial-gossip-sync.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2018/001000_Improving-the-initial-gossip-sync.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Improving the initial gossip sync</title>
+    <updated>2023-05-20T08:04:01.889046+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/001050.html" rel="alternate"/>
+    <summary>The Lightning-dev mailing list recently discussed proposals to address issues with the initial synchronization of nodes. One proposal suggested adding a new feature bit called 'channel_range_queries'. A prototype has been built with this feature bit, and if both parties set 'initial_routing_sync' and 'channel_range_queries', they do nothing. Otherwise, they either send their routing table as before or a 'query_channel_range' message. The solution involves adding three new messages to handle channel range queries: query_short_channel_id, query_channel_range, and reply_channel_range.In addition, the group discussed implementing compression schemes to reduce the size of the raw 8-byte stream of ordered channels. Various compression schemes were tried and tested, and it was found that the 'deltagz' scheme worked best, resulting in a file size of 595469 bytes for all P2SH outputs between blocks 508000-508999.During the discussion on implementing new Lightning Network features, participant Olaoluwa Osuntokun suggested adding a distinct `chan_update_horizon` message to set up initial session context. Another possible enhancement includes incorporating a high+low timestamp to allow for batched requests in response to a channel range message, and adding an additional encoding_type field before data.Another proposal suggests grouping channel announcements by "buckets" and creating a filter for each bucket. When a node receives a 'channel_announcement_filters' message, it uses it to filter channel announcements before sending them. This proposal cares only about new channels, while the first proposal focuses on eventually synchronizing all the set of updates. Both proposals aim to eliminate zombie churn and intensive initial connection graph dump without any extra messaging overhead.The Lightning-dev mailing list concluded with agreement that a stop-gap solution was needed to fix the naive table dump on initial connect, as zombie churn was causing wasted bandwidth. It was also suggested that a new message is required instead of extending the 'init' message. The use case for the second proposal is mobile nodes or nodes that are often offline and need to resync very often.</summary>
+    <published>2018-02-25T23:23:54+00:00</published>
+  </entry>
+</feed>

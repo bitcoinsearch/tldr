@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Link-level payment splitting via intermediary rendezvous nodes</title>
+  <updated>2023-05-25T15:50:22.741321+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-11-13 04:46:53</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-11-14 23:29:30</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-11-09 05:46:36</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-11-09 11:32:27</name>
+  </author>
+  <author>
+    <name>Christian Decker 2018-11-13 03:45:52</name>
+  </author>
+  <author>
+    <name>Conner Fromknecht 2018-11-13 20:21:28</name>
+  </author>
+  <author>
+    <name>Christian Decker 2018-11-14 11:40:46</name>
+  </author>
+  <author>
+    <name>Christian Decker 2018-11-15 07:22:09</name>
+  </author>
+  <author>
+    <name>Johan Torås Halseth 2018-11-09 08:07:51</name>
+  </author>
+  <link href="lightning-dev/Nov_2018/001575_Link-level-payment-splitting-via-intermediary-rendezvous-nodes.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001599_Link-level-payment-splitting-via-intermediary-rendezvous-nodes.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001547_Link-level-payment-splitting-via-intermediary-rendezvous-nodes.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001551_Link-level-payment-splitting-via-intermediary-rendezvous-nodes.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001573_Link-level-payment-splitting-via-intermediary-rendezvous-nodes.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001582_Link-level-payment-splitting-via-intermediary-rendezvous-nodes.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001594_Link-level-payment-splitting-via-intermediary-rendezvous-nodes.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001606_Link-level-payment-splitting-via-intermediary-rendezvous-nodes.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001550_Link-level-payment-splitting-via-intermediary-rendezvous-nodes.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Link-level payment splitting via intermediary rendezvous nodes</title>
+    <updated>2023-05-25T15:50:22.741321+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001575.html" rel="alternate"/>
+    <summary>The Lightning Network community has been discussing proposals for implementing link-level payment splitting and rendezvous routing. One proposal involves creating a route from itself to D when C is the payer, using an onion-wrapped route from E with ephemeral key and other necessary data. Another proposal suggests that B can provide the onion-wrapped route D-&gt;E to C if channel CD is low capacity or down when B is the payer. The email conversation also discusses the operation of processing a hop, where the onion is unwrapped with current ephemeral key and dispatched based on realm byte.There are issues with the proposed mechanism when it comes to the padding at the rendezvous point, which would usually be zero-padded and then encrypted in one go with the shared secret generated from the previous ephemeral key. This ephemeral key is not known to the recipient, so the recipient would be unable to compute the correct MACs. A proposed solution involves adding a detour when generating the next onion, involving one additional ECDH at the rendezvous, one ChaCha20 encryption, and one scalar multiplication to generate the next ephemeral keys. However, this mechanism also raises an issue where it is not possible for C to find an ephemeral key that would end up identical to the one that D would require to decrypt the onion correctly.The Lightning-dev mailing list discussed the possibility of payment splitting and re-routing over multiple hops using rendezvous routing. The group explored a graph example where node C cannot send to node D because the channel direction is saturated in favor of D. Instead, C can route to D via A and treat that sub-route as a partial route-to-payee under rendez-vous routing, as long as node A supports rendez-vous routing. Another proposal was mentioned on the mailing list, which suggested using HORNET's support for rendezvous routing as it is formally proven in this model, although some members had concerns about wrap resistance.ZmnSCPxj proposed link-level payment splitting and provisional acceptance of rendez-vous routing, which aims to allow nodes with only one channel to perform link-level payment splitting/re-routing. Christian Decker presented his current favorite scheme for encryption padding at the rendezvous point, involving performing ECDH like normal to get the shared secret, decrypting the payload, and simultaneously encrypting the padding. The Lightning-dev mailing list has discussed the possibility of link-level payment splitting and provisionally accept rendez-vous routing. It is suggested that it is possible to perform link-level payment splitting/re-routing even if a node has only a single channel to the next node, allowing for re-routing or payment splitting over multiple hops.</summary>
+    <published>2018-11-13T04:46:53+00:00</published>
+  </entry>
+</feed>

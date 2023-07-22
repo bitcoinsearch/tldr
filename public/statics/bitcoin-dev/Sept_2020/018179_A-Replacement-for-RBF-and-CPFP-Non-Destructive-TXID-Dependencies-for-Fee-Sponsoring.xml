@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Replacement for RBF and CPFP: Non-Destructive TXID Dependencies for Fee Sponsoring</title>
+  <updated>2023-06-14T15:23:33.645488+00:00</updated>
+  <author>
+    <name>Antoine Riard 2020-09-19 18:39:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Replacement for RBF and CPFP: Non-Destructive TXID Dependencies for Fee Sponsoring</title>
+    <updated>2023-06-14T15:23:33.645488+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-September/018179.html" rel="alternate"/>
+    <summary>A draft proposal for a mechanism to replace CPFP and RBF for increasing fees on transactions in the mempool is being shared with Bitcoin Devs. The proposal aims to create a fully abstracted primitive that requires no special structure from an underlying transaction to increase fees to confirm the transactions. However, the lack of a global mempool leads to creatively combining vectors that provoke mempools-partitions.The proposal aims to solve class a) of pinnings by allowing fee-bumping with a new definition of dependencies. However, it may not achieve this as the Sponsor feerate is part of this commitment and can't be unilaterally adjusted to actual mempool-congestion. A further softfork proposal with regards to sighash malleability is required to achieve the security semantic for Lightning type of protocols.The proposal suggests a general-purpose mechanism for expressing non-destructive dependencies on specific transactions that can be used to sponsor fees of remote transactions. The mempool has unintended consequences for second layer protocol developers. Applications are either vulnerable to attacks (such as transaction pinning) or must go through great amounts of careful protocol engineering to guard against known mempool attacks.The proposal restricts the mempool policy to ensure a subset of behavior sufficient to replace CPFP and RBF for fee bumping. The final output of a transaction is an unambiguous location to attach metadata to a transaction such that the data is available for transaction validation.In addition, the Bitcoin mempool has introduced a new feature that allows third-party fees to be attached to arbitrary transactions. The rules for this feature have been tightly bound, and it is not subject to traditional issues around pinning. There are several limitations imposed on the Sponsor Vector to prevent garbage sponsors.For instance, the Sponsor's feerate must be greater than the Sponsored's ancestor fee rate. Additionally, one Sponsor can replace another subject to normal replacement policies, and they are treated as conflicts. Future policy work might be able to insert sponsors into a special sponsor pool with an eviction policy that would enable sponsors to be queried and tracked for transactions that have too low fee to enter the mempool in the first place.A reference implementation demonstrating these rules is available, but it has not been carefully audited for correctness and likely diverges from this document in ways that should either be reflected in this document or amended in the code.</summary>
+    <published>2020-09-19T18:39:41+00:00</published>
+  </entry>
+</feed>

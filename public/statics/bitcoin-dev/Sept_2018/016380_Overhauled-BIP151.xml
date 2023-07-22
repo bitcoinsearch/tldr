@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Overhauled BIP151</title>
+  <updated>2023-05-20T17:39:46.086426+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2018-09-07 02:31:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Overhauled BIP151</title>
+    <updated>2023-05-20T17:39:46.086426+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-September/016380.html" rel="alternate"/>
+    <summary>In a bitcoin-dev discussion, the topic of improving privacy and security in Bitcoin's peer-to-peer (p2p) connections was brought up. One suggestion was to use an ECDH key exchange with an encoding of public keys that provides indistinguishability from random bitstrings. However, this would require writing new cryptographic code and may not actually improve security as Bitcoin traffic is easily identifiable by its traffic patterns. Another proposal was to enhance BIP151, which currently does not add any long-term confidentiality for p2p connections running over Tor. This could be achieved by adding some level of confidentiality hedge. The discussion also touched on the need to improve key derivation to prevent an attacker from creating a situation where two peers think they're in the same session, but they're not. Finally, there was disagreement over whether improving security would hinder adoption or give people a false sense of security.In a discussion about the Bitcoin protocol, the idea of using a shared secret to avoid issues with signalling re-keying in the length field was proposed. The contributory key model was also discussed but it was determined that an attack form was not possible. There was debate around the use of deterministic rekeying rules versus different policies, which could lead to fingerprinting implementations. It was suggested that using a cipher suite that effectively "rekeyed" every message would be preferable but there are no well-analyzed authenticated encryption modes with this property. When it comes to choosing between AES-GCM and ChaCha20/Poly1305, both are reasonable choices but on devices without hardware AES/clmul constant time AES-GCM is very slow compared to ChaCha20/Poly1305. The possibility of padding to hide message length without too much overhead was suggested, but it was noted that it could only be done at the message level. Writing things in stone to avoid complexity and fingerprinting was deemed impractical, as new proposals for messages where the overhead matters are upcoming. "May negotiate" was introduced to avoid a debate about who assigned numbers from the limited space in the future. Encryption can kill external analysers, but logging traffic is still possible. Lastly, there was a debate about whether the re-keying must be done after every 1GB of data sent or received, with the consensus being that it should just read "sent" instead of "sent or received."</summary>
+    <published>2018-09-07T02:31:15+00:00</published>
+  </entry>
+</feed>

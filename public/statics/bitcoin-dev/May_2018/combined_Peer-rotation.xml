@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Peer rotation</title>
+  <updated>2023-06-13T02:55:48.301799+00:00</updated>
+  <author>
+    <name>Gleb Naumenko 2018-05-23 21:03:58</name>
+  </author>
+  <author>
+    <name>Gleb Naumenko 2018-05-23 21:03:58</name>
+  </author>
+  <author>
+    <name>Gleb Naumenko 2018-05-23 21:03:58</name>
+  </author>
+  <link href="bitcoin-dev/May_2018/016014_Peer-rotation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2018/016014_Peer-rotation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2018/016014_Peer-rotation.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Peer rotation</title>
+    <updated>2023-06-13T02:55:48.301799+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/016014.html" rel="alternate"/>
+    <summary>The author of this post discusses the issue of network attacks that have become more prevalent in recent years due to the publication of new papers on the topic. The revealing of the topology of a network is one factor that can increase the risk of various types of attacks, including partitioning/eclipse and deanonymization of transactions. The current join/leave algorithm makes the network fairly static, making it possible to reconstruct the topology by observing events in the network. One solution to this problem is the rotation of peers, but there are several questions to answer before implementing this approach. For example, in a P2P network, rotating peers may cause an additional threat because having connections to more different peers increases the chances of connecting to an attacker. It's essential to avoid disconnecting the most reliable peers since a node may act legitimately but just to wait until all of the connections are under the control of an attacker. There are several metrics that might be used to consider peers reliable, such as the fraction of recent blocks or transactions a particular node has relayed to us, and how long the connection has been maintained.Rotation of the outgoing connections only seems to be sufficient yet not very hard to implement and analyze. Current 8 peers for outgoing connections is an arbitrary number, however, there is a reason behind keeping a number of outgoing connections low. Thus, there are three values to discuss: N, M, T. N is the number of persistent peers that are considered trustworthy based on the metrics discussed earlier, M is the number of peers to be rotated every T seconds. Figuring out an optimal set {N, M, T} may be done analytically or by simulation. It may also be useful to keep track of previous connections (which were evicted due to the rotation) and get back to those after a while under certain conditions. The rotation of peers itself may increase the chance that a particular Bitcoin address or set of transactions would be linked to a node. In this case, either Dandelion or sending own transactions to a static set of peers (say first 8 peers) may help.</summary>
+    <published>2018-05-23T21:03:58+00:00</published>
+  </entry>
+</feed>

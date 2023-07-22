@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TXO bitfield size graphs</title>
+  <updated>2023-06-13T02:56:17.223416+00:00</updated>
+  <author>
+    <name>Jim Posen 2018-05-24 04:02:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TXO bitfield size graphs</title>
+    <updated>2023-06-13T02:56:17.223416+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/016023.html" rel="alternate"/>
+    <summary>The email thread discusses the compression ratios of TXO bitfields and their feasibility for committing to block headers. The intention is to compress the bitfields when sending proofs of spentness/unspentness to light clients, where bandwidth is a concern. A Merkle Mountain Range can be constructed over the bitfield chunks to compactly prove spentness in this bitfield to a client. The top graph shows the compression ratios possible on a TXO bitfield split into 4 KiB chunks using gzip (level=9) and lz4. Data was collected at block height 523,303. The compression ratio is much lower for older chunks and is worse for more recent blocks. Over the entire history, gzip achieves 34.4%, lz4 54.8%, and bz2 37.6%. The bottom graph shows the per-block bitfield sizes, which are more compatible with constructions where an output's position is its block hash plus relative index. The compression ratios overall are 50% for gzip, 70% for lz4, and 61.5% for bz2. Bram Cohen suggests that run length encoding on the number of repeated bits and compressing that using elias omega encoding would work better than standard compression algorithms as it handles bitfields natively.</summary>
+    <published>2018-05-24T04:02:17+00:00</published>
+  </entry>
+</feed>

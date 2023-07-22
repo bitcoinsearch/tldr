@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Stale Factory (and channel) problem</title>
+  <updated>2023-06-02T18:18:30.050206+00:00</updated>
+  <author>
+    <name>Alejandro Ranchal Pedrosa 2019-04-21 02:38:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Stale Factory (and channel) problem</title>
+    <updated>2023-06-02T18:18:30.050206+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-April/001984.html" rel="alternate"/>
+    <summary>In an email exchange on the Lightning-Dev mailing list, Alejandro Ranchal Pedrosa and ZmnSCPxj discuss the potential of using `SIGHASH_NOINPUT` to address issues with stale offchain systems. This problem arises when one participant in a multiparticipant offchain system sends a signature that advances the protocol, but is then unable to receive further signatures from other participants to continue the protocol. For two-participant offchain systems (payment channels), the issue can be fixed by allowing the exchange of signatures of the most recent state upon re-establishing a communication channel. However, for multiparticipant offchain systems that host other offchain systems (channel factories), it is unknown whether or not dropped participants are able to construct the new state, making it ambiguous if on-factory channels should be rooted from the old state or the new state. ZmnSCPxj suggests that `SIGHASH_NOINPUT` could help address this issue, as on-factory channels not affected by a channel reorganization operation at the factory level can continue to operate by use of `SIGHASH_NOINPUT`. In an example provided, if channel states use `SIGHASH_NOINPUT` in signatures, then unaffected channels can continue operation even if a factory-level operation is in an indeterminate state. Alejandro Ranchal Pedrosa notes that while `SIGHASH_NOINPUT` offers similar functionality to what he suggests in his paper, there may be some variants to `SIGHASH_NOINPUT` that could affect the no-lock property of offchain layers. Nonetheless, with minor variants (listed in the paper), `SIGHASH_NOINPUT` could work well as a solution.</summary>
+    <published>2019-04-21T02:38:23+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CLTV/CSV/etc. deployment considerations due to XT/Not-BitcoinXT miners</title>
+  <updated>2023-06-10T20:31:57.062874+00:00</updated>
+  <author>
+    <name>Btc Drak 2015-08-27 22:11:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CLTV/CSV/etc. deployment considerations due to XT/Not-BitcoinXT miners</title>
+    <updated>2023-06-10T20:31:57.062874+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/010684.html" rel="alternate"/>
+    <summary>In August 2015, a discussion was being held on the Bitcoin-dev mailing list regarding the issues created by Bitcoin XT. One of the members proposed that the nVersion bits set by XT and Not-Bitcoin-XT miners should be masked away prior to applying standard IsSuperMajority() logic. This would mean that CLTV/CSV/etc. miners running Bitcoin Core would create blocks with nVersion=8. From the perspective of the CLTV/CSV/etc. IsSuperMajority() test, XT/Not-Bitcoin-XT miners would be advertising blocks that do not trigger the soft-fork.The proposal also mentioned that for the purpose of soft-fork warnings, the highest known version can remain nVersion=8, which is triggered by both XT/Not-Bitcoin-XT blocks as well as a future nVersion bits implementation. The three lowest bits will be unusable for some time, but will be eventually recoverable as XT/Not-Bitcoin-XT mining ceases. The proposal also suggested that further IsSuperMajority() soft forks can be accomplished with the same masking technique.One member suggested that all bits except the 4th bit should be masked, so that other fork proposals may use other bits for voting concurrently. Another member asked if the masking is applied only during the voting stage and whether the nVersion will be simply &gt;=8 without any masking after the soft fork is fully enforced with 95% support.It was later suggested that due to the seriousness of the issues created by Bitcoin XT, OPs text should be converted into an informational BIP. Additionally, BIPS 112 and 113 were changed to reflect the amended deployment strategy.</summary>
+    <published>2015-08-27T22:11:10+00:00</published>
+  </entry>
+</feed>

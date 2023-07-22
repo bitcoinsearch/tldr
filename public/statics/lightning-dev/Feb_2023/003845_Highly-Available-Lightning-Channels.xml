@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Highly Available Lightning Channels</title>
+  <updated>2023-06-03T11:55:32.538909+00:00</updated>
+  <author>
+    <name>Matt Corallo 2023-02-13 16:12:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Highly Available Lightning Channels</title>
+    <updated>2023-06-03T11:55:32.538909+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-February/003845.html" rel="alternate"/>
+    <summary>In an email thread discussing reputation systems in Lightning Network (LN), Christian Decker expressed his skepticism towards the patchwork approach of building the protocol. He argued that while reputation systems are useful when they work, it is hard to get them right. Decker categorized reputation systems into three types; first-hand experience, inferred experience, and hearsay. He noted that relying on first-hand and inferred experiences alone would not be sufficient as repeat interactions are too rare. Local knowledge also gets outdated over time, making it difficult to make good decisions. Decker suggested that LN could have a trivial solution to this by having wallet vendors/LSPs extract a fee for every HTLC routed through them. They can then tell users their view of the network live, which users would generally accept. Larger nodes would also not face any issues, but middle nodes would be stranded without good data.Decker objected to the idea of penalizing nodes that haven't been reliable in the past. Instead, he believes that the goal should be to optimize the payment process by choosing the best possible routes, rather than making a judgment on the honesty or reliability of a node. He thinks that penalizing nodes could lead to node operators playing stupid games to avoid perceived penalties. Decker suggested that to build a better model of liquidity, we could ask altruistic nodes for scoring data instead of relying on hearsay. He also warned against creating two classes of nodes by enshrining differences of availability in the protocol.Matt Corallo responded to Joost Jager's suggestion that payers on the LN should become strict about node performance by requiring routing nodes to operate flawlessly or else apply a hefty penalty. Corallo believes that nodes should measure the network and route over paths that they think are reliable for what they want, robustly over an unreliable network. He thinks that we should not expect the LN to be built out of high reliability nodes as it creates strong centralization pressure. Corallo suggested that lightning today is already very reliable and fast, with few retries required, and does not need any changes to fix it.The Lightning Network is proposing a new solution to increase payment success rates. Currently, with the network's shadow channels, routing nodes may not have enough liquidity up to the channel capacity. To address this issue, it is suggested to extend the `channel_update` field `channel_flags` with a new bit for routing nodes to signal `highly_available`. This flag would allow payers to prefer `highly_available` channels during pathfinding, but the routing node would face a stronger penalty than usual if it returns a failure. The proposal also includes a variation that signals availability implicitly through routing fees, but it may disincentivize cheap but reliable channels on high traffic links. Overall, implementing some form of a `highly_available` flag seems feasible and may improve payment success rates.</summary>
+    <published>2023-02-13T16:12:02+00:00</published>
+  </entry>
+</feed>

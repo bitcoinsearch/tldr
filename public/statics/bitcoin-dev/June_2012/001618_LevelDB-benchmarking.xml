@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>LevelDB benchmarking</title>
+  <updated>2023-06-06T05:43:30.052380+00:00</updated>
+  <author>
+    <name>Stefan Thomas 2012-06-19 19:22:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>LevelDB benchmarking</title>
+    <updated>2023-06-06T05:43:30.052380+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-June/001618.html" rel="alternate"/>
+    <summary>LevelDB is an ordered data structure that is pretty good at everything, making it a fantastic solution for desktop software with multiple use cases. It was written to power IndexedDB in Chrome which is a JavaScript API and uses LSM trees as a database type. One downside is the number of file descriptors, LevelDB defaults to 1000 per DB. It's very quick at doing bulk inserts and doesn't need any of the bells and whistles that BDB offers. However, it isn't really designed for something like Bitcoin which doesn't need ordered access, has relatively predictable characteristics, and - at least some of the time - runs on servers. Nonetheless, it seems to work well for the Bitcoin use case anyway. The CPU work can be multi-threaded, but the IO work, not as much. As Bitcoin grows we need to scale the nodes. Eventually there may be multi-machine nodes, but for now, we can buy more time by making the existing nodes faster.The code is a lot simpler compared to BDB and was refactored out of BigTable and made standalone for usage in Chrome, which makes it as portable as Chrome is. Mac/Windows/Linux should all work. Solaris, however, may need 64 bit binaries to avoid low FD limits. There are python bindings available for LevelDB.Overall, LevelDB is a great choice for desktop software with multiple use cases, but it isn't ideal for Bitcoin. Nonetheless, it works well for the Bitcoin use case anyway, thanks to the LSM trees. Lowering the file descriptor limit also works, but if you lower it too much, LevelDB will start to spend a lot of time opening and closing files, so combining tables into one is the better option.</summary>
+    <published>2012-06-19T19:22:15+00:00</published>
+  </entry>
+</feed>

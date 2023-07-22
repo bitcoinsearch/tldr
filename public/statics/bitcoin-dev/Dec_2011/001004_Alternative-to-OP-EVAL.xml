@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Alternative to OP_EVAL</title>
+  <updated>2023-05-18T22:53:17.726853+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2011-12-29 19:08:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Alternative to OP_EVAL</title>
+    <updated>2023-05-18T22:53:17.726853+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-December/001004.html" rel="alternate"/>
+    <summary>In response to Gavin's request for an alternative to OP_EVAL, roconnor proposes a new opcode called OP_CHECKEDEVAL. This opcode defines its own literal-only stack where all literals push to and only OP_CHECKEDEVAL pops from. The opcode looks at the two most recent elements pushed by a literal: S (the serialized script) and H (its hash). For the outer script, OP_CHECKEDEVAL has no effect except for popping 2 elements from the literal-only stack and potentially causing failure. Failure is caused when either no two elements remain on the literal-only stack, Hash(S) != H, or inner script execution causes failure. For the execution of the inner script, it is executed in a completely new and independent execution environment and inherits the main stack and alt stack (without the serialized script and the hash themselves) from the outer execution.  This requires OP_CHECKEDEVAL to immediately follow the push of script and hash, so the code in the pair can be parsed and interpreted as code, allowing static analysis. As OP_CHECKEDEVAL has no effects except for potentially causing failure, it is similar to the OP_NOPx it replaces and guarantees that interpreting OP_CHECKEDEVAL as OP_NOPx cannot cause the script to become invalid if it wasn't already.OP_CHECKEDEVAL has several advantages, including easy spend-to-script-hash, backward compatibility that is guaranteed by construction instead of separately enforced like with OP_EVAL, static analyzability (though it requires deserializing the script data), and the possibility to introduce a new language inside (not done in this proposal). The only disadvantages are that it is slightly less flexible than OP_EVAL since it disallows dynamic interaction with serialized scripts and that static code analyzers need to deserialize script data.</summary>
+    <published>2011-12-29T19:08:39+00:00</published>
+  </entry>
+</feed>

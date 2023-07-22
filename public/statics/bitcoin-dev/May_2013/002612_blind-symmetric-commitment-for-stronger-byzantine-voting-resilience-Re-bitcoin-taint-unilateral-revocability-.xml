@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>blind symmetric commitment for stronger byzantine voting resilience (Re: bitcoin taint &amp; unilateral revocability)</title>
+  <updated>2023-06-06T17:00:42.558909+00:00</updated>
+  <author>
+    <name>Adam Back 2013-05-16 14:51:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>blind symmetric commitment for stronger byzantine voting resilience (Re: bitcoin taint &amp; unilateral revocability)</title>
+    <updated>2023-06-06T17:00:42.558909+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-May/002612.html" rel="alternate"/>
+    <summary>In May 2013, Adam Back suggested the use of fixed size committed coin spends for better cryptography. The system involved using blind-sender, auth-tag, and encrypted-tx-commit with pub key P = xG, G = base point. Blind-sender was cP (public key EC multiplied by constant c) and sig was ECDSA( cx, encrypted-tx-commit ). Encrypted-tx-commit was AES( K, tx-commit ) where K was random. To reveal to a recipient, one had to send them P and K at each hop. However, earlier in the committed spend chain could force a reveal for someone later if the same K was used every time. To solve this, K_i was used for different spends and was included in the encrypted-tx-commit with K_{i-1} || tx-commit. The symmetric encrypted variant of the coin as specified was already evaluatable with fixed size committed spend. The limitation is one-use coin committed addresses (and inability to remove spend to committed junk with public validation, though there is the tx fee as a discouragement, it does bloat a recipients verification and so maybe frustrates SPV-&gt;SPV consumption of committed coins). The blind-sender was SHA1( SHA256( 1, pub ) ), auth was HMAC-SHA256-128(K, encrypted-tx-commit), and K was SHA-256(pub). Adam suggested using a KDF like IEEE P1363 KDF2 or PKCS#5 PBKDF2 with 1 iteration rather than ad hoc hashes for key derivation to improve the clarity in terms of the purpose of hashes.</summary>
+    <published>2013-05-16T14:51:09+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>`OP_FOLD`: A Looping Construct For Bitcoin SCRIPT</title>
+  <updated>2023-05-22T17:45:47.000001+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2022-02-27 16:34:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>`OP_FOLD`: A Looping Construct For Bitcoin SCRIPT</title>
+    <updated>2023-05-22T17:45:47.000001+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/020021.html" rel="alternate"/>
+    <summary>Bitcoin SCRIPT is a programming language used to implement OP_EVICT and general operations in SCRIPT. The language's "total" nature means that programs written in it must terminate. One of the looping constructs available is the OP_FOLD operation, which applies a function repeatedly on the contents of an input structure, creating a "sum" or "accumulation" of the contents.The addition of an OP_FOLD operation should be safe as long as further operations that admit partiality are not added. An `OP_FOLD` opcode replaces an `OP_SUCCESS` code and can be used only in SegWit v1 (Taproot). On execution, `OP_FOLD` expects the stack: `z`, the initial value for the loop accumulator; `n`, the number of times to loop; and items to loop over. Restricting the use of `OP_FOLD` ensures that the maximum amount of processing that a SCRIPT utilizing `OP_FOLD` will use shall not exceed that of a SCRIPT without `OP_FOLD`. However, `OP_FOLD` must exist exactly once in a Tapscript, and the `f` sub-SCRIPT of `OP_FOLD` must not itself contain an `OP_FOLD`.The article discusses the possibility of adding an annex field to Taproot that indicates the maximum number of opcodes to be processed. This would make processing costly by adding the number in the annex field directly to the weight of the transaction. This allows for lifting restrictions on OP_FOLD and multiple loops, as well as loops-in-loops.Furthermore, the article discusses two ways of extending SCRIPT: providing more general operations or providing operations that do more. Each side has its arguments, and the article suggests that there is no optimal SCRIPT design. Instead, we have to pick and choose which uses to optimize for and which uses are less optimal.Finally, the article includes addenda regarding totality and partiality. It is worth noting that programming is compression, and compressing the list of operations makes it easier to transfer over the bandwidth.</summary>
+    <published>2022-02-27T16:34:31+00:00</published>
+  </entry>
+</feed>

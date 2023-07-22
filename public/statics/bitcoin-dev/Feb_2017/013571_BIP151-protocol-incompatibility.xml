@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP151 protocol incompatibility</title>
+  <updated>2023-06-11T21:32:47.800438+00:00</updated>
+  <author>
+    <name>Jonas Schnelli 2017-02-13 11:14:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP151 protocol incompatibility</title>
+    <updated>2023-06-11T21:32:47.800438+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-February/013571.html" rel="alternate"/>
+    <summary>The conversation discusses the compatibility of feefilter BIP 133 and sendheaders BIP130 with BIP151. The messages are enabled by protocol version, and if they are received by a node below the version at which they are activated, they are unknown messages implying an invalid peer. BIP151 violates this rule by allowing the new control message to be sent before the version handshake. While this may not be ideal for compatibility checks, it increases security. The protocol specification does not indicate that communication must be terminated when messages are transmitted before the version handshake has been done. BIP151 states that the requesting peer needs to initiate the encryption (encinit). In the case of light clients not supporting BIP151 connecting to peers supporting BIP151, there should never be transmission of new message types specified in BIP151. There are already nodes out there breaking connections based on the BIP, which could mean that the initial responding peer tries to initiate an encryption session meaning that BIP151 was not implemented correctly. New messages can only be added after the handshake negotiates the higher version; otherwise, the handshake is both irrelevant and broken for all existing protocol versions. There is no evidence of the protocol specification forbidding such messages, and allowing unknown-messages before the version handshake makes the protocol flexible. Regarding DOS, waste of bandwidth is not something to be ignored. If a peer is flooding a node with addr message, the node can manage it because it understands the semantics of addr messages. If a node is required to allow any message that it cannot understand, it has no recourse. It cannot determine whether it is under attack or if the behavior is correct and for proper continued operation must be ignored. If a message type is not known, it is an invalid message, and the peer is immediately dropped. The implementation decision to allow unknown messages has allowed the deployment of stuff like compact blocks, feefilter, etc., without breaking backward compatibility. The conversation concludes that once BIP151 is widely deployed, it would make sense to bump the protocol version, but this needs to be done after implementation and deployment. A protocol minversion for BIP151 should be set once it has been widely deployed.</summary>
+    <published>2017-02-13T11:14:01+00:00</published>
+  </entry>
+</feed>

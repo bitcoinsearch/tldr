@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Unclear HTLC scenario</title>
+  <updated>2023-06-03T11:17:28.033354+00:00</updated>
+  <author>
+    <name>SomberNight 2022-12-13 15:53:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Unclear HTLC scenario</title>
+    <updated>2023-06-03T11:17:28.033354+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-December/003803.html" rel="alternate"/>
+    <summary>In a message to the Lightning-dev list, Benjamin Weintraub asked how update_fail_htlcs are handled in the case where a node forwards an HTLC along a channel that does not have the funds to support a payment of that size. BOLT #2 states that until the corresponding HTLC is irrevocably committed in both sides' commitment transactions, nodes must not send an `update_fulfill_htlc`, `update_fail_htlc`, or `update_fail_malformed_htlc`. This raised a question for Weintraub about whether nodes still need to commit to a payment that cannot be supported. It was explained that this scenario is handled earlier than update_fail_htlc. When the recipient sees the update_add_htlc, some sanity checks will fail and it won't commit it to the commitment tx. If the recipient decides to simply close the transport connection, the update_add_htlc message is forgotten, and the channel is back to a usable state. BOLT #2 also specifies that when receiving an `amount_msat` that the sending node cannot afford at the current `feerate_per_kw` (while maintaining its channel reserve and any `to_local_anchor` and `to_remote_anchor` costs), the receiving node should send a `warning` and close the connection, or send an `error` and fail the channel. The context clarifies that there is no need to wait until an invalid transaction is received to send an update_fail_htlc.</summary>
+    <published>2022-12-13T15:53:51+00:00</published>
+  </entry>
+</feed>

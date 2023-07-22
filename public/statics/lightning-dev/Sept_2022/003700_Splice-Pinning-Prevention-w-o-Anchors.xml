@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Splice Pinning Prevention w/o Anchors</title>
+  <updated>2023-06-03T09:39:11.822596+00:00</updated>
+  <author>
+    <name>Greg Sanders 2022-09-26 20:46:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Splice Pinning Prevention w/o Anchors</title>
+    <updated>2023-06-03T09:39:11.822596+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-September/003700.html" rel="alternate"/>
+    <summary>The Lightning Network is facing the risk of being mempool-pinned by "ancestor bulking" and "junk pinning" attacks. These attacks can lead to griefing attacks and loss of funds for HTLCs that have timed out for a pinned commitment transaction. Although anchor outputs were introduced to mitigate junk pinning, splice transactions are still susceptible to both attacks. To address this issue, a proposed mitigation requires reliable access to the UTXO set. However, this may be problematic for mobile LN clients relying on lightweight validation backends. As a result, mobile clients might not be able to participate in splicing operations with their LSPs or without a decrease in trust-minimization. To mitigate the risks of junk and bulk pinning attacks for splice, every tx_add_input proposed by a peer must be included in the UTXO set, and every output included directly in a splice transaction must be a v0 P2SH witness script that begins with a minimum of 1 CSV relative timelock. No output on the splice transaction will be spendable until it is included in a block to prevent junk pinning.However, there are two side effects as you cannot CPFP a splice transaction, and arbitrary third-party scriptPubKeys are not permissible directly into the splice tx. For arbitrary splice out funds, they can be included in a “fan-out” transaction, while new channel outpoints' v0 witness script should start with [OP_1, OP_CHECKSEQUENCEVERIFY]. Splice-in transactions will not require any fan-out children as long as all change goes into the channel outpoint. The interactive tx protocol mandates that splice txs are RBF-enabled, and broadcast splice proposals can be replaced out for the original commitment transaction at any time since the original commitment transaction has existing anchors. This combined with every other output in the tree being locked behind a 1 CSV means the force close will always have top mempool priority, mitigating the “output junk” style pin. The message provides a link to the subscription page for the Lightning-dev mailing list hosted on lists.linuxfoundation.org. Interested individuals can sign up to receive updates and participate in discussions related to Lightning development. The message also includes an HTML attachment that has been scrubbed of its URL, so it is unclear what information or resources may have been included in that attachment.</summary>
+    <published>2022-09-26T20:46:37+00:00</published>
+  </entry>
+</feed>

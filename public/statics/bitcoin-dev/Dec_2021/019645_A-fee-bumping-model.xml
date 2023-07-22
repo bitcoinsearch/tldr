@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A fee-bumping model</title>
+  <updated>2023-06-15T03:06:16.565621+00:00</updated>
+  <author>
+    <name>Antoine Riard 2021-12-08 23:56:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A fee-bumping model</title>
+    <updated>2023-06-15T03:06:16.565621+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-December/019645.html" rel="alternate"/>
+    <summary>The conversation between Antoine and darosior centers around the challenges associated with fee estimation in off-chain contracts like Lightning and Revault. The two parties discuss the need for ensuring confirmation of transactions within a given number of blocks to prevent overpayments, but also note the difficulty of anticipating bids from unknown participants in the Bitcoin network.One of the key issues discussed is replace-by-fee (RBF) pinning and how it affects the security of Bitcoin protocols like Revault that rely on presigned transactions. The goal of these protocols is to ensure the confirmation of a transaction before the expiration of a timelock at any point after the establishment of the contract. To accomplish this, a maximum reserve feerate needs to be set, above which the enforcement of all contracts on-chain cannot be ensured. However, the reserve funds needed for bumping fees need to be estimated, which is difficult for protocols with dynamic transaction sizes.Revault is a Bitcoin vault management protocol that aims to provide a more secure and flexible way of managing funds in a multi-party setup. The protocol relies on off-chain transactions with a time lock that can be enforced on-chain if necessary. Revault uses two distributions per vault based on a basic geometric suite, one for reserve distribution, and the other for bonus distribution. The reserve distribution ensures that users can bump up to the reserve feerate, while the bonus distribution contains smaller coins useful to prevent overpayments during low and medium fee periods.To address the issue of fee-bumping and RBF pinning, Revault merged consolidation with fanout when fanning out a refilled UTxO, scanning the pool for coins that need to be consolidated according to a heuristic. However, assumptions made in the process could be invalidated by a large increase in the exchange price of BTC.While discussing solutions to the problem of fee estimation and RBF pinning, Antoine and darosior acknowledge the inherent challenges associated with any kind of fee estimation. They propose policy-level mitigations like dropping the requirement on increasing absolute fees if the mempool is "full enough" or introducing new consensus rules. However, Revault also recognizes the need for an insurance market given the hacks and workarounds involved in managing Bitcoin vaults.</summary>
+    <published>2021-12-08T23:56:39+00:00</published>
+  </entry>
+</feed>

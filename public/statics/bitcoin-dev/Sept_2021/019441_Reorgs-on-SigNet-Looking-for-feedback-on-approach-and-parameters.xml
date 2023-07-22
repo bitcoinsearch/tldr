@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reorgs on SigNet - Looking for feedback on approach and parameters</title>
+  <updated>2023-05-21T03:34:00.376418+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-09-12 07:53:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reorgs on SigNet - Looking for feedback on approach and parameters</title>
+    <updated>2023-05-21T03:34:00.376418+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019441.html" rel="alternate"/>
+    <summary>In a Bitcoin-dev email thread, AJ proposed an idea to allow SigNet users to opt-out of reorgs if they don't want to be affected by them. However, Matt Corallo questioned the need for a version bit and suggested using a different reorg signing key instead. To which AJ responded that having two different challenges would cause problems, as the signet block signature encodes the signet challenge. This means that a node opting out of reorgs would see the to-be-reorged blocks as invalid due to a bad signature and start marking peers following reorgs as discouraged and worth disconnecting, leading to potential network partitioning. Therefore, using RECENT_CONSENSUS_CHANGE behavior that avoids discourage/disconnect logic seems more practical, and the easiest way to do this is by using a version bit.They also discussed the reorg interval X, which depends on the user's needs. Having too frequent reorgs could hinder other SigNet users, but waiting for a week to test reorgs may not be practical. AJ suggested reorging almost every block or as often as possible, while Matt suggested having three reorgs per day, each 48 blocks apart, allowing developers in all time zones to be awake during one or two reorgs per day. AJ mentioned that if users opt-in to testing with reorgs, they should be able to test immediately instead of waiting.To implement this, AJ proposed an easy solution: miner 1 ignores blocks marked for reorg, while miner 2 marks its blocks for reorg, mines on top of the most work block, and never mines a block which would have (height % 10 == 1). Both miners have the same hashrate but mine at randomly different times, ensuring there is almost always a reorg being mined, people that follow reorgs will see fewer than 1.9x as many blocks as non-reorg nodes, and reorgs won't go on for more than 10 blocks.</summary>
+    <published>2021-09-12T07:53:05+00:00</published>
+  </entry>
+</feed>

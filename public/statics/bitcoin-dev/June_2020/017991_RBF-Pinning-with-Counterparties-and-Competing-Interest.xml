@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-06-14T00:36:33.420756+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-06-20 16:01:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-06-14T00:36:33.420756+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-June/017991.html" rel="alternate"/>
+    <summary>In this message, the author raises a question about whether pay-to-preimage would work with PTLCs and proposes an alternative solution. They suggest using a pay-for-signature construction where A provides a fund that can only be claimed by leaking knowledge of `s` behind `s * G`. To do this, A creates a new keypair `A[p4s] = a[p4s] * G` and puts a fund into it. A generates an `R[A][p4s] = r[A][p4s] * G`, and computes `R[p4s] = R[A][p4s] + s * G` and `s'[A][p4s] = r[A][p4s] + h(A | R[p4s] | m) * a[p4s]`. The signed message could be a signature to `SIGHASH_NONE`. A reveals publicly (in an `OP_RETURN`) `R[A][p4s]`, `s * G`, `s'[A][p4s]`, and `A[p4s]`. In order to complete the above signature, a third party C has to learn `s` from B. Once learned, the third party can complete the signature and claim the funds. A then learns `s`, from which it can derive `t`. The third party learns about which channel was spent to create the PTLC but never learns `t` or `T`, providing a small privacy bonus.</summary>
+    <published>2020-06-20T16:01:16+00:00</published>
+  </entry>
+</feed>

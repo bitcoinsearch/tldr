@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>On the scalability issues of onboarding millions of LN mobile clients</title>
+  <updated>2023-06-14T01:18:24.815434+00:00</updated>
+  <author>
+    <name>Antoine Riard 2020-05-06 09:40:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>On the scalability issues of onboarding millions of LN mobile clients</title>
+    <updated>2023-06-14T01:18:24.815434+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-May/017828.html" rel="alternate"/>
+    <summary>The discussion revolves around the scalability of light client protocols for LN and how to build a scalable, secure, private chain access backend for millions of LN clients. The current paradigm of trust-minimization of Bitcoin security model has always relied first and above on running a full-node which may be shifted by LN where fast, affordable, confidential, censorship-resistant payment services may attract a lot of adoption without users running a full-node. Light client protocols for LN exist, although their privacy and security guarantees with regards to implementation on the client-side may still be an object of concern. One of the bottlenecks is likely the number of full-nodes being willingly to dedicate resources to serve those clients. Assuming 10M light clients each of them consuming ~100MB/month for filters/headers, that means you're asking 1PB/month of traffic to the backbone network. Even with cheaper, more efficient protocols like BIP 157, there could be a huge discrepancy between what is asked and what is offered. Widening full-node adoption, specially in term of geographic distribution means as much as we can to bound its operational cost. It's not about which protocol is deployed but more about incentives for node operators to dedicate long-term resources to client they have lower reasons to care about otherwise. Therefore, monetary compensation can be introduced in exchange of servicing filters. Light client not dedicating resources to maintain the network but free-riding on it, you may use their micro-payment capabilities to price chain access resources.As a result, the entire protocol could be served over something like HTTP, taking advantage of all the established CDNs and anycast serving infrastructure. Piggy backing off the above idea, if the data starts being widely served over HTTP, then LSATs can be used to add a lightweight payment mechanism by inserting a new proxy server in front of the filter/header infrastructure. The minted tokens themselves may allow a user to purchase access to a single header/filter, a range of them in the past, or N headers past the known chain tip, etc.Web-of-trust style of deployments should be also envisioned, you may get huge scaling improvement, assuming client may be peers between themselves and the ones belonging to the same social entity should be able to share the same chain view without too much risk. The entire protocol could be served over something like HTTP, taking advantage of all the established CDNs and anycast serving infrastructure.</summary>
+    <published>2020-05-06T09:40:06+00:00</published>
+  </entry>
+</feed>

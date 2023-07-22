@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>eltoo: A Simplified update Mechanism for Lightning and Off-Chain Contracts</title>
+  <updated>2023-05-20T05:27:28.630898+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-05-07 23:26:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>eltoo: A Simplified update Mechanism for Lightning and Off-Chain Contracts</title>
+    <updated>2023-05-20T05:27:28.630898+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/015928.html" rel="alternate"/>
+    <summary>The introduction of symmetric state in BOLT 1.1 re-introduces the dependency between the CSV value of the commitment and the HTLC timeouts, which was pointed out by Mats in an earlier version of the BOLT spec. This means that if long CSV timeouts are allowed, the total CLTV timeout along the entire route would increase. However, with robust and reliable private outsourcers, this may not be a concern for most implementations in the future. The symmetric state changes the strategy around breach attempts, resulting in more breach attempts (and therefore update transactions) on the chain since attempting to cheat w/ vanilla symmetric state is now "costless." With a commitment protocol that uses symmetric state, the 2-stage HTLC scheme doesn't apply. The clock starts ticking after the latest update transaction has hit the chain, and there are no further challenges, which means the commitment transaction itself doesn't need to have any CSV delays within the Script branches of the outputs it creates. Each of those outputs can be immediately spent as the challenge period has already elapsed, and from the point of view of the chain, this is now the "correct" commitment. Due to this, the HTLC outputs would now be symmetric themselves, and look very much like an HTLC output that one would use in a vanilla on-chain cross-chain atomic swap.A routing node with an upstream HTLC with CLTV = X needs to ensure that if it learns the preimage, it has time to broadcast and confirm an HTLC-success transaction before height X. Assuming the settlement transaction is already final and it takes at most D_update blocks from the time the update transaction is broadcasted for it to be mined, unless the downstream HTLC is already failed, the upstream channel should always be closed at height X - D_success - CSV_update - D_update. If the downstream hop waits until just before Y to publish the preimage, they can force the upstream channel to be closed, and this applies transitively for further upstream hops, assuming a large enough CSV value. Upstream hops can watch the blockchain for preimage reveals in other closing transactions and fulfill off-chain if there is sufficient time. In conclusion, the introduction of symmetric state brings about changes in the commitment protocol and strategy around breach attempts, which may result in more breach attempts on the chain. It also means that the 2-stage HTLC scheme doesn't apply, and each output can be immediately spent as the challenge period has already elapsed. However, this introduces new challenges for routing nodes with an upstream HTLC, and they need to ensure they close the upstream channel at the correct height to avoid being forced to close it by downstream hops.</summary>
+    <published>2018-05-07T23:26:05+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Refreshed BIP324</title>
+  <updated>2023-05-22T21:51:22.171405+00:00</updated>
+  <author>
+    <name>Anthony Towns 2022-11-18 08:24:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Refreshed BIP324</title>
+    <updated>2023-05-22T21:51:22.171405+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021214.html" rel="alternate"/>
+    <summary>On Sat, Nov 12, 2022, Pieter Wuille suggested an idea in which every alphabetic command of L characters becomes L bytes and 102 non-alphabetic 1-byte commands can be assigned. Additionally, 15708 non-alphabetic 2-byte commands can also be assigned. This provides a uniform space from which commands can be assigned and there is no need to treat short-binary and long-alphabetic commands as distinct.It was questioned whether this optimization was necessary and whether the goals should be to make it easy to come up with a message identifier without conflicting with someone else's proposal and making commonly used messages on the wire have a short encoding to save bandwidth. Depending on how much the p2p protocol ossifies, which messages are "commonly used on the wire" might be expected to change, and picking an otherwise meaningless value from a set of 102 elements seems likely to produce conflicts.A potential solution suggested was to use "SHORTMSG" to specify an array of tables supported and, once both sides support the table, send "SENDSHORTMSG" to choose the table used to abbreviate messages sent, as well as any modifications to that table. BIPs could then choose a meaningful string, and when implementing, send a one-time "SENDSHORTMSG" message to optimize the messages sent most often. As time goes on and the most common messages change, a new BIP with a new table can be issued so that the one-time SHORTIDs message becomes shorter too.Another suggestion was to potentially support taking over the one-byte message space, presuming there are no one-character messages that need to be sent. This could be done alongside the encoding mentioned above. In this case, BIPs would specify alphabetic message ids, and SENDSHORTMSG could be used to dynamically allocate non-alphabetic ids. This would limit the number of non-alphabetic ids to how many could be specified in a single SENDSHORTIDs message, which would be up to something like 749k different 1/2/3/4/5/6-byte alphabetic message ids (encoded as 1/2/3-byte non-alphabetic messages).</summary>
+    <published>2022-11-18T08:24:49+00:00</published>
+  </entry>
+</feed>

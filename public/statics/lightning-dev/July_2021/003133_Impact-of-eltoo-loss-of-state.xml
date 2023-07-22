@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Impact of eltoo loss of state</title>
+  <updated>2023-06-03T05:10:03.429955+00:00</updated>
+  <author>
+    <name>Christian Decker 2021-07-14 14:44:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Impact of eltoo loss of state</title>
+    <updated>2023-06-03T05:10:03.429955+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-July/003133.html" rel="alternate"/>
+    <summary>In this context, Anthony Towns discusses a scenario where Bob's lightning node crashes while payments are going from Alice to Bob to Carol with eltoo channels. He explains that Carol will reveal the point preimages on-chain via adaptor signatures, but Bob won't be able to decode those adaptor signatures because those signatures will need to change for each state. Even if Bob knows the point preimages, he won't be able to claim the PTLC payments on-chain as he needs newer adaptor signatures that he'll have lost with the state update. For any payments that timeout, Carol doesn't have any particular incentive to make it easy for Bob to claim the refund, and Bob won't have the adaptor signatures for the latest state to do so. However, Alice will be able to claim refunds easily. Towns suggests that nodes should share state on reconnection and always negotiate a mutual/cooperative close if possible to avoid using the eltoo protocol on-chain. If one wants to allow continuing the channel after restoring an old state from backup, they can set the channel state index based on the real time. This way, the first update after a restore from backup will ensure that any old states that your channel partner may not have told you about are invalidated. Nodes can also limit the total value of inbound PTLCs for forwarding that they're willing to accept at any one time. Finally, layered commitments seem to make channel factories complicated. Nobody has come up with a way to avoid layered commitments while Towns wasn't watching.</summary>
+    <published>2021-07-14T14:44:24+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Delegated signatures in Bitcoin within existing rules, no fork required</title>
+  <updated>2023-06-14T19:23:46.358027+00:00</updated>
+  <author>
+    <name>Guido Dassori 2021-03-24 13:33:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Delegated signatures in Bitcoin within existing rules, no fork required</title>
+    <updated>2023-06-14T19:23:46.358027+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-March/018717.html" rel="alternate"/>
+    <summary>Guido mentioned that he implemented a similar idea in a POC available on GH since a while and they are working to make it production ready. They run a 2-on-3 wallet with buy/sell features and aim to cut their transaction fees down to ~5%. In the context of delegating funds, Jeremy Rubin notes that SIGHASH_NONE or SIGHASH_SINGLE can be used to allow the delegator to dynamically choose things like a change output. Jeremy also mentions that layered encryption can enable a decent amount of scripting capability for fully pre-signed transactions. He suggests that in cases where privacy is a goal, delegates can contact the original signer and ask to cooperate. However, in some circumstances this may not be viable given access to keys or whatnot. A hybrid approach can be taken where the user delegates to a script and provides a default sighash_all txn, and a modifiable sighash_none/single. Interestingly, there is a subset of cases where it is desirable to have privacy from the original script holder. ZmnSCPxj notes that an advantage of the technique that Jeremy described is that the delegator can impose additional restrictions that are programmable via any SCRIPT, an ability that merely handing over the privkey cannot do. If the delegatee is a known single entity, and S is simply the delegatee key plus some additional restrictions, it may be possible to sign with `SIGHASH_ALL` a transaction that spends A and D, and outputs to a singlesig of the delegatee key. This would avoid the use of `SIGHASH_NONE`, for a mild improvement in privacy. In terms of offchain technology, if the delegator remains online, the delegatee may present a witness satisfying S to the delegator, and ask the delegator to provide an alternate transaction that spends A directly without spending D and outputs to whatever the delegatee wants. The delegator cannot refuse since the delegatee can always use the `SIGHASH_NONE` signature and spend to whatever it decides provided it can present a witness satisfying S. One generalized use-case for delegation would be if the delegator suspects it may not be online or able to sign with the delegator key.</summary>
+    <published>2021-03-24T13:33:07+00:00</published>
+  </entry>
+</feed>

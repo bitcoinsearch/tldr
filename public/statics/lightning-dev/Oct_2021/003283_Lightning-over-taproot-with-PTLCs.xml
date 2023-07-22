@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Lightning over taproot with PTLCs</title>
+  <updated>2023-05-23T16:21:50.596172+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-10-09 13:59:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Lightning over taproot with PTLCs</title>
+    <updated>2023-05-23T16:21:50.596172+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-October/003283.html" rel="alternate"/>
+    <summary>A proposal was made regarding the use of deterministic nonces in MuSig. The person who generated the nonce needs to be able to recover the secret/dlog for the nonce later, without having to store unique randomness for it. The "deterministic" nonce secrets can be chosen after knowing what the other party's ("revocable") nonce is, so can include it in the hash. As far as the revocable nonce goes, only a single signature based on that should be generated since that's used to finish things off and post the transaction on chain. The proposal raised some concerns about the security of using deterministic nonces unless combined with heavy machinery that proves correctness of the nonce derivation in zero knowledge. If one signer uses deterministic nonces and another signer uses random nonces, then two signing sessions will have different challenge hashes which results in nonce reuse by the first signer. To avoid this attack, DA1,DA2 = f(seed,n) where n increases each round. The proposal also suggested using an adaptor signature scheme that cannot treat MuSig2 as a black box. The proposed solution involves Bob having a shachain-based secret generator, producing secrets s_0 to s_(2**48). If you've seen s_0 to s_n, you only need to keep O(log(n)) of those values to regenerate all of them. Bob generates RB1_n and RB2_n as H(s_n, 1)*G and H(s_n, 2)*G and sends those values to Alice. Alice determines the message (ie, the transaction), and sets da1_n and da2_n as H(A_priv, msg, RB1_n, RB2_n, 1) and H(A_priv, msg, RB1_n, RB2_n, 2). She then calculates k=H(da1_n, da2_n, RB1_n, RB2_n), and signs for her nonce which da1_n+k*da2_n, and sends da1_n*G and da2_n*G and the partial signature to Bob. Bob checks and records Alice's musig2 derivation and partial signature but does not sign himself. If Bob wants to close the channel and publish the tx, he completes the signature by signing with nonce RB1_n + k*RB2_n.</summary>
+    <published>2021-10-09T13:59:39+00:00</published>
+  </entry>
+</feed>

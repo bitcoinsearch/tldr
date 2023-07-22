@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Optional "wallet-linkable" address format (Re-request)</title>
+  <updated>2023-06-07T15:38:35.697597+00:00</updated>
+  <author>
+    <name>Mike Hearn 2013-08-09 19:58:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Optional "wallet-linkable" address format (Re-request)</title>
+    <updated>2023-06-07T15:38:35.697597+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-August/003102.html" rel="alternate"/>
+    <summary>The context discusses a new payment protocol and an alternate address serialization aimed at providing better security than relying on SSL/PKI infrastructure. The new format is longer but allows the sender to provide more information than currently contained in the 25-byte hash160 form. It can be used for certain services between wallet software and a business/exchange where the exchange would like to send addresses to the user for deposit without risk of MITM or even if their public server is compromised.The author of wallet software pre-verifies the public key portion of the service and hardcodes it into the software, making the service's signed public key available through query server, allowing the software author to offline-sign replacement keys or add keys for new service providers. Although BIP32 already specifies how to use the first three tree levels, it does not make sense for handing out receive chains to lots of people. Instead, extra wallet chains can behave as different wallets or sub-wallets, treating this merely as an address-generation algorithm, and do not expose any hierarchy to the user interface.Jeremy, a member of the Bitcoin-development mailing list, has suggested a mechanism for generating address chains for long-term relationships. This mechanism involves combining two ideas to get all the benefits by creating a data structure consisting of ParentPubKey, Addend, and ChainCode. The ParentPubKey is the public key of m/i' and corresponds to a user's identity rooted in [m/i']. Each service gets their own 'j', and ParentPubKey + Addend gives you the PubKey of [m/i'/j]. The receiver can then generate [m/i'/j/k] for monotonically increasing 'k' with the ChainCode. All transactions under [m/i'] can be presented in a single ledger from the user's perspective. Jeremy suggests that this mechanism could be built into the wallet for persistent long-term relationships, eliminating the need for further communication after the initial exchange. The user gets the ability to send multiple payments to their contacts without immediately sacrificing their privacy. Everything goes into the same ledger, balance, coin pool, etc. Most of the code base is unaware BIP32 is even in use. Finally, the multiplication trick for deterministic keys is a nice one and worth doing but it has to be a v2 feature by this point. It's more important to get v1 widely implemented and deployed first.</summary>
+    <published>2013-08-09T19:58:39+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Opening balanced channels using PSBT</title>
+  <updated>2023-06-03T06:03:03.941275+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2021-09-22 06:58:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Opening balanced channels using PSBT</title>
+    <updated>2023-06-03T06:03:03.941275+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-September/003249.html" rel="alternate"/>
+    <summary>The Lightning Network team has developed a dual funding proposal (https://github.com/lightningnetwork/lightning-rfc/pull/851) that enables the opening of balanced channels, which can be utilized between two nodes or opened in a ring between multiple nodes. Ole Henrik Skogstrøm discovered a way to open balanced channels using LND's psbt option by joining funded PSBTs before signing and submitting them. However, he is unsure if this method is safe or not. In order to do this efficiently, nodes must collaborate by sending PSBTs back and forth. In the case of a single channel being opened, Node A generates a new address and sends it to Node B, then starts an interactive channel open to Node B using psbt. Node A funds the channel address, and Node B funds the refund transaction to Node A and sends the PSBT back to Node A. Node A joins the two PSBTs and sends it back to Node B. Node B verifies the content and signs the joined PSBT before sending it back to Node A. Node A verifies the content and signs the joined PSBT before completing the channel open by publishing the fully signed PSBT. For a ring of channels between multiple nodes, Node A starts an interactive open channel to Node B using psbt and funds the channel address. Node B starts an interactive open channel to Node C using psbt and funds the channel address. Node C starts an interactive open channel to Node A using psbt and funds the channel address. Node B and C send their PSBTs to Node A, which joins all the PSBTs. Node A verifies and signs the PSBT and sends it to Node B for verification and signing. Node B verifies and signs the PSBT before sending it to Node C for verification and signing. Node C verifies and signs the PSBT before sending it back to Node A and B. Node A completes the channel open, as does Node B. Node C completes the channel open and publishes the transaction.</summary>
+    <published>2021-09-22T06:58:18+00:00</published>
+  </entry>
+</feed>

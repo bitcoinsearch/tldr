@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Direct Message draft</title>
+  <updated>2023-06-02T23:45:56.135129+00:00</updated>
+  <author>
+    <name>Rusty Russell 2020-02-20 09:36:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Direct Message draft</title>
+    <updated>2023-06-02T23:45:56.135129+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002552.html" rel="alternate"/>
+    <summary>The Lightning Network (LN) is an off-chain system that enables fast and cheap Bitcoin transactions. Messaging over lightning is a new feature being proposed for the offers protocol. It's unreliable as it doesn't remember across restarts, limits users to 1000 total remembered forwards with random drop, and the protocol doesn't include a method for errors yet. The WIP patch is small enough to be pasted in the post below and on GitHub. It's much friendlier on nodes than using an HTLC (which requires 2 round trips, signature calculations, and db commits), so it is an obvious candidate for much more than just invoice requests. The messages in LN are grouped logically into five groups, ordered by the most significant byte. One of these groups is Routing, which includes node and channel announcements, as well as any active route exploration or forwarding. Directed messages have an onion with an alternate hop_payload format. If this node is not the intended recipient, the payload is simply a 33-byte pubkey indicating the next recipient. Otherwise, the payload is the message for this node. Directed messages allow peers to use existing connections to query for invoices. Like gossip messages, they are not associated with a particular local channel. Like HTLCs, they use BOLT 4 protocol for end-to-end encryption. Directed messages are unreliable, designed to be cheap and not needing to be committed to a database. Each one has an optional reply, which is onion-encoded just like HTLC errors. There are two types of messages: directed and directed_reply. The context provides details about messaging over lightning, its implementation, grouping of messages, directed messages, directed message replies, and references. The proposed feature is unreliable yet convenient, and it has a small patch available on GitHub. Directed messages are a new feature of the Lightning Network that allows users to query for invoices or send messages using existing connections.</summary>
+    <published>2020-02-20T09:36:55+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Lightning over taproot with PTLCs</title>
+  <updated>2023-05-23T16:20:49.728626+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-10-19 04:16:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Lightning over taproot with PTLCs</title>
+    <updated>2023-05-23T16:20:49.728626+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-October/003324.html" rel="alternate"/>
+    <summary>The email thread discusses ways to improve the Lightning Network's payment forwarding system with low latency. The proposed solution involves two channel parameters: payment delay (PD) and channel recovery delay (RD). If an old state is published, the recovery delay will correct it. However, if an active state includes a payment that has been forwarded, the shorter payment delay may be used to forward the payment claim details back. The goal is to allow for safe payment forwarding without requiring an additional round-trip back for acknowledgement.The email then goes on to provide an example of how payments are currently forwarded and how they could be forwarded optimally. The optimal forwarding would require 0.5 round-trips as opposed to the current 1.5 round-trips. The proposed solution suggests lifting the HTLC out of an in-flight transaction into a balance transaction, which Bob can post within the payment delay period, and revealing secrets prior to the payment timeout.However, this proposal adds complexity and kills some of the elegance of the original protocol. Alice needs to prevent Bob from posting the "low-latency" tx if he doesn't react within the payment delay period, which can be achieved through a signature from Bob. The proposal also makes the system more separable by adding a feature bit to allow nodes to not implement low-latency payments, particularly if they're not usually forwarding payments or are only connected to nearby nodes.</summary>
+    <published>2021-10-19T04:16:13+00:00</published>
+  </entry>
+</feed>

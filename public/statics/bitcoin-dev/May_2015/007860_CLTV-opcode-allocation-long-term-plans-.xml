@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CLTV opcode allocation; long-term plans?</title>
+  <updated>2023-06-09T19:28:11.058659+00:00</updated>
+  <author>
+    <name>Peter Todd 2015-05-04 05:07:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CLTV opcode allocation; long-term plans?</title>
+    <updated>2023-06-09T19:28:11.058659+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/007860.html" rel="alternate"/>
+    <summary>Matt Corallo raised concern over the scarcity of OP_NOP in Bitcoin mempool, regarding only CLTV pull-req. He suggested that using one of the precious few OP_NOPs would be more flexible and efficient. The author presents two lines of thought to address this issue. Firstly, we may end up with a Script v2.0 soon based on Russell O'Connor and Pieter Wuille's Merkelized Abstract Syntax Tree idea which requires at most a single OP_NOPx to implement, largely solving the scarcity issue. Secondly, even if all ten OP_NOPxs were used in script v1.0, implementing an OP_EXTENDED would be logical. The form of a relative CLTV is still not clear, but it is proposed that OP_PREVOUT_HEIGHT_VERIFY/OP_PREVOUT_DATA along with OP_ADD should be used whilst avoiding the use of any opcode accessing non-reorg-safe prevout info until the coinbase maturity period has passed for soft-fork safety. If people have strong feelings about this, the author proposes making OP_CLTV work as follows: 1 OP_CLTV where 1 selects absolute mode and all others act as OP_NOPs. A future relative CLTV could then be a future soft-fork implemented as follows: 2 OP_CLTV. Although there are concerns such as rewriting existing tests, example code and updating the BIP, and complicating the code base compared to sticking with just doing a Script v2.0, the author concludes that the above proposal is not too big of a deal.</summary>
+    <published>2015-05-04T05:07:15+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CAddrMan: Stochastic IP address manager</title>
+  <updated>2023-06-05T02:13:31.584102+00:00</updated>
+  <author>
+    <name>Michael Hendricks 2012-01-30 16:53:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CAddrMan: Stochastic IP address manager</title>
+    <updated>2023-06-05T02:13:31.584102+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-January/001104.html" rel="alternate"/>
+    <summary>Pieter Wuille, a developer for the Satoshi bitcoin client, has been considering moving to IPv6 support in the future. However, the current way IP addresses are being managed is not efficient as all addresses ever seen are being kept both on-disk and in-memory, leading to multi-megabyte addr.dat files. After discussing with Gregory Maxwell and others, Pieter decided to write a specialized address manager that only keeps a limited number of addresses, indexes them in-memory, and occasionally dumps them to disk. This architecture is an improvement over what they have now. The new design includes two tables, one for addresses they've had connections with and one for untried/new addresses. Both tables are separated into several limited-size buckets providing protection against sybil attacks. Addresses in the first table are placed in one of only a few buckets chosen based on the address range (/16 for IPv4), while addresses in the second table are placed into one of a few buckets chosen based on the address range the information came from, instead of the address itself. The new design seems resilient to many attacks, but a Sybil attack coming from a large botnet can still fill all buckets in both tables.</summary>
+    <published>2012-01-30T16:53:27+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposed new policy for transactions that depend on other unconfirmed transactions</title>
+  <updated>2023-06-10T19:33:25.602963+00:00</updated>
+  <author>
+    <name>Danny Thorpe 2015-10-05 18:51:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposed new policy for transactions that depend on other unconfirmed transactions</title>
+    <updated>2023-06-10T19:33:25.602963+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-October/011403.html" rel="alternate"/>
+    <summary>Alex Morcos proposed updates to the policy limits on unconfirmed transaction chains. These limits are not a change to consensus rules and do not affect how many chained transactions a valid block may contain. The existing limits in master and scheduled for release in 0.12 are: Ancestor packages = 100 txs and 900kb total size, Descendant packages = 1000 txs and 2500kb total size. However, large packages of unconfirmed transactions were the primary vector for mempool clogging or relay fee boosting attacks. Therefore, the new proposed limits are: Ancestor packages = 25 txs and 100kb total size, Descendant packages = 25 txs and 100kb total size. Based on historical transaction data, the most restrictive of these limits is the 25 transaction count on descendant packages. Over the period of April and May of this year, 5.8% of transactions would have violated this limit alone. Danny Thorpe asked about the meaning of "package" and whether 25 txs meant maximum linked chain depth or total number of dependent transactions regardless of chain depth. Alex Morcos explained that these are policy limits that affect transactions which depend on other unconfirmed transactions only. They are not a change to consensus rules and do not affect how many chained txs a valid block may contain. Furthermore, any transaction that was unable to be relayed due to these limits need only wait for some of its unconfirmed ancestors to be included in a block and then it could be successfully broadcast. This is unlikely to affect the total time from creation to inclusion in a block. Finally, these limits are command line arguments that can easily be changed on an individual node basis in Bitcoin Core. Matt Corallo sees no problem with such limits. However, Danny Thorpe thinks that dropping down to allowing only two levels of chained unconfirmed transactions is too tight and suggested that a depth limit of 10 would provide plenty of headroom for this 3 level use case and similar patterns. Alex Morcos said these limits are generous, but they were designed to be as generous as was computationally feasible so they were unobjectionable (since the existing policy was no limits).</summary>
+    <published>2015-10-05T18:51:23+00:00</published>
+  </entry>
+</feed>

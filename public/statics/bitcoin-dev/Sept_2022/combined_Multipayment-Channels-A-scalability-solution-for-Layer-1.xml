@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Multipayment Channels - A scalability solution for Layer 1</title>
+  <updated>2023-06-16T00:12:41.330056+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2022-09-05 03:17:27</name>
+  </author>
+  <author>
+    <name>Ali Sherief 2022-09-04 22:31:38</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2022-09-05 03:17:27</name>
+  </author>
+  <author>
+    <name>Ali Sherief 2022-09-04 22:31:38</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2022-09-05 03:17:27</name>
+  </author>
+  <author>
+    <name>Ali Sherief 2022-09-04 22:31:38</name>
+  </author>
+  <link href="bitcoin-dev/Sept_2022/020909_Multipayment-Channels-A-scalability-solution-for-Layer-1.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2022/020908_Multipayment-Channels-A-scalability-solution-for-Layer-1.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2022/020909_Multipayment-Channels-A-scalability-solution-for-Layer-1.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2022/020908_Multipayment-Channels-A-scalability-solution-for-Layer-1.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2022/020909_Multipayment-Channels-A-scalability-solution-for-Layer-1.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2022/020908_Multipayment-Channels-A-scalability-solution-for-Layer-1.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Multipayment Channels - A scalability solution for Layer 1</title>
+    <updated>2023-06-16T00:12:41.330056+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-September/020909.html" rel="alternate"/>
+    <summary>ZmnSCPxj has developed a new way to batch transactions together into blocks on layer 1 without the need for hardforks. The idea was born from a discussion with Greg Maxwell about implementing multisig using Taproot. The scheme uses MuSig1, OP_CHECKLOCKTIMEVERIFY (OP_CLTV) timelock type, and negligible OP_RETURN data to create constructs called "multipayment channels" that allow multiple people to pay in one transaction. Each channel consists of a fixed amount of people N who create an address using a specific script. Simultaneously, each participant receives the N signatures and constructs the N-of-N MuSig. Each participant will generate their own independent "commitment transaction" with a single input, the MuSig output, and outputs corresponding to the addresses and balances of each participant in the agreed-upon distribution. The author's modifications to the scheme are modernizations of the Spilman channels, which are similar to CoinPools / multiparticipant channels / Statechains. A second output with a script OP_RETURN can be added to the transaction to enable L1 channel discovery. Full nodes parsing the blockchain can maintain a list of connection IDs to connect to. Spending the output to another MuSig of the above format will create a new connection if it spends to a similarly-constructed MuSig output with different signature. In all cases, the current connection is destroyed. This introduces a variable grace period, in blocks, after which anybody can broadcast this transaction to commit the channel funds distribution to each of the participants' addresses.However, the N-of-N signature might be leaked into the public, and all participants must be trustworthy. Despite these drawbacks, ZmnSCPxj's scheme represents an innovative approach to increasing transactions-per-second without resorting to hardforks.</summary>
+    <published>2022-09-05T03:17:27+00:00</published>
+  </entry>
+</feed>

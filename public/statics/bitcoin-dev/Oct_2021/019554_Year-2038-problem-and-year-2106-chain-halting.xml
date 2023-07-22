@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Year 2038 problem and year 2106 chain halting</title>
+  <updated>2023-06-15T02:44:37.723776+00:00</updated>
+  <author>
+    <name>David Bakin 2021-10-16 20:37:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Year 2038 problem and year 2106 chain halting</title>
+    <updated>2023-06-15T02:44:37.723776+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-October/019554.html" rel="alternate"/>
+    <summary>The Bitcoin development community recently discussed the possibility of a "wraparound" timestamp issue, where if a series of blocks has a timestamp of 0xFFFFFFFF, it could potentially halt the chain for old clients. The current rules state that the block timestamp may not be lower than the median of the last 11 blocks, may not be greater than the current time plus two hours, and may not be greater than 2^32 (Sun, 07 Feb 2106 06:28:16 +0000). However, if a block with a 0xFFFFFFFF timestamp were to occur, it would violate multiple rules for old clients and potentially lead to a chain halt. One proposed solution is to include an additional rule that requires a 64-bit (or higher) timestamp to be present in the coinbase transaction, with similar rules translated to the appropriate bit size. Another idea is to use a similar scheme for nLockTime, where a 64-bit nLockTime64 could be included in the additional signed block in Taproot SegWit v1 if legacy vnLockTime is at the maximum seconds-timelock possible. However, changing the timestamp datatype could cause hardware incompatibility and require a hard fork, making it difficult to implement. It's worth noting that even if a change like this were made in the next five years, it would be over a decade before any wrapped-around timestamp is legitimately mined, making it unlikely that anyone would still be running incompatible node software at that point. Overall, while the wraparound timestamp issue poses a potential problem, there are possible solutions that could be explored if necessary.</summary>
+    <published>2021-10-16T20:37:27+00:00</published>
+  </entry>
+</feed>

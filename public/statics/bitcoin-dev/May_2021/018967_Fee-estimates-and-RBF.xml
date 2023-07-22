@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fee estimates and RBF</title>
+  <updated>2023-06-14T20:36:50.331114+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2021-05-18 13:10:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fee estimates and RBF</title>
+    <updated>2023-06-14T20:36:50.331114+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-May/018967.html" rel="alternate"/>
+    <summary>In the context provided, there is a discussion about implementing RBF (Replace-By-Fee) in financial code. The problem with using RBF lies in exception handling as it involves testing and handling reorgs. If you use a fixed feerate and broadcast-and-forget, you don't have to handle exceptions, but that means not using RBF at all. Testing the handling of reorgs is crucial because it may use an older version of an RBFed transaction rather than a newer one, which would require recreating follow-up transactions. Since this is financial code, thorough testing is necessary, and code with many branches due to the handling of possible exceptions is difficult to cover completely in testing.C-lightning supposedly supports RBF, but there are potential edge cases where it might mishandle a replaced transaction and lose track of onchain funds. Supporting "we can spend unconfirmed change outputs" and "we can change the feerate of unconfirmed transactions" simultaneously is challenging because the latter changes the txid and therefore the UTXO id of the change output spent by use of the previous feature.</summary>
+    <published>2021-05-18T13:10:12+00:00</published>
+  </entry>
+</feed>

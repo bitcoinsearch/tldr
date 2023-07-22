@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 35: add mempool message</title>
+  <updated>2023-06-06T07:00:11.737542+00:00</updated>
+  <author>
+    <name>Amir Taaki 2012-08-16 20:57:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 35: add mempool message</title>
+    <updated>2023-06-06T07:00:11.737542+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-August/001800.html" rel="alternate"/>
+    <summary>In August 2012, BitcoinJS announced that it would implement a new feature for distinguishing incoming "getdata" requests. The suggestion was to use a new inv_type, MSG_MEMTX, which could help in the future if broadcast and relayed transactions are stored in a fast local cache, while the general mempool is stored in a slower data structure. This would allow for querying the right storage immediately and help with things like DoS scoring. Additionally, if a node doesn't have anything in its mempool, it sends back an empty inv message. Stefan Thomas suggests responding with an inv message containing a single element of type MSG_MEMTX and hash 0, indicating that this response is associated with a mempool request.Pieter Wuille expressed support for the idea of being able to query the memory pool of a node, but questioned the usefulness of an "inv" message always being returned, even if empty. Jeff Garzik responded by suggesting that nodes need to be able to know whether a given inv is in response to a "mempool" command or not, and that the implementation is straightforward. Feature discovery is enabled by checking two "version" message attributes: protocol version &gt;= 60002 and NODE_NETWORK bit set in nServices. However, this forces other full implementations that want to expose protocol version 60002 (or later) to also implement this. Wuille suggested allocating an extra service bit for this, which would mean that mempool-providing services may be discovered before connecting to them, as the service bits are carried around in addr messages.</summary>
+    <published>2012-08-16T20:57:40+00:00</published>
+  </entry>
+</feed>

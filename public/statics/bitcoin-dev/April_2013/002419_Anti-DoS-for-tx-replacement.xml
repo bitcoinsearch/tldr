@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Anti DoS for tx replacement</title>
+  <updated>2023-06-06T15:08:40.748014+00:00</updated>
+  <author>
+    <name>Alan Reiner 2013-04-17 19:44:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Anti DoS for tx replacement</title>
+    <updated>2023-06-06T15:08:40.748014+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002419.html" rel="alternate"/>
+    <summary>The topic of malleability of transactions has been a recent concern on IRC. The question is to what extent someone else can change a signed transaction without affecting its validity. This was previously thought to be just annoying rather than malicious, but in the context of HFT, malicious behavior is possible. A procedure was outlined where Alice creates a transaction, Tx1, for 10 BTC to a 2-of-2-{Alice, Bob} address, with a locktime of 30 days in the future. Before signing the transaction, she gets Bob to sign a transaction, Tx2, from 2-of-2-{Alice, Bob} back to herself that references Tx1 by hash. At any time in the next 30 days, Alice can sign an alternate Tx2 transaction reducing the amount returned to self and increasing the amount to Bob as a method of paying him more. However, Bob can broadcast/mine Tx1' (Tx1-prime), which has a different number of 0x00 pad bytes in the signatures or flips the sign of one of the s-values in the signature, thus changing the hash of Tx1. By doing this, Bob has now created a transaction, Tx1', that Tx2 no longer returns to Alice. It's not outright theft, but Bob can hold Alice's money for ransom since she needs his signature to move it. This type of contract is usually between parties with some mutual respect/history.When the system was first being discussed, Gavin was concerned that miner incentives were to ignore replacements because it meant extra work and the replacement might have equal or lower fees than before (or indeed, no fees). He proposed two solutions: one is to progressively raise the fee on each replacement, and the other is to specify lock time in terms of blocks and then step it backward once for each replacement, thus ensuring that by replacing the transaction you get to claim any attached fee earlier. Both solutions seriously reduce the utility of HFT because they limit how often you can update the contract.If an application is implemented that uses tx replacement, it would probably start with replacements that don't change the fees and don't count down the lock time field. We can then observe whether miners bother changing their software to behave differently, or whether the inherent utility of the application is enough to convince them to play by the default rules. Ideally, at least one application made possible by this feature is a "killer app"- something so useful/unique/compelling that people want to obtain Bitcoin just to use it. There are some other miscellaneous details - reactivation requires bumping the protocol version and starting to relay non-final transactions to new nodes again. Those nodes should relay replacements but not let them enter wallets unless/until the wallet software itself can handle them better, for instance, by communicating via APIs anticipated confirmation times.</summary>
+    <published>2013-04-17T19:44:56+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[Pre-BIP] Fee Accounts</title>
+  <updated>2023-06-03T07:20:47.189782+00:00</updated>
+  <author>
+    <name>Jeremy 2022-01-19 20:08:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[Pre-BIP] Fee Accounts</title>
+    <updated>2023-06-03T07:20:47.189782+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-January/003448.html" rel="alternate"/>
+    <summary>Bitcoin developer Jeremy Rubin has proposed a new method of paying fees in Bitcoin transactions. His proposal involves creating fee accounts that separate the pays-for from the participates-in concerns, which simplifies the process of computing effective feerates for a transaction. This approach differs from existing methods like child-pays-for-parent (CPFP) and has several benefits, including potential byte savings, fixing dust leakage for eltoo-like protocols, and reducing vulnerability to pinning issues.During a discussion about SIGHASH_BUNDLE, an opcode that specifies a transaction must be mined alongside another transaction, Rubin suggested using OP_VER output instead, which guarantees the acyclic nature of the transaction. He also compared his proposal to a new sighash flag that only allows a transaction to be signed if it is mined in the same block as another specified transaction. However, Rubin believes his proposal would be more efficient and less vulnerable to certain types of attacks.Rubin's proposal includes an account system in Bitcoin to support long-lived smart contracts that cannot predict future fee rates. The proposal defines a special output type called a "fee account" with associated amounts that anyone can spend. Deposits to these outputs get stored in a separate UTXO database for fee accounts, and fee accounts can sign only two kinds of transaction: A) a fee amount and a TXID; B) a withdraw amount, a fee, and an address. These transactions are committed in an extension block merkle tree, and mempool logic is updated to allow attaching of account fee spends to transactions. The proposed design could be modified to improve privacy and scalability and works well for channels in Lightning. It could potentially be done as a federated network that bribes miners without a fork.</summary>
+    <published>2022-01-19T20:08:23+00:00</published>
+  </entry>
+</feed>

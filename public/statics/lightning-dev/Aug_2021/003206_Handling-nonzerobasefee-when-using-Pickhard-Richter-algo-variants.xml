@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Handling nonzerobasefee when using Pickhard-Richter algo variants</title>
+  <updated>2023-06-03T05:40:50.118593+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2021-08-30 10:58:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Handling nonzerobasefee when using Pickhard-Richter algo variants</title>
+    <updated>2023-06-03T05:40:50.118593+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-August/003206.html" rel="alternate"/>
+    <summary>The article explores the feasibility of a proposed scheme for Lightning Network (LN) that involves whole-flow payments. In this scheme, only one HTLC would be paid for each channel with non-zero flow using a single 'base_fee', avoiding underestimation of the base fee for non-zero base fee channels. However, if any hop fails to deliver, the entire payment fails and has to be restarted from the beginning. The current LN scheme splits only at the source and joins only at the destination, where if any hop of an MPP fails, only the sub-payment(s) going through that hop will need to be retried. Despite the benefits of the proposed scheme, there are concerns that it is not practical since a failed hop would leave some join nodes waiting for an incoming HTLC that will never arrive. To address this issue, the article suggests that a split node could give a request-to-fail signal to its other outgoing HTLCs, which would fail all its incoming HTLCs so that the entire payment fails and needs to be restarted from the top. Another solution proposed in the article is to modify the LN protocol such that instead of MPP having individual sub-payments that split at the source and join at the destination, the source can instruct arbitrary intermediate nodes to join and/or split payments. This would allow the output of the mincostflow algorithm to be used directly, without the problematic disect stage.The cost function defined in Pickhardt-Richter can include a base fee, but the current Pickhardt-Richter scheme cannot work with non-zero base fees if it were modified to consider fees due to the disect algorithm. An alternative solution would be to optimize for a maximum fee rather than optimizing for the exact fee. This effectively converts the base fee to a proportional fee and may help create a practical payment algorithm that handles current LN with non-zero base fees. Finally, having particular split amounts is helpful to reduce the ability of intermediate nodes snooping on payment amounts, and it may be practical to have the payment unit adjustable by a higher-level process. The article presents different options: supporting whole-flow payments or sticking to the current scheme of partial failure of MPP.</summary>
+    <published>2021-08-30T10:58:02+00:00</published>
+  </entry>
+</feed>

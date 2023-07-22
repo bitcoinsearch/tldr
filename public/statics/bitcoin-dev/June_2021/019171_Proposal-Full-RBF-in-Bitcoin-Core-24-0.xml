@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Full-RBF in Bitcoin Core 24.0</title>
+  <updated>2023-06-14T22:39:49.378741+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2021-06-30 19:21:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Full-RBF in Bitcoin Core 24.0</title>
+    <updated>2023-06-14T22:39:49.378741+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-June/019171.html" rel="alternate"/>
+    <summary>The proposal to make Replace-By-Fee (RBF) the default replacement policy in Bitcoin Core version 24.0 has generated controversy, but it is motivated by ongoing and anticipated changes in the Bitcoin ecosystem. The use of opt-in RBF has been shown to be a Denial of Service (DoS) vector against multi-party funded transactions, which affects several Bitcoin protocols such as Coinjoin, onchain DLCs, and dual-funded LN channels. Additionally, opt-in RBF poses a risk of mempool malicious partitions where an attacker exploits network topology or divergence in mempools policies to partition network mempools in different subsets.Corey Haddad proposed that nodes should forward any transaction conflicting with another one so long as it has a higher fee. However, there is a spam risk where someone could intend to pay a fee of 1000 sats, but every time they make a payment, they generate a transaction with the minimum fee, then a transaction with a fee 1 sat higher, etc., until they've generated about 1000 sats. Therefore, nodes only forward transactions that have a fee at least X sats higher than one they already have in their mempool.While opt-in RBF doesn't suit the deployment of robust second-layer protocols, even if those issues are still early and deserve more research, a meaningful subset of the ecosystem relies on 0-confs transactions, even if their security is relying on far weaker assumptions. Antoine Riard, a Bitcoin Core contributor, proposed two reactive security models to enhance the security of 0-confs against double-spending attacks. One model involves running full-nodes with well-spread connection graphs and unlinkable between them to detect a successful double-spend attempt. The second model proposes reacting after the fact if a double-spend has been qualified.The Lightning Network ecosystem could adopt trust-minimized, decentralized solutions to patch the risks when entering in a channel/HTLC operation with an anonymous counterparty. Antoine Riard believes that a transaction relay/mempool acceptance policy might be beneficial to some class of already-deployed Bitcoin applications while being detrimental to newer ones. If there is ecosystem agreement on switching to full-RBF, but 0.24 sounds too early, let's defer it to 0.25 or 0.26. There is no consistent deprecation process with respect to policy rules heavily relied-on by Bitcoin users; therefore, setting a precedent satisfying as many folks as possible is essential.</summary>
+    <published>2021-06-30T19:21:29+00:00</published>
+  </entry>
+</feed>

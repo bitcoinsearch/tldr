@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+  <updated>2023-06-15T15:32:23.657667+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2022-01-27 19:16:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+    <updated>2023-06-15T15:32:23.657667+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-January/019818.html" rel="alternate"/>
+    <summary>The email thread focuses on the implementation of opcodes and the benefits of different proposals, specifically CTV and OP_TXHASH. The sender expresses concern about technical debt and the need for ongoing maintenance of opcodes. They argue that implementing a CTV opcode that will eventually be obsoleted by a TXHASH is not valuable. However, they acknowledge the argument for bare CTV and the finer details of weight calculations. The receiver provides feedback on several points, including the use of APO covenants with split R and S values to save key versions. They also suggest the need for a formal model of scripting and transaction validity properties to test various combinations of flags. They caution that flexible hashing has the potential for quadratic hashing bugs and stress the importance of proper caching.The sender notes that while TXHASH is an acceptable theoretical approach, they prefer CTV as a first step due to pragmatic engineering and availability timeline reasons. The email also recaps the relationship between CTV and ANYPREVOUT proposals, noting their overlap in applications despite distinct primary purposes. It explains the differences in cost and coverage of transaction values between simulating CTV via ANYPREVOUT and the actual CTV proposal. The proposal suggests decomposing the operations of CTV and ANYPREVOUT into their constituent pieces to reassemble their behavior programmatically. The proposed opcodes include OP_TXHASH and OP_CHECKSIGFROMSTACKVERIFY, which have roughly equivalent functionality to CTV and TXHASH. While these opcodes offer the ability to program solutions from pieces and build more applications, they require more bytes than purpose-built proposals. Unlike CTV, TXHASH is not NOP-compatible and can only be implemented within Tapscript. This proposal does not preclude the possibility of having CTV added to legacy script while having TXHASH added to Tapscript. Additionally, TXHASH is not amenable to extending the set of txflags at a later date. To mitigate these difficulties, the proposal suggests designing a robust set of TXHASH flags from the start. Interactions with potential future opcodes should be considered, such as CAT, rolling SHA256 opcodes, or how it might interface with other covenant opcodes that may do things like push input or output amounts onto the stack for computation purposes. Overall, the proposed opcodes allow for greater flexibility in programming solutions and building applications, but careful consideration must be given to their implementation and interaction with future opcodes.The sender emphasizes the significance of implementing CTV to enable applications for privacy, scalability, self-custody, and decentralization. Finally, they note that having CTV implemented can drive the process of review for any covenant proposals forward, even if it is ultimately not activated.</summary>
+    <published>2022-01-27T19:16:33+00:00</published>
+  </entry>
+</feed>

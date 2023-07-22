@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Bitcoin Secure Multisig Setup</title>
+  <updated>2023-06-14T17:35:07.222820+00:00</updated>
+  <author>
+    <name>Dmitry Petukhov 2021-02-14 10:37:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Bitcoin Secure Multisig Setup</title>
+    <updated>2023-06-14T17:35:07.222820+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018419.html" rel="alternate"/>
+    <summary>The proposed encryption scheme for a multisig setup involves using PBKDF2 with SHA512 as the key derivation function. The `Password` and `Salt` are exchanged between the coordinator and signers prior to the setup. The `NONCE`, a 64-bit number, can be converted to a 6-word phrase, a 20-digit decimal number, or a QR code. The encryption key is derived from these parameters with `c=2048` and `dkLen=256`. The human-readable title should be in ASCII format with a minimum length of 8 and a maximum length of 20. The assumption is that the secure session is only needed temporarily for a few hours, maybe up to one day. One participant should have a unique token, so it's not possible for one participant to attack another. A public 'participant id' derived from the token can be used instead of trying all tokens to decrypt the data. The coordinator will store the map between the participant labels and their participant ids and tokens. When data from Alice comes with a participant id attached, the coordinator will know which token to use and where to put the xpub in the descriptor. The proposed scheme might be vulnerable to a rainbow table attack. One suggestion was to make the "token" longer by using a mnemonic. This creates an issue with entering long data of the shared key into the device manually, making it difficult UX-wise. Another issue is potential confusion between entering the main key and entering the shared key for multisig setup. The approaches can be combined by specifying a key derivation function suitable for passwords and sharing a password and/or the derived key via a secure channel.</summary>
+    <published>2021-02-14T10:37:52+00:00</published>
+  </entry>
+</feed>

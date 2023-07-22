@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>More thoughts on NOINPUT safety</title>
+  <updated>2023-05-23T01:58:54.312722+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-03-21 09:06:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>More thoughts on NOINPUT safety</title>
+    <updated>2023-05-23T01:58:54.312722+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-March/001929.html" rel="alternate"/>
+    <summary>In a discussion on the Lightning-dev mailing list, ZmnSCPxj had some questions regarding eltoo with MAST and NOINPUT. He was initially confused about which script would be acceptable for an eltoo script. In response, aj clarified that either of the two scripts is okay. ZmnSCPxj then asked if it would be safe for Watchtower to know about the SIGHASH_NOINPUT and the q private key included in the blob sent to them. Aj responded positively, stating that from Alice/Bob's point-of-view, the NOINPUT sig ensures they control their money. Aj then went on to explain that each update transaction pays out to an OP_IF statement that contains OP_CSV and an OP_CHECKSIGVERIFY, followed by an OP_CHECKSIG, or an OP_ELSE statement that contains OP_CHECKLOCKTIMEVERIFY and an OP_CHECKSIGVERIFY, followed by an OP_CHECKSIG. They discussed making this shorter, with aj suggesting that signing with NOINPUT,NOSCRIPT and codeseparatorpos=1 allows binding to any prior update tx, while signing with codeseparatorpos=-1 and NOINPUT but committing to the script code and nSequence (for the CSV delay) allows binding to only that update tx. This requires two pubkeys, two sigs, and the taproot point reveal.</summary>
+    <published>2019-03-21T09:06:14+00:00</published>
+  </entry>
+</feed>

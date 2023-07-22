@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - crowdfunding with SIGHASH_ANYONE_CAN_PAY</title>
+  <updated>2023-05-23T21:40:25.911354+00:00</updated>
+  <author>
+    <name>Ryan Grant 2015-11-23 20:12:55</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2015-11-24 23:04:31</name>
+  </author>
+  <author>
+    <name>Ryan Grant 2015-11-23 22:44:05</name>
+  </author>
+  <link href="lightning-dev/Nov_2015/000332_crowdfunding-with-SIGHASH-ANYONE-CAN-PAY.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2015/000342_crowdfunding-with-SIGHASH-ANYONE-CAN-PAY.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2015/000333_crowdfunding-with-SIGHASH-ANYONE-CAN-PAY.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - crowdfunding with SIGHASH_ANYONE_CAN_PAY</title>
+    <updated>2023-05-23T21:40:25.911354+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000332.html" rel="alternate"/>
+    <summary>Alice intends to participate in Bob's crowdfunded project on the Lightning Network by pledging a one-input, one-output, anyone-can-pay transaction valid for one month. Bob has publicized his address anchored to an open channel on the Lightning Network and Alice has received Bob's hashed preimage R. They plan to use an intermediary node run by Hubab.However, Alice needs a special Lightning protocol option to indicate that only the final hop should be rewritten and signed as anyone-can-pay, while all other anyone-can-pay donors need to pay to the same output. Bob's Lightning software needs to leave all anyone-can-pay fragments alone until they are valid together. Crowdsourcing initiatives usually deal in larger amounts of money than the initiators can raise beforehand, which would preclude matching the amount in an initial Funding Transaction.To solve this problem, Alice sends Hubab a normal channel transaction using the HTLC to cover the cost plus fees. Alice can then send Hubab special instructions on how to create a SIGHASH_ANYONE_CAN_PAY for Bob using the HTLC. Once Bob receives the pledge transaction from Alice, it should not be revoked, as in normal bidirectional use of Lightning channels, and it should lie out-of-band until the anyone-can-pay output is claimed. Bob does not update any related Commitment Transactions until the anyone-can-pay is fulfilled. Hubab will be able to spend her normal channel transaction when Bob reaches his goal. Bob's crowdfunding software will concatenate scriptPubKeys of the pledges delivered by Hubab, with their HTLCs, to claim the anyone-can-pay output, releasing R.Crowdfunding events could lock up money for a long time since execution is not handed over to the network when the HTLC commitment is initiated. Lightning Network nodes will price their fees accordingly, and fee discovery should be aware of different transaction types. Pledges have longer lives than payments, and it's not an error to change one's mind about them. The protocol needs an update_revoke_pledge_htlc to revoke accepted pledges that have not yet expired or caused other errors.Hubab may need to route further, to Carol. She needs to be aware of more in the route than her handoff address, such as whether the next destination is final. When signing the SIGHASH_ANYONE_CAN_PAY transaction, Hubab (or Carol) needs to select an input matching the exact amount.In conclusion, while there are some complexities involved in using the Lightning Network for crowdfunding, it is still a viable option for those who already have Lightning funds. However, everyone considering a pledge can sign their part of the transaction for free if they hold any coins on the Bitcoin blockchain, and only the initiator needs to pay any transaction fee.</summary>
+    <published>2015-11-23T20:12:55+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Merkle branch verification &amp; tail-call semantics for generalized MAST</title>
+  <updated>2023-06-12T18:20:53.061242+00:00</updated>
+  <author>
+    <name>Luke Dashjr 2017-11-04 07:59:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Merkle branch verification &amp; tail-call semantics for generalized MAST</title>
+    <updated>2023-06-12T18:20:53.061242+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-November/015256.html" rel="alternate"/>
+    <summary>Mark Friedenbach has proposed two new script features to be added to the bitcoin protocol, MERKLE-BRANCH-VERIFY (MBV) and tail-call execution semantics. These features will allow script authors to force redemption to use values selected from a pre-determined set committed in the scriptPubKey, while maintaining enhanced privacy and smaller script sizes. MBV also allows the verification of multiple items extracted from a single tree. The implementation of these features is expected to be simple enough, and the use cases compelling enough that we could BIP 8/9 rollout of these features in a relatively short order, perhaps before the end of the year. Friedenbach has written three BIPs to describe these features, including Fast Merkle Trees, MERKLEBRANCHVERIFY, and Tail-call execution semantics.  In addition, Friedenbach modified the hashing function fast-SHA256 to prevent an internal node from being interpreted simultaneously as a leaf. He also changed MERKLEBRANCHVERIFY to have two modes: one where the inputs are assumed to be hashes, and one where they are run through double-SHA256 first. Furthermore, he made tail-call eval compatible with BIP141’s CLEANSTACK consensus rule by allowing parameters to be passed on the alt-stack and restricted tail-call eval to segwit scripts only.Luke Dashjr suggested using `OP_CALCMERKLEROOT OP_EQUAL` instead of `OP_CHECKMERKLEBRANCH` for the first stage. This would be more future-proof since there could more easily be alternatives to `OP_EQUAL` in future script versions. However, he also noted that `OP_ADDTOSCRIPTHASH` may be fatally incompatible with script versioning. Old nodes won't know how to check the witness program, which means an undefined version could be used to bypass the correct script entirely. Therefore, further thought is required on this matter.</summary>
+    <published>2017-11-04T07:59:07+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>ANYPREVOUT in place of CTV</title>
+  <updated>2023-06-15T19:19:20.121104+00:00</updated>
+  <author>
+    <name>Nadav Ivgi 2022-04-29 05:08:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>ANYPREVOUT in place of CTV</title>
+    <updated>2023-06-15T19:19:20.121104+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-April/020377.html" rel="alternate"/>
+    <summary>The author of the post provides a list of trade-offs for using APO as an alternative to CTV. Firstly, the resulting txids from APO are not stable, which could pose issues for certain proposed use-cases like channel factories. Secondly, APO is only available on Taproot, which some may prefer to avoid long-term multi-decade vault storage due to quantum computing concerns. The witness satisfaction cost of APO is 3x higher than that of CTV-in-Taproot, and it also has higher network-wide full-node validation costs. Lastly, APO suffers from the half-spend problem, making the simple-apo-vault implementation vulnerable to spending multiple vaulted outputs of the same denomination together and burning all but the first one. The author suggests amending BIP 118 with new sigmsg flags to fix this issue, making APO as-is not a CTV-replacement candidate without first going through more design and review iterations. The author proposes that SIGHASH_ANYPREVOUTANYSCRIPT can emulate CTV fine if its "ANYONECANPAY" behaviour is made optional, and therefore BIP118 is a soft fork candidate that could benefit most Bitcoin users. Overall, the author suggests that APO-AS covers the flagship usecase of vaults and that potential use-case applications of APO should be explored while waiting for onchain usage of a less efficient construction to achieve the same goal.</summary>
+    <published>2022-04-29T05:08:32+00:00</published>
+  </entry>
+</feed>

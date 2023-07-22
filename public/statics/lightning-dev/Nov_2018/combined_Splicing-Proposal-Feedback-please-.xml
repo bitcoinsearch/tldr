@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Splicing Proposal: Feedback please!</title>
+  <updated>2023-05-20T08:49:26.433248+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-11-06 06:55:03</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-10-15 19:04:23</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-11-06 07:02:24</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-10-15 19:04:46</name>
+  </author>
+  <link href="lightning-dev/Nov_2018/001521_Splicing-Proposal-Feedback-please-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2018/001455_Splicing-Proposal-Feedback-please-.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001522_Splicing-Proposal-Feedback-please-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2018/001456_Splicing-Proposal-Feedback-please-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Splicing Proposal: Feedback please!</title>
+    <updated>2023-05-20T08:49:26.433248+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001521.html" rel="alternate"/>
+    <summary>The Lightning Network is a payment protocol that uses smart contracts to enable instant payments across a network of participants. The discussion around the limitations and benefits of creating multiple channels to a single peer is ongoing. It is argued that having more channels would increase capacity and provide fault tolerance, path diversity, and redundancy reasons. Post AMP, the increased HTLC bandwidth load may promote nodes to open additional channels to other nodes for accommodating the sharded multi-path payments.The initiator distinction is discussed, and it is suggested that doing away with it may cause an initiatee to pay fees they did not voluntarily consider paying. Priorities are also discussed, and it is said that people want to prioritize splicing over AMP or watchtowers, which puzzles some individuals.The "pre seating of inputs" approach is explored, where clients generate addresses, and others deposit to them, and then have these deposits spliced directly into the channel. The asynchronous splice proposal requires a link-level protocol that allows both sides to collaboratively create and recognize these outputs.The Lightning Network is proposing to allow splicing of existing channels, allowing for distinct channels with different acceptance policies, a mix of public and non-advertised channels with a node, more than the current maximum HTLC amount, the ability to get past the maximum channel size value and carry more HTLCs given additional pressure. The splicing_add_* messages will allow one to add several inputs in a single message, with an upper limit on the number of inputs/outputs to add.Nested p2sh inputs will require the redeem script to be exposed or additional fields to allow sides to set a sig script as well as witness during the signing phase. The splice signatures are for the old multi-sig and the protocol allows you to forget everything about the old channel, including old HTLCs and revocation requirements. The post-splice reserve is 1% of post-splice capacity (rounded down). However, some details need to be clarified, including the lack of support for P2SH and the absence of change addresses.In Lightning Network, `splice` proposal is used to add or remove funds from an existing channel without closing it. The proposal includes `splice_add_input`, `splice_add_output`, and `splice_all_added`. Each splice add input/output has specific requirements that must be met before adding it to the proposal. Once both parties have sent `splice_all_added`, they create and sign a splice transaction and the first commitment transaction which spends it. A `splice_commitment_signature` is then sent and received by each party, followed by `splice_signature` and `splice_witness` for each `splice_add_input`. Once both parties have sent `splice_signature`, the splice is locked in. The new channel is then announced to the network using `channel_update` with a new `message_flags` field. During splicing, message changes occur, and a new field in `channel_reestablish` flags that we consider ourselves to be splicing.The Lightning Network development team has proposed a new feature called 'Splicing', which would allow users to add or remove funds from an existing payment channel without the need to close it and open a new one. The proposal includes several steps for splicing, such as validation changes, fees division, and completing splicing. It also allows nodes to send multiple inputs in a single message, and modify funding details like CSV param, reserve, max accepted HTLCs, max HTLC size, etc during the process. The team believes that splicing will be useful for users who want to expand their channels, especially given the increasing number of c-lightning users who want to open multiple channels.However, the team also noted that allowing multiple channels could be unnecessarily limiting because the current implementation involves one daemon per peer. The Lightning Network specification is being updated to include a new feature called "splicing", which will allow users to add or remove funds from their existing payment channels without the need to close and reopen them. The proposal is still under discussion, with two different methods being debated for splicing. One method is simpler but has a larger on-chain footprint, while the other is more complex but has a smaller on-chain footprint. The Lightning developers are also considering potential failure modes during splicing and how to recover from them. Other topics discussed include the implementation of AMP and watchtowers, payment decorrelation, and the pre-seating of inputs.</summary>
+    <published>2018-11-06T06:55:03+00:00</published>
+  </entry>
+</feed>

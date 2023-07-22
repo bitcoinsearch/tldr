@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CHECKSIGFROMSTACK/{Verify} BIP for Bitcoin</title>
+  <updated>2023-06-14T23:59:38.768230+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2021-07-04 19:03:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CHECKSIGFROMSTACK/{Verify} BIP for Bitcoin</title>
+    <updated>2023-06-14T23:59:38.768230+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-July/019202.html" rel="alternate"/>
+    <summary>In a discussion about the usefulness of CHECKSIGFROMSTACKADD and the need for more detail in the corresponding BIP, Jeremy and Pieter Wuille engage in a conversation about the potential applications for this feature. While Pieter does not see a wide design space for this feature, he suggests that it could be useful for doing a 2-of-3 between Alice, Bob, and an Oracle signed value. However, since this functionality can be replicated by various SWAPs and ADDs, he suggests leaving it out until there is a specific use case for it.Regarding the non-prehashed argument, Pieter explains that one reason for using it is that hashing the message requires the hash to be collision-resistant, whereas if the message is given directly, it only requires the hash to be "random-prefix" collision/preimage-resistant. Additionally, it allows for extremely fast signing oracles because an R value and the midstate of the hash can be precomputed all the way up to the application prefix. Pieter also suggests that CHECKSIGFROMSTACK should take the 32-byte message from the stack instead of hashing a message itself, as this would keep the message off the blockchain, save space, add privacy, and make the operation compatible with rolling SHA256 opcodes. Given that BIP-0340 is going to be extended to support non-32 byte messages, there is no reason to impose a message length restriction on CHECKSIGFROMSTACK.Regarding splitting R/S, while Pieter sees no reason to deviate from whatever tapscript CHECKSIG* do for internal pubkeys and invalid pubkeys, he suggests taking a normal 64-byte signature value as a stack item for CHECKSIGFROMSTACK. Although he doesn't feel strongly about this, he wouldn't oppose splitting R and S in Bitcoin if that is where consensus lies. Ultimately, Pieter believes that restricting script to prevent covenants is a losing game and that it's only a matter of time before some way to enable covenants is accidentally introduced. Thus, he suggests adding CAT to Bitcoin and not getting too fancy with CHECKSIGFROMSTACK.</summary>
+    <published>2021-07-04T19:03:40+00:00</published>
+  </entry>
+</feed>

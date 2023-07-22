@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>An idea to block invalid addresses from reaching the peers.dat buckets</title>
+  <updated>2023-05-21T03:18:14.539172+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2021-07-13 00:54:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>An idea to block invalid addresses from reaching the peers.dat buckets</title>
+    <updated>2023-05-21T03:18:14.539172+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-July/019266.html" rel="alternate"/>
+    <summary>According to a post on BitcoinTalk, someone is spamming the bitcoin network with an addr message that points to invalid addresses and ports, causing issues with the peers.dat file and corresponding structure in memory. However, the peers.dat file and structure have fixed sizes, so they are not the main problem. Since the peers.dat file uses a custom record type which cannot be parsed, it is difficult to check specifics of IP addresses listed in there. Nevertheless, there is a workaround to prevent this kind of thing from happening, but it is unclear how easy or difficult it will be to implement the change.The "addrman" database is organized into 1024 buckets with "new" addresses and 256 buckets with "tried" addresses. Each bucket can hold one address, and along with the addresses, it remembers where they were originally heard about (which IP). Each group of source IPs selects a subset of just 64 buckets, salted using a host-specific secret key, and inserts newly received IPs in a position in a bucket if certain criteria are met. The attacker cannot affect IPs in buckets outside of the 64 their group maps to. This limits the impact an attacker can have.One suggestion to improve the situation is to change the AddrDb updating functionality so that it does not add nodes that are unreachable by "connection refused" errors. While it may not be feasible to not add untried addresses at all, the existing structure should reasonably protect against spam in terms of database poisoning, although there is a processing cost to it.</summary>
+    <published>2021-07-13T00:54:29+00:00</published>
+  </entry>
+</feed>

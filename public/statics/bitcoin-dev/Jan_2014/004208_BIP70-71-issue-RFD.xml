@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP70/71 issue, RFD</title>
+  <updated>2023-06-08T00:47:01.733814+00:00</updated>
+  <author>
+    <name>Andreas Schildbach 2014-01-26 21:32:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP70/71 issue, RFD</title>
+    <updated>2023-06-08T00:47:01.733814+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-January/004208.html" rel="alternate"/>
+    <summary>In a message to the Bitcoin-development mailing list dated 26th January, 2014, Andreas Schildbach reported an issue with the protobuf format when experimenting with BIP70/71 payment protocol usage in face-to-face payments. Protobufs are not self-delimiting, meaning that if reading from an undelimited stream, one would read endlessly because they don't know how much to read. The current BIP70 implementations probably work because they're reading either from a file or from an HTTP resource which sets the Content-Length header. However, the Content-Length header is optional, and also there are many kinds of streams that don't have this built-in delimiting mechanism. The Java protobuf API solves this by offering delimited I/O, like payment.writeDelimitedTo(os), which writes the size of the message as a varint before writing the data. This leading varint is an incompatible change and would need to be added to the spec. Schildbach encountered this specifically with PaymentMessage and PaymentACK, but it might be a good idea to apply this to all messages if any. NFC NDEF and QR codes are not affected.</summary>
+    <published>2014-01-26T21:32:52+00:00</published>
+  </entry>
+</feed>

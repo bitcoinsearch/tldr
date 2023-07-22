@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Roadmap/schedules</title>
+  <updated>2023-05-18T22:09:11.824025+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2011-08-10 18:57:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Roadmap/schedules</title>
+    <updated>2023-05-18T22:09:11.824025+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-August/000339.html" rel="alternate"/>
+    <summary>In an email exchange from August 2011, Gavin Andresen outlined the priorities for Bitcoin's future roadmap. One issue he identified was a problem with new code causing CRITICAL_SECTION deadlocks. Pieter Wuille suggested either a rewrite to make everything single-threaded or a careful checking and rework of the locking system. He proposed having one lock for the node-handling code, one for the wallet-handling code, and one for network-handling code. Wuille also suggested moving towards reader-writer locks. This would involve wrapping inspector functions in lock_shared/unlock_shared blocks, mutator functions in lock_upgrade/unlock_upgrade blocks, and modifying data structures in unlock_upgrade_and_lock/unlock_and_lock_upgrade blocks.Wuille also discussed his work on fee handling, suggesting assigning a score to each transaction group that increases over time, sorting the memory pool according to those scores, and dropping the lowest scoring ones when a configurable memory limit is reached. For mining, the top N transaction groups would be selected in such a way that an average configurable fee per byte is maintained. Nodes could measure and estimate this distribution, calculate expected time to inclusion for a given fee, and converge to a more or less fixed probability distribution for the score at which transactions are included. However, Wuille did not have time to implement these ideas at the time.</summary>
+    <published>2011-08-10T18:57:53+00:00</published>
+  </entry>
+</feed>

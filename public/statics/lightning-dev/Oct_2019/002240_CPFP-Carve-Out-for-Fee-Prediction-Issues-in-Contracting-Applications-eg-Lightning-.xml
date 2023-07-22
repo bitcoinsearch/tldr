@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+  <updated>2023-06-02T15:33:46.210073+00:00</updated>
+  <author>
+    <name>Johan Torås Halseth 2019-10-24 13:49:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+    <updated>2023-06-02T15:33:46.210073+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-October/002240.html" rel="alternate"/>
+    <summary>The recently released RC for bitcoind 0.19 includes a carve-out rule intended to pave the way for more robust CPFP of on-chain contracts (Lightning commitment transactions). The carve-out rule was added in an attempt to use the Bring Your Own Fees strategy using CPFP. An implementation of a new commitment format for this purpose has been worked on and it is suggested that the special case rule should be relaxed a little to avoid adding a 1 CSV to all outputs which would also require changing HTLC scripts to add the CSV delay. Instead, it is recommended that the last transaction added to a package of dependent transactions in the mempool should have no more than one unconfirmed parent. This may allow an attacker to exceed the MAX_PACKAGE_VIRTUAL_SIZE limit in some cases but it is unclear if this poses a problem with the current mempool acceptance code in bitcoind. There have been several changes to the acceptance code and eviction policy since the limit was first introduced. Rusty Russell suggests a simplified RBF where you can replace if the feerate is higher, the new tx is in the first 4Msipa of mempool, and the old tx isn't. Though it allows 100k of free tx spam, it is simple and could be further restricted by marking the unilateral close somehow to say "gonna be pushed" and further limiting the child tx weight.</summary>
+    <published>2019-10-24T13:49:09+00:00</published>
+  </entry>
+</feed>

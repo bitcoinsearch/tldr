@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>`htlc_maximum_msat` as a valve for flow control on the Lightning Network</title>
+  <updated>2023-06-03T09:56:42.748149+00:00</updated>
+  <author>
+    <name>Anthony Towns 2022-09-28 18:58:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>`htlc_maximum_msat` as a valve for flow control on the Lightning Network</title>
+    <updated>2023-06-03T09:56:42.749150+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-September/003704.html" rel="alternate"/>
+    <summary>In a Lightning-dev forum, users discussed monetization and the undercutting of fees by CLBOSS. Some forwarding node operators think that CLBOSS is depleting its usable liquidity in the long term by undercharging fees for routing payments. The consensus seems to be that the software should be modified to raise fees and preserve liquidity supply.Additionally, it was noted that forward nodes sell liquidity, and if their channel is unbalanced against payment requests, they earn no profit. The idea of 'stock of liquidity' as a helpful metaphor was also questioned, and payment flow seen as a better descriptor. Payment flow refers to whether one is forwarding more money in one direction than another, which can lead to imbalances in the long term. The point is made that having balanced payment flows is essential to maintaining a long-running lightning channel.Rebalancing is an option to move the imbalance to someone else's channel but does not improve the network's state. The idea of introducing artificial impediments to accept payment sizes below a certain amount was also discussed. However, this could be overcome if the forwarding node splits rebalances into quanta and spikes payment size distribution. Finally, a scenario was given where an attacker generates fake traffic over A-&gt;X-&gt;B channels, causing X to detect an imbalance and then lower its max_msat to get the flow balanced.The author discusses the challenges in creating a reliable forwarding node for Lightning Network payments while optimizing for low fees. One challenge is that creating fake payment flows to rebalance channels requires reserving capital, which could become prohibitively capital intensive if there is high demand at X's fee rate along the path.Additionally, max_msat, a public indication of high demand, creates another challenge as forwarding nodes may split their rebalancing into quanta of N millisats, rendering #zerofeerouting unreliable. The author suggests a per source/dest channel token bucket rate limit as a possible solution to this problem.In an ideal world, the author imagines a scenario where $100,000 a day travels from A to B and $90,000 a day travels from B to A. In order to achieve balanced flows, routing nodes X and Y set their max_msat in the A to B direction to $2.25, splitting 20k $5 payments from A to B into $2.25 through X, $2.25 through Y, and $0.50 through Z. Meanwhile, 90 $1000 payments from B to A get split into $500 through X and $500 through Y.Routing nodes X and Y collect $0.90 in routing fees per day with their channel staying in balance, while Z sees $10,000 going from A to B and collects $40 a day. However, Z's channel runs out after five days, requiring him to spend $200 rebalancing on-chain. Payment initiators could potentially AMP as many max_msat payments as they need through the cheapest channel, making it challenging to make this incentive compatible with AMP payments.</summary>
+    <published>2022-09-28T18:58:16+00:00</published>
+  </entry>
+</feed>

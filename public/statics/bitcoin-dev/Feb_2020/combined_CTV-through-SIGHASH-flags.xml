@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - CTV through SIGHASH flags</title>
+  <updated>2023-06-13T23:27:10.667218+00:00</updated>
+  <author>
+    <name>Jeremy 2020-02-03 08:20:52</name>
+  </author>
+  <author>
+    <name>Bob McElrath 2020-02-01 20:39:42</name>
+  </author>
+  <author>
+    <name>Bob McElrath 2020-02-01 20:39:42</name>
+  </author>
+  <author>
+    <name>Bob McElrath 2020-02-01 20:39:42</name>
+  </author>
+  <author>
+    <name>Jeremy 2020-02-03 08:20:52</name>
+  </author>
+  <author>
+    <name>Jeremy 2020-02-03 08:20:52</name>
+  </author>
+  <link href="bitcoin-dev/Feb_2020/017608_CTV-through-SIGHASH-flags.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017604_CTV-through-SIGHASH-flags.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017604_CTV-through-SIGHASH-flags.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017604_CTV-through-SIGHASH-flags.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017608_CTV-through-SIGHASH-flags.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017608_CTV-through-SIGHASH-flags.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - CTV through SIGHASH flags</title>
+    <updated>2023-06-13T23:27:10.668162+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-February/017608.html" rel="alternate"/>
+    <summary>The bitcoin-dev mailing list is currently discussing proposals to change the behavior of OP_CHECKTEMPLATEVERIFY (CTV) and how it should be specified. One proposal suggests that CTV should behave more like CHECKSIG, including a flags byte that specifies what is hashed. Another proposal suggests using a flag called SIGHASH_NOSIG instead of an actual CheckSig SIGHASH Flag. However, this proposal has been criticized for being ill-advised due to the awkward API it would create and its incompatibility with soft-fork encoding rules.It was also suggested that committing to the input index using a flag instead of CTV may be less flexible. Enabling a flag right away may enable a big footgun right off the bat. NOINPUT as specified in a BIP isn't a great surrogate for CTV because CTV commits to the input index, which prevents half-spend. Committing to the input-index is not a sender policy choice but a receiver policy choice.The proposal imposes "MUST" conditions on the existence of the covenant itself, as well as the number of inputs and outputs, to prevent txid malleability so that such transactions can be used in offline protocols. Txid non-malleability can be achieved by enforcing that the output must be spent using SIGHASH_ALL instead of committing to the number of inputs separately with a new opcode. The MUST condition also helps with sighash caching for batch validation.Input indexes eliminate third-party malleability of input order and prevent half-spend, but there is confusion regarding their usage in transactions. CTV is equivalent to a flag in sequence_no that is logically MUST|ALL|NOSIG|INPUTINDEX and a redeemScript of &lt;&gt;. Lightning-like use cases might put sequence_no flags that are logically MAY|ALL|NOINPUT.The idea of expressing CTV as a sighash type today does not offer any benefits since a future soft fork can make CTV a valid hash in a new language. Instead of cramming logic into flags, it is suggested to construct the digest pattern in script or write an actual language for dealing with sighashes. However, this may lead to quadratic hashing if every output commits to a different complex thing.Despite its complexity, the CTV method is fully compatible with context-free validation optimizations. This makes it unique from other approaches which may not be as compatible. The compatibility of the CTV method allows for a more efficient and effective validation process.</summary>
+    <published>2020-02-03T08:20:52+00:00</published>
+  </entry>
+</feed>

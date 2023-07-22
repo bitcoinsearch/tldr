@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - [PATCH v3] daemon: encrypted communication (version 3)</title>
+  <updated>2023-05-23T21:25:14.941029+00:00</updated>
+  <author>
+    <name>Rusty Russell 2015-10-23 01:33:33</name>
+  </author>
+  <author>
+    <name>Mats Jerratsch 2015-10-27 18:01:32</name>
+  </author>
+  <author>
+    <name>Peter Todd 2015-10-27 20:40:47</name>
+  </author>
+  <author>
+    <name>Pierre 2015-10-27 10:34:44</name>
+  </author>
+  <author>
+    <name>Pierre 2015-10-27 17:00:24</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2015-10-27 19:48:52</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2015-10-27 19:44:07</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2015-10-28 00:32:18</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2015-10-28 02:17:20</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2015-10-27 19:41:20</name>
+  </author>
+  <link href="lightning-dev/Oct_2015/000287_-PATCH-v3-daemon-encrypted-communication-version-3-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2015/000296_-PATCH-v3-daemon-encrypted-communication-version-3-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2015/000301_-PATCH-v3-daemon-encrypted-communication-version-3-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2015/000294_-PATCH-v3-daemon-encrypted-communication-version-3-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2015/000295_-PATCH-v3-daemon-encrypted-communication-version-3-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2015/000299_-PATCH-v3-daemon-encrypted-communication-version-3-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2015/000300_-PATCH-v3-daemon-encrypted-communication-version-3-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2015/000306_-PATCH-v3-daemon-encrypted-communication-version-3-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2015/000308_-PATCH-v3-daemon-encrypted-communication-version-3-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2015/000298_-PATCH-v3-daemon-encrypted-communication-version-3-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - [PATCH v3] daemon: encrypted communication (version 3)</title>
+    <updated>2023-05-23T21:25:14.941029+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-October/000287.html" rel="alternate"/>
+    <summary>A new version of inter-node crypto has been created for a bitcoin implementation. The code consists of several functions that read, encrypt and verify packets sent by other peers in the network. The `pkt_unwrap()` function checks if the received packet is of the expected type and returns the pointer to the base message. The `check_proof()` function verifies the signature of the authentication packet exchanged between two peers. The `receive_proof()` function reads the packet containing the authentication proof. The `peer_read_packet()` function reads the incoming packets from the network and decrypts them using AES encryption. The `peer_write_packet()` function writes packets in the network after encrypting them with AES encryption. Finally, the `pkt_wrap()` function wraps a message inside a Packet and returns it.The main function being implemented is `peer_crypto_setup` which sets up encryption between two nodes on the network. Public and private keys are generated and shared with the other node, and a shared secret is derived using Elliptic Curve Diffie-Hellman (ECDH) key exchange. The function `setup_crypto` is used to set up the encryption for incoming and outgoing packets.The Lightning Network protocol uses ECDH to derive a shared secret, which is then used to generate transmission encoding parameters for each side. These include the Session AES-128 key, Session HMAC key, and IV for AES. The protocol also encrypts all packets from then on with an HMAC, which covers totlen and data. Totlen is actually the size of the unencrypted serialized protobuf message, not the total data transmitted. Unknown protobuf fields are handled in the protocol using explicit numbering. Odd numbered fields are optional and backwards compatible, while even numbered fields are required and cause an abort if received. This allows for deliberate breaking of backwards compatibility in the future after some transition.The lightning protocol uses protobuf messages for communication, and unknown fields are handled in a special way to maintain backwards compatibility. ECDH is used to derive a shared secret, which is then used to generate session AES-128 and HMAC keys, as well as an IV for AES. All packets are encrypted using AES-CTR, and the IV contains a counter to prevent replay attacks.The Lightning Network is a protocol which enables instant payments between two parties, without the need for a trusted third party. A recent update to the lightning.pb-c.c file adds functionality for authentication.</summary>
+    <published>2015-10-23T01:33:33+00:00</published>
+  </entry>
+</feed>

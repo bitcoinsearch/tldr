@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Draft BIP for SNICKER</title>
+  <updated>2023-06-13T21:06:06.577535+00:00</updated>
+  <author>
+    <name>David A. Harding 2019-10-21 00:06:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Draft BIP for SNICKER</title>
+    <updated>2023-06-13T21:06:06.577535+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-October/017414.html" rel="alternate"/>
+    <summary>A recent discussion on implementing SNICKER in Electrum, specifically the "Receiver" role, took place among SomberNight, waxwing, and ThomasV. As per the reference section, the "Receiver" can restore from seed, but to calculate `c`, they need access to their private keys. This makes the proposed scheme incompatible with watch-only wallets. However, requiring interaction with the cold wallet is acceptable for the recovery procedure from the SNICKER documentation. The set of candidate transactions produced would be small and probably with no false positives. If any SNICKER candidates were found by a watch-only wallet, they could be bundled up and transferred to the corresponding cold wallet using the same means used for PSBTs, where the cold wallet could perform step #3 using its private keys and return a file/QRcode/whatever to the hot wallet telling it any shared secrets it found. This process may need to be repeated several times if an output created by one SNICKER round is spent in a subsequent SNICKER round. This can be addressed by refusing to participate in chains of SNICKER transactions or by refusing to participate in chains of SNICKERs more than n long, requiring a maximum n rounds of recovery. It could also be addressed by the watching-only wallet looking ahead at the blockchain a bit in order to grab SNICKER-like child and grandchild transactions of our SNICKER candidates and sending them also to the cold wallet for attempted shared secret recovery. The SNICKER recovery process is only required for wallet recovery and not normal wallet use, so a small amount of round-trip communication between the hot wallet and the cold wallet is not too much to ask, especially since anyone using SNICKER with a watching-only wallet must be regularly interacting with their cold wallet anyway to sign the coinjoins.</summary>
+    <published>2019-10-21T00:06:08+00:00</published>
+  </entry>
+</feed>

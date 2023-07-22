@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Squashing redundant tx data in blocks on the wire</title>
+  <updated>2023-06-09T01:09:36.591444+00:00</updated>
+  <author>
+    <name>Jeff Garzik 2014-07-18 13:53:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Squashing redundant tx data in blocks on the wire</title>
+    <updated>2023-06-09T01:09:36.591444+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-July/006296.html" rel="alternate"/>
+    <summary>In a discussion, Gavin Andresen encouraged the idea of coding up a prototype first or at the same time with the existing p2p protocol. He suggested that there could be a mining-only very-fast-block-propagation network separate from the existing p2p network. By combining these optimizations with "broadcast as many near-miss blocks as bandwidth will allow" on a mining backbone network, it should allow insanely fast propagation of most newly solved blocks. Andresen also recommended thinking along these lines, and mentioned his previous experiment with sending block header + tx list + coinbase via UDP best effort broadcast in the UDP P2P protocol extension he wrote. He stated that if neighbors receiving this message already have the TXs in the TX list, then the block is complete and may be relayed further. However, if neighbors don't have all TXs in the block, they must fetch them at an additional time/latency cost. Thus, incentives are created to relay blocks containing TXs already distributed out into network mempools and cached in the signature cache. Andresen emphasized that we want to capture that incentive in whatever protocol is eventually used. Miners have a TX fee incentive to include many transactions, and in theory, they want to include as many TX as possible. This would help scale considerably to solve the problem.</summary>
+    <published>2014-07-18T13:53:35+00:00</published>
+  </entry>
+</feed>

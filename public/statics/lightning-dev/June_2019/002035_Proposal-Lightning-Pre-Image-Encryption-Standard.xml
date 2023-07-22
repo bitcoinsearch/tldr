@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Lightning Pre-Image Encryption Standard</title>
+  <updated>2023-06-02T19:06:48.689346+00:00</updated>
+  <author>
+    <name>Nadav Kohen 2019-06-25 16:54:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Lightning Pre-Image Encryption Standard</title>
+    <updated>2023-06-02T19:06:48.689346+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-June/002035.html" rel="alternate"/>
+    <summary>The proposal suggests the use of AES encryption in CFB mode with no padding to plaintext for monetizing data transfers in Lightning. Responding to any request for data with an invoice and encrypted data with that invoice's payment pre-image ensures that the user gets the data only if they successfully pay that invoice over the lightning network. The proposed scheme is already in use in real applications and will likely be further adopted as more lapps emerge. The proposal suggests the creation of an industry standard for uniform libraries for standard ln-encryption and ln-decryption. AES encryption is a widely used standard that has libraries available for most platforms and languages. CFB mode allows the encryption of arbitrary sized plaintexts, allowing the avoidance of logic for padding/unpadding. When encrypting with the preimage, any pre-image that is 16, 24 or 32 bytes will work. After encrypting the desired data with the payment pre-image, serialize the encrypted data by prepending the IV to the encrypted data, and then convert the sequence of bytes to a base64 string. The proposal recommends that a data provider should respond to requests for data over a secure channel (e.g. HTTPS) with the requested data encrypted by the payment pre-image using AES in CFB mode. Encrypting with the pre-image ensures that the user only receives the data they pay for, and sending over a secure channel ensures no one else who knows the pre-image receives the data. Once the payment has been received by the data provider, they may offer the payment pre-image directly to the data recipient if there is a communication channel to the user (say over a websocket). The proposal provides reference implementations in JavaScript using the Crypto-JS library, Python using the Pycrypto library, and Java/Scala using the Bitcoin-S library. Finally, the proposal acknowledges Alex Bosworth for sharing this idea with them and having a working implementation of this scheme at yalls.org, and Torkel Rogstad for the encryption details and reference implementations.</summary>
+    <published>2019-06-25T16:54:23+00:00</published>
+  </entry>
+</feed>

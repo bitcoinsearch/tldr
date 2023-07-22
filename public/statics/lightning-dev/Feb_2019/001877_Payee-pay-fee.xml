@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Payee pay fee</title>
+  <updated>2023-06-02T17:27:03.018314+00:00</updated>
+  <author>
+    <name>Cezary Dziemian 2019-02-19 18:46:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Payee pay fee</title>
+    <updated>2023-06-02T17:27:03.018314+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-February/001877.html" rel="alternate"/>
+    <summary>The email thread discusses the issue of fees in lightning network transactions where the payee pays the fee instead of the payer. The original poster, Cezary Dziemian, suggests an alternative solution where the payee provides a fee limit along with the invoice and the payer finds a route that does not exceed the limit. However, ZmnSCPxj argues that the proper solution would involve the payee providing one or more complete paths from the payer to the payee node, which will be provided as fully encrypted onions to the payer, providing various benefits. These include the payee knowing exactly how much it will lose in fees since it is the one providing the path, improving privacy for the payer, and the payer being unable to bias the route towards other nodes it controls that happen to charge high LN fees. The use-case discussed is where the payer is a publicly-useable service such as an exchange. In this case, the payer provides its node address to the user, but the user never provides its node address to the service. There is no spec yet, and ZmnSCPxj is too busy with other considerations to actually work on anything Lightning-related. However, he suggests that someone can pick up this issue and continue its development. The solution proposed by ZmnSCPxj requires some standard of transporting multiple encrypted onions from the user (payee) to the service (payer), and some implementation must provide some method of generating multiple routes from the user to the service. This must compute "forwards", i.e. a constant amount will be released by the payer, and the payee will take whatever value remains after fees. The implementation needs to have some heuristic, i.e. if it finds a route that loses more than 1% of the value being paid (overrideable by the user), then it probably should reject that route and not provide it to the service (payer). In essence, this issue shows the "other side" of merchants, which is exchanges. Current LN is biased towards merchants, where the merchant exposes its node ID on the invoice it provides to the user. For exchanges, a dual transformation is needed, where the exchange exposes its node ID somehow via a mechanism that does not yet exist.</summary>
+    <published>2019-02-19T18:46:50+00:00</published>
+  </entry>
+</feed>

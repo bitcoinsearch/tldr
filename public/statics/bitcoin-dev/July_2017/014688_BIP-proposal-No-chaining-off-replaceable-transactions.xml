@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP proposal: No chaining off replaceable transactions</title>
+  <updated>2023-06-12T03:15:53.263935+00:00</updated>
+  <author>
+    <name>Andreas Schildbach 2017-07-04 11:50:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP proposal: No chaining off replaceable transactions</title>
+    <updated>2023-06-12T03:15:53.263935+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-July/014688.html" rel="alternate"/>
+    <summary>The BIP125 policy aims to create a more efficient fee marketplace by allowing users to increase the fees of unconfirmed transactions. However, this proposal is hindered when the receiver spends from the unconfirmed output, exposing the sender who must choose between paying an effectively unbounded amount or not fee bumping at all. This is especially problematic for batched sends with multiple receivers, as wallets and services cannot effectively lowball the fee of transactions due to the risk of the receiver spending it before confirmation. To support a healthy fee marketplace, the proposal suggests increasing the utility of BIP125 by making transactions that spend an unconfirmed BIP125 output non-standard. The policy specifies a max chain depth of 1 for any BIP125 transactions, meaning receivers of these transactions will need to wait until the transaction has confirmed before spending from it. This will not be significantly different than current practice as receivers already need to monitor for replacements.If senders want to make further transactions before the BIP125 transaction confirms and need to utilize the change of the transaction, they will need to replace the transaction with one that makes the other send in "pass through" style or first finalize the BIP125 transaction and then chain from the spend normally.</summary>
+    <published>2017-07-04T11:50:30+00:00</published>
+  </entry>
+</feed>

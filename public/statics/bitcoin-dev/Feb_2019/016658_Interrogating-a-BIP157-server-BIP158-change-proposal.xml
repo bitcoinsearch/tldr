@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Interrogating a BIP157 server, BIP158 change proposal</title>
+  <updated>2023-06-13T16:57:15.559965+00:00</updated>
+  <author>
+    <name>Tamas Blummer 2019-02-06 08:09:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Interrogating a BIP157 server, BIP158 change proposal</title>
+    <updated>2023-06-13T16:57:15.559965+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-February/016658.html" rel="alternate"/>
+    <summary>In a recent email exchange, Tamas Blummer and Olaoluwa Osuntokun discussed the advantages and disadvantages of various Bitcoin block filters. Blummer suggests that moving to a spent outpoint + output script filter would be more secure and allow light clients to perform further probabilistic checks. However, Osuntokun believes it is too late to change the current deployment of the BIPs and instead suggests adding new filter types in the future.Jim Posen also adds to the discussion, proposing three possibilities for improving client protocol given the limitations of the current filter system. Option two, which involves clients tracking multiple possible filter header chains and considering the union of their matches, is favored by Posen due to its simplicity and support from the BIP 157 P2P protocol.Tamas Blummer has suggested a change to BIP158, which would allow for a decision on which filter chain is correct at lower bandwidth usage. He proposes having a basic filter, as opposed to the current full filter, which would contain exactly the spent outpoints and the scriptPubKey of each output aside from all OP_RETURN output scripts for each transaction in a block. The client could then download the entire filter of the block and check it entirely against the contents of the same block. If there is a divergence at a checkpoint, the client would request the filter headers between the last matching and first divergent checkpoint to figure out which block's filter is the first that does not match previous assumptions. The client would then download the corresponding block, check that its header fits the PoW secured best header chain, re-calculate merkle root of its transaction list to know that it is complete and query the filter to see if every output script of every transaction is contained in there. If not, the server is lying, and the case is closed, and the server disconnected. However, having all output scripts in the filter does not guarantee that the filter is correct since it might omit input scripts. A remedy here would be another filter chain on created and spent outpoints as is implemented currently by Murmel.</summary>
+    <published>2019-02-06T08:09:55+00:00</published>
+  </entry>
+</feed>

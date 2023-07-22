@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Thoughts on Improving MPP</title>
+  <updated>2023-06-04T00:30:58.652650+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-08-02 02:02:25</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-08-16 19:10:13</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-08-12 18:20:13</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-08-14 02:59:30</name>
+  </author>
+  <link href="lightning-dev/Aug_2020/002775_Thoughts-on-Improving-MPP.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2020/002778_Thoughts-on-Improving-MPP.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2020/002776_Thoughts-on-Improving-MPP.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2020/002777_Thoughts-on-Improving-MPP.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Thoughts on Improving MPP</title>
+    <updated>2023-06-04T00:30:58.653650+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-August/002775.html" rel="alternate"/>
+    <summary>The article highlights the challenges of generating invoices for Lightning Network payments when all channels are unpublished. The author suggests using a round-robin strategy to select routehints and generate multiple invoices, each with different sets of routehints. Privacy concerns arise when probing fake payers can discover entry points used by the payee to connect to the public network, therefore, avoiding unpublished channels is recommended. Additionally, the author addresses the challenges faced by the payer when settling MPP payments split into sub-payments. Currently, sub-payments execute on the same routehint leading to deadlock. The author proposes a round-robin distribution of routehints among sub-payments, where each sub-payment gets the entire list of routehints in a different order. ZmnSCPxj suggests splitting payments in terms of a Fibonacci sequence instead of splitting payments by half in case of an adaptive split to reduce the risk of deadlock. The C-Lightning MPP implementation is facing a limit on the number of HTLCs a channel can have. The initial consideration was for every channel with outgoing capacity, 10 HTLCs would be allocated, but they neglected to consider the incoming number-of-HTLCs limit of the payee, which caused an issue. The use of the same failure code `temporary_channel_failure` for hitting both msat capacity and number of HTLCs limits exacerbated the problem. To fix this issue, it would be reasonable to count the number of channels the payee has and use it as well as the basis of the number of HTLCs the receiver can get, and to get the lower of this and the outgoing channels of the payer. Overall, the issue is probably fixable if they consider the number of channels of the payer and also the number of channels of the payee.</summary>
+    <published>2020-08-02T02:02:25+00:00</published>
+  </entry>
+</feed>

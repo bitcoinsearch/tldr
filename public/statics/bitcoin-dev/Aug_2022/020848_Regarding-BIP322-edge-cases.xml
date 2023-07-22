@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Regarding BIP322 edge cases</title>
+  <updated>2023-06-15T23:41:38.392044+00:00</updated>
+  <author>
+    <name>vjudeu at gazeta.pl 2022-08-10 15:05:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Regarding BIP322 edge cases</title>
+    <updated>2023-06-15T23:41:38.392044+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-August/020848.html" rel="alternate"/>
+    <summary>A hypothetical OP_CHECKDATASIG can perform an ECDSA public key recovery for legacy P2PKH signing, which can be done safely inside BIP. If OP_CHECKDATASIG is not handled, then signing by scripts can handle that, but it would unnecessarily complex the script. To make a new opcode compatible with existing schemes, it has to be assigned some byte for OP_CHECKDATASIG or any other new opcodes. Backward compatibility needs to be considered and it can be achieved by introducing OP_RESERVED to make it compatible with "Bitcoin Message". Assigning unused opcode would make things more complex as in Script, those opcodes make transactions invalid, but inside TapScript, those opcodes are defined as OP_SUCCESS, and make things automatically valid. The draft of BIP322 has some TODO items like Silent Transactions, some invalid opcode to allow only in various proof types, and a way for the initial signer to delegate to another scriptPubKey. A NOP can be placed at the beginning of the script to activate proof parsing mode and limit what opcodes scriptPubKeys should be eligible to sign from them. For Silent Transactions, a subsection can be made to operate with them using its scriptPubKey. Delegation to another scriptPubKey can be done through MAST.</summary>
+    <published>2022-08-10T15:05:59+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Composing a transaction of many small transactions</title>
+  <updated>2023-05-24T02:01:51.056546+00:00</updated>
+  <author>
+    <name>CJP 2017-06-13 19:28:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Composing a transaction of many small transactions</title>
+    <updated>2023-05-24T02:01:51.056546+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2017-June/000736.html" rel="alternate"/>
+    <summary>The Lightning Network has a major vulnerability where an attacker can perform a DoS attack by sending large transactions to himself over a long route and letting them time out. This locks up a lot of funds, and the total cost of lost opportunity to innocent nodes is much higher than that of the attacker. One solution for this DoS mode is that nodes require either a fast commit or roll-back within a short amount of time, or a proof that another channel was closed. However, this approach limits freedom of node pairs to join the network with new/unusual channels in a useful way. Another proposed solution is by splitting a transaction into many small parts, so at any given point in time, only a small amount would be locked. If it turns out to be locked for a long time, that would not be a problem since it's only a small amount. Initially, there was a concern that only a part of the funds gets transferred; however, this is not an issue most of the time because trust is required between the endpoints of a transaction. However, there is still a question as to whether this approach really resolves the DoS attack mode. The attacker can easily lock funds in another small transaction, and so on, eventually locking up the same amount of funds for the same amount of time as in the original attack. To prevent this, you have to distinguish the attacker from regular users, which is difficult in a network where the identity of source and destination are protected. One possible solution is requiring nodes to "unwrap the onion" in case of a transaction that stays locked for too long. This would be mostly useful towards the payee, but it wouldn't prevent the next locked transaction. Another solution is when the last cooperating node in the route is no longer allowed to forward payments through the non-cooperating node. If the otherwise cooperative node fails this rule, the next time, the second-last cooperating node is no longer allowed to forward payments through that node. This may continue a couple of times, until a truly cooperative node follows all the rules, and attacker transactions are canceled in a fast and efficient manner by that node. However, an attacker can significantly delay being blocked by creating a part of the network under their own control, which has at least one "cooperating" node as a gateway, followed by large numbers of non-cooperating nodes, which are continuously being replaced once old ones are being flagged as non-cooperating.</summary>
+    <published>2017-06-13T19:28:03+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Preferential Treatment in AttemptToEvictConnection()</title>
+  <updated>2023-06-14T16:03:18.792311+00:00</updated>
+  <author>
+    <name>Mike Brooks 2020-10-03 23:06:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Preferential Treatment in AttemptToEvictConnection()</title>
+    <updated>2023-06-14T16:03:18.792311+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-October/018225.html" rel="alternate"/>
+    <summary>The Bitcoin community has expressed concerns about the preferential treatment and odd comments found in AttemptToEvictConnection(), which is used to limit the impact of eclipsing attacks. The concern is that an adversary intending to provide data-arbitrage services will have preferential treatment in the formation of the network. The code on line 948 states that an attacker cannot predict which netgroups will be protected, but an attacker can have more netgroups than node slots. Similarly, the code on line 952 claims that an attacker cannot manipulate this metric without physically moving nodes closer to the target, but an attacker can run tcp-traceroute on the network to find where miners clump up and run a malicious message-relay in a nearby data center.On line 955, the code protects four nodes that most recently sent novel transactions accepted into the mempool, and an attacker cannot manipulate this metric without performing useful work. However, a dishonest centralized-service can preemptively send novel-transactions as part of the handshake for new hosts, which improves the odds of the connection staying open and cutting contact with an honest node. Similarly, on line 962, the code protects four nodes that most recently sent novel blocks, but an attacker can manipulate this metric with the data-arbitrage of novel blocks. An attacker can move newly created blocks from the source to all parts of the network, garnering value within the connection pool of new hosts.All of the above checks, except for the one starting on line 948, are subject to a race condition. With continued centralization, fair connection formation becomes a bigger concern, putting a lot of pressure on AttemptToEvictConnection().</summary>
+    <published>2020-10-03T23:06:19+00:00</published>
+  </entry>
+</feed>

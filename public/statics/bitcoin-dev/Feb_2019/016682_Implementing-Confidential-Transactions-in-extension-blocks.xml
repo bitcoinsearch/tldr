@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Implementing Confidential Transactions in extension blocks</title>
+  <updated>2023-06-13T17:02:35.937174+00:00</updated>
+  <author>
+    <name>Hampus Sjöberg 2019-02-14 22:32:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Implementing Confidential Transactions in extension blocks</title>
+    <updated>2023-06-13T17:02:35.937174+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-February/016682.html" rel="alternate"/>
+    <summary>There is a debate over whether extension blocks are a soft fork since they make it impossible for older nodes to have an accurate view of the UTXO set. However, SegWit still allows pre-SegWit fullnodes to see the UTXO set, even though they could be deceived into thinking that a particular UTXO is anyone-can-spend even if they are not. Extension blocks are seen as an "evil" soft fork since older nodes are forced to upgrade as their intended functionality becomes impossible. It is no better than a hard fork in this regard, which at least is very noisy about how older fullnode versions will simply stop working.Regarding confidential transactions (CT), there is a way to do CT without an extension block and while still maintaining a correct UTXO set for old nodes. Funds that go into CT-mode are placed in a consensus/miner controlled reserve pool and to go out from CT back to normal, funds are then transferred back to the user from this pool. CT transactions seen from non-upgraded nodes will be a transaction with 0 sat outputs. The actual rangeproof commitment could be placed in the script output or somewhere else. To enter CT-mode, a commitment is required, and the transaction contains two outputs: one to the reserve pool containing the funds that can only be reclaimed when going back to normal, and one CT-output that one can start doing CT transactions from. It is believed this could be made seamlessly with just a new bech32 address specifically for CT, and sending to a CT address could be done as easily as sending to a P2SH. However, this method is seen as an evil soft fork since older nodes are forced to upgrade as their intended functionality becomes impossible. A non-extension-block approach is a definite hardfork. In terms of safety, if there is a software bug in CT, it's impossible to create new coins because the coins move from normal block to normal block as public transactions. The issue of a future quantum computing breach of the algorithms used to implement confidentiality is also relevant here. It is believed that this can be achieved with a non-extension-block approach by implementing a globally-verified publicly-visible counter of the total amount in all confidential transaction outputs. Then it becomes impossible to move from confidential to public transactions with a value more than this counter, thus preventing inflation even if a future QC breach allows confidential transaction value commitments to be opened to any value. Finally, the capacity increase from CT transactions being stored in the extension block is not an unalloyed positive since it translates to greater network capacity usage globally on all fullnodes.</summary>
+    <published>2019-02-14T22:32:17+00:00</published>
+  </entry>
+</feed>

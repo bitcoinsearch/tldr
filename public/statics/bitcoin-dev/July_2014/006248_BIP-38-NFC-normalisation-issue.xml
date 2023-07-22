@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 38 NFC normalisation issue</title>
+  <updated>2023-06-09T00:59:19.518434+00:00</updated>
+  <author>
+    <name>Jeff Garzik 2014-07-15 15:17:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 38 NFC normalisation issue</title>
+    <updated>2023-06-09T00:59:19.518434+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-July/006248.html" rel="alternate"/>
+    <summary>The context discusses the normalisation of string inputs for Bitcoin wallet encryption. Unicode guarantees that null-terminated strings still work, with U+0000 terminating a unicode (or C) string. The byte count of a string can be determined using strlen(), while the character count can be determined using mbstowcs(). While whitespace can be problematic and control characters should be filtered, emoticons are difficult to filter without resorting to substandard approaches such as character blacklists. A test vector was added to the implementation of BIP 38 (password protected private keys) in bitcoinj. However, the third test vector may not be valid, as it gives a hex version of what the NFC normalised version of the input string should be, but this does not match the results of the Java unicode normaliser. Given that "pile of poo" is not a character any sane user would put into a passphrase, it is suggested that the value of this test vector be questioned. Proposed action is to remove this test vector as it does not represent any real world usage of the spec, or if verification of NFC normalisation is desperately needed, a different, more realistic test string should be used.</summary>
+    <published>2014-07-15T15:17:04+00:00</published>
+  </entry>
+</feed>

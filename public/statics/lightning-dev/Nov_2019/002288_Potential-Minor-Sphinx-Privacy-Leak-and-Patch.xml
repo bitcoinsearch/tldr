@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Potential Minor Sphinx Privacy Leak and Patch</title>
+  <updated>2023-05-23T02:32:39.874429+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2019-11-06 02:37:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Potential Minor Sphinx Privacy Leak and Patch</title>
+    <updated>2023-05-23T02:32:39.874429+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-November/002288.html" rel="alternate"/>
+    <summary>A recently published paper analyzing the security of the Sphinx mix-net packet format has discovered that certain security notions put forth in previous research weren't actually practically achievable by real-world onion routing implementations or weren't entirely correct or additive. The new paper proposes stronger security notions, along with extensions to the original Sphinx mix-net packet format that achieve these notions. A flaw was discovered in the original Sphinx paper that can allow an exit node to deduce a lower bound of the length of the path used to reach it. The fix for this is easy and involves replacing zero bytes with random bytes when constructing the starting packet. This mitigation has already been implemented in one of the reference Sphinx implementations and a PR has been created to lnd's lightning-onion PR implementing this mitigation.However, the author notes that there are larger existing privacy leaks due to their unique application of the packet format. For example, a receiver can use the CLTV of the final HTLC to deduce bounds on the path length, and another leak is their usage of the variable length onion payloads which a node can use to ascertain path length since they space they consume counts towards the max hop count of 20-something.Despite this, the author believes that the discovered privacy leak is relatively minor and can be easily patched without wide-spread network coordination. As such, the new and old packet construction algorithms are compatible as packet processing isn't changing, instead just the starting set of bytes are being updated.</summary>
+    <published>2019-11-06T02:37:10+00:00</published>
+  </entry>
+</feed>

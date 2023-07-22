@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Fwd:  "Compressed" headers stream</title>
+  <updated>2023-06-12T15:14:36.013195+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2017-08-28 17:12:15</name>
+  </author>
+  <author>
+    <name>Peter Todd 2017-09-04 14:06:44</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2017-08-28 17:12:15</name>
+  </author>
+  <author>
+    <name>Peter Todd 2017-09-04 14:06:44</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2017-08-28 17:12:15</name>
+  </author>
+  <author>
+    <name>Peter Todd 2017-09-04 14:06:44</name>
+  </author>
+  <link href="bitcoin-dev/Aug_2017/014881_Fwd-Compressed-headers-stream.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2017/014904_Fwd-Compressed-headers-stream.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2017/014881_Fwd-Compressed-headers-stream.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2017/014904_Fwd-Compressed-headers-stream.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2017/014881_Fwd-Compressed-headers-stream.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2017/014904_Fwd-Compressed-headers-stream.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Fwd:  "Compressed" headers stream</title>
+    <updated>2023-06-12T15:14:36.013195+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-August/014881.html" rel="alternate"/>
+    <summary>Riccardo Casatta, in an email to bitcoin-dev, stated that Bitcoin headers are the most essential part of data in the world and their demand is expected to increase. He suggested that when sending a continuous stream of block headers, it would be possible to optimize the transmitted data by avoiding the transmission of previous hashes after the first header. The receiver could compute the previous hash by double hashing the previous header, which he needs to do anyway to verify the proof of work. This could result in savings of about 40% in bandwidth when sending a long stream of block headers.However, another contributor to the discussion pointed out that there were other ways to save bytes in the block headers field, such as not changing the bits field every 2016 blocks or only including the timestamp if it is greater than the median of the last 11. These improvements are just a constant factor. He recommended looking into compact SPV proofs described in the appendix of the sidechains whitepaper for log scaling proofs.Gregory Maxwell, in a discussion on bitcoin-dev, pointed out several ways to reduce the number of bytes needed for block headers. These include reducing the frequency of changing the bits field, setting the timestamp to be no less than the median of the last 11 blocks and usually only slightly more than the last one, and noting that the block version is usually one of the last few. However, these improvements are just a constant factor.The compact SPV proofs described in the appendix of the sidechains whitepaper create log scaling proofs, but they only prove total work, not validity. OpenTimestamps plans to have infrastructure for trusted validity attestations. Timestamping has security issues when done via proof-of-work, since miners can set block times backwards, which could weaken security further. It is important to understand the risks before implementing compact SPV proofs.It may also be possible to reduce initial download bandwidth by shipping a known-good sum-merkle-tree tip hash with the software.</summary>
+    <published>2017-08-28T17:12:15+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New P2P commands for diagnostics, SPV clients</title>
+  <updated>2023-05-19T03:42:46.672631+00:00</updated>
+  <author>
+    <name>Matt Corallo 2012-07-23 16:40:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New P2P commands for diagnostics, SPV clients</title>
+    <updated>2023-05-19T03:42:46.672631+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-July/001727.html" rel="alternate"/>
+    <summary>Andreas Petersson expressed his concern regarding Bloom Filters and discussed it with Stefan Thomas. Andreas mentioned that the current way Bloom filters are planned requires a complicated setup and is not optimal. He proposed a scheme where the client takes a list of addresses they are interested in, hashes them to a fixed-length bit array (Bloom filter) of length 64KiB, and combines them with | to add more 1's with each address. The server maintains a binary tree data structure of unspent outputs arranged by the Bloom filter bits. To build the tree, the server would need to calculate the 64KiB bits for each address and arrange them in a binary tree. That way, he can easily traverse the tree for a given Bloom query. Matt responded to Andreas' idea and liked having "give me all unspent outputs for my pubkeys" command. However, he thinks that clients somewhere between "I store nothing but pubkeys and don't know about the chain" and "I store a full chain," Bloom filters are pretty useful for many clients. He also suggested an electrum-style server-client system with specialized servers instead of relying on P2P nodes to provide them with a list of unspent outputs/etc. Matt mentioned that his implementation has yet to implement block filtering, for now, it's only tx inv filtering. However, doing a scan of any individual transaction is very fast, so during the download phase, it really isn't much of any extra load on blockchain providers. In response to Mike's what-the-filter-should-match question, the way it is now, it just checks each input+output to see if the hash160 of the dest addr, hash160 of the pubkey or hash160 of the p2sh sh matches the filter as-is. From the list provided, adding a check to allow adding a specific outpoint to a filter would be nice.</summary>
+    <published>2012-07-23T16:40:36+00:00</published>
+  </entry>
+</feed>

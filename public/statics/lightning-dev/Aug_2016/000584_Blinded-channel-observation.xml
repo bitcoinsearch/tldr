@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Blinded channel observation</title>
+  <updated>2023-05-24T00:13:09.368058+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-08-13 10:30:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Blinded channel observation</title>
+    <updated>2023-05-24T00:13:09.368058+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-August/000584.html" rel="alternate"/>
+    <summary>In an email exchange between Joseph Poon and Rusty Russell, Rusty asks why use an HMAC-of-tx instead of the txid. Joseph explains that txid is needed to index by to check whether a penalty transaction broadcast needs to take place, thus it cannot be used as a secret key. Rusty suggests using SHA256(txid) to which Joseph agrees. He then outlines a strawman spec, which includes changes to the protocol to use shachain/elkrem with an additional SHA256() to get the preimage, making commit N-1 unguessable even if you know commit N. The format of message-to-watcher is also provided, including the txid prefix hint, chacha20poly1305 blob, key is SHA256(txid), txid-of-previous-commit-or-zero, bitcoin signature, revocation preimage, htlc #1 H-hash ripemd160, htlc #1 expiry, htlc #2 H-hash ripemd160, htlc #2 expiry, and arbitrary zero padding. Implementations should pad this out to some reasonable amount to cover expected HTLCs and avoid revealing too much using size. Handwave. Rusty then asks what he has missed.</summary>
+    <published>2016-08-13T10:30:33+00:00</published>
+  </entry>
+</feed>

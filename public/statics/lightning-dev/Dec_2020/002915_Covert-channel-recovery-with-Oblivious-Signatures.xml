@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Covert channel recovery with Oblivious Signatures</title>
+  <updated>2023-06-03T03:27:56.066792+00:00</updated>
+  <author>
+    <name>Ariel Lorenzo-Luaces 2020-12-14 08:08:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Covert channel recovery with Oblivious Signatures</title>
+    <updated>2023-06-03T03:27:56.066792+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-December/002915.html" rel="alternate"/>
+    <summary>The email thread discusses different protocols for sending and verifying commitment transactions in the Lightning Network. The first protocol proposed involves requesting the plain text unsigned commitment transaction, sending a Pedersen commitment, and receiving encrypted signatures. If the node is fine and wants to continue the channel, it checks `encrypted_signature_verify(X, settlement_tx, Y)` and sends the commitment blinding y back to prove that it doesn't have the signature. If verification fails, the node fails the channel. However, David A. Harding suggests that there is no reason a node shouldn't send its latest commitment transaction to its counterparty in plain text over the regular BOLT8 P2P encrypted and authenticated link.The challenge with either protocol is deciding which peer goes first because whoever sends the commitment transaction reveals what they think the current state is. Any node that refuses to go first can then be suspected of having lost data. However, Ariel Lorenzo-Luaces argues that it's not clear that any party refusing to go first can be assumed to have lost data. If the rule is that the party receiving the connection must send the oblivious signatures, then a party that has both lost data and is receiving a connection can just ignore the connection request. There is plausible deniability because knowingly not answering a request can't be distinguished from having connection issues or a machine being turned off. This reasoning should work well into the future because as long as machine failures are common, the node with data loss can hide in that anonymity set.</summary>
+    <published>2020-12-14T08:08:27+00:00</published>
+  </entry>
+</feed>

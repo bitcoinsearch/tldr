@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Optional "wallet-linkable" address format - Payment Protocol</title>
+  <updated>2023-06-06T18:53:02.338926+00:00</updated>
+  <author>
+    <name>Timo Hanke 2013-06-19 14:25:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Optional "wallet-linkable" address format - Payment Protocol</title>
+    <updated>2023-06-06T18:53:02.338926+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-June/002779.html" rel="alternate"/>
+    <summary>A new address format made possible by BIP 32 is proposed in order to specify a "Wallet ID" and "One-time payment" code. This alternative address format allows parties with a persistent relationship to be able to prove that payment addresses they provide each other are linked to a particular wallet, reducing exposure to MitM attacks without the need for SSL or a web of trust. The standard address is computed by the payee (the person sending the address to receive money) as Standard Address ~ Base58(0x00 || hash160(PubKeyParent * Multiplier[i]) || checksum). The proposal suggests having the option, when specifying an address through the payment protocol, to send *just* the {PublicKeyParent, Multiplier[i]}, and let the receiver of that address compute the address on their own. This provides the useful property that they can recognize when addresses specified in this way come from the same wallet because the PubKeyParent will be the same. It allows them to validate a specific address provided by the payee but not generate or identify any other addresses. When two parties decide they will start a relationship, they can start by exchanging the public keys of their wallets and verify them in a reliable manner. After that, when one party requests a payment address from the other, they can optionally send {PubKey, Multiplier}, and the payer's software will identify the owner of that address.When a customer first provides a deposit to an exchange, it will send money from an address in their wallet, and the software will provide the exchange the {PubKey,Mult}. When the customer later provides a withdrawal address, the site can automatically trust the address as long it is provided in the alternate form, and the public keys match. If they don't, it might be the same customer just requesting a withdrawal to a different wallet, which is fine, but they'll have to go through an extra verification step to do so. The only way this works with P2SH violates one of the goals of P2SH slightly, but it may not matter much if it's all done under the hood by the software. Instead of providing a 20-byte hash of a script, you provide all the public keys and multipliers for the individual addresses. The payer's software automatically verifies all addresses and creates the P2SH script itself (after a divine decree that public keys will always be sorted lexicographically in the multi-sig script).</summary>
+    <published>2013-06-19T14:25:10+00:00</published>
+  </entry>
+</feed>

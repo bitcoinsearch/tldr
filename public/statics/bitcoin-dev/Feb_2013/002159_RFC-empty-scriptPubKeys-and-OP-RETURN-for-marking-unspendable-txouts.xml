@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RFC: empty scriptPubKeys and OP_RETURN for marking unspendable txouts</title>
+  <updated>2023-06-06T10:08:16.617350+00:00</updated>
+  <author>
+    <name>Peter Todd 2013-02-12 15:11:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RFC: empty scriptPubKeys and OP_RETURN for marking unspendable txouts</title>
+    <updated>2023-06-06T10:08:16.617350+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-February/002159.html" rel="alternate"/>
+    <summary>The author proposes two new features for the fidelity bond protocol. The first feature involves using OP_RETURN at the end of a scriptPubkey to mark an unspendable txout, ensuring that it can be immediately pruned. This is preferable to using a spendable scriptPubkey like OP_CHECKSIG, as implementors may fail to write the code to spend non-standard outputs created, which would pollute the UTXO set. Using OP_FALSE is another possibility, but there are no clear advantages over OP_RETURN. The second feature proposed is using an empty scriptPubkey with OP_TRUE or similar to create trivially spendable outputs, providing a mechanism for even non-miners to take funds sacrificed and increasing the incentive to scan the blockchain for sacrifices. This also avoids having to provide the txin to prove the value of the mining fee. In the future, this could be used as a way for multiple parties to collectively sign an assurance contract donating to miners, effectively a mining fee. Making an empty scriptPubkey spent by the scriptSig OP_TRUE a standard transaction type would make collecting the funds easier until miners start doing so themselves. However, the main disadvantage is that it makes it easier for people with buggy custom transaction code to accidentally lose their funds. Feedback on both ideas is requested.</summary>
+    <published>2013-02-12T15:11:08+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>The increase of max block size should be determined by block height instead of block time</title>
+  <updated>2023-06-11T02:24:35.464038+00:00</updated>
+  <author>
+    <name>Jorge Timón 2015-12-18 20:20:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>The increase of max block size should be determined by block height instead of block time</title>
+    <updated>2023-06-11T02:24:35.464038+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-December/012034.html" rel="alternate"/>
+    <summary>The discussion is about determining the max block size based on block height or time. Jeff Garzik prefers height activation with one step per block as it is more simple and attacks would occur around the already-heavily-watched flag day activation event, which is useful. However, he wants to hear from others about possible attacks before diverging from the default community approach of switch-based-on-time. Jorge Timón thinks median time of the previous block is better than the time of the current one and would also solve Chun Wang's concerns. He prefers heights that correspond to diff recalculation. From a code standpoint, based off height is easy. The internal version triggered on block 406,800 and each block increased by 20 bytes thereafter. It was changed to time as MTP flag day is more stable than block height. A single flag trigger (height or time) is preferred rather than the more complex trigger-on-time, increment-on-height, but any combination of those will work. They suggest using bip9 for 95% miner upgrade confirmation and also having an initial height in bip9 for softforks. The sign bit can be used as the "hardfork bit" that gets activated for the next diff interval after 95% is reached and a hardfork becomes active. Chun Wang suggests that block height should determine the max block size as it is easier to implement and more elegant than time.</summary>
+    <published>2015-12-18T20:20:13+00:00</published>
+  </entry>
+</feed>

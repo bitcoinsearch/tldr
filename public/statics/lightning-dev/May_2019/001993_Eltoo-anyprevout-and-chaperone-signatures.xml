@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Eltoo, anyprevout and chaperone signatures</title>
+  <updated>2023-06-02T18:35:08.356936+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-05-15 20:36:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Eltoo, anyprevout and chaperone signatures</title>
+    <updated>2023-06-02T18:35:08.356936+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-May/001993.html" rel="alternate"/>
+    <summary>Christian proposes that both variants of Anthony Towns' anyprevout BIP proposal should be considered for Eltoo, but mainly applies to the update_tx settlement_tx link rather than the funding_tx update_tx link and update_tx update_tx link. The separation between anyprevout and anyprevoutanyscript is useful compared to the previous noinput proposal as it would simplify the funding tx to a simple multisig without cltv/csv and remove the need for the trigger tx. Christian also acknowledges that the more tricky part to integrate is the chaperone signature. He states that the update transactions would need modification to include this signature. In response, they could collapse those 1-of-2 multisigs into a single-sig if they just collaboratively create a shared private key that is specific to the instance of the protocol upon setup. Furthermore, Christian points out that there might be some interaction between the taproot and noinput, which means we can't make use of the collaborative path where we override an update_tx with a newer one in taproot. When updating the channel, Alice and Bob would exchange their anyprevoutanyscript signatures (for the 2-of-2 multisig). The chaperone signature can be provided by either Alice or Bob at transaction broadcast time. Christian mentions that using the same key for both signatures (the chaperone one and the anyprevoutanyscript one) is safe here, but if someone knows better, they should introduce another key-pair (chaperone key).However, Christian notes that he quite likes the chaperone idea, but it doesn't really play nice with taproot collaborative spends that require anyprevout / anyprevoutanyscript / noinput, which would make their transactions stand out quite a bit. Nonetheless, this is only the case for the unhappy, unilateral close path of the protocol, which should happen rarely.</summary>
+    <published>2019-05-15T20:36:32+00:00</published>
+  </entry>
+</feed>

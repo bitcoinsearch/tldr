@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reinterpretations of contracts in different pay-to-contract schemes</title>
+  <updated>2023-06-13T14:44:17.825765+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-09-03 09:26:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reinterpretations of contracts in different pay-to-contract schemes</title>
+    <updated>2023-06-13T14:44:17.825765+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-September/016354.html" rel="alternate"/>
+    <summary>The possibility of issues arising when different pay-to-contract schemes are used on Bitcoin has been raised by ZmnSCPxj. The concern is that the byte serialization of a contract under one scheme could be reinterpreted as the byte serialization of a different contract under a different scheme. This could mean that users may commit to a contract under one scheme, but unknowingly commit to a different contract under another scheme. If an independent protocol uses pay-to-contract, it may be possible for the contract to be reinterpreted as a Bitcoin SCRIPT under Taproot, leading to a contract that can be reinterpreted as a Bitcoin SCRIPT and allowing a Bitcoin-level UTXO to be stolen without knowledge of the private key. ZmnSCPxj suggests using the hash of the contract to avoid this issue, proposing that pay-to-contract schemes should pay to the below tweak:Q = P + SHA256d(P || Scheme || C) * GWhere `Scheme` is 256 bits (32 bytes) scheme identifier. For Taproot, it could be the genesis block ID. Other pay-to-contract schemes must ensure that they use a `Scheme` ID that is different with high probability from other `Scheme` IDs, in order to ensure that reinterpretation of contracts is impossible.</summary>
+    <published>2018-09-03T09:26:35+00:00</published>
+  </entry>
+</feed>

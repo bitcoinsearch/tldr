@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Liquidity griefing for 0-conf dual-funded txs</title>
+  <updated>2023-06-03T13:01:15.895147+00:00</updated>
+  <author>
+    <name>Matt Morehouse 2023-05-09 17:38:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Liquidity griefing for 0-conf dual-funded txs</title>
+    <updated>2023-06-03T13:01:15.895147+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-May/003938.html" rel="alternate"/>
+    <summary>Bastien Teinturier, a member of the Lightning Network development team sent a message to the Lightning-dev mailing list regarding the challenge of protecting against liquidity griefing attacks from malicious peers in dual funded transactions. When using 0-conf, accidentally double-spending a channel because of concurrent instances can result in the loss of funds for one of the peers if payments were made on that channel before detecting the double-spend. Additionally, nodes that want to offer 0-conf channels must ensure that the UTXOs they use for 0-conf are isolated from the UTXOs they use for non 0-conf. To address this issue, Bastien suggests never locking UTXOs used in dual funded transactions and proposes that UTXOs be locked after tx_completes have been exchanged if the channel has option_zeroconf and if the peer adds any inputs to the funding transaction, the process should be aborted as 0-conf is unsafe in this case. After the broadcast of the funding transaction, the 0-conf channel can be used. Eclair, the open-source Lightning Network implementation, is currently doing "opportunistic" 0-conf by immediately sending 'channel_ready' if it receives it immediately, knows that the peer does not have any input and the transaction hasn't been RBF-ed yet. However, when mixing 0-conf and non-0-conf funding attempts, soft locks may prevent upgrading to 0-conf. Bastien seeks ideas for improving the situation and offering good-enough protections against liquidity griefing for nodes offering 0-conf services.</summary>
+    <published>2023-05-09T17:38:55+00:00</published>
+  </entry>
+</feed>

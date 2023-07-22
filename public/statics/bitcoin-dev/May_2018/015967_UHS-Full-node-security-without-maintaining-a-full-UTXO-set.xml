@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>UHS: Full-node security without maintaining a full UTXO set</title>
+  <updated>2023-06-13T02:21:08.268574+00:00</updated>
+  <author>
+    <name>Cory Fields 2018-05-16 16:36:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>UHS: Full-node security without maintaining a full UTXO set</title>
+    <updated>2023-06-13T02:21:08.268574+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/015967.html" rel="alternate"/>
+    <summary>The Bitcoin unspent transaction output set, or UTXO, has two primary roles. It provides proof that previous outputs exist to be spent and the actual previous output data for verification when new transactions attempt to spend them. Bram Cohen's TXO Bitfield idea suggests considering these roles independently, leading to compelling reasons to do so. Rather than storing all unspent outputs, store their hashes. Untrusted peers can supply the full outputs when needed with very little overhead. Any attempt to spoof those outputs would be apparent, as their hashes would not be present in the hash set. For each new output, gather all extra data that will be needed for verification when spending it later as an input: the amount, scriptPubKey, creation height, coinbaseness, and output type (p2pkh, p2sh, p2wpkh, etc.). Create a hash from the concatenation of the new outpoint and the dereferenced prevout data. Call this a Unspent Transaction Output Hash. Rather than storing the full dereferenced prevout entries in a UTXO set as is currently done, instead store their hashes to an Unspent Transaction Output Hash Set, or UHS. When relaying a transaction, append the dereferenced prevout for each input. The UHS model requires no consensus changes, purely a p2p/implementation change. The UHS is substantially smaller than a full UTXO set, requiring less memory. A block’s transactions can be fully verified before doing a potentially expensive database lookup for the previous output data. The burden of holding UTXO data is technically shifted from the verifiers to the spender. UTXO storage size grows exactly linearly with UTXO count, as opposed to growing linearly with UTXO data size. This may be relevant when considering new larger output types which would otherwise cause the UTXO Set size to increase more quickly. The primary disadvantage is a small increase in network traffic. The obvious drawback of using a UHS is a significant network traffic increase. Non-standard output scripts must be sent in-full, though because they account for only ~1% of all current UTXOs, they are rare enough to be ignored here. When transactions are chained together in the same block, dereferenced prevout data for these inputs would be redundant, as the full output data is already present. For that reason, these dereferenced prevouts can be omitted when sending over the wire.Assuming sha256 for the UHS's hash function, no fundamental changes to Bitcoin's security model are introduced. Transitioning from the current UTXO model would be annoying but not particularly painful. A new service-bit should be allocated to indicate that a node is willing to serve blocks and transactions with dereferenced prevout data appended. Once connected to a node advertising this feature, nodes would use a new getdata flag, creating MSG_PREVDATA_BLOCK and MSG_PREVDATA_TX.</summary>
+    <published>2018-05-16T16:36:35+00:00</published>
+  </entry>
+</feed>

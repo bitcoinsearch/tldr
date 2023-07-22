@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Compressed block headers</title>
+  <updated>2023-06-14T01:27:45.281361+00:00</updated>
+  <author>
+    <name>Will Clark 2020-05-08 12:31:06</name>
+  </author>
+  <author>
+    <name>Richard Myers 2020-05-11 11:46:04</name>
+  </author>
+  <author>
+    <name>Richard Myers 2020-05-20 13:06:11</name>
+  </author>
+  <author>
+    <name>Robin Linus 2020-05-11 12:26:54</name>
+  </author>
+  <author>
+    <name>Will Clark 2020-05-08 12:31:06</name>
+  </author>
+  <author>
+    <name>Richard Myers 2020-05-20 13:06:11</name>
+  </author>
+  <author>
+    <name>Robin Linus 2020-05-11 12:26:54</name>
+  </author>
+  <author>
+    <name>Will Clark 2020-05-08 12:31:06</name>
+  </author>
+  <author>
+    <name>Richard Myers 2020-05-11 11:46:04</name>
+  </author>
+  <author>
+    <name>Robin Linus 2020-05-11 12:26:54</name>
+  </author>
+  <author>
+    <name>Richard Myers 2020-05-11 11:46:04</name>
+  </author>
+  <author>
+    <name>Richard Myers 2020-05-20 13:06:11</name>
+  </author>
+  <link href="bitcoin-dev/May_2020/017834_Compressed-block-headers.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2020/017844_Compressed-block-headers.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2020/017881_Compressed-block-headers.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2020/017845_Compressed-block-headers.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2020/017834_Compressed-block-headers.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2020/017881_Compressed-block-headers.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2020/017845_Compressed-block-headers.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2020/017834_Compressed-block-headers.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2020/017844_Compressed-block-headers.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2020/017845_Compressed-block-headers.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2020/017844_Compressed-block-headers.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2020/017881_Compressed-block-headers.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Compressed block headers</title>
+    <updated>2023-06-14T01:27:45.281361+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-May/017834.html" rel="alternate"/>
+    <summary>In a proposal on the Bitcoin development mailing list, Will Clark has suggested a compressed block header scheme for Initial Block Download (IBD) and block announcements. The current block headers are 81 bytes each, which can be significantly reduced for low bandwidth nodes who are doing headers-only sync. Clark's proposed specification includes a new data type called `block_header2` which compresses some fields completely and others under certain conditions, resulting in a maximum reduction from an 81 byte header to best-case 39 byte header. A new service bit would be required so that nodes can advertise their ability to supply compact headers. Three new messages would be used by nodes that enable compact block header support: `getheaders2`, `sendheaders2`, and `headers2`.The author proposes a compressed block header scheme for IBD and block announcements that could provide significant bandwidth savings for low bandwidth nodes that are doing a headers-only sync. The proposal can reduce the size of block headers from 81 bytes to a best-case 39-byte header, resulting in significant bandwidth savings. Nodes can support more header-only peers for IBD and protection against eclipse attacks through this scheme.With 629,474 blocks in the current blockchain, a continuous header sync from genesis has been tested to have its required bandwidth reduced from 50.98MB down to 25.86MB, a saving of 49%. The proposed `headers2` message is returned in response to a `getheaders2` or at new header announcement following a `sendheaders2` request.According to the discussion on the Bitcoin-dev mailing list, the first header in the first `block_header2[]` vector to a newly-connected client must contain the full `nBits`, `timestamp`, `version`, and `prev_block_hash` fields, along with a correctly populated `bitfield` byte. The subsequent headers in a contiguous vector should follow the compressed format. Similarly, subsequent compressed headers supplied to an already-connected client requesting compressed headers should also follow the compressed format.However, the proposal has some potential drawbacks. It will require higher computation and memory for caching the last few versions, and there may be complexity and bugs associated with implementing this compression scheme. Additionally, the use of low-bandwidth light clients should not be encouraged. This information is important for Decentralized Applications Engineers like Richard Myers at goTenna, who may need to consider the proposal's potential benefits and drawbacks when designing decentralized applications that involve low bandwidth nodes.</summary>
+    <published>2020-05-08T12:31:06+00:00</published>
+  </entry>
+</feed>

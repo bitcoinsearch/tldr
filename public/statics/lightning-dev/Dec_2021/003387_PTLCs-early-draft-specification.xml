@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PTLCs early draft specification</title>
+  <updated>2023-06-03T06:42:11.384035+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2021-12-08 10:00:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PTLCs early draft specification</title>
+    <updated>2023-06-03T06:42:11.384035+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003387.html" rel="alternate"/>
+    <summary>The Lightning network developers are discussing a solution to the problem of updating commitment transactions without invalidating prior adaptor signatures. The issue arises when updating a commitment transaction with two PTLCs, one from A-&gt;B conditional on X, and one from B-&gt;A conditional on Y. To update the commitment transaction, A needs to produce a signature for B to spend the funding tx, an adaptor signature allowing B to spend via X, and a signature allowing B to recover Y after timeout from his commitment tx spending to an output she can claim if he cheats. She must also receive an adaptor signature from B to be able to spend the Y output if B posts his commitment tx using A's signature in step one. This is problematic because A cannot give B the result of step one until she receives step four from B. To solve this, AJ proposes doing a synchronous update of commitments to the channel state, which would work pretty well. The proposal involves Alice proposing a new commitment to Bob, including adaptor sigs for PTLCs to Bob. Bob then agrees to the new commitment, including adaptor sigs for PTLCs to Alice, sigs for Alice to spend HTLCs and PTLCs to Bob from her own commitment tx, and a signature for Alice to spend the funding tx. Alice finishes the new commitment by providing sigs for Bob to spend HTLCs and PTLCs to Alice from his own commitment tx, a signature for Bob to spend the funding tx, revealing old prior commitment secret, and a new commitment nonce. Bob then finishes the new commitment by revealing the old prior commitment secret and a new commitment nonce. This proposal adds half a round-trip compared to the previous protocol. The timings change so that Bob can use the new commitment after 1.5 round-trips (previously 0.5), and Alice can be sure Bob won't use the old commitment after 2 round-trips (previously 1). Alice can use the new commitment after 1 round-trip (unchanged), and Bob can be sure Alice won't use the old commitment after 1.5 round-trips (unchanged). The funding tx would also need to be a musig setup, with 64B of musig2 nonces provided in one direction and the other side's 64B of musig2 nonces back along with the partial signature for spending the funding tx. The developers note that this proposal could be bundled with `option_simplified_update` without the adaptor sigs and later added as tlvs when doing PTLCs. This would allow for the deployment of the new update protocol separately from PTLCs, simplifying the state machine and making other features such as splicing and dynamic channel upgrades easier.</summary>
+    <published>2021-12-08T10:00:18+00:00</published>
+  </entry>
+</feed>

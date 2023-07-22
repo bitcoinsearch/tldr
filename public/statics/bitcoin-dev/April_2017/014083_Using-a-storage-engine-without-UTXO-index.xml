@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Using a storage engine without UTXO-index</title>
+  <updated>2023-05-20T01:53:57.953077+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2017-04-08 00:44:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Using a storage engine without UTXO-index</title>
+    <updated>2023-05-20T01:53:57.953077+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/014083.html" rel="alternate"/>
+    <summary>In an email exchange, Tomas argues that the minimal disk storage required in Bitcoin cannot be less than all the unspent outputs. He suggests retracting the claim that protocol improvements may not be worth considering as output costs still bound resource requirements. The UTXO data remains a significant long term resource cost, which is unavoidable without radical protocol changes such as TXO-proofs. Implementations like improving locality or keeping spentness in memory do not change this fact. However, during peak load block validation with pre-synced transactions, accessing storage can be minimized as it only needs the transaction index to lookup pointers from hashes, the tip of the spend-tree and the tip of the block. Latency-related costs in Bitcoin Core also do not depend on the number of outputs in transactions in a block. When a transaction is handled, it goes into an in-memory buffer and only gets flushed later if it isn't spent before the buffer fills. A block will take more time to validate with more inputs, similar to what Tomas observes. Still, aggregate resource usage for users depends significantly on outputs. Therefore, there are even further misaligned incentives than just the fact that small outputs have outsized long term costs.</summary>
+    <published>2017-04-08T00:44:50+00:00</published>
+  </entry>
+</feed>

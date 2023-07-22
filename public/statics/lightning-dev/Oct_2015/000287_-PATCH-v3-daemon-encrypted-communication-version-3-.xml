@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[PATCH v3] daemon: encrypted communication (version 3)</title>
+  <updated>2023-05-23T21:13:56.682783+00:00</updated>
+  <author>
+    <name>Rusty Russell 2015-10-23 01:33:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[PATCH v3] daemon: encrypted communication (version 3)</title>
+    <updated>2023-05-23T21:13:56.682783+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-October/000287.html" rel="alternate"/>
+    <summary>The Lightning Network daemon is implemented using C code, which includes three primary functions called `decrypt_pkt()`, `encrypt_pkt()` and `do_read_packet()`. These functions are responsible for handling cryptographic packets and are called by other helper functions. The `decrypt_pkt()` function checks the HMAC of a given packet, decrypts it, and returns it in ProtobufC format. On the other hand, `encrypt_pkt()` encrypts a given packet, pads it with zeroes if necessary, and returns it in `struct crypto_pkt` format. The `do_read_packet()` function reads packets from a file descriptor (fd) and updates the input buffer of the peer using information from its io_data structure.The updated code contains changes to multiple files, including the addition of a new struct called io_data in peer.h and the modification of the "pkt__field_descriptors" variable to add a new field for authentication named "auth". The `peer_crypto_setup()` function generates a session key used for encryption and returns an IO plan for reading a session key from the peer. Once the session keys are exchanged, the `keys_exchanged()` function sets up the necessary encryption keys and signs the peer's session key to prove its identity. The `authenticate_pkt()` function creates an authentication packet from the node id and signature passed as arguments. The `peer_read_packet()` function reads packets from the peer into the peer's input buffer, while `peer_write_packet()` writes packets to the peer. The code includes several other functions to perform various tasks such as generating a session key, wrapping/unwrapping packets, and freeing memory.In peer.c, a new function called `peer_test` has been added which generates an error packet for testing purposes. The `destroy_peer()` function has been modified to remove the peer from the state's peers list. The `peer_connected_out()` and `peer_connected_in()` functions have been modified to call the `peer_crypto_setup()` function instead of `io_write()`, passing in the `peer_test()` function as the callback argument. The `peer_read_packet()` function has been modified to store the received packet in the peer's inpkt field.In lightning.pb-c.c, a new message descriptor called authenticate has been added with two fields node_id and session_sig. The "Authenticate" struct has been declared in "lightning.pb-c.h", along with its associated methods. The "authenticate" message has been defined in "lightning.proto" file. Finally, the "Pkt" message has been updated to contain the "auth" field.</summary>
+    <published>2015-10-23T01:33:33+00:00</published>
+  </entry>
+</feed>

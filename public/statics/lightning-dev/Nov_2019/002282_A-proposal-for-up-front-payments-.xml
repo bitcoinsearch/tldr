@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A proposal for up-front payments.</title>
+  <updated>2023-06-02T21:14:15.849920+00:00</updated>
+  <author>
+    <name>Rusty Russell 2019-11-05 09:26:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A proposal for up-front payments.</title>
+    <updated>2023-06-02T21:14:15.849920+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-November/002282.html" rel="alternate"/>
+    <summary>The proposal is to implement up-front payments for messages in order to avoid Type 2 spam. The author proposes a new feature bit, extended messages, and adding an HTLC which causes a push of a number of msat on commitment_signed, and a hash. Failing/succeeding an HTLC returns some of those msat, and a count and preimage. The sender will need to provide a series of preimages that they get by decoding the onion. The amount of msat that can be taken for forwarding depends on the number of preimages presented. The base rate is 16 preimages, but one is subtracted for each leading 4 zero bits of the SHA256(blockhash | hmac) of the onion. The final node gets some variable number of preimages, which adds noise. It should take all and subtract from the minimum required invoice amount on success, or take some random number on failure. The proposal is then demonstrated with an example. The author provides details on how this would work using Rusty, ZmnSCPxj, and YAIjbOJa. They also discuss potential attacks that could occur and how to prevent them. Rusty needs some upper limit on how much he'll pay out, so a reasonable limit for each HTLC would be 20 hops x 16 x 50msat == 16sat. Even with no other limits, with 486 HTLCs in flight each way, that's only 15456 satoshis. The proposed solution leaks some forward information and makes an explicit tradeoff for the sender between amount spent and privacy, but it's the best the author has been able to come up with.</summary>
+    <published>2019-11-05T09:26:45+00:00</published>
+  </entry>
+</feed>

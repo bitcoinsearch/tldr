@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>eltoo towers and implications for settlement key derivation</title>
+  <updated>2023-05-23T02:33:19.844471+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-12-03 07:33:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>eltoo towers and implications for settlement key derivation</title>
+    <updated>2023-05-23T02:33:19.844471+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-December/002362.html" rel="alternate"/>
+    <summary>In a recent email thread on the Lightning-Dev mailing list, Conner Fromknecht revisited the eltoo paper and noticed some things related to watchtowers that might affect channel construction. In order to spend, the tower must also produce a witness script which when hashed matches the witness program of the input. To ensure settlement transactions can only spend from exactly one update transaction, each update transaction uses unique keys for the settlement clause, meaning that each state has a unique witness program.However, another user on the mailing list, aj, argued that this is not necessary with the ANYPREVOUT design. The design aj proposes uses a common taproot internal key P=muSig(A,B) for update transactions. The tapscript paths are defined by two transactions: Update n and Settlement n. Update n has a script of OP_1 CHECKSIGVERIFY [500e6+n+1] CLTV and a witness of [ANYPREVOUTANYSCRIPT sig]. Settlement n has a witness of [ANYPREVOUT sig] and a sequence number of delay; nLockTime=500e6+n+1. This method relies on having the two variants of ANYPREVOUT, one of which commits to the state number via committing to the [500e6+n+1] value in the update tx's script, so that unique keys are not needed to ensure settlement transaction n cannot spend settlement transaction n+k. With this, it is possible to tell which update was posted by subtracting 500e6 from the nLocktime, and use that to calculate the tapscript the update transaction used, and the internal key is constant.The watchtower only needs to post the latest update transaction. As long as the latest update is posted, the only transaction that can spend it is the correct settlement transaction, so the user can post that whenever they're back online, even if that's weeks or months later. This design allows for simpler channel construction without the need for unique keys, making it easier to manage and maintain channels.</summary>
+    <published>2019-12-03T07:33:25+00:00</published>
+  </entry>
+</feed>

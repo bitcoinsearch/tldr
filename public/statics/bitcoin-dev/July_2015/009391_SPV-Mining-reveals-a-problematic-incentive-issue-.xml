@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>SPV Mining reveals a problematic incentive issue.</title>
+  <updated>2023-06-10T02:21:20.481703+00:00</updated>
+  <author>
+    <name>Tier Nolan 2015-07-11 13:17:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>SPV Mining reveals a problematic incentive issue.</title>
+    <updated>2023-06-10T02:21:20.481703+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-July/009391.html" rel="alternate"/>
+    <summary>SPV mining is a technique used to prevent hashing hardware from wasting power when it isn't needed. When a header arrives, SPV miners put it in the "probably valid" category and build empty blocks on top of this header. As time passes without the full block being received/validated, it becomes less and less likely that the block is actually valid. The timeout is to recognize that fact. Making the timeout longer does not give the miner much benefit over making it 1-2 minutes. Setting the timeout to low means that the miner sometimes switches away from a header that turns out to be valid. SPV miners do not produce invalid blocks other than building on invalid blocks. The full blocks they produce are still fully checked blocks. In the world where minting fees are very low, there is no point in SPV mining. Pools have to pay their hashers for hashing power. When minting fees are tiny, pools only get income only from tx fees. There is no point in creating empty blocks since they don't pay anything.Pools might go pure pay per share. The protocol would say how much they are willing to pay for a share and the local mining proxy would pick the most profitable pool. This eliminates pools having lots of ways of saying how they charge fees, you just connect to lots of pools and go with the one that pays the most. More interestingly, the average fee per byte for transactions in the memory pool is likely to increase as time passes since the last block. Hashers would end up getting variable payouts based on how long since the last block was received. If some miners increase/decrease their output based on the fees the pools offer, then as time passes since the last block, the hashing rate would increase. If there are major SHA256 altcoins (or side chains), then miners might end up switching between coins. The longer a coin went without a new block being found, the more tx fees available in the memory pool, so the more hashing power would decide to switch to that coin.</summary>
+    <published>2015-07-11T13:17:53+00:00</published>
+  </entry>
+</feed>

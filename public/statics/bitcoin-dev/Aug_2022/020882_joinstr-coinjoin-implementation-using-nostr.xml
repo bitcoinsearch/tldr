@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>joinstr: coinjoin implementation using nostr</title>
+  <updated>2023-06-15T23:51:22.519936+00:00</updated>
+  <author>
+    <name>alicexbt 2022-08-20 16:52:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>joinstr: coinjoin implementation using nostr</title>
+    <updated>2023-06-15T23:51:22.519936+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-August/020882.html" rel="alternate"/>
+    <summary>The writer of the email has created a Python script to implement CoinJoin using Nostr. The implementation requires python-nostr library because nostr is used for coordination between peers. Nostr is a decentralized network based on cryptographic keypairs. It is not peer-to-peer however simple and scalable. Every step is published as an event using a nostr relay and 5 peers coordinate to create, sign and broadcast a coinjoin transaction. The writer needs to write a NIP that would be an alternative to blind signatures. Relay will share a random secret with clients for one round which should be present in output registration request although never gets published.If someone tries to register an output without registering any inputs, the request would not have the number initially shared with inputs so the request would get rejected or published as unverified. Relay would not be able to link inputs and outputs as the number is same for all inputs in a round and they get registered at different times with new keys and IP address. Clients can use multiple relays at the same time to avoid trusting one relay. This would result in different shared secret numbers but the same process.The writer has received feedback on their implementation from Max Hillebrand. There are a few DoS vectors that need to be fixed. There is also a warning at the bottom of README to not use this on mainnet as it might have bugs. The writer will continue the development with coinjoin transactions on signet for a few weeks until there is a stable release with no bugs. They have a few ideas in mind for various relay types that might be used concurrently to prevent numerous problems.Custom relays are supported by Nostr. Examples include paying a fee to register for a round, subscribing with a time limit, or using invite-only relays. The writer will run a free and open nostr relay for this project and try to fix the Dos issues before a mainnet version is released for python script(for nerds) and android app (for all users). The email includes links to related GitHub repositories of the implementation, Nostr and the idea.</summary>
+    <published>2022-08-20T16:52:56+00:00</published>
+  </entry>
+</feed>

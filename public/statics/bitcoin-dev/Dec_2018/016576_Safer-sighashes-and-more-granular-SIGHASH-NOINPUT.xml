@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-06-13T15:26:14.799583+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-12-20 23:17:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-06-13T15:26:14.799583+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-December/016576.html" rel="alternate"/>
+    <summary>The discussion revolves around the use of OP_CODESEPARATOR and its relevance in taproot. The argument is that OP_CODESEPARATOR may not be necessary as it can make scripts more complex and no wallet requires it. However, there is a proposal that suggests using the new sighash to always commit to the same H(script) instead of truncated scriptCode so that hashing only needs to be done once even if the script is very large. This proposal could be useful for NOINPUT with MASKEDSCRIPT, which will commit to the H(masked_script) instead of H(script). The semantics of CODESEPARATOR do not change as the sighash also commits to the position of the last executed CODESEPARATOR, making it still work for scripts without CODESEPARATOR. However, if NOINPUT does not commit to H(masked_script), it could still commit to the position of the last executed CODESEPARATOR but may be unreliable and non-useful except for "I reused keys for multiple outputs" oops.</summary>
+    <published>2018-12-20T23:17:15+00:00</published>
+  </entry>
+</feed>

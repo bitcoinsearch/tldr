@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Should Graftroot be optional?</title>
+  <updated>2023-05-20T16:24:36.668194+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2018-05-22 18:17:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Should Graftroot be optional?</title>
+    <updated>2023-05-20T16:24:36.668194+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/016006.html" rel="alternate"/>
+    <summary>A recent discussion on Taproot and Graftroot has raised questions about whether a practical deployment needs a way to explicitly enable or disable the Graftroot spending path. The idea is that a script type could exist which looks like a pubkey Q, but can be spent either by key spending or by proving Q was derived as Q = P + H(P,S)*G, with a script S and its inputs (Taproot script spending), or by signing a script S using Q and providing S's inputs (Graftroot script spending). Both approaches have different trade-offs, with Graftroot being more compact when dealing with many spending paths while Taproot lets you prove all the different spending paths. The question is whether it is safe to always permit both types of script spending paths or an explicit commitment to whether Graftroot is permitted is necessary. While none of the concerns raised are convincing points against allowing Graftroot spending path in all scenarios, they do raise potential issues. Accidentally signing a script could have more broad consequences without Graftroot, and in a multisignature setting, a subset of participants could remove others from the set of signers. In situations where private keys are stored in an HSM, an attacker needs access to the device and convince it to sign for every output without Graftroot, but with Graftroot, the HSM may be tricked into signing a script that does not include itself. Overall, it seems good to discuss potential reasons such outputs couldn't or wouldn't be adopted in certain applications. Links to previous discussions on Taproot, Graftroot, and half-aggregated signatures are provided.</summary>
+    <published>2018-05-22T18:17:42+00:00</published>
+  </entry>
+</feed>

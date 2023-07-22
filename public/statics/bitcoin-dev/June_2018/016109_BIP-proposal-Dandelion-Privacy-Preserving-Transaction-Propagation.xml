@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP proposal - Dandelion: Privacy Preserving Transaction Propagation</title>
+  <updated>2023-05-20T03:00:00.106722+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2018-06-12 01:05:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP proposal - Dandelion: Privacy Preserving Transaction Propagation</title>
+    <updated>2023-05-20T03:00:00.106722+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-June/016109.html" rel="alternate"/>
+    <summary>In a bitcoin-dev thread, Pieter Wuille and Bradley Denby discussed the behavior of Dandelion nodes. They agreed to make descriptions for the intended node behaviors more clear in the BIP. Malicious nodes can exploit Dandelion routing decisions based on self-reported features to launch serious deanonymization attacks. Therefore, they recommend not allowing fee filters from peers to influence the choice of route. Wuille suggested automatically fluffing or applying fee filters in the stempool to prevent the tx from propagating in stem phase. Wuille proposed that most full nodes on the network use feefilter while only light nodes and blocksonly nodes generally use Bloom filters. Dropping stem transactions that would otherwise be sent to a Dandelion peer which fails its filter and relying on embargo seems fine. The reference implementation adds any mempool transactions to the stempool but not vice-versa so that the stempool becomes a superset of the mempool.Regarding stem orphans, one way to deal with this issue would be to re-broadcast all previous Dandelion transactions that have not been fluffed after Dandelion route shuffling. A second option is to wait for the fluff phase to begin, at which point the orphans will be resolved. Another option is to remember which peer each stempool transaction was forwarded to. They also discussed preferred connections and found that making Dandelion routing decisions based on claims made by peer nodes can cause problems. Therefore, they recommended against biasing the peer selection code. They planned to prioritize writing up a clearer spec for node behavior in the BIP.</summary>
+    <published>2018-06-12T01:05:14+00:00</published>
+  </entry>
+</feed>

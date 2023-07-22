@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Codex32</title>
+  <updated>2023-06-16T15:48:13.728036+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2023-02-23 03:30:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Codex32</title>
+    <updated>2023-06-16T15:48:13.728036+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-February/021502.html" rel="alternate"/>
+    <summary>The codex32 strings can be verified using partial verifications with BCH properties. A quickchecksum verification of any size up to 13 characters can be performed, where a 1 character quickchecksum will detect any 1 character error and a 3 character quickchecksum will detect any 2 character error, etc. However, there remains a 1 in 32^n chance of failing to detect larger numbers of errors, where n is the size of the quickcheck. To perform this verification, one would start with a specified initial state with a pair of bech32 characters and add the next pair of characters from the string, lookup the result in a large lookup table and continue until the final state is reached, which for any string up to 400 bit master seeds, is always 'H9'. This process is similar to Peter Todd's suggestion of using a lookup table on "words" but with Bech32 addition instead of calculator addition. Russell O'Connor suggests using a "quick check" worksheet to evaluate the string modulo (x - T) to verify a 5 bit checksum, whose operation would be similar to the existing checksum worksheet in structure but significantly less work. Alternatively, working modulo (x - T)*(x - S) could be used to get a 10 bit checksum or a 15 bit checksum depending on the size of the other factors. The long generator for seeds greater than 400 bits has not been looked into yet. Andrew Poelstra had previously commented that the ability to vet shares/seeds that aren't being actively used, without exposing them to the sorts of threats associated with active use, is a big selling point for Codex32. However, Peter Todd disagrees and suggests using a simpler approach of mod N = 0 checksum that can be computed by hand with a word/symbol-&gt;number lookup table and pen and paper or a calculator. This approach is simple enough to be remembered and is less error-prone in terms of leaking information accidentally. Small checksums aren't foolproof, but Peter Todd believes that creating a relatively easy procedure with a 1-in-1000 chance of an error going undetected is better than a complex procedure that people don't actually do at all.</summary>
+    <published>2023-02-23T03:30:10+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Security issue in anchor outputs implementations</title>
+  <updated>2023-06-01T19:04:07.975294+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2022-04-22 09:22:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Security issue in anchor outputs implementations</title>
+    <updated>2023-06-01T19:04:07.975294+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-April/003561.html" rel="alternate"/>
+    <summary>A vulnerability has been found in older versions of some lightning implementations of anchor outputs. While most implementations have not released support for anchor outputs, they should verify that they are not impacted by this type of vulnerability while implementing this feature. The issue was discovered in March 2021, and while finalizing support for the 0-htlc-fees variant of anchor outputs in eclair, in-depth interoperability tests were done with other implementations that supported anchor outputs. Both lnd and c-lightning were impacted by the edge case discovered in March, which could be exploited to steal funds. Users running versions of lnd prior to 0.14.0 and users running versions of c-lightning prior to 0.10.2 if they have activated experimental features and have anchor outputs channels are affected. A fix for this vulnerability was released in lnd 0.14.0 and c-lightning 0.10.2 in November 2021.With anchor outputs, a lightning node doesn't use `SIGHASH_ALL` when sending its signatures for htlc transactions in `commitment_signed`. It uses `SIGHASH_SINGLE | SIGHASH_ANYONECANPAY` instead and the other node is supposed to add a `SIGHASH_ALL` signature when they broadcast the htlc transaction. The vulnerability lies in how revoked htlc transactions were handled because historically, `SIGHASH_ALL` was used, and it was assumed that htlc transactions had a single output. When presented with a transaction containing multiple revoked htlcs, both impacted implementations would fail to claim any output, allowing an attacker to publish a revoked commitment with htlcs that have been settled since then and claim these htlcs a second time on-chain, thus stealing funds.The attack depends on what block target implementations use for penalty/justice transactions and how congested the mempool is, but it may not work all the time, so it can carry a risk for the attacker. The success of the attack depends on the ability of the node under attack to make his penalty/justice transactions confirm immediately after the revoked commitment by claiming outputs directly from the commitment transaction with a high enough feerate. If the attacker notices that their peer is offline, they can use this opportunity to carry out the attack.It is recommended that users upgrade to newer versions of the impacted implementations as soon as possible to prevent any potential attacks.</summary>
+    <published>2022-04-22T09:22:49+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>"Updates Overflow" Attacks against Two-Party Eltoo ?</title>
+  <updated>2023-06-03T11:14:36.366433+00:00</updated>
+  <author>
+    <name>Antoine Riard 2022-12-14 01:22:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>"Updates Overflow" Attacks against Two-Party Eltoo ?</title>
+    <updated>2023-06-03T11:14:36.367432+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-December/003805.html" rel="alternate"/>
+    <summary>The context is a conversation between two individuals discussing an attack scenario on the Eltoo channel. The attack purpose is to delay confirmation of the final settlement transaction S to double-spend a HTLC forwarded by a routing hop. To achieve this, Malicia updates the Eltoo channel N times and gets possession of N update transactions. She breaks the channel at block A and confirms the update transaction 0 by attaching a feerate equal to or superior to top mempool block space + 1 sat. At each new block, she iterates by confirming the next update transaction, i.e., update transaction 1 at block A+1, update transaction transaction 2 at block A+2, update transaction 3 at block A+3, etc.The conversation also discusses the unbounded spending path cycle introduced for one of the counterparties. If there is an unbounded spending path cycle, then you're exposed to "eltoo states overflow." The discussion suggests that a tapscript path with "1 CHECKSIGVERIFY k" could be used in update transaction 1 to spend it immediately without having to wait for the next block. However, this approach might not be compatible with the version 3 relay rules being considered.To avoid the problem mentioned above, eltoo nodes can have a priority tx relay network. If they see a channel close to state N, they should always replace any txs closing to an earlier state K quickly relay that close to all other peers.The conversation also explores a scenario where Mallory has two channels with Bob, M1, and M2. Both have a to_self_delay of 144 blocks, and cltv_expiry_delay should include some slack. Mallory forwards a large payment, M1-&gt;Bob-&gt;M2, claims the funds on M2 just before the timeout, but goes offline on M1. In this case, under the two-party eltoo scheme, Bob should immediately broadcast the most recent UB.n state for M1/Bob, aim for this to be confirmed within 5 blocks, wait 144 blocks for the relative timelock to expire, and broadcast SB.n to finalize the funds.Finally, there is a discussion on punishment transactions in the network mempools. Each punishment transaction R, as its confirmation could have been delayed due to "honest" slow propagation on the network, is likely to be pre-signed with top mempool block space feerate but not more to save on fees. Therefore, transaction RN.0 should fail to punish update transaction 0 as it's double-spent by update transaction 1, transaction RN.1 should fail to punish update transaction 1 as it's double-spent by update transaction 2, transaction RN.2 should fail to punish update transaction 2 as it's double-spent by update transaction 3, etc.</summary>
+    <published>2022-12-14T01:22:55+00:00</published>
+  </entry>
+</feed>

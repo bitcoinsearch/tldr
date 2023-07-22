@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>further test results for : "Datastream Compression of Blocks and Tx's"</title>
+  <updated>2023-06-11T01:29:21.167138+00:00</updated>
+  <author>
+    <name>Peter Tschipper 2015-11-28 14:48:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>further test results for : "Datastream Compression of Blocks and Tx's"</title>
+    <updated>2023-06-11T01:29:21.167138+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-November/011828.html" rel="alternate"/>
+    <summary>The results of testing the reference implementation in compressing blocks and transactions have been shared. The implementation concatenates blocks and transactions, resulting in data sizes in the 1-2MB range. Compression libraries were tested with and without latency, and all performed better than without compression when latency was present on the network. Although preference for higher compression of Zlib exists, LZO has been given the edge due to being the fastest, most scalable option at the lowest compression setting. Compression ratio achieved for various sizes of data was also studied, with Zlib found to be the clear winner for compressibility. LZOx-999 came close but at a cost. The time taken in seconds to compress data of various sizes was also analyzed, with LZO1x being the fastest. As file sizes increase, LZO1x time hardly increases at all. However, as compression ratios increase, LZOx-999 performs much worse than Zlib. Jeff Garzik commented that a fallback path to non-compressed is required should compression fail or crash.The discussion on the bitcoin-dev mailing list centered around the idea of local trade-off decisions being negotiated between peers instead of being a required feature of the network P2P. One participant mentioned that 25% bandwidth savings is significant, particularly for those running full nodes in countries with lower internet bandwidth and data caps. The conversation was led by Johnathan Corgan from Corgan Labs, a company that offers SDR training and development services. Peter Ts's recent numbers bear out that most blocks and transactions have runs of zeroes and/or highly common bit-patterns, which contributes to useful compression even at smaller sizes. Tier Nolan suggested sticking to just blocks for historical data and defining a "cblocks" message that handles multiple blocks. Similarly, transactions could be combined together and compressed "ctxs". More generally, a message could be defined which is a compressed message holder. However, it is probably too complex to be worth the effort.The thread ended with information about the bitcoin-dev mailing list and how to subscribe to it.</summary>
+    <published>2015-11-28T14:48:41+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - HTLCs using OP_CHECKSEQUENCEVERIFY/OP_LOCKTIMEVERIFY and revocation hashes.</title>
+  <updated>2023-05-18T20:39:15.654713+00:00</updated>
+  <author>
+    <name>Anthony Towns 2016-02-10 16:50:49</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2016-02-09 08:59:56</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2015-07-23 05:07:33</name>
+  </author>
+  <link href="lightning-dev/Feb_2016/000441_HTLCs-using-OP-CHECKSEQUENCEVERIFY-OP-LOCKTIMEVERIFY-and-revocation-hashes-.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2016/000437_HTLCs-using-OP-CHECKSEQUENCEVERIFY-OP-LOCKTIMEVERIFY-and-revocation-hashes-.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2015/000054_HTLCs-using-OP-CHECKSEQUENCEVERIFY-OP-LOCKTIMEVERIFY-and-revocation-hashes-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - HTLCs using OP_CHECKSEQUENCEVERIFY/OP_LOCKTIMEVERIFY and revocation hashes.</title>
+    <updated>2023-05-18T20:39:15.654713+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-February/000441.html" rel="alternate"/>
+    <summary>The email thread discusses the scenario of Alice and Eve being connected with two channels and Eve performing a payment to herself routed through these two channels. The channels have an OP_CSV delay parameter set at 'D'. Alice's commitments include a fee that she expects will result in confirmation in less than a delay of "F". Two HTLCs are involved, one where Eve pays Alice $X on receipt of R, CLTV at time T and another one where Alice pays Evelyn $X on receipt of R, CLTV at time T'. Alice calculates T' such that T' = now + D + F when forwarding the HTLC. If the forwarded HTLC isn't resolved by T'-D-F, Alice has to close the channel on the blockchain to be safe. Alice should start the timer ticking if she doesn't get an ack from Eve prior to T-D-F. She must publish her commitment transaction containing the HTLC before the CLTV of the HTLC times out or otherwise Eve can try to claim the HTLC funds. If Alice publishes her commitment transaction at T-D-F, the transaction gets mined before "F" time units transpire, so the time is now T-D-x. After an additional "D" time units, the time is T-x, at which point Alice can spend the transaction, but Eve cannot. The question is which times out first, Alice's CSV or Eve's CLTV? The one that times out first will be the first to be able to claim the funds. Alice's CSV should be the first to time out. There are four ways to handle a unilateral close: keep the channel open, they close the channel unilaterally, you close the channel unilaterally or both close the channel cooperatively. At any point, the preferences are strictly d &gt; b &gt; c. With the current arrangement, your counterparty can't make any threats. With an OP_CSV on both sides of HTLCs, you can make a somewhat realistic threat. The email thread also discusses the conditions for additional output per HTLC and scripts for an HTLC from US to THEM and HTLC from THEM to US.</summary>
+    <published>2016-02-10T16:50:49+00:00</published>
+  </entry>
+</feed>

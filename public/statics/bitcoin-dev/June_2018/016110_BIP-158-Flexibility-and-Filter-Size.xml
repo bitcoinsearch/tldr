@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 158 Flexibility and Filter Size</title>
+  <updated>2023-05-20T08:31:51.270206+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-06-12 23:51:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 158 Flexibility and Filter Size</title>
+    <updated>2023-05-20T08:31:51.270206+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-June/016110.html" rel="alternate"/>
+    <summary>In a discussion on bitcoin-dev, David A. Harding questions why commitment proof size is significant in the BIP157 protocol, as each filter commits to the filter for the previous block, allowing validation of the commitment at the tip of the chain. Olaoluwa Osuntokun responds by highlighting that the coinbase transaction is the first in a block and has the longest merkle proof path, meaning it may be several hundred bytes long. The gain from using a more efficient filter is saved bytes, while the gain from using block commitments is SPV-level security. Comparing the extra bytes used by block commitments to the reduced bytes saved by prevout+output filters is like comparing the extra bytes used to download all blocks for full validation to the reduced bytes saved by only checking headers and merkle inclusion proofs in simplified validation. Harding suggests that there is no normative way for one to "outweigh the gains" from the other, and Osuntokun asks whether they should optimize for better security or lower bandwidth. Harding argues that the security model is "at least one of my peers is honest" and that both outpoint+output filters and prevout+output filters ensure that as long as the client has at least one honest peer, it will see every transaction affecting its wallet. In the second case, it's possible for the client to eventually probabalistically determine which peer(s) are dishonest and kick them. Neither protocol seems significantly more complicated than keeping an associative array recording the number of false positive matches for each peer's filters.</summary>
+    <published>2018-06-12T23:51:29+00:00</published>
+  </entry>
+</feed>

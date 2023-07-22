@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - [BIP] OP_CHECKPRIVPUBPAIR</title>
+  <updated>2023-06-11T01:28:35.364180+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-11-29 23:41:43</name>
+  </author>
+  <author>
+    <name>Mats Jerratsch 2015-11-27 08:02:37</name>
+  </author>
+  <author>
+    <name>Mats Jerratsch 2015-11-27 08:02:37</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2015-11-29 23:41:43</name>
+  </author>
+  <author>
+    <name>Mats Jerratsch 2015-11-27 08:02:37</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2015-11-29 23:41:43</name>
+  </author>
+  <link href="bitcoin-dev/Nov_2015/011834_-BIP-OP-CHECKPRIVPUBPAIR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2015/011827_-BIP-OP-CHECKPRIVPUBPAIR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2015/011827_-BIP-OP-CHECKPRIVPUBPAIR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2015/011834_-BIP-OP-CHECKPRIVPUBPAIR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2015/011827_-BIP-OP-CHECKPRIVPUBPAIR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2015/011834_-BIP-OP-CHECKPRIVPUBPAIR.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - [BIP] OP_CHECKPRIVPUBPAIR</title>
+    <updated>2023-06-11T01:28:35.364180+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-November/011834.html" rel="alternate"/>
+    <summary>In a bitcoin-dev mailing list discussion on November 27, 2015, Mats Jerratsch proposed introducing a new general OP_CRYPTO to allow for all sorts of general crypto operations in script. He suggested using a single prefixed 0x01 byte to push "OP_CRYPTO" onto the stack and have OP_CRYPTO look at the top item on the stack to determine what to do. This would not be a softfork and could lead to arbitrarily expandable multi-byte pushes. Jerratsch also discussed some constructions that could break the signature scheme but were either too large or expensive to calculate. In response, there was a suggestion to add more crypto ops into a BIP for a check-verify crypto toolkit op like this. The only ones mentioned with practical uses in the near term were base-point multiply on secp256k1 (CHECKPUBPRIVPAIR) and Schnorr-signature of transaction with secp256k1 curve (smaller, faster, more-anonymous N-of-N multisig). Other suggestions included general point addition/multiply on secp256k1, SHA3-256/SHA2-512/SHA3-512, and ECDSA/Schnorr signature of value from stack.Onion-routing has been suggested as a method of improving privacy while using a payment network, where each node only knows the previous and next node in the payment route, with no knowledge of the position of the node in the route, the payer or the payee. However, the use of preimage-hash pair R-H in payments within the network makes it easy to breach privacy by reducing the number of nodes an attacker needs to control. The solution is to use private/public EC key pairs instead of RIPEMD-160 for preimage-hash construction. To make this possible, there would need to be a way to force a private key given a public key on the blockchain. By using one of the unused OP_NOP codes, deployment using a softfork would be allowed. Alternatively, it is possible to use a NIZKP to prove that a node can recover a preimage given certain information, but they are expensive to calculate.It was also noted that if the segregated witness soft-fork is plausible, any opcode could be re-enabled/changed/added as a soft-fork, not just turning a NOP into CHECK_foo_VERIFY. It was suggested to wait and see how the segregated witness soft-fork goes before drafting a BIP or similar.</summary>
+    <published>2015-11-29T23:41:43+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Simulating Eltoo Factories using SCU Escrows (aka SCUE'd Eltoo)</title>
+  <updated>2023-06-03T02:05:16.962973+00:00</updated>
+  <author>
+    <name>Christian Decker 2020-09-01 12:38:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Simulating Eltoo Factories using SCU Escrows (aka SCUE'd Eltoo)</title>
+    <updated>2023-06-03T02:05:16.962973+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-September/002792.html" rel="alternate"/>
+    <summary>In this context, a proposal has been made to simplify the way update transactions can be attached only to prior updates. This is done by comparing the state-number committed to in the prevout script with the current timelock through CLTV. The monotonicity of the sequence of updates is guaranteed through the script. Currently, it's possible to emulate `sighash_anyprevout` and variants, but it involves iterating through all potential bindings, updating the transaction being signed with the prevout details of the potential binding, and signing it. There are two downsides to this: processing overhead and communication overhead due to exchanging multiple signatures instead of a single `anyprevout` signature. The proposal aims to replace the use of ANYPREVOUT with a federation of SCU Escrows. These escrows will enforce state updates by only generating signatures to spend older states with newer ones. For example, the commitment transaction spends the funding output and has a single output which has two spending conditions. Either E_k and X_k sign OR all N parties sign cooperatively after Delta. The Lightning Network could be improved by using a threshold condition with many escrow public keys instead of a single key. This would make it less likely that the federation could be bribed to spend non-time-locked funds. Attacks could be made traceable so attacked parties can prove Escrows have been malicious. The escrow scheme is also improved using Taproot. Currently, virtually all information about the channel, as well as how to find it on chain, is given to the escrow(s), which is avoidable. In principal, Escrows should do nothing but random looking simple computations on random looking inputs to generate random looking outputs. Verification part of this algorithm's execution is linear time and so there must be a way to do it in Zero Knowledge. Fees were not considered in this proposal.</summary>
+    <published>2020-09-01T12:38:58+00:00</published>
+  </entry>
+</feed>

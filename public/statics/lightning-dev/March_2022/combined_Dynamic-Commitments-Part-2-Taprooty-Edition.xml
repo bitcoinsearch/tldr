@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Dynamic Commitments Part 2: Taprooty Edition</title>
+  <updated>2023-05-23T17:46:37.612846+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-03-24 22:52:42</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2022-10-27 14:53:52</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2022-11-01 22:59:08</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-03-24 23:36:51</name>
+  </author>
+  <link href="lightning-dev/March_2022/003531_Dynamic-Commitments-Part-2-Taprooty-Edition.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2022/003730_Dynamic-Commitments-Part-2-Taprooty-Edition.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2022/003735_Dynamic-Commitments-Part-2-Taprooty-Edition.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2022/003532_Dynamic-Commitments-Part-2-Taprooty-Edition.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Dynamic Commitments Part 2: Taprooty Edition</title>
+    <updated>2023-05-23T17:46:37.612846+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-March/003531.html" rel="alternate"/>
+    <summary>The Lightning Network developers are exploring the possibility of upgrading all 80k+ segwit v0 channels to taprooty channels without any on-chain transactions. This proposal aims to remove many hard-coded parameters in the protocol and future-proof anchored multi-sig outputs in the chain. However, one potential downside of the adapter commitment approach is the uncertainty of the fee overhead at closing time.To overcome this issue, another idea involves dividing the taprootyness of a channel into two: taproot funding outputs and taproot commitment outputs. This approach would require new channels to use taproot multisig for funding output while existing channels could be upgraded only on the commitment level. Laolu Osuntokun proposed the concept of dynamic commitments to upgrade channel types and remove hard coded limits. With taproot now active on mainnet, this concept could be used to upgrade all 80k+ public channels to taproot without any on-chain transactions using an "adaptor commitment" that would allow for updating across witness versions.The proposal includes creating an adaptor commitment that upgrades the multi-sig output from segwit v0 to v1 (taproot) and then anchoring the new commitment transaction using this new output. A two-phase dynamic commitment update protocol is proposed, inspired by the Raft consensus protocol, which allows either party to propose a commitment/channel param update, but only the initiator can apply it. Two new messages, 'commitment_update_propose' and 'commitment_update_apply', are introduced, with fields covering the TLV blob for the new params. The messages have an opaque nested TLV field which makes it extensible to add in other things like tweaking the total number of max HTLCs, the current dust values, min/max HTLCs, etc.The dynamic upgrade might serve in an emergency context where waiting for the settlement of pending HTLCs is not feasible. Furthermore, if there are undesirable interferences between new commitment types and HTLCs/PTLCs present, they should be dealt with on a case-by-case basis. The Lightning Network community seeks a consensus protocol for multi-party constructions in the long-term.</summary>
+    <published>2022-03-24T22:52:42+00:00</published>
+  </entry>
+</feed>

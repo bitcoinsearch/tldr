@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>UHS: Full-node security without maintaining a full UTXO set</title>
+  <updated>2023-06-13T02:20:39.347905+00:00</updated>
+  <author>
+    <name>Alex Mizrahi 2018-05-18 15:42:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>UHS: Full-node security without maintaining a full UTXO set</title>
+    <updated>2023-06-13T02:20:39.347905+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/015990.html" rel="alternate"/>
+    <summary>In March and May of 2017, a group of individuals engaged in discussions related to Bitcoin development on the bitcoin-dev mailing list. Among those involved were Tadge Dryja, Greg Sanders, John Newbery, Neha Narula, Jeremy Rubin, Jim Posen, and others. The discussions centered around a proposal for an alternative approach to how unspent transaction outputs (UTXOs) are stored in the network.The proposal suggests storing only the hashes of UTXOs instead of their full data. Untrusted peers would supply the full data when required with minimal overhead. This approach offers several advantages, including disk and memory savings, faster validation speeds, and more efficient caching. However, it also has a small increase in network traffic.The proposal is based on separating the two primary roles of the UTXO set: providing proof that previous outputs exist to be spent and providing the actual previous output data for verification when new transactions attempt to spend them. Instead of storing the full dereferenced prevout entries in a UTXO set as currently done, the proposal suggests storing their hashes to an Unspent Transaction Output Hash Set (UHS).When relaying a transaction, the proposal suggests appending the dereferenced prevout for each input. The benefits of this approach include requiring no consensus changes, being substantially smaller than a full UTXO set, fully verifying block transactions before doing a potentially expensive database lookup for the previous output data, pay-to-pubkey outputs being less burdensome on full nodes, and enabling an even more aggressive pruning mode.However, there are some drawbacks to this approach. The possibility of a few "bridge nodes" may being needed for some time during the transition period, and there is a ~5% network overhead. The proposal does not require fundamental changes to Bitcoin's security model since the unspent transaction output hashes commit to all necessary data, including output types.Transitioning from the current UTXO model would be annoying, but not particularly painful. The proposal suggests wallets holding full prevout data for their unspent outputs, and they could back-into the data as-is. The context also includes a link to a GitHub repository for the project.</summary>
+    <published>2018-05-18T15:42:00+00:00</published>
+  </entry>
+</feed>

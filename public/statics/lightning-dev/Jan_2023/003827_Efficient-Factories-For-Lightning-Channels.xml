@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Efficient Factories For Lightning Channels</title>
+  <updated>2023-06-01T19:14:13.194110+00:00</updated>
+  <author>
+    <name>jlspc 2023-01-15 21:13:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Efficient Factories For Lightning Channels</title>
+    <updated>2023-06-01T19:14:13.194110+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-January/003827.html" rel="alternate"/>
+    <summary>Factories that enable multiple two-party Lightning channels to be created, resized and closed with a small number of on-chain transactions are crucial for the scalability of Bitcoin. This post presents two protocols for factories that can be closed unilaterally in O(1) time using O(1) on-chain transactions. The first protocol is called the Tunable-Penalty Factory (TPF) protocol and requires P different transactions to instantiate the factory's channels, while the second protocol, called the Single-Commitment (SC) protocol, uses only a single transaction. Both protocols are modifications of the Tunable-Penalty Channel (TPC) protocol and share many of its properties. The TPF protocol eliminates the HTLC control outputs from the State transactions and modifies the Commitment transactions to have channel outputs owned by two parties in the factory. The SC protocol requires more on-chain bytes but eliminates the need to maintain multiple versions of off-chain channel states. In order to establish a new factory state, all parties calculate the State and Commitment transactions for the new state, exchange partial signatures for the new state's Commitment transactions, and exchange per-commitment keys for the old state, thus revoking it.Both protocols are based on the TPC protocol, which allows tunable penalties for putting old transactions on-chain and watchtowers with storage that's logarithmic in the number of factory states supported. Per-commitment keys can use the Lightning protocol's compact storage technique for revocation keys to consume only O(log S) storage to revoke a maximum of S old transactions that could be put on-chain by a single other party. Therefore, each party requires O(P*log S) storage to hold the per-commitment keys for all of the P parties. No change to the underlying Bitcoin protocol is required.The TPF factory protocol uses P conflicting Commitment transactions to establish the factory state and channels, increasing computation, storage, and communication for channels by a factor of P. The SC protocol eliminates this factor of P blow-up by having all parties use a single shared Commitment transaction. Revocable State transactions are used to ensure only the current Commitment transaction can be put on-chain. A shared Trigger transaction and per-user Mold transaction are introduced, where the Commitment and Mold transactions compete for the Trigger transaction's outputs. The Mold transaction is put on-chain prior to the Commitment transaction and constrains the Commitment transactions that can be put on-chain. The Trigger transaction has one value output and log_2(S) control outputs, numbered 0 .. log_2(S) - 1. States 0 through S - 1 are supported, with the exception of states of the form 2^b where 1.</summary>
+    <published>2023-01-15T21:13:08+00:00</published>
+  </entry>
+</feed>

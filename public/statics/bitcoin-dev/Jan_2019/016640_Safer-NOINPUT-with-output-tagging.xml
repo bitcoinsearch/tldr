@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer NOINPUT with output tagging</title>
+  <updated>2023-05-20T18:53:36.104764+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-01-31 06:04:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer NOINPUT with output tagging</title>
+    <updated>2023-05-20T18:53:36.104764+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-January/016640.html" rel="alternate"/>
+    <summary>In a Bitcoin developer forum, ZmnSCPxj raised concerns about the impact of a boutique protocol on existing on-chain wallets. One developer suggested using partially signed bitcoin transactions (PSBT) as a solution to reduce the number of on-chain wallets that could be integrated while still allowing wallet funds to remain under user control until sign-off. The proposed protocol would involve generating a PSBT for a new channel with no inputs and a single output of the 2-of-2 address. Then, the wallet would fund the PSBT but not sign it, add a change address if necessary, and combine it with other transactions, such as bustapay style. Afterward, lightning determines the TXID from the PSBT and creates update/settlement TXs for funding TX so funds can be recovered. Finally, the wallet signs and publishes the PSBT, and lightning sees the transaction on the chain, opening the channel. Although this method is more convoluted than the alternative, it avoids letting users get into the habit of passing NOINPUT addresses around and risking a user typo-ing the value and losing money immediately. Additionally, it has the benefit that the wallet can tweak the value if that avoids a change address or enhances privacy. If the channel's closed cooperatively, it also avoids ever needing to publish a NOINPUT sig (or NOINPUT tagged output).</summary>
+    <published>2019-01-31T06:04:05+00:00</published>
+  </entry>
+</feed>

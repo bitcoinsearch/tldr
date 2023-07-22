@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>mempool transaction witness-replacement</title>
+  <updated>2023-06-15T18:21:41.688010+00:00</updated>
+  <author>
+    <name>darosior 2022-03-22 19:57:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>mempool transaction witness-replacement</title>
+    <updated>2023-06-15T18:21:41.688010+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020168.html" rel="alternate"/>
+    <summary>Larry Ruane has proposed a change to the Bitcoin Core mempool where an existing transaction with the same txid can be replaced by one with a sufficiently smaller witness and thus higher feerate. This change is miner-incentive compatible, making it more beneficial for miners to mine a transaction with a higher feerate. However, there are complications with RBF that need to be considered as it may not be sufficient justification for merging. There is also a code complexity cost and transaction-relay DoS concern, and a per-node setting could be implemented. Witness replacement provides a defense against a mempool pinning attack, especially if there is an application that uses same-txid-different-witness transactions shared between counterparties, making those applications safe. Question 2 gets at a DoS tradeoff: If the new transaction may have only a very slightly smaller witness, an attacker might re-broadcast it many times, consuming a lot of relay bandwidth and CPU to update the mempool. On the other hand, if the new transaction must have a much smaller witness, then it wouldn't be possible to replace a transaction with a beneficially-smaller one. This proposal is similar to RBF but differs in several ways, including that witness-replacement does not require evicting mempool descendant transactions because their inputs' txid references to their parent (who is being replaced) remain valid. The new transaction replaces exactly one existing transaction since the inputs are the same. Signaling is not required by witness-replacement since the outputs cannot change.</summary>
+    <published>2022-03-22T19:57:23+00:00</published>
+  </entry>
+</feed>

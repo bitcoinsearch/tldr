@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Increase channel-jamming capital requirements by not counting dust HTLCs</title>
+  <updated>2023-06-03T03:57:28.273234+00:00</updated>
+  <author>
+    <name>Eugene Siegel 2021-04-23 15:58:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Increase channel-jamming capital requirements by not counting dust HTLCs</title>
+    <updated>2023-06-03T03:57:28.274231+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-April/003005.html" rel="alternate"/>
+    <summary>Eugene, from Crypt-iQ, has proposed a simple mitigation to increase the capital requirement of channel-jamming attacks. This would prevent an unsophisticated attacker with low capital from jamming a target channel. He believes that this mitigation is free and has no downsides besides code-writing. Eugene suggests that in a commitment transaction, dust HTLC outputs should be trimmed. The reason for the 483 HTLC limit each side has in the spec is to prevent commitment transactions from growing unreasonably large and to ensure they are still valid transactions that can be included in a block. If dust HTLCs are not included in this calculation since they are not on the commitment transaction, we still allow 483 (x2) non-dust HTLCs to be included on the commitment transaction. Eugene proposes that there could be a configurable limit on the number of outstanding dust HTLCs, but the point is that it does not affect the non-dust throughput of the channel. This raises the capital requirement of channel-jamming so that each HTLC must be non-dust, rather than spamming 1 sat payments. Eugene is interested in hearing other opinions on his proposal.</summary>
+    <published>2021-04-23T15:58:18+00:00</published>
+  </entry>
+</feed>

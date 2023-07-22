@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Squashing redundant tx data in blocks on the wire</title>
+  <updated>2023-06-09T01:11:51.018191+00:00</updated>
+  <author>
+    <name>Kaz Wesley 2014-07-31 20:47:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Squashing redundant tx data in blocks on the wire</title>
+    <updated>2023-06-09T01:11:51.018191+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-July/006390.html" rel="alternate"/>
+    <summary>The discussion is about the practicality of set reconciliation for condensed block exchange. It would require a round trip to request missing transaction keys, making it expensive to exchange transactions that are not mutually-known. The approach of remembering what invs have been transmitted both directions along each connection is less elegant but very effective at squeezing bytes and cheap in CPU cycles. There is a wealth of mutual knowledge already available in the current protocol, allowing for the goal of exchanging blocks efficiently by solving an easier problem than its context-less cousin. An implementation of inv-history-tracking uses a 2b/tx alternative to getdata for tx, and a better implementation plus sparseblock messages will be ready soon. This approach has a total vtx transmission size of 2*nTxKnown + 1*nTxUnknown + nBytesTxUnknown, where only a small window of very recent transactions and any transactions that have fallen out of the history limit would be mutually known but not known to be known. Compact descriptions of block tx inclusion and ordering policies could nearly eliminate the overhead for both known and unknown transactions. Efficient mempool synchronization would increase the efficacy of channel-memory sparseblocks. Mempool exchange would enable a node to have one or more "roaming" peer slots, making it difficult to sybil attack a node. If a serious bug or DoS attack caused the network to start to partition itself due to DoS bans, occasional roamers crossing the partition keep both sides generally in sync.</summary>
+    <published>2014-07-31T20:47:35+00:00</published>
+  </entry>
+</feed>

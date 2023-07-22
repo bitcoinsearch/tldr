@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-06-14T00:37:52.099083+00:00</updated>
+  <author>
+    <name>Antoine Riard 2020-04-22 08:01:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-06-14T00:37:52.099083+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-April/017763.html" rel="alternate"/>
+    <summary>The context discusses two separate vulnerabilities in the Lightning Network's payment structure. The first vulnerability involves a scenario where a malicious party can deliberately stick their own transactions in the mempool to avoid confirmation of timeout and provoke an unbalanced settlement for the victim. This can be achieved by disabling RBF on one's transaction and using BIP 125 rule 3 or 5. The attack involves colluding with another party, opening channels, and rebalancing to get full incoming capacity. The attacker can then broadcast a Pinning Preimage Tx on offered HTLC #2 output on Alice's transaction, with a feerate maliciously chosen to get in network mempools but never to confirm. The attacker can manipulate the order of events for every node, provoking a local conflict to bounce off HTLC preimage tx out of the victim's mempool while broadcasting preimage tx without conflict to the rest of the network.The second vulnerability arises when there is a payment structure in which A-&gt;B-&gt;C, with HTLC A-&gt;B having a larger timeout than HTLC B-&gt;C. The vulnerability occurs when the current time is L+1 or greater, and the A-&gt;B HTLC has timed out already. This allows B and C to bid to miners to get their version of reality committed on-chain, setting up a bidding war. To prevent this, B should ensure that before L+1, the HTLC-Timeout has been committed on-chain, which outright prevents the bidding war from even starting. However, B is using a pre-signed HTLC-timeout, which prevents B from RBF-ing the HTLC-Timeout transaction. One solution is to add an RBF carve-out output to HTLC-Timeout at the cost of more blockspace. Another solution is to use SIGHASH_NOINPUT to allow B to re-sign the B-side signature for a higher-fee version of HTLC-Timeout. With this, B can exponentially increase the fee as L+1 approaches and prevent C from stealing the HTLC value. The additional output bloats the UTXO set and requires another transaction to claim later, but Decker-Russell-Osuntokun sidesteps this issue, as any timed-out HTLC can be claimed with a fee-bumpable transaction directly without RBF-carve-out.</summary>
+    <published>2020-04-22T08:01:23+00:00</published>
+  </entry>
+</feed>

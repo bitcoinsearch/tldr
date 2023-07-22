@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposed new policy for transactions that depend on other unconfirmed transactions</title>
+  <updated>2023-06-10T19:32:24.480822+00:00</updated>
+  <author>
+    <name>Alex Morcos 2015-08-14 19:33:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposed new policy for transactions that depend on other unconfirmed transactions</title>
+    <updated>2023-06-10T19:32:24.480822+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/010221.html" rel="alternate"/>
+    <summary>Alex proposes a new set of requirements as a policy for accepting new transactions into the mempool and relaying them. This policy would affect transactions with inputs from unconfirmed transactions in the blockchain. The motivation behind this policy is to limit the size of the mempool, which is explained in pull request 6470. Once the mempool is full, a new transaction must be able to pay for not only the transaction it would evict but also any dependent transactions that would be removed from the mempool. To ensure this, Alex proposes four new policy limits, all command line configurable. The first two limits ensure no chain of transactions will be too large for the eviction code to handle. The maximum number of descendant transactions should not exceed 1000, and the maximum descendant size cannot be greater than maxmempool / 200 = 2.5MB. The third limit ensures calculating the state required for sorting and limiting the mempool and enforcing the first two limits is computationally feasible. No transaction can be accepted if it has too many ancestor transactions which are not yet confirmed in the mempool. The default for this limit is 100. The fourth limit maintains the pre-existing policy goal that all transactions in the mempool should be mineable in the next block. No transaction shall be accepted if the total size of all its unconfirmed ancestor transactions is too large, and the default for this limit is 1MB. These limits would have affected less than 2% of transactions entering the mempool in April or May of this year. During the period of 7/6 through 7/14, while the network was under stress test, up to 25% of the transactions would have been affected. The code to implement these changes can be found in pull request 6557, which is built off of pull request 6470.</summary>
+    <published>2015-08-14T19:33:31+00:00</published>
+  </entry>
+</feed>

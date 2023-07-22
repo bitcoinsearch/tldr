@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>bitcoind multiplexing proxy - request/response routing problem</title>
+  <updated>2023-06-04T18:59:45.745292+00:00</updated>
+  <author>
+    <name>Steve 2011-09-08 08:15:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>bitcoind multiplexing proxy - request/response routing problem</title>
+    <updated>2023-06-04T18:59:45.745292+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-September/000480.html" rel="alternate"/>
+    <summary>The proposed solution in this context is to serialize all request/response exchanges. This means that when a request comes in from a remote node, the proxy acquires a lock on the proxy-localdaemon channel and sends the request. The channel remains locked until a response is received or a timeout occurs, in which case the remote node will not receive a response. Once a response is received, the channel is unlocked and the response is sent to the client.It is suggested that messages that do not expect a response, such as relaying a transaction broadcast from a remote node, can be pushed down a locked channel to improve performance as they will not interfere with sequencing. Locked channels may also receive other unsolicited messages from the local daemon before the expected response message, which would be dealt with the same way as if they came from an unlocked channel.However, there are also some disadvantages to this approach. One disadvantage is that there will be idle time for the channel while waiting for a response. As per option 2, this allows the proxy to stay thin but loses the opportunity for de-duplicating/caching unless option 1 is layered on top.In addition to the above solution, another suggestion is to use all 125 available bitcoind connections in a channel pool. Acquiring a lock on a channel consists of checking for an unlocked channel first, then waiting in a queue for one to become available.</summary>
+    <published>2011-09-08T08:15:50+00:00</published>
+  </entry>
+</feed>

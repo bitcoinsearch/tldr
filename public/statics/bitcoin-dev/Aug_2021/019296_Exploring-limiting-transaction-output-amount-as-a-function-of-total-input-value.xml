@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Exploring: limiting transaction output amount as a function of total input value</title>
+  <updated>2023-06-15T00:29:16.053557+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2021-08-03 18:12:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Exploring: limiting transaction output amount as a function of total input value</title>
+    <updated>2023-06-15T00:29:16.053557+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-August/019296.html" rel="alternate"/>
+    <summary>The author proposes implementing new scripting capabilities in Bitcoin to enable rate-limiting the output amount of a transaction based on the total value of its inputs. The proposed use cases are to enable users to add additional protection to their funds by limiting the amount they are allowed to send during a certain period and to allow exchanges to rate-limit addresses containing large amounts of bitcoin. Multisig would be used so that the user has two sets of private keys to their encumbered address, with one set allowing only for sending with rate-limiting restrictions in place and the other set allowing for sending any amount without rate-limiting. The proposed parameters for rate-limiting an output are a block height indicating the first and last block heights of an epoch, a maximum amount that is allowed to be sent in any epoch, and a maximum amount that is allowed to be sent within the current epoch. For rate-limiting to work, any change output created by a transaction from a rate-limited address must itself be rate-limited as well. The author provides examples to illustrate how rate-limiting works for transactions from rate-limited addresses and change outputs. The author acknowledges that the proposal may increase implementation complexity, and believes that the added functionality justifies this complexity. The author is interested in seeing feedback on the usefulness and technical feasibility of rate-limiting functionality.Moving on, the context discusses rate-limiting parameters in a transaction system, which are chosen by the user or wallet and must be validated to ensure they do not violate intended constraints. An example transaction is given where a spend of 400k does not violate the constraint of 500k per epoch, but another transaction is attempted to shift the epoch forward and enable overspending. Specifying the rate-limiting parameters explicitly at every transaction allows for tighter spending limits and easier validation without considering previous transactions within an epoch. The author gauges interest in continuing work on defining validations and describing aggregate behavior of multiple inputs.</summary>
+    <published>2021-08-03T18:12:28+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Stamping transaction</title>
+  <updated>2023-06-14T02:15:08.217111+00:00</updated>
+  <author>
+    <name>Chris Riley 2020-06-09 14:16:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Stamping transaction</title>
+    <updated>2023-06-14T02:15:08.217111+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-June/017945.html" rel="alternate"/>
+    <summary>In a recent email exchange on the Bitcoin-dev mailing list, Mostafa Sedaghat joo proposed the idea of stamping transactions to decouple them from blocks and keep the size of the blockchain as small as possible. He argued that blockchain size matters, even though data storage is cheap and easy, and suggested that if you need a data-center to keep a copy of a blockchain, then you are far from a decentralization system. He added that stamped transactions have a time-to-live and transactions have their own way to survive, with the owner of the coin keeping the history of their transactions. However, ZmnSCPxj countered that the entire history of Bitcoin is needed when starting a new node to prove ownership of current coins, and that existing currency systems have not only the "official" minter but also many "unofficial" minters (counterfeiters) which dilute the value of the currency. ZmnSCPxj further argued that validating the stamp is still a cost on every node, and it is that cost that needs to be reflected in pricing every byte in the transaction. He pointed out that UTXOs are retained indefinitely and that outputs in SegWit are 4x more expensive than signatures because signatures are only validated once when the transaction is queued to be put in the mempool. Mostafa Sedaghat joo suggested that the proposed mechanism could be made into a softfork by using an unspendable `scriptPubKey` with 0 output value. ZmnSCPxj countered that soft fork is not possible here since the transaction will not be saved inside the block and only tx hashes will be saved. Therefore the block will be invalid. Mostafa Sedaghat joo suggested that nodes can turn on pruning if the operator doesn't desire to keep all the transactions from the genesis block. Likewise, light clients may not keep any transaction history. He also suggested that when a new node connects to the network, it doesn't need to validate all the blocks since genesis but can start validating from a checkpoint. He added that there have been some checkpoint discussions on here too, which have discussed the pros and cons of them. ZmnSCPxj raised concerns about the incentives for stamped transactions, as users will prefer to run older versions and never upgrade to the new version that requires stamped transactions. He argued that if it is so good for the network, then it should be good for an individual user because the network is made up of individual users anyway. If individual users are not incentivized to use it, then that fact suggests it might not be as good for the network as one might think.</summary>
+    <published>2020-06-09T14:16:27+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>multisig, op_eval and lock_time/sequence...</title>
+  <updated>2023-06-04T21:13:05.840014+00:00</updated>
+  <author>
+    <name>Gavin Andresen 2011-11-09 20:02:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>multisig, op_eval and lock_time/sequence...</title>
+    <updated>2023-06-04T21:13:05.840014+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-November/000743.html" rel="alternate"/>
+    <summary>Gavin Andresen, a Bitcoin developer, does not believe that partially-signed transactions should be on the main Bitcoin P2P network. He argues that it would be too easy for someone to endlessly spam bogus, will-never-be-completed partial transactions just to be annoying. However, he suggests one idea that might work, which is broadcasting (and paying fees for) complete transactions that contain extra signatures for the transaction that you want to sign. This could be done via an escrow transaction with three public keys, one of which Gavin would own. He would then broadcast a 'fee-only' transaction that pays 0 bitcoins to the key he owns but adds extra data to the scriptSig. The other parties to the escrow transaction could monitor the blockchain for transactions to Gavin's key and get the signature and proposed "spend the funds in escrow" transaction from the scriptSig. While this idea could potentially gunk up the blockchain with more data, the parties involved would have to pay for the extra data they're including. Furthermore, everything in the scriptSigs can theoretically be forgotten (or never sent) to most nodes on the network once the transaction is spent and is buried deep enough in the block chain. Additionally, the IsStandard() check today allows up to 200 bytes, which wouldn't be enough for an extra signature and n-value. The standard multi-signature proposal will be increasing that to 500 bytes to accommodate 3-signatures transactions. A simple 1-input-1-output transaction would be around 50 bytes or so. However, Gavin acknowledges that it might be cheaper and better to not use the block chain to distribute signatures, but the only advantage he sees in using the blockchain is that it might be more anonymous than directly connecting to and finding out the IP address of the parties involved in the transaction.</summary>
+    <published>2011-11-09T20:02:23+00:00</published>
+  </entry>
+</feed>

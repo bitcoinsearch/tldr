@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving the initial gossip sync</title>
+  <updated>2023-05-24T20:43:08.368111+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-02-20 06:26:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving the initial gossip sync</title>
+    <updated>2023-05-24T20:43:08.368111+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/001033.html" rel="alternate"/>
+    <summary>The query_short_channel_id is a mechanism to query for a channel_announcement and channel_updates for a specific 8-byte shortid. The receiver should respond with a channel_announce and the latest channel_update for each end, not batched in the normal 60-second gossip cycle. However, a node MAY send this if it receives a channel_update for a channel it has no channel_announcement, but SHOULD NOT if the channel referred to is not an unspent output (ie. check that it's not closed before sending this query!). It may be possible that the sender thinks the channel is still possibly open while the receiver has seen the closing transaction of the channel on the mempool. There are also race conditions where the sender has not received a new block yet, then sends the message, and the receiver receives/processes the message after it has received a new block containing the closing transaction. There should be a possible reply to this message which indicates "short_channel_id so-and-so was closed by txid so-and-so". Alternatively, receivers should not rely on this "SHOULD NOT" and will have to silently ignore `query_short_channel_id` that it thinks is closed; this also implies that the sender cannot rely on getting information on the specified channel from anyone, either.</summary>
+    <published>2018-02-20T06:26:16+00:00</published>
+  </entry>
+</feed>

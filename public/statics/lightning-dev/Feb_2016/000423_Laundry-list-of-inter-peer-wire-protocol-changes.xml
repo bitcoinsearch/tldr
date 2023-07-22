@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Laundry list of inter-peer wire protocol changes</title>
+  <updated>2023-05-23T22:10:17.977145+00:00</updated>
+  <author>
+    <name>CJP 2016-02-02 17:56:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Laundry list of inter-peer wire protocol changes</title>
+    <updated>2023-05-23T22:10:17.977145+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-February/000423.html" rel="alternate"/>
+    <summary>Amiko Pay, a payment channel network, manually confirms messages to ensure nodes know which messages were received/need re-transmission even after a crash and restart. The protocol assigns a number to each message sent, and the receiving side confirms receipt up to that number, with unconfirmed messages being retransmitted. Amiko Pay also facilitates bi-directional routing between payer and payee, enabling transmission of meta-data that doesn't fit in a QR code. The payee sends an arbitrary-contents "receipt" to the payer, which in the future may be digitally signed as proof of transfer of ownership of non-cryptographic goods. Reserving before locking is another feature of the network, which reduces risk of locking funds in payment channels on one part of the route, and then undoing it when it turns out that the remaining part of the route does not exist. Reserving is an informal temporary locking of funds for use in the transaction and can be done and undone very fast without channel operations. However, reserving increases latency. For channel designs facilitating bi-directional payments with decrementing lock time, reserving is essential as failed routing attempts cause lock time decrements that reduce the channel lifetime more than necessary. Reserving is necessary for bi-directional routing since routing happens in the payee -&gt; meeting point direction, but locking has to happen in the meeting point -&gt; payee direction, making them different steps.In terms of latency, transactions might take three seconds if reserving is used instead of one second without reserving. While this is not significant for some use cases, it may be essential for public transport access gates where passenger throughput is critical. For high-frequency trading, people might manually optimize their network and physical location to get better figures.</summary>
+    <published>2016-02-02T17:56:08+00:00</published>
+  </entry>
+</feed>

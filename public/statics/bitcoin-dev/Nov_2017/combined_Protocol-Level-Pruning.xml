@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Protocol-Level Pruning</title>
+  <updated>2023-06-12T22:15:50.232140+00:00</updated>
+  <author>
+    <name>Marc Bevand 2017-11-16 17:19:13</name>
+  </author>
+  <author>
+    <name>Marc Bevand 2017-11-16 16:56:46</name>
+  </author>
+  <author>
+    <name>Bryan Bishop 2017-11-16 17:14:47</name>
+  </author>
+  <author>
+    <name>William Casarin 2017-11-17 19:07:04</name>
+  </author>
+  <author>
+    <name>Bryan Bishop 2017-11-16 17:14:47</name>
+  </author>
+  <author>
+    <name>Marc Bevand 2017-11-16 16:56:46</name>
+  </author>
+  <author>
+    <name>Bryan Bishop 2017-11-16 17:14:47</name>
+  </author>
+  <author>
+    <name>Marc Bevand 2017-11-16 17:19:13</name>
+  </author>
+  <author>
+    <name>Marc Bevand 2017-11-16 17:19:13</name>
+  </author>
+  <author>
+    <name>Marc Bevand 2017-11-16 16:56:46</name>
+  </author>
+  <author>
+    <name>William Casarin 2017-11-17 19:07:04</name>
+  </author>
+  <author>
+    <name>William Casarin 2017-11-17 19:07:04</name>
+  </author>
+  <link href="bitcoin-dev/Nov_2017/015298_Protocol-Level-Pruning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015296_Protocol-Level-Pruning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015297_Protocol-Level-Pruning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015299_Protocol-Level-Pruning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015297_Protocol-Level-Pruning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015296_Protocol-Level-Pruning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015297_Protocol-Level-Pruning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015298_Protocol-Level-Pruning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015298_Protocol-Level-Pruning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015296_Protocol-Level-Pruning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015299_Protocol-Level-Pruning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2017/015299_Protocol-Level-Pruning.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Protocol-Level Pruning</title>
+    <updated>2023-06-12T22:15:50.232140+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-November/015298.html" rel="alternate"/>
+    <summary>Bryan Bishop responded to a message from Bitcoin developer Marc about an idea that seemed too simple and likely already discussed. Bryan provided several links to previous proposals for UTXO set commitment, which include TXO bitfields, delayed TXO commitments, rolling UTXO set hashes, and more. He also noted that there are many other resources available, including source code proposals. Marc suggested the concept of protocol-level pruning (PLP) to significantly reduce the size of the blockchain, which could enable on-chain scaling. The idea is to serialize the UTXO set in a standardized way and publish a hash of it in the block header so that the blockchain commits to it. When a new node joins the network, it would download the block headers only, identify the most recent block containing the UTXO set hash, and download the UTXO set from peers. Nodes would serialize and verify that their UTXO set hash matches the one published in the blockchain every 576 blocks.The serialized UTXO set is currently about 3GB, while the blockchain is about 150GB, hence PLP could cut down the amount of data stored by full nodes by a factor of approximately 50. To avoid hashing the entire UTXO set every 576 blocks, the UTXO set serialization could be a sparse merkle tree, allowing for on-the-fly recomputation of the hash as new blocks are mined. With PLP, all full nodes on the network could switch to it, without a need for any node to archive the entire blockchain.However, nodes would no longer be able to handle reorgs that go further back than the last UTXO set hash published on the chain since previous blocks have been discarded. Therefore, keeping around the last N*576 blocks (N=10?) may be a sufficient workaround.Bryan Bishop shared his thoughts on the UTXO set commitment proposals in a bitcoin-dev post. He provided links to several resources, including previous discussions, bitfields, and source code proposals on delayed TXO commitments, rolling UTXO set hashes, and the usefulness of TXO commitments. However, he mentioned that it is uncertain whether the person he was addressing had already looked into these proposals. The post ends with a question about whether there is a way to categorize these discussions by topic for easier accessibility.</summary>
+    <published>2017-11-16T17:19:13+00:00</published>
+  </entry>
+</feed>

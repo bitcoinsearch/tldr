@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for rendez-vous routing</title>
+  <updated>2023-05-25T15:11:50.767687+00:00</updated>
+  <author>
+    <name>CJP 2018-11-05 08:04:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for rendez-vous routing</title>
+    <updated>2023-05-25T15:11:50.767687+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001514.html" rel="alternate"/>
+    <summary>In this conversation, Rusty Russell proposes a "merchant forward" service using the lightning network to allow Alice to remain anonymous. Bob's node would offer the forwarding service and Alice would pay Bob (base + percentage) giving him a path to Alice, short-channel-ID (BobAliceSCID), and privkey (BobAliceSecretKey). Anything sent from Bob to this short channel ID and pubkey would be forwarded via a new HTLC to Alice. Alice would use BobAliceKey to create an invoice with a route-hint to say pubkey=Bob, short_channel_id=BobAliceSCID. Alice could sign that invoice, and Bob could decode the incoming payment to create a new HTLC to pay Alice. The payer wouldn't even know this arrangement exists: it would look exactly like Alice has a private channel with Bob.However, CJP raises concerns about the proposal. Since Bob is providing the forwarding service, he could risk being excluded from the side of the network with the more harsh regulatory conditions. The case where a payment is routed from and to the same channel could be a hint though. Normally that makes no sense, but if payer and payee make their part of the route independently, the combined route can often end up like that. Rusty acknowledges these concerns and suggests that rendezvous routing may be a solution. In rendez-vous routing, any forwarding node can be a rendezvous point, and even the node itself wouldn't know about it.</summary>
+    <published>2018-11-05T08:04:11+00:00</published>
+  </entry>
+</feed>

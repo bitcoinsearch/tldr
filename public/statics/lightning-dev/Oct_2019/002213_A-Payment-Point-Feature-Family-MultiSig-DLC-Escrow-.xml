@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Payment Point Feature Family (MultiSig, DLC, Escrow, ...)</title>
+  <updated>2023-06-02T20:54:32.800246+00:00</updated>
+  <author>
+    <name>Nadav Kohen 2019-10-09 23:42:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Payment Point Feature Family (MultiSig, DLC, Escrow, ...)</title>
+    <updated>2023-06-02T20:54:32.800246+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-October/002213.html" rel="alternate"/>
+    <summary>Nadav proposes new lightning contracts using Payment Points (PP) and ECDHing. These contracts can be used to create Multisig, Escrow, and DLCs. PP Addition allows us to maintain the Proof of Payment property while enabling new features like Payment De-correlation, "Stuckless" Payments, High AMP, Selling Signatures, Selling Pedersen De-commitment, and Escrow Contracts. The author categorizes these new features into two categories: PoP and Commitment Applications. The Escrow Contract idea is based on the point S + ECDH(B,E) where S is the seller's point, B is the buyer's point, and E is the escrow's point. This allows for scalar discovery by the seller in collaboration with the buyer or the escrow, i.e., S AND (B OR E). Under certain circumstances, this can be generalized to have payments conditioned on arbitrary AND/OR circuits. AND circuits are straightforward as two conditions A and B can be added together to get a point that requires both scalars to be discoverable. OR requires multi-party key exchanges. KE(A,B) acts as A OR B in the payment condition contract. Contracts following this scheme look indistinguishable from normal payments on the network and are fully compatible with High AMPs. The author proposes two ideas: "MultiSignature" Lightning Contracts and DLCs Routed over Lightning. In the former, m-of-n parties must agree to the payment, and no actual signatures are used. For example, a 2-of-3 multisig between parties A, B, and C can be represented as (A AND B) OR (B AND C) OR (C AND A). If some seller has a point S, and three parties have points A, B, and C, where a certain payment must go through if any two of them think it should, then the payment point used for the payment should be S + KE(A+B, B+C, C+A). In the latter, Alice and Bob enter into a contract under which Alice wins some amount if s_A is broadcasted and Bob if s_B is broadcasted. Alice sends a payment with the payment point A + S_A to Bob, and Bob sends a payment with B + S_B to Alice. If s_A is broadcasted, then Alice gets paid (and Bob gets proof of payment a, which is the scalar to A), otherwise s_B is broadcasted, and Bob gets paid (with Alice receiving b as PoP). Setup for DLC Routed over Lightning isn't trustless. However, by trusting some escrow entity who generates some point E for their payment, trust can be moved from counter-party to trustworthy escrow in such a way that the Escrow learns nothing about the contract itself (other than that there is one of some kind). This scheme can be extended to more events through the use of multiple payments being set up (usually in both directions).</summary>
+    <published>2019-10-09T23:42:54+00:00</published>
+  </entry>
+</feed>

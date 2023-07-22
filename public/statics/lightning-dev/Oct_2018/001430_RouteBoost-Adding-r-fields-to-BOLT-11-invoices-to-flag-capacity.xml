@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RouteBoost: Adding 'r=' fields to BOLT 11 invoices to flag capacity</title>
+  <updated>2023-05-25T13:58:12.064454+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-10-08 10:57:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RouteBoost: Adding 'r=' fields to BOLT 11 invoices to flag capacity</title>
+    <updated>2023-05-25T13:58:12.064454+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-October/001430.html" rel="alternate"/>
+    <summary>ZmnSCPxj is implementing a pull request into c-lightning. In this implementation, the r= fields are preferred, but if unable to find routes to the nodes indicated in the r= fields, it falls back to the known node map before failing completely. The implementation retries each r= field until all routes to the node indicated have failed, then moves to the next r= field (if exists), or if no more r= fields, tries finding the node itself directly in the node map.Matt Corallo has raised a related point of clarification about appropriate usage of the r= field. Initially, if an invoice had an r= field any publicly-discovered last-hop routes would be ignored as the r= data is most likely more up-to-date than any public route rumor information. However, if it's only used as a hint and only one or two out of potentially many channels are included in it, that may make little sense. Matt suggests using invoice-r=-provided-hints over publicly-discovered routes, but MAY use other last-hops in case a substantially better route is known.Rusty Russell is considering a change to c-lightning where the invoice would automatically append an 'r' field for a channel which has sufficient incoming capacity for the amount using a weighted probability across peers. It is not what 'r' was originally intended for, but it would be a useful hint for payment routing and also potentially for establishing an initial channel. This is an issue for the Blockstream Store which deliberately doesn't advertise an address anymore to avoid centralization.</summary>
+    <published>2018-10-08T10:57:02+00:00</published>
+  </entry>
+</feed>

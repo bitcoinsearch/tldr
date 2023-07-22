@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>BIP37: 'getdata' request for filtered blocks is answered with 'merkleblock's even if no filter is set</title>
+  <updated>2023-05-20T21:55:11.716767+00:00</updated>
+  <author>
+    <name>Sebastian Falbesoner 2020-04-02 15:26:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>BIP37: 'getdata' request for filtered blocks is answered with 'merkleblock's even if no filter is set</title>
+    <updated>2023-05-20T21:55:11.716767+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-April/017743.html" rel="alternate"/>
+    <summary>Sebastian, an independent researcher, has reported an odd behavior in BIP37 bloom filters while experimenting with the functional test for p2p_filter.py. According to BIP37, 'getdata' commands are only responded to if a filter is set. When no BIP37 is set and we request a filtered block, there should be no response from the node, but what indeed happens is that we always get a 'merkleblock' message in reply. This issue arose because there is always a default filter set that matches everything, which was introduced in v0.8.4. Sebastian is seeking suggestions on how to deal with this problem since it leads to a few "dead code"-spots in the code base. Whenever there is a check if a filter is set, the corresponding else-branch is never executed.Further details on how to reproduce this issue and where the relevant code parts are can be found on the corresponding GitHub issue #18483. Andreas Schildbach has already pointed out that this could be a problem for the clients and suggests that the connection should be dropped to clients that request filtered blocks without any filter set.</summary>
+    <published>2020-04-02T15:26:40+00:00</published>
+  </entry>
+</feed>

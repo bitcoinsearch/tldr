@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Removing transaction data from blocks</title>
+  <updated>2023-05-19T20:16:18.524750+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2015-05-08 14:52:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Removing transaction data from blocks</title>
+    <updated>2023-05-19T20:16:18.524750+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/008000.html" rel="alternate"/>
+    <summary>At DevCore London, Gavin Andresen suggested that newly minted blocks could be distributed as block headers plus all hashes of the transactions included in the block, instead of sending full blocks. This approach is more efficient as transactions would only be sent once over the network and fast due to the small size of the resulting blocks. Moreover, it eliminates the block size limit for a long time. However, this idea requires changes in Bitcoin Core's internals, including a new block format and a way to bulk-request missing transactions. There are several ideas about how to reduce the size of blocks being sent on the network, which include Matt Corallo's relay network, Gavin Andresen's IBLT based set reconciliation for blocks, and Greg Maxwell's network block coding based on erasure coding, which also supports sharding. The primary purpose of reducing block size is reducing propagation delay, which results in higher forking rates. Fast propagation is one of the most essential responsibilities of full nodes to avoid centralization pressure. None of these techniques let us "get rid of the block size" at all because all transactions still have to be transferred and processed. Due to inherent latencies of communication across the globe, the higher the transaction rate, the higher the number of transactions in blocks will be that peers have not yet heard about. One must also consider the communication mechanism used to minimize processing overheads and unnecessary roundtrips. Several people are working on refining and optimizing the above mechanisms to make them practically usable.</summary>
+    <published>2015-05-08T14:52:28+00:00</published>
+  </entry>
+</feed>

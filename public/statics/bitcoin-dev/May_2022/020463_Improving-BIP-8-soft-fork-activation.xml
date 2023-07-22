@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving BIP 8 soft fork activation</title>
+  <updated>2023-06-15T20:45:27.677791+00:00</updated>
+  <author>
+    <name>alicexbt 2022-05-11 15:15:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving BIP 8 soft fork activation</title>
+    <updated>2023-06-15T20:45:27.677791+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020463.html" rel="alternate"/>
+    <summary>In this conversation, Billy Tetrud provides feedback on a proposal to resolve issues with the BIP 8 and BIP 9 activation methods. The proposal suggests using tri-state version signaling that can encode both active support as well as active opposition to an active soft fork. The meaning for each ternary value is 0 for no signal, 1 for ready for new consensus rules, and 2 for not ready for new consensus rules. Miners should not consider signaling as voting. The proposal also mentions the intriguing concept of minimum and maximum threshold, and the author is interested to read what other developers have to say about it. Billy Tetrud acknowledges the proposal's usefulness and agrees that there are things about BIP 9 that BIP 8 fixes. He suggests a minor improvement to specify "minimum_activation_blocks" instead of "minimum_activation_height" as it is easier to reason about and change when necessary. He gives a concept ACK and would like future soft forks to use a previously specified activation mechanism rather than rolling out a rushed unspeced thing as part of the (very orthogonal) soft fork implementation. The proposal with no code and some changes in BIP 8 is available on GitHub, and a state transitions diagram is available on imgur. This proposal removes lockinontimeout flag, and activation never fails although MUST_SIGNAL can be longer if miners signaling does not reach the threshold. Longer period for MUST_SIGNAL state is useful for coordination if LOCKED_IN was not reached. MUST_SIGNAL = ((100-t)/10)*2016 blocks, where t is threshold reached and blocks that fail to signal in MUST_SIGNAL phase are invalid. An example is given where if only 60% miners signaled readiness and timeout height was reached, the MUST_SIGNAL phase starts and will last for 4*2016 blocks, and the soft fork is activated with a delay of 2 months.</summary>
+    <published>2022-05-11T15:15:15+00:00</published>
+  </entry>
+</feed>

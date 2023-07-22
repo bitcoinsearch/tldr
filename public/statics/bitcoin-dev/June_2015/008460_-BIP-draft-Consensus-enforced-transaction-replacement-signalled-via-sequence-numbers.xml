@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP draft] Consensus-enforced transaction replacement signalled via sequence numbers</title>
+  <updated>2023-06-09T22:09:32.396559+00:00</updated>
+  <author>
+    <name>Adam Back 2015-06-02 13:11:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP draft] Consensus-enforced transaction replacement signalled via sequence numbers</title>
+    <updated>2023-06-09T22:09:32.396559+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-June/008460.html" rel="alternate"/>
+    <summary>The email conversation thread discusses the possibility of having an inverted version of both CSV and CLTV, which could verify if an output is spent before a specific time. However, the problem with this idea is that just having a lock time of less than some value does not necessarily mean it has to be spent before that script value. This might not work as any implementations of such a feature would have to provide the script execution environment with access to information that it doesn't have now, which is what they are trying to avoid.Mark Friedenbach proposed a reference implementation and BIP draft for a soft-fork change to the consensus-enforced behavior of sequence numbers for the purpose of supporting transaction replacement via per-input relative lock-times. The proposal seeks to enable safe transaction replacement by repurposing the nSequence field of a transaction input to be a consensus-enforced relative lock-time. By doing so, it makes use of the full range of the 32-bit sequence number which until now has rarely been used for anything other than a boolean control over absolute nLockTime.The advantages of this approach are that it does so in a way that is semantically compatible with the originally envisioned use of sequence numbers for fast mempool transaction replacement. However, the disadvantages are that external constraints often prevent the full range of sequence numbers from being used when interpreted as a relative lock-time, and re-purposing nSequence as a relative lock-time precludes its use in other contexts. The latter point has been partially addressed by having the relative lock-time semantics be enforced only if the most-significant bit of nSequence is set. This preserves 31 bits for alternative use when relative lock-times are not required.</summary>
+    <published>2015-06-02T13:11:23+00:00</published>
+  </entry>
+</feed>

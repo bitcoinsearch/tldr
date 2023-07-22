@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Making Electrum more anonymous</title>
+  <updated>2023-06-10T03:05:16.774779+00:00</updated>
+  <author>
+    <name>s7r 2015-07-24 11:12:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Making Electrum more anonymous</title>
+    <updated>2023-06-10T03:05:16.774779+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-July/009653.html" rel="alternate"/>
+    <summary>In a post to the bitcoin-dev mailing list, Thomas Voegtlin proposed an anonymous routing layer between Electrum servers and clients. The idea is inspired by TOR. Each server S publishes its own RSA public key KS, and each client gets a list of available servers with their respective pubkeys. For each wallet address addr_i, a client chooses a server S_i, and an RSA keypair (K_addr_i, k_addr_i). The client creates a list of encrypted requests, which contains addr_i and K_addr_i, and is encrypted with the pubkey KS_i of S_i. The client then chooses a main server M and sends the list of encrypted requests to M. M dispatches the client's requests to the corresponding servers S_i without the client's IP address. Each server decrypts the request it receives, performs the request, and encrypts the result with K_addr_i. M receives encrypted responses and forwards them to the client. The client decrypts the encrypted response with k_addr_i. Voegtlin acknowledges that this would be too complicated in practice, and there would be many other types of attacks to defend against, including Sybil attacks, misbehaving servers not responding to requests, and misbehaving servers not forwarding requests. There would need to be some kind of directory or master servers that sign and authenticate the public server keys; otherwise, someone can poison the data and provide the clients with wrong server keys. Furthermore, RSA should not be used for this project, but rather Ed25519, which is faster, more CPU efficient, and provides better security.Voegtlin concludes that he does not see the issue as a major one and thinks it is not worth pursuing. Instead, he suggests that better work on electrum server defenses, hardening them against denial-of-service attacks. As a pro, using SPV gives users the ability to sync immediately and not download the entire blockchain. Privacy-concerned individuals should run their own Electrum server and make it accessible via .onion, connecting the bitcoind running on the electrum server host only to other onion peers (onlynet=tor). Using Electrum with Tor cannot leak more than some addresses that belong to the same wallet, which is not the end of the world.</summary>
+    <published>2015-07-24T11:12:39+00:00</published>
+  </entry>
+</feed>

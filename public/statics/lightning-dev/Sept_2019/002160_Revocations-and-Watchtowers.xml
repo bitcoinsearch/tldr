@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Revocations and Watchtowers</title>
+  <updated>2023-06-02T20:18:07.050266+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-09-19 14:54:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Revocations and Watchtowers</title>
+    <updated>2023-06-02T20:18:07.050266+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-September/002160.html" rel="alternate"/>
+    <summary>In a conversation between Christian and ZmnSCPxj, they discuss the storage requirements for nodes and watchtowers in relation to state data. They mention that even with shachain, the storage requirements are not constant due to the need to keep information around to react to old states, including anything built on top of them. The HTLC outputs are revocable with knowledge of the revocation key, but the SCRIPT needs to be provided in full, including the payment hashes. When it comes to eltoo, reusing the same watchtower protocol designed for LN-penalty is likely too simplistic. ZmnSCPxj suggests establishing an authenticated session with a watchtower by signing all encrypted updates using a session key, and the watchtower only replacing updates that match the session. Multiple sessions with a single watchtower would still reveal all activity on a channel. Spreading across multiple watchtowers assumes other watchtowers are not sybils of an existing watchtower. ZmnSCPxj proposes adding the channel outpoint to the update in plaintext so that the watchtower can prune states for closed channels. However, this would mean revealing funding outpoints for unpublished channels to the watchtower, resulting in significant privacy loss. Before, ZmnSCPxj proposed continuing to use encrypted-blob watchtowers and triggering them on sighash[:16], rather than txid[:16], which would allow watchtowers to rebuild the entire sequence of updates in case of a breach, but only in case of a breach. With this method, watchtowers cannot know whether many updates are for a single channel updating 100 times or for 100 channels updated once each.Privacy is less important for most users than convenience and low price, so a privacy-conscious person might run one or more private watchtowers for their nodes and distribute them physically as much as possible. Nonetheless, the watchtowers created should have as little practical information to reveal as possible.</summary>
+    <published>2019-09-19T14:54:56+00:00</published>
+  </entry>
+</feed>

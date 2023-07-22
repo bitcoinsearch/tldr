@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - A Mobile Lightning User Goes to Pay a Mobile Lightning User...</title>
+  <updated>2023-05-23T16:46:50.567026+00:00</updated>
+  <author>
+    <name>Matt Corallo 2021-10-13 16:57:57</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2021-10-13 04:44:21</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2021-12-27 19:12:10</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2021-10-20 19:16:34</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2021-10-13 05:13:53</name>
+  </author>
+  <link href="lightning-dev/Oct_2021/003312_A-Mobile-Lightning-User-Goes-to-Pay-a-Mobile-Lightning-User-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2021/003307_A-Mobile-Lightning-User-Goes-to-Pay-a-Mobile-Lightning-User-.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2021/003436_A-Mobile-Lightning-User-Goes-to-Pay-a-Mobile-Lightning-User-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2021/003330_A-Mobile-Lightning-User-Goes-to-Pay-a-Mobile-Lightning-User-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2021/003309_A-Mobile-Lightning-User-Goes-to-Pay-a-Mobile-Lightning-User-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - A Mobile Lightning User Goes to Pay a Mobile Lightning User...</title>
+    <updated>2023-05-23T16:46:50.567026+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-October/003312.html" rel="alternate"/>
+    <summary>The Lightning Network is a payment protocol that enables faster and cheaper transactions by using a network of payment channels. However, it faces the challenge of coordinating users to be online at the same time when making payments, particularly on mobile phones. Existing solutions such as invoices or keysend/AMP have limitations in this regard.To address this issue, a proposed solution is to use the lnurl trust model, where a third-party provides pre-signed invoices that are trusted to never provide an invoice twice. This involves the Tipper getting an invoice from the lnurl endpoint they wish to pay and sending a HTLC with a long CLTV timeout to their own LSP with instructions. The recipient's LSP sends a reply to the Tipper's LSP, causing the Tipper's LSP to forward the original HTLC, which the Recipient receives.However, Matt Corallo points out the problem with the lnurl model of a trusted party not reusing invoices, making it possible for the recipient's LSP to steal all funds after the first claim. He proposes PTLCs where the sender always adds some random nonce * G to the PTLC they're paying and sends the recipient a random nonce in the onion. Rusty Russell suggests a generic authorization mechanism that lets the user choose the trust model they want.In addition, senders also need to come online while the payment isn't settled; otherwise, they risk losing their channels if the sender's LSP receives the preimage but the sender does not come online. The use case here is narrow, where the recipient is a mobile user that has his phone locked or doesn't have the lightning app open and in the foreground when a payment comes in. Matt Corallo suggests relying on users to open the app immediately when they receive a notification, absent a better idea.Overall, these proposed solutions aim to address the challenges of Lightning Network payments on mobile devices, specifically the issue of coordinating users to be online at the same time when making payments. However, there are still some concerns regarding the security of lnurl trust model and the need for senders to come online while the payment is not settled.</summary>
+    <published>2021-10-13T16:57:57+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reworking the policy estimation code (fee estimates)</title>
+  <updated>2023-06-09T03:38:12.779555+00:00</updated>
+  <author>
+    <name>Mike Hearn 2014-10-28 09:55:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reworking the policy estimation code (fee estimates)</title>
+    <updated>2023-06-09T03:38:12.779555+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-October/006823.html" rel="alternate"/>
+    <summary>Alex Morcos, a developer working on Bitcoin, has found issues with the existing code for estimating fees. The existing code calculates the median fee for each possible block confirmation time instead of gathering statistics for each possible fee rate. This approach is statistically incorrect and certain fee rates appear so frequently that they dominate the statistics at all possible confirmation times. Transactions which don't have all their inputs available aren't excluded from the calculations either, which skews the results. Alex rewrote the code to follow a different approach by dividing all possible fee rates up into fee rate buckets. For each transaction that was confirmed, he updated the appropriate fee rate bucket with how many blocks it took to confirm that transaction. To answer "estimatefee Y", he scanned through all of the fee buckets from the most expensive down until he found the last bucket with &gt;80% of the transactions confirmed within Y blocks.</summary>
+    <published>2014-10-28T09:55:00+00:00</published>
+  </entry>
+</feed>

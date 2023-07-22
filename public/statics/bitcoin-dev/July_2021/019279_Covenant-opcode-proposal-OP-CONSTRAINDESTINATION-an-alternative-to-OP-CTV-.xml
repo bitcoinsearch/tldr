@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Covenant opcode proposal OP_CONSTRAINDESTINATION (an alternative to OP_CTV)</title>
+  <updated>2023-06-15T00:23:22.647586+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2021-07-25 19:49:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Covenant opcode proposal OP_CONSTRAINDESTINATION (an alternative to OP_CTV)</title>
+    <updated>2023-06-15T00:23:22.647586+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-July/019279.html" rel="alternate"/>
+    <summary>The proposal being discussed involves constraining the amount of fee that an output is allowed to contribute. The medianFeeRate is defined as the median fee rate per vbyte for the most recent windowLength blocks, and the maxFeeContribution is defined as medianFeeRate multiplied by 2^feeFactor of the fee. However, storing the feerate for every transaction in a 3,000 block window would not be ideal as it requires a large dataset. It is suggested to find the median fee-rate for each block and store that instead. The proposal has some concerns about its effect on the incentives for miners. Miners can include many small high-fee pay-to-self transactions in their blocks to raise the median feerate but this puts them at an increased risk of fee sniping from other miners, which may incentivize fee-raisers to centralize their mining. Another concern is that the fee mechanism is redundant because a mutual spend clause and a fee override are desirable mechanisms. The mutual spend clause involves all parties agreeing on a spend of the output and setting an appropriate feerate at that time. A fee override allows paying additional fees beyond what OP_CONSTRAINDESTINATION allows, either through attaching an additional input or through CPFP. These mechanisms negate the need for a constrained feerate mechanism that might be manipulable by miners.The proposal's opcode was primarily designed with wallet vaults in mind, where there is a "mutual spend clause" of a kind, but all the keys may be owned by a single individual. One of the keys would be kept close at hand, and other keys would be kept in more secure and more difficult-to-access places. While the key-spend-path would be cheapest on-chain, traveling to get the key itself might often be more expensive than using the script spend-path. The fee limitation is there to limit griefing attack vectors that spend an unreasonable amount of a particular output towards the fee. Spending other outputs towards a transaction's fee via a fee override or CPFP is perfectly acceptable and doesn't undermine the purpose of the fee limitation. The limitation is there because the miner is another destination that the output's funds can be sent to, and without it, the output could be spent entirely as a fee, which could be very damaging.</summary>
+    <published>2021-07-25T19:49:38+00:00</published>
+  </entry>
+</feed>

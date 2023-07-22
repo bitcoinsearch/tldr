@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Continuing the discussion about noinput / anyprevout</title>
+  <updated>2023-06-02T20:37:12.069523+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-10-01 15:42:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Continuing the discussion about noinput / anyprevout</title>
+    <updated>2023-06-02T20:37:12.069523+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-October/002188.html" rel="alternate"/>
+    <summary>In a discussion on the Bitcoin-dev mailing list, ZmnSCPxj suggests the creation of a new opcode called `OP_CHECKSIG_WITHOUT_INPUT` as an alternative to `SIGHASH_NOINPUT`. However, another member points out that there is no meaningful difference between creating a new opcode and a new tapscript public key type. The latter can redefine how sighash flags are treated. Under Tapscript v0, `OP_1` can be given as the public key to `OP_CHECKSIG` to reuse the internal Taproot pubkey. ZmnSCPxj proposes a similar mechanism for copying the internal Taproot pubkey while enabling new `SIGHASH` flags for a particular script. This would allow Decker-Russell-Osuntokun funding transactions between nodes A, B, and C to have a Taproot internal key of `P = MuSig(A,B,C)` and Script 1: leaf version 0, ` OP_CHECKSIG`. Update transactions could use `MuSig(A,B,C)` for signing along the "update" path with unique "state" keys, while cooperative closes would sign using `P + h(P | MAST( OPCHECKSIG)) * G`, without revealing that it was a Decker-Russell-Osuntokun output.</summary>
+    <published>2019-10-01T15:42:08+00:00</published>
+  </entry>
+</feed>

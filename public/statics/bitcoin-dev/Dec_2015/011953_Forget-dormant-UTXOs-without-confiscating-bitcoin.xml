@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Forget dormant UTXOs without confiscating bitcoin</title>
+  <updated>2023-06-11T02:05:26.290314+00:00</updated>
+  <author>
+    <name>gb 2015-12-12 23:01:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Forget dormant UTXOs without confiscating bitcoin</title>
+    <updated>2023-06-11T02:05:26.290314+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-December/011953.html" rel="alternate"/>
+    <summary>A proposal has been made to deal with the issue of dormant UTXOs in Bitcoin. The proposal suggests that UTXOs with 420,000 confirmations be considered dormant and handled appropriately. In each block after 420,000, a hash will be committed to for all UTXOs generated in block X-420,000. The Merkle hash of the serialized UTXOs will then be calculated. After some confirmations, nodes may safely delete the UTXO records of block X permanently. If a user wants to redeem a dormant UTXO, they have to provide the scriptPubKey, height (X), and UTXO value as part of the witness. They also need to provide the Merkle path to the dormant UTXO commitment. To confirm the transaction, the miner will calculate a new Merkle hash for the block X, with the hash of the spent UTXO replaced by 1, and commit the hash to the current block. All full nodes will keep an index of latest dormant UTXO commitments so double spending is not possible. It becomes the responsibility of dormant coin holders to scan the blockchain for the current status of the UTXO commitment for their coin. They may also need to pay extra fee for the increased transaction size. This is a softfork if there is no hash collision but this is a fundamental assumption in Bitcoin anyway. The proposal also works without segregated witness, just by replacing "witness" with "scriptSig".</summary>
+    <published>2015-12-12T23:01:09+00:00</published>
+  </entry>
+</feed>

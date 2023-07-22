@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>soft-fork block size increase (extension blocks) Re: Proposed alternatives to the 20MB stepfunction</title>
+  <updated>2023-06-09T21:47:19.363137+00:00</updated>
+  <author>
+    <name>Adam Back 2015-05-30 00:00:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>soft-fork block size increase (extension blocks) Re: Proposed alternatives to the 20MB stepfunction</title>
+    <updated>2023-06-09T21:47:19.363137+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/008356.html" rel="alternate"/>
+    <summary>The extension block idea on wizards is a way to soft-fork an opt-in block-size increase. The security of the extension block is better than Raylstonn inferred from Tier's explanation. It works as Tier described - there is an extension block (say 10MB) and the existing 1MB block. The extension block is committed to in the 1MB chain. Users can transfer bitcoin into the extension block, and they can transfer them out.The interesting thing is this makes block sizes changes opt-in and gives users choice. Fee pressure still exists for blocks of difference size as the security assurances are not the same. There are three choices of validation level with extension blocks. Similarly for mining - miners could validate 1MB and 10MB transactions (solo mine or GBT-style), or they could self-validate 1MB transactions and pool mine 10MB transactions (have a pool validate those).One MB full node users who do not upgrade to software that understands extension blocks, could run in SPV mode with respect to 10MB blocks. Here lies the risk - this imposes a security downgrade on the 1MB non-upgraded users, and also on users who upgrade but don't have the bandwidth to validate 10MB blocks. We could defend non-upgrade users by making receiving funds that came via the extension block opt-in also.It is plausible that some people would pay more for transactions in the 1MB block. We could harden 1MB block SPV security (when receiving weaker extension block transactions) in a number of ways: UTXO commitments, fraud proofs (and fraud bounties) for moving from the extension block to the 1MB block. We could optionally require coins moving via the extension block to the 1MB block to be matured (eg 100 blocks delay).This is not as simple to code as a hard-fork, but way safer transition than a hard-fork, and opt-in - if you prefer the higher decentralisation of 1MB blocks, keep using them; if you prefer 10MB blocks you can opt-in to them. The block size debate will be far easier to discuss if a bigger block-size is an opt-in choice, and some people wanted 10MB or even 100MB blocks for low-value transactions.</summary>
+    <published>2015-05-30T00:00:28+00:00</published>
+  </entry>
+</feed>

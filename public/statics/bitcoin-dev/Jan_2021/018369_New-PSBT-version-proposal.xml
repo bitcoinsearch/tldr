@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New PSBT version proposal</title>
+  <updated>2023-05-21T00:05:33.994627+00:00</updated>
+  <author>
+    <name>Andrew Chow 2021-01-21 19:50:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New PSBT version proposal</title>
+    <updated>2023-05-21T00:05:33.994627+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018369.html" rel="alternate"/>
+    <summary>Andrew Chow has proposed PSBTv2, a backward-incompatible update to the Partially Signed Bitcoin Transaction (PSBT) protocol. The update allows adding inputs and outputs to PSBT after creation, by introducing fields like Transaction Version, Fallback Locktime, Input Count, Output Count, Transaction Modifiable Flags, and SIGHASH_SINGLE Inputs.The PSBT_GLOBAL_TX_MODIFIABLE will be an 8-bit unsigned little-endian integer treated as a bit field where bit 0 represents the Inputs Modifiable flag, bit 1 represents the Outputs Modifiable flag, bit 2 represents the Has Signatures flag, and bit 3 represents the Has SIGHASH_SINGLE flag. The new per-input and per-output types for PSBT Version 2 are defined, with details on their names, descriptions, and versions requiring inclusion, exclusion, or allowing inclusion.Additionally, the process of determining the nLockTime field of a transaction is explained in detail, depending on whether inputs have PSBT_IN_REQUIRED_TIME_LOCKTIME and PSBT_IN_REQUIRED_HEIGHT_LOCKTIME fields or not. The PSBTv2 introduces new roles, including the Creator who initializes the PSBT with 0 inputs and outputs, and the Constructor who adds inputs and outputs.In the proposed update, lock time fields will now be split into two separate fields, one for time-based lock times and another for height-based lock times, as all inputs must use the same type of lock time, and any new input added must be compatible with the existing inputs' lock time type. Furthermore, a new global field, PSBT_GLOBAL_UNDER_CONSTRUCTION, will be added to signal whether inputs and outputs can be added to the PSBT.Andrew Chow has also proposed PSBTv1, which contains all input and output data for each in their respective maps. Several fields are being added such as PSBT_GLOBAL_TX_VERSION, PSBT_GLOBAL_PREFERRED_LOCKTIME, PSBT_GLOBAL_INPUT_COUNT, and more. Additionally, PSBT_IN_REQUIRED_LOCKTIME is added because some inputs require a specific minimum locktime to be set.Overall, the proposed changes allow PSBT to be used in the construction of transactions and inputs and outputs can be added as needed. The proposed changes are backward incompatible with PSBTv0, but parsers for PSBTv0 should be able to deserialize PSBTv2 with only changes to support the new fields. A reference implementation of PSBTv2 is available at https://github.com/achow101/bitcoin/tree/psbt2.</summary>
+    <published>2021-01-21T19:50:45+00:00</published>
+  </entry>
+</feed>

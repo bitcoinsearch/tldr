@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>new BIP: Self balancing between excessively low/high fees and block size</title>
+  <updated>2023-06-13T18:13:31.197315+00:00</updated>
+  <author>
+    <name>Omar Shibli 2019-04-09 00:13:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>new BIP: Self balancing between excessively low/high fees and block size</title>
+    <updated>2023-06-13T18:13:31.197315+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-April/016859.html" rel="alternate"/>
+    <summary>On April 7, 2019, a new Bitcoin Improvement Proposal (BIP) was introduced by simondev1 via the bitcoin-dev mailing list. The BIP, found on GitHub, proposes that the logarithm of transaction fees should limit block size in order to keep block space small and reduce spam transactions. Additionally, it suggests an auto balance fee system to increase very low fees and decrease very high fees, allowing for larger sizes when the sender pays more. The proposal would allow wallets to calculate and display how much average free block space there is for each fee price while also giving senders more control over their transaction's fee/priority. The specification of the proposal states every transaction must fit into the following block space: input variable 'FeeInSatoshiPerByte' must be positive or zero, type double, unit Satoshi per byte; output type uint, unit bytes. The formula for this is floor(log10(1.1 + FeeInSatoshiPerByte) * 1024 * 1024). To implement this proposal, transactions would be sorted by FeeInSatoshiPerByte from lowest to highest, and the block size would be validated if the summed up bytes of space used so far are smaller or equal than the formula result for each transaction. If applied as a soft fork with the old hardcoded block size limit kept, the proposal would maintain backward compatibility. However, if applied as a hard fork with the old hardcoded block size limit removed, backward compatibility would not be maintained.</summary>
+    <published>2019-04-09T00:13:21+00:00</published>
+  </entry>
+</feed>

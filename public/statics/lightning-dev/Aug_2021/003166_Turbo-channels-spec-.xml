@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Turbo channels spec?</title>
+  <updated>2023-06-03T04:26:51.254110+00:00</updated>
+  <author>
+    <name>Rusty Russell 2021-08-12 05:04:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Turbo channels spec?</title>
+    <updated>2023-06-03T04:26:51.254110+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-August/003166.html" rel="alternate"/>
+    <summary>A new text has been proposed for `funding_locked_tlvs` in the lightning-rfc pull request #895. As per the changes, funding_locked can be sent early without any feature needed. However, it is only useful if the sender is a sole funder or trusts the other side as without that, payments cannot be accepted or routed. If push_msat is used, payments can be sent out but that seems a niche case. The short_channel_id needs to be known for the channel so that it can be added to route hints for incoming payments and also for chainsplit scenarios. The proposed requirements include that the sender should set short_channel_id and may send funding_locked before the funding transaction reaches minimum_depth if it is the sole contributor to the funding transaction or has reason to trust the peer. If the sender will route payments to that short_channel_id, they may set short_channel_id to a fake value. Otherwise, they must wait until the funding transaction reaches minimum_depth before sending this message. Additionally, the sender should re-transmit funding_locked if the short_channel_id for this channel has changed. On the other hand, the receiver should ignore the funding_locked if it knows the short_channel_id of the channel and it differs from the value in funding_locked. Nodes that have funded the channel or trust their peers to have done so can start using the channel instantly by sending funding_locked. However, as the new channel does not yet have a block number, a convincing fake number can be used for route hints. When the real funding transaction is finally mined, funding_locked can be re-sent with the real value.</summary>
+    <published>2021-08-12T05:04:58+00:00</published>
+  </entry>
+</feed>

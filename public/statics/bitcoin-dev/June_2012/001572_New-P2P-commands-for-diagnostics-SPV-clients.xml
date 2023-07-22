@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New P2P commands for diagnostics, SPV clients</title>
+  <updated>2023-06-06T05:01:40.854119+00:00</updated>
+  <author>
+    <name>Mike Hearn 2012-06-16 08:25:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New P2P commands for diagnostics, SPV clients</title>
+    <updated>2023-06-06T05:01:40.854119+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-June/001572.html" rel="alternate"/>
+    <summary>The bottleneck for the android Bitcoin Wallet app is rapidly becoming bandwidth and parse time. A discussion among the developers regarding this was held in June 2012 where Amir Taaki mentioned that he doesn't believe that network traffic is the issue here, instead it's disk space usage/blockchain validation time which is causing the problem. They were discussing about adding new P2P commands for diagnostics and SPV clients, and also figuring out a format that can provide users with all the necessary information. Matt made a good point about data duplication, but the group felt that trying to fix it would make things much more complicated. They came up with a three-part change to resolve the issue - first step was to add the mempool command and make nodes sync up their mempools on startup. Second step was that if protocol version &gt;= X, the "block" message consists of a header + num transactions + vector  instead of the full transactions themselves. The third and final step was to introduce a new message, getmerkletx takes a vector and returns a merkletx message: "merkle branch missing the root + transaction data itself" for each requested transaction. The filtering commands are added, so the block message now only lists transaction hashes that match the filter which can then be requested with getmerkletx.</summary>
+    <published>2012-06-16T08:25:48+00:00</published>
+  </entry>
+</feed>

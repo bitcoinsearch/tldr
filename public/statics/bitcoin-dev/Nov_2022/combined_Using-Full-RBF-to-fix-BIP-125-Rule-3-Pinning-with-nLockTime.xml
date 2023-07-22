@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Using Full-RBF to fix BIP-125 Rule #3 Pinning with nLockTime</title>
+  <updated>2023-06-16T02:58:45.553966+00:00</updated>
+  <author>
+    <name>Peter Todd 2022-11-09 12:41:30</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2022-11-07 22:55:59</name>
+  </author>
+  <author>
+    <name>Peter Todd 2022-11-09 12:41:30</name>
+  </author>
+  <author>
+    <name>David A. Harding 2022-11-11 03:00:58</name>
+  </author>
+  <author>
+    <name>Peter Todd 2022-11-09 12:41:30</name>
+  </author>
+  <author>
+    <name>David A. Harding 2022-11-11 03:00:58</name>
+  </author>
+  <author>
+    <name>Peter Todd 2022-11-07 21:17:50</name>
+  </author>
+  <author>
+    <name>Peter Todd 2022-11-07 21:17:50</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2022-11-07 22:55:59</name>
+  </author>
+  <author>
+    <name>David A. Harding 2022-11-11 03:00:58</name>
+  </author>
+  <author>
+    <name>Peter Todd 2022-11-07 21:17:50</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2022-11-07 22:55:59</name>
+  </author>
+  <link href="bitcoin-dev/Nov_2022/021193_Using-Full-RBF-to-fix-BIP-125-Rule-3-Pinning-with-nLockTime.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021179_Using-Full-RBF-to-fix-BIP-125-Rule-3-Pinning-with-nLockTime.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021193_Using-Full-RBF-to-fix-BIP-125-Rule-3-Pinning-with-nLockTime.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021202_Using-Full-RBF-to-fix-BIP-125-Rule-3-Pinning-with-nLockTime.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021193_Using-Full-RBF-to-fix-BIP-125-Rule-3-Pinning-with-nLockTime.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021202_Using-Full-RBF-to-fix-BIP-125-Rule-3-Pinning-with-nLockTime.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021176_Using-Full-RBF-to-fix-BIP-125-Rule-3-Pinning-with-nLockTime.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021176_Using-Full-RBF-to-fix-BIP-125-Rule-3-Pinning-with-nLockTime.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021179_Using-Full-RBF-to-fix-BIP-125-Rule-3-Pinning-with-nLockTime.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021202_Using-Full-RBF-to-fix-BIP-125-Rule-3-Pinning-with-nLockTime.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021176_Using-Full-RBF-to-fix-BIP-125-Rule-3-Pinning-with-nLockTime.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021179_Using-Full-RBF-to-fix-BIP-125-Rule-3-Pinning-with-nLockTime.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Using Full-RBF to fix BIP-125 Rule #3 Pinning with nLockTime</title>
+    <updated>2023-06-16T02:58:45.553966+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021193.html" rel="alternate"/>
+    <summary>The email exchange between Antoine and Peter Todd on the Bitcoin-dev mailing list discusses a solution to address Rule #3 pinning in multi-party transactions. The attack involves a malicious party broadcasting a low fee transaction that is difficult to replace, tying up funds from other parties who are then unable to spend their inputs unless they pay for Mallory's transaction. To fix this problem, pre-signed, nLockTime'd transactions with a sufficiently high fee can be implemented to ensure the transaction can be cancelled/mined at some point after N blocks, defeating the attack by ensuring that Mallory will have to pay the cost of getting the multi-party transaction unstuck at some point in the future.However, there are many open questions and difficulties in implementing such a solution. One issue is determining the high-fee to guarantee replacements with high odds while avoiding an adversary pinning the multi-party funded transaction. Another issue is the economic lower bound on the funds that can be staked in the collaborative transaction when using a "historically-worst" sat/vb. This introduces a griefing vector, allowing a participant to deliberately pin to inflict asymmetric damage, without entering into any fee competition.The solution relying on nLocktime doesn't solve the timevalue DoS inflicted to the participants UTXOs until the pre-signed high-fee transaction is final. Thus, participants may prefer to save the timevalue of their contributed UTXOs over operation success, and a better approach could be for them to unilaterally spend after a protocol/implementation timepoint (e.g LN's funding timeout recovery mechanism). A more workable solution could be to rely on package-relay, an ephemeral anchor output, and a special replacement regime (e.g nVersion=3) to allow the multi-party funded transaction coordinator to unilateral fee-bump, in a step-by-step approach.In cases where there is a central semi-trusted coordinator, such as Wasabi coinjoins, the solution could involve using a two-party punishment transaction consisting of tx1, which spends Mallory's input to a txout spendable by either CheckSig or CheckSequenceVerify and tx2, which spends tx1 output to as much fees as needed. This approach ensures that if Mallory cheated with a double-spend, it can be proven to third parties and Mallory cannot simply release tx1 on their own to frame the coordinator.The community suggests pre-signing a transaction with nLockTime set far into the future and spending one or more inputs of the transaction with a high enough fee to replace transactions attempting to exploit the rule. However, there are open questions regarding determining the high fee needed to guarantee replacements with high odds. The sat/vb is an unknown fact at the time of signature exchange among participants, so solving this issue may require overshooting and adopting a historical worst-case mempool feerate.Additionally, if considering miner harvesting attacks as part of the threat model, it's unclear if the v3 rules that depend on miners arbitrarily rejecting transactions from their mempools are sufficiently incentive compatible to work. The email also highlights many open questions and difficulties in implementing such a solution.</summary>
+    <published>2022-11-09T12:41:30+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP sighash_noinput</title>
+  <updated>2023-06-13T01:49:05.921094+00:00</updated>
+  <author>
+    <name>Christian Decker 2018-05-10 14:12:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP sighash_noinput</title>
+    <updated>2023-06-13T01:49:05.921094+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/015959.html" rel="alternate"/>
+    <summary>Laolu Osuntokun, a Bitcoin developer, has expressed excitement over the resurrection of the no_input feature in Bitcoin. He implemented a variant of no_input in 2015 for both btcd and bitcoind, but this new version differs slightly as it relies on witness validity instead of committing to the script being sent. This approach provides more flexibility as the script attached to the output being spent can change without rendering the spending transaction invalid as long as the witness still ratifies a branch in the output's predicate. The removal of the script commitment was necessary for eltoo, but it seems to add a lot of flexibility that might be useful.Laolu believes that introducing a new sighash flag alongside no_input could bundle additional flexible sighash flags concurrently. This would require a larger overhaul with respect to how sighash flags are interpreted. Introducing a new CHECKSIG operator, which would consume an available noop opcode, is suggested. Laolu refers to jl2012's BIP-0YYY, which allows developers to express things like "don't sign the input value, nor the sequence, but sign the output of this input, and ONLY the script of this output." This approach is powerful and enables developers to modify scripts within the context of merklized script executions.Laolu suggests that the proposal should be small and well-defined, with several possible applications to back it, to make it as uncontroversial as possible. He is not opposed to additional flags being deployed in parallel, but they'll need their justification and analysis and shouldn't be rushed just because of no_input. Going for a separate op-code is an option that has been considered, but Laolu thinks it would duplicate quite a lot of existing functionality. He also states that he purposefully made the proposal as small as possible and with a number of possible applications to back it.</summary>
+    <published>2018-05-10T14:12:21+00:00</published>
+  </entry>
+</feed>

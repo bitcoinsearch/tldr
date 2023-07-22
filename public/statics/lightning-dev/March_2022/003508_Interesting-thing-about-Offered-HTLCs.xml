@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Interesting thing about Offered HTLCs</title>
+  <updated>2023-06-03T07:43:54.787066+00:00</updated>
+  <author>
+    <name>Eugene Siegel 2022-03-10 14:55:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Interesting thing about Offered HTLCs</title>
+    <updated>2023-06-03T07:43:54.787066+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-March/003508.html" rel="alternate"/>
+    <summary>On Mon, Mar 7, 2022, Eugene Siegel shared an interesting observation regarding offered HTLCs in Lightning Network. These have three claim paths: revocation case, offerer claiming through the HTLC-timeout transaction, and the receiver claiming via their signature and preimage. The offering party can claim via the HTLC-timeout case on their commitment transaction with their signature and the remote's signature (SIGHASH_ALL) after the cltv_expiry timeout. However, they can only spend with the HTLC-timeout transaction due to SIGHASH_ALL, even if the remote party gives them a signature + preimage. This trick is not possible with received HTLCs due to OP_CHECKLOCKTIMEVERIFY. Antoine Riard responded to Eugene's observation stating that bip342 could solve this issue by splitting up all conditionals into leaves for taproot lightning. He agreed that splitting the script branches in two tapleaves and having bip342 signature digest committing to the tapleaf_hash could solve the problem if it was determined to be relevant. Antoine also mentioned that from a receiving counterparty safety viewpoint, if you're already suffering a contest, it means your HTLC-claim on your own local commitment transaction inbound HTLC output has been inefficient, and your fee-bumping strategy is to blame.</summary>
+    <published>2022-03-10T14:55:24+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - A solution may solve Block Withholding Attack</title>
+  <updated>2023-06-12T21:32:57.488067+00:00</updated>
+  <author>
+    <name>潘志彪 2017-10-03 15:52:16</name>
+  </author>
+  <author>
+    <name>潘志彪 2017-10-03 15:52:16</name>
+  </author>
+  <author>
+    <name>潘志彪 2017-10-03 15:52:16</name>
+  </author>
+  <author>
+    <name>Kevin Pan 2017-10-08 09:28:32</name>
+  </author>
+  <author>
+    <name>James Hilliard 2017-10-06 14:36:15</name>
+  </author>
+  <author>
+    <name>Kevin Pan 2017-10-08 09:28:32</name>
+  </author>
+  <author>
+    <name>Kevin Pan 2017-10-08 09:28:32</name>
+  </author>
+  <author>
+    <name>James Hilliard 2017-10-06 14:36:15</name>
+  </author>
+  <author>
+    <name>James Hilliard 2017-10-06 14:36:15</name>
+  </author>
+  <link href="bitcoin-dev/Oct_2017/015163_A-solution-may-solve-Block-Withholding-Attack.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2017/015163_A-solution-may-solve-Block-Withholding-Attack.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2017/015163_A-solution-may-solve-Block-Withholding-Attack.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2017/015165_A-solution-may-solve-Block-Withholding-Attack.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2017/015164_A-solution-may-solve-Block-Withholding-Attack.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2017/015165_A-solution-may-solve-Block-Withholding-Attack.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2017/015165_A-solution-may-solve-Block-Withholding-Attack.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2017/015164_A-solution-may-solve-Block-Withholding-Attack.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2017/015164_A-solution-may-solve-Block-Withholding-Attack.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - A solution may solve Block Withholding Attack</title>
+    <updated>2023-06-12T21:32:57.488067+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-October/015163.html" rel="alternate"/>
+    <summary>A new solution for the Block Withholding Attack in Bitcoin has been proposed by Kevin Pan, which is based on an idea from Aviv Zohar. The solution involves changing the difficulty algorithm using a new_diff equation that divides DIFF_1 by the absolute value of the target minus an offset value. This offset must be within a specific range and is provided to miners when they receive a job from a mining pool. The offset_hash value is put as a tx hash at the beginning of the array of hashes making up the merkle root hash.When mining pools send a job to miners, they include the PoW hash range for miners to submit valid shares. The network_diff is much higher than the miner's diff, so it's impossible for cheat miners to find out which share could make a valid block. However, implementing this solution would require a hard fork and render existing ASIC DSHA256 chips useless. New ASIC chips could be created based on the existing technology though. Other proposals exist such as one from 2012 that may be possible to implement in existing miners.On October 3, 2017, a proposal was presented by 潘志彪 via bitcoin-dev mailing list to solve the Block Withholding Attack. The proposed solution is based on the general idea from Aviv Zohar and involves changing the difficulty algorithm for mining. The new difficulty algorithm sets the New_Diff value as DIFF_1 divided by the absolute difference between the target and offset. Offset is a 32-byte uint256 in Bitcoin with a range of [0, 2^256), where offset_hash is defined as DSHA256(offset). The merkle root hash algorithm needs a slight modification to place the offset_hash at the beginning of the tx hashes array. The mining pool provides miners with the PoW hash range (miner_hash_begin/end) in the job. If miners find a hash that falls within the miner_hash_range, they should submit it to the pool as a valid share. On the other hand, if the hash value is between network_hash_begin and network_hash_end, then it means the miner has found a valid block.The network_diff is much higher than the miner's diff, which implies that the network_hash_range is way smaller than miner_hash_range. Although this proposal can deal with Block Withholding Attack, there are two problems with this proposal. First, it requires a hard fork, which is not an easy task. Second, it will make existing ASIC DSHA256 chips useless, but making new ASIC chips based on current technology can be an option. There have been other proposals to deal with the Block Withholding Attack, such as https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-June/001506.html, which may be possible to implement in existing miners.</summary>
+    <published>2017-10-03T15:52:16+00:00</published>
+  </entry>
+</feed>

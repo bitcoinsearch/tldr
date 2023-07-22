@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CoinPools based on m-of-n Schnorr aggregated signatures</title>
+  <updated>2023-06-14T16:19:04.528551+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-11-16 01:32:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CoinPools based on m-of-n Schnorr aggregated signatures</title>
+    <updated>2023-06-14T16:19:04.528551+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-November/018273.html" rel="alternate"/>
+    <summary>The author proposes a model for m-of-n multisig transactions using Schnorr aggregate signatures to enable CoinPools for off-chain scalability. The proposal involves creating a 'pool' with all the 'N' public keys and noting down the threshold M for this pool. Deposits can be made to a pool with an OP_LOAD_POOL_AGG_PUB_KEY OP_CHECKSIG script. Redeem script would contain the aggregated signature from all signers and the bitmap of signers. The author introduces two new opcodes: OP_POOL and OP_LOAD_POOL_AGG_PUB_KEY. The opcode uses the top two elements from the stack- the first element from the stack specifies the POOL_ID to load, which will load the public keys from the pool. SIGNERS_BITMAP is a 32 byte value and represents a bitmap of which public keys from the pool have signed the transaction.The proposed scheme enables scalability of m-of-n multisig transactions and trust minimized off-chain scalability solutions due to the use of a sufficiently large pool of signers. However, the downsides are that the public keys of the members of the pool need to be exposed. The author also discusses the possibility of generating an m-of-n aggregated pubkey, which requires an interactive setup and extra data storage. The current plan is to implement an OP_CHECKSIGADD, where your script would be: OP_CHECKSIGADD OP_CHECKSIGADD OP_CHECKSIGADD OP_EQUAL. However, OP_POOL would have a single m-of-m signature.</summary>
+    <published>2020-11-16T01:32:11+00:00</published>
+  </entry>
+</feed>

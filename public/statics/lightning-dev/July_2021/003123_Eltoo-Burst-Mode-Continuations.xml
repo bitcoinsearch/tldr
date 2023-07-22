@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Eltoo Burst Mode &amp; Continuations</title>
+  <updated>2023-06-03T05:08:28.699643+00:00</updated>
+  <author>
+    <name>Jeremy 2021-07-10 23:25:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Eltoo Burst Mode &amp; Continuations</title>
+    <updated>2023-06-03T05:08:28.699643+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-July/003123.html" rel="alternate"/>
+    <summary>The email thread is discussing a method to get around the restriction of CSV by signing an Eltoo "trampoline". Essentially, the idea is to begin a burst session at pk1:N under pk2 but always include a third branch to go to any pk1:N+1. This allows for 32 bits worth of updates and then forward to a new contract by paying 1x extra transaction. By always using this method every update, there would essentially be 64 bits of sequence space. However, doing layers like this adds a bunch of CSV layers, so it increases resolution time linearly.To mitigate this, the suggestion is to do a "semitrusted burst mode" with a counterparty. Party A requests to Party B to initiate burst mode where A and B move to sequence M+1 where state M+1 passes through to a 2 step Eltoo update. This burst now has 32 bits of sequences to blow through. B or A then indicates to the other party to terminate the burst at "internal state number" Q. Then B and A sign M+2 where M+2 reflects the last state at internal state number Q. One benefit of this protocol is that top-level state numbers do not reflect the number of payments strongly as they're more akin to how many burst mode payments were done, which has a benefit for privacy. The semi-trusted nature of this is that if a malicious peer induces you into starting this, you double your funds lockup time. There are some mitigations suggested such as only entering burst mode with long-lived peers, only entering burst mode when initiator has more funds in the channel than you (or has some ratio) which imposes an opportunity cost for attacking, and only allowing a certain percentage of liquidity to be moved during a burst.</summary>
+    <published>2021-07-10T23:25:06+00:00</published>
+  </entry>
+</feed>

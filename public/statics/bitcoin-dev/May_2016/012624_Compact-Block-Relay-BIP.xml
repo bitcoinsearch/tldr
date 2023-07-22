@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Compact Block Relay BIP</title>
+  <updated>2023-05-19T23:19:01.645280+00:00</updated>
+  <author>
+    <name>Matt Corallo 2016-05-02 22:13:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Compact Block Relay BIP</title>
+    <updated>2023-05-19T23:19:01.645280+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-May/012624.html" rel="alternate"/>
+    <summary>Matt Corallo has designed a BIP-formatted design spec for compact block relay to reduce block relay time and conserve bandwidth for nodes on the P2P network. The protocol is designed in two ways, the "high-bandwidth" mode and the "low-bandwidth" mode. The "high-bandwidth" mode is enabled by setting the first boolean to 1 in a "sendcmpct" message, and peers send new block announcements with short transaction IDs already. The "low-bandwidth" mode is enabled by setting the first boolean to 0 in a "sendcmpct" message, and peers send new block announcements with the usual inv/headers announcements after fully validating the block.The Bitcoin protocol has added a few new messages and inv type, including sendcmpct, cmpctblock, getblocktxn, and blocktxn. Upon receipt of a "sendcmpct" message with the first and second integers set to 1, the node should announce new blocks by sending a cmpctblock message. Short transaction IDs are used to represent a transaction without sending a full 256-bit hash. The protocol includes several new data structures that are added to the P2P network to relay compact blocks: PrefilledTransaction, HeaderAndShortIDs, BlockTransactionsRequest, and BlockTransactions. Additionally, there is a new variable-length integer encoding for use in these data structures. Nodes MUST NOT send a request for a MSG_CMPCT_BLOCK object to a peer before having received a sendcmpct message from that peer. Furthermore, nodes MUST check for a protocol version of &gt;= 70014 before sending sendcmpct messages. Finally, MSG_CMPCT_BLOCK inv objects MUST NOT appear anywhere except for in getdata messages.This document outlines the protocol for compact block relay, which requires nodes to request missing transactions using a getblocktxn message before sending a cmpctblock message. Nodes must validate that the header properly commits to each transaction in the block before sending a cmpctblock message. Upon receipt of a properly-formatted requested blocktxn message, nodes should attempt to reconstruct the full block. Nodes are recommended to send a sendcmpct message with the first integer set to 1 to up to three peers based on their past performance in providing blocks quickly. All nodes should send a sendcmpct message to all appropriate peers.Nodes with limited inbound bandwidth should request blocks using MSG_CMPCT_BLOCK/getblocktxn requests when possible. Nodes sending cmpctblock messages should limit prefilledtxn to around 10KB of transactions. Nodes may pick one nonce per block they wish to send and only build a cmpctblock message once for all peers which they wish to send a given block to. The version field in sendcmpct is intended to allow changes in transaction encoding in the future. This protocol design is simpler than other proposals to reduce block relay time. Some TODO items are left in the document as indicated. Furthermore, the implementation linked at the bottom of the document has a few remaining TODO items.</summary>
+    <published>2016-05-02T22:13:22+00:00</published>
+  </entry>
+</feed>

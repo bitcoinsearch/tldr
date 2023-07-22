@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Exploring: limiting transaction output amount as a function of total input value</title>
+  <updated>2023-06-15T00:34:09.065170+00:00</updated>
+  <author>
+    <name>Zac Greenwood 2021-08-02 09:32:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Exploring: limiting transaction output amount as a function of total input value</title>
+    <updated>2023-06-15T00:34:09.065170+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-August/019294.html" rel="alternate"/>
+    <summary>In a message to the Bitcoin developer mailing list, Zac Greenwood proposed implementing new scripting capabilities in Bitcoin that would enable limiting the output amount of a transaction based on the total value of its inputs. This could be used to rate-limit the amount that a user is allowed to send during a certain period (measured in blocks), adding an additional layer of protection against attackers sweeping all a user's funds in one transaction. Exchanges could use it to rate-limit addresses containing large amounts of bitcoin, enabling them to reduce the number of times a cold wallet must be accessed with private keys that give access to the full amount. Greenwood suggested using multisig so that users have two sets of private keys to their encumbered address, one allowing only for sending within rate-limiting restrictions and the other allowing for sending any amount without such restrictions. The parameters defining how an output is rate-limited could include a block height "h0" indicating the first block height of an epoch; a block height "h1" indicating the last block height of an epoch; an amount "a" in satoshi indicating the maximum amount that is allowed to be sent in any epoch; and an amount "a_remaining" (in satoshi) indicating the maximum amount that is allowed to be sent within the current epoch. Greenwood gave an example of an input containing 100m sats (1 BTC) which had been rate-limited with parameters (h0, h1, a, a_remaining) of (800000, 800143, 500k, 500k). These parameters defined that the address is rate-limited to sending a maximum of 500k sats in the current epoch that starts at block height 800000 and ends at height 800143, and that the full amount of 500k is still sendable. These rate-limiting parameters ensure that it takes at minimum 100m / 500k = 200 transactions and 200 x 144 blocks or about 200 days to spend the full 100m sats. To properly enforce rate-limiting, any change output created by a transaction from a rate-limited address must itself be rate-limited as well. The rate-limiting parameters are part of the transaction and chosen by the user (or their wallet). This means that the parameters must be validated to ensure that they do not violate the intended constraints. Greenwood suggested two main pieces of work: defining all validations; and describing aggregate behaviour of multiple (rate-limited) inputs and proof that two rate-limited addresses cannot spend more than the sum of their individual limits.</summary>
+    <published>2021-08-02T09:32:36+00:00</published>
+  </entry>
+</feed>

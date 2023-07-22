@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[Pre-BIP] Fee Accounts</title>
+  <updated>2023-06-15T03:56:04.808739+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2022-01-19 04:53:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[Pre-BIP] Fee Accounts</title>
+    <updated>2023-06-15T03:56:04.808739+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-January/019787.html" rel="alternate"/>
+    <summary>The email thread discusses proposals for improving the fee-paying semantics in Bitcoin. The current system of paying fees in-band poses challenges when writing smart contracts that can't predict future fee rates, and for implementing features such as fee bumping for stuck transactions or DoS-resistant payment channels. One proposal involves using a special type of transaction called a "sponsor" to allow arbitrary fee appending, while another proposes an account system in Bitcoin as an extension block. The latter proposal would involve defining a special anyone-can-spend output type that is a "fee account," which would have separate UTXO databases for deposits and withdrawals. Fee accounts could sign only two types of transactions: one specifying a fee amount and a TXID (or outpoint), and another specifying a withdrawal amount, a fee, and an address. These transactions would be committed in an extension block merkle tree. In any block, fee account deposits could be released into fees, consolidated together, or released into fees and paid back into the requested withdrawal key (encumbered by a 100-block timeout). Mempool logic would be updated to allow attaching fee account spends to transactions, with restrictions on accounts not being allowed to spend more than their balance. This design could potentially be modified to offer better privacy through something like Tornado.cash or a trustless mixing protocol.The proposal is deemed scalable because adding fees to a transaction would not require adding inputs or outputs or tracking substantial amounts of new state. The Lightning Network could also benefit from this design because adding fees to a channel state would not require pre-planning or transaction flexibility. The proposal could be implemented as a federated network that bribes miners until a consensus upgrade is deployed, but this approach may centralize mining.</summary>
+    <published>2022-01-19T04:53:21+00:00</published>
+  </entry>
+</feed>

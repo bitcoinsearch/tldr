@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Design approaches for Signature Aggregation</title>
+  <updated>2023-06-13T00:23:25.173416+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2018-01-30 19:12:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Design approaches for Signature Aggregation</title>
+    <updated>2023-06-13T00:23:25.173416+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-January/015696.html" rel="alternate"/>
+    <summary>In an email discussion, Bitcoin Core developer Russell O'Connor argues against the expedient approach to cross-input signature aggregation proposed by Matt Corallo. The main issue with the expedient proposal is the arbitrary choice of which input witness will be the canonical choice for holding the aggregated signature. This complicates the specification and makes the implementation somewhat error-prone. On the other hand, the extended-transaction approach supports a clean model of script semantics whereby the signature aggregation is supported via a new writer (aka logging) side-effect for Script. In this model, rather than the semantics of Script returning only failure or success, Script instead results in either failure or conditional success plus a log of additional constraints that need to be satisfied for the transaction to be valid. The aggregated signature in the extension of the transaction provides a witness that demonstrates all the constraints emitted by all the scripts are satisfied. However, even in the extended-transaction approach, supporting future extensions of new script versions or new opcodes that may want to participate in signature aggregation is going to be very difficult. Russell has some half-baked ideas on how we could support new script versions and new opcodes based on this idea of a writer side-effect model of Script semantics. He thinks that the cleaner semantic model of the extended-transaction approach is by itself enough reason to prefer it over the expedient approach, but reasonable people can disagree about this. There are larger issues lurking which appear when we start looking for unintended semantic consequences of the expedient design. Russell believes that the expedient proposal has a host of unintended semantic consequences and the above list is only the ones that he can think of off the top of his head. He does not even know the full extent of what they will be enabling with this design but it seems to include adding a subversive unidirectional cross-input communication channel for Script. He thinks that the extended-transaction design is the conservative design. If this conjecture holds, it means that we can prove that the extended-transaction design is only an optimization and doesn't have any further unintended semantic consequences. In conclusion, Russell argues against the expedient approach to signature aggregation and believes that there are probably other designs for signature aggregation beyond the two designs discussed in the email.</summary>
+    <published>2018-01-30T19:12:31+00:00</published>
+  </entry>
+</feed>

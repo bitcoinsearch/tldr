@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Annex Purpose Discussion: OP_ANNEX, Turing Completeness, and other considerations</title>
+  <updated>2023-06-15T17:38:44.799864+00:00</updated>
+  <author>
+    <name>Jeremy Rubin 2022-03-05 12:20:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Annex Purpose Discussion: OP_ANNEX, Turing Completeness, and other considerations</title>
+    <updated>2023-06-15T17:38:44.799864+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020048.html" rel="alternate"/>
+    <summary>In a bitcoin-dev discussion, the purpose of the Annex in Bitcoin was debated. The Annex is defined in BIP341 and is a way to add extra information to a transaction without increasing its size significantly. It was suggested that the Annex could be used to specify advanced computation or per-input absolute locktimes. The Annex can be executed as a script, but it was noted that the annex should only be committed to by signatures in the same way nVersion, nLockTime, and nSequence are committed to by signatures. There was also discussion about introducing an OP_ANNEX opcode which would put the annex on the stack. However, there were concerns about accessing individual entries from the annex rather than the annex as a single unit.It was suggested that a way of specifying locktimes in the annex could solve some problems with CLTV, but the general problem still exists. There was also discussion about how miniscript had been affected by the CLTV issue before. Some participants suggested that banning OP_ANNEX might be a good option.The discussion revolves around accessing nLockTime and nSequence from script. While CLTV and CSV opcodes do not allow accessing it from script, they only lower bound it. The exact nLockTime/Sequence cannot be obtained on the stack except for when using the maximum allowable value. Given that it is not defined at all, signing it seems skeptical presently. However, a future upgrade would make it compatible to add new sighash flags to cover it. One solution could be to soft-fork it out always must be 0, and when a use case arises for an annex, it can be added back. Reserving the annex this way means that it should not be used now, but when we agree on how it should be used, it is immediately ready. The reservation of the annex also ensures that for cases where script enforcement of reasonable values is not required, new consensus rules can still be used with utxos pre-dating the new consensus rules immediately.It is highly likely that new sighash flags will be needed once partial covers of the annex are allowed. A soft fork is already being done for the new annex rules, so it is not a big deal. Legacy outputs can also use these new sighash flags in theory.</summary>
+    <published>2022-03-05T12:20:02+00:00</published>
+  </entry>
+</feed>

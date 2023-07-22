@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - [BIP Proposal] New "feefilter" p2p message</title>
+  <updated>2023-06-11T04:04:04.360030+00:00</updated>
+  <author>
+    <name>Alex Morcos 2016-02-16 20:20:26</name>
+  </author>
+  <author>
+    <name>Alex Morcos 2016-02-17 02:28:31</name>
+  </author>
+  <author>
+    <name>Alex Morcos 2016-02-17 02:28:31</name>
+  </author>
+  <author>
+    <name>Luke Dashjr 2016-02-17 00:46:16</name>
+  </author>
+  <author>
+    <name>Luke Dashjr 2016-02-17 02:36:09</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2016-02-17 02:43:02</name>
+  </author>
+  <author>
+    <name>Alex Morcos 2016-02-16 20:20:26</name>
+  </author>
+  <author>
+    <name>Alex Morcos 2016-02-17 02:28:31</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2016-02-17 02:43:02</name>
+  </author>
+  <author>
+    <name>Alex Morcos 2016-02-16 20:20:26</name>
+  </author>
+  <author>
+    <name>Luke Dashjr 2016-02-17 00:46:16</name>
+  </author>
+  <author>
+    <name>Luke Dashjr 2016-02-17 02:36:09</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2016-02-17 02:43:02</name>
+  </author>
+  <author>
+    <name>Luke Dashjr 2016-02-17 00:46:16</name>
+  </author>
+  <author>
+    <name>Luke Dashjr 2016-02-17 02:36:09</name>
+  </author>
+  <link href="bitcoin-dev/Feb_2016/012449_-BIP-Proposal-New-feefilter-p2p-message.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012451_-BIP-Proposal-New-feefilter-p2p-message.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012451_-BIP-Proposal-New-feefilter-p2p-message.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012450_-BIP-Proposal-New-feefilter-p2p-message.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012452_-BIP-Proposal-New-feefilter-p2p-message.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012453_-BIP-Proposal-New-feefilter-p2p-message.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012449_-BIP-Proposal-New-feefilter-p2p-message.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012451_-BIP-Proposal-New-feefilter-p2p-message.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012453_-BIP-Proposal-New-feefilter-p2p-message.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012449_-BIP-Proposal-New-feefilter-p2p-message.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012450_-BIP-Proposal-New-feefilter-p2p-message.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012452_-BIP-Proposal-New-feefilter-p2p-message.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012453_-BIP-Proposal-New-feefilter-p2p-message.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012450_-BIP-Proposal-New-feefilter-p2p-message.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2016/012452_-BIP-Proposal-New-feefilter-p2p-message.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - [BIP Proposal] New "feefilter" p2p message</title>
+    <updated>2023-06-11T04:04:04.360030+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-February/012449.html" rel="alternate"/>
+    <summary>In February 2016, a Bitcoin developer forum post raised questions about the usefulness and extensibility of the feefilter message. The message is defined as a message containing an int64_t where pchCommand == "feefilter". The debate centered around why 64 bits would be used for what is likely a small number and the lack of extensibility in the system. The feefilter is additive with a bloom filter for transactions. If a Simplified Payment Verification (SPV) client loaded a bloom filter and sent a feefilter message, transactions would only be relayed if they passed both filters. This led to concerns about the usefulness of the message for wallets due to the fact that transactions would only be relayed if they passed both the fee filter and a bloom filter.Luke Dashjr suggested using a priorityrate filter as an OR behavior instead of the feefilter message due to the privacy disaster of bloom filters and the need for validation to relay third-party transactions. Another suggestion was to use different feerate definition versions to avoid the need for a new protocol extension for every new policy. Alex Morcos defended his decision, stating that the command string system already provides sufficient extensibility and that a different command name can be given to a better version of feefilter if developed later. He also clarified that sending feefilter messages should not affect the acceptance of transactions into the mempool. However, the email exchange between Luke Dashjr and Alex Morcos ended without a resolution.Privacy concerns related to deanonymizing a node by broadcasting identifying information about its mempool min fee are addressed by quantizing the filter value broadcast with a small amount of randomness and broadcasting messages to different peers at individually randomly distributed times. Due to these concerns, it was deemed not practical to use an OR behavior for very high fee transactions or personal transactions.Overall, the feefilter message is an optional peer-to-peer (p2p) message designed to reduce unnecessary network traffic. It informs peers of the minimum fee below which no transactions are accepted to a node's mempool, saving them from requesting transaction ids and saving the node from requesting transactions that are not in its recentRejects filter. The message is optional and can be ignored as a protocol rule, and there is also an option to turn off sending the messages within the implementation. There are ongoing discussions among developers regarding the usefulness and extensibility of the message, and potential solutions such as using a priorityrate filter as an OR have been suggested.</summary>
+    <published>2016-02-16T20:20:26+00:00</published>
+  </entry>
+</feed>

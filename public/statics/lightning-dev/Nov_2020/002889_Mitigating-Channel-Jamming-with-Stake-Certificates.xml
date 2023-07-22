@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Mitigating Channel Jamming with Stake Certificates</title>
+  <updated>2023-06-03T03:10:54.587077+00:00</updated>
+  <author>
+    <name>Andrés G. Aragoneses 2020-11-27 12:04:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Mitigating Channel Jamming with Stake Certificates</title>
+    <updated>2023-06-03T03:10:54.587077+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-November/002889.html" rel="alternate"/>
+    <summary>The Lightning Network community is exploring the use of Stake Certificates as a solution to mitigate channel jamming in the Lightning Network (LN). The certificates, previously used to prevent malicious actors from announcing channels they don't control, would now require a "fidelity bond" to send HTLCs. This would increase the cost for attackers attempting to jam channels by requiring an upfront payment. Stake Certificates are tied to UTXO ownership and credit balance, with a stake-to-credit function defining how much credit is given per certificate.Privacy can be preserved by using zero-knowledge proofs of UTXO ownership. However, implementing the solution will need novel cryptography. Stake Certificates could also be used as routing credit balance, where the sender commits to a particular channel UTXO by embedding an ownership proof in the onion packet while sending an HTLC to the recipient. If the checks succeed, the recipient decrements the sender's credit balance and relays the HTLC.The article evaluates various factors that must be considered when implementing Stake Certificates, including economic feasibility, integration and UX, protocol design/implementation, and privacy. The proposal raises several questions regarding the implementation of Stake Certificates, such as whether credit spending should be gossiped across the entire network or only known to routing nodes involved in the payment, which zero-knowledge system should be used for Stake Certificates, and whether spending a UTXO should reveal all Stake Certificates generated from it.One issue with the LN is that payment senders can be affected by malicious routing nodes, leading to failed payments and wasted credit or fees. Stake Certificates reduce the reputation of faulty links and routing nodes on the payment sender node, incentivizing routing nodes to sanitize their links. "Provable blaming" can further strengthen the mitigation.While Stake Certificates may not be the best near-term solution due to complexity, its zero satoshi overhead for honest payments is appealing for future adoption. The proposal also illustrates how stake-based protocols can solve Sybil challenges in the Bitcoin ecosystem. However, the article suggests that PoW is not a viable solution due to misaligned trade-offs and hardware limitations. Secondary markets are still possible even with restricted acceptable proofs, but supply would be much smaller and work worse for an attacker.The proposed Stake Certificate system has raised important design questions, and the next step is to discuss these questions and choose a cryptosystem if the community finds it interesting. References and footnotes are provided throughout the article. A non-naive, private version of the protocol is proposed, where each node provides its own stake certificate to the next node (and only to that node). This makes it less likely that the sender exposes themselves to remote nodes in the route and doesn't need to be inside the onion.</summary>
+    <published>2020-11-27T12:04:30+00:00</published>
+  </entry>
+</feed>

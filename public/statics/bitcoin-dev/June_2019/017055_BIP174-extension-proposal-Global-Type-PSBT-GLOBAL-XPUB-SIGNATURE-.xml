@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+  <updated>2023-06-13T19:31:33.690684+00:00</updated>
+  <author>
+    <name>Jonathan Underwood 2019-06-28 02:44:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+    <updated>2023-06-13T19:31:33.690684+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-June/017055.html" rel="alternate"/>
+    <summary>The proposal is aimed at resolving the problem of verifying an address while using HD (hierarchical deterministic) without changing the address every time. Another issue is that someone could alter a partially signed bitcoin transaction (PSBT) before signing, which could change the change address to their own address. To solve this problem, the signer needs to guess all the path sets it knows, derive thousands of change addresses and search for the correct one. However, since the signer is offline, he cannot tell which change addresses have a transaction history. Therefore, a global tag has been proposed to tell the signer how to get from the master private key to the xpub used in the output's BIP32_DERIVATION tag. This enables the signer to derive the same key and check whether it belongs to the owner before signing. The proposal extends across wallets so that users don't have to give their cold wallet's master key to their warm wallet. Instead, a signer can only sign if it sees a signature that itself has signed. Then, from that signed xpub(s), it derives the BIP32_DERIVATION in the outputs. If the output doesn't match, it will reject and not sign, creating a "chain of trust" for the wallet.Currently, the best way to prevent hacking is to reuse the same address every time you want to send to a warm wallet, but this is a huge HD drawback for high-security environments. Having this data in the PSBT standard will allow Trezor to create an enforceable whitelist feature. Peter suggests that instead of adding more complexity, it would be better to sign the entire "outputs" section of the PSBT, which would cover any future BIP additions to the outputs area and help non-multisig cases today.</summary>
+    <published>2019-06-28T02:44:15+00:00</published>
+  </entry>
+</feed>

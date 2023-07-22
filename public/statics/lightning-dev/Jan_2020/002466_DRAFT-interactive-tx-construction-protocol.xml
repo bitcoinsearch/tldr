@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DRAFT: interactive tx construction protocol</title>
+  <updated>2023-06-02T23:01:57.718874+00:00</updated>
+  <author>
+    <name>lisa neigut 2020-01-28 01:51:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DRAFT: interactive tx construction protocol</title>
+    <updated>2023-06-02T23:01:57.718874+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-January/002466.html" rel="alternate"/>
+    <summary>The feedback received for the dual-funding proposal suggested simplifying it by breaking it down into smaller, more manageable parts. The most significant aspect of this update is the change from a single peer constructing a transaction to two participants. This change allows for the removal of inputs and outputs. The set of messages involved in initiating the protocol varies depending on the case of the transaction, such as open, close or splice. Validity of inputs/outputs is not checked until both peers have sent consecutive `tx_complete` messages.Feerate is set by the initiator, and every peer pays fees for the inputs + outputs they contribute, plus enough to cover the maximum estimate of their witnesses. The initiator is responsible for contributing the output/input in question, and either peer may add or remove inputs and outputs until both peers have successfully exchanged a `tx_complete` message in succession. If `tx_complete` agreement cannot be reached, either peer may fail the channel or open protocol.In the Simple Open case, both peers signal `opt_dual_fund`, and the opener initiates a channel open with `open_channel2` message, indicating the feerate for the opening transaction. In the Splice case, one peer initiates a splice, also signaling the feerate for the transaction. In the Close case, a peer initiates a close sending a `shutdown`, and the closing initiator sends `tx_add_input` to spend the funding output and `tx_add_output` to add their output for the channel closure. If any input is flagged as RBF’able, then the transaction is considered eligible for RBF. RBF can be initiated by either party, and serves as an initiation for another round of transaction composition, as outlined above. Each `fee_step` adds 1/4 (rounded down) to the initial transaction feerate. The sender MUST set `fee_step` greater than zero and greater than any prior `fee_step`. The recipient must evaluate the new transaction's feerate is above their minimum acceptable, after subtraction of their own output value.When the fee applied to a splice transaction exceeds the sender's current balance minus reserve, an error must occur. According to Rule 4 of BIP125, the feerate increase must surpass the minimum transaction relay setting. The rule also suggests that ratcheting by 25% should satisfy this requirement. Implementing this rule would limit the number of RBF transactions created as each one requires more tracking by the recipient.In addition to these rules, an extra check will be added to RBF transactions. This check ensures that at least one identical, replaceable input must be present in the original transaction.</summary>
+    <published>2020-01-28T01:51:28+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Congestion Control via OP_CHECKOUTPUTSHASHVERIFY proposal</title>
+  <updated>2023-06-13T18:55:07.175643+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-05-25 03:56:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Congestion Control via OP_CHECKOUTPUTSHASHVERIFY proposal</title>
+    <updated>2023-06-13T18:55:07.175643+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-May/016974.html" rel="alternate"/>
+    <summary>In a conversation between ZmnSCPxj and Jeremy, Jeremy explains the benefits of using OP_COSHV over pre-signed transactions. He states that using MuSig and other distributed signing solutions are not acceptable for this case as they all require interaction for guarantee of payout. With OP_COSHV Taproot key, a user can request a withdrawal from an exchange which some time later pays out to a lot of people without having to withdraw multiple times and then pay. The exchange doesn't have to know this is what the user did. They also don't have to tell the user the exact inputs they'll spend to them or if they're batched or not. Furthermore, it allows the exchange to take inbound payments to their hot wallet and move them into cold storage with pre-set spending paths. None of this works well with just pre-signing because you need to ask for permission first in order to do these operations, but with OP_COSHV you can do so without needing permission. Jeremy's explanation leads to an objection from ZmnSCPxj who argues that there are certain cases where OP_COSHV is not useful. In CoinJoin, the initial funding transaction must be signed by participants anyways after checking that the output is correct. Any spend that is not a signature spend is going to defeat the purpose of CoinJoin trying to be private by imitating "typical" spends. If `OP_CHECKOUTPUTSHASHVERIFY` path is used, the privacy of CoinJoin is lost by reducing anonymity set. Similarly, in Channel Factories, the initial funding transaction must be signed by the participants anyway after each initial sub-channel initial commitment / initial update+state transaction is signed. In both above cases, the issue of users dropping out during the step of signing the initial funding transaction is unavoidable even with `OP_CHECKOUTPUTSHASHVERIFY`.</summary>
+    <published>2019-05-25T03:56:22+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP draft: OP_CHECKBLOCKATHEIGHT</title>
+  <updated>2023-06-11T20:08:44.386715+00:00</updated>
+  <author>
+    <name>Dave Scotese 2016-09-24 00:08:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP draft: OP_CHECKBLOCKATHEIGHT</title>
+    <updated>2023-06-11T20:08:44.387714+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-September/013163.html" rel="alternate"/>
+    <summary>The proposed BIP (Bitcoin Improvement Proposal) suggests a new opcode, OP_CHECKBLOCKATHEIGHT, to address reissuing bitcoin transactions when the coins they spend have been conflicted/double-spent. The context provided by Luke Dashjr in the bitcoin-dev mailing list explains how the new opcode can solve the problem of double-spending, where Alice sends Bob 4 BTC using UTXO 1, but Fred double-spends UTXO 1 with UTXO 1-B, invalidating Alice's transfer to Bob. Without the new opcode, Alice could send Bob UTXO 0, but there is a risk that both UTXO 2 and UTXO 3 would be mined, resulting in giving Bob 8 BTC instead of 4 BTC. However, with the new opcode, Alice can create UTXO 3 such that it is valid only in the blockchain where Fred's UTXO 1-B has confirmed. If that block is reorganized out, UTXO 3 is invalid, and either Bob receives only the original UTXO 2, or Alice can create a UTXO 3-B which is valid in the reorganized blockchain if it confirms the UTXO 1-B double-spend again. The added complexity of the opcode enables victims of double-spends to pay untrusted creditors without the risk of paying them twice, but some argue whether the reward of protecting Bitcoiners from untrusted creditors is worth the added complexity. The context also mentions that Alice can let her wallet use the new opcode so that the logic is built-in. Wallet makers who want to help solve this problem can implement the new opcode, or they can offer people like Bob the ability to refund orphaned transactions so that they can be duplicated in the valid chain without any risk to the original sender. If Alice can establish trust with Bob, she can pay him again, or Bob could make a transaction to send the first input from Alice back to her, sign it, and send that to her. She can then keep it instead of having to use the new opcode.</summary>
+    <published>2016-09-24T00:08:24+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving SPV security with PoW fraud proofs</title>
+  <updated>2023-06-13T18:15:54.137385+00:00</updated>
+  <author>
+    <name>Ruben Somsen 2019-04-15 06:37:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving SPV security with PoW fraud proofs</title>
+    <updated>2023-06-13T18:15:54.137385+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-April/016873.html" rel="alternate"/>
+    <summary>The Simplified-Payment-Verification (SPV) system relies on the chain with the most Proof-of-Work (PoW) being valid, but this assumption has proven unsafe in past attacks like Segwit2x. An improvement on this system rejects invalid blocks as long as there are enough honest miners to create a block within a reasonable timeframe. This system is not fully secure against dishonest miners but is an improvement over regular SPV. A potential solution to verifying the validity of block N+1 without knowing the UTXO set at block N is through the introduction of UTXO set commitments. This would allow block N+1 to be validated by verifying whether its inputs are present in the UTXO set that was committed to in block N. It is still uncertain if a similar result can be achieved without a soft fork that commits to the UTXO set. If an invalid block is created and only 10% of the miners are honest, it would take an average of 100 minutes for a valid block to appear. During this time, the SPV client will follow the invalid chain and see roughly 9 confirmations before the chain gets rejected. It may be prudent to wait for a number of confirmations that correspond to the time it may take for the conservative percentage of miners that you think may behave honestly to create a block. While waiting for confirmation may cause payments from an invalid chain to get reverted, it's still preferable to continually following an invalid chain. As long as a reasonable number of miners remain honest, a dishonest majority can only temporarily control the network, and their blocks (and all coins gained from it) will eventually be rejected.</summary>
+    <published>2019-04-15T06:37:43+00:00</published>
+  </entry>
+</feed>

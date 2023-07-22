@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Proposal: Full-RBF in Bitcoin Core 24.0</title>
+  <updated>2023-05-22T16:27:42.892344+00:00</updated>
+  <author>
+    <name>Jeremy 2021-12-18 16:51:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Proposal: Full-RBF in Bitcoin Core 24.0</title>
+    <updated>2023-05-22T16:27:42.892344+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-December/019696.html" rel="alternate"/>
+    <summary>Bitcoin Core developer Antoine Riard has proposed to deprecate opt-in Replace-by-Fee (RBF) in favor of full RBF as the default replacement policy in version 24.0, which will be deployed a year from now. This proposal is motivated by ongoing and anticipated changes in the Bitcoin ecosystem. Riard believes that opt-in RBF doesn't suit well for deployment of robust second-layer protocols due to its vulnerability to DoS attacks against multi-party funded transactions and risk of mempools malicious partitions. Riard notes that an attacker can easily DoS a multi-party funded transaction by propagating an RBF opt-out double-spend of its contributed input before the honest transaction is broadcasted by the protocol orchester. Such an attack affects a series of Bitcoin protocols such as Coinjoin, onchain DLCs, and dual-funded LN channels. As those protocols are still in the early phase of deployment, it doesn't seem to have been executed in the wild for now. However, considering that dual-funded are more efficient from a liquidity standpoint, we can expect them to be widely relied on once Lightning enters a more mature phase.Another issue with opt-in RBF is the risk of mempools malicious partitions, where an attacker exploits network topology or divergence in mempools policies to partition network mempools in different subsets. From then on, a wide range of attacks can be envisioned such as package pinning, artificial congestion to provoke LN channels closure, or manipulation of fee-estimator's feerate. Acknowledging this, RBF opt-out is a low-cost partitioning tool, of which the existence nullifies most of the potential progresses to mitigate malicious partitioning.Riard proposes to ease into getting rid of full-RBF by keeping the flag working, but make enforcement of non-replaceability something that happens n seconds after first seen. This reduces the ability to partition the mempools by broadcasting irreplaceable conflicts all at once and slowly eases clients off of relying on non-RBF. Riard suggests starting with 60 seconds, then doubling every release till it gets to 600, at which point it will be disabled.To enhance 0-confs security, Riard suggests proactive security models such as double-spend monitoring/receiver-side fee-topping with package relay and reactive security models such as economic reputation-based compensations. He believes that a transaction relay/mempool acceptance policy might be beneficial to some class of already-deployed Bitcoin applications while being detrimental to newer ones. The conversation should revolve around how to preserve the current interests of 0-confs users while enabling upcoming interests of fancy L2s to flourish.</summary>
+    <published>2021-12-18T16:51:46+00:00</published>
+  </entry>
+</feed>

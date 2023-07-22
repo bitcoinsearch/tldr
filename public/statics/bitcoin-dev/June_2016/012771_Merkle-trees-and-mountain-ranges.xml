@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Merkle trees and mountain ranges</title>
+  <updated>2023-06-11T05:42:31.921222+00:00</updated>
+  <author>
+    <name>Peter Todd 2016-06-18 22:09:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Merkle trees and mountain ranges</title>
+    <updated>2023-06-11T05:42:31.921222+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-June/012771.html" rel="alternate"/>
+    <summary>The email conversation between Bram Cohen and Peter Todd discusses the possibility of adding latency to utxo commitments. It is agreed that adding latency can work in principle but it should only be used as a last resort technique when optimization fails. However, adding latency to utxo commitments does not imply latency to proofs of inclusion and exclusion. This means that with the addition of roots of what's added and deleted in each block, a proof of inclusion or exclusion can be done by having a proof of inclusion of the trailing utxo set followed by a proof of exclusion from all the following deletion sets or a proof of inclusion in one of the single block addition sets followed by proofs of exclusion from all the more recent deletion sets. Although this solution makes proofs larger, it adds complexity and should only be done when necessary. The discussion also leans towards the assumption that blocks commit to key:value maps of the block contents, specifically a pre-block "UTXO deletion/things that this block spent" set. This solution would be similar to the solutions treechains would need to prove coins haven't been double-spent. Validation before block propagation needs to be extremely fast, so for utxo roots, this trick is probably both necessary and sufficient. However, Peter Todd thinks validation before propagation doesn't need to be done at all and it's reasonable to propagate blocks that have not been validated beyond checking PoW as an anti-DoS measure. The time it takes miners to start mining the next block and collecting fees is very important, so protocol designs that require miners to have relatively large amounts of RAM dedicated to UTXO lookup can be implemented.</summary>
+    <published>2016-06-18T22:09:29+00:00</published>
+  </entry>
+</feed>

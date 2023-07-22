@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Waiting SIGHASH_ANYPREVOUT and Packing Packages</title>
+  <updated>2023-06-03T04:06:57.003018+00:00</updated>
+  <author>
+    <name>Antoine Riard 2021-06-18 22:11:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Waiting SIGHASH_ANYPREVOUT and Packing Packages</title>
+    <updated>2023-06-03T04:06:57.004018+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-June/003057.html" rel="alternate"/>
+    <summary>The post discusses two safety holes in Lightning network, namely pre-signed feerate issue and malicious transaction pinnings. The first issue, as highlighted in Matt Corallo's paper, can cause loss of funds in sudden mempool congestion, even without adversarial settings. This problem becomes more urgent to solve with increasing demand for block space. The second issue is documented in Bastien Teinturier's "Pinning Attacks" paper, which talks about a class of attacks against an LN node.To solve the pre-signed feerate issue, package-relay or SIGHASH_ANYPREVOUT are suggested as solutions. However, relying on non-normative tx-relay/mempool acceptance rules is not a viable long-term solution. It is better to solve the pre-signed feerate problem with a consensus change such as SIGHASH_ANYPREVOUT rather than having off-chain coins relying on weaker assumptions offered by bitcoin core's tx-relay/mempool acceptance rules. To solve the Tx-pinning issue, the mempool needs to be hardened against Tx-Relay Jammings attacks. The post suggests agreeing on a common L2 attacker model before modifying widely-relied subset of the mempool, such as the replace-by-fee logic or the in-mempool package limits. Package-relay design trade-offs are discussed, where package relay relies on at least two cleanly separate components, higher half and lower half. One open design question for the "higher half" is the package-size of the acceptance logic. Ultimately, the seriousness of this issue depends on the number of Lightning nodes relying on base-layer tx-relay and the number of fee-bumped onchain operations.The proposal recommends the implementation of "package-relay" in Bitcoin Core to allow for more efficient routing of Lightning Network transactions. Simulations and cost-effective package-replacement policies would avoid nullifying small improvements made to minimize bandwidth usage on Bitcoin core nodes. Anti-DoS measures for package-relay would also need to be considered.The author recommends early deployment of package-relay in Bitcoin Core 0.24 or 0.25 for integration and feedback from the LN/L2 ecosystem. The proposed deployment timeline includes mempool hardening in Bitcoin Core 0.26 or 0.27, the opt-in of any LN/L2 implementation to migrate its fee-bumping backend on top of a future SIGHASH_ANYPREVOUT softfork, and an "optimized/multi-party fee-bumping primitive" softfork in the coming decade. However, the question of p2p design belongs to the Bitcoin Core dev process.The post includes various links for further reading and analysis related to the proposal.</summary>
+    <published>2021-06-18T22:11:38+00:00</published>
+  </entry>
+</feed>

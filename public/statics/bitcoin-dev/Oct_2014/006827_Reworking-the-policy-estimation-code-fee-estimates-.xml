@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reworking the policy estimation code (fee estimates)</title>
+  <updated>2023-06-09T03:38:27.623031+00:00</updated>
+  <author>
+    <name>Alex Morcos 2014-10-28 14:55:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reworking the policy estimation code (fee estimates)</title>
+    <updated>2023-06-09T03:38:27.623031+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-October/006827.html" rel="alternate"/>
+    <summary>The estimates for transaction rates will be dominated by the prevailing transaction rates, which means that the estimates for the least amount one can pay to be 90% sure of getting confirmed in 20 blocks may not be correct. The new code will return a much higher rate than existing code, but this is due to sorting and the fact that no one places transactions with such small fees. To give correct low answers, the new code will need frequent super low feerate transactions, with an average of 1 tx per block. The bar for enough datapoints in a feerate bucket is pretty low, and it can be made lower at the expense of a bit of noisiness in the answers.Alex Morcos suggests that specifying a default (possibly 80%) and making the 90% number an argument to rpc call might make it easier for people to build more complicated logic on top of it. Gavin Andresen agrees with Alex's approach and thinks we cannot know how much better it is until we have a functioning fee market. He notes that hard-coded fees mean that we do not have a functioning fee market at present. The git HEAD code says that a fee of 10,000 satoshis/kb is needed to be pretty sure of getting confirmed in the next block.</summary>
+    <published>2014-10-28T14:55:10+00:00</published>
+  </entry>
+</feed>

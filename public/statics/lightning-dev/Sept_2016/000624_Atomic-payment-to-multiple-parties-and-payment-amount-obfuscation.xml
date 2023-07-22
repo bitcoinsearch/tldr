@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Atomic payment to multiple parties, and payment amount obfuscation</title>
+  <updated>2023-05-24T00:32:16.862248+00:00</updated>
+  <author>
+    <name>CJP 2016-09-27 18:01:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Atomic payment to multiple parties, and payment amount obfuscation</title>
+    <updated>2023-05-24T00:32:16.862248+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-September/000624.html" rel="alternate"/>
+    <summary>In a recent email exchange, Rusty Russell discussed out-of-band distribution of the pre-image and its potential risks. Two examples were mentioned - from B (role 2) to B (role 1), and as a scenario assumption of C receiving the pre-image out-of-band. However, it was concluded that there is no risk in this process. In fact, it was argued that out-of-band distribution of the pre-image is even desirable. If one of the intermediate nodes blocks the regular distribution, the other ones can commit the transaction on their channels as soon as they receive the pre-image (in- or out-of-band). Thus, the node on the payee-side of the blocking node can enforce being paid by the HTLC mechanism, and the node on the payer-side doesn't mind not having to pay but can still pay voluntarily. On the other hand, if there is no out-of-band distribution of the pre-image, one blocking node can potentially keep all HTLCs on his payer-side locked for quite some time (until their time-outs). Eventually, they end up being rolled back, with the blocking node again being the only one losing funds. The advantage of having your HTLCs resolved quickly so those funds can flow in the opposite direction quickly might be a sufficient incentive for non-regular distribution of the pre-image. For instance, in Amiko Pay, payer-&gt;payee distribution is added next to payee-&gt;payer distribution, but it's a voluntary thing, and people might decide to remove it from their version of Amiko Pay, without any real harm being done. Furthermore, Rusty Russell highlighted a possible risk in the case where someone pays $4 in fees to C via B. In this scenario, B can simply use the H-preimage it gets from A to fulfill the HTLC A offered, gaining $4 and ignoring C. However, if C somehow gets the pre-image out-of-band, it can claim the $5 from B and then B can get its $1 from C. The risk for B is that C will wait until the C-&gt;B HTLC has expired, then use the B-&gt;C HTLC to collect $5, leaving B out-of-pocket. Nonetheless, Rusty Russell argued that this game happens for normal fees too, especially since we don't know if two apparently-distinct nodes are actually identical.</summary>
+    <published>2016-09-27T18:01:35+00:00</published>
+  </entry>
+</feed>

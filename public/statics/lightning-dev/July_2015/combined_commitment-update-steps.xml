@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - commitment update steps</title>
+  <updated>2023-05-18T20:38:37.649960+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-07-23 04:40:45</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2015-07-24 03:30:05</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2015-07-25 08:44:26</name>
+  </author>
+  <link href="lightning-dev/July_2015/000053_commitment-update-steps.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2015/000058_commitment-update-steps.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2015/000062_commitment-update-steps.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - commitment update steps</title>
+    <updated>2023-05-18T20:38:37.649960+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-July/000053.html" rel="alternate"/>
+    <summary>The lightning protocol is a network-protocol level that allows for conditional payments. Assuming Alice and Bob already have a channel setup, their current commitments are illustrated in the process of updating the channel to reflect a conditional payment from Bob once R is revealed. This involves Bob checking transaction structure, amounts, and R, after which Alice discards old commitment txn, replies, and stores her new transaction. If the protocol follows through to completion, then they each have matching, updated, signed commitment transactions; along with the secrets necessary to void attempts to use older commitments.HTLCs (Hashed Time-Locked Contracts) are discussed in terms of storage and identification within a channel. One proposed solution is to use nLockTime with values below current unixtime as filter/counter for identifying the commitment transaction, giving about a billion updates per channel. However, this only solves commitment transactions but not HTLC outputs. One suggestion is to store the information for every commitment and each HTLC output, but this would require too much storage. A more feasible alternative is to increment nLockTime with every new HTLC or every N commitment updates since the last time nLockTime incremented.Another suggestion is to use OP_RETURN metadata output to fit three outputs per metadata, where 32-bits is used for the Commitment Transaction. With OP_CTV and OP_CSV, one only needs to know the txn's commitment id, which can be worked out from nLockTime anyway. The key management works by calculating the key set used for HTLC #N given any secret M&gt;N.Regarding the frequency of updates, if a channel is updated ~100 times a second and lasts for a month, that would be 259M updates which on a laptop would take 22 minutes of search time. Even waiting for 3 days worth of OP_CSV delay would still be manageable. If one spends a year doing 100 new HTLC/s, that's 57GB for HTLCs. If n is set to be 100k hashes to search through and assuming 1000 commitments/s in a worst-case distribution, that's just an extra 5MB. ~60GB after a year is about 30*12 = 360 GB-months of data, which is about $12 on Amazon S3.</summary>
+    <published>2015-07-23T04:40:45+00:00</published>
+  </entry>
+</feed>

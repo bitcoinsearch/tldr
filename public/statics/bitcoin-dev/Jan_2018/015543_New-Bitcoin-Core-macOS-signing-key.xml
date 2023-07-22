@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New Bitcoin Core macOS signing key</title>
+  <updated>2023-06-12T23:47:19.437232+00:00</updated>
+  <author>
+    <name>Peter Todd 2018-01-12 08:54:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New Bitcoin Core macOS signing key</title>
+    <updated>2023-06-12T23:47:19.437232+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-January/015543.html" rel="alternate"/>
+    <summary>The email conversation on bitcoin-dev mailing list suggested using openssl smime to verify the certificate that was used to sign Bitcoin Core binaries. The -ignore_critical flag is required to ignore Apple specific critical extensions that OpenSSL doesn't understand and -purpose any allows the purpose == smimesign check to be skipped since the certificate is only authorized to sign code, not arbitrary messages. However, it is noted that the signature will fail to validate as the certificate has expired. If openssl doesn't have the Apple Certificate Authority in its CA list, -noverify needs to be added. To compare the signer's certificate to the one from the repo, -signer option can be used to write the signer's certificate to a file. OpenTimestamps has git integration, which allows the extraction of an OTS proof from 2016 for that certificate from the repo. The signed message was timestamped on the Bitcoin blockchain using OpenTimestamps. The real issue is that asking the user to cut-n-paste that PKCS7-encoded message is problematic, as differences in whitespace and line endings will make the verification fail. Bitcoin Core's contrib/verifybinaries/verify.sh isn't vulnerable to this mistake.</summary>
+    <published>2018-01-12T08:54:12+00:00</published>
+  </entry>
+</feed>

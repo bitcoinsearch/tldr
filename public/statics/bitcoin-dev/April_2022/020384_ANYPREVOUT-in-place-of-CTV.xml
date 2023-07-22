@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>ANYPREVOUT in place of CTV</title>
+  <updated>2023-06-15T19:21:56.262828+00:00</updated>
+  <author>
+    <name>Nadav Ivgi 2022-04-30 08:09:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>ANYPREVOUT in place of CTV</title>
+    <updated>2023-06-15T19:21:56.262828+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-April/020384.html" rel="alternate"/>
+    <summary>The email thread discusses the use cases of APOAS|SINGLE and its interesting uses for restricting a single output. It is suggested that it is useful for vaults or spacechains, but not for batch channels or congestion control. In the vault use-case, it makes it possible to bump fees on the unvault tx by adding more inputs and a change output, as well as unvault multiple vaulted outputs in a single transaction. For spacechains, it makes it possible to add the spaceblock hash OP_RETURN and pay fees directly in the tx chain, instead of having to use an additional tx to prepare an output that gets spent in the tx chain.CTV does not commit to the input amounts. This has some practical implications like sending an even slightly incorrect amount will make the covenant-encumbered spend path unusable. With CTV, sending a slightly lower amount results in slightly lower fees while any extra gets spent/burned on fees. The ability to allow for additional inputs with unknown amounts makes it possible to fee-bump the covenant spending transaction (with whole utxos and no change). It is suggested to either not cover `sha_amounts` in the msg hash or to make it optional behind a flag.The email thread suggests doing BIP118 in place of BIP119. SIGHASH_ANYPREVOUT and its precedent iterations have been discussed for over 6 years, presenting proven and implemented use cases that are demanded and more widely accepted than CTV's. SIGHASH_ANYPREVOUTANYSCRIPT can emulate CTV just fine if its "ANYONECANPAY" behaviour is made optional. CTV advocates have been presenting vaults as the flagship use case. However, using APO-AS covers it and it's not a couple dozen more virtual bytes that are going to matter for a potential vault user. Given the interest in, and demand for, both simple covenants and better offchain protocols, BIP118 is a soft fork candidate that could benefit more (if not most of) Bitcoin users.</summary>
+    <published>2022-04-30T08:09:26+00:00</published>
+  </entry>
+</feed>

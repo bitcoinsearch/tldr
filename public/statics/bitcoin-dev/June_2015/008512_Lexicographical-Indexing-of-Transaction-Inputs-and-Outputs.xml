@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Lexicographical Indexing of Transaction Inputs and Outputs</title>
+  <updated>2023-06-09T22:13:47.998316+00:00</updated>
+  <author>
+    <name>Kristov Atlas 2015-06-07 00:06:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Lexicographical Indexing of Transaction Inputs and Outputs</title>
+    <updated>2023-06-09T22:13:47.998316+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-June/008512.html" rel="alternate"/>
+    <summary>The author of the BIP has updated it in two ways. Firstly, making it clear that sorting is algorithmically agnostic but should conform to the output of example algorithms written in Python. Secondly, the BIP now handles schemes that create an input/output dependency, such as SIGHASH_SINGLE. Uncommon forms of transactions create ordering dependencies between inputs and outputs of a transaction. Wallets forming these transactions should first sort inputs according to the methodology outlined in section “Transaction Inputs” of this BIP. Then they should fix the output indices that depend on the input order and sort the remaining outputs around them. If there are no outputs that do not depend on input order, then all outputs will simply be ordered based on the expected scheme. The known cases of input/output dependency that must be handled specially include SIGHASH_SINGLE hash type. Clients seeking to verify LI01 compliance for a transaction must inspect the last byte of the scriptSig of each input to determine the signature hash type. In the case of SIGHASH_SINGLE (0x03) for input “n”, the verifier should expect that output “n” will be fixed when considering output ordering.The author is satisfied with this adjustment as it is unlikely that any software that wants to verify compliance with the BIP will not have access to the scriptSig of each input. Finally, the author considered defining the comparison of txids in terms of integers; however, he was concerned that this definition may be ambiguous when applied to a variety of languages and platforms without a similar amount of explanation as currently exists. The algorithm stated in the BIP should target test cases rather than implementation and should leave as little room for ambiguity as possible.</summary>
+    <published>2015-06-07T00:06:56+00:00</published>
+  </entry>
+</feed>

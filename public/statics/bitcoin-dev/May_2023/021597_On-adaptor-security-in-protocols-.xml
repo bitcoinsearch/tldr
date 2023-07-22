@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>On adaptor security (in protocols)</title>
+  <updated>2023-06-16T18:08:56.494869+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2023-05-01 04:23:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>On adaptor security (in protocols)</title>
+    <updated>2023-06-16T18:08:56.494869+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-May/021597.html" rel="alternate"/>
+    <summary>In a recent email exchange on the bitcoin-dev mailing list, a member called "LL" disagreed with another member, "waxwing," on the usefulness of single-signer adaptors. Waxwing claimed that these adaptors "don't provide a way to create enforcement that the publication of signature on a pre-defined message will reveal a secret" and are therefore useless. LL disagreed, stating that if someone holds a secret key for X and creates a signature adaptor with encryption key Y for a message m without creating any further signatures on m, any published signature on m necessarily reveals the secret on Y to them. LL believes this is useful and has already been used for years by DLCs in production.Additionally, LL suggests a general proof against all secure Schnorr signing schemes in the ROM by extending the ROM forwarding approach from Aumayer et al to all "tweak" operations on the elements that go into the Schnorr challenge hash, such as the public key and nonce. LL proposes that applying any bijective map to the (X,R) tuple before they go into the challenge hash function would prove all Schnorr-like schemes secure when bip32/TR tweaking (i.e., tweaking X) and adaptor tweaking (i.e., tweaking R) is applied to them, including MuSig2, MuSig, and FROST.In the original email, AdamISZ (also known as waxwing) mentioned that he was motivated to look more carefully at the security of using signature adaptors after becoming interested in the idea of using adaptors across N signing sessions for multiparty swaps. He posted his analysis on GitHub, which focuses on scenarios of multiple adaptors at once or multiple signing sessions at once with the same adaptor, specifically around MuSig but not MuSig2. The third case of "multiple signing sessions, same adaptor" proved to be the most interesting, as an issue arose around sequencing that may be irrelevant but is worth further discussion. AdamISZ seeks input from experts in the field on security reductions for this primitive in the case of multiple concurrent signing sessions, which has already been analyzed very carefully for base MuSig(2).</summary>
+    <published>2023-05-01T04:23:30+00:00</published>
+  </entry>
+</feed>

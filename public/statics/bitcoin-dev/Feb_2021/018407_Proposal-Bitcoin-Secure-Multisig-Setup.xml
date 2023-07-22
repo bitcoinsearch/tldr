@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Bitcoin Secure Multisig Setup</title>
+  <updated>2023-06-14T17:26:09.879240+00:00</updated>
+  <author>
+    <name>Peter D. Gray 2021-02-12 13:48:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Bitcoin Secure Multisig Setup</title>
+    <updated>2023-06-14T17:26:09.879240+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018407.html" rel="alternate"/>
+    <summary>In a proposal sent out by Christopher Allen, he suggested the use of '48'/0'/0'/3'/PBKDF(complex string)' as a key derivation path to avoid xpub key reuse in multisig. However, Peter D. Gray, founder of Coinkite, opposed this idea stating that it is a terrible one and that key derivation paths should be small, sequential integers so that they can be searched in reasonable time. He further added that while it may not matter when things are working, the stakes can be very high when they stop working. Current common practice by hardware wallets is the 48'/0'/0'/2' derivation for segwit multsig, which is the only one used for all multisigs offered by that hardware wallet. To tackle this, Allen suggested creating an index using a PBKDF of the Account Policy (a descriptor with all xpubs and keys removed), plus optional notes. This would be unique for all 2 of 3 segwig transactions. With the addition of the Policy Map creators optional note, it would be truly unique and could easily be added to existing APIs. The other advantage of this technique is that the cosigner app can know what policy it is participating in before the descriptor is completed. It may decide it doesn't want to participate in some funky 4:9 with a weird script and not return an xpub at all. Long-term, a commitment scheme should be used so that you don't reveal what xpub you offered until all the parties xpubs are shared. However, this can be done at the same time as the musig. The proposal was made by Christopher Allen, Blockchain Commons.</summary>
+    <published>2021-02-12T13:48:16+00:00</published>
+  </entry>
+</feed>

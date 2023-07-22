@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proof of Payment</title>
+  <updated>2023-06-09T18:30:02.963405+00:00</updated>
+  <author>
+    <name>Kalle Rosenbaum 2015-03-14 18:16:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proof of Payment</title>
+    <updated>2023-06-09T18:30:02.963405+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-March/007709.html" rel="alternate"/>
+    <summary>Kalle Rosenbaum has proposed an idea called Proof of Payment (PoP) as a way to prove that a payment has been made in various scenarios. The PoP is a data structure used to prove ownership of the credentials needed to unlock all inputs of a transaction T. It has the same structure as a bitcoin transaction with the same inputs as T and with a single OP_RETURN output. The PoP is signed using the same signing process as a bitcoin transaction. To generate a PoP, a request is sent from the server to the wallet containing a random nonce, a destination to send the PoP, and data hinting the wallet which transaction to create a proof for. The wallet identifies the transaction T and creates an unsigned PoP (UPoP) for T, which is then signed by the user to create PoP(T). The PoP is sent to the destination, where it is validated by checking the format, output script, nonce, txid, inputs, and signatures. If the signatures are valid, the PoP is valid. PoP can be used in various scenarios, including pre-paid hotel rooms, online video rental services, ad-signs, and lotteries. A PoP should be generated on demand, only usable once to avoid theft issues, and able to create a PoP for any payment regardless of script type. Current methods of proving a payment include BIP0070, which does not meet requirements 1 or 2 and only meets requirement 3 if the payment is made through BIP0070, and signing messages, which could meet requirements 1 and 2 but probably not 3. These current methods are not standardized either. Security issues with PoP include interception of the PoP-request and changing the destination or txid, stealing a PoP and trying to use the service hoping to get a matching nonce, and wallets being valuable as a generator for PoPs even if they have no funds. These issues could be mitigated by using secure connections and possibly extending BIP0070 to support PoPs. Further work includes figuring out how to make use of and extend BIP0070 for the purpose of PoPs, defining an extension for BIP0021 to support PoP requests, implementing a proof-of-concept, and proposing BIPs for the different parts.</summary>
+    <published>2015-03-14T18:16:39+00:00</published>
+  </entry>
+</feed>

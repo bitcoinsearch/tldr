@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[1.1] Proposed `funding_cancelled` message</title>
+  <updated>2023-05-24T18:24:12.495680+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-01-09 05:25:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[1.1] Proposed `funding_cancelled` message</title>
+    <updated>2023-05-24T18:24:12.495680+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-January/000909.html" rel="alternate"/>
+    <summary>In an email exchange between ZmnSCPxj and Matt Corallo, the idea of a `funding_cancelled` message was proposed. However, Matt expressed his disapproval, stating that it could lead to unnecessary complexity in the protocol. As there is no specified timeout for funding transactions, fundee nodes may keep track of them until end-of-life. This becomes complicated when implementing replaceable funding transactions because all versions must be monitored on the blockchain. For this reason, the complexity lies in tracking all versions of the funding transaction which can be accomplished by creating a database of transactions to be watched. The funder, who initially owns all coins in the channel, needs to keep track of all versions of the funding transaction it broadcast regardless of their confirmations. If a transaction has deeply confirmed, the funder would delete the entries from its database; sending `funding_cancelled` in this case is simply "being nice", and the fundee ignores this at its own detriment, wasting resources each block to check for a transaction that logically can never confirm.</summary>
+    <published>2018-01-09T05:25:29+00:00</published>
+  </entry>
+</feed>

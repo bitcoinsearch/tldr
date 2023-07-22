@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Committing to dust</title>
+  <updated>2023-05-23T21:43:32.437473+00:00</updated>
+  <author>
+    <name>Rusty Russell 2015-11-27 03:58:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Committing to dust</title>
+    <updated>2023-05-23T21:43:32.437473+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000348.html" rel="alternate"/>
+    <summary>Anthony Towns has posted on the Lightning Github page about an issue with sending micropayments on the lightning channel. The problem is that if the payment is less than 546 satoshi, then it will hit the IsDust() test and will be rejected. This is a similar problem to sub 1-satoshi payments, but it's different in that while you can't represent them as an HTLC output, you can represent them as soon as they complete. Anthony suggests treating these payments much the same way as sub 1-satoshi payments, by accounting for them exactly in the lightning state but approximating the results in the actual commitments. Rusty Russell, author of the post, agrees that there needs to be a rule to avoid creating outputs that will be rejected due to their small size. Rusty also suggests weakening the dust protection in the network so that anyone could clear the dust after three months if it weren't otherwise claimed. However, this would mean paying to an actual (non-standard) script, rather than a scripthash, which would be annoying in its own way. Ultimately, Rusty agrees with Anthony that culling those outputs and letting them go to fees is the best solution.</summary>
+    <published>2015-11-27T03:58:25+00:00</published>
+  </entry>
+</feed>

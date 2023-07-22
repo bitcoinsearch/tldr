@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reason for having HMACs in Sphinx</title>
+  <updated>2023-06-02T15:23:51.095748+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-12-05 00:44:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reason for having HMACs in Sphinx</title>
+    <updated>2023-06-02T15:23:51.095748+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-December/001719.html" rel="alternate"/>
+    <summary>In a post on Lightning-dev, Corné Plooy shares concerns regarding an attack that can guess the final node in a payment route. This attack involves an intermediate node sending a self-written onion packet to the next node in the route, with itself as the final node, and the same amount and payment hash as instructed by the incoming payment. If the attack succeeds, it learns that the next node is indeed the final node. If it fails, the attack is detectable by the next node, which first receives an incoming payment with an unrecognized payment hash, followed by a payment forwarding request with the same payment hash. To prevent this type of attack, Plooy suggests including a shared secret in the onion message to the final node. The payee generates the shared secret and passes it to the payer as part of the invoice. The payer includes the shared secret in the per hop data to the payee. On receiving the incoming message, the payee checks whether the received shared secret corresponds to the generated one. If not, it behaves in exactly the same way as when the payment hash is unrecognized, including timing to prevent timing side-channel attacks.This solution would be an incremental improvement, and Plooy notes that the shared secret does not need to be very large, as the number of attempts per second to guess the shared secret is limited by network latency, bandwidth, and maybe some artificial rate limiting. If an attacker can do 100 attempts per second, then a 32-bit shared secret will take (on average) 248 days to crack, for a single guess of which node is the final node. Additionally, the transaction lock time will likely have expired in the meantime. Rusty suggests using the last 4 bytes of the signature instead of a shared secret.</summary>
+    <published>2018-12-05T00:44:44+00:00</published>
+  </entry>
+</feed>

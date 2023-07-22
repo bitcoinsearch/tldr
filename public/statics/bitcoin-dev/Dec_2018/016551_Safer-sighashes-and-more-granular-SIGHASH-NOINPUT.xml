@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-06-13T15:23:03.290215+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2018-12-13 16:21:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-06-13T15:23:03.290215+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-December/016551.html" rel="alternate"/>
+    <summary>The email discussion revolves around the proposal to use a 64-byte signature for the default "signing all" sighash, and a 65-byte signature for other sighash types to save space in a block. However, this creates difficulty in witness weight estimation in multisig cases since it is proposed to sign the actual weight rather than an upper bound on the weight. The issue with signing an upper bound is that there is no place to stash that data in the transaction. Anthony Towns suggests assuming every signature is 65 witness bytes and being grateful for the prioritization benefit if someone chooses a shorter signature. Russell O'Connor questions if there is a proof that any script can be transformed into an equivalent one that avoids witness weight malleability. He also states that even if witness weight malleability is entirely avoidable, it always seems to come at a cost. As an example, he cites libwally's proposed "csv_2of3_then_2" Script that begins with "OP_DEPTH OP_1SUB OP_1SUB", which he argues could have been more obvious as "DEPTH 2 NUMNOTEQUAL." Anthony Towns explains that the idea of using 1SUB was derived from the csv_2of2_then_1 script where DEPTH 1SUB is shorter than DEPTH 1 NUMNOTEQUAL.</summary>
+    <published>2018-12-13T16:21:10+00:00</published>
+  </entry>
+</feed>

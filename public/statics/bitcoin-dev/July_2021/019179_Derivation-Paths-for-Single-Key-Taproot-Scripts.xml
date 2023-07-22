@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Derivation Paths for Single Key Taproot Scripts</title>
+  <updated>2023-05-21T02:49:26.314896+00:00</updated>
+  <author>
+    <name>Andrew Chow 2021-07-02 20:03:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Derivation Paths for Single Key Taproot Scripts</title>
+    <updated>2023-05-21T02:49:26.314896+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-July/019179.html" rel="alternate"/>
+    <summary>Andrew Chow proposed a derivation path scheme for keys to be used in Taproot scripts. The suggested scheme is based on BIP 44 and will have the purpose level path m/86' once assigned a BIP number. The derived keys should be for the Taproot internal key and then tweaked with the hash of itself as recommended by BIP 341. These keys should not be used directly as the Taproot output pubkey, and no new version bytes for extended key serialization are specified in this BIP since descriptors eliminate the need for it. Although Andrew feels that this BIP is somewhat unnecessary, it seems like it will be needed to drive adoption and implementation of Taproot into software and hardware wallets. The proposed derivation scheme aims to provide HD wallets with a common scheme to recover single key Taproot outputs. It consists of two steps to derive multiple deterministic addresses based on a BIP 32 master private key. The first step uses the same account-structure as defined in BIPs 44, 49, and 84 but with a different purpose value for the script type. The second step derives the output key used in the P2TR script from the derived public key using the method recommended in BIP 341.This BIP is not backwards compatible by design. An incompatible wallet will not discover these accounts at all, and the user will notice that something is wrong. However, since the proposed method is similar to the one used in BIPs 44, 49, and 84, it should not be difficult to implement. The document includes references to BIPs 32, 43, 44, 49, 84, and 341. The BIP is licensed under the 2-clause BSD license, and the text can be viewed on GitHub.</summary>
+    <published>2021-07-02T20:03:20+00:00</published>
+  </entry>
+</feed>

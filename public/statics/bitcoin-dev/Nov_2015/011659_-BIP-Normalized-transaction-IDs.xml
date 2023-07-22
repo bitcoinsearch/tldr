@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP] Normalized transaction IDs</title>
+  <updated>2023-06-11T00:20:49.040312+00:00</updated>
+  <author>
+    <name>Christian Decker 2015-11-03 21:44:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP] Normalized transaction IDs</title>
+    <updated>2023-06-11T00:20:49.040312+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-November/011659.html" rel="alternate"/>
+    <summary>Luke Dashjr and Christian Decker discuss the idea of having empty scriptsigs and shipping the signatures in external scripts. The proposal uses on-the-fly normalization because there is no good way of relaying the external scripts. However, assuming a connected component of upgraded nodes that relay both the transaction and the associated external scripts can be achieved, the external scripts could be piggybacked on top of the normal messages and non-upgraded nodes will read the entire two-part message but only parse the classical transaction, dropping the external script. Validation rules for upgraded nodes are the same as before. They have to commit to the external scripts used during the creation of a block, and the easiest way to add this commitment is the coinbase input. If it works, this could be a much nicer solution. Regarding the issue of malleability, Luke states that wallets should ideally be actively trying to make transfers using multiple malleated versions of the same payment. This is a desired malleability that they will likely not be able to fix. He suggests that the way to make an anti-malleable wallet would be to strictly enforce the no-address-reuse rule on payments received and rely only on the hash of that scriptPubKey+value for the input in subsequent transactions. This way, no matter what inputs or other outputs the transaction paying the address/invoice uses, the subsequent transaction ignores them and remains valid. However, this does not help someone receiving funds from a sender to build new transactions on top since the sender may simply doublespend its output before it is confirmed. Luke thinks this should be addressed in a separate proposal.</summary>
+    <published>2015-11-03T21:44:02+00:00</published>
+  </entry>
+</feed>

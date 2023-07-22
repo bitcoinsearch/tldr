@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RFC: extend signmessage/verifymessage to P2SH multisig</title>
+  <updated>2023-06-06T14:55:26.518059+00:00</updated>
+  <author>
+    <name>Peter Todd 2013-04-14 05:09:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RFC: extend signmessage/verifymessage to P2SH multisig</title>
+    <updated>2023-06-06T14:55:26.518059+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002406.html" rel="alternate"/>
+    <summary>The current signmessage/verifymessage only supports messages signed by a single key. However, it is proposed that this should be extended to support messages signed by n-of-m keys or P2SH multisig addresses. rpc.cpp:signmessage() returns the output of SignCompact(), which starts with a header byte marking the signs of the various keys to enable key recovery. For multisig signmessage signatures, each signature or key can be in the form of sig, compressed key, or uncompressed key. Despite not being used for a given signature, all pubkeys must be provided to allow the P2SH address to be reconstructed. The decoding/encoding process is code-intensive due to the numerous cases; however, this format keeps the size down to an absolute minimum. Alternatively, length bytes could be used. The format is backward compatible in the sense that older versions will fail safely on new signatures, even ones that have been truncated. New signatures are easily distinguished from old, and if another signature format is needed in the future, the leading byte can be incremented. In addition, signing incomplete signatures on messages can be handled by converting pubkeys to signatures. Furthermore, the RPC signmessage command can be extended with an optional "existing signature" option.</summary>
+    <published>2013-04-14T05:09:58+00:00</published>
+  </entry>
+</feed>

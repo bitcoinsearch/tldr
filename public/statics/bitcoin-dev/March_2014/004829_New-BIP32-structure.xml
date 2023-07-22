@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New BIP32 structure</title>
+  <updated>2023-06-08T16:18:21.112544+00:00</updated>
+  <author>
+    <name>Mike Belshe 2014-03-27 06:15:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New BIP32 structure</title>
+    <updated>2023-06-08T16:18:21.112544+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-March/004829.html" rel="alternate"/>
+    <summary>Alan Reiner, the founder and CEO of Armory Technologies, has announced that Armory will be implementing multi-sig/linked wallets where each device has a parallel HDW branch and produces P2SH addresses. He plans to allocate two chains per signing authority. For example, if you have a shared 2-of-2 wallet split between your phone and your spouse's phone, your phone would distribute addresses on P2SH chain 0 and generate change addresses on P2SH chain 1, while your spouse's phone would use chains 2 and 3. The goal is to allow users to switch to new apps that support M-of-N linked wallets without losing their coin history along the first 2*N chains.However, in general with multisig, it is advisable to discourage using a common root keychain for multiple keys in the same P2SH address because having the single, root private key can sign them all, which goes against the point of multisig. BitGo BIP32 implementation creates two extended keys for users and one for BitGo, which users can then use to create any number of separate branches (accounts) of P2SH addresses. Change/public addresses are generated from the 0/1 branches, and new addresses are generated from there. Every time a new change address is generated, all three keys in the P2SH are rotated. This makes sure that for any chain depth i of the P2SH address, the ith key in each keychain is used. Paths in a user's keychain look exactly like BIP32's layout.Another issue unique to P2SH addresses is the order of the keys. While sorting is simplifying for interop if new change addresses are never used, maintaining key order offers more management simplicity and is probably more ready for interop. By maintaining key order, knowing that key #0 for this address is always Bob's key, regardless of how deep the chaining goes.Mike Hearn, Thomas V (Electrum), and Marek (Trezor) have agreed on a wallet structure for their BIP32 wallet structures to be compatible. They have agreed on an even simpler least common denominator and wallets that want to implement some feature can do but are encouraged to pick a totally different "cointype." Cointype is zero for Bitcoin, but it distinguishes between keys intended for things like multisig outputs and can avoid mixing of coins by keeping essentially wallets-within-a-wallet. Change is 0 for receiving addresses and 1 for change addresses, and n is the actual key index. The goal here is that the same seed can be written down once and meet all users' needs while still allowing some drift between what wallets support.</summary>
+    <published>2014-03-27T06:15:50+00:00</published>
+  </entry>
+</feed>

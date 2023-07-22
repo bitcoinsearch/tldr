@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>reducing the number of blockchain transactions used by the LN, and the fees paid to confirm them</title>
+  <updated>2023-05-24T17:46:42.807593+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2017-12-21 06:44:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>reducing the number of blockchain transactions used by the LN, and the fees paid to confirm them</title>
+    <updated>2023-05-24T17:46:42.807593+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2017-December/000865.html" rel="alternate"/>
+    <summary>A proposal called "splce in/out" has been discussed on the Lightning-dev mailing list. The splicing transaction has an input that is the previous funding transaction output. The splicing transaction has an output that is the next funding transaction output. All other inputs of the splicing transaction must spend SegWit UTXOs so that the splicing transaction itself is not malleable. For pure splice-out, it would be possible to continue operating the channel even when the splicing transaction is not yet confirmed. The channel updates commitment transactions that spend the next funding transaction output. For any splice-in, there is the possibility that inputs are forcibly double-spent while the splicing transaction is unconfirmed, so the channel cannot be safely used until the splicing transaction is confirmed. The rough idea of protocol includes writing up the splicing transaction without signing it, writing and signing commitment transactions based on the splicing transaction, signing the splicing transaction, and broadcasting the fully-signed transaction. The splicing protocol will exist in BOLT 1.1.In another email, Jim Renkel suggests a way to reduce the number of blockchain transactions and fees paid by LN in a common use case where a customer makes frequent purchases from the same merchant over an extended period of time. He proposes depositing and withdrawing funding in the channel to and from the blockchain without closing the channel, which could be done with a single blockchain transaction that is essentially the merge of the closing and re-opening blockchain transactions. This reduces the number of blockchain transactions required and leads to a reduction in total fees paid for operating the channel. Comments are expected and welcome.</summary>
+    <published>2017-12-21T06:44:27+00:00</published>
+  </entry>
+</feed>

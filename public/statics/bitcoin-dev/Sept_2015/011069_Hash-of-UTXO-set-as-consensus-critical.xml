@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Hash of UTXO set as consensus-critical</title>
+  <updated>2023-05-19T21:54:41.701282+00:00</updated>
+  <author>
+    <name>Matt Corallo 2015-09-18 20:11:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Hash of UTXO set as consensus-critical</title>
+    <updated>2023-05-19T21:54:41.701282+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-September/011069.html" rel="alternate"/>
+    <summary>The discussion here is on improving initial-sync time by skipping initial-sync and getting a committed-to utxo set which is a new security model in between SPV and full-node and could be called SPV with future validation. However, full nodes using UTXO set commitments is a change to the bitcoin security model. Currently, an attacker with over 50% of the network hashrate can rewrite history. If full nodes rely on UTXO set commitments such an attacker could create an infinite number of bitcoins. Before we consider mechanisms for UTXO set commitments, we should seriously discuss whether the security model reduction is reasonable. Currently, when a new node wants to join the network, it needs to retrieve the entire blockchain history, starting from January 2009 and up until now, in order to derive a UTXO set that it can verify new blocks/transactions against. With a blockchain size of 40GB and a UTXO size of around 1GB, the extra bandwidth required is significant, and will keep increasing indefinitely. If a newly mined block were to include the UTXO set hash of the chain up until the previous block, then new nodes would be able to acquire the UTXO set in a trustless manner, by only verifying proof-of-work headers, and knowing that a block with an invalid UTXO set hash would be rejected.This actually alleviates Bitcoin Core nodes, as it will now become possible for nodes without the entire blockchain to answer SPV queries (by retrieving the UTXO set trustlessly and using this to answer queries). It also saves bandwidth for Bitcore Core nodes, who only need to send roughly 1GB of data, in order to synchronise a node, rather than 40GB+. This forces miners to actually maintain a UTXO set, rather than just build on top of the chain with the most proof-of-work. Producing a UTXO set and verifying a block against a chain is the same thing, so by including the hash of the UTXO set we force miners to verify the block that they want to build on top of. The only added step to verifying a block is to hash the UTXO set. So it does require additional computation, but most modern CPUs have a SHA256 throughput of around 500 MB/s, which means it takes only two seconds to hash the UTXO set. And this can be improved further (GPUs can do 2-3 GB/s). A small sacrifice for the added ease of initial syncing.</summary>
+    <published>2015-09-18T20:11:33+00:00</published>
+  </entry>
+</feed>

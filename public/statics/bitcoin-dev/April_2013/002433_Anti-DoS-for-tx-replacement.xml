@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Anti DoS for tx replacement</title>
+  <updated>2023-06-06T15:05:49.184542+00:00</updated>
+  <author>
+    <name>Jeremy Spilman 2013-04-20 01:48:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Anti DoS for tx replacement</title>
+    <updated>2023-06-06T15:05:49.184542+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002433.html" rel="alternate"/>
+    <summary>The proposal presented by John involves users signing TX1 and committing funds to the MULTISIG, which they may never get back. However, the proposal can be anti-DoS by allowing only nSequence of 0 or MAX for exactly one replacement. The initial funding transaction and time-locked refund is complicated to set up, but it can support coins from arbitrarily sized inputs. The user and AP negotiate how much to escrow, who pays the fees, and how far in the future nLockTime will be set. The proposal involves six steps. Firstly, the user creates an unsigned TX1 with one or more inputs from their 'listunspent', change going back to the user (if any), and a single output of 'FundAmount' with scriptPubKey of '2 PK1 OP_0 CHECKMULTISIG', and sends it to the AP. Secondly, the AP adds to TX1; their inputs (if any), their change (if any), replaces OP_0 in the scriptPubKey with a PK they control, and signs SIGHASH_ALL, and returns TX1 to User. Thirdly, the user verifies TX1 and signs it SIGHASH_ALL, but keeps it to himself. Fourthly, the user completes TX1, knows its TxID, and creates TX2-Locked spending TX1 back to themselves. Fifthly, at each payment milestone, the user creates TX2-Final with TX1 as input, final nSequence, no lock time, with a single output going back to the user, and an amount equal to the remaining balance of the channel. Finally, AP can add an output to TX2-Final sending their portion of the coins wherever they want, sign it SIGHASH_ALL, and broadcast it at any point, closing the channel. The alternative to the TX2-Locked is a third party in the MULTISIG who is trusted to close the channel at the request of either party, based on the latest TX2-Final sent by the user. In this case, there is no TX2-Locked, only a single broadcast version of TX2-Final, and transaction replacement is not needed.</summary>
+    <published>2013-04-20T01:48:11+00:00</published>
+  </entry>
+</feed>

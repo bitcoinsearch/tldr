@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer NOINPUT with output tagging</title>
+  <updated>2023-06-13T16:12:15.324078+00:00</updated>
+  <author>
+    <name>Christian Decker 2018-12-20 17:20:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer NOINPUT with output tagging</title>
+    <updated>2023-06-13T16:12:15.324078+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-December/016573.html" rel="alternate"/>
+    <summary>In this context, Johnson Lau discusses the process of setting up and closing a payment channel between two parties using Bitcoin. He assumes that BIP118, 143, and 141-P2WSH are used, and he skips possible optimizations for the sake of simplicity. The first step is to create a setup transaction with an output script, which provides for a collaborative close transaction that is valid immediately. The second step is to create an update transaction that spends the setup output with NOINPUT, and locktime = s+1, to the update-0 output with the script. It reflects the initial state of the channel, and the second branch in the script is the update branch. The third step is to create the settlement transaction, which spends the update-0 output with As0 and Bs0, using BIP68 relative-locktime, with 2 settlement outputs. The fourth step is to sign the setup tx and let it confirm. They also need to sign (but not broadcast) update_0 to allow either party to initiate closure if the counterparty becomes unresponsive. The fifth step is to create the update transaction 1, spending the setup output with NOINPUT and locktime = s+2, to the update-1 output, and create the settlement transaction 1, spending the update-1 output with As1 and Bs1 using relative-locktime, with 2 settlement outputs. Then, they can close the channel by broadcasting update tx 1, wait for several confirmations, and broadcast settlement-tx-1.Finally, they have to differentiate between collaborative close and unilateral close. In the collaborative close, they come to a mutual agreement to take the latest state and settle. So they create a new transaction that spends the setup output, and add outputs according to the state agreed upon, and sign it. In the unilateral case, one party isn't there anymore, or refuses to sign. So they take the trigger transaction and the latest update_n transaction and broadcast them. Then they wait for the CSV timeout to expire, and then send the settlement transaction, which gives them the enforcement of the latest state agreed on.</summary>
+    <published>2018-12-20T17:20:54+00:00</published>
+  </entry>
+</feed>

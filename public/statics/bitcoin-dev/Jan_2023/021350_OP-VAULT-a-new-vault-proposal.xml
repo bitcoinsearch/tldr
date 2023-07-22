@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_VAULT: a new vault proposal</title>
+  <updated>2023-05-22T23:19:52.529848+00:00</updated>
+  <author>
+    <name>Andrew Chow 2023-01-16 23:47:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_VAULT: a new vault proposal</title>
+    <updated>2023-05-22T23:19:52.529848+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-January/021350.html" rel="alternate"/>
+    <summary>An email thread between James O'Beirne and Andrew regarding a proposed vault design called OP_VAULT has been shared. James had been interested in vaults for some years as a way to derisk custodying Bitcoin. Covenant-enabling consensus functionality is necessary to provide the feature set required to make vault use practical. James experimented with using OP_CTV, a limited covenant mechanism to implement a "minimum-viable" vault design but found it wanting due to inherent limitations of a precomputed covenant scheme. James wanted to explore a middle way - a proposal that would deliver the safety benefits of vaults to users without getting hung up on trying to solve the general problem of covenants. The resulting proposal, OP_VAULT, is aimed at making the best vault use possible, with covenant functionality as a secondary consideration. The current construction makes it impossible to spend these vaults together as if there are multiple inputs with different recovery scripts, then the transaction will fail. Address reuse can be avoided by ensuring the unvault scripts are unique, and recovery scripts must be the same. However, this would leave an identifying mark on-chain for every unvault, which would be rather detrimental to user privacy. The implemented optional re-vault output explicitly requires address reuse, which breaks the batched unvaulting of scripts that have different unvault scripts. Andrew has a few issues regarding batching and privacy as OP_VAULT seems like it will encourage address reuse for vaults, at least in some parts. He suggests that each vault address should be unique through the use of key derivation, which could be produced from ranged descriptors. He thinks it would not be hard to have descriptors for vaults, which would then allow for usage of other descriptors and miniscript into the recovery and unvault scripts. Andrew also recommends limiting the usage of OP_VAULT and OP_UNVAULT to tapscripts only, which would simplify their implementation. James has written a paper summarizing his findings and a draft implementation, which is available on GitHub. He may work on a BIP if there is interest.</summary>
+    <published>2023-01-16T23:47:09+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Pay-to-Open and UX improvements</title>
+  <updated>2023-06-02T22:27:08.068171+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2019-12-18 10:14:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Pay-to-Open and UX improvements</title>
+    <updated>2023-06-02T22:27:08.068171+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-December/002394.html" rel="alternate"/>
+    <summary>The email conversation revolves around the modification of Tapscript's `OP_CHECKSIG` to prevent double-spending in off-chain protocols that do not require confirmation. Bastien proposed a solution that reads signatures as two 32-byte stack arguments, `R` first then `s`, instead of a single 64-byte stack argument. This modification leverages nonce reuse as a feature to prevent double-spending once a signature has been shared off-chain.To illustrate the use case, a service provider commits to the nonce they will use to spend the output. When they want to start using an off-chain protocol, the recipient can verify that the inputs have the correct format. If the service provider double-spends the inputs, they will be signing a different message with the same nonce, allowing the recipient to extract the private key and spend the UTXO to themselves. However, there were several issues raised during the discussion, such as difficulty recognizing spent UTXOs on-chain, inability to allow key-path spend but revoke this capability once the script has been revealed (off-chain), and difficulty using RBF on transactions that spend this kind of UTXO because it would reveal the private key. One proposal to address these issues suggested using Schnorr signatures, while another suggestion was to enforce that RBF is signalled for every spend of the output. Additionally, adding an output for CPFP could remedy the difficulty using RBF.Another email in the conversation proposes the use of `OP_CAT` to enforce a particular `R`, which would allow for the implementation of single-show signatures. The proposed code assumes that signatures are the concatenation of `(R,s)` and uses `OP_SWAP OP_CAT OP_CHECKSIG` to feed only `s` on the witness stack. Overall, Bastien's proposal has potential for many new use cases and could remove many pain points in Lightning. The email conversation took place on the Lightning-dev mailing list.</summary>
+    <published>2019-12-18T10:14:38+00:00</published>
+  </entry>
+</feed>

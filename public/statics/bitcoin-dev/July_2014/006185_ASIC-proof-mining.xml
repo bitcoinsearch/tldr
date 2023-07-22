@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>ASIC-proof mining</title>
+  <updated>2023-06-09T00:40:09.994972+00:00</updated>
+  <author>
+    <name>Alan Reiner 2014-07-04 10:53:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>ASIC-proof mining</title>
+    <updated>2023-06-09T00:40:09.994972+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-July/006185.html" rel="alternate"/>
+    <summary>Andy Parkins has suggested a way of protecting against ASCI mining by making the algorithm IO-bound rather than CPU-bound. In his idea, proof-of-work hash for a block would no longer be just "hash of block", which contains the hash of the parent block, but instead would be hash of "[NEW_BLOCK] [ALL_PREVIOUS_BLOCKS] [NEW_BLOCK]". The [ALL_PREVIOUS_BLOCKS] is 20GB and growing. By prefixing and suffixing the new block, every byte of the blockchain must be fed through the hashing engine. This makes it IO-bound rather than CPU-bound. Alan suggests that ROMix algorithm defined by Colin Percival can be used for this idea. It works by taking N sequential hashes and storing the results into a single N*32 byte lookup table. He suggests that something similar could be applied to Andy's idea. They can use the hash of a prevBlockHash||nonce as the starting point for 1,000,000 lookup operations. The output of the previous lookup is used to determine which block and tx (perhaps which chunk of 32 bytes within that tx) is used for the next lookup operation. This achieves what Andy is describing without actually requiring the full 20 GB of reading on ever hash.</summary>
+    <published>2014-07-04T10:53:47+00:00</published>
+  </entry>
+</feed>

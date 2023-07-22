@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+  <updated>2023-06-14T22:14:36.007546+00:00</updated>
+  <author>
+    <name>Antoine Riard 2021-06-10 21:45:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+    <updated>2023-06-14T22:14:36.007546+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-June/019053.html" rel="alternate"/>
+    <summary>Antoine and Lloyd exchange emails discussing different fee-bumping techniques for second-layer protocols. They compare input-based and CPFP fee-bumping techniques and their trade-offs in terms of onchain footprint, tx-relay bandwidth rebroadcast, batching opportunities, and mempool flexibility. While CPFP is a mature fee-bumping technique, it may not be suitable for contract protocols with distrusting counterparties as it can be leveraged as a pinning vector to downgrade odds of transaction confirmation.Input-based fee-bumping has been less studied as a primitive for L2s. One variant of input-based fee-bumping usable today is the leverage of the SIGHASH_ANYONECANPAY/SIGHASH_SINGLE malleability flags. However, input-based fee-bumping does not work to bump the first stages of contract transactions as it's destructive of the txid, and as such breaks the chain of pre-signed transactions.Lloyd proposes a new class of solutions called tx mutation schemes that use a key to increase the fee by lowering a particular output after the transaction is signed without invalidating the signature. The advantage of tx mutation schemes is that they do not require keeping extra inputs around to bump the fee. However, Antoine notes that the scheme relies on interactivity in the worst-case scenario where a counterparty wants to increase its fee-bumping output from the contract balance.Antoine further discusses how different fee-bumping techniques affect onchain footprint, tx-relay bandwidth rebroadcast, batching opportunities, and mempool flexibility. He concludes by hoping to unravel the ground for a real feerate performance framework of second-layers protocols.In another email exchange, Antoine discusses the potential benefits of future soft forks that would allow for significant onchain footprint savings, particularly in the case of batching. He also suggests that future package relay bandwidth efficiency should take into account the rebroadcast frequency of CPFPing multi-party protocols. Antoine proposes evaluating different package relay announcement schemes based on the odds of non-cooperative protocol broadcast and concurrent broadcast/rebroadcast frequencies. Links to relevant resources, including the revault architecture and a previous proposal, are provided.Antoine notes that in theory, an already-relayed transaction shouldn't pass Core's `filterInventoryKnown`. However, if the transaction is announced as part of a package_id, the child might have changed while the parent has not, leading to redundant relay of the latter.</summary>
+    <published>2021-06-10T21:45:04+00:00</published>
+  </entry>
+</feed>

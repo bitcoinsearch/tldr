@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>bloom filtering, privacy</title>
+  <updated>2023-06-09T17:31:01.090393+00:00</updated>
+  <author>
+    <name>Mike Hearn 2015-02-20 19:03:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>bloom filtering, privacy</title>
+    <updated>2023-06-09T17:31:01.090393+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-February/007513.html" rel="alternate"/>
+    <summary>The proposal is to have a scriptpubkey bitmap per block that users can request, allowing them to be SPV confident that they received a faithful one. If there are hits, they can request the block and be confident there was no censoring. However, there are potential issues with this proposal. Firstly, miners would need to upgrade to generate the per-block filters, and any block that doesn't have such a filter would still need to be downloaded in full. Secondly, if checking the filter isn't a consensus rule, any miner who builds a wrong filter breaks the entire SPV userbase. Thirdly, downloading full blocks is still a lot of data, which could be problematic for mobile users. Fourthly, header size is constant, but per-block filters wouldn't be, and even the null sync would download more data as the network got busier. Finally, there are concerns about privacy if a hit is detected in a block, as it would require downloading the entire block and potentially revealing transaction information to a remote node. The author suggests finding a solution that has O(1) scaling on sync, such as treating nodes as sources of UTXO data and shovelling the client (tx, existing merkle path) pairs keyed off script prefixes. This would provide the same security guarantees as Bloom filtering today but would create other problems to solve.</summary>
+    <published>2015-02-20T19:03:26+00:00</published>
+  </entry>
+</feed>

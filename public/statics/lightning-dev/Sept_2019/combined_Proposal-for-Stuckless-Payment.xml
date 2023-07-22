@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Proposal for Stuckless Payment</title>
+  <updated>2023-06-03T22:05:47.379428+00:00</updated>
+  <author>
+    <name>Hiroki Gondo 2019-06-27 09:45:13</name>
+  </author>
+  <author>
+    <name>Hiroki Gondo 2019-06-25 08:20:12</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-06-25 10:15:29</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2019-06-25 16:46:38</name>
+  </author>
+  <author>
+    <name>Hiroki Gondo 2019-09-18 10:08:03</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-09-18 10:30:57</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-06-26 03:19:39</name>
+  </author>
+  <link href="lightning-dev/June_2019/002049_Proposal-for-Stuckless-Payment.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002029_Proposal-for-Stuckless-Payment.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002030_Proposal-for-Stuckless-Payment.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002034_Proposal-for-Stuckless-Payment.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2019/002152_Proposal-for-Stuckless-Payment.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2019/002153_Proposal-for-Stuckless-Payment.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002039_Proposal-for-Stuckless-Payment.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Proposal for Stuckless Payment</title>
+    <updated>2023-06-03T22:05:47.379428+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-June/002049.html" rel="alternate"/>
+    <summary>The Lightning-Dev mailing list has been discussing a proposal to add an additional round of communication to avoid wormhole attacks and decorrelate payments. The proposal is designed to reduce the possibility of payments getting stuck, allowing both the payee and the payer to provide keys to settle payments without involving intermediate nodes. However, there are concerns about security and privacy issues in the proposal, particularly relating to the anonymity of the payer.One solution proposed involves creating an ACK onion packet during the setup phase, which is embedded inside the last hop payload of the add_htlc onion packet. This way, D doesn't learn anything about A, and intermediate nodes aren't included in the ACK route so they don't learn anything either. Hiroki Gondo believes that embedding the ACK packet inside the last hop payload of the add_htlc onion packet could be an improvement, and plans to understand more precisely the limitations of the onion packet and consider combining this proposal with AMP and new routing algorithms (Trampoline, Rendezvous).In addition, ZmnSCPxj suggests that the sums used for payment decorrelation will be sent in onion packets in a new phase called Pre-Settlement, but adding the ACK-key turnaround may allow intermediate nodes to guess the payer's distance. Despite these issues, it is believed that the added communication round may allow intermediate nodes to guess the payer's identity, but this information may not be significant enough to pose a problem in practice.Hiroki Gondo explains that the proposal for Stuckless Payments can be accomplished using HTLC variants that are not compatible with BOLT 1.x HTLCs, instead of waiting for PTLCs. This change helps support cross-currency swaps without premium-free American Call Option and non-custodial escrow. Both can also be served by using points. Finally, a potential solution to the "American Call Option" problem is discussed. The proposed solution involves the exchange requiring payment of the premium immediately, with the premium encumbered only by the exchange. The exchange can force a timeout on the premium payment or require payment before performing the swap. The payer and payee can still lock the exchange funds by not paying the option premium, but the exchange can permanently delete z if it is not paid. The payer can also send a cancel message instead of key in response to ACK if necessary.</summary>
+    <published>2019-06-27T09:45:13+00:00</published>
+  </entry>
+</feed>

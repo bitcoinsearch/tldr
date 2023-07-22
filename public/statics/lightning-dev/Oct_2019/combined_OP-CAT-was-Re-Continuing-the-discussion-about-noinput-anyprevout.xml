@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - OP_CAT was Re: Continuing the discussion about noinput / anyprevout</title>
+  <updated>2023-06-03T22:41:46.278041+00:00</updated>
+  <author>
+    <name>Ethan Heilman 2019-10-04 00:48:17</name>
+  </author>
+  <author>
+    <name>Peter Todd 2019-10-04 11:15:36</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-10-06 08:46:59</name>
+  </author>
+  <author>
+    <name>Jeremy 2019-10-04 05:02:14</name>
+  </author>
+  <author>
+    <name>Andrew Poelstra 2019-10-09 16:56:51</name>
+  </author>
+  <author>
+    <name>Jeremy 2019-10-04 18:40:53</name>
+  </author>
+  <author>
+    <name>Ethan Heilman 2019-10-03 15:05:52</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-10-04 07:00:13</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2019-10-06 07:02:52</name>
+  </author>
+  <author>
+    <name>Peter Todd 2019-10-06 09:12:21</name>
+  </author>
+  <author>
+    <name>Jeremy 2019-10-04 18:33:09</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-10-03 23:42:25</name>
+  </author>
+  <author>
+    <name>Peter Todd 2019-10-05 15:49:02</name>
+  </author>
+  <link href="lightning-dev/Oct_2019/002202_OP-CAT-was-Re-Continuing-the-discussion-about-noinput-anyprevout.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2019/002205_OP-CAT-was-Re-Continuing-the-discussion-about-noinput-anyprevout.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2019/002209_OP-CAT-was-Re-Continuing-the-discussion-about-noinput-anyprevout.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2019/002218_OP-CAT-was-Re-Continuing-the-discussion-about-noinput-anyprevout.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2019/002212_OP-CAT-was-Re-Continuing-the-discussion-about-noinput-anyprevout.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2019/002220_OP-CAT-was-Re-Continuing-the-discussion-about-noinput-anyprevout.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2019/002201_OP-CAT-was-Re-Continuing-the-discussion-about-noinput-anyprevout.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2019/002204_OP-CAT-was-Re-Continuing-the-discussion-about-noinput-anyprevout.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2019/002208_OP-CAT-was-Re-Continuing-the-discussion-about-noinput-anyprevout.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2019/002210_OP-CAT-was-Re-Continuing-the-discussion-about-noinput-anyprevout.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2019/002219_OP-CAT-was-Re-Continuing-the-discussion-about-noinput-anyprevout.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2019/002203_OP-CAT-was-Re-Continuing-the-discussion-about-noinput-anyprevout.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2019/002207_OP-CAT-was-Re-Continuing-the-discussion-about-noinput-anyprevout.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - OP_CAT was Re: Continuing the discussion about noinput / anyprevout</title>
+    <updated>2023-06-03T22:41:46.279038+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-October/002202.html" rel="alternate"/>
+    <summary>The email exchanges among members of the Bitcoin community revolve around proposals for new opcodes and improvements to existing ones. One proposal is to enable OP_CAT, which allows concatenation of stack values, potentially leading to smaller transaction sizes and enabling new protocols on Bitcoin. However, challenges exist with Merkle trees and determining if a hash is a subnode or leaf transaction. Another proposal is to replace OP_CAT with OP_SHA256STREAM, which uses the streaming properties of SHA256 to allow concatenation of an unlimited amount of data that can only be hashed. However, this raises security concerns with exposing raw SHA256 midstates.ZmnSCPxj suggests implementing tagged SHA256 as a new opcode instead, while Ethan prefers increasing the size of inputs to OP_CAT. Additionally, ZmnSCPxj proposes a radical idea to remove SIGHASH flags from signatures and put them on public keys instead, using a new opcode called OP_SETPUBKEYSIGHASH. The proposal includes adding a byte to public keys to select the sighash algorithm, allowing particular SIGHASH. This solution removes problems associated with SIGHASH_NONE and SIGHASH_SINGLE and retains the old feature where the sighash is selected at time-of-spending rather than time-of-payment.There is also discussion about the potential advantages and limitations of different options for constructing midstate in scripts and the use of OP_SHA256STREAM compared to OP_CAT. While theoretically OP_SHASTREAM is less efficient than OP_CAT, it may be more advantageous in cases where memory areas used for data cannot be resized. Limiting the maximum output of OP_CAT to 64 bytes is not suitable for building Merkle trees due to issues with lack of typechecking.The email thread on the Lightning-dev mailing list discusses two main topics. The first topic is about protocols that could benefit from OP_CAT and whether there exists a scriptless counterpart. The second topic is the proposed solution for the malleability issue that affects Bitcoin transactions. ZmnSCPxj proposes using the script "OP_SETPUBKEYSIGHASH OP_CHECKSIG" to allow selecting the SIGHASH flag at time-of-signing while still committing to the SIGHASH it was created for.Public keys will not have an attached SIGHASH byte by default, implying SIGHASH_ALL and disallowing non-SIGHASH_ALL.In a discussion on the Lightning-dev mailing list, several members proposed various solutions to improve the concatenation of data while hashing it. Furthermore, ZmnSCPxj proposed removing `SIGHASH` from signatures and putting them on public keys instead. To achieve this, ZmnSCPxj suggested the addition of a new opcode called OP_SETPUBKEYSIGHASH. If the sighash byte is set to 0x00, the result is a 33-byte public key, implying SIGHASH_ALL. By default, public keys will not have an attached SIGHASH byte, disallowing non-SIGHASH_ALL options unless specifically allowed in the output script.In a recent email thread, ZmnSCPxj has discussed the importance of `OP_CAT` and how it could be used to make TumbleBit transactions smaller. However, the current limitation is that stack values cannot be concatenated in Bitcoin. He suggests enabling `OP_CAT` with a change that limits the size of each concatenated value to 64 bytes or less since this size is most suited for building Merkle trees. ZmnSCPxj also proposed a radical idea regarding `SIGHASH` flags attached to signatures, suggesting they are a misdesign and should be removed. Instead, he proposes putting `SIGHASH` on public keys. Public keys would be encoded as either 33-bytes (implicit `SIGHASH_ALL`) or 34-bytes (`SIGHASH` byte, followed by pubkey type, followed by pubkey coordinate).In an email exchange on October 4, 2019, Jeremy questioned the weakness of midstate attacks on a script under user control. He suggested that using a correctly constructed midstate such as hashing all elements on the stack and comparing to a known hash could prevent such attacks. However, Peter Todd raised the question of the actual advantage over using OP_CAT. Given the size limit for OP_CAT output is comparable to SHA256STREAM, it may be just as easy to use OP_CAT followed by a single OP_SHA256. The email exchange was part of a discussion on petertodd.org.</summary>
+    <published>2019-10-04T00:48:17+00:00</published>
+  </entry>
+</feed>

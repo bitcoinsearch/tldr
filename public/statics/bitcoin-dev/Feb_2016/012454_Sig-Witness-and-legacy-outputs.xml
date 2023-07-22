@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Sig-Witness and legacy outputs</title>
+  <updated>2023-06-11T04:04:15.240503+00:00</updated>
+  <author>
+    <name>Tier Nolan 2016-02-18 16:14:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Sig-Witness and legacy outputs</title>
+    <updated>2023-06-11T04:04:15.240503+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-February/012454.html" rel="alternate"/>
+    <summary>In a bip written by TierNolan, the idea of extended transaction information was introduced. This included the scriptPubKey being spent along with transactions, making it easier to verify transactions locally. The extended transaction would contain the current transaction and the CTxOuts that are being spent. Each entry in the UTXO set could store UTXO_hash = hash(txid_parent | n | CTxOut). Witness transactions could include the CTxOut for each input that isn't a segregated witness output as part of the witness data. There was also a suggestion at one of the conferences to have the witness data include info about the block height/index of the output that each input is spending. By implementing this change, nodes would only need to store the UTXO_hashes for each UTXO value in the database, making it more efficient. It would also make it easier to create a simple consensus library where the library would return the UTXO_hashes that are spent, the UTXO_hashes that are created, the fee, sigops, and anything that needs to be summed when given the transaction and the witness.Validating a block would mostly involve validating the transactions in the block and adding up the totals. Including the info with transactions saves each node from having to include a lookup table to find the data.</summary>
+    <published>2016-02-18T16:14:19+00:00</published>
+  </entry>
+</feed>

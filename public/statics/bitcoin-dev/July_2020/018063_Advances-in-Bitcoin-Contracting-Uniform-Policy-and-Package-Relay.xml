@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Advances in Bitcoin Contracting : Uniform Policy and Package Relay</title>
+  <updated>2023-06-14T03:09:53.160074+00:00</updated>
+  <author>
+    <name>Antoine Riard 2020-07-29 20:17:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Advances in Bitcoin Contracting : Uniform Policy and Package Relay</title>
+    <updated>2023-06-14T03:09:53.160074+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-July/018063.html" rel="alternate"/>
+    <summary>The security and operation of higher-layer protocols such as vaults, LN, CoinJoin, and watchtowers have different demands and assumptions regarding tx-relay and fee models. Lightning, which is the most deployed time-sensitive protocol currently, relies on timely confirmations of some of its transactions to enforce its security model. This is achieved by propagating well-transactions across the network to quickly hit miner mempools and offering a competitive feerate to get in next coming blocks. However, updating feerate just-in-time can be challenging for LN, and the only option is a CPFP due to current constraints of maintaining a trustless chain of transactions. Effective transaction propagation and uniform relay policy are crucial for the laid-out security model. Compliance with consensus rules and policy rules determines the effectiveness of transaction propagation across the p2p network. These policy rules govern different aspects of transactions like size, output type, feerate, ancestors/descendants, etc. and are introduced to sanitize the p2p network against a wide scope of resource abuses.Heterogeneity in these rules across implementations/versions can be problematic for higher protocols since it can silently break the security of channels if your LN's full-node is connected to tx-relay peers with more constraining policies than yours. To address this issue, there is a need to identify and document the subset of policy rules on which upper layers have to rely on to enforce their security model and guarantee backward-compatibility of those rules. Committing to a uniform policy would incentivize upper layer devs to rely on such stable APIs, and full-node operators would follow such uniform policy to improve effective feerate discovery by their mempools.Adversarial fee bumping and package relay also pose a problem for transaction propagation and uniform relay policy. A low-feerate parent can be rejected while a high-feerate child might have to follow few microseconds later, which can lead to false fee estimator for network nodes and failure of feerate bump for CPFP users. To solve this, it may be necessary to deploy a package relay, which is part of the uniform policy laid out above, thus providing a censorship-resistant, reliable highway across the p2p network to always increase the feerate of blockspace bids.In conclusion, upper layers of the Bitcoin stack require that single full-nodes behave in a homogeneous way such that the base network as a whole system provides a trustworthy propagation/fee bumping API.</summary>
+    <published>2020-07-29T20:17:11+00:00</published>
+  </entry>
+</feed>

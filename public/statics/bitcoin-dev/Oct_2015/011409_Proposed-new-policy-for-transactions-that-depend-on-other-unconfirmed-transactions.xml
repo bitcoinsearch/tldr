@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposed new policy for transactions that depend on other unconfirmed transactions</title>
+  <updated>2023-06-10T19:33:38.486852+00:00</updated>
+  <author>
+    <name>Alex Morcos 2015-10-05 20:02:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposed new policy for transactions that depend on other unconfirmed transactions</title>
+    <updated>2023-06-10T19:33:38.486852+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-October/011409.html" rel="alternate"/>
+    <summary>The proposed policy limits on unconfirmed transaction chains in Bitcoin Core were reduced due to the primary vector for mempool clogging or relay fee boosting attacks being large packages of unconfirmed transactions. The existing limits in master and scheduled for release in 0.12 are Ancestor packages = 100 txs and 900kb total size, while Descendant packages = 1000 txs and 2500kb total size. The proposed new limits are Ancestor packages = 25 txs and 100kb total size, while Descendant packages = 25 txs and 100kb total size. These limits are command line arguments that can easily be changed on an individual node basis in Bitcoin Core. However, these are policy limits that affect transactions which depend on other unconfirmed transactions only, and they do not affect how many chained transactions a valid block may contain. Any transaction that was unable to be relayed due to these limits need only wait for some of its unconfirmed ancestors to be included in a block and then it could be successfully broadcast. This is unlikely to affect the total time from creation to inclusion in a block. Finally, based on historical transaction data, the most restrictive of these limits is the 25 transaction count on descendant packages. Over the period of April and May of this year (before stress tests), 5.8% of transactions would have violated this limit alone. Applying all the limits together would have affected 6.1% of transactions.</summary>
+    <published>2015-10-05T20:02:40+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Onion routing design.</title>
+  <updated>2023-05-23T20:12:12.404461+00:00</updated>
+  <author>
+    <name>Rusty Russell 2015-09-20 20:48:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Onion routing design.</title>
+    <updated>2023-05-23T20:12:12.404461+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-September/000196.html" rel="alternate"/>
+    <summary>In a thread on the Lightning Network mailing list, Rusty Russell discussed a weakness in the network's security regarding route probing attacks. The problem is that there is no MAC to protect against nosy nodes replacing the routing past the next hop. This means that someone could replace it entirely and probe by guessing the final destination right. Russell says he can't see a general fix for this. Channel capacity might not be an issue for tiny micropayments, but the reveal of R is a good point; such probing should have a real cost on success. Russell believes that parallel probes don't work well because if any of your probes succeed, your neighbor knows R and can claim all of your probes. Parallelization is also limited by channel capacity unless the payee knows how much to expect. If someone wants to know whether you're sending money to someone else, they could get a cheap hub near both parties and probe every payment which passes through both. However, Russell thinks that this type of surveillance is fairly boutique and doesn't scale. For a general solution to rule out probing, Russell suggests having two R values, one known only by the recipient and one by the sender, making the HTLCs payable on presentation of both R and S and including S encrypted to the final recipient in the onion payload. Munging the payload then makes the HTLC irredeemable so misrouting it gives no information. He thinks it is clever and would require more coffee to determine if the transaction structure needs revision to include this.</summary>
+    <published>2015-09-20T20:48:37+00:00</published>
+  </entry>
+</feed>

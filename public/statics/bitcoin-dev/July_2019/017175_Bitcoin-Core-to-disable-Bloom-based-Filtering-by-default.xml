@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Bitcoin Core to disable Bloom-based Filtering by default</title>
+  <updated>2023-05-20T20:40:50.729960+00:00</updated>
+  <author>
+    <name>Matt Corallo 2019-07-27 16:10:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Bitcoin Core to disable Bloom-based Filtering by default</title>
+    <updated>2023-05-20T20:40:50.729960+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-July/017175.html" rel="alternate"/>
+    <summary>The conversation is about the NODE_BLOOM peers and BIP 37 wallets. The defaults change to serve BIP 37 peers doesn't suggest removing the code while people still want to use them. Historical upgrade cycles indicate that a large number of nodes will serve NODE_BLOOM for many years. If you need them, run a node or two as long as no one is exploiting the issues with them, such a node isn't too expensive. Even though BIP 137 is a replacement in some cases, it is not in others. It is an important DoS fix for the average node, and there is an argument that it is going to break existing BIP 37 wallets.BIP 158 causes more traffic than BIP 37, but it provides the ability to filter blocks without depending on serving peers who may compromise your financial privacy. Also, if you keep the filters, further rescans consume the same or less bandwidth than BF BIP 37. Peer operators may not be endlessly willing to serve a CPU/disk intense service with no benefits for the network. Moreover, BIP 158 won't allow you to filter the mempool, but as soon as you are connected to the network, you may fetch tx with inv/getdata and pick out the relevant ones. A hardcoded filter for wallets with many addresses will be too blurry, and thus each block will be matched, forcing wallets that follow the "one address per incoming payment" pattern (e.g., HD wallets) at some point to wrap their key chains back to the beginning.Lastly, block-filters will likely be useful for other features, like load/rescan an [old] wallet on a prune peer that has the filters constructed. There is no clear answer as to which is better, Node_bloom peers or BIP 37 wallets, and developers should be more honest and transparent to users about the implications of the used filtering and give them choices. Full node hardware appliances that run at home (or in a trusted environment) are solving many of these issues, plus adding a bunch of great features if done right.</summary>
+    <published>2019-07-27T16:10:03+00:00</published>
+  </entry>
+</feed>

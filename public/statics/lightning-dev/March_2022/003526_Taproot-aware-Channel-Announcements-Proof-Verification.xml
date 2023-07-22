@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Taproot-aware Channel Announcements + Proof Verification</title>
+  <updated>2023-05-23T17:19:38.412396+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-03-23 01:10:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Taproot-aware Channel Announcements + Proof Verification</title>
+    <updated>2023-05-23T17:19:38.412396+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-March/003526.html" rel="alternate"/>
+    <summary>The Lightning Network (LND) has integrated Taproot into its codebase, which is scheduled to ship in version 0.15 around April. However, since Taproot means a different on-chain funding output, the existing gossip layer needs modification because the BOLTs don't define how to validate a given output as a Taproot channel. Discussions during prior spec meetings have centered on two possible paths: 1) redesigning the channel validation portion of the gossip layer, or 2) going with a more minimal mostly the same channel_announcement-like message for Taproot channels.Laolu Osuntokun, a developer at Lightning Labs, explores the second option in detail in this email. A new Taproot-aware `channel_announcement2` message could be a simple message that would include signature, length information, features, chain hash, short channel ID, node IDs, and Bitcoin keys. While adding an optional merkle proof to make channel validation more feasible for constrained/mobile clients may increase the size of the message, it may also enable more elaborate unlocking/multi-sig functionality for the normal funding output. To maintain the same level of binding for on-chain output validation, nodes would need to reconstruct the aggregated Bitcoin public key, which would ensure that there's no actual committed script root that binds the output to their context further. The `announcement_signatures` message would also need to change, as only a single signature across the wire would be sent: the musig2 partial signature. To generate these signatures, both sides would need to exchange their public nonce, which can be piggybacked on top of the existing funding message flow. Overall, Laolu Osuntokun outlines a mostly mechanical mapping of Taproot awareness to the existing gossip message flow that doesn't deviate too much from the current flow, making it easier to deploy.</summary>
+    <published>2022-03-23T01:10:00+00:00</published>
+  </entry>
+</feed>

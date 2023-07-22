@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 68 (Relative Locktime) bug</title>
+  <updated>2023-06-10T02:09:58.535799+00:00</updated>
+  <author>
+    <name>Tom Harding 2015-07-05 19:50:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 68 (Relative Locktime) bug</title>
+    <updated>2023-06-10T02:09:58.535799+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-July/009350.html" rel="alternate"/>
+    <summary>On the Bitcoin-dev mailing list, Tom Harding proposed a fix to the dual effect of nSequence in BIP 68 that prevents a transaction from having an effective nLocktime without also requiring at least one of its inputs to be mined ahead of its parent. The solution involves shifting the semantics so that nSequence = MAX_INT - 1 specifies 0 relative locktime, rather than 1. This would avoid the inversion and put relative locktimes outside the realm of both the MAX_INT and MAX_INT - 1 values. Additionally, it would allow an explicit relative locktime of 0, which would help applications avoid accidentally finalizing the whole transaction when they only meant to not impose a relative locktime on one input. Mark Friedenbach suggested that Bitcoin Core post-0.11 switch to using 0 in the sequence number field instead of MAX_INT - 1 for cases where an effective nLocktime is desired without requiring at least one input to be mined ahead of its parent.</summary>
+    <published>2015-07-05T19:50:59+00:00</published>
+  </entry>
+</feed>

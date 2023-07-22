@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Signature bundles</title>
+  <updated>2023-05-20T05:24:57.787776+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-04-02 23:46:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Signature bundles</title>
+    <updated>2023-05-20T05:24:57.787776+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-April/015862.html" rel="alternate"/>
+    <summary>A proposal for a more flexible alternative to SIGHASH_SINGLE|SIGHASH_ANYONECANPAY has been put forward, which includes two bits: SIGHASH_BUNDLESTART/SIGHASH_INBUNDLE. The proposed signature would indicate that it only signs part of a transaction's inputs and outputs (a "bundle"), which can be combined with other bundles into larger transactions, and non-bundled signature inputs/outputs appended. Two per-tx counters are kept to track bundle_inputs_used and bundle_outputs_used, both starting at 0. SIGHASH_BUNDLESTART indicates the number of inputs in this bundle and the number of outputs, while SIGHASH_INBUNDLE indicates that the signature applies to the current bundle.Users can sign a transaction just like before, but with two extra bytes and these SIGHASH flags. Transactions can now be aggregated by pasting on another bundle or attaching other normal inputs/outputs. This approach could be useful when trying to guess future fees for commitment transactions since we cannot rely on getting another signature from our counterparty to increase fees. It also allows public aggregators to provide throughput promises and sometimes add additional fees. The proposed BIP would detail how any weird stuff makes the transaction invalid. Feedback is welcome on this proposal by Rusty.</summary>
+    <published>2018-04-02T23:46:45+00:00</published>
+  </entry>
+</feed>

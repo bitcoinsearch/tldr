@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>On mempool policy consistency</title>
+  <updated>2023-06-16T02:22:58.965971+00:00</updated>
+  <author>
+    <name>Greg Sanders 2022-10-27 17:44:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>On mempool policy consistency</title>
+    <updated>2023-06-16T02:22:58.965971+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021126.html" rel="alternate"/>
+    <summary>The discussion revolves around the potential for a double-spend attack on joint-funded transactions, such as coinjoins, dual funding, and DLCs. The concern is that if one of the parties involved in the transaction double-spends their input, it could cause problems for the other parties, even if they have opted-in to replace-by-fee (RBF) signaling. The example given involves three parties: A, B, and C, who create a transaction with inputs A1, B1, and C1. A then spams the network with an alternative transaction, double-spending her input A1, which can effectively pin any attempt to replace it, causing problems for B and C. While opt-in RBF provides some protection against double-spends, it may not be enough to prevent a denial-of-service (DoS) attack. However, blame rounds can be used to kick out the griefer in the case of coinjoins. Properly replacing rule#3 would give these protocols higher assurances, but this is where we're at now. The author argues that this scenario is not a real example of a DoS vector that is available because non-RBF signaling transactions are still supported. The double-spend attack could be low-feerate and large, so it effectively pins any attempt to replace it or it could be higher feerate, and confirm, forcing B/C to start all over. Another possible scenario is A stalling things in the signing phase, and B/C having to figure out when to give up on the channel with A. The author finds this example unconvincing and asks if there are any other examples where having a non-replacement policy for some transactions causes problems for protocols people are trying to build.</summary>
+    <published>2022-10-27T17:44:43+00:00</published>
+  </entry>
+</feed>

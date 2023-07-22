@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Gossip Propagation, Anti-spam, and Set Reconciliation</title>
+  <updated>2023-06-03T08:23:06.000770+00:00</updated>
+  <author>
+    <name>Greg Sanders 2022-04-21 13:20:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Gossip Propagation, Anti-spam, and Set Reconciliation</title>
+    <updated>2023-06-03T08:23:06.000770+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-April/003557.html" rel="alternate"/>
+    <summary>On the Lightning Development mailing list, Alex Myers proposed using set reconciliation as a method to reduce bandwidth and redundancy of gossip message propagation. The proposal is that each node builds a sketch representing its own gossip set, encodes it, and transmits it to another node. The recipient merges it with their own sketch and produces differences that should ideally be exactly the latest missing gossip of both nodes. Due to size constraints, the set differences will necessarily be encoded, but Bob’s node will be able to identify which gossip Alice is missing and transmit only those messages. However, each node and Lightning implementation may have its own rules for gossip acceptance and propagation, and depending on their gossip partners, not all gossip may propagate to the entire network. Core-lightning implements rate limiting for incoming channel updates and node announcements, with a default rate limit of 1 per day and a burst of 4. Of all publicly broadcasting half-channels analyzed over a 14-day period, 18% of them fell afoul of spam-limiting rules at least once. Well-connected nodes may be more susceptible to this due to more frequent routing attempts, and failures resulting in a returned channel update. A slight relaxation of the rate limit resolves the majority of these cases. A smaller subset of channels broadcast frequent channel updates with minor adjustments to htlc_maximum_msat and fee_proportional_millionths parameters. These nodes appear to be power users, with many channels and large balances, and automated channel management at work. Core-Lightning has updated rate limiting in the upcoming release to achieve a higher acceptance of incoming gossip. However, a broader discussion of rate limits may now be worthwhile, including a common listing of current default rate limits across lightning network implementations, internal checks of RPC input to limit or warn of network propagation issues if certain rates are exceeded, and a commonly adopted rate-limit standard.Myers aims to create a set reconciliation gossip type that will use a common, simple heuristic to accept or reject a gossip message. This solution allows tighter consensus but suffers from the same problem as original anti-spam measures – it remains somewhat arbitrary. Myers would like to start a conversation regarding gossip propagation, channel_update and node_announcement usage, and perhaps even bandwidth goals for syncing gossip in the future (how about a million channels?). This would aid in the development of gossip set reconciliation but could also benefit current node connection and routing reliability more generally.</summary>
+    <published>2022-04-21T13:20:58+00:00</published>
+  </entry>
+</feed>

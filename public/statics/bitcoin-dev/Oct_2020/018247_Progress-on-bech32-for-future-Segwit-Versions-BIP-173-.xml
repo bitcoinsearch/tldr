@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Progress on bech32 for future Segwit Versions (BIP-173)</title>
+  <updated>2023-06-14T16:05:44.885289+00:00</updated>
+  <author>
+    <name>Rusty Russell 2020-10-15 01:40:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Progress on bech32 for future Segwit Versions (BIP-173)</title>
+    <updated>2023-06-14T16:05:44.885289+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-October/018247.html" rel="alternate"/>
+    <summary>In a recent thread on the bitcoin-dev mailing list, Rusty Russell proposed an alternative to the length restrictions suggested by Russell in BIPs PR #945. He suggests using the checksum change based on the first byte, unless the first byte is 0. There are two proposals discussed in this thread: Length restrictions and Checksum change based on the first byte. Length restrictions propose that future segwits must be of specific lengths ranging from 10 to 40 bytes, it is backwards compatible for v1 etc., but restricts future segwit versions and may require new encoding. On the other hand, Checksum change based on the first byte is backwards incompatible for v1 etc. and weakens guarantees against typos in the first two data-part letters to 1 in a billion. Rusty prefers the second proposal as it forces upgrades since it breaks so clearly. The length extension bug means it's unwise to accept non-v0 addresses, and he thinks that anyone accepting v1 addresses today is going to become a liability once v1 addresses start being generated. However, he does not agree that the second option forces upgrades. It just creates another opt-in address format which would mean several years with every wallet having two or three address buttons. David A. Harding also agrees with the first proposal since widespread support for bech32 addresses took a lot of community effort to get. If they want to maximize safety, consensus should restrict v1 witness program size. Furthermore, deferring a hard decision is not useful unless we expect things to be easier in the future, and he thinks it only gets harder as time passes and user bases grow. However, he hopes that most software will have implemented length limits by the time they want to use segwit v2, so they won't need any additional consensus restrictions from then on forward.</summary>
+    <published>2020-10-15T01:40:30+00:00</published>
+  </entry>
+</feed>

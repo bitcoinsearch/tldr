@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Statechain implementations</title>
+  <updated>2023-06-14T00:20:36.938774+00:00</updated>
+  <author>
+    <name>Albert 2020-03-26 03:55:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Statechain implementations</title>
+    <updated>2023-06-14T00:20:36.938774+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-March/017718.html" rel="alternate"/>
+    <summary>A team is working on implementing the statechains concept, which aims to enable the change of ownership of an individual position in a discreet log contract (DLC) without the need for an on-chain transaction and without requiring the cooperation of the counterparty. There are two main modifications under consideration: First, instead of using an eltoo-based backup/refund transaction, which enables the current owner to claim the UTXO if the statechain entity disappears, they propose using a decrementing nLocktime for backup transactions as the output changes hands. Second, they suggest replacing the 2-of-2 multisig output with a single P2(W)PKH output where the public key is shared between the SE and the current owner, who can then sign with a 2-of-2 ECDSA MPC. The latter approach involves a key generation process and a transfer protocol that can be repeated to transfer ownership to new owners. The team recognizes that the proposed protocol has information leakage in every iteration due to the scenario where one of the owners sends coins to itself. This implies knowledge of two random numbers sampled from a uniform distribution, x1*s1 and x2*s1, and once these numbers are obtained, they can be summed together to obtain s1*(x1+x2). With enough samples, the search space can be drastically reduced and brute force applied to guess the value of \sum x and s1. However, this attack might not work if the search space is still too large for brute force to be fruitful. To further minimize trust, the SE role could be run inside an AWS oracle or a hardware isolated processor such as SGX.Feedback on the proposed modifications would be appreciated.</summary>
+    <published>2020-03-26T03:55:50+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP30 and BIP34 interaction (was Re: [BIP Proposal] Buried Deployments)</title>
+  <updated>2023-06-11T20:37:19.585009+00:00</updated>
+  <author>
+    <name>Eric Voskuil 2016-11-17 17:49:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP30 and BIP34 interaction (was Re: [BIP Proposal] Buried Deployments)</title>
+    <updated>2023-06-11T20:37:19.585009+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-November/013314.html" rel="alternate"/>
+    <summary>The discussion is about the possibility of hash collisions in the Bitcoin protocol. The scenario discussed involves an attacker finding a valid transaction (tx2) which is not equal to another confirmed transaction (tx1), and has the same SHA256 hash as tx1. The attacker can replace tx1 with tx2 in block X, creating two different versions of UTXOs if the colliding tx is valid. In this case, anyone trying to download the blockchain from the beginning may end up with a different ledger, causing a consensus failure. Alternatively, the attacker can find an invalid transaction (tx3) with the same SHA256 hash as tx1 and replace tx1 with it in block X. This will permanently reject the hash of block X for anyone trying to download the blockchain from the beginning, resulting in a permanent fork.If a new valid block is created from an old one, it has the potential to cause a reorg. The blocks that previously built on the original are still able to do so but presumably cannot build forever on the *new* block as it has a different transaction. But other new blocks can. There is no chain split due to a different interpretation of valid; there are simply two valid competing chains. However, note that this scenario requires not only block and transaction validity with a transaction hash collision but also that the transaction be valid within the block. Creating a new invalid block results in its being discarded by everyone, but does not invalidate the hash of that block. Permanent blocking as described would be a peer-to-peer protocol design choice, having nothing to do with consensus. Libbitcoin, for example, does not ban invalidated hashes at all; it just discards the block and drops the peer. The discussion concludes that there is a need to fix the problem and that no hash algorithm can prevent hash collisions.</summary>
+    <published>2016-11-17T17:49:45+00:00</published>
+  </entry>
+</feed>

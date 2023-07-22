@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Protocol for multiple in-flight updates.</title>
+  <updated>2023-05-23T22:27:16.827321+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-02-02 01:18:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Protocol for multiple in-flight updates.</title>
+    <updated>2023-05-23T22:27:16.827321+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-February/000421.html" rel="alternate"/>
+    <summary>The context presents a strawman protocol that addresses the need for a more sophisticated approach to overlapping requests, particularly when pipelining requests. The protocol involves each side maintaining two sets of proposals, one for adding to their htlcs and another for removing from their htlcs. To add an HTLC, one sends a proposal, which can be declined or accepted. If accepted, it is added to the proposals. On the other hand, if one wants to close an HTLC, they send fulfill/timeout/fail, which cannot be declined, and add to their proposals.To simplify the protocol, one always tells the other side what the next revocation hash will be as part of finalizing a commit transaction. If there are no outstanding add requests, one can send commit messages, which include signature of current state, including proposals. If one receives commit_accept with signature and their old revocation preimage, it commits proposals and sends update_commit_complete with old revocation preimage. However, if it receives an update_commit message (conflict!), it commits proposals to the current state, re-sends update_commit with the current state plus proposals or commits proposals to the current state and sends update_commit_accept.Packets involved in the protocol include update_add_htlc, update_decline_htlc, update_accept_htlc, update_fulfill_htlc, update_timeout_htlc, update_fail_htlc, update_commit, update_commit_accept, and update_commit_complete. The author acknowledges that the protocol is complex and welcomes suggestions for improvement.</summary>
+    <published>2016-02-02T01:18:17+00:00</published>
+  </entry>
+</feed>

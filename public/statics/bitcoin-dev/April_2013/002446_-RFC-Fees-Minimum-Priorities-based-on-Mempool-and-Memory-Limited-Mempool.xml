@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>[RFC] Fees/Minimum Priorities based on Mempool and Memory-Limited Mempool</title>
+  <updated>2023-05-19T16:48:34.733958+00:00</updated>
+  <author>
+    <name>Matt Corallo 2013-04-24 21:09:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>[RFC] Fees/Minimum Priorities based on Mempool and Memory-Limited Mempool</title>
+    <updated>2023-05-19T16:48:34.733958+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002446.html" rel="alternate"/>
+    <summary>TheBlueMatt, a Bitcoin developer, recently posted his new minimum fee and priority calculator code on Github. He notes that the code is more of a discussion-starter than a strict proposal and welcomes comments from others. The algorithm calculates the minimum fee/priority by averaging out the highest FEE_POLICY_TOP_N_TX (10) transactions in the mempool that have been in there for at least FEE_POLICY_DETERMINATION_BLOCKS (6) blocks, then multiplies that average by FEE_POLICY_FACTOR (1.1).The code limits the size of the mempool to a default of 10*MAX_BLOCK_SIZE and keeps 2/9 of the mempool for the highest-prio transactions and 7/9 for the highest-fee transactions when it has to remove transactions due to limited space. Transactions with lower fees or priorities than the lowest-ranked transactions removed will not be accepted into the mempool at all.TheBlueMatt also acknowledges two obvious bugs in the code: it does not do anything for minimum fee/priority when it has not seen at least FEE_POLICY_TOP_N_TX (10) transactions in the mempool for at least FEE_POLICY_DETERMINATION_BLOCKS (6) blocks, and it relays all transactions until the mempool has filled up (or if the mempool never fills). The likely way to address the first bug is to look at previous blocks and find the lowest fee/prio transactions included in them. Matt suggests doing something initially to limit DoS potential for the second bug. Overall, this code aims to optimize transaction fees and prioritize higher fees and priorities while minimizing the impact on the mempool's size.</summary>
+    <published>2013-04-24T21:09:32+00:00</published>
+  </entry>
+</feed>

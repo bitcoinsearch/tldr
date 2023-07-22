@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Witness asymmetric payment channels</title>
+  <updated>2023-06-03T02:01:41.937057+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2020-08-25 11:39:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Witness asymmetric payment channels</title>
+    <updated>2023-06-03T02:01:41.937057+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-August/002785.html" rel="alternate"/>
+    <summary>This proposal presents a new channel construction for Lightning that uses witness asymmetry to identify the broadcasting party without assigning them different transactions. The proposed protocol retains the time-lock precedence of BOLT 3 transactions, where absolute time-locks are settled before relative time-locks to avoid having to account for relative time-locks when calculating absolute time-locks. All commitment transactions spend from the 2-of-2 on the Fund transaction and each represents a "state" of the channel. Before creating a commitment transaction, the parties must exchange two curve points each: a publication point whose secret is revealed if that party broadcasts the commitment transaction and a revocation point whose secret is explicitly revealed to the other party when revoking this commitment transaction.The article also discusses the application of Scriptless Scripts to Lightning channels. This idea was introduced in a 2018 paper by Andrew Poelstra and can be used to create more efficient and private Lightning channels without requiring on-chain transactions for every update. There are two types of outputs: balance outputs and PTLC (Pay-to-Lightning-Channel) outputs. For balance outputs, if Alice broadcasts a non-revoked commitment transaction, she waits for the relative time-lock and then broadcasts her claim transaction, while Bob owns the output. If Alice broadcasts a revoked commitment transaction, Bob must spend the output before Alice's relative time-locked claim transaction. For PTLC outputs, if Alice broadcasts a non-revoked commitment transaction which has a PTLC offered to Bob, Bob owns the output. If there is a PTLC timeout, Alice waits until the relative time lock expires and then broadcasts the claim transaction. Conversely, if Alice broadcasts a non-revoked commitment transaction which has a PTLC offered to herself, Alice owns the output. If there is a PTLC timeout, Bob owns the output. Finally, when Alice broadcasts a revoked commitment with a PTLC, either Alice manages to also confirm the PTLC-success or PTLC-timeout transactions, or Bob revokes the PTLC output in a transaction of his choosing.</summary>
+    <published>2020-08-25T11:39:11+00:00</published>
+  </entry>
+</feed>

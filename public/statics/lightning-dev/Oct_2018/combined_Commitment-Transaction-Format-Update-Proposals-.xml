@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Commitment Transaction Format Update Proposals?</title>
+  <updated>2023-05-25T14:33:49.248886+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-10-12 06:19:31</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2018-10-19 10:42:31</name>
+  </author>
+  <author>
+    <name>Conner Fromknecht 2018-10-20 16:12:00</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-11-06 06:03:19</name>
+  </author>
+  <author>
+    <name>Fabrice Drouin 2018-10-18 11:28:31</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2018-11-06 04:59:52</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-11-06 04:29:21</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2018-10-12 04:56:03</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2018-10-12 06:36:57</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-10-12 07:08:48</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2018-10-13 02:59:02</name>
+  </author>
+  <author>
+    <name>Jim Posen 2018-10-20 20:36:59</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2018-10-23 10:43:26</name>
+  </author>
+  <link href="lightning-dev/Oct_2018/001448_Commitment-Transaction-Format-Update-Proposals-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2018/001469_Commitment-Transaction-Format-Update-Proposals-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2018/001470_Commitment-Transaction-Format-Update-Proposals-.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001520_Commitment-Transaction-Format-Update-Proposals-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2018/001466_Commitment-Transaction-Format-Update-Proposals-.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001519_Commitment-Transaction-Format-Update-Proposals-.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001518_Commitment-Transaction-Format-Update-Proposals-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2018/001446_Commitment-Transaction-Format-Update-Proposals-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2018/001449_Commitment-Transaction-Format-Update-Proposals-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2018/001450_Commitment-Transaction-Format-Update-Proposals-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2018/001452_Commitment-Transaction-Format-Update-Proposals-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2018/001471_Commitment-Transaction-Format-Update-Proposals-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2018/001473_Commitment-Transaction-Format-Update-Proposals-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Commitment Transaction Format Update Proposals?</title>
+    <updated>2023-05-25T14:33:49.248886+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-October/001448.html" rel="alternate"/>
+    <summary>The Lightning-dev mailing list has been discussing proposals to simplify the channel backup and recovery workflow and avoid fee-related issues. One proposal suggested using an OP_TRUE-style output to allow Child Pays for Parent (CPFP), while another proposed modifying the HTLC sighashes to allow Bring Your Own Fees (B.Y.O.F.). However, both proposals require an available UTXO to make the CPFP, which may not always be possible.Another proposal suggested modifying the derivation for local+remote pubkey to simplify the backup+recovery workflow with the current commitment design, but not making unnecessary changes. Rusty Russell proposed several changes to the Lightning Network protocol, including using an OP_TRUE-style output for CPFP, HTLC-timeout and HTLC-success transactions signatures to be SIGHASH_ANYONECANPAY|SIGHASH_SINGLE, and a two-stage unhardened BIP-32 derivation based on the commitment number for `localpubkey`, `remotepubkey`, `local_htlcpubkey`, `remote_htlcpubkey`, `local_delayedpubkey`, and `remote_delayedpubkey`.Additionally, Rusty suggested that `to_self_delay` for both sides is now the maximum of either the `open_channel` or `accept_channel`. Furthermore, `to_remote` is now a P2WSH of `to_self_delay` OP_CSV OP_DROP  OP_CHECKSIG. He also agreed with Connor's suggestion that the CLTV timeout should be symmetrical to avoid trying to game the peer into closing.In a conversation between Jim Posen and Rusty, Jim suggests signing all inputs with ANYONECANPAY and expecting the sender to make an exact output for the fees input instead of leaving an extra output for Child Pays For Parent (CPFP). However, this would change the transaction ID which the HTLC transactions rely on. Regarding the symmetric delays, Jim is in favor of it because it simplifies game theory analysis, but he questions the need for both participants to have the same delay period (max of `to_self_delay` for both sides).Rusty explains that if the max is not taken, it brings back the game theory aspect where one participant may want the other to drop to chain due to a shorter delay period. Rusty also says that there is a fairness argument involved where if one participant wants the other to suffer a long delay, they should too. The Lightning Network is making changes to the commitment transaction format, including using an OP_TRUE-style output for CPFP, a BIP-32-style for remotepubkey and symmetrical CLTV timeout. These changes will be combined into a single `commitment_style2` feature instead of having a testing matrix of all these disabled and enabled. The feerate for commitment transactions will always be 253 satoshi/Sipa, and fees, OP_TRUE are always paid by the initial funder. HTLC-timeout and HTLC-success txs sigs will be SIGHASH_ANYONECANPAY|SIGHASH_SINGLE, and the derivation for localpubkey, remotepubkey, local_htlcpubkey, remote_htlcpubkey, local_delayedpubkey, and remote_delayedpubkey will now use a two-stage unhardened BIP-32 derivation based on the commitment number.</summary>
+    <published>2018-10-12T06:19:31+00:00</published>
+  </entry>
+</feed>

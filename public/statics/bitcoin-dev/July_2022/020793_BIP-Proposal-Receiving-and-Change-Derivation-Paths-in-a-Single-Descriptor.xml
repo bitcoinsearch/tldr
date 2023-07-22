@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP Proposal: Receiving and Change Derivation Paths in a Single Descriptor</title>
+  <updated>2023-05-22T20:48:28.024564+00:00</updated>
+  <author>
+    <name>Andrew Chow 2022-07-26 22:27:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP Proposal: Receiving and Change Derivation Paths in a Single Descriptor</title>
+    <updated>2023-05-22T20:48:28.024564+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-July/020793.html" rel="alternate"/>
+    <summary>Andrew Chow proposed a BIP (Bitcoin Improvement Proposal) that aims to simplify and de-duplicate how descriptors for receiving and change addresses are represented. Currently, two almost identical descriptors are required with the only difference being one derivation path element. Andrew's proposal allows for a single derivation path element that specifies a pair of indexes which can be expanded into two nearly identical descriptors with the first using the first index of the pair and the second using the second index. This notation also works for descriptors involving multiple keys; the first element in every pair is used for the first descriptor, and the second element of each pair in the second descriptor. The proposal uses tuples of two values, but Andrew sees potential for generalizing it to any sized tuples as long as they are all the same length and the limit is one tuple per key expression to avoid combinatorial blowup issues. Pavol Rusnak thanked Andrew for the BIP and asked if variable-length tuples would also work or if the proposal only supports tuples of exactly two values. The BIP is titled "Multipath Descriptor Key Expressions" and is an addition to the Key Expressions defined in BIP 380. The modification allows Key Expressions to indicate BIP 32 derivation path steps that can have multiple values. The common use case for this is to represent descriptors for producing receiving and change addresses, where wallets can use the first descriptor for producing receiving addresses and the second descriptor for producing change addresses. The full text of the BIP can be found at https://github.com/achow101/bips/blob/bip-multipath-descs/bip-multipath-descs.mediawiki and the implementation of it to Bitcoin Core is available at https://github.com/bitcoin/bitcoin/pull/22838. The BIP is currently in draft status and feedback is appreciated.</summary>
+    <published>2022-07-26T22:27:58+00:00</published>
+  </entry>
+</feed>

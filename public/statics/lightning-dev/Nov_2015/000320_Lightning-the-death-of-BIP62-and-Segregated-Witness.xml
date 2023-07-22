@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Lightning, the death of BIP62, and Segregated Witness</title>
+  <updated>2023-05-23T21:33:46.987592+00:00</updated>
+  <author>
+    <name>zaki at manian.org 2015-11-19 19:15:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Lightning, the death of BIP62, and Segregated Witness</title>
+    <updated>2023-05-23T21:33:46.987592+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000320.html" rel="alternate"/>
+    <summary>In the email thread, Tadge Dryja discusses the issues with BIP62 and how it addresses many vectors for txid malleability but does not help in the context of lightning channel creation due to the inherent malleability of ECDSA sigs. The needed functionality is the ability to reliably spend from unconfirmed transactions, which can be accomplished by segregated witness or sighash_noinput. Sighash_noinput can modify the spending transaction while leaving counterparty signatures intact as input txids are not signed. To test malleability mitigation out, Tadge aims to start a new "testnet-L" similar to testnet3 with this sighash type. Mark Friedenbach explains the basic idea of the soft-fork plan: have the scriptPubKey be just the 20-byte hash of the redeem script, and the scriptSig of the spending input is empty. The actual scriptSig, with the redeem script and signatures, is contained in a separate Merkle tree committed to elsewhere in the block. Meanwhile, Greg Sanders explains that the hardfork variant is quite simple as one can just stick the signatures in another parallel Merkle tree. Glenn Tarbox comments on the lack of information on Segregated Witness, but notes that it "apparently" can be done with a soft fork similar to P2SH, which is good news.</summary>
+    <published>2015-11-19T19:15:00+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>On the security of softforks</title>
+  <updated>2023-05-19T22:57:13.135116+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-12-18 06:12:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>On the security of softforks</title>
+    <updated>2023-05-19T22:57:13.135116+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-December/012021.html" rel="alternate"/>
+    <summary>The discussion revolves around a potential attack on the Bitcoin network after the activation of SegWit soft fork, where Mallory wants to defraud Bob with a 1 BTC payment for beer. The attack requires non-upgraded miners and nodes to accept an invalid SegWit transaction that pays into one of Mallory's wallets, which upgraded miners and nodes would reject. However, to be safe, the invalid SegWit transaction should look non-standard to non-upgraded nodes, and as such, they should refuse to mine it. The attack involves creating a segwit-invalid spend back to himself or directly to Bob, providing empty scriptSig but no witness data. The transaction will fail the AreInputsStandard() test on non-upgraded nodes and won't be accepted into the mempool or mined by non-upgraded nodes. If it is accepted by some old nodes, that transaction won't ever get many confirmations, and with only 5% of hash power, it will take around three hours for Carol and friends to find a block in general.In general, leaving standardness checks turned on (and waiting for six confirmations before accepting any non-standard transaction) should be enough to keep one safe from any attack a soft-fork might enable. Upgrading software regularly should also be enough to keep one safe for any soft-fork and hard-fork. The fact that segwit outputs are "anyone can spend" may mitigate this further; you could have a vigilante node that creates invalid segwit txns for every segwit output that just spends the entire thing to fees. Even if the vigilante's transactions get rejected by nodes who see Mallory's attempt first, that should still be enough to trigger any double-spend alerts.</summary>
+    <published>2015-12-18T06:12:23+00:00</published>
+  </entry>
+</feed>

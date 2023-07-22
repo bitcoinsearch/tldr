@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+  <updated>2023-05-22T16:41:37.953550+00:00</updated>
+  <author>
+    <name>Anthony Towns 2022-02-01 01:16:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+    <updated>2023-05-22T16:41:37.953550+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019845.html" rel="alternate"/>
+    <summary>The Bitcoin-dev mailing list recently hosted a discussion on the usefulness of various opcodes and proposals for Bitcoin Script. One developer proposed combining the TXHASH proposal with CAT and/or rolling SHA256 opcodes to allow users to assemble hashes from specific inputs and outputs into a single signed message. However, another developer argued that Bitcoin Script lacks higher-level language capabilities. The miniscript language was mentioned as an example of what is composable in Bitcoin Script today.The usefulness of CSFSV and CAT opcodes was also questioned, with some suggesting they may be more useful in theory than in practice. Finally, the question of whether TXHASH or CTV is a better opcode was discussed, with TXHASH being considered more flexible but possibly less useful in practice than CTV. There was a call for modesty in designing reusable components and simplifying transaction message algorithms.The discussion revolved around the commitments made by CTV (Check Template Verify) and ANYSCRIPT in terms of transactions. It is noted that CTV allows annex malleability as it neither commits to the annex nor forbids its inclusion. There is an issue of combining two UTXOs distributing 0.42 BTC to the same set of addresses via CTV and losing one to fees. SIGHASH_GROUP is proposed as an alternative that would commit to specific groups of outputs determined via the annex.SIGHASH_GROUP has two options: ALL/NONE/SINGLE/GROUP and -/ANYONECANPAY/ANYPREVOUT/ANYPREVOUTANYSCRIPT. The former option deals with which outputs are committed to, while the latter specifies all inputs committed to, specific input committed to, scriptpubkey/tapscript committed to, or just the nseq/annex/codesep_pos. It is suggested that there is no efficient way of doing SIGHASH_GROUP via tx introspection opcodes that doesn't introduce a quadratic hashing risk and would require extensive coding to let the signer choose how many outputs to commit to.Two alternative approaches are presented for CTV. The first approach suggests having a dedicated sighash type for CTV while the second proposes using ANYPREVOUTANYSCRIPT|GROUP for CTV, which means also implementing annex parsing and better RBF behaviour to prevent excessive vulnerability to pinning. The disadvantage of the second approach is that you can't rely on stable txids when looking for CTV spends and have to continue using APO/APOAS when chaining signatures on top of unconfirmed CTV outputs.The discussion includes links to relevant resources for further reading. Overall, there was a call for modesty in designing reusable components and simplifying transaction message algorithms.</summary>
+    <published>2022-02-01T01:16:39+00:00</published>
+  </entry>
+</feed>

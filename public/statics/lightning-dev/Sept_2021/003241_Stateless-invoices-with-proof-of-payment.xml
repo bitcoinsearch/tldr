@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Stateless invoices with proof-of-payment</title>
+  <updated>2023-06-03T05:56:12.650104+00:00</updated>
+  <author>
+    <name>fiatjaf 2021-09-21 12:03:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Stateless invoices with proof-of-payment</title>
+    <updated>2023-06-03T05:56:12.650104+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-September/003241.html" rel="alternate"/>
+    <summary>The Lightning Network has been praised for its ability to provide light-weight, no-login payments with minimal friction. However, there is a problem with this setup as it needs protection against unbounded generation of payment requests. Joost Jager suggests a solution in the form of stateless invoices. The idea is that a lightning invoice is only generated and stored nowhere on the recipient side. When the payment arrives at the recipient though, two problems arise.Firstly, the recipient doesn't know whom or what the payment is for. This can be solved by attaching additional custom tlv records to the htlc. An alternative is to use the existing invoice description field and simply always pass that along with the htlc as a custom tlv record. A second alternative that already works today is to use part (for example 16 out of 32 bytes) of the payment_secret (aka payment address) to encode the order details in. Secondly, the recipient doesn't know the preimage that is needed to settle the htlc(s). One option is to use a keysend payment or AMP payment. In that case, the sender includes the preimage with the htlc. Unfortunately, this doesn't provide the sender with proof of payment that they'd get with a regular lightning payment. An alternative solution is to use a deterministic preimage based on a (recipient node key-derived) secret, the payment secret, and other relevant properties. Joost Jager has implemented such a scheme on @lntxbot, but it required low-level code in a c-lightning plugin and a hack with route hints. If node implementations could provide such a thing, it would reduce database requirements and improve the lives of application developers. To Joost Jager, it seems that stateless invoices can be a relatively simple way to improve the resiliency of systems that deal with lightning invoices. Unlimited amounts of invoices can be generated without worrying about storage or memory, no matter if the requests are due to popularity of a service or a deliberate dos attack.</summary>
+    <published>2021-09-21T12:03:44+00:00</published>
+  </entry>
+</feed>

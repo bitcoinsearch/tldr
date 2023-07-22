@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Take 2: Removing the Dust Limit</title>
+  <updated>2023-06-03T06:48:06.563778+00:00</updated>
+  <author>
+    <name>Ruben Somsen 2021-12-08 10:46:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Take 2: Removing the Dust Limit</title>
+    <updated>2023-06-03T06:48:06.563778+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003388.html" rel="alternate"/>
+    <summary>Jeremy proposed a carve-out rule to allow 0 value outputs but require that they be used as Intermediate Outputs, i.e., the output must be spent by another tx in order for the transaction creating it to be in the mempool. This policy would also require the parent to have a higher feerate after CPFP'ing the parent than the parent alone, which would allow 0 value outputs to be used for Anchor Outputs and not get eltoo/Decker channels pinned by junk witness data using Anchor Inputs and not get channels drained by at-dust outputs. The policy would prevent 0-value utxos from proliferating long and still be valid for a 0 value that somehow gets created to be spent by the fee paying txn later. The policy presupposes a fully working package relay system. Ruben pointed out that the 0 sat output could still enter the UTXO set under certain rules, but it needs to provably be the only spendable output. Having a relative timelock on the other outputs would do the trick (and this happens to be true for spacechains), but that will only be provable if all script conditions are visible prior to spending time (ruling out p2sh and taproot, and conflicting with standardness rules for transactions). It's worth noting out that miners would get more fees if they evicted C1, so we must assume they will if the transaction ever reaches them. Finally, Bastien noted that lightning anchor outputs use a 330 sats amount, and each commitment transaction has two such outputs, and only one of them is spent to help the transaction get confirmed, so the other stays there and bloats the utxo set.</summary>
+    <published>2021-12-08T10:46:22+00:00</published>
+  </entry>
+</feed>

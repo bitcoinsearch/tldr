@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Forwarding hints in channel update messages</title>
+  <updated>2023-05-25T16:58:33.064659+00:00</updated>
+  <author>
+    <name>Joost Jager 2018-11-14 08:17:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Forwarding hints in channel update messages</title>
+    <updated>2023-05-25T16:58:33.064659+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001593.html" rel="alternate"/>
+    <summary>Joost proposes an idea for improving non-strict forwarding, which involves repurposing the `channel_update` message as a 'forwarding hint' in case of failed non-strict forwarding. When forwarding fails, the intermediate node would iterate over all its channels to the next hop and determine the 'best' channel to use from the sender's point of view based on a trade-off between minimum fee and time lock delta. The hinted policy of the best channel is then returned to the sender as a forwarding hint instead of the requested channel. This would give senders more certainty about the parameters that lead to successful forwarding and likely reduce payment attempts to complete the payment. However, Joost notes that senders should not blindly apply the new policy to a route as an intermediate node may try to maximize its earning by handing out 'expensive' forwarding hints. The sender should also be aware that if something changes at the intermediate node, the hint may not be valid anymore. To implement this proposal, no onion packet changes are required, and an intermediate node could advertise that it provides forwarding hints through a global feature bit, but that is optional.</summary>
+    <published>2018-11-14T08:17:14+00:00</published>
+  </entry>
+</feed>

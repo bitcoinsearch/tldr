@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+  <updated>2023-06-03T02:50:25.571471+00:00</updated>
+  <author>
+    <name>Rusty Russell 2021-05-04 05:03:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+    <updated>2023-06-03T02:50:25.571471+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-May/003032.html" rel="alternate"/>
+    <summary>In a recent exchange between Rusty Russell and Matt Corallo, they discussed the idea of a turn-taking protocol for splice transactions in Bitcoin. Corallo suggests that this would be less work than debugging based on logs and a new state machine. Russell argues that the proposal is a subset of the existing state machine. The proposal involves adding an "update_noop" message which requests your turn and has no other effects. If you want to send an update, you send it if it's your turn or wait for either a `yield`, or a different update if it's not your turn. If you receive an update when it's your turn you ignore it if you've already sent an update, otherwise, you send `yield`. Russell explains that with the simplified protocol, you can `update_splice` at any time instead of your normal update since both sides are already in sync. However, Corallo thinks both proposals are similar in logic. Corallo suggests deterministic throw out one slice to implement turn-based, but Russell believes that this is not the same as implementing turns. Russell points out that currently, you can have Alice propose a splice while Bob proposes at the same time, so we have a tiebreak protocol. You can also have Alice propose a splice while Bob proposes a different update which needs to be completely resolved before the splice can continue. In turn taking, when someone proposes a splice, that's what you're doing, as soon as it is received.</summary>
+    <published>2021-05-04T05:03:35+00:00</published>
+  </entry>
+</feed>

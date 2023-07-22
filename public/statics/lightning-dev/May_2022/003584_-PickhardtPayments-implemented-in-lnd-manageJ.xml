@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>#PickhardtPayments implemented in lnd-manageJ</title>
+  <updated>2023-06-03T08:43:11.994717+00:00</updated>
+  <author>
+    <name>Matt Corallo 2022-05-16 20:59:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>#PickhardtPayments implemented in lnd-manageJ</title>
+    <updated>2023-06-03T08:43:11.994717+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-May/003584.html" rel="alternate"/>
+    <summary>In a recent update of lnd-manageJ, basic support for PickhardtPayments has been included. PickhardtPayments is an approach to sending payments on the Lightning Network (LN) that splits large payments into smaller shards and uses the minimum-cost flow problem in computer science to find MPP routes. The algorithm is proven to be optimal and considers both liquidity information and routing costs to come up with reliable and cheap-ish MPPs. The implementation of PickhardtPayments in lnd-manageJ needs to ignore non-zero base fee channels to avoid extremely slow computations, and the code is highly experimental but shows promising results. There are two concepts that need disentangling: switching to a minimum-cost flow routing algorithm and scoring based on channel value and estimated available liquidity. For payments where MPP does not add much to success rate, dijkstra's with a liquidity/channel-size based scoring will give the exact same result. However, for high-value payments, taking a minimum-cost-flow algorithm becomes important. The current issue with sending payments through the LN is that it often fails, especially with larger amounts. Splitting payments into smaller shards helps, but the success probability drops exponentially with the number of channels included. Finding routes through the LN is tricky because the channels' liquidity is uncertain at the time of computing the routes, and a simple "trial and error" approach might take too long. PickhardtPayments takes into account liquidity information and can find routes that may be very long, have a surprising number of shards, or rather odd amounts. The algorithm also deals with shared segments without oversaturating them. The code in lnd-manageJ is highly experimental and complex, but it offers a start, and its creator invites people to discuss implementation details and help with upcoming benchmarks and experiments.</summary>
+    <published>2022-05-16T20:59:05+00:00</published>
+  </entry>
+</feed>

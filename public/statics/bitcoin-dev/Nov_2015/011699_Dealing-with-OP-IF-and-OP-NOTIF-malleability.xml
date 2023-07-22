@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Dealing with OP_IF and OP_NOTIF malleability</title>
+  <updated>2023-06-11T00:55:30.308861+00:00</updated>
+  <author>
+    <name>Oleg Andreev 2015-11-10 10:52:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Dealing with OP_IF and OP_NOTIF malleability</title>
+    <updated>2023-06-11T00:55:30.308861+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-November/011699.html" rel="alternate"/>
+    <summary>The discussion on bitcoin-dev mailing list revolves around the usage of OP_0 and OP_PUSH opcodes for pushing data. It is mentioned that OP_0 gives a zero-length byte array because it is equivalent to pushdata with zero length, which means that empty string is not equal to a single-byte string with 0x00 byte in it. Therefore, OP_EQUAL will push "false" as the result of comparison. This "false" value is encoded as an empty string, similar to the result of OP_0. The participants of the discussion suggest that OP_0 and OP_1 should be used to push data and not any other push opcodes. One of the participants suggests defining "IF/NOTIF argument must be either zero-length array or a single byte 0x01" explicitly as it contradicts the rule of minimally-encoded "zero". The concern is to avoid any potential mutation of the transaction by changing the length of the array.</summary>
+    <published>2015-11-10T10:52:46+00:00</published>
+  </entry>
+</feed>

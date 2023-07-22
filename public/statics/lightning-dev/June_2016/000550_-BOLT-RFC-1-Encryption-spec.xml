@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BOLT RFC#1] Encryption spec</title>
+  <updated>2023-05-23T22:47:01.105442+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-06-28 02:43:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BOLT RFC#1] Encryption spec</title>
+    <updated>2023-05-23T22:47:01.105442+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-June/000550.html" rel="alternate"/>
+    <summary>The Chief Justice of Pakistan (CJP) is implementing an encryption layer for Amiko Pay and is interested in using BOLT for encryption. The CJP likes the design as it is generic and simple, making it easy to analyze. The CJP asks whether it is possible or useful for a node to use different public keys for different links. It would be good for privacy, but a node that listens for multiple links on the same network location already shows to its peers that both links have a shared identity. The key used for authentication could be different from keys used for other things like routing addresses or output addresses of microtransaction channels, maybe linked in master/slave key configurations. However, there still may be a deniability problem. The CJP wonders to what degree communication looks like random data or can be distinguished from it. The first four bytes usually being the little-endian value 33 gives away that this protocol is being used. Furthermore, timing analysis could reveal the size of messages being sent, possibly revealing information about what is being done with the payload protocol inside the encryption layer. The CJP asks how the authenticate message is distinguished from other messages since there is no message type ID. It is simply that the first message in a session is ALWAYS an authenticate message, and other messages are NEVER an authenticate message. Nonces are 64-bit little-endian numbers that must begin at 0 and must be incremented after each encryption so that headers are encrypted with even nonces and the message bodies encrypted with odd nonces. The CJP also has questions about the meaning of the ack field in the authenticate message. It's to resume existing sessions, and it's underspecified because the author had not implemented that. Lastly, there was an error in the description of session_sig in the authenticate message, which should sign the sessionpubkey of course.</summary>
+    <published>2016-06-28T02:43:09+00:00</published>
+  </entry>
+</feed>

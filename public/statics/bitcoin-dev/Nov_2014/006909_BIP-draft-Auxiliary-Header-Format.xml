@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP draft - Auxiliary Header Format</title>
+  <updated>2023-06-09T14:13:24.217894+00:00</updated>
+  <author>
+    <name>Tier Nolan 2014-11-10 11:42:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP draft - Auxiliary Header Format</title>
+    <updated>2023-06-09T14:13:24.217894+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-November/006909.html" rel="alternate"/>
+    <summary>The proposed BIP is about adding auxiliary headers to Bitcoin in a bandwidth efficient manner. The overhead per auxiliary header is only around 104 bytes per header, which is much smaller than embedding the hash of the header in the coinbase of the block. It is a soft fork and uses the last transaction in the block to store the hash of the auxiliary header. The last transaction in the block has a less complex Merkle branch than the other transactions. However, there are some implementation challenges such as creating "seed" transactions, each node needing control over an UTXO to create the final transaction in the block that has the digest of the auxiliary header, and nodes being able to detect the special transactions and use them. There is also a tradeoff between overhead and delayed transactions. 12.5% of transactions may be delayed to the next block, which may or may not be acceptable. Adding padding transactions can be considered an improvement. The author suggests encoding the entire aux-header in the block by including the hash in the final transaction and the full aux-header in the 2nd last one, thereby reducing changes to block data storage since the aux-header doesn't have to be stored separately. A reference to another BIP could be sufficient for making use of the data by SPV clients. In response to initial comments, the author acknowledges the confusion regarding tying in protocol changes and agrees that separating p2p part from the committed data would make it easier to deploy.</summary>
+    <published>2014-11-10T11:42:17+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Segwit2x BIP</title>
+  <updated>2023-06-12T03:23:44.600761+00:00</updated>
+  <author>
+    <name>Sergio Demian Lerner 2017-07-13 03:10:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Segwit2x BIP</title>
+    <updated>2023-06-12T03:23:44.600761+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-July/014775.html" rel="alternate"/>
+    <summary>The proposal to limit the maximum transaction size has received mixed responses. While some believe that it may not be the best solution, others suggest viable soft-forking solutions such as reducing the maximum non-segwit checksigs per input or transaction or reducing the amount of data hashed by non-segwit checksigs. Regardless of the solution chosen, a soft-fork can be deployed in advance to reduce the exposure. The risk is still low as no one has exploited this vulnerability in the four years since it was reported. It should be noted that assuming the current transaction pattern is replicated in a 2 MB plain-sized block that is 100% filled with transactions, then the witness-serialized block would occupy 3.6 MB. However, in a worst-case scenario, the result could be 8 MB, which this document fails to mention. Segwit exacerbates this problem because each witness byte costs 1/4th of a non-witness byte, making the block bloat attack cheaper than before. The guilt lies more in Segwit discount factor than in the plain block size increase. The suggestion is to remove the discount factor altogether and add a fixed (40 bytes) discount for each input with respect to outputs (not for certain input types) to incentivize cleaning of the UTXO set. There is already an incentive to remove signatures from blocks to save disk space.A modified BIP91 can be deployed to activate Segwit, where the signal "segsignal" is replaced by "segwit2x." It is important to note that BIP-91 and the proposed solution are indistinguishable on the network because the string "segsignal" is merely a variable name used in the software. However, it must be redefined even if it's not a consensus change as it is exposed to the rpc mining interface (getblocktemplate).</summary>
+    <published>2017-07-13T03:10:55+00:00</published>
+  </entry>
+</feed>

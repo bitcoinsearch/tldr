@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Block Batch Filters for Light Clients</title>
+  <updated>2023-06-13T21:27:52.304757+00:00</updated>
+  <author>
+    <name>admin at bitaps.com 2019-09-24 13:36:26</name>
+  </author>
+  <author>
+    <name>admin at bitaps.com 2019-09-28 17:21:47</name>
+  </author>
+  <author>
+    <name>admin at bitaps.com 2019-09-24 13:36:26</name>
+  </author>
+  <author>
+    <name>Jonas Schnelli 2019-10-11 15:44:54</name>
+  </author>
+  <author>
+    <name>nopara73 2019-09-23 05:20:31</name>
+  </author>
+  <author>
+    <name>admin at bitaps.com 2019-09-19 17:20:13</name>
+  </author>
+  <author>
+    <name>Jonas Schnelli 2019-10-11 15:44:54</name>
+  </author>
+  <author>
+    <name>admin at bitaps.com 2019-09-19 17:20:13</name>
+  </author>
+  <author>
+    <name>Tamas Blummer 2019-09-21 21:16:25</name>
+  </author>
+  <author>
+    <name>admin at bitaps.com 2019-09-28 17:21:47</name>
+  </author>
+  <author>
+    <name>Jonas Schnelli 2019-10-11 15:44:54</name>
+  </author>
+  <author>
+    <name>admin at bitaps.com 2019-09-19 17:20:13</name>
+  </author>
+  <author>
+    <name>Tamas Blummer 2019-09-21 21:16:25</name>
+  </author>
+  <author>
+    <name>nopara73 2019-09-23 05:20:31</name>
+  </author>
+  <author>
+    <name>admin at bitaps.com 2019-09-24 13:36:26</name>
+  </author>
+  <author>
+    <name>Tamas Blummer 2019-09-21 21:16:25</name>
+  </author>
+  <author>
+    <name>nopara73 2019-09-23 05:20:31</name>
+  </author>
+  <author>
+    <name>admin at bitaps.com 2019-09-28 17:21:47</name>
+  </author>
+  <link href="bitcoin-dev/Sept_2019/017322_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2019/017325_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2019/017322_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2019/017384_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2019/017321_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2019/017315_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2019/017384_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2019/017315_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2019/017320_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2019/017325_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2019/017384_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2019/017315_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2019/017320_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2019/017321_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2019/017322_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2019/017320_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2019/017321_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2019/017325_Block-Batch-Filters-for-Light-Clients.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Block Batch Filters for Light Clients</title>
+    <updated>2023-06-13T21:27:52.305755+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-September/017322.html" rel="alternate"/>
+    <summary>The Bitcoin-dev mailing list has been discussing the limitations of BIP 157 compared to BIP 37, which does not allow applying filters to mempool and checking zero confirmation transactions. The latest update to the draft for the BIP block batch filters can be found on the Bitaps Github page. The updated version includes changes such as a return to Golomb coding and a simpler, more effective schema implementation. Additionally, the total filter size is smaller than that of BIP 158, with estimated savings of over 20%. The filter is deterministic and could potentially be committed as a commitment in coinbase transactions in the future. The GCS parameters are flexible to maintain necessary FPS, and the filter has been split into two parts - unique elements and duplicated elements - with the latter being encoded more effectively.The Mempool Transaction Filters draft proposes a future consensus layer soft-fork to make block filters commitment one of the block validation rules to protect light nodes from payment hiding attacks. This new method also reduces more bandwidth consumption compared to block filters and downloading full blocks for affected addresses.Aleksey Karpov shared a draft proposal for compact probabilistic block filters as an alternative to BIP 158 in a recent Bitcoin-dev mailing list. For lite client filters download strategy, they get the biggest filter for a blocks range, then, in case of a positive test, get medium filters to reduce the blocks range, followed by getting block filters for the affected range and downloading affected blocks over TOR. Separating filters by address type allows lite clients to avoid downloading redundant information without compromising privacy. The proposed alternative uses delta coding and splits data into two bit string sequences with one containing data without prefixes and the second containing information about the bit length written to the first sequence. The second sequence is compressed using two rounds of the Huffman algorithm, resulting in an effectiveness of about 98%.Tamas Blummer also shared his thoughts on the use of filters in deciding whether a newly announced block should be downloaded or not. He opined that whole chain scans would be better served with plain sequential reads in map-reduce style. The majority of clients do not care about filters for blocks before the birth date of their wallet’s keys, so they skip over the majority of history which is a bigger saving than any aggregate filter. Blummer wished to get a filter committed as commitment would unlock more utility than any marginal savings through a more elaborate design. In conclusion, there are ongoing discussions on finding ways to make the light client process more efficient without compromising privacy and security. Possible solutions include retrieving a complete compact filter of the whole mempool using a maximum size of the filter ordered by feerate. To mitigate DOS concerns, dynamic filter construction could be used, and the update-interval of such a filter could also be time-based rather than on every new tx in the mempool.</summary>
+    <published>2019-09-24T13:36:26+00:00</published>
+  </entry>
+</feed>

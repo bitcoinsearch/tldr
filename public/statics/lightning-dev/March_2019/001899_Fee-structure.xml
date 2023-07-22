@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fee structure</title>
+  <updated>2023-06-02T17:58:22.141040+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-03-14 05:40:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fee structure</title>
+    <updated>2023-06-02T17:58:22.141040+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-March/001899.html" rel="alternate"/>
+    <summary>The current version of the Lightning Network specification uses source routing, which requires the sending node to attach fees to the payment. If the wrong amount of fees is sent for a channel, an intermediate node will reply with an update message containing the actual fees. However, binding the fees of a channel to its state would require re-broadcasting a channel update for every payment that traverses the channel.One solution to maintaining balance on a node's channels is to scale the feerate depending on the channel state. This is already possible within the protocol, but care must be taken to avoid spamming `channel_update` messages, which could potentially leak information about payments passing through the node. A heuristic approach involving random scheduling and sleeping can help reduce leakage.Focusing too much on channel balance may not be necessary, as there is almost always an alternate path that may have balance in the opposite direction. JIT Routing from rpickhardt is more sensible, as it attempts to rebalance only if it benefits the node to perform the rebalancing. By attempting the rebalance if the time and fee available are sufficient, the node increases the possibility of earning money and improves the probability of routing success.</summary>
+    <published>2019-03-14T05:40:16+00:00</published>
+  </entry>
+</feed>

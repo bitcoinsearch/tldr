@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Blinded channel observation</title>
+  <updated>2023-05-24T00:11:59.299138+00:00</updated>
+  <author>
+    <name>Tadge Dryja 2016-08-10 14:52:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Blinded channel observation</title>
+    <updated>2023-05-24T00:11:59.299138+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-August/000573.html" rel="alternate"/>
+    <summary>The author describes a revocation key method that is compatible with shachain/elkrem and has log(n) storage. They developed a script that omits hashing in the commit script and uses only signature verification. The script consists of DUP, [Revocable Pubkey], CHECKSIG, NOTIF, [Timeout Pubkey], CHECKSIGVERIFY, [timeout period], and CHECKSEQUENCEVERIFY. As an if statement, it ends up being: if (revocable sig) || (timeout sig &amp;&amp; CSV &gt; timeout). To build the revocable pubkey, Alice takes their elkrem sender hash from state n, multiplies EHn * G, getting a point EPn. Alice sends EPn to Bob, who adds their commitment pubkey (BP) to EPn. The result, (RPub n = BP + EPn), is the revocable pubkey for state n.For the timeout key, Alice adds a point to their own timeout key. It obscures the commitment script by making both pubkeys different each state, as they're all generated from the hash tree. Bob only needs to keep track of the most recent "elkrem points" and the hash tree itself.The author notes that if Laolu has made a different key revocation scheme he is not aware, but encourages him to post about it if so.</summary>
+    <published>2016-08-10T14:52:13+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fee estimates and RBF</title>
+  <updated>2023-06-14T20:37:39.292247+00:00</updated>
+  <author>
+    <name>Prayank 2021-05-06 01:57:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fee estimates and RBF</title>
+    <updated>2023-06-14T20:37:39.292247+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-May/018890.html" rel="alternate"/>
+    <summary>In an email exchange, two individuals named ZmnSCPxj and Prayank discussed the engineering issues related to a full replace-by-fee (RBF) wallet. While ZmnSCPxj stated that a true full-RBF wallet should be the goal for every on-chain wallet, he also acknowledged the challenges in achieving this. He provided examples of what can be done if RBF does not exist, such as spending an unconfirmed input from a third party. However, he warned that this is not actually safe since an unconfirmed transaction might have a conflicting transaction get confirmed. ZmnSCPxj then went on to explain the process a true full-RBF wallet would follow. The user would impose a limit on how much to spend on fees to have a spend happen, and the wallet would optimistically create a low-fee send transaction. After some time, the wallet would bump up the fee by creating a new transaction and keep doing so until it reaches the designated limit, the longer the transaction remains unconfirmed. However, there is a race condition in this case, where a miner could find a new block that has the old transaction with a lower fee while the wallet is bumping up and constructing a new transaction with higher fees.The subsequent user story involved the user wanting to spend another amount to address B, and the wallet RBFs the existing transaction to include the spend to address B. Similarly, a race condition can occur here too, where a random miner can find a new block that includes the old transaction while the wallet is feebumping a new transaction that includes the new output. Therefore, the wallet needs to keep track of any "pending spends" and correlate them with actual transactions.ZmnSCPxj further explained that while it is convenient to be able to spend money while it is unconfirmed, the sender of the unconfirmed input might be using the same software as the wallet, meaning that the actual transaction output might change as the original spender keeps fee-bumping it over time. He admitted not having thought about this issue much, and stated that engineering issues are a significant challenge in achieving a true full-RBF wallet.</summary>
+    <published>2021-05-06T01:57:59+00:00</published>
+  </entry>
+</feed>

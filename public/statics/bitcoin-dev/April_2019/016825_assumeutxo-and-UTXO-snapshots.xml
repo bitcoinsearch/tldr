@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>assumeutxo and UTXO snapshots</title>
+  <updated>2023-06-13T17:55:35.227907+00:00</updated>
+  <author>
+    <name>James O'Beirne 2019-04-02 20:43:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>assumeutxo and UTXO snapshots</title>
+    <updated>2023-06-13T17:55:35.227907+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-April/016825.html" rel="alternate"/>
+    <summary>The context discusses assumeutxo, a proposal for a complementary alternative to SPV modes, which may help modest clients transact under a security model that closely resembles full validation within minutes instead of hours or days. The basic idea is to allow nodes to initialize using a serialized version of the UTXO set rendered by another node at some predetermined height. The initializing node syncs the headers chain from the network, then obtains and loads one of these UTXO snapshots. The subject of this mail is a proposal for a complementary alternative to SPV modes, and which is in the spirit of an existing default, `assumevalid`.Clients running on modest hardware under limited bandwidth constraints face usability challenges during initial block download linearly based on the length of the chain's history, making it unrealistic for them to have fully validating clients. Therefore, clients with resource constraints rely on the SPV trust model. However, assumeutxo may allow such clients to use trust models closer to full validation.Assumeutxo allows nodes to initialize using a serialized version of the UTXO set rendered by another node at some predetermined height. The initializing node syncs the headers chain from the network, then obtains and loads one of these UTXO snapshots. Based upon the snapshot, the node can quickly reconstruct its chainstate and compares a hash of the resulting UTXO set to a preordained hash hard-coded in the software a la assumevalid. Security implications need to be considered since practical attacks may become easier with assumeutxo. While this proposal is in the spirit of assumevalid, the same attack is made easier in assumeutxo because, unlike in assumevalid, the attacker need not construct a valid PoW chain to get the victim's node into a false state. For this reason, it is recommended that if assumeutxo were to be implemented, it should not be allowed its specification via command-line argument.An exciting use-case for assumeutxo is the possibility of mobile devices functioning as fully validating nodes with access to the complete UTXO set (as an alternative to SPV models). The total resource burden needed to start a node from scratch based on a snapshot is, at time of writing, a ~(3.2GB + blocks_to_tip * 4MB) download and a few minutes of processing time, which sounds manageable for many mobile devices currently in use. A mobile user could initialize an assumed-valid bitcoin node within an hour, transact immediately, and complete a pruned full validation of their assumed-valid chain over the next few days.The implementation of assumeutxo has been submitted via Github, and it is recommended that concrete plans for deployment steps should be discussed in the Github issue.</summary>
+    <published>2019-04-02T20:43:11+00:00</published>
+  </entry>
+</feed>

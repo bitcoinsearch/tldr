@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Eltoo Burst Mode &amp; Continuations</title>
+  <updated>2023-06-04T02:00:19.836165+00:00</updated>
+  <author>
+    <name>Jeremy 2021-07-10 21:07:02</name>
+  </author>
+  <author>
+    <name>Jeremy 2021-07-10 23:25:06</name>
+  </author>
+  <author>
+    <name>Jeremy 2021-07-11 00:02:35</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2021-07-11 04:10:00</name>
+  </author>
+  <link href="lightning-dev/July_2021/003122_Eltoo-Burst-Mode-Continuations.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2021/003123_Eltoo-Burst-Mode-Continuations.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2021/003124_Eltoo-Burst-Mode-Continuations.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2021/003125_Eltoo-Burst-Mode-Continuations.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Eltoo Burst Mode &amp; Continuations</title>
+    <updated>2023-06-04T02:00:19.836165+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-July/003122.html" rel="alternate"/>
+    <summary>Eltoo channels can be continued without having to go on-chain by signing a move to a new update key for the final update. This allows up to 32 bits worth of updates before forwarding to a new contract with an additional transaction fee. However, this method adds an additional CSV and increases resolution time linearly. A "semitrusted burst mode" can be used with a counterparty to mitigate this, where parties move to sequence M+1 and pass through to a 2-step Eltoo update, allowing for 32 bits of sequences to blow through. The burst can be terminated at a certain internal state number, and the last state reflected in M+2. This protocol also improves privacy, as top-level state numbers do not reflect the number of payments strongly. There are mitigations against potential malicious attacks, such as only entering burst mode with long-lived peers, only entering when the initiator has more funds in the channel than you or has some ratio, and limiting the % of liquidity moved during a burst. Jeremy Rubin proposed two solutions to improve the sequence space for Eltoo channels. The first solution involves creating a Taproot tree with N copies of the state update protocol, where the 1st copy is used until MAX_STATE is reached and then signing with the 2nd copy while removing the 1st copy from the tree. The second solution involves using a continuation state, where for the final update, one signs a move to a new update key which essentially allows for 32 bits worth of updates before forwarding to a new contract by paying an extra transaction. Using this trick for every update would provide 64 bits of sequence space, but would also increase resolution time linearly. To mitigate this, Rubin suggests doing a "semitrusted burst mode" with a counterparty, where parties move to sequence M+1 and enter a burst with 32 bits of sequences to blow through. Then, they indicate to the other party to terminate the burst at "internal state number" Q and sign M+2, reflecting the last state at internal state number Q, to get rid of the temporary extra locking time for when parties are offline.This solution also provides a benefit for privacy as top-level state numbers do not strongly reflect the number of payments made. However, entering burst mode with malicious peers can result in double funds lockup time. To mitigate this, Rubin suggests only entering burst mode with long-lived peers, when the initiator has more funds in the channel than the other party, or when only a certain percentage of liquidity is moved during a burst. In a recent email exchange, Jeremy asked if one had to go on chain when about to hit sequence limits on an Eltoo channel. The response was that for the final update, you could sign a move to a new update key and do a continuation where an extra transaction is added to the uncooperative path every 2**30 states. Layers like this add a bunch of CSV layers, which increases resolution time linearly. However, using the CLTV path for updating the state, rather than the CSV path, should be done instead of the latter. Additionally, Jeremy suggested signing an eltoo "trampoline," which would start an eltoo channel factory amongst a group of people and allow them to close their channels with a single additional update to the factory once bored. This approach is not as cost-effective as creating a Taproot tree with N copies (with different keys) of the state update protocol, which allows for more privacy w.r.t. how many state updates were made throughout the protocol.</summary>
+    <published>2021-07-10T21:07:02+00:00</published>
+  </entry>
+</feed>

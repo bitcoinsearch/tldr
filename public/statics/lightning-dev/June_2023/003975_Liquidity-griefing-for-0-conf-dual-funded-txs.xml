@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Liquidity griefing for 0-conf dual-funded txs</title>
+  <updated>2023-07-07T02:46:31.709710+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2023-06-07 09:46:36+00:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Liquidity griefing for 0-conf dual-funded txs</title>
+    <updated>2023-07-07T02:46:31.709738+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-June/003975.html" rel="alternate"/>
+    <summary>In a recent discussion, Bastien and Antoine addressed the issues surrounding mempool pinning and liquidity griefing in lightning network transactions. Bastien suggested using v3 transactions for channel funding and splicing as a mid-term solution. However, he acknowledged that this would make these transactions identifiable on-chain unless everyone eventually moves to v3 transactions for all purposes. They also agreed that some kind of anti-DoS token would be necessary in the long term to prevent this type of issue, but designing and analyzing such a solution would be challenging.Antoine pointed out that disabling inbound payments or using a longer `cltv_expiry_delta` than usual could be valuable in mitigating the impact of mempool fee spikes on 0-conf chain confirmations. He also highlighted the potential for liquidity griefing through lack of signature release or mempool manipulation. To address this, he suggested exploring solutions used to mitigate channel jamming, such as the Staking Credentials framework, which could impose fees and introduce privacy-preserving credentials to protect against griefing attacks. Antoine also mentioned the possibility of batch pinning unrelated dual-funding transactions as a way to exploit mempool vulnerabilities.Bastien started the conversation by discussing the challenges posed by liquidity griefing attacks in dual funded transactions within the lightning network. He explained that when a remote node goes silent during the protocol, it can lock the utxos contributed by the honest node, rendering them unusable. To address this issue, he proposed never locking utxos in dual-funded transactions, allowing them to be automatically reused if a remote node goes silent. However, this approach is not suitable for 0-conf channels as accidental double-spending could result in fund loss. Bastien also highlighted the importance of isolating utxos used for 0-conf channels from those used for non 0-conf channels to avoid race scenarios and accidental double-spending.In the context of Eclair, Bastien mentioned their current implementation of "opportunistic" 0-conf, where they rely on certain conditions to use 0-conf channels. However, as they explore mixing 0-conf and non 0-conf funding attempts, the presence of soft-locked utxos poses challenges in upgrading to 0-conf. Bastien sought ideas and suggestions for improving protections against liquidity griefing while offering reliable 0-conf services.Overall, the discussion highlighted the need to address mempool pinning issues and liquidity griefing in lightning network transactions. It emphasized the importance of implementing effective solutions to protect against these vulnerabilities and improve the user experience in using 0-conf channels.</summary>
+    <published>2023-06-07T09:46:36+00:00</published>
+  </entry>
+</feed>

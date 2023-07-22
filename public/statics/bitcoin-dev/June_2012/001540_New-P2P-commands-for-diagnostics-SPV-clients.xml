@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New P2P commands for diagnostics, SPV clients</title>
+  <updated>2023-06-06T05:00:45.327822+00:00</updated>
+  <author>
+    <name>Mike Hearn 2012-06-15 13:43:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New P2P commands for diagnostics, SPV clients</title>
+    <updated>2023-06-06T05:00:45.327822+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-June/001540.html" rel="alternate"/>
+    <summary>The discussion is about the format of a project and potential user input to determine what information is necessary. Matt's point is that a branch-per-transaction could create duplicate data and suggests that a format to solve this issue would be more complex. The proposal for a three-part change includes adding the mempool command, syncing up nodes' mempools on startup, and changing the "block" message to consist of a header + num transactions + vector instead of full transactions for protocol version &gt;= X. Upon receiving such a block, the missing transactions from the mempool are requested with getdata. After receiving the tx message, it checks if it was one that was missing from a block. Once all transactions in the block message are in memory, the block is assembled and verified as usual. This should speed up the block propagation process, and miners have an incentive to upgrade because it reduces wasted work.The third step involves a new message, getmerkletx, which takes a vector and returns a merkletx message: "merkle branch missing the root + transaction data itself" for each requested transaction. The filtering commands are added so that the block message only lists transaction hashes that match the filter, which can then be requested with getmerkletx.</summary>
+    <published>2012-06-15T13:43:06+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Mitigations for loop attacks</title>
+  <updated>2023-05-25T00:40:33.353808+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-05-10 04:40:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Mitigations for loop attacks</title>
+    <updated>2023-05-25T00:40:33.353808+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-May/001268.html" rel="alternate"/>
+    <summary>The conversation revolves around the topic of information leakage and reputation loss in the Lightning Network. One proposal is to randomize the reputation-loss-rate to obfuscate intermediate node distance from the payee. However, it was pointed out that this leaks both distances simultaneously, which is more than twice as worse as leaking just one distance. Another proposal is the implementation of CLTV-delay randomization for payments, which is similar to shadow routes and can also obfuscate intermediate node distance from the payee. The concern with this proposal is that CLTV already partly leaks the distance from the payee. There is also a discussion about the reputation system and its advantages over other proposals. It is explained that the reputation system gives more discretion to the preceding hop and keeps all links in the network high quality. Nodes earn reputation scores over time and are quickly disconnected from delaying nodes if the incentives are right. The reputation system helps solve the question of whether potential fees are worth the risk of forwarding a payment to a downstream. The key is not forwarding through malicious peers.There is a concern that some models tried in Milan created an incentive to fail payments, which is a non-starter. It is argued that even if there's a nominal spam fee paid to routing nodes that fail payments, nodes still have more to gain by forwarding the payment and earning the full fee on a completed payment. A node that constantly fails payments will be blacklisted by the sender eventually and stop receiving HTLCs from them at all. Another issue raised is the amount of information leaked. It was pointed out that the CLTV values help determine the number of downstream hops in a route in exactly the same way as the reputation-loss-rate helps determine the number of upstream hops in a route. These were seen as symmetric in a sense. A major drawback of the proposal to aggregate losses along the route is that the rate at which the sender of the HTLC threatens reputation loss lets one estimate their distance from the ultimate sender of the funds.</summary>
+    <published>2018-05-10T04:40:19+00:00</published>
+  </entry>
+</feed>

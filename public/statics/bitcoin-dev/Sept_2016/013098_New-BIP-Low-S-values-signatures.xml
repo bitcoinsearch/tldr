@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New BIP: Low S values signatures</title>
+  <updated>2023-05-19T23:40:11.283776+00:00</updated>
+  <author>
+    <name>Johnson Lau 2016-09-02 08:28:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New BIP: Low S values signatures</title>
+    <updated>2023-05-19T23:40:11.284763+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-September/013098.html" rel="alternate"/>
+    <summary>BIP146 proposes changes to the Bitcoin transaction validity rules to fix signature malleability related to ECDSA signature encoding. Signature malleability refers to the ability of any relay node on the network to transform the signature in transactions, with no access to the relevant private keys required. To fix signature malleability, the BIP introduces two new rules: LOW_S and NULLFAIL. The former restricts the S value inside ECDSA signatures to at most the curve order divided by 2, with strict DER encoding. If a signature passing to ECDSA verification does not pass the Low S value check and is not an empty byte array, the entire script evaluates to false immediately. The latter rule, NULLFAIL, requires that if an OP_CHECKSIG is trying to return a FALSE value to the stack, the relevant signature must be an empty byte array. If an OP_CHECKMULTISIG is trying to return a FALSE value to the stack, all signatures passing to this OP_CHECKMULTISIG must be empty byte arrays, even if some signatures' processing has been skipped due to early termination of the signature verification. Otherwise, the entire script evaluates to false immediately.NULLDUMMY has been removed from BIP146 and will become another softfork that will be implemented at the same time as segwit. This revision of BIP146 adds the newly implemented NULLFAIL rules which should cover all special cases. The LOW_S softfork may be deployed at a later release since there was some undocumented behavior discovered in LOW_S. However, NULLFAIL will be implemented as a policy rule in 0.13.1, but the softfork won't be deployed in 0.13.1.</summary>
+    <published>2016-09-02T08:28:14+00:00</published>
+  </entry>
+</feed>

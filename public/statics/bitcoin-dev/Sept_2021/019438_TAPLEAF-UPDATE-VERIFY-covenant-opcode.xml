@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TAPLEAF_UPDATE_VERIFY covenant opcode</title>
+  <updated>2023-05-21T03:52:14.686361+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-09-11 03:26:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TAPLEAF_UPDATE_VERIFY covenant opcode</title>
+    <updated>2023-05-21T03:52:14.686361+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019438.html" rel="alternate"/>
+    <summary>In an email exchange, Antoine Riard and Andrew Poelstra discussed various aspects of Taproot and its implementation. They talked about a new opcode called OP_MERKLESUB, which checks the output N has the same scripts as the current input except with the current script removed, and with its internal pubkey as the current input's internal pubkey plus P. They also discussed the possibility of introducing a separate OP_MERKLEADD to add a point to the internal pubkey group signer. However, Poelstra believes that saving a byte of witness data at the cost of specifying additional opcodes seems like optimizing the wrong thing. They also discussed the issue of verifying that the new utxo retains the bitcoin that was in the old utxo. Poelstra suggested using a new opcode called IN_OUT_AMOUNT that pushes two items onto the stack: the amount from this input's utxo and the amount in the corresponding output. This way, anyone using TLUV can use maths operators to verify that funds are being appropriately retained in the updated scriptPubKey. They also talked about the SIGHASH_GROUP design and how it achieves the same effect as IN_OUT_AMOUNT, at least for the CoinPool use-case.Moreover, they touched upon the topic of automated market makers and how they work on different chains aiming to support multiple asset types, but not on Bitcoin directly. They also talked about tweaking the formula so that one makes a profit, which also means that the fund pool becomes more liquid over time. They concluded by discussing the issues with the CAT "TapBranch" SHA256 DUP CAT SWAP CAT SHA256 logic and proposing the introduction of an opcode that builds a merkle root from tagged hashes directly rather than one that lets you compare to 32B strings so that you can do the TapBranch logic manually.</summary>
+    <published>2021-09-11T03:26:44+00:00</published>
+  </entry>
+</feed>

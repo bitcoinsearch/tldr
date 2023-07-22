@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Soft-forks and schnorr signature aggregation</title>
+  <updated>2023-06-13T01:07:30.638748+00:00</updated>
+  <author>
+    <name>Bram Cohen 2018-03-22 00:47:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Soft-forks and schnorr signature aggregation</title>
+    <updated>2023-06-13T01:07:30.638748+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-March/015844.html" rel="alternate"/>
+    <summary>The proposed segwit v2 with reclaiming most things as RETURN_VALID is being suggested for supporting aggregated signatures in the future. However, there are some subtleties to getting it right. Most unused opcodes should be reclaimed as RETURN_VALID, but there should still be one OP_NOP and there should be a 'real' RETURN_VALID, which doesn't have any parsing weirdness. There are several options for dealing with new opcodes being added later on, including avoiding the problem completely by exterminating IF and MASTing, adding IFJUMP, IFNJUMP, and JUMP which specify a number of bytes, requiring all new opcodes have fixed length 1, or making it so that the unknown opcodes case a RETURN_VALID even when they're parsed, regardless of whether they're being executed. By far the most expedient option is to cause a RETURN_VALID at parse time, even though there's precedent for this sort of behavior in the other direction with disabled opcodes causing failure at parse time even if they aren't being executed. It may make sense to seriously consider BLS signatures, which have a lot of practical benefits starting with them being noninteractively aggregatable so you can always assume that they're aggregated instead of requiring complex semantics to specify what's aggregated with what. Regarding hacking in a multisig opcode, it is very stuck specifically on m-of-n and doesn't support more complex formulas for how signatures can be combined, which makes it feel hacky and weird. While there are many strategies for dealing with new opcodes, the general strategy of making unused opcodes be RETURN_VALID for now and figuring out how to handle it later works for all of them.</summary>
+    <published>2018-03-22T00:47:01+00:00</published>
+  </entry>
+</feed>

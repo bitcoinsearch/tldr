@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Explicit Fee Management Proposal</title>
+  <updated>2023-05-25T15:39:52.008902+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-11-09 00:06:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Explicit Fee Management Proposal</title>
+    <updated>2023-05-25T15:39:52.008902+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001546.html" rel="alternate"/>
+    <summary>The proposal for explicit management of commitment transaction and mutual close transaction fees includes additional variables, such as `from_local_fee_msat` and `from_remote_fee_msat`, which will be tracked by nodes for each channel. If a node initiates the channel, its `from_local_fee_msat` contains the fee decided during channel opening, while its `from_remote_fee_msat` is zero. The rationale behind using millisatoshi instead of satoshi is to allow finer proportional deductions when reducing fees. There are also two additional channel state updates: the `add_fees` message and the `propose_deduct_fees` message. The former allows the sending node to propose a donation as fees, which is deducted from the sender funds of the channel. Multiple `add_fees` messages can be sent, and their effects add up. The sender must not offer a fee donation that would put their balance below the channel reserve, but they may donate their entire balance, minus the channel reserve. Both nodes must convert the satoshi units in this message to millisatoshis before updating the `from_local_fee_msat` and `from_remote_fee_msat` when a commitment is signed. The `propose_deduct_fees` message starts a sub-protocol where other channel state update messages for the channel are disallowed, triggering an `error` message with code `TBD`. This message proposes the amount by which the total fees will be deducted. The lowest `proposed_deducted_fee_sat` before the `accept_deduct_fees` is selected. Each node has the ability to veto a deduction by simply sending a 0 `proposed_deducted_fee_sat`. The `accept_deduct_fees` message is sent once both nodes have agreed on how much to deduct as fees, which is split between the two nodes in proportion to how much each one donated to the fees.</summary>
+    <published>2018-11-09T00:06:53+00:00</published>
+  </entry>
+</feed>

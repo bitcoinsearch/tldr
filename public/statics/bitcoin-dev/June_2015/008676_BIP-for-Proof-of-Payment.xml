@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP for Proof of Payment</title>
+  <updated>2023-06-09T22:24:32.466338+00:00</updated>
+  <author>
+    <name>Kalle Rosenbaum 2015-06-15 09:21:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP for Proof of Payment</title>
+    <updated>2023-06-09T22:24:32.466338+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-June/008676.html" rel="alternate"/>
+    <summary>Kalle Rosenbaum has proposed a new implementation of Proof of Payment (PoP) which aims to enable scenarios where it would be useful to prove that payment has been made without revealing personal information. The PoP proposal can be found on his Github Wiki page, and the changes include having only one output - the "pop output" with a value of 0, setting the sequence number of all inputs of PoP to 0, and setting the lock_time of PoP to 499999999.The desirable properties of PoP include being able to generate a PoP on demand, being usable only once, being able to create a PoP for any payment regardless of script type, proving that the user has enough credentials to unlock all the inputs of the proven transaction, and being easy to implement by wallets and servers to ease adoption.Current methods of proving payment include BIP0070, which does not meet some of the desirable properties of PoP, and signing messages chosen by the server with private keys used to sign the transaction. PoP is structured like a Bitcoin transaction with the same inputs as the proven transaction but with each sequence number set to 0. PoP has exactly one output, the pop output, with value 0 and conforms to a specific OP_RETURN output format.Kalle Rosenbaum plans to ask Gregory Maxwell to assign BIP numbers to his proposed changes if there are no major objections. He suggests that "Proof of Payment" is the most descriptive name for non-technical people, although he has provided a list of alternative names for PoP.There are security considerations to keep in mind when using PoP, such as someone intercepting the PoP-request and changing any parameter in it or stealing a PoP and trying to use the service hoping to get a matching nonce. To validate a PoP, one must check its format, lock_time, and inputs, run all the scripts of the inputs, and check that the txid in the PoP output is the transaction for which proof is required.Kalle Rosenbaum has provided a reference implementation of PoP on his Github page. He plans to change the data structure to have only one output, the "pop output," and no outputs from T will be copied to the PoP. The pop output will have a value of 0, and the sequence number of all inputs of the PoP will be set to 0. The lock_time of the PoP is always set to 499999999.In another conversation, the redundancy of outputs with txid was discussed, and the nLocktime solution was proposed as a way to eliminate the need for copied outputs. It was suggested to start the proof script with a magic constant and leave space for future expansion to make PoP's easy to identify and extend. The author removed the constant but added a 2 byte version field to make it extendable. The term "Proof of Potential" was acknowledged at the end of the conversation.</summary>
+    <published>2015-06-15T09:21:06+00:00</published>
+  </entry>
+</feed>

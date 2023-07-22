@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving the initial gossip sync</title>
+  <updated>2023-05-24T20:36:56.759955+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-02-26 01:43:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving the initial gossip sync</title>
+    <updated>2023-05-24T20:36:56.759955+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/001052.html" rel="alternate"/>
+    <summary>During a lightning dev interop call, Rusty Russell presented a solution to the issue of initial_routing_sync. The proposed solution includes a new feature bit called channel_range_queries with three parts: if a node's local features include initial_routing_sync and channel_range_queries, then do nothing; if they include initial_routing_sync but not channel_range_queries, then send your routing table as before; if you support channel_range_queries, send a query_channel_range message. This makes channel_range_queries obsolete initial_routing_sync. They also discussed adding a data field containing zipped ids like in reply_channel_range so that multiple items can be queried with a single message. The same compression format decided for reply_channel_range data field will be used. An additional encoding_type field will be added before data or it could be the first byte of data.Rusty Russell tried various compression schemes to improve the performance of the Lightning Network. He used Corpus 1 (LN mainnet dump, 1830 channels) and Corpus 2 (All P2SH outputs between blocks 508000-508999 incl, 790844 channels) to test his compression schemes. Raw, gzip -9, splitgz, delta, and deltagz were tried. Splitgz is trivial, while deltagz is better but requires work. They need to pick one and make that version 0.</summary>
+    <published>2018-02-26T01:43:56+00:00</published>
+  </entry>
+</feed>

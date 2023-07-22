@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP proposal: No chaining off replaceable transactions</title>
+  <updated>2023-06-12T03:15:41.200194+00:00</updated>
+  <author>
+    <name>James Hilliard 2017-07-03 04:17:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP proposal: No chaining off replaceable transactions</title>
+    <updated>2023-06-12T03:15:41.200194+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-July/014685.html" rel="alternate"/>
+    <summary>A proposal to modify the RBF eviction policy was suggested in a bitcoin-dev discussion. The change would allow the feerate separation between transactions in the mempool to be calculated, and the sweep transaction+parent could be evicted by the fee bumped replacement if it has a different feerate. This way, the sweep transaction parent would only get replaced when miners are unlikely to produce a block with transactions at the same feerate as the sweep transaction+parent simultaneously with the replacement transaction feerate. From the miner's point of view, this gives a higher fee block template overall, since it is unlikely that transactions with the feerate of both the CPFP sweep and the replacement parent will appear in the same block template. The discussion also touched on the BIP125 rules, where the sender needs to pay for the cost of invalidating all transactions, along with the replay cost of descendant transactions, if they wish to bump their low-fee transaction to a higher one. However, if the receiver pays a higher feerate, their transaction will get confirmed faster than the sender's replacement. A problem highlighted was when receivers do big sweeps and include unconfirmed inputs; in such cases, replacing the transaction would require paying the cost of the sweep, which can be expensive. The proposal aims to have a stable fee market and help services dynamically increase their fees sanely when dealing with withdrawals, especially batched ones. It was noted that fee estimation is a fool's game, and even the new and improved fee estimation in master today was suggesting x30 fees to what was required. People being able to increase their fees dynamically when dealing with withdrawals will go a long way to helping the overall ecosystem.</summary>
+    <published>2017-07-03T04:17:08+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Stealth Addresses</title>
+  <updated>2023-06-07T23:43:52.117421+00:00</updated>
+  <author>
+    <name>Alan Reiner 2014-01-18 04:55:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Stealth Addresses</title>
+    <updated>2023-06-07T23:43:52.117421+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-January/004156.html" rel="alternate"/>
+    <summary>The proposal suggests skipping the ECDSA/ECDH process for blockchain transactions and using a second key pair for encryption instead. This would involve using a much simpler scheme where the payer creates their own multiplier and encrypts it into an OP_RETURN message using the secondary public key of the receiver. The receiver would then attempt decryption of every OP_RETURN message and identify theirs based on a deterministic identifier appended to it. The proposal is not tied to any particular crypto, and the author suggests using a faster asymmetric encryption algorithm such as ed25519. The proposal envisions Alice giving out her business card with public keys X (BIP32 root) and Y (fastCrypto). Bob generates a random 32-byte nonce, and EC-multiplies Alice's public key by it. He prepares a transaction sending coins to that address (Z) and computes a deterministic identifier, which he appends to the multiplier and encrypts with Alice's fastCrypto key, Y. The encrypted message is put in the OP_RETURN output. Alice's wallet will attempt decryption of every OP_RETURN message, and if the tx is actually hers, the last 8 bytes will match the identifier, and she knows to use the other 32 bytes as a multiplier. It is suggested to use 24-byte values for the multipliers or hashes of 24-byte values so that adding 8 bytes makes the whole message an even 32 bytes which is better for encryption. The author believes this proposal has the same properties as the original proposal, including compatibility with CoinJoin, but it all depends on having fast asymmetric encryption.</summary>
+    <published>2014-01-18T04:55:25+00:00</published>
+  </entry>
+</feed>

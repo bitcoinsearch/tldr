@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Ultimate Blockchain Compression w/ trust-free lite node</title>
+  <updated>2023-06-06T05:50:07.735163+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2012-06-19 18:18:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Ultimate Blockchain Compression w/ trust-free lite node</title>
+    <updated>2023-06-06T05:50:07.735163+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-June/001614.html" rel="alternate"/>
+    <summary>Alan Reiner raised a concern on using a tree-structure with multiple valid configurations for the same unspent transaction outputs (UTXOs) in a thread. Using a binary tree requires replaying the history of insertions and deletions to get the correct tree structure and root. The use of a red-black tree, although theoretically well-known, could still be subject to implementation errors, leading to significant disruptions in the network. Mark suggested using a 2-3-4 tree instead as it is a generalization of RB-trees that doesn't allow for implementation choices in balancing. To solve this problem trivially, they need to choose a standard, mandate it, and write test cases.However, if they were to use a raw trie structure, they could solve all the issues as a trie has the same configuration no matter how elements are inserted or deleted, and accesses to elements in the tree are constant time. Still, overall space-efficiency may be an issue. On the other hand, a PATRICIA tree/trie would be ideal as it also has a completely deterministic structure and is an order-of-magnitude more space-efficient. Insert, delete, and query times are still O(1), but it is not a trivial implementation. Peter Todd pointed out that a trie of any sort is dependent on the distribution of input data for balancing. A malicious actor could construct transaction or address hashes to grow some segment of the trie unbalancedly, which is exploitable under particular timing-sensitive circumstances. Self-balancing search trees don't suffer from this problem.</summary>
+    <published>2012-06-19T18:18:07+00:00</published>
+  </entry>
+</feed>

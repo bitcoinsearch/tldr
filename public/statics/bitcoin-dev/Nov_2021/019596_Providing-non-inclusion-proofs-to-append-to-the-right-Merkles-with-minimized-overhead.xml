@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Providing "non-inclusion proofs" to "append to the right Merkles" with minimized overhead</title>
+  <updated>2023-05-22T16:16:46.594750+00:00</updated>
+  <author>
+    <name>shymaa arafat 2021-11-11 22:28:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Providing "non-inclusion proofs" to "append to the right Merkles" with minimized overhead</title>
+    <updated>2023-05-22T16:16:46.594750+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-November/019596.html" rel="alternate"/>
+    <summary>The author suggests a modification to the UTXO Merkle structure to provide non-inclusion proofs. The modification involves mapping the UTXOs to their positions as leaves given their hash value. A 2⁶⁴ pointer vector is allocated to put the UTXO in a bucket according to its hash. Due to the cryptographic hash robustness and bit randomness, UTXO hashes should fall uniformly as all buckets are equiprobable and each bucket is expected to contain 1-2 UTXOs. Insertion is adding a node (in order) to the bucket linked list, deletion is deleting a node from the bucket list; the vector bucket pointer may be adjusted in the process from or to a NULL value. To save computation time, the accumulated root value of this secondary tree is calculated and sent only once per block, either at the end if valid or when encountering an invalid UTXO to send the non-inclusion proof and abort the whole block. The non-inclusion proof will be sent according to the previous block accumulated root, so during batch preparation, a newly inserted UTXO will be flagged 1, a deleted UTXO is flagged -1, and 0 means value the same as the previous block. If the block is valid, update and reset flags to 0 while computing the new root.If we had an invalid UTXO, there are two cases. In one case, the hash doesn't exist in any case (not even with a deleted flag), in which case the usual non-inclusion proof is sent considering the old status before any UTXO from this block. In the other case, the UTXO hash is there but has a deleted flag (it was spent before during this block). In this case, it is suggested that the previous inclusion proof is resent along with saying something like "TX ID ....spent it with proof...." However, this is an implementation detail of how to point out to a previous proof in the same block.</summary>
+    <published>2021-11-11T22:28:39+00:00</published>
+  </entry>
+</feed>

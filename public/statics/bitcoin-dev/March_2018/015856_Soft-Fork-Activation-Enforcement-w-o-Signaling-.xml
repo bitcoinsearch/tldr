@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Soft Fork Activation &amp; Enforcement w/o Signaling?</title>
+  <updated>2023-06-13T01:09:19.451737+00:00</updated>
+  <author>
+    <name>Samad Sajanlal 2018-03-29 05:14:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Soft Fork Activation &amp; Enforcement w/o Signaling?</title>
+    <updated>2023-06-13T01:09:19.451737+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-March/015856.html" rel="alternate"/>
+    <summary>A developer inquired about the possibility of activating soft forks, such as BIP65 and BIP66, without prior signaling from miners. He noted that his project is a clone of a clone of Bitcoin that did not and never intends to replace Bitcoin. The whole network will upgrade their clients within a short window (~2 weeks), so they would schedule the activation ~2 months out from when the client is released to ensure everyone has time to upgrade. The developer is trying to bring the code branch up to 0.15 at least, so that they can implement Segwit and other key features that Bitcoin has introduced. He also asked if the block version gets bumped up automatically at the time that a soft fork activates or if there is additional stuff that he needs to do within the code to ensure it bumps up at the same time.Jorge Timón responded, stating that softforks can be activated at a given height and he didn't see any reason why they couldn't rebase to 0.16 directly. He also mentioned that the block version bumping was a mistake in bip34 and the developer doesn't really need to bump the version number. Jorge recommended reading bip34 and what it activates in the code, recalling that the last thing was bip65. The current deployed codebase (based on bitcoin 0.9.4) makes versions 0x00000002 (as seen by a 0.15 client), whereas 0.15 and 0.16 use block versions as 0x20000000.Therefore, it appears safe to activate soft forks which require a minimum of version 3 and 4 blocks (0x00000003 and 0x00000004, respectively) without any signaling beforehand. Activating them will segregate the 0.15 clients onto their own fork, which is why the repercussions of doing it without any signaling beforehand must be understood. The block version will bump up automatically at the time that a soft fork activates.</summary>
+    <published>2018-03-29T05:14:42+00:00</published>
+  </entry>
+</feed>

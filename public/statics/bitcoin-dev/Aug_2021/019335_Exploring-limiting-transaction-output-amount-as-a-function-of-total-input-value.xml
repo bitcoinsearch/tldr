@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Exploring: limiting transaction output amount as a function of total input value</title>
+  <updated>2023-06-15T00:31:38.705373+00:00</updated>
+  <author>
+    <name>Zac Greenwood 2021-08-13 11:02:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Exploring: limiting transaction output amount as a function of total input value</title>
+    <updated>2023-06-15T00:31:38.705373+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-August/019335.html" rel="alternate"/>
+    <summary>The email conversation is about proposing a functionality that allows control of a coin with two private keys, one to limit spending over time while the other has unrestricted spending. The proposed functionality should be desirable, not already possible, and feasible to implement. The user should be able to keep one key offline and one key online, with the offline key allowing unrestricted spending and the online key being limited in how much it is allowed to spend over time. The spending limit must be intuitive and must allow the user to set these parameters freely. ZmnSCPxj gives some advice on how this can be implemented by creating two sets of keys, a long-term-storage keyset in "cold" storage and a short-term-spending keyset in "warm" storage. All funds are put into a single UTXO with an k-of-n of cold keys, and the cold keys are put online to sign a transaction spending most of it to a new address that is a tweaked k-of-n of cold keys and a smaller output controlled by the k-of-n of warm keys. This transaction is kept off-chain in warm storage. Pre-signed transactions are stored in warm storage together with warm keys. From today to tomorrow, you can spend only the first warm TXO, and from tomorrow to the day after, you can spend only the first two warm TXOs, and so on. If tomorrow your warm keys are stolen, you can bring the cold keys online to claim the second cold TXO and limit your fund loss to only just the first two warm TXOs.</summary>
+    <published>2021-08-13T11:02:14+00:00</published>
+  </entry>
+</feed>

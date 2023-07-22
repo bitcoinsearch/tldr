@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Relative CHECKLOCKTIMEVERIFY (was CLTV proposal)</title>
+  <updated>2023-05-19T19:54:51.413694+00:00</updated>
+  <author>
+    <name>Matt Corallo 2015-05-04 02:15:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Relative CHECKLOCKTIMEVERIFY (was CLTV proposal)</title>
+    <updated>2023-05-19T19:54:51.413694+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/007858.html" rel="alternate"/>
+    <summary>In an email exchange on April 21, 2015, Peter Todd and Matt Corallo discussed the idea of adding an OP_RELATIVECHECKLOCKTIMEVERIFY (RCLTV) to Bitcoin's script language. RCLTV would allow a transaction output to be unlocked if the input being spent is at least N blocks old, plus the height of the output being spent. However, Todd pointed out that this implementation was not reorg-safe because it relied on the nLockTime parameter in the spending transaction rather than the actual block height of the block containing the spending transaction. Corallo responded that the assumption was that N would be set to at least 100 blocks, which is the same limit as coinbase transactions. This would make RCLTV reorg safe up to the same limit as coinbase transactions. Todd agreed that this was reasonable and suggested that during a large reorg that made coinbases unavailable, entire blocks containing txouts created by them could be disconnected. Adding RCLTV to Bitcoin's script language has two major drawbacks. First, it exposes more transaction information inside the script, making it harder to enforce mempool invariants. Second, transactions using RCLTV would need to be re-evaluated during reorgs. Despite these drawbacks, Corallo argued that adding RCLTV would be useful for some protocols, such as setting up a contest interval in a sidechain data validation operation. The email exchange also discusses three possibilities for implementing RCLTV: 1) RCLTV against nLockTime, which needs a minimum age &gt; COINBASE_MATURITY to be safe; 2) RCLTV against current block height/time, which is completely reorg safe; and 3) GET_TXOUT_HEIGHT/TIME ADD CLTV, which requires GET_TXOUT_HEIGHT/TIME to fail if minimum age &lt; COINBASE_MATURITY to be reorg safe. All three possibilities require making information about the prevout's height/time available to VerifyScript(). Todd also raised the question of whether absolute CLTV should check against nLockTime if RCLTV is implemented against current block height/time. He argued that this would needlessly limit it to only being able to compare against a block height or a block time in a single transaction and could complicate multi-party signatures in some circumstances. Finally, the email exchange briefly discusses the possibility of supporting time-based locks and the potential incentive issues with mining that they could cause.</summary>
+    <published>2015-05-04T02:15:47+00:00</published>
+  </entry>
+</feed>

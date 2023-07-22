@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Blockchain verification flag (BIP draft)</title>
+  <updated>2023-05-19T22:29:43.353081+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2015-12-04 08:26:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Blockchain verification flag (BIP draft)</title>
+    <updated>2023-05-19T22:29:43.353081+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-December/011853.html" rel="alternate"/>
+    <summary>The proposal presented in BIP draft-maxwell-flagverify provides a flag that can be used by block authors to signal that they have completely validated the content of their block and the blocks before it. The signaling is not enforced internally to the network, but if implemented correctly, can act as a hint for more intelligent risk analysis. The use of this mechanism can turn otherwise harmful validation skipping by miners into a behavior that benefits the public. The version field in a Bitcoin block header is a 32-bit signed integer, and the most significant bit (30) of the block version signals that the author of the block has validated the whole chain up to and including the content of the block. However, conforming miners must not set this flag when they have not completely validated the prior block(s) or the content of their own block. It is recommended that miners do not set the flag on blocks created by the same device which created the block immediately prior to reduce the incorrect implication of independent validation when the two most recent blocks are the product of the same, single, faulty system. Non-verifying clients of the network may check this bit and use it as an input to their risk modeling. Once this BIP is widely accepted by the network, non-full-node wallets are recommended to refrain from counting confirmations on blocks where the bit is not set. However, the accuracy of this field must not be strongly relied upon since any miner who correctly uses this flag could stop doing so at any time, intentionally or not. Moreover, because invalid blocks are rare, it may take a long time to detect misuse of the flag.The motivation behind this proposal is to address vulnerabilities in thin-client wallets that assume all block authors have verified the blockchain. Such applications are vulnerable to even small and short-duration violations of this assumption. Processing and propagation delays resulting from increased transaction load contribute to block orphaning when multiple blocks are found at close to the same time. This has caused some miners to work on extending the chain with the most proof-of-work prior to validating the latest block(s). The validation skipping undermines the security assumptions of thin clients but also has a beneficial effect by reducing centralization pressure and improving the security of Bitcoin in the long term.The deployment of this proposal does not require any special strategy since there is no consensus-enforced behavior. Finally, it is worth noting that the document is placed in the public domain.</summary>
+    <published>2015-12-04T08:26:22+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>MuSig2 BIP</title>
+  <updated>2023-05-22T19:16:00.128749+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-04-28 01:47:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>MuSig2 BIP</title>
+    <updated>2023-05-22T19:16:00.128749+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-April/020361.html" rel="alternate"/>
+    <summary>A developer has praised Jonas Nick and co-authors for publishing an excellent technical specification on the much-anticipated musig2 BIP. The developer made a PR earlier to add some JSON test vectors that would make it easier for other implementations to integrate the existing vectors and more easily update implementations to account for any updates to the vectors. They have been following the BIP for a few months now, and have been updating their implementation for `btcsuite/btcd` (mostly) in lock step. The developer also mentioned that they have been integrating their implementation into lnd as well in order to get more familiar with their proposed API, as well as hands-on experience crafting real transactions that use musig2 in the wild. While exercising all the different signing combinations on regtest, they realized that an implementation must make the _pre tweaked_ combined key available to the caller in order to support signing for a key that uses BIP 86 derivation or an external key that commits to a tapscript root. As is, the BIP doesn't touch on this case, which is something any implementation will need to account for if they wish to support the two signing modes mentioned above. In practice, what they do now is compute the aggregated key, stash that away, then compute the tweaked key, making both available to the caller. They also add a special case for BIP 86, since in that case no real tweak needs to be specified, instead an implementation should compute the BIP 340 tagged hash (tap tweak) of the pre-tweaked aggregated key and use that as the main tweak. They also asked Jonas to elaborate a bit on the fragment of the BIP that describes a "short cut" when a specific signer is meant to send their nonces last. My reading here is that if there's a signer that will always send their nonce last, then they don't actually need to generate real randomness, and can just fully specify all the new optional arguments. Overall, the developer has praised Jonas Nick and co-authors for publishing an excellent technical specification on the much-anticipated musig2 BIP and has suggested certain areas where the implementation of the BIP could be improved.</summary>
+    <published>2022-04-28T01:47:33+00:00</published>
+  </entry>
+</feed>

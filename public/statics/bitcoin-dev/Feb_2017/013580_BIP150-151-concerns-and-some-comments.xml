@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>BIP150/151 concerns and some comments</title>
+  <updated>2023-05-20T00:59:43.705521+00:00</updated>
+  <author>
+    <name>Jonas Schnelli 2017-02-14 16:10:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>BIP150/151 concerns and some comments</title>
+    <updated>2023-05-20T00:59:43.705521+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-February/013580.html" rel="alternate"/>
+    <summary>There have been concerns raised about BIP150/151 and its "identity system". While some worry that BIP150 could partition the network, most of these worries are unfounded. Users already filter and authenticate peers by IP tables, 'addnode' command, peer banning in app-layer, and fast block relay is a good example. Additionally, BIP150 allows for the switching from IP based authentication to a secure form of authentication with pre-shared keys (ECDH). While some feel that identity is not something we want in Bitcoin, BIP150 introduces an optional authentication over an EC pubkey that can be changed per network interface and only revealed to peers who have already proven they know your identity. IP addresses are another form of identity, but they are way more inflexible and different to hide. Peers cannot fingerprint you over BIP150 messages as it does not reveal your identity unless the responding peer has proven they know your identity. It has been suggested that BIP150/151 is not necessary as Tor and STunnel already exist. However, using tor for a single secure channel seems like using a sledgehammer to crack a nut. Additionally, how many SPV users have encrypted channels to trusted nodes today? Peer operators who depend on designated connections, what security do they have today? The focus of Tor is not on securing single channels but on onion routing and anonymity. Some feel that BIP151 gives a false sense of security and has no MITM detection. While it is true that BIP151 has no MITM detection, without it, anyone can hook into the stream and read what's going on. With BIP151, an attacker needs to actively substitute ephemeral keys in both directions. This attack is more complex to achieve and requires the attacker to accept the risk of being detected. Some attacks are worthless if you have to take the risk of being detected. Bitcoin traffic is trustless, so why encrypt it? If you use one of the available SPV clients today, you will reveal your complete wallet content to every network observer between you and the node you have connected to. This means that if you pay for a coffee while being on the owner's WIFI, the owner and all involved ISPs can correlate your wallet with your other internet behavior. They can still perform this attack if you don't have a trusted node by performing the attack that involves the risk mentioned earlier. While some suggest that if you want to have a light client, you should use a different channel to communicate with your full node than the p2p layer, this could be undesirable from an end user's perspective. Using the p2p channel as the current SPVs do seems reasonable. Keeping users on the p2p layer allows future changes where they can help the network in some ways. Additionally, using the p2p layer for a trusted connection also allows you to fallback anytime to non-trusted nodes if your trusted node is no longer reachable.</summary>
+    <published>2017-02-14T16:10:15+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>`htlc_maximum_msat` as a valve for flow control on the Lightning Network</title>
+  <updated>2023-06-03T09:58:42.830690+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2022-09-29 00:41:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>`htlc_maximum_msat` as a valve for flow control on the Lightning Network</title>
+    <updated>2023-06-03T09:58:42.831685+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-September/003705.html" rel="alternate"/>
+    <summary>The Lightning Network is a payment protocol that operates on top of Bitcoin. In this context, the discussion revolves around the issue of unbalanced flow in Lightning Network. Forwarding nodes sell IPpvHg or liquidity, and if they run out of stock, they cannot forward against the balance, leading to no profit. A forwarding node's stock of IPpvHg can be depleted by "mostly a drain" peers, and the stock received from "mostly a source" peers is less valuable.Actual forwarding node operators classify their peers based on their payment flow and want CLBOSS to do the same. If a forwarding node sells its stock of IPpvHg at a low price point, other nodes will buy them out and form an effective cartel, later selling them at a higher price. Channel balance is the integral of the sum of payment flows in both directions, and actual forwarding node operators are obsessed with it. The channel balance is private information, which can be used to buy cheaply-offered IPpvHg towards the same node and resell it later at a higher price.In the scenario discussed, Y charges high fees to forward from A to B, whereas X charges low fees to forward from A to B, causing X's channel to always be depleted in that direction. Y takes advantage of being constantly online to always be the first to route their rebalance through X when X's channel clears up. There are limitations on such an attack, including forego legitimate fee income and requiring capital for creating fake payment flows.The use of `htlc_max_msat` as a flow valve is flawed, and the best option is a decently high and non-zero `base_fee`. In an ideal world, a rate limit could suffice. The proposal to add mandatory global functionality to support onchain-to-offchain swaps would force any net receivers to move their funds from Lightning to on-chain and make available any global IPpvHg stocks towards them. In the given scenario, X and Y set their max_msat in the A to B direction to $2.25 to get balanced flows. X and Y are seeing $45,000 going each way, collecting $0.90 in routing fees per day, and their channel is not going out of balance. Meanwhile, Z sees $10,000 going from A to B, collecting $40 a day, but his channel runs out after 5 days, at which point he has collected a total of $200 and has to spend $200 rebalancing on-chain. Each person paying $5 to B pays $0.002045 in fees, while each person paying $1000 to A pays $0.01 in fees.To break even, Z could reduce his fee rate below 0.4% and increase his channel capacity above $50k. However, increasing the B-&gt;A channel flow would lead X and Y's flows to be unbalanced, causing payers to have to route more flow through Z. Therefore, it is necessary to have a mechanism to move funds outside of the Lightning network, so that every published node should have onchain/offchain swap capability.</summary>
+    <published>2022-09-29T00:41:44+00:00</published>
+  </entry>
+</feed>

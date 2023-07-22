@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP174 / PSBT extensions</title>
+  <updated>2023-05-20T19:48:42.934465+00:00</updated>
+  <author>
+    <name>Andrew Chow 2019-03-07 15:34:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP174 / PSBT extensions</title>
+    <updated>2023-05-20T19:48:42.934465+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-March/016720.html" rel="alternate"/>
+    <summary>In an email thread on the bitcoin-dev mailing list, Andrew Poelstra proposed several extensions to PSBT (Partially Signed Bitcoin Transactions). The first proposal suggests adding a field to PSBT_GLOBAL_UNSIGNED_TX that contains only a txid of the unsigned transaction. This would save bandwidth in case signers have already seen the tx or can construct it themselves. However, this would break the central idea of PSBT that a PSBT contains everything required to construct a transaction.The second proposal is to add a version field to the global table, but its purpose remains unclear.The remaining proposals suggest adding several fields to per-input and per-output tables for various purposes, such as confirmed depth of referenced txout, maps from SHA2 hashes to their 32-byte preimages, maps from public keys to 32-byte "tweaks" used in pay-to-contract construction, maps from public keys to partial nonce commitments, partial nonces, and partial signatures, and maps from signatures (or signature nonces) to sign-to-contract tweaks. These last two suggestions are considered premature and need further development and standardization of related protocols.Finally, the proposal suggests adding a field (or family of fields) to every table that is "proprietary use" and guaranteed not to be defined by any future PSBT extension. Specifically, every field with key-type 0xFF could be considered "proprietary". The special field in the global table whose key is only 0xFF should be a "proprietary version field" with unspecified semantics but an understanding that specific users might stick a GUID or something in there as a way to recognize their own PSBTs.</summary>
+    <published>2019-03-07T15:34:26+00:00</published>
+  </entry>
+</feed>

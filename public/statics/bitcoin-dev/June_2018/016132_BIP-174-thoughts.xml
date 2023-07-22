@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 174 thoughts</title>
+  <updated>2023-06-13T03:18:12.037631+00:00</updated>
+  <author>
+    <name>matejcik 2018-06-19 14:22:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 174 thoughts</title>
+    <updated>2023-06-13T03:18:12.038639+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-June/016132.html" rel="alternate"/>
+    <summary>In this email thread, Pieter Wuille suggests the use of a key-value map or set model for PSBTs to allow for duplication and merging of signatures. While a key-value model can remove duplication more easily, a simpler set model can also achieve this by not allowing duplication. However, this means that certain data encoded inside keys can be dropped, reducing the PSBT size. The output script records could be ordered the same as their corresponding outputs, but if a Creator does not want to include a script for an output, the Script record should have a field to match it to the appropriate output. For input scripts, they suggest that they are per-input and not included in the global record. The "transaction" record needs to be unique, and this can be done either by adding an exception or encoding it separately outside the normal records. They also discuss the ability for Combiners to verify two PSBTs are for the same transaction, which cannot be combined if they are for incompatible transactions. To enforce this, the "transaction" record inside a PSBT may need to be in a canonical form, meaning with empty scriptSigs and witnesses, and there could be per-input records for "finalized scriptSig" and "finalized witness". Regarding BIP32 derivation paths, the spec currently only encodes the 32-bit fingerprint of the parent or master xpub, which may be less convenient for the signer when there are many xprv or when they're not available indexed by fingerprint. Therefore, Pieter suggests that the derivation paths include the full public key and chaincode of the parent or master things are derived from, which does mean that the Creator needs to know the full xpub which things are derived from, rather than just its fingerprint. However, Jan Matejek and Tomas Susanka do not understand the rationale for this idea and do not see a scenario where an index on master fingerprint is not available but index by xpubs is.</summary>
+    <published>2018-06-19T14:22:30+00:00</published>
+  </entry>
+</feed>

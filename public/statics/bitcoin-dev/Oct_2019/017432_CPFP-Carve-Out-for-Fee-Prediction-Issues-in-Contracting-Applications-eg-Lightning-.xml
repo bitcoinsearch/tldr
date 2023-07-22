@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+  <updated>2023-05-20T18:30:57.439992+00:00</updated>
+  <author>
+    <name>Matt Corallo 2019-10-24 21:25:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+    <updated>2023-05-20T18:30:57.439992+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-October/017432.html" rel="alternate"/>
+    <summary>A discussion on the carve-out rule in Bitcoin's RC for bitcoind 0.19 has been revived. The rule was added to pave the way for more robust CPFP of on-chain contracts, particularly Lightning commitment transactions. The rule states that the last transaction added to a package of dependent transactions in the mempool must have no more than one unconfirmed parent. However, an implementation of a new commitment format for utilizing the Bring Your Own Fees strategy using CPFP suggests that the special case rule should be relaxed to avoid the need for adding a 1 CSV to all outputs. It is suggested to allow adding a large transaction to each output of the unconfirmed parent instead, which would allow an attacker to exceed the MAX_PACKAGE_VIRTUAL_SIZE limit in some cases. The author of the suggestion questions whether this would be a problem with the current mempool acceptance code in bitcoind and if transactions could be evicted based on feerate when the max mempool size is met. In the original email thread, Matt Corallo discusses the fact that a commitment transaction always needs at least one non-CSV output per party and how the size limitation on the transaction that spends for carve-out purposes only affects how many other inputs/outputs can be added. Rusty Russell proposes a simplified RBF where an old transaction can be replaced by a new one with a higher feerate and that is in the first 4Msipa of mempool, but not if the old transaction is also in the top 4Msipa. This allows someone 100k of free tx spam and can be further restricted by marking the unilateral close and limiting the child tx weight.</summary>
+    <published>2019-10-24T21:25:14+00:00</published>
+  </entry>
+</feed>

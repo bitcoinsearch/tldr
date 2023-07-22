@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Payment channel without timeout protected from malleability</title>
+  <updated>2023-05-18T19:11:45.736453+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-11-27 20:11:13</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2015-11-27 09:09:46</name>
+  </author>
+  <link href="lightning-dev/Nov_2015/000360_Payment-channel-without-timeout-protected-from-malleability.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2015/000355_Payment-channel-without-timeout-protected-from-malleability.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Payment channel without timeout protected from malleability</title>
+    <updated>2023-05-18T19:11:45.736453+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000360.html" rel="alternate"/>
+    <summary>In a forum post, Nicolas Dorier suggests a method to open a channel without suffering from malleability attack. By adapting an idea from gmaxwell, A can create the first commitment transaction for opening a channel with B. A then extracts the hash that B needs to sign to be able to broadcast the commitment and asks B to sign the hash, but does not disclose the commitment. After confirmation, A announces the anchor to B. A also passes the original unsigned commitment to B, who verifies that it's in the right format and hashes to the hash that he signed. B can't identify A's anchor before announcement because he does not know the P2SH of the multisig. However, someone other than B (ie a third party) could malleate the anchor between broadcast and confirmation just for their own amusement. B can't reuse pubkeys between different channels with this protocol either, but that's good practice anyway.The author of the post believes that child-pays-for-parent seems plausible and would work by doing txA: spend 6 BTC to 5 BTC to A&amp;B and 1 BTC to A. Then doing txB: spend 1 BTC from txA:1 to 0.999 BTC to A. This method should be pretty safe, but CPFP doesn't work yet, and segregated witness seems like it'll happen sooner anyway. Finally, the author prefers seggregated witness to fix the problem cleanly, but thinks that opening the channel as described is a good enough workaround until it happens.</summary>
+    <published>2015-11-27T20:11:13+00:00</published>
+  </entry>
+</feed>

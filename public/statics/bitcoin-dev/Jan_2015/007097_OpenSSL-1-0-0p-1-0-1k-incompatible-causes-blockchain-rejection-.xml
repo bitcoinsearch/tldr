@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>OpenSSL 1.0.0p / 1.0.1k incompatible, causes blockchain rejection.</title>
+  <updated>2023-05-19T19:40:31.749324+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2015-01-10 04:26:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>OpenSSL 1.0.0p / 1.0.1k incompatible, causes blockchain rejection.</title>
+    <updated>2023-05-19T19:40:31.749324+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-January/007097.html" rel="alternate"/>
+    <summary>Bitcoin users have been warned not to update OpenSSL 1.0.0p / 1.0.1k, which is being pushed out by various operating system maintainers as the update could lead to consensus forks and is incompatible with the Bitcoin system. Bitcoin Core released binaries from Bitcoin.org are unaffected, as are any built with the gitian deterministic build system. If you are running third-party or self-compiled Bitcoin Core or an alternative implementation using OpenSSL you must not update OpenSSL or must run a Bitcoin software containing a workaround. Tests included with Bitcoin Core in the test_bitcoin utility already detect this condition and fail.The incompatibility is due to the OpenSSL update changing the behavior of ECDSA validation to reject any signature which is not encoded in a very rigid manner. This was a result of OpenSSL's change for CVE-2014-8275 "Certificate fingerprints can be modified". While for most applications it is generally acceptable to eagerly reject some signatures, Bitcoin is a consensus system where all participants must generally agree on the exact validity or invalidity of the input data. In a sense, consistency is more important than "correctness".The patches that fix one symptom of the general problem: relying on software not designed or distributed for consensus use (in particular OpenSSL) for consensus-normative behavior. Therefore, as an incremental improvement, a targeted soft-fork has been proposed to enforce strict DER compliance soon, utilizing a subset of BIP62. Adding a blockchain rule for strict DER will reduce the risk of consensus inconsistencies from alternative implementations of signature parsing or signature verification, simplify BIP62, and better isolate the cryptographic validation code from the consensus algorithm. A failure to do so will likely leave the situation or possibly worse again in the future.The relevant incompatible transactions are already non-standard on the network since 0.8.0's release in February 2013, although there was seemingly a single miner still mining incompatible transactions. That miner has been contacted and has fixed their software, so a soft-fork with no chain forking should be possible.</summary>
+    <published>2015-01-10T04:26:23+00:00</published>
+  </entry>
+</feed>

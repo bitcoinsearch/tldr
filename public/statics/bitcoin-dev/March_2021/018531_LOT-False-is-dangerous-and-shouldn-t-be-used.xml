@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>LOT=False is dangerous and shouldn't be used</title>
+  <updated>2023-06-14T18:50:41.910992+00:00</updated>
+  <author>
+    <name>Eric Voskuil 2021-03-02 20:07:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>LOT=False is dangerous and shouldn't be used</title>
+    <updated>2023-06-14T18:50:41.910992+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-March/018531.html" rel="alternate"/>
+    <summary>The purpose of supermajority signaling is to reduce the chance of a chain split. It is not a bug and it is misleading to call it so. Majority hash power censors non-conforming transactions, which is why a non-censoring majority is required to counter it. In case of a hypothetical chain split, LOT=false chain would be vulnerable to reorgs, while LOT=true would suffer from slow blocks. Both chains suffer if a chain split happens, which is why they are important to avoid.According to Luke Dashjr via bitcoin-dev mailing list, coordinating activation by miner signal alone leaves open the door to a miner veto. This was never the intended behavior and a bug, which took a rushed deployment of BIP148 to address. LOT=False would reintroduce that same bug. LOT=True is a fallback to avoid regression on this and other bugs. BIP 8 (LOT=True) combines the certainty of such a flag day with the speed improvement of a MASF, so that softforks can be activated both reasonably quick and safely.With LOT=False in the picture, things can get messy. Some users will enforce Taproot while others will not. Users with LOT=True will still get all the safety thereof, but those with LOT=False will face an unreliable chain, being replaced by the LOT=True chain every time it overtakes the LOT=False chain in work. For two weeks, users with LOT=False would not have a usable network. The only way to resolve this would be to upgrade to LOT=True or to produce a softfork that makes an activated chain invalid (thereby taking the anti-Taproot path).To make matters worse for LOT=False, giving miners a veto also creates an incentive to second-guess the decision to activate and/or hold the activation hostage. This is a direct result of the bug giving them a power they weren't intended to have. In all possible scenarios, LOT=False puts users and the network at significant risk, while LOT=True minimizes risk to everyone and has no risk to users running LOT=True. The overall risk is maximally reduced by LOT=True being the only deployed parameter, and any introduction of LOT=False only increases risk probability and severity.</summary>
+    <published>2021-03-02T20:07:16+00:00</published>
+  </entry>
+</feed>

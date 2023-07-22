@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Protocol extensions</title>
+  <updated>2023-06-05T00:41:40.643480+00:00</updated>
+  <author>
+    <name>Michael Grønager 2011-12-22 09:18:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Protocol extensions</title>
+    <updated>2023-06-05T00:41:40.643480+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-December/000984.html" rel="alternate"/>
+    <summary>The discussion among Bitcoin developers centers on the Distributed Hash Table (DHT) and the risk of a Sybil attack. Michael suggests that forcing someone to participate in a fixed position in the block storage network is a good way to reduce the risk of such an attack. The hash should include only information that cannot be changed by the user, so including the IP address is safe, but adding the port number is risky. To keep the different A.B segment requirement as imposed in the client today, we need to agree on this approach. Broadcasting transactions is not necessary since miners fetch them from their storage place. Alternatively, we could use the inv broadcast to notify peers about a new block/transaction and let it retrieve them from the permanent storage (DHT or block storage network). Caching at nodes leading to the real location, however, is possible if we route traffic internally in the DHT. While agreeing that thinner nodes would most likely just serve as cache, they need notification on tx'es involving some of their tx outs or involving some of their Bitcoin addresses. By letting that be part of the hash space, we could maintain a true p2p setup without revealing the user's address to the server. Michael also believes that supernodes will emerge at some point that other nodes trust to validate transactions for them. Supernodes wouldn't even need to store the entire blockchain and transaction pool, but it would suffice to keep lists of IP addresses of other trustworthy nodes and partition them into a hashspace. The trusted supernode could provide just enough incentive for the supernode to do its best to ensure the nodes it vouches for are indeed legit. There is also a discussion about the potential attack vector and the possibility of partitioning the hashspace to minimize the risk that an attacker can manage to disproportionately gain control over a part of the hashspace.</summary>
+    <published>2011-12-22T09:18:52+00:00</published>
+  </entry>
+</feed>

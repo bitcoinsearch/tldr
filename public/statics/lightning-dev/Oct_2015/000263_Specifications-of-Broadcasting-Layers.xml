@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Specifications of Broadcasting Layers</title>
+  <updated>2023-05-23T21:02:32.763269+00:00</updated>
+  <author>
+    <name>Mats Jerratsch 2015-10-16 13:23:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Specifications of Broadcasting Layers</title>
+    <updated>2023-05-23T21:02:32.763269+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-October/000263.html" rel="alternate"/>
+    <summary>The author is discussing three different broadcast messages that require different handling due to their varying levels of dynamism. The first message, Pubkey-Channel-Relationships, is very static and relayed every 10 days with a size of 264 bytes. The second message, which contains node addresses/IP, is dynamic and depends on the nodes. It is estimated to be sent approximately every 12 hours and has a size of 133 bytes. The third message, Channel-Status, has highly varied content depending on actual traffic and node usage. It is estimated to be sent once an hour with a size of 176 bytes.The author would love to combine the first and third messages to save the 80 bytes of an additional signature, but they do not believe that the first message is worth being broadcast hourly. They also mention wanting to spare some additional bytes in the first message for a reputation system. These three messages combined add up to 2.5 GB daily data or 30 kb/s constant load, with hard drive space being around 330 MB.To implement this, the author suggests using either a gossip protocol or a DHT approach. A new node would need to retrieve the full dataset before opening a channel with a new node. The author suggests designing a way to distribute the load of retrieving the full dataset among several nodes, although it may not be necessary as 330 MB isn't too much to retrieve from a small number of nodes. Lastly, the author notes that the network currently has around 100k nodes, although Rusty usually starts with higher estimates.</summary>
+    <published>2015-10-16T13:23:34+00:00</published>
+  </entry>
+</feed>

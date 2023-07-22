@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proof-of-closure as griefing attack mitigation</title>
+  <updated>2023-06-03T00:22:27.060904+00:00</updated>
+  <author>
+    <name>Rusty Russell 2020-04-06 01:20:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proof-of-closure as griefing attack mitigation</title>
+    <updated>2023-06-03T00:22:27.060904+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002625.html" rel="alternate"/>
+    <summary>Rusty Russell proposed a rework of the old unwrap-the-onion proposal, with some important bits missing. One important bit is that C needs to prove that the channel it is willing to close involves the payment attempt and is not some other channel closure that it is attempting to use to fulfill its own soft timeout. This can be done by having B (and A) inspect the transaction outputs and see (with some additional data from C) that one of the outputs is to an HTLC that matches the payment hash. Rusty's previous proposal was to limit the damage somewhat by requiring that C offer a signed list of some limited number of HTLCs it is claiming were caught, alongside the closure proof. The closure claim gets socialized, and if there are multiple different claim lists for the tx then C is a bad actor and we no longer respect its closure proof. In addition, for closure proofs to work, nodes need to agree on what is a valid, standard, high-enough-fee commitment transaction. The payment might be considered dust, or an unresponsive peer has not yet acked the HTLC. The timeout would work by having node N wait for a proof for 30 seconds, plus get another 30 seconds for each decryption of the onion it receives.Otherwise, you can't know how long you've got to provide this closure proof, or how long to wait for it.</summary>
+    <published>2020-04-06T01:20:18+00:00</published>
+  </entry>
+</feed>

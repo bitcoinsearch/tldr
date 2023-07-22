@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Stealth Address Idea (special-less)</title>
+  <updated>2023-06-10T22:20:49.335359+00:00</updated>
+  <author>
+    <name>Richard Moore 2015-09-12 05:38:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Stealth Address Idea (special-less)</title>
+    <updated>2023-06-10T22:20:49.335359+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-September/010995.html" rel="alternate"/>
+    <summary>The founder of Genetic Mistakes Software, Richard Moore, has presented an idea for a straightforward stealth address that is SPV-friendly and easy to support in software without too much special code. The goal is to create two modes of operation: revocable payments and irrevocable payments. Revocable payments would result in both parties knowing the private key, allowing for plausible deniability when funds are swept or revoked. Irrevocable payments would allow only the receiver to claim the funds. This would enable them to leave the funds in the address until they need to be spent. Moore's proposal involves sending to a target public key and choosing one UTXO set of inputs into a transaction at random. From here, the ECDH of the targetPublicKey and senderUtxo.privateKey is used as a shared secret. For revocable payments, this shared secret is used as the private key and the address is computed. For irrevocable payments, a sharedPrivateKey is created from the bytes of the shared secret and ECC addition (or multiplication) is used on the public key of the sharedPrivateKey and the targetPublicKey. The receiver can then use ECC addition (or multiplication) on the sharedPrivateKey and the targetPrivateKey to generate the corresponding privateKey. The SPV-able part is lightly discussed in the top of stealth.js and involves making a 1-of-2 multisig where the first is the resulting stealth address and the second is something that looks like a valid public key but will match a bloom filter (given a tweak that is generated deterministically from the targetPublicKey) and matches the targetPublicKey. However, Moore is seeking more feedback on this. He provides links to his GitHub repository with working code and examples of transactions on the blockchain.</summary>
+    <published>2015-09-12T05:38:53+00:00</published>
+  </entry>
+</feed>

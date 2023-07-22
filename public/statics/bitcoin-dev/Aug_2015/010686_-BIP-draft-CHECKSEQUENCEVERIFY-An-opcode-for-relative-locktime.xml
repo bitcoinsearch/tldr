@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP-draft] CHECKSEQUENCEVERIFY - An opcode for relative locktime</title>
+  <updated>2023-06-10T19:21:32.355154+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2015-08-27 23:32:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP-draft] CHECKSEQUENCEVERIFY - An opcode for relative locktime</title>
+    <updated>2023-06-10T19:21:32.355154+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/010686.html" rel="alternate"/>
+    <summary>Mark Friedenbach has created two new repositories on GitHub with changed rules regarding sequencenumbers. The first repository inverts the sequence number, with nSequence=1 meaning one block relative lock-height and nSequence=LOCKTIME_THRESHOLD meaning one second relative lock-height. nSequence&gt;=0x80000000 is not interpreted as a relative lock-time. The second repository not only inverts the sequence number, but also interprets it as a fixed-point number. This allows up to a five-year relative lock time using blocks as units and up to about a two-year relative lock time using seconds as units. It saves four bits for future use without second-level granularity, and more bits could be recovered from time-based locktimes by choosing a higher granularity (a soft-fork change if done correctly).Friedenbach asks what an appropriate maximum would be to choose, assuming a maximum of one year relative lock-times. He suggests that lock times on the order of a few days to a month or so are most suitable but feels uncomfortable going less than a year for a hard maximum. He is having trouble thinking of any use case that would require more than a year of lock-time and asks whether anyone else can think of such a use case. A power of 2 would be far more efficient, he says, and the key question is how long of a relative block time is needed. He advises figuring out what the maximum should be and then seeing how many bits are left over.Finally, Gregory Maxwell suggests adding an extra wrinkle to the discussion by representing one block with more than one increment, leaving additional space for future signaling or allowing higher resolution numbers for a sharechain commitment. Jorge Timón explains this to Pieter using "for example, 10 instead of 1".</summary>
+    <published>2015-08-27T23:32:55+00:00</published>
+  </entry>
+</feed>

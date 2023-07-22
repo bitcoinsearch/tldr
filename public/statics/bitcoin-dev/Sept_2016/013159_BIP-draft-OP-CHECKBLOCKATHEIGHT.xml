@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP draft: OP_CHECKBLOCKATHEIGHT</title>
+  <updated>2023-06-11T20:08:05.457693+00:00</updated>
+  <author>
+    <name>Peter Todd 2016-09-23 20:02:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP draft: OP_CHECKBLOCKATHEIGHT</title>
+    <updated>2023-06-11T20:08:05.457693+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-September/013159.html" rel="alternate"/>
+    <summary>The discussion in the bitcoin-dev mailing list revolves around a proposal which is believed to destroy an important property of Bitcoin. Currently, during an "innocent" re-org, all affected transactions can eventually get replayed as long as the re-org depth is less than 100. The proposed operation would destroy this property. However, if the transaction was required to be locktimed at least 100 blocks after the block it's referencing, the mempool handling complexity could be reduced and the reorg safety impact eliminated. But this would make the functionality not very useful for this application as waiting for 100 blocks until the tx is minable makes it unlikely that the wallets would use this opcode. The scenario discussed involves Alice paying Bob with tx1a, which gets N confirmations before Bob pays Charlie from tx1a's output in tx2a. A reorg eliminates the block that tx1a existed, and a conflicting tx1b is mined instead, making tx1a and tx2a invalid. Bob pays Charlie again with tx2b, whose inputs do not conflict with tx2a. Another reorg eliminates tx1b, allowing tx1a, tx2a, and tx2b to all be mined, resulting in Charlie being paid twice.As two reorgs are required for this scenario to be applicable, it's easier to wait for tx1b to be confirmed sufficiently deeply in the chain so that a reorg undoing it is unlikely. Since 100 blocks is a lot more than most wallets consider "sufficiently unlikely", it's unlikely that the feature will get used.</summary>
+    <published>2016-09-23T20:02:23+00:00</published>
+  </entry>
+</feed>

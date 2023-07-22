@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-05-20T17:59:16.782953+00:00</updated>
+  <author>
+    <name>Johnson Lau 2018-11-28 08:40:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-05-20T17:59:16.783953+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-November/016512.html" rel="alternate"/>
+    <summary>A developer named Bob McElrath recently shared his experimental wallet that implements Bitcoin Covenants/Vaults using "Pay-to-Timelock Signed Transaction" (P2TST). The concept is to deposit funds to an address for which the private key is unknown and construct a second transaction sending it to a timelocked staging address with a private key, along with an IF/ELSE condition. One must delete the private key of the deposit address or generate a signature directly using a RNG. This construction of covenants/vaults requires NOINPUT, as standard sighash's commit to the txid, which in turn commits to the address, which commits to the pubkey, resulting in a circular dependency on the pubkey. Sipa's proposal, bip-schnorr, is compatible with this vaulted construction by using SIGHASH_NOINPUT | SIGHASH_SCRIPTMASK to remove the scriptPubKey/redeemScript from the sighash, thus removing the circular dependency.McElrath believes that covenants could be made using OP_CHECKSIGFROMSTACK or OP_PUSHTXDATA. He also expressed excitement to combine the above idea with Taproot/Graftroot/g'Root.</summary>
+    <published>2018-11-28T08:40:34+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Making Electrum more anonymous</title>
+  <updated>2023-06-10T03:04:34.141158+00:00</updated>
+  <author>
+    <name>Eric Voskuil 2015-07-22 22:20:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Making Electrum more anonymous</title>
+    <updated>2023-06-10T03:04:34.141158+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-July/009536.html" rel="alternate"/>
+    <summary>The issue of privacy in Bitcoin transactions has been a topic of concern for many. Electrum clients have been using one server for requesting address balances and history, meaning that the selected server knows which addresses belong to the same wallet. To address this problem, an anonymous routing layer between Electrum servers and clients has been proposed. The scheme is similar to onion routing, where each server publishes an RSA public key, and each client receives a list of available servers and their pubkeys. For each wallet address, the client chooses a server and an RSA keypair, creates a list of encrypted requests, and sends them to the main server. The main server dispatches the client's requests to the corresponding servers without revealing the client's IP address. Each server decrypts the requests it receives, performs the request, and encrypts the result with K_addr_i. The client then decrypts the encrypted response with k_addr_i.However, implementing this scheme raises some weakness issues such as lack of relay nodes making collaboration trivial, the size of the network, directory perpetual weakness, and content visibility to the exit node. An ideal solution would allow clients to balance privacy against performance because the level of privacy will always be a performance trade-off. It is suggested to use a distinct Tor route for each Bitcoin address rather than reinvent Tor and reproduce its community to resolve these problems but with the downside of lower performance. Furthermore, any robust privacy optimization would at least be designed to support partial (SPV) chain clients and support wallet restoration from backup. Finally, if a server cannot be trusted to protect a client's privacy, then it is unlikely that the client would trust it with their money either.</summary>
+    <published>2015-07-22T22:20:33+00:00</published>
+  </entry>
+</feed>

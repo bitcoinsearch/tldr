@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Onion messages for probing scheme</title>
+  <updated>2023-06-03T12:12:52.526236+00:00</updated>
+  <author>
+    <name>Antoine Riard 2023-03-01 18:02:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Onion messages for probing scheme</title>
+    <updated>2023-06-03T12:12:52.526236+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-March/003870.html" rel="alternate"/>
+    <summary>In a Lightning-dev mailing list, Val brought up the idea of using onion messages (OMs) for payment probing which was briefly touched on at the 2022 LN summit. In today’s lightning, payment reliability tends to heavily depend on having sufficient payment volume to determine current liquidity balances of channels, which is how most big nodes can tell whether a given channel has enough liquidity to forward a given amount. Today’s HTLC payment probing can work well, but risks channel liquidity being locked up if a peer along the route goes offline. Onion messages (OMs) present a convenient way to probe without risking locked liquidity along the route. A routing hop could commit to "private" gossip sent back to HTLC senders during HTLC successful settlement which might announce "differentiated services" of channel liquidity levels. Any deviation from the gossip message could be penalized by sender's scoring algorithms as the liquidity SLA parameters have been announced explicitly by the routing hops. Antoine suggested an alternative of the routing hops themselves announcing their liquidity balances with an extension or new set of gossip messages. Gossips messages could commit to a liquidity balance and duration (e.g +1000 blocks from tip), rather relying on sender-side probing, which might be less and less accurate with higher rate of network liquidity congestion. Val recommended reading the gist instead since it has the relevant diagrams in-line. A naive approach could be to send onion message probes directly to individual nodes along the desired route, including those to which you don’t have a direct channel. Therefore, it is probably best to design a scheme that probes along channel paths, like HTLC probing. This adds more complexity to the case where an intermediate node cannot forward the desired amount due to the stateless nature of OMs. The happy path of OMs is explained where Alice is probing Alice &gt; Bob &gt; Carol &gt; Dave for a 100k msat payment. She’ll construct an onion message for Bob, the first hop. Bob receives this OM, sees that he’s able to forward 110k msats to his next-hop Carol, and forwards Carol’s onion packet to her. Finally, Dave receives his onion packet, sees he can receive 100k msats from Carol, and uses the provided reply path to send a simple probe success onion message back to Alice.As an example of the sad path for an intermediate node, if Carol can’t forward 105k msats to Dave, she’ll fail the probe back to Bob by sending an empty “failed” message. Val views this feature as a low priority enhancement, given there are a lot more pressing issues in LN.</summary>
+    <published>2023-03-01T18:02:04+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP sighash_noinput</title>
+  <updated>2023-05-25T00:26:12.383430+00:00</updated>
+  <author>
+    <name>Christian Decker 2018-04-30 16:29:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP sighash_noinput</title>
+    <updated>2023-05-25T00:26:12.383430+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-April/001224.html" rel="alternate"/>
+    <summary>Christian Decker has proposed a new sighash flag, SIGHASH_NOINPUT, that removes the commitment to the previous output. This flag was mentioned previously by Joseph Poon but was never formally proposed. SIGHASH_NOINPUT would be useful for Lightning and enable simple watch-towers so that the need to watch the blockchain for channel closures is outsourced and the counterparty can react appropriately if they misbehave. In addition, the eltoo paper, which describes a simplified update mechanism that can be used in Lightning and other off-chain contracts with any number of participants, has just been released. By not committing to the previous output being spent by the transaction, an input can be rebound to point to any outpoint with a matching output script and value. The binding is no longer explicit through a reference, but through script compatibility, and the transaction ID reference in the input is a hint to validators. The sighash flag is meant to enable some off-chain use-cases and should not be used unless the tradeoffs are well-known. Contract-specific key-pairs are suggested to avoid having any unwanted rebinding opportunities. Implementation details are still being discussed, including whether to use a separate opcode or a sighash flag. Some feel that the sighash flag could lead to confusion with existing wallets. However, given that we have SIGHASH_NONE and existing wallets will not sign things with unknown flags, it was decided to go with the sighash way. The proposal is minimalistic and simple. There are still some things on which they'd like to hear input from the wider community, such as committing to the amount of the outpoint being spent. The rationale behind this is that while rebinding to outpoints with the same value maintains the value relationship between input and output, they will probably not want to bind to something with a different value and suddenly pay a gigantic fee.The deployment part of the proposal is left vague on purpose to avoid colliding with any other proposals. It should be possible to introduce it by bumping the segwit script version and adding the new behavior. Christian hopes the proposal is well received and is looking forward to discussing variants and tradeoffs. The applications that have been proposed so far are quite interesting, and he believes there are many more they can enable with this change.</summary>
+    <published>2018-04-30T16:29:53+00:00</published>
+  </entry>
+</feed>

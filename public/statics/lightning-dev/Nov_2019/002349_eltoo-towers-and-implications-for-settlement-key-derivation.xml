@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>eltoo towers and implications for settlement key derivation</title>
+  <updated>2023-06-02T21:53:40.934016+00:00</updated>
+  <author>
+    <name>Conner Fromknecht 2019-11-26 23:41:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>eltoo towers and implications for settlement key derivation</title>
+    <updated>2023-06-02T21:53:40.934016+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-November/002349.html" rel="alternate"/>
+    <summary>In this message, Conner revisits the eltoo paper and notes some potential issues related to watchtowers that could impact channel construction. Due to the NOINPUT feature, any update transaction can spend from any other update transaction. However, in order for a watchtower to spend, it must also produce a witness script that matches the input's witness program. Each update transaction uses unique keys for the settlement clause to ensure that settlement transactions can only spend from one update transaction, meaning each state has a unique witness program. Naively, a watchtower could store settlement keys for all states, allowing it to reconstruct arbitrary witness scripts for any given sequence of confirmed update transactions. To avoid this, Conner proposes giving the tower an extended parent pubkey for each party and deriving non-hardened settlement keys on demand based on the confirmed state numbers. However, this solution is not ideal because leaking one hot settlement key compromises all sibling settlement keys. The issue of spending the unique witness programs is mentioned in section 4.1.4 of the eltoo paper, but from the perspective of counterparties rather than a third-party service. It is unclear if requiring non-hardened keys is a known consequence of the construction or if there are alternative approaches available.</summary>
+    <published>2019-11-26T23:41:14+00:00</published>
+  </entry>
+</feed>

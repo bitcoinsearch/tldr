@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Package Relay Proposal</title>
+  <updated>2023-06-15T20:58:40.501961+00:00</updated>
+  <author>
+    <name>eric at voskuil.org 2022-05-26 02:59:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Package Relay Proposal</title>
+    <updated>2023-06-15T20:58:40.501961+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020522.html" rel="alternate"/>
+    <summary>The email thread discusses a proposal for package relay in Bitcoin protocol. Since packages do not have headers, they require identity in a BIP152 scheme. A Merkle root can be used to uniquely identify the partially-ordered set of transactions, replacing header and blockhash fields. The concern is raised about a dishonest peer announcing a package with false information and whether we should double-check it with other peers or censor that tx from us. The fix for this is to provide fee and weight when announcing the package rather than only being asked for its info. Single tx broadcasts do not carry an advertised fee rate, but 'feefilter' (BIP133) message provides this distinction, which can be interpreted as applicable to packages. Thus, there is no need to send a potentially bogus fee rate with every package. It can only be validated by obtaining the full set of txs. A package is fundamentally a compact block announcement without the header, and once a validated set of txs within the package has been obtained with sufficient fee, a fee-optimal node would accept the largest subgraph of the package that conforms to fee constraints and drop any peer that provides a package for which the full graph does not. The proposed changes to names are sendpkg, MSG_CMPCT_PKG, cmpctpkg, getpkgtxn, pkgtxn. Size is restricted in the same manner as block and transaction broadcasts, by consensus, and count is incorporated into BIP152 as 'shortids_length'. Adding versioning to individual protocols is just a reflection of the insufficiency of the initial protocol versioning design, and that of the various ad-hoc changes to it, including yet another approach in this proposal.</summary>
+    <published>2022-05-26T02:59:01+00:00</published>
+  </entry>
+</feed>

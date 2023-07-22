@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DNS records for LN nodes</title>
+  <updated>2023-06-03T05:50:18.063544+00:00</updated>
+  <author>
+    <name>Andy Schroder 2021-09-12 23:52:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DNS records for LN nodes</title>
+    <updated>2023-06-03T05:50:18.063544+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-September/003226.html" rel="alternate"/>
+    <summary>A proposal was made on the Lightning-dev mailing list to create DNS records that apply to LN nodes to serve the same information as the @host format for defining a connection to an LN node. The proposed DNS records would allow assigning an alternate host name for the LN node for a domain and storing the pubkey for the LN node in a DNS record. This could be particularly useful when dealing with machines in the physical world where users want an easy way to make a connection and channel to with a human-readable string that is printed on the machine, but don't even want to deal with QR codes or NFC. Although anyone can already store data into DNS records and tell people to confirm from there, it would be nice if it was standardized in a bLIP so that everybody does it in the same way. Additionally, there could be a reverse link in which nodes publish their domain names as their alias and that is confirmed with the DNS record. Then, there will finally be able to identify and trust the payee pubkeys in invoices. The proposal also takes into account the fact that verifying against DNS doesn't mean we can fully trust it since DNS has centrally controlled root servers. However, implementing DNSSEC may help a lot because they are mostly honest for right now. With DNSSEC in mind, it may make sense for LN nodes to also advertise "DS" records for a domain, that way the rest of the DNS records (unrelated to LN) can be more trusted. The point here being, we can have a two-way link between DNS and LN to keep DNS in check. Overall, the proposal suggests using DNS records to provide information about LN nodes and make connections easier, complementing the peer-to-peer gossip protocol. However, it also acknowledges the limitations of DNS and the need for additional security measures such as DNSSEC. It remains to be seen whether this type of definition fits better in lnurl-rfc or as part of a BOLT.</summary>
+    <published>2021-09-12T23:52:10+00:00</published>
+  </entry>
+</feed>

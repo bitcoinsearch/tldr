@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Difference between ignoring htlc request due to wrong payment hash vs refusing to release preimage in LND</title>
+  <updated>2023-06-03T00:12:58.649978+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-03-24 08:27:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Difference between ignoring htlc request due to wrong payment hash vs refusing to release preimage in LND</title>
+    <updated>2023-06-03T00:12:58.649978+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-March/002601.html" rel="alternate"/>
+    <summary>In a conversation between ZmnSCPxj and Subhra, ZmnSCPxj discusses an issue regarding the LND protocol. ZmnSCPxj explains that A and B form an HTLC where the payment is "irrevocably committed". B then looks at the HTLC data and checks whether it knows the preimage to the payment hash. If B does not know the preimage, and there is no forwarding data (B is the final hop), then B responds with "incorrect or unknown payment details", and A waits for the channel state to advance. ZmnSCPxj also mentions that money gets locked temporarily in the HTLC but was freed soon afterwards as fast as B and A can advance the channel state. When asked how one can mimic a griefing attack scenario in LND, ZmnSCPxj suggests modifying the LND code directly or asking LND developers for any available hooks. In C-Lightning, a plugin must be installed, and you may devise some way for the plugin to know what payment hash you want to grief. Then, the plugin hooks into `htlc_accepted` handler, performs a `waitblockheight` command, and waits for the target block height to grief for before returning from the `htlc_accepted` handler.</summary>
+    <published>2020-03-24T08:27:27+00:00</published>
+  </entry>
+</feed>

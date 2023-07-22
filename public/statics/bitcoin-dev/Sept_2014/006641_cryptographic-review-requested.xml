@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>cryptographic review requested</title>
+  <updated>2023-06-09T02:42:32.156392+00:00</updated>
+  <author>
+    <name>Mem Wallet 2014-09-23 21:12:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>cryptographic review requested</title>
+    <updated>2023-06-09T02:42:32.156392+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-September/006641.html" rel="alternate"/>
+    <summary>A proposal has been made for a standardized ECIES scheme for Bitcoin communication. The proposal also includes a proposed change to BIP44, with the inclusion of a series of identity keys that include addresses for signing and public keys for encrypted messages. A working implementation with a whitepaper is available on http://memwallet.info/btcmssgs.html. This scheme allows for secure messaging using a Bitcoin wallet without needing other software. It makes it possible for an address owner to prove ownership to another address holder privately without requiring secure communication channels.The document describes a scheme for sending signed encrypted messages using Bitcoin public and private keys. It employs CompactSize format as a variable size little endian length field serialization format known as a bitcoin "Variable length integer." The standard assumes that the reader is familiar with the Bitcoin compact signature format, which is a 65-byte signature allowing the verifier to recover the public key associated with the signature, eliminating the need to send it with the message.The sender's address will be provided to enable validation of the signature. The format is a 1-byte recid followed by ECDSA R then S values. This ECIES scheme uses HMAC_SHA256 for mac and PBKDF2 for KDF. PBKDF2 is used with 2048 iterations, salt=("Bitcoin Secure Message" || ecies_nonce_publickey). AES is used with 256-bit keys, and CFB mode with a 128-bit feedback buffer. No padding or envelope, simply a pure byte cipher.The compact_signed_message is 0x01 || CompactSizePrefix(M) || Sender_Address || Signature, and the compact_unsigned_message is 0x00 || CompactSizePrefix(M). The SendMessage function takes M, Signing_Key, and Dest_Pub as inputs, while ReceiveMessage takes eM and Decrypting_Key.Test vectors are in WIF format, public keys in base58_check format, messages in c-style UTF-8 string literals, and encrypted messages are in Base64 format. Compliant implementations will use random nonces from a cryptographically strong DRBG.The provided context includes a cryptographic address (UX2YFmLKZYG6oYBjEUpRSnXwvofdfbgM) and a signing address (1HxcmSvFiviw1RDyzoPgktJfzgKcJ4pHeh). The implementation of this address can be found on memwallet.info/btcmssgs.html. The implementation credit goes to 76NPRHE2g5pSvbLgP8fEEtBvfPB4zte56veXdxXfaXcsQwRjZB, also known as 1Lk96ASyr3k6ZoTFGLrUgxGuctNKF24V5q. Furthermore, the acknowledgement goes to bitaddress.org, brainwallet.org, and other contributors who have simplified cryptocurrency and Bitcoin coding in Javascript.</summary>
+    <published>2014-09-23T21:12:04+00:00</published>
+  </entry>
+</feed>

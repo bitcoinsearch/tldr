@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Scalability issues</title>
+  <updated>2023-06-06T06:36:53.680822+00:00</updated>
+  <author>
+    <name>Michael Grønager 2012-07-25 09:45:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Scalability issues</title>
+    <updated>2023-06-06T06:36:53.680822+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-July/001737.html" rel="alternate"/>
+    <summary>In an email exchange between Steve and Michael Grønager, a difference in performance on virtual machines versus running directly on the iron was noted. Michael suggested that virtual machines are weak when it comes to disk i/o and berkeley DB, as used by Bitcoin, is a sucker for disk i/o. The CPU doing the blockchain download is just waiting for the disk all the time. Michael would like to test keeping database log files in memory. He thinks that it should not matter for durability of the wallet, as it flushes at each write anyway. As for the blockindex, it will remain consistent, but might be lagging some blocks behind at startup. Otherwise, the system described by Steve (raid0 over 6 disks) should perform like crazy with respect to disk i/o, at least on par with SSD. However, Michael is worried about Steve's virtualization. Steve said that bitcoin blockchain download/verification all happens in one thread, so multicores do not really help. He has never tried an SSD. What he does have is 6 SATA 6gbs configured as RAID0 Drives, 32gb of ram, and Ubuntu 64, and this runs up to 16 VM's. However, he has not tried to download the blockchain on the master OS, just in virtualization. He believes that network bandwidth is the issue. He might instrument the bitcoin-qt exe to only pick low ping nodes. Steve said that it is time to start some benchmarking. The verification for the past five days was negligible. Steve is off to Australia tomorrow and plans to set some breakpoints and do some timings in a debugger. Michael said that he gets a full blockchain from scratch in 45 minutes on his laptop. In contrast, Steve stated that he has never had the entire chain under 12 hours, in fact, it is normally closer to 24. Michael suggested that these numbers would depend largely on the system running the test. He called his laptop slightly over the average today with 2.66Ghz i7 dual-core, 8GBRAM, 512GB SSD. On some VPSes, he only reaches such numbers (12 hours) that are known for notoriously slow disk I/O.</summary>
+    <published>2012-07-25T09:45:33+00:00</published>
+  </entry>
+</feed>

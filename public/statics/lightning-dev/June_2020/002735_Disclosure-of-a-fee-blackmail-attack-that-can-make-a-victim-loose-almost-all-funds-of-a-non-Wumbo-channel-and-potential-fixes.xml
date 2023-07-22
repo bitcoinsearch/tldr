@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Disclosure of a fee blackmail attack that can make a victim loose almost all funds of a non Wumbo channel and potential fixes</title>
+  <updated>2023-06-03T01:41:41.683176+00:00</updated>
+  <author>
+    <name>René Pickhardt 2020-06-17 10:29:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Disclosure of a fee blackmail attack that can make a victim loose almost all funds of a non Wumbo channel and potential fixes</title>
+    <updated>2023-06-03T01:41:41.683176+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-June/002735.html" rel="alternate"/>
+    <summary>In July 2019, a potential blackmail attack was discovered on the Lightning Network involving Hash Time-Locked Contracts (HTLCs). The attack involves spamming a channel with the maximum possible amount of HTLCs during a fee spike and overpaying the fees by a significant margin. Once all HTLCs are set up, the attacker will stop signing commitment transactions. Eventually, the victim will dare to force close the channel with all those expensive HTLCs, leading to a time window where the attacker can blackmail the victim outside of the Lightning Network protocol.The attack is similar to the one that was possible with transaction malleability on the funding transaction without the SegWit upgrade. Depending on the circumstances, an attacker can make channel partners lose a substantial amount of bitcoin without substantial costs for themselves. The current solution of lowering the maximum amount of HTLCs that can concurrently be in flight seems to be a reasonable start for now.The attack was disclosed in July 2019 to Fabrice Drouin and Christian Decker, who discussed it with people from other implementations. People working on implementations were more or less aware of the possibility of this attack, and currently, implementations try to mitigate this by setting low limits of allowed/accepted HTLCs in flight. The attack seems actually very similar to the one described in the "Flood &amp; Loot: A Systemic Attack On The Lightning Network" paper, which came out recently.A potential attack on the Lightning Network has been identified, where an attacker could steal funds from users by exploiting the accepted number of Hashed Time-Locked Contracts (HTLCs). The attack would involve an attacker creating many channels to create a highly connected node that might be interesting for both autopilot and non-autopilot users. This would allow the attacker to trick specific victims into opening a channel with them and execute the attack.C-lightning has merged a patch to mitigate the attack, while eclaire is somewhat mitigating it by defaulting to 30 accepted HTLCs. However, lnd does not appear to have a hard cap on HTLCs, and may allow up to 483 by default. Several potential fixes have been suggested, including not using the maximum value of HTLCs, allowing low fees and asking persons claiming outputs to pay fees, not overpaying commitment transaction fees, not adding HTLCs where the on-chain fee is higher than the HTLCs value, aggregating HTLCs, and splitting on-chain fees differently.It has also been suggested that there should be a hint in the Lightning Network's readme file about how to disclose attacks and vulnerabilities.</summary>
+    <published>2020-06-17T10:29:42+00:00</published>
+  </entry>
+</feed>

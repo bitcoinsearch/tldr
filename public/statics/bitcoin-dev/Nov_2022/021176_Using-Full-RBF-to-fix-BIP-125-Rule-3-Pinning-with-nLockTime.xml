@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Using Full-RBF to fix BIP-125 Rule #3 Pinning with nLockTime</title>
+  <updated>2023-05-22T22:48:44.149427+00:00</updated>
+  <author>
+    <name>Peter Todd 2022-11-07 21:17:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Using Full-RBF to fix BIP-125 Rule #3 Pinning with nLockTime</title>
+    <updated>2023-05-22T22:48:44.150382+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021176.html" rel="alternate"/>
+    <summary>The Bitcoin community is discussing ways to prevent a pinning attack on multi-party transactions. Specifically, they are looking at BIP-125 Rule #3, which states that the replacement transaction pays an absolute fee of at least the sum paid by the original transactions. The pinning attack involves one party broadcasting a transaction spending their input with a low fee rate transaction that's potentially quite large during high mempool demand, causing the other parties to be unable to spend their inputs unless they broadcast a transaction "paying for" the malicious party's. To address this issue, the community suggests pre-signing a transaction with nLockTime set sufficiently far into the future to ensure that the transaction can be cancelled/mined at some point after N blocks. This would allow the parties to defeat the attack by ensuring that the malicious party would have to pay the cost of getting the multi-party transaction unstuck at some point in the future. In cases where there is a central semi-trusted coordinator, such as Wasabi coinjoins, the solution could involve using a two-party punishment transaction consisting of tx1, which spends Mallory's input to a txout spendable by either CheckSig or CheckSequenceVerify and tx2, which spends tx1 output to as much fees as needed. This approach ensures that if Mallory cheated with a double-spend, it can be proven to third parties and Mallory cannot simply release tx1 on their own to frame the coordinator.</summary>
+    <published>2022-11-07T21:17:50+00:00</published>
+  </entry>
+</feed>

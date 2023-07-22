@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>bustapay BIP :: a practical sender/receiver coinjoin protocol</title>
+  <updated>2023-06-13T14:26:59.139404+00:00</updated>
+  <author>
+    <name>rhavar at protonmail.com 2019-01-27 07:36:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>bustapay BIP :: a practical sender/receiver coinjoin protocol</title>
+    <updated>2023-06-13T14:26:59.139404+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-January/016626.html" rel="alternate"/>
+    <summary>Ryan and Adam Gibson, in a conversation on bitcoin-dev, discussed the possibility of standardizing PayJoin as a transaction that breaks the assumption of common ownership of transaction inputs. They talked about various aspects of PayJoin such as protocol versioning, using PSBT/BIP174, version/locktime, and avoiding non-payment "Unnecessary Input Heuristic." Ryan proposed better support for moving utxo's between wallets, while Adam suggested creating something acceptable for inclusion into a project like BTCPayServer.Adam commented on some specific points in the BIP and made several suggestions such as renaming Bustapay to PayJoin, making sure that the sender creates a "template transaction" instead of the receiver, and picking a contributed input of the same type as the other transaction inputs if possible.The Bustapay proposal aims to address fungibility concerns and blockchain analysis by creating Bitcoin transactions that are indistinguishable from normal ones. The sender creates a fully valid, signed transaction known as the "template transaction", and gives it to the receiver through an HTTP POST request. The receiver processes the transaction and returns a partially signed coinjoin, adding one of their own inputs and increasing the output that pays themselves by the contributed input amount. The partial transaction is sent back to the sender to sign and then propagated on the Bitcoin network by the receiver after being validated. To implement Bustapay payments, receivers need to be aware of several implementation notes, including checking if the transaction is suitable for the mempool with testmempoolaccept in Bitcoin Core 0.17. On the other hand, sending applications should ensure they validate the HTTP response to ensure no unexpected changes have been made to the transaction. The idea for Bustapay is based on Dr. Maxwell's CoinJoin proposal, and the reduced scope inspired by a simplification of the "pay 2 endpoint" (now offline) blog post by Blockstream. While there are many possible extensions to this specification, it is essential to keep the implementation as simple as possible to encourage its widespread adoption.</summary>
+    <published>2019-01-27T07:36:59+00:00</published>
+  </entry>
+</feed>

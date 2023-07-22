@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+  <updated>2023-06-02T15:30:20.837689+00:00</updated>
+  <author>
+    <name>Johan Torås Halseth 2019-10-28 09:45:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+    <updated>2023-06-02T15:30:20.837689+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-October/002255.html" rel="alternate"/>
+    <summary>The proposed change to the carve-out rule in Bitcoin's mempool limits has raised concerns about relay cost and mempool walking. Naively removing all limits would increase relay cost, but relaxing the current rules by allowing the addition of a child to each output as long as it has a single unconfirmed parent would still only allow free relay of extra data O(size of parent). OP_SECURETHEBAG can help with the Lightning Network issue by putting all HTLCS into a tree where they are individualized leaf nodes with a preceding CSV. Relaxing the carve-out rule could avoid the need for adding a 1 CSV to all outputs. The last transaction added to a package of dependent transactions in the mempool must have no more than one unconfirmed parent. This would allow an attacker to exceed the MAX_PACKAGE_VIRTUAL_SIZE limit in some cases, but this is not a problem with the current mempool acceptance code in bitcoind. Evicting transactions based on feerate when the max mempool size is met handles this.In addition, the discussion revolves around the feasibility of a simplified Replace-by-Fee (RBF) scheme, which allows replacing an old transaction with a new one if certain conditions are met. The first proposed condition was that the old package should not be in the top 4 million weight and the replacement would be. However, due to block time variance, even this criterion does not hold up, as if one or two blocks come in late or early, the confirmation process could be delayed. Therefore, a Lightning close algorithm is proposed, which involves giving bitcoind unilateral close, asking for the current expedited fee, giving bitcoind child "push" tx at that total feerate, and checking if the next block contains the unilateral close tx. Furthermore, the RBF could work if certain conditions were met, such as a higher feerate, the new transaction being in the first 4Msipa of mempool, and the old transaction not being present. Although this may allow someone 100k of free tx spam, it is simple and could be further restricted by marking the unilateral close and limiting the child tx weight. Overall, the discussion sheds light on the challenges and potential solutions for implementing a simplified RBF scheme.</summary>
+    <published>2019-10-28T09:45:39+00:00</published>
+  </entry>
+</feed>

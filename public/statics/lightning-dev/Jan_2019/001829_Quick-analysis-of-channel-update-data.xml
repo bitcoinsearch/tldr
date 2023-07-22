@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Quick analysis of channel_update data</title>
+  <updated>2023-06-02T16:51:32.726640+00:00</updated>
+  <author>
+    <name>Fabrice Drouin 2019-01-20 19:53:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Quick analysis of channel_update data</title>
+    <updated>2023-06-02T16:51:32.726640+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-January/001829.html" rel="alternate"/>
+    <summary>The channel_update traffic does not primarily cause nodes to publish new updates when channels are about to become stale. This is confirmed by comparing routing table backups over a single day, which shows that nearly all channels were updated once on average with an update that almost always doesn't include new information. The cause could be due to flapping channels, possibly because the hosts that are hosting them are unreliable and often offline. Heuristics can be used to improve traffic, but it's orthogonal to the problem of improving the current sync protocol. These heuristics would probably be used to close channels to unreliable nodes instead of filtering/delaying publishing updates for them. Fabrice expresses concern over startup time and payment UX as they matter a lot for mobile users. They would like to push the current gossip design as far as it can go. Rusty mentions that if nodes ratelimit their own enables to one per 120 seconds, then the corner case that penalizes flapping channels will not occur. It was suggested to accept redundant updates after a week.</summary>
+    <published>2019-01-20T19:53:56+00:00</published>
+  </entry>
+</feed>

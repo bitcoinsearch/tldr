@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP70 extension to allow for identity delegation</title>
+  <updated>2023-06-08T03:32:10.149326+00:00</updated>
+  <author>
+    <name>Kevin Greene 2014-03-01 20:42:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP70 extension to allow for identity delegation</title>
+    <updated>2023-06-08T03:32:10.149326+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-March/004475.html" rel="alternate"/>
+    <summary>The lack of identity delegation in BIP70 can cause issues for payment processors like BitPay and Coinbase. This is because they have to sign payment requests as themselves, resulting in a confusing UI for the user. To solve this issue, Mike Hearn proposed a simple extension that allows the creation of an extended certificate, which is similar to X.509 certificates but simpler and Bitcoin-specific. The ExtensionCert message includes an ECDSA public key from the payment processor (PP), signature, and expiry time fields. The PP signs the ExtensionCert message using their SSL private key and adds it to the X509Certificates message. In the PaymentRequest, there are now two signature fields: one for the PP's SSL cert and another for the delegated ECDSA key. This system allows the merchant to be namespaced under the payment processor, giving the user the correct name in the wallet UI. The memo field could optionally indicate the purpose of this cert, like "Delegation to BitPay" but it would not appear in the UI. Dev Random suggested that this solution works well for medium/large businesses, but small businesses or individuals may not have the technical expertise to perform the delegation signature. Therefore, the PP could certify that "PP / merchant-id" generated the invoice directly on the PP system, requiring just one additional field - the merchant identifier. For maximum security, the merchant may choose to set very short expiry times (like, a day) and then have a cron job that uploads a new ExtensionCert at the end of each expiry period. This means that in the case of PP compromise, the system reseals very fast. Other alternatives considered were introducing a use of User-Agent field to the case where a payment request is fetched via HTTP and creating the extension cert as an X.509 cert. However, these options had potential drawbacks and the proposed solution was deemed the safest and simplest option. Feedback was welcome.</summary>
+    <published>2014-03-01T20:42:18+00:00</published>
+  </entry>
+</feed>

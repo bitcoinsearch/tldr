@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>death to the mempool, long live the mempool</title>
+  <updated>2023-06-15T02:56:23.105486+00:00</updated>
+  <author>
+    <name>Gloria Zhao 2021-10-26 18:16:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>death to the mempool, long live the mempool</title>
+    <updated>2023-06-15T02:56:23.105486+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-October/019579.html" rel="alternate"/>
+    <summary>In a recent conversation with @glozow, Lisa Neigut realized that the mempool is obsolete and should be eliminated. Instead, users should submit their transactions directly to mining pools, preferably over an anonymous communication network such as Tor. Mempools make sense in a world where mining is done by a large number of participating nodes, but in reality, mempool relay is unnecessary where the majority of hashpower and thus block template creation is concentrated in a semi-restricted set. Removing the mempool would greatly reduce the bandwidth requirement for running a node, keep intentionality of transactions private until confirmed/irrevocable, and naturally resolve all current issues inherent in package relay and replace it with direct communication channel between block template construction venues and transaction proposers. However, removing the mempool would complicate solo mining and would also make BetterHash proposals much more difficult. To address this issue, provided the number of block template producing actors remains beneath, say 1000, it’d be quite feasible to publish a list of Tor endpoints that nodes can independently + directly submit their transactions to. In fact, merely allowing users to select their own list of endpoints to use alternatively to the mempool would be a low effort starting point for the eventual replacement.On Bitcoin Core today, you can use the -blocksonly config option to ignore incoming transactions (effectively switching off your mempool), but there are strong reasons not to do this because of privacy, querying someone else for what feerate to put on your transaction, and no ability to use BIP152 compact block relay, so your block validation speed slows down. Some benefits of keeping a mempool as a non-mining node include fee estimation based on your node's knowledge of unconfirmed transactions + historical data, dramatically increased block validation (and thus propagation) speed, reduced block relay bandwidth usage, and wallet ability to send/receive transactions that spend unconfirmed outputs.Initial feerate estimation would need to be based on published blocks, not pending transactions (as this information would no longer be available), or from direct interactions with block producers. There are many reasons why using only published blocks for fee estimates is a flawed design, including artificial inflation of the feerate of the transactions in their mempool simply by including a few of their own transactions that pay extremely high feerates and transaction's feerate may have been enough to be included 2 blocks ago or a week ago, but it will be compared to the other unconfirmed transactions available to the miner now.</summary>
+    <published>2021-10-26T18:16:51+00:00</published>
+  </entry>
+</feed>

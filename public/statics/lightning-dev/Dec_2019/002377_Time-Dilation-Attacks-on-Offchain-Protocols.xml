@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Time-Dilation Attacks on Offchain Protocols</title>
+  <updated>2023-06-02T22:08:49.788619+00:00</updated>
+  <author>
+    <name>Antoine Riard 2019-12-16 07:17:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Time-Dilation Attacks on Offchain Protocols</title>
+    <updated>2023-06-02T22:08:49.788619+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-December/002377.html" rel="alternate"/>
+    <summary>The discussion revolves around the effectiveness of a proposed countermeasure of "raising alarms" in case the best-block nTime field is too far behind. It is considered compelling in an SPV-assumption world, but not sufficient if the time delay is small. During IBDing, alarms should be off to avoid raising false positives so that an attacker who manages to eclipse before syncing to top won't raise it. The validation software needs to remember that you're out of IBD to avoid being pinned back in the past, fallback to IBD and disable alarms. The usefulness of this countermeasure depends on the assumption that the Bitcoin full node used is differently eclipsable from the Lightning node used, e.g. the former is openly on an IPv4 address while the latter is on a Tor hidden service.It is suggested that given the connectivity is cheaper than the base layer and with such header protocol, one should open connections to well-known LN pubkeys. Even if an infrastructure attacker is assumed, given encrypted transport, it's hard to drop 80-bytes headers without tampering other messages and so being easily detected. However, the authenticity problem arises when one is not sure whether the LN pubkeys received are the ones they intended to connect to. Copy-pasting from LN search engines may not be the best practice.Regarding sophisticated attacks, it is believed that they try to trick the victim into believing that no attack is underway. A basic eclipse attack where blocks update is halted would be easily detectable. Eclipsing by discarding commitment/penalty txn still let CLTV/CSV time for the victim to react, and it cannot be ensured that the victim does not have a fallback way to broadcast tx. If well executed, such attacks stay stealth until it's too late to react. It is suggested that for analysis, detection should be separated from reaction, even if the same communication channel is used for both.</summary>
+    <published>2019-12-16T07:17:31+00:00</published>
+  </entry>
+</feed>

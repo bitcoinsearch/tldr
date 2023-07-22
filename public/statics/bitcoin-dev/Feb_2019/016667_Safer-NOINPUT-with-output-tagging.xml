@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer NOINPUT with output tagging</title>
+  <updated>2023-06-13T16:13:46.611808+00:00</updated>
+  <author>
+    <name>Jonas Nick 2019-02-08 19:01:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer NOINPUT with output tagging</title>
+    <updated>2023-06-13T16:13:46.611808+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-February/016667.html" rel="alternate"/>
+    <summary>The use of NOINPUT in Bitcoin's eltoo protocol can result in reduced fungibility in multiparty channels. However, this can be solved by creating settlement transactions that pay off the unresponsive party and fund a new channel with the remaining participants. If the unresponsive party returns, there is no loss of fungibility. While NOINPUT is powerful, it also presents risks of signature replay due to key-pair reuse which is a social and technical norm. The proposed solution is to tag an output as spendable with NOINPUT explicitly by the payer. There are two possible ways to do this tagging: setting a certain bit in the tx version or scriptPubKey. Tagging in either way should not complicate the eltoo protocol in any way. A clear advantage of scriptPubKey tagging is that it can be done on a per-output basis. However, it is only possible with native-segwit, not P2SH. On the other hand, tagging with tx version will protect P2SH-segwit, but it is somewhat a layer violation and you could only tag all or none output in the same tx. An extension to the version tagging could make NOINPUT even safer. In addition to tagging requirement, NOINPUT will also sign the version of the previous tx. While fully compatible with eltoo, it is important to consider if there are any other proposals requiring NOINPUT that would be adversely affected by either way of tagging.</summary>
+    <published>2019-02-08T19:01:40+00:00</published>
+  </entry>
+</feed>

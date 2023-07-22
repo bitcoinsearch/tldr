@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Continuing the discussion about noinput / anyprevout</title>
+  <updated>2023-06-13T21:33:21.697324+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-10-03 03:07:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Continuing the discussion about noinput / anyprevout</title>
+    <updated>2023-06-13T21:33:21.697324+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-October/017342.html" rel="alternate"/>
+    <summary>The proposal suggests a more radical excision by removing `SIGHASH` from signatures and putting `SIGHASH` on public keys. However, this may not be practical for key path spends as it would lose some of the indistinguishability of taproot addresses and be more expensive than having the sighash be in witness data. The nonexistence of sighash byte implies `SIGHASH_ALL`, and for offchain anyway the desired path is to end up with an n-of-n MuSig `SIGHASH_ALL` signed mutual close transaction. The problems with `SIGHASH_NONE` `SIGHASH_SINGLE` are no worse than using `SIGHASH_ALL` to pay to "1*G". As the existing sighashes are not particularly used anyway, additional restrictions on them are relatively immaterial. One way of looking at a transaction spending UTXO "U" to address "A" is that "script" lets you enforce conditions on the transaction when you create "A", "sighash" lets you enforce conditions on the transaction when you sign the transaction, and nlocktime, nsequence, taproot annex are ways you express conditions on the transaction. In that view, "sighash" is actually an extremely simple scripting language itself (with a total of six possible scripts). Only one of the scripts is widely used, another has an edge use it sucks at (assurance contracts). This does not seem like a good design, rather legacy cruft.</summary>
+    <published>2019-10-03T03:07:55+00:00</published>
+  </entry>
+</feed>

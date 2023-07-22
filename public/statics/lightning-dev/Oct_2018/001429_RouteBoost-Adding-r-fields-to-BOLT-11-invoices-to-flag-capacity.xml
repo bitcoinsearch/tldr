@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RouteBoost: Adding 'r=' fields to BOLT 11 invoices to flag capacity</title>
+  <updated>2023-05-25T13:57:33.585005+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-10-08 05:16:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RouteBoost: Adding 'r=' fields to BOLT 11 invoices to flag capacity</title>
+    <updated>2023-05-25T13:57:33.586019+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-October/001429.html" rel="alternate"/>
+    <summary>In a recent post, Matt Corallo expressed the need for clarity on the appropriate usage of the r= field in Lightning Network invoices. Initially, Corallo had implemented it such that if an invoice had an r= field, any publicly discovered last-hop routes would be ignored since the r= data is most likely more up-to-date than any public route rumor information. However, he wonders if it's only used as a hint and only one or two out of potentially many channels are included in it, that may make little sense. Originally, there were two proposed uses of r=: for payments via unannounced channels and for routing hints for nodes which don't have a complete topology. Corallo recommends that the payer should prefer to use the final hops specified in r fields over other equivalent routes it knows. He notes that r can provide zero-or-more full routes, not just a single hop as is done here. However, there's no reason to believe that the invoicer has more knowledge about all but the last hop. Corallo suggests that the appropriate guidance should be something like "SHOULD prefer to use invoice-r=-provided-hints over publicly-discovered routes however MAY use other last-hops in case a substantially better route is known." It's important to note the weasel word "equivalent" here, as biases against these could arise from fees, timeouts, or even privacy concerns. Finally, Corallo admits that he hasn't implemented this yet.</summary>
+    <published>2018-10-08T05:16:19+00:00</published>
+  </entry>
+</feed>

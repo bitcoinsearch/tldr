@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>General question on routing difficulties</title>
+  <updated>2023-05-19T16:15:42.523074+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2017-11-25 19:16:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>General question on routing difficulties</title>
+    <updated>2023-05-19T16:15:42.523074+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2017-November/000804.html" rel="alternate"/>
+    <summary>In the email, the author discusses a paper about coordinate embedding that can provide sender and receiver privacy in a payment network using a distance-vector-like routing system. The author believes that this protocol is better suited for closed-membership networks such as Ripple, which has only a handful of gateways. Ripple does not have a concept of fees within the network and relies on bi-lateral trust. In comparison, Lightning Network (LN) operates differently. The primary difference between this protocol and the source-routed system is that the sender needs to know "most" of the path to the destination. To achieve proper sender/receiver privacy, the author plans to extend their Sphinx usage to leverage HORNET, which includes several paths from rendezvous nodes to the receiver.The article discusses the extension of the header in Sphinx to include a per-hop payload for precise dictation of route structure, authentication of information given to intermediate nodes, and verification that policies have been respected. However, the protocol's core component, landmarks, becomes the weakest component when extended to LN. All nodes must be aware of an identical set of landmarks, similar to the desired homogeneity of Gateways, for the coordinate embedding scheme to work.There is no requirement that all nodes have a globally consistent view of the network, raising the question of who chooses the landmarks. A desirable property of a routing system for LN is close to zero required initial setup by a central administrator; however, with this protocol, it seems necessary for all nodes to ship with a hard-coded set of global landmarks for path finding to succeed. Several downsides arise from this.As all payments must flow through landmarks, they must be well-capitalized, leading to strong consolidation of their selection. Landmarks must be globally known, introducing fragility into the network. If most of the landmarks go down, the network's throughput instantly becomes crippled. Unbalanced channels would become a problem if all payment flows must go through landmarks. Passive channel rebalancing is possible with source routing, but not with distance-vector-like protocols.The notion of value privacy within the scheme is weak, as any protocol that doesn't broadcast intents to send payments to the world achieves this trait. Probabilistically dropping incoming payments could mitigate this, but it would dramatically increase routing failures by senders, removing the "low-latency" trait of payment networks that many find desirable.The author believes that there will not be a one-size-fits-all solution and instead suggest deploying several distinct protocols based on use-case requirements.</summary>
+    <published>2017-11-25T19:16:12+00:00</published>
+  </entry>
+</feed>

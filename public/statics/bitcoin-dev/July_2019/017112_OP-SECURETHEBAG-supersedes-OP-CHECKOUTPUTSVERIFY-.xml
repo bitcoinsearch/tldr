@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_SECURETHEBAG (supersedes OP_CHECKOUTPUTSVERIFY)</title>
+  <updated>2023-06-13T19:14:48.479817+00:00</updated>
+  <author>
+    <name>Dmitry Petukhov 2019-07-08 10:26:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_SECURETHEBAG (supersedes OP_CHECKOUTPUTSVERIFY)</title>
+    <updated>2023-06-13T19:14:48.479817+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-July/017112.html" rel="alternate"/>
+    <summary>The bitcoin-dev mailing list discusses a method for eliminating malleability in UTXOs using the ANYPREVOUTANYSCRIPT signature, which would be used to restrict spending conditions. This would require a second signature to commit to the entire transaction. The control-sig would be created with flags meaning ANYPREVOUTANYSCRIPT to restrict the outputs. P would be the pubkey of the actual key needed to spend the UTXO and the signature of P can commit to all the inputs and outputs to prevent malleability. The use of NOPREVOUT and NOSCRIPT flags for sighash is suggested as a way to exclude previous outputs and all inputs except the current one. By combining these with ANYONECANPAY, this would mean NOINPUT. With NOPREVOUT|ANYONECANPAY|NOSCRIPT, it would create ANYPREVOUTANYSCRIPT. With NOPREVOUT|NOSCRIPT, you could commit to "all the inputs beside the current one," allowing for a spending restriction such as a "vault" UTXO that requires an additional "control" UTXO to spend. This mechanism could enable the rights to spend certain UTXOs to be transferred or revoked retroactively by creating taproot branches with different pairs of (vault, control) keys and a chain of transactions that each spend the previous control UTXO so that the newly created UTXO becomes controlled by the control key of the next pair together with the vault key in that pair.</summary>
+    <published>2019-07-08T10:26:24+00:00</published>
+  </entry>
+</feed>

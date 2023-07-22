@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving SPV security with PoW fraud proofs</title>
+  <updated>2023-06-13T18:16:19.625354+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-04-19 00:25:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving SPV security with PoW fraud proofs</title>
+    <updated>2023-06-13T18:16:19.625354+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-April/016876.html" rel="alternate"/>
+    <summary>The email conversation between Ethan Heilman and ZmnSCPxj discusses the potential loopholes in Simplified-Payment-Verification (SPV) system. SPV is secure under the assumption that the chain with most Proof-of-Work (PoW) is valid, which is not always a safe assumption as shown by attacks like Segwit2x. ZmnSCPxj proposes an improvement to SPV where invalid blocks will be rejected as long as there are enough honest miners to create a block within a reasonable time frame. This can be achieved through the introduction of UTXO set commitments, which would allow block N+1 to be validated by verifying whether its inputs are present in the UTXO set committed in block N. However, this may require a soft fork. ZmnSCPxj points out that a minority miner with more than 10% of network hashrate could disrupt the SPV-using network by creating a valid block at block N+1 and deliberately ignoring every other valid block at N+1, N+2, N+3 etc. that it did not create itself. This means that the proposed rule above would provide only strictly more security than current SPV clients. ZmnSCPxj also warns that every rule imposes a potential loophole by which a new attack is possible. ZmnSCPxj then presents another scenario where a supermajority of miners (90%) decide to increase inflation of the currency through a hardfork. They believe they can take over the network hashpower and impose their will on the network because they think SPV nodes dominate the economy. At height S+1, they begin the rule where for 1 block, the coinbase is 21,000,000 times the pre-fork coinbase value; for 9 blocks, the coinbase is the pre-fork value; and repeat this pattern every 10 blocks. This implies that at heights S+1, S+11, S+21, s+31... the coinbase violates the pre-hardfork rules. With a "rare enough" inflation event, miners may even be able to spend some coinbases on SPV nodes that SPV nodes become unwilling to revert to the minority pre-hardfork chain, economically locking in the post-hardfork inflation. However, every rule is an opportunity to loophole.</summary>
+    <published>2019-04-19T00:25:25+00:00</published>
+  </entry>
+</feed>

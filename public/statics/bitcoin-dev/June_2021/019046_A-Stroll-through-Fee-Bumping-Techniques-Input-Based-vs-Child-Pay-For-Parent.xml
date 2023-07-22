@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+  <updated>2023-06-14T22:18:44.006559+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2021-06-07 02:27:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+    <updated>2023-06-14T22:18:44.006559+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-June/019046.html" rel="alternate"/>
+    <summary>The email thread discusses fee-bumping strategies for second-layer protocols. The author compares input-based and Child-Pay-For-Parent (CPFP) techniques, highlighting their trade-offs in terms of onchain footprint, tx-relay bandwidth rebroadcast, batching opportunity, and mempool flexibility. CPFP is a mature technique but raises security issues when used in contract protocols with distrusting counterparties. Input-based fee-bumping has been less studied but can be improved with the deployment of the SIGHASH_ANYPREVOUT softfork proposal, which allows transaction signing without reference to any specific previous output. The author proposes a new class of solutions called "tx mutation schemes," where a key can increase the fee by lowering a particular output after the transaction is signed without invalidating the signature. This technique does not require keeping extra inputs around to bump the fee, but it requires using ANYPREVOUT as child presigned transactions will have destructive effects on txids. The author also suggests a new opcode OP_CHECKSIG_MUTATED to check validity against a reduced output and an external key. Both parties can use MuSig to sign the commitment tx under the external key with a decent fee, but in case it proves insufficient, they have added leaves to their key in the funding output to unilaterally bump the fee. The author evaluates the onchain footprint, tx-relay bandwidth rebroadcast, batching opportunity, and mempool flexibility of CPFP and input-based fee-bumping. They conclude that input-based fee-bumping works whatever the number of contract participants and scores better than CPFP on various factors. The author suggests future soft forks can allow significant onchain footprint savings, especially in case of batching, and future package relay bandwidth efficiency should account for rebroadcast frequency of CPFPing multi-party protocols.</summary>
+    <published>2021-06-07T02:27:36+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP47 Prague Discussion</title>
+  <updated>2023-06-15T21:51:20.865214+00:00</updated>
+  <author>
+    <name>Paul Sztorc 2022-06-11 14:30:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP47 Prague Discussion</title>
+    <updated>2023-06-15T21:51:20.865214+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-June/020550.html" rel="alternate"/>
+    <summary>The Bitcoin-developer mailing list recently discussed a new version of BIP47, an improvement to the existing protocol that requires a notification transaction prior to making payments. The current implementation of BIP47 (V1/V2) requires an input key for blinding, the blinded sender payment code in an op_return, and the recipient key in an output. However, the discussion focused on the possibility of minimizing the on-chain space required and outsourcing the notification transaction so the link between the sender and recipient is no longer apparent on-chain.The first question raised during the discussion was whether it is necessary for the recipient to learn the payment code of the sender. The benefit of this is that it enables the recipient to send a notification transaction and subsequent payment to the sender, but in practice, this rarely happens, making it acceptable to forego this requirement and potentially save space. The minimum notification payload required seems to be a fresh sender key and a static recipient key.The next part of the discussion revolved around the idea of putting multiple notifications in a single transaction that can be outsourced to a third party in order to break the sender/recipient link. This third party could be paid over the Lightning Network for their services. One downside with this approach is that it requires custom software for the recipient to notice the notification, since it's not tied to an easily noticeable output. The middle ground solution would be to put the sender keys there but still create an output for each recipient key.An interesting point that came up in the discussion was that the recipient key could be represented using only 4 bytes (provided it is in the annex), leaving a window of 1 in ~4.3 billion for a collision. This would reduce the payload from 64 bytes to 36 bytes of witness data. Using the annex makes the transaction non-standard, which could either be standardized as the first use case for the annex or an alternative method should be considered. In conclusion, the discussion revolved around minimizing the on-chain space required for BIP47 and outsourcing the notification transaction to a third party to break the sender/recipient link. The idea of representing the recipient key with only 4 bytes was also discussed, which would reduce the payload from 64 bytes to 36 bytes of witness data.</summary>
+    <published>2022-06-11T14:30:13+00:00</published>
+  </entry>
+</feed>

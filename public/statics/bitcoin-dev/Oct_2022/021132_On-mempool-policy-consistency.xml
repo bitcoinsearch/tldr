@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>On mempool policy consistency</title>
+  <updated>2023-05-22T22:16:03.322084+00:00</updated>
+  <author>
+    <name>Anthony Towns 2022-10-30 02:24:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>On mempool policy consistency</title>
+    <updated>2023-05-22T22:16:03.322084+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021132.html" rel="alternate"/>
+    <summary>The email thread on bitcoin-dev dated October 27, 2022, discusses the design goals and principles of core's transaction-relay propagation rules, as well as mempool policies that should be implemented. The author believes that the goals of mempool/relay policy are simple: to relay transactions from users to all potential miners and to have most of the data that makes up the next block pre-validated and pre-distributed throughout the network. However, there may not be a standard set of policy rules that satisfy every use-case.The discussion revolves around the future of Bitcoin Core development, where some suggest that the "one-size-fits-all" policy rules conception might need to be abandoned for more heterogeneity in the policy rules. However, the fundamental principles of decentralization/censorship-resistance, privacy, and efficiency are still deemed crucial. Some advanced Bitcoin applications might have to outgrow the "mempool policy rules" game and therefore require a different policy targeted at each new use case.Regarding the network's full node resources, blocks are limited on average to 4MB-per-10-minutes, and applications certainly shouldn't be designed to work only if they can monopolize the entirety of the next few blocks. It doesn't make any sense to imagine application events in Bitcoin that exceed the capacity of a random full node. The email also talks about an example of a Lightning Service Provider doing a liquidity maintenance round of all its counterparties, and as such force-closing and broadcasting more transactions than can be handled at the transaction-relay layer due to default MAX_PEER_TX_ANNOUNCEMENTS value. Finally, the author believes that we might have to realize we're facing an heterogeneity of Bitcoin application.In terms of implementation, the author recommends that Core should implement a particular mempool policy, and only have options that either make it feasible to scale that policy to different hardware limitations or provide options that users can activate en-masse if it turns out people are doing crazy things in the mempool. A high-bandwidth overlay network where edges feed transactions back into the main peer-to-peer (p2p) network would reduce spam and is a fine addition to bitcoin provided it has the same policy rules as regular bitcoin nodes. However, there are potential risks involved in miners subscribing to an overlay network with different rules, which could become a centralization risk.</summary>
+    <published>2022-10-30T02:24:43+00:00</published>
+  </entry>
+</feed>

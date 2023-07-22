@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Automated Inbound Liquidity With Invoices</title>
+  <updated>2023-06-02T19:59:14.110115+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-08-16 03:58:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Automated Inbound Liquidity With Invoices</title>
+    <updated>2023-06-02T19:59:14.110115+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-August/002129.html" rel="alternate"/>
+    <summary>ZmnSCPxj, a Lightning Network developer, shared his insights on two separate topics related to the network. In response to a proposal for automated inbound liquidity with invoices, he suggested a current and practical way to set up incoming liquidity by creating a channel to a high-uptime node on the network using a submarine swap to pay offchain funds to buy onchain funds. However, this method requires onchain funds, which should be stored and transported in Bitcoin before starting other operations. ZmnSCPxj mentioned that an auto-system could eventually be implemented, but it is still early days, and infrastructure needs to be developed.In another thread, ZmnSCPxj discussed just-in-time routing, a concept that would allow routing nodes to implement the idea of routing payments "just in time," even if there aren't any pre-existing routes to the destination. However, he noted some difficulties in implementation, such as the onion route format containing the next short-channel-id instead of the node-id of the next hop in the route. The final HTLC going to the payee also poses a challenge since it has the tightest time schedule, and if its timeout is too near, the payee will reject the payment. To mitigate this effect, the spec recommends using "shadow routing," which adds a greater timeout to the payee than the minimum required and decreases at each hop. ZmnSCPxj added that trampoline routing would greatly help this idea, as planned trampoline routing indicates the node id of the next trampoline hop, thus not requiring implementations to remember who a closed short-channel-id used to be connected to.The proposal for embedding the node uri of the invoice creator along with the amount to be routed suggests establishing auto channels and pushing payments to help users receive and send payments instantly while hiding everything from them as an end-user. For example, if Bob wants to send 100,000 sats to a user whose node has just come online and has no inbound liquidity, the user creates an invoice for 100,000 sats including their URI. Bob's wallet sees this and tries to route it, auto opens a channel, and pushes the payment when it doesn't find anything. However, this is only for routing nodes and not all LN nodes. The size of Bob's channel and charging premium by routing nodes who provide this service are important considerations. Additionally, the proposal can possibly be extended to neutrino LN wallets if they are public. Overall, this proposal offers benefits such as instant payment transactions and improved privacy for end-users.</summary>
+    <published>2019-08-16T03:58:25+00:00</published>
+  </entry>
+</feed>

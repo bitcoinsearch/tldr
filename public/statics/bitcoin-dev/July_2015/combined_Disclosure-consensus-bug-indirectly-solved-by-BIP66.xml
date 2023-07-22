@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Disclosure: consensus bug indirectly solved by BIP66</title>
+  <updated>2023-06-10T04:01:06.283797+00:00</updated>
+  <author>
+    <name>Adam Back 2015-07-29 13:46:46</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2015-07-28 14:27:18</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2015-07-29 13:41:07</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2015-07-29 13:48:16</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2015-07-28 14:27:18</name>
+  </author>
+  <author>
+    <name>Adam Back 2015-07-29 13:46:46</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2015-07-29 13:41:07</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2015-07-29 13:48:16</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2015-07-29 13:41:07</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2015-07-29 13:48:16</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2015-07-28 14:27:18</name>
+  </author>
+  <author>
+    <name>Adam Back 2015-07-29 13:46:46</name>
+  </author>
+  <link href="bitcoin-dev/July_2015/009718_Disclosure-consensus-bug-indirectly-solved-by-BIP66.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009697_Disclosure-consensus-bug-indirectly-solved-by-BIP66.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009717_Disclosure-consensus-bug-indirectly-solved-by-BIP66.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009719_Disclosure-consensus-bug-indirectly-solved-by-BIP66.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009697_Disclosure-consensus-bug-indirectly-solved-by-BIP66.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009718_Disclosure-consensus-bug-indirectly-solved-by-BIP66.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009717_Disclosure-consensus-bug-indirectly-solved-by-BIP66.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009719_Disclosure-consensus-bug-indirectly-solved-by-BIP66.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009717_Disclosure-consensus-bug-indirectly-solved-by-BIP66.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009719_Disclosure-consensus-bug-indirectly-solved-by-BIP66.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009697_Disclosure-consensus-bug-indirectly-solved-by-BIP66.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009718_Disclosure-consensus-bug-indirectly-solved-by-BIP66.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Disclosure: consensus bug indirectly solved by BIP66</title>
+    <updated>2023-06-10T04:01:06.283797+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-July/009718.html" rel="alternate"/>
+    <summary>Recently, a vulnerability in OpenSSL was solved which allows for the use of non-OpenSSL signature verification in the future. This opens up the possibility of replacing OpenSSL with alternatives such as LibreSSL or BoringSSL. The Bitcoin development community has been discussing the replacement of OpenSSL with alternative libraries like secp256k1, which Pieter and Greg have tested rigorously and believe to be more reliable than *SSL libraries. The consensus is that OpenSSL and its derivatives are not focused on consensus consistency, causing their own bug fixes to potentially break Bitcoin. As a result, developers suggest using alternative libraries like LibreSSL or BoringSSL instead. Pieter Wuille, a Bitcoin developer, disclosed a vulnerability in September 2014 which could have led to the forking of the blockchain between nodes. A specially-crafted transaction could have opened up such security flaw on systems using OpenSSL on a 32-bit system and on 64-bit Windows systems, as well as those that use some non-OpenSSL codebases for parsing signatures. The vulnerability is related to Bitcoin's signature encoding rules, which are ASN.1 BER encoded, utilizing a complex standard that allows many different encodings for the same data. Since Bitcoin Core 0.8, a standardness rule has been in effect that only allowed a subset of encodings (DER) for relay and mining, even though any BER remained valid in the blockchain. However, in practice, BER has many weird edge cases, and no single cryptographic codebase can parse all of them correctly, including OpenSSL, Crypto++, BouncyCastle, btcec, and libsecp256k1 library. One of the features of BER is the ability for internal structures to have a length descriptor whose size itself is up to 126 bytes. A block chain containing a transaction with a valid signature using such a 5-byte length descriptor would be accepted by some systems and not by others, resulting in a fork if it were mined into a block.Bitcoin Core 0.10.0 was released with support for BIP66, which enabled a consensus rule for strict DER signatures in the blockchain. This solved the vulnerability and opens the door to using non-OpenSSL signature verification in the near future. The community recognizes the importance of security and continues to work towards improving Bitcoin's codebase. There is also a discussion about replacing OpenSSL with https://github.com/bitcoin/secp256k1 for other uses such as RPC SSL and BIP 70.</summary>
+    <published>2015-07-29T13:46:46+00:00</published>
+  </entry>
+</feed>

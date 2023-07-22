@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Fee-free rebalancing to support JIT-routing</title>
+  <updated>2023-06-01T18:12:54.041478+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-07-03 06:09:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Fee-free rebalancing to support JIT-routing</title>
+    <updated>2023-06-01T18:12:54.041478+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-July/002055.html" rel="alternate"/>
+    <summary>The context focuses on JIT-routing, which is a method that allows nodes to perform channel rebalance operations just in time for forwarding requests. The current fee structure for rebalancing from one channel to another under the existing network requires a fee, making JIT-routing challenging. To address this issue, Rene Pickhardt proposes a "fee-free rebalance" to better support JIT-routing.The author considers the simplest case of useful JIT-routing where three nodes form a tiny cyclic superhub with perfectly balanced channels but limited usable capacity. In this scenario, the rebalancing of channels would require a fee under the current network. Therefore, the author suggests arguing for a fee-free forwarding, but only for the last hop in the rebalance. To achieve this, an HTLC-dependent construction is proposed where both nodes agree to create a 0.06 BTC output on both commitment transactions using a specific SCRIPT and exchange signatures for two special transactions, HTLC-waivefee-timeout and HTLC-waivefee-success, before exchanging signatures for the commitment transactions as usual through `commitment_signed`, then `revoke_and_ack`. The context also discusses the use of Channel Factories for JIT-routing. The author proposes the idea of using channel factories to allow for JIT-routing and suggests that a factory-level channel reorganization could be used to waive the fees charged by nodes during a channel rebalance. However, the reduced capacity in a channel could mean that nodes are disincentivized to allow the transfer of capacity away from their channel without recompense.Additionally, the author notes that the BOLT #7 spec does not specify that `fee_base_msat` or `fee_proportional_millionths` must be non-zero, indicating that 0 routing fees are already allowed. The author proposes the use of zero routing fees instead of negative ones to support rebalancing and believes that this solution will fix multiple problems without requiring any spec changes.</summary>
+    <published>2019-07-03T06:09:31+00:00</published>
+  </entry>
+</feed>

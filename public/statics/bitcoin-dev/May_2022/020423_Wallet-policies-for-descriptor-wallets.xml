@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Wallet policies for descriptor wallets</title>
+  <updated>2023-05-22T19:58:31.610023+00:00</updated>
+  <author>
+    <name>Salvatore Ingala 2022-05-05 14:32:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Wallet policies for descriptor wallets</title>
+    <updated>2023-05-22T19:58:31.610023+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020423.html" rel="alternate"/>
+    <summary>Salvatore Ingala discusses the challenges of implementing descriptors and miniscript support in hardware wallets. The technical constraints of embedded development, limited RAM, and computational power limit the usage of complex scripts. To address these challenges, Ingala proposes using a "wallet policies" language that can benefit all hardware wallets wanting to securely support complex scripts.The proposed solution involves having a registration flow for the wallet policy in the hardware wallet containing information to generate all relevant addresses/scripts and identify keys controlled by the hardware wallet. The user registers a wallet policy into the hardware wallet, and the software wallet initiates the wallet policy registration on the hardware wallet. The registered policy is stored in the hardware wallet's permanent memory, and a master key encrypts all necessary information needed to spend funds sent to those addresses.The policy language proposed in this document targets a stricter subset of the output descriptors language, which makes it easier to implement and allows human inspection during the registration flow. Wallet descriptor templates consist of key placeholders and a vector of key origin information, including P2SH, P2WSH, P2PKH, P2WPKH, multisig, sorted multi, P2TR, and miniscript templates.The document outlines a standard for output script descriptors used to derive addresses and scripts from wallet descriptor templates. Wallet policies are invalid if any placeholder has derivation steps while the corresponding element of the keys vector is not an xpub. The document provides examples of wallet descriptor templates, including those for native segwit accounts, taproot BIP86 accounts, and multisig setups.Overall, the proposed wallet policies language aims to provide a solution to the security and user experience challenges faced by hardware wallets when allowing the usage of complex scripts. By registering wallet policies, hardware wallets can securely perform operations such as generating addresses and signing transactions.</summary>
+    <published>2022-05-05T14:32:34+00:00</published>
+  </entry>
+</feed>

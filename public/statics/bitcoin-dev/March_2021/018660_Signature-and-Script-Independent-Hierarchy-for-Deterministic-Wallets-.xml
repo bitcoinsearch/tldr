@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Signature and Script Independent Hierarchy for Deterministic Wallets.</title>
+  <updated>2023-06-14T19:25:26.146116+00:00</updated>
+  <author>
+    <name>SomberNight 2021-03-14 15:13:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Signature and Script Independent Hierarchy for Deterministic Wallets.</title>
+    <updated>2023-06-14T19:25:26.146116+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-March/018660.html" rel="alternate"/>
+    <summary>Robert Spigler, a developer, has raised concerns about the existing standards for deterministic wallets in an email to the bitcoin-dev mailing list. He argues that there are issues with the current standards and that keys and scripts should not be mixed in the same layer. According to BIP 44/49/84, the derivation path is `m / purpose' / coin_type' / account' / change / address_index`, with per-script derivations made redundant with descriptors. Spigler suggests creating extended private/public keys independent of the script or signature type, defining the following 5 levels in the BIP32 path: `m / purpose' / coin_type' / account' / change / address_index`. Spigler notes that it's crucial to increase the account level for each new wallet joined or private/public keys created, both for privacy and cryptographic purposes. He gives examples such as incrementing the account level before sending a new key record to a coordinator in multisignature wallets and before creating its own single signature wallet. However, by trying to create a standard that mixes discoverable and non-discoverable scripts in the same derivation scheme and incrementing a single index, all scripts become non-discoverable. Even if a user only used singlesig scripts and followed this proposal, during recovery from seed, the wallet would have to check all script types for all account indices. The workaround is to backup both seed words and output script descriptors and keep appending new output script descriptors to existing backups when the account index is incremented. While less user-friendly than backing up just a seed, it is more generic and extendable. Spigler's proposal makes a tradeoff that is easy to miss on first read of the text, so he explicitly points it out for the record.</summary>
+    <published>2021-03-14T15:13:32+00:00</published>
+  </entry>
+</feed>

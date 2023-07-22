@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>BIP OP_CHECKTEMPLATEVERIFY</title>
+  <updated>2023-05-20T21:24:01.051897+00:00</updated>
+  <author>
+    <name>Jeremy 2019-12-11 00:37:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>BIP OP_CHECKTEMPLATEVERIFY</title>
+    <updated>2023-05-20T21:24:01.051897+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-December/017525.html" rel="alternate"/>
+    <summary>The author proposes three changes to the OP_CTV draft that will improve its functionality. Firstly, the hash should commit to the INPUT_INDEX of the executing scriptPubKey, which prevents a "half-spend" issue where half of the intended outputs are created. Secondly, the constexpr restriction should be removed so that any argument can be accepted, allowing for more functionality in the future. Finally, the template digest should be modified to be easier to cache and work with in script.The impact of these changes is minor but they will improve the functionality of OP_CTV. The first change reduces miner-caused TXID malleability and has a minor impact on cacheability. The second change allows for more creative use of OP_CTV without limiting its functionality. The third change improves the efficiency of the template digest. These changes will put the draft in a good place in terms of outstanding feedback.Jeremy Rubin, a Bitcoin Core developer, has announced refinements to the BIP draft for OP_CHECKTEMPLATEVERIFY. The main changes in the new BIP include changing the name to something more fitting and acceptable to the community, changing the opcode specification to use the argument off of the stack with a primitive constexpr/literal tracker rather than script lookahead, permitting future soft-fork updates to loosen or remove "constexpr" restrictions, and providing a more detailed comparison to alternatives in the BIP, and why OP_CHECKTEMPLATEVERIFY should be favored even if a future technique may make it semi-redundant.The new design also includes RPC functions under preliminary development to aid in testing and evaluation of OP_CHECKTEMPLATEVERIFY and improvements to the mempool which will help make it safe to lift some of the mempool's restrictions on longchains specifically for OP_CHECKTEMPLATEVERIFY output trees. However, Russell O'Connor, another Bitcoin Core developer, expressed concerns about adding a new "global" state variable to the Script interpreter for tracking whether the previous opcode was a push-data operation or not.He suggested instead making the CHECKTEMPLATEVERIFY operation fail if it isn't preceded by (or alternatively followed by) an appropriate sized (canonical?) PUSHDATA constant, even in an unexecuted IF branch. This allows implementations to consider improper use of CHECKTEMPLATEVERIFY as a parsing error, just as today unbalanced IF-ENDIF pairs can be modeled as a parsing error, even though that isn't how it is implemented in Bitcoin Core. O'Connor admitted that this would mean losing the soft-fork upgrade path to reading values off the stack but argued that this is a reasonable tradeoff.</summary>
+    <published>2019-12-11T00:37:59+00:00</published>
+  </entry>
+</feed>

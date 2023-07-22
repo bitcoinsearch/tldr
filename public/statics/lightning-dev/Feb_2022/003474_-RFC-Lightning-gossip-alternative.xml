@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] Lightning gossip alternative</title>
+  <updated>2023-06-03T07:32:08.686100+00:00</updated>
+  <author>
+    <name>Rusty Russell 2022-02-16 02:35:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] Lightning gossip alternative</title>
+    <updated>2023-06-03T07:32:08.687106+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-February/003474.html" rel="alternate"/>
+    <summary>In this conversation, Rusty proposes a concrete version of a proposal and Joost Jager raises several questions about it. One question pertains to a static value used to determine the total proved utxo value; Jager proposes that this value could be dynamic similar to the minimum relay fee on L1. Another concern is the meaning of capacity in the context of a channel and its relationship with the maximum htlc amount that nodes want to route. Rusty explains that capacity refers to the old htlc_maximum_msat but expressed in satoshis because msat seems to be too fine-grained. A question arises as to whether 10 x 10k channels should weigh as much on the budget as a 1 x 100k channel. Rusty suggests a minimum cost to discourage spammers from opening 100k 1sat channels. Rusty further discusses the details of his proposal by breaking it down into three components and addressing Jager's questions for each component. The first component includes `tlv_stream` and `channel_update_v2_tlvs`. The second component involves types such as `capacity`, `cost`, and `min_msat`. Finally, the third component entails the conditions under which a channel is considered to exist. Rusty explains that both peers must send a `channel_update_v2`, at least one of which must set the `claim` flag, and if a node sets `claim`, the capacity of the channel is subtracted from the remaining announcable_channel_capacity for that node (minimum 10,000 sats). Throughout the conversation, both Rusty and Jager raise concerns about the fixed values in the proposal and how they can be made more dynamic to avoid wasted gossip and promote flexibility. Rusty suggests using feature bits or some more fine-grained way to change values. The two also discuss the possibility of simplifying certain aspects of the proposal, such as applying the cost to both nodes if the budget multiplier were increased from 10 to 20. Overall, this conversation delves into the intricacies of a proposal and raises important questions about how various components can be made more dynamic and efficient.</summary>
+    <published>2022-02-16T02:35:16+00:00</published>
+  </entry>
+</feed>

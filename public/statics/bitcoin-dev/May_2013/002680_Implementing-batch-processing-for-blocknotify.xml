@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Implementing batch processing for -blocknotify</title>
+  <updated>2023-06-06T18:10:18.182882+00:00</updated>
+  <author>
+    <name>Rune Kjær Svendsen 2013-05-31 12:37:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Implementing batch processing for -blocknotify</title>
+    <updated>2023-06-06T18:10:18.182882+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-May/002680.html" rel="alternate"/>
+    <summary>In an email exchange between Michael Hendricks and Rune Kjær Svendsen, the latter was asking for a way to keep up with new blocks as they come in through his application. He wanted to use the -blocknotify option with bitcoind, which would execute his application for each new block. However, his app wasn't quick enough to finish its work before a new block came in and the app was executed again. Hendricks suggested changing the -blocknotify script to quickly append necessary information to a queue and immediately exit. A separate script runs at all times monitoring this queue for work, and performs the labor-intensive calculations. But Svendsen felt that it would be clunky and lead to concurrency issues. Jeremy Spilman suggested blocking the bitcoind thread until Svendsen's process exits, but Svendsen didn't think it was optimal as it would slow down synchronization drastically. Instead, he thought it would be nimble for bitcoind to synchronize at full speed and only send out events when necessary, batching together previously queued items.</summary>
+    <published>2013-05-31T12:37:50+00:00</published>
+  </entry>
+</feed>

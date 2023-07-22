@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP Proposal: Wallet Labels Export Format</title>
+  <updated>2023-06-15T23:55:46.467749+00:00</updated>
+  <author>
+    <name>rhavar at protonmail.com 2022-08-24 19:01:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP Proposal: Wallet Labels Export Format</title>
+    <updated>2023-06-15T23:55:46.467749+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-August/020890.html" rel="alternate"/>
+    <summary>The proposal for a BIP that specifies a format for the export and import of labels from a wallet has been made. The proposed format is a simple two-column CSV file, with the reference to a transaction, address, input or output in the first column, and the label in the second column. However, Ryan disagrees with the use of CSV as it can lead to implementation issues due to its lack of strict escape rules. Additionally, he suggests using JSON instead, which allows for easier parsing and extensibility. The BIP also allows for the compression and encryption of the CSV file using the ZIP format and AES encryption. The proposed standard will allow users to move easily between different wallets without experiencing lock-in to a particular wallet application, ensuring accessibility for users without specific technical expertise. The UTXO model that Bitcoin uses makes these labels particularly valuable as they may indicate the source of funds, whether received externally or as a result of change from a prior transaction. In both cases, care must be taken when spending to avoid undesirable leaks of private information. Labels provide valuable guidance in this regard and have even become mandatory when spending in several Bitcoin wallets.The CSV export of labels from a wallet must be a UTF-8 encoded text file, containing one record per line, with records containing two fields delimited by a comma. The first field in the record contains a reference to the transaction, address, input or output in the wallet. This is specified as one of the following: Transaction ID (txid), Address, Input (rendered as txid), Output (rendered as txid&gt;index or txid:index). The second field contains the label applied to the reference. Exporting applications may omit records with no labels or labels of zero length.When importing, a naive algorithm may simply match against any reference, but it is possible to disambiguate between transactions, addresses, inputs, and outputs. Importing applications may truncate labels if necessary. The BIP proposes that the textual representation of the wallet's extended public key (as defined by BIP32, with an xpub header) should be used as the password for encryption. The proposal aims to create a standard to transfer any labels the user may have applied to the transactions, addresses, inputs or outputs in their wallet. Allowing users to export their labels in a standardized way ensures that they do not experience lock-in to a particular wallet application. In addition, by using common formats, this BIP seeks to make manual or bulk management of labels accessible to users without specific technical expertise.</summary>
+    <published>2022-08-24T19:01:17+00:00</published>
+  </entry>
+</feed>

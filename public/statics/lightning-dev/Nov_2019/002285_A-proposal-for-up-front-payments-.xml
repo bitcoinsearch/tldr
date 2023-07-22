@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A proposal for up-front payments.</title>
+  <updated>2023-05-23T02:20:20.515258+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2019-11-06 00:13:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A proposal for up-front payments.</title>
+    <updated>2023-05-23T02:20:20.515258+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-November/002285.html" rel="alternate"/>
+    <summary>The need for prepaid HTLCs has been acknowledged to resolve the routing-related incentive issues. A proposal has been made to use HORNET for both Offers and Joost's WhatSat to avoid introducing new internal protocol level messages. The prepay amount should be signalled in the update add message to let HTLCs carry a heterogeneous set of prepay amounts. In addition, a new onion field is needed to signal the incoming amount the node should have received allowing them to detect deviations in the sender's intended route. Failing an HTLC shouldn't return the prepay amount; otherwise extending long-lived HTLCs then cancelling them at the last minute is still costless. The channel update message should be extended to allow nodes to signal prepay costs similar to the way regular payment success fees are handled. Nodes should also be able to signal a new coefficient used to scale the prepay fee as a function of the CLTV value of the incoming HTLC to eliminate the number of costless attacks possible today on the routing network. Once this is introduced, loop attacks and the like are no longer free to launch, and nodes can dynamically respond to congestion in the network by raising their prepay prices.A proposal has been made to avoid Type 2 spam that includes Type 1 link-local, Type 2 though multiple nodes, and Type 3 liquidity-using spam. The proposal includes a new feature bit, extended messages, and more. Adding an HTLC causes a push of a number of msat on commitment_signed (new field), and a hash. Failing/succeeding an HTLC returns some of those msat, and a count and preimage (new fields). The user has to give several preimages to forward the payment, base rate is 16 preimages but subtract one for each leading 4 zero bits of the SHA256(blockhash | hmac) of the onion. The final node gets some variable number of preimages, which adds noise. It should take all and subtract from the minimum required invoice amount on success, or take some random number on failure. This leaks some forward information and makes an explicit tradeoff for the sender between the amount spent and privacy.</summary>
+    <published>2019-11-06T00:13:05+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Bloom io attack effectiveness</title>
+  <updated>2023-06-07T16:10:49.398821+00:00</updated>
+  <author>
+    <name>Peter Todd 2013-08-19 00:13:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Bloom io attack effectiveness</title>
+    <updated>2023-06-07T16:10:49.398821+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-August/003163.html" rel="alternate"/>
+    <summary>The writer of this post has conducted some tests with a variant of attack and has discovered that it is easy to saturate a node's disk IO bandwidth. When this happens, the node falls behind in consensus and becomes useless to its peers. The writer notes that this particular variant of attack is different and less efficient in bandwidth than others discussed privately. The bandwidth required to take out an Amazon EC2 m1.small is about 1KiB/second and results in it getting multiple blocks behind in consensus or a delay on the order of minutes to tens of minutes. The writer also had similar results attacking a p2pool node that they own, which has a hard drive and 4GB of RAM. It should be noted that the orphan rate went up to 100%. The writer is interested in repeating the attack by distributing it from multiple peers rather than a single source. This way, the attack could be made indistinguishable from a bunch of SPV wallets rescanning the chain for old transactions.SPV peers do not contribute back to the network, so they should be deprioritized and served only with whatever resources a node has spare. The more interesting question is how to make it possible for SPV nodes to gain priority over an attacker. The solution needs to be some kind of limited resource since schemes that rely on prioritizing long-lived identities fail against patient attackers. Time doesn't make an identity expensive if the identity is free in the first place. Similarly, summing up the fees paid by transactions relayed from that peer also fails because an attacker can easily broadcast the same transaction to multiple peers at once. Bandwidth is limited but orders of magnitude cheaper for the attacker than an Android wallet on a dataplan.</summary>
+    <published>2013-08-19T00:13:57+00:00</published>
+  </entry>
+</feed>

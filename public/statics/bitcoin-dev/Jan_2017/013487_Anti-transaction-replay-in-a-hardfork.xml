@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Anti-transaction replay in a hardfork</title>
+  <updated>2023-06-11T21:12:45.167391+00:00</updated>
+  <author>
+    <name>Chris Priest 2017-01-26 07:03:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Anti-transaction replay in a hardfork</title>
+    <updated>2023-06-11T21:12:45.167391+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-January/013487.html" rel="alternate"/>
+    <summary>The proposal is to create a "bridge" that replays all transactions from one network over to the other, and vice-versa. When a user moves coins mined before the fork date, both blockchains should record that transaction. Also a rule should be introduced that prevents users "tainting" their prefork-mined coins with coins mined after the fork. The advantage of pre-fork coins being recorded on both forks is that if one fork goes extinct, no one loses any money. This setup encourages the minority chain to die, and unity returned. Matt Corallo via bitcoin-dev suggested making anti-replay mandatory to maximize fork divergence. In the design of DAO hardfork, a permanent split was not anticipated and no precaution has been taken to protect against transaction replay attack, which led to significant financial loss for some users. A replay attack is an attempt to replay a transaction of one network on another network. It is normally impossible, for example between Bitcoin and Litecoin, as different networks have completely different ledgers. The txid as SHA256 hash guarantees that replay across network is impossible. Unfortunately, fixing problems in bitcoin is like repairing a flying plane. Preventing replay attack is constrained by the requirement of backward compatibility. The proposal has the following objectives: A. For users on both existing and new fork, anti-replay is an option, not mandatory.B. For transactions created before this proposal is made, they are not protected from anti-replay. The new fork has to accept these transactions, as there is no guarantee that the existing fork would survive nor maintain any value.C. It doesn’t require any consensus changes in the existing network to avoid unnecessary debate.D. As a beneficial side effect, the O(n^2) signature checking bug could be fixed for non-segregated witness inputs, optionally.</summary>
+    <published>2017-01-26T07:03:23+00:00</published>
+  </entry>
+</feed>

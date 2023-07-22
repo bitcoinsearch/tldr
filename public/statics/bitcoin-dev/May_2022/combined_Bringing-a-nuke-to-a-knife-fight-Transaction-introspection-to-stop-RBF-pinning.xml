@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Bringing a nuke to a knife fight: Transaction introspection to stop RBF pinning</title>
+  <updated>2023-06-15T20:47:53.975055+00:00</updated>
+  <author>
+    <name>David A. Harding 2022-05-12 07:17:05</name>
+  </author>
+  <author>
+    <name>David A. Harding 2022-05-12 07:17:05</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-05-10 18:53:14</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-05-10 18:53:14</name>
+  </author>
+  <author>
+    <name>David A. Harding 2022-05-12 07:17:05</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-05-12 13:31:02</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-05-10 18:53:14</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-05-12 13:31:02</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-05-12 13:31:02</name>
+  </author>
+  <link href="bitcoin-dev/May_2022/020469_Bringing-a-nuke-to-a-knife-fight-Transaction-introspection-to-stop-RBF-pinning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020469_Bringing-a-nuke-to-a-knife-fight-Transaction-introspection-to-stop-RBF-pinning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020458_Bringing-a-nuke-to-a-knife-fight-Transaction-introspection-to-stop-RBF-pinning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020458_Bringing-a-nuke-to-a-knife-fight-Transaction-introspection-to-stop-RBF-pinning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020469_Bringing-a-nuke-to-a-knife-fight-Transaction-introspection-to-stop-RBF-pinning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020474_Bringing-a-nuke-to-a-knife-fight-Transaction-introspection-to-stop-RBF-pinning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020458_Bringing-a-nuke-to-a-knife-fight-Transaction-introspection-to-stop-RBF-pinning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020474_Bringing-a-nuke-to-a-knife-fight-Transaction-introspection-to-stop-RBF-pinning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020474_Bringing-a-nuke-to-a-knife-fight-Transaction-introspection-to-stop-RBF-pinning.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Bringing a nuke to a knife fight: Transaction introspection to stop RBF pinning</title>
+    <updated>2023-06-15T20:47:53.975055+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020469.html" rel="alternate"/>
+    <summary>A proposal has been made to add OPTX_SELECT_WEIGHT to the "state" input's script in an update transaction to set an upper bound on the final transaction weight. Additionally, for each contract participant, there is a conditional commitment to the change output's scriptpubkey via OPTX_SELECT_OUTPUT_SCRIPTPUBKEY and OPTX_SELECT_OUTPUTCOUNT==2, which allows any participant to send change back to themselves. However, this proposal has been met with some skepticism due to concerns about mempool spending reintroducing pinning.Mallory, for example, can submit unencumbered UTXOs to the mempool to prevent update[-1] from being committed on-chain before its (H|P)TLC timeout. If `OPTX_SELECT_WEIGHT OP_TX` limits each update's weight to 1,000 vbytes and the default node relay/mempool policy of allowing a transaction and up to 24 descendants remains, Mallory can pin the unsubmitted update[-1] under 25,000 vbytes of junk. This proposal makes escaping the pinning at most 75% cheaper than today, but it does not eliminate the underlying concern. Moreover, depending on the mempool ancestor/descendant limits makes it harder to raise those limits in the future, which increases the risk of node memory/CPU DoS. Therefore, there is a need to ensure raising these limits won't increase the risk.The conversation is centered around a proposed update transaction that sets the upper bound on the final transaction weight. The proposal includes OPTX_SELECT_WEIGHT to push tx weight to stack and conditionally commit to the change output's scriptpubkey for each contract participant. However, there are concerns about pinning an unsubmitted update[-1] under 25,000 vbytes of junk. It is suggested that raising mempool ancestor/descendant limits might be necessary in the future.One thought is to relative-time lock update transactions' state input by one block to close the vector off, allowing for one "update transaction package" at a time in mempool. The use of ANYONECANPAY-like behavior may not have these issues, such as vault structures. The author also notes that making the 1,000 vbytes limit smaller would limit the amount of pinning possible but also discourage people from holding bitcoins in deep taproot trees or sophisticated tapscripts.A developer has shared their thoughts on eltoo designs for Elements and eventual inclusion into Bitcoin, particularly focusing on the issue of BIP125 rule#3. The rule states that "The replacement transaction pays an absolute fee of at least the sum paid by the original transactions," which creates a problem in scenarios such as eltoo where fees are required to be brought by the counterparty. This can result in illicit HTLC timeouts due to low feerate update transactions or bloated inputs/outputs, causing users to fork over more sats.The developer suggests mitigating this pinning using policy or transaction introspection opcodes. They provide an example using Rusty's OP_TX proposal and state outputs that are continuously spent off-chain and sent to a committed set of outputs. They add OPTX_SELECT_WEIGHT to the state input's script and conditionally commit to the change output's scriptpubkey via OPTX_SELECT_OUTPUT_SCRIPTPUBKEY and OPTX_SELECT_OUTPUTCOUNT==2. By doing this, they restrict the size of the transaction package being submitted to mempools.The developer also suggests encumbering change outputs to either 1 block CSV encumbered outputs or another OPTX_SELECT_WEIGHT recursively to allow each counterparty to CPFP N times, each transaction a maximum weight, and use the 1 block CSV as an "escape hatch" to get their fee output back out from the covenant structure. The developer concludes by stating that mempool is hard, but transaction weight, output count, and output scriptpubkey, and introspection can be used to avoid solving life's hard problems.</summary>
+    <published>2022-05-12T07:17:05+00:00</published>
+  </entry>
+</feed>

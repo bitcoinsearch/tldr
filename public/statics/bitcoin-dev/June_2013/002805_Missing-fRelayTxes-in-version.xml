@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Missing fRelayTxes in version</title>
+  <updated>2023-05-19T17:02:55.464891+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2013-06-20 10:52:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Missing fRelayTxes in version</title>
+    <updated>2023-05-19T17:02:55.464891+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-June/002805.html" rel="alternate"/>
+    <summary>The discussion concerned increasing the version number for parsing purposes in Bitcoin protocol. The proposal was made to simplify things, as it would be trivial to do. However, some developers argued that this change could limit future extensions. They asserted that after the version/verack exchange, the protocol version is negotiated between peers and there is no need for anything optional anymore. It was noted that this was only about parsing, not about relaying.One developer expressed confusion over why the policy of requiring version increases was contentious, as it had allowed them to use asserts to check the expected length of messages per protocol version. However, this behavior would be lost if the policy were changed. They also noted that you cannot check the deserialization process by serializing the deserialized message and comparing it to the original data because the bool is always present in the serializer. They suggested that using a quirk of an implementation is bad form and sloppy coding, and that optional fields should have their own mechanism that allows them to remain as optional fields between protocol version upgrades.Another developer argued that there was no problem with the current system, and that adding a new version field wasn't necessary unless there was actually a new field to add. They believed that any parser written on the assumption that all messages have a fixed number of fields per version was just buggy. However, another developer argued in favor of raising the protocol version number to indicate "all fields up to fRelayTxes are required if the announced nVersion is above N." It was noted that all previous additions to the version message were accompanied by a protocol version increase as well.</summary>
+    <published>2013-06-20T10:52:51+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Is BIP32's chain code needed?</title>
+  <updated>2023-06-14T15:47:22.676126+00:00</updated>
+  <author>
+    <name>Adam Back 2020-10-17 09:14:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Is BIP32's chain code needed?</title>
+    <updated>2023-06-14T15:47:22.676126+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-October/018252.html" rel="alternate"/>
+    <summary>The advantage of random access from BIP 32 versus iterated chain is that if there is a bit-flip or corruption, only one utxo will be burned instead of destroying access to all future addresses. The issue is not entirely theoretical as proven empirically. The number of characters to backup may increase with codes, but it won't matter much if the codes are all derived. 128-bits are enough for security targets of ECDSA provided reasonable key-stretching algorithms such as PBKF2 and ECDSA are used. The iterated hashing argument does not seem like a practical concern since BIP 39 uses PBKDF2 with 2048 iterated hash invocations. Although collisions can occur due to the deterministic hash being non-bijection, iterating enough unreachable states cannot create a brute force shortcut because the domain is practically unenumerable. In retrospect, the chaincode in BIP32 was not necessary cryptographically. The rationale for keeping it was that xpubs demand more protection than public keys, and repeated hashing reduces entropy at every step. However, this argument is minimal and only relevant for information-theoretical security, which is not applicable to ECC.</summary>
+    <published>2020-10-17T09:14:59+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PubRef - Script OP Code For Public Data References</title>
+  <updated>2023-06-13T20:09:32.409398+00:00</updated>
+  <author>
+    <name>Mike Brooks 2019-07-29 03:07:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PubRef - Script OP Code For Public Data References</title>
+    <updated>2023-06-13T20:09:32.409398+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-July/017184.html" rel="alternate"/>
+    <summary>In a recent email exchange, ZmnSCPxj and Mike discussed the potential implications of using the OP_PUBREF4 operation in the blockchain. As it turns out, the short channel ID used by Lightning to refer to channels is similar to the PUBREF proposal, as both use an index of block number, index of transaction, and index of output. While pruning may be necessary for scalability, it can also create a problem if the data in a pruned transaction is needed for a future OP_PUBREF. ZmnSCPxj believes that current applications using txids to refer to previous transactions would not be affected by short-ranged history rewrites. However, since OP_PUBREF would be a consensus rule, a "deeply-confirmed" point that is deep enough for all cases needs to be selected. ZmnSCPxj suggests using 100 blocks, which is considered "deep enough" to risk allowing miners to sell their coins. There is a potential for a targeted attack where a large payout going to a scriptPubKey that uses OP_PUBREF on a recently-confirmed transaction is replaced with one that pays to a different public key via a history-rewrite attack. Such an attack is doable by miners, and if 100 blocks is considered "acceptably low risk" against miner shenanigans, then it might be acceptable for this as well. Although dealing with larger data sets may be challenging, there are other open source projects that have accounted for the real-world limits on computability, such as Apache HTTPD's Bucket-Brigade and leveldb. Pruning can be a real asset for PubRef, but the problem with transaction being pruned is that the data in them might now be used in a future OP_PUBREF.</summary>
+    <published>2019-07-29T03:07:01+00:00</published>
+  </entry>
+</feed>

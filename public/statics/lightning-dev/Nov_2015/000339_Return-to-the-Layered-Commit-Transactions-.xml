@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Return to the Layered Commit Transactions?</title>
+  <updated>2023-05-23T21:42:50.444272+00:00</updated>
+  <author>
+    <name>Mats Jerratsch 2015-11-24 17:47:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Return to the Layered Commit Transactions?</title>
+    <updated>2023-05-23T21:42:50.444272+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000339.html" rel="alternate"/>
+    <summary>While working on the payment layer and experimenting with timeouts and timeframes for CSV and CLTV, Mats observed some issues. Firstly, it is not possible for HTLCs to have a long revocation time and a short refund time due to the way scripts and commit transactions are designed. Secondly, there are race conditions where both parties can claim the payment depending on propagation time of the transaction. Thirdly, as the absolute CLTV timeout must increase with each hop, it can provide insight into the position within the route. However, this can also result in a long total refund time. Mats played with the numbers but didn't see any solution to the problem. Short refund timeouts could mitigate some of the issues, but anything below one day could be dangerous for DDoS attacks. To solve the issue, they would need to separate 'claiming-a-payment-using-R' and 'revoke-an-output' into two layers and enforce revealing R within a separate timeframe than the revocation timeframe.To achieve this, they would need either SIGHASH_NOINPUT or SW as they cannot construct the transaction on top of the 'reveal-R' transaction without knowing R currently. Mats would prefer to stick with the current design as it avoids the need to keep another set of signatures, making everything easier.</summary>
+    <published>2015-11-24T17:47:36+00:00</published>
+  </entry>
+</feed>

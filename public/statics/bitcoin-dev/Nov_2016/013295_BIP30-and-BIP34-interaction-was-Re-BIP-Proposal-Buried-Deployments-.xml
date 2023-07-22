@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP30 and BIP34 interaction (was Re: [BIP Proposal] Buried Deployments)</title>
+  <updated>2023-06-11T20:36:12.084894+00:00</updated>
+  <author>
+    <name>Eric Voskuil 2016-11-17 00:43:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP30 and BIP34 interaction (was Re: [BIP Proposal] Buried Deployments)</title>
+    <updated>2023-06-11T20:36:12.084894+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-November/013295.html" rel="alternate"/>
+    <summary>In a recent discussion on the bitcoin-dev mailing list, Tier Nolan pointed out that as long as there is no hash function break, the rules guarantee that all future transactions will have different transaction IDs (txids). However, Eric Voskuil noted that if there is an address collision, someone may lose some money, while if there is a tx hash collision and implementations handle it differently, it will produce a chain split. As such, this is not something that a node can simply dismiss. If they do, they are implementing a hard fork.Nolan explained that the only way to have two transactions with the same txid is if their parents are identical since the txids of the parents are included in a transaction. In the past, coinbases had no parents, so it was possible for two of them to be identical. Duplicate outputs were not possible in the database, so the later coinbase transaction effectively overwrote the earlier one. This happened for two coinbases, which is why exceptions were made. Neither of those coinbases were spent before the overwrite occurred, and they may not even have been spent at all.The result of these discussions is that every active coinbase transaction has a unique hash, and all new coinbases will be unique. Therefore, all future transactions will have different txids, although there might not be an explicit rule that requires txids to be unique. However, nodes must still be vigilant because if there is an address or tx hash collision, it could lead to serious problems.</summary>
+    <published>2016-11-17T00:43:08+00:00</published>
+  </entry>
+</feed>

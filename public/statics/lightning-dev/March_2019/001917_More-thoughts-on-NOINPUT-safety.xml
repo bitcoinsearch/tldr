@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>More thoughts on NOINPUT safety</title>
+  <updated>2023-05-23T01:59:24.946114+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-03-18 06:38:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>More thoughts on NOINPUT safety</title>
+    <updated>2023-05-23T01:59:24.946114+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-March/001917.html" rel="alternate"/>
+    <summary>The discussion is about the possibility of using tagged outputs in taproot addresses. The idea is to add a "plus" option to the tagged output, which would allow for noinput sigs for them. The concern is how to bind update 3 to the funding tx output that is not tagged. The solution presented is having two sigs for each update tx, one with NOINPUT and a previous update tx as its input and one with SINGLE|ANYONECANPAY sig and the funding tx as input. The approach would require more storage and communication requirements, but it has three potential gains: making NOINPUT safer, giving fewer hints that you're using eltoo, and putting less data/computation load on the blockchain. Output tagging can already indicate the usage of NOINPUT, so it seems like the second benefit probably won't exist. Using a key path spend (without a script) is probably going to be cheaper on the blockchain though. However, requiring a non-NOINPUT signature seems like a better approach since it reduces a unilateral close to only being special due to the settlement tx having a relative timelock. It also reduces the number of signatures required from 1+n signatures per update today to 4+n signatures if using scriptless scripts. An alternative proposed is to add a trigger transaction that needs to be published in a unilateral case, but that'd increase the on-chain footprint. The extra latency introduced by the interactive signing protocol for muSig could also be a hit, particularly if multiparty channels with many participants are involved, rather than just two.</summary>
+    <published>2019-03-18T06:38:56+00:00</published>
+  </entry>
+</feed>

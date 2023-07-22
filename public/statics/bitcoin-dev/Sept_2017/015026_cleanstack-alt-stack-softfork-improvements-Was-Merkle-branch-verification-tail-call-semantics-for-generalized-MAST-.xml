@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>cleanstack alt stack &amp; softfork improvements (Was: Merkle branch verification &amp; tail-call semantics for generalized MAST)</title>
+  <updated>2023-05-20T03:58:42.259137+00:00</updated>
+  <author>
+    <name>Johnson Lau 2017-09-20 05:13:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>cleanstack alt stack &amp; softfork improvements (Was: Merkle branch verification &amp; tail-call semantics for generalized MAST)</title>
+    <updated>2023-05-20T03:58:42.259137+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-September/015026.html" rel="alternate"/>
+    <summary>During a discussion on Bitcoin-dev mailing list, it was observed that tail-call semantics could still be maintained if the alt stack is used for transferring arguments to the policy script. This raised a question of whether it was a bug in the cleanstack rule. Another idea that came up during the discussion was to replace all the NOPs and otherwise-unallocated opcodes with a new OP_RETURNTRUE implementation in future versions of Script. This would immediately exit the program with a successful outcome, allowing softforking in ANY new opcode and not just the -VERIFY opcode variants that have been done before.The benefit of this approach is that the new opcode can remove or push stack items instead of merely terminating the Script with a failure. Old nodes will always succeed immediately upon encountering an undefined opcode, allowing the new opcode to do literally anything from that point onward. However, implementing OP_RETURNTRUE has its own challenges such as not working well with signature aggregation and becoming a hardfork when transforming it into another opcode like OP_17.Alternatively, any op code could be created with an OP_NOP, but it takes more witness space and can make the script version ugly. In the new BIP114, the suggestion is to move the script version to the witness which is cheaper. The author had implemented OP_RETURNTRUE in an earlier version of MAST (BIP114) but gave up the idea in favor of allowing inclusion of scripts in witness, and requiring them to be signed. This would allow users to add additional conditions for the validity of a signature, for example, making the transaction valid only in the specified chain using OP_CHECKBLOCKHASH.</summary>
+    <published>2017-09-20T05:13:04+00:00</published>
+  </entry>
+</feed>

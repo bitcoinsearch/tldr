@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Useless Address attack?</title>
+  <updated>2023-06-09T18:22:49.289702+00:00</updated>
+  <author>
+    <name>Kevin Greene 2015-03-05 02:13:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Useless Address attack?</title>
+    <updated>2023-06-09T18:22:49.289702+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-March/007633.html" rel="alternate"/>
+    <summary>Bitcoind's address manager protects against attackers filling a user's database with their own nodes by organizing addresses into buckets. The bucket an address is stored in is chosen based on the IP of the peer that advertised the address message, as well as the address itself. The bucketing is done randomly to prevent any attacker from filling the entire table with their own nodes. Addresses that have not yet been tried go into 256 "new" buckets, while addresses of nodes that are known to be accessible go into 64 "tried" buckets. Bucket selection is based on cryptographic hashing using a randomly generated 256-bit key. Additionally, several indexes are kept for high performance.A user on the Bitcoin-development mailing list asked if they could slow down communication over the P2P network by popping up a heap of dummy nodes that exchange version and relay addresses. They wondered if they could send addr messages with all 1000 addresses pointing to their useless nodes, causing clients to connect to their dummy nodes instead of legitimate ones. The user noted that if they filled up a user's address pool with enough addresses to dumb nodes and kept them fresh time-wise, it could have an impact, especially if all 8 outbound connections were used up by their dumb nodes. However, Bitcoind's address manager prevents this type of attack by randomly organizing addresses into buckets and using cryptographic hashing to select buckets.</summary>
+    <published>2015-03-05T02:13:38+00:00</published>
+  </entry>
+</feed>

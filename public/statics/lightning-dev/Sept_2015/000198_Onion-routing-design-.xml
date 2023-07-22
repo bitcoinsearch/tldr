@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Onion routing design.</title>
+  <updated>2023-05-23T20:13:00.879315+00:00</updated>
+  <author>
+    <name>Rusty Russell 2015-09-20 21:05:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Onion routing design.</title>
+    <updated>2023-05-23T20:13:00.879315+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-September/000198.html" rel="alternate"/>
+    <summary>In this conversation, Rusty Russell is discussing the methods used to protect transaction routes from being guessed and exploited. He explains that nodes create the route backward to calculate size and randomly pick a total size between 1024 and 4096, then pads to that size with at least 32 bytes of random padding. Rusty acknowledges that this offers some protection against guessing route length but points out that it could be better to store the expected balance to be forwarded rather than the fee so that if someone takes too much, the next node can immediately abort the transaction.Rusty also notes that the onion blob should be re-padded when forwarded; otherwise, it would sometimes drop below 1024 bytes, and you'd be able to tell you're near the end of the chain. One proposed solution was just adding random bytes on to the end or appending the encrypted bytes that make up your post of the payload from your incoming message. Still, these suggestions have potential probing attack issues. Finally, Rusty suggests including a pubkey and using that to encrypt 0 padding. The last hop would get the privkey and boundary information and verify the padding. Rusty admits that he has not had coffee yet and may be missing flaws or simplifications.</summary>
+    <published>2015-09-20T21:05:58+00:00</published>
+  </entry>
+</feed>

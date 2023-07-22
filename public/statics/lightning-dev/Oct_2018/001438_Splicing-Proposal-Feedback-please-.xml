@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Splicing Proposal: Feedback please!</title>
+  <updated>2023-05-25T14:03:55.848939+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-10-11 00:32:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Splicing Proposal: Feedback please!</title>
+    <updated>2023-05-25T14:03:55.848939+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-October/001438.html" rel="alternate"/>
+    <summary>René Pickhardt proposes a new method for splicing in and out of Lightning Network channels. Splicing in would create an additional output that can be spent in future commitment transactions, which should be spent by a special commitment transaction that goes to the funder of the splicing operation before the actual funding takes place. Once enough confirmations are received, the channels are merged, and a new commitment transaction is created that now spends each output of each of the two funding transactions. In contrast, splicing out creates a spent of the funding transaction with two outputs: one goes to the recipient of the splice-out operation, and the second output acts as a new funding transaction for the newly spliced channel. The old channel must not be used anymore, but the new channel can be operational right away without blockchain confirmation. Rusty, however, did not choose to use the parallel funding transaction method since every transaction commitment forever will require two signatures and does not allow them to forget old revocation information. It also has some strange side-effects, such as on-chain this looks like two channels and figuring out the limit on splice-in to make sure the commitment tx stays under 400kSipa. Furthermore, relying on CPFP pushing through the splice-out transaction if it gets stuck requires checking carefully for standardness and other constraints that might prevent this.René Pickhardt believes that sending around all messages twice is unnecessary as they only need to maintain double-state until it is fair and safe to do so. He also thinks that with his approach, it should be possible to have multiple splicing operations in parallel. In terms of what happens to the short_channel_id of a channel to which funds have been spliced in, in the parallel splice world, they look like two channels, whereas in René's proposal, it looks like a new channel with a channel_update to ensure modern nodes know that the transition is happening.</summary>
+    <published>2018-10-11T00:32:46+00:00</published>
+  </entry>
+</feed>

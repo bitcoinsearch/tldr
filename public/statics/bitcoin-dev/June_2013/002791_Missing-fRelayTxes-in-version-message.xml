@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Missing fRelayTxes in version message</title>
+  <updated>2023-06-06T19:08:38.751194+00:00</updated>
+  <author>
+    <name>Mike Hearn 2013-06-20 07:10:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Missing fRelayTxes in version message</title>
+    <updated>2023-06-06T19:08:38.751194+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-June/002791.html" rel="alternate"/>
+    <summary>The Bitcoin protocol version was last bumped when Bloom filtering was added, and there is no need to bump it again. The existence of the nStartingHeight field depends on the message length and not anything else, and given that the old clients have to be handled no matter what, it is consistent with how other version fields are handled. A user named Turkey Breast brought up the issue that optional lengths shouldn't be used and for every field change, the protocol version should be upgraded. However, this is the first time anyone has suggested this minor detail is a problem, and it doesn't present any issues for the C++ code or bitcoinj where message objects know their own length at parse time. Additionally, Bitcoin version messages have always had variable length, and it is not inherent in the Bitcoin protocol that all messages are fixed length.Mike Hearn notes that if one wants to criticize the Bitcoin protocol for sloppiness, the variable length of some messages isn't where he would start. He points out that ping has the same issue, its length has changed over time to include the nonce. If one's parser can't handle that kind of thing, they need to fix it since the protocol has always worked that way. Similarly, when new fields are added to the version message, it's not a big deal to say that this protocol version has X number of fields, that (higher) protocol version message has X + N number of fields. Deterministic number of fields per protocol version is sensible and how Bitcoin has been for a long time.Turkey Breast believes that the existence of an unclear behavior that depends on some magic from one implementation doesn't help other implementations. He suggests that a fixed number of fields per protocol should be made, so given a protocol version number, one knows the number of fields in a message. This is not only easier for parsing messages but just good practice. Mike Hearn clarifies that it's not a bug (although there was recently a change to make bitcoind/qt always send this field anyway). He doesn't know where Amir is going with BIP 60, and he notes that version messages have always been variable length. There's nothing inherent in the Bitcoin protocol that says all messages are fixed length.</summary>
+    <published>2013-06-20T07:10:05+00:00</published>
+  </entry>
+</feed>

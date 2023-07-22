@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fat Errors</title>
+  <updated>2023-06-03T10:22:09.997560+00:00</updated>
+  <author>
+    <name>Joost Jager 2022-11-10 15:24:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fat Errors</title>
+    <updated>2023-06-03T10:22:09.997560+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-November/003750.html" rel="alternate"/>
+    <summary>Joost Jager proposed a solution to a long-standing issue in Lightning regarding gaps in error attribution. Error attribution is crucial for properly penalizing nodes after a payment failure occurs and giving the next attempt a better chance at succeeding. However, it's possible for nodes on the route to hide themselves, and if they return random data as the failure message, the sender won't know where the failure happened.To address this issue, Joost proposed a new format for the failure message that lets each node commit to it by adding an HMAC when passing it back. This makes it impossible for any of the nodes to modify the failure message without revealing that they might have played a part in the modification. The new failure message consists of three parts: message (var len), payloads (fixed len), and HMACs (fixed len). Payloads contain space for each node on the route to add data to return to the sender. The solution provides HMACs for all possible positions because nodes don't know their position in the path, making it unclear what part of the failure message they are supposed to include in the HMAC. The last node that updated HMACs added HMAC_0_2, HMAC_0_1, and HMAC_0_0 to the block. Each HMAC corresponds to a presumed position in the path, where HMAC_0_2 is for the longest path (two downstream hops) and HMAC_0_0 for the shortest (node is the error source).Before a hop adds its HMACs, it first deletes some of the previous HMACs. The removed HMACs are the ones that cannot be useful anymore. Deleting the useless data reduces the number of HMACs (and roughly the total failure message size) to half. With this information, the sender is able to verify the longest chain of HMACs until it encounters a hop_payload with a final node sending back random data.Joost developed a Go implementation of the new format for the failure message and pushed it to GitHub. His goal is to make the Lightning Network more reliable by preventing nodes from hiding themselves and allowing senders to pinpoint delays down to a pair of nodes.However, the Lightning Network still has a vulnerability in which a malicious node can modify a byte of the failure message. But the sender can determine the pair of nodes that the offending node is part of. The downside of the current scheme is its size, with a maximum of 27 hops resulting in a total size of 12 KB. Reducing the number of hops could decrease the overall size to about 2 KB.For backwards compatibility, nodes need to signal what algorithm they should run to generate or transform the failure message via a tlv onion field. Intermediate nodes also need to advertise their capability to transform the new format through a feature bit. Successes can also be delayed, and it's suggested to add the same payloads and hmacs blocks to the update_fulfill_htlc message.</summary>
+    <published>2022-11-10T15:24:28+00:00</published>
+  </entry>
+</feed>

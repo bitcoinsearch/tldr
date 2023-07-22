@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>3 way channels and 0 conf channels</title>
+  <updated>2023-06-03T12:09:08.789312+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2023-02-23 12:37:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>3 way channels and 0 conf channels</title>
+    <updated>2023-06-03T12:09:08.789312+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-February/003866.html" rel="alternate"/>
+    <summary>The context is related to using the Lightning Network (LN) as an anti-spam, anti-sybil rate limiting scheme for a peer-to-peer network system. The use case involves creating a service that transports small payments of hundreds of sats at a time, and maintaining balance of the channels to keep them available as much as possible. The LN instance itself will be part of the indra service, which requires 3 optimal channels between relays on the network so as to optimize for ensuring that messages are at least 3 layers deep. In addition, there may be "seeds" that clients open zero-conf, one-way channels to for very small balances.It is not a concern if a peer out of the 3 is not available temporarily, the path will just be retried with a different path. The payments need to be relatively low latency, and the proportion of nodes that might be congested or fallen offline compared to the whole network is usually going to be very small because relays that are not running are not making the relay operator money. The real income of the relay is not from routing the tiny payments but from users requesting relay services, and premium services that have a higher cost than network-internal.The intended setup is that the 3 participants are 1 client, and 2 relays. Relays may be motivated to increase their uptime to as close as 100% as possible, but there is simply no way to have 100% uptime: accidents and unknown unknowns exist. Generally, "high reliability" would be 6 nines, i.e 0.999999 uptime. If you have 2 relays, and you need both to be up in order to operate a single 3-participant system, you would degrade to slightly better than 5 nines, which may be acceptable. But basically, random "relays" on the LN network will still sometimes disappear or become disoperational, if you allow random plebeian relays on your network rather than those that have been specifically been allowed by you or your organization, you cannot really control their uptime very much, and you would suffer worse uptime issues than what LN already has. The use of LN as an anti-spam, anti-sybil rate limiting scheme is relevant for many different kinds of monetized p2p networks. Nostr, for example, could use something like this to create a general mechanism for users to anonymously pay other relays to host and deliver content for designated user identities, and would enable this to become a distributed service rather than having users depend on the trustworthiness of relays.</summary>
+    <published>2023-02-23T12:37:07+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Statechain implementations</title>
+  <updated>2023-06-14T00:16:26.568638+00:00</updated>
+  <author>
+    <name>Bob McElrath 2020-03-26 14:52:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Statechain implementations</title>
+    <updated>2023-06-14T00:16:26.568638+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-March/017722.html" rel="alternate"/>
+    <summary>The email thread on the bitcoin-dev mailing list discusses modifications to the statechains concept, which enables change of ownership in a discreet log contract (DLC) without an on-chain transaction and without requiring the cooperation of the counterparty. The proposed modifications include replacing the eltoo-based backup/refund transaction with a decrementing nLocktime for backup transactions as the output changes hands and replacing the 2-of-2 multisig output with a single P2(W)PKH output where the public key is shared between the statechain entity (SE) and the current owner.The second modification involves a KeyGen process where Owner 1 generates a private key share (o1) and sends the corresponding public key (O1) to the SE. The SE then generates a private key (s1), calculates the corresponding public key (S1), and sends it to Owner 1. Both parties multiply their received public keys by their own private key shares to obtain a shared public key (P). Owner 1 creates a funding transaction to pay an amount A to the address corresponding to P but does not sign it. Once Owner 1 and the SE cooperatively sign the first backup transaction, Owner 1 signs and broadcasts the deposit transaction. Transfer from Owner 1 to Owner 2 involves Owner 2 generating two private keys (o2 and b2), the SE generating a temporary blinding nonce (x), and calculating x*s1, and sending this securely to Owner 2.Owner 2 multiplies x*s1 by the modular inverse of o2 (o2_inv), sends this value to Owner 1, who multiplies it by o1 and sends the resulting value to the SE. The SE multiplies this value by the modular inverse of the temporary nonce (x_inv) to obtain s1*o2_inv*o1. This value, when multiplied by the new owner key share o2, equals the original shared private key s1*o1. The SE sets this value equal to s2 = s1*o2_inv*o1 and deletes s1. S2 and o2 are now the key shares of P and can be used to collaboratively sign (with 2P ECDSA).The thread also discusses potential attacks on the protocol, including if Owner 1 and Owner 2 were the same entity and if a self-sending owner could determine a similar quantity to what is shared between Owner 1 and Owner 2. The importance of not reusing keys is highlighted. Additionally, the trust-minimizing role of SGX is discussed, with some disagreement on whether it is necessary.The email shared on the bitcoin-dev mailing list outlines a protocol for transferring ownership of bitcoins in a secure and private manner. The transfer protocol uses a nonce (x) to prevent any of the participants from determining any information about each other's secret keys. This way, previous owners cannot hack into the system to steal funds. Each time the SE key share sX is updated, the previous key shares become invalid. However, the trust factor still remains with the SE to delete the old key share.The email concludes by asking for comments on the transfer protocol proposed. It also includes a quote by H.L. Mencken, "For every complex problem, there is a solution that is simple, neat, and wrong."</summary>
+    <published>2020-03-26T14:52:36+00:00</published>
+  </entry>
+</feed>

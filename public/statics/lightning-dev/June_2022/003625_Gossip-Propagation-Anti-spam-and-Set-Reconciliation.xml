@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Gossip Propagation, Anti-spam, and Set Reconciliation</title>
+  <updated>2023-06-03T08:30:38.794208+00:00</updated>
+  <author>
+    <name>Michael Folkson 2022-06-29 11:09:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Gossip Propagation, Anti-spam, and Set Reconciliation</title>
+    <updated>2023-06-03T08:30:38.794208+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-June/003625.html" rel="alternate"/>
+    <summary>Alex Myers recently presented at Bitcoin++ on the use of Minisketch and Lightning gossip for set reconciliation as a means to reduce bandwidth and redundancy of gossip message propagation. Using sketches, each node builds a sketch representing its own gossip set which is then transmitted to other nodes for differences to be produced. The differences should ideally be exactly the latest missing gossip of both nodes. However, the set differences will necessarily be encoded due to size constraints. The difficulty arises from each node and lightning implementation having its own rules for gossip acceptance and propagation. Depending on their gossip partners, not all gossip may propagate to the entire network.One of the major differences between using Minisketch for transaction relay and Lightning gossip is that with full nodes, there is a sense of urgency to get the transactions of the next block to be mined, while with Lightning gossip, unless a payment or route is being planned, learning about the current state of the network is less urgent. Another difference is that hash collisions are a concern for Lightning gossip due to the short hash function that produces a 64-bit fingerprint. This is not a concern for Erlay since it uses per-peer sketches with inventory sets rather than global sketches.Channel_update messages make up 97% of gossip messages in Lightning, and this raises questions about whether users are following advice not to update channels too often. Core-Lightning implements rate limiting for incoming channel updates and node announcements, but a broader discussion of rate limits may be worthwhile to achieve a higher acceptance of incoming gossip. Alex Myers aims for a set reconciliation gossip type that will use a common, simple heuristic to accept or reject a gossip message.</summary>
+    <published>2022-06-29T11:09:57+00:00</published>
+  </entry>
+</feed>

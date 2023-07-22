@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP sighash_noinput</title>
+  <updated>2023-05-20T08:09:55.330645+00:00</updated>
+  <author>
+    <name>Anthony Towns 2018-05-08 14:40:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP sighash_noinput</title>
+    <updated>2023-05-20T08:09:55.330645+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/015930.html" rel="alternate"/>
+    <summary>In a Bitcoin-dev mailing list, Christian Decker expresses concerns regarding the 'SIGHASH_NOINPUT' proposal, which has received support without much criticism. The primary issue raised is that if the same key is used for multiple inputs and one of them is signed with SIGHASH_NOINPUT, all of them would be spent. Although the proposal limits potential damage by committing to the prevout amount, it still poses risks for people who reuse addresses. Christian suggests an alternative approach where NOINPUT is a flag for a signature of a hypothetical "OP_CHECK_SIG_FOR_SINGLE_USE_KEY" opcode instead, making it impossible to trick someone who regularly reuses keys into signing something authorizing spends of other inputs as well.Christian proposes introducing a new opcode called 'OP_CHECKSIG_1USE' or 'OP_CHECKMULTISIG_1USE,' which would ensure that a NOINPUT signature is only valid for keys deliberately intended for single-use, rather than potentially valid for every key. This approach would be 34 witness bytes worse than spending a Schnorr aggregate key directly. It may also make sense to encode different intentions in different addresses using a new opcode for NOINPUT. A new opcode theoretically has an advantage as it could be deployed into the existing segwit v0 address space rather than waiting for segwit v1.</summary>
+    <published>2018-05-08T14:40:21+00:00</published>
+  </entry>
+</feed>

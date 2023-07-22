@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Guessing the spentness status of the pruned relatives</title>
+  <updated>2023-06-11T23:28:37.758889+00:00</updated>
+  <author>
+    <name>praxeology_guy 2017-04-02 20:43:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Guessing the spentness status of the pruned relatives</title>
+    <updated>2023-06-11T23:28:37.758889+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/013966.html" rel="alternate"/>
+    <summary>When using spentness bits in the merkle tree hashes instead of setting leaf nodes to empty, increasing the DLH_REQUIRED beyond 8 quickly has diminishing returns. Given that the spentness bit fields are 1 bit per txo, and markle hash size is 32 bytes, if you are using a 32 byte hash and spentness bits, you are pretty much limited to only being able to prune 8 to 12 layers. This corresponds to an MMR proof length of 512 to 768 bytes. The spentness bits take up 30% of the data structure's space with DLH_REQUIRED = 8 while it takes up 87% with DLH_REQUIRED = 12. Using stats from blockchain.info, 12E6 delayed utxo only txos are added to an MMR per year w/ the current block size while 200E6 txo/year added to the MMR per year if spent txos are added too. With 12E6 txo/year added to the MMR, the MMR grows by about 1.5MB (or 5MB) per year, whereas with 200E6 txo/year added to the MMR, the MMR grows by about 27.5MB (or 80MB) per year. Puts a hard limit on the potential gains by pruning more since the spentness bits are not in any way compressed by the MMR tree. A growth rate of 27MB to 80MB per year for adding all txos to the MMR doesn't sound too bad. If the block size is increased, we may soon decide we'd rather switch from using spentness bits to changing digest nodes to empty nodes, as this would give more breathing room.</summary>
+    <published>2017-04-02T20:43:40+00:00</published>
+  </entry>
+</feed>

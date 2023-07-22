@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Extension for BIP-0070 to support recurring payments</title>
+  <updated>2023-06-08T01:53:15.645940+00:00</updated>
+  <author>
+    <name>Kevin Greene 2014-02-11 10:00:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Extension for BIP-0070 to support recurring payments</title>
+    <updated>2023-06-08T01:53:15.645940+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-February/004334.html" rel="alternate"/>
+    <summary>The email thread discusses a proposed protocol to enable recurring payments in Bitcoin and can be seen as an extension of BIP-0070. The main goal is to have the customer subscribe to a service of some kind, agreeing on the terms of that subscription contract, and then having the wallet make recurring payments without any intervention from the customer as long as the payments match what the customer agreed to pay. A working prototype has been developed using Bitcoinj. There are ongoing discussions about how to trigger it off the existing payment protocol, data structures to define the payment schedule, and whether to allow pre-submission of time-locked transactions or not. The flow of operations includes creating the subscription, ongoing payments, subscription change (optional), and cancellation of the subscription. There are also discussions around what should happen if the client tries to fetch the PaymentRequest early or late, if the client tries to consume the same PaymentRequest twice during the same period, and if daily/weekly/monthly is flexible enough. It is suggested to have a concrete start time and end time when the next PaymentRequest will be valid, which also prevents the wallet from having to remember when it last sent a payment and getting skewed over time. Additionally, when a wallet hits the polling_url to download the next PaymentRequest, it seems there needs to be a way to communicate an error code to the wallet, for example, if the server canceled the contract without the wallet knowing. It is suggested to have a separate polling_status_url, with a corresponding ACK message to indicate if the PaymentRequest is available. Finally, it is noted that the wallet in this design doesn't have any way of knowing when the payments are supposed to end, which is important to show to the user before they start their wallet polling infinitely.</summary>
+    <published>2014-02-11T10:00:53+00:00</published>
+  </entry>
+</feed>

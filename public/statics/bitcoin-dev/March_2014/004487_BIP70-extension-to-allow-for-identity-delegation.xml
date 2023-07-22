@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP70 extension to allow for identity delegation</title>
+  <updated>2023-06-08T03:33:12.786202+00:00</updated>
+  <author>
+    <name>Andreas Schildbach 2014-03-02 15:20:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP70 extension to allow for identity delegation</title>
+    <updated>2023-06-08T03:33:12.786202+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-March/004487.html" rel="alternate"/>
+    <summary>The message is from Mike Hearn proposing a simple extension for Bitcoin Improvement Proposal 70 (BIP70) to allow identity delegation. The lack of this feature causes issues with payment processors and creates security risks. The proposal suggests creating an extended certificate that would be added to the X509Certificates message in the PaymentRequest. This new certificate would be signed by both the SSL cert of the payment processor and their delegated ECDSA key. The finished protobuf would show up in old clients as signed by the payment processor and by new clients as signed by the merchant, even though they did not provide their SSL key to the payment processor.The proposed implementation also includes an option for maximum security where the merchant can set very short expiry times on the certificates and have a cron job upload a new one at the end of each period, ensuring faster resealing in the case of payment processor compromise. The proposal also considers alternatives, such as using the User-Agent field or creating the extension certificate as an X.509 cert, but ultimately recommends a unique format to ensure safety. Feedback is welcome, and the author notes that the current spec doesn't allow two different PKIs at once, which is something they may want to fix in the future.</summary>
+    <published>2014-03-02T15:20:34+00:00</published>
+  </entry>
+</feed>

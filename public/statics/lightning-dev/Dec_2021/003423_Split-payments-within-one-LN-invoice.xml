@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Split payments within one LN invoice</title>
+  <updated>2023-06-03T06:57:32.278971+00:00</updated>
+  <author>
+    <name>Christian Decker 2021-12-17 11:02:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Split payments within one LN invoice</title>
+    <updated>2023-06-03T06:57:32.278971+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003423.html" rel="alternate"/>
+    <summary>In a discussion thread, ZmnSCPxj suggests the possibility of a "Poor man's rendez-vous" scheme for split payments. While there is no such command at the protocol level yet, ZmnSCPxj proposes that each intermediate payee sign an invoice for which it does not know the preimage using a hypothetical `signfakeinvoice` command, and then use the `htlc_accepted` hook for the "rendez-vous". To generate the invoice, the payees must be arranged in a fixed order, with the last payee generating a normal invoice while each previous payee creates its own signed invoice to itself using `signfakeinvoice`. The first payee then sends the sender the invoice. On payment, the sender sends the payment to the first hop, and from the first payee to the second-to-last, the plugin checks if the incoming payment has a hash that is in this scheme stored in the database and gathers `htlc_accepted` hook invocations until they sum up to the expected amount. Once all hooks are gathered, the plugin marks that it has gathered them all in durable storage and propagates the payment to the gathered `htlc_accepted` hooks. The last payee receives a normal payment using the normal invoice-receive scheme. Christian notes that `createinvoice`, which almost does what the scheme requires, requires the preimage and stores the invoice in the database, which the scheme does not want. However, if one has access to the `hsm_secret`, then they could sign in the plugin itself and sidestep `lightningd`. Each recipient must run the plugin beforehand, and creating an invoice requires more work since each payee needs to coordinate to be part of the Rendez-vous, but from the sender's point of view, it's all seamless. It remains unclear whether this is better suited for the protocol itself, but it could make its way into the spec if it is implemented, tested, and popular enough to warrant everybody having to implement yet another feature.</summary>
+    <published>2021-12-17T11:02:02+00:00</published>
+  </entry>
+</feed>

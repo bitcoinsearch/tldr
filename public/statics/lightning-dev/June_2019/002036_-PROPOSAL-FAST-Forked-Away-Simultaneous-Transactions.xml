@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[PROPOSAL]: FAST - Forked Away Simultaneous Transactions</title>
+  <updated>2023-06-02T19:00:34.720579+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-06-25 22:32:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[PROPOSAL]: FAST - Forked Away Simultaneous Transactions</title>
+    <updated>2023-06-02T19:00:34.720579+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-June/002036.html" rel="alternate"/>
+    <summary>The Lightning Network community is discussing an idea proposed by Ugam Kamat which involves simultaneous payment to multiple parties using the same partial route. The scenario presented is of Alice wanting to pay the bill amount to Eric, the restaurant owner and a tip to Grace, her waiter. In the current situation, Alice would have to send two payments to Eric and Grace. However, if they repurpose the onion blob in the same way as needed for spontaneous payments, there will be no path duplication. Dave would split the payments, one to Eric and the other going to Grace through Frank. The pre-image used in commitments A-&gt;B, B-&gt;C and C-&gt;D will be a function of pre-images P1 of D-&gt;E and P2 of D-&gt;F and F-&gt;G such that PM = f(P1, P2). This proposal works in a similar fashion to the Spontaneous Payment proposal, by packing additional data in the unused hops. The first byte would indicate how many hashes are packed, so the payload can be 64 + 33 bytes = 97 bytes. The first hop tells D the short-channel id, the amount to forward, CLTV and the padding. Since the pre-image is 32 bytes, it can be packed in one single hop that is received by the final party. This leaves the remaining 7 hops that can be used for routing.Under Scriptless Script (payment point / scalar), this is possible to do while retaining a form of proof-of-payment. However, note that the proof-of-payment scalar will be the sum of Eric and Grace proof-of-payment scalars. It is uncertain if that provides undeniable proof that you paid Grace or Eric. One solution would be to route through Eric and leave Eric with a higher-than-normal fee, which retains an undeniable proof-of-payment of Grace. Eric would not provide proof-of-payment, but in this scenario, given it seems, it is a "tip" and the actual payment is to the restaurateur Grace. In any case, this is effectively simply creation of fork points and join points along a multipart path. That the payment does not later join is merely a detail, especially once we get to "high" AMP (which requires payment points / scalars). We decided at the previous dev summit not to implement this due to complexity-of-implementation for payers, as well as how to resolve when one branch fails while the other branch claims the payment.</summary>
+    <published>2019-06-25T22:32:42+00:00</published>
+  </entry>
+</feed>

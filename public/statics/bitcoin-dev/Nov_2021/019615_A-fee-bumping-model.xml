@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A fee-bumping model</title>
+  <updated>2023-06-15T03:10:34.746596+00:00</updated>
+  <author>
+    <name>Antoine Riard 2021-11-30 01:43:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A fee-bumping model</title>
+    <updated>2023-06-15T03:10:34.746596+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-November/019615.html" rel="alternate"/>
+    <summary>The email thread discusses fee-bumping, which is an essential aspect of ensuring the security of many protocols built on Bitcoin, including Revault's delegation process. Fee-bumping confirms a transaction before the expiration of a timelock after establishing the contract. Strategies for fee-bumping include confirming Commitment transactions and children HTLC-Success/HTLC-Timeout transactions in Lightning and using a per-contract reserve in Revault. The email also discusses overpayments, UTxO set footprint, pinning vectors, and miner-harvesting attacks. The need for an insurance market to address the problem of "what is a reasonable feerate up to which we need to make contracts enforceable on-chain?" is suggested.Revault is a Bitcoin-based protocol that aims to improve watchtower operations by minimizing overpayments and the UTxO set footprint for delegated vaults. It uses presigned, ANYONECANPAY transactions, which introduces malleability in Cancel transactions and avoids opening a pinning vector. However, Revault acknowledges that it cannot ensure confirmation at any feerate, so it sets a "reserve feerate" above which it cannot enforce its contracts on-chain simultaneously. Revault also uses a reserve to manage its funds, but the distribution of UTxOs per vault is based on a basic geometric suite with two distributions: the reserve distribution and the bonus distribution. To bump and rebump transactions, Revault recommends using the `estimatesmartfee 2 CONSERVATIVE` method and being aggressive immediately.The post discusses the technical challenges of implementing a Bitcoin vault system called Revault. The system is an off-chain solution that requires all participants to sign transactions before a timelock, falling back to on-chain enforcement at a reserve feerate in case of a dispute. The post proposes solutions to the problems of stuck funds due to low feerates and the risk of miners stuffing their blocks with high fee self-paying transactions. Users can bump up the feerate of their transaction or fall back to a blockchain-based estimation when estimates are not available. The post also describes a study conducted to observe different metrics such as time at risk and operational cost with different deployment configurations and event probability. Historical fee estimates data were obtained from Statoshi, Txstats, and historical chain data from Riccardo Casatta's 'blocks_iterator.' The post concludes by acknowledging the limitations of its proposal and the need for an insurance market to address the limitations of off-chain solutions.</summary>
+    <published>2021-11-30T01:43:49+00:00</published>
+  </entry>
+</feed>

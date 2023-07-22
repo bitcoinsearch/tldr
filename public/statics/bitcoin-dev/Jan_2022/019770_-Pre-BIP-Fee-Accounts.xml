@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[Pre-BIP] Fee Accounts</title>
+  <updated>2023-06-15T03:50:15.058530+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2022-01-18 16:12:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[Pre-BIP] Fee Accounts</title>
+    <updated>2023-06-15T03:50:15.058530+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-January/019770.html" rel="alternate"/>
+    <summary>On January 1, 2022, Jeremy shared some thoughts for conceptual review with the Bitcoin developers in an email. He proposed a new design to clean up the fee paying semantics in Bitcoin "for good." The current transaction design has quirks that make it difficult to support real-world usage of Bitcoin, including fee bumping stuck transactions, DoS-resistant payment channels, and other long-lived smart contracts that cannot predict future fee rates. Previously, Jeremy proposed a special type of transaction called a "Sponsor" to allow arbitrarily appending fees to a transaction to bump it up in the mempool. As an alternative, he suggested establishing an account system in Bitcoin as an "extension block." The proposed design involves defining a special anyone can spend output type called a "fee account," storing all deposits to these outputs in a separate UTXO database for fee accounts, and allowing fee accounts to sign only two kinds of transactions: A) a fee amount and a TXID (or Outpoint?), or B) a withdraw amount, a fee, and an address. These transactions are committed in an extension block merkle tree.The proposed account system is fundamentally 'decent' for scalability because adding fees to a transaction does not require adding inputs or outputs and does not require tracking substantial amounts of new state. Additionally, this type of design works well for channels because the addition of fees to a channel state does not require any sort of pre-planning or transaction flexibility. While accounts are generally considered bad, the proposed fee accounts are not bad because any funds withdrawn from the fee extension are fundamentally locked for 100 blocks as a coinbase output. Therefore, there should be no issues with any series of reorgs, and since there is no "rich state" for these accounts, the state updates can always be applied in a conflict-free way in any order.To improve the privacy of this design, Jeremy suggests modifying it to implement something like Tornado.cash so that the fee account paying can be unlinked from the transaction being paid for, improving privacy at the expense of being a bit more expensive. Other operations could also be added to allow a trustless mixing to be done by miners automatically, where groups of accounts with similar values are trustlessly split into a common denominator and change, and keys are derived via a verifiable stealth address-like protocol. This proposed design could potentially be done as a federated network that bribes miners, retroactively after a block is formed. That might be sufficient to prove the concept works before a consensus upgrade is deployed, but such an approach does mean there is a centralizing layer interfering with normal mining.</summary>
+    <published>2022-01-18T16:12:36+00:00</published>
+  </entry>
+</feed>

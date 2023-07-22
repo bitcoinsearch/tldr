@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] IBLT block testing implementation</title>
+  <updated>2023-06-10T00:43:32.085361+00:00</updated>
+  <author>
+    <name>Rusty Russell 2015-06-27 04:46:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] IBLT block testing implementation</title>
+    <updated>2023-06-10T00:43:32.085361+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-June/009133.html" rel="alternate"/>
+    <summary>Rusty Russell has developed a model for using Invertible Bloom Lookup Tables (IBLT) to communicate blocks between peers. He posted the details on Github, which is a standalone C++ application for testing that is not integrated with Bitcoin. Kalle Rosenbaum linked to his previous work on IBLTs where he investigated the behavior of the IBLT when changing different parameters such as cell count, hashFunctionCount etc. Rusty’s implementation did not use a keyHashSum at all but only a concatenation of (txid48, fragid, tx-chunk) as value. The txid48+fragid functions as a kind of keyHashSum. Kalle thinks this might be a very good idea. Rosenbaum asked if Rusty implemented his idea to remove all the count==1 fragments in ascending order of (fragid-base_fragid). Rusty replied that he keeps records of all the 1 and -1 buckets; separate lists depending on how far they are off the base. Lists for 0, 1, 2, ... 7, then powers of 2. They also discussed making more comparable tests as proposed last year by Rosenbaum. Rusty’s design relies on similarity in mempools, with some selection hints. It is designed to be re-encoded between nodes as nodes will have similar mempools. Actual results will have to be worse than these minima, as peers will have to oversize the IBLT to have a reasonable chance of success. Rosenbaum suggested that exceptional tx *could* instead be encoded in the IBLT, just as if they were unknown differences. Rusty said that it's pretty easy to cut the bitmaps to zero and test this, whereas the overhead of IBLT is some factor greater than txsize. The purpose of reencoding when relaying is to improve the failure probability as new tx may have arrived in the mempool of the intermediary node.</summary>
+    <published>2015-06-27T04:46:35+00:00</published>
+  </entry>
+</feed>

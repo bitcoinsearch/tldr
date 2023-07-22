@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-06-03T00:44:35.136670+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-04-22 04:12:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-06-03T00:44:35.136670+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002640.html" rel="alternate"/>
+    <summary>The Lightning Protocol currently faces a severe issue with RBF Pinning HTLC Transactions, allowing a counterparty to steal funds. If B broadcasts the commitment transaction, C can spend an HTLC using preimage with a low-fee, RBF-disabled transaction. After a few blocks, A could claim the HTLC from B via the timeout mechanism, and then after a few days, C could get the HTLC-claiming transaction mined via some out-of-band agreement with a small miner. This leaves B short the HTLC value. One solution is to add a clause in OP_CHECKSEQUENCEVERIFY to prevent C from making an RBF-disabled transaction. However, if the transaction is not in the mempool at all, the vulnerability is not about RBF or relay, but sheer economics.Before L+1, C has no incentive to bid because placing any bid leaks the preimage, which B can use to spend from A. Thus, B should ensure that *before* L+1, the HTLC-Timeout has been committed onchain, which prevents this bidding war from even starting. The issue then is that B is using a pre-signed HTLC-timeout, preventing B from RBF-ing the HTLC-Timeout transaction. Two solutions include adding an RBF carve-out output to HTLC-Timeout at the cost of more blockspace or using `SIGHASH_NOINPUT` to make the C-side signature `SIGHASH_NOINPUT|SIGHASH_SINGLE`. With this, B can exponentially increase the fee as L+1 approaches.C can bribe a miner to prevent HTLC-Timeout from confirming between L and L+1, which is a censorship attack. To solve this, B can bump the fee on HTLC-Timeout, setting up a bidding war between C requesting miners to censor and B requesting miners to confirm. This only delays the war, and C will eventually want to start the bidding war.If both nodes support it, a Poon-Dryja channel can be upgraded without onchain activity to a Decker-Russell-Osuntokun channel. Signed transactions spending the funding tx to a txo that has been set up as Decker-Russell-Osuntokun sidesteps the issue under discussion here.</summary>
+    <published>2020-04-22T04:12:59+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Compact SPV proofs via block header commitments</title>
+  <updated>2023-06-08T15:12:07.457967+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2014-03-17 17:24:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Compact SPV proofs via block header commitments</title>
+    <updated>2023-06-08T15:12:07.457967+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-March/004727.html" rel="alternate"/>
+    <summary>The proposed compact SPV proof scheme aims to establish connectivity and proof of work in simple payment verification (SPV) proofs. The scheme involves committing to a hash tree of past block headers in each block, which can then be exploited to demonstrate in logarithmic space that an elided sequence of block headers actually represents the claimed work. The miner of a block is allowed to choose some subset of the block history which it creates direct links back to. These links include the block hash, height, and work distance from the new block, and are organized into a hash tree structure. The primary trade-off in choosing which back-links to include is that more back-links results in better connectivity, whereas a limited number of links results in smaller tree structures and therefore fewer hashes. Compact SPV proofs allow side chains or private accounting servers to experiment with very short block intervals without having a detrimental effect on SPV proof sizes, as the compact proofs scale logarithmically with the number of blocks. In fully general form, this compact SPV proof scheme works no matter the back-links chosen by miners, so long as they are either revealed or selected in a deterministic way such that full nodes can check their validity.For SPV clients, a client that has just come online could quickly ascertain which block represents the most work, and retrieve compact proofs-of-inclusion for its transactions without having to download every intervening block header. Assuming the availability of (U)TxO hash-tree commitments, a compact SPV proof would allow a mobile client to very quickly fast-forward to the current most-work block from which it could then query the spend status of its wallet outputs. The savings from not including every intervening block header could be very significant in bandwidth and processing time for merged-mined or slow proof-of-work side chains. Finally, the most important and driving use case: symmetrical two-way pegging between bitcoin and side-chains is made efficient enough to be reduced to practice by the availability of compact SPV proofs. The compact SPV proofs allow both the necessary proofs-of-spend and proofs-of-reorg to fit within current blockchain size limitations, and provide incentives for keeping this data out of the block chain until it is absolutely necessary.</summary>
+    <published>2014-03-17T17:24:46+00:00</published>
+  </entry>
+</feed>

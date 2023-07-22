@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Splice Lock Race Condition Solution</title>
+  <updated>2023-06-03T12:32:36.528185+00:00</updated>
+  <author>
+    <name>Dusty Daemon 2023-04-06 16:14:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Splice Lock Race Condition Solution</title>
+    <updated>2023-06-03T12:32:36.528185+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-April/003905.html" rel="alternate"/>
+    <summary>The issue being discussed relates to the `announcement_signatures` and `commit_sig` cases. The solution involves storing the last_short_channel_id to determine which announcement messages can be safely ignored and which are considered errors until sending or receiving `revoke_and_ack`. Although it is not a protocol issue, it is a critical detail that implementations need to handle correctly to avoid breaking or force closing during the splice lock process. The proposal suggests allowing a certain class of 'stale' messages for a period of time until either mutual_splice_locked or successful commitment_signed/revoke_and_ack round trip in either direction. This ideal solution requires more effort but would make the protocol and nodes more robust. The link to the original gist from January is provided, along with a proposed solution that adds a lock on the connection via an extra STFU step.</summary>
+    <published>2023-04-06T16:14:41+00:00</published>
+  </entry>
+</feed>

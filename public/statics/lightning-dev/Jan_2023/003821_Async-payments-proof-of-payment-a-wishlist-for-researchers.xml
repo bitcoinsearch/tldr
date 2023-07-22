@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Async payments proof-of-payment: a wishlist for researchers</title>
+  <updated>2023-06-03T11:28:48.757370+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2023-01-11 01:35:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Async payments proof-of-payment: a wishlist for researchers</title>
+    <updated>2023-06-03T11:28:48.757370+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-January/003821.html" rel="alternate"/>
+    <summary>The email thread discusses the problem of asynchronous payments in Lightning Network, where a mobile noncustodial user can receive payments even if they are regularly offline. The open research question is how the sender will get an invoice from the receiver, given that they are offline at sending-time. One existing protocol extension that solves this is AMP, which provides reusable invoices that can be posted anywhere on the internet, enabling a sender to attempt payment without the receiver being online. The payment cannot be stolen as the pre-image shares are in the final hop of the onion payload, which can only be decrypted by the receiver. Invoice negotiation protocols such as BOLT 12, LN-URL, and Lightning Address can also be used to fetch a self-contained AMP invoice. However, there is no standard that has emerged yet to encode proof-of-payment information, and most schemes would let any third party that learned the pre-image to claim that they sent the payment. Trampoline payments are critical in any sort of async payment scheme as they allow the sender's LSP to retry the payment at will without needing to fetch a fresh onion each time. With Trampoline payments, the entire flow can be async.The research question is about creating a scheme that allows a regularly-offline receiver to create a reusable invoice for their LSP to provide to senders, such that senders have proof-of-payment. One possible direction suggested is to stick with keysend, but have the sender encode a nonce + the time they sent the payment + the payment amount as a tweak to the keysend PTLC point, and make the receiver tweak their point with the same data when fulfilling the payment. Although this wouldn't provide proof-of-payment, it would allow the sender to prove "I sent X amount at Y time."</summary>
+    <published>2023-01-11T01:35:28+00:00</published>
+  </entry>
+</feed>

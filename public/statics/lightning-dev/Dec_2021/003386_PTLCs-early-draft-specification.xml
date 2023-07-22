@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PTLCs early draft specification</title>
+  <updated>2023-05-23T16:54:09.256980+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-12-08 09:28:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PTLCs early draft specification</title>
+    <updated>2023-05-23T16:54:09.256980+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003386.html" rel="alternate"/>
+    <summary>In a discussion on Lightning-dev, ZmnSCPxj stated that fast-forwards could be an alternative to updating the commitment transactions on the payment-forwarding path. However, if two PTLCs exist between parties A and B, and A wants to update the commitment transaction, she needs to follow several steps, including producing a signature for B to spend the funding tx and receiving an adaptor signature from B, which can only be done after B has received a signature from A. This creates a problem where previous adaptor signatures would be invalidated, even if the B-&gt;A PTLC conditional on Y is within a fast-forward child-transaction. In this case, any way of spending without an adaptor sig would cause B to lose funds. The problem would persist regardless of whether the commitment transaction that A and B will publish is the same or different. The author suggests doing a synchronous update of commitments to the channel state, which involves half a round-trip compared to the current protocol. The timings change so that Bob can use the new commitment after 1.5 round-trips and Alice can use the new commitment after 1 round-trip. Making the funding tx a musig setup would mean supplying 64B of musig2 nonces along with the "adaptor sigs" in one direction.However, the same protocol should work fine with the revocable signatures on a single tx approach as well. Fast forwards would reduce the 2 round-trip protocol to update the state commitment to a 0.5 round-trip update, reducing latency when forwarding by the same amount as before (1.5 round-trips to 0.5 round-trips).</summary>
+    <published>2021-12-08T09:28:53+00:00</published>
+  </entry>
+</feed>

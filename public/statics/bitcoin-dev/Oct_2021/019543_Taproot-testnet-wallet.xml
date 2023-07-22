@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Taproot testnet wallet</title>
+  <updated>2023-05-22T15:55:10.508976+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-10-15 01:05:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Taproot testnet wallet</title>
+    <updated>2023-05-22T15:55:10.508976+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-October/019543.html" rel="alternate"/>
+    <summary>Bitcoin Core users can create a taproot-capable wallet following several steps. Firstly, they need to have or create a descriptor wallet with descriptors=true using the createwallet RPC command. Secondly, they should import a taproot descriptor in the form "tr(KEY)", where KEY can be a tprv.../* or any other supported key expression. Thirdly, they can get a new address with addresstype=bech32m. It is important to note that this process is currently somewhat cumbersome, especially prior to taproot activating on mainnet. To create a taproot-capable wallet in Bitcoin Core using master (which has PR#21500 merged), there are five steps involved. First, users should create a descriptor wallet using the command 'bitcoin-cli -signet -named createwallet wallet_name=descwallet descriptors=true load_on_startup=true'. Second, they need to get the associated bip32 tprv private key using 'TPRV=$(bitcoin-cli -rpcwallet=descwallet -signet listdescriptors true | jq '.descriptors | .[].desc' | sed 's/^.*(//;s/[)/].*//' | uniq | head -n1)'. Note that this step requires an updated version of bitcoin-cli due to PR#21500. Third, users should construct the taproot descriptor per BIP 86 using 'DESC="tr($TPRV/86'/1'/0'/0/*)"' and 'CHK="$(bitcoin-cli -rpcwallet=descwallet -signet getdescriptorinfo "$DESC" | jq -r .checksum)"'. Fourth, import the descriptor using 'bitcoin-cli -rpcwallet=descwallet -signet importdescriptors "[{\"desc\": \"$DESC#$CHK\", \"active\": true, \"timestamp\": \"now\", \"range\": [0,1000], \"next_index\": 1}]"'. Finally, get an address using 'bitcoin-cli -rpcwallet=descwallet -signet getnewaddress '' bech32m'. Once taproot has been activated on mainnet and PR#22364 is merged, users will only need to do the first and last steps. The signet faucet can be used to send a few million ssats to the created address directly. It should be noted that this process also works with testnet, but it is unclear if any testnet faucets will accept bech32m addresses directly.</summary>
+    <published>2021-10-15T01:05:12+00:00</published>
+  </entry>
+</feed>

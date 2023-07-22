@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Replacement for RBF and CPFP: Non-Destructive TXID Dependencies for Fee Sponsoring</title>
+  <updated>2023-06-14T15:21:55.591013+00:00</updated>
+  <author>
+    <name>nopara73 2020-09-19 15:01:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Replacement for RBF and CPFP: Non-Destructive TXID Dependencies for Fee Sponsoring</title>
+    <updated>2023-06-14T15:21:55.591013+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-September/018175.html" rel="alternate"/>
+    <summary>A draft proposal for a mechanism to replace CPFP and RBF for increasing fees on transactions in the mempool that should be more robust against attacks has been shared. The proposal requires that the Sponsor's feerate must be greater than the Sponsored's ancestor fee rate to prevent garbage sponsors. The reference implementation does not include this requirement, so there is confusion about whether a Sponsor Tx A can be replaced by Sponsor Tx B if A and B have at least one input in common or if A can be replaced by B even if they don't have any inputs in common as long as they do have a Sponsor Vector in common. In either case, it may still be possible for Mallory to prevent Bob from sponsor-fee-bumping (sponsor-bumping?) his transaction by submitting a sponsor before he does. Additionally, Mallory can use an existing pinning technique to make it expensive for Bob to fee bump. The normal replacement policies require a replacement to pay an absolute higher fee than the original transaction, so Mallory can create a 100,000 vbyte transaction with a single-vector sponsor at the end pointing to Bob's transaction. This sponsor transaction pays the same feerate as Bob's transaction but in order for Bob to replace Mallory's sponsor transaction with his own sponsor transaction, Bob needs to pay the incremental relay feerate more, making it costly.</summary>
+    <published>2020-09-19T15:01:07+00:00</published>
+  </entry>
+</feed>

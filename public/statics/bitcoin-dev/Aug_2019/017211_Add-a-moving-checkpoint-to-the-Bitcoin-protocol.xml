@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Add a moving checkpoint to the Bitcoin protocol</title>
+  <updated>2023-06-13T20:39:35.554658+00:00</updated>
+  <author>
+    <name>LORD HIS EXCELLENCY JAMES HRMH 2019-08-03 00:51:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Add a moving checkpoint to the Bitcoin protocol</title>
+    <updated>2023-06-13T20:39:35.554658+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-August/017211.html" rel="alternate"/>
+    <summary>Lord James proposes adding a moving checkpoint to the Bitcoin protocol. This rule would be making the moving checkpoint valid only if the difference in blocks between the main chain and the new fork is smaller than X blocks, like for example 3 days of blocks, so after a long network split everyone can finally follow the longest chain. The current fix to a network split is simple, the longest chain win. But with the moving checkpoint, there is a problem if both chains began to differ more than N blocks ago, the forks are permanent. Hence an additional rule is needed to ignore the moving checkpoint, a limit of X blocks. The longest chain with the most proof of work should not be considered the longest chain. If a node sees a fork longer than its main chain, and the fork has at least X blocks more than the main chain, then the node ignores the moving checkpoint rule, and it follows the fork, the longest chain. Lord James suggests two possible scenarios: a 51% attack where the blocks older than 24 hours are protected against a history rewrite during at least 3 days, in that time developers could release an emergency release with another mining algorithm to stop the attack; network split, if the network split is older than N blocks, we have 2 permanent forks (or chains), but in 3 days (or more) the blockchain heights will differ in more than X blocks (the blocks of 3 days) because there will be more miners in one chain than in the other so finally the loser chain will be abandoned and everyone will follow the longest chain. Alistair Mann questions how a (potentially, state-sponsored) netsplit lasting longer than N would be handled. Lord James clarifies that it would be detected by the community much before reaching the reorg limit of N blocks (it's 24 hours) so nodes could stop until the netsplit is fixed. In the extreme case, no one notices the network split during more than N blocks (24 hours) and there are 2 permanent forks longer than N, nodes from one branch could delete their local history so they would join the other branch. Ethan Heilman believes that a moving-checkpoint rule as described above would make Bitcoin more vulnerable to 51% attacks.</summary>
+    <published>2019-08-03T00:51:12+00:00</published>
+  </entry>
+</feed>

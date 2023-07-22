@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>type,len,value standard</title>
+  <updated>2023-05-25T17:06:42.783552+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-11-15 07:39:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>type,len,value standard</title>
+    <updated>2023-05-25T17:06:42.783552+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001607.html" rel="alternate"/>
+    <summary>The discussion is about the structure of `type,len,value` sequence where the `type`s must be in ascending order. Even though descending would make just as much sense, it's better to have them in ascending order for a naive parser. The length of `type` is suggested to be one byte instead of two to avoid creating a new message type for 256 optional fields. For an even `type` that is not known, it is suggested to crash and burn to maintain consistency. However, this could depend on the context of the gossip messages or link-level messages. It is also proposed to use varint for the length of `len` since one byte is not enough for all lengths, but two seems excessive for uint8 or even uint32. A separate BOLT document is proposed for `type,len,value` to add new fields proposed in 1.1 and to help spec and verify the t-l-v data structures (a mapping from u16 to binary blobs) separately. At the t-l-v level, there would only be binary blobs for the value, and separate parts of the software would understand what the actual meanings of those blobs are.</summary>
+    <published>2018-11-15T07:39:19+00:00</published>
+  </entry>
+</feed>

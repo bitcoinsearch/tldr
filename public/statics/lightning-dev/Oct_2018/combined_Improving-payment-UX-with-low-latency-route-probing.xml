@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Improving payment UX with low-latency route probing</title>
+  <updated>2023-05-25T15:00:26.737574+00:00</updated>
+  <author>
+    <name>Fabrice Drouin 2018-10-31 17:28:58</name>
+  </author>
+  <author>
+    <name>Pierre 2018-11-07 00:18:08</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-11-06 07:26:06</name>
+  </author>
+  <link href="lightning-dev/Oct_2018/001484_Improving-payment-UX-with-low-latency-route-probing.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001527_Improving-payment-UX-with-low-latency-route-probing.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001524_Improving-payment-UX-with-low-latency-route-probing.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Improving payment UX with low-latency route probing</title>
+    <updated>2023-05-25T15:00:26.737574+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-October/001484.html" rel="alternate"/>
+    <summary>The issue of sent payments that remain pending is a significant challenge for Lightning Network (LN) and a common source of complaints from end-users. Intermediate nodes are often stuck waiting for a revocation, and recipients can take a very long time to reply with a payment preimage. One possible solution proposed by Fabrice is to use probing with short timeout requirements before sending the actual payment. The sender would first send a "blank" probe request along the same route as the payment, similar to a payment request, and if the next node in the route does not reply within the timeout period, the current node will immediately send back an error message. There could be several options for the probe request: include the same amounts and fee constraints as the actual payment request or include no amount information, in which case we're just trying to "ping" every node on the route. Fabrice suggests implementing this with a "0 satoshi" payment request that the receiving node would generate along with the real one. The sender would try to "pay" the "0 satoshi" request using the route it computed with the actual payment parameters.It is already possible to partially mitigate this issue by disconnecting from a node that is taking too long to send a revocation after 30 seconds, for example, and reconnecting immediately to the same node. This way, pending downstream HTLCs can be forgotten, and the corresponding upstream HTLCs failed. However, Pierre suggests adding this solution to BOLT 2 in the form of a "SHOULD" clause.Laolu suggests that HORNET could address this issue effectively. During the set up phase using Sphinx, the sender can get a sense of if the route is actually "lively" or not, and during the set up phase, the sender can drop a unique payload to each node. Each node can use a private "fee function," which may take into account the level of congestion in their channels, or other factors. This would differ from the current approach in that this fee schedule need not be communicated to the wider network, only those wishing to route across that link. Nodes on either side of the circuit can exchange payment hashes, perform cool zkcp set up protocols, etc., and receive a protocol-level payment ACK. Finally, HORNET would let nodes easily rotate their onion keys to achieve forward secrecy during the data phase.</summary>
+    <published>2018-10-31T17:28:58+00:00</published>
+  </entry>
+</feed>

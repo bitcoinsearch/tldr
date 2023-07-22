@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[VERY ROUGH DRAFT] BOLT 12: Offers</title>
+  <updated>2023-06-02T21:36:11.100027+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-11-05 07:39:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[VERY ROUGH DRAFT] BOLT 12: Offers</title>
+    <updated>2023-06-02T21:36:11.100027+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-November/002279.html" rel="alternate"/>
+    <summary>The Lightning Network protocol involves a payment system that requires offers to be made and invoices to be requested. Each offer has various attributes including `time_unit`, `period`, `number` of total payments, `basetime`, and `paywindow`. The default offer is a nominal offer used to send unsolicited payments. An invoice request can be generated using the `invoice_req` message inside `directed`'s `onion_routing_packet`, and it expects an `invoice_or_error_tlv` inside the `directed_reply` message. Directed messages allow peers to use existing connections to query for invoices and are not associated with a particular local channel. A `directed` message will be the mechanism for sending invoice requests and receiving invoice request responses.The BOLT #12 protocol is used for dealing with invoices over Lightning for donation offers on a website. The human-readable part of a Lightning offer is `lno`, and the data part consists of three parts, including 0 or more TLV encoded fields, a 32-byte nodeid, and a 64-byte signature of SHA256(hrp-as-utf8 | tlv | nodeid). The TLV fields define how to get the invoice, and what it's for. Each offer has a unique `offer_identifier` so the offering node can distinguish different invoice requests. Offers can request recurring payments of various kinds and specify what base currency they are calculated in. `Additional_data` is a bitfield that indicates what information the invoice requester should (odd) or must (even) supply. The encoding of TLV fields is explained in detail, and the document sets out the requirements for offers and invrequests. A writer of an offer MUST use a unique `offer_idenfitier` for each offer and MAY include `recurrence` to indicate an offer should trigger time-spaced invoices. A reader of an offer should gain user consent for recurring payments, allow users to view and cancel recurring payments, and gain user consent to send `delivery_` fields. Finally, some offers are periodic, such as a subscription service or monthly dues, in that payment is expected to be repeated, and there are many flavors of repetition. ISO 3166 alpha-2 code should be used for `delivery_country`.</summary>
+    <published>2019-11-05T07:39:28+00:00</published>
+  </entry>
+</feed>

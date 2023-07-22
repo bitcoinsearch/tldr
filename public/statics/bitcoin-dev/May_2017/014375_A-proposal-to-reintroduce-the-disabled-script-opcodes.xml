@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A proposal to reintroduce the disabled script opcodes</title>
+  <updated>2023-06-12T00:53:08.664472+00:00</updated>
+  <author>
+    <name>Ethan Heilman 2017-05-22 16:43:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A proposal to reintroduce the disabled script opcodes</title>
+    <updated>2023-06-12T00:53:08.664472+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-May/014375.html" rel="alternate"/>
+    <summary>The user is requesting for an OP_CAT instruction that concatenates hash outputs together. The ideal instruction for this use case would be an instruction that pops N vectors of the stack, concatenates them together and hashes them. There should be a limit on maximum output size for the instruction, and the user suggests that it should generate an output of no greater than 512 Bytes. This can be done in a streaming fashion so that memory usage would never exceed 32 Bytes regardless of the size of the input vectors. The user desires the OP_CAT instruction so he can securely and compactly verify many hashes and hash preimages which would shrink offchain Tumblebit transactions significantly. For instance, if the user wants a transaction TxA that checks that a transaction TxB releases preimages x1,x2,...,x10 such that y1=H(x1), y2=H(x2),...,y10=H(x10), the user currently puts y1,...y10 and checks that the preimages hash correctly. With OP_CAT, the user would only have to store one hash in TxA, yhash. TxA could then just hash all the preimages supplied by TxB and confirm they hash to TxA. This would reduce the size of TxA from approx 10*32B to 32+10*16B. Most of the math OP codes aren't particularly helpful due to their 32-bit nature and their strange overflow behavior. The user recognizes that OP_CAT is more generally useful and already in scripts but just disabled. The user is pushing for an OP_CAT which can generate an output of no greater than 512 Bytes.</summary>
+    <published>2017-05-22T16:43:11+00:00</published>
+  </entry>
+</feed>

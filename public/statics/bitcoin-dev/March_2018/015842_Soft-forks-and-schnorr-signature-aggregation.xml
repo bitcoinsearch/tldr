@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Soft-forks and schnorr signature aggregation</title>
+  <updated>2023-06-13T01:07:05.240008+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-03-21 07:53:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Soft-forks and schnorr signature aggregation</title>
+    <updated>2023-06-13T01:07:05.240008+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-March/015842.html" rel="alternate"/>
+    <summary>The article discusses various solutions to the challenges of implementing both signature aggregation and RETURN_VALID together in Bitcoin. One solution is to write scripts carefully to ensure that aggregated signatures conditional on a redefined RETURN_VALID opcode go into later buckets, but this may be difficult for complicated scripts. Another solution proposed by ZmnSCPxj is to use dedicated opcodes such as OP_ADD_AGG_PUBKEY and OP_CHECK_AGG_SIG[VERIFY] for aggregated signatures. A third solution is to use a Merkleized Abstract Syntax Tree (MAST) which would commit to an execution path and could be the only solution if everyone is happy to use it.The article also discusses the use of separate buckets in Bitcoin for independent generation and verification of signatures, which reduces the benefit of signature aggregation. Aggregated signatures can be used in response to CHECKSIGVERIFY or n-of-n CHECKMULTISIGVERIFY, but invalid signatures will fail the entire transaction if there was a problem. Soft-forking in new opcodes can be done by bumping the segwit script version or redefining OP_NOP opcodes as OP_CHECK_foo_VERIFY opcodes. Another approach involving RETURN_VALID opcodes seems possible, allowing for the introduction of any new opcode and concurrent soft-forks.The author suggests introducing a new segwit witness version, called v2, which should support Schnorr signature verification, have a "pay to public key (hash?)" witness format, and allow direct signatures of the transaction via the corresponding private key to be aggregatable. V2 should also have a "pay to script hash" witness format via taproot+MAST or graftroot and support MAST scripts. The article also discusses other aspects to consider for signature aggregation, such as the consensus-critical aggregation algorithm and whether non-interactive half-sig aggregation can go in at the same time.</summary>
+    <published>2018-03-21T07:53:59+00:00</published>
+  </entry>
+</feed>

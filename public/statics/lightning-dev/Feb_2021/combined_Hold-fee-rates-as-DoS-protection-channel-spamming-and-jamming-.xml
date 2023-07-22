@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Hold fee rates as DoS protection (channel spamming and jamming)</title>
+  <updated>2023-06-04T01:14:49.005013+00:00</updated>
+  <author>
+    <name>Joost Jager 2021-02-11 15:24:05</name>
+  </author>
+  <author>
+    <name>Joost Jager 2021-02-14 18:05:08</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2021-02-15 13:56:45</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2021-02-23 01:52:49</name>
+  </author>
+  <author>
+    <name>Joost Jager 2021-02-11 14:28:14</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2021-02-12 13:29:11</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-02-13 04:24:07</name>
+  </author>
+  <author>
+    <name>Joost Jager 2021-02-23 12:33:50</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-02-11 14:53:06</name>
+  </author>
+  <author>
+    <name>Joost Jager 2021-02-12 20:15:50</name>
+  </author>
+  <author>
+    <name>Joost Jager 2021-02-20 18:33:09</name>
+  </author>
+  <link href="lightning-dev/Feb_2021/002961_Hold-fee-rates-as-DoS-protection-channel-spamming-and-jamming-.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2021/002974_Hold-fee-rates-as-DoS-protection-channel-spamming-and-jamming-.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2021/002975_Hold-fee-rates-as-DoS-protection-channel-spamming-and-jamming-.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2021/002977_Hold-fee-rates-as-DoS-protection-channel-spamming-and-jamming-.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2021/002958_Hold-fee-rates-as-DoS-protection-channel-spamming-and-jamming-.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2021/002965_Hold-fee-rates-as-DoS-protection-channel-spamming-and-jamming-.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2021/002967_Hold-fee-rates-as-DoS-protection-channel-spamming-and-jamming-.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2021/002978_Hold-fee-rates-as-DoS-protection-channel-spamming-and-jamming-.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2021/002959_Hold-fee-rates-as-DoS-protection-channel-spamming-and-jamming-.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2021/002966_Hold-fee-rates-as-DoS-protection-channel-spamming-and-jamming-.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2021/002976_Hold-fee-rates-as-DoS-protection-channel-spamming-and-jamming-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Hold fee rates as DoS protection (channel spamming and jamming)</title>
+    <updated>2023-06-04T01:14:49.005013+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-February/002961.html" rel="alternate"/>
+    <summary>The Lightning-dev mailing list has been discussing the use of feerates versus fixed fees in a scenario where a channel is forced on-chain. A proposal suggests using a time-proportional hold fee rate to address the limitation of not considering hold invoices and other long-term held packets. However, concerns have been raised about clock differences between endpoints of a channel and the risk of going offline while holding an HTLC. There are also privacy issues with incrementing hold fees along a payment path. It was suggested that the first solution proposed in 2015 involving closing out the channel and sending back a proof of closure may be more desirable from the point of view of enforcing tangible costs.The vulnerability of channel jamming on the Lightning Network still exists, and an experiment confirmed its seriousness. A solution proposed by t-bast's remix of forward and backward upfront payments, called bidirectional upfront payment, is considered the most promising direction. This proposal has a time-independent hold fee, which forces the receiver of the HTLC to pay the full hold fee if it doesn't resolve within the grace period. To address this limitation, a variation of bidirectional upfront payments that uses a time-proportional hold fee rate has been presented.Antoine proposed the variation of bidirectional upfront payments, which uses a time-proportional hold fee rate that binds the hold fee to the consumed timelocked period of liquidity rather than its potential maximum. Routing nodes advertise their 'hold_grace_period' and are willing to pay hold fees for HTLC forwarding if they added a delay greater than the grace period. Joost proposed a variation of bidirectional upfront payments that uses a time-proportional hold fee rate with a hold grace period. The proposal adds flexibility to not take a step back in terms of functionality, fair pricing for holding invoices, and its applications. Joost's spreadsheet calculates the fees for a three-hop route, and users can make a copy and try out various different values. However, concerns have been raised about HTLC settlement differences due to clock discrepancies or incoming counterparties going offline, which could lead to routing nodes being at a loss. To prevent abuse of the system, routing nodes also advertise their hold grace period, which is the maximum duration that they are willing to pay hold fees for.In a conversation between Joost and ZmnSCPxj, the issue of using feerates versus fixed fees in payment channels is discussed. ZmnSCPxj argues that adding an anti-DoS fee on top of an accidental channel closure is adding insult to injury, which could deter forwarding nodes from operating at all. They express concern about privacy, as incrementing holdfee can leak an upper bound on the distance to payer, making it easier to associate a single payment-part with the payer and payee.The discussions about the Lightning Network have been missing any sort of threat model or attacker profile. The first instances of griefing attack will be executed by routing node operators who operate in a gray area, given the potential for earning thousands of dollars per month in routing fees. By jamming the competition's channels, these operators can capture their traffic and command a higher fee rate. Overall, the conversations are focused on proposing solutions to address the vulnerability of channel jamming, using feerates versus fixed fees in payment channels, and the need for a threat model or attacker profile in discussions about the Lightning Network.</summary>
+    <published>2021-02-11T15:24:05+00:00</published>
+  </entry>
+</feed>

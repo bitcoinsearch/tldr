@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Taproot (and graftroot) complexity</title>
+  <updated>2023-05-20T21:41:13.449807+00:00</updated>
+  <author>
+    <name>Anthony Towns 2020-02-10 00:20:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Taproot (and graftroot) complexity</title>
+    <updated>2023-05-20T21:41:13.449807+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-February/017622.html" rel="alternate"/>
+    <summary>On the Bitcoin development mailing list, concerns have been raised regarding the development of Taproot. One issue is not seeing the benefit of Taproot. However, the proposed benefit is that it allows wallets to change from "if you lose this key, your funds are gone" to "if you lose this key, you'll have to recover 3 of your 5 backup keys that you sent to trusted friends, and pay a little more, but you won't have lost your funds". This provides a new recovery option if a key is lost and does not cost anything beyond upgrading wallet software/hardware.Graftroot was also discussed, but it is not proposed as it requires non-interactive half-signature aggregation that has not been properly written up for criticism. There is also some discussion on the differences between a merkle branch and a taproot alternative. With Taproot, there is less overhead 60% of the time, which results in an expected overhead of 26B. If there is a particular outcome that is overwhelmingly likely, with others just there for emergencies, then a taproot-style alternative will be better. The benefits of Taproot include preserving anonymity sets even after spending. However, there are still concerns about the merit of doing Taproot versus alternatives and the process through which we got here. It is believed that Taproot is more private than bare MAST and Schnorr separately, presuming single-pubkey-single-signature remains a common authorization pattern. Taproot with a key is about as cheap as it gets, and it is then 33 bytes of witness data more expensive to use a script, which will presumably make it more likely that people use the simple key path.Taproot spends can be distinguished based on whether they are spent via key path, script path with internal key unknown, or script path with an internal known NUMS point. However, there is no fee rate advantage between reusing a NUMS point and generating a fresh one. Looking at blocks 616650 to 616700, it was found that over 95% of outputs for plain SegWit are plain key. The driving force behind bundling changes into Taproot is the advantages it offers, including allowing users to decide between a simple public-key and signature to authorize a spend or a script without added cost. Implementing Taproot requires a new SegWit version, so splitting it up into separate soft-forks for Merkle Branch Witnesses and Schnorr Signatures does not make sense. Updating to Schnorr signing makes blockchain validation easier and has benefits for hardware wallets. Upgrading sooner rather than later has systemic benefits.Overall, while there are concerns about the development of Taproot, it is viewed as a good midway point to draw a line and get the feature out and released.</summary>
+    <published>2020-02-10T00:20:11+00:00</published>
+  </entry>
+</feed>

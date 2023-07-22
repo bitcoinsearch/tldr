@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Onion routing strawman proposal</title>
+  <updated>2023-05-18T15:25:47.380377+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-10-06 05:22:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Onion routing strawman proposal</title>
+    <updated>2023-05-18T15:25:47.380377+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-October/000255.html" rel="alternate"/>
+    <summary>On October 6th, 2015, Rusty Russell made a post on Github discussing the changes he made to the test_onion and Makefile test to separate generate and decode. He also suggested mixing in the python version there too. Anthony Towns questioned why flip_key() was being used in onion_key.c, stating that it is only necessary for the single use onion-msg-keys. When asked about AES128, Anthony explained it just uses the first half of the calculated enckey, iv and pad_iv. Since libsecp256k1 already sha256s the ecdh secret, the hmac/enckey/etc end up being sha256'ed twice (with a byte added in between). Rusty suggested using both halves of a sha for iv and pad_iv to save a sha call and stated that ECDH step dominates performance-wise anyway. In addition, Rusty mentioned that the message size of 128 bytes is completely made up, as is 20 hops, and that they might want to reduce it to 96 or 64 bytes. Anthony replied that he figured 20=floor(4096/192) which made sense to him. He also stated that the message needs to include fee info and the forwarding address which is 4B and 20B-32B respectively. However, some nodes may want to do clever things like allow you to tell it to deliberately delay forwarding for an hour or two, or deduct (different) fees from multiple HTLC's simultaneously. Anthony predicts that 64B is probably plenty for that. Lastly, if there is a need to redirect an onion-routed payment, then hops would have to be added and dropped. This can complicate the situation by messing up the constant-size packets.</summary>
+    <published>2015-10-06T05:22:36+00:00</published>
+  </entry>
+</feed>

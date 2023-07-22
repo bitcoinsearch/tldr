@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Lightning over taproot with PTLCs</title>
+  <updated>2023-05-23T16:27:29.908655+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-10-09 01:12:07</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2021-10-12 04:48:56</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2021-10-12 03:26:58</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2021-10-12 03:08:21</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2021-10-11 06:29:51</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2021-10-09 02:15:19</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2021-10-19 06:26:50</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2021-10-19 04:16:13</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2021-10-09 13:59:39</name>
+  </author>
+  <link href="lightning-dev/Oct_2021/003278_Lightning-over-taproot-with-PTLCs.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2021/003296_Lightning-over-taproot-with-PTLCs.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2021/003294_Lightning-over-taproot-with-PTLCs.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2021/003293_Lightning-over-taproot-with-PTLCs.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2021/003287_Lightning-over-taproot-with-PTLCs.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2021/003280_Lightning-over-taproot-with-PTLCs.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2021/003325_Lightning-over-taproot-with-PTLCs.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2021/003324_Lightning-over-taproot-with-PTLCs.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2021/003283_Lightning-over-taproot-with-PTLCs.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Lightning over taproot with PTLCs</title>
+    <updated>2023-05-23T16:27:29.908655+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-October/003278.html" rel="alternate"/>
+    <summary>The context discusses proposals for updating Lightning network's BOLT#2 and BOLT#3 to take advantage of taproot and implement PTLCs. The aim is to minimize storage requirements and latency, support offline receiving, and minimize on-chain footprint and third-party analysis. The proposed solutions involve four layers of transactions with nonces exchanged in advance to update the balance transaction and generate a new revocable secret.Inflight transactions are used to enable low-latency forwarding while allowing the recovery of funds if old states are posted. The proposal suggests using "low-latency" transactions that spend Alice's balance and have outputs for recent payments. However, this approach adds complexity to the system, and it may not work for "offline" peers since they'd need to be able to post the low-latency tx within the "PD" delay, which they can't do because they're offline.The proposal involves the use of deterministic and recoverable nonces to ensure security. Additionally, there is talk about the balance transaction, inflight transactions, and layered transactions. Various scenarios, including the use of htlc and ptlc outputs, the need for "k" to distinguish inflight payments, and the potential for costless theft attempts, are discussed.The context also discusses challenges in creating a payment channel system that can facilitate fast and secure payments. It proposes shachain-based secret generators to address nonce reuse by the first signer. It is suggested that routing nodes do shadow channels as a matter of course to allow splicing funds into or out of the shadow channel while retaining positive longevity heuristics of the public channel.However, the layering proposed does not work as it allows Bob to post the inflight tx before Alice can claim her balance directly, preventing Alice from claiming the refund. The proposal acknowledges that this approach adds complexity to the system and suggests sticking it behind a feature bit so nodes can just not implement low-latency payments.</summary>
+    <published>2021-10-09T01:12:07+00:00</published>
+  </entry>
+</feed>

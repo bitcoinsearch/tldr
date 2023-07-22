@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Blinded channel observation</title>
+  <updated>2023-05-24T00:15:30.980015+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-08-11 01:55:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Blinded channel observation</title>
+    <updated>2023-05-24T00:15:30.980015+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-August/000574.html" rel="alternate"/>
+    <summary>Tadge Dryja proposed a scheme that uses a revocation key and is compatible with shachain/elkrem. It omits hashing in the commit script and uses only signature verification, which reduces the script size and makes previous commit transactions untraceable. To build the revocable pubkey, Alice takes her elkrem sender hash from state n, then multiplies EHn * G, getting a point EPn. Alice sends EPn to Bob, who adds their commitment pubkey (BP) to EPn, resulting in RPub n = BP + EPn, the revocable pubkey for state n. At state n+1, Alice sends Bob EHn, and Bob can compute the private key for Rpub n, as it's just their commitment private key plus EHn, modulo the order of the curve. A similar procedure is used for the timeout key; Alice adds a point to their own timeout key, but it is pointless because they know both scalars. Bob only needs to keep track of the most recent "elkrem points" and the hash tree itself. The property Rusty was hoping for was the ability for Alice and Bob to independently predict each other's future revocation hashes/pubkeys, allowing an arbitrary number of commitment transactions in flight each way at once.</summary>
+    <published>2016-08-11T01:55:36+00:00</published>
+  </entry>
+</feed>

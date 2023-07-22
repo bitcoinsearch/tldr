@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New BIP: Hardfork warning system</title>
+  <updated>2023-06-11T20:43:32.085646+00:00</updated>
+  <author>
+    <name>Tom Zander 2016-12-01 18:51:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New BIP: Hardfork warning system</title>
+    <updated>2023-06-11T20:43:32.085646+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-December/013333.html" rel="alternate"/>
+    <summary>Johnson Lau has proposed a change in consensus rules regarding block nVersion and has defined a concept of generalized block header to implement a hardfork warning system for full nodes and light nodes. Softforks make some previously valid blocks invalid, while hardforks make some previously invalid blocks valid. Bitcoin has successfully introduced a number of new functions through softforks, but some features may not be easily introduced with a softfork.The BIP defines a change in consensus rules regarding block nVersion and defines a concept of generalized block header to implement a hardfork warning system for full nodes and light nodes. The hardfork warning system is able to detect several types of hardforks but does not guarantee that the hardfork will be successful and not end up with two permanent incompatible forks.A bitcoin protocol implementation should consider a generalized block header as valid if it satisfies all the criteria set by Johnson Lau. Light node should observe the hardfork notification bits in block header, along with any other rules it opts to validate. If any of the hardfork notification bits is set, it should issue a warning to its users and stop processing incoming and outgoing transactions until further instructions are given.Developers should pay attention to the fact that BIP9 is disabled when any of the hardfork notification bits are set, which may interrupt any ongoing softfork support signalling process. They may redefine the counting of signal or move the signalling bitfield to a different location. Legacy nodes would not benefit from this softfork and warning system. However, no additional risks are introduced to legacy nodes either.It is important to note that a hardfork may have lower difficulty but higher total proof-of-work, such as by decreasing the average block interval. In the March 2013 fork, pre-0.8 full nodes would see that as a hardfork with unknown rules, while light nodes and 0.8.0 full nodes would see that as multiple valid blockchains. In the July 2015 fork, BIP66-complying full nodes would see that as a hardfork with unknown rules, while legacy full nodes would see that as multiple valid blockchains.The hardfork warning system is only responsible for informing users that a hardfork might be happening and prompting for further instructions. It does not guarantee that the hardfork will be successful and not end up with two permanent incompatible forks. This requires broad consensus of the whole community and is not solvable with technical means alone.The Bitcoin Improvement Proposal (BIP) describes a softfork that would only affect miners. The nVersion bit, which is disabled and never used in the main network, would be affected by the new rules. However, it is unlikely that any miner would unintentionally find an invalid block due to the new rules. The reference implementation is yet to be done. This document is placed in the public domain.</summary>
+    <published>2016-12-01T18:51:56+00:00</published>
+  </entry>
+</feed>

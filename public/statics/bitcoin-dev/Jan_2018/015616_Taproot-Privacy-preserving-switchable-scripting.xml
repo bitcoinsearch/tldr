@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Taproot: Privacy preserving switchable scripting</title>
+  <updated>2023-05-20T04:49:46.080278+00:00</updated>
+  <author>
+    <name>Matt Corallo 2018-01-23 02:51:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Taproot: Privacy preserving switchable scripting</title>
+    <updated>2023-05-20T04:49:46.080278+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-January/015616.html" rel="alternate"/>
+    <summary>On January 23, 2018, Gregory Maxwell via bitcoin-dev suggested a new construction called Taproot that allows for the creation of smart contracts with greater privacy and efficiency. The construction is based on a top-level "threshold-signature" combined with arbitrary conditions that can be made indistinguishable from a standard one-party signature without any overhead in the common case. This is achieved by using a special delegating CHECKSIG. Taproot also provides anonymity by making the contract alternatives indistinguishable from normal payments. The construction is set up by computing the 2-of-2 aggregate key, C = A + B, where Alice has public A and Bob has pubkey B. Then, a timelock script, S = "OP_CSV OP_DROP B OP_CHECKSIGVERIFY," is formed. The key, P, that will be published is computed as P = C + H(C||S)G, where G is a point on the elliptic curve. Paying to a scriptPubKey of [Taproot supporting version] [EC point P] allows Alice and Bob to jointly form a 2-of-2 signature for P and spend as if it were a payment to a single party.The Taproot consensus rules allow for alternative redemption branches where someone provides the network with C (the original combined pubkey), S, and whatever S requires, such as passing the CSV check and providing Bob's signature. With this information, the network can verify that C + H(C||S) == P. In the all-sign case, there is zero overhead, and no one can tell that the contract alternative exists. In the alternative redemption branch, the only overhead is revealing the original combined pubkey, and the existence of the contract is made public. This construction works the same way for any number of participants and with setup interaction for any threshold of participants. The verification computational complexity of signature path is obviously the same as any other plain signature. Verification of the branch redemption requires a hash and a multiplication with a constant point, which is strictly more efficient than a signature verification and could be efficiently fused into batch signature validation. Taproot allows for the largest possible anonymity set for fixed-party smart contracts by making them look like the simplest possible payments without invoking any sketchy or impractical techniques, requiring extra rounds of interaction between contract participants, or durable storage of other data.</summary>
+    <published>2018-01-23T02:51:51+00:00</published>
+  </entry>
+</feed>

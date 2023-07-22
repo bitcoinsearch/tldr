@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Speculations on hardware wallet support for Lightning</title>
+  <updated>2023-06-02T22:38:21.378292+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-01-14 15:14:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Speculations on hardware wallet support for Lightning</title>
+    <updated>2023-06-02T22:38:21.378292+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-January/002425.html" rel="alternate"/>
+    <summary>The author discusses the creation of a hardware unit that can act as a signer for Lightning-related transactions. The goal is to create a design that reduces the need for trust in the software and storage requirements for the hardware signer. However, the author notes that such a design cannot match an on-chain Bitcoin hardware wallet, which requires no trust in the software and no state beyond the private key. For Lightning, any hardware would require some level of trust in the software and some storage of current states. The author explains that incoming HTLCs deduct from the funds owned by the remote node, so the hardware only needs to verify that the funds owned by this node on the channel remain the same and there is a new HTLC added that this node can claim if it knows the preimage. However, the hardware must remember at least what the current state is and store this knowledge in persistent, secure, modifiable memory that the software cannot touch.Additionally, the hardware has to store two commitments to commitment transactions for each channel. The author also discusses how the hardware can prevent publication of our own commitment transaction by not signing it as it is created. Instead, the hardware can store a simple hash or txid of the latest own commitment transaction. When updating the own commitment transaction, the software must provide the signature from the other node for the next commitment transaction, as well as the current and proposed-next commitment transaction. To close channels, the hardware provides three APIs: Mark-as-close, Get-final-signature, and Delete-closed. Revocation of old remote state is not ensurable by hardware and requires trust in software. Opening a channel involves allocating a slot in hardware persistent memory and validating that the hardware can claim the equivalent amount in both the own and remote commitment transactions. Forwarding should be automated but still trusted, and payments can be retried without requiring user confirmation for each attempt.Accepting payments has no trust or storage requirements, and there are methods for reducing storage size. The hardware state can be stored using a Merklized purely-functional data structure, which requires only secure persistent memory that fits 32 bytes. The software can send only relevant parts of the hardware state that are required for specific channels and outgoing payment attempts. To ensure consistency between the hardware and software states, two copies of the hardware state can be stored, with the hardware providing updated state data and a signature of the old and new root. If power is shut off, the current root held in the hardware can be used to recover the system.</summary>
+    <published>2020-01-14T15:14:57+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Pinging a route for capacity</title>
+  <updated>2023-05-24T21:24:37.577369+00:00</updated>
+  <author>
+    <name>Jim Posen 2018-03-02 14:42:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Pinging a route for capacity</title>
+    <updated>2023-05-24T21:24:37.577369+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-March/001063.html" rel="alternate"/>
+    <summary>The Lightning Network mailing list discussed the issue of flood pinging, and the potential solutions to mitigate this problem. One solution presented was to include a small proof-of-work with the ping, similar to BIP 154. However, some argued that this could counteract the purpose of the ping, which is meant to be a cheaper way to collect routing information than attempting to send a payment. It was noted that the sender already expends a certain amount of computation creating the onion packet upfront, so this may be sufficient.It was also mentioned that there are better ways for someone to DoS the network than using the proposed ping mechanism. For example, someone can send payments along any circuit with a randomly generated payment hash, for which the preimage is unknown, and force a payment failure at the end of the route. This is essentially a way to ping that works now but is more expensive for everyone.In terms of benefits, the ping mechanism should make it quicker to send a successful payment because latency is lower than sending an actual payment, and the sender could ping all possible routes in parallel, whereas they can't send multiple payments in parallel. However, one downside is that it is faster and cheaper for someone to extract information about channel capacities on the network with a binary search. Overall, the discussion highlighted the importance of considering all potential security risks and implementing effective safeguards.</summary>
+    <published>2018-03-02T14:42:09+00:00</published>
+  </entry>
+</feed>

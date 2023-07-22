@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for extra nonce in block header</title>
+  <updated>2023-06-08T21:53:47.358144+00:00</updated>
+  <author>
+    <name>Timo Hanke 2014-05-04 16:08:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for extra nonce in block header</title>
+    <updated>2023-06-08T21:53:47.358144+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-May/005700.html" rel="alternate"/>
+    <summary>In 2014, Timo Hanke proposed a Bitcoin Improvement Proposal (BIP) to reduce incentives for miners to find cheap, non-standard ways to generate new work by reducing the size of the block version number and reassigning two bytes from the version field of the block header to a new extra nonce field. The proposal aimed to protect the version and timestamp fields in the block header from abuse. The rationale behind the proposal was that pre-hashing required overheads, and as ASIC cost per hash performance dropped, the relative cost of pre-hashing increased, incentivizing miners to find cheaper ways to create new work, such as on-device rolling of the timestamp into the future. The solution was to reduce the range of version numbers from 2^32 to 2^16 and declare the third and fourth bytes of the block header as legitimate space for an extra nonce. This reduction would minimize the incentive for a miner to abuse the shortened version number by a factor of 2^16.The proposal didn't require incrementing the version number to 3 since old clients already recognized the new block headers as something new because they looked like very high version numbers to them. Moreover, there was no reason to phase out blocks that had zero in the MSBs of the version. Old versions of the client would accept blocks of this kind but would throw an alert at the user to upgrade. The only code change would be a cast of the version number to a short. Besides the upgrade alert, old and new versions of the client could co-exist, and there was no need to introduce a new block version number or to phase-out old block versions.Timo Hanke talked about the relative costs involved in hashing and how those would change, creating incentives for miners to find cheaper ways to create new work than by means of pre-hashing. An example of this currently happening is the on-device rolling of the timestamp into the future, which is unwanted. The version number in the block header is a possible target for alteration with the goal of cheaply creating new work. Currently, blocks with arbitrarily large version numbers get relayed and accepted by the network, which is unwanted behavior. As this is unwanted behavior, there should not exist any incentive for a miner to abuse the version number in this way.The BIP was proposed as a software upgrade that was absolutely required. When Mike Hearn raised concerns about ignoring the protocol spec to reduce costs, Timo Hanke clarified that the purpose of the proposal was to change the protocol spec, not to ignore it. The argument for the proposal was explained in the Rationale section, and in abstracted form meant precisely to make everybody follow the protocol spec by reducing incentives to ignore it. Specifically, it aimed to protect the timestamp field.</summary>
+    <published>2014-05-04T16:08:22+00:00</published>
+  </entry>
+</feed>

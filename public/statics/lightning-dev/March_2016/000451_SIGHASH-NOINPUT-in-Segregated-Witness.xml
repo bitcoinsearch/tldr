@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>SIGHASH_NOINPUT in Segregated Witness</title>
+  <updated>2023-05-23T22:35:13.573262+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-03-02 00:44:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>SIGHASH_NOINPUT in Segregated Witness</title>
+    <updated>2023-05-23T22:35:13.573262+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-March/000451.html" rel="alternate"/>
+    <summary>Rusty Russell, a developer for the Bitcoin Lightning Network, discussed the advantages of using SIGHASH_NOINPUT over pre-signed transactions on Monday. He stated that if there are no batchings, every second commit transaction adds a new HTLC, which is (4 + 32) / 2 + 32 = 50 bytes per commit transaction. Without SIGHASH_NOINPUT, you would have to add 64 bytes per commit transaction output (2+), plus generate those signatures. Rusty Russell thinks that it's probably going to be less than one TCP packet, though, and he's not convinced it's qualitatively different. The discussion was focused on how to recover timeout/R values recoverable last year, and they came up with some clever tricks which don't win much. You can avoid sending/storing the 4-byte timeout. Rusty Russell also talked about having a visible scriptPubKey with SegWit where R is trivially obvious, but this isn't possible anymore. Moreover, MAST doesn't help because you still need the hash of the unknown part. They'd need a "script is one of these hashes" form, which bloats the UTXO set. Therefore, it's not likely to be acceptable until lightning is the main bitcoin user.</summary>
+    <published>2016-03-02T00:44:51+00:00</published>
+  </entry>
+</feed>

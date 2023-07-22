@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Relative CHECKLOCKTIMEVERIFY (was CLTV proposal)</title>
+  <updated>2023-06-09T18:47:17.239661+00:00</updated>
+  <author>
+    <name>Peter Todd 2015-04-21 07:59:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Relative CHECKLOCKTIMEVERIFY (was CLTV proposal)</title>
+    <updated>2023-06-09T18:47:17.240660+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-April/007804.html" rel="alternate"/>
+    <summary>In March 2015, Bitcoin developer Matt Corallo proposed a method of requiring locktime that would be at least N plus the height of the input. It was suggested that this new opcode should be called OP_RELATIVECHECKLOCKTIMEVERIFY, and it would have identical semantics to CLTV. However, it was pointed out that the implementation wasn't reorg safe and exposed more transaction information inside the script than necessary. Additionally, the new operation would make enforcing Bitcoin Core's mempool invariant harder. Corallo suggested that a relative locktime difference of at least 100 blocks could be required, similar to coinbase maturity, but this might still cause problems in extremely large reorgs. Despite the potential issues, Corallo believed that the value of such an operation was quite nice for some protocols. Currently, the minimal interface to script execution is simply an integer bitcoinconsensus_verify_script with the unspent coin in the UTXO set derived from scriptPubKey and txTo transactions. The UTXO set contains CCoins entries for each transaction with unspent outputs that include nVersion, nHeight, and vout. Although the block nTime isn't directly available through the UTXO set, it can be found in the block headers. There are three possibilities to implement RCLTV - against nLockTime, against current block height/time, or GET_TXOUT_HEIGHT/TIME ADD CLTV. To be reorg safe, GET_TXOUT_HEIGHT/TIME must fail if a minimum age is not met.</summary>
+    <published>2015-04-21T07:59:12+00:00</published>
+  </entry>
+</feed>

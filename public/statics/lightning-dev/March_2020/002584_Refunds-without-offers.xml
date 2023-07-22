@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Refunds without offers</title>
+  <updated>2023-06-01T18:28:05.004866+00:00</updated>
+  <author>
+    <name>Jorge Timón 2020-03-06 16:45:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Refunds without offers</title>
+    <updated>2023-06-01T18:28:05.004866+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-March/002584.html" rel="alternate"/>
+    <summary>The Lightning Network is a second layer payment protocol that operates on top of a blockchain-based cryptocurrency. It allows for faster and cheaper transactions by enabling payments to be routed through multiple nodes before reaching their destination. In a discussion on the lightning-dev mailing list, user 'alice' suggests a way to solve refunds in Lightning without requiring implementations to support every feature included in current offers bolt proposal. The proposal includes a series of incremental design proposals to satisfy different requirements for the refund process. The requirements include: the payer proving they paid to the payee, the payer not needing to reveal their node's ID, and the payee being able to prove if a refund has occurred. Design proposals include providing an http server URL for the payee to process legitimate refunds beyond proof of payment. Another option could be replacing the refund_invoice with a refund_onion argument plus a refund_payment_hash to be signed with a refund signature. This way, the payer asking for a refund doesn't reveal their own node ID, and the route used to pay could be reused backward without it being revealed to the payee. Design D3 proposes ephemeral merkle keys for the payee's onion, which would allow the payer to privately communicate with the payee by encrypting to g_ephemeral instead of f_ephemeral. Furthermore, payers can prove they were the payer by revealing a merkle tree to the payee with the result of g_ephemeral as the root of the tree, payee_pk in a specific position of the tree, refund_pk in a specific position of the tree, and more_stuff allowed in the rest of the tree. Additionally, the http server answering refund requests shouldn't be necessary given the payer already runs a lightning node with an ID known to the payee and a working route just used to pay them. Lastly, the payer could request a refund to the payee by doing a new payment with extra payload with the refund request data.</summary>
+    <published>2020-03-06T16:45:07+00:00</published>
+  </entry>
+</feed>

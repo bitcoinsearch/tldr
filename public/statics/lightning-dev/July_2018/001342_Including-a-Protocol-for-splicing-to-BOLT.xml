@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Including a Protocol for splicing to BOLT</title>
+  <updated>2023-05-25T01:39:44.820231+00:00</updated>
+  <author>
+    <name>Christian Decker 2018-07-03 13:45:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Including a Protocol for splicing to BOLT</title>
+    <updated>2023-05-25T01:39:44.820231+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-July/001342.html" rel="alternate"/>
+    <summary>In a discussion among members of the Lightning development community, ZmnSCPxj suggests that when reopening old nodes, it should appear as a normal close followed by a normal open. One member suggests creating a new `channel_announce_reopen` to inform everyone that an old scid will eventually become a new scid and that the nodes involved will still consider routes via the old scid to be valid. Another member thinks of it more as a new alias for the old channel so that the update in the network view is just switching names after the announce depth is reached. It is suggested that an ordinary `channel_announce` follow once the announce depth of the new scid is reached. From the point of view of old nodes, the channel is closed for some blocks, but a new channel between the two nodes is then announced. From the point of view of new nodes, the channel is referred to using the previous scid until an ordinary `channel_announce` is received, and then the channel is referred to using the new scid.It is suggested that the message announcing the reopen or the alias should probably preceed the actual close. Otherwise, nodes may prune the channel from their view upon seeing the close. The message then simply has the effect of saying "ignore the close, let it linger for 6 more blocks before really removing from your network view". The group agrees that multipath routing is a priority, but splicing is just as much a key piece to a better user experience since it allows ignoring differences between on-chain and off-chain funds, showing just a single balance for all use-cases. Lastly, a member suggests that while capacities are still very much important for AMP (Atomic Multi-Path payments), if there is a smaller min-cut separating source and destination than the total amount of the payment, then the payment will still fail. We now simply no longer require a single channel with sufficient capacity to exist.</summary>
+    <published>2018-07-03T13:45:30+00:00</published>
+  </entry>
+</feed>

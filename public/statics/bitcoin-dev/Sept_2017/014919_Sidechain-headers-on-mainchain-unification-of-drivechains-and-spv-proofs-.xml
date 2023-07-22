@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Sidechain headers on mainchain (unification of drivechains and spv proofs)</title>
+  <updated>2023-06-12T18:00:32.870456+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2017-09-05 23:32:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Sidechain headers on mainchain (unification of drivechains and spv proofs)</title>
+    <updated>2023-06-12T18:00:32.870456+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-September/014919.html" rel="alternate"/>
+    <summary>The email discusses the issue of sidechain forks and how the mainchain considers the longest chain to be valid in case of a sidechain fork. The sidechain headers are embedded in the mainchain block's coinbase, which allows the mainchain fullnodes to validate the rule of "longest work chain". However, if the provided merkle tree hash has an invalid transaction in it, then the mainchain nodes would think the longest work chain is the valid chain, which could kill off any consensus valid chain that sidechain miners are trying to construct. This problem exists in different forms in any sidechain proposal. In drivechain, malicious mainchain miners may arbitrarily downvote any side-to-main peg even if the side-to-main peg is valid on the sidechain, with mainchain fullnodes unable to gainsay them. In original sidechain's SPV proofs, malicious mainchain miners may provide an invalid SPV proof and then censor any reorg proof against that SPV proof.In the case of sidechain-headers-on-mainchain, the hit on trust in the sidechain and the value of sidecoin would be permanent. The fact that sidechains are merge mined and cannot be mined off-mainchain makes sidechains entirely dependent on mainchain miner's support. Sidechains must be merge mined entirely; otherwise, the sidechain will effectively reduce mainchain security by pulling away potential miners from the mainchain. OP_BRIBEVERIFY, which is intended to allow sidechain miners/protectors to be a separate datacenter from miners, allows anyone with either enough hashpower or enough maincoin to disrupt a sidechain by spamming its slot with random hash values. With enough disruption, the sidechain may become unusable in drivechains, but may indeed be killed that way in sidechain-headers-on-mainchain.The email also suggests that the coinbase maturity period on the sidechain should be longer than 288 to incentivize the sidechain miners to work together to extend the chain by working with other s:miners. Another interesting thing might be to use the OP_WITHDRAWPROOFVERIFY opcode used in the elements project, which allows a merkle proof to be provided to the bitcoin blockchain to initiate a withdrawal from the sidechain. Even without sidechain headers on mainchain, one might consider plain blind merged mining to have put even the "previous block hash" in the sidechain block coinbase transaction.</summary>
+    <published>2017-09-05T23:32:17+00:00</published>
+  </entry>
+</feed>

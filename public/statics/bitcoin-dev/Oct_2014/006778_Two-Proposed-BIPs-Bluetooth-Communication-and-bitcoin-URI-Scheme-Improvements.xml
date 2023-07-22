@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Two Proposed BIPs - Bluetooth Communication and bitcoin: URI Scheme Improvements</title>
+  <updated>2023-06-09T03:14:56.350776+00:00</updated>
+  <author>
+    <name>Mike Hearn 2014-10-20 12:50:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Two Proposed BIPs - Bluetooth Communication and bitcoin: URI Scheme Improvements</title>
+    <updated>2023-06-09T03:14:56.350776+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-October/006778.html" rel="alternate"/>
+    <summary>The discussion revolves around the issue of whether BIPs should document how we'd like things to work, or how they actually do work. BIP32 is an example of the former while BIP 44 is an example of the latter. The current protocol has several problems that need to be addressed. While preserving compatibility with existing Android apps is surely useful, having a well-designed protocol is also good. Developers of other wallet apps may also want a BIP even in the current state. Regarding the specifications, there seem to be some inconsistencies in the connection header messages. The current method uses an unauthenticated Bluetooth connection for Bluetooth 2.1. This is not excellent. What is needed is a simple lightweight library that does an ECDH key agreement using secp256k1, and then does AES+HMAC on framed messages. Once the encrypted connection is set up above the Bluetooth layer, the payment protocol request can then be signed either with a regular Bitcoin key that was in the Bitcoin URI as the payment address or with a PKI signed PaymentDetails structure that contains a copy of the public key used to set up the connection.There is no acknowledgement failure message possible in the payment protocol, only an acknowledgement message or lack of acknowledgement message. Abusing the memo field is definitely the wrong thing to do! Rather the Bluetooth specific encapsulation protocol should have a notion of failure. Extending BIP70 with more negotiable privacy features is a different effort, let's not discuss that as part of Bluetooth support.The number of offline transactions of a wallet is limited to the known unspent outputs when they go offline. Long term, it would be interesting to see wallet devices that can use systems such as Kryptoradio's DVB-T based broadcast. However, given that all interesting mobile devices have sophisticated internet access radios of various forms, it's not worth putting much effort into this. Bluetooth for submitting payments makes sense some of the time, partly for performance and partly because it's more decentralised than looping in an intermediary HTTPS server to temporarily host a BIP70 request file.The additional payment_url approach is a bit sloppy of a solution in the PaymentDetails portion of the PaymentRequest. Much better to have the PaymentRequest formatted and signed on demand once the URI is being resolved. But that means abandoning the h= mechanism.</summary>
+    <published>2014-10-20T12:50:24+00:00</published>
+  </entry>
+</feed>

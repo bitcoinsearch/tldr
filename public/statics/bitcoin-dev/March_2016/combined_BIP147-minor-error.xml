@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - BIP147 minor error</title>
+  <updated>2023-06-11T04:32:52.446716+00:00</updated>
+  <author>
+    <name>jl2012 at xbt.hk 2016-03-22 06:48:49</name>
+  </author>
+  <author>
+    <name>Sergio Demian Lerner 2016-03-22 10:39:51</name>
+  </author>
+  <author>
+    <name>jl2012 at xbt.hk 2016-03-22 06:48:49</name>
+  </author>
+  <author>
+    <name>Sergio Demian Lerner 2016-03-22 10:39:51</name>
+  </author>
+  <author>
+    <name>jl2012 at xbt.hk 2016-03-22 06:48:49</name>
+  </author>
+  <author>
+    <name>Sergio Demian Lerner 2016-03-21 02:50:55</name>
+  </author>
+  <author>
+    <name>Sergio Demian Lerner 2016-03-22 10:39:51</name>
+  </author>
+  <author>
+    <name>Sergio Demian Lerner 2016-03-21 02:50:55</name>
+  </author>
+  <author>
+    <name>Sergio Demian Lerner 2016-03-21 02:50:55</name>
+  </author>
+  <link href="bitcoin-dev/March_2016/012573_BIP147-minor-error.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2016/012574_BIP147-minor-error.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2016/012573_BIP147-minor-error.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2016/012574_BIP147-minor-error.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2016/012573_BIP147-minor-error.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2016/012572_BIP147-minor-error.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2016/012574_BIP147-minor-error.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2016/012572_BIP147-minor-error.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2016/012572_BIP147-minor-error.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - BIP147 minor error</title>
+    <updated>2023-06-11T04:32:52.446716+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-March/012573.html" rel="alternate"/>
+    <summary>Sergio Demian Lerner has pointed out a minor error in BIP147 through a post on the bitcoin-dev mailing list. The rule states that total sigop cost should be less than or equal to 80,000, but the code implements a different formula. This has led to an example of nSigOps = 1 and nWitSigOps = 79999 being flagged as an error by the code, even though it is not an error by BIP definition. BIP147 defines that "Sigop cost" is the cost of a sigop in traditional script (4) and the cost of a sigop in a witness program (1). The new rule states that the total sigop cost should be no more than 80,000. However, the code implements the rule differently, with the condition that if (nSigOps + (nWitSigOps + 3)/4 &gt; MAX_BLOCK_SIGOPS), then there will be an error. Lerner provided an example to show how this is an error by the implemented code but not by the BIP definition. He stated that nSigOps = 1 and nWitSigOps = 79999, which does not violate the BIP147 definition but does cause an error in the implemented code.This discrepancy between the BIP definition and the implemented code can lead to errors. The BIP147 defines the cost of a sigop in traditional script as 4, while the cost of a sigop in witness program is 1. However, the implemented code does not reflect this rule accurately as it uses a different formula to calculate sigops. As a result, examples like nSigOps = 1 and nWitSigOps = 79999 would be flagged as an error by the implemented code but not by the BIP definition.</summary>
+    <published>2016-03-22T06:48:49+00:00</published>
+  </entry>
+</feed>

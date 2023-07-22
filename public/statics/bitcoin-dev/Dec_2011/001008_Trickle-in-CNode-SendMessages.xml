@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Trickle in CNode::SendMessages</title>
+  <updated>2023-06-05T01:36:02.021466+00:00</updated>
+  <author>
+    <name>Michael Grønager 2011-12-29 22:05:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Trickle in CNode::SendMessages</title>
+    <updated>2023-06-05T01:36:02.021466+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-December/001008.html" rel="alternate"/>
+    <summary>The CNode::SendMessages function in the peer-to-peer network uses a trickle algorithm to send messages to nodes. At each update round, a new random trickle node is chosen from 120 nodes, and with an average round time of 100ms for sleep, all nodes are moved through roughly every 12-15 seconds. When a node is chosen as the trickle node, it sends all its pending addresses to its corresponding peer. However, when a node is not the trickle node, only 1/4 of transaction-invs are sent, while the rest are pushed to wait for the next round. The selection process for the 1/4 invs that get sent is based on a hashSalt constant generated during start-up, resulting in the other 3/4 never getting sent. It is suggested to remove the redundant vInvWait stuff or change the algorithm to push the tx'es into a multimap (invHash^hashSalt, invHash) and choose the first 25% in each round. The current implementation divides the inv forwarding hash space into 4, similar to DHTs. As long as there are more than four nodes, all transactions will be sent around, given the different hashSalt for each node in the peer-to-peer network.</summary>
+    <published>2011-12-29T22:05:55+00:00</published>
+  </entry>
+</feed>

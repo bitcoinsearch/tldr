@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>(space) efficient reusable addr via weil pairing IBE (Re: Bait for reusable addresses)</title>
+  <updated>2023-06-08T00:41:04.029545+00:00</updated>
+  <author>
+    <name>Peter Todd 2014-02-02 11:55:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>(space) efficient reusable addr via weil pairing IBE (Re: Bait for reusable addresses)</title>
+    <updated>2023-06-08T00:41:04.029545+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-February/004272.html" rel="alternate"/>
+    <summary>Adam Back discussed with several people, including Greg Maxwell, Peter Todd, Jeremy Spillman, Mike Hearn, and Bytecoin about reusable addresses. They talked about a simplified ECC-based version to solve the problem of Alice wanting to pay Bob, who is bandwidth constrained and frequently offline, while Ivan has a full node but can't be trusted, and Eve is trying to piece together everyone's financial details. Bob publicly publishes three pubkeys, Filter, Recover, and Spend, along with a short n-bit prefix p. When Alice needs to pay Bob, she creates an ephemeral keypair and uses ECDH two shared secrets from Bob's Filter and Recover pubkeys, and makes a transaction that pays Bob by deriving pubkey Spend_{n_f} from the Spend and n_r nonce. She also uses the Filter nonce and the prefix to derive an encrypted prefix p'=n_f^p and puts that prefix and the cleartext ephemeral pubkey in the transaction as data. When Bob wants to find that transaction, he gives the prefix and Filter secret key to Ivan, who then scans the blockchain. For every transaction he computes n_f=ECDH(Filter_sec, Ephm_pub), extracts the encrypted prefix p' from the transaction, and checks if p'=n_f^p. If so, he gives that transaction to Bob who can then use his Recover secret key to check if the transaction was, in fact, for him. Because Bob's prefix is short, Ivan only learns probabilistic information about what transactions might be Bob's. Eve doesn't know the Filter secret key and thus learns nothing at all from the blockchain data.What they would really like is for there to be some way for Alice to derive a time-limited Filter pubkey from some public random beacon with value R_i, such as the Bitcoin blockchain, such that each defined time interval uses a different key. However, ECDSA doesn't have a way to do this, and the closest thing available is BIP32-style key derivation. Identity-based cryptography can solve that problem in which Bob publishes a single master public key, and anyone can derive public keys based on that master key and the random beacon value R_i.</summary>
+    <published>2014-02-02T11:55:31+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Covenants and feebumping</title>
+  <updated>2023-05-22T18:14:14.023364+00:00</updated>
+  <author>
+    <name>darosior 2022-03-12 18:08:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Covenants and feebumping</title>
+    <updated>2023-05-22T18:14:14.023364+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020122.html" rel="alternate"/>
+    <summary>Recently, the concept of using a soft fork to fix dynamic fee bumping has been discussed due to the complexity of designing fee bumping with today's primitives. One solution suggests using covenants for fee bumping which would have attractive properties. A UTxO can only be spent by an Unvaulting transaction, whose output triggers a timelock before the expiration of which a revocation transaction may be confirmed.With a covenant, one could commit to the revocation tx instead of presigning it, and using a Taproot tree, one could commit to different versions of it with increasing feerate. However, this makes for a perfect DoS as it would be easy for a miner to guess other leaves and replace the witness to use the highest-feerate spending path. One solution is to attach an increasing relative timelock to each leaf, but this needs to be done carefully to avoid wrecking miner incentives.Paying fees from shared funds instead of a per-watchtower fee-bumping wallet eliminates the need to decide on an amount to be refilled and the need for a potentially large amount of funds to sit on a hot wallet. In a recent email thread on the Bitcoin-Dev mailing list, Antoine Riard proposed a covenant-based approach to fee bumping in multi-party vault setups.The current reactive security model involves waiting for another party to pay for the fees. However, this does not work well in all situations. Riard suggests creating a Taproot tree with a depth of 7 and using covenants for the revocation transaction with varying feerates and timelocks. This approach is smaller in size than other feebumping primitives and has a smaller footprint on the UTXO set.Riard also notes that the timelocked-covenant approach only applies to bumping the first transaction of a chain and cannot be used for HTLC transactions in Lightning or Coinpool. To work around this issue, different covenants per participant can be used. While this requires a private key or secret to be committed to in advance, it is more optimal and usable than CPFP or adding a pair of input/output for all the reasons mentioned above.Despite potential sneaky techniques that could arise from using this method, it would still be a useful solution for Bitcoin application developers and users.</summary>
+    <published>2022-03-12T18:08:39+00:00</published>
+  </entry>
+</feed>

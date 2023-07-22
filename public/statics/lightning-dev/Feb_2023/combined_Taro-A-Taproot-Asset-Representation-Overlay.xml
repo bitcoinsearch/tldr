@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Taro: A Taproot Asset Representation Overlay</title>
+  <updated>2023-06-04T03:22:05.424008+00:00</updated>
+  <author>
+    <name>Johan Torås Halseth 2022-11-03 09:26:05</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-11-05 00:35:53</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2023-02-06 10:48:09</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-04-05 15:06:03</name>
+  </author>
+  <author>
+    <name>David A. Harding 2022-04-08 23:54:20</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-04-11 18:59:16</name>
+  </author>
+  <author>
+    <name>Ruben Somsen 2022-04-15 13:14:40</name>
+  </author>
+  <author>
+    <name>Alex Schoof 2022-04-07 19:11:39</name>
+  </author>
+  <author>
+    <name>Dr Maxim Orlovsky 2022-04-11 16:38:37</name>
+  </author>
+  <author>
+    <name>Johan Torås Halseth 2022-11-07 13:51:12</name>
+  </author>
+  <author>
+    <name>Ruben Somsen 2022-04-07 17:14:03</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-04-08 17:30:51</name>
+  </author>
+  <author>
+    <name>Ruben Somsen 2022-04-10 16:51:52</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-04-11 19:51:55</name>
+  </author>
+  <author>
+    <name>Hiroki Gondo 2022-10-07 09:33:08</name>
+  </author>
+  <link href="lightning-dev/Nov_2022/003738_Taro-A-Taproot-Asset-Representation-Overlay.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2022/003742_Taro-A-Taproot-Asset-Representation-Overlay.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003839_Taro-A-Taproot-Asset-Representation-Overlay.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2022/003539_Taro-A-Taproot-Asset-Representation-Overlay.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2022/003543_Taro-A-Taproot-Asset-Representation-Overlay.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2022/003549_Taro-A-Taproot-Asset-Representation-Overlay.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2022/003553_Taro-A-Taproot-Asset-Representation-Overlay.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2022/003541_Taro-A-Taproot-Asset-Representation-Overlay.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2022/003548_Taro-A-Taproot-Asset-Representation-Overlay.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2022/003746_Taro-A-Taproot-Asset-Representation-Overlay.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2022/003540_Taro-A-Taproot-Asset-Representation-Overlay.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2022/003542_Taro-A-Taproot-Asset-Representation-Overlay.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2022/003545_Taro-A-Taproot-Asset-Representation-Overlay.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2022/003550_Taro-A-Taproot-Asset-Representation-Overlay.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2022/003708_Taro-A-Taproot-Asset-Representation-Overlay.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Taro: A Taproot Asset Representation Overlay</title>
+    <updated>2023-06-04T03:22:05.425008+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-November/003738.html" rel="alternate"/>
+    <summary>In early April 2022, Laolu Osuntokun announced the Taro protocol, a layer 2 protocol built on top of Bitcoin that enables the creation of tokens. The protocol uses a hybrid merkle tree called Merkle Sum Sparse Merkle Tree (MS-SMT) to commit extra asset structured metadata based on a merkle sum tree and a sparse merkle tree, allowing for easily verifiable asset supply proofs and efficient proofs of non-existence. Taro asset transfers are embedded in a virtual/overlay transaction graph that uses a chain of asset witnesses to track the transfer of assets across taproot outputs. The Taro design also supports integration with the Lightning Network (BOLTs), as the scripting system can be used to emulate the existing HTLC structure, allowing for multi-hop transfers of Taro assets.However, Ruben Somsen, an expert who has examined RGB protocol extensively, raised concerns about Taro protocol's scripting expectations and asset divisibility. Ruben believes that Taro's scripting capabilities cannot handle conditional payments, which is the basis of any meaningful script other than self-encumbering covenants. To address these issues, Ruben suggests that Taro can function over Lightning by relying solely on Bitcoin's scripting capabilities, but this would increase complexity significantly.  In an email to Laoluwa Osuntokun, Hiroki Gondo expressed concerns about the verification of the provenance of the asset UTXOs in Taro's specs. He explained that it is necessary to verify the state transitions of all transaction graphs without gaps from the genesis transaction of the asset to the current location to ensure that a UTXO has not changed at any point in the transaction. The absence of this validation implies that asset inflation (double spending) is possible.Laolu also had an email conversation with Ruben discussing various topics related to the Taro protocol, including the limitations of building scripting support in Taro. However, the conversation explores a potential solution called an "issuance covenant" design sketch that extends the system to allow a specified or generalized script to be validated when an asset issuance transaction is being validated.Furthermore, Ruben raised concerns about the abundance of documentation but a lack of clear mapping of the fundamental design with regards to the RGB protocol. He believes that the RGB protocol should be credited in the Taro documentation as its design precedes and seems to have inspired Taro. Despite these concerns, Laolu explained that double spending or duplicate assets are resolved by strongly binding all assets to Bitcoin UTXOs, but assets can be burnt if a user doesn't supply a valid witness. Additionally, he thanked Ruben for his feedback and will be updating the draft.Overall, Taro is a promising protocol that allows for the issuance of assets on the main Bitcoin chain and supports integration with the Lightning Network, while addressing concerns about soundness and re-org safety traits. The email thread highlights ongoing discussions around addressing issues like the "free call option" problem in transferring fungible assets via asset-aware LN endpoints.</summary>
+    <published>2022-11-03T09:26:05+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>The relationship between Proof-of-Publication and Anti-Replay Oracles</title>
+  <updated>2023-06-09T14:59:27.031463+00:00</updated>
+  <author>
+    <name>Jorge Timón 2014-12-21 11:25:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>The relationship between Proof-of-Publication and Anti-Replay Oracles</title>
+    <updated>2023-06-09T14:59:27.031463+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-December/007039.html" rel="alternate"/>
+    <summary>In a discussion about decentralized exchanges, Mark Friedenbach suggests that with vanilla bitcoin, decentralized exchanges would be possible today using SIGHASH_SINGLE if only the protocol supported multiple validated assets. He adds that further extensions to the protocol would enable market participants to use a wider class of orders and allow the buyer rather than the seller to dictate order sizes via partial redemption. However, Peter Todd argues that all those Freimarket's uses are either based on proof-of-publication or insecure due to sybil attacks. In order to explain how non-proof-of-publication orders are "insecure", they go through an example where Alice wants to sell 1 unit of A for 100 units of B, and Bob is willing to pay up to 200 Bs for 1 A. They begin by assuming a proof of publication system where the execution price is the mean between bid and ask. Alice publishes her order, and Bob could publish his order at price 200 Bs, but after seeing Alice's order he knows he doesn't need to pay that much, so he publishes an order buying for 100 Bs. Alice gets 100 Bs, and Bob pays less than he was wiling to pay; everyone is happy. They then consider native assets and sighash_single where Alice publishes her order out of band, using various channels. Bob could publish his order at price 200 Bs, and then a miner would execute at 100 Bs for Alice, at 200 Bs for Bob, and pocket 100 Bs as mining fees. After seeing Alice's order, Bob publishes an order buying for 100 Bs. Alice gets 100 Bs, and Bob pays 100 Bs. The only difference is that Alice didn't have to pay a fee to publish her binding order. However, Peter Todd expresses concern that Carol isolates Bob preventing him from seeing Alice's order. If this happens, maybe Bob publishes his own order at 200 Bs. If Carol sees both orders while preventing the other participants from seeing them, she can build a transaction in which Alice sells at 100, Bob buys at 200, and Carol pockets the difference. But any smart miner will replace Carol's address with his own when processing the trade, so Carol cannot win this way. Another thing Carol can do is to buy the A herself for 100 Bs, leaving Bob without them. If Alice cares about Bob getting the deal instead of Carol, she can establish a direct communication channel with Bob or move to a proof of publication system and start paying fees for publishing binding orders. Finally, they discuss the advantage that proof-of-publication provides to Alice so that she will be willing to pay the higher costs to get the same deal.</summary>
+    <published>2014-12-21T11:25:36+00:00</published>
+  </entry>
+</feed>

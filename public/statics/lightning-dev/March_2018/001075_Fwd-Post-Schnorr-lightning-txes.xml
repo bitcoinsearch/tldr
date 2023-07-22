@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fwd:  Post-Schnorr lightning txes</title>
+  <updated>2023-05-24T21:34:15.978081+00:00</updated>
+  <author>
+    <name>Andrew Poelstra 2018-03-06 20:58:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fwd:  Post-Schnorr lightning txes</title>
+    <updated>2023-05-24T21:34:15.978081+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-March/001075.html" rel="alternate"/>
+    <summary>The Lightning-dev mailing list has proposed a simpler way to update states in a payment channel using adaptor/Bellare-Neven signatures. Adaptor signatures enable the use of multipaths for Atomic Multipath Payments (AMP) by linking multiple state updates into complete paths. The suggested method for distributing funds in a two-party transaction involves jointly signing a transaction with A(i), Revocation(B,i). This ensures that A has time to penalize misbehavior and B can complete the signature when closing properly. For completeness, it makes sense to do HTLCs via Schnorr, revealing elliptic curve private keys and ideally making them mostly indistinguishable from regular transactions as a "scriptless script" or "discreet log contract". The author proposes a solution for efficient outsourced channel monitoring in Bitcoin using 2-of-2 multisig funding transactions, which can be converted to Schnorr/muSig when available, and generating six plus eight times the number of HTLCs in-flight transactions every time the channel state is updated. These transactions consist of channel state commitment transactions held by A/B, channel fund distribution transactions held by A/B, timeout/success transactions held by X/Y, and pay2pubkey(hash) outputs. The author notes that monitoring can be outsourced efficiently with minimal overhead and without serious changes to Bitcoin. However, there is currently no plausible way of doing constant space outsourced channel monitoring without SIGHASH_NOINPUT.Revoking an old state involves sending an adaptor signature for revealing half of AB_i or AB_{i-1}, which gives the other party the secret key to AB_i, allowing them to take the coins. The required state to store consists of these adaptor signatures, which is linear in the number of state updates in each channel. Blind monitoring may be possible because everything is discrete-log based, which is friendly towards blinding.The email thread also discusses optimizing for the rare case of misbehavior in closing a lightning channel by using muSig Schnorr pay-to-pubkey transactions. The email includes references to various links and papers discussing the use of blockchain and discreet log contracts. One proposed idea is to use a zero-knowledge proof to confirm a new revocation hash conforms to standards without revealing the secret, where the public key would be generated without using the muSig construct.Another suggestion is to create a transaction pre-signed by B that spends the commitment tx A holds, giving all channel funds to A after a large CSV timeout, making it possible to penalize disappearance as well as misbehavior. However, this could provide too much incentive to block someone from accessing the blockchain.The author of the email is Andrew Poelstra, who works in the Mathematics Department at Blockstream.</summary>
+    <published>2018-03-06T20:58:51+00:00</published>
+  </entry>
+</feed>

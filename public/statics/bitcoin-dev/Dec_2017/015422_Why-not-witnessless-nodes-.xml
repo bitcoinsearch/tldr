@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Why not witnessless nodes?</title>
+  <updated>2023-06-12T23:08:18.844254+00:00</updated>
+  <author>
+    <name>Eric Voskuil 2017-12-18 16:19:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Why not witnessless nodes?</title>
+    <updated>2023-06-12T23:08:18.844254+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-December/015422.html" rel="alternate"/>
+    <summary>A full node that does initial block download must download witnesses even if it is going to skip verification of the witnesses anyway. The reasons for downloading the witnesses for those blocks are to be able to send witnesses to other nodes and to verify the witness root hash of the blocks. A bad peer may send invalid witnesses during initial block download, and if we don't verify that the witness root hash commits to them, we'll get banned by peers requesting the blocks from us because we send them garbage. Therefore, it is important to verify the witness root hash. Assumevalid feature of Bitcoin Core skips signature verification up to block X. Witnessless nodes would be able to sync faster because it needs to download less data to calculate their UTXO set. They would therefore more quickly be able to provide full service to SPV wallets and its local wallets as well as serving blocks to other witnessless nodes with same or higher assumevalid block. For witnessless nodes with lower assumevalid they can serve at least some blocks. It could also serve blocks to non-segwit nodes. However, there is no other reason that a node requires witness data. SPV clients don't need it as it is neither require it to verify header commitment to transactions nor to extract payment addresses from them. But because the client is pruned and therefore not a peer (cannot reciprocate), one will not be able to provide those blocks to nodes that are validating. An SPV client is similarly not a peer; it is a more deeply pruned client than the witnessless client.The harm to the network by pruning is that eventually it can become harder and even impossible for anyone to validate the chain. But because you are fully validating you individually remain secure, so there is no individual incentive working against this system harm. In conclusion, despite the benefits of witnessless nodes, it may risk dividing the network in two parts, one witnessless and one with full nodes, with few connections between the parts.</summary>
+    <published>2017-12-18T16:19:34+00:00</published>
+  </entry>
+</feed>

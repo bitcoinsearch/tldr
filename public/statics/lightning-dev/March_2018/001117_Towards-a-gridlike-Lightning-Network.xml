@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Towards a gridlike Lightning Network</title>
+  <updated>2023-05-24T22:25:00.289386+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-03-23 15:29:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Towards a gridlike Lightning Network</title>
+    <updated>2023-05-24T22:25:00.289386+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-March/001117.html" rel="alternate"/>
+    <summary>ZmnSCPxj suggested an algorithm to identify a peer node for connecting and funding a channel in the Lightning Network. The algorithm starts with a 32-bit number and uses a hash algorithm, such as RIPEMD160(SHA256(x)), to filter nodes based on their public key. Nodes with a matching highest bit are kept in the set while others are removed. The process is continued until the set has at least three nodes. The remaining nodes are sorted according to hash and the next node in the list becomes the candidate peer. If the candidate already has a channel with the node or cannot be contacted, the process is repeated by incrementing i.ZmnSCPxj's original algorithm had a significant probability of diverging, so he later respecified the termination condition. He also suggested that all nodes have similar-enough views of the publicly-visible peers on the node graph, as built by node gossip. Even if nodes have some divergence in their own local maps of the network, the difference can be filtered away, and the nodes that are "destined" to form a superhub can still find each other in the same superhub. ZmnSCPxj's idea of organizing the Lightning Network using cyclic superhubs requires coordination to set up cyclic superhubs. However, he suggests that coordination is needed only to identify peers with which one forms superhubs. He proposed an algorithm, which given a set of nodes extracted from node gossip, returns a peer to try connecting and funding a channel to. Our own node should be part of the original working set, and in the decimation loop, we should start with the highest bit. This is the 7-index bit (1).</summary>
+    <published>2018-03-23T15:29:19+00:00</published>
+  </entry>
+</feed>

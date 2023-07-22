@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>ECDH for spontaneous payments and offline vending machines</title>
+  <updated>2023-06-02T18:41:05.782051+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-06-11 03:47:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>ECDH for spontaneous payments and offline vending machines</title>
+    <updated>2023-06-02T18:41:05.782051+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-June/002012.html" rel="alternate"/>
+    <summary>The discussion is about offline vending machines, where the idea was to pre-load a vending machine with invoices and display them to the user and ask for payment confirmation. However, they can't work if the payment amount is variable. To generate invoices on the fly, there is a trick where a vending machine generates an ephemeral key `k` and corresponding ephemeral node id `K`. It generates an invoice signed with this key and includes routing information that the payment should go through our online node `N`. The preimage used is `hmac-sha256(x, amount)` where `x` is a secret key from ECDH(K, N). When an online node receives a request to route a payment, it tries to generate the preimage by calculating the ECDH secret `x`, i.e., (x-coordinate of n * K where `n` is a private key corresponding to its node id) and calculates the preimage from the amount encoded in the short channel id and the secret x. If the preimage matches the payment hash, it can claim the money.Reviewing BOLT #4, there is no way to inform the online node which is the next hop, as the `per_hop` does not include it. Instead, the `short_channel_id` informs the forwarding node about the next hop. In the proposal, the online node is not able to extract `K`, and thus, the next-node-ID is never transmitted. However, in the donation case, the donator is the sender and can use the shared secret as the preimage. For the invoice-generation case, the sender might not know how to properly inform the shared secret.In the future, when "rendezvous routing" is used, it may become possible to perform this trick. Then the online node can check if the "next node ID" in the rendezvous routing sub-route can be used to compute a shared secret that is the preimage.</summary>
+    <published>2019-06-11T03:47:26+00:00</published>
+  </entry>
+</feed>

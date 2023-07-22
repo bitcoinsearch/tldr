@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>ANYPREVOUT in place of CTV</title>
+  <updated>2023-06-15T19:22:15.701958+00:00</updated>
+  <author>
+    <name>darosior 2022-05-03 10:38:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>ANYPREVOUT in place of CTV</title>
+    <updated>2023-06-15T19:22:15.701958+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020413.html" rel="alternate"/>
+    <summary>In a conversation between Antoine and Jacob regarding the comparison between CTV and APO covenants, Antoine clarifies that both commit to the same template, making one not "safer" than the other. However, in the long term, more powerful covenants could enable more interesting applications where CTV would be an optimization for these covenant constructions instead of an APO one. In the short term, activating CTV to start playing with covenants before settling on the way forward to more useful covenant is being requested by some, but Antoine believes that a tweaked APO that would optionally commit to the input index, nSequences, etc. would address the technical debt concerns of CTV once more interesting covenants are available. Jacob argues that APOAS-based covenants tie the signature message algorithm to both the covenant commitment and transaction validation, introducing a trade-off between safety and flexibility with covenant-based applications. Antoine asks Jacob to clarify what he means by "tied to the transaction validation", as he doesn't see how it could differ in safety or flexibility with another hashed-template approach (CTV) if the template is the same. The APO approach is more flexible as sighash types may be combined, allowing users to opt-in to more malleability. However, committing to the input index fixes the "half spend" issue by which two coins with the same covenant get spent in the same transaction. Antoine suggests separating the covenant commitment from the signatures to validate transactions (as with CTV and TXHASH + CHECKSIGFROMSTACK), bypassing the trade-off introduced by APOAS-based covenants. He also notes that CTV doesn't need a signature since the transaction is pre-defined and can't be malleated. Additional templates with new CTV versions would require a new soft fork for new use cases, while TXHASH would enable more utility. Finally, Antoine references the OP for rationale.</summary>
+    <published>2022-05-03T10:38:52+00:00</published>
+  </entry>
+</feed>

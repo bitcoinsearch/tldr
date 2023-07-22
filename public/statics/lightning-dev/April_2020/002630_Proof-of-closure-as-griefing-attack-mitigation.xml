@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proof-of-closure as griefing attack mitigation</title>
+  <updated>2023-06-03T00:26:08.543659+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-04-13 03:42:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proof-of-closure as griefing attack mitigation</title>
+    <updated>2023-06-03T00:26:08.543659+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002630.html" rel="alternate"/>
+    <summary>The article discusses the problem of griefing attacks in multi-hop offchain payment attempts, which can cause payments to be stuck pending for long periods of time due to the need for enforceable onchain timelocks. The authors assess various proposed solutions to mitigate the effects of griefing attacks and propose a particular solution called proof-of-closure that requires significant changes to the update state machine.The issue of griefing attacks in payment channels has led to the proposal of several solutions, such as paying for an attempt rather than just successful completion and imposing economic barriers against collusions attacking intermediate nodes. However, these solutions also pose barriers against normal, non-malicious payments, particularly low-value, high-frequency payments.Proof-of-closure is presented as a solution that protects intermediate nodes against payer/payee collusions while only coming into play upon detection of an attack. It involves a softer timeout measurable in fractions of a second, with each node advertising both a block-based cltv_delta and a timeout_delta in units of 0.1 seconds. There are two timeouts: the enforceable onchain hard timeout and a new sidereal-time-based soft timeout that is not onchain enforceable.The article discusses proof-of-closure in the context of Lightning Network, a payment protocol built on top of Bitcoin's blockchain. Proof-of-closure is used to punish malicious nodes that cause delays in the payment process by forcing them to close their channel with the counterparty. The article explains how proof-of-closure works, its limitations and how it can be used in different update mechanisms.The Lightning Network is planning to use payment points and payment decorrelation to increase privacy. The current system has a single payment hash for the entire payment attempt, but this is seen as a privacy loss. Payment points will allow each hop to have its own unique payment point, which will be changed at each hop to prevent decorrelation. To ensure that transactions are valid, C needs to provide proofs. These include a target point P, partial signature, and adaptor signature that reveals the scalar behind P. C also needs to show that the PTLC belongs to the same payment attempt offered by B. This requires providing the C-only blinding factor that is the difference between the payment point of the B-to-C PTLC and the C-to-E PTLC on the unilateral close.When B needs to propagate the proof-of-closure back to A, it adds its own blinding factor to the reported blinding factor to convince A that it's the same payment attempt. One downside to this mechanism is that intermediate nodes will know some channel closure related to the payment, allowing them to determine the exact path taken until the channel being closed. However, proof-of-closure is only propagated in case of violation of the soft timeout, so normal non-malicious payments won't cause privacy loss.</summary>
+    <published>2020-04-13T03:42:56+00:00</published>
+  </entry>
+</feed>

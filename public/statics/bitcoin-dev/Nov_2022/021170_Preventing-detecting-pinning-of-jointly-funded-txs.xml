@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Preventing/detecting pinning of jointly funded txs</title>
+  <updated>2023-06-16T02:45:46.007861+00:00</updated>
+  <author>
+    <name>Antoine Riard 2022-11-06 23:22:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Preventing/detecting pinning of jointly funded txs</title>
+    <updated>2023-06-16T02:45:46.007861+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021170.html" rel="alternate"/>
+    <summary>In a Bitcoin-dev post, Anthony Towns discusses solutions for a denial-of-service (DoS) attack in the opt-in replace-by-fee (RBF) world. The attack targets joint funding protocol participants and requires a distributed monitoring of the network mempools to detect conflicting spends of multi-party transactions. However, this "mempools watchdog" infrastructure is not immune to partitioning attacks, where an adversary attempts to control the local node mempool view by changing policies across versions or creating two same-feerate transactions.Moreover, there is a scarce resource in contest: inbound connection slots. Despite its feasibility, outsourcing mempool monitoring would hit the issue of bounded public resources, leading to a single-point-of-censorship vector. Additionally, Antony points out that the economic scalability of such defensive infrastructure remains an open question as it is subject to the cat-and-mouse game between the victims and the attacker. Moreover, Antony notes assigning blame reliably among a set of trust-minimized joint funding protocol participating UTXOs. He suggests introducing some "UTXO-satoshi-weight" vote to efficiently converge towards assignment.In a future where the time-value of circulating coins is priced in, the damage inflicted on each round of blame assignment could be significant. Finally, Antony suggests relying on full-RBF as an alternative resolution process, which requires solving RBF pinning rule 3. This approach would reduce the attack scenario to a "flood-and-loot" attack, where the attacker is constrained to buy the blockspace.In a Bitcoin-dev mailing list, a discussion was held on how to handle conflicts when re-validating transactions without having a copy of the transaction. One approach suggested using BIP 37 mempool filters but this could compromise privacy as it could reveal information to attackers. Another solution proposed was investing in hashpower, which may not be unreasonable if working with untrusted peers.If privacy is a concern, anonymous bitcoind nodes can be run to check their mempool content. To make running anonymous bitcoind nodes easier, transaction broadcasts could be made more private through methods such as Tor/i2p or Dandelion. Querying an explorer or centralized service could also be an option if privacy is not a concern. Overall, the discussion aimed to find better solutions for handling transaction conflicts in Bitcoin.</summary>
+    <published>2022-11-06T23:22:08+00:00</published>
+  </entry>
+</feed>

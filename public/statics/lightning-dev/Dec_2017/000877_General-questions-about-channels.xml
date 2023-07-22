@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>General questions about channels</title>
+  <updated>2023-05-24T17:12:46.717468+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2017-12-27 10:37:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>General questions about channels</title>
+    <updated>2023-05-24T17:12:46.718469+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2017-December/000877.html" rel="alternate"/>
+    <summary>The email thread discusses the maximum limit for channel funding size in Lightning network. The upper 32 bits must be zero, according to BOLT #2, which gives a maximum HTLC value of .04294967295 BTC. Originally, the field was 32-bit and not 64-bit, but it was expanded to 64-bit, and for BTC only, the 42mBTC limit was still imposed by requiring the upper 32-bits to be 0. The reason behind the limit is that originally, Rusty Russell believed this was a reasonable amount to transfer on Lightning, limiting the risk involved if payments get stuck to about $10 at the time. It also encourages decentralization by encouraging people to make many small channels than one large channel, which helps in keeping funds resilient against temporary outages of fellow nodes. Removing the limit may not necessarily result in people using the expanded capacity, as most likely, the existing network will continue to use the existing limits, and alt-Lightning network nodes will have to check if they are using or creating a channel that has the existing limits or not. Moreover, Lightning is still alpha-level to beta-level software; hence, a soft start is necessary. In practice, the limits may take time before all nodes upgrade to higher limits, and the existing channels will have to be re-consolidated.Regarding the single payment and channel limit amounts being different, the maximum payment limit can survive one or two or three 0.042 payments, so the channel limit being 0.167 is just shy of being able to fit four max-size payments through it. This makes sense since the channel reserve and most of the time, the channel will be in a "halfway" state between the two nodes (i.e., about 83.88mBTC each). In essence, the discussion concludes that setting limits is essential, as Lightning is still an evolving software and requires a soft start. The limits encourage decentralization, limit the risk involved if payments get stuck, and make it easier for people to use Lightning.</summary>
+    <published>2017-12-27T10:37:04+00:00</published>
+  </entry>
+</feed>

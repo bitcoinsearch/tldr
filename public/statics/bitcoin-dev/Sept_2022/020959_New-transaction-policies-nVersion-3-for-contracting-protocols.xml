@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New transaction policies (nVersion=3) for contracting protocols</title>
+  <updated>2023-06-16T00:31:40.009079+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2022-09-30 12:08:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New transaction policies (nVersion=3) for contracting protocols</title>
+    <updated>2023-06-16T00:31:40.009079+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-September/020959.html" rel="alternate"/>
+    <summary>In a recent IRC discussion, a proposal was made to address concerns about unconfirmed v3 transactions with ephemeral outputs. The proposed design ensures that any child v3 transaction spending the unconfirmed parent spends the ephemeral output(s) and requires a child to CPFP for transactions that pay no fees. Ruben Somsen expressed interest in allowing transactions to be 0 fees and have a 0 sat output that could be used to pay all the fees with CPFP. The proposal presented is intended for fee-bumping presigned transactions specifically using CPFP and anchor outputs and is a minimally-invasive step that works for Lightning today, similar to CPFP carve-out.The email thread discusses the progress on the package Replace-by-Fee (RBF), which is expected to enhance security for Layer 2 (L2) contracts and simplify anchor outputs. The rules around unconfirmed inputs are revised, where a new unconfirmed input may be included in a package, but the child's ancestor feerate must be at least as high as every transaction being replaced. The compatibility of these rules with miners' incentives is questioned. Additionally, the possibility of having a single dust-value output, which is immediately spent by the package, makes anchors even easier to design. There is concern about 0-value outputs in the UTXO set and privacy issues surrounding unilateral closures. The experts also discuss whether package RBF can detect a "sibling output spend" conflict and knock it out of the mempool via other replacement rules, getting rid of the requirement to 1 block CSV lock every output.The proposal is to introduce a set of mempool/transaction relay policies to aid L2/contract protocols and solve some of the remaining problems with the Package Mempool Accept package RBF. The proposal includes a set of additional policy rules applying to V3 transactions, modifications to package RBF rules, and intended usage for LN. The expected questions are answered in the proposal, including whether V2 transactions can replace V3 transactions and vice versa, and if V3 transactions are a privacy issue.Gloria requested help with a particular issue she was facing while trying to run Bitcoin Core on the bitcoin-dev mailing list. She provided links to two previous messages she had posted on the same topic. The specific issue or error message was not clear from her post. The bitcoin-dev mailing list is a forum for developers to discuss technical issues related to Bitcoin and its underlying software. It is operated by the Linux Foundation and anyone can subscribe to it. This highlights the collaborative and open nature of Bitcoin development, where community members are encouraged to seek help and support from each other through public forums like the bitcoin-dev mailing list.</summary>
+    <published>2022-09-30T12:08:41+00:00</published>
+  </entry>
+</feed>

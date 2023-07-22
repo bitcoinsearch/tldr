@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Payment Protocol Proposal: Invoices/Payments/Receipts</title>
+  <updated>2023-06-06T08:40:30.146595+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2012-12-23 02:33:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Payment Protocol Proposal: Invoices/Payments/Receipts</title>
+    <updated>2023-06-06T08:40:30.146595+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-December/002115.html" rel="alternate"/>
+    <summary>A proposal has been made for protocol buffer-based formats that can improve Bitcoin addresses by using signed, authenticated "invoices" and "receipts". These invoices are requests for payment that are tied to authenticated identities using X.509 certificates signed by root certificate authorities. The invoices include payment amounts, where refunds should be sent, and a user-friendly description of what the payment is for. They also come with a cryptographically signed receipt for proof-of-payment if there is any dispute with the merchant.The proposal suggests a payment protocol for Bitcoin that uses X.509 certificates as the identity system for merchants. The protocol involves customers receiving SignedInvoices from merchants, authorizing payments, and creating Payment messages that are sent directly to the merchant's server. The server checks the validity of the transaction and determines whether the customer has won or lost. If the customer wins, a transaction is broadcasted to pay them using Payment.refund_to.In some cases, it is necessary to include a "reference height" in the invoice, and to implement this, an optional "uint64 refheight" field is required in the invoice structure. The proposal gives a concrete example of Freicoin, which uses blocktime as the clock for time-value calculations.The use case also covers a multi-signature wallet scenario where payments must be authorized by two different people (Alice and Bob). Alice begins the payment process by getting a SignedInvoice from a merchant, then authorizing the payment. Her Bitcoin client creates a partially-signed transaction, which is sent to Bob for signature. Once Bob approves the transaction, it is submitted to the merchant, and Bob sends Alice a SignedReceipt.The proposal uses Protocol Buffers as the encoding format instead of JSON, as it is a simple, robust, multi-programming-language, well-documented, easy-to-work-with, and extensible format. It also suggests ways for merchants to pay the cost of Bitcoin network transaction processing fees so that customers pay the exact amount required.The Online Certificate Checking Protocol (OCSP) is suggested as a way for Bitcoin clients to check certificate statuses every time they receive or re-use an Invoice. However, the effectiveness of such a system remains questionable due to the lack of incentive for Certificate Authorities to support a robust infrastructure that can handle millions of OCSP validation requests quickly.</summary>
+    <published>2012-12-23T02:33:22+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Split payments within one LN invoice</title>
+  <updated>2023-06-03T06:59:55.987547+00:00</updated>
+  <author>
+    <name>Christian Decker 2021-12-16 10:27:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Split payments within one LN invoice</title>
+    <updated>2023-06-03T06:59:55.987547+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003415.html" rel="alternate"/>
+    <summary>A user named Ronan is building Trelis.com, a platform that accepts simple payment links through Lightning. Ronan wants to know if it's possible to create an invoice that splits the payment to two Lightning addresses. Christian responds by explaining his solution called "Poor man's rendez-vous" which routes a payment through all the parties that are to be paid and ensures atomicity so that no participant can cheat others. He explains how it works by giving an example where User `A` wants to pay `B` and `C` atomically, with `B` getting 10ksat and `C` getting 90ksat out of a total of 100ksat. Christian explains the steps required for the transaction to occur successfully. First, `C` creates an invoice with payment hash `H` for 90ksat and sends it to `B`. Second, `B` creates an invoice with payment hash `H` (same as the first invoice, but `B` doesn't know the preimage) for 100ksat. Third, `A` receives an invoice which appears to be from `B` for the expected total of 100ksat. Fourth, `A` proceeds to pay the invoice to `B` like normal. Fifth, `B` receives the incoming payment, but doesn't have the preimage for `H`, so they must forward to `C` if they want to receive their share. Finally, `B` pays the 90ksat invoice from `C`, reveals the preimage to them, and claims the incoming `100ksat` (covering both `B` and `C` share).Although this method is considered a poor man's version because it requires creating two invoices and `B` sees two payments, the overall outcome is still the desired one: either both parties get paid or no one gets paid. This method can also be extended to any number of parties with reduced success probability and remains atomic. Additionally, it doesn't require any changes on the sender side, and only minimal setup between the payees. The crux of this method is that we need to ensure `H` is always the same along the entire chain of payments, but with a good coordination protocol, that should be feasible.</summary>
+    <published>2021-12-16T10:27:33+00:00</published>
+  </entry>
+</feed>

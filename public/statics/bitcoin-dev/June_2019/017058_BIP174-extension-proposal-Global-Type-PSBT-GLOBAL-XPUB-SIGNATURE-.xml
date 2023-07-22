@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+  <updated>2023-06-13T19:34:53.159500+00:00</updated>
+  <author>
+    <name>Peter D. Gray 2019-06-28 14:37:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+    <updated>2023-06-13T19:34:53.159500+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-June/017058.html" rel="alternate"/>
+    <summary>In a discussion, the proposal of creating a PSBT (Partially Signed Bitcoin Transaction) was brought up. The idea is that the creator of the PSBT can indicate to the signers that it controls specific outputs that don't otherwise look like a change. However, some problems were brought up such as: 1) The PSBT creator would need to know the private key of the current signer derived from the signer's root to m/2042083607'/959190427'/1400854130'/990526201', and the Coldcard policy will never export a private subkey.2) The 'm' in that path depends on who is reading the PSBT file, in the multisig case. Each cosigner would need a different version of the PSBT file.3) XPUB's are big and hard to parse, and this addition is using lots of them.4) Coinjoins, and more complex script types, will want to authorize outputs that the PSBT signer may not fully understand. Your proposal would only help P2PKH and M-of-N multisig users.To fix these issues, a new proposal was made which mentions that the signer and PSBT creator must share a pubkey/private key out of band (setup time), and the origin of that key is out of scope of this standard (but it could be derived via BIP32). The PSBT creator can optionally sign any or all output sections by number using that key. The signatures should be in the global section, and the signature is over all the bytes in the indicated output section, as originally serialized when it came into the signer's possession. Also, multiple signers for individual outputs should be supported, along with multiple signatures for the same output section, supporting different derived keys per cosigner, and also quorum approval or other policies like that. The problem being solved is "How can a signer verify an address with HD changing the address every time?" The problem extends across wallets, and this proposal says "A signer can be built to only sign if it sees a signature that itself has signed, then from that signed xpub(s) derives the BIP32_DERIVATION in the outputs, and if the output doesn't match it will reject and not sign." This creates a sort of "chain of trust" for the wallet. The best way to prevent hacker swapping the send-to address without using signatures is to reuse the same address every time you want to send to the warm wallet, since after a few times, the signers (people) will be able to remember the address. Having this data in the PSBT standard will allow Trezor etc. to create an enforceable whitelist feature.</summary>
+    <published>2019-06-28T14:37:55+00:00</published>
+  </entry>
+</feed>

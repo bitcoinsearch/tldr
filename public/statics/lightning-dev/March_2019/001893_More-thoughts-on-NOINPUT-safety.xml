@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>More thoughts on NOINPUT safety</title>
+  <updated>2023-05-23T01:57:14.751673+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-03-13 01:41:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>More thoughts on NOINPUT safety</title>
+    <updated>2023-05-23T01:57:14.751673+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-March/001893.html" rel="alternate"/>
+    <summary>The article discusses the potential risks and benefits of NOINPUT implementation in the Bitcoin ecosystem. The use of NOINPUT in eltoo reintroduces third-party malleability to transactions, which raises safety concerns. However, a safety measure is in place if the "finish" transaction is also a NOINPUT tx with a CSV delay.There are two fundamental ways NOINPUT can cause problems for users – signature could be applied to an unexpectedly different script or someone else could reuse the prior signature to forward money without user's consent. To address the issue, OP_MASK has been proposed, but it doesn't apply to address blacklists.Furthermore, there is concern about losing funds due to replays which could lead to major exchanges banning sending funds to any address capable of NOINPUT. To prevent such a scenario, the author suggests tagging addresses that can be spent via NOINPUT so that exchanges and wallets can avoid providing NOINPUT capable addresses.One proposed solution to prevent NOINPUT signatures from being replayable on different transactions by third parties is to require NOINPUT signatures to always be accompanied by a non-NOINPUT signature. This would increase witness size, but provide greater safety measures. Another option would be to drop NOINPUT from normal taproot key path spending, allowing it to be done as a separate upgrade to taproot later. The latter approach is more costly but provides greater protection against cheating.Overall, the author leans towards putting more safety measures in place for NOINPUT, rather than fewer. Requiring a non-NOINPUT sig instead would allow only holders of the appropriate private key to spend the output. Output tagging may not provide a workable defense against third-party malleability.</summary>
+    <published>2019-03-13T01:41:43+00:00</published>
+  </entry>
+</feed>

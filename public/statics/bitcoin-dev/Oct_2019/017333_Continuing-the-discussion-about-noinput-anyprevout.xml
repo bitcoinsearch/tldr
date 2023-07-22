@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Continuing the discussion about noinput / anyprevout</title>
+  <updated>2023-06-13T21:30:29.531361+00:00</updated>
+  <author>
+    <name>Chris Stewart 2019-10-01 12:23:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Continuing the discussion about noinput / anyprevout</title>
+    <updated>2023-06-13T21:30:29.531361+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-October/017333.html" rel="alternate"/>
+    <summary>The author of this post has concerns about the introduction of SIGHASH_NOINPUT in the bitcoin protocol due to the potential risk it poses with address reuse. It is common practice for bitcoin businesses to reuse addresses, and if an exchange produces a digital signature from a cold storage address with a SIGHASH_NOINPUT signature, that signature can be replayed on the blockchain until the wallet is drained. This could lead to fund loss, especially if the second signing path that uses SIGHASH_NOINPUT gets mixed up with the first signing path that controls an exchange's on-chain funds.Despite these risks, SIGHASH_NOINPUT is seen as an extremely useful tool for off-chain protocols like Lightning, which gives the building blocks for enforcing specific off-chain states to end up on-chain. However, if SIGHASH_NOINPUT is widely adopted, large economic entities in Bitcoin, such as exchanges, will need to have a second unique signing path that uses SIGHASH_NOINPUT. It is crucial to keep the on-chain hot wallet signing procedures separate from off-chain hot wallet signing procedures, which introduces more complexity for key management.The author also expresses concern about introducing more footguns into the protocol, given the current network behavior of address re-use. They suggest disallowing the use of SIGHASH protocols that have unexpected behavior, like SIGHASH_SINGLE.The article also discusses two complementary proposals to allow rebinding of transactions to new outputs: BIP-118 and bip-anyprevout. However, there remain unclear points, such as the dangers of SIGHASH_NOINPUT and chaperone signatures. Chaperone signatures are signatures that ensure that there is no third-party malleability of transactions, but they have additional size and protocols can still use a globally known privkey, voiding their benefit. On the other hand, output tagging is proposed as a way to achieve the same disincentive to use on non-smart-contract cases by simply making the output scripts unaddressable.Christian Decker, a developer at Blockstream, has proposed a new type of Bitcoin transaction that could significantly reduce the costs associated with using the Lightning Network. The proposal involves stripping away certain features of transactions to create what Decker calls "eltoo" transactions. While these transactions are less flexible than current ones, they could be used to replace existing ones in the Lightning Network, which allows for almost instant, low-cost Bitcoin payments. Decker also proposes the use of output tagging and chaperone signatures in conjunction with eltoo transactions to improve security and efficiency.</summary>
+    <published>2019-10-01T12:23:47+00:00</published>
+  </entry>
+</feed>

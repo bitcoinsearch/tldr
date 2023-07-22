@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Trustless Address Server – Outsourcing handing out addresses to prevent address reuse</title>
+  <updated>2023-06-16T00:40:19.795980+00:00</updated>
+  <author>
+    <name>rot13maxi 2022-10-17 23:26:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Trustless Address Server – Outsourcing handing out addresses to prevent address reuse</title>
+    <updated>2023-06-16T00:40:19.795980+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021029.html" rel="alternate"/>
+    <summary>A developer is working on a light wallet and has come up with an idea to provide an endpoint that can vend fresh receive addresses to senders, which would make the easy-path for sending Bitcoin to users also be the more private one. They have suggested another use case for this setup: address authentication. Currently, Bitcoin addresses do not carry any semantic information that humans can use to distinguish legitimate addresses from illegitimate ones. Clipboard-hijacking malware has taken advantage of this fact in the past to steal Bitcoin. In this new setup, the wallet has an address book with a pubkey for each recipient the user wants to send Bitcoin to. When Alice wants to pay Bob, she clicks "Bob" in her transaction UI, and her wallet goes and asks the address server for an address for Bob. The address server picks an unused address, signs it, and sends a signed blob back to Alice containing an address and a signature proving that the address is, in fact, Bob's. This way, Alice's wallet can tell whether or not the address it's putting in the transaction output belongs to Bob, even if that data was intercepted between the address server and the wallet. The developer suggests that it would be nice to have a protocol that makes wallets interoperable in fetching fresh addresses from Address Servers and in the return schema that can include signatures and other metadata. Another developer responded to this thread, suggesting a different solution to maintaining a database of inputs that should be blocked or mapped to addresses. Instead, the spender submits to the server (but not the network) a valid transaction paying a placeholder address and receives a guaranteed unique address in return. They can then broadcast a transaction using the same inputs to pay the guaranteed unique address. If the server does not see that transaction within a reasonable amount of time, it broadcasts the transaction paying the placeholder address. This is essentially the BIP78 payjoin protocol without any payjoining going on, which several wallets and BTCPay already implement.</summary>
+    <published>2022-10-17T23:26:15+00:00</published>
+  </entry>
+</feed>

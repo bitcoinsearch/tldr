@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Impact of eltoo loss of state</title>
+  <updated>2023-05-23T15:25:03.590159+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-07-12 08:17:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Impact of eltoo loss of state</title>
+    <updated>2023-05-23T15:25:03.590159+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-July/003127.html" rel="alternate"/>
+    <summary>The context describes a scenario where payments are being made in eltoo channels from Alice to Bob to Carol. Bob's lightning node crashes and he recovers from an old backup, causing Alice and Carol to drop newer channel states onto the blockchain. The timeout for the payments is a few hours away, while the channels have specified a week-long CSV delay to rectify any problems on-chain.It is noted that Carol will reveal the point preimages on-chain via adaptor signatures, but Bob won't be able to decode those adaptor signatures because those signatures will need to change for each state. Additionally, even if Bob knows the point preimages, he won't be able to claim the PTLC payments on-chain due to needing newer adaptor signatures that he'll have lost with the state update. For any payments that timeout, Carol doesn't have any particular incentive to make it easy for Bob to claim the refund, and Bob won't have the adaptor signatures for the latest state to do so. However, Alice will be able to claim refunds easily.The context suggests that (3) can be fixed by giving Carol the ability to steal funds meant to have been refunded provided she gives Bob the option of claiming them first. It also notes that everyone is incentivized to negotiate cooperative closes instead of going on-chain. The context suggests that nodes should share state on reconnection, and if a node does not do this, close the channel and put the node on your enemies list. If there is disagreement on what the current state is, share the most recent state, and if the other guy's state is more recent, update the state to match theirs if all the signatures verify. Always negotiate a mutual/cooperative close if possible to avoid using the eltoo protocol on-chain.To allow continuing the channel after restoring an old state from backup, set the channel state index based on real-time. If connectivity is lost to a channel partner, it is noted that one will have to pay any PTLCs that were going to them and won't be able to claim the PTLCs that were funding them. There is a suggestion to limit the total value of inbound PTLCs for forwarding that one is willing to accept at any one time.Lastly, the context notes that layered commitments seem to make channel factories complicated.</summary>
+    <published>2021-07-12T08:17:49+00:00</published>
+  </entry>
+</feed>

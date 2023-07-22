@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Time to worry about 80-bit collision attacks or not?</title>
+  <updated>2023-06-11T03:01:27.425403+00:00</updated>
+  <author>
+    <name>Ethan Heilman 2016-01-07 22:56:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Time to worry about 80-bit collision attacks or not?</title>
+    <updated>2023-06-11T03:01:27.425403+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-January/012204.html" rel="alternate"/>
+    <summary>In a Bitcoin development mailing list, Ethan pointed out that an algorithm will find two arbitrary values that collide. However, this is not useful as an attack in the context they are talking about because both of those values will be useless as coin destinations with overwhelming probability. He further explains that finding collisions containing targeted substrings and length extension attacks are possible with RIPEMD160. Targeted cycles can be found by using seed = {0,1}^160 and hash(target1||x||target2), where x is updated iteratively from i=0 to 2^80. An adversary can find two different targeted substrings which collide for an additional 2**80. Length extension attacks can be performed by appending substrings to the input and getting collisions once two random values hash(x) = hash(y) have been found. RIPEMD160(SHA256()) does not protect against length extension attacks on SHA256 but should protect RIPEMD-160 against length extension attacks as it uses 512-bit message blocks.It's unclear whether Bitcoin is using a non-standard version of RIPEMD-160 since MD4 is vulnerable to length extension attacks, and Merkle–Damgård strengthening does not protect against length extension. Research has shown that cascading the same hash function twice is weaker than using HMAC. In conclusion, security should not rest on the notion that an attacker requires 2**80 memory, many targeted collision attacks can work without much memory.</summary>
+    <published>2016-01-07T22:56:38+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Wallet policies for descriptor wallets</title>
+  <updated>2023-06-15T20:22:18.039500+00:00</updated>
+  <author>
+    <name>darosior 2022-05-09 11:36:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Wallet policies for descriptor wallets</title>
+    <updated>2023-06-15T20:22:18.039500+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020446.html" rel="alternate"/>
+    <summary>This email exchange discusses the implementation of output descriptors on signing devices, proposing optimizations to overcome difficulties for implementers. Three key optimizations are suggested: optimization for the common use case of using two descriptors at different derivation indices for receive and change, the `/**` optimization for the common use case of `/` for point 1), and a new key expression `@i` referring to an index in a list of keys. The email also addresses challenges in implementing complex scripts in hardware wallets, including security and UX concerns, and proposes a solution in the form of a registration flow for wallet policies in the hardware wallet. To address the increase in descriptor size, the email suggests reusing the same *xpub* in multiple places, albeit with different final steps of derivation.The document proposes a policy language for Bitcoin output script descriptors, targeting a stricter subset of the output descriptors language and generalizing the approach already used for single-signature accounts or in multisignature setups. The proposed wallet policy includes a wallet descriptor template and a vector of key information items. The wallet descriptor template is a SCRIPT expression containing different expressions such as sh(SCRIPT), wsh(SCRIPT), pkh(KP), wpkh(KP), multi(k,KP_1,KP_2,...,KP_n), sortedmulti(k,KP_1,KP_2,...,KP_n), tr(KP) or tr(KP,TREE), and any valid miniscript template inside wsh or tr. Each element of the key origin information vector is a KEY expression consisting of the actual key, either a hex-encoded pubkey or a serialized extended public key (xpub). The wallet policy is invalid if any placeholder @i has derivation steps while the corresponding (i+1)-th element of the keys vector is not an xpub.The wallet descriptor template can be used to obtain the 1-dimensional descriptor for receive and change addresses by replacing each key placeholder with the corresponding key origin information, replacing every /** with /0/* for the receive descriptor, and /1/* for the change descriptor, and replacing every / with /M for the receive descriptor and /N for the change descriptor. Implementations need not necessarily implement all of the possible wallet policies defined by this standard, but it is recommended to clearly document any limitation. The document also includes examples of wallet descriptor templates, such as a native segwit account, a taproot BIP86 account, a native segwit 2-of-3, and a template with miniscript for "1 of 2 equally likely keys". Finally, the document provides a list of references, including Output Script Descriptors, BIP-129 (Bitcoin Secure Multisig Setup), and various BIPs related to single-signature accounts or multisignature setups.</summary>
+    <published>2022-05-09T11:36:47+00:00</published>
+  </entry>
+</feed>

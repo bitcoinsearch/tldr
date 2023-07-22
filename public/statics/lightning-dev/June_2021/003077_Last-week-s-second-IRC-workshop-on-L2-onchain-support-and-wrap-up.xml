@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Last week's second IRC workshop on L2 onchain support and wrap up</title>
+  <updated>2023-06-03T04:31:33.127202+00:00</updated>
+  <author>
+    <name>Michael Folkson 2021-06-29 09:44:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Last week's second IRC workshop on L2 onchain support and wrap up</title>
+    <updated>2023-06-03T04:31:33.127202+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-June/003077.html" rel="alternate"/>
+    <summary>The second workshop on Bitcoin was conducted to discuss fee bumping and package relay. The attendees agreed that enabling two transaction packages would be sufficient for Lightning and DLCs, as a two-step process can always be designed where the first transaction has an effective zero fee rate and the second transaction sets the fee. Supporting RBF within a package increases implementation complexity and makes it harder to reason about. Therefore, two packages {A,B} and {B,C} were suggested if three transaction packages weren't supported. It was suggested that only hints could be communicated rather than relaying the transaction themselves, but there were concerns from others on whether these hints would successfully propagate across the network. Tapscripts can be unlimited in size so with current Taproot rules you could go from a 100,000 vbyte witness to an empty witness. A future soft fork could give meaning to the annex in Taproot which could be used for inflating the fee rate of a witness. L2 protocols should seek to minimize assumptions on the base layer. Package relay is potentially useful for L2 protocols to address the inherent unpredictability of future fees. Prior work has been done in previous years on package relay, mainly by Suhas Daftuar. Recently, Gloria Zhao has been advancing package relay in Bitcoin Core. Attendees seemed in agreement that enabling two transaction packages would be sufficient (at least for now) for Lightning and DLCs. Package relay background was also discussed. CPFP seeks to ensure that a justice transaction, in Lightning’s case, with a lower fee gets confirmed in a more timely manner because miners are incentivized to include the child transaction in a block. There has been prior work done in previous years on package relay, mainly by Suhas Daftuar. Recently, Gloria Zhao has been advancing package relay in Bitcoin Core. The conversation log and summary of the first workshop was also shared. In addition, package relay design questions were also discussed. The participants suggested that instead of creating two packages, it is perhaps better to just broadcast a high fee CPFP transaction for the {A,B} package rather than creating two packages. If the first package has been evicted from the mempool, the {B,C} package wouldn't propagate because it would be an orphan package. Furthermore, darosior suggested the idea of a package-based CBlockPolicyEstimator in Bitcoin Core if CPFP is going to be increasingly used on the network.</summary>
+    <published>2021-06-29T09:44:11+00:00</published>
+  </entry>
+</feed>

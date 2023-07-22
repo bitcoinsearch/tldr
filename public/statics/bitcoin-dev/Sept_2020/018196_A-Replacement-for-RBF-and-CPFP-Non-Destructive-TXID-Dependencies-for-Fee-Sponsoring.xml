@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Replacement for RBF and CPFP: Non-Destructive TXID Dependencies for Fee Sponsoring</title>
+  <updated>2023-06-14T15:22:12.692532+00:00</updated>
+  <author>
+    <name>Jeremy 2020-09-23 22:10:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Replacement for RBF and CPFP: Non-Destructive TXID Dependencies for Fee Sponsoring</title>
+    <updated>2023-06-14T15:22:12.692532+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-September/018196.html" rel="alternate"/>
+    <summary>The email conversation discusses the proposal of a new type of transaction known as "Sponsors" that aims to allow third parties to attach themselves to the transaction graph of other parties and participate in fee bumping. The proposal is met with some skepticism, as it breaks the principle that once a valid transaction is created, it should not become invalid later on unless the inputs are double-spent. Additionally, allowing sponsors to RBF (replace-by-fee) each other could introduce the possibility of 3rd party griefing and interfere with transactions between others. However, the author argues that a consensus change may be required to achieve this mechanism because CPFP (Child-Pays-for-Parent) based protocols are complex and require an omniscient-like behavior around how to coordinate. CPFP also suffers from chain bloat issues and composes poorly when used recursively. The behavior of sponsors is already emulable in a transaction graph, where non-sponsor transactions include a single CPFP anchor output/CPFP hook with an OP_TRUE as the last output, and miners sweep all OP_TRUE outputs at the end of the block to an OP_RETURN. The author is unconcerned with the impact that a sponsors-like mechanism has on the properties of the transaction graph itself and believes that a consensus change would be more robust and fixable in case of a new attack. Also, the proposed amendment to limit sponsors to 1000 bytes minimizes concerns about pinning, and further restrictions that sponsors may not sponsor a transaction that is sponsoring another transaction, and sponsors may not have any children, prevent recursive sponsoring. Overall, the author suggests that a sponsors mechanism may be less invasive than CPFP-based protocols and could provide a higher-order composable mechanism.</summary>
+    <published>2020-09-23T22:10:22+00:00</published>
+  </entry>
+</feed>

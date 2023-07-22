@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>A Commitment-suitable UTXO set "Balances" file data structure</title>
+  <updated>2023-05-20T01:02:16.784906+00:00</updated>
+  <author>
+    <name>praxeology_guy 2017-03-07 21:28:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>A Commitment-suitable UTXO set "Balances" file data structure</title>
+    <updated>2023-05-20T01:02:16.784906+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-March/013692.html" rel="alternate"/>
+    <summary>The proposed Commitment-suitable UTXO set "Balances" file data structure allows pruned nodes to satisfy SPV nodes and trustlessly start synchronizing at a Balances file's block height instead of the genesis block. All nodes in the network can verify their UTXO set's data integrity through this structure. For this to work, Bitcoin would need a new policy where a UTXO commitment is made every "Balances/UTXO Commitment Period" (BCP) blocks. The UTXO commitment is made on the state of the UTXO at BCP blocks ago, and the file/commitment is made in a background thread, starting at least BCP/2 blocks after the last block containing a utxo commitment.The Balances file summary consists of a header, balances, balance index, and merkle tree hashes. Balances are listed by txid while a piece is like bittorrent's piece. A "piece size" of 32*1024 bytes is proposed. Transaction index is an array of elements that include the first N bytes of a txid and piece offset. Merkle tree hashes consist of leaf hashes, node hashes, or copying up if only one child.Data structure design notes suggest that the piece size should be small enough that not much effort is wasted when invalid pieces are received. Piece size should also be small in the case that this data structure is used instead of block history for SPV proof. The child count = 2 merkle tree structure is only necessary if this data structure is to be used to satisfy SPV clients. If not used for such a purpose, then technically the root hash could have the leaf hashes as its direct children. The balance index only serves to support SPV clients.Other notes suggest making BCP 5000 blocks, which would allow more frequent checks on UTXO set integrity and permit new pruning nodes to start syncing closer to the tip. The suggested design change to the chainstate "CCoinsViewDB" utxo database proposes changing the "CCoins" data structure so that it can keep track of spends that shouldn't be included in the commitment. Vtipspends could hold {vout_ix, blockhash } instead of just vout_ix. Checking whether a txo is spent will then require a parameter that specifies the "fork tip hash" or "fork chain."</summary>
+    <published>2017-03-07T21:28:49+00:00</published>
+  </entry>
+</feed>

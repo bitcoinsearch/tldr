@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Regarding BIP322 edge cases</title>
+  <updated>2023-06-15T23:42:12.816176+00:00</updated>
+  <author>
+    <name>Ali Sherief 2022-08-10 16:42:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Regarding BIP322 edge cases</title>
+    <updated>2023-06-15T23:42:12.816176+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-August/020849.html" rel="alternate"/>
+    <summary>In a recent discussion, it was found that OP_CHECKDATASIG is already an opcode in Bitcoin Cash since some years ago. However, proponents of BIP322 do not have BCH script compatibility as a high or medium priority. Therefore, to make an opcode called OP_CHECKDATASIG for this BIP's internal purposes, a lengthy soft-fork is required, which modifies the consensus rules. This raises the question of how Script should verify a single signature that is on the stack without touching any of the inputs or outputs.In response to the discussion, some suggestions were made such as performing key recovery for legacy ECDSA, where "OP_SWAP OP_CHECKSIG" is always spendable, for any valid DER-encoded pair. Another suggestion was to use "OP_DUP OP_HASH160 OP_EQUALVERIFY OP_SWAP OP_CHECKDATASIG" as the output script to require a valid signature and public key explicitly. If there is only a signature, then the key can be recovered by oneself.Further discussion was had regarding backward compatibility with Bitcoin Message and the use of opcodes like OP_RESERVED, which can be wrapped in OP_IF, making it a conditionally valid transaction. However, introducing a new opcode may add unnecessary complexity to the Script.</summary>
+    <published>2022-08-10T16:42:10+00:00</published>
+  </entry>
+</feed>

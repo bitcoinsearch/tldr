@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_BEFOREBLOCKVERIFY - discussing and opcode that invalidates a spend path after a certain block</title>
+  <updated>2023-06-14T22:33:18.416570+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2021-06-12 07:59:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_BEFOREBLOCKVERIFY - discussing and opcode that invalidates a spend path after a certain block</title>
+    <updated>2023-06-14T22:33:18.416570+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-June/019060.html" rel="alternate"/>
+    <summary>The discussion on the bitcoin-dev mailing list revolves around the proposed Taproot annex and its potential use cases. The annex is seen as a way to add additional inputs to a script with possible constraints. Moving the max height to the annex could help script caching, but it is unclear how exactly the annex would be used. A proposal already addresses script caching, and the result of the script can be cached as long as the cache item also requires just the OP_BBV to be re-evaluated for the relevant block. One suggestion for addressing the issue of reorgs is to require that the input to OP_BBV be in the script itself and not originate from the witness. However, the ideal solution is to change the definition of what counts as finalization to account for BBV transactions mined close to their expiration. Regarding the auto-double-spend wallet proposal, if the proposal is rewritten to place the max height into the taproot annex, then every payment would be sent with an annex value that limits the payment to being valid only up to the next block. If the payment does not make it into the next block, it should be resigned with the annex incremented to the next block, and the process repeated. This system could be less attractive to double spenders than the current model, as there is a real cost to every attempt (transaction fees) with no guarantee of success. Finally, the inclusion of a transaction with 0 transaction fee in a block is not necessarily an abuse, but its relay is an abuse as it allows one to use Bitcoin's gossip network for arbitrary communications without cost. Therefore, nodes require a cost to relay transactions so that broadcasting isn't free.</summary>
+    <published>2021-06-12T07:59:16+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A blame ascribing protocol towards ensuring time limitation of stuck HTLCs in flight.</title>
+  <updated>2023-06-03T06:55:22.791510+00:00</updated>
+  <author>
+    <name>lightning developer 2021-12-16 00:50:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A blame ascribing protocol towards ensuring time limitation of stuck HTLCs in flight.</title>
+    <updated>2023-06-03T06:55:22.791510+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003413.html" rel="alternate"/>
+    <summary>A proposal has been made to address the issue of HTLC spam via onions in the Lightning Network. The proposal aims to tackle this problem by ascribing blame to a malicious actor through a new lightning message called 'blame_channel' in combination with onion messages. The goal is to ensure quick attribution of blame by requiring a proportional reply from downstream nodes within a fixed time frame after successfully negotiating an HTLC.The proposal addresses the limitation of blaming an honest node by using onion messages to verify the proof received from a potentially malicious node. However, constructing the blame proofs might be tricky, but the author believes they can be worked out if the community agrees that such a mechanism is an overall improvement for the protocol.The proposed mechanism involves sending a "blame_channel" message that includes proof that the node has previously successfully set up the HTLC with the next peer. A node might have received a "blame_channel" message from a downstream channel and can propagate this back. To disallow spoofing, nodes might always have to extend the message with their own signature. A node on an upstream channel could verify that the sender of the "blame_channel" message was honest by sending messages via a different path as an onion message. Through the mechanism to ascribe blame several nodes will learn about a malicious or slow actor on the network and can take other preventive measures especially if they also have direct channels with that peer.The proposal does not resolve all issues and limitations in the network, but it provides a useful approach to mitigate some of them. Once PTLCs and a protocol for stuckless payments are available, an honest sender of the payment may quickly discard the stuck HTLC (PTLC) and try another path without including the malicious node.</summary>
+    <published>2021-12-16T00:50:11+00:00</published>
+  </entry>
+</feed>

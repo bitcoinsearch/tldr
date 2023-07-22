@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Unenforceable fee obligations in multiparty protocols with Taproot inputs</title>
+  <updated>2023-05-22T23:34:51.896782+00:00</updated>
+  <author>
+    <name>Yuval Kogman 2023-02-07 02:49:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Unenforceable fee obligations in multiparty protocols with Taproot inputs</title>
+    <updated>2023-05-22T23:34:51.896782+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-February/021444.html" rel="alternate"/>
+    <summary>In a multiparty transaction, Mallory can unfairly extract a fee contribution from other parties by using a larger than estimated signature. This is possible because Taproot spends have variable sizes depending on the path used. To perform this attack, Mallory registers a P2TR output with a large script spend path as an input into the transaction with a fee obligation calculated based on a key spend. Once all other participants have provided signatures, Mallory can use the script spend path, which effectively steals a fee from other parties. There are several mitigations that can be implemented to prevent this type of attack. All parties could negotiate a series of transactions ahead of time at a lower feerate to establish a minimum feerate that Mallory can force. Enforcing a minimal weight for all non-witness data in the transaction before it is considered fully constructed can limit the effectiveness of the attack. In a centralized setting with BIP-322 ownership proofs, the server can reject signatures that do not exercise the same spend path as the ownership proof. Publicly verifiable protocol transcripts and ring signatures from keys used in the transaction or its transcript committing to the new proposed transaction can provide weak evidence for the honesty of the peer. These proofs can be more compelling to entities that have participated in transcripts or proximal transactions. Increasing costliness by requiring a minimum feerate for the previous transaction or a minimum confirmation age can make such attacks less lucrative. Signature ordering can also be used to require signatures from potentially exploitative inputs ahead of legacy or SegWit v0 ones, determined based on reputation or costliness.</summary>
+    <published>2023-02-07T02:49:28+00:00</published>
+  </entry>
+</feed>

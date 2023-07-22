@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving Lightning Network Pathfinding Latency by Path Splicing and Other Real-Time Strategy Game Techniques</title>
+  <updated>2023-06-02T19:36:11.787910+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2019-08-02 08:30:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving Lightning Network Pathfinding Latency by Path Splicing and Other Real-Time Strategy Game Techniques</title>
+    <updated>2023-06-02T19:36:11.787910+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-August/002099.html" rel="alternate"/>
+    <summary>In a recent discussion between Bastien and ZmnSCPxj, they discussed the Lightning Network routing algorithms and game path-finding algorithms. Bastien noted that the routing algorithm does not know remote channel balance allocation and the cost of a path depends on the value being sent. However, ZmnSCPxj argued that these differences are smaller than initially perceived. They also talked about an error-reporting solution for `permuteroute`. ZmnSCPxj suggested that the current error reporting mechanism is sufficient and `permuteroute` does not require better error reporting. To address the issue with Lightning Network costs being both fixed and proportional to the value being sent, a balancing factor needs to be selected between the two types of costs. One solution proposed by ZmnSCPxj is to record the average payment size of the user and use it as an "example value" to minimize the error between cached fees and actual fees. `maxfeepercent` and `maxdelay` are used to set limits on fees and risk for payments. Precomputation and caching are used to generate a path, which is then double-checked to ensure it does not exceed the limits. If it does, a non-precomputed search is used instead. Trampoline nodes can leverage multipath payments at each hop, allowing them to join/split incoming payments to reach the next trampoline node. Implementing multipath payments requires tight integration with the routing algorithm since each payment consumes a path. However, most solutions to the network flow problem require an accurate view of flows at each node, which is not available in this case. A solution proposed by ZmnSCPxj is to use flocking, a technique used to retain cohesion of a blob of units. Alternatively, `permuteoute` can be used to find alternate routes that avoid the smallest-capacity channels, which are more likely to fail when multiple payments run through them.Bastien also suggested recording average payment sizes to determine how to balance fixed and proportional costs. They discussed MPP implementation using an algorithm similar to "flocking" and the benefits of combining it with retries.</summary>
+    <published>2019-08-02T08:30:30+00:00</published>
+  </entry>
+</feed>

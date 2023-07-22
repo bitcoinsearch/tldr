@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_VAULT: a new vault proposal</title>
+  <updated>2023-06-16T03:48:51.680215+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2023-01-18 19:00:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_VAULT: a new vault proposal</title>
+    <updated>2023-06-16T03:48:51.680215+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-January/021355.html" rel="alternate"/>
+    <summary>A proposal for a targeted wallet vault opcode has been suggested, which aims to limit objections and complexity. A general covenant opcode is used in the proposed design to meet all criteria, allowing batching and sending in a single transaction. However, it is unclear how a node can verify that the destination of an OP_VAULT output uses an appropriate OP_UNVAULT script, and Greg Sanders has made a suggestion to fix this issue. Another issue is that the recovery path is vulnerable to attack, and it may be prudent to store the recovery address with every key to minimize the possibility of lost or stolen funds. The idea of making the recovery-path authorization behavior variable on a single byte flag preceding the 32 byte data push has been proposed for flexibility. While disallowing the spending of vault funds without access to already-unvaulted bitcoin seems like a very inconvenient design, it may require more complex transactions involving a second wallet or asking a third party for their bitcoin. On the other hand, OP_LIMITFEECONTRIBUTION allows rather flexibly limiting fees to a particular range of "priorities" regardless of fee environment. It seems inaccurate to say that the warm wallet step is "skipped" in the case of a withdrawal, as it is replaced with an OP_UNVAULT script step. Combining vaults when spending normally presents a problem, but using an identical OP_VAULT script for all the utxos in the vault may solve this issue. Another suggestion is to have the unvault path for OP_VAULT require the vout number for its corresponding OP_UNVAULT output on the stack, which would allow for both address reuse and avoiding it.</summary>
+    <published>2023-01-18T19:00:29+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP] Normalized Transaction IDs</title>
+  <updated>2023-06-09T20:58:54.307673+00:00</updated>
+  <author>
+    <name>Christian Decker 2015-05-13 18:04:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP] Normalized Transaction IDs</title>
+    <updated>2023-06-09T20:58:54.307673+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/008153.html" rel="alternate"/>
+    <summary>Christian Decker proposed a BIP to normalize transaction IDs to address transaction malleability and facilitate higher level protocols. The normalized transaction ID is an alias used in parallel to the current (legacy) transaction IDs to address outputs in transactions. It is calculated by removing (zeroing) the scriptSig before computing the hash, which ensures that only data whose integrity is also guaranteed by the signatures influences the hash. When validating, a client supporting this BIP would use both the normalized tx ID as well as the legacy tx ID when validating transactions. This solution solves a long-standing problem of transaction malleability and simplifies higher-level protocols. However, Pieter Wuille argued that normalized transaction IDs are only effectively non-malleable when all inputs they refer to are also non-malleable. They do not provide the actual benefit of guaranteed non-malleability before it becomes disallowed to use the old mechanism. That, together with the resource doubling needed for the UTXO set and the fact that an alternative that is only a softfork is available, makes this a bad idea. Therefore, he suggested a softfork approach where transactions get two txids, one used to reference them (computed as before), and one used in an (extended) sighash. This approach does not require structural changes to Bitcoin, and the ntxid is computed by replacing the scriptSigs in inputs by the empty string and by replacing the txids in txins by their corresponding ntxids. A new checksig operator is softforked in, which uses the ntxids in its sighashes rather than the full txid. To support efficiently computing ntxids, every tx in the utxo set stores the ntxid, but only supports lookup by txid still. This results in a system where a changed dependency indeed invalidates the spending transaction, but the fix is trivial and can be done without access to the private key.</summary>
+    <published>2015-05-13T18:04:54+00:00</published>
+  </entry>
+</feed>

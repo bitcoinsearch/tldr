@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal to replace BIP0039</title>
+  <updated>2023-06-07T18:25:46.458075+00:00</updated>
+  <author>
+    <name>Timo Hanke 2013-11-03 07:40:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal to replace BIP0039</title>
+    <updated>2023-06-07T18:25:46.458075+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-November/003531.html" rel="alternate"/>
+    <summary>The communication method between the computer and Trezor needs to be done in a different way. Trezor should commit to a value first and send random s to the computer while keeping it secret. The computer then sends its random t to Trezor, which makes r := s+t as its internal master private key with corresponding master public key R := (s+t)*G. Since R = S+t*G, the computer can verify the master public key. The computer can store R and verify each derived pubkey that it was indeed derived from R, hence from its own entropy t. However, straight bip32 out of the box cannot be used by Trezor, and the chaincode would have to be something like SHA(R). The seed that gets translated to mnemonic would be r itself, making it 256 bit instead of only 128 bit. If a longer seed is bearable, this is a good way to do it.One question remains: if you only write down the mnemonic, how can you be sure that it is correct and corresponds to the secret in Trezor? You cannot verify that on paper. You would have to restore it on some device, eg another empty Trezor, and see if it brings up the same master pubkey. Thomas Voegtlin asked for clarification on how Trezor works and what its requirements are. Timo Hanke replied that the computer would use B for this check, but it could be rigged by Trezor who computes b as k-a.</summary>
+    <published>2013-11-03T07:40:52+00:00</published>
+  </entry>
+</feed>

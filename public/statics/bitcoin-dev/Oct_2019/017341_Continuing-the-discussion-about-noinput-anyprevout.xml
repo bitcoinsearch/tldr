@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Continuing the discussion about noinput / anyprevout</title>
+  <updated>2023-05-20T20:59:36.924002+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-10-03 01:47:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Continuing the discussion about noinput / anyprevout</title>
+    <updated>2023-05-20T20:59:36.924002+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-October/017341.html" rel="alternate"/>
+    <summary>In a Lightning-dev discussion about the issues with `SIGHASH_NONE` and `SIGHASH_SINGLE`, ZmnSCPxj proposed that `SIGHASH` be removed from signatures, and instead put on public keys. This would remove the problems with `SIGHASH_NONE` and `SIGHASH_SINGLE`. However, the proposal may not work for key path spends as it could lose some of the indistinguishability of taproot addresses, making it more expensive than having the sighash in witness data. Therefore, sighashes would still be included in key path signatures, which could make the behavior confusingly different between signing for key path and script path spends. The problems with NONE and SINGLE are no worse than using SIGHASH_ALL to pay to "1*G". The use of NOINPUT/ANYPREVOUT is worse because it could allow someone to steal funds from other UTXOs, similar to nonce-reuse. Committing to enabling NOINPUT for an address may make sense, but the same is not necessary for other sighashes generally.One way to look at a transaction spending UTXO "U" to address "A" is that the "script" lets you enforce conditions on the transaction when you create "A", while the "sighash" lets you enforce conditions on the transaction when you sign the transaction. Nlocktime, nsequence, and taproot annex express conditions on the transaction. In this view, "sighash" is actually an extremely simple scripting language itself with a total of six possible scripts. Finally, graftroot allows updating those conditions for address "A" after the fact.</summary>
+    <published>2019-10-03T01:47:58+00:00</published>
+  </entry>
+</feed>

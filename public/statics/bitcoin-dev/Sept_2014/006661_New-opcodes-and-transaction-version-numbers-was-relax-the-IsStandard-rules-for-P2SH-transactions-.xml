@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New opcodes and transaction version numbers (was 'relax the IsStandard rules for P2SH transactions')</title>
+  <updated>2023-06-09T02:48:21.123510+00:00</updated>
+  <author>
+    <name>Peter Todd 2014-09-29 05:35:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New opcodes and transaction version numbers (was 'relax the IsStandard rules for P2SH transactions')</title>
+    <updated>2023-06-09T02:48:21.123510+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-September/006661.html" rel="alternate"/>
+    <summary>In a discussion regarding the addition of new opcodes to P2SH, Alan Reiner suggested that the address format be updated to allow for a transaction version number to be included in the address serialization. However, Peter Todd pointed out that this would require new addresses for every new opcode, which defeats the purpose of P2SH. He also noted that when a wallet creates a transaction, the scriptPubKeys in the transaction outputs are specified by the receiver(s) and aren't executed until they are spent. Therefore, there is no reason why the wallet should care what the contents of those scriptPubKeys are at all. Additionally, if there are multiple recipients of a transaction, it becomes difficult to determine which version number to use. Todd argued that using transaction version numbers to enable new opcodes rather than just enabling them globally based on block version numbers doesn't make sense. Todd also criticized Satoshi's implementation of a per-block sigop limit, stating that it computes the limit based on the contents of all scriptSigs and scriptPubKeys in the block, even though the contents of the latter are not executed. This allows for the creation of blocks that pass the sigop limit, yet execute millions of expensive signature operations by being filled with scriptSigs spending txouts with large numbers of sigops in their scriptPubKeys. Although P2SH improves on this situation somewhat by counting the sigops in redeemScripts towards the limit, it misses the opportunity to count all sigops in all scriptSigs directly.</summary>
+    <published>2014-09-29T05:35:26+00:00</published>
+  </entry>
+</feed>

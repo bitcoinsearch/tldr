@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fixing a griefing attack on JIT Channels using PTLCs</title>
+  <updated>2023-06-03T13:01:58.508279+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2023-05-10 12:52:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fixing a griefing attack on JIT Channels using PTLCs</title>
+    <updated>2023-06-03T13:01:58.508279+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-May/003945.html" rel="alternate"/>
+    <summary>In this email, ZmnSCPxj explains the possible mitigations and their drawbacks for Lightning Service Providers (LSP) and clients. Most of these mitigations involve either "LSP trusts client" or "client trusts LSP". However, a trust-minimized solution requires a third party that both LSP and client agree upon to enforce that the second mover does not cheat or steal from the first mover. This third party should be the blockchain, but other options include Liquid, which is custodial, and requires trust in a federation. Without a trusted third party, the choices for LSPs and clients include LSP issuing a promise to make a 0-conf funding transaction confirmed before some future target block height. The client can refuse to send channel_ready until after the LSP issues this promise. Alternatively, the client can wait for the funding transaction to appear on its local mempool before sending channel_ready. Another option is the benthecarman proposal, where the client trusts the LSP. Finally, LSP can wait for the client to hand over the preimage before broadcasting the funding tx, which makes the client trust the LSP. The Open LSP Specifications group prefers "LSP trusts client" as the LSP is a big target for out-of-LSPS attacks. For example, a hacker could modify the behavior of an LSP so that the LSP attacks the client if the "client trusts LSP" model is used. However, the only truly "LSP trusts client" scheme involves the LSP issuing a cryptographically third-party-verifiable promise to get the funding tx confirmed by some later block height. This scheme has been controversial even among LSPS participants.</summary>
+    <published>2023-05-10T12:52:56+00:00</published>
+  </entry>
+</feed>

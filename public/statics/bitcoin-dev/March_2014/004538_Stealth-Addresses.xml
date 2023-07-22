@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Stealth Addresses</title>
+  <updated>2023-06-07T23:44:59.451355+00:00</updated>
+  <author>
+    <name>Dan Carter 2014-03-06 12:23:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Stealth Addresses</title>
+    <updated>2023-06-07T23:44:59.451355+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-March/004538.html" rel="alternate"/>
+    <summary>The need for CoinJoin could be eliminated by using stealth addresses combined with zk-snarks. Stealth addresses would conceal the recipient for payments and even mined coins while zk-snarks would hide the coin's value. A mined coin would have a coin secret generated, a coinbase transaction would be created with an output to the stealth address, and hash(coin-secret + reward-value) + encrypt(coin-secret + reward-value) would be sent where only the recipient can decrypt. The 0.2KB zk-snark proof + 3KB verifying key that the hash result is in fact SHA256(coin-secret + reward-value) would also be embedded. A coin could be split into as many pieces as desired in a single transaction and sent to multiple recipients, some of which could go to the sender (change) and others to the payee. Each piece would have a different recipient address thanks to stealth addresses and all values hidden thanks to zk-snarks. If a mined coin was to be split into two new ones, a transaction would be created where the input redeems the mined coin using mined tx out + stealth address, and there would be two new coins as outputs to own stealth address each having: hash(new-coin-secret + new-hidden-value) + encrypt(new-coin-secret + new-hidden-value). If two coins were to be merged into one, it would be done in reverse, with two inputs and one output, a zk-snark proof that two original hidden values add up to the new hidden value and that the new hash result is SHA256(new-coin-secret + new-hidden-value). To transfer ownership of a coin, the coin would be redeemed at input, and the output would be the same as the mined coin except using recipient stealth address (which is a public key) to encrypt(coin-secret + hidden-value).In conclusion, a stealth address is a new type of Bitcoin address and related scriptPubKey/transaction generation scheme that allows payees to publish a single, fixed address for payors to send funds efficiently, privately, reliably, and non-interactively. Payors do not learn what other payments have been made to the stealth address, and third parties learn nothing at all, both subject to an adjustable anonymity set.</summary>
+    <published>2014-03-06T12:23:40+00:00</published>
+  </entry>
+</feed>

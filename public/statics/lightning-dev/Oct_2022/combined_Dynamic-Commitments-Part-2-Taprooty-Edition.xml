@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Dynamic Commitments Part 2: Taprooty Edition</title>
+  <updated>2023-06-04T03:13:33.611597+00:00</updated>
+  <author>
+    <name>Johan Torås Halseth 2022-10-27 09:16:58</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2022-10-27 14:53:52</name>
+  </author>
+  <author>
+    <name>Johan Torås Halseth 2022-10-28 07:35:42</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-03-24 22:52:42</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2022-11-01 22:59:08</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-03-24 23:36:51</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2022-03-26 00:27:19</name>
+  </author>
+  <link href="lightning-dev/Oct_2022/003728_Dynamic-Commitments-Part-2-Taprooty-Edition.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2022/003730_Dynamic-Commitments-Part-2-Taprooty-Edition.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2022/003731_Dynamic-Commitments-Part-2-Taprooty-Edition.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2022/003531_Dynamic-Commitments-Part-2-Taprooty-Edition.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2022/003735_Dynamic-Commitments-Part-2-Taprooty-Edition.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2022/003532_Dynamic-Commitments-Part-2-Taprooty-Edition.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2022/003533_Dynamic-Commitments-Part-2-Taprooty-Edition.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Dynamic Commitments Part 2: Taprooty Edition</title>
+    <updated>2023-06-04T03:13:33.612608+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-October/003728.html" rel="alternate"/>
+    <summary>The Lightning Network team is working on a proposal to update channel commitments dynamically and remove hard-coded parameters from the protocol. The aim of this proposal is to upgrade all 80k+ segwit v0 channels to taprooty channels without any on-chain transactions. One proposed solution is the "adaptor commitment," which allows peers to defer the two transactions needed to close the old segwit v0 funding output and re-open the channel with a new segwit v1 funding output until closing time.There is some uncertainty regarding the fee overhead at closing time with the adaptor commitment approach. Johan Torås Halseth suggested dividing the taprootyness of a channel into funding and commitment outputs, enabling upgrading existing channels only on the commitment level and new channels to use taproot multisig for the funding output. However, Antoine Riard questioned the economic gain of adapter commitments while Matt Corallo questioned the need for taproot commitment outputs.To implement the dynamic commitments concept, a concrete protocol is needed for dynamic commitment updates. Rusty proposed upgrading the commitment type upon channel re-establishment, but it does not allow both sides to adjust values like dust limit or max in flight. Laolu Osuntokun proposed a two-phase dynamic commitment update protocol inspired by the Raft consensus protocol that would allow upgrading nearly all channel/commitment related values without involving on-chain transactions.The proposed protocol includes two new messages, "commitment_update_propose" and "commitment_update_apply," which encode new sets of updates. The `commitment_update_propose` message includes nested TLV fields and also includes a signature to prevent spoofing and serve as evidence during retransmission phases. The `commitment_update_apply` message can include up to two `commitment_update_propose` messages and can be used to add other commitment updates in the future. This protocol would allow for future-proofing existing anchored multi-sig outputs and removing inflexible parameters in the network such as the 483 HTLC limit, while also providing a way to protect against unforeseen widespread policy changes.Overall, the proposed protocol aims to make channel upgrades more efficient and less disruptive to the existing network, ultimately introducing more flexibility in the Lightning Network.</summary>
+    <published>2022-10-27T09:16:58+00:00</published>
+  </entry>
+</feed>

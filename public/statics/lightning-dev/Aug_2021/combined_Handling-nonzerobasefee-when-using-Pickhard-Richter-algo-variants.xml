@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Handling nonzerobasefee when using Pickhard-Richter algo variants</title>
+  <updated>2023-06-04T02:16:43.737272+00:00</updated>
+  <author>
+    <name>Stefan Richter 2021-08-30 12:28:01</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-08-30 10:58:02</name>
+  </author>
+  <author>
+    <name>René Pickhardt 2021-08-30 12:32:30</name>
+  </author>
+  <link href="lightning-dev/Aug_2021/003208_Handling-nonzerobasefee-when-using-Pickhard-Richter-algo-variants.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2021/003206_Handling-nonzerobasefee-when-using-Pickhard-Richter-algo-variants.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2021/003209_Handling-nonzerobasefee-when-using-Pickhard-Richter-algo-variants.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Handling nonzerobasefee when using Pickhard-Richter algo variants</title>
+    <updated>2023-06-04T02:16:43.737272+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-August/003208.html" rel="alternate"/>
+    <summary>The article discusses a proposed scheme for Lightning Network (LN) that involves whole-flow payments, where only one HTLC would be paid for each channel with non-zero flow using a single 'base_fee.' However, there are concerns about the practicality of this scheme since any hop failure would cause the entire payment to fail and restart from the beginning. The current LN scheme splits only at the source and joins only at the destination, where if any hop of an MPP fails, only the sub-payment(s) going through that hop will need to be retried. To address this issue, the article suggests modifying the LN protocol such that instead of MPP having individual sub-payments that split at the source and join at the destination, the source can instruct arbitrary intermediate nodes to join and/or split payments. This would allow the output of the mincostflow algorithm to be used directly, without the problematic disect stage. An alternative solution discussed in the article is to optimize for a maximum fee rather than optimizing for the exact fee.In addition, the email exchange also discusses a proposed protocol change for the transport layer of HTLCs/PTLCs to support local payment splits and merges. The author proposes a new lightning message called `update_update_htlc` to update the amount of an HTLC committed/offered to a channel to reflect flows more accurately. The email outlines five consequences for the protocol, including the need for a cancellable payment mechanism, adopting a transport mechanism to reflect flow optimization for success probabilities, and adding Friend of a Friend Balance sharing to reduce uncertainty around senders and recipients.Finally, the article suggests various options for supporting whole-flow payments or sticking to the current scheme of partial failure of MPP. However, the practicality of whole-flow payment is yet to be considered, as any hop failure could leave some join nodes waiting for an incoming HTLC that will not arrive. The failure would have to be handled by a split node when it receives an update_fail_htlc, but that split node cannot propagate the failure backward to the source if other outgoing HTLCs are still in play.</summary>
+    <published>2021-08-30T12:28:01+00:00</published>
+  </entry>
+</feed>

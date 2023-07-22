@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+  <updated>2023-06-14T22:17:14.394330+00:00</updated>
+  <author>
+    <name>Antoine Riard 2021-05-27 20:14:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+    <updated>2023-06-14T22:17:14.394330+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-May/019031.html" rel="alternate"/>
+    <summary>The post explores fee-bumping strategies for second-layer protocols, specifically comparing input-based and CPFP techniques. CPFP is a mature fee-bumping technique known in the Bitcoin ecosystem but has security issues when used in contract protocols with distrusting counterparties. Input-based fee-bumping has been less studied and uses the SIGHASH_ANYONECANPAY/SIGHASH_SINGLE malleability flags to increase the feerate of the whole package. The post compares the two techniques in terms of onchain footprint, tx-relay bandwidth rebroadcast, batching opportunity, and mempool flexibility.CPFP requires one anchor output per participant, while input-based fee-bumping only requires one input if the bumping utxo offers an adequate feerate point. If a preliminary fan-out transaction must be broadcasted first, one input and two outputs more must be accounted for. In contrast, input-based (SIGHASH_ANYPREVOUT+SIGHASH_IOMAP) only requires one input and one output. Regarding tx-relay bandwidth rebroadcast, CPFP's efficiency depends on the assumption of bounded rationality of the participants. Rebroadcasting the entire chain of transactions wastes bandwidth consumption for an identical bumped transaction. Input-based (today) breaks the chain validity and requires updating and rebroadcasting the remaining transactions beyond the updated root. However, input-based (SIGHASH_ANYPREVOUT+SIGHASH_IOMAP) doesn't break the chain validity and could preserve the rest of the chain.For fee-bumping batching, CPFP requires one input/one output per aggregated chain, even if the child transaction fields can be shared. Input-based (today) requires one bumping input per chain, although transaction fields can be shared if a preliminary fan-out transaction is relied on to offer multiple feerate points. Input-based (SIGHASH_ANYPREVOUT+SIGHASH_IOMAP) can attach one bumping input and outgoing output to the aggregated root.Regarding fee-bumping mempool flexibility, CPFP has limitations and doesn't scale beyond two contract participants. The root of the chain of transactions is the package's oldest ancestor for input-based, so package limits don't restrain its acceptance whatever the number of contract participants.The post concludes by highlighting future soft forks that allow significant onchain footprint savings, especially in case of batching, and future package relay bandwidth efficiency that should account for rebroadcast frequency of CPFPing multi-party protocols.</summary>
+    <published>2021-05-27T20:14:13+00:00</published>
+  </entry>
+</feed>

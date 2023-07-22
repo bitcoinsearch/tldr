@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Inherited IDs - A safer, more powerful alternative to BIP-118 (ANYPREVOUT) for scaling Bitcoin</title>
+  <updated>2023-05-23T16:10:26.644289+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-09-18 11:37:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Inherited IDs - A safer, more powerful alternative to BIP-118 (ANYPREVOUT) for scaling Bitcoin</title>
+    <updated>2023-05-23T16:10:26.644289+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-September/003231.html" rel="alternate"/>
+    <summary>A proposal for an alternative to BIP-118 called Inherited IDs (IIDs) has been made by John Law. The IID protocol involves adding a resettable "structural" tx id called an "iid" to each utxo, and identifying input txs in this way when signing, so that if the details of the transaction changes but not the structure, the signature remains valid. The proposal suggests tagging a segwit v2 output in the tx to be used as the tagging method. The multisig factories section introduces using invalidation trees to allow updating the split of funds between groups of participants. This approach would introduce a tradeoff between how many updates one can make, how long they have to notice a close is proposed and correct it before an invalidated state can be posted, and how long it will take to extract funds from the factory if there are problems initially.The proposal compares IIDs with eltoo, and concludes that special casing two-party channels with eltoo would make eltoo-2party and 2stage equally effective. Comparing eltoo-nparty and the multisig iid factories approach, the uncooperative case shows that ms-iid would require log(n) txs for the invalidation tree and log(n) time for the delays to ensure invalidated states don't get published, while eltoo would require only 1 tx from the user and 1 block after noticing, plus the fixed csv delay. The proposal also discusses the implementation of the "iid" concept, which would require additional complexity, but it is presumed to be mostly just in the additional complexity. Both iid and ANYPREVOUT require changes to how signatures are evaluated and apps that use the new feature are written, but ANYPREVOUT doesn't need changes beyond that. Finally, the author suggests that this construction could easily be simulated with anyprevout and does not allow any new constructions that anyprevout wouldn't.</summary>
+    <published>2021-09-18T11:37:40+00:00</published>
+  </entry>
+</feed>

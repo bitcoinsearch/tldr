@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>SIGHASH_SINGLE + update_fee Considered Harmful</title>
+  <updated>2023-05-23T14:32:46.359655+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-09-10 18:13:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>SIGHASH_SINGLE + update_fee Considered Harmful</title>
+    <updated>2023-05-23T14:32:46.359655+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-September/002797.html" rel="alternate"/>
+    <summary>Antoine Riard has discovered a potential vulnerability in the anchor output specification update that could be harmful to funds safety. The SIGHASH_SINGLE and `update_fee` mechanism are susceptible to attacks like "flood &amp; loot," where the non-initiator can calculate the worst-case leakage of fees in the revocation case.One issue is that there is no way to do a "soft reject" of an update_fee as it is. However, depending on the implementations, it may be possible to reconnect and issue a co-op close if there are no HTLCs on the commitment transaction.In lnd today, anchors are still behind a build flag, but the plan is to enable them by default for their upcoming 0.12 release. Anchor output switched the sighash type from SIGHASH_ALL to SIGHASH_SINGLE | SIGHASH_ANYONECANPAY for HTLC signatures sent to the counterparty. Thus, it can spend non-cooperatively its HTLC outputs on its commitment transactions.Pre/post-anchor channels are negotiating a feerate through `update_fee` exchange, initiated by the channel funder. This `update_fee` can be rejected by the receiver if it's deemed unreasonable compared to the local fee estimator view, but as of today, implementations are pretty liberal in their acceptance, admitting a divergence from a scale of 1 to no-bound at all.The Lightning Network has been found to have a vulnerability that allows a malicious party to partially escape penalties by inflating fees committed on HTLC input/output pairs and redirecting the inflated fee to a single-controlled output. Current countermeasures include tighter channel policies and the adoption of a scorched earth approach by justice transactions to increase odds of winning the feerate race.A possible solution could be to patch the current anchor specification to remove `feerate_per_kw` application on 2nd-stage transactions.</summary>
+    <published>2020-09-10T18:13:03+00:00</published>
+  </entry>
+</feed>

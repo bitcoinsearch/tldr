@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Selling timestamps (via payment points and scalars + Pedersen commitments ) [try2]</title>
+  <updated>2023-05-23T02:14:47.074777+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-09-25 09:43:12</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2019-09-25 19:29:58</name>
+  </author>
+  <link href="lightning-dev/Sept_2019/002167_Selling-timestamps-via-payment-points-and-scalars-Pedersen-commitments-try2-.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2019/002169_Selling-timestamps-via-payment-points-and-scalars-Pedersen-commitments-try2-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Selling timestamps (via payment points and scalars + Pedersen commitments ) [try2]</title>
+    <updated>2023-05-23T02:14:47.074777+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-September/002167.html" rel="alternate"/>
+    <summary>Konstantin Ketterer proposed a solution to timestamp messages by aggregating them in a merkle tree and paying low fees per message. However, for timestamping something once in a while, he needed to rely on free services or pay high fees. He suggested model the timestamping service as having fixed and floating users, with the fixed users paying a subscription fee that covers the costs and get placed relatively high in the merkle tree, while the floating users are placed low in the merkle tree and are basically free money. The merkle tree might then have 2**N-1 fixed slots, all at height N, then 2**K floating slots, all at height N+K, but there would be no need to charge the floating slots anything up front because the fixed costs are all paid for by subscription income from the fixed slots.The proposed solution was to buy a place in a merkle tree "risk-free" by sending hash x of the message (or the merkle root of another tree) to the timestamping server. The server calculates Pedersen commit, hashes it, builds a merkle tree with other commits in it and publishes a valid transaction containing the merkle root to the Bitcoin blockchain. After a certain number of block confirmations and with the given proof, the commitment C is confirmed to be part of the Bitcoin blockchain. To prove payment, a lightning payment was sent with C - x*H = r*G as the payment point to the timestamping server, and the server must reveal r to receive the money.ZmnSCPxj asked how to prove, knowing only `R` and `x`, and that there exists some `r` such that `R = SHA256(r)`, that `C = SHA256(x || r)`? aj responded that if you know x and r, you can generate C and R and a zero knowledge proof of the relationship between x,C,R that doesn't reveal r. However, the zkp already proves that C was generated based on x, and therefore timestamping can be done for free.</summary>
+    <published>2019-09-25T09:43:12+00:00</published>
+  </entry>
+</feed>

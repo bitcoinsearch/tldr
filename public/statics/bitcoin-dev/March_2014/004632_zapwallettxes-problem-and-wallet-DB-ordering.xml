@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>zapwallettxes problem and wallet DB ordering</title>
+  <updated>2023-06-08T14:59:18.025071+00:00</updated>
+  <author>
+    <name>Travis Johansen 2014-03-12 19:30:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>zapwallettxes problem and wallet DB ordering</title>
+    <updated>2023-06-08T14:59:18.025071+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-March/004632.html" rel="alternate"/>
+    <summary>The issue with the ordering of transactions seems to be caused by CWalletDB::ReorderTransactions. After applying zapwallettxes, new transaction records were being given a low nOrderPos number while old acentry records were high enough that they were being ordered at the end of listtransactions all the time. The cause of this is believed to be due to two issues. Firstly, ReorderTransactions only collects the acentry records from "" which should probably be changed to "*". Secondly, ReorderTransactions tries too hard to maintain previous ordering and likely fails. A simpler solution is suggested which involves reordering the records using a loop. Applying these fixes appears to have corrected the ordering in the wallet DB, but concerns are raised about potentially breaking something else. The author is new to the code and seeks advice on whether this is a bad idea.</summary>
+    <published>2014-03-12T19:30:49+00:00</published>
+  </entry>
+</feed>

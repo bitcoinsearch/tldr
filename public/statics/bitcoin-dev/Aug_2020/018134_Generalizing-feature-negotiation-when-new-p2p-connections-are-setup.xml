@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Generalizing feature negotiation when new p2p connections are setup</title>
+  <updated>2023-06-14T15:05:00.442692+00:00</updated>
+  <author>
+    <name>G. Andrew Stone 2020-08-24 13:59:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Generalizing feature negotiation when new p2p connections are setup</title>
+    <updated>2023-06-14T15:05:00.442692+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018134.html" rel="alternate"/>
+    <summary>A proposal has been made to create a new message, XVERSION, as an alternative to the contentious discussion around allowing unknown messages or not. This message would be a key-value array of arbitrary data that any protocol extension can choose a new key for. The value field can be serialized via the same network serialization format, making it possible to publish custom data via this message without needing to bump the protocol rev field. Typical "custom data" would be the min and max supported version of some specific extended protocol, but any data is possible since the "value" field can be serialized via the same network serialization format. It therefore doubles as a "configuration" message as well as protocol extension negotiation. Code has been deployed for a long time and a specification can be found at https://gitlab.com/bitcoinunlimited/BCHUnlimited/-/blob/dev/doc/xversionmessage.md. The original motivation behind the proposal was to establish what the expectations are for new feature deployment, particularly whether the protocol version should continue to be bumped or not. However, after helpful discussions, the author of the proposal has withdrawn their suggestion. The proposal was to build in new messages to accomplish the same goal as the XVERSION message, but the use of multi-round messaging was deemed unnecessary complexity. An example where the XVERSION message could be useful is to communicate the maximum unconfirmed chain a node will commit to the mempool, and peers don't bother to send transactions that exceed this limit. The XVERSION message provides a way to negotiate non-bilateral feature support and supersedes the limited service bits currently available.</summary>
+    <published>2020-08-24T13:59:26+00:00</published>
+  </entry>
+</feed>

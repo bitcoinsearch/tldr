@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP proposal - Dandelion: Privacy Preserving Transaction Propagation</title>
+  <updated>2023-05-20T02:59:14.658260+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2017-06-13 01:00:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP proposal - Dandelion: Privacy Preserving Transaction Propagation</title>
+    <updated>2023-05-20T02:59:14.658260+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-June/014573.html" rel="alternate"/>
+    <summary>A preliminary implementation and BIP for Dandelion, a privacy-enhancing modification to Bitcoin's transaction propagation mechanism, has been put together. It aims to obscure the original source IP of each transaction by defending against an attacker that actively tries to learn which nodes were involved in the stem phase. To achieve this, the approach is called "Mempool Embargo," meaning a node that receives a "stem phase" transaction behaves as though it never heard of it until it receives it again from someone else, or until a random timer elapses. However, there are concerns about information leaks, such as querying for the existence of a transaction by sending a conflict, but these issues can be resolved with careful consideration of the implementation. It is suggested that avoiding the mempool entirely is the most sensible way, and anything less will end up continually suffering from serious information leaks, which are hard to avoid accidentally introducing via other changes. The primary functionality should be straightforward to implement, needing just a flag to determine if a transaction would be accepted to the mempool but for the flag, but which skips actually adding it. Handling chains of unconfirmed stem transactions is made more complicated by this, and it deserves careful consideration. After a random number of hops along the stem, the transaction enters the fluff phase, although the BIP is a bit under-specified on this transition. An alternative construction would be that when a stem transaction goes out there is a random chance that the stem flag is not set (with suitable adjustment to keep the same expected path length), which allows non-dandelion capable nodes to take on the role of the last stem hop, which would improve the anonymity set during the transition phase. Meanwhile, concerns have arisen regarding dandelion propagation potentially making to measure properties of the inter-node connection graph.</summary>
+    <published>2017-06-13T01:00:50+00:00</published>
+  </entry>
+</feed>

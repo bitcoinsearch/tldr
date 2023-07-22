@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Add a moving checkpoint to the Bitcoin protocol</title>
+  <updated>2023-06-13T20:40:49.585286+00:00</updated>
+  <author>
+    <name>Kenshiro [] 2019-08-03 10:35:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Add a moving checkpoint to the Bitcoin protocol</title>
+    <updated>2023-06-13T20:40:49.585286+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-August/017212.html" rel="alternate"/>
+    <summary>A proposal to add a "moving checkpoint" to the Bitcoin protocol has been suggested. The rule would allow nodes to ignore any new block under nodeBlockHeight - N, thereby making the blockchain truly immutable after N blocks. However, concerns have been raised about how a potentially state-sponsored network split lasting longer than N would be handled. A safer rule proposed is if a node detects a fork with both sides of the split having length &gt; 144 blocks, it halts and requests user intervention to determine which chain to follow. The proposal has also been criticized for making Bitcoin more vulnerable to 51% attacks. To address this, a limit of X blocks has been suggested to decide if the moving checkpoint is ignored or not. The length of X blocks could be measured as numberOfBlocks * averageBlockDifficulty to take into account any difficulty adjustment that happens during the time interval. The new rule would make the moving checkpoint valid only if the difference in blocks between the main chain and the new fork is smaller than X blocks, like for example 3 days of blocks. If a node sees a fork longer than its main chain, and the fork has at least X blocks more than the main chain, then the node ignores the moving checkpoint rule and follows the fork, the longest chain. Two possible situations have been considered: 1) 51% attack where the blocks older than 24 hours are protected against a history rewrite during at least 3 days, and 2) network split where if the network split is older than N blocks, there are two permanent forks (or chains), but in 3 days (or more) the blockchain heights will differ in more than X blocks (the blocks of 3 days) because there will be more miners in one chain than in the other so finally the loser chain will be abandoned and everyone will follow the longest chain.</summary>
+    <published>2019-08-03T10:35:51+00:00</published>
+  </entry>
+</feed>

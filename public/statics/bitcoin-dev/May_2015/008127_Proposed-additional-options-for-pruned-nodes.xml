@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposed additional options for pruned nodes</title>
+  <updated>2023-06-09T20:53:04.215660+00:00</updated>
+  <author>
+    <name>Tier Nolan 2015-05-12 22:00:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposed additional options for pruned nodes</title>
+    <updated>2023-06-09T20:53:04.215660+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/008127.html" rel="alternate"/>
+    <summary>In an email conversation, Gregory Maxwell highlighted the importance of localizing block coverage. Historical blocks are almost always needed in contiguous ranges, and having random peers with totally random blocks would be detrimental to performance. Block storage on nodes with a fraction of the history should not depend on believing random peers. Gaps would be handled by archive nodes, so there is no reason to increase vulnerability by behaving non-uniformly. The decision to contact a node should need O(1) communications, and the expression of what blocks a node has should be compact so it can be rumored efficiently. Figuring out what block (ranges) a peer has given should be computationally efficient, and the communication about what blocks a node has should be compact.The coverage created by the network should be uniform, and ideally, one shouldn't need to update their state to know what blocks a peer will store in the future, assuming that it doesn't change the amount of data it's planning to use. Growth of the blockchain shouldn't cause any need to refetch old blocks. A method was proposed where the initial 50MB of data starting at the block at height S(n) is stored; this generates a sequence of start points. If the start point is less than the block height, then it counts as a hit. As the blockchain increases in size, new starts will be less than the block height, indicating that some other runs would be deleted. There is a weakness in that tiny blocks have the same priority as larger blocks, but every block has the same odds of being included. Nodes should keep the first 50MB of blocks with some probability (10%?) to ensure low-height blocks are covered.</summary>
+    <published>2015-05-12T22:00:33+00:00</published>
+  </entry>
+</feed>

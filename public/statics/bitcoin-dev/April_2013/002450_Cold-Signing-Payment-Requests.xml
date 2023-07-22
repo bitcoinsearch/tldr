@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Cold Signing Payment Requests</title>
+  <updated>2023-06-06T15:26:53.103748+00:00</updated>
+  <author>
+    <name>Timo Hanke 2013-04-25 09:58:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Cold Signing Payment Requests</title>
+    <updated>2023-06-06T15:26:53.104746+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002450.html" rel="alternate"/>
+    <summary>The author of the post is not a fan of weird hacks involving non-existent domain names. They decided to punt on implementing the clean way in v1 but admitted that having a custom cert type that chains onto the end is the way to go. However, chaining it to the SSL cert defeats the original purpose of "cold signing" because the SSL private key is typically kept online and cannot be used to sign a pubkey that should remain offline. The idea of the "hack" is to get two independent things signed by the CA in just one cert: 1) the SSL pubkey, and 2) the custom cert (by including its cryptographic hash). This hack is the simplest possible solution and is also the only solution if one wants to stick with domain-names as identifiers for the payment protocol. The author believes a cleaner way would be to have a cert signed by the CA containing an extended "bitcoin" attribute in compliance with X.509, but this seems a little far off. The author is in favor of the "hack" and suggests thinking carefully about where to place the hash.The author believes that in the long run, payee identities based on alt-chains rather than domain-names plus CAs would be better but this is more of a concern for v3 than v2. Custom certs can also be chained to non-SSL identities like PGP-keys, which could solve Melvin Carvalho's problem of sending to RSA keys (assuming the RSA key holder previously published their custom cert with a cert server).</summary>
+    <published>2013-04-25T09:58:55+00:00</published>
+  </entry>
+</feed>

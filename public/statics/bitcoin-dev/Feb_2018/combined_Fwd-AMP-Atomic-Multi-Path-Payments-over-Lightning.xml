@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Fwd:  AMP: Atomic Multi-Path Payments over Lightning</title>
+  <updated>2023-06-13T00:27:38.861588+00:00</updated>
+  <author>
+    <name>Bryan Bishop 2018-02-08 17:49:23</name>
+  </author>
+  <author>
+    <name>Bryan Bishop 2018-02-08 17:49:23</name>
+  </author>
+  <author>
+    <name>Bryan Bishop 2018-02-08 17:49:23</name>
+  </author>
+  <link href="bitcoin-dev/Feb_2018/015708_Fwd-AMP-Atomic-Multi-Path-Payments-over-Lightning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2018/015708_Fwd-AMP-Atomic-Multi-Path-Payments-over-Lightning.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2018/015708_Fwd-AMP-Atomic-Multi-Path-Payments-over-Lightning.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Fwd:  AMP: Atomic Multi-Path Payments over Lightning</title>
+    <updated>2023-06-13T00:27:38.861588+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-February/015708.html" rel="alternate"/>
+    <summary>Olaoluwa Osuntokun and Conner Fromknecht have designed a protocol called Atomic Multi-Path Payments (AMP) that allows atomic payments over Lightning through multiple payment flows without reusing the payment hash. The protocol ensures atomicity, order invariance, avoiding payment hash reuse, and non-interactive setup. The sender uses additive secret sharing to prevent the receiver from pulling the payment until they have enough shares to reconstruct the original pre-image. The protocol can be experimented with on Lightning today with the addition of a new feature bit.The AMP protocol has several benefits, including allowing logical payments larger than the current maximum value of an individual payment, reducing strain from larger payments on individual paths, potential fee savings for larger payments, improving privacy of LN intermediaries, and increasing the set of possible paths a partial payment could have taken. The design can be seen as a generalization of the single non-interactive payment scheme that uses decoding of extra onion blobs (EOBs) to encode extra data for the receiver. Only the sender and receiver need to implement this feature for it to function, which can be announced using a feature bit.The Lightning Network currently uses a 65-byte payload to instruct each node on how to forward a payment, including the realm, next node, amount, outgoing CLTV, and an HMAC over the entire thing. With AMPs, there is a solution that leverages EOBs to deliver additive shares of a base preimage, from which partial payments can be derived. The protocol allows for up to 2^64-1 satoshis to be sent in a single payment. The sender initiates the payment by building the base preimage and sampling n additive shares, taking the sum to compute BP. The sender then constructs n partial payments, determining the partial preimage and payment hash for each one.The receiver has access to a persistent key-value store DB that maps ID to (n, c*, BP*). In the basic protocol, the receiver caches the first n it sees and verifies that all incoming partial payments have the same n. The receiver should reject all partial payments if any EOB deviates. Next, the persistent store is updated with DB[ID] = (n, c* + 1, BP* ^ s_i), advancing the reconstruction by one step. Upon the arrival of each partial payment, the receiver will iteratively reconstruct BP and do some bookkeeping to figure out when to settle the partial payments. The AMP protocol offers a solution to eliminate the constraint that a single path from sender to receiver with sufficient directional capacity, allowing for larger payments, and increasing privacy for LN intermediaries. The protocol requires no fundamental changes to the existing Lightning Network protocol and can be experimented with today with the addition of a new feature bit.</summary>
+    <published>2018-02-08T17:49:23+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Request for review/testing: headers-first synchronization in Bitcoin Core</title>
+  <updated>2023-06-09T03:04:12.407051+00:00</updated>
+  <author>
+    <name>Aaron Voisine 2014-10-12 05:51:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Request for review/testing: headers-first synchronization in Bitcoin Core</title>
+    <updated>2023-06-09T03:04:12.407051+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-October/006725.html" rel="alternate"/>
+    <summary>In an email exchange between Aaron Voisine of breadwallet.com and Pieter Wuille, a large change that Wuille has been working on for Bitcoin Core, headers-first synchronization, was discussed. This mode of operation changes the way the best chain is discovered, downloaded, and verified, and has several advantages including parallel block downloading, no more stalled downloads, more robustness against unresponsive or slow peers, and reduces the need for checkpoints in the code. Additionally, it removes a class of DoS attacks related to peers feeding low-difficulty valid large blocks on a side branch, reduces memory usage during sync, and is a major step towards an SPV mode using the reference codebase. Wuille explained that technically, headers-first synchronization works by replacing the single-peer blocks download by a single-peer headers download and verification, while simultaneously fetching blocks along the best-known headers chain from all peers that have the relevant blocks. The code is available as a github pull request, or packaged on http://bitcoin.sipa.be/builds/headersfirst, where binaries can be tested with. Known issues include slow downloading at the start of the sync (especially before all headers are processed), blocks being stored on disk out of order (making it incompatible with some tools or other programs), and the block index database holding headers for which no block is stored on disk (which earlier versions won't support). Overall, headers-first synchronization is a significant step forward for Bitcoin Core, making it practical to run a full node part-time on a laptop again. While there are known issues that will need experimentation and improvement, this mode of operation has been around for years and has finally been refactored enough to support it.</summary>
+    <published>2014-10-12T05:51:41+00:00</published>
+  </entry>
+</feed>

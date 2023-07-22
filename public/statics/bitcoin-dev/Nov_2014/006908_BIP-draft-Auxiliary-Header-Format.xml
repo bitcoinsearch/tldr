@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>BIP draft - Auxiliary Header Format</title>
+  <updated>2023-05-19T19:30:23.007011+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2014-11-10 00:52:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>BIP draft - Auxiliary Header Format</title>
+    <updated>2023-05-19T19:30:23.007011+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-November/006908.html" rel="alternate"/>
+    <summary>Tier Nolan proposed a draft for Bitcoin Improvement Proposal (BIP) to add auxiliary headers in a bandwidth efficient way. This would be done through a soft fork, using the last transaction in the block to store the hash of the auxiliary header. The overhead per auxiliary header is only around 104 bytes per header, much smaller than embedding the hash of the header in the coinbase of the block. However, there are some tradeoffs between overhead and delayed transactions. Around 12.5% of transactions may be delayed to the next block. Padding transactions could be added as an improvement, but creating "seed" transactions is an implementation headache. Each node requires control over an UTXO to create the final transaction in the block that has the digest of the auxiliary header. Therefore, mining nodes need to have wallets to manage their UTXO entry. There are different approaches for generating signatures for locktime restricted transactions, ranging from adding a transaction with a few thousand outputs into the blockchain to detecting the special transactions and using them. A middle ground would be for servers to send out timed-locked transactions that pay to a particular address, but the transaction would be time-locked and miners who mine version two blocks wouldn't be able to spend them early. Tying in the protocol changes is confusing and seems to be required out the gates, which would make it harder to deploy. It should be possible to have the p2p part entirely separate from the committed data.</summary>
+    <published>2014-11-10T00:52:05+00:00</published>
+  </entry>
+</feed>

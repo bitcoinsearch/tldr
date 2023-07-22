@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Decoupling BIP70 Payment Protocol from Wallets</title>
+  <updated>2023-06-12T23:24:04.412049+00:00</updated>
+  <author>
+    <name>Ryan Grant 2018-01-02 11:31:51</name>
+  </author>
+  <author>
+    <name>Ryan Grant 2018-01-02 11:31:51</name>
+  </author>
+  <author>
+    <name>James Hilliard 2018-01-01 18:50:04</name>
+  </author>
+  <author>
+    <name>James Hilliard 2018-01-01 18:50:04</name>
+  </author>
+  <author>
+    <name>Ryan Grant 2018-01-02 11:31:51</name>
+  </author>
+  <author>
+    <name>James Hilliard 2018-01-01 18:50:04</name>
+  </author>
+  <link href="bitcoin-dev/Jan_2018/015491_Decoupling-BIP70-Payment-Protocol-from-Wallets.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2018/015491_Decoupling-BIP70-Payment-Protocol-from-Wallets.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2018/015490_Decoupling-BIP70-Payment-Protocol-from-Wallets.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2018/015490_Decoupling-BIP70-Payment-Protocol-from-Wallets.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2018/015491_Decoupling-BIP70-Payment-Protocol-from-Wallets.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2018/015490_Decoupling-BIP70-Payment-Protocol-from-Wallets.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Decoupling BIP70 Payment Protocol from Wallets</title>
+    <updated>2023-06-12T23:24:04.412049+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-January/015491.html" rel="alternate"/>
+    <summary>James Hilliard proposed moving the BIP70 protocol implementation into a browser extension that can communicate with wallets over a simple IPC mechanism. The W3C Payments API automates all data entry and handles choices related to common transactions on the Web, registers "payment handlers" in the browser and selects one to complete a transaction. Payment requests often ask for information that Bitcoin wallets have no current need to provide, such as shipping addresses. In those cases, it is the chosen payment type's handler that negotiates with the user how to reveal the supposedly necessary information.A merchant payment processor has decided to drop support for BIP21 payment URI's in favor of accepting exclusively BIP70 payments, which has brought up several issues with BIP70. Many wallets do not support BIP70 and have no intention of doing so in the near future. BIP70 requires large complex PKI dependencies like X.509 and TLS support, which have a large attack surface and poor track record when it comes to vulnerabilities. Signing transactions with keys resident in the same application that handles TLS greatly increases the possibility of keys being leaked due to vulnerabilities in TLS libraries like openssl.Therefore, the proposal is to move the BIP70 protocol implementation into a browser extension that can communicate with wallets over a simple IPC mechanism. The browser extension will serve as a translation layer that can convert BIP70 URLs into standard BIP21 URI's for wallets that do not want to support BIP70 or other custom schemes. This process provides several benefits over the current method of implementing BIP70 directly within wallets. It removes complex/risky dependencies from wallets and moves them into the browser which already has to implement full PKI support. It re-enables payment support for wallets that only support BIP21/normal addresses. Finally, it makes offline/custom signing schemes easier to use with BIP70.It may seem early for wallet makers to consider integration with a mere W3C Recommendation, but it would not be early to choose the right architecture to build code on, given that this is in the works for the major browsers. Development can proceed even in browsers that have not implemented anything, through an HTML5 Javascript polyfill. A demonstration that includes payment in bitcoins is already available.James Hilliard believes that there is nothing in this spec that would preclude the workflow of a Bitcoin transaction, whether on-chain (with the seller's backend marking off confirmations) or using the Lightning Network. It even allows the seller to offer a discount on certain payment methods. However, paying a BIP70 invoice with an incompatible wallet currently needs manual non-user-friendly workarounds.</summary>
+    <published>2018-01-02T11:31:51+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Per-block non-interactive Schnorr signature aggregation</title>
+  <updated>2023-06-12T00:39:42.673253+00:00</updated>
+  <author>
+    <name>adiabat 2017-05-07 06:45:00</name>
+  </author>
+  <author>
+    <name>Russell O'Connor 2017-05-10 01:59:06</name>
+  </author>
+  <author>
+    <name>adiabat 2017-05-07 06:45:00</name>
+  </author>
+  <author>
+    <name>adiabat 2017-05-07 06:45:00</name>
+  </author>
+  <author>
+    <name>Andrew Poelstra 2017-05-10 07:55:42</name>
+  </author>
+  <author>
+    <name>Andrew Poelstra 2017-05-10 07:55:42</name>
+  </author>
+  <author>
+    <name>adiabat 2017-05-10 14:59:08</name>
+  </author>
+  <author>
+    <name>adiabat 2017-05-10 14:59:08</name>
+  </author>
+  <author>
+    <name>Russell O'Connor 2017-05-10 01:59:06</name>
+  </author>
+  <author>
+    <name>Russell O'Connor 2017-05-10 01:59:06</name>
+  </author>
+  <author>
+    <name>Andrew Poelstra 2017-05-10 07:55:42</name>
+  </author>
+  <author>
+    <name>adiabat 2017-05-10 14:59:08</name>
+  </author>
+  <link href="bitcoin-dev/May_2017/014272_Per-block-non-interactive-Schnorr-signature-aggregation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2017/014306_Per-block-non-interactive-Schnorr-signature-aggregation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2017/014272_Per-block-non-interactive-Schnorr-signature-aggregation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2017/014272_Per-block-non-interactive-Schnorr-signature-aggregation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2017/014308_Per-block-non-interactive-Schnorr-signature-aggregation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2017/014308_Per-block-non-interactive-Schnorr-signature-aggregation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2017/014310_Per-block-non-interactive-Schnorr-signature-aggregation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2017/014310_Per-block-non-interactive-Schnorr-signature-aggregation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2017/014306_Per-block-non-interactive-Schnorr-signature-aggregation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2017/014306_Per-block-non-interactive-Schnorr-signature-aggregation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2017/014308_Per-block-non-interactive-Schnorr-signature-aggregation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2017/014310_Per-block-non-interactive-Schnorr-signature-aggregation.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Per-block non-interactive Schnorr signature aggregation</title>
+    <updated>2023-06-12T00:39:42.673253+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-May/014272.html" rel="alternate"/>
+    <summary>Bitcoin's signature aggregation feature is being discussed in a proposal involving Schnorr signatures, which could lead to non-interactive partial aggregation of signatures on a per-block basis, saving space. Private and public keys are generated, with s-values calculated for each signature. The unique R-values are used to sign and verify [m,P]. While interactive aggregate signatures require co-signers, non-interactively half of the signature can be aggregated as the s-values can be summed up. The main benefit of this approach is smaller signatures, taking up less disk and network space, and fitting more signatures in a block. However, it may be difficult to cache signatures and quickly validate a block after it comes in.Russell O'Connor suggests that a proposal under consideration is horribly broken, proposing a scenario where a malicious actor could create an invalid signature but valid when combined with other inputs. Andrew Poelstra proposes using non-interactive Schnorr aggregation, having independent Schnorr signatures without aggregation until a miner produces a block. Then, the miner multiplies each s-value by H(witness root || index), sums them up, and commits the sum somewhere it does not affect the root. Verifiers can recognize the signature given only the transaction it signs and R_i, uniquely determining a valid signature.A potential vulnerability in the signature aggregation feature is discussed, where the Wagner generalized birthday attack could manipulate the system by varying the R-values and colliding hashes. One possible defense is proposed by having the miner calculate s-aggregate and aggregate all the public keys from all the aggregated signatures in the block, then sorting and hashing the concatenated list of pubkeys. They could multiply s by this combo-pubkey hash (call it h(c)), and verification would involve creating the same combo-pubkey hash, multiplying s by the multiplicative inverse of the h(c) they calculate, then verifying s. Another optimization proposed was concatenating all the R or P values in the order they appear in the block, with the miner committing to s*h(c)^1, the multiplicative inverse of the hash of all those values. When nodes verify in IBD, they can multiply by h(c) and do not need to compute the inverse. Further feedback from experts is needed to ensure the safety of this proposal.</summary>
+    <published>2017-05-07T06:45:00+00:00</published>
+  </entry>
+</feed>

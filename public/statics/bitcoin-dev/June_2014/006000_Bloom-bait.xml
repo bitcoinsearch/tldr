@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Bloom bait</title>
+  <updated>2023-06-08T23:46:27.890167+00:00</updated>
+  <author>
+    <name>Mike Hearn 2014-06-10 10:38:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Bloom bait</title>
+    <updated>2023-06-08T23:46:27.890167+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-June/006000.html" rel="alternate"/>
+    <summary>The email thread discusses the implementation of bloom filters for privacy reasons in the Bitcoin network. The writer explains that implementing this feature would be costly and look like a denial-of-service attack on the network due to the O(n) cost per query. However, another person responds that prefix filtering may not save any disk seeks or could even make it worse for the current loads the network is handling. The cost of disk reads is mainly rotational latency, and modern kernels will adaptively read ahead when working through a disk file sequentially. Implementing prefix filtering requires calculating a sorted list of all data elements and tx hashes in the block, which takes up extra disk space and requires seeking through indexes. A smart implementation could pack the index next to each block, but it would slow down block relay. The additional data storage and increased pressure on the page cache may make prefix filtering worthwhile at some point, but it is unlikely for current traffic levels. It is suggested that finding ways to increase usage is more important than worrying about resources that are not presently scarce. The writer also mentions that exporting storage technology via a stats message would be neat since LevelDB is designed for HDDs, not SSDs.</summary>
+    <published>2014-06-10T10:38:23+00:00</published>
+  </entry>
+</feed>

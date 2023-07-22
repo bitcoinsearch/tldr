@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Closed Seal Sets and Truth Lists for Better Privacy and Censorship Resistance</title>
+  <updated>2023-06-11T18:51:57.137391+00:00</updated>
+  <author>
+    <name>Peter Todd 2016-06-22 11:10:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Closed Seal Sets and Truth Lists for Better Privacy and Censorship Resistance</title>
+    <updated>2023-06-11T18:51:57.137391+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-June/012796.html" rel="alternate"/>
+    <summary>At the recent coredev.tech meetup in Zurich, attendees discussed ideas to combat censorship by ensuring that miners do not have access to the information necessary to selectively censor transactions. Adam Back's idea of blind symmetric commitments and client-side verification served as the foundation for achieving this goal. The proposed scheme uses "smart contract" state machine tooling to provide a better Zerocash-like guarantee that only a subset of data becomes public without requiring "moon math" of uncertain security.To implement Single-Use Seals, miners attest to the contents of a series of key:value maps of true expressions, with the keys being the expressions, and the values being commitments. Periodically, the most recent map is archived, and the map is started fresh again. A single-use seal implemented with the closed seal maps is then identified by the expression and a block height. Similar to the logic in Bitcoin's segregated witnesses proposal, separating the commitment and witness arguments to the seal expression ensures that the witness attesting to the fact that a given seal was closed does not depend on the exact signature used to actually close it. An expression validity oracle is implemented by having miners attest to the validity of a perpetually growing list of true predicate expressions, whose evaluation can in turn depend on previously attested expressions in the truth list.When spending an output, funds spent are directed to a set of outputs by irrevocably committing single-use seals to that distribution of outputs. In a transaction with multiple outputs, each output is associated with a unique nonce to avoid linking them together as seals associated with them are closed. When validating a transaction, the least amount of data possible is validated, allowing the maximum amount of data to be omitted for a given recipient. To make use of the separation between seal closure and validation, transaction information is passed from peer to peer. Over time, proofs that a coin is valid will grow as each additional transaction adds more data.The article discusses the use of single-use seals and true expressions list in Bitcoin transactions to enable "smart contract" applications similar to those targeted by Ethereum. This combination also allows for improved privacy as it avoids revealing most transaction data. However, the article raises several open questions related to this architecture, such as its interaction with scaling proposals like sharding and fraud proofs, how statistical inflation protection works in a real economy, and how wallets can pass proof data between each other or backup proof data.The article provides references on blind symmetric commitment for stronger Byzantine voting resilience, building blocks of the state machine approach to consensus, and deterministic predicate expressions for smarter signatures.</summary>
+    <published>2016-06-22T11:10:09+00:00</published>
+  </entry>
+</feed>

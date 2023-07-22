@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Sphinx Rendezvous Update</title>
+  <updated>2023-06-02T23:52:54.218028+00:00</updated>
+  <author>
+    <name>Christian Decker 2020-03-02 11:39:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Sphinx Rendezvous Update</title>
+    <updated>2023-06-02T23:52:54.218028+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-March/002574.html" rel="alternate"/>
+    <summary>In this context, Christian and Bastien are discussing privacy concerns with partial onion routing, which is being proposed as a solution to the issues with full onion routing. They discuss the tradeoff between the size of the onion and the number of hops it can have. Christian is currently using the maximum size but plans to expose the size to be prefilled so that smaller partial onions can be used. This would enable the ability to chain multiple partial onions. The shared secret used to generate the prefill stream is derived from both the ephemeral key and RV's private key, so RV+1 can't compute the same stream. The ephemeral key in the partial onion is used twice. Once by RV to generate an obfuscation stream to fill in the gap, and as part of the reconstructed onion, processed by RV+1 to decode the onion. This design ensures security and doesn't leak information. Christian mentions that payment errors won't be readable by RV since the recipient generates the onion and RV doesn't have the shared secrets. Any error beyond RV should be treated by the sender as "rendezvous failed, discard partial onion". Bastien points out that each hop's amount/cltv is fixed at invoice generation time by the recipient, meaning MPP cannot be used, and if any channel along the path updates their fee the partial onion becomes invalid unless you overpay the fees. Trampoline should be able to address that since it provides more freedom to each trampoline node to find an efficient way to forward to the next trampoline. However, it's not clear how to mix these two proposals to make them work together.</summary>
+    <published>2020-03-02T11:39:49+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Hash of UTXO set as consensus-critical</title>
+  <updated>2023-06-10T22:48:52.095153+00:00</updated>
+  <author>
+    <name>Jorge Timón 2015-09-18 20:38:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Hash of UTXO set as consensus-critical</title>
+    <updated>2023-06-10T22:48:52.095153+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-September/011078.html" rel="alternate"/>
+    <summary>On September 18, 2015, Rune Kjær Svendsen posted on the Bitcoin-dev mailing list suggesting that a newly mined block should include the hash of the current UTXO set in order for new nodes to acquire the UTXO set in a trustless manner. This would allow nodes to verify proof-of-work headers and know that a block with an invalid UTXO set hash would be rejected. Svendsen argued that this would force miners to actually maintain a UTXO set and not just build on top of the chain with the most proof-of-work. Producing a UTXO set and verifying a block against a chain are the same thing, so by including the hash of the UTXO set we force miners to verify the block that they want to build on top of. In response, Patrick Strateman argued that full nodes using UTXO set commitments is a change to the Bitcoin security model since an attacker with &gt;50% of the network hashrate can rewrite history. If full nodes rely on UTXO set commitments such an attacker could create an infinite number of bitcoins (as in many times more than the current 21 million bitcoin limit). Before considering mechanisms for UTXO set commitments, it is important to seriously discuss whether the security model reduction is reasonable. Jorge Timón also weighed in, suggesting that with UTXO commitments at some point, it may be enough to validate the full headers history but only the last 5 years of transaction history (assuming UTXO commitments are buried 5 years worth of blocks in the past). This scales much better than validating the full history, and if there is a 5 year reorg, something is going really wrong anyway. After validating the last 5 years, one may also want to validate the rest of the history backwards to get the "fully-full node" security. Of course, 5 years is just an arbitrary number: 2 or maybe even 1 would probably be secure enough for most people. Timón referred to this idea as "hard checkpoints" or "moving the genesis block forward" in the past.In conclusion, there were differing opinions on how to handle UTXO set commitments and their impact on Bitcoin's security model. The discussion also touched on the scalability issues of validating the full blockchain history and ways to alleviate this burden for new nodes joining the network.</summary>
+    <published>2015-09-18T20:38:06+00:00</published>
+  </entry>
+</feed>

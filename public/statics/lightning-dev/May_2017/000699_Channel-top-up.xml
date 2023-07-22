@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Channel top-up</title>
+  <updated>2023-05-24T01:34:22.995118+00:00</updated>
+  <author>
+    <name>Christian Decker 2017-05-04 17:53:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Channel top-up</title>
+    <updated>2023-05-24T01:34:22.995118+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2017-May/000699.html" rel="alternate"/>
+    <summary>The conversation is between two people, ZmnSCPxj and Christian, discussing a proposal for top-up mechanism in the Lightning Network. The proposed mechanism involves using onion routing to move funds from off-LN Alice to on-LN Bob, to on-LN Alice. The only difference is that the first "hop" of the route is performed via an on-chain transaction. Once the usual onion-routing mechanisms have settled with update_fulfill_htlc, the channel state settles to a new topped-up state. The "side funds" are definitely in the possession of Bob, and do not affect the channel state and are not considered in the channel state. The other proposal called splice-in/-out solves the top-up problem and does not incur any exceptional risks. Splicing is just a clever way of closing a channel and reopening a new one right from the settlement, and the new one does not need to be confirmed before we can perform further updates. Alice may just be pre-allocating some funds in parallel. During the splice-in we need to stop forwarding HTLCs for a few seconds, so we can settle cleanly. Directly after the splice-in the channel is functional again, no need to let the settlement/funding transaction confirm. That is because the funds in the channel never touched an unconfirmed singlesig output, hence they can never be doublespent without the collaboration of the counterparty. There remains the risk that Bob may refuse to cooperate on a splice-out, thus this is not safe to think of the channel's fund as anything but locked in since uncooperation means the channel's funds are returned to you after a timeout. If we are able to recreate the same HTLCs on the re-anchored channel in a safe way then we can avoid draining them off of the channel before splicing. Even if we don't do that we may simply hold back on adding new HTLCs, drain, re-anchor and then add the held back HTLCs once the splice is completed. And finally, this could allow us to perform a partial drop to the chain, splicing out just the HTLCs which are about to expire and maintaining the rest of the channel intact.Christian likes the combination of on-chain and off-chain payments. He also believes that this approach may be used by someone off-LN to pay into an LN node without committing funds to open a channel. Alternatively, a non-Lightning user can claim he or she did an off-LN onion route, but actually just sent the funds to himself/herself to throw off trackers.</summary>
+    <published>2017-05-04T17:53:29+00:00</published>
+  </entry>
+</feed>

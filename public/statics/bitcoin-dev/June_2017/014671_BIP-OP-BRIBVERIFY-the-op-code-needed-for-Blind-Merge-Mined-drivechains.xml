@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP: OP_BRIBVERIFY - the op code needed for Blind Merge Mined drivechains</title>
+  <updated>2023-06-12T03:04:57.227472+00:00</updated>
+  <author>
+    <name>Paul Sztorc 2017-06-28 22:20:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP: OP_BRIBVERIFY - the op code needed for Blind Merge Mined drivechains</title>
+    <updated>2023-06-12T03:04:57.227472+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-June/014671.html" rel="alternate"/>
+    <summary>In a conversation between ZmnSCPxj and Paul Sztorc, it was discussed that in the case of the Merkle tree root, bribers would react to the scheme inefficiently, especially when the main chain's tx-fee-rate is low. There would be many bribe attempts, which would take up space in mainchain blocks, most of which would be unsuccessful. The miners might react to this by offering users the privilege of occupying transaction slot #2 right after the coinbase. Users need to trust miners for this, introducing a cost friction that becomes pure deadweight loss. ZmnSCPxj suggested an alternate proposal that sidechains and altcoins wanting to do "blinded" merge mining can use without a soft fork. It would encode a block header as a simple cons-pair, with the head as the block and the tail as the parent cons-pair. When a sidechain node wants to know the consensus, it downloads mainchain-blocks and looks for OP_RETURN's. Starting with its genesis cons-pair hash equivalent to the empty list, it scans each OP_RETURN transaction. When a sidechain miner wants to create a side-block, it generates a new cons-pair and creates an OP_RETURN transaction for it, paying a mainchain miner to include it in the next mainchain-block. Paul Sztorc presented an idea for Blind Merge Mined Sidechains through the creation of a new opcode, OP_BRIBEVERIFY, for the Bitcoin scripting system. This allows users to bribe a miner to include a hash in the coinbase transaction's output. BRIBEVERIFY redefines the existing NOP4 opcode. When executed, if the given critical hash is included at the given vout index in the coinbase transaction, the script evaluates to true. Otherwise, the script will fail. This enables sidechains in Bitcoin, allowing various factions of the community to realize their vision on their separate blockchain that is interoperable with the Bitcoin blockchain. The document includes several references and credits to Paul Sztorc, CryptAxe, and others. The deployment of this proposal is yet to be determined.</summary>
+    <published>2017-06-28T22:20:35+00:00</published>
+  </entry>
+</feed>

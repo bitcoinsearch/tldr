@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for extra nonce in block header</title>
+  <updated>2023-06-08T21:51:32.310119+00:00</updated>
+  <author>
+    <name>Timo Hanke 2014-04-27 07:07:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for extra nonce in block header</title>
+    <updated>2023-06-08T21:51:32.310119+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005610.html" rel="alternate"/>
+    <summary>This proposal suggests reassigning two bytes from the version field of the block header to a new extra nonce field in order to reduce incentives for miners to find cheap, non-standard ways to generate new work. The motivation behind this proposal is to provide miners with a cheap constant-complexity method to create new work that does not require altering the transaction tree and to protect the version and timestamp fields in the block header from abuse. The proposal aims to reduce the incentive for a miner to abuse the shortened version number by a factor in the order of 2^16. The traditional extra nonce is part of the coinbase field of the generation transaction and is always the very first transaction of a block. After incrementing the extra nonce, the minimum amount of work a miner has to do to recalculate the block header is to hash the coinbase transaction and to recalculate the left-most branch of the merkle tree all the way to the merkle root. This creates an incentive for miners to find cheaper ways to create new work than by means of pre-hashing. The solution proposed in this draft is to reduce the range of version numbers from 2^32 to 2^16 and to declare the third and fourth bytes of the block header as legitimate space for an extra nonce. The proposal also greatly reduces the bandwidth requirements of a blind pool protocol by only submitting the block header to the miner. Old versions of the client will accept blocks of this kind but will throw an alert at the user to upgrade. There is no need to introduce a new block version number or to phase-out old block versions.</summary>
+    <published>2014-04-27T07:07:32+00:00</published>
+  </entry>
+</feed>

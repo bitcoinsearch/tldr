@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Combining big transactions with hash-only blocks to improve tps.</title>
+  <updated>2023-06-08T00:36:49.315534+00:00</updated>
+  <author>
+    <name>Christophe Biocca 2014-01-22 22:20:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Combining big transactions with hash-only blocks to improve tps.</title>
+    <updated>2023-06-08T00:36:49.315534+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-January/004191.html" rel="alternate"/>
+    <summary>The idea of not rebroadcasting transactions as part of blocks is being considered as it can help cut network traffic by almost half. It is suggested that if miners only receive the hashes of transactions, they may find it difficult to validate blocks and mine on top of a block when they don't know if it's valid. The use of zkSNARKs could be used to prove that hash-only blocks have valid transactions, however, generating it may be inefficient. The proposal suggests two optimizations to improve tps (transactions per second) in Bitcoin. The first optimization is to keep only hashes of transactions included in a block and transfer all tx separately. By keeping only transaction hashes in blocks, block propagation time can remain constant while achieving more tps. The second optimization is to use CoinJoin to merge transactions from many users for online shopping and banking. This would allow many people to send coins with one transaction, which would greatly increase anonymity of the network. However, there are problems with these optimizations, such as the potential for selfish miners to keep a subset of transactions for themselves and release them only with a new block. The incentive will then be to mine only well-distributed transactions to lower orphan rate. The miner can also try to sneak in an invalid transaction in a block. These problems can be mitigated by making nodes verify all transactions before propagating a block and not accepting a block before it gets verified. There is also a proposed fallback solution called Jumbo Transactions, which removes CoinJoin induced delays while keeping transaction sizes big. However, Jumbo transactions do not mix coins and therefore do not increase anonymity of the network. The proposal recommends that Jumbo transaction size limit be made lower than CoinJoin to make fees for these transactions higher and create an incentive to only use them when necessary. References are provided to various sources that discuss increasing the network hashing power by reducing block propagation time and Bitcoin privacy for the real world. Ultimately, these proposed optimizations could improve tps and network anonymity while mitigating problems related to network traffic and transaction verification.</summary>
+    <published>2014-01-22T22:20:58+00:00</published>
+  </entry>
+</feed>

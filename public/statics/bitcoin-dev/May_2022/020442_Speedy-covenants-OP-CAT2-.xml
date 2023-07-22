@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Speedy covenants (OP_CAT2)</title>
+  <updated>2023-06-15T20:33:39.300673+00:00</updated>
+  <author>
+    <name>Nadav Ivgi 2022-05-08 02:03:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Speedy covenants (OP_CAT2)</title>
+    <updated>2023-06-15T20:33:39.300673+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020442.html" rel="alternate"/>
+    <summary>The bitcoin-dev mailing list discussed the use of OP_CAT and its effect on enabling recursive covenants. It was noted that with OP_CTV, non-recursive covenants can be enabled but not recursive covenants. It was suggested that this is because CTV does not let you have a verified copy of the input's prevout scriptPubKey on the stack. However, it was proposed that instead of verifying user-supplied witness data against the input to obtain the quine, the script can simply contain a copy of itself as an initial push (minus this push). Two examples of recursive covenants using this approach were provided in rough sketches, which included an auction and a listed price sale with royalty. The discussion then moved towards the difference between non-recursive and recursive covenants and how recursive covenants are very near to true Turing-completeness. It was noted that recursive covenants can force an output to be spent only if the output is spent on a transaction where one of the outputs is the same covenant (possibly with tweaks). This behavior is still of concern as it may be possible to attack the network by eroding its supply through such a recursive covenant. Several common reactions were discussed, including limiting the number of opcodes processed to avoid DoS, looking at OP_CTV and SIGHASH_ANYPREVOUT to avoid recursive covenants while allowing recursive ones, and the safety of total-with-codata. It was noted that the burden of proof-of-safety is on the proposer and if there is proof that total-with-codata is safe, opcodes that may enable recursive covenants can be added, and OP_CAT can be added back in too.</summary>
+    <published>2022-05-08T02:03:25+00:00</published>
+  </entry>
+</feed>

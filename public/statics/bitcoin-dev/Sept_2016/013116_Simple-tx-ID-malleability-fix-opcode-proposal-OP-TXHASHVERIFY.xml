@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Simple tx ID malleability fix, opcode proposal: OP_TXHASHVERIFY</title>
+  <updated>2023-06-11T19:59:57.040411+00:00</updated>
+  <author>
+    <name>Rune K. Svendsen 2016-09-17 20:45:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Simple tx ID malleability fix, opcode proposal: OP_TXHASHVERIFY</title>
+    <updated>2023-06-11T19:59:57.040411+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-September/013116.html" rel="alternate"/>
+    <summary>The author is proposing a solution to create transactions that are immune to transaction ID malleability. The proposed solution involves introducing an opcode called OP_TXHASHVERIFY, which would only work if added to a scriptSig as the very first operation and would abort if the hash of the transaction with all OP_TXHASHVERIFY operations (including stack push) removed does not match what has been pushed on the stack. To produce a transaction with one or more inputs protected against tx ID malleability, one would first calculate the tx ID of the tx, then for each input they wish to protect, add "0x32 $TX_HASH OP_TXHASHVERIFY" to the beginning of the scriptSig. When evaluating OP_TXHASHVERIFY, a copy of the tx in question is made, and the "0x32 OP_TXHASHVERIFY" sequence is removed from the beginning of all scriptSigs (if present). If the tx copy hash does not match the top stack item, the operation will abort.This solution adds 34 bytes per input and is meant to be a temporary solution until something better becomes available (e.g. Segwit). The proposal is seen as valuable because it allows users to not worry about tx ID malleability. The author asks for feedback on the proposal.</summary>
+    <published>2016-09-17T20:45:17+00:00</published>
+  </entry>
+</feed>

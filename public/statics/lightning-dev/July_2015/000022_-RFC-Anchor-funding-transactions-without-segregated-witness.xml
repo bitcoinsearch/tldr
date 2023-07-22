@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] Anchor (funding) transactions without segregated witness</title>
+  <updated>2023-05-23T18:25:14.837770+00:00</updated>
+  <author>
+    <name>Rusty Russell 2015-07-07 06:09:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] Anchor (funding) transactions without segregated witness</title>
+    <updated>2023-05-23T18:25:14.837770+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-July/000022.html" rel="alternate"/>
+    <summary>In a recent post, Rusty Russell revisited his ideas for establishing an anchor without new sighash modes. In the draft paper and current code, signatures are traded on the first commitment transaction before signing the anchor transaction. This can be done in Elements Alpha because it has segregated witness; however, it can't be done in normal Bitcoin. To solve this problem, we can have two anchors instead of one, each requiring both our signatures to spend. The commitment tx has two inputs, one for each. To recover funds in the event of an abort case, an intermediary transaction called "Escape" transactions is added. It spends the 2 of 2 anchor output but can be spent either by 2 of 2 (i.e., the commitment tx), OR back to the anchor owner after a delay using OP_CHECKSEQUENCEVERIFY. The order is as follows: both parties trade anchor txids and amounts, then they trade signatures for the escape transactions so that either party can broadcast them. Now, both parties can be sure to recover their funds, and each broadcasts their anchor txs. If the other side broadcasts their escape transaction, you should abort and broadcast your escape transaction. If the other side doesn't broadcast their anchor tx, you should abort and broadcast your escape transaction. Otherwise, when the anchor txs reach the required depth, both parties exchange signatures for the commitment transaction. If the other side broadcasts either escape transaction, broadcast the other escape transaction and the commitment tx as normal before they can reclaim their anchor funds. Although there are three extra transactions involved, one extra for the channel open, and two for the channel close, this technique works and doesn't add any new requirements.</summary>
+    <published>2015-07-07T06:09:39+00:00</published>
+  </entry>
+</feed>

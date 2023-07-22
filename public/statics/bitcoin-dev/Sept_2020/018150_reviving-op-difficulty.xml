@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>reviving op_difficulty</title>
+  <updated>2023-06-14T15:12:02.345528+00:00</updated>
+  <author>
+    <name>Jeremy 2020-09-02 18:27:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>reviving op_difficulty</title>
+    <updated>2023-06-14T15:12:02.345528+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-September/018150.html" rel="alternate"/>
+    <summary>A proposal by Tamas Blummer for an additional opcode enabling Bitcoin difficulty futures was discussed on the bitcoin-dev mailing list. However, Jeremy Rubin proposed an alternate scheme that allows for difficulty futures without requiring changes to Bitcoin. This method takes advantage of the fact that changes in difficulty also cause a difference in maturation time between timelocks and height-locks. The basic formula involves creating an unsigned transaction that deposits money into a 2-of-2 multisig, then signing two conflicting spends from the multisig - one paying Alice with an nLockTime(height) of CURRENT_HEIGHT + 2016 blocks, and the other paying Bob with an nLockTime(time) of CURRENT_TIME + 2016 * 10 * 60 seconds. Depending on whether hashrate increases or decreases during the subsequent period, the spend that pays Alice or Bob will mature first. Other contracts can be created by tweaking this formula. It is possible to embed this scheme in a taproot commitment using OP_CLTV or OP_CSV instead of nLockTime, and it can be compatible with offchain commitments. A python code has been developed for handling this embedded in basic channels between two parties, enabling high-frequency updates and modeling of a hashrate perpetual swap assuming that the counterparty is online. However, the general issue with this construction family is that the contracts are metastable, meaning that there is some minimum time and hashrate moves to play with, and the less "clearly correct" you were, the less clearly correct the execution will be. Therefore, the channel version of the contract is more compelling as it allows for frequent updates and revocation on further out contracts.</summary>
+    <published>2020-09-02T18:27:00+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 100 specification</title>
+  <updated>2023-06-10T21:55:43.765490+00:00</updated>
+  <author>
+    <name>Andy Chase 2015-09-04 07:53:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 100 specification</title>
+    <updated>2023-06-10T21:55:43.765490+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-September/010920.html" rel="alternate"/>
+    <summary>The 32MB limit has been set in the code to keep message size small enough for serialization in memory. A suggestion was made to lift the limit and implement an auto-raise ceiling according to an exponential factor starting from a year from now. The hard limit ceiling should be 32 MB till 2016-2017 and then it should be 32*((currentYear-2018)*1.5) MB after that. The factor could be 2 as in BIP-101 but a more conservative approach is suggested. The delay time can also be increased if needed. A discussion was held regarding the hardLimit range, which floats between 1-32M, inclusive. It was questioned if the 32MB limit still exists anywhere in the code since it reinstates a legacy limitation. It was explained that the message size limit aims to minimize storage required per peer and if a 32MB block size is required, each network input buffer must be at least 32MB, which makes it difficult for a node to support a large number of peers. It was suggested that sending messages containing only part of a block will make it possible to receive parts of a block from multiple sources. It was suggested that using MB resolution instead of byte resolution would use up fewer bytes in the coinbase. Even with the +/- 20% rule, miners can vote for the nearest MB. Abstains were suggested to count for the status quo, and votes that are out of range should be clamped. Regarding the new hardLimit, votes were suggested to sort from lowest to highest for the last 12,000 blocks. Blocks that do not have a vote are considered a vote for the status quo. Votes are limited to +/- 20% of the current value. The raise value is defined as the vote for the 2400th highest block (20th percentile), and the lower value is defined as the vote for the 9600th highest block (80th percentile). If the raise value is higher than the status quo, the new limit is set to the raise value. If the lower value is lower than the status quo, the new limit is set to the lower value. Otherwise, the size limit remains unchanged.</summary>
+    <published>2015-09-04T07:53:48+00:00</published>
+  </entry>
+</feed>

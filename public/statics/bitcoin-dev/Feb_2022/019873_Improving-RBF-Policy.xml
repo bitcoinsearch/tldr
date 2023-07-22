@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving RBF Policy</title>
+  <updated>2023-05-22T16:59:53.430093+00:00</updated>
+  <author>
+    <name>Anthony Towns 2022-02-08 04:58:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving RBF Policy</title>
+    <updated>2023-05-22T16:59:53.430093+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019873.html" rel="alternate"/>
+    <summary>The conversation is about outbound tx relay size-based rate-limiting and prioritizing tx relay by feerate to prevent spammers from wasting bandwidth network-wide. The scheme would slow down low feerate spam, preventing a huge network-wide bandwidth spike while allowing high feerate transactions to propagate regardless of how busy traffic is. The inbound tx request rate-limiting could also prevent DoS regardless of the fee-based replacement policies. One point that needs clarification is whether it is okay to prioritize transactions by ancestor feerate in this scheme since it can be quite different from the actual feerate considered for a transaction in a block. The transaction could have a high feerate sibling bumping its ancestor, which makes it ugly. It's something of a special case, but it could be resolved by tracking the "effective fee rate" smarter than the ancestor fee rate manages. This same work could also make it possible to come up with a better answer to "do I care that this replacement would invalidate these descendents?"Regarding wallets, it is best to have the mempool acceptance rule only consider economic incentives, and the spam prevention only be about "shall I tell my peers about this?" If there is no split, then the anti-spam rules can prevent getting the tx in the mempool at all. However, if there is a split, even if the bitcoind anti-spam rules are blocking you at every turn, it is still possible to send your tx to miners through other routes, and they can add it to their mempool directly without hassle.</summary>
+    <published>2022-02-08T04:58:50+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Base AMP</title>
+  <updated>2023-05-25T16:30:54.125163+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-11-13 22:39:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Base AMP</title>
+    <updated>2023-05-25T16:30:54.125163+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001584.html" rel="alternate"/>
+    <summary>The email thread between Johan and ZmnSCPxj discusses the concept of merge nodes, which wait for the entire payment to be available and committed to as HTLCs before making claims. They assume that proof-of-payment is valuable and if the ultimate payee has not received all payments, it would be irrational to claim a partial payment since it would release the proof-of-payment for a value less than the value implied by the invoice. Similarly, intermediate nodes should forward a value only if it's greater than the current total value merging into it and it has assurances it can claim all values in a commitment transaction. This atomicity is economically rational and not information theoretically atomicity. Johan suggests renaming non-atomic payments and ZmnSCPxj proposes a `multipath_merge_per_hop` type to support Base AMP, allowing arbitrary merges of paths but not arbitrary splits, which may not be safe. The proposal defines the contents of the hop and specifies that the receiver must impose a reasonable timeout for waiting to receive all component paths and fail all incoming HTLC offers for the payment hash if they have not totaled equal to intended_total_payment. The sender must use the same payment_hash for all paths of a single multipath payment.</summary>
+    <published>2018-11-13T22:39:05+00:00</published>
+  </entry>
+</feed>

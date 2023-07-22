@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Selling timestamps (via payment points and scalars + Pedersen commitments ) [try2]</title>
+  <updated>2023-05-23T02:13:38.399819+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-09-25 09:43:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Selling timestamps (via payment points and scalars + Pedersen commitments ) [try2]</title>
+    <updated>2023-05-23T02:13:38.399819+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-September/002167.html" rel="alternate"/>
+    <summary>The email thread discusses a way to timestamp messages without relying on free services or paying high fees. The solution proposed is to buy a place in a merkle tree "risk-free". The process involves sending the hash of the message to the timestamping server that calculates Pedersen commit, hashes it, builds a merkle tree with other commits and publishes a valid transaction containing the merkle root to the Bitcoin blockchain. After a certain number of block confirmations and with the given proof, it can be confirmed that the commitment C is indeed part of the Bitcoin blockchain. A lightning payment must be sent with C - x*H = r*G as the payment point to the timestamping server and as a proof of payment, the server must reveal r to receive the money.The model suggested for the timestamping service involves fixed and floating users, where fixed users pay a subscription fee, which covers the costs and get placed relatively high in the merkle tree, while the floating users are placed low in the merkle tree and are basically free money. The merkle tree has 2**N-1 fixed slots, all at height N, then 2**K floating slots, all at height N+K. It is suggested that some up-front fee should be charged to prevent people from spamming with things to timestamp that they're never going to pay for. It is suggested that since it's off-chain, R and C can also be provided with a zero-knowledge proof that one knows an r such that R = SHA256(r) and C = SHA256(x || r). This can be done with lightning as it exists today.</summary>
+    <published>2019-09-25T09:43:12+00:00</published>
+  </entry>
+</feed>

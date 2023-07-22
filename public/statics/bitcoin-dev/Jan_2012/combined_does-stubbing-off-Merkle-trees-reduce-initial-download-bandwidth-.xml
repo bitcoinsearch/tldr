@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - does "stubbing" off Merkle trees reduce initial download bandwidth?</title>
+  <updated>2023-06-05T01:40:52.831050+00:00</updated>
+  <author>
+    <name>Elden Tyrell 2012-01-02 05:04:03</name>
+  </author>
+  <author>
+    <name>Christian Decker 2012-01-02 13:31:19</name>
+  </author>
+  <author>
+    <name>Elden Tyrell 2012-01-03 01:39:09</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2012-01-05 23:30:16</name>
+  </author>
+  <author>
+    <name>Elden Tyrell 2012-01-02 22:23:16</name>
+  </author>
+  <author>
+    <name>Elden Tyrell 2012-01-02 05:04:03</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2012-01-02 22:41:10</name>
+  </author>
+  <author>
+    <name>Elden Tyrell 2012-01-03 01:39:09</name>
+  </author>
+  <author>
+    <name>Elden Tyrell 2012-01-02 05:04:03</name>
+  </author>
+  <author>
+    <name>Christian Decker 2012-01-02 13:31:19</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2012-01-02 22:41:10</name>
+  </author>
+  <author>
+    <name>Elden Tyrell 2012-01-03 01:39:09</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2012-01-02 22:41:10</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2012-01-05 23:30:16</name>
+  </author>
+  <author>
+    <name>Christian Decker 2012-01-02 13:31:19</name>
+  </author>
+  <author>
+    <name>Elden Tyrell 2012-01-02 22:23:16</name>
+  </author>
+  <author>
+    <name>Elden Tyrell 2012-01-02 22:23:16</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2012-01-05 23:30:16</name>
+  </author>
+  <link href="bitcoin-dev/Jan_2012/001018_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001019_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001028_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001030_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001026_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001018_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001027_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001028_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001018_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001019_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001027_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001028_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001027_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001030_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001019_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001026_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001026_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001030_does-stubbing-off-Merkle-trees-reduce-initial-download-bandwidth-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - does "stubbing" off Merkle trees reduce initial download bandwidth?</title>
+    <updated>2023-06-05T01:40:52.831050+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-January/001018.html" rel="alternate"/>
+    <summary>This context touches upon two topics, transaction pruning and simplified payment verification (SPV) mode. Transaction pruning or 'stubbing' helps save disk space without affecting initial chain download bandwidth or time. On the other hand, SPV clients can only download chain headers with no bodies, which reduces initial setup time, but this method is still linear in Bitcoin's life length and requires a regular series of checkpoints signed by a trusted developer and a circular block store for truly bounded overheads. The merkle tree is useful because it allows SPV clients to receive only transactions of interest while having almost the same assurances as downloading full blocks. Contrary to popular belief, SPV clients do not use "number of blocks on top" to decide validity. They look for the best chain available. However, if an SPV node has access to the P2P network and is also talking to you, you can defraud it for as long as you can dominate the network's hash power (51% attack). But your invalid blocks won't be accepted by the rest of the network, regardless of how many there are or how much work they represent. As soon as you stop dominating the network, the correct chain will catch up and replace yours, resulting in the fraud being detected and shown to the SPV user.The conversation between Christian Decker and another individual covered the fact that full blocks would be necessary to detect usable inputs for future outgoing transactions. A paranoid client would need an unstubbed copy of the entire blockchain to confirm receipt of coins, as incoming coins may have already been spent. Although a stubbed chain can still be used for other actions such as sending coins, confirmation of receipt requires the full unstubbed chain.Finally, Satoshi's paper mentions that storage requirements for the blockchain can be reduced by deleting transactions whose outputs have been spent. However, this technique can only reduce storage requirements and not the bandwidth required for the initial chain download by a high-security client who doesn't trust any of its peers.</summary>
+    <published>2012-01-02T05:04:03+00:00</published>
+  </entry>
+</feed>

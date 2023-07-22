@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>SIGHASH_SINGLE + update_fee Considered Harmful</title>
+  <updated>2023-06-03T02:07:36.939313+00:00</updated>
+  <author>
+    <name>Antoine Riard 2020-09-13 23:28:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>SIGHASH_SINGLE + update_fee Considered Harmful</title>
+    <updated>2023-06-03T02:07:36.939313+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-September/002799.html" rel="alternate"/>
+    <summary>The Lightning Network has a vulnerability that allows an attacker to steal funds from other users. This vulnerability is related to the recent anchor output spec update and the new usage of SIGHASH_SINGLE for HTLC transactions. The vulnerability allows a malicious party to inflate fees committed on HTLC input/output pairs and redirect this inflated fee to a single-controlled output attached to these malleable pairs. This vulnerability can be mitigated by setting proper values for max allowed htlcs, max in flight, reserve, etc. Nodes are able to quantify this fee leak risk ahead of time and set reasonable parameters based on their security model. However, one issue is that these values are set in stone when the channel is opened.To mitigate the vulnerability, it is suggested to get rid of `update_fee` for HTLC-txn only and keep it for the commitment transaction for now. It is also critical that nodes are able to update the fees on their second-level HTLC transactions. If nodes aren't able to get 2nd level HTLCs in the chain in time, then the incoming HTLC expiry will expire, creating a race condition across both commitments which can potentially cascade.Furthermore, limitations such as channel policies, `max_accepted_htlcs`, `max_htlc_value_in_flight`, `channel_reserve`, and acceptance bound of `update_fee` can be exploited to escape a substantial part of the channel value. To counteract this vulnerability, channel policies could be tightened, such as bounding further down `max_accepted_htlcs` or restraining acceptance of `update_fee`. Justice transactions can adopt a scorched earth approach binding their feerate to the max to increase odds of winning the feerate race and thus deter attackers. However, this introduces a griefing attack vector where a counterparty can burn more of the lawful balance in fees than you'll punish its revoked balance. A workable option would be to patch current anchor spec to remove `feerate_per_kw` appliance on 2nd-stage transactions, maybe just committing a minimal relay fee. Overall, the chance of attack success sounds high if the anchor output is deployed.</summary>
+    <published>2020-09-13T23:28:51+00:00</published>
+  </entry>
+</feed>

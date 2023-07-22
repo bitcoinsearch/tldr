@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Should Graftroot be optional?</title>
+  <updated>2023-05-20T16:23:09.328851+00:00</updated>
+  <author>
+    <name>Johnson Lau 2018-05-25 10:14:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Should Graftroot be optional?</title>
+    <updated>2023-05-20T16:23:09.328851+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/016028.html" rel="alternate"/>
+    <summary>The bitcoin developers are discussing the possibility of introducing graftroot-like delegation to all existing and new P2PK and P2PKH UTXOs with a soft fork. They would define SIGHASH_GRAFTROOT = 0x40, and apply new rules if (nHashType &amp; SIGHASH_GRAFTROOT). The third stack item must be at least 64 bytes, with 32-byte R and 32-byte S followed by a script of arbitrary size, and it must be a valid signature for the script with the original public key. The remaining stack items must solve the script. This could be extended to arbitrary output types, but it might be too complicated to describe in detail. They cannot do this in P2WPKH and P2WSH due to the implicit CLEANSTACK rules, but they can introduce another witness structure (which is invisible to current nodes) and store the extra graftroot signatures and scripts. A graftroot design like this is a strict subset of existing signature checking rules. If this is dangerous, the existing signature checking rules must also be dangerous. There is no problem with blind signature, since the first signature will always sign the outpoint, with or without ANYONECANPAY. Any potential problem can be fixed by a proper rules design. The developers believe there is no reason to make graftroot optional, at the expense of block space and/or reduced privacy.</summary>
+    <published>2018-05-25T10:14:48+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 174 thoughts</title>
+  <updated>2023-05-20T17:05:14.960601+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2018-06-19 17:16:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 174 thoughts</title>
+    <updated>2023-05-20T17:05:14.960601+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-June/016134.html" rel="alternate"/>
+    <summary>The email thread from Bitcoin-dev focuses on the Partially Signed Bitcoin Transaction (PSBT) standard, which is used for offline signing of Bitcoin transactions. The discussion covers various aspects of the PSBT structure, including global and per-input items such as BIP-32 paths, redeem scripts, and witness scripts. The discussion also touches upon the ambiguity of the sighash type and the skipping of records with unknown types. One topic of discussion is whether the PSBT standard should prioritize space conservation over clarity and ease of use. Suggestions are made to simplify signers and avoid duplication in the case of key reuse by making the PSBT format a transaction plus per-input and per-output extra fields. Another suggestion is to introduce a flag to define if a record is optional in case a signer encounters an unrecognized record.To manage the data needed for signing a transaction, separate scopes are needed as some information is global while others are per-input. This can be achieved through a global scope for the transaction itself and everything else per-input and per-output. The email suggests using varint for the field, allowing the creation of namespaces for future extensions by using one byte as a namespace identifier and one as a field identifier.The email also discusses the unique transaction record, which can either be added as an exception or encoded separately outside the normal records to make it clear that it is always required. One suggestion is to encode the full public key and chaincode of the parent/master instead of just the 32-bit fingerprint or master xpub. This change permits signers to have thousands of master keys, index their master keys by whatever they like, and protect a single private key.</summary>
+    <published>2018-06-19T17:16:51+00:00</published>
+  </entry>
+</feed>

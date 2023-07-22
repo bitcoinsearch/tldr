@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Announcement: libcoin</title>
+  <updated>2023-06-05T02:30:43.894219+00:00</updated>
+  <author>
+    <name>Michael Grønager 2012-02-02 08:32:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Announcement: libcoin</title>
+    <updated>2023-06-05T02:30:43.894219+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-February/001177.html" rel="alternate"/>
+    <summary>The email conversation between two individuals discusses the possibility of splitting the Bitcoin project into a library with a prototype client and actual clients. The implementation of libcoin is suggested to facilitate this requirement. With libcoin, several wallets can be integrated into a single application, and several RPC servers can be deployed. The RPC server in libcoin is found to be faster than the Satoshi client as all the query methods access the blockchain as a constant object without interrupting the work of the Node thread. The SendTo methods are an exception and follow the process of querying if a transaction can occur, pushing it to the work-queue of the Node thread, and then exiting immediately. A code for a simple one node, two wallet libcoin client is provided as an example. The extra wallet can be accessed using the RPC interface. The code attached to the email includes derived classes to get other class names, i.e., ExtraGetBalance, and ExtraSendToAddress. The main function consists of the default chain bitcoin, adding the wallet and extra_wallet, running it as a background thread, registering server methods, registering node methods, and registering wallet methods. The absence of auth requires anyone on localhost to read the balance. The suggestion of completely separating wallet operations from background chain operations is made. This separation would have a chain daemon performing its functions, updating, verifying, etc., a generator doing its job, and a wallet app that can independently manage separate wallets in parallel referencing the live chain files as required. However, presently, only one wallet can be dealt with at a time while running bitcoind. When the chain is being processed hard by the daemon cpuwise, bitcoin RPC takes minutes to respond, if ever or errors out. If wallet operations or statistical queries on the chain require integrity or reading, a db checkpoint/lock/logroll could be implemented into the chain demon processes with a client lib api to trigger it.</summary>
+    <published>2012-02-02T08:32:24+00:00</published>
+  </entry>
+</feed>

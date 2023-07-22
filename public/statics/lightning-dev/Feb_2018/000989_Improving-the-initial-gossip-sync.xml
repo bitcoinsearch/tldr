@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving the initial gossip sync</title>
+  <updated>2023-05-24T20:38:08.789271+00:00</updated>
+  <author>
+    <name>Christian Decker 2018-02-05 13:02:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving the initial gossip sync</title>
+    <updated>2023-05-24T20:38:08.789271+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/000989.html" rel="alternate"/>
+    <summary>The author of the message explains that initially, they decided to postpone topology synchronization until they have a better understanding of the expected network loads. Instead, they implemented a trivial gossip protocol for distributing topology updates. During the last call, the team decided to opt for an incremental improvement rather than a full synchronization mechanism. The author proposes adding a new feature bit (6) to indicate that the init message is extended with a u32 gossip_timestamp interpreted as a UNIX timestamp. The gossip_timestamp is the lowest channel_update and node_announcement timestamp the recipient is supposed to send, any older update or announcement is to be skipped. The logic to forward announcements follows this outline: set gossip_timestamp for this peer. Iterate through all channel_updates that have a newer timestamp than the gossip_timestamp skipping replaced ones per BOLT 07. For each channel_update, fetch the corresponding channel_announcement and endpoints node_announcement. Forward the messages in the correct order, i.e., channel_announcement, then channel_update, and then node_announcement. The feature bit is even, meaning that it is required from the peer. A peer that does not support this feature would be unable to parse future extensions to the init message.Alternatively, a new set_gossip_timestamp message could be created but that may cause duplicate messages to be delivered between the init and set_gossip_timestamp message and require additional messages. Gossip_timestamp is flexible, allowing the sender to specify its most recent update if it believes it is completely caught up or send a slightly older timestamp to have some overlap for currently broadcasting updates. The reason for using timestamp instead of blockheight in the short channel ID is that timestamp is already used for pruning. In blockheight-based timestamp, channels that were created, not announced, forgotten, and later came back may be ignored.The proposal is meant to fix the short-term issues faced during the initial sync while waiting for a real sync protocol. It is not meant to allow perfect synchronization of the topology between peers. The author invites feedback on the proposal and also expresses interest in discussing Pierre's proposal.</summary>
+    <published>2018-02-05T13:02:38+00:00</published>
+  </entry>
+</feed>

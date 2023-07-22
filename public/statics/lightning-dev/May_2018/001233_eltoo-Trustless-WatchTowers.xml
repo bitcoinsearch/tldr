@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>eltoo Trustless WatchTowers</title>
+  <updated>2023-05-25T00:54:57.467675+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-05-02 10:43:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>eltoo Trustless WatchTowers</title>
+    <updated>2023-05-25T00:54:57.467675+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-May/001233.html" rel="alternate"/>
+    <summary>ZmnSCPxj proposed a half-baked idea for encrypted-blob, slightly-blinded Decker-Russell-Osuntokun WatchTowers. He observed that update transactions in Decker-Russell-Osuntokun channels have no txid that can be used as key for the encrypted blob. One thing he suggested is to use the trigger transaction, which has a stable txid since its sole input is an ordinary 2-of-2 that is signed with normal `SIGHASH_ALL`. However, this has the drawback that each update of a single channel generates a `(txid[:16], blob)` pair that has the same `txid[:16]` key, letting the WatchTower correlate the timing and number of updates of each of your channels. ZmnSCPxj then proposed to generalize WatchTowers pairs to `(hash[:16], blob)`, where `hash` is the message that is signed in the witness program, not just the `txid`. The same framework can be used for Poon-Dryja and Decker-Russell-Osuntokun WatchTowers. The main loop of the WatchTower (which can watch either Poon-Dryja or Decker-Russell-Osuntokun channels) is now something like: When a block comes in, verify each transaction. If during signature validation, we match the hash of the message being signed to a watched blob `hash[:16]`, we decrypt the blob and proceed to justice depending on the type of the decrypted blob. The above retains the decorrelation property (the WatchTower, given two `(hash[:16], blob)` pairs, cannot know if the two pairs refer to the same channel, or different channels), but only up to a theft attempt.If a theft attempt occurs, then the WatchTower can now correlate the blobs (it might have kept records of when the blobs were given to it, and the decrypted blobs certainly give it history of how much money was allocated to both sides of the channel at that time) to a specific channel. The proposal also requires quite a bit of grinding on the WatchTower, as it has to generate a large number (possibly up to a billion) of possible future update transactions.</summary>
+    <published>2018-05-02T10:43:22+00:00</published>
+  </entry>
+</feed>

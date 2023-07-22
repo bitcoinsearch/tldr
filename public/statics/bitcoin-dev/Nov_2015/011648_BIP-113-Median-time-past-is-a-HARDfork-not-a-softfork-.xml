@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 113: Median time-past is a HARDfork, not a softfork!</title>
+  <updated>2023-06-11T00:50:28.784088+00:00</updated>
+  <author>
+    <name>jl2012 at xbt.hk 2015-11-02 04:27:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 113: Median time-past is a HARDfork, not a softfork!</title>
+    <updated>2023-06-11T00:50:28.784088+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-November/011648.html" rel="alternate"/>
+    <summary>The current consensus rule for including a transaction in a block states that the locktime of the transaction must be smaller than the timestamp of the block. However, BIP113 proposes a new rule whereby a transaction can only be included in a block if its locktime is smaller than the median-time-past. The median-time-past is the median timestamp of the past 11 blocks. It is already a consensus rule that the timestamp of a block must be greater than the median-time-past. Therefore, the new BIP makes transactions valid which were previously invalid. This constitutes a hardfork, as any transaction with a locktime between the median-time-past and the block nTime will now be valid.Bitcoin Core recently merged #6566, which added BIP113 logic to the mempool and block creation process. However, this may produce invalid blocks, which should be caught by CNB's safety TestBlockValidity call. Rusty suggested adding N hours to the median-time-past for comparison, and max()'d with the block nTime for it to be a proper hardfork. Alternatively, it may be best to hold off on deploying BIP113 until a hardfork is implemented in the future.In conclusion, there are concerns about the implementation of BIP113, as it introduces a new consensus rule and constitutes a hardfork. Bitcoin Core has already merged this logic, but invalid blocks may result. Further discussion and input is required before a solution can be determined.</summary>
+    <published>2015-11-02T04:27:50+00:00</published>
+  </entry>
+</feed>

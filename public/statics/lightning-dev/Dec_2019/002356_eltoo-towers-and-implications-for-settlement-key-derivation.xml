@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>eltoo towers and implications for settlement key derivation</title>
+  <updated>2023-06-02T21:54:14.296039+00:00</updated>
+  <author>
+    <name>Rusty Russell 2019-12-02 23:53:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>eltoo towers and implications for settlement key derivation</title>
+    <updated>2023-06-02T21:54:14.296039+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-December/002356.html" rel="alternate"/>
+    <summary>Conner Fromknecht revisited the eltoo paper and noticed something related to watchtowers that could affect channel construction. Due to NOINPUT, any update transaction can spend from any other, so the tower only needs the most recent update txn to resolve any dispute. However, in order to spend, the tower must also produce a witness script which when hashed matches the witness program of the input. To ensure settlement txns can only spend from exactly one update txn, each update txn uses unique keys for the settlement clause, meaning that each state has a unique witness program. Rusty, however, did not think this was the design. The update transaction can spend any prior, with a fixed script, due to NOINPUT. The settlement transaction does not use NOINPUT, and thus can only spend the matching update.</summary>
+    <published>2019-12-02T23:53:01+00:00</published>
+  </entry>
+</feed>

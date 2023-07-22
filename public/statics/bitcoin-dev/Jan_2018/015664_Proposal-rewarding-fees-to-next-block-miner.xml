@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: rewarding fees to next block miner</title>
+  <updated>2023-05-20T05:06:07.417391+00:00</updated>
+  <author>
+    <name>Nathan Parker 2018-01-27 08:45:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: rewarding fees to next block miner</title>
+    <updated>2023-05-20T05:06:07.417391+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-January/015664.html" rel="alternate"/>
+    <summary>Miners can currently fill their blocks with high-paying transactions at no cost because they receive the fees back to themselves. However, this practice could potentially increase the recommended fee. A proposed solution is to reward the fees of the current block to the miner of the next block or X blocks after the current one. This way, if a miner floods its own block with very high fee transactions, those fees are no longer given back to itself but to the miner of future blocks. Flooding blocks with fake transactions is discouraged, but filling blocks with real transactions paying real fees is still encouraged. The implementation of this solution would require a soft-fork and would enforce miners to set an anyone-can-spend output in the coinbase transaction of the block. The miner of 100 blocks after the current one can add a secondary transaction spending this block's anyone-can-spend coinbase transaction and thus claim the funds. Therefore, the block reward of a block X is always transferred to the miner of block X+100. Although this approach discourages flooding blocks with fake transactions, it encourages filling blocks with real transactions, as the miner who mines the block that claims the reward would receive all the fees.One possible downside of implementing this solution is that when the fork is activated, miners won't get any rewards for mining blocks for a period of 100 blocks. They could choose to power off the mining equipment temporarily, which could result in a drop in hashrate. If the hashrate drops too much, blocks would take much longer to mine, and miners wouldn't want that either since they want to go through those 100 reward-less blocks as soon as possible so they can start getting rewards from mining again.</summary>
+    <published>2018-01-27T08:45:10+00:00</published>
+  </entry>
+</feed>

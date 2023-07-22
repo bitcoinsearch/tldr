@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - A small tweak to TLUV to enable off-chain cancellation of payment pool transactions</title>
+  <updated>2023-06-15T20:48:26.735864+00:00</updated>
+  <author>
+    <name>Antoine Riard 2022-05-16 00:01:29</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2022-05-16 00:01:29</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2022-05-16 00:01:29</name>
+  </author>
+  <link href="bitcoin-dev/May_2022/020488_A-small-tweak-to-TLUV-to-enable-off-chain-cancellation-of-payment-pool-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020488_A-small-tweak-to-TLUV-to-enable-off-chain-cancellation-of-payment-pool-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020488_A-small-tweak-to-TLUV-to-enable-off-chain-cancellation-of-payment-pool-transactions.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - A small tweak to TLUV to enable off-chain cancellation of payment pool transactions</title>
+    <updated>2023-06-15T20:48:26.735864+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020488.html" rel="alternate"/>
+    <summary>The proposed modification to TLUV aims to enable the cancellation of off-chain transactions among a set of pool participants. The Withdraw phase occurs when a participant publishes an Update transaction and their own Withdraw transaction, freeing their balance from the pool control. Any participant can publish a Withdraw transaction or the consensus of remaining participants can agree to stay in the pool by canceling non-published Withdraw transactions with a Snapshot one spending the pool output. A group signature spending any non-published Withdraw transaction `pool_output` and `balance_output` would be produced to cancel the non-published transactions. The SIGHASH_ANYPREVOUTANYSCRIPT semantic could be used to attach the re-lifting Update transaction on any Withdraw transaction even if user balances are not equal. To enable rebinding on multiple canceled Withdraw transactions, SIGHASH_ANYONECANPAY could be used. However, the group producing the signature to spend any canceled output should reflect the new set of pool participants after the withdrawals have been played out. Any withdrawing user should have been removed, as there is no interest anymore to contribute to the signature. The group of signers should be constrained leveraging some covenant mechanism. TLUV semantics could achieve this by adding an output index to target the second output. Currently, a Withdraw transaction `balance_output` is only the owner pubkey. The update internal pubkey should also be inherited there to make the output cancellable. The owner withdrawing capability could be moved as a timelock + a key inside a tapscript. The new tapscript would duplicate TLUV with an output index to constrain the spending transactions both outputs and therefore make them cancellable. This modification of TLUV may serve other use-cases beyond the payment pool one.</summary>
+    <published>2022-05-16T00:01:29+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Disclosure of a fee blackmail attack that can make a victim loose almost all funds of a non Wumbo channel and potential fixes</title>
+  <updated>2023-06-03T01:42:11.371715+00:00</updated>
+  <author>
+    <name>Jeremy 2020-06-22 19:18:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Disclosure of a fee blackmail attack that can make a victim loose almost all funds of a non Wumbo channel and potential fixes</title>
+    <updated>2023-06-03T01:42:11.371715+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-June/002756.html" rel="alternate"/>
+    <summary>The Lightning Network is a protocol that allows for faster and cheaper Bitcoin transactions, but it has faced vulnerabilities. One vulnerability is a blackmail attack which relies on update_fee mechanism and unbounded commitment transaction size inflation. To mitigate this issue, one solution would be to cap commitment size to ensure competitive propagation/block selection and limit HTLC exposure. Another solution is BIP-119 Congestion Control trees to bucket a tree by doing a histogram of HTLC size so that all small HTLCs live in a common CTV subtree and don't interfere with higher value HTLCs. Additionally, there could be a layer of indirection added to how HTLCs are manifested within the commitment transactions to further mitigate costs. This technique, called "coupe commitments," adds a new 2-of-2 multi-sig output (an HTLC indirect block) to the commitment transactions, which is then spent by a new transaction (the HTLC block) that actually manifests the HTLC outputs. The cost to have a commitment mined in the chain is now independent of the number of HTLCs in the channel. CTV can make this technique more efficient as it allows one to succinctly commit to all the relevant desirable combinations of HTLC indirect blocks, and HTLC fan-out transactions. Other flavors of this technique are possible as well, allowing both sides to craft varying HTLC indirection trees (double layers of indirection are possible, etc) which may factor in traits like HTLC expiration time (HTLCs that expire later are further down in the tree). However, using multisig layers to emulate everything else can add substantial latency in doing either 2pECDSA for each layer or on-chain &amp; storage overhead in the signature space. Deterministic and compact CTV helps mitigate these issues.</summary>
+    <published>2020-06-22T19:18:08+00:00</published>
+  </entry>
+</feed>

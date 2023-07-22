@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Selling Signatures: Another Reason to Move to Payment Points</title>
+  <updated>2023-06-02T19:31:32.884585+00:00</updated>
+  <author>
+    <name>Nadav Kohen 2019-07-17 16:56:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Selling Signatures: Another Reason to Move to Payment Points</title>
+    <updated>2023-06-02T19:31:32.884585+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-July/002079.html" rel="alternate"/>
+    <summary>Nadav Kohen proposed a scheme for a trusted data provider to sell data through the Lightning Network where data is received atomically with purchase. However, Nadav has been thinking about situations where an untrusted party attempts to sell its signature to a known message, such as in offering a DLC-like Option contract where they are collateralizing themselves in a funding transaction and then selling their signatures to Contract Execution Transactions (CETs). In this example, it is necessary to ensure that the buyer of the signatures pays only if they receive valid signatures for the CETs which are known. Nadav believes that this can be achieved by using ZmnSCPxj's proposed payment points with scalars. The (Schnorr) signature seller could give the buyer their one-time public key, `R = k*G`, through which the buyer could compute the payment point whose scalar is the seller's signature: `sig*G = R + h(m, R)*A` where `A` is the seller's public key. Using this value as the payment point, the buyer could be assured that they pay only if they receive `sig` from the seller, where `sig` is the desired valid signature of `m`. Lloyd Fournier expressed interest in the idea but raised concerns about the downside of the proposal, which involves the seller knowing which signature they're selling and therefore learns what kind of contract the buyer must be involved in. Nadav addressed this concern by proposing a more decentralized setup with normal DLC oracles that can be used for all kinds of things as all they do is schnorr sign messages with pre-committed R values, while having the CETs be 3-of-3 multisig outputs.</summary>
+    <published>2019-07-17T16:56:05+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PubRef - Script OP Code For Public Data References</title>
+  <updated>2023-06-13T20:09:01.625541+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-07-29 02:49:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PubRef - Script OP Code For Public Data References</title>
+    <updated>2023-06-13T20:09:01.625541+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-July/017183.html" rel="alternate"/>
+    <summary>In a conversation between Mike and ZmnSCPxj, it was discussed that the use of `OP_PUBREF` on blockchain may affect other applications built on the same. However, the current applications can rebroadcast the transactions they are spending and get those reconfirmed again, thus minimizing the risk of double-spending. The value being put in a `scriptPubKey` that uses `OP_PUBREF` may justify the cost of history rewrites if it is large enough. They suggested using 100 as "deep enough" to risk allowing miners to sell their coins. Lightning uses a "short channel ID" which is not affected even in case of short-ranged history rewrites. The conversation also highlighted that there is a potential for a targeted attack where a large payout going to a `scriptPubKey` that uses `OP_PUBREF` on a recently-confirmed transaction finds that recently-confirmed transaction is replaced with one that pays to a different public key, via a history-rewrite attack. Thus, the SCRIPT validity must be re-evaluated every time there is a chain tip reorganization unless "only allow `OP_PUBREF` to data that is more than 100 blocks confirmed." Mike found the arbitrary '100' to be unsatisfying and suggested testing it on the testnet. ZmnSCPxj agreed that the details need to be considered during implementation, and implementation details may leak in the effective spec. Pruning could be a real asset for PubRef as it would allow validators to safely skip over it if all transactions for a wallet have been pruned. However, the problem with transaction being pruned is that the data in them might now be used in a *future* `OP_PUBREF`.</summary>
+    <published>2019-07-29T02:49:04+00:00</published>
+  </entry>
+</feed>

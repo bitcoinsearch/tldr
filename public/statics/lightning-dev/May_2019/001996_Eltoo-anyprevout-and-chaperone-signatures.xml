@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Eltoo, anyprevout and chaperone signatures</title>
+  <updated>2023-05-23T02:04:02.705797+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-05-16 15:37:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Eltoo, anyprevout and chaperone signatures</title>
+    <updated>2023-05-23T02:04:02.705797+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-May/001996.html" rel="alternate"/>
+    <summary>In a discussion on the Bitcoin-dev mailing list, members were discussing the use of the collaborative path in Taproot. Christian Decker expressed concern that the collaborative path cannot be used with update_tx, as it needs to be signed with noinput and there is no way to specify the chaperone key since the committed script is not revealed. While Bastien Teinturier stated that he would look into previous discussions on the matter, the conversation also turned towards potential optimizations unlocked by taproot/tapscript.The topic then shifted to a series of eltoo scripts that were passed around privately for discussion. The scripts described an eltoo update transaction (UPDATE TX n), settlement transaction (SETTLEMENT TX n), and HTLC claim/refund transactions that utilized muSig. Each UPDATE TX involved revealing a 33-byte control block, 43-byte redeem script, 65-byte ANYPREVOUT signature, and 64-byte sighash all signature, which totaled to an extra 143 weight units or 35.75 virtual bytes compared to a 65-byte key path spend.The proposed UPDATE TX script was roughly "IF 2 Asi Bsi ELSE CLTV DROP 2 Au Bu ENDIF 2 OP_CHECKMULTISIG", which was estimated to be about 282 WU total or an extra 216 WU/54 vbytes over a 65 byte key path spend. The discussion also included a potential alternative approach that used SIGHASH_ALL key path spends for the common unilateral case where only a single UPDATE TX was published, but this required generating additional signatures.The conversation touched on various aspects of the proposed scripts, including combining multiple UPDATE TXs and SETTLEMENT TXs, adding fees, and calculating the private key using ECDH between peers to generate the seed. Overall, the scripts were considered more "thought bubble" than draft at the time of discussion.</summary>
+    <published>2019-05-16T15:37:48+00:00</published>
+  </entry>
+</feed>
