@@ -1,16 +1,33 @@
-import { convertXmlToText, fetchGithub } from "@/helpers/github";
-import * as fs from "fs"
-import FakeData from "../../data.json"
-import Image from "next/image";
+import { indexAndSearch } from "../helpers/search-data";
+import FakeData from "../../data.json";
 import Homepage from "@/components/client/homepage";
+import { SearchDataParams } from "@/helpers/types";
 
-export type FakeDataType = typeof FakeData
+export type FakeDataType = typeof FakeData;
+
+async function getSearchData({ path, query }: SearchDataParams) {
+  const directory = `public/statics${path ? "/" + path : "/"}`;
+  const data = await indexAndSearch(directory, query);
+  if (data) {
+    return data;
+  } else {
+    throw new Error("No data found");
+  }
+}
 
 export default async function Home() {
+  const data = FakeData;
+  const response = await getSearchData({
+    path: "bitcoin-dev",
+    query: {
+      author: "Jeremy",
+      keyword: "legal defense",
+    },
+  });
+  if (response instanceof Error) {
+    console.error(response);
+  }
+  console.log(response);
 
-  const data = FakeData
-
-  return (
-    <Homepage data={data} />
-  );
+  return <Homepage data={data} />;
 }
