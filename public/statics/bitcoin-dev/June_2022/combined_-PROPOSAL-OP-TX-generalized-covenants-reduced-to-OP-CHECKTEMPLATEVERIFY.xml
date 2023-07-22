@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - [PROPOSAL] OP_TX: generalized covenants reduced to OP_CHECKTEMPLATEVERIFY</title>
+  <updated>2023-06-15T20:43:08.938430+00:00</updated>
+  <author>
+    <name>Anthony Towns 2022-06-24 06:06:05</name>
+  </author>
+  <author>
+    <name>Jeremy Rubin 2022-06-24 18:05:50</name>
+  </author>
+  <author>
+    <name>Alex Schoof 2022-05-11 23:32:34</name>
+  </author>
+  <author>
+    <name>Alex Schoof 2022-05-11 23:32:34</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2022-05-10 10:35:54</name>
+  </author>
+  <author>
+    <name>Brandon Black 2022-05-10 15:16:10</name>
+  </author>
+  <author>
+    <name>Brandon Black 2022-05-10 15:16:10</name>
+  </author>
+  <author>
+    <name>Jeremy Rubin 2022-06-24 18:05:50</name>
+  </author>
+  <author>
+    <name>Alex Schoof 2022-05-11 23:32:34</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2022-05-10 10:35:54</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2022-06-24 06:06:05</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2022-05-10 10:35:54</name>
+  </author>
+  <author>
+    <name>Brandon Black 2022-05-10 15:16:10</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2022-06-24 06:06:05</name>
+  </author>
+  <author>
+    <name>Jeremy Rubin 2022-06-24 18:05:50</name>
+  </author>
+  <link href="bitcoin-dev/June_2022/020599_-PROPOSAL-OP-TX-generalized-covenants-reduced-to-OP-CHECKTEMPLATEVERIFY.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2022/020600_-PROPOSAL-OP-TX-generalized-covenants-reduced-to-OP-CHECKTEMPLATEVERIFY.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020470_-PROPOSAL-OP-TX-generalized-covenants-reduced-to-OP-CHECKTEMPLATEVERIFY.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020470_-PROPOSAL-OP-TX-generalized-covenants-reduced-to-OP-CHECKTEMPLATEVERIFY.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020450_-PROPOSAL-OP-TX-generalized-covenants-reduced-to-OP-CHECKTEMPLATEVERIFY.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020454_-PROPOSAL-OP-TX-generalized-covenants-reduced-to-OP-CHECKTEMPLATEVERIFY.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020454_-PROPOSAL-OP-TX-generalized-covenants-reduced-to-OP-CHECKTEMPLATEVERIFY.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2022/020600_-PROPOSAL-OP-TX-generalized-covenants-reduced-to-OP-CHECKTEMPLATEVERIFY.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020470_-PROPOSAL-OP-TX-generalized-covenants-reduced-to-OP-CHECKTEMPLATEVERIFY.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020450_-PROPOSAL-OP-TX-generalized-covenants-reduced-to-OP-CHECKTEMPLATEVERIFY.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2022/020599_-PROPOSAL-OP-TX-generalized-covenants-reduced-to-OP-CHECKTEMPLATEVERIFY.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020450_-PROPOSAL-OP-TX-generalized-covenants-reduced-to-OP-CHECKTEMPLATEVERIFY.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2022/020454_-PROPOSAL-OP-TX-generalized-covenants-reduced-to-OP-CHECKTEMPLATEVERIFY.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2022/020599_-PROPOSAL-OP-TX-generalized-covenants-reduced-to-OP-CHECKTEMPLATEVERIFY.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2022/020600_-PROPOSAL-OP-TX-generalized-covenants-reduced-to-OP-CHECKTEMPLATEVERIFY.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - [PROPOSAL] OP_TX: generalized covenants reduced to OP_CHECKTEMPLATEVERIFY</title>
+    <updated>2023-06-15T20:43:08.938430+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-June/020599.html" rel="alternate"/>
+    <summary>A proposal has been made for a v1 tapscript opcode that would allow for generic covenants to be added to the Bitcoin network. The proposed soft fork involves OP_TX, followed by 4 bytes of flags. Only certain flag combinations have to be defined for this soft fork, while others can have semantics later. The lack of OP_CAT has been sidestepped by using the first bit, while the latter bit allows for OP_TXHASH semantics and avoiding stack element limits. The proposal provides an enumeration of what can be committed to, making it clear what is not committed. The bits separating concatenation and hashing provide a simple mechanism for commitments or individual elements' programmatic treatment. The OP_SUCCESS semantic is only valid in tapscript v1, which means that this does not allow covenants for v0 segwit or pre-segwit inputs.Rusty Russell proposed OPTX_SEPARATELY and OPTX_UNHASHED fields, which can be treated separately instead of concatenating and pushed on the stack without hashing, respectively. However, both approaches seem less efficient than using a merkle path. It is also difficult to prove that the output is being taken in its entirety, which raises concerns related to upgradability if additional features like CAT or TLUV are added. Both OP_TX and CTV are trying to take upgradability into account in advance.In a discussion on the bitcoin-dev mailing list, the topic of using a merkle tree for Commitment Transaction Verification (CTV) was brought up. While a merkle tree could be superior from an API perspective, the main reason not to use one was validation performance. The discussion also touched on other fields such as OPTX_SELECT_OUTPUT_AMOUNT32x2* and OPTX_SELECT_OUTPUT_SCRIPTPUBKEY*. The issue of upgradability was raised in relation to committing to specific outputs, as it can be awkward with the current approach used by both OP_TX and CTV. A merkle path was suggested as a potential solution for proving that an entire output has been taken.Brandon responded to the proposal for a v1 tapscript opcode, suggesting that OPTX_SELECT_IN_OUT_AMOUNT32x2 should be added so that a single script can be reused and a small script can be constructed for a relocatable, batchable construction. Overall, the discussion focused on the tradeoffs between using a merkle tree versus other methods for CTV and the proposed v1 tapscript opcode for generic covenants, which could potentially improve the efficiency and security of the Bitcoin network.</summary>
+    <published>2022-06-24T06:06:05+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Hiding entire content of on-chain transactions</title>
+  <updated>2023-06-11T19:26:13.233200+00:00</updated>
+  <author>
+    <name>Henning Kopp 2016-08-09 07:26:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Hiding entire content of on-chain transactions</title>
+    <updated>2023-06-11T19:26:13.233200+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-August/012967.html" rel="alternate"/>
+    <summary>The proposed design for Bitcoin Confidential (BBC) aims to enhance privacy by hiding the entire content of Bitcoin transactions. This is achieved by only publishing the hash of inputs and outputs in the blockchain. The plaintext of inputs and outputs is sent directly to the payee via a private message, and never goes into the blockchain. To protect against double-spends, the payer also has to publish another hash, which is the hash of the output being spent.To issue the new private coin, one can burn regular BTC by sending it to one of several unspendable bitcoin addresses, one address per denomination. After user A sends a private payment to user B, user A will know what the spend proof is going to be when B decides to spend the coin. Therefore, A will know when the coin was spent by B, but nothing more. The proposal goes beyond existing techniques such as CoinJoin and ring signatures, which only obfuscate the transaction graph, and Confidential Transactions, which only hide the amounts. Since the plaintext of the transaction is not published to the public blockchain, all validation work has to be done only by the user who receives the payment.To prove that the outputs being spent are valid, the payer also has to send the plaintexts of the earlier transaction(s) that produced them, then the plaintexts of even earlier transactions that produced the outputs spent in those transactions, and so on, up until the issue (similar to coinbase) transactions that created the initial private coins. The author proposes to forbid any coin merges but still allow coin splits to avoid rapid growth of ownership history.Exchanges and large merchants are likely to accumulate large coin histories, although this is still fragmented, far from complete, and likely outdated. To avoid any privacy leakage, it is recommended to use multiple addresses to store a relatively small amount on each. The bitcoin network protocol can be extended with a new message type to facilitate exchange of private transaction data. However, it lacks encryption, hence private payments are only truly private when bitcoin is used over tor.The author raises the question of whether there are any flaws in this design, but has received no feedback on the proposal so far. BBC uses the same private keys and addresses as BTC, and every BBC transaction must be enclosed by a small BTC transaction that stores the OP_RETURNs and pays for the fees.</summary>
+    <published>2016-08-09T07:26:35+00:00</published>
+  </entry>
+</feed>

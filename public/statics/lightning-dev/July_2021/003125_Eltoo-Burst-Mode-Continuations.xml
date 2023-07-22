@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Eltoo Burst Mode &amp; Continuations</title>
+  <updated>2023-05-23T15:23:50.255208+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-07-11 04:10:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Eltoo Burst Mode &amp; Continuations</title>
+    <updated>2023-05-23T15:23:50.255208+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-July/003125.html" rel="alternate"/>
+    <summary>In a recent email exchange, Jeremy asked if one had to go on chain when about to hit sequence limits on an Eltoo channel. The response was that for the final update, you could sign a move to a new update key and do a continuation where an extra transaction is added to the uncooperative path every 2**30 states. Layers like this add a bunch of CSV layers, which increases resolution time linearly. However, using the CLTV path for updating the state, rather than the CSV path, should be done instead of the latter. Additionally, Jeremy suggested signing an eltoo "trampoline," which would start an eltoo channel factory amongst a group of people and allow them to close their channels with a single additional update to the factory once bored. However, this approach is not as cost-effective as creating a Taproot tree with N copies (with different keys) of the state update protocol, which allows for more privacy w.r.t. how many state updates were made throughout the protocol. This can be achieved by constructing scripts carefully and keeping the trees the same size. The script leaves may only get you 5 bits of added sequence space, but adding 4 merkle branches at 32B each and revealing the pubkey for 33B gets you 2**34 states (4 added bits of added sequence space) for about 161 extra bytes.</summary>
+    <published>2021-07-11T04:10:00+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reconciling the off-chain and on-chain models with eltoo</title>
+  <updated>2023-06-02T20:15:46.868436+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-09-10 01:28:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reconciling the off-chain and on-chain models with eltoo</title>
+    <updated>2023-06-02T20:15:46.868436+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-September/002146.html" rel="alternate"/>
+    <summary>The eltoo update scheme is an interesting idea worth exploring for consolidating blocks of off-chain transactions. Although using CSV is more complicated and outputs must also use SIGHASH_NOINPUT, the ability to have multiple party channels and the most used types of scripts makes eltoo compelling compared to LN-Penalty for this kind of application. The multiple party aspect introduces an interesting way to unify concepts from different second layer protocols like federated sidechains and statechains. This evolution of the channel factory paper towards something like a federated sidechain could solve the dynamic membership problem. One additional concept that could be new to this off-chain blockchain model would be something like batched multi-party loop-in/out. For setting this up, it might be useful to have a ritual where the mechanism can continue operating without waiting for onchain activity to complete. It ensures that, even if the membership-change onchain transaction becomes invalid later, we will still enter an update that will eventually put the new membership set onchain. Until the membership-change onchain transaction is deeply-confirmed onchain, the CSV parameter is temporarily doubled, and the mechanism cannot be mutually closed until the membership-change onchain transaction is deeply-confirmed.Ultimately, a multi-party eltoo based 'signet' with the same RPC interface, but different transaction validation and block creation logic could be designed for managing these negotiations. The "block" that would need to be signed by the participants would actually be a Decker-Russell-Osuntokun update+state transaction, and would commit to the UTXO set rather than the transaction set.</summary>
+    <published>2019-09-10T01:28:04+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 155 (addrv2) update - spec and Bitcoin Core v0.21 implementation</title>
+  <updated>2023-06-14T16:44:40.339861+00:00</updated>
+  <author>
+    <name>John Newbery 2020-12-10 09:47:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 155 (addrv2) update - spec and Bitcoin Core v0.21 implementation</title>
+    <updated>2023-06-14T16:44:40.339861+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-December/018301.html" rel="alternate"/>
+    <summary>In February 2019, Wladimir van der Laan proposed BIP 155 as a way to gossip longer node addresses over the Bitcoin P2P network in support of torv3 and other networks. Since then, several changes have been made to the proposal after discussions on the BIPs repo and the Bitcoin Core repo for implementation issues. The email provides a summary of these changes, while readers are referred to BIP 155 for the full specification. The specification changes include storing the `time` field in the `addrv2` message as a fixed length uint32 instead of a variable-length compact size and allowing the `addr` field to be up to a maximum of 512 bytes (4096 bits) instead of 32 bytes (256 bits) for compatibility with future address formats. Clients should now gossip addresses for known networks, even if they can't connect to those networks, but should not gossip addresses for unknown networks and ignore addresses for known networks that are different from the address length for that network specified in BIP 155. Additionally, new network IDs must be reserved in a BIP document. Support for `addrv2` is not dependent on a p2p protocol version, and a new message type called `sendaddrv2` is introduced to signal support for addrv2. This message must be sent after the initial version message is sent and before the verack message is sent. During testing of the Bitcoin Core implementation, it was found that another Bitcoin implementation would disconnect from peers on receipt of an unknown message. However, this behavior is an incorrect interpretation of the Bitcoin p2p protocol, as the original v0.1 Satoshi client and all Bitcoin Core versions derived from it have always explicitly ignored unknown message types as a mechanism to extend the p2p protocol. To prevent those implementations from being disconnected from v0.21 Bitcoin Core nodes, this initial version will only send `sendaddrv2` messages to peers on p2p protocol version 70016 and higher. This behavior may be reverted in the future, at which point Bitcoin Core would send `sendaddrv2` messages to all peers during the version/verack handshake.</summary>
+    <published>2020-12-10T09:47:54+00:00</published>
+  </entry>
+</feed>

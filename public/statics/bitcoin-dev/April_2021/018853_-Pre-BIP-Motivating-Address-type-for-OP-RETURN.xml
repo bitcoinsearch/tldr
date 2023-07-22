@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[Pre-BIP] Motivating Address type for OP_RETURN</title>
+  <updated>2023-06-14T20:20:26.610264+00:00</updated>
+  <author>
+    <name>Jeremy 2021-04-24 20:05:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[Pre-BIP] Motivating Address type for OP_RETURN</title>
+    <updated>2023-06-14T20:20:26.610264+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-April/018853.html" rel="alternate"/>
+    <summary>The discussion on bitcoin-dev mailing list focused on the use of OP_RETURN outputs. The first concern was raised about the type Script being too wide and representing things we know nothing about, which can lead to a leaky abstraction. In response, the max size of a scriptSig/scriptPubKey was mentioned to be 10k bytes, still probably too big for an address. To address the issue of offensive and illegal text in OP_RETURN data, it was suggested that tools should default to meaningless representations of OP_RETURN data, such as displaying it in hex. The discussion then moved on to whether the OP_RETURN output should have a fixed length or support arbitrary length strings. It was suggested that if it doesn't support the full range, someone will complain later and there will have to be a v2 address. Another point of discussion was whether it should be possible to pay into such an OP_RETURN or categorize OP_RETURNS as a non-payable address type. It was argued that including arbitrary data in the blockchain is not currently useful for typical end-users and applications that want to use OP_RETURN with Bitcoin Core can already call create(psbt|rawtransaction) with the `data` field. The psbt interface was noted to use a blind union type, whereby the entries in an array are either [address, amount] or ["data", hex], making it convenient for strongly typed RPC bindings. Regarding parsing block data, it was suggested that there's no need to change Bitcoin Core's current representation of OP_RETURN outputs, which is just showing the hex-encoded script in RPC output. For any program needing OP_RETURN output, hex format is going to be the next best thing to getting it in raw binary. The increasing transaction fees were noted to push uses of OP_RETURN off the network or into more efficient constructions, so optimizing its use may not be necessary. However, some uses like stealth addresses or open timestamps may still merit some sort of standard address type. A custom way to represent OP_RETURN was suggested, but it would be much better to define it in a standard manner across all software.</summary>
+    <published>2021-04-24T20:05:25+00:00</published>
+  </entry>
+</feed>

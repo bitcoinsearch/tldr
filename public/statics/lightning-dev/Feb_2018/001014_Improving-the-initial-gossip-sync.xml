@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving the initial gossip sync</title>
+  <updated>2023-05-24T20:35:52.102923+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-02-09 01:44:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving the initial gossip sync</title>
+    <updated>2023-05-24T20:35:52.102923+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/001014.html" rel="alternate"/>
+    <summary>The author of this message proposes a new mechanism for timestamp synchronization and suggests that this should be a feature bit pair. They propose that the `timestamp_routing_sync` feature should override the `initial_routing_sync` feature, and similarly, a future `fancy_sync` would override `timestamp_routing_sync`. They also suggest that an optional 4-byte `routing_sync_timestamp` field can be appended to `init` without issues. The author expresses their dislike for the re-transmission of all old channel_announcement and node_announcement messages, just because there's been a recent channel_update. Instead, they suggest that it would be simpler to say 'send anything &gt; = routing_sync_timestamp'. The author explains how c-lightning internally keeps a tree of gossip in the order they received them, keeping a 'current' pointer for each peer. However, this isn't quite the same as timestamp order, so we can't just set the 'current' pointer based on the first entry &gt;= routing_sync_timestamp. We need to actively filter, which is still a simple traverse, however, skipping over any entry less than routing_sync_timestamp.The author raises some questions about the proposed mechanism, such as when to stop retransmitting announcements if a new channel_update comes in during this time, and whether they have to remember which ones they've sent to each peer. They suggest that if missing announcements become a problem, a simple query message could be added, which they think will be needed for any fancy scheme anyway.</summary>
+    <published>2018-02-09T01:44:24+00:00</published>
+  </entry>
+</feed>

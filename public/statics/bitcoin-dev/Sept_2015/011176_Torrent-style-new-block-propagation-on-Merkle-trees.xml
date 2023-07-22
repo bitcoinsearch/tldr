@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Torrent-style new-block propagation on Merkle trees</title>
+  <updated>2023-06-10T22:59:54.229474+00:00</updated>
+  <author>
+    <name>Jonathan Toomim (Toomim Bros) 2015-09-23 23:12:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Torrent-style new-block propagation on Merkle trees</title>
+    <updated>2023-06-10T22:59:54.229474+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-September/011176.html" rel="alternate"/>
+    <summary>The current block propagation algorithm used by Bitcoin requires a peer to have the full block before it starts uploading to other peers in the p2p mesh, which slows down block propagation. A Bittorrent-inspired algorithm is proposed which splits the transactions into chunks and hashes each chunk. The leeches verify the block header, then request the Nth row of the transaction Merkle tree and a bitfield indicating which of the Merkle nodes the seed has leaves for. They calculate all parent node hashes in the Merkle tree and verify that the root hash is as described in the header. The leeches search their Merkle hash cache to see if they have the leaves for that node already. They begin sharing leaves with each other and upload chunks of data as soon as they get them and confirm both PoW and hash/data integrity instead of waiting for a fully copy with full verification. This algorithm is more complicated than the existing algorithm and won't always perform better in situations where the bandwidth to ping latency ratio is high relative to the blocksize.</summary>
+    <published>2015-09-23T23:12:14+00:00</published>
+  </entry>
+</feed>

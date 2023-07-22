@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP draft: OP_CHECKBLOCKATHEIGHT</title>
+  <updated>2023-06-11T20:08:24.725510+00:00</updated>
+  <author>
+    <name>Luke Dashjr 2016-09-23 22:34:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP draft: OP_CHECKBLOCKATHEIGHT</title>
+    <updated>2023-06-11T20:08:24.725510+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-September/013161.html" rel="alternate"/>
+    <summary>In this context, Joe sends Alice 5 BTC (UTXO 0), and Fred sends Alice 4 BTC (UTXO 1). Alice then sends Bob 4 BTC using UTXO 1, creating UTXO 2. However, Fred double-spends UTXO 1 with UTXO 1-B, which invalidates Alice's transfer to Bob. Alice could send Bob UTXO 0 (UTXO 3), but if she does so, there is a possibility that UTXO 0 could be mined, resulting in her giving Bob a total of 8 BTC instead of 4 BTC. Even if Alice waits until Fred's UTXO 1-B confirms 10 blocks deep, there is a chance that a reorganization can reverse those 10 blocks and confirm UTXO 1 again.To address this issue, Luke Dashjr proposed a new opcode called OP_CHECKBLOCKATHEIGHT for the Bitcoin scripting system. This opcode allows Alice to create UTXO 3 in such a way that it is only valid in the blockchain where Fred's UTXO 1-B has confirmed. If that block is reorganized out, UTXO 3 becomes invalid, and either Bob receives only the original UTXO 2 or Alice can create a UTXO 3-B that is valid in the reorganized blockchain if it confirms the UTXO 1-B double-spend.Overall, the new opcode proposed by Luke Dashjr aims to solve the issue of double-spending and conflicts in bitcoin transactions, ensuring that the intended recipient receives the correct amount of BTC without any risk of loss due to blockchain reorganizations.</summary>
+    <published>2016-09-23T22:34:41+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Scalability issues</title>
+  <updated>2023-06-06T06:33:10.895476+00:00</updated>
+  <author>
+    <name>Michael Grønager 2012-07-24 08:25:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Scalability issues</title>
+    <updated>2023-06-06T06:33:10.895476+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-July/001733.html" rel="alternate"/>
+    <summary>Michael Gronager claims to have downloaded the entire blockchain from scratch in 45 minutes on his laptop using libcoin and bitcoind build based on it. He also mentions that the numbers are from March/April and that they might be a bit longer today. Michael has tested libcoin against Satoshi bitcoin where it performs similarly, but sometimes even faster. He uses an async concurrency model in libcoin instead of the pure reentrant mutexes model used by Satoshi client, which is not believed to motivate the best coding practice or performance. During block download, CPU load depends on the system running the test. The initial download is typically disk I/O bound, while the verification stage is CPU-bound, but it could still be disk I/O bound. Michael suggests that the concurrency model should be better in libcoin. He warns against holding locks for too long as it prevents concurrency.Steve is surprised by Michael's claim and asks him to provide additional information to help with testing. Steve has been doing extensive testing in this area and has never had the entire chain in less than 12 hours. He has an extensive setup of test machines ranging from e4300 to phenom2x6 to i5's. He mentions that it took him 2 hours to sync the last 5 days on an AMD e-450 with 4GB RAM and approximately 3Gb/s internet connection.</summary>
+    <published>2012-07-24T08:25:09+00:00</published>
+  </entry>
+</feed>

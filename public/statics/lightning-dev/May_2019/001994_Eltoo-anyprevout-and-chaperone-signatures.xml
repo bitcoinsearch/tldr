@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Eltoo, anyprevout and chaperone signatures</title>
+  <updated>2023-06-02T18:36:53.484288+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-05-16 01:48:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Eltoo, anyprevout and chaperone signatures</title>
+    <updated>2023-06-02T18:36:53.484288+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-May/001994.html" rel="alternate"/>
+    <summary>In a Lightning Network developer mailing list, ZmnSCPxj proposed to minimize extra space by collapsing 1-of-2 multisigs into a single-sig. This can be done by collaboratively creating a shared private key that is specific to the instance of the protocol upon setup. Moreover, using MuSig on the two participants will reduce the need for `OP_CHECKMULTISIG`/`OP_CHECKSIGADD`. There is no requirement for an explicit `OP_CHECKSEQUENCEVERIFY`, or even separate keys for state and update paths. The proposal that does not include `OP_CODESEPARATOR` is given as `OP_CHECKLOCKTIMEVERIFY OP_DROP OP_CHECKSIG  OP_CHECKSIG`. For update transactions, `nSequence` is 0, and for state transactions, it is non-0. Both of them will have `nLockTime` equal to the required index. The `nSequence` is enforced by the participants refusing to sign invalid `nSequence`. When updating the channel, anyprevoutanyscript signatures (for the 2-of-2 multisig) are exchanged between Alice and Bob. The chaperone signature can be provided by either Alice or Bob at transaction broadcast time so that it commits to a specific input transaction. However, they could use another key-pair (chaperone key) if the same key for both signatures is unsafe.ZmnSCPxj also mentioned that although the chaperone idea is quite good, it won't play nice with taproot collaborative spends that require anyprevout / anyprevoutanyscript / noinput, making it stand out. Nonetheless, this should happen rarely. Finally, the use of any `SIGHASH` that is not `SIGHASH_ALL` already stands out, so there is no significant objection.</summary>
+    <published>2019-05-16T01:48:51+00:00</published>
+  </entry>
+</feed>

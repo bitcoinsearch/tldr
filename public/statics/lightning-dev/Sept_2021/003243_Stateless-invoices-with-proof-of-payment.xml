@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Stateless invoices with proof-of-payment</title>
+  <updated>2023-06-03T05:57:43.213661+00:00</updated>
+  <author>
+    <name>fiatjaf 2021-09-21 13:05:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Stateless invoices with proof-of-payment</title>
+    <updated>2023-06-03T05:57:43.213661+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-September/003243.html" rel="alternate"/>
+    <summary>The conversation between two individuals discusses the implementation of stateless invoices. The proposal is for the payee to generate a stateless invoice using some secret to compute the preimage upon receiving the HTLC. One way to achieve this is via the payment_secret, which is already an arbitrary invoice id that gets sent as a tlv record.  Implementations should expose a "stateless invoice" API for receiving using the payment_secret and when sending, implementations should attach a TLV record with encoded order details. While 1 is simple to do, 2 requires full network compatibility, but it is much needed; otherwise, the payee has to keep track of all the invoice ids related to the orders they refer to. There are application-specific workarounds that can be applied for 2, such as having a fixed, hardcoded set of possible orders, encoding the order minimally in the payment secret or route hint, storing order details on redis for only 3 minutes, and using lnurlpay to reduce the delay between invoice issuance and user confirmation to zero. A clever workaround was used by fiatjaf on @lntxbot, but it required low-level code in a c-lightning plugin and a hack with route hints since TLV payloads were not an option.</summary>
+    <published>2021-09-21T13:05:48+00:00</published>
+  </entry>
+</feed>

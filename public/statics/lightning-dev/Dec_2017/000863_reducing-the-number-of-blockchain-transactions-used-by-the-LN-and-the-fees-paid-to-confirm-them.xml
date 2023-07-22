@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>reducing the number of blockchain transactions used by the LN, and the fees paid to confirm them</title>
+  <updated>2023-05-24T17:45:51.969190+00:00</updated>
+  <author>
+    <name>Jim Renkel 2017-12-21 01:52:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>reducing the number of blockchain transactions used by the LN, and the fees paid to confirm them</title>
+    <updated>2023-05-24T17:45:51.969190+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2017-December/000863.html" rel="alternate"/>
+    <summary>The author of the post is a computer networking developer who is new to cryptocurrency and interested in contributing to its development. They have come up with an idea while looking at the lightning network design and code that would reduce the number of blockchain transactions used by the LN and the fees paid to confirm them in a common LN use case. The use case they are referring to is the frequent, repeated purchases by a customer from the same merchant over an extended period of time. To use the LN to pay for these purchases, the author suggests that Alice opens and funds an LN channel to Bob. This takes one blockchain transaction. As coffees are purchased every day, funds are transferred from Alice to Bob in the channel without any blockchain transactions. However, Alice cannot afford to fund the channel for an extended period of time, and Bob is unwilling to wait an extended period of time to be paid for the coffees Alice has purchased. So every week or so, Alice and Bob close the channel, Alice gets back any unspent funds, and Bob gets the funds that have been transferred to him for Alice's purchases. Then Alice and Bob re-open the channel with new funding from Alice. Closing and re-opening the channel each take one blockchain transaction.If the LN were enhanced with an operation to deposit and withdraw funding in the channel to and from the blockchain without closing the channel, this could be done with a single blockchain transaction that is essentially the merge of the closing and re-opening blockchain transactions. In this example, each adjustment will only pay Bob his accumulated but as yet unpaid funds and charge Alice for the new funds she places into the channel, but leave Alice's unspent funds in the channel. Thus, the fee paid for the adjustment transaction, assuming the same fee rate for all the transactions, is never more than the sum of the fees paid for the closing and re-opening transactions, sometimes less, and occasionally significantly less. This reduction in fees is by an additive amount. Because the channel remains open while waiting for the adjustment transaction to confirm, there may be less urgency in having it confirm. So it's fee rate can be reduced, reducing the fee paid by a multiplicative amount. If this high-level, bare-bones idea is seen to be worthy of further consideration, the author would like to work with the community to flesh out a detailed specification and participate in the implementation of it. The author welcomes comments on their idea.</summary>
+    <published>2017-12-21T01:52:43+00:00</published>
+  </entry>
+</feed>

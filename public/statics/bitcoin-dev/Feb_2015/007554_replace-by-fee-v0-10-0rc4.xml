@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>replace-by-fee v0.10.0rc4</title>
+  <updated>2023-06-09T17:01:16.918143+00:00</updated>
+  <author>
+    <name>Peter Todd 2015-02-22 17:12:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>replace-by-fee v0.10.0rc4</title>
+    <updated>2023-06-09T17:01:16.918143+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-February/007554.html" rel="alternate"/>
+    <summary>On Feb 22, 2015, Tom Harding discussed the replace-by-fee patch that Peter Todd made available for the v0.10.0rc4 release on his GitHub page. While the patch simplifies successful double-spends of unconfirmed transactions, the idea that it "gives a path to making zeroconf transactions economically secure" is quite dubious. Harding raised concerns about not providing sufficient means to detect and relay double-spends, which is necessary to trigger a scorched-earth reaction. He also mentioned that not all double-spends will conform to the replacement rules, which could be problematic. However, Todd argued that if they don't, then the situation is no different from what we have now, and replace-by-fee does no harm. Harding pointed out that the replace-by-fee patch significantly weakens DoS protections by removing the early conflict check, making all conflict processing more expensive. Todd countered that if you're going to consider replacement, conflict processing will definitely be more expensive. Additionally, there is no attempt to protect against the same transaction being continually replaced with the fee bumped by a minimal amount. Todd claimed that the current version ensures every replacement pays at least as much additional fees as would normally cost to broadcast that much data on the network, and additionally requires the fees/KB to always increase; under all circumstances, it should be no more of a DoS threat than low-fee transactions are otherwise.It is unclear when, if ever, any senders/receivers will actually try to use scorched-earth as a double-spend deterrent. Few people need to rely on unconfirmed transactions anyway. XT nodes might help overcome some issues, but in the ANYONECANPAY design, Bob's replacement is a triple-spend. Even though XT nodes won't relay it, RBF nodes will.</summary>
+    <published>2015-02-22T17:12:22+00:00</published>
+  </entry>
+</feed>

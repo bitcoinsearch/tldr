@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Dynamic Commitments Part 2: Taprooty Edition</title>
+  <updated>2023-06-03T08:01:48.978626+00:00</updated>
+  <author>
+    <name>Antoine Riard 2022-03-26 00:27:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Dynamic Commitments Part 2: Taprooty Edition</title>
+    <updated>2023-06-03T08:01:48.978626+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-March/003533.html" rel="alternate"/>
+    <summary>The lightning-dev mailing list has presented a new protocol for updating commitments on-the-fly that could potentially update all 80k+ segwit v0 channels to the base level of taprooty channels without any on-chain transactions. The concept of dynamic commitments has been revisited in order to upgrade all public channels to taproot without any on-chain transactions. To achieve this, an "adaptor commitment" has been proposed which allows peers to defer the two transactions to close the old segwit v0 funding output and re-open the channel with a new segwit v1 funding output until closing time. For co-op close, one can just spend the v0 output and deliver it to the relevant P2TR outputs. Rusty made a spec PR last year outlining a way to upgrade the commitment type upon channel re-establish. However, a more generalized approach is proposed instead, inspired by the way the Raft consensus protocol handles configuration/member changes.The proposal introduces two new messages, 'commitment_update_propose' and 'commitment_update_apply' with various fields allowing upgrading nearly all channel/commitment related values such as dust limit, max in-flight, etc. The `commitment_update_propose` message includes nested TLV fields and also includes a signature to prevent spoofing and serve as evidence during retransmission phases. The `commitment_update_apply` message can include up to two `commitment_update_propose` messages and can be used to add other commitment updates in the future.This protocol would allow for future-proofing existing anchored multi-sig outputs and removing inflexible parameters in the network such as the 483 HTLC limit, while also providing a way to protect against unforeseen widespread policy changes.</summary>
+    <published>2022-03-26T00:27:19+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Signature bundles</title>
+  <updated>2023-05-20T05:24:35.379338+00:00</updated>
+  <author>
+    <name>Anthony Towns 2018-04-03 03:57:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Signature bundles</title>
+    <updated>2023-05-20T05:24:35.379338+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-April/015864.html" rel="alternate"/>
+    <summary>The bitcoin-dev community has proposed a new way to bundle transactions in order to deal with the issue of guessing future fees for commitment transactions. The proposal involves indicating that a signature only applies to part of a transaction, or a "bundle". Bundles can be combined into larger transactions and non-bundled signature inputs/outputs can be appended. A SIGHASH_BUNDLESTART flag indicates the number of inputs and outputs in a bundle, while a SIGHASH_INBUNDLE flag indicates that a signature applies to the current bundle. Two per-tx counters are kept to track the number of inputs and outputs used in each bundle. The proposed bundling method could replace SINGLE|ANYONECANPAY at the cost of an extra couple of witness bytes. It is also possible to establish BIP-69 style ordering rules within a bundle. While the bundling does not seem to offer any privacy benefits, it allows for dealing with discrepancies in fees. A potential issue arises when trying to pre-sign HTLC-Success/HTLC-Timeout transactions, which require the output address to be correct. If the commitment transaction gets bundled and its txid changes, pre-signing becomes impossible. One suggested solution is adding a zero-value anyone-can-spend output to commitment transactions, although this may lead to UTXO bloat if fee bumping isn't needed. Another idea is after-the-fact fee-bumping via special sighash flags at the block level. However, coding this is not straightforward.</summary>
+    <published>2018-04-03T03:57:23+00:00</published>
+  </entry>
+</feed>

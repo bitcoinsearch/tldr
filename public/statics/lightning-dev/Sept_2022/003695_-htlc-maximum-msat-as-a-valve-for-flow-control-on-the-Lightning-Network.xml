@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>`htlc_maximum_msat` as a valve for flow control on the Lightning Network</title>
+  <updated>2023-06-03T09:54:36.750102+00:00</updated>
+  <author>
+    <name>Anthony Towns 2022-09-24 12:12:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>`htlc_maximum_msat` as a valve for flow control on the Lightning Network</title>
+    <updated>2023-06-03T09:54:36.751095+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-September/003695.html" rel="alternate"/>
+    <summary>A Lightning developer named René Pickhardt proposed a new mechanism to mitigate the depletion of channels due to drain via Markov Models. The proposal suggests exploiting the `htlc_maxium_msat` setting as a control valve and regulating the "pressure" coming from the drain, which is expected to decrease payment latency/failures due to depleted channels. The proposal would make lightning nodes look at htlc_max_msat and throttle their use of a channel based on its value. This way, channels can set the value so that their payment flow is balanced on average, resulting in rare depletion and usually successful payments. The proposal relies on senders doing things that are slightly less optimal in the short term (paying higher fees) for things that benefit them only in the long term (avoiding payment latency/failures). It also depends on most people cooperating. There could be some privacy-preserving ways for channel operators to throttle payments based on htlc_max_msat (and channel depletion percentage), so cheaters are less likely to prosper.The proposal has limitations regarding collecting forwarding fees since rejecting X BTC per hour from the overloaded direction because the channel's depleted means not getting the opportunity to forward those payments and collect the corresponding fees. However, there aren't many ways to do better with this issue. One way is if you have a cheap way to rebalance your channels. In that case, rebalance your channel, let it drain again, collecting fees all the while, and repeat. If rebalancing is cheaper than the fees you collect, this works great! Another way is if fees rates are expected to change, which means if they're likely to go down later, then you might as well deplete your channel now, since you'll collect more fees for it now than you would later. Likewise, if you expect fees to up up later, then you might want to retain some balance now, so you can deplete it later. However, this approach is very dynamic, and the profits are limited. This proposal seems better than the fee rate cards idea in several ways. It doesn't decrease channel profitability half the time to avoid channel depletion, makes routing decisions less dependent on internal/private state, doesn't add much gossip/probing traffic, and provides a way of throttling payment traffic independent of fees. The proposal is expected to have proportional responses, with a small decrease in htlc_max_msat resulting in a small decrease in payment volume, and conversely. This mechanism is much better for stability/optimization!</summary>
+    <published>2022-09-24T12:12:03+00:00</published>
+  </entry>
+</feed>

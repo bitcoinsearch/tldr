@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Liquidity griefing for 0-conf dual-funded txs</title>
+  <updated>2023-06-03T13:00:22.018279+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2023-05-05 16:21:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Liquidity griefing for 0-conf dual-funded txs</title>
+    <updated>2023-06-03T13:00:22.018279+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-May/003920.html" rel="alternate"/>
+    <summary>The introduction of dual funded transactions in lightning has created challenges, particularly regarding protecting against liquidity griefing attacks from malicious peers. The dual funding protocol involves exchanging data about utxos and broadcasting the resulting transaction. If a peer goes silent after locking their utxos, the honest node's liquidity is locked and unusable. One solution is to never lock utxos used in dual funded transactions as they will automatically be re-used in another instance of the protocol if a remote node goes silent. However, this approach falls short when using 0-conf as accidentally double-spending a 0-conf channel can result in loss of funds for one of the peers. Nodes offering 0-conf services expose themselves to liquidity griefing by locking utxos. Another issue arises when nodes offering 0-conf channels must ensure that the utxos they use for 0-conf are isolated from the utxos they use for non-0-conf. This can be fixed by using a "soft lock" when selecting utxos for a non-0-conf funding attempt. In eclair, the opportunistic 0-conf approach is used, but it cannot be used anymore when mixing 0-conf and non-0-conf funding attempts due to soft locked utxos. The aim is to gather ideas on how to improve the situation and offer good enough protections against liquidity griefing for nodes offering 0-conf services.</summary>
+    <published>2023-05-05T16:21:50+00:00</published>
+  </entry>
+</feed>

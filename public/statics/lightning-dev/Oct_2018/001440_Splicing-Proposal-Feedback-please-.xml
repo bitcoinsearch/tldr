@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Splicing Proposal: Feedback please!</title>
+  <updated>2023-05-25T14:23:44.570237+00:00</updated>
+  <author>
+    <name>Christian Decker 2018-10-11 17:33:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Splicing Proposal: Feedback please!</title>
+    <updated>2023-05-25T14:23:44.570237+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-October/001440.html" rel="alternate"/>
+    <summary>The email thread discusses two methods of splicing channels in the Lightning Network. The first method involves merging channels once enough confirmations are received and creating a new commitment transaction that spends each output of each of the two funding transactions and assigns the channel balance to the channel partners accordingly. The old commitment transactions are invalidated. The second method involves creating a spent of the funding transaction which has two outputs, one of which goes to the recipient of the splice-out operation and the second output acts as a new funding transaction for the newly spliced channel. Once signatures for the new commitment transaction are exchanged, the splicing operation can be broadcasted. The second method is considered safer since the old channel must not be used anymore, but the new channel can be operational right away without blockchain confirmation. In case someone tries to publish an old state of the old channel, it will be a double spend of the splicing operation and will be punished. If someone publishes an old state of the new channel, everything will work as normal even if the funding transaction is not yet mined. However, this method requires careful checking for standardness and other constraints which might prevent CPFP pushing through the splice-out transaction if it gets stuck. The downside of using this method is that we now have two on-chain transactions (pre-allocation and re-open), and splice-outs are no longer immediate if we have a splice-in in the changeset as well. However, this can be remediated with one more re-anchor that just considers splice-ins that were proposed. The email thread also discusses the short_channel_id of a channel to which funds have been spliced in. In the parallel splice world, they look like two channels. In the proposal, it looks like a new channel, with a channel_update to make sure modern nodes know that the transition is happening.</summary>
+    <published>2018-10-11T17:33:48+00:00</published>
+  </entry>
+</feed>

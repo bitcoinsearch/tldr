@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Recovering protocol with watchtowers</title>
+  <updated>2023-05-25T16:07:07.330072+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-11-12 23:33:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Recovering protocol with watchtowers</title>
+    <updated>2023-05-25T16:07:07.330072+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001570.html" rel="alternate"/>
+    <summary>In a recent email to the dev-lightning community, Margherita Favaretto shared an update on her thesis project which focuses on the recovering mechanism of false positives in the Lightning network. She proposes a solution for backup in the network in case of false positive nodes, with particular attention to privacy and security. Rather than using other connected nodes as the backup of recent status, she suggests using watchtowers, which she defines as simply full nodes that are online 24/7. In her design, she considers a watchtower as a backup node and has suggested that it may be possible in the future for e-commerce organizations to offer a service of "Watchtower-Recovery" that nodes can purchase to back up their commitments data.Margherita's solution involves defining two new concepts: nonce-time Tn, which is the current value of nonce-time (sequential integer number that defines the order of the backups) and payload P, consisting of a zip of all status channels of a node A at a specific time T1, the nonce time corresponding to the time T1 of the status contained in the zip, and the channel_id of the channel with A. This payload is encrypted by the public key of the node A, so the watchtowers cannot know the status channel of A. The idea is not to send all data to all watchtowers, but just send the actual nonce-time and the actual payload to one of the watchtowers, and just send the new nonce-time to the others.Margherita provides an example to explain the design, considering Alice, who has a channel (with Eltoo protocol) with Bob, Charlie, Diana, and three watchtowers W0, W1, and W2. Every time that Alice is online, she is connected to the three watchtowers. When Alice needs to have the backup of all her data, she has to ask all her watchtowers the information connected to her node. Margherita suggests that fee be sent every time that the node A requests data to the watchtower for the backup. This money encourages the watchtowers to guarantee the service every time.In terms of security, since all the watchtowers store the current time-nonce, and the payload is encrypted with the public key of A, the risks of a watchtower sending an older payload instead of the last one can be mitigated by ensuring that each payload with a nonce time older than the current time-nonce is not considered. If one of the watchtowers decides to change the nonce-time, for example from T3 to T5 and sends to A T5 with the payload, Alice can think that the actual time-nonce is T5, but no one of the watchtowers contains a payload corresponding to the state T5. This sort of misbehavior is solved by the majority, e.g., if 2/3 nodes confirm that the actual nonce-time is T3, Alice considers this last nonce-time as the last one and not T5. The attack can happen just if 51% of the watchtower agree to cheat and send to Alice another nonce-time.</summary>
+    <published>2018-11-12T23:33:41+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CTV vaults in the wild</title>
+  <updated>2023-06-15T17:44:05.289027+00:00</updated>
+  <author>
+    <name>Antoine Riard 2022-03-06 23:15:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CTV vaults in the wild</title>
+    <updated>2023-06-15T17:44:05.289027+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020073.html" rel="alternate"/>
+    <summary>In a Bitcoin-dev email thread, Antoine Riard responded to James O'Beirne's sketch of a CTV-based vault design. Riard expressed his concern regarding the immutability of flow paths once funds are locked to the root vault UTXO in any hashchain-based vault design. He believes that corruption and key endpoint compromise are major concerns, particularly in the early phases of toolchain deployment when bugs may slip in, affecting output amount or relative-timelock setting correctness. Riard suggests leveraging a presigned transaction data design where every decision point is a multisig, allowing for correction or adaptation if all multisig participants agree on it. This design could achieve the same as a key-deletion design, as long as all the vault's stakeholders participate in the multisig. Riard notes that relying on presigned transactions comes with higher assumptions on the hardware hosting the flow keys, but flow keys can be stored on the same keys guarding the UTXOs before sending them to vault custody. The presence of trusted hardware in the vault design might lead one to ask what's the security advantage of vaults compared to classic multisig setup. Riard thinks this security advantage is only relevant in the context of recursive design, where the partial unvault sends back the remaining funds to vault UTXO (not the design proposed here).Riard also discusses other minor points on vault design. For instance, he suggests introducing an intermediary, out-of-chain protocol step where the unvault broadcast is formally authorized by the vault stakeholders to avoid hot key compromise. Also, he questions the safety of using anchor outputs in any vault deployment where the funds stakeholders do not trust each other or where watchtowers are not trusted.James O'Beirne's implementation and write-up of a simple vault design using CTV were shared. O'Beirne believes that the design has several appealing characteristics for custody operations of any size.</summary>
+    <published>2022-03-06T23:15:41+00:00</published>
+  </entry>
+</feed>

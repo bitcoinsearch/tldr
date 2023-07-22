@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Difference between ignoring htlc request due to wrong payment hash vs refusing to release preimage in LND</title>
+  <updated>2023-06-03T00:11:32.800461+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-03-24 11:27:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Difference between ignoring htlc request due to wrong payment hash vs refusing to release preimage in LND</title>
+    <updated>2023-06-03T00:11:32.800461+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-March/002605.html" rel="alternate"/>
+    <summary>The issue of unresolved HTLCs while probing has been discussed in a paper available on arxiv.org. The paper explains that running multiple probes over the same channels causes a surge of irredeemable HTLCs and DOSes the probe route, forcing nodes to wait until the HTLCs time out before forwarding other payments. In order to avoid this problem, channels leading up to the final target are chosen to have a much higher balance. Regarding the lock times for each channel in a payment route, it is explained that inside a channel, every contract has an implicit branch "if both parties agree, they can spend the contract funds any way they want". This allows both parties to sign a new 2-of-2 transaction without the contract if they both agree to it. Thus, even if the receiver grieves up to 143 blocks, at the 144th block, the sending node is willing to sign off on an agreement to re-assign the HTLC funds back to the sender. This allows the funds to be reused again in a different payment, which can earn fees for the intermediaries in the future. It is clarified that B and C are incentivized to report immediately in case of a reported failure, so as to free up the funds and forward them soon. However, if either B or C is offline at the time, the new state where the HTLC is removed out-of-contract is not possible to sign with both parties. It is pointed out that this situation does not mimic the one where the receiver denies having the correct preimage since B and C are incentivized to report immediately.</summary>
+    <published>2020-03-24T11:27:32+00:00</published>
+  </entry>
+</feed>

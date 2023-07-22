@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Trustless Watchtowers</title>
+  <updated>2023-05-25T16:00:44.734056+00:00</updated>
+  <author>
+    <name>Conner Fromknecht 2018-11-14 00:12:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Trustless Watchtowers</title>
+    <updated>2023-05-25T16:00:44.734056+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001589.html" rel="alternate"/>
+    <summary>The email exchange between Conner and ZmnSCPxj is regarding the development of watchtowers. Conner has implemented much of the server side, which accepts encrypted blobs from watchtower clients and stores them. The functionality related to scanning blocks and publishing justice transactions has also been implemented but hasn't been merged yet. The remaining task is to integrate the client so that it backs up states after receiving revocations from the remote peer. ZmnSCPxj notes that watchtowers would need to keep all encrypted blobs that are keyed to the same partial txid in order to avoid possible spam attacks. However, even with this measure in place, an attacker could still spam the watchtower until it runs out of resources and crashes. To counter this, Conner suggests using a session-based, encrypted-blob approach that maps client public keys to encrypted blobs in a two-level bucketing structure, ensuring that different clients can't overwrite each other. Regarding watchtowers compatible with Decker-Russell-Osuntokun (DRO) channels, Laolu had previously suggested that DRO channels can simply "update" the blob side of a txid-blob entry, with the txid being the kickoff/trigger transaction. However, this is unsafe unless the watchtower identifies the user somehow since an attacker can identify the watchtower and update the blob side with a randomly-generated, invalid blob before launching an attack. There is also the issue of privacy leakage if the watchtower identifies the user. ZmnSCPxj asks what plans the lnd developers have for these issues and expresses curiosity about their first moves into this area. The general design should be readily able to serve eltoo clients with some slight modifications to breach detection and justice txn construction. The concern with the update-and-replace model is that it leaks timing information about a particular channel to the tower since the tower must know which prior state needs replacing. Therefore, it is better to store all prior encrypted blobs to maintain adequate privacy. On private towers, this privacy/space tradeoff may be acceptable, but not sure if the tradeoff makes sense on public towers.</summary>
+    <published>2018-11-14T00:12:05+00:00</published>
+  </entry>
+</feed>

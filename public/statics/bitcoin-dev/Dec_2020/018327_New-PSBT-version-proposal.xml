@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New PSBT version proposal</title>
+  <updated>2023-05-21T00:07:47.545201+00:00</updated>
+  <author>
+    <name>Andrew Chow 2020-12-23 21:32:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New PSBT version proposal</title>
+    <updated>2023-05-21T00:07:47.545201+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-December/018327.html" rel="alternate"/>
+    <summary>Andrew Chow has proposed a new version of PSBT, version 1, which is backwards incompatible with the current version, v0. The primary change in the new version is to have all input and output data for each contained within their respective maps. This will disallow PSBT_GLOBAL_UNSIGNED_TX in this new version. The version number will be set to 2, and there will be two fields for lock times: one for a time-based lock time and another for height-based. The PSBT_GLOBAL_PREFERRED_LOCKTIME is changed to purely be the fallback option if no input lock time fields are present. Any role which does lock time calculation will first check if there are input lock time fields. If there are not, it must then check for a PSBT_GLOBAL_PREFERRED_LOCKTIME. Additionally, a new global field - PSBT_GLOBAL_UNDER_CONSTRUCTION - is added to signal whether inputs and outputs can be added to the PSBT. Several rules must be followed to ensure that adding additional inputs and outputs will not invalidate existing signatures. First, an input or output adder must check for any existing signatures in all of the other inputs. Secondly, newly added inputs when there are existing signatures must have the same type of lock time used in the transaction, and must be less than or equal to the transaction lock time. Finally, to uniquely identify transactions for combiners, a txid can be computed from the information present in the PSBT.The new fields in Global include PSBT_GLOBAL_TX_VERSION, PSBT_GLOBAL_PREFERRED_LOCKTIME, PSBT_GLOBAL_INPUT_COUNT and PSBT_GLOBAL_OUTPUT_COUNT. The new fields in Input include PSBT_IN_PREVIOUS_TXID, PSBT_IN_OUTPUT_INDEX, PSBT_IN_SEQUENCE and PSBT_IN_REQUIRED_LOCKTIME. The new fields in Output include PSBT_OUT_VALUE and PSBT_OUT_OUTPUT_SCRIPT.With these new fields, inputs and outputs can be added as needed. However, there is no longer a unique transaction identifier, so more care must be taken when combining PSBTs. Additionally, adding new inputs and outputs must be done such that signatures are not invalidated. Finalizers must choose the maximum of all *_LOCKTIME fields to choose the locktime for the transaction.The changes disallow the PSBT_GLOBAL_UNSIGNED_TX field, so PSBT v1 needs the version number bump to enforce backwards incompatibility. Once the inputs and outputs of a PSBT are decided, a PSBT could be "downgraded" back to v0 by creating the unsigned transaction from the above fields, and then dropping these new fields.If these changes are deemed reasonable, Andrew Chow will write a PR to modify BIP 174 to incorporate them.</summary>
+    <published>2020-12-23T21:32:33+00:00</published>
+  </entry>
+</feed>

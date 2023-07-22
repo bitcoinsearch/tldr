@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP sighash_noinput</title>
+  <updated>2023-06-13T01:49:54.413306+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-05-04 14:25:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP sighash_noinput</title>
+    <updated>2023-06-13T01:49:54.413306+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/015926.html" rel="alternate"/>
+    <summary>The email conversation between Christian and ZmnSCPxj discusses the use of `SIGHASH_NOINPUT` in trustless protocols like CoinSwap, Poon-Dryja, and Decker-Russell-Osuntokun. The problem with these protocols is that they have an offchain component that requires a backoff transaction to be created before the funding transaction is broadcasted. This pattern cannot be supported by commodity user wallets and exchange wallets which only support basic "make tx, sign, broadcast" functionality. However, `SIGHASH_NOINPUT` can solve this problem by allowing the creation of the backoff transaction first, followed by the typical "make tx, sign, broadcast" procedure that commodity wallets implement. ZmnSCPxj also mentions that using `SIGHASH_NOINPUT` may paint the user as using a special protocol, but this issue can be solved by combining it with other techniques like MAST, Taproot, or Graftroot. Further, ZmnSCPxj suggests that if the protocol completes cooperatively, only a 2-of-2 multisig is spent and signed using `SIGHASH_ALL`, and the money goes to some ordinary P2WPKH addresses. The advantage of using `SIGHASH_NOINPUT` is that it allows for the implementation of "walletless" software where the special protocol software runs the protocol up to the point that they get the backoff transaction, then asks the user to pay an exact amount to an exact address. This has several benefits like supporting RBF without renegotiating a new backoff transaction, allowing hardware wallets and exchange wallets to integrate with the protocols via P2WSH address, and enabling special protocol software to focus on the specific protocol they implement without implementing even basic wallet functionality.</summary>
+    <published>2018-05-04T14:25:46+00:00</published>
+  </entry>
+</feed>

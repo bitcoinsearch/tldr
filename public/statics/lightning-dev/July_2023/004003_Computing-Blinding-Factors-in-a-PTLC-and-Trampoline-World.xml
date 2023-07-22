@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Computing Blinding Factors in a PTLC and Trampoline World</title>
+  <updated>2023-07-13T17:34:28.385708+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2023-07-04 20:55:34+00:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Computing Blinding Factors in a PTLC and Trampoline World</title>
+    <updated>2023-07-13T17:34:28.385735+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-July/004003.html" rel="alternate"/>
+    <summary>In the conversation between Bastien and ZmnSCPxj, they discuss a proposal for a schnorr multi-hop locks mechanism. Bastien expresses confusion because ZmnSCPxj's proposal differs from the one specified in the latest schnorr multi-hop locks proposal found in [1]. ZmnSCPxj argues that their proposal is simply a restatement of the same scheme.Bastien points out that using the construction from [1], it appears that using a trampoline does not impact the protocol. The sender follows the exact steps of the protocol and sends the left/right locks in the trampoline onion. However, ZmnSCPxj is surprised that the left and right locks need to be sent. They expected that since the PTLC (Payment-Point Lock Contract) arrives at the trampoline node and serves as the left lock, only the delta scalar between its left and right locks would need to be sent to the trampoline node.ZmnSCPxj explains that their scheme allows implementations to define a function called `buildPath`. This function takes inputs such as a random source, gossip map, final or next trampoline payment point, final hop or next trampoline hop, and delta scalar. The function uses a pathfinding algorithm to generate a raw path, generates a new scalar for each hop, decorates the path with the generated scalars, takes the sum, and subtracts it from the input delta scalar to generate the first hop scalar. This scalar is then added to the input final or next trampoline payment point (after multiplication by `G`) to obtain the output PTLC point. The last hop is decorated with the delta scalar.For a flat payment function, the payment function can generate its own delta scalar for each attempt and pass the paths as-is to the onion encoder. The same `buildPath` function can also be used by a trampoline node. The trampoline node would simply pass in the received delta scalar from the input onion. Additionally, a payment function through trampoline nodes can reuse the same function by assigning individual deltas to be sent to each trampoline node selected by the pathfinding algorithm.Overall, ZmnSCPxj's proposal is a variation of the schnorr multi-hop locks mechanism that allows for flexibility and reusability of the `buildPath` function. It simplifies the process by eliminating the need to send left and right locks when using a trampoline node.</summary>
+    <published>2023-07-04T20:55:34+00:00</published>
+  </entry>
+</feed>

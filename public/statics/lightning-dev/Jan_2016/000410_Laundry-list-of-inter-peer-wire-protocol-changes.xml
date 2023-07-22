@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Laundry list of inter-peer wire protocol changes</title>
+  <updated>2023-05-18T16:42:00.694619+00:00</updated>
+  <author>
+    <name>Anthony Towns 2016-01-27 14:22:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Laundry list of inter-peer wire protocol changes</title>
+    <updated>2023-05-18T16:42:00.695373+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-January/000410.html" rel="alternate"/>
+    <summary>In an email conversation between Rusty Russell and aj, they discuss shachain vs elkrem. They use it to generate the revocation secrets to minimize storage and computation for a huge number of old commitment txs. They state that both shachain and elkrem are similar, but elkrem is much easier to comprehend. However, there seem to be some issues with the code example given in the comments, as it should be 0, 1 and 2, not 0, 1 and 8. The code also seems incorrect since if you try calling 'descend(6, 13, 2, R(seed))', you get L(L(R(seed))), instead of an error. They further discuss having the indexing backwards; i=0 should match the seed, and the first hash transmitted across the wire should be i=2^64-1, then counting down from there. This matches the numbering used in https://en.wikipedia.org/wiki/Hash_chain. With shachain, the only parameter needed is the seed, and you can work out the hash for any given index directly from that, up to any arbitrary index. With elkrem, you can build an arbitrarily deep tree given a seed at the conceptual level without any further parameters. However, when mapping that to indexes, you need to know the desired height first. They also discuss using a simple secret "redeemhash" to allow easy tracing of transactions through the network, and multi-sig txs, which could enable escrow-style services. Joseph pointed out that by simply allowing more than one hash on commit txs, we can enable such services.</summary>
+    <published>2016-01-27T14:22:29+00:00</published>
+  </entry>
+</feed>

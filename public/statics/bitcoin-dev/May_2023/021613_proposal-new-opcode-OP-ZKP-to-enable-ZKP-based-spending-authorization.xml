@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>proposal: new opcode OP_ZKP to enable ZKP-based spending authorization</title>
+  <updated>2023-06-16T18:02:47.491387+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2023-05-04 17:13:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>proposal: new opcode OP_ZKP to enable ZKP-based spending authorization</title>
+    <updated>2023-06-16T18:02:47.491387+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-May/021613.html" rel="alternate"/>
+    <summary>The issue discussed in this context is the potential attack on non-aggregated transactions. An anonymous attacker can flood the fullnode mempool network with large numbers of non-aggregated transactions and confirm a single aggregated transaction with a lower feerate than what it put in the several non-aggregated transactions. The attacker ends up paying less for the confirmed transaction, while the fullnode network has to process and validate all the non-aggregated transactions. This increases the load on the mempool.To prevent this attack, transactions that could appear in the mempool should be made non-aggregatable with other transactions. Aggregation should be arranged before the blockchain-level transaction hits the mempool. Signature aggregation is allowed within a single blockchain-level transaction but not across transactions, preventing the above attack. Similarly, cross-input ZKP aggregation would be acceptable but not cross-transaction ZKP aggregation.It is important to focus on the load on the mempool rather than the blocks as the mempool is a free service that should not be abusable. On the other hand, blockspace is a paid service, so its load is less important. Therefore, disallowing ZKP aggregation once a transaction could potentially hit the mempool and requiring paid services for aggregation outside of the unpaid, free mempool is recommended.</summary>
+    <published>2023-05-04T17:13:09+00:00</published>
+  </entry>
+</feed>

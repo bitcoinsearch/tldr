@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 174 thoughts</title>
+  <updated>2023-06-13T03:22:33.304535+00:00</updated>
+  <author>
+    <name>matejcik 2018-06-21 11:29:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 174 thoughts</title>
+    <updated>2023-06-13T03:22:33.304535+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-June/016140.html" rel="alternate"/>
+    <summary>The discussion revolves around the format of partially signed bitcoin transactions (PSBT). The first issue addressed is why the global type 0x03 (BIP-32 path) isn't per-input. It's mentioned that the reason behind this is address reuse, which may be discouraged but still happens in practice. While it's possible to make them per-input or per-output, it doesn't gain much since signers need to match up public keys with derivation paths when supporting any kind of multisig. The discussion then moves on to comparing two cases for a naive signer - either all data is global or most data is per input. The general signing flow is described step by step for both cases highlighting the differences between them. It's suggested that there are no advantages to the more complicated flow, and it's assumed that the format is space-saving because saving space was the only reason they could imagine. There's also talk about the role of combiners and finalizers, where it's pointed out that a combiner doesn't have to do anything more complicated than merge and deduplicate records while the finalizer reconstructs and validates the result. There's a suggestion to drop the "number of inputs" field and guarantee that the number of inputs in the transaction corresponds to the number of input fields for PBST.Another proposal is to change the BIP32 fields from fingerprint to chaincode. This has three advantages: signers can have thousands of master keys; they can index their master keys by whatever they like, and it permits signers who don't store a chaincode at all and just protect a single private key. The notion that you need to give all this information to a possibly untrusted Creator is disliked, and there's a discussion about whether the original Creator delegates this to some "sub-Creators."</summary>
+    <published>2018-06-21T11:29:44+00:00</published>
+  </entry>
+</feed>

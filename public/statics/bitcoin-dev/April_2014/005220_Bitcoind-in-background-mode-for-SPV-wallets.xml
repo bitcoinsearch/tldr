@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Bitcoind-in-background mode for SPV wallets</title>
+  <updated>2023-06-08T19:17:36.461580+00:00</updated>
+  <author>
+    <name>Tier Nolan 2014-04-10 17:30:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Bitcoind-in-background mode for SPV wallets</title>
+    <updated>2023-06-08T19:17:36.461580+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005220.html" rel="alternate"/>
+    <summary>The suggestion of error correction codes is interesting in the context of storing blocks. With 10000 nodes and each node storing 0.1% of the blocks at random, there is a chance of 45 in a million that a block will not be stored. However, with error correction codes like Reed-Solomon, the chances of blocks going missing are much lower. For example, in a system of 34 Reed-Solomon-like codes, 2 blocks out of 34 could be lost without any actual data loss for the network. The odds of two missing blocks landing within 34 of another is 68/1000000, meaning that the chances of two missing blocks falling in the same correction section is 0.153%. A simple error correction system would take 32 blocks in sequence and then compute 2 extra blocks. The extra blocks would have to be the same length as the longest block in the 32 being corrected, and shorter blocks would be padded with zeroes so everything is the same size. For each byte position in the blocks, one would compute the polynomial that goes through byte (x, data(x)), for x = 0 to 31. This could be a finite field or just mod 257. Then compute the value for x=32 and x = 33, which are the values for the 2 extra blocks. If mod 257 is used, only the 2 extra blocks have to deal with symbols from 0 to 256.With 32 of the 34 blocks, one can compute the polynomial and generate the 32 actual blocks. Soft fork could achieve this by having a commitment every 32 blocks in the coinbase. However, it makes the header chain much longer though. Longer sections are more efficient but need more calculations to recover everything. Interleaving can be done to handle the case where entire sections are missing.</summary>
+    <published>2014-04-10T17:30:32+00:00</published>
+  </entry>
+</feed>

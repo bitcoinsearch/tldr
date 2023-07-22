@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Safe auto-updating</title>
+  <updated>2023-06-07T15:27:08.634030+00:00</updated>
+  <author>
+    <name>Jim 2013-08-05 17:14:00</name>
+  </author>
+  <author>
+    <name>Wendell 2013-08-07 04:32:08</name>
+  </author>
+  <author>
+    <name>Wendell 2013-08-05 14:39:49</name>
+  </author>
+  <author>
+    <name>Daniel F 2013-08-05 15:54:02</name>
+  </author>
+  <author>
+    <name>Wendell 2013-08-07 04:32:08</name>
+  </author>
+  <author>
+    <name>Wendell 2013-08-05 14:39:49</name>
+  </author>
+  <author>
+    <name>Daniel F 2013-08-05 15:54:02</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2013-08-07 08:41:54</name>
+  </author>
+  <author>
+    <name>Wendell 2013-08-05 14:39:49</name>
+  </author>
+  <author>
+    <name>Daniel F 2013-08-05 15:54:02</name>
+  </author>
+  <author>
+    <name>Alan Reiner 2013-08-05 16:47:30</name>
+  </author>
+  <author>
+    <name>Jim 2013-08-05 17:14:00</name>
+  </author>
+  <author>
+    <name>Alan Reiner 2013-08-05 16:47:30</name>
+  </author>
+  <author>
+    <name>Peter Todd 2013-08-05 17:49:36</name>
+  </author>
+  <author>
+    <name>Alan Reiner 2013-08-05 16:47:30</name>
+  </author>
+  <author>
+    <name>Jim 2013-08-05 17:14:00</name>
+  </author>
+  <author>
+    <name>Peter Todd 2013-08-05 17:49:36</name>
+  </author>
+  <author>
+    <name>Wendell 2013-08-07 04:32:08</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2013-08-07 08:41:54</name>
+  </author>
+  <author>
+    <name>Peter Todd 2013-08-05 17:49:36</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2013-08-07 08:41:54</name>
+  </author>
+  <link href="bitcoin-dev/Aug_2013/003064_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003067_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003060_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003062_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003067_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003060_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003062_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003068_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003060_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003062_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003063_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003064_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003063_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003065_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003063_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003064_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003065_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003067_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003068_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003065_Safe-auto-updating.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2013/003068_Safe-auto-updating.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Safe auto-updating</title>
+    <updated>2023-06-07T15:27:08.634030+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-August/003064.html" rel="alternate"/>
+    <summary>The email thread begins with a discussion about implementing an auto-updater in Hive, a wallet app, for usability purposes. One member suggests using a server behind a Tor hidden service that outputs a checksum of the update package, but others point out that this method is not safe enough and recommend digital signing instead. To ensure better security, a distributor public key can be hardcoded in the software, and client software will only trust signed data from that key. The private key for that data is kept offline. When executing an upgrade, the new checksums are signed offline, and the signed checksum is uploaded to the distribution server.Another member suggests committing to the blockchain to ensure making a release available for download is public. This would involve each person on the signing list creating a transaction with a special form from a specific pubkey that commits to the digest of the binaries, and the auto-update code refusing to update unless it sees that special transaction with a sufficient number of confirmations. Developers would then be unable to make a special release for a specific target without letting the world know they did so, even under coercion.The potential danger of auto-updating being easy to target individuals is discussed, and anonymous downloads are suggested, but they tend to be fragile with regard to deanonymization attacks. Gregory Maxwell suggests using quorum signatures and timed quarantine with negative signatures to ensure security. Peter Todd suggests extending gitian with quorum signatures and timed quarantine with negative signatures.It is noted that Bitcoin-QT lacks an auto-updater due to security reasons, but it is unclear if this decision has been revisited. In addition, the discussion also veers off-topic when someone shares information about getting SQL databases under version control. In conclusion, the email thread emphasizes the importance of digital signing over just relying on a checksum for package authentication. The thread ends with links to the SQL database version control and Bitcoin-development mailing list.</summary>
+    <published>2013-08-05T17:14:00+00:00</published>
+  </entry>
+</feed>

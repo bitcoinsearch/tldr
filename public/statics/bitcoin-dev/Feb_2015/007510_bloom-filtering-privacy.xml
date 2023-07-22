@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>bloom filtering, privacy</title>
+  <updated>2023-06-09T17:30:01.044398+00:00</updated>
+  <author>
+    <name>Adam Back 2015-02-20 17:59:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>bloom filtering, privacy</title>
+    <updated>2023-06-09T17:30:01.044398+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-February/007510.html" rel="alternate"/>
+    <summary>In a conversation in #bitcoin-wizards, a user proposed the idea that each block should contain a commitment to a bloom filter which has all of the addresses in the block stored in it. This would allow users to download headers and bloom data for all blocks and then scan it offline and locally by searching for addresses from their wallet in it. Users could then know (modulo false positives) which addresses of theirs maybe in the block. To get merkle paths + transactions for the addresses from the UTXO set from the block(s) that it was found in, they would ask a full node. Additionally, UTXO commitments could be combined to improve security in two ways - the normal SPV increase and to avoid withholding by the full node if the UTXO commitment is a trie (sorted). They can expect a merkle path to lexically adjacent nodes either side of where the claimed missing address would be as a proof that there really are no transactions for that address in the block. Mike Hearn had some questions regarding this proposal such as how does it interact with the need to download chains rather than individual transactions and do so without round-tripping to the remote node for each block? Bloom filtering currently pulls down blocks in batches without much client/server interaction and that is useful for performance. He suggested junking the whole notion of chain scanning and getting to a point where clients are only syncing headers.</summary>
+    <published>2015-02-20T17:59:03+00:00</published>
+  </entry>
+</feed>

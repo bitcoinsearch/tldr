@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - ECDH for spontaneous payments and offline vending machines</title>
+  <updated>2023-06-03T21:59:38.647828+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-06-11 03:47:26</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-06-10 06:04:08</name>
+  </author>
+  <author>
+    <name>Stepan Snigirev 2019-06-10 08:34:07</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-06-11 12:47:28</name>
+  </author>
+  <author>
+    <name>Stepan Snigirev 2019-06-09 19:39:11</name>
+  </author>
+  <author>
+    <name>Stepan Snigirev 2019-06-11 07:58:43</name>
+  </author>
+  <link href="lightning-dev/June_2019/002012_ECDH-for-spontaneous-payments-and-offline-vending-machines.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002010_ECDH-for-spontaneous-payments-and-offline-vending-machines.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002011_ECDH-for-spontaneous-payments-and-offline-vending-machines.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002014_ECDH-for-spontaneous-payments-and-offline-vending-machines.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002009_ECDH-for-spontaneous-payments-and-offline-vending-machines.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002013_ECDH-for-spontaneous-payments-and-offline-vending-machines.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - ECDH for spontaneous payments and offline vending machines</title>
+    <updated>2023-06-03T21:59:38.647828+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-June/002012.html" rel="alternate"/>
+    <summary>The lightning network community has two recent interesting ideas: making spontaneous payments with the knowledge of a node id and generating invoices for offline vending machines with arbitrary amounts. For the latter, the vending machine generates an ephemeral key 'k' and corresponding ephemeral node id 'K', which is used to create an invoice signed with the key. The routing information in the payment goes through their online node 'N'. In the future, when "rendezvous routing" is used, it may become possible to perform this trick. However, the proposal faced issues with the inability to extract `K` as the next-node-ID was never transmitted.To generate invoices on the fly, the vending machine uses hmac-sha256(x, amount), where x is a secret key from ECDH(K, N) - (x-coordinate of k * N). This construction allows for generating invoices without ever talking to the node itself. The vending machine generates a new ephemeral key for every invoice, including for spontaneous payments. Additional information can be provided to the node about the payment by misusing the short channel id field, but the preferred method would be to have a metadata field in the invoice that can be passed to the payee in the onion packet, which requires changes in the bolt 11 and is already on the roadmap.The issue of tips not being included in preimage generation is discussed where ZmnSCPxj suggests using a pre-shared common secret at installation time for preimage generation and passing a nonce as a channel ID. This method doesn't allow for tips above the invoice face value to be included. To accept tips up to 25% above the invoice face value, the iteration from `amount_to_forward` down to `0.8 * amount_to_forward` can be used to yield a preimage that matches the payment hash. An online node can try to generate the preimage for every HTLC offer with all known common secrets and the channel ID and if it fails, try to route the payment as usual.To determine the source of payment, a set of common secrets can be used, and the first byte or varint of the channel ID can be used as a secret ID, provided there is enough space left for the nonce. Christian Decker has implemented the feature of making spontaneous payments with the knowledge of a node id as a plugin for c-lightning. It involves calculating a common secret with ECDH and using it as a payment hash for the htlc.</summary>
+    <published>2019-06-11T03:47:26+00:00</published>
+  </entry>
+</feed>

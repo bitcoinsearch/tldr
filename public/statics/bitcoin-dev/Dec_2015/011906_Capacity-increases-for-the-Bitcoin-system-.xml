@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Capacity increases for the Bitcoin system.</title>
+  <updated>2023-05-19T22:34:23.099967+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-12-09 04:51:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Capacity increases for the Bitcoin system.</title>
+    <updated>2023-05-19T22:34:23.099967+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-December/011906.html" rel="alternate"/>
+    <summary>A discussion on bitcoin-dev mailing list has taken place regarding the impact of segwit-spending inputs on block size. The thread started with Gavin Andresen suggesting that creating a one-megabyte transaction using segwit-spending SIGHASH_ALL inputs would allow more inputs to be fit into a block, since their smaller size means each input would hash very close to one megabyte of data, taking up less space in blocks. However, Gregory Maxwell pointed out that witness size comes out of the 1MB at a factor of 0.25, therefore it is not possible to make a block which has signatures with the full 1MB of data under the sighash while also having signatures externally. On the worst case scenario, he came up with a script which would take up 80kB of redeem-script and require hashing 19.9GB of data to fully verify with current Bitcoin rules. Maxwell then explored different scenarios including one where the limit is 3MB of witness data without the 75% factor. This scenario would require hashing 750GB of data to verify a 3MB block. However, Maxwell believed that straightforward optimizations could prevent this kind of abuse. For instance, disallowing more than a dozen sigops per input or failing checksigs with the same key in a single input. Finally, Maxwell suggested that the only realistic transactions that would cause lots of signatures and hashing are those that have lots of inputs that each require a signature or two, which might happen if a miner is cleaning up dust. In such cases, a 1MB transaction with a single output and a bunch of 41B inputs would only require hashing 9.5GB of data. Switching from 2-of-2 multisig to just a single public key would reduce the hashed data to about 9.3GB for 14900 signatures with about 626kB of base data and 1488kB of witness data. Rusty's calculation was that the worst-case scenario is hashing about 406kB, 3300 times for 1.34GB of hashed data.</summary>
+    <published>2015-12-09T04:51:39+00:00</published>
+  </entry>
+</feed>

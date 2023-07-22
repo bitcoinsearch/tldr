@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>An Argument For Single-Asset Lightning Network</title>
+  <updated>2023-06-02T16:22:34.689261+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2019-01-02 06:09:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>An Argument For Single-Asset Lightning Network</title>
+    <updated>2023-06-02T16:22:34.689261+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-January/001798.html" rel="alternate"/>
+    <summary>Hello! In this discussion, the topic of using Hashed Time-Locked Contracts (HTLCs) in a naive way causing the "option problem" is brought up. The atomic swap protocol described is flawed as one party has an "option" for the duration of a set time period. The ideal abstract functionality would be to make an offer, take an offer, and cancel an offer. A new protocol is developed which allows for this ideal functionality. The protocol involves Alice putting the HTLC for asset `A` on blockchain α and creating a partial β blockchain transaction by signing one input and one output. This gives Alice the "Make Offer" functionality. If Bob wants to accept the offer, he adds asset `B` to another input of the transaction and posts it to blockchain β. If Alice wishes to cancel the trade before Bob confirms the transaction, she double spends the `C` output and reclaims `A`. This shows that HTLCs themselves do not cause options but rather uncancelable offers + uncollateralized HTLCs cause the option problem. In payment channels where Alice and Bob have direct channels to each other, there may be an issue if they both decide to cancel/take at the same time. A trusted third party to compute the outcome of an offer seems like a promising direction to avoid on-chain resolution. Regarding cross-asset payments, sending a payment in asset `A` and receiving it as asset `B` with an exchange node doing a conversion is unsound given what we are able to construct in Lightning. However, a single two-party channel could record multiple asset types with distinct outputs for different asset-type/party combinations. This would allow for buying an amount of the desired asset in one's own channel and exchanging it with their direct peer without needing HTLCs.</summary>
+    <published>2019-01-02T06:09:23+00:00</published>
+  </entry>
+</feed>

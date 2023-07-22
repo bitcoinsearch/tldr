@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PTLCs early draft specification</title>
+  <updated>2023-06-03T06:46:06.605985+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2021-12-22 08:02:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PTLCs early draft specification</title>
+    <updated>2023-06-03T06:46:06.605985+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003435.html" rel="alternate"/>
+    <summary>In this email exchange, Bastien and AJ discuss the use of revkey and pubkey in the context of commitment transactions for Bitcoin's Lightning Network. They consider whether to use revkey or pubkey for Bob's anchor on his commitment, and Alice's anchor on Bob's commitment. While using the pubkey would allow each participant to claim their anchor in the latest commitment, it defeats the purpose of the `OP_16 OP_CHECKSEQUENCEVERIFY` script branch, which is intended to avoid keeping anchor outputs around forever. The revkey, on the other hand, is not revealed when channels close with the latest commit, so it cannot be used to clean up the utxo set. AJ suggests that using the revkey can work if they just specify (revkey) rather than musig(revkey, remote_key), but Bastien points out that this would prevent them from bumping the current remote commitment if it appears on-chain. However, if they need to bump someone else's commitment, they should use the remote_anchor provided by that party, not the local_anchor. Overall, they agree that a smarter solution may be needed to address these issues.</summary>
+    <published>2021-12-22T08:02:23+00:00</published>
+  </entry>
+</feed>

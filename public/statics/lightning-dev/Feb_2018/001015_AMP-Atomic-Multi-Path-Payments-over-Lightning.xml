@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>AMP: Atomic Multi-Path Payments over Lightning</title>
+  <updated>2023-05-24T20:47:31.873345+00:00</updated>
+  <author>
+    <name>CJP 2018-02-09 10:15:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>AMP: Atomic Multi-Path Payments over Lightning</title>
+    <updated>2023-05-24T20:47:31.873345+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/001015.html" rel="alternate"/>
+    <summary>The Lightning network has proposed a new feature called Atomic Multi-Path Payments (AMP) to send larger payments over multiple channels without reusing payment hashes or compromising the trust between payer and payee. AMP splits every transaction into lots of micro-payments, allowing for better path diversity and privacy in routing.Additionally, it reduces strain on individual paths and allows for logical payments larger than the current maximum value of an individual payment. The protocol goals include atomicity, avoiding payment hash reuse, order invariance, and non-interactive setup.The proposed solution, Atomic Multi-path Payments (AMPs), leverages Encrypted Onion Balances (EOBs) to deliver additive shares of a base preimage from which the payment preimages of partial payments can be derived, ensuring atomicity of the transaction. To initiate an AMP transaction, the sender generates a random identifier ID and divides the total payment value V into n partial payments using the base preimage BP, sampled additive shares s_1 to s_n, and H, a collision-resistant hash function. The protocol currently has a hard limit of 20 hops, and each node gets a 65-byte payload that includes instructions on how to forward a payment, such as the realm, next node to forward to, amount to forward, outgoing CLTV, and HMAC over the entire thing.The article discusses other variants of AMPs, such as non-interactive to interactive AMPs, additive shares vs threshold-shares, adaptive AMPs, and cross-chain AMPs. Non-interactive to interactive AMPs involve the sender receiving an ID and amount from the receiver in an invoice before initiating the protocol. Adaptive AMPs allow for dynamically chosen n by iteratively constructing the shared secrets. Cross-Chain AMPs can be used to pay a receiver in multiple currencies atomically.To support the increased load, internal routing nodes are incentivized to have more active channels, which may increase the longevity of channels as there will be smaller, more numerous payment flows. The current onion packet format can be utilized to deliver additional data from sender to receiver while still being end-to-end authenticated. If HORNET is integrated, a distinct communication session may be established to allow sender and receiver to exchange up-to-date partial payment information, allowing the sender to more accurately size each partial payment.In a world where most payments use an AMP-like protocol, there will be several pending HTLC's on commitments network-wise, which may incentivize nodes to open more channels to support the increased commitment space utilization.</summary>
+    <published>2018-02-09T10:15:20+00:00</published>
+  </entry>
+</feed>

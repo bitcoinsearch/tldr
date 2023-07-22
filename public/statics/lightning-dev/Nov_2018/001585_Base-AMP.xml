@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Base AMP</title>
+  <updated>2023-05-25T16:29:42.569932+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-11-13 22:47:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Base AMP</title>
+    <updated>2023-05-25T16:29:42.569932+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001585.html" rel="alternate"/>
+    <summary>The Lightning Network developer ZmnSCPxj has proposed a change to support Base AMP. The proposal allows arbitrary merges of paths but not arbitrary splits. The multipath_merge_per_hop type indicates that payment has been split by the sender using Base AMP, and that the receiver should wait for the total intended payment before forwarding or claiming the payment. The contents of this hop will be the same across all paths of the Base AMP. The payment_hash of the incoming HTLCs will also be the same across all paths of the Base AMP. The `intended_total_payment` is the total amount of money that this node should expect to receive in all incoming paths to the same `payment_hash`. The ultimate payee is J, which is a merge point. Other intermediate nodes, B, C, D, E, G, H, and I, are not merge points and do not need to understand this. Only F and J need to be given some merge point information in the new per_hop_type. Splitting the entire payment needs to be done at the ultimate source always, but merging can be done at any point along the way.The receiver must impose a reasonable timeout for waiting to receive all component paths, and fail all incoming HTLC offers for the `payment_hash` if they have not totaled equal to `intended_total_payment`. It must not forward (if an intermediate node) or claim (if the final node) unless it has received a total greater or equal to `intended_total_payment` in all incoming HTLCs for the same `payment_hash`. The sender must use the same `payment_hash` for all paths of a single multipath payment.It would be valuable to advertise the ability to merge payments as a global feature bit, not on the invoice. The proposal still works without the intermediaries needing to know this. The receiver should fail the payment if `intended_total_payment` is less than the invoice amount. The proposal may also require a new name; suggestions include NAMP or CPHR (Concurrent Payment Hash Re-use).</summary>
+    <published>2018-11-13T22:47:19+00:00</published>
+  </entry>
+</feed>

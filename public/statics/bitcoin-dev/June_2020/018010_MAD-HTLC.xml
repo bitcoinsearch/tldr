@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>MAD-HTLC</title>
+  <updated>2023-06-14T02:35:30.512583+00:00</updated>
+  <author>
+    <name>David A. Harding 2020-06-28 16:41:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>MAD-HTLC</title>
+    <updated>2023-06-14T02:35:30.512583+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-June/018010.html" rel="alternate"/>
+    <summary>The discussion on the Bitcoin-dev mailing list reveals a proposed implementation of MAD-HTLC, which comprises two UTXOs: Deposit and Collateral. Deposit holds the intended HTLC tokens, with three redeem paths - Alice (signature) with preimage "A," no timeout; Bob (signature) with preimage "B," timeout T; and any entity (miner), with both preimages "A" and "B," no timeout. Collateral holds the fidelity bond, which does not have to be of the same amount as the deposit, with two redeem paths - Bob (signature), no preimage, timeout T, and any entity (miner), with both preimages "A" and "B," timeout T.However, Dave expresses his concern about the safety of using MAD-HTLC if the counterparty is a miner. He imagines a scenario where Bob offers Alice a MAD-HTLC, whereby Alice knows the payment preimage "A," while Bob knows the bond preimage "B," and he makes the payment and offers the bond. After receiving the HTLC, Alice takes no action on it, allowing the timelock to expire, and Bob broadcasts the refund transaction with the bond preimage. Then, Alice, who is actually a miner, attempts to privately mine a transaction that pays her both the payment ("deposit") and the bond ("collateral") using her pre-existing knowledge of the payment preimage plus her received knowledge of the bond preimage. If Alice has a non-trivial amount of hashrate, she will succeed some percentage of the time in executing this type of attack, assuming she is a non-majority miner, and her chance of success depends on her percentage of the network hashrate and how much fee Bob paid to incentivize other miners to confirm his refund transaction quickly.</summary>
+    <published>2020-06-28T16:41:32+00:00</published>
+  </entry>
+</feed>

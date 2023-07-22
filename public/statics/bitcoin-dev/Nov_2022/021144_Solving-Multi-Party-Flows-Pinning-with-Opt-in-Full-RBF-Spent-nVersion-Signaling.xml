@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Solving Multi-Party Flows Pinning with Opt-in Full-RBF Spent-nVersion Signaling</title>
+  <updated>2023-05-22T22:42:04.636528+00:00</updated>
+  <author>
+    <name>Antoine Riard 2022-11-02 02:21:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Solving Multi-Party Flows Pinning with Opt-in Full-RBF Spent-nVersion Signaling</title>
+    <updated>2023-05-22T22:42:04.636528+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021144.html" rel="alternate"/>
+    <summary>The issue of pinning contracting protocols funding flows with opt-out double-spend is a challenge that can be solved by implementing an opt-in Full-Replace-by-Fee Spent-nVersion Signaling policy. The problem arises when multi-party collaborative flows are subjected to a low-cost and high-success DoS vector with asymmetric damages, where a single input can bleed the time value of the remaining inputs or engage in a MEV attack. Currently, there is no mechanism to require replacement signaling provable to a third party only on the knowledge of the UTXO spents. The solution proposed is that a confirmed transaction is considered to have opted-in to allowing replacement of any of its spends if the last bit of the nVersion field is set. This protects the collaborative participants of a multi-party flow that the target transaction should propagate to the miners if the fee/feerate offered are the best ones without opt-out based pinning. On the validation-side, there is one engineering issue as there is no access to the spent nversion fields by the mempool logic. For the contracting protocols wallets, if they don't know which coins are going to be used for a collaborative flow, they're better off marking all their coins nVersion fields opting fullrbf. However, this policy bookmarking comes as a protocol fingerprint leak for an observer of the transaction logs. For zeroconf operators, assuming they have access to the UTXO set, they can inspect the receiving transactions ancestors nVersion fields and sort those transactions in the wider set of replaceable ones.Long-term, this new policy enforcement efficiency is still dependent on the existence of relay paths and support at the endpoints that matter, the miner mempools. Therefore, it might be necessary to realize incentive alignment with hashrate is what matters in terms of transaction-relay rules. Credit goes to Greg Maxwell for this idea.</summary>
+    <published>2022-11-02T02:21:59+00:00</published>
+  </entry>
+</feed>

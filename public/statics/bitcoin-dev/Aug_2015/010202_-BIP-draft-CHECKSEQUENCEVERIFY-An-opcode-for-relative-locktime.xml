@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP-draft] CHECKSEQUENCEVERIFY - An opcode for relative locktime</title>
+  <updated>2023-06-10T19:20:28.856560+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2015-08-13 18:12:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP-draft] CHECKSEQUENCEVERIFY - An opcode for relative locktime</title>
+    <updated>2023-06-10T19:20:28.856560+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/010202.html" rel="alternate"/>
+    <summary>The author of the BIP 1 requests that the BIP editor assign an official number to the work. The CHECKSEQUENCEVERIFY opcode is described in this draft BIP for Bitcoin's scripting system, which introduces a form of relative-locktime. The opcode redefines the existing NOP3 opcode and compares the top item on the stack to the inverse of the nSequence field of the transaction input containing the scriptSig. BIP 68's redefinition of nSequence prevents a non-final transaction from being selected for inclusion in a block until the corresponding input has reached the specified age, as measured in block height or block time. By comparing the argument to CHECKSEQUENCEVERIFY against the nSequence field, we indirectly verify a desired minimum age of the output being spent. Making the nSequence field accessible to script enables the construction of code pathways that only become accessible some minimum time after proof-of-publication. This enables a wide variety of applications in phased protocols such as escrow, payment channels, or bidirectional pegs. A reference implementation is available in a git repository. It is recommended that this soft-fork deployment trigger include other related proposals for improving Bitcoin's lock-time capabilities, including BIP 65: OP_CHECKLOCKTIMEVERIFY, BIP 68: Consensus-enforced transaction replacement signaled via sequence numbers, and BIP XX: Median-Past-Time-Lock.An example given is an escrow that times out automatically 30 days after being funded. Alice, Bob, and Escrow create a 2-of-3 address with a redeem script. At any time, funds can be spent using signatures from any two of Alice, Bob or the Escrow. After 30 days Alice can sign alone. We reuse the double-threshold switchover mechanism from BIPs 34 and 66, with the same thresholds, but for nVersion = 4. The new rules are in effect for every block (at height H) with nVersion = 4 and at least 750 out of 1000 blocks preceding it (with heights H-1000..H-1) also have nVersion = 4.</summary>
+    <published>2015-08-13T18:12:43+00:00</published>
+  </entry>
+</feed>

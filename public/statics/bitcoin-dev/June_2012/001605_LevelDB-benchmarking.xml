@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>LevelDB benchmarking</title>
+  <updated>2023-06-06T05:43:00.656337+00:00</updated>
+  <author>
+    <name>Mike Hearn 2012-06-18 18:41:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>LevelDB benchmarking</title>
+    <updated>2023-06-06T05:43:00.656337+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-June/001605.html" rel="alternate"/>
+    <summary>The author changed the transaction database to Google LevelDB library, which is a part of BigTable. Tests were performed on a 6 core Ubuntu machine using a hard disk with an average 8.9msec seek time. The test was run on a chain with 185127 blocks using -loadblock. The analysis was conducted between Regular BDB as they have today and LevelDB with customized options. The results showed that throughput for Regular BDB was usually 4-5MB/sec with pauses of 8-10 seconds for "Flushing wallet...". Running time was 96 minutes and throughput was 12-17mb/sec when EC verification was disabled, running time was cut in half. LevelDB without customized options took about 50 minutes with throughput often in the range of 20-30mb/sec. LevelDB with 10 bit per key bloom filter and 30mb cache yielded no change in running time or throughput. Signature checking remained the bottleneck, not IO.LevelDB with 10 bit per key bloom filter, 30mb cache, and no signatures took only 12 minutes compared to 42 minutes for BDB on the same benchmark. The conclusion was that LevelDB is a clear win, taking a sync in the absence of network delays from 95 minutes to 50. It is nearly 4x faster when signature checks are not done (i.e., when receiving a block containing only mempool transactions already verified).</summary>
+    <published>2012-06-18T18:41:43+00:00</published>
+  </entry>
+</feed>

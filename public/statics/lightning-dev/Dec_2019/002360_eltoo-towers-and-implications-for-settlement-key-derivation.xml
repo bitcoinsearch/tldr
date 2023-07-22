@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>eltoo towers and implications for settlement key derivation</title>
+  <updated>2023-06-02T21:54:53.439051+00:00</updated>
+  <author>
+    <name>Rusty Russell 2019-12-03 04:00:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>eltoo towers and implications for settlement key derivation</title>
+    <updated>2023-06-02T21:54:53.439051+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-December/002360.html" rel="alternate"/>
+    <summary>In a conversation on the Lightning-Dev mailing list, Rusty Russell and ZmnSCPxj discussed some potential issues related to watchtowers in relation to channel construction. Rusty had revisited the eltoo paper and discovered that due to NOINPUT, any update transaction can spend from any other, which could affect the role of watchtowers. However, in order to spend, the tower must also produce a witness script which when hashed matches the witness program of the input. To ensure settlement txns can only spend from exactly one update txn, each update txn uses unique keys for the settlement clause, meaning that each state has a unique witness program. ZmnSCPxj pointed out that he didn't think this was the design, and that the update transaction would be able to spend any prior with a fixed script due to NOINPUT, while the settlement transaction would only be able to spend the matching update. Rusty acknowledged his mistake and proposed changing the key(s) every time, based on something the watchtower will know, such as something in the update tx itself. However, they acknowledged that using the output for this purpose would create a circular dependency, and questioned whether there is some taproot thing they can use to insert some noise in the input.</summary>
+    <published>2019-12-03T04:00:10+00:00</published>
+  </entry>
+</feed>

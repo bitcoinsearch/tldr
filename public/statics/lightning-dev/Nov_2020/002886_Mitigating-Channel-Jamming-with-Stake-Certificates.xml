@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Mitigating Channel Jamming with Stake Certificates</title>
+  <updated>2023-06-03T02:59:57.212399+00:00</updated>
+  <author>
+    <name>Gleb Naumenko 2020-11-27 05:57:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Mitigating Channel Jamming with Stake Certificates</title>
+    <updated>2023-06-03T02:59:57.212399+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-November/002886.html" rel="alternate"/>
+    <summary>In a forum post discussing the Lightning Network, members of the community have suggested using UTXO ownership proofs, also known as Stake Certificates, to address channel jamming. The proposal suggests that these certificates could act as a "fidelity bond" and requirement for sending HTLCs.To relay an HTLC, Alice would need to embed an ownership proof in the onion packet sent to Bob. Bob would then need to verify that the channel identifier pointed unambiguously to an on-chain UTXO and that the ownership proof was valid against the previously disclosed UTXO witness script. If all checks were successful, Bob would then check if Alice had exceeded her credit balance. If she hadn't, he would decrement her credit balance and relay the HTLC to Carol.However, this protocol is a privacy concern as routing nodes can easily assign every HTLC they forward to the sender's UTXO. To preserve privacy, the proposed solution would rely on zero-knowledge proofs of UTXO ownership by avoiding pointing to a specific UTXO.When it comes to economic feasibility, both Stake Certificates and upfront payments are considered equal. However, the design of Stake Certificates may vary in terms of UX burden, from completely automatic to requiring custom actions with private keys from users. There are also questions about whether credit spending should be gossiped across the entire network or only known to the routing nodes involved in the payment.The authors conclude by stating that Stake Certificates may provide a better economic feasibility for the cost of implementation complexity, as they rely on zero-knowledge proofs. Despite this, the trade-offs associated with selecting the right zero-knowledge system, designing the best credit-to-value-transferred function, interactivity and lifetime of Stake Certificates, spending a UTXO revealing all Stake Certificates generated from it, and mitigating malicious routing nodes failing payments must be considered.While Stake Certificates may not be the best near-term solution due to complexity, the proposal highlights stake-based protocols' potential in solving Sybil challenges in the Bitcoin ecosystem. If the community finds it interesting, the design questions mentioned above should be discussed, and a cryptosystem should be chosen.</summary>
+    <published>2020-11-27T05:57:53+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[Pre-BIP] Fee Accounts</title>
+  <updated>2023-06-03T07:10:11.004382+00:00</updated>
+  <author>
+    <name>Jeremy 2022-01-01 20:04:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[Pre-BIP] Fee Accounts</title>
+    <updated>2023-06-03T07:10:11.004382+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-January/003437.html" rel="alternate"/>
+    <summary>In a recent post, Jeremy Rubin proposed an alternative approach to Bitcoin's current transaction fee design. He suggests establishing an account system in Bitcoin as an extension block to clean up the fee paying semantics. The proposal involves defining a special anyone can spend output type that is a "fee account", which has a redeeming key and an amount associated with it. Deposits to these outputs get stored in a separate UTXO database for fee accounts. Fee accounts can sign only two kinds of transactions, which are committed in an extension block merkle tree. In any block, any of the fee account deposits can be released into fees if there is a corresponding tx, consolidated together to reduce the number of utxos, or released into fees and paid back into the requested withdrawal key.While this design improves scalability because adding fees to a transaction does not require adding inputs or outputs and does not require tracking substantial amounts of new state, it could be modified to improve privacy. Rubin suggests implementing something like Tornado.cash so that the fee account paying can be unlinked from the transaction being paid for. Other operations could also be added to allow trustless mixing to be done by miners automatically where groups of accounts with similar values are trustlessly split into a common denominator and change.Rubin believes that this type of design works well for channels because the addition of fees to channel state does not require any pre-planning. Moreover, this sort of design is naturally immune to pinning issues since you could offer to pay a fee for any TXID, and the number of fee adding offers does not need to be restricted in the same way the descendant transactions would need to be. This type of design could be implemented without a fork as a federated network that bribes miners, potentially even retroactively after a block is formed.</summary>
+    <published>2022-01-01T20:04:00+00:00</published>
+  </entry>
+</feed>

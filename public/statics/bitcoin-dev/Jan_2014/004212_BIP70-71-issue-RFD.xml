@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP70/71 issue, RFD</title>
+  <updated>2023-06-08T00:46:25.289336+00:00</updated>
+  <author>
+    <name>Mike Hearn 2014-01-26 23:01:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP70/71 issue, RFD</title>
+    <updated>2023-06-08T00:46:25.289336+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-January/004212.html" rel="alternate"/>
+    <summary>Andreas Schildbach, a Bitcoin developer, encountered an issue with the protobuf format while experimenting with BIP70/71 (payment protocol) usage in face to face payments. Protobufs are not self-delimiting. This means if you're reading from an undelimited stream, you will read endlessly because you don't know how much to read. The current BIP70 implementations probably work because they're reading either from a file or from an HTTP resource which sets the Content-Length header. However, the Content-Length header is optional, and there are many kinds of streams that don't have this built-in delimiting mechanism. Andreas suggests using delimited I/O for PaymentRequest, Payment, and PaymentACK messages that write the size of the message as a varint before writing the data. Nonetheless, this leading varint is an incompatible change and would need to be added to the spec. Bluetooth, Wifi Direct, HTTP request/responses via broken proxies, smoke signals, basically anything that is a stream rather than a file can be affected by this problem. NFC NDEF and QR codes are not affected, so we can skip the delimiter for these mediums.</summary>
+    <published>2014-01-26T23:01:53+00:00</published>
+  </entry>
+</feed>

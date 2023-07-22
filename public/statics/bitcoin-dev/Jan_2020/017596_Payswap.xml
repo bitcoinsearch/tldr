@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Payswap</title>
+  <updated>2023-06-13T23:18:14.457647+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-01-24 10:11:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Payswap</title>
+    <updated>2023-06-13T23:18:14.457647+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-January/017596.html" rel="alternate"/>
+    <summary>In a recent post on lightning-dev, ZmnSCPxj suggested using a circular self-payment mechanism to hide the direction of payment from third-party snooping nodes. This atomic mechanism involves the source paying a larger-than-amount payment to the destination and the destination returning the difference instead. This mechanism can also be based on CoinSwap to mislead onchain analysis. The Payswap payment flow involves the sender locating some owned UTXOs that total an amount equal or greater than the payment amount, revealing the sum to the destination. The destination locates some owned UTXOs that total an amount equal or greater than the difference (change) of the sender total minus the payment amount. The sender and destination set up an unequal CoinSwap where the destination receives all the sender coins and the sender receives the difference between the sender total and the payment amount (change). They execute the CoinSwap and complete the payment protocol. The above is an active misleading of chain analysis and is even possible today with 2p-ECDSA to make it use P2WPKH with Scriptless Script. However, this involves more transactions than Payjoin, making it more expensive in blockspace. The protocol can be aborted by one participant, which will lead to spending onchain fees to back out of the protocol. CoinSwap overhead approaches the overhead of setting up a temporary Lightning Network channel, thus it might actually be better to implement all CoinSwap protocols over Lightning instead. ZmnSCPxj suggests that probably the correct order for this would be for the payer to instantiate the Scriptless Script payment to the payee first, then the payee instantiating the change back to the payer. By use of some kind of Scriptless Script, it is possible to as well implement a proof-of-payment system similar to Lightning, which might be useful to prove to an auditor that a payment has been made without revealing this to anyone other than the auditor. Both the payer and payee can generate a scalar. The payee provides a signed invoice (can reuse the Lightning BOLT11 invoice format) attesting the payment point that needs to be paid, the payment point being the generator point times the payee scalar. The payer then instantiates the Scriptless Script PTLC, requiring knowledge of the payee scalar + the payer scalar from the payee. Then the payee instantiates the change Scriptless Script PTLC, requiring knowledge of the payer scalar from the payer. Then the payee claims the change, which allows the payer to claim the full transfer while revealing the payee scalar as a proof-of-payment.</summary>
+    <published>2020-01-24T10:11:55+00:00</published>
+  </entry>
+</feed>

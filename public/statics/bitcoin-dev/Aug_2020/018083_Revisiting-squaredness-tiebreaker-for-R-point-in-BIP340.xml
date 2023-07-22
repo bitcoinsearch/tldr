@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Revisiting squaredness tiebreaker for R point in BIP340</title>
+  <updated>2023-06-14T03:34:27.587116+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2020-08-13 05:31:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Revisiting squaredness tiebreaker for R point in BIP340</title>
+    <updated>2023-06-14T03:34:27.587116+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018083.html" rel="alternate"/>
+    <summary>Pieter Wuille, a Bitcoin Core developer, has suggested reconsidering the use of squaredness as a tie-breaker for conveying the Y coordinate of points in BIP340. Currently, squaredness is used for the R point inside signatures while evenness is used for public keys. The justification for using squaredness was performance-related, as determining evenness requires a conversion to affine coordinates, which can be slower than computing squaredness directly in Jacobian coordinates. However, recent developments have shown that this assumption is incorrect and that using evenness as the tie-breaker may be faster. The impact of using evenness instead of squaredness on performance varies depending on the hardware and algorithmic optimizations used. In general, there may be a small speedup in verification and a slowdown in signing. However, the change is relatively simple to implement and may simplify code maintenance by unifying xonly -&gt; point conversion, making it easier to maintain type-safe APIs. The change involves modifying the BIP and test vectors, as well as changes to the proposed BIP340 implementation and the Python test reimplementation in Bitcoin Core. While it is late in the process to make such a change, Pieter believes that it is worth considering given the potential benefits and the fact that it will become harder to make this simplification in the future. Other developers are invited to share their thoughts on the matter.</summary>
+    <published>2020-08-13T05:31:58+00:00</published>
+  </entry>
+</feed>

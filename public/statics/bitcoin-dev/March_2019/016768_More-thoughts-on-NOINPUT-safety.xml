@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>More thoughts on NOINPUT safety</title>
+  <updated>2023-06-13T17:41:51.969369+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-03-13 06:41:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>More thoughts on NOINPUT safety</title>
+    <updated>2023-06-13T17:41:51.969369+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-March/016768.html" rel="alternate"/>
+    <summary>The email suggests a way to improve the security of the eltoo channel in Bitcoin. It proposes requiring every script to have a valid signature that commits to the input, which would prevent cheating. However, this approach is more costly than a key path spend, as it requires revealing the taproot point and two keys, and has some script overhead. The email argues that output tagging doesn't provide a workable defense against third party malleability via a deeper-than-the-CSV-delay reorg, but requiring a non-NOINPUT sig does. The writer believes that restricting NONINPUT sigs from being used to spend an ordinary 2-of-2 is still output tagging since a cooperative close would still reveal that the output is not a 2-of-2. They suggest that ideally, historical data of whether onchain coin was used in Lightning or not should be revealed as little as possible, so the spend should look no different from an ordinary 2-of-2 spend in a cooperative close. To work around this, the email suggests adding a "kickoff" transaction that spends the eltoo setup transaction and outputs to an ordinary 2-of-2, with the rest of the protocol anchored on top of the kickoff. The kickoff is kept offchain until a non-cooperative close is needed, and it must need onchain fees attached to it, which complicates fees. Alternatively, the kickoff can be signed with `SIGHASH_SINGLE | SIGHASH_ANYONECANPAY` so that it is possible to add a fee-paying UTXO to it.</summary>
+    <published>2019-03-13T06:41:47+00:00</published>
+  </entry>
+</feed>

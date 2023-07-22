@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PoDLEs revisited</title>
+  <updated>2023-06-03T03:32:54.517668+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2021-01-15 01:28:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PoDLEs revisited</title>
+    <updated>2023-06-03T03:32:54.517668+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-January/002935.html" rel="alternate"/>
+    <summary>In an email exchange between Lloyd Fournier and Rusty Russell, the issue of proving ownership of inputs when using a signaling transaction was discussed. The practical problem with a signaling transaction is that it's difficult to tell if it's conflicting, as Mallory uses a single UTXO to probe for everyone’s UTXO at once. Poor Bob wants to both wait 60 seconds to see if a conflicting transaction ends up in his mempool and broadcast it ASAP to signal to others. He wants to do both of these before revealing his own UTXOs. Lloyd Fournier pointed out that this is a problem with all three schemes he mentioned. There will always be a need to wait for things to be gossiped in some way to catch attempts at parallel sessions. If parallel sessions are legal, then you shouldn't try and catch them; but if they're legal, there will always be an effective dual funding UTXO discovery attack by using one UTXO to hit many targets. The real question is whether it's even worth trying to stop sequential attacks if parallel attacks are unstoppable. PoDLE might have an advantage in parallel attacks if the scheme was changed a bit. A weakness of the lightning proposal compared to the joinmarket idea is that the h2 point is not broadcast immediately, rather you wait for failure and then broadcast it. Instead, a peer should broadcast h2 as soon as they have agreed to create a transaction with the initiator. If at any time during the tx creation protocol they receive the same h2 from someone else, they cancel and don't reveal their UTXOs. Note that here you don't have to randomly select the time you wait. Since this scheme is effective, it would also break the "middleman" idea unless Alice funds with two UTXOs or there is some way for all parties involved in the funding to distinguish gossiped h2s from their funding session from others.</summary>
+    <published>2021-01-15T01:28:49+00:00</published>
+  </entry>
+</feed>

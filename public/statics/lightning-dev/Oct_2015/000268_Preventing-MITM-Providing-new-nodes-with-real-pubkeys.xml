@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Preventing MITM - Providing new nodes with real pubkeys</title>
+  <updated>2023-05-23T20:59:38.146641+00:00</updated>
+  <author>
+    <name>Mats Jerratsch 2015-10-18 11:21:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Preventing MITM - Providing new nodes with real pubkeys</title>
+    <updated>2023-05-23T20:59:38.146641+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-October/000268.html" rel="alternate"/>
+    <summary>The discussion is about finding a solution for malleability in anchor transactions. Currently, there is no one working on a malleability fix, so the group decides to work towards the next available goal. The anchor transaction output looks like P2SH (2 KEYA KEYB 2 OP_CHECKMULTISIG). To avoid key reuse, it is suggested to use SecretAHash || KeyB' || KeyB || KeyA || TxID || nodePubKey || SignatureB (L=264B) with KeyB as a channel key that does not need to be equal with the nodePubKey. However, the only viable solution for anchor transactions dealing with malleability are with escape and fast-escape. The group discusses using Schnorr signatures as they can be used for multisig by addition, but not all members are comfortable with it. They discuss adding together one object for the channel to be sent by both nodes, which saves some bytes and overhead of gossipping. The group also considers how much of the map a node will need to keep once it is live. It may be possible to prune distant parts of the map randomly and get it back from the rest of the network if needed. One member likes the idea of implementing broadcast messages, as it is the most expensive to attack and has the least on-chain spam. However, any node can refuse to participate in the gossip network by never requesting data and never relaying anything. This is similar to the whole blockchain, and it is important to keep at some points, but most of it is throw-away for individual nodes already participating in the network.</summary>
+    <published>2015-10-18T11:21:13+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP141 segwit consensus rule update: extension of witness program definition</title>
+  <updated>2023-05-19T23:30:06.647169+00:00</updated>
+  <author>
+    <name>Johnson Lau 2016-06-08 05:57:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP141 segwit consensus rule update: extension of witness program definition</title>
+    <updated>2023-05-19T23:30:06.647169+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-June/012747.html" rel="alternate"/>
+    <summary>The segregated witness (BIP141) consensus rule has been updated to extend the definition of a witness program, allowing it to consist of a data push between 2 to 40 bytes. Previously, only a data push between 2 to 32 bytes was allowed. The update was necessary as BIP141 defined only version 0 witness programs for P2WPKH and P2WSH, leaving versions 1 to 16 undefined and considered anyone-can-spend scripts. This left only 16 versions for upgrades when a 32-byte program was used, which may not be compatible with some hashing functions. By extending the maximum length by 8 bytes, up to 16 * 2^64 versions are now available for future upgrades. A witness program of 40 bytes allows a 32-byte hash with 8-byte metadata, and any scripts larger than 32 bytes should be recorded in the witness field to reduce transaction cost and impact on the UTXO set. Since SHA256 is widely used, it is unlikely that a larger witness program would be required without a major revamp of the bitcoin protocol. Previously, no witness data was allowed for a script with a 1-byte push followed by a data push of 33-40 bytes, but this is now allowed. If you're running a segnet node or a testnet node with segwit code, it's important to upgrade to the latest version at https://github.com/bitcoin/bitcoin/pull/7910. Alternative implementations should ensure their consensus code is updated accordingly to avoid forking off the network.</summary>
+    <published>2016-06-08T05:57:36+00:00</published>
+  </entry>
+</feed>

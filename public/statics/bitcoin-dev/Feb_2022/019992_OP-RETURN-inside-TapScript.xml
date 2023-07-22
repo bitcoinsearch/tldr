@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_RETURN inside TapScript</title>
+  <updated>2023-06-15T17:14:02.832176+00:00</updated>
+  <author>
+    <name>vjudeu at gazeta.pl 2022-02-24 13:27:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_RETURN inside TapScript</title>
+    <updated>2023-06-15T17:14:02.832176+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019992.html" rel="alternate"/>
+    <summary>Since Taproot was activated, it's no longer necessary to create separate OP_RETURN outputs to be pushed on-chain. Users can now attach any data to a transaction by creating an "OP_RETURN" branch in the TapScript. By doing this, they can store data off-chain and always prove that it's connected with some taproot address, which was pushed on-chain. Furthermore, they can store more than 80 bytes for free since no such taproot branch will ever be pushed on-chain and used as an input. Ruben Somsen notes that committing to an ECC point allows users to tweak it to commit data inside it (i.e. pay-to-contract), including P2PK and P2PKH. This means that users can commit to 1.5GB of data using OP_RETURN or even an entire merkle tree of hashes, as is the case with Todd's opentimestamps. However, tweaking an ECC point in non-deterministic ways also makes it harder to recover from backup since it requires knowing the full commitment. It's worth noting that the scheme isn't equivalent to op_return because it requires the user to communicate out-of-band to reveal the commitment, whereas with op_return the data is immediately visible. While not popular, BIP47 and various colored coin protocols rely on this. That said, storing additional data on-chain is expensive, and Ruben suggests that attaching data to the TapScript takes zero additional bytes on-chain and can be done using a taproot public key as usual.</summary>
+    <published>2022-02-24T13:27:16+00:00</published>
+  </entry>
+</feed>

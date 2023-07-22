@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Removing the Dust Limit</title>
+  <updated>2023-06-15T00:49:40.246487+00:00</updated>
+  <author>
+    <name>Antoine Riard 2021-08-10 22:37:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Removing the Dust Limit</title>
+    <updated>2023-06-15T00:49:40.246487+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-August/019327.html" rel="alternate"/>
+    <summary>As developers, the problem of outputs being worth less than they cost to spend is a challenge that LN needs to deal with regardless of Bitcoin Core's dust limit. Currently, commitment outputs of lower value than the transaction owner's dust_limit_satoshis plus the HTLC-claim fee at the agreed-on feerate will be trimmed to dust. However, this approach has limitations as it requires an agreement among channel operators on the mempools feerate, which may be problematic to find. Moreover, the trim-to-dust evaluation doesn't match the lifetime of the HTLC accurately, especially with a wider deployment of long-lived routed packets over LN. If LN devs remove feerate negotiation from the trim-to-dust definition to a static feerate, it would likely put higher pressure on full-nodes operators, as the number of uneconomical outputs might increase. Probabilistic payments have been discussed in the context of LN since early 2016 as an alternative approach for low-value payments. Although raising the dust limit can convert a higher percentage of LN channels capacity into dust, increases in the minimum necessary feerate to get a transaction confirmed in an appropriate amount of time also do the same job, which developers cannot control. In addition, trust vectors are introduced not by the dust limit but by the economics of outputs being worth less than they cost to spend. LN node operators might compensate for this trust vector by relying on side-trust models or using trustless probabalistic payments. Utreexo doesn't solve the problem as many nodes still want to store the full UTXO set and access it quickly, and Utreexo proofs will grow in size with UTXO set size. Many full node operators do not want their bandwidth wasted by people who create UTXOs they have no reason to spend. The status quo is good enough for now.</summary>
+    <published>2021-08-10T22:37:48+00:00</published>
+  </entry>
+</feed>

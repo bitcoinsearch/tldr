@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>More thoughts on NOINPUT safety</title>
+  <updated>2023-05-20T20:04:06.594178+00:00</updated>
+  <author>
+    <name>Johnson Lau 2019-03-22 04:23:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>More thoughts on NOINPUT safety</title>
+    <updated>2023-05-20T20:04:06.594178+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-March/016800.html" rel="alternate"/>
+    <summary>The discussion on the bitcoin-dev mailing list is about the requirement of OP_CSV in the settlement branch of the update transaction outputs. The aim is to allow later update transactions to have higher priority over settlement transactions and ensure that a settlement signature can only take the settlement branch. To achieve this, a distinct public key for the branch is needed, so at least A_s and B_s without rolling them for each i, if they use nLockTime on the settlement transactions and enforce it with OP_CHECKLOCKTIMEVERIFY. It might be possible to do this with OP_CODESEPARATOR, but we do need the OP_CSV in the settlement branch.However, according to the post, OP_CSV (BIP112) is not needed. Only BIP68 relative-time is needed. For update purposes, A and B will co-sign the muSig with nLockTime=t, not committing to the scriptCode, and no BIP68 lock time. For settlement purposes, A and B will co-sign the muSig with nLockTime=t, committing to the scriptCode, and with an agreed BIP68 locktime. Without committing to the scriptCode and BIP68 lock time, the update sig could be bound to any previous update tx immediately. On the other hand, the settlement sig will only bind to a specific update tx (thought scriptCode), and only after the relative locktime is passed. The eltoo paper is wrong about using OP_CSV. That’s a common mistake even for experienced bitcoin developer. OP_CSV is needed only if one party could single-handedly decide the relative-lock-time. However, this is not the case here as it is a muSig. The post also mentions that even the given script: OP_CHECKLOCKTIMEVERIFY OP_DROP OP_CHECKSIGVERIFY OP_CHECKSIG doesn’t need OP_CSV, despite not using muSig. This is because the two signatures must use the same relative locktime, or the transaction is invalid.</summary>
+    <published>2019-03-22T04:23:28+00:00</published>
+  </entry>
+</feed>

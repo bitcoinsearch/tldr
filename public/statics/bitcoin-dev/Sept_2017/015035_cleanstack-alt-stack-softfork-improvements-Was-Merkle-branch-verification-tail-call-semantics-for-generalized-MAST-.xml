@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>cleanstack alt stack &amp; softfork improvements (Was: Merkle branch verification &amp; tail-call semantics for generalized MAST)</title>
+  <updated>2023-05-20T03:59:09.235932+00:00</updated>
+  <author>
+    <name>Johnson Lau 2017-09-21 17:38:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>cleanstack alt stack &amp; softfork improvements (Was: Merkle branch verification &amp; tail-call semantics for generalized MAST)</title>
+    <updated>2023-05-20T03:59:09.235932+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-September/015035.html" rel="alternate"/>
+    <summary>The discussion revolves around the implementation of SigAgg, which is a soft fork that allows the aggregation of multiple signatures into a single signature. The new OP_CHECKSIG has two arguments: top stack must be a 33-byte public key, and the second top stack item is the signature. Depending on the size of the signature, it returns different values. If all scripts pass, the aggregator will combine all pairs to obtain the aggkey and aggmsg and verify against aggsig. The current idea of sigagg is explained in detail with an example script. However, old clients won't understand this as sigagg is a softfork. The conversation also touches upon whether the new approach would require more witness space for storing (pubkey, message) pairs. It's suggested that the lookup opcode could have a data payload itself, and the script can be parsed independently from execution to collect the applicable ones. But, the problem with this approach is that it would lead to a hard fork as the aggregator of old and new clients will see different data. Another approach to solve this problem is to use a new script version for every new non-verify type operation. However, using multiple versions creates many problems. Another problem arises when signatures from different versions can't be aggregated. There are also discussions about creating many OP_DROPs and OP_2DROPs, so new VERIFY operations could pop the stack. This saves one byte and looks cleaner.</summary>
+    <published>2017-09-21T17:38:01+00:00</published>
+  </entry>
+</feed>

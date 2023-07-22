@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>malleability work-around vs fix (Re: 0.8.5 with libsecp256k1)</title>
+  <updated>2023-06-07T17:34:00.956741+00:00</updated>
+  <author>
+    <name>Adam Back 2013-10-10 14:21:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>malleability work-around vs fix (Re: 0.8.5 with libsecp256k1)</title>
+    <updated>2023-06-07T17:34:00.956741+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-October/003346.html" rel="alternate"/>
+    <summary>The context discusses the use of deterministic ECDSA signatures, where k is calculated using H(d,m) instead of random values. This method is deemed cool and necessary to avoid issues with RNG such as leaked partial bits or biases, which can compromise security. The signature verification relation is also provided, and it involves calculating whether [H(m)s^-1G+rs^-1Q].x=?r. The issue of malleability is also addressed in the discussion, and it is suggested that plugging the (r,s), (r,-s) specific case as a DSA-specific workaround may not completely address all malleability issues. It is proposed that ECS (schnorr) be added since it is simpler and more efficient. Finally, a more generic/robust way to fix this issue would be to change the txid from H(sig,inputs,outputs,script) to H(pubkey,inputs,outputs,script), which would ensure that the malleability of the signature mechanism does not affect the security of conditional payments.</summary>
+    <published>2013-10-10T14:21:54+00:00</published>
+  </entry>
+</feed>

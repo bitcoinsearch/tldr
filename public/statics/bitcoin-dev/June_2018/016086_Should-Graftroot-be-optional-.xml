@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Should Graftroot be optional?</title>
+  <updated>2023-05-20T16:25:09.671844+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2018-06-06 17:04:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Should Graftroot be optional?</title>
+    <updated>2023-05-20T16:25:09.671844+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-June/016086.html" rel="alternate"/>
+    <summary>The bitcoin-dev mailing list discussed the implications of Graftroot, a proposal to delegate control over a script to another party. One argument against making Graftroot optional was that delegation is not strictly less powerful than using a normal transaction since the signer could have signed an arbitrary transaction instead. However, Tim Ruffing disagreed and argued that Graftroot enables delegation in such a way that the delegation itself cannot be fixed in the chain, which is not currently possible. He suggested defining the semantics of Graftroot transactions to make them identical to the signature hash of an implicit transaction spending the coin and creating a new output with the delegated script as sPK, and the same amount. However, Pieter Wuille pointed out that this would introduce malleability because the created outpoint will be different in both cases (different txid). Additionally, the implicit transaction would be 0 fee and this sounds very similar to the issue SIGHASH_NOINPUT is intended to solve. Wuille suggested that Graftroot spending should become a special sighash flag that builds an implicit transaction, moves all the coins to a newly provided script, computes the sighash of that transaction, and requires a signature with that. The delegated script is then evaluated in the context of that implicit transaction. However, to avoid the malleability issue, the actual signature should still be different, possibly by simply passing through the Graftroot sighash flag into the sighash being computed.</summary>
+    <published>2018-06-06T17:04:23+00:00</published>
+  </entry>
+</feed>

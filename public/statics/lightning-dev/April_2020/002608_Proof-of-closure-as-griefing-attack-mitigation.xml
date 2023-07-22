@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proof-of-closure as griefing attack mitigation</title>
+  <updated>2023-06-03T00:21:56.661869+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-04-01 06:19:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proof-of-closure as griefing attack mitigation</title>
+    <updated>2023-06-03T00:21:56.661869+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002608.html" rel="alternate"/>
+    <summary>Contracts on offchain protocols require enforceability onchain, which often leads to long timeouts for payment delivery. Deliberately setting up a multi-hop payment such that it will be in a "pending" state for long periods of time is known as a "griefing attack". To mitigate the effects of griefing attacks, various proposed solutions have been assessed, including proof-of-closure, which requires significant changes to the update state machine. Griefing attacks are motivated, and they are performed by payers and payees against intermediate nodes. Previous proposed solutions include time-spent reporting and up-front payment, but they do not protect payees from intermediate nodes and payers or erect economic barriers against normal, non-malicious payments.The article explains that both "hard" and "soft" timeouts decrement at each hop, meaning the payee has the shortest timeout. If the payee delays claiming the payment and violates the "soft" timeout, the channel CE between C and E will be dropped on-chain. The article also talks about update state shenanigans, and how attacking payee E can fool around with the update state machine to make it difficult for C to report a willingness to close CE. With Decker-Russell-Osuntokun, the risk can be removed by requiring a ritual, and prior to step 5, C can simply fail the incoming HTLC from B in case its own soft timeout is near.To combat potential attacks, the Lightning Network proposes a new proof-of-closure mechanism that would require the attacker to have their channels closed as punishment for providing false proof-of-closure. The mechanism can be used for any update mechanism and requires only the validation of transactions contained in the proof-of-closure. However, the acceptable forms of HTLC need to be agreed-upon by the entire network, and implementations need to assess whether a transaction is valid or not.In the near future, the Lightning Network plans to use payment points and add a blinding scalar at each hop called payment decorrelation to prevent privacy loss in the payment attempt. Instead of HTLC, there will be PTLC, and the payment point at each hop will change to prevent decorrelation. To provide proofs that the apparent singlesig on the unilateral close output is in fact a PTLC and that the PTLC belongs to the same payment attempt as what B offered to C, C needs to perform certain actions, and B needs to add its own blinding factor to the reported blinding factor to convince A that this is the same payment attempt.</summary>
+    <published>2020-04-01T06:19:03+00:00</published>
+  </entry>
+</feed>

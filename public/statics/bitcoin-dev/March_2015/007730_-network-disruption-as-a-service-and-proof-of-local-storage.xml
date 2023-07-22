@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>"network disruption as a service" and proof of local storage</title>
+  <updated>2023-06-09T18:41:04.547962+00:00</updated>
+  <author>
+    <name>Jeremy Spilman 2015-03-24 05:14:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>"network disruption as a service" and proof of local storage</title>
+    <updated>2023-06-09T18:41:04.547962+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-March/007730.html" rel="alternate"/>
+    <summary>Sergio Lerner has proposed a protocol for Proof of Storage called "Proof of Local storage" which can be useful in any application to try to prove a keyed copy of some data. Two protocols can be performed to prove local possession: (1) The verifier sends a seed to derive some n random indexes, and the prover must respond with the hash of the decrypted blocks within a certain time bound. (2) The verifier chooses a seed n, and then pre-computes the encrypted blocks derived from the seed using the prover's IP. Then the verifier sends the seed, and the prover must respond with the hash of the encrypted blocks within a certain time bound. Both protocols can be made available by the client, under different states. For example, new nodes are only allowed to request protocol 2 and are allowed to periodically perform protocol 1 after mutual authentication. However, there are few questions raised on this proposal. For instance, in Protocol 1, it is asked whether the prover is hashing random blocks of decrypted, as-in raw, blockchain data, and what does this prove other than fast random IO of the blockchain? The verifier keeps blocks in the keyed format and can decrypt quickly to provide raw data or use the keyed data for hashing to try to demonstrate they have a pre-keyed copy. In Protocol 2, a full-node challenger could have to do the computation first and also include something like HMAC(identityKey, expectedResult). The prover could then know if the challenger was honest before returning a result and blacklist them if not. A new-node could see if different servers all returned the same challenge response, but they would have no way to know if the challenge response was technically correct or sybil. There is also a question about the effect of spinning disk versus SSD. Seek time for 1,000 random reads is either nearly zero or dominating depending on the two modes. I wonder if a sequential read from a random index is a possible trade-off; it doesn't prove possession of the whole chain nearly as well, but at least iowait converges significantly.</summary>
+    <published>2015-03-24T05:14:23+00:00</published>
+  </entry>
+</feed>

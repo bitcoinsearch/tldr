@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] Canonical input and output ordering in transactions</title>
+  <updated>2023-06-09T22:17:11.708187+00:00</updated>
+  <author>
+    <name>Danny Thorpe 2015-06-08 21:25:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] Canonical input and output ordering in transactions</title>
+    <updated>2023-06-09T22:17:11.708187+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-June/008518.html" rel="alternate"/>
+    <summary>The Open Assets colored coin protocol places special significance on the zeroth input and the position of the OP_RETURN colored coin marker output to distinguish colored coin issuance outputs from transfer outputs. However, reordering the inputs or the outputs breaks the colored coin representation. Although recommending sorting of the inputs and outputs as a best practice is fine, it should not be part of IsStandard() or consensus rules because there are cases where the order of the inputs and outputs is significant. In 2015, Rusty Russell proposed a BIP for a canonical ordering of inputs and outputs when creating transactions. The motivation behind this was that most bitcoin wallet implementations randomize the outputs of transactions they create to avoid trivial linkage analysis, but mistakes have been made in this area in the past. Implementing a canonical ordering has the same effect but is simpler, more obvious if incorrect, and can eventually be enforced by IsStandard() and even a soft-fork to enforce it. The BIP specifies that inputs should be ordered by index (lower value first) and txid (little endian order, lower byte first), while outputs should be ordered by amount (lower value first) and script (starting from first byte, lower byte first, shorter wins). This ordering would reduce privacy risks and could become an IsStandard() rule once widely adopted. A reference implementation is available on GitHub.</summary>
+    <published>2015-06-08T21:25:40+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP draft: Extended block header hardfork</title>
+  <updated>2023-05-20T01:30:21.778790+00:00</updated>
+  <author>
+    <name>Johnson Lau 2017-04-02 20:13:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP draft: Extended block header hardfork</title>
+    <updated>2023-05-20T01:30:21.778790+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/013964.html" rel="alternate"/>
+    <summary>The proposed hardfork, called "spoonnet," fulfills the commonly requested features for bitcoin businesses, including deterministic activation logic, strong and simple 2-way replay protection, wipe-out protection, and predictable resource use. The activation is based on flag day because it is difficult to measure community consensus on-chain. A reference implementation for consensus codes can be found at https://github.com/jl2012/bitcoin/tree/spoonnet2. The extended block header hardfork proposal aims to provide a flexible and upgradable header format through a hardfork. The current Bitcoin protocol has a fixed 80-byte block header with no space reserved for additional data, which is not ideal for light clients. The proposed extended block header format includes objectives such as being easily upgradeable with softforks, compatible with the Stratum mining protocol, and having a deterministic hardfork activation. The hardfork employs a simple flag day deployment based on the median timestamp of previous blocks, ensuring a deterministic and permanent departure from the original rules. The witness field of the coinbase input is used to store the extended header, minimizing changes in the peer-to-peer protocol between full nodes. Committing to the block height allows determining the value before all parental headers are obtained. This is a hard forking change that breaks compatibility with old full node and light node, and it should not be deployed without widespread consensus. Old full nodes will consider the block header nVersion as invalid, while light nodes may consider the hardfork chain as the best chain if it has the most total proof-of-work, but they will not see any transactions in the chain. The proposed hardfork includes several specifications, such as requiring the nVersion of the block header to have the most significant bit signalled, segregated witness enabled, and bytes 36 to 67 in the block header replaced by the double SHA256 hash of the extended header. The special extheader softfork allows future protocol upgrades to increase the size of the extended header and redefine the calculation of block weight in a backward compatible way.</summary>
+    <published>2017-04-02T20:13:23+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+  <updated>2023-06-15T15:37:50.212670+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2022-02-08 02:16:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+    <updated>2023-06-15T15:37:50.212670+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019870.html" rel="alternate"/>
+    <summary>In the bitcoin-dev mailing list, developers discussed various opcodes and proposals to enhance Bitcoin Script's functionality. One proposal was the use of the TXHASH opcode in combination with CAT and/or rolling SHA256 opcodes. This would enable users to assemble hashes of specific inputs and outputs into a single signed message, supporting relative or absolute input/output indexes. Although there were concerns about complexity and potential errors, this approach could be useful for soft forks that address unknown future applications.Developers also discussed the limitations of current reusable components in Bitcoin Script and proposed the use of CHECKSIGFROMSTACK (CSFSV) as a step towards more interesting programs. CSFSV can take arbitrary messages, including locktime values, output/input counts/sequences, pubkeys, signatures, and oracle assertions. However, there were questions about the actual use cases for CSFSV and whether it is significantly more convenient/efficient than other options like CTV and OP_CHECKSIG.Regarding CTV, developers examined whether APO would simplify its transaction message algorithm and allow for limited transaction reflection. ANYPREVOUTANYSCRIPT would require commitment to nVersion, nLockTime, nSequence, spend_type, annex, sha_annex, sha_outputs, key_version, and codesep_pos. SIGHASH_GROUP would provide an alternative to ALL/SINGLE/NONE by committing to nVersion, nLockTime, nSequence, spend_type, annex, sha_group_outputs, key_version, and codesep_pos. However, SIGHASH_GROUP may not work well without access to the annex, and txids would be unstable. The flexibility of TXHASH was seen as necessary to prevent the need for future soft forks as new applications emerge.The context further discusses the options for outputs and inputs in the TXHASH proposal. There are four options for outputs, which include ALL, NONE, SINGLE, and GROUP. Similarly, one of four options for inputs includes -, ANYONECANPAY, ANYPREVOUT, and ANYPREVOUTANYSCRIPT. The discussion mentions that there is no efficient way of doing SIGHASH_GROUP via tx introspection opcodes that does not introduce a quadratic hashing risk.There are two alternative approaches suggested beyond the VERIFY-vs-PUSH semantic, including having a dedicated sighash type for CTV or using ANYPREVOUTANYSCRIPT|GROUP for CTV. The latter approach requires implementing annex parsing and better RBF behavior to avoid those txs being excessively vulnerable to pinning. However, transactions using "GROUP" sigs can be combined either for batching purposes or for adapting to the fee market after the signature has been made, which is an advantage.Lastly, the context provides two links for further reading, including bitmatrix trying to multiply two numbers together and doing a point preimage reveal via clever scripting pre-taproot, which never saw an implementation despite seeming theoretically plausible.</summary>
+    <published>2022-02-08T02:16:10+00:00</published>
+  </entry>
+</feed>

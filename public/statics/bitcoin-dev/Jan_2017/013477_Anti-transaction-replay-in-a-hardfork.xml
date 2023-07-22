@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Anti-transaction replay in a hardfork</title>
+  <updated>2023-05-20T00:38:59.293988+00:00</updated>
+  <author>
+    <name>Johnson Lau 2017-01-25 04:03:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Anti-transaction replay in a hardfork</title>
+    <updated>2023-05-20T00:38:59.293988+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-January/013477.html" rel="alternate"/>
+    <summary>In a conversation between Tom Harding and Johnson Lau via bitcoin-dev, they discussed the proposal to prevent transaction replay attacks in the event of a chain split. Johnson's proposal was an opt-out approach, while Tom's suggestion was for a soft fork that supports its own hard-fork opt-out bit. Johnson's proposal relies on non-standardness in the existing network to prevent replay, while Tom argues that a responsible new network would allow something that is invalid in the existing network for transactions where replay to the existing network is undesirable. Tom suggests that it is overreaching for Johnson's BIP to suggest specific changes to be included in the new network, such as the specific O(n^2) fix suggested by Johnson. Instead, the matter should be left to the new network itself. Johnson's proposal does not depend on standardness for protection, but instead, it depends on the new network enforcing a new SignatureHash for txs with an nVersion not used in the existing network. This is to avoid requiring any consensus changes to the existing network, as there is no guarantee that such softfork would be accepted by the existing network. If the new network wants to protect their users, it would be trivial for them to include a SignatureHash hardfork like this, along with other hardfork changes. Further hardforks will only require changing the network characteristic bit but not the SignatureHash. If the hardfork designers don't like the fix of BIP143, there are many other options. The simplest one would be a trivial change to Satoshi's SignatureHash, such as adding an extra value at the end of the algorithm. Johnson agreed that his proposal is similar to Tom's, but the two differ in their approach since Johnson's proposal is opt-in while Tom's is opt-out.</summary>
+    <published>2017-01-25T04:03:40+00:00</published>
+  </entry>
+</feed>

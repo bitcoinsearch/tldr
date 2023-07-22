@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Solving the Scalability Problem on Bitcoin</title>
+  <updated>2023-06-12T15:02:21.789069+00:00</updated>
+  <author>
+    <name>Btc Ideas 2017-08-27 03:52:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Solving the Scalability Problem on Bitcoin</title>
+    <updated>2023-06-12T15:02:21.789069+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-August/014872.html" rel="alternate"/>
+    <summary>Adam Tamir Shem-Tov has proposed a solution to solve the scalability issue for Bitcoin. The current implementation of node pruning keeps only unspent inputs and most recent blocks, but there was also a proposal to include UTXO in some blocks for SPV clients to use. However, Thomas Guyot-Sionnest via bitcoin-dev argues that implementing Shem-Tov's solution is impossible because there is no way to determine authenticity of the blockchain midway without keeping all blocks until a hard-coded checkpoint. He also points out that it is not just the addresses and balance that need to be saved, but also each unspent output block number, tx position, and script required for validation on input. This would result in a lot of data being saved every 1000 blocks, and it doesn't even guarantee dropping older blocks. Shem-Tov's proposal suggests combining and pruning the blockchain in its entirety every 999 blocks to one block, leaving only the genesis block. Once block 1000 has been created, the network would wait for a special "pruned block", and until this block was created and verified, block 1001 would not be accepted by any nodes. This pruned block would prune everything from block 2 to block 1000, creating a summed up transaction of all transactions which occurred in these 999 blocks, and its hash pointer would be the Genesis block. If accepted by full nodes, the ledger will always be a maximum of 1000 blocks.</summary>
+    <published>2017-08-27T03:52:57+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>User Activated Soft Fork Split Protection</title>
+  <updated>2023-06-12T01:56:44.020011+00:00</updated>
+  <author>
+    <name>James Hilliard 2017-06-07 21:21:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>User Activated Soft Fork Split Protection</title>
+    <updated>2023-06-12T01:56:44.020011+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-June/014529.html" rel="alternate"/>
+    <summary>The proposed SegWit2x agreement has been deemed too slow to activate SegWit mandatory signaling ahead of BIP148 using BIP91. In response, James Hilliard proposed a solution called splitprotection soft fork, which is almost identical to BIP91 but uses BIP8 instead of BIP9 with a lower activation threshold and immediate mandatory signaling lock-in. The purpose of this is to prevent a chain split ahead of the Aug 1st BIP148 activation date. Splitprotection allows miners running BIP148 to coordinate activation of the existing segwit deployment with less than 95% hash power before BIP148 activation. This reduces the chances of an extended chain split by activating using a simple miner majority of 65% over a 504 block interval instead of a higher percentage.The deployment of BIP149 is scheduled between midnight on November 15th, 2016 and midnight on November 15th, 2017. Miners will need to upgrade their nodes to support split protection, otherwise they may build on top of an invalid block. Users should either upgrade to split protection or wait for additional confirmations when accepting payments while this bip is active.Historically, IsSuperMajority() has been used to activate soft forks such as BIP66 with a mandatory signaling requirement for miners once activated. This technique can be leveraged to lower the signaling threshold of a soft fork while it is being deployed in a backwards compatible way. A BIP8 style timeout is also used to ensure that this BIP is compatible with BIP148 and that BIP148 compatible mandatory signaling activates regardless of miner signaling levels.By orphaning non-signaling blocks during the BIP9 bit 1 "segwit" deployment, this BIP can cause the existing "segwit" deployment to activate without needing to release a new deployment. As we approach BIP148 activation, it may be desirable for a majority of miners to have a method that will ensure that there is no chain split.References for this information include a mailing list discussion, P2SH flag day activation, BIP9 Version bits with timeout and delay, BIP16 Pay to Script Hash, BIP91 Reduced threshold Segwit MASF, BIP141 Segregated Witness (Consensus layer), BIP143 Transaction Signature Verification for Version 0 Witness Program, BIP147 Dealing with dummy stack element malleability, BIP148 Mandatory activation of segwit deployment, and BIP149 Segregated Witness (second deployment). There is also a link to information on the benefits of SegWit. This document is dual licensed as BSD 3-clause, and Creative Commons CC0 1.0 Universal and has been shared via the bitcoin-dev mailing list.</summary>
+    <published>2017-06-07T21:21:29+00:00</published>
+  </entry>
+</feed>

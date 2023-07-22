@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Bitcoin Secure Multisig Setup</title>
+  <updated>2023-06-14T17:31:45.510662+00:00</updated>
+  <author>
+    <name>Dmitry Petukhov 2021-02-12 17:42:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Bitcoin Secure Multisig Setup</title>
+    <updated>2023-06-14T17:31:45.510662+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018409.html" rel="alternate"/>
+    <summary>In a recent proposal for the encryption aspect of a scheme, PBKDF2 with PRF=SHA512 would be used as the key derivation function. The reason for going with SHA512 is due to legacy support on some hardware. The assumption is that the secure session is only needed temporarily for a few hours, maybe up to one day. The Coordinator and Signers agree and exchange these two secrets prior to the setup. HUMAN_READABLE_TITLE is in ASCII format, with a minimum length of 8 and a maximum length of 20. NONCE is a 64-bit number. Depending on the vendor, the NONCE can be converted to either a 6-word phrase using BIP39 wordlist, a 20-digit decimal number, or a QR code. This flexibility in the data format allows each vendor to customize the UX based on their respective device capabilities.The proposed scheme might be vulnerable to rainbow table attack; therefore, key derivation functions designed for passwords, like PBKDF2, are recommended instead. However, this adds another code dependency for vendors if the device firmware does not already have the required key derivation function. Maybe this could be solved by making the TOKEN even longer and using mnemonics. The issue is that entering long data of the shared key into the device manually is difficult UX-wise.It seems that to crack this with fixed Pwd and 64 bit nonce, the attacker will need to be about 10^15 more powerful than 80Mhz MCU. The approaches can be combined - specify a key derivation function suitable for passwords; via secure channel, share a password and/or the derived key. If hww supports derivation function, it can derive the key from the password. If hww supports only keys, the key can be entered raw or via mnemonic.</summary>
+    <published>2021-02-12T17:42:31+00:00</published>
+  </entry>
+</feed>

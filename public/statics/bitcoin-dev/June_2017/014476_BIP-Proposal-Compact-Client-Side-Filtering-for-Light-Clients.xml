@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>BIP Proposal: Compact Client Side Filtering for Light	Clients</title>
+  <updated>2023-05-20T02:56:58.646612+00:00</updated>
+  <author>
+    <name>Matt Corallo 2017-06-01 21:33:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>BIP Proposal: Compact Client Side Filtering for Light	Clients</title>
+    <updated>2023-05-20T02:56:58.646612+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-June/014476.html" rel="alternate"/>
+    <summary>Olaoluwa Osuntokun, a Bitcoin developer, has proposed a new light client BIP together with Alex Akselrod. The BIP proposes a new light-client mode that uses client-side filtering based off of Golomb-Rice coded sets. Full-nodes maintain an additional index of the chain, and serve this compact filter (the index) to light clients which request them. Light clients then fetch these filters, query the locally and maybe fetch the block if a relevant item matches. Blocks can be fetched from any source once the light client deems it necessary. This work was motivated by enabling a light client mode for lnd in order to support a more lightweight back end paving the way for the usage of Lightning on mobile phones and other devices. The team has integrated neutrino as a back end for lnd and will be making the updated code public very soon.The proposal uses a fixed false-positive rate specified as P = 1/2^20. The team has done a bit of analysis and optimization attempting to optimize the following sum: filter_download_bandwidth + expected_block_false_positive_bandwidth. Using a fixed fp=20, Olaoluwa has some stats detailing the total index size, as well as averages for both mainnet and testnet. In order to consider the average+median filter sizes in a world worth larger blocks, the team also ran the index for testnet. Finally, there are the testnet stats which take into account the increase in the maximum filter size due to segwit's block-size increase.One specific area they would like feedback on is the parameter selection. Unlike BIP-37 which allows clients to dynamically tune their false positive rate, this proposal uses a fixed false-positive. Karl Johan Alm (kallewoof) has done some extensive analysis of his own, focusing on a distinct encoding type. His filters use a binomial encoding directly on the filter contents, while their team will instead create a Golomb-Coded set with the contents being hashes (they use siphash) of the filter items.For those interested in the raw data, Olaoluwa has uploaded a CSV file of raw data for each block (mainnet + testnet). Links to the GitHub pages for reference implementations and other relevant projects are also provided. The team looks forward to getting feedback from all of the community.</summary>
+    <published>2017-06-01T21:33:43+00:00</published>
+  </entry>
+</feed>

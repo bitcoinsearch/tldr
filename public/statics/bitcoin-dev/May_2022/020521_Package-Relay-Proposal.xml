@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Package Relay Proposal</title>
+  <updated>2023-06-15T20:53:20.338824+00:00</updated>
+  <author>
+    <name>eric at voskuil.org 2022-05-25 20:52:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Package Relay Proposal</title>
+    <updated>2023-06-15T20:53:20.338824+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020521.html" rel="alternate"/>
+    <summary>The email thread on the bitcoin-dev mailing list discusses potential issues with peer-to-peer package announcements and proposes solutions. One concern is that a dishonest peer could announce a package with incorrect information about its parents' transaction IDs and fee rate, leading to censorship of the transaction by other nodes. The suggestion is to provide fee and weight information when announcing a package to avoid this issue. However, it is noted that single transactions do not carry an advertised fee rate, so the existing 'feefilter' message could be used instead for consistency and efficiency.Another proposal is to encode parent transactions as short hashes of the wtxid and include them in the inv announcement to reduce bandwidth usage while still allowing deduplication of parents. It is suggested that packaging is fundamentally a compact block announcement without the header, making BIP152 a suitable solution. Once a validated set of transactions within the package has been obtained with sufficient fee, a node would accept the largest subgraph of the package that conforms to fee constraints and drop any peer that provides a package for which the full graph does not.Size is restricted in the same manner as block and transaction broadcasts, and count is incorporated into BIP152 as 'shortids_length'. There is some discussion about whether to use a bit field for the "version" field in "sendpackages", but it is ultimately agreed that a few extra messages per connection are not significant enough to warrant this change. Overall, the thread highlights potential issues with peer-to-peer package announcements and proposes solutions using existing protocols.</summary>
+    <published>2022-05-25T20:52:07+00:00</published>
+  </entry>
+</feed>

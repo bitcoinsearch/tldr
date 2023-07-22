@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Debate: 64 bytes in OP_RETURN VS taproot OP_FALSE OP_IF OP_PUSH</title>
+  <updated>2023-06-16T04:12:47.731562+00:00</updated>
+  <author>
+    <name>Aymeric Vitte 2023-02-03 11:15:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Debate: 64 bytes in OP_RETURN VS taproot OP_FALSE OP_IF OP_PUSH</title>
+    <updated>2023-06-16T04:12:47.731562+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-February/021414.html" rel="alternate"/>
+    <summary>The discussion in the bitcoin-dev mailing list revolves around the best method to store data on the Bitcoin blockchain. The witness envelope is considered more costly and less easy to use compared to OP_RETURN. One user suggests adding a Non-Standard OP_PUSH OP_DROP at the beginning of scriptSig or witness while spending standard P2PKH or P2WPKH output, which only makes one transaction. Another option is to use a dummy 1 of N multisig where only one corresponds to a pubkey and the rest is data, but this requires several transactions. The main argument against the witness envelope is that it requires a two-step process of first spending to a "commitment" address and then a second spend to "reveal" your payload. This is more costly and presents the risk of money being stuck in the "commit" stage of the protocol if the "reveal" transaction cannot be included due to censorship, for example. On the other hand, OP_RETURN allows for a single transaction and does not require any cancellation spends. If the data is larger than 80 bytes, witness-embedding method is preferable, while a pay-to-contract tweak is best for smaller data from a space and fingerprinting perspective. Overall, increasing the size of OP_RETURN may be the best solution to prevent users from inventing deviant methods and provide a safe place to store data without clogging UTXO space.</summary>
+    <published>2023-02-03T11:15:14+00:00</published>
+  </entry>
+</feed>

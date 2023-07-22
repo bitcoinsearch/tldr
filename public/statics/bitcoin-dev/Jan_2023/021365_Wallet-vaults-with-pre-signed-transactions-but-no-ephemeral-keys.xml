@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Wallet vaults with pre-signed transactions but no ephemeral keys</title>
+  <updated>2023-05-22T23:24:34.929685+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2023-01-23 17:39:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Wallet vaults with pre-signed transactions but no ephemeral keys</title>
+    <updated>2023-05-22T23:24:34.929685+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-January/021365.html" rel="alternate"/>
+    <summary>The discussion around James' OP_VAULT proposal implied that precomputed vaults must use ephemeral keys that must be deleted as part of the vaulting protocol, similar to Bryan Bishop's proposal. However, there isn't a wallet vault proposal found that doesn't require ephemeral keys. A simple way to do a wallet vault without requiring any key deletion is to create an N-of-N multisig address and pre-sign some transactions from it with N-1 keys to an address with several timelocked spend paths. This has the fallback that funds can always be spent immediately if all the keys are used, just like a normal N-of-N multisig address. But the usage of any of the pre-signed transactions leads to an address that guarantees a clawback within a time window.The process involves creating a 3 of 3 Vault Address and an Interim Address that can send with 1 of 3 keys after a timelock of 1 month, 2 of 3 keys after a timelock of 1 week, and 3 of 3 keys with no timelock. Then, creating a transaction sending an output to the Vault Address, spending that Vault Address output to the Interim Address, and presigning one copy of the step-2 transaction for each of the three combinations of two keys. Seeds should be stored separately, along with the wallet config and the three presigned transactions with each seed.To unvault, sign one of the pre-signed transactions with the missing signature, broadcast it, wait the appropriate timelock for the number of keys being signed with, create a transaction sending from the Interim Address, and broadcast it. After unvaulting, to recover, sign the utxo with all three keys to any destination or alternately sign with two keys and wait one week before broadcasting it.This method has downsides such as needing to backup these transactions for each vaulting, complications involving the flexibility of fees, and inflexibility in how much to unvault as it must be the whole utxo with no change. It also has the same downside that OP_CTV vaults have, where a stolen key can steal funds from the interim address by racing the owner with their transaction once the necessary delay has passed. But not requiring any toxic waste keys seems like a pretty good benefit over Bryan Bishop's original proposal.</summary>
+    <published>2023-01-23T17:39:41+00:00</published>
+  </entry>
+</feed>

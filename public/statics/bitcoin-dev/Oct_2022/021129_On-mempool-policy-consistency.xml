@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>On mempool policy consistency</title>
+  <updated>2023-06-16T02:24:11.218918+00:00</updated>
+  <author>
+    <name>Antoine Riard 2022-10-27 20:29:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>On mempool policy consistency</title>
+    <updated>2023-06-16T02:24:11.218918+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021129.html" rel="alternate"/>
+    <summary>The author of a letter on Bitcoin Core development discusses the need for clear design goals and principles for transaction-relay propagation rules. They argue that policy rules may not be able to satisfy every use-case, and suggest envisioning a Bitcoin ecosystem where configuring a client is on the same bar as the kernel Kconfig. The author also questions what should be the reasonable or average use-case supported by the Bitcoin base-layer transaction-relay rules. They acknowledge the need for more communication and coordination in the case of full-RBF deployment, but if consensus cannot be reached, they suggest a gradual approach to deployment.The latest version of Knots includes new options and changes in defaults, such as -acceptnonstdtxn on mainnet, -permitbaremultisig defaults to false, and reduced -datacarriersize. Additionally, the introduction of new options like -spkreuse and -mempoolreplacement provides full RBF behavior by default. The pushback against the full RBF option has mostly been against forcing people, with many arguing that giving people a new relay behavior they can opt-in to when not confident enough to turn on by default doesn't match the approach core has taken in the past. Assuming this is a change in direction, it is worth considering what it means for people to choose their own relay/mempool policies and for them to expect different mempool policies from most of their potential peers.The Bitcoin community is discussing the idea of gradually deploying mempool policies. Currently, all relay policies are applied when adding transactions to the mempool via RPC, and there's no way to remove transactions from the mempool. However, there may be scenarios where something like this could be useful, such as preventing L2 transactions from pinning attacks. In these situations, specialized mempool policies could be used to ensure that specific nodes can decode replacement transactions. While this approach has technical benefits, it also increases centralization pressure on mining and raises concerns about privacy.One possible solution is for people outside of core to recommend a mempool configuration, which core can then make easy to implement through an option similar to "-std=c++17" for a C++ compiler. This approach would allow developers to design their apps with confidence that their transactions will be widely propagated. Additionally, miners would not need to do anything special, so there would be no new mining centralization pressure, and users would not reveal what they're doing with bitcoin by configuring their nodes in a certain way. However, one challenge with this approach is that core has historically been willing to remove options that don't seem useful anymore.Overall, the gradual deployment of mempool policies is a complex issue with potential benefits and drawbacks.</summary>
+    <published>2022-10-27T20:29:47+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Escrow Over Lightning?</title>
+  <updated>2023-06-02T18:49:16.676586+00:00</updated>
+  <author>
+    <name>Andrés G. Aragoneses 2021-02-11 07:21:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Escrow Over Lightning?</title>
+    <updated>2023-06-02T18:49:16.676586+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-February/002956.html" rel="alternate"/>
+    <summary>In an email thread, a new twist to the old idea of PTLCs (Payment-Point Time-Locked Contracts) was proposed by ZmnSCPxj. The issue with using simple `&amp;&amp;` in PTLCs is that it is trivial, while the `||` is difficult and requires ECDH and proof that the ECDH was done correctly. However, ZmnSCPxj suggested inverting the logic by making two payments of the same amount: Seller -&gt; Buyer claimable by BUYER &amp;&amp; ESCROW, and Buyer -&gt; Seller claimable by SELLER. The ritual involves the seller handing over the item once both payments are made. If the buyer is satisfied, they fail the Seller-&gt;Buyer payment after the seller claims the Buyer-&gt;Seller payment, and the seller is paid with no more obligations. If the buyer is dissatisfied, they can complain to Escrow, who will either judge that the buyer is right and reveal the ESCROW key to the buyer, who then clawbacks the payment to the seller, or judge that the seller is right and delete the ESCROW privkey ("not ESCROW"), and the Seller-&gt;Buyer payment eventually times out, ending the obligation of the seller. The "reverse" payment is effectively the inversion of logic by the De Morgan theorem, and the "normal case" (buyer ultimately pays seller) has the Escrow not revealing the privkey. In addition, in the case where the buyer is satisfied, the Escrow is never involved. This even provides a simple BUYER + ESCROW keypair that gives the seller a proof-of-refund, and of course, the simple SELLER gives the buyer a proof-of-payment as well. It only requires twice as much Bitcoins getting locked.</summary>
+    <published>2021-02-11T07:21:18+00:00</published>
+  </entry>
+</feed>

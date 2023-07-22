@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Recent EvalScript() changes mean CHECKLOCKTIMEVERIFY can't be merged</title>
+  <updated>2023-06-09T14:50:22.429984+00:00</updated>
+  <author>
+    <name>Peter Todd 2014-12-15 12:47:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Recent EvalScript() changes mean CHECKLOCKTIMEVERIFY can't be merged</title>
+    <updated>2023-06-09T14:50:22.429984+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-December/006995.html" rel="alternate"/>
+    <summary>Recently, BtcDrak found a significant design change that makes merging the CHECKLOCKTIMEVERIFY patch to master impossible. The EvalScript() function has been changed to take an abstract SignatureChecker object, removing the txTo and nIn arguments. The CHECKLOCKTIMEVERIFY needs txTo to obtain the nLockTime field of the transaction, and it needs nIn to obtain the nSequence of the txin. This change is indicative of a development process that has been taking significant risks with regard to refactoring the consensus critical codebase. There have been no ACKs for pull-req #4890, and only two untested utACKS, which is worrying for something that made significant consensus critical code changes. Peter suggests not upgrading to v0.10 due to these issues as it would come at the cost of safety. A much safer approach would be to keep the code changes required for a consensus library to only simple movements of code for this release.</summary>
+    <published>2014-12-15T12:47:30+00:00</published>
+  </entry>
+</feed>

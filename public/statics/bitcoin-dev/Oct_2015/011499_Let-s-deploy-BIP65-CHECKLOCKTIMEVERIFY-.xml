@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Let's deploy BIP65 CHECKLOCKTIMEVERIFY!</title>
+  <updated>2023-05-19T22:03:12.400811+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-10-12 16:33:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Let's deploy BIP65 CHECKLOCKTIMEVERIFY!</title>
+    <updated>2023-05-19T22:03:12.400811+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-October/011499.html" rel="alternate"/>
+    <summary>In a discussion on Bitcoin-dev mailing list, Anthony Towns explains the scenarios where SPV clients get affected by orphans and full nodes wouldn't be worried. The first scenario is when someone mines a completely invalid block containing invalid transactions based on the best current valid block, and presents it to SPV clients. This is expensive and does not last long, making it an unlikely attack in practice.The second scenario is when there's a "damaging soft-fork" with lock-in occurring immediately after 95% of blocks claim to support the soft-fork. Until the remaining 5% of hash power upgrades, SPV clients will easily be able to be spoofed roughly once every 3h20m when a non-upgraded miner finds a block for about 20m until two upgraded blocks are found, and the non-upgraded block is orphaned. This attack is borne entirely by the non-upgraded miners, who are mining blocks that will always be orphaned.In the third scenario, non-upgraded miners will have their blocks orphaned by upgraded miners immediately after the soft-fork is activated. However, in the "safe soft-fork" case, all the transactions included in the invalid blocks will also be acceptable to upgraded miners, and will likely be included in the replacement blocks anyway. Further, while SPV clients could monitor the block version, they couldn't do something similar with versionbits in place since the corresponding bit is cleared once the soft-fork activates.The article discusses the potential effects of a hard fork in Bitcoin's blockchain. A hard fork would create two separate blockchains, one that obeys old rules (Bitcoin-Old) and one that obeys new rules (Bitcoin-New). The first block using new features will be unacceptable on Bitcoin-Old, leading to a point of divergence where 95% of hash power will be on Bitcoin-New, and blocks will be found every 10.5 minutes, while Bitcoin-Old will only see new blocks every 3h20m with 5% of hash power.Non-upgraded nodes will track Bitcoin-Old, which will become an altcoin. Until difficulty reset, low hash power nodes will find more blocks than before, causing an increased mempool size due to fewer blocks being mined. The article suggests that if there is a hard fork, users should ensure their software is updated and consider running both a full node and an SPV client.</summary>
+    <published>2015-10-12T16:33:47+00:00</published>
+  </entry>
+</feed>

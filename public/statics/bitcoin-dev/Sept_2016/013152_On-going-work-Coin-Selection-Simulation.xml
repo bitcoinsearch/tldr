@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>On-going work: Coin Selection Simulation</title>
+  <updated>2023-05-19T23:55:18.514941+00:00</updated>
+  <author>
+    <name>Murch 2016-09-23 09:11:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>On-going work: Coin Selection Simulation</title>
+    <updated>2023-05-19T23:55:18.514941+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-September/013152.html" rel="alternate"/>
+    <summary>Murch, who is compiling his Master's thesis about Coin Selection, has created a framework to simulate wallet behavior on basis of a sequence of payments. He re-implemented multiple coin selection strategies of prominent Bitcoin wallets including Bitcoin Core, Mycelium, Breadwallet, and Android Wallet for Bitcoin. The PDF containing a two-page description of his ongoing work includes preliminary simulation results, and three figures showing the simulated wallets' UTXO compositions at the end of the simulation. Daniel Weigl asked about Mycelium's large UTXO set for 5460sat (=TransactionUtils.MINIMUM_OUTPUT_VALUE). Murch replied that his simulation did add small change outputs to the fee, but he got the boundary wrong. Instead of the 5460, he dropped at the dust boundary which calculates to 4440 in his simulation. Murch corrected the boundary in his simulation now and will update his simulation results before Scaling Bitcoin. Regarding Mycelium, Murch stated that it doesn't create small change outputs but rather hardly ever spends them when received. It appears to select UTXO in a FIFO approach, but after the selection, prunes by removing the smallest selected UTXO until the excess beyond the spending target is minimized. This post-selection step seems the likely reason for Mycelium's small UTXO build-up. A balanced approach between BreadWallet's and Mycelium's approaches might be that instead of pruning all small inputs, a few of the small inputs could be allowed to be selected to slowly drain low-value UTXO out of the wallet by spending them over time.</summary>
+    <published>2016-09-23T09:11:58+00:00</published>
+  </entry>
+</feed>

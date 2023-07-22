@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fast Merkle Trees</title>
+  <updated>2023-06-12T18:33:43.300865+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2017-09-07 17:42:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fast Merkle Trees</title>
+    <updated>2023-06-12T18:33:43.300865+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-September/014951.html" rel="alternate"/>
+    <summary>Mark Friedenbach responded to Russell O'Connor's email and expressed his confusion over the possibility of performing the attack described in the BIP. He believes that it is not possible to accomplish it without breaking full SHA256. He also pointed out that separating the hash function of leaves from internal nodes is already in the specification. While he is not opposed to using a different IV for fast-SHA256, he wants to make sure that the complication is well justified.Russell O'Connor expressed his concern regarding the vulnerability of the design due to the lack of distinction between leaf nodes and internal nodes. He suggested that the fast hash for internal nodes needs to use an IV that is not the standard SHA-256 IV. As it stands, he believes someone can claim a leaf node as an internal node by creating a proof that provides a phony right-hand branch claiming to have hash 0x80000..0000100 (which is really the padding value for the second half of a double SHA-256 hash).O'Connor also explained how arbitrary data can be stored in Fast Merkle Tree leaves, including the Merkle root of another Fast Merkle Tree. Applications that are limited to proof with paths no longer than 32 branches can still circumvent this limit by staging these Fast Merkle Trees in explicit layers. By storing an inner Fast Merkle Tree root inside the (explicit) leaf of an outer Fast Merkle Tree, the application can verify an Inclusion Proof of the inner Fast Merkle Tree Root in the outer Fast Merkle Tree Root, and then verify a second Inclusion Proof of the desired data in the inner Faster Merkle Tree Root.</summary>
+    <published>2017-09-07T17:42:13+00:00</published>
+  </entry>
+</feed>

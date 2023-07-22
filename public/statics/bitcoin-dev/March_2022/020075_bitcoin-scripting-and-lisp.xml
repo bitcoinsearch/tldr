@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>bitcoin scripting and lisp</title>
+  <updated>2023-06-15T17:31:04.182973+00:00</updated>
+  <author>
+    <name>Bram Cohen 2022-03-07 06:26:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>bitcoin scripting and lisp</title>
+    <updated>2023-06-15T17:31:04.182973+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020075.html" rel="alternate"/>
+    <summary>The discussion revolves around the design differences between Chia and Bitcoin, with a focus on Chia Lisp, which is deemed to have gotten most of the major design decisions right. The differences include having secp256k1 signatures instead of BLS12-381 ones and adding tx introspection instead of having bundle-oriented CREATE_COIN, CREATE/ASSERT results. While Bitcoin uses the UTXO model, Chia uses the Coin Set model, and retrofitting onto existing Bitcoin may be best done by leaving the UTXO model intact and compensating by adding more opcodes special to parsing Bitcoin transactions. Serialization has been noted to be verbose, with possible improvements in optimizing serialization for small lists and literal numbers. However, it's not clear how frequently serialization size would be the limiting factor for cost versus execution time or memory usage. There is a hook for doing compression at the consensus layer, but it isn't being used aggressively yet. Softfork opcodes are proposed as an approach to upgradability, either by defining a new version of the language via the tapleaf version or using the "softfork" opcode. Chia defines softfork as (softfork cost code), and total cost is shoved into blocks at the consensus layer out of an abundance of caution, although that isn't technically necessary. Chia's approach to transaction fees is essentially identical to Bitcoin's, although there are fewer things in the ecosystem supporting fees due to a lack of needing it yet. Mempool issues have little to do with the choice of scriptpubkey language, which mostly involves adding covenants and capabilities. There are multiple ways automatic aggregation functionality could be added to coin set mempools, but they haven't been implemented yet.</summary>
+    <published>2022-03-07T06:26:47+00:00</published>
+  </entry>
+</feed>

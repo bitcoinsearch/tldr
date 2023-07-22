@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Rendez-vous proposal with ephemeral key switch</title>
+  <updated>2023-05-25T17:24:29.135750+00:00</updated>
+  <author>
+    <name>Christian Decker 2018-11-18 13:34:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Rendez-vous proposal with ephemeral key switch</title>
+    <updated>2023-05-25T17:24:29.136750+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001635.html" rel="alternate"/>
+    <summary>The author has amended their initial proposal for the rendez-vous protocol using the ephemeral key switch at the rendez-vous point. The proposal can be found on the Wiki, which describes the entire proposal and uses the description in the onion routing bolt. The initial proposal was to swap in an ephemeral key instead of generating it from `ss_k` derived from ECDH(`ek_{k-1}`, node_id) to allow the recipient to generate the second half of the route by selecting that `ek_rv`. However, the decryption is done via XOR with a ChaCha20 bytestream whose key is generated from `ss_k`, which is unknown to `R`. To fix this, a virtual hop is added at `RV`. The proposal is clean and backwards compatible, and there are a number of variants for this protocol. For example, `ek_{rv+1}` could equal `ek_rv`, but the author prefers not to do this because of symmetry. Alternatively, the filler could be overwritten with `0x00`-bytes and not obfuscated, but this leaks the fact that `RV` is a rendez-vous node to the next hop. The author intends to implement this soon and welcomes suggestions. Links to the proposal and onion routing bolt are provided in the context.</summary>
+    <published>2018-11-18T13:34:47+00:00</published>
+  </entry>
+</feed>

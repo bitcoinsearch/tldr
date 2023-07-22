@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP151 protocol incompatibility</title>
+  <updated>2023-06-11T21:32:13.300556+00:00</updated>
+  <author>
+    <name>Jonas Schnelli 2017-02-14 20:58:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP151 protocol incompatibility</title>
+    <updated>2023-06-11T21:32:13.301555+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-February/013584.html" rel="alternate"/>
+    <summary>The conversation is discussing the implementation of BIP151, which improves security in communication between Bitcoin nodes by encrypting messages. The issue raised is that it's not backward compatible, meaning compatibility checks may fail with older versions. However, the BIP is still backward compatible as all SPV clients and full node implementations would still work if BIP151 has been implemented. Encryption negotiation must be done before the version handshake for security, and the requesting peer needs to initiate encryption. If the connecting peer does not request encryption, the responding peer will not enforce or ask for encryption.There is a debate about the interpretation of the terms "requesting" and "responding" peers, but it's clear from the BIP that the request for encryption should come before any other message. Allowing invalid messages in a protocol can lead to protocol incompatibility and encourages DOS attacks. The current flexibility exists because we do not drop unknown messages, but this could be up to the implementation. The purpose of version negotiation is to identify invalid messages, and anything that doesn't match the agreed version is dropped.</summary>
+    <published>2017-02-14T20:58:54+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Alternative to OP_EVAL</title>
+  <updated>2023-06-05T01:26:33.431183+00:00</updated>
+  <author>
+    <name>Stefan Thomas 2012-01-02 15:14:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Alternative to OP_EVAL</title>
+    <updated>2023-06-05T01:26:33.431183+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-January/001020.html" rel="alternate"/>
+    <summary>The discussion on OP_EVAL has raised concerns regarding the removal of the ability to statically reason about scripts. The current proposal eliminates the static analysis properties in Bitcoin, as it can stand for any number of operations, which might be part of some piece of data and change the script that is executed by OP_EVAL at runtime. Gavin's patch counts the sigops at runtime and aborts only after the limit has been reached. However, proponents argue that it is possible to "dry run" the script, avoiding the expensive OP_CHECKSIG operation and running only the other very cheap operations. But a dry runner cannot predict the outcome of conditional branches in the presence of an OP_CHECKSIG, so it has to either do the OP_CHECKSIG or follow both branches. This makes it too complicated to involve the protocol rules such as the sigops limit.As a result, people are now on a spectrum from those who feel strongly that static analysis is an important property and not something to give up easily all the way to those who think it's superfluous and the other side is just unnecessarily delaying OP_EVAL deployment. Currently, Bitcoin allows you to tell if a script contains a specific opcode or not, count how many times a script will execute an operation at most, count how many total operations a script will execute at most, count how many signatures a script will execute at most, find the maximum length of a datum pushed onto the stack, find the maximum number of items that can be pushed onto the stack, find the maximum size (in bytes) of the stack, and calculate how long a script will run at most. OP_EVAL as proposed makes these upper bounds almost meaningless as it can contain, indirectly, up to 32 instances of any other opcode. Therefore, several proposals for OP_EVAL that allow static analysis have been suggested, such as using a fixed position reference prefix, using an execute bit on data set by an opcode, using OP_CODEHASH, using OP_CHECKEDEVAL, and using OP_HASH160 OP_EQUALVERIFY as a special sigPubKey. The debate on whether it is worth the hassle to get a statically verifiable OP_EVAL is ongoing, and Gavin's latest proposal looks very promising in settling the dispute quickly. Static analysis is a better argument than for other weaker properties, such as limited recursion depth. Suppose we want to allow arbitrary scripts as IsStandard, but put constraints on them, such as enforcing a subset of allowed opcodes. If we want to include OP_EVAL in the set of allowed opcodes, it's important that OP_EVAL is implemented in a way that allows static analysis, because we can then allow it while still maintaining other restrictions. If proponents of the current implementation want to argue that we don't need static analysis now, the burden is on them to show how we could retrofit it when/if we get to this point or why they think we will never want to allow some freedom in IsStandard that includes OP_EVAL.</summary>
+    <published>2012-01-02T15:14:32+00:00</published>
+  </entry>
+</feed>

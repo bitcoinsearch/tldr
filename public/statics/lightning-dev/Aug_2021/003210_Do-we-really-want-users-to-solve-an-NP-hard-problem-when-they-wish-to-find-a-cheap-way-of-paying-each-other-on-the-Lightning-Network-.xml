@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Do we really want users to solve an NP-hard problem when they wish to find a cheap way of paying each other on the Lightning Network?</title>
+  <updated>2023-05-23T16:06:45.875226+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-08-31 04:01:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Do we really want users to solve an NP-hard problem when they wish to find a cheap way of paying each other on the Lightning Network?</title>
+    <updated>2023-05-23T16:06:45.875226+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-August/003210.html" rel="alternate"/>
+    <summary>In a Lightning-dev email thread, René Pickhardt asked whether users should be required to solve an NP-hard problem when they want to find a cheaper way of paying each other on the Lightning Network. In response, Andrew Poelstra said he didn't see why not, noting that Debian's "apt-get install" program solves an NP-hard problem every time it runs by simulating 3SAT using Depends and Conflicts relationships between packages. Poelstra worked on a related project in Debian that involved working out whether updating a package would render other packages uninstallable, which occasionally hit some of the hard NP cases. However, this was never really a big deal in practice; you just set an iteration limit and consider it to "fail" if things get too complicated, and if it fails too often, you re-analyse what's going on manually and add a new heuristic to cope with it. Poelstra suggested that a similar approach could work for Lightning, stating that at worst, one could consider routing on log(N) different networks: one that routes payments of up to 500msat at (b+0.5ppm), one that routes payments of up to 1sat at (b+ppm), one that routes payments of up to 2sat at (b+2ppm), one that routes payments of up to 4sat at (b+4ppm), etc. One could try to choose a route for all the funds; if that fails, split it; repeat. In some cases, this would fail despite there being a possible successful multipath route, and in other cases, it would choose a moderately higher fee path than necessary. Still, if paying a 0.2% fee vs a 0.1% fee when the current state of the art is a 1% fee, that would be acceptable.</summary>
+    <published>2021-08-31T04:01:34+00:00</published>
+  </entry>
+</feed>

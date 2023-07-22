@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Storing the Merkle Tree in a compact way</title>
+  <updated>2023-05-21T04:10:40.274966+00:00</updated>
+  <author>
+    <name>shymaa arafat 2021-09-11 03:00:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Storing the Merkle Tree in a compact way</title>
+    <updated>2023-05-21T04:10:40.274966+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019440.html" rel="alternate"/>
+    <summary>The Utreexo project has been discussing storage saving and traversing issues when handling the UTXOS Merkle Tree/forest. The problem involves storing N internal nodes along with 2N pointers (left &amp; right), plus one more pointer in the leaves special nodes to handle different traversing options such as insert, delete, and proof fetch that traverse aunt or niece node according to your implementation.To address this problem, a simple idea was proposed to get rid of all the pointers. This approach works best when all trees are full (complete) in the forest, but can work for any Merkle Tree. The approach involves using a 2D array with variable row size. R[j] is of length (N/2^j).For example, when N=8 nodes, R[0]=0,1,2,...,7; R[1]=8,9,10,11; R[2]=12,13; R[3]=14. Total storage is just 2N-1 nodes, and there is no need for pointers. Traversing could be neat in any direction with the right formula.A pseudocode was provided to fetch proof[i]. It involves determining the direction to know whether to add or subtract 1 from i, then adding the sibling node before adding the rest through a loop. This approach transforms a recursion to an iteration and can work for any Merkle Tree.</summary>
+    <published>2021-09-11T03:00:12+00:00</published>
+  </entry>
+</feed>

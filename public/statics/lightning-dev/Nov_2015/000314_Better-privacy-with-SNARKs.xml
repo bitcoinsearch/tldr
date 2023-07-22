@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Better privacy with SNARKs</title>
+  <updated>2023-05-23T21:28:26.896838+00:00</updated>
+  <author>
+    <name>Mats Jerratsch 2015-11-19 13:16:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Better privacy with SNARKs</title>
+    <updated>2023-05-23T21:28:26.897838+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000314.html" rel="alternate"/>
+    <summary>The author discusses the use of zero-knowledge proofs (ZKPs) to prove that R1 = R2 XOR X, without revealing R1 or R2. This would allow for the switching of R in between routing an arbitrary amount of time, solving the last obvious privacy attack vector currently existing. However, the author notes that ZKPs require perfect implementation to work as intended. To solve the issue of having to send SHA(R1), SHA(R2), SHA(R3), SHA(R4), X12, X23, X34, and three proofs when paying via a merchant, the author suggests a messaging system over the same route as the actual payment. The data that needs to be communicated over regular channels would be limited to a rendezvous node and the encrypted route from that node to the receiver. Additionally, the author believes that efficiency of SNARKs will further improve with time.The author also proposes using elliptic curve (EC) keys instead of preimage-hash verification to make a payment towards a public key. In this construction, Bob calculates a key pair he wants to receive a payment on and gives the public key Q to Alice. Alice then calculates a route consisting of 10 hops, chooses x random large numbers N_x and calculates x public keys. Each hop is able to translate the public key towards the corresponding key for the next relay node, only Alice, with the knowledge of the set N is able to relate the payment though. However, there is one caveat - currently, it is impossible to enforce a payment with a priv/pub key pair. A new operator OP_CHECKPRIVPUBKEYPAIR or similar would be needed to pop two items from the stack and replace them with true/false.</summary>
+    <published>2015-11-19T13:16:57+00:00</published>
+  </entry>
+</feed>

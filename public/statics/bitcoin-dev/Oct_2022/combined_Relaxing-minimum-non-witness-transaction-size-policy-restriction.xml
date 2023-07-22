@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Relaxing minimum non-witness transaction size policy restriction</title>
+  <updated>2023-06-16T01:46:26.771475+00:00</updated>
+  <author>
+    <name>Greg Sanders 2022-10-11 13:14:54</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-10-26 19:09:38</name>
+  </author>
+  <author>
+    <name>Peter Todd 2022-10-20 23:21:01</name>
+  </author>
+  <author>
+    <name>Peter Todd 2022-10-20 23:21:01</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-10-21 00:07:54</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-10-11 12:50:07</name>
+  </author>
+  <author>
+    <name>Peter Todd 2022-10-20 23:21:01</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-10-21 00:07:54</name>
+  </author>
+  <author>
+    <name>Peter Todd 2022-10-21 00:13:15</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-10-26 19:09:38</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-10-11 13:14:54</name>
+  </author>
+  <author>
+    <name>Peter Todd 2022-10-21 00:13:15</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-10-26 19:09:38</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-10-21 00:07:54</name>
+  </author>
+  <author>
+    <name>Peter Todd 2022-10-21 00:13:15</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-10-11 12:50:07</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-10-11 13:14:54</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2022-10-11 12:50:07</name>
+  </author>
+  <link href="bitcoin-dev/Oct_2022/020997_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021114_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021088_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021088_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021090_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/020995_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021088_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021090_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021091_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021114_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/020997_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021091_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021114_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021090_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021091_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/020995_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/020997_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/020995_Relaxing-minimum-non-witness-transaction-size-policy-restriction.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Relaxing minimum non-witness transaction size policy restriction</title>
+    <updated>2023-06-16T01:46:26.771475+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/020997.html" rel="alternate"/>
+    <summary>A proposal has been made to change the current policy limit of 85 non-witness serialized bytes for Bitcoin transactions to 65 non-witness bytes. This change would allow for a single input, single output transaction with 4 bytes of OP_RETURN padding, instead of having to pad out 21 bytes to reach p2wpkh size. The current limit was introduced as a covert fix for CVE-2017-12842. However, the "reasonable" constant chosen was not optimal.The proposed change would support more exotic transaction types and address the covert fix for CVE-2017-12842. Allowing anything below 64 non-witness bytes is also being considered, but this option may come with risks for only a small gain in bytes. KING JAMES HRMH raised concerns about backward compatibility for older clients like v0.18 and how they may not be able to receive transactions from newer clients that require validation of 85 non-witness serialized bytes.A competing pull request has been opened for separate evaluation in response to feedback. The PR for this proposed change can be found on GitHub at https://github.com/bitcoin/bitcoin/pull/26265. Until this change reaches a critical mass of 10%+ of the network, propagation of these types of transactions may be hampered. Feedback and concerns regarding this proposal are welcomed.There was also an initial issue regarding the broadcast of blocks that are 61, 62, or 63 bytes long but not 64 bytes, which led to Greg Sanders proposing his changes. Peter Todd commented that it is okay to only restrict blocks that are 64 bytes long since there is a specific reason for doing so. However, only fairly technical use cases would be affected.Sanders wants to ensure that his proposal does not die in case people find it odd that 61, 62, 63, but not 64 bytes ended up being broadcastable. Peter Todd suggests that spending a single input to OP_RETURN with no payload could be a valid use to get rid of dust in the UTXO set.</summary>
+    <published>2022-10-11T13:14:54+00:00</published>
+  </entry>
+</feed>

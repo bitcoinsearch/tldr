@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Sphinx Rendezvous Update</title>
+  <updated>2023-06-03T23:46:54.665390+00:00</updated>
+  <author>
+    <name>Christian Decker 2020-02-24 18:22:08</name>
+  </author>
+  <author>
+    <name>Christian Decker 2020-03-02 11:39:49</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2020-02-25 16:24:29</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2020-02-24 09:33:33</name>
+  </author>
+  <link href="lightning-dev/Feb_2020/002566_Sphinx-Rendezvous-Update.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2020/002574_Sphinx-Rendezvous-Update.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2020/002567_Sphinx-Rendezvous-Update.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2020/002565_Sphinx-Rendezvous-Update.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Sphinx Rendezvous Update</title>
+    <updated>2023-06-03T23:46:54.665390+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002566.html" rel="alternate"/>
+    <summary>The Lightning-dev mailing list provides a platform for developers working on the Lightning Network to discuss technical issues related to scalability and transaction speed. In October 2019, an email thread on the mailing list discussed solutions for implementing a rendezvous feature in the Lightning Network, which involves reconciling both sides of the onion at the rendezvous node (RV). One proposed solution involves Alice prepending filler data to the onion when generating it, and then Carol generating her own filler data for her part of the route following the normal Sphinx protocol when completing the onion. Another proposed solution involves dropping a large part of the partial onion to fit it into an outer onion, with the RV re-constructing the original packet from the included data. Christian Decker and Bastien Teinturier exchanged emails regarding privacy concerns with partial onion routing, which is being proposed as a solution to the issues with full onion routing. Christian plans to expose the size to be prefilled so that smaller partial onions can be used, enabling the ability to chain multiple partial onions. The shared secret used to generate the prefill stream is derived from both the ephemeral key and RV's private key, ensuring security and not leaking information. However, the proposal has issues with each hop's amount/cltv being fixed at invoice generation time by the recipient, which means MPP cannot be used, and if any channel along the path updates their fee, the partial onion becomes invalid unless the fees are overpaid. To address this issue, Trampoline could potentially provide more freedom for each trampoline node to find an efficient way to forward to the next trampoline. Bastien requested feedback on implementing rendezvous routing to facilitate direct payments between two nodes without a direct channel. He specifically asked for ideas on reconciling rendezvous routing with HMACs used to protect payments from malicious actors. Bastien suggested that rendezvous on normal onions would be costly to integrate into invoices due to their size but doing rendezvous on the trampoline onion could have better properties. He encouraged others to share their thoughts and ideas on possible constructions for implementing rendezvous routing correctly. Finally, he noted that while Hornet offers many useful features for the future of Lightning, it may take some time before they can be implemented, so having a custom rendezvous scheme available soon could still make sense. In another message to the Lightning development mailing list, Bastien discussed the issue of making HMACs check out with rendezvous. Two solutions were suggested: Carol could either send the filler via a TLV in update_add_htlc, which means every intermediate hop needs to forward it, or she could provide Bob with the rho keys used to generate her filler and the length used by each hop, which would leak an upper bound on the number of hops and the number of bytes sent to each hop. Teinturier also pointed out that rendezvous on normal onions would be costly to integrate into invoices since it takes 1366 bytes to include one onion, but doing rendezvous on the trampoline onion could have better properties. When doing that, having Carol transmit her filler data only to Bob via the outer onion payload becomes practical and doesn't leak information. Multi-part would work with a single trampoline onion in the invoice (~500 bytes), because nodes can do MPP between trampoline nodes thanks to the onion-in-onion construction.</summary>
+    <published>2020-02-24T18:22:08+00:00</published>
+  </entry>
+</feed>

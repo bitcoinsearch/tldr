@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 118 and SIGHASH_ANYPREVOUT</title>
+  <updated>2023-05-20T23:32:21.794756+00:00</updated>
+  <author>
+    <name>Matt Corallo 2020-08-06 15:58:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 118 and SIGHASH_ANYPREVOUT</title>
+    <updated>2023-05-20T23:32:21.794756+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018077.html" rel="alternate"/>
+    <summary>The conversation between Matt and ZmnSCPxj revolves around a relay-based attack that can compromise HTLC security in the Lightning Network. In this attack, the attacker connects twice to the LN - once to any node near the victim and once to the victim. The attacker then arranges for the victim-attacker channel to have most funds on the victim's side and routes a circular payment terminating in the victim-attacker channel. The attacker broadcasts a very low-fee old-state transaction of the victim-attacker channel just before the HTLC timeout, forcing the victim to broadcast a unilateral close attempt for the victim-attacker channel in order to enforce the HTLC on-chain. Unfortunately, relay shenanigans prevent the latest commitment from being broadcast, leaving the victim at risk. ZmnSCPxj suggests that the forwarding node drops channels on-chain "early" if the HTLC will time out soon. However, Matt notes that when there is a non-relative time limit (i.e., an HTLC) for confirmation, relay attacks become critical, and it is no longer just about revocation. He adds that SIGHASH_NOINPUT makes these issues much simpler to address, but only if nodes can somehow be "smart" about replacement when they see a SIGHASH_NOINPUT spend that can spend an output that something else in the mempool already spends. Matt also suggests that nodes should be able to relay a transaction to a full node without knowing exactly which input transaction that full node has in its mempool/active chain. This is important for systems like lighting where you do not know which counterparty commitment transaction(s) are in a random node’s mempool, and you should be able to describe to that node that you are spending them nonetheless. While this is incredibly complex, it may leave SIGHASH_NOINPUT rather useless for lighting without it. In addition, they discuss the possibility of an overlay relay network of lightning nodes that do calculation and then pass transactions to their local full nodes. Given such a network would represent an increase in local mempool fees, it is not unreasonable to expect at least some miners to run a local node that can submit such transactions to their template-generating nodes. Overall, they conclude that monitoring on-chain events and ignoring mempool events could help prevent such attacks, as once a transaction is confirmed, its txid does not malleate without a reorg, and a SIGHASH_NOINPUT signature can then be "locked" to that txid.</summary>
+    <published>2020-08-06T15:58:53+00:00</published>
+  </entry>
+</feed>

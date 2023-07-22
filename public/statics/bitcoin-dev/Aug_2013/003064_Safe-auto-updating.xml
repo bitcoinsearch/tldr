@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safe auto-updating</title>
+  <updated>2023-06-07T15:23:07.125451+00:00</updated>
+  <author>
+    <name>Jim 2013-08-05 17:14:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safe auto-updating</title>
+    <updated>2023-06-07T15:23:07.125451+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-August/003064.html" rel="alternate"/>
+    <summary>One approach to ensure package authentication is to use bitcoin signing on a list of the build artifacts together with their SHA256 hashes. The MultiBit release notes give an idea of how this can be achieved, having machine-readable statements that include a list of files in the build, their SHA256 hashes, and the above bitcoin signed by multiple signatures. Acceptable Bitcoin addresses for signatures would be a whitelist in the client code. Alan Reiner suggests hardcoding a "distributor" public key in the software, where client software will only trust signed data from that key. The private key for that data should not be kept on the server distributing the signed checksums, instead, it should be kept offline. When executing an upgrade, the new checksums are signed offline, and the signed checksum is uploaded to the distribution server. Even if the server is compromised, the client-side software will not accept a bogus checksum because it won't bear the right signature. If you want package authentication, digital signing should be added, not just a checksum. A compromised host can change both the checksum and binaries undetectably. However, if there's a signature made by a key that is not kept on the host, there's no way to fake a valid binary. This was Daniel F's suggestion in response to Wendell's query about the safe way to have an auto-updater in their wallet app. Wendell had suggested placing one server behind a Tor hidden service, whose only function is to output a checksum of the update package. The theory is that if it is well-secured, it will at least be immune to tampering at the physical hosting level. The email thread ends with links to the SQL database version control and Bitcoin-development mailing list.</summary>
+    <published>2013-08-05T17:14:00+00:00</published>
+  </entry>
+</feed>

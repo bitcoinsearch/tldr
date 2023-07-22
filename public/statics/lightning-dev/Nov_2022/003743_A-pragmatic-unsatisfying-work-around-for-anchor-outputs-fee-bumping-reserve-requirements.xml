@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A pragmatic, unsatisfying work-around for anchor outputs fee-bumping reserve requirements</title>
+  <updated>2023-06-03T10:31:15.797619+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-11-05 00:51:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A pragmatic, unsatisfying work-around for anchor outputs fee-bumping reserve requirements</title>
+    <updated>2023-06-03T10:31:15.797619+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-November/003743.html" rel="alternate"/>
+    <summary>The Lightning Network has updated its transaction format to leverage CPFP carve-out and allow nodes to set fees at broadcast time using a feature called anchor outputs. While desirable, this change brings a whole new set of challenges by requiring nodes to maintain a reserve of available UTXOs for fee-bumping. Correctly managing this fee-bumping reserve involves a lot of complex decisions and dynamic risk assessment because in worst-case scenarios, a node may need to fee-bump thousands of HTLC transactions in a short period of time. Each node can sign multiple versions of the HTLC transactions at various feerates, and at broadcast time, if lucky, they'll have a pre-signed transaction that approximately matches the feerate they want, so they don't need to add inputs from their fee bumping reserve. This reduces the requirements on their on-chain wallet and simplifies transaction management logic. Initial users had to deal with the UTXO reserve, but then sort of accepted the trade-off for the safety that actually being able to dynamically bump the fee on the commitment transaction and HTLCs. Lnd has its own wallet (btcwallet), which is what has allowed them to adopt default P2TR addresses everywhere so quickly. However, if an implementation doesn't have its own wallet, things can be a bit more difficult, as stuff like the bitcoind wallet may not expose the APIs one needs to do things like CPFP properly. The new considerations aren't any worse than needing to predict the future fee schedule of the chain to ensure that you can force close in a timely manner when you need to. Re fee bumping thousands of HTLCs: anchor lets them all be batched in the same transaction, which reduces fees and also the worst-case on-chain force close footprint. The mapping of signing multiple versions of HTLC transactions at various feerates to taproot channels that use musig2 may not be super clean. Ultimately, it's not clear why implementations that have already rolled out anchors by default and have a satisfactory policy for ensuring fee bumping UTXOs are available at all times would implement this. It's just yet another option defined in the spec and prescribes a more restrictive solution to what's already possible: being able to dynamically fee bump commitment transactions and aggregate second level spends.</summary>
+    <published>2022-11-05T00:51:55+00:00</published>
+  </entry>
+</feed>

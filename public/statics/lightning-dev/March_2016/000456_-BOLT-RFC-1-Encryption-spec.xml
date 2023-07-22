@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BOLT RFC#1] Encryption spec</title>
+  <updated>2023-05-23T22:47:30.091229+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-03-07 03:51:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BOLT RFC#1] Encryption spec</title>
+    <updated>2023-05-23T22:47:30.091229+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-March/000456.html" rel="alternate"/>
+    <summary>The Basis of Lightning Technology RFC 1 draft describes the encryption and authentication of communications between lightning nodes. It is recommended that all communications be encrypted to make analysis more difficult and authenticated to avoid malicious interference. The initial handshake is sent by a node using a DER-encoded compressed public EC-key as the sessionpubkey field, which is then checked for validity by the receiver. A shared secret is derived from the initial handshake, and keys are derived from this shared secret for encrypting data. The protocol uses Authenticated Encryption with Additional Data using ChaCha20-Poly1305, and nonces are used to encrypt packet headers and bodies. To authenticate peer identity, the first packet sent must be an authentication packet containing three required fields: bitcoin_pubkey node_id, signature session_sig, and a signature of the SHA256 of SHA256 of the receiver's node_id using the secret key corresponding to the sender's node_id. Public-key cryptography here uses the secp256k1 elliptic curve to avoid additional dependencies. The RFC recommends using existing, commonly-used, validated libraries to avoid implementation pitfalls possible. Rusty Russell of Blockstream authored the initial draft, and feedback is welcomed on the lightning-dev list. References include Secp256k1, RFC7539, and the libsodium documentation.</summary>
+    <published>2016-03-07T03:51:02+00:00</published>
+  </entry>
+</feed>

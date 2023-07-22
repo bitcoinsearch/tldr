@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Splicing Proposal: Feedback please!</title>
+  <updated>2023-05-25T14:23:06.490936+00:00</updated>
+  <author>
+    <name>René Pickhardt 2018-10-10 22:42:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Splicing Proposal: Feedback please!</title>
+    <updated>2023-05-25T14:23:06.490936+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-October/001437.html" rel="alternate"/>
+    <summary>The letter from Rene to Rusty proposes a new method for splicing in the Lightning Network. This involves creating an additional output spent by a special commitment transaction, which simplifies the process and avoids the need to send around all messages twice. The proposal also allows for multiple splicing operations in parallel. Rene suggests that splicing out is safer, as one can create a spend of the funding transaction with one output going to the recipient of the splice-out operation and the second output acting as a new funding transaction for the newly spliced channel. The process of Splice Signing and Splice Announcement in the Lightning Network is explained. This involves creating and signing both the splice transaction itself and the first commitment transaction which spends it. Each side sends `splice_commitment_signature` and waits to receive and verify the other side's `splice_commitment_signature`. Once a node has sent `splice_commitment_signature`, it remembers the splice proposal across reconnects. We also have to tell the network about the new channel through Splice Announcement.Message Changes During Splicing are also explained, wherein each commitment transaction is duplicated: one spends the old funding transaction, one spends the splice transaction. The sender must set the `splice_txid` field to the txid of the splice transaction if it has sent `splice_commitment_signature` and not sent the corresponding `splice_closed`. Otherwise, it must not. The recipient must retransmit `splice_signature` if it has sent `splice_commitment_signature` and not sent the corresponding `splice_closed`. If the `splice_txid` field exists and is not all zeroes, it must send `splice_closed`.Validation Changes During Splicing are also included in the context. The post-splice reserve is 1% of post-splice capacity (rounded down). The fees for the splicing transaction itself are divided into parts by the number of `splice_add_input` plus `splice_add_output`, rounded up. Each side pays as many parts as it proposed `splice_add_input` plus `splice_add_output`, with the total fee being split accordingly. To complete the splice, both sides must see minimum depth confirmations of the splice transaction and send a `splice_closed` message with the channel ID.Once received, announcement signatures can be sent for the new channel, and everything about the old channel can be forgotten, including any old HTLCs and revocation requirements. Rusty Russell's rough proposal for splicing in Lightning Network is also mentioned, and feedback on the proposal is welcome.</summary>
+    <published>2018-10-10T22:42:18+00:00</published>
+  </entry>
+</feed>

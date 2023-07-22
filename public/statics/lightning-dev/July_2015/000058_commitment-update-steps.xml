@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>commitment update steps</title>
+  <updated>2023-05-18T00:21:05.906228+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-07-24 03:30:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>commitment update steps</title>
+    <updated>2023-05-18T00:21:05.906228+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-July/000058.html" rel="alternate"/>
+    <summary>In a conversation between Rusty Russell and Anthony Towns on July 24, 2015, the topic of cheating in Bitcoin payments was discussed. If Alice cheats and publishes an old commitment, Bob needs to work out which of the 100 Alice_N hashes he knows or can work out is being abused. With millions of transactions, this could require many hash calculations or a 100MB lookup table. Russell suggests using a dummy output of "0: OP_RETURN 42" to make that calculation trivial. If a channel has ~100 updates per second and lasts for a month, that would be 259M updates, taking about 22 minutes of search time on a laptop. Even with three days worth of OP_CSV delay, it would still be manageable.However, if pay2scripthash is used, HTLCs become harder, and Bob could only claim the final outputs if he could unhash the scripts, which would require having remembered R1..R4 even after those contracts had long been resolved. Russell suggests adding an extra output "0: OP_RETURN 42 #R1 #R2 #R3 #R4" to deal with this issue.While p2sh outputs are 32 bytes total, OP_RETURN is 51 bytes, so increasing the transaction size by about 80%. Storing all the R's seen may also be an option, but if okay with storing them, then 100/second for a month is just 5GB if stored in the order they're seen.</summary>
+    <published>2015-07-24T03:30:05+00:00</published>
+  </entry>
+</feed>

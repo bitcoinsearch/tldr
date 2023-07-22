@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Congestion and Flow control for Multipath Routing</title>
+  <updated>2023-06-02T19:28:24.761956+00:00</updated>
+  <author>
+    <name>René Pickhardt 2019-07-15 12:23:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Congestion and Flow control for Multipath Routing</title>
+    <updated>2023-06-02T19:28:24.761956+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-July/002071.html" rel="alternate"/>
+    <summary>In an email addressed to fellow BOLT developers, Rene Pickhardt proposed a congestion and flow control mechanism to improve the speed and reliability of multi-path routing schemes on the Lightning Network. Currently, there is an issue of stuck payments on the network, particularly if Atomic Multi Path routing is used. This means that all payments and HTLCs of a multipath payment will only be settled once enough incoming HTLCs arrive at the recipient. One malicious actor can interrupt the entire payment process, and the entire payment process takes as long as max time needed over all payments. Pickhardt looked at the windowing mechanism used in TCP to achieve congestion control and transferred this concept to the setting of the Lightning Network. He proposed a base version protocol where a regular payment on the Lightning Network for amount x has a Payment Hash H and a preimage r. If a recipient accepts that this payment could be split over up to n paths, the recipient would create a sha-chain of preimages and payment hashes with n elements. However, sequential payments make the payment process even longer since it is not the max time needed over all payments but the sum of times needed.To resolve this issue, Pickhardt suggested introducing flow control via a windowing mechanism and allowing concurrency of partial payments. In this suggested version, assuming the receiving node supports a window size of s concurrent payments, the payee will create s sha-chains of n payment hashes. The advantage of this mechanism is that as long as less than s payments get stuck, the protocol can continue to deliver partial payments. Furthermore, Pickhardt suggested potential improvements for better privacy, such as using xor every preimage with a sequence number making it harder for an attacker to correlate two consecutive payments in the stream of payments and creating some path decorrelation when paths are reused for partial payments. The sender needs to keep track of how many payments have been successfully sent and how many are in transition/stuck, and the receiver needs to store more data in memory. Pickhardt concluded that with the introduction of two new fields in BOLT 11 invoices and rather simple code changes for invoice creation/preimage releasing, the proposed mechanism can be extended for a streaming payments protocol. He believed that this mechanism could reduce load from the network, and a few stuck payments can be neglected as "cost" of operation.</summary>
+    <published>2019-07-15T12:23:18+00:00</published>
+  </entry>
+</feed>

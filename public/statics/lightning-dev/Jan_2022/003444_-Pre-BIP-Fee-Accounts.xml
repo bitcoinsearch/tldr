@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[Pre-BIP] Fee Accounts</title>
+  <updated>2023-06-03T07:17:07.051200+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2022-01-19 04:53:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[Pre-BIP] Fee Accounts</title>
+    <updated>2023-06-03T07:17:07.051200+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-January/003444.html" rel="alternate"/>
+    <summary>The current design of Bitcoin's fee paying system has some limitations that make it difficult to support long-lived smart contracts, fee bumping stuck transactions, and DoS resistant payment channels. Previously, a "sponsor" transaction type was proposed to solve these problems. As an alternative, an account system could be established as an extension block in Bitcoin.The proposal suggests defining a special anyone-can-spend output type called a "fee account", with associated deposits stored in a separate UTXO database. Fee accounts can sign only two types of transactions: one for a fee amount and a TXID or outpoint, and another for a withdrawal amount, a fee, and an address. These transactions are committed in an extension block merkle tree.Mempool logic is updated to allow attaching account fee spends to transactions, with the mempool restricting accounts from spending more than their balance. While accounts have negative associations, the proposed accounts are not bad due to the funds withdrawn being locked for 100 blocks as a coinbase output and because there is no rich state for these accounts. The proposal could also be modified to improve privacy by implementing something like Tornado.cash.The Bitcoin Lightning Network (LN) could be used to add fees to transactions without requiring the addition of inputs or outputs, making it a scalable solution. Accounts with similar values can be split into a common denominator and change, with keys derived via a verifiable stealth address like protocol. Updates can be produced by individuals rather than miners, with miners simply honoring them for better privacy.To ensure the owner doesn't pay a fee and then withdraw the rest, reputable fee accounts could be used, with reputation measured somewhat decentralized-ly by longevity of the account and historically paid transactions. Paying someone else to pay for you via the LN makes the process more efficient if withdrawal issues can be resolved. This design is particularly suited to channels as adding fees to a channel state does not require any pre-planning or transaction flexibility.It is naturally immune to pinning issues as the number of fee adding offers does not need to be restricted in the same way that descendant transactions would need to be. This type of design could be implemented as a federated network that bribes miners, potentially even retroactively after a block is formed. However, such an approach means there is a centralizing layer interfering with normal mining.</summary>
+    <published>2022-01-19T04:53:21+00:00</published>
+  </entry>
+</feed>

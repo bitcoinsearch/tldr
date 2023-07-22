@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fwd: (Semi)Traceless 2-party coinjoin off-chain protocol using schnorr signatures</title>
+  <updated>2023-06-14T00:52:20.850253+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-04-23 17:56:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fwd: (Semi)Traceless 2-party coinjoin off-chain protocol using schnorr signatures</title>
+    <updated>2023-06-14T00:52:20.850253+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-April/017788.html" rel="alternate"/>
+    <summary>A protocol has been proposed to make atomic swaps possible within the same chain in a traceless way, effectively turning an entire chain into a mixer by default. The proposed solution involves using a suitably chosen schnorr signature in place of the secret 't' used in atomic swaps with schnorr signatures. Alice and Bob would hold funds at UTXO1 controlled by Alice and UTXO2 controlled by Bob. Alice provides Bob with a single public key P_A while Bob provides Alice two pubkeys P_B1, P_B2. They then construct the P2PKH addresses Addr1 and Addr2 where the UTXO1 funds will be sent to eventually and where the UTXO2 funds will be sent to eventually respectively. After exchanging time-locked refund transactions for the funding transactions sending the funds to Addr1 and Addr2, they submit the funding transactions with Alice paying to Addr1 from UTXO1 and Bob paying to Addr2 from UTXO2. Alice sends Bob an adaptor signature r1 + H(r1 | m)*x_a + r2 + H( r2 | m')*x_a which Bob verifies contains a valid signature for spending from Addr1 AND another valid signature for spending from Addr2, both signatures from Alice. Bob now sends Alice the valid signature: r2 + H( r2 | m' )*x_b2. Alice can now add her signature to Bob's and get: r2 + H( r2| m' )*(x_b2 + x_a) which is a valid signature to spend the funding transaction sent to Addr2. Finally, Bob sees Alice claims the fund sent to Addr2 and uses that signature to subtract his own: r2 + H( r2 | m' )*(x_b2 + x_a) - (r2 + H( r2 | m' )*x_b2) = H( r2 | m ')*x_a. Bob takes the original adaptor signature and subtracts the known quantity r2+ H( r2 | m' )*x_a, to get a valid signature: r1 + H( r1 | m )*x_a. Bob can now add to that valid signature, his own signature and retrieve the funds. It is possible for the counterparty to store copies of the signatures as proof that such a join has taken place, but plausible deniability is available upon discarding signatures since the joint private keys are unavailable.</summary>
+    <published>2020-04-23T17:56:08+00:00</published>
+  </entry>
+</feed>

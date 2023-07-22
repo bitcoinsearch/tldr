@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Taproot-aware Channel Announcements + Proof Verification</title>
+  <updated>2023-05-23T17:24:40.523422+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-03-23 01:10:00</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-03-23 22:30:40</name>
+  </author>
+  <link href="lightning-dev/March_2022/003526_Taproot-aware-Channel-Announcements-Proof-Verification.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2022/003529_Taproot-aware-Channel-Announcements-Proof-Verification.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Taproot-aware Channel Announcements + Proof Verification</title>
+    <updated>2023-05-23T17:24:40.523422+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-March/003526.html" rel="alternate"/>
+    <summary>The Lightning Network Daemon (lnd) will be integrating Taproot into its codebase, with a release date of version 0.15 in April. However, modifications need to be made to the gossip layer since a flavor of Taproot means a different on-chain funding output. There have been discussions regarding two possible paths for this: redesigning the channel validation portion of the gossip layer or going with a more minimal approach. The second option proposes a new taproot-aware `channel_announcement2` message that uses musig2 to generate a single signature under the aggregate public key instead of carrying around four signatures like the existing `channel_announcement`. This approach doesn't deviate too much from the current flow, making it easier to deploy. The main difference would be how nodes validate the Bitcoin output on chain. If nodes want to maintain the same level of binding, they reconstruct the aggregated Bitcoin public key and assert that it matches the pkScript on chain. Alternatively, if this strong binding isn't desirable, they specify just a single Bitcoin key and look for that directly in the on-chain script.In an email to the Lightning Development mailing list, Laolu Osuntokun outlined a proposal for mapping Taproot awareness to existing gossip message flow. The email discusses maintaining the same level of binding for pure Taproot channels and how nodes can use bitcoin keys to construct a p2wsh multi-sig script while verifying that the script matches what has been confirmed on-chain. The proposed approach requires exchanging public nonce points R_1 and R_2 before the signatures can be generated. To facilitate this, the email proposes adding a `66*byte`:`public_nonce` field to the open+accept channel messages, which must be present if the channel is to be advertised. These changes are expected to be implemented by version 0.15 of lnd in April.</summary>
+    <published>2022-03-23T01:10:00+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Towards a Market for Liquidity Providers -- Enforcing Minimum Channel Lifetime</title>
+  <updated>2023-05-25T15:54:42.207727+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-11-12 00:35:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Towards a Market for Liquidity Providers -- Enforcing Minimum Channel Lifetime</title>
+    <updated>2023-05-25T15:54:42.207727+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001560.html" rel="alternate"/>
+    <summary>In a Lightning-dev discussion, ZmnSCPxj brought up the "initiator pays" principle in relation to liquidity providers. He analyzed the scenario where onchain fees are split between the liquidity provider and party buying liquidity. In this case, the liquidity provider would increase its liquidity fees until it reaches the level where it would still earn the opportunity cost of locking its funds, taking into account the onchain fee that the provider would provide. Therefore, in effect, the onchain fee from the liquidity provider's side would still end up being paid by the buyer of liquidity, so "initiator pays" seems reasonable. On the other hand, if the onchain fees were only paid by the party buying liquidity, then they would account for the onchain fees incurred plus the liquidity fee as part of the cost of doing business with the liquidity provider. If this cost is too high, regardless of how many outputs the liquidity provider provides, it may be uneconomical for the party buying liquidity to do business with that particular liquidity provider and would take its business elsewhere. Therefore, the liquidity provider would prefer to keep its own funds in as few outputs as possible to be more competitive in the liquidity provider market.ZmnSCPxj also discussed how parties have to exchange the first commitment txes (one for each side) before the funding tx is even published. As a consequence, the absolute CLTV delay wouldn't really constrain the duration of the channel because the timer starts running before the channel is created. Mercy (who is buying liquidity) opens the channel, with Licky providing part of the funds, and then Mercy shutting down its node. As long as the funding transaction gets confirmed and it is possible for Licky to broadcast the commitment transaction, the same analysis applies: Mercy pays Licky to lock its funds, so Licky earns here already, regardless of whether Mercy uses the capacity or not. Finally, ZmnSCPxj presented the full contract that Mercy and Licky would agree to in this scenario. Mercy agrees to pay N satoshi to Licky, Licky agrees to have L satoshi locked for use in the channel until blockheight B, either side may void this contract by paying a miner fee until the time the funding transaction confirms, and Mercy is responsible for getting the funding transaction confirmed.</summary>
+    <published>2018-11-12T00:35:55+00:00</published>
+  </entry>
+</feed>

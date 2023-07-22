@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for P2P Wireless (Bluetooth LE) transfer of Payment URI</title>
+  <updated>2023-06-09T16:31:51.443104+00:00</updated>
+  <author>
+    <name>Paul Puey 2015-02-05 08:01:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for P2P Wireless (Bluetooth LE) transfer of Payment URI</title>
+    <updated>2023-06-09T16:31:51.443104+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-February/007320.html" rel="alternate"/>
+    <summary>Airbitz has developed a protocol for peer-to-peer wireless transfer of a URI request using an open broadcast or advertisement channel such as Bluetooth, Bluetooth Low Energy, or WiFi Direct. The current implementation, available in their iOS and Android mobile wallet, eliminates the need for a merchant and customer to exchange a URI request using QR codes, which can be cumbersome. Using a wireless local broadcast allows the merchant to just enter the payment and wait. The tablet and smartphone are not maneuvered to align in any way. A copycat broadcaster acting as MITM might duplicate the broadcast simultaneously as the merchant, attempting to lure the customer to send funds to the copycat. That attack is mitigated with this broadcast method because of the partial address in the broadcast. The protocol involves Requester generating a bitcoin URI request of variable length, and a limited descriptive identifier string. Requester then broadcasts the URI’s partial public address plus identifier over a publicly visible wireless channel. Sender scans for broadcasts on their device, examines and selects the desired request by the identifier and partial address. This connects a data channel to Requester. Requester sends full URI back over the data channel. Sender device ensures the partial address is part of the full URI public address and checks the full address integrity. Checking the broadcast and full URI integrity prevents a copycat device within range from copying the partial address and fooling the customer into sending funds to the copycat instead.The proposed specification involves Peripheral advertising over a service UUID a BLE extended advertisement with a Scan Response containing the partial address of a bitcoin URI and a Name, any plain text. When the Central scans the advertisement, it may display the Scan Response in a human-readable listing using the two pieces of information. If Central chooses this advertisement to receive the full request, it then subscribes to the service and writes the characteristic with its own name, or a blank if not sending a name, to the Peripheral. The Peripheral gets a characteristic write request of the Central’s name and acknowledges the receipt by sending a server response. Central receives a characteristic write (from the response) and immediately requests the entire bitcoin URI by issuing a read request on that characteristic. Peripheral receives the read request and sends the entire bitcoin URI over that characteristic up to 512 bytes. The Sender would then normally confirm the request and decide whether to initiate the fund transfer. There are no prior BIPs covering this.</summary>
+    <published>2015-02-05T08:01:31+00:00</published>
+  </entry>
+</feed>

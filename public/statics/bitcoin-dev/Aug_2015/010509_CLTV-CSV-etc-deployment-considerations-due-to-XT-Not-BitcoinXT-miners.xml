@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CLTV/CSV/etc. deployment considerations due to XT/Not-BitcoinXT miners</title>
+  <updated>2023-06-10T20:29:54.607927+00:00</updated>
+  <author>
+    <name>jl2012 at xbt.hk 2015-08-20 17:32:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CLTV/CSV/etc. deployment considerations due to XT/Not-BitcoinXT miners</title>
+    <updated>2023-06-10T20:29:54.607927+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/010509.html" rel="alternate"/>
+    <summary>During a discussion on the bitcoin-dev mailing list in August 2015, developer Peter Todd proposed the implementation of a nVersion mask for IsSuperMajority(), which would allow miners running Bitcoin Core to create blocks with the nVersion set to 8. The proposal involved masking away the nVersion bits set by XT/Not-Bitcoin-XT miners before applying the IsSuperMajority() logic. This would mean that CLTV/CSV/etc. miners running Bitcoin Core would create blocks with nVersion=8, and from the perspective of the IsSuperMajority() test, XT/Not-Bitcoin-XT miners would be advertising blocks that do not trigger the soft-fork. The proposal also suggested that, for the purpose of soft-fork warnings, the highest known version can remain nVersion=8, which is triggered by both XT/Not-Bitcoin-XT blocks as well as a future nVersion bits implementation. Further IsSuperMajority() softforks could be accomplished with the same masking technique. However, the option proposed does complicate the XT-coin protocol implementation in the future. In response to the proposal, another developer suggested masking all bits except the 4th bit so that other fork proposals may use other bits for voting concurrently. It was clarified that the masking is only applied during the voting stage and once the softfork is fully enforced with 95% support, the nVersion will be simply &gt;=8, without any masking.  It should be noted that at the time of this discussion, maintainers Hearn and Andresen had argued against the use of soft-forks and/or appeared to be in favor of a more centralized mandatory update schedule.</summary>
+    <published>2015-08-20T17:32:02+00:00</published>
+  </entry>
+</feed>

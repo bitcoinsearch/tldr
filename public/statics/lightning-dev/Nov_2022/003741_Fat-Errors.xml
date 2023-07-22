@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fat Errors</title>
+  <updated>2023-06-03T10:26:45.166090+00:00</updated>
+  <author>
+    <name>Joost Jager 2022-11-04 06:53:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fat Errors</title>
+    <updated>2023-06-03T10:26:45.166090+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-November/003741.html" rel="alternate"/>
+    <summary>In this email conversation, two individuals discuss a proposal to solve a problem related to message relay. The proposed solution involves adding hmacs to each node, but this results in a significant increase in size. One way to keep the size small is to have each node add its hmac without deleting any part of the message to relay. This option was previously disqualified due to the size increase, but it merits more consideration as it is much simpler and size only grows linearly with the length of the route. However, increasing the message length still leaks information, even with randomization by the final node. Another advantage of the naive hmac append is that each node can add a variable (tlv?) payload, which is not possible with the fixed size proposal. To keep the constant size property, a low limit on the number of nodes could be used, such as 8 or less. Longer routes can still be used, but hmacs would only be obtained for the first 8 hops, with a revert to the legacy system if failure happens after the first 8 hops. This middle road keeps the size low and the first 7 hops are clean. The question remains about the problematic nature of a full size fat error of 12 kb, wondering if there would be an actual degradation of the user experience or other significant negative effects in practice.</summary>
+    <published>2022-11-04T06:53:53+00:00</published>
+  </entry>
+</feed>

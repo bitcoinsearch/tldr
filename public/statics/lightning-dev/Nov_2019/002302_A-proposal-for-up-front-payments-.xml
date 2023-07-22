@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A proposal for up-front payments.</title>
+  <updated>2023-06-02T21:18:18.070045+00:00</updated>
+  <author>
+    <name>Rusty Russell 2019-11-08 02:38:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A proposal for up-front payments.</title>
+    <updated>2023-06-02T21:18:18.070045+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-November/002302.html" rel="alternate"/>
+    <summary>The email conversation between Anthony Towns and Rusty Russell discussed the fairness of Lightning Network's routing fees. Alice, who created the onion, knows all preimages since she created the chain AAAAA....ZZZZZ. The proposed formula for fair pricing is "16 - X/4" where X is the number of zero bits in some PoW-y thing, which was suggested to be SHA256(blockhash|revealedonion). This formula means that each step is individually grindable. Alternatively, one could use the prepayment hashes themselves, so you generate the nonce AAAA as the value you'll send to Dave then hash it repeatedly to get BBBB..QQQQ.   If you don't grind and just go by luck, the average number of hashes per hop is ~15.93, so you should be able to estimate path length pretty accurate by dividing claimed prepaid funds by 15.93*25msat or whatever. However, the ideal prepay range would be wider, so you can believably have payments between 16 and 4 per hop, say. The hashcash method is better than nothing, but still not very good. The email also discussed the issue of routing failure and refunds. If you're buying a $2 coffee and paying 500ppm in regular fees per hop with 5 hops, then each routing attempt increases your fees by 4%, which seems pretty easy to ignore. However, ideally, lots of noise would exist even if people are trying to minimize fees (which, if they're sending messages rather than payments, they might).</summary>
+    <published>2019-11-08T02:38:04+00:00</published>
+  </entry>
+</feed>

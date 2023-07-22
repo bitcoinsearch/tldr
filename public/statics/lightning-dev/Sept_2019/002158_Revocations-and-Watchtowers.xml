@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Revocations and Watchtowers</title>
+  <updated>2023-06-02T20:17:33.869039+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-09-19 10:14:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Revocations and Watchtowers</title>
+    <updated>2023-06-02T20:17:33.869039+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-September/002158.html" rel="alternate"/>
+    <summary>ZmnSCPxj, a member of the Lightning-dev mailing list, pointed out some inaccuracies in a recent talk regarding the storage requirements for revocation transactions in Lightning Network. While it is true that revocation transactions require extra storage space, Rusty created a shachain construct to store these transactions in O(1) space and O(log n) time to extract in case of breach. However, watchtowers with Poon-Dryja revocation mechanism still need to store O(n) transactions because shachain stores keys, and watchtowers do not possess revocation keys, only pre-built signatures to revocation transactions that pay a partial fee to the watchtower.Watchtowers also need to store all O(n) transactions it receives for a channel to protect against "poisoned blob" attacks, where an attacker creates an encrypted blob that is just random data and feeds it into the watchtower. Even with Decker-Russell-Osuntokun watchtowers, which have other advantages such as multiparticipant offchain updateable cryptocurrency systems, they either need to identify their clients so that attackers cannot spoof the clients or have to store all encrypted blobs related to a channel. To reduce the storage requirements for watchtowers, Christian proposed establishing an authenticated session with a watchtower, signing all encrypted updates using a session key, and having the watchtower only replace updates that match the session. He also suggested adding the channel outpoint to the update in cleartext so that the watchtower can prune states for closed channels. Multiple sessions could be opened with the watchtower or spread across multiple watchtowers to hide the activity and timing of channels. These proposals could effectively reduce the storage space for watchtowers in eltoo to O(1).</summary>
+    <published>2019-09-19T10:14:34+00:00</published>
+  </entry>
+</feed>

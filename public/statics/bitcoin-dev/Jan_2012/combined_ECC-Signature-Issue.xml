@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - ECC Signature Issue</title>
+  <updated>2023-06-05T01:53:12.489681+00:00</updated>
+  <author>
+    <name>Brautigam Róbert 2012-01-27 18:19:54</name>
+  </author>
+  <author>
+    <name>Brautigam Róbert 2012-01-22 13:18:35</name>
+  </author>
+  <author>
+    <name>Brautigam Róbert 2012-01-24 17:33:33</name>
+  </author>
+  <author>
+    <name>Brautigam Róbert 2012-01-24 17:33:33</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2012-01-23 17:50:51</name>
+  </author>
+  <author>
+    <name>Brautigam Róbert 2012-01-24 17:33:33</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2012-01-23 17:50:51</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2012-01-23 17:50:51</name>
+  </author>
+  <author>
+    <name>Brautigam Róbert 2012-01-22 13:18:35</name>
+  </author>
+  <author>
+    <name>Brautigam Róbert 2012-01-27 18:19:54</name>
+  </author>
+  <author>
+    <name>Brautigam Róbert 2012-01-22 13:18:35</name>
+  </author>
+  <author>
+    <name>Brautigam Róbert 2012-01-27 18:19:54</name>
+  </author>
+  <link href="bitcoin-dev/Jan_2012/001075_ECC-Signature-Issue.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001067_ECC-Signature-Issue.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001070_ECC-Signature-Issue.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001070_ECC-Signature-Issue.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001068_ECC-Signature-Issue.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001070_ECC-Signature-Issue.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001068_ECC-Signature-Issue.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001068_ECC-Signature-Issue.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001067_ECC-Signature-Issue.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001075_ECC-Signature-Issue.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001067_ECC-Signature-Issue.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2012/001075_ECC-Signature-Issue.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - ECC Signature Issue</title>
+    <updated>2023-06-05T01:53:12.489681+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-January/001075.html" rel="alternate"/>
+    <summary>There is an issue with the BitcoinJ implementation which fails to verify a specific transaction, whereas the official (C++) client of Bitcoin is successful in verifying it. This behavior suggests that BouncyCastle, which both implementations use, might be the cause of this discrepancy. A user named Brautigam Róbert encountered an issue with BouncyCastle while verifying a particular signature. Dave Hook from Bouncycastle replied to the post, stating that one of the ASN1 encoded integers in the signature was negative, which is not a valid coordinate for a point on a curve. Since ASN1 integers are always signed, "big" values need to be padded with a zero byte to stay positive. The official C++ client was able to verify the transaction successfully, but the bitcoinj implementation failed to do so, which suggests that the issue may lie with BouncyCastle, which both implementations use. A developer is working on a Java implementation of Bitcoin and has modularized, unit tested the core modules of the implementation. However, the dummy client gets stuck on block 140493 at transaction hash: 70f7c15c6f62139cc41afa858894650344eda9975b46656d893ee59df8914a3d. The signature verification fails for this specific transaction for one input, which is odd since verification was successful for all preceding blocks and inputs. The developer asks if anyone has hit this issue before and if someone can double-check that they are not missing something trivial. They provide the data that should be signed, the signature (with '01' at the end for SIGHASH_ALL), and the public key. This works with OpenSSL but fails with BouncyCastle version 140. Mike Hearn and Robert discuss Bitcoinj's implementation of signature verification for Bitcoin transactions. Mike mentions that the official (C++) client was successful in verifying a transaction, while Bitcoinj seems to fail to verify it, indicating that there may be an issue with BouncyCastle, which both implementations use. However, Robert points out that Bitcoinj does not actually verify signatures since it is an SPV implementation. He proceeds to test the mentioned transaction's signature using hardwired code along with data obtained from debugging the official client. Robert notes that all transactions prior to the mentioned one work, so the data and test code are likely correct. Despite using an old version of bitcoinj (version 0.3), Robert doubts it would impact ECC verification.</summary>
+    <published>2012-01-27T18:19:54+00:00</published>
+  </entry>
+</feed>

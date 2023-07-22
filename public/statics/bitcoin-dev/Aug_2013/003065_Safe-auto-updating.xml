@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safe auto-updating</title>
+  <updated>2023-06-07T15:25:34.309809+00:00</updated>
+  <author>
+    <name>Peter Todd 2013-08-05 17:49:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safe auto-updating</title>
+    <updated>2023-06-07T15:25:34.309809+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-August/003065.html" rel="alternate"/>
+    <summary>The email thread is discussing the implementation of an auto-updater in a wallet app for usability purposes. The original poster suggests using a server behind a Tor hidden service that outputs a checksum of the update package. However, some members point out that this method is not safe enough and suggest digital signing. One proposed solution involves hardcoding a "distributor" public key in the software, which only trusts signed data from that key. The private key would be kept offline, and the signed checksum would be uploaded to the distribution server a couple of times per year. This way, even if the server is compromised, the client-side software will not accept a bogus checksum because it won't bear the right signature.Another member argues that a better way is to ensure that the act of making a release available for download must be public, even if you can control what binaries are made available to a particular target. This could be done by putting a commitment in the blockchain itself. Each person on the signing list creates a transaction with a special form from a specific pubkey that commits to the digest of the binaries, and the auto-update code refuses to update unless it sees that special transaction with a sufficient number of confirmations. In theory, the public can check if their builds are reproducible and start asking questions if not.The members also discuss the potential danger of auto-updating being easy to target individuals. By leaving auto-updates on, one is essentially trusting the developers capable of signing an update not to specifically try to attack them in the future, which is a much more risky thing to do than simply trusting them not to release a malicious version. The members suggest implementing anonymous downloads and similar mechanisms, but they tend to be fragile with regard to deanonymization attacks.</summary>
+    <published>2013-08-05T17:49:36+00:00</published>
+  </entry>
+</feed>

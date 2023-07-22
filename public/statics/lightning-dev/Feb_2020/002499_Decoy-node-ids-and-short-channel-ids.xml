@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Decoy node_ids and short_channel_ids</title>
+  <updated>2023-06-02T22:44:08.787401+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2020-02-04 14:50:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Decoy node_ids and short_channel_ids</title>
+    <updated>2023-06-02T22:44:08.787401+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002499.html" rel="alternate"/>
+    <summary>In this email thread, Rusty Russell and Bastien Teinturier discuss the implementation of a feature that allows temporary node IDs to be used for private channels in Lightning Network. They explore the potential attack vectors associated with using temporary IDs, including the possibility of Mallory sending malformed payments to Alice using a transient key in an invoice to see if she decrypts it. Bastien proposes a solution to this by using payment_secret and decoy_key to derive a decoy_scid, which can protect against unknown_next_peer and improve privacy. However, he notes that Alice may need to share her decoy_node_ids with Bob, which would require more state management. Rusty suggests two uses for the temporary ID feature: always using a temporary ID to obscure the onchain footprint, or applying a new temporary ID and node ID for every invoice to add an extra layer of transience. However, implementing the latter securely is challenging, as it requires brute-forcing the onion against N keys and ensuring that all code paths return WIRE_INVALID_ONION_HMAC to prevent attacks from Mallory. Rusty suggests using the payment_hash as a fastpath to streamline the decryption process, but acknowledges that the code required for this is still complex.</summary>
+    <published>2020-02-04T14:50:26+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>eltoo: A Simplified update Mechanism for Lightning and Off-Chain Contracts</title>
+  <updated>2023-06-13T01:39:04.336987+00:00</updated>
+  <author>
+    <name>Christian Decker 2018-05-01 11:36:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>eltoo: A Simplified update Mechanism for Lightning and Off-Chain Contracts</title>
+    <updated>2023-06-13T01:39:04.336987+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/015913.html" rel="alternate"/>
+    <summary>The Lightning Network is a second layer payment protocol that enables instant, low-cost Bitcoin transactions. Jim Posen has raised concerns about the impact of eltoo construction on safe CLTV delta requirements. According to him, this would increase the safe CLTV delta requirements significantly since HTLCs cannot be timed out immediately on the settlement transaction. Currently, Lightning guarantees that the CLTV delta is sufficient when an HTLC offered to another party times out, and they do not fail the HTLC off-chain. However, with eltoo, when the downstream channel closes on-chain, it must wait for the CSV timeout on the update transaction before locking in the timed-out HTLC.This means that the CLTV delta must be greater than the CSV timeout plus some extra time, whereas it is currently safe to make it significantly shorter. The CLTVs will need to be far enough in the future for the CSV timeout to expire and to grab any preimage downstream and insert it upstream. This results in an offset of all the CLTVs to less than the maximum CSV timeout along the path. This fixed offset for each channel can be announced using the gossip protocol so that senders can take it into consideration when computing routes.In today's network, many nodes have a CLTV delta of 144 blocks, resulting in HTLC funds unavailable for several days depending on the route length. However, adding a fixed offset is not much worse. Once watch-towers are implemented, both the offset as well as the CLTV deltas can be reduced. Eltoo makes watch-towers less expensive due to reduced storage costs, making it a net positive for the Lightning network.</summary>
+    <published>2018-05-01T11:36:32+00:00</published>
+  </entry>
+</feed>

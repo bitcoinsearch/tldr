@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+  <updated>2023-06-14T22:18:27.362454+00:00</updated>
+  <author>
+    <name>Antoine Riard 2021-07-09 13:19:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+    <updated>2023-06-14T22:18:27.362454+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-July/019246.html" rel="alternate"/>
+    <summary>In a Bitcoin-dev discussion, Antoine Riard suggested reducing the overhead of transaction signing by introducing more advanced sighash malleability flags like SIGHASH_IOMAP. This flag would allow transaction signers to commit to a map of inputs/outputs, and in the context of input-based transactions, the overflowed fee value could be redirected to an outgoing output. However, Anthony Towns raised concerns about IOMAP, including theft possibility, heaviness of range specification, and inability to cache different ways of hashing outputs. To avoid O(n^2) behavior, partial overlaps should be disallowed by treating each transaction as distinct bundles of x-inputs and y-outputs, and using the annex for grouping. A new SIGHASH_GROUP flag can be introduced, allowing each output in a transaction to be hashed three times instead of twice. Riard agreed with the overall direction but pointed out that this proposal might not fit the second-layer use-case they are interested in.The author proposed a new SIGHASH_GROUP flag as an alternative to ALL/SINGLE/NONE. This flag would commit to each output in a transaction and could allow for the combination of x-inputs and y-outputs safely. The annex field "sig_group_count" would be introduced to group the inputs. When processing inputs, a new state pair (start, end) would be created and initially set to (0,0). When evaluating an input, if sig_group_count is not present, then start is set to end. If sig_group_count is present and greater than 0, start is set to end, and end is set to start + sig_group_count. However, if sig_group_count is present and equal to 0, start and end remain unchanged.The proposed flag would mean that each output in a transaction could be hashed three times instead of twice, which would let you combine x-inputs and y-outputs fairly safely. Additionally, the first input could commit to "y" in the annex, while the remaining x-1 could commit to "0". The author notes that including an "OP_RETURN hash(x1)" tapleaf branch in one of the y outputs could prevent the problem of claiming all but one of two different sets of inputs (x1 and x2) that spend to the exact same set of y outputs while paying only a single set of y outputs.The author acknowledges that this proposal appears to be reinventing Rusty's signature bundles from 2018. However, using the annex is likely an improvement on having values that affect other inputs being buried deeper in an input's witness data. Without something like this, it may be difficult to incorporate fees into eltoo with layered commitments. The proposal could be included as part of ANYPREVOUT to avoid introducing many new "unknown key types."</summary>
+    <published>2021-07-09T13:19:45+00:00</published>
+  </entry>
+</feed>

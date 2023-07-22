@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>First-Seen-Safe Replace-by-Fee</title>
+  <updated>2023-06-09T21:31:49.000516+00:00</updated>
+  <author>
+    <name>Adam Back 2015-05-26 22:18:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>First-Seen-Safe Replace-by-Fee</title>
+    <updated>2023-06-09T21:31:49.000516+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/008276.html" rel="alternate"/>
+    <summary>The replacement tx spends the same inputs as the original transaction, with additional inputs. If the original tx is accepted and the replacement rejected, there is no need to pay a higher fee. The extra input remains unspent and the extra change address is unused, which can be used later for another purpose. However, if you've bundled extra transactions into the replacement, spending from the additional inputs, then you'll need to resubmit those as a separate transaction. One has to keep in mind re-orgs, so for example, the original tx could be put into a block, and then that block could get reorged by another block that grows into a longer chain with the replacement tx in it (or vice versa). RBF applies only to pending transactions in the mempool awaiting incorporation into a block. There is a window of opportunity in which the pending transaction is incorporated into a block at the same time that the spender is constructing and publishing a replacement for that pending transaction. The replacement transaction would be rejected by the peer network as a double spend because it conflicts with the now confirmed original tx. An implementation that wishes to take advantage of RBF will still need to have a "plan B" implementation path to handle the corner case of a replacement tx being rejected as a double spend. Allowing the contents of blocks to change (other than by mining a competing chain) would be pretty much the largest possible change to Bitcoin's design.</summary>
+    <published>2015-05-26T22:18:42+00:00</published>
+  </entry>
+</feed>

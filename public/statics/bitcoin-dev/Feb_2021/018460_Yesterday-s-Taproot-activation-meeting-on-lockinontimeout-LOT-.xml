@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Yesterday's Taproot activation meeting on lockinontimeout (LOT)</title>
+  <updated>2023-05-21T00:59:09.697659+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-02-22 05:16:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Yesterday's Taproot activation meeting on lockinontimeout (LOT)</title>
+    <updated>2023-05-21T00:59:09.697659+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018460.html" rel="alternate"/>
+    <summary>In a discussion thread on bitcoin-dev, it was mentioned that the software complexity for Bitcoin Core to implement an option like lockinontimeout=true is not practical. This is due to the fact that Bitcoin Core does not have the infrastructure to handle switching consensus rules with the same datadir. Matt Corallo had pointed this out earlier. However, a participant in the discussion, AJ Towns, disagrees and suggests that with the current proposed bip8 code, switching to lockinontimeout=true will not cause valid blocks to be marked as invalid. According to AJ, if a node running lockinontimeout=true accepts the header, it will apply the same consensus rules as a lockinontimeout=false node. Additionally, he believes that an invalid header will not be added to the block index at all, so a node restart should always cleanly allow it to be reconsidered. He cites a test case in the bip8 code that demonstrates that a node that had rejected a chain due to lockinontimeout=true will reorg to that chain after being restarted.However, AJ also notes that if one switches from lockinontimeout=false to lockinontimeout=true and the tip of the current most work chain is after the timeoutheight and did not lockin, then the node will continue following that chain until a taproot-invalid transaction is included, rather than immediately reorging to a shorter chain that complies with the lockinontimeout=true rules.</summary>
+    <published>2021-02-22T05:16:24+00:00</published>
+  </entry>
+</feed>

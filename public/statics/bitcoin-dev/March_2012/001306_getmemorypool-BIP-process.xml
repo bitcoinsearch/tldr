@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>getmemorypool BIP process</title>
+  <updated>2023-06-06T03:21:22.158578+00:00</updated>
+  <author>
+    <name>Geir Harald Hansen 2012-03-04 17:49:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>getmemorypool BIP process</title>
+    <updated>2023-06-06T03:21:22.158578+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-March/001306.html" rel="alternate"/>
+    <summary>Geir Harald Hansen proposes a solution to the race condition in long polling as currently implemented in pools. He suggests adding "longpollid" in long poll responses, which should be included by the client in future long poll requests, enabling the server to see if the client has missed any block changes. Adding any parameters to getmemorypool itself breaks compatibility with bitcoind 0.5; using HTTP headers makes it HTTP-specific again. Therefore, Geir believes that long polling and reconnecting to LP is an HTTP-specific problem anyway, and it may be best to go with an HTTP header. Another useful value in the getmemorypool response would be "height," so the miner can include the correct height in the coinbase. Geir thinks this should be required. He also explains how target vs. fulltarget works, and suggests that some things should be optional for a client to implement. Doing this safely needs some way for clients to communicate capabilities to the server, which has the problem of passing parameters to getmemorypool. He suggests adding an optional "servercapabilities" key on the server side, the value being a space-delimited list of what's supported by the server.Moreover, he believes that "noncerange" is of limited use, but says that there is no mining hardware to date that exhausts even half the nonce space, so he would really prefer to see this as a required feature on the miner side. It's merely an extension for getwork, so he can see the problem so long as they're using getwork proxies. Finally, he suggests including the "hostlist" and "switchto" getwork extensions. These can fit right into the JSON response, to keep with being transport-agnostic, but otherwise look like they do for getwork.</summary>
+    <published>2012-03-04T17:49:00+00:00</published>
+  </entry>
+</feed>

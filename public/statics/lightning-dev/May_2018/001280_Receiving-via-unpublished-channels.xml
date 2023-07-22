@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Receiving via unpublished channels</title>
+  <updated>2023-05-24T23:39:12.285603+00:00</updated>
+  <author>
+    <name>Hiroshi Ueno 2018-05-15 14:04:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Receiving via unpublished channels</title>
+    <updated>2023-05-24T23:39:12.285603+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-May/001280.html" rel="alternate"/>
+    <summary>Nayuta-ueno is currently implementing the `r` field to `ptarmigan` and has a query regarding the `r` field's signature. The `r` field does not contain a signature like the `channel_update`, and Nayuta-ueno is curious about whether c-lightning checks something in the `r` field from payee's invoice. ZmnSCPxj replies to this, stating that the temporary `channel_update`s are sent after `funding_locked` has been sent by both sides, as well as reconnection (only if both sides have sent `funding_locked`). After announcement depth, "normal" `channel_update` should get sent after a `channel_announcement`, and not the temporary ones.ZmnSCPxj also mentions that while implementing support for the `r` field in invoices, he stumbled upon some issues regarding creating invoices with `r` fields. In order to receive via an unpublished channel, we need to know what onLightning fees the other side of that channel wants to charge. In case of an unpublished channel, we do not send `channel_announcement`, and in that case, we do not send `channel_update`. The other side of the channel never informs us of the onLightning fees they want to charge if we would receive funds by this channel. An idea that was considered for this was to simply send `channel_update` as soon as we lock in the channel. ZmnSCPxj asks other LN implementations like lnd, eclair, ucoin, lit if we should consider standardizing this behavior.</summary>
+    <published>2018-05-15T14:04:15+00:00</published>
+  </entry>
+</feed>

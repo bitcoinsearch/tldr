@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Onion messages rate-limiting</title>
+  <updated>2023-06-04T03:52:49.898611+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-06-30 00:22:08</name>
+  </author>
+  <author>
+    <name>vwallace 2022-06-30 01:24:52</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2022-06-30 02:19:04</name>
+  </author>
+  <author>
+    <name>Christian Decker 2022-06-30 10:15:18</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-07-02 00:48:32</name>
+  </author>
+  <author>
+    <name>Joost Jager 2022-07-11 09:08:53</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2022-06-29 08:28:26</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2022-06-30 07:46:59</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2022-06-30 16:47:32</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-07-02 01:09:05</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2022-07-04 02:00:26</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2022-07-04 02:07:16</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2022-07-05 19:58:59</name>
+  </author>
+  <author>
+    <name>Joost Jager 2022-07-10 08:43:27</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2022-07-10 19:14:17</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2022-07-26 08:16:24</name>
+  </author>
+  <link href="lightning-dev/June_2022/003631_Onion-messages-rate-limiting.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2022/003634_Onion-messages-rate-limiting.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2022/003635_Onion-messages-rate-limiting.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2022/003639_Onion-messages-rate-limiting.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2022/003652_Onion-messages-rate-limiting.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2022/003663_Onion-messages-rate-limiting.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2022/003623_Onion-messages-rate-limiting.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2022/003637_Onion-messages-rate-limiting.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2022/003642_Onion-messages-rate-limiting.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2022/003653_Onion-messages-rate-limiting.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2022/003656_Onion-messages-rate-limiting.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2022/003657_Onion-messages-rate-limiting.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2022/003660_Onion-messages-rate-limiting.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2022/003661_Onion-messages-rate-limiting.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2022/003662_Onion-messages-rate-limiting.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2022/003664_Onion-messages-rate-limiting.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Onion messages rate-limiting</title>
+    <updated>2023-06-04T03:52:49.898611+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-June/003631.html" rel="alternate"/>
+    <summary>There are concerns about the ongoing DDoS attack on Tor, which has started to affect Lightning Network (LN) and other related systems like Umbrel that rely on Tor for networking traversal. Tor developers have suggested adding some PoW to attempt to mitigate DDoS attacks. During the Oakland Dev Summit, Lightning Network engineers discussed various schemes proposed to address denial of service (DoS) attacks on the network.One proposal involves backpressure rate limiting, which applies pressure backwards until nodes appropriately ratelimit the source of traffic. Another proposal involves rate-limiting per-peer incoming onion messages that should be relayed. Nodes keep track of where the messages come from and send an 'onion_message_drop' message to the sender when an incoming onion message reaches the rate limit. The sender then relays the message to the last sender, halving their rate limits with that peer.Researchers are encouraged to find formulas to evaluate the efficiency of this scheme against various types of spam. There were discussions regarding the viability of proposals to introduce pre-payments for Hash Time-Locked Contracts (HTLCs) to mitigate jamming attacks. Instead, Laolu advocates for the forwarding pass approach, a scheme that allows major flows of the network to continue even in the face of disruption.In an email conversation between Olaoluwa Osuntokun and Matt, they discuss the issue of paying for spam in relation to pre-payments for HTLCs to mitigate jamming attacks. While HTLCs differ in cost from PoW-for-spam, naive proposals for pre-payments are not ideal. They discuss the use of backpressure rate limiting as a solution to mitigate attacks on the Lightning Network.The Lightning Network is a payment protocol that uses a network of bidirectional payment channels between nodes to enable fast and cheap Bitcoin transactions. One concern with the system is spamming, which can occur if an attacker generates a large number of onion messages. Requiring a channel to relay onion messages puts a significant cost on getting an onion messaging channel, however, explicit payment allows an attacker to pay much less to break the system.Backpressure based rate limiting is good to bootstrap as a naive DoS protection for onion messages though it may not be robust enough in the long-term. It is an interesting research problem to find formulas for those probabilities to evaluate how efficient this will be against various types of spam. A proposal for rate-limiting onion messages in the network was discussed, but it was noted that HTLC DoS attacks are fundamentally different from onion message attacks because the culprit isn't always upstream, and back pressure cannot work.While spammers can still hit the next hop rate limit with enough channels, legitimate users will not typically reach the point of decreased limits unless they require much less rate than is available. The idea could be extended to HTLC forwarding rate limiters to combat short-lived HTLC spam.</summary>
+    <published>2022-06-30T00:22:08+00:00</published>
+  </entry>
+</feed>

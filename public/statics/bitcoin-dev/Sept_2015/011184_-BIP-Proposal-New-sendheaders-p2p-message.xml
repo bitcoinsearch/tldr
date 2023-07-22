@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP Proposal] New "sendheaders" p2p message</title>
+  <updated>2023-05-19T21:57:28.393320+00:00</updated>
+  <author>
+    <name>Suhas Daftuar 2015-09-24 18:02:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP Proposal] New "sendheaders" p2p message</title>
+    <updated>2023-05-19T21:57:28.393320+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-September/011184.html" rel="alternate"/>
+    <summary>A new optional peer-to-peer (p2p) message is being proposed to improve the way blocks are announced on the Bitcoin network. The draft BIP can be found on GitHub and the implementation of the BIP is available on bitcoin's GitHub repository. This p2p message will allow nodes to announce blocks with headers messages rather than with inv's, which will eliminate a round trip in network communication, leading to more efficient propagation of reorgs. The new p2p message is optional, so nodes can continue to use inv messages to announce new blocks. The proposal adds a new message called "sendheaders," which indicates that a node prefers to receive new block announcements via a "headers" message rather than an "inv." Since the introduction of "headers-first" downloading of blocks in 0.10, blocks will not be processed unless they are able to connect to a valid headers chain. In a case where a new block is being announced that builds on the tip, it would be more efficient if the node just announced the block header for the new block, rather than just the block hash, and saved the peer from generating and transmitting the getheaders message. In the case of a reorg, where one or more blocks are disconnected, nodes currently just send an "inv" for the new tip. By announcing headers from the last fork point leading up to the new tip in the block announcement, peers are able to request all the intermediate blocks immediately. The backward compatibility of this proposal ensures that older clients remain fully compatible and interoperable after the change.</summary>
+    <published>2015-09-24T18:02:28+00:00</published>
+  </entry>
+</feed>

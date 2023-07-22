@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Batch validation of CHECKMULTISIG using an extra hint field</title>
+  <updated>2023-06-16T02:14:00.130176+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2022-10-19 03:51:42</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2022-10-20 22:02:51</name>
+  </author>
+  <author>
+    <name>Mark Friedenbach 2022-10-19 03:51:42</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2022-10-20 22:02:51</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2022-10-20 22:02:51</name>
+  </author>
+  <author>
+    <name>Mark Friedenbach 2022-10-19 03:51:42</name>
+  </author>
+  <link href="bitcoin-dev/Oct_2022/021048_Batch-validation-of-CHECKMULTISIG-using-an-extra-hint-field.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021079_Batch-validation-of-CHECKMULTISIG-using-an-extra-hint-field.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021048_Batch-validation-of-CHECKMULTISIG-using-an-extra-hint-field.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021079_Batch-validation-of-CHECKMULTISIG-using-an-extra-hint-field.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021079_Batch-validation-of-CHECKMULTISIG-using-an-extra-hint-field.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2022/021048_Batch-validation-of-CHECKMULTISIG-using-an-extra-hint-field.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Batch validation of CHECKMULTISIG using an extra hint field</title>
+    <updated>2023-06-16T02:14:00.130176+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021048.html" rel="alternate"/>
+    <summary>In this conversation, Mark proposes an optimization for the CHECKMULTISIG algorithm in Bitcoin. The original implementation had a mistake causing an extra item to be popped off the stack upon completion, which provided a malleability vector and prevented batch validation for threshold signatures. After SegWit was released, it was observed that this new rule was suboptimal and Satoshi's mistake gave an extra parameter to CHECKMULTISIG. This parameter can be used to convey extra information to the algorithm and enable batch validation of threshold signatures using this opcode.The updated CHECKMULTISIG algorithm requires a minimally-encoded bitmap to specify which keys are used or skipped instead of requiring the final parameter on the stack to be zero. Before attempting validation, for a k-of-n threshold, only k bits should be set in the bitfield indicating the used pubkeys (or n-k bits set indicating the keys to skip). During validation, the associated bit in the bitfield is checked to see if the pubkey is used. If the bitfield indicates that the pubkey is not used, then it is skipped without even attempting validation. This solution to the CHECKMULTISIG batch validation problem had been completely forgotten and did not come up during Tapscript review.While MuSig-like key aggregation schemes can be used for n-of-n thresholds, there are still use cases where explicit k-of-n thresholds must be used. FROST is an alternative that supports k-of-n but requires participation from all the signers in the set and additional data storage by privkey owners after the setup ritual. Despite this, the proposed batch-validation friendly CHECKMULTISIG algorithm would still be useful for such applications.</summary>
+    <published>2022-10-19T03:51:42+00:00</published>
+  </entry>
+</feed>

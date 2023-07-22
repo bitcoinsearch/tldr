@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Proposal for Advertising Channel Liquidity</title>
+  <updated>2023-05-25T15:37:50.544871+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-11-07 06:17:17</name>
+  </author>
+  <author>
+    <name>Jim Posen 2018-11-08 02:40:13</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-11-08 07:02:01</name>
+  </author>
+  <author>
+    <name>lisa neigut 2018-11-12 09:42:13</name>
+  </author>
+  <author>
+    <name>lisa neigut 2018-11-07 04:07:42</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2018-11-08 22:39:54</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-11-12 09:58:08</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-11-12 10:05:08</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-11-07 10:49:21</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2018-11-08 06:17:03</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-11-08 22:42:38</name>
+  </author>
+  <author>
+    <name>lisa neigut 2018-11-12 09:20:49</name>
+  </author>
+  <author>
+    <name>lisa neigut 2018-11-12 09:35:19</name>
+  </author>
+  <author>
+    <name>Cezary Dziemian 2019-06-05 14:05:17</name>
+  </author>
+  <link href="lightning-dev/Nov_2018/001536_Proposal-for-Advertising-Channel-Liquidity.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001541_Proposal-for-Advertising-Channel-Liquidity.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001543_Proposal-for-Advertising-Channel-Liquidity.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001565_Proposal-for-Advertising-Channel-Liquidity.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001532_Proposal-for-Advertising-Channel-Liquidity.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001544_Proposal-for-Advertising-Channel-Liquidity.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001566_Proposal-for-Advertising-Channel-Liquidity.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001567_Proposal-for-Advertising-Channel-Liquidity.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001538_Proposal-for-Advertising-Channel-Liquidity.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001542_Proposal-for-Advertising-Channel-Liquidity.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001545_Proposal-for-Advertising-Channel-Liquidity.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001563_Proposal-for-Advertising-Channel-Liquidity.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001564_Proposal-for-Advertising-Channel-Liquidity.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2019/002002_Proposal-for-Advertising-Channel-Liquidity.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Proposal for Advertising Channel Liquidity</title>
+    <updated>2023-05-25T15:37:50.545871+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001536.html" rel="alternate"/>
+    <summary>The Lightning Network's proposed liquidity advertising feature could pave the way for automated node rebalancing. This would create a market of inbound capacity that any node can take advantage of, reducing the amount of out-of-band negotiation needed to get the inbound capacity required. The proposal will be helpful for vendors and nodes to get reliable inbound capacity as they do not have to rely on out-of-band negotiation. Credit has been given to Casey Rodamor for the initial idea.However, there are concerns around potential attacks on the system, such as HTLC withholding/loop attacks, and reputation management. One of the proposed attacks is offering capacity, closing the channel, and re-offering the freed capacity to another customer. A mechanism has been proposed to prevent this kind of attack. It is suggested that the market should price itself to reflect the reality that keeping a high-traffic channel open should be worth more in routing fees than the liquidity provided.The discussion on the Lightning-dev mailing list revolves around allowing nodes to advertise liquidity which can pave the way for automated node re-balancing. However, it is important to consider potential attacks such as requesting for arbitrary capacity or closing the channel immediately after earning fees for providing liquidity without actually delivering that liquidity.It is suggested that the channel commitment transactions for channels opened via liquidity requests should have an `nSequence` that prevents them from being claimed for a month or so to prevent this attack. Additionally, individual nodes can take strategies such as soliciting small liquidity offers, shopping around for the best rates, blacklisting unreliable nodes, and using a ratcheting mechanism to limit potential losses.The proposal hinges on dual funding being possible, and the possibility of nodes requesting more liquidity than they put into the channel on their half is open for discussion. It is also suggested that a liquidity advertising node should include a maximum amount of liquidity that they will match/provide. As currently proposed, the only way to discover if a node can meet your liquidity requirement is by sending an open channel request. In the case of a vendor who wants inbound capacity, capping the liquidity request allowed seems unnecessary.A user suggested the idea of creating a market by establishing a channel with the rate of 32 msat per 500 satoshi per hour for the first three days. However, this could be gamed by a second cooperating node that sends payments through the channel to meet the rate and capture the fees for the first. To make such an attack infeasible, it is suggested charging higher transmission fees.In another thread, the discussion was regarding the mechanism and whether it can be superior to the CLTV-encumbrance proposed by I and Rene. Also, a user named Cezary Dziemian had earlier worked on the implementation of a similar solution based on clightning but faced issues and now plans to work on it as a full-time job. The user has requested support from the community and agreed to write it in Java.In conclusion, allowing nodes to advertise liquidity creates a market of inbound capacity that any node can take advantage of, reducing the amount of out-of-band negotiation needed to get the inbound capacity required. However, it is important to consider potential attacks and mechanisms to prevent them. The Lightning-dev mailing list discusses various strategies that individual nodes can adopt to limit potential losses. Credit has been given to Casey Rodamor for the initial idea.</summary>
+    <published>2018-11-07T06:17:17+00:00</published>
+  </entry>
+</feed>

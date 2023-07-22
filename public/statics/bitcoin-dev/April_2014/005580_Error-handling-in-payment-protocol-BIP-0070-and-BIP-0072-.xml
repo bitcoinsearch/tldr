@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Error handling in payment protocol (BIP-0070 and BIP-0072)</title>
+  <updated>2023-06-08T21:36:24.852298+00:00</updated>
+  <author>
+    <name>Gavin Andresen 2014-04-26 13:23:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Error handling in payment protocol (BIP-0070 and BIP-0072)</title>
+    <updated>2023-06-08T21:36:24.852298+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005580.html" rel="alternate"/>
+    <summary>The concern of Gavin Andresen is the handling of unexpected problems while sending or receiving Payment messages. In case of transport layer failure or non-200 HTTP status code, he proposes that for any transport failure or 500 status code, the client retries after a delay (suggested at 30-60 seconds). For 400 status codes, the request should not be repeated, and as such the user should be alerted and a copy of the Payment message saved to be resent later. Regarding redirect and similar status codes, it is considered safe to follow redirects and referencing whatever RFCs defines how to fetch URLs would be the best way to do this. For merchant systems, Payment messages should have a maximum size of 50,000 bytes, and a defined maximum time to wait to avoid DDoS via connection holding might be useful too. Gavin suggests that merchant systems should handle repeatedly receiving the same Payment message, and return an equivalent (if not identical) PaymentACK to each. Lastly, Gavin wonders about potential timing issues with transactions; if a merchant system wants to see confirmation of a transaction before sending a PaymentACK, he thinks it's not a good idea as the user should get feedback right away.</summary>
+    <published>2014-04-26T13:23:03+00:00</published>
+  </entry>
+</feed>

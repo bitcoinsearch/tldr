@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>daemon/p2p protocol</title>
+  <updated>2023-05-18T15:30:39.136018+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-10-16 20:53:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>daemon/p2p protocol</title>
+    <updated>2023-05-18T15:30:39.136018+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-October/000265.html" rel="alternate"/>
+    <summary>The Lightning Network currently relies on protobufs with union support, which requires a newer version of protobuf-c than is in Debian or Ubuntu. Capnp's canonical implementation is in C++ rather than C; the C version is serialisation-only, which seems like it loses the fancy time-travel RPC feature. With protobufs, fixed-length fields can be implemented using custom field options, although it is not obvious how to get it passed through to C somehow so that you could actually check it automatically.There are three uses for public key crypto in lightning: routing keys, anchor keys, and p2p keys. Routing keys are used for constructing the onion; a node's identity as far as lightning is concerned must be well-known and associated with channels and fees for routing to be possible. Anchor keys are used for spending the anchor transaction for a channel and thus signing commitment transactions; only needs to be known by the counterparty you're constructing a channel with. P2P keys are used for establishing a shared secret when talking to a node, to avoid your P2P communications being available to someone else.If Alice tries to connect to Bob, the current protocol (as of git commit gc7eaa4f, from daemon/cryptopkt.c) is: Alice sends "Call me ." to Bob, and Bob responds with "Call me .". This is secure against passive monitoring but has a few downsides such as revealing node id to anyone who asks, revealing node id before realizing MITM attack, inability to run multiple node ids on a single connection, and potential DoS attacks due to Bob having to do crypto operations for every connection. It is valuable to treat the relationship between a network address and the lightning network address as sensitive because revealing a network address helps reveal physical identity, makes denial-of-service attacks straightforward, and gives a point of entry for targeted hacking to steal money.</summary>
+    <published>2015-10-16T20:53:55+00:00</published>
+  </entry>
+</feed>

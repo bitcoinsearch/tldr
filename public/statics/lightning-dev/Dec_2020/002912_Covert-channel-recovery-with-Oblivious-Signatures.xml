@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Covert channel recovery with Oblivious Signatures</title>
+  <updated>2023-06-03T03:24:41.284195+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2020-12-11 02:02:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Covert channel recovery with Oblivious Signatures</title>
+    <updated>2023-06-03T03:24:41.284195+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-December/002912.html" rel="alternate"/>
+    <summary>When a lightning node experiences data loss, there are currently two options for recovering funds, which are limited in terms of control and security. However, the concept of Oblivious Transfer (OT) could provide a solution to this issue. OT involves the use of cryptographic primitives to enable covert retrieval of a signed cooperative settlement transaction without alerting the peer involved. This would allow recovery of funds without the risk of malicious actors exploiting the situation. To achieve this, an extra requirement beyond typical OT is necessary, which is the ability to verify the contents of the message that was not chosen. This is known as "oblivious signatures", which can be created using any verifiable encrypted signature scheme where the encryption key is a group element. Adaptor signatures can be used to create a Schnorr oblivious signature scheme, similar to what is done with BIP340 Schnorr.The process involves three functions that can be instantiated with adaptor signatures: `encrypted_sign(x, m, Y) -&gt; e`, `encrypted_signature_verify(X, m, Y) -&gt; true/false`, and `decrypt_signature(e, y) -&gt; s`. The party receiving the offer decides whether they want to receive the settlement tx signature by setting c = 0 or otherwise c = 1 and then creates a pedersen commitment Y to c by choosing a random y: Y = y *G + c * H and sends the commitment Y to its peer. The peer then sends `e = encrypted_sign(x, settlement_tx, Y)` back. If c = 0 (i.e. it is doing a covert recovery), it does `s = decrypt_signature(e, y)` and attaches to the settlement transaction and broadcasts it. If c = 1 (i.e. the node is fine and it wants to continue the channel), then it checks `encrypted_signature_verify(X, settlement_tx, Y)`. If it passes, it sends the commitment blinding y back to prove that it doesn't have the signature (i.e. prove c = 1). If verification fails, then the node is malicious and it fails the channel. There are some questions and considerations regarding this approach, such as whether it requires "crazy crypto magic" (it does not), who is the receiver and who is the sender (the peer opening the connection is the receiver), whether it works for multiple signatures (yes), and what to do if the channel state has HTLCs in flight (this is unclear). However, overall, this approach provides a better solution for recovering funds following lightning node data loss.</summary>
+    <published>2020-12-11T02:02:04+00:00</published>
+  </entry>
+</feed>

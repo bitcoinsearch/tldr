@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 38 NFC normalisation issue</title>
+  <updated>2023-06-09T00:54:51.872734+00:00</updated>
+  <author>
+    <name>Aaron Voisine 2014-07-16 21:06:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 38 NFC normalisation issue</title>
+    <updated>2023-06-09T00:54:51.872734+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-July/006273.html" rel="alternate"/>
+    <summary>The discussion revolves around the issue of encoding private key with a given passphrase that contains control characters. A user named Andreas Schildbach had implemented only the decoding side of BIP38 and proposed a test vector for the same. The passphrase used by him was "\u03D2\u0301\u0000\U00010400\U0001F4A9", which contains control characters. Another user, Aaron Voisine from breadwallet.com, suggested that rather than just removing control characters from the password, the spec should require passwords containing control characters to be invalid. He also recommended disallowing any character below U+0020 (space) for UI compatibility across many platforms. UTF-8 encoded the passphrase becomes 0xcf93f0909080f09f92a9. When this passphrase is used to encode the private key, it generates a BIP38 key of 6PRW5o9FMb4hAYRQPmgcvVDTyDtr6R17VMXGLmvKjKVpGkYhBJ4uYuR9wZ. It was observed that when Andreas's passphrase was decoded, it was different from what was expected. This was attributed to the fact that Java uses 16 bit characters internally and may not support characters outside the BMP. Thus, it was suggested to limit the spec to the subset of Unicode that all popular platforms can support unless someone can find a fix. The discussion also talks about filtering out ISO control characters to avoid issues arising due to them.</summary>
+    <published>2014-07-16T21:06:41+00:00</published>
+  </entry>
+</feed>

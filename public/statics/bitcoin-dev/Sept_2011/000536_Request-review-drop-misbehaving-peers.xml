@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Request review: drop misbehaving peers</title>
+  <updated>2023-06-04T19:46:15.061286+00:00</updated>
+  <author>
+    <name>Mike Hearn 2011-09-15 11:45:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Request review: drop misbehaving peers</title>
+    <updated>2023-06-04T19:46:15.061286+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-September/000536.html" rel="alternate"/>
+    <summary>Probabilistic disconnections can make it difficult to debug protocol implementations and increase the risk of flaky behavior. The most likely failure mode is scaling or legitimate version skew that causes problems as the network evolves. Non-standard transactions should not be considered an attack, according to Luke. To address attacks based on sending transactions that aren't syntactically valid, a flag could be implemented to set a minimum threshold for the badness scores and ignore any below that. The formula for the DoS score in the case of invalid signatures/merkle roots seems unnecessarily elaborate, since an invalid signature should never occur and could always result in immediate disconnection. Treating a block with too many sigops as invalid means legitimate relayers might be treated as an attacker if/when the constant changes in the future, so this situation should not be treated as an attack at all. Using a mutable field with a const setter is not recommended. Unit tests that rely on sleeps can be flaky, and it would be better if tests can override the clock by modifying and advancing it in a fast and efficient manner.</summary>
+    <published>2011-09-15T11:45:04+00:00</published>
+  </entry>
+</feed>

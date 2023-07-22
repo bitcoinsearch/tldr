@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A proposal for up-front payments.</title>
+  <updated>2023-06-02T21:15:45.681866+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-02-20 03:42:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A proposal for up-front payments.</title>
+    <updated>2023-06-02T21:15:45.681866+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002549.html" rel="alternate"/>
+    <summary>ZmnSCPxj is concerned about what happens if he forwards a payment, but the outgoing channel is dropped onchain and that peer disconnects from him. Since the onchain HTLC might have a timelock of a few hundred blocks from now, the outgoing peer can claim it up until the timelock. If the peer does not claim it, ZmnSCPxj cannot claim it in his incoming as well. He also cannot safely fail his incoming, as the outgoing peer can still claim it until the timelock expires. ZmnSCPxj wonders if he is liable for paying the encumbrance fee in this situation and how he can charge the next node the encumbrance fee himself if it has dropped the channel on-chain and disconnected from him.A different way of mitigating this issue is to reverse the direction in which the bond is paid. For instance, instead of paying to offer an HTLC, nodes need to pay to receive an HTLC. However, the payments should have a grace period, and "if you keep this payment open longer than 20 seconds, you have to start paying me x msat/minute, but if it fulfills or cancels before then, it's all good." Each peer could do this for HTLCs on their channels. At $10k/BTC, 1msat is about the fair price for locking up $5 worth of BTC (so 50k sat) for 1 minute at a 1% pa interest rate. This approach opens up the possibility of an attack where a peer lies about the time to make the "per minute" go faster, but if msats-per-minute is the units, that may not be critical. It may also imply a different protocol for HTLC forwarding. The proposed protocol involves A sending the HTLC onion packet to B, B decrypting it and making sure it makes sense, B sending a half-signed updated channel state back to A, and A accepting it and forwarding the other half-signed channel update to B. This protocol enables Alice to safely abort the HTLC she was forwarding to Bob to avoid paying fees before starting to expect Bob to start paying her fees that she'll forward back.</summary>
+    <published>2020-02-20T03:42:39+00:00</published>
+  </entry>
+</feed>

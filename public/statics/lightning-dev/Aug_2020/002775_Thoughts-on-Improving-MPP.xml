@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Thoughts on Improving MPP</title>
+  <updated>2023-06-03T01:56:27.027156+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-08-02 02:02:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Thoughts on Improving MPP</title>
+    <updated>2023-06-03T01:56:27.027156+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-August/002775.html" rel="alternate"/>
+    <summary>The article discusses the challenges of generating invoices for Lightning Network payments when all channels are unpublished. To receive funds, a node may use Multiple Payment Protocol (MPP) to accept payments from multiple payers with sufficient sum total incoming capacity. However, generating invoices with routehints for multiple payers with little overlap in their routehints is critical to avoid deadlock between payments.The author suggests using a round-robin strategy to select routehints and generate multiple invoices, each with different sets of routehints. Additionally, privacy concerns arise when probing fake payers can discover entry points used by the payee to connect to the public network. Therefore, the author recommends avoiding unpublished channels.The article also addresses the challenges faced by the payer when settling MPP payments split into sub-payments. Currently, paymod system uses a single sequence of routehints for all sub-payments, causing them to execute on the same routehint. To reduce the risk of deadlock, sub-payments should have different sequences of routehints to try. The author proposes a round-robin distribution of routehints among sub-payments, where each sub-payment gets the entire list of routehints in a different order.Lastly, the author suggests that the first hop should avoid using the same set of resources as much as possible. The Lightning Network has proposed a solution to reduce congestion by coordinating sub-payments in a round-robin order, maintaining a list of outgoing channels for each sub-payment. The algorithm shuffles local channels at the start of the payment and distributes outgoing channels based on the same algorithm. When a sub-payment executes, it selects routehints using a similar algorithm as in the invoice case. The algorithm removes the channel from the front of the round-robin list, appends it to a removed list, and then considers splitting the payment if the round-robin list is empty. It skips channels with insufficient outgoing capacity or that are dead ends but breaks out of the loop if the channel has sufficient capacity.</summary>
+    <published>2020-08-02T02:02:25+00:00</published>
+  </entry>
+</feed>

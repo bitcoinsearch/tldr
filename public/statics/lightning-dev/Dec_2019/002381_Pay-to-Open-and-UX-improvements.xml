@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Pay-to-Open and UX improvements</title>
+  <updated>2023-06-02T22:28:18.095249+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2019-12-17 08:34:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Pay-to-Open and UX improvements</title>
+    <updated>2023-06-02T22:28:18.095249+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-December/002381.html" rel="alternate"/>
+    <summary>The Lightning network's onboarding process could be made smoother, according to a post on the mailing list by Bastien, who has been experimenting with pay-to-open using Phoenix. While it provides a great user experience for newcomers, it requires temporary trust between the user and the node until the funding transaction confirms. There are two places where the trust relationship appears: first, the user releases the preimage and then the channel is funded, and secondly, the user trusts that the funder will not double-spend the funding transaction.Presently, there is a need for the first scenario as it cannot be ensured that the user will reveal the preimage once the channel has been funded. This can be fixed easily once Bitcoin supports Schnorr. If PTLCs are used (where the secret is a private key) along with MuSig for channel funding transactions, then when Alice receives a PTLC to forward to Bob, if she doesn't have a channel to Bob and Bob supports pay-to-open, she can initiate a tweaked channel opening flow. Alice can use tlv extensions in the open_channel message to tell Bob that this channel is linked to a PTLC with point `X = x*G`. Bob will tweak the MuSig nonce with `X` and provide Alice with a partial signature for that nonce. When Bob provides the adaptor signature to finalize the funding transaction, it reveals `x` to Alice who can now fulfill the PTLC downstream. It must be noted that in this simple version, Alice knows the nonce tweak beforehand, which may or may not be a security issue.Bastien is more concerned about fixing the second scenario, i.e., double-spending by the funder while the funding transaction is unconfirmed. He is trying to figure out possible solutions for this and is calling for ideas that could help. The incentives can be set up so that it's never rational for the funder to double-spend.</summary>
+    <published>2019-12-17T08:34:07+00:00</published>
+  </entry>
+</feed>

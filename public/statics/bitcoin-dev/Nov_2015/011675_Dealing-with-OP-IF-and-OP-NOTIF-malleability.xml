@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Dealing with OP_IF and OP_NOTIF malleability</title>
+  <updated>2023-06-11T00:55:14.331999+00:00</updated>
+  <author>
+    <name>Tier Nolan 2015-11-06 09:27:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Dealing with OP_IF and OP_NOTIF malleability</title>
+    <updated>2023-06-11T00:55:14.331999+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-November/011675.html" rel="alternate"/>
+    <summary>On November 6, 2015, jl2012 proposed a new Bitcoin Improvement Proposal (BIP) for fixing malleability in OP_IF and OP_NOTIF. These codes are used in the Bitcoin script system to control program flow based on whether the top stake value is zero or not. However, this creates a vulnerability where a third party can alter a non-zero flow control value to any other non-zero value without invalidating the transaction. As more sophisticated functions such as OP_CHECKLOCKTIMEVERITY are introduced, usage of these codes will become more common, so the malleability issue needs to be addressed. The proposal specifies that if the transaction version is three or above, the flow control value for OP_IF and OP_NOTIF must be either zero or one, or else the transaction fails. This change should be implemented with BIP62, and it is a softfork. To ensure transactions created before the introduction of this BIP will still be accepted by the network, the new rules only apply to transactions of version 3 or above. Those who want to preserve the original behavior of OP_IF and OP_NOTIF can use an OP_0NOTEQUAL before the flow control code to transform any non-zero value to one.One important note mentioned in the proposal is that one and zero should be defined as arrays of length one. Otherwise, it is still possible to mutate the transaction by changing the length of the array. The proposal also mentions that minimal encoding is covered by previous rules. Overall, the proposal aims to make malleability of transactions with OP_IF and OP_NOTIF impossible and should be implemented alongside other malleability fixes.</summary>
+    <published>2015-11-06T09:27:24+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New transaction policies (nVersion=3) for contracting protocols</title>
+  <updated>2023-06-16T00:29:38.630096+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2022-09-26 15:27:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New transaction policies (nVersion=3) for contracting protocols</title>
+    <updated>2023-06-16T00:29:38.630096+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-September/020941.html" rel="alternate"/>
+    <summary>The Bitcoin developer community is discussing a new proposal for transaction replacement rules that would allow a child transaction to pay for a fee-bump of its parent transaction. This would enable users to increase the fees on their transactions if they become stuck in the mempool due to low fees. A proposal has been made to introduce a set of mempool/transaction relay policies aimed at aiding L2/contract protocols. The proposed changes incorporate additional rules for V3 transactions, which can be replaced even if they do not signal BIP125 replaceability. Additionally, any descendant of an unconfirmed V3 transaction must also be V3, and an unconfirmed V3 transaction cannot have more than one descendant. A V3 transaction with an unconfirmed V3 ancestor cannot be larger than 1000 virtual bytes. The proposal is intended to solve Rule 3 pinning and may allow the removal of CPFP carve-out. The proposal includes modifications to package RBF rules, allowing presigned transactions to replace each other, making it possible to use a single anchor output instead of multiple ones. This change may simplify the process for L2 protocol developers who can create presigned transactions paying 0 fees and one output for attaching a CPFP at broadcast time.Additionally, if a single dust-value output is immediately spent by the package, anchors become easier to design, although there may be some complications such as making sure the parent transaction is dropped if the child spend is dropped. The proposal has been implemented in Bitcoin Core, and feedback from users is encouraged. Transactions with nVersion=3 are currently non-standard in Bitcoin Core, and anything that was standard before this policy change would still be standard afterward. The proposal also includes intended usage for Lightning Network transactions and answers to expected questions from the community. Feedback and review of the proposal are encouraged. It is noted that pinning attacks may occur where a malicious counterparty prevents the transaction from being replaced by adding many descendant transactions that aren't fee-bumping. In general, the proposed changes are considered very valuable work for L2 contracts and may greatly improve their security model. The proposal is aimed at aiding L2/contract protocols and includes modifications to package RBF rules. Additionally, the proposal suggests allowing OP_TRUE to become a standard script type as part of the policy update to save bytes by having the input be empty of witness data.</summary>
+    <published>2022-09-26T15:27:40+00:00</published>
+  </entry>
+</feed>

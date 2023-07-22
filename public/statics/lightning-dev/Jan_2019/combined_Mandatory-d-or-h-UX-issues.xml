@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Mandatory "d" or "h" UX issues</title>
+  <updated>2023-06-03T21:30:44.618051+00:00</updated>
+  <author>
+    <name>Francis Pouliot 2019-01-11 16:37:33</name>
+  </author>
+  <author>
+    <name>Giovanni P 2019-01-21 11:40:22</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2019-01-14 23:38:05</name>
+  </author>
+  <author>
+    <name>Félix-Antoine Paradis 2019-01-15 11:04:56</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2019-01-21 05:18:18</name>
+  </author>
+  <link href="lightning-dev/Jan_2019/001818_Mandatory-d-or-h-UX-issues.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001836_Mandatory-d-or-h-UX-issues.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001819_Mandatory-d-or-h-UX-issues.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001820_Mandatory-d-or-h-UX-issues.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001832_Mandatory-d-or-h-UX-issues.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Mandatory "d" or "h" UX issues</title>
+    <updated>2023-06-03T21:30:44.619051+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-January/001818.html" rel="alternate"/>
+    <summary>Francis Pouliot, a developer working on the Lightning Network payout feature, is facing issues with ensuring recipients generate the right Bolt11 invoice for Bitcoin services performing payouts/withdrawals. He suggests that the design of Bolt11 may have been biased towards merchants since normally merchants decide what the invoice will be and the sender doesn't have a choice but to conform. However, for LN payouts, the sender is the service provider, which creates an added requirement for communication, lower payment success rates, and likely higher abandonment rate. Francis believes that making "d" and "h" fields mandatory creates a UX issue for Bitcoin services that are performing payouts/withdrawals in absence of a widely adopted payment protocol. Users will have to manually enter some fields in their wallet, and if the content doesn't match, there will be a payment failure.Francis explains the UX issues taking place, where a user goes to an app to buy Bitcoin with fiat and opts for LN payout. The app tells the user to make an invoice with msatoshi and description. The user types a description in his wallet, but it may contain a typo or be left blank. When the app tries to pay, they have to decode the bolt11 and compare the "h" or "d" that they instructed the user to create with the decoded bolt11. If they are not the same, they need to instruct the user to create a new bolt11 invoice because the one he created was not correct, which creates an unnecessary requirement for communication, lower payment success rates, and higher abandonment rate.Francis questions if making "d" or "h" mandatory is necessary and suggests leaving business logic to Bitcoin businesses. Olaoluwa Osuntokun replies that it isn't mandatory and can be left blank as none of the existing wallets require users to input a description when they make an invoice. The issue can likely be fixed with a standardized payment protocol, but addressing this issue seems a lower hanging fruit.On the Lightning-dev mailing list, Francis Pouliot raised a user experience issue regarding withdrawing funds from a service via Lightning Network (LN). The current process lacks a mechanism for verifying if the user has created the invoice correctly, which can lead to errors or typos. Rusty Russell suggested using an lninv URL with a description, minimum and maximum amounts, and submission URL to alleviate this issue. However, he acknowledged that he was unsure about how the browser reaching out to the wallet to get an invoice and do the submission itself would work in practice.Francis Pouliot is using c-lightning at present and would like to avoid switching. This issue can be fixed with a standardized payment protocol, but addressing this issue seems to be a lower hanging fruit. The issue has been raised at https://github.com/lightningnetwork/lightning-rfc/issues/541.</summary>
+    <published>2019-01-11T16:37:33+00:00</published>
+  </entry>
+</feed>

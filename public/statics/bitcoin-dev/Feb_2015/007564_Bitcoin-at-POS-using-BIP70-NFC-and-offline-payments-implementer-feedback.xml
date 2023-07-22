@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Bitcoin at POS using BIP70, NFC and offline payments - implementer feedback</title>
+  <updated>2023-06-09T17:54:21.850681+00:00</updated>
+  <author>
+    <name>Andy Schroder 2015-02-22 23:35:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Bitcoin at POS using BIP70, NFC and offline payments - implementer feedback</title>
+    <updated>2023-06-09T17:54:21.850681+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-February/007564.html" rel="alternate"/>
+    <summary>This email discusses the implementation of NFC and offline payments in a Bitcoin point of sale terminal based on a Raspberry Pi. The author, Jan Vornberger, explains that using NFC involves several options, such as double-tapping to transmit the transaction or establishing a Bluetooth connection. The author prefers option 3 because it offers the nicest UX, but many users still have Bluetooth turned off, which can result in UI dialogs popping up and asking the user to turn on Bluetooth.Most Bitcoin wallets with NFC support make use of NDEF (NFC Data Exchange Format) and define a number of record types, among them URI and Mime Type. A common way of using NFC with Bitcoin is to create a URI record that contains a Bitcoin URI. Beyond that, Schildbach's wallet supports the mime type record, which is set to 'application/bitcoin-paymentrequest,' and the rest of the NFC data is a complete BIP70 payment request. The author tested various scenarios, including scanning QR codes, transmitting transactions via the Bitcoin network, fetching BIP70 details via HTTP and posting transactions via HTTP, and receiving BIP70 details directly. The author switched to using the NFC URI record instead of providing the complete BIP70 payment request via NFC because the latter was too fragile. Currently, the terminal uses the non-standard extension of Andreas' wallet, 'bt,' to fetch BIP70 details via Bluetooth.The author proposes changes to the BIP70 payment protocol regarding the optional string payment_url field. The proposed change is to make it a repeated string payment_url, which could potentially be used in parallel by wallets attempting to fetch the payment request. Additionally, an 'h' parameter is suggested as a hash of the BIP70 payment request to prevent MITM attacks on the Bluetooth channel. The author seeks feedback on these proposals from the Bitcoin-development mailing list. The email also includes links to relevant resources for further context.</summary>
+    <published>2015-02-22T23:35:07+00:00</published>
+  </entry>
+</feed>

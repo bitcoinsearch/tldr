@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+  <updated>2023-06-03T02:47:17.695554+00:00</updated>
+  <author>
+    <name>Christian Decker 2020-10-15 09:47:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+    <updated>2023-06-03T02:47:17.695554+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002848.html" rel="alternate"/>
+    <summary>The context discusses the turn-taking approach in which there can be a known state for fee changes but it may have to handle cases where incoming changes are not allowed under the new fee regime. The issue of changes becoming invalid due to the change from the other side may only affect changes that result in other changes no longer being applicable. The fee changes are not impacted by this issue as the non-leader applies the change to its commitment once it gets back its own change.In the remaining edgecases where changes can become invalid if they are in flight, bouncing the change through the non-leader and telling him to send it back after adding it to his stream can address the issue. This adds latency but these synchronization points are rare and not on the critical path when forwarding payments.The downside of the leader-based approach is that it adds 1RTT latency to the updates from one side, but the other never has to wait for the token. In contrast, with the turn-taking approach, neither endpoint can make any progress while the token is in flight, resulting in dead-air if both sides have a constant stream of changes to add. The turn-taking approach may require adding a timeout to defer giving up the token to counter dead-air, further adding delay to the changes from the other end, and adding yet another parameter. In contrast, the leader-based approach allows both parties to keep queuing updates without silent times to transferring the token from one end to the other.</summary>
+    <published>2020-10-15T09:47:59+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Blinded channel observation</title>
+  <updated>2023-05-24T00:20:49.894342+00:00</updated>
+  <author>
+    <name>Tadge Dryja 2016-08-11 03:12:59</name>
+  </author>
+  <author>
+    <name>Joseph Poon 2016-08-11 07:49:26</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2016-08-12 03:24:52</name>
+  </author>
+  <author>
+    <name>Joseph Poon 2016-08-12 21:28:53</name>
+  </author>
+  <author>
+    <name>Tadge Dryja 2016-08-15 15:18:24</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2016-08-09 21:06:11</name>
+  </author>
+  <author>
+    <name>Joseph Poon 2016-08-09 22:29:38</name>
+  </author>
+  <author>
+    <name>Tadge Dryja 2016-08-10 14:52:13</name>
+  </author>
+  <author>
+    <name>Joseph Poon 2016-08-11 04:16:26</name>
+  </author>
+  <author>
+    <name>Joseph Poon 2016-08-12 21:20:34</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2016-08-13 10:30:33</name>
+  </author>
+  <author>
+    <name>Tadge Dryja 2016-08-08 16:17:04</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2016-08-09 05:43:57</name>
+  </author>
+  <author>
+    <name>Joseph Poon 2016-08-09 19:28:14</name>
+  </author>
+  <author>
+    <name>Tadge Dryja 2016-08-10 01:34:43</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2016-08-10 02:03:46</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2016-08-10 10:39:50</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2016-08-11 01:55:36</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2016-08-12 03:47:52</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2016-08-18 06:47:49</name>
+  </author>
+  <link href="lightning-dev/Aug_2016/000575_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000577_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000578_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000583_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000588_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000568_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000569_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000573_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000576_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000582_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000584_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000565_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000566_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000567_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000570_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000571_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000572_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000574_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000579_Blinded-channel-observation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2016/000593_Blinded-channel-observation.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Blinded channel observation</title>
+    <updated>2023-05-24T00:20:49.894342+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-August/000575.html" rel="alternate"/>
+    <summary>In this conversation, the Lightning Network's payment channel and how to maintain privacy while updating the channel state are discussed. The update process is especially tricky with HTLCs due to more nodes in the mix and more points for data to leak out to the observer. Different ways to obscure the funding transaction and avoid outsourcing work are also discussed.One option is to use HMAC of the transaction itself as the secret key. They also discuss the method of using a revocation key that is compatible with shachain/elkrem, which has log(n) storage. However, this method is vulnerable to watchers knowing the revocation preimage N and figuring out some or all previous revocation preimages (and thus hashes).To counter the invalid closure of a channel at an old, invalidated state, nodes must be vigilant and online or risk losing funds. Outsourcing can help defend against attacks by allowing multiple parties to mount a defense. States with in-flight HTLCs are another issue; excluding them and making sure their sum is less than either non-HTLC balance in the channel will limit data storage and still cause the attacker to lose money.The Lightning Network's design, particularly around HTLCs, is discussed. Non-encrypted can be more efficient because most things in the channel states can be obfuscated such that even if everything is told to the observer, they don't learn anything. However, HTLCs would need to be in some kind of encrypted blob to send to the observer.Chained decryption may end up revealing more HTLCs than are needed but if the fraud has occurred then anonymity is gone anyway and it's no big deal if the observer learns a little more. Hash trees are preferred for implementing the construction because they are simple. Rusty questions sending encrypted state information to the observer and suggests attaching every relevant HTLC to every watch request instead.They also discuss a revocation key scheme that eliminates hashing in the commit script and uses only signature verification, making previous commit transactions underivable. However, changing the timeout key is deemed gratuitous. The conversation then turns to space and communication requirements for different schemes, with shachain/elkrem, SIG_NOINPUT, and a MAST scheme emerging as the ultimate solution.Finally, a simulation result for 1M commitment txs showing the encoding bytes that will be required based on different numbers of HTLCs is discussed.</summary>
+    <published>2016-08-11T03:12:59+00:00</published>
+  </entry>
+</feed>

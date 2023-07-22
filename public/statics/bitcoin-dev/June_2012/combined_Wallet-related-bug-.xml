@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Wallet related bug?</title>
+  <updated>2023-06-06T05:55:10.582476+00:00</updated>
+  <author>
+    <name>grarpamp 2012-06-22 11:01:19</name>
+  </author>
+  <author>
+    <name>grarpamp 2012-06-23 00:10:57</name>
+  </author>
+  <author>
+    <name>grarpamp 2012-06-23 00:10:57</name>
+  </author>
+  <author>
+    <name>grarpamp 2012-06-22 11:01:19</name>
+  </author>
+  <author>
+    <name>grarpamp 2012-06-23 00:10:57</name>
+  </author>
+  <author>
+    <name>grarpamp 2012-06-22 11:01:19</name>
+  </author>
+  <link href="bitcoin-dev/June_2012/001628_Wallet-related-bug-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001629_Wallet-related-bug-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001629_Wallet-related-bug-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001628_Wallet-related-bug-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001629_Wallet-related-bug-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2012/001628_Wallet-related-bug-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Wallet related bug?</title>
+    <updated>2023-06-06T05:55:10.583475+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-June/001628.html" rel="alternate"/>
+    <summary>The writer has identified a potential bug related to the order of operations when rescanning, upgrading wallets, and marking the last block. They encountered an issue when dropping an old wallet into a current blockchain and running it in rescan mode, receiving an old wallet version message. Upon rescanning the entire chain, some blockhashes, blocks out of range, and invalid/nonwallet txids were added to the wallet that were already present as legit ones in the old logs. In plain mode, the new wallet version was logged and the last 20k blocks were rescanned, which may have been the marker for the old wallet's last use. However, subsequent runs duplicated the second one without saying 'upgrading wallet' as it sometimes does. The writer always ran detach=1 and questions why the last 20k blocks need to be scanned every time if the whole chain was already done, suggesting that it should only happen once if not. Additionally, they suggest dumping the run params (bitcoin.conf, cmdline) to the log would be useful and not automatically truncating the log when big, but just appending or rolling it.The speaker had previously commented on their references to wallet version, which were actually in reference to nFileVersion. They have since been able to update both the nFileVersion and the real wallet version but still experience the wallet rescanning the last 14,000+ blocks every time it is invoked, which seems unnecessary. The speaker is unsure why this is happening more than once and plans to send the balance from their old wallets (version 10500) to a new wallet soon to avoid the issue.</summary>
+    <published>2012-06-22T11:01:19+00:00</published>
+  </entry>
+</feed>

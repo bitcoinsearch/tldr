@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Discussion related to pull 349 and pull 319 (escrow transactions)</title>
+  <updated>2023-05-18T21:27:18.431648+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2011-07-23 23:39:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Discussion related to pull 349 and pull 319 (escrow transactions)</title>
+    <updated>2023-05-18T21:27:18.431648+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-July/000217.html" rel="alternate"/>
+    <summary>The pull request 349 on Github repository of Bitcoin implements a new feature for multiple signature escrowed transactions. Considering the demise of clearcoin, it is a necessary addition to the client. The implementation has been tested on a private network and works well but requires more testing and discussion before being added to the client. However, one challenge is that it needs a new transaction type, which cannot be deployed until an updated isStandard is widely used in the network. Therefore, the author suggests separating out the IsStandard part of the patch and getting it out in 0.4.However, the implementation exposes an issue with multisig validation caused by redundancy in script length coding opcodes. Due to multiple ways of coding a script, signature validation code creates new template scripts to evaluate signatures for one output. The problem arises when the new script is not coded the same as the original one, causing signature validation to fail. Pull 349 contains a candidate fix for this issue, excluding the length opcodes from comparison. But it carries a risk of creating differences in how nodes validate transactions leading to lasting forks.Another way of fixing this would be to define that OP_PUSHDATA* cannot be used to push smaller lengths which could be more efficiently encoded with the direct length opcodes. This would be consistent with current behavior and carry no severe split risk. Alternatively, changing the templating code to ensure it codes the template the same way as the original was coded would be beneficial if the same class of problem exists for other things besides length coding.</summary>
+    <published>2011-07-23T23:39:13+00:00</published>
+  </entry>
+</feed>

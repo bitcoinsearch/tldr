@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-05-23T03:22:33.275735+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-04-22 23:11:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-05-23T03:22:33.275735+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002654.html" rel="alternate"/>
+    <summary>ZmnSCPxj posted on a Bitcoin-dev mailing list discussing a vulnerability in the HTLC payment channel. The vulnerability occurs when the current time is L + 1 or greater and the HTLC A-&gt;B has already timed out. In this scenario, B and C bid to miners to get their version of reality committed on-chain, and C can bribe a miner to prevent HTLC-Timeout from confirming between L and L+1, thereby censoring the transaction. To prevent this, B should ensure that before L+1, the HTLC-Timeout has been committed on-chain, which outright prevents this bidding war from even starting. However, B cannot RBF the HTLC-Timeout transaction since it uses a pre-signed HTLC-timeout.Therefore, two solutions are proposed - adding an RBF carve-out output to HTLC-Timeout at the cost of more blockspace or with `SIGHASH_NOINPUT`, making the C-side signature `SIGHASH_NOINPUT|SIGHASH_SINGLE` and allowing B to re-sign the B-side signature for a higher-fee version of HTLC-Timeout. With these mechanisms, B can exponentially increase the fee as L+1 approaches. If B can get HTLC-Timeout confirmed before L+1, then C cannot steal the HTLC value at all since the UTXO it could steal from has already been spent.Note that this delay only sets up a second bidding war later between C and B, and C is at a disadvantage since it has to bribe miners to censor continuously from L to L+1 and additional bribe miners to confirm its transaction after L+1, whereas B can offer its bribe as something that miners can claim now without waiting after L+1. The issue of an additional output bloats the UTXO set and requires another transaction to claim later. However, if both nodes support it, a Poon-Dryja channel can be upgraded, without on-chain activity, to a Decker-Russell-Osuntokun channel. This mechanism sidesteps the issue under discussion here, and HTLCs now sidestep the issue.The email conversation is about a proposal to mitigate the issue of RBF Pinning HTLC Transactions in Bitcoin's Lightning Network. The proposal suggests using OP_CHECKSEQUENCEVERIFY to require RBF-flagging and adding two witness bytes in the hashlock branch. This prevents a low-fee claim tx from being broadcast, allowing for fee-bumping of the HTLC-Timeout if the L+1 timeout is approaching. The proposal has several advantages, including low costs, no need for extra RBF carve-out txo, and no mempool rule changes required.</summary>
+    <published>2020-04-22T23:11:08+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>[was BIP OP_CHECKTEMPLATEVERIFY] Fee Bumping Operation</title>
+  <updated>2023-05-20T23:23:21.535699+00:00</updated>
+  <author>
+    <name>Jeremy 2020-06-08 06:43:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>[was BIP OP_CHECKTEMPLATEVERIFY] Fee Bumping Operation</title>
+    <updated>2023-05-20T23:23:21.535699+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-June/017938.html" rel="alternate"/>
+    <summary>A potential solution to application-DoS (pinning and other attacks) in the mempool beyond CTV is a "Pay for Neighbor" transaction where a transaction can specify that it wants to pay the fee for another transaction(s). This would create a 'ghost child' transaction that cannot be mined unless its 'ghost parents' are confirmed, too. This method is essentially CPFP but guarantees that the link being examined is always exactly one hop away, which gets rid of most of the CPFP graph traversal issues. However, the extant CPFP logic is somewhat brittle and doesn't work as expected. To make fee bumping work nicely, it may require removing CPFP entirely, although nothing concrete has been determined yet. A Fee Bump transaction can name a list of TXIDs or one TXID that implies all ancestors of that transaction that it wishes to be included in a block with. It must be included in that block and may have no unconfirmed ancestors nor any children. Transactions in the mempool may set a flag that opts out of CPFP for descendants/blocks any descendants. Channel protocols should set this bit to prevent pinning and then use the Fee Bump to add fees to whatever transactions need to go through. Additionally, there is a suggestion to use the annex or anyone-can-spend output for this purpose. If done right, a coinswap protocol could also be layered with the fee-bumping transactions change so that there is a privacy benefit at the same time. While this idea originally required a hardfork, it could potentially be made into a soft fork past-taproot by putting the txids of 'ghost parents' into taproot annex. However, creating a new index of all past transactions for consensus would be problematic and cannot be done.</summary>
+    <published>2020-06-08T06:43:39+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Pay-to-Open and UX improvements</title>
+  <updated>2023-06-02T22:24:54.519767+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2019-12-17 10:23:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Pay-to-Open and UX improvements</title>
+    <updated>2023-06-02T22:24:54.519767+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-December/002383.html" rel="alternate"/>
+    <summary>In a conversation thread, t-bast raised concerns about the trust relationship that appears in two places when using pay-to-open in Lightning wallets. The user releases the preimage and trusts that the funder won't double-spend the funding transaction. ZmnSCPxj suggested a construction to ensure atomicity using HTLC-like constructions, similar to what is used in HTLC-success/HTLC-timeout in BOLT 3. Channel opening could be done by creating a transaction from on-chain funds, paying out to an HTLC-like construction with logic "(hash_preimage &amp;&amp; A &amp;&amp; B) || (timelock &amp;&amp; A)." Once the pre-funding is sufficiently confirmed as per Bob security parameter, Bob broadcasts the funding transaction, making it valid by adding the preimage to the witness stack. This setup ensures that the funder cannot double-spend funds that will eventually get into the channel after it is capable of receiving the preimage. However, this makes Alice vulnerable to Bob aborting after the pre-funding is confirmed, forcing Alice to pay for the pre-funding and the timelock branch. This can be fixed by forcing Bob to provide funds to the pre-funding, which get returned to the channel on Bob's side.</summary>
+    <published>2019-12-17T10:23:14+00:00</published>
+  </entry>
+</feed>

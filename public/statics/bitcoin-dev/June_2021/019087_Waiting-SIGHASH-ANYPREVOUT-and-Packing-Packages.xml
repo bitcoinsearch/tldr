@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Waiting SIGHASH_ANYPREVOUT and Packing Packages</title>
+  <updated>2023-06-14T23:21:34.431063+00:00</updated>
+  <author>
+    <name>Antoine Riard 2021-06-19 01:34:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Waiting SIGHASH_ANYPREVOUT and Packing Packages</title>
+    <updated>2023-06-14T23:21:34.431063+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-June/019087.html" rel="alternate"/>
+    <summary>The post discusses two safety issues in Lightning, how they can be solved, and proposes a deployment timeline. The first issue is the pre-signed feerate problem, which can cause a loss of funds in Lightning routing hubs during sudden mempool congestion. The second issue is malicious transaction pinnings. To solve the pre-signed feerate problem, either package-relay or SIGHASH_ANYPREVOUT can be used. While package-relay can be used as a fallback plan, it's better long-term to solve the problem with a consensus change such as SIGHASH_ANYPREVOUT. For solving Tx-Pinnings, the mempool needs to be hardened against Tx-Relay Jammings attacks.There is another remaining interdependency between "the lower half" design and L2s behaviors, namely bandwidth waste in case of high-frequency package redundancy. Lastly, there is a consideration to have around anti-DoS measures that will have to be deployed for package-relay. Antoine, a Bitcoin developer, has proposed a soft fork for an "optimized/multi-party fee-bumping primitive" that aims to improve the Layer 2 (L2) ecosystem. He references the Coupling Principle, which states that as things get larger, they often exhibit increased interdependence between components.Antoine acknowledges potential concerns with pinning attacks and the lack of clear discussion on how SIGHASH_ANYPREVOUT solves them. However, he notes that examples have been set with recent changes to bitcoin core addr-relay policy where the PR author reached out to potentially affected downstream projects. Additionally, he points to analysis of the Revault protocol for fee-bumping issues in L2s and a WIP called "Secure Fee-Bumping for L2s" as steps towards establishing an attacker model.The concern for second-layer Tx-relay rules was raised early on during p2p segwit review. A rough deployment timeline is proposed, with Package-relay in bitcoin core, early 0.24 or 0.25; mempool hardening in bitcoin core, early 0.26 or 0.27; SIGHASH_ANYPREVOUT softfork in the coming year(s), opt-in of any LN/L2 implementation to migrate its fee-bumping backend on top of it.</summary>
+    <published>2021-06-19T01:34:28+00:00</published>
+  </entry>
+</feed>

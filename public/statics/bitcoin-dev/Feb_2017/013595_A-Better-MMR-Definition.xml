@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Better MMR Definition</title>
+  <updated>2023-06-11T21:40:33.556806+00:00</updated>
+  <author>
+    <name>Bram Cohen 2017-02-23 03:07:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Better MMR Definition</title>
+    <updated>2023-06-11T21:40:33.556806+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-February/013595.html" rel="alternate"/>
+    <summary>In a discussion on the Bitcoin-dev mailing list, Peter Todd explained how proving the soundness of proofs becomes trivial if validation is deterministic. He noted that it's impossible to construct two different proofs that prove contradictory statements, as a proof is simply part of the data structure itself. Contradiction would imply that the two proofs are different, but this can be easily rejected by checking the hash of the data. His code works in this way, where proofs are serialization of a subset of the tree and to validate a proof you ask a single function whether a particular value is included in that tree subset, and it answers yes or no. This means it's impossible for a single value to both validate and not validate. The proof code was quite terrifying before he made this change (which he did on suggestion), but it's much cleaner and simpler now. Peter Todd also said that his code supports compact proofs of multiple inclusions and exclusions in the same serialization of a subset of the tree because the upper branches won't have to be repeated. Although he hasn't written code for generating those, the validation code will happily accept them. He asked for clarification on what MMRs are, and whether they refer to patricia tries or something flatter and more fixed depth. Lastly, he mentioned that his code doesn't keep track of tree size, but it would be trivial to add that functionality to the library. Including it in the hashing creates complexity and doesn't seem to have any benefit over sending that data in a side channel.</summary>
+    <published>2017-02-23T03:07:08+00:00</published>
+  </entry>
+</feed>

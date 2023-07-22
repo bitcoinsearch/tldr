@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Difference between ignoring htlc request due to wrong payment hash vs refusing to release preimage in LND</title>
+  <updated>2023-06-03T00:11:59.845799+00:00</updated>
+  <author>
+    <name>Subhra Mazumdar 2020-03-24 16:15:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Difference between ignoring htlc request due to wrong payment hash vs refusing to release preimage in LND</title>
+    <updated>2023-06-03T00:11:59.845799+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-March/002606.html" rel="alternate"/>
+    <summary>The email conversation between Subhra Mazumdar and ZmnSCPxj discussed various scenarios related to the Lightning Network. In the first part of the conversation, they talked about the BOLT 04 specification and the error possibilities that could occur during transactions. They mentioned that the intermediate hop should not fail the HTLC, but the final node should fail the HTLC if the payment_secret does not match the expected value or if the payment hash is unknown. However, they questioned what C should do if the final node, D, denies revealing the secret. They wondered if C should resort to condition no.1 (secret doesn't match), generate an error message, and unlock funds of A-&gt;B and B-&gt;C as soon as possible.In the second part of the conversation, they discussed a surge of unresolved HTLCs while probing, which leads to escrowing funds in these HTLCs and DOSing the probe route, forcing nodes to wait until the HTLCs time out before being able to forward other payments. They also talked about the locktimes of different channels in the route A-&gt;B-&gt;C-&gt;D and how the funds in A-&gt;B and B-&gt;C still remain locked for the mentioned locktime. ZmnSCPxj explained that every contract has an implicit branch "if both of us in this channel agree, we can spend this contract funds any way we want". He also mentioned that even if D griefs up to 143 blocks it wants, at the 144th block C can report immediately back to B and then A with the failure mechanism, and B and C are incentivized to do this quickly since it would allow the funds to be reused again in a different, probably-will-not-be-griefed near-future payment, which might earn them fees in the future.</summary>
+    <published>2020-03-24T16:15:21+00:00</published>
+  </entry>
+</feed>

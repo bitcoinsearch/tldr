@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP for Proof of Payment</title>
+  <updated>2023-06-09T22:23:30.243429+00:00</updated>
+  <author>
+    <name>Kalle Rosenbaum 2015-06-16 12:31:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP for Proof of Payment</title>
+    <updated>2023-06-09T22:23:30.243429+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-June/008735.html" rel="alternate"/>
+    <summary>An SPV wallet cannot validate a Proof of Payment (PoP) without fetching the input transactions of the PoP from an external source. The validation of the PoP depends on the external source(s) being honest. Kalle Rosenbaum has discussed how merchants need to ensure that they only accept a PoP provided as a response to their challenge. He also mentions that merchants will probably use a library for PoP that will hide the details.The purpose of PoP is to prove that one has ownership of the credentials needed to unlock all the inputs of a transaction. It is used to prove that you have paid for something and not that you have the intent to pay for something. A pre-paid hotel room where your PoP functions as a key to the door, an online video rental service where you pay for a video and watch it on any device, an ad-sign where you pay in advance for e.g. two weeks exclusivity, and more are some scenarios in which PoP would be useful without any personal information being involved.A proof of payment for a transaction T, here called PoP(T), has the exact same structure as a bitcoin transaction with the same inputs as T and in the same order as in T but with each sequence number set to 0. There is exactly one output, here called the pop output, with value 0. The lock_time of the PoP must be set to 499999999 to prevent the PoP from being included in a block should it appear on the bitcoin p2p network.An SPV wallet cannot validate a PoP without fetching the input transactions of the PoP from an external source. A Proof of Potential (PoP) is a method used to prove that a transaction has occurred without revealing any information about the transaction itself. The process involves sending a PoP request containing a random nonce, a destination where to send the PoP, and data hinting the wallet which transaction to create a proof for.The wallet identifies a transaction T if possible, otherwise it asks the user to select among the ones that match the hints in the request. The wallet then creates an unsigned PoP for T and asks the user to sign it. The signed UPoP(T) is sent to the server, which validates it and responds with “valid” or “invalid”. To validate a PoP, the server checks the format of the PoP, lock_time, output value and format, nonce, inputs, and scripts. If any step fails, the validation is aborted and "invalid" is returned.There are several security considerations to be aware of when using PoPs, such as the possibility of interception and changes to parameters, theft of PoPs, brute force attacks, and transaction malleability.The PoP request can be transferred using secure connections, and wallets should not rely on the transaction id of the outgoing transaction. Instead, they should listen for the transaction on the network and put that in its list of transactions. A reference implementation of PoP can be found on GitHub.</summary>
+    <published>2015-06-16T12:31:19+00:00</published>
+  </entry>
+</feed>

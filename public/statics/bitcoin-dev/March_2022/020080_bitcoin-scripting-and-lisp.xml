@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>bitcoin scripting and lisp</title>
+  <updated>2023-05-22T17:53:50.797477+00:00</updated>
+  <author>
+    <name>Anthony Towns 2022-03-08 01:27:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>bitcoin scripting and lisp</title>
+    <updated>2023-05-22T17:53:50.797477+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020080.html" rel="alternate"/>
+    <summary>Bram Cohen, the creator of BitTorrent, has discussed the benefits of Chia's Lisp language for Bitcoin script. Chia uses the Coin Set model which is similar to the UTXO model used in Bitcoin. However, in the coin set model, each puzzle is run, whereas in the UTXO model transactions are passed to a scriptpubkey and either pass or fail.To match the way Bitcoin works, the "list of extra conditions" could be encoded explicitly in the transaction via the annex. One approach to upgradability is defining a new version of the language via the tapleaf version, defining new opcodes however they like. Sticking with the UTXO model would also benefit from the soft fork hook that all unknown opcodes will make the entire thing automatically pass. Chia's transaction fee system is similar to Bitcoin's, but fewer things in the ecosystem support fees because they haven't been required yet. The choice of scriptpubkey language is not directly related to mempool issues, which are mainly about adding covenants and capabilities. Writing a quine gets general recursive covenants in a pretty straightforward way. Serialization seems to be somewhat verbose, but optimizing it for small lists and perhaps small literal numbers might be an improvement. Chia's "scriptPubKey" is the hash of a Lisp program, and when a new coin is created, the "scriptPubKey" of the newly generated coin is also the output of a Lisp program. Spend bundles can be merged together so that a block only has a single spend bundle joining all the puzzles and solutions for the coins being spent together.BIP342 defines tapscript, and it's selected by the taproot leaf version 0xc0. This hypothetical lispy "btcscript" might be selected via taproot leaf version 0xc2 or similar. AJ is proposing an alternative format to OG Bitcoin SCRIPT. Finally, everything in Lisp is sandboxed and that functionality is important to many things. It is really normal to be given a reveal of a scriptpubkey and be able to rely on your parsing of it.</summary>
+    <published>2022-03-08T01:27:19+00:00</published>
+  </entry>
+</feed>

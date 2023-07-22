@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Consensus fork activation thresholds: Block.nTime vs median time vs block.nHeight</title>
+  <updated>2023-06-10T04:20:37.053978+00:00</updated>
+  <author>
+    <name>Jorge Timón 2015-08-04 20:02:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Consensus fork activation thresholds: Block.nTime vs median time vs block.nHeight</title>
+    <updated>2023-06-10T04:20:37.053978+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/009917.html" rel="alternate"/>
+    <summary>In an email conversation, Gavin Andresen suggested using the version and timestamp fields in the block header as the simplest and best option for all. He stated that all options can use the version. The advantages of this option are that it is available to SPV nodes with no change to the network protocol and allows all block validation except validation against the UTXO to happen in parallel, out-of-order, independent of any other block. However, there is one disadvantage to this option- it is not monotonically increasing. Andresen thinks that discussions about transactions in the memory pool are just a distraction since a blockchain re-organization could mean the validity of transactions accepted into the memory pool must be re-evaluated. In the non-reorg case, without reorg, you know what the next height or current median time is, but you don't know what the next block time is. Andresen doesn't care if median time or block timestamp is used, he thinks either will work. However, he doesn't like height because there are too many cases where the time is known but the block height isn't. Bitcoin-tx.cpp has no idea what the current block height is, so it's impossible to know about the next block time. Andresen also pointed out that there seems to be disagreement on whether miners' upgrade confirmation (aka voting) is necessary for uncontroversial hardforks or not. In BIP99, the advice for uncontroversial hardforks is setting a threshold (based on height, but we can change it) and then wait for 95% of the hashrate to upgrade to enforce the chain. But maybe the "voting" can happen first and then the threshold is added to the "miners' confirmation height/time". This may influence which of the three discussed options (height, block time and median time) is better, so they should discuss that first.</summary>
+    <published>2015-08-04T20:02:53+00:00</published>
+  </entry>
+</feed>

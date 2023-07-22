@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+  <updated>2023-06-14T22:20:25.517864+00:00</updated>
+  <author>
+    <name>darosior 2021-05-27 21:45:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+    <updated>2023-06-14T22:20:25.517864+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-May/019032.html" rel="alternate"/>
+    <summary>The discussion is about the input-based fee-bumping primitive for Layer 2 (L2) networks. While one variant of input-based fee-bumping currently in use leverages the SIGHASH_ANYONECANPAY/SIGHASH_SINGLE malleability flags, it is trivially pinable and hence not suited for Revault. Instead, Revault uses ACP | ALL and requires a well laid-out pool of fee-bumping UTXOs that need to be consumed entirely. The current input-based method requires two inputs and three outputs for on-chain footprint. However, it is suggested to create an entire UTXO pool in advance by broadcasting a single fan-out transaction, which would be more optimal. This would involve creating one coin per contract and smaller coins that can be attached to any transaction to bump up by a certain threshold. The feebump would not depend on the confirmation of a first-stage transaction, and rebroadcasting would only require updating and rebroadcasting the remaining transactions. It is also suggested to attach the bumping input at the tail end of the chain, which would effectively be a CPFP for the entire chain in case of rebroadcast. Jacob Swambo is credited with coming up with the single fan-out transaction and discussing practical application to Revault.</summary>
+    <published>2021-05-27T21:45:35+00:00</published>
+  </entry>
+</feed>

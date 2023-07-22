@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP sighash_noinput</title>
+  <updated>2023-06-13T01:47:20.012549+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2018-05-01 16:58:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP sighash_noinput</title>
+    <updated>2023-06-13T01:47:20.012549+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/015917.html" rel="alternate"/>
+    <summary>Christian Decker proposed a new sighash flag called `SIGHASH_NOINPUT` that removes commitment to the previous output. The proposal was first mentioned by Joseph Poon but was never formally proposed until now. It is believed that `SIGHASH_NOINPUT` would be useful for Lightning since it enables simple watch-towers and allows for a simplified update mechanism that can be used in off-chain contracts with any number of participants. By not committing to the previous output being spent by the transaction, an input can be rebound to point to any outpoint with a matching output script and value. The binding is no longer explicit through a reference but rather through script compatibility, and the transaction ID reference in the input is a hint to validators. However, this flag should only be used if the tradeoffs are well-known, and contract-specific key-pairs should be used to avoid unwanted rebinding opportunities. The deployment part of the proposal is left vague on purpose in order not to collide with any other proposals. The proposal is minimalistic and straightforward, and the wider community's input is needed in regards to implementation details. Some discussions have been had internally on whether to use a separate opcode or a sighash flag, but it was decided to go the sighash way. Additionally, they still commit to the amount of the outpoint being spent as rebinding to outpoints with the same value maintains the value relationship between input and output, and binding to something with a different value could lead to paying a gigantic fee.</summary>
+    <published>2018-05-01T16:58:37+00:00</published>
+  </entry>
+</feed>

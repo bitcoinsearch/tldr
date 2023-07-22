@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>An Argument For Single-Asset Lightning Network</title>
+  <updated>2023-06-02T16:30:50.233353+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-05-19 11:01:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>An Argument For Single-Asset Lightning Network</title>
+    <updated>2023-06-02T16:30:50.233353+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-May/001999.html" rel="alternate"/>
+    <summary>The exchange node needs to impose collateral in a swap protocol, and it cannot trust any other node to impose the collateral on its behalf. Therefore, multiple secrets are needed for the route from payer to payee through the exchange. The exchange node itself must ensure that the ultimate payee will provide collateral and cannot depend on any other node to enforce it. The need for multiple secrets is because the route could have multiple hop nodes inserted between the participants. A concrete example explains how the protocol works. Suppose 1 BTC is equivalent to 100000000 WJT, and we agree to a 10% collateral in the exchange. Payer routes from itself to exchange to payee, releasing 1 BTC, requiring both the exchange and payment preimages. On reaching the exchange, it verifies the exchange rate and the collateral value, as well as that it knows the preimage of the exchange hash. It releases 110000000 WJT to the next node, requiring both the exchange and payment preimage. On reaching the payee, it checks the value is correct and that it knows the preimage of the payment hash. It releases 10000000 WJT (the collateral) to the next node, requiring only the exchange preimage. Having multiple hops means an exchange cannot determine who is the ultimate payer and ultimate payee, and cannot impose any reasonable censorship policy. Thus the exchange cannot operate as if the second-to-last hop can be relied upon to impose the collateral rule on the payee: the exchange must impose this collateral itself. All payments are still HTLCs, and forcing settlement on the blockchain just means one can no longer cancel the contract but are *forced* to wait out any timelocks.</summary>
+    <published>2019-05-19T11:01:02+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>MuSig2 BIP</title>
+  <updated>2023-06-15T18:48:13.407023+00:00</updated>
+  <author>
+    <name>Jonas Nick 2022-10-11 15:34:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>MuSig2 BIP</title>
+    <updated>2023-06-15T18:48:13.407023+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021000.html" rel="alternate"/>
+    <summary>A team of researchers including Yannick Seurin, Tim Ruffing, Elliott Jin, and Jonas Nick have discovered an attack against the latest version of BIP MuSig2. The attack is effective in a scenario where a signer's individual key A = a*G is tweaked before providing it as input to key aggregation. The vulnerability arises when four conditions are met simultaneously. Firstly, the signer supports signing with a tweaked individual key whose tweak is known to the attacker. Secondly, the signer's public key appears at least twice with different tweaks in the set of public keys that are aggregated. Thirdly, the signer uses "concurrent signing". Finally, the secret key provided to the Sign algorithm is not yet fully determined when the NonceGen algorithm is called.In such a scenario, an attacker can forge a signature for any message and any aggregate public key that contains the signer's individual public key A (with any attacker-chosen tweak). This includes forging a signature for any message and the public key A itself. However, condition 4 should only apply in relatively rare cases unless the signer is tricked into such a situation.The researchers suggest that one definite fix is to make the secret key argument to the NonceGen algorithm mandatory. They are also exploring other options and will follow up shortly with a concrete fix of the BIP draft. It is important to note that this discovery does not invalidate the security proof of the scheme as presented in the MuSig2 paper because the security model in the paper does not support tweaking a signer's key.If you've implemented the BIP draft in your library or are already using it in production, the researchers encourage you to reach out to clarify the implications of this discovery.</summary>
+    <published>2022-10-11T15:34:23+00:00</published>
+  </entry>
+</feed>

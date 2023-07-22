@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_VAULT: a new vault proposal</title>
+  <updated>2023-05-22T23:19:18.521293+00:00</updated>
+  <author>
+    <name>Anthony Towns 2023-01-10 12:29:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_VAULT: a new vault proposal</title>
+    <updated>2023-05-22T23:19:18.522328+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-January/021328.html" rel="alternate"/>
+    <summary>A proposal for a new Bitcoin vault construction was discussed on the bitcoin-dev mailing list. The proposed scheme uses a scriptPubKey that allows for two spend paths - recovery and unvaulting. Recovery spends directly to a hash of an arbitrary scriptPubKey, verified by checking the hash of the sPK matches and the amount it preserved. Unvaulting spends to a scriptPubKey of a witness script, verified by checking that the witness script hashes to #unvault and is satisfied. As soon as the recovery address is revealed, anyone can move all funds into cold storage. The public key for the cold wallet needs to be handled secretly as revealing it would allow a malicious party to lock up all funds. The author suggests using a pay-to-contract construction for the recovery path, rather than an empty witness. This construct allows delayed withdrawals but doesn't provide a way to cap withdrawals. The author proposes a cleverer way of batching/generalising checking that input/output amounts match.The current proposal means unvaulting locks up the entire utxo for the delay period. Changing the unvault construction to have an optional OP_VAULT output would remedy that. It would be dangerous to combine this construction with APO signatures on the hot wallet as it could result in paying for things twice. Using APO probably isn't interesting anyway.The author suggests hiding all this under Taproot. The unvault output needs two script paths - move_funds_to(recovery-spk) and OP_CSV; move_funds_to(X). The vault output also needs two paths - move_funds_to(recovery-spk) and hot-wallet-script; move_funds_to(unvault[X]). It requires a "move_funds_to" operator and some way of constructing "unvault[X]".</summary>
+    <published>2023-01-10T12:29:52+00:00</published>
+  </entry>
+</feed>

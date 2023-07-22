@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Nonce blinding protocol for hardware wallets and airgapped signers</title>
+  <updated>2023-06-13T23:48:59.486780+00:00</updated>
+  <author>
+    <name>Marko 2020-02-28 17:42:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Nonce blinding protocol for hardware wallets and airgapped signers</title>
+    <updated>2023-06-13T23:48:59.486780+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-February/017663.html" rel="alternate"/>
+    <summary>The writer expresses gratitude for the initiative of implementing and releasing a protocol, which was inspired by a blog post on the topic. The protocol was implemented in the secp256k1 library for Schnorr sigs by Jonas Nick and backported to ECDSA in the same library to be used for current transactions. Proof of concepts for BitBox02 hw wallet firmware and BitBoxApp wallet were made to verify that the protocol works well in practice. A generalized sign-to-contract scheme was used in those implementations where the final nonce is computed as `k' = k + H(k*G, n)` instead of `k'=k+n`, but otherwise, it works mostly the same for the anti nonce covert channel protocol. The writer suggests using this scheme in PSBT as well. The writer is interested in seeing widespread support for this protocol and standardizing it would help with that. However, there is increased danger in implementing the protocol wrongly when using PSBT with an air-gapped signer. The PSBT must be verified carefully against state stored by the host for the PSBT; otherwise, the signer can change or pre-fill the relevant NONCE fields and leak the private keys anyway. The writer seeks information on the current best practice for identifying a PSBT by the host to store/retrieve the state. Additionally, the writer asks if there are other examples in PSBT where the host cannot trust the contents of the PSBT that the signer returns, except for the parts the user can verify themselves. Finally, guidelines or conventions on how to avoid these pitfalls would be helpful.</summary>
+    <published>2020-02-28T17:42:15+00:00</published>
+  </entry>
+</feed>

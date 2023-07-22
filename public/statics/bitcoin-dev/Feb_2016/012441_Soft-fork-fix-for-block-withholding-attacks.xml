@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Soft fork fix for block withholding attacks</title>
+  <updated>2023-06-11T04:01:57.812082+00:00</updated>
+  <author>
+    <name>gladoscc 2016-02-12 11:31:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Soft fork fix for block withholding attacks</title>
+    <updated>2023-06-11T04:01:57.812082+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-February/012441.html" rel="alternate"/>
+    <summary>A proposed solution to fix block withholding attacks with a soft fork is presented in this context. The solution involves redefining the block PoW target to be less than the difficulty, with the last two bytes being the target. Blocks must include a blinded hash of the target plus some junk in the coinbase, and miners cannot arbitrarily switch targets. Hashers must submit all shares that match the first PoW criteria and delegate secondary verification to the miner. Miners are required to communicate a proof of their target hash in a non-hashed area of the block. This can be deployed as a soft fork with miner opt-in triggering across many difficulty cycles. Initially, the last bit of the block hash is required to be zero, followed by the last two bits in the next cycle. The progression continues over 16 difficulty cycles to minimize increases in block timings. The nominal difficulty would have been cut by 2^16 (65536) by then, but the block target makes mining each block 65536 times harder. It is possible to progress over even more difficulty cycles through more clever soft fork rules, such as Vitalik's "timewalking" attacks that allow effective granular lowering of the nominal difficulty. Critiques are welcome.</summary>
+    <published>2016-02-12T11:31:56+00:00</published>
+  </entry>
+</feed>

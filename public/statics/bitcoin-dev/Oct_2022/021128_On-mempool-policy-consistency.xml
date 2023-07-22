@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>On mempool policy consistency</title>
+  <updated>2023-06-16T02:22:27.829420+00:00</updated>
+  <author>
+    <name>Greg Sanders 2022-10-27 19:00:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>On mempool policy consistency</title>
+    <updated>2023-06-16T02:22:27.829420+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021128.html" rel="alternate"/>
+    <summary>In a discussion on the bitcoin-dev mailing list, Suhas Daftuar brought up the point that even with full replace-by-fee (RBF), an adversary controlling a certain number of inputs can still cause issues due to rule#5 pinning. This means that while rule#3 damage can potentially be mitigated with full RBF, there cannot be promises made about mempool entry beyond small transaction sizes. An adversary can make 100 transactions, 4 chains of 25, and achieve the original pin. The biggest issue is when the double-spend is low-feerate and large, and effectively pins any attempt to replace it. While this makes it possible to over-bid your griefer, properly replacing rule#3 would give these protocols higher assurances, but this is where we're at now. Anthony Towns had previously claimed that opt-in RBF isn't enough to avoid a DoS issue when utxos are jointly funded by untrusting partners. In the scenario he described, A, B, and C create a transaction with multiple inputs, with A then spamming the network with an alternative transaction just before publishing it. This double spend could be annoying for B and C, as it could be low-feerate and large, effectively pinning any attempt to replace it. Even in a world where all transactions are replaceable, there are still ways for an adversary to cause issues. Suhas finds this example to be unconvincing and asks if there are any other examples where having a non-replacement policy for some transactions causes problems for protocols people are trying to build.</summary>
+    <published>2022-10-27T19:00:13+00:00</published>
+  </entry>
+</feed>

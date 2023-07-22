@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Bringing a nuke to a knife fight: Transaction introspection to stop RBF pinning</title>
+  <updated>2023-05-22T20:01:11.407652+00:00</updated>
+  <author>
+    <name>Greg Sanders 2022-05-10 18:53:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Bringing a nuke to a knife fight: Transaction introspection to stop RBF pinning</title>
+    <updated>2023-05-22T20:01:11.407652+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020458.html" rel="alternate"/>
+    <summary>A developer has shared their thoughts on eltoo designs for Elements and eventual inclusion into Bitcoin, particularly focusing on the issue of BIP125 rule#3. The rule states that "The replacement transaction pays an absolute fee of at least the sum paid by the original transactions," which creates a problem in scenarios such as eltoo where fees are required to be brought by the counterparty. This can result in illicit HTLC timeouts due to low feerate update transactions or bloated inputs/outputs, causing users to fork over more sats. The developer suggests mitigating this pinning using policy or transaction introspection opcodes. They provide an example using Rusty's OP_TX proposal and state outputs that are continuously spent off-chain and sent to a committed set of outputs. They add OPTX_SELECT_WEIGHT to the state input's script and conditionally commit to the change output's scriptpubkey via OPTX_SELECT_OUTPUT_SCRIPTPUBKEY and OPTX_SELECT_OUTPUTCOUNT==2. By doing this, they restrict the size of the transaction package being submitted to mempools. The developer also suggests encumbering change outputs to either 1 block CSV encumbered outputs or another OPTX_SELECT_WEIGHT recursively to allow each counterparty to CPFP N times, each transaction a maximum weight, and use the 1 block CSV as an "escape hatch" to get their fee output back out from the covenant structure. The developer concludes by stating that mempool is hard, but transaction weight, output count, and output scriptpubkey, and introspection can be used to avoid solving life's hard problems.</summary>
+    <published>2022-05-10T18:53:14+00:00</published>
+  </entry>
+</feed>

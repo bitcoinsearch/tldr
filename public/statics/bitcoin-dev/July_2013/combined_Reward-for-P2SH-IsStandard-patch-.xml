@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Reward for P2SH IsStandard() patch.</title>
+  <updated>2023-06-06T19:58:11.369395+00:00</updated>
+  <author>
+    <name>John Dillon 2013-07-14 19:05:26</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2013-07-14 19:28:39</name>
+  </author>
+  <author>
+    <name>John Dillon 2013-07-14 19:05:26</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2013-07-14 19:28:39</name>
+  </author>
+  <author>
+    <name>John Dillon 2013-07-14 19:40:21</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2013-07-14 19:28:39</name>
+  </author>
+  <author>
+    <name>John Dillon 2013-07-14 19:40:21</name>
+  </author>
+  <author>
+    <name>John Dillon 2013-07-14 19:40:21</name>
+  </author>
+  <author>
+    <name>John Dillon 2013-07-14 19:05:26</name>
+  </author>
+  <link href="bitcoin-dev/July_2013/002887_Reward-for-P2SH-IsStandard-patch-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2013/002889_Reward-for-P2SH-IsStandard-patch-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2013/002887_Reward-for-P2SH-IsStandard-patch-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2013/002889_Reward-for-P2SH-IsStandard-patch-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2013/002891_Reward-for-P2SH-IsStandard-patch-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2013/002889_Reward-for-P2SH-IsStandard-patch-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2013/002891_Reward-for-P2SH-IsStandard-patch-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2013/002891_Reward-for-P2SH-IsStandard-patch-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2013/002887_Reward-for-P2SH-IsStandard-patch-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Reward for P2SH IsStandard() patch.</title>
+    <updated>2023-06-06T19:58:11.369395+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-July/002887.html" rel="alternate"/>
+    <summary>In a mailing list conversation, John Dillon suggests the long-term benefits of using P2SH with an inner OP_CHECKSIG for most addresses, which saves 1 byte. He recommends implementing this change first for change addresses and mentions that bitcoinj support will help sites like satoshidice pay to P2SH change. The overhead for multisig's P2SH for 1-of-2, 2-of-2, and 3-of-3 is 10%, 8.6%, and 6.2% respectively, which are all minor percentages, especially if the blocksize limit is assumed to be raised in the future.The author of the message offers a reward of 1BTC to anyone who creates a patch to change IsStandard() to accept only P2SH and pubkeyhash in a raw scriptSig, allowing other forms only when used with P2SH. This is to prevent the IsStandard() code from accepting up to 120 bytes of junk data as a pubkey, which allows injection of 240 bytes of spendable data into the UTXO set with bare OP_CHECKMULTISIG. Keeping the size of the UTXO set small is critical, and there have been problems with distasteful data being added to the UTXO set. Gregory Maxwell has an excellent solution to the distasteful data problem in the form of P2SH, and Peter Todd pointed out how it can be implemented with the existing P2SH form. They plan to implement some kind of OP_RETURN soon, which handles timestamping and similar use-cases without UTXO impact.Pieter Wuille also commented on the current implementation in the reference client, which uses a custom script encoder for the UTXO database. For "standard" address payment, there is no storage impact of using P2SH instead. The impact refers to the impact on transaction size and thus blockchain space and fees, not UTXO size as stored by nodes themselves. The current OP_CHECKMULTISIG function is being used by Peter Todd's timestamper, but it can easily be changed to OP_RETURN. This change can be made for change addresses first, and bitcoinj support will help satoshidice and other similar sites pay to P2SH change. The overhead for multisig's P2SH for 1-of-2, 2-of-2, and 3-of-3 is 10%, 8.6%, and 6.2% respectively, which are all minor percentages, especially if the assumption is made that the blocksize limit will be raised in the future.</summary>
+    <published>2013-07-14T19:05:26+00:00</published>
+  </entry>
+</feed>

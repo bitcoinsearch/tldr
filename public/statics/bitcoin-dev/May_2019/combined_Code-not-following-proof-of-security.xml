@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Code not following proof of security</title>
+  <updated>2023-06-13T18:53:01.046925+00:00</updated>
+  <author>
+    <name>Zawy 2019-05-18 17:40:16</name>
+  </author>
+  <author>
+    <name>Zawy 2019-05-18 17:40:16</name>
+  </author>
+  <author>
+    <name>Zawy 2019-05-18 17:40:16</name>
+  </author>
+  <link href="bitcoin-dev/May_2019/016932_Code-not-following-proof-of-security.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2019/016932_Code-not-following-proof-of-security.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2019/016932_Code-not-following-proof-of-security.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Code not following proof of security</title>
+    <updated>2023-06-13T18:53:01.046925+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-May/016932.html" rel="alternate"/>
+    <summary>To ensure Proof of Work (POW) security, the code for cryptocurrency mining must reflect proof of security. If MAX_FUTURE_BLOCK_TIME in chain.h is smaller than DEFAULT_MAX_TIME_ADJUSTMENT in timedata.h, it can lead to a 33% Sybil attack on the nodes, which undermines POW security. This occurs because blocks with accurate timestamps would be rejected, allowing various attacks. POW security requires clock synchronization, but using median of network time for it is a consensus mechanism that is subject to Byzantine attacks. Therefore, POW requires an absolute bound on time that is at least as stringent as the allowed timestamp variation. The rule to revert to node time if network time is &gt;70 minutes off is the real bound that honest nodes can impose unilaterally. Many cryptocurrencies have reduced MAX_FUTURE_BLOCK_TIME to have faster responding difficulty algorithms. However, this can allow for manipulation of difficulty. Thus, MAX_FUTURE_BLOCK_TIME should be a function of the size of the difficulty window for proof of security. It is important to ensure that the code reflects proof of security, as "unintended consequences due to how disparate code interacts" can result from not following this principle. The fail-safe uses node operators as the oracle, who can all approximately agree as to what time it is without asking each other. Cryptonote appears to have done away with network time without ill effect.</summary>
+    <published>2019-05-18T17:40:16+00:00</published>
+  </entry>
+</feed>

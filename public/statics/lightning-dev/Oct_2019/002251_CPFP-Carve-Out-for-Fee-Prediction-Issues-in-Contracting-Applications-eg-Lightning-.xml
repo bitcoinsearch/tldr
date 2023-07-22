@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+  <updated>2023-06-02T15:32:47.478377+00:00</updated>
+  <author>
+    <name>Jeremy 2019-10-27 19:13:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+    <updated>2023-06-02T15:32:47.478377+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-October/002251.html" rel="alternate"/>
+    <summary>The email thread discusses two main categories of mempool issues related to the OP_SECURETHEBAG feature - relay cost and mempool walking. The first issue can be fixed by assessing Replace By Fee update fees appropriately. However, there are some tricky edge cases that make it non-obvious to do so. The second issue is related to the algorithms used in the mempool, which can be N log N or N^2 in the number of descendants. An opened PR should help with some of the walking issues by allowing for cheap caching to avoid re-expanding a node.OP_SECURETHEBAG is designed to allow an unlimited number of child transactions, unlike lightning htlcs. This feature puts all HTLCS into a tree where they are individualized leaf nodes with a preceding CSV. To ensure each HTLC has time to close properly, the above fix would ensure each HTLC always has individualized lockpoints. The discussion also includes a proposal to relax the current carve-out rule to avoid adding a 1 CSV to all outputs, which causes HTLC scripts to change. Instead, it is suggested to let the last transaction added to a package of dependent transactions in the mempool have no more than one unconfirmed parent. This would allow an attacker to exceed the MAX_PACKAGE_VIRTUAL_SIZE limit in some cases, but it's not clear if this is a problem with the current mempool acceptance code in bitcoind.</summary>
+    <published>2019-10-27T19:13:09+00:00</published>
+  </entry>
+</feed>

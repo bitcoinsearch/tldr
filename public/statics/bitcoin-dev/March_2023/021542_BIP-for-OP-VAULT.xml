@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP for OP_VAULT</title>
+  <updated>2023-06-16T15:40:53.206977+00:00</updated>
+  <author>
+    <name>Anthony Towns 2023-03-24 12:10:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP for OP_VAULT</title>
+    <updated>2023-06-16T15:40:53.206977+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-March/021542.html" rel="alternate"/>
+    <summary>On Tue, Mar 07, 2023 at 10:45:34PM +1000, Anthony Towns via bitcoin-dev wrote that there are perhaps four opcodes that are interesting in this class- idx sPK OP_FORWARD_TARGET, idx [...] n script OP_FORWARD_LEAF_UPDATE, idx OP_FORWARD_SELF, and amt OP_FORWARD_PARTIAL. The BIP 345 draft has been updated and now pretty much defines OP_VAULT to have the behavior specced for OP_FORWARD_LEAF_UPDATE above, and OP_VAULT_RECOVER to behave as OP_FORWARD_TARGET above. These proposed opcodes come close to making it possible to do a fair, non-custodial, on-chain auction of ordinals. The idea is that you create a utxo on chain that contains the ordinal in question, which commits to the address of the current leading bidder, and can be spent in two ways- it can be updated to a new bidder if the bid is raised by at least K satoshis, in which case the previous bidder is refunded their bid, or if there have been no new bids for a day, the current high bidder wins, and the ordinal is moved to their address, while the funds from their winning bid are sent to the original vendor's address.He believes that this can be implemented in script assuming some opcodes are available. Then construct the following script, make that script the sole tapleaf, accompanied by a NUMS point as the internal public key, calculate the taproot address corresponding to that, and send the ordinal to that address as the first satoshi. This approach seems pretty "MEV" resistant: you pay fees via input 1 if your bid succeeds; if it doesn't, you don't pay any fees. Obviously, this is a pretty limited auction mechanism in various ways. He thinks you can probably do all those things with this set of opcodes and clever scripting, though it probably gets ugly. He doesn't think this is easily extensible to taro or rgb style assets, as rather than being able to ensure the asset is transferred by controlling the input/output positions, he thinks you'd need to build up merkle trees and do point tweaks beyond what's supported by OP_FORWARD_LEAF_UPDATE/OP_VAULT.</summary>
+    <published>2023-03-24T12:10:05+00:00</published>
+  </entry>
+</feed>

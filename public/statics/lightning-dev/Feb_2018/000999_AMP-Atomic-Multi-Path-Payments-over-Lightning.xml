@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>AMP: Atomic Multi-Path Payments over Lightning</title>
+  <updated>2023-05-20T07:58:43.816987+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-02-07 00:03:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>AMP: Atomic Multi-Path Payments over Lightning</title>
+    <updated>2023-05-20T07:58:43.816987+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/000999.html" rel="alternate"/>
+    <summary>The email conversation discusses the possibility of Atomic Multi-Path Payments (AMP) on Lightning network and its implementation. The negotiation is strictly end-to-end between sender and receiver, so a global feature bit could be used to gate this new feature. The potential fee savings for larger payments are contingent on there being a super-linear component to routed fees. There is also a suggestion that using smaller payments increases the set of possible paths a partial payment could have taken, reducing the effectiveness of static analysis techniques involving channel capacities and plaintext values being forwarded. In order to include the three-tuple within the per-hop payload for the final destination, the first byte of the unused padding bytes in the payload can be repurposed to signal version 0x01 of the AMP protocol. However, the realm byte is meant to signal "forward this to the dogecoin channel" and ATM, it defaults to 0 as "Bitcoin". Thus, any combo of these bytes can be used to signal more advanced protocols to the final destination. It's important to note that intermediate nodes don't need to be aware of the end-to-end protocol and only the final hop has 53 free bytes to signal more advanced protocols to the final destination.Finally, there is a correction to an earlier statement where it was mentioned that (H(BP), s_i) could be used to send EOB from sender to receiver. It should actually be (H(s_0 || s_1 || ...), s_i). This allows them to check this fingerprint to see if they have all the final shares, but doesn't allow them to preemptively pull all the payments.</summary>
+    <published>2018-02-07T00:03:45+00:00</published>
+  </entry>
+</feed>

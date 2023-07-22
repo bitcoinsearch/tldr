@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+  <updated>2023-06-13T19:36:11.462047+00:00</updated>
+  <author>
+    <name>Dmitry Petukhov 2019-06-29 04:31:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+    <updated>2023-06-13T19:36:11.462047+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-June/017065.html" rel="alternate"/>
+    <summary>During a discussion about a whitelist feature, the issue of revocation of signatures was brought up. One possible solution that was suggested involved pre-signing a revocation cert and blacklisting any wallets that displayed it. However, this raised the question of why not store the whitelist pubkeys if the signer had a trustworthy store of state. It was suggested that if a hardware wallet could permanently store at least one counter, it could have rich state, stored externally. The hardware wallet would sign a state stored in RAM and give out the state and signature to the supporting app. When the app gave the signed state and transaction data to the hardware wallet, it would check its signature over the state, checks that serial matches its internal counter, uses and modifies the state, then updates the internal counter and the serial number of the state before giving out the signed new state to the app. However, there should be some mechanism to securely override the hw wallet internal state if the app loses the state blob. This approach might have other limitations as processing and storing big enough state in the RAM of a resource-constrained device might present a problem in itself. Another idea proposed was to add serial to xpub-package, which is in the same vein as storing the xpub-package serial inside the hw wallet directly or inside its 'external rich state blob', but it can take only one byte. It was unlikely to need more than 255 xpub-package 'revocations' at that point.</summary>
+    <published>2019-06-29T04:31:04+00:00</published>
+  </entry>
+</feed>

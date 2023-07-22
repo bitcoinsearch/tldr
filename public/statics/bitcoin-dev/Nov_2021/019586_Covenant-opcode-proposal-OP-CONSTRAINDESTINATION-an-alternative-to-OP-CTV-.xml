@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Covenant opcode proposal OP_CONSTRAINDESTINATION (an alternative to OP_CTV)</title>
+  <updated>2023-06-15T00:23:02.161731+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2021-11-01 01:19:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Covenant opcode proposal OP_CONSTRAINDESTINATION (an alternative to OP_CTV)</title>
+    <updated>2023-06-15T00:23:02.161731+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-November/019586.html" rel="alternate"/>
+    <summary>In a recent email thread on the bitcoin-dev mailing list, Billy Tetrud responded to Jeremy's suggestion of splitting up the fee limiting functionality from OP_CD into a separate opcode called OP_LIMITFEECONTRIBUTION. While Tetrud found the idea interesting, he noted that there were some limitations and considerations to keep in mind. For example, when it came to output addresses, Tetrud had added specifying amounts to make script evaluation simpler and eliminate a potential DOS vector. However, he acknowledged that this could require calculating various combinations of inequalities, which could get expensive in scenarios where many inputs had overlapping destinations. Tetrud also pointed out that while it might be possible to verify that a number of inputs with destination address limitations is within limits, he didn't know of an elegant and cheap way to do so. Additionally, if there was a good way to evaluate what addresses an input goes to without knowing what amounts it contributes to each output, Tetrud wouldn't want to propose validating specific amounts going to specific outputs. As for the fee-limit opcode, Tetrud believed it could be done on its own but noted that a version of OP_CD that doesn't specify fees would have to take the fee-limit into account, and the calculation for the standalone fee-limit operation would be moot for that output.Regarding Jeremy's comment that all transactions are twice as large as they might otherwise need to be, Tetrud clarified that the transaction wouldn't be quite twice as large and added that perhaps it would be reasonable to allow omitting an output value in cases where the entire output amount is contributed by that input. This would reduce the overhead of specifying output amounts to 2 bytes for most outputs, meaning that it would only make the transaction about 7% larger. Tetrud welcomed others' input on these ideas.</summary>
+    <published>2021-11-01T01:19:42+00:00</published>
+  </entry>
+</feed>

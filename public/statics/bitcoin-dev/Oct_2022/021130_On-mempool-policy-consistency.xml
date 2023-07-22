@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>On mempool policy consistency</title>
+  <updated>2023-06-16T02:24:25.584383+00:00</updated>
+  <author>
+    <name>David A. Harding 2022-10-29 07:45:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>On mempool policy consistency</title>
+    <updated>2023-06-16T02:24:25.584383+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021130.html" rel="alternate"/>
+    <summary>In a post on bitcoin-dev, Anthony Towns suggested that a 30% threshold for listening nodes with compatible policies would provide a 95% chance of having an outbound peer accept a transaction. However, Dave argued that this understated the problem and that a 95% chance of acceptance implied a 1 in 20 failure rate on initial broadcast. This could lead to issues with UX and safety for time-sensitive transactions such as onchain HTLC resolutions. Additionally, unreliable propagation increases the ability of spy nodes to assume that the IP address from which they received a transaction was the creator of it.These problems are especially concerning for lightweight clients, which need to connect to a large number of nodes to find one that supports a more permissive policy than most of the network. For example, if we round up the number of daily transactions to 100 million a year and assume that only one transaction per year should fail to propagate, a lightweight client would need to connect to over 50 randomly selected nodes where 30% of nodes have adopted a more permissive policy. For a more permissive policy adopted by only 10% of nodes, the client needs to connect to almost 150 nodes.This also implies that nodes adopting a more restrictive policy degrades UX, safety, and privacy for users of transactions violating that policy. For instance, if 30% of nodes used Knots's -spkreuse configuration option and about 50% of transactions reuse scriptPubKeys, then about nine transactions a day wouldn't initially propagate. Dave suggests several alternative approaches which mitigate these problems, but acknowledges that they have their own tradeoffs.</summary>
+    <published>2022-10-29T07:45:09+00:00</published>
+  </entry>
+</feed>

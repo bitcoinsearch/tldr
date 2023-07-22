@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_BEFOREBLOCKVERIFY - discussing and opcode that invalidates a spend path after a certain block</title>
+  <updated>2023-06-14T22:31:11.788402+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2021-06-10 23:20:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_BEFOREBLOCKVERIFY - discussing and opcode that invalidates a spend path after a certain block</title>
+    <updated>2023-06-14T22:31:11.788402+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-June/019055.html" rel="alternate"/>
+    <summary>The discussion revolves around the proposed opcode, OP_BEFOREBLOCKVERIFY (OP_BBV), that marks a transaction invalid if the current block it is being evaluated for is greater than or equal to the block height specified in the opcode. The primary motivation behind this opcode is to enable switch-off type transactions. One use case highlighted is more efficient wallet vaults. While some people hold the opinion that there is no meaningful difference between the active and passive roles in the context of double spending a transaction during a reorg, others see a material difference between actively broadcasting a replacement transaction and passively waiting for a transaction to fall out of validity. There are concerns that the proposed opcode could create a DOS vector where a malicious actor might be able to spam the mempool with transactions containing the opcode. Additionally, it could cause "bad" reorg behavior where transactions that were spent become not spendable because they were mined too near their expiry point. However, the author argues that these concerns can be addressed, and OP_BBV is safe. Mempool handling is solvable, and software can warn users to wait for six confirmations in relevant scenarios where a six-block reorg might reverse the transaction. The author acknowledges a few other potential issues with the proposal, including the fact that Bitcoin software tends to cache script validity, so using the taproot annex instead of pure script would be preferable. Another issue is that the proposal defeats limits on transaction replacement because now, instead of meeting minimum thresholds for fee bumping, one can let the previous transaction expire and bump the fee by a fraction. Nonetheless, the main concern remains outstanding.</summary>
+    <published>2021-06-10T23:20:19+00:00</published>
+  </entry>
+</feed>

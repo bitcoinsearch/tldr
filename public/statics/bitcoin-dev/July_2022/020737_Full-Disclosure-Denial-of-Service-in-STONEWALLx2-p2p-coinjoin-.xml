@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Full Disclosure: Denial of Service in STONEWALLx2 (p2p coinjoin)</title>
+  <updated>2023-05-22T20:45:43.086944+00:00</updated>
+  <author>
+    <name>alicexbt 2022-07-14 09:25:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Full Disclosure: Denial of Service in STONEWALLx2 (p2p coinjoin)</title>
+    <updated>2023-05-22T20:45:43.086944+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-July/020737.html" rel="alternate"/>
+    <summary>Samourai Wallet's p2p coinjoin transaction, STONEWALLx2, splits the miner fee between both participants of the transaction. However, Antoine Riard shared the details of a denial-of-service (DoS) attack in an email on June 21, 2022. The attack was carried out by one participant preventing the other from completing the transaction. In his proof of concept, he created a testnet wallet and used two Android devices to simulate Bob and Carol, who followed each other's paynyms. Carol initiated several paynyms and when Bob initiated a STONEWALLx2 transaction that required collaboration with Carol, she spent the UTXO from her wallet before Bob could complete the last step. This caused an error message to appear on Bob's app when trying to broadcast the transaction.The Samourai Wallet team came up with two suggestions to prevent such attacks. First, they proposed an error message that states collaborator spent her UTXO used in STONEWALLx2, end the p2p coinjoin process, unfollow collaborator's paynym and suggest user to do such transactions with trusted users only for a while. Second, once full RBF is used by some nodes and miners, attacker's transaction could be replaced with a higher fee rate. However, bumping the fee won't be simple as fees are shared 50/50 for STONEWALLx2 spends.The timeline shows that the issue was acknowledged by Samourai on July 7, 2022, and conclusions were shared on July 14, 2022. Antoine Riard discovered the DoS vector in p2p coinjoin transactions and helped by responding to emails during testing.</summary>
+    <published>2022-07-14T09:25:56+00:00</published>
+  </entry>
+</feed>

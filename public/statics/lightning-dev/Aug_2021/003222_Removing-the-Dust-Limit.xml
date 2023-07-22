@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Removing the Dust Limit</title>
+  <updated>2023-06-03T05:16:50.557546+00:00</updated>
+  <author>
+    <name>shymaa arafat 2021-08-27 09:07:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Removing the Dust Limit</title>
+    <updated>2023-06-03T05:16:50.557546+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-August/003222.html" rel="alternate"/>
+    <summary>In a discussion on the bitcoin-dev mailing list, the suggestion was made to consolidate all dust UTXOs and separate them from probably unspendable UTXOs in a different partition until a mitigation solution is found. This would help reduce the proof size and benefit things like Bloom filters. The paper cited earlier noted that as of February 2018, there were about 2.4 million UTXOs less than 1000 Satoshi, with approximately 824,892 holding exactly 1 Satoshi. It is unlikely that any of these UTXOs have been spent since then and there may even be more now. The idea was suggested as an easy improvement with little effort. In response to the original post, Billy Tetrud mentioned that the cost of maintaining dust creates a small incentive for miners to mine transactions that use dust outputs with a slightly lower fee to reduce future maintenance costs. However, the rational discount for this would likely be vanishingly small. Tetrud suggested adding something to consensus rules to decrease vbytes for a transaction that consumes dust outputs so that the value of removing them from the system (saving future maintenance costs) is roughly equal to the amount by which fees could be lowered. However, he was unsure how to evaluate the magnitude of this future cost. Another contributor, ZmnSCPxj, noted that the Lightning spec already puts outputs below the dust limit into fees instead, incentivizing L2 protocols to have similar rules. Thus, the existence of a dust limit might be incentivize-compatible for miners regardless of centralization effects.</summary>
+    <published>2021-08-27T09:07:35+00:00</published>
+  </entry>
+</feed>

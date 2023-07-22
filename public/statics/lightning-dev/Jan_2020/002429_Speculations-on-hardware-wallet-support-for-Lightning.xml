@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Speculations on hardware wallet support for Lightning</title>
+  <updated>2023-06-02T22:39:45.455482+00:00</updated>
+  <author>
+    <name>Antoine Riard 2020-01-16 22:30:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Speculations on hardware wallet support for Lightning</title>
+    <updated>2023-06-02T22:39:45.455482+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-January/002429.html" rel="alternate"/>
+    <summary>The Lightning Network (LN) security model differs from the base layer, requiring on-chain monitoring and reaction to keep funds safe. Hardware wallets have not assumed UTXO state access as secure until now, but LN models require it. To improve current LN deployment, a master-slave scheme could be implemented where an external signer is coupled with watchtowers to serve as UTXO oracles while mitigating node compromise. The external signer should store commitment numbers and balances for each channel and do key derivation locally, while the watchtower should do justice delegation, timeout HTLCs, and perform outgoing-to-incoming preimage passing in case of regular node failure.Watchtowers provide a security boost against p2p sybil attacks if each runs its own full-node, but spurious broadcast of revoked commitments and trusted external signer are problems that must be solved. This kind of deployment may only serve important processing LN nodes first, but designing specialized hardware/interfaces for them will also benefit more thrifty nodes operators by commoditization in the long term.The Lightning-dev mailing list discusses reducing trust in node software and the hardware required to do so. One suggestion is to delegate publishing penalty transactions to a quorum of watchtowers, with the node software proving to the hardware that the watchtowers have been informed of new state by providing a receipt signed by the watchtowers. However, revocation secrets for remote commitment transactions can only be stored by the software, but the hardware should store these secrets in secure storage attached to the hardware store, so that the node can be recreated if the node software has been catastrophically compromised.When opening a channel, if there is a difference in fees paid, implying that this node is what pays the fee, the hardware should double-confirm with the user using its UI whether the paid fees are acceptable. For trusted forwarding, while forwarding should be automated and not require a confirmation from the user on the hardware unit UI, the hardware has to trust the software to actually perform forwarding correctly. It is suggested that there may be a way to prove correctness of forwarding to the hardware, but ultimately, forwarding is still trusted.Regarding reducing storage size, the hardware can store a single commitment to the current state it knows to be valid instead of storing multiple channel slots and payment slots in its own persistent memory. However, there is a need for reliable backup in case of catastrophic failure. The idea of having a secure append-only log could be used for off-hardware state storage, forming a secure channel between the hardware and the append-only log machine.</summary>
+    <published>2020-01-16T22:30:01+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-06-03T00:53:13.738510+00:00</updated>
+  <author>
+    <name>Antoine Riard 2020-04-22 08:01:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-06-03T00:53:13.738510+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002644.html" rel="alternate"/>
+    <summary>A recent discussion on the bitcoin-dev mailing list has highlighted potential attack scenarios in Lightning Network, one of which involves mempool-pinning. The attack is designed to provoke an unbalanced settlement for the victim by maliciously blocking its own transactions in the mempool, thereby avoiding confirmation of timeout. The success rate and economic rationality of attacks are based on how well an attacker can leverage mempool rules to pin their own transaction. The attack scenario involves collusion between two parties - Mallory and Eve - who open channels with Alice.To carry out the attack, Mallory broadcasts its Pinning Preimage Tx on offered HTLC #2 output on Alice's transaction, with a feerate that is maliciously chosen to get into network mempools but never to confirm. The absolute fee must be higher than HTLC-timeout #2, a fact known to Mallory. At block 110, Alice broadcasts HTLC-timeout #2, which is rejected from network mempools as replacement for Pinning Preimage Tx due to BIP 125 rule 3. At block 120, Eve closes the channel and HTLC-timeout HTLC #2. Mallory can RBF its Pinning Preimage Tx by a high-feerate one and get it confirmed.The proposal to fix this issue involves resuscitating old work to ensure peering through a full-RBF propagation path, but p2p implications are hard to gauge as it may not guarantee p2p censorship resistance. The attack scenario is quite complex and requires a good deal of bitcoin and lightning knowledge to understand.Another issue discussed in the email is related to the lightning protocol, which has a severe issue in which a counterparty can steal an HTLC with a low-fee RBF-disabled transaction. To prevent this, ZmnSCPxj suggests preventing this by adding the requirement "must be RBF-enabled" to `OP_CHECKSEQUENCEVERIFY` using 2 bytes in the witness of the hashlock branch. However, out-of-band agreements with miners could still occur creating a bidding war between B and C. To prevent this, B could exponentially increase the fee of HTLC-Timeout as L+1 approaches. The issue of monitoring for previous Poon-Dryja commitment transactions is also discussed in the email context regarding the latest Poon-Dryja commitment transactions and how to switch the mechanism over to Decker-Russell-Osuntokun. It is mentioned that HTLCs now sidestep this issue. The email is signed by ZmnSCPxj and includes links to the bitcoin-dev mailing list and its subscription page.</summary>
+    <published>2020-04-22T08:01:23+00:00</published>
+  </entry>
+</feed>

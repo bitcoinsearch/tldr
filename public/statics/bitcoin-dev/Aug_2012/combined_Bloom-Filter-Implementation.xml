@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Bloom Filter Implementation</title>
+  <updated>2023-06-06T06:58:51.837767+00:00</updated>
+  <author>
+    <name>Matt Corallo 2012-08-15 00:26:31</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2012-08-15 10:07:14</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2012-08-15 10:07:14</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2012-08-15 00:26:31</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2012-08-15 00:26:31</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2012-08-15 10:07:14</name>
+  </author>
+  <link href="bitcoin-dev/Aug_2012/001790_Bloom-Filter-Implementation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2012/001791_Bloom-Filter-Implementation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2012/001791_Bloom-Filter-Implementation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2012/001790_Bloom-Filter-Implementation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2012/001790_Bloom-Filter-Implementation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2012/001791_Bloom-Filter-Implementation.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Bloom Filter Implementation</title>
+    <updated>2023-06-06T06:58:51.837767+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-August/001790.html" rel="alternate"/>
+    <summary>In response to the "New P2P commands for diagnostics, SPV clients" thread, the author of this post has implemented a new bloom filter and block relay type. This implementation allows for faster relay for clients that already have transactions in memory pool. SPV clients can request that all future MSG_TX inv messages and blocks are filtered by sending a filterload message with a serialized bloom filter. Nodes can also send filteradd messages which add particular data blocks to the filter and call filterclear which disables filtering on a node's connection until re-enabled. However, it is not recommended for anonymity purposes. The filter will match any transaction which has a script data element in either a scriptPubKey or scriptSig which matches the filter, spends an input who's COutPoint is in the filter, has a hash in the filter, or has a script data element in a prevout's scriptPubKey. Matching of prevouts only occurs on free txes, not those in blocks. Therefore, SPV clients should update the remote node's filter before requesting a block, if required, to be sure it includes the hash of any transaction which would not otherwise match the filter so that the node knows when its transactions are included in blocks. The branch of this implementation can be found at https://github.com/TheBlueMatt/bitcoin/compare/master...bloom.The writer expresses gratitude while also providing feedback regarding updating the filter after every block download, which they suggest would negatively affect performance gains due to the round-trip involved. The writer proposes doing bulk getblocks on hundreds/thousands of blocks at a time, allowing data to stream in, as a solution to this issue. They also suggest saving bandwidth and network round-trips by providing transactions immediately in the block using a class called CLiteMerkleTx and a class called CMerkleBlock. The latter class includes variables such as nVersion, hashPrevBlock, hashMerkleRoot, nTime, nBits, nNonce, and vMatchedTxns.</summary>
+    <published>2012-08-15T00:26:31+00:00</published>
+  </entry>
+</feed>

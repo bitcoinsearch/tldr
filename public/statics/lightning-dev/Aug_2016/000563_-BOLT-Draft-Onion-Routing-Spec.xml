@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BOLT Draft] Onion Routing Spec</title>
+  <updated>2023-05-24T00:01:17.284845+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-08-05 04:00:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BOLT Draft] Onion Routing Spec</title>
+    <updated>2023-05-24T00:01:17.284845+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-August/000563.html" rel="alternate"/>
+    <summary>The discussion revolves around designing a high throughput onion routing network. Two options were considered - the first being to include the payload in the header HMAC computation, resulting in minimal overhead and "fail fast" behavior with regard to packet forwarding. The second option involved anonymous rendezvous meetings where the final recipient provides half of the route in the form of a precompiled header. It was suggested that packets with similar sized payloads should have the same packet size, allowing for non-uniform sizes as far as mix-headers. Three types of mix-header formats were proposed: regular, extended, and rendezvous. Regarding timestamps in the packet, it was proposed to include a timestamp rounded up to the closest hour and have a sliding window of accepted timestamps of +/- 1 hour.A large node with high frequency bi-directional throughput may forward around 5k HTLC's per second at peak times, which amounts to approximately 576MB if nodes are required to store an entire window. Daily key rotation and remembering all onions for the current and previous key were considered to simplify the design. Broadcasting new node keys once a day is recommended, with validity time range included with each key to spot if a node is missing one. The summary of keys for each node includes the channel key, id key, comms key, and various ephemeral keys for inter-node comms. The issue of enabling intermediate nodes to reply to a packet by recycling the routing info was also discussed. This is a troubling issue as certain classes of failures become harder to reconcile with onion routing. They want to prove when a node is misbehaving when it gives a fail message and if a node corrupts a fail message on return. However, they don't want to expose the source of fail messages or leak the route. If they solve this, they can greatly increase the robustness of onion routing within the network.</summary>
+    <published>2016-08-05T04:00:54+00:00</published>
+  </entry>
+</feed>

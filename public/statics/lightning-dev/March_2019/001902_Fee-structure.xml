@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fee structure</title>
+  <updated>2023-06-02T17:57:14.270208+00:00</updated>
+  <author>
+    <name>John-John Markstedt 2019-03-14 07:58:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fee structure</title>
+    <updated>2023-06-02T17:57:14.270208+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-March/001902.html" rel="alternate"/>
+    <summary>In this communication, John-John Markstedt acknowledges his mistake in assuming that channel balances needed to be known to create a route. He realizes that this would not scale well and defeat the effort of keeping payments private. However, he learns that it is possible within the protocol to make changes to the channel fee without broadcasting balance changes. It is suggested that caution should be taken not to spam the `channel_update` so as to avoid leaking information about payments. A heuristic is proposed to achieve reasonable results without too much leakage. The issue with this approach is that it does not regard the size of the payments. Paying the same proportional fee for a payment leaving the balance at the far end as one close to the middle would not be beneficial. Broadcasting each balance change to fix this issue would not scale well and run into leakage, making it a moot point. John-John Markstedt suggests implementing a strategy that sets the fee only regarding the initial state, but it is not obvious how beneficial this would be to a routing node. He plans to implement something along these lines and see if it outperforms a node not using it. JIT Routing by rpickhardt is proposed as a more sensible approach as it attempts to rebalance only if it would benefit the node to perform the rebalancing. This approach is more accurately named "JIT rebalancing." John-John Markstedt plans to have a closer look at the JIT Routing emails. Overall, Andrea and ZmnSCPxj are thanked for pointing out the flaws in the original idea.</summary>
+    <published>2019-03-14T07:58:18+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Jamming against Channel Jamming</title>
+  <updated>2023-06-03T10:55:11.838092+00:00</updated>
+  <author>
+    <name>Joost Jager 2022-12-02 17:59:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Jamming against Channel Jamming</title>
+    <updated>2023-06-03T10:55:11.838092+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-December/003781.html" rel="alternate"/>
+    <summary>One way to address channel jamming and spamming is to install a lightning firewall like circuitbreaker, which allows setting limits on pending htlcs and/or rate limits. However, this approach may lead to extra retries and penalization for the node applying limits. An alternative is to hold and queue exceeded htlcs instead of failing them, which prevents failures from affecting a routing node's reputation. Holding also punishes upstream nodes by occupying their htlc slots and freezing funds, which could incentivize them to apply limits as well. This recursive propagation of limits across the network can ultimately push bad senders into corners where they can't do much harm anymore. However, routing nodes employing the hold strategy may be punishing themselves too if they are the initiator of a channel with many pending htlcs, leading to high commit fees in case of a force-close. The hold strategy can be used selectively for channels that the routing node did not initiate, while self-initiated channels can use the fail action or no limit at all. Circuitbreaker has been updated with a queue mode for experimentation.</summary>
+    <published>2022-12-02T17:59:23+00:00</published>
+  </entry>
+</feed>

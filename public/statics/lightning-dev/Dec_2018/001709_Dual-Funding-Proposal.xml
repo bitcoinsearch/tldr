@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Dual Funding Proposal</title>
+  <updated>2023-06-02T15:11:49.249621+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-12-04 02:00:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Dual Funding Proposal</title>
+    <updated>2023-06-02T15:11:49.249621+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-December/001709.html" rel="alternate"/>
+    <summary>The proposed v2 of channel open would deprecate the original between two upgraded nodes. The receiving node must fail the channel if option_dual_fund has been negotiated. It is suggested to check max_extra_witness_len since that will affect the fees and each signature adds 74, and pubkey adds 34. It is recommended to send max_witness_len and not send any witness at this stage, and send the entire witness in funding_signed2. It is also suggested to relax the value to 1000 for the script itself. In case the most recent funding tx is unlikely to be confirmed in reasonable time, the sender MAY send init_rbf and MUST set feerate_per_kw larger than the most recent funding tx. It is recommended to break out `funding_txn_feerate_per_kw` from `commitment_txn_feerate_per_kw` in `open_channel2`. Allowing the opener to add new inputs/outputs drives down the scope of a RBF; adding new inputs seems like a common sense bare minimum, especially if we assume wildly unpredictable fee rates. It is necessary to specify new outputs with new inputs (change). The channel_id changes on each renegotiation, so either we switch channel_id after each accept_rbf, or keep the original channel_id until funding_locked2.It is suggested to continue to include the temporary channel id, in addition to the 'current' (i.e. most recently negotiated funding txn) channel id until the funding_locked2 is sent. However, the temporary_channel_id is an untrusted value. For dual funded channels, `channel_id` is based not on the txid but the SHA256(open_channel2.revocation_basepoint | accept_channel2.revocation_basepoint), which must be unique. We'd still use the `temporary_channel_id` for open_channel2 and the accept_channel2 reply (to match them), but we don't ever need to change again.</summary>
+    <published>2018-12-04T02:00:18+00:00</published>
+  </entry>
+</feed>

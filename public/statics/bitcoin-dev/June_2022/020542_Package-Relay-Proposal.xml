@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Package Relay Proposal</title>
+  <updated>2023-05-22T20:06:25.782757+00:00</updated>
+  <author>
+    <name>Suhas Daftuar 2022-06-08 15:59:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Package Relay Proposal</title>
+    <updated>2023-05-22T20:06:25.782757+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-June/020542.html" rel="alternate"/>
+    <summary>In a bitcoin-dev mailing list thread, Suhas Daftuar raises concerns about potential bandwidth waste in non-adversarial situations where nodes are running with different policy rules. This could happen when a low-fee, non-standard transaction is relayed and new nodes send INV(PKGINFO1, T) to all package-relay peers. Daftuar suggests several ways to mitigate this issue, including including a hash of the package wtxids along with the wtxid of the child in the initial announcement and limiting the use of v1 packages to transactions with very few parents.The discussion focuses on the Package Relay Proposal and its implementation using BIP152. The proposal suggests that packages require identity in a BIP152 scheme, which can be achieved by replacing 'header' and 'blockhash' fields with a Merkle root for the package. This unique identifier will help identify the partially-ordered set of transactions.The conversation also touches upon the potential for dishonest peers announcing packages, leading to censorship vectors. The proposed fix is to provide fee and weight information when announcing the package instead of only being asked for its info. It is suggested that packaging should be done using BIP152 without the 'header' field, an updated protocol version, and some changes to names.Once a validated set of transactions within the package has been obtained with sufficient fee, a fee-optimal node would accept the largest subgraph of the package that conforms to fee constraints and drop any peer that provides a package for which the full graph does not. Various aspects of the proposal are discussed, such as incorporating ancestors into package announcements, having versioning as a bit field instead of sending a message for each version, and more.Daftuar questions the usefulness of including the blockhash in transaction relay and suggests that it may be just wasted pkginfo bandwidth on a single-link, and not across links. If the problem of de-duplicating package data across peers with a package-wtxid-commitment in the announcement can be solved, he believes there would be no need for the blockhash. The discussion concludes that the existing message is simpler, more consistent, and more efficient than introducing accidental complexity.Throughout the discussion, links to relevant resources, such as BIP152 and its shortid section, are provided.</summary>
+    <published>2022-06-08T15:59:03+00:00</published>
+  </entry>
+</feed>

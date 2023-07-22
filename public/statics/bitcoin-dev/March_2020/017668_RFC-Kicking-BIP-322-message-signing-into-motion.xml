@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RFC: Kicking BIP-322 (message signing) into motion</title>
+  <updated>2023-06-13T23:58:18.050953+00:00</updated>
+  <author>
+    <name>Karl-Johan Alm 2020-03-04 06:23:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RFC: Kicking BIP-322 (message signing) into motion</title>
+    <updated>2023-06-13T23:58:18.050953+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-March/017668.html" rel="alternate"/>
+    <summary>The author of a BIP-322 pull request has noticed that despite their PR being open for twice the time as another PR to Bitcoin Core, which touched on the same areas of complexity, the latter was merged without any consideration for BIP-322 compatibility. This leads them to believe that people dislike BIP-322 in its current form. They are seeking criticism to improve their PR and have listed several things that they can do to make it more appealing. Firstly, they suggest that the use of signmessage as a way to prove funds should be discouraged entirely and replaced with a prove funds system, which is an opinion shared by Luke-jr and Greg Maxwell. Secondly, they propose using a transaction rather than a new format by making the first input’s txid the message hash, which would ensure the tx cannot be broadcasted and could provide to an existing hardware wallet without modifications. Mark Friedenbach and Johnson Lau support this idea but Lau also suggests modifying the signature hash, which defeats the benefit above since now hardware wallets cannot sign. Prusnak is against this idea and proposes using the Trezor style instead.The Trezor style has already been adopted, but the drawback is that we would be stuck with the exact same limitations as in the legacy system, which we wanted to fix in the updated version. Lastly, the author suggests introducing OP_MESSAGEONLY, which means the script following the code would never be valid. For messaging purposes, OP_MESSAGEONLY is considered as OP_NOP and ignored. A message could be signed with either key_m or key_s, but for spending purposes, only key_s is valid.</summary>
+    <published>2020-03-04T06:23:53+00:00</published>
+  </entry>
+</feed>

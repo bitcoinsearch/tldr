@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fast Merkle Trees</title>
+  <updated>2023-06-12T18:33:19.651665+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2017-09-07 20:04:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fast Merkle Trees</title>
+    <updated>2023-06-12T18:33:19.651665+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-September/014960.html" rel="alternate"/>
+    <summary>The email thread discusses a specific instance of a general problem where third-party scripts cannot be trusted. The attack described involves finding a collision between double-SHA256(innocuous) and fast-SHA256(fast-SHA256(fast-SHA256(double-SHA256(malign) || r2) || r1) || r0). For this attack to occur, the first opcode of innocuous is the push of a value that the attacker claims to be their 33-byte public key. The attacker can grind r2 until the result of fast-SHA256(double-SHA256(malign) || r2) contains the correct first couple of bytes for the script header and the opcode for a 33-byte push. It was difficult to actualize the attack into a practical one that escalates the attacker's capabilities. However, if the attacker can get the other party to agree to a MAST policy that is nothing more than a CHECKSIG over a key they presumably control, then they don't need to do any complicated grinding. The attacker in that scenario would just specify a key they control and take the funds that way. To prevent attacks like these, multi-party wallet level protocols for jointly constructing scriptPubKeys should require a 'delinearization' step that proves knowledge of information necessary to complete each part of the script, as part of proving the safety of a construct. Additionally, it is suggested to modify the scheme to use a different IV for hash tree updates which would prevent even implausible attacks.</summary>
+    <published>2017-09-07T20:04:30+00:00</published>
+  </entry>
+</feed>

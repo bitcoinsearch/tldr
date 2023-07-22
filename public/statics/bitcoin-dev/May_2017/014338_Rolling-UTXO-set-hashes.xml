@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Rolling UTXO set hashes</title>
+  <updated>2023-06-12T00:49:13.220844+00:00</updated>
+  <author>
+    <name>Peter R 2017-05-15 20:53:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Rolling UTXO set hashes</title>
+    <updated>2023-06-12T00:49:13.220844+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-May/014338.html" rel="alternate"/>
+    <summary>Pieter Wuille proposed a discussion on computing a UTXO set hash that is efficient to update but does not support any compact proofs of existence or non-existence. Multiple approaches were discussed in the past and this proposal focuses on an efficient hash that supports only comparing two UTXO sets. Two methods were presented for efficient addition and deletion, MuHash and ECMH. The former involves multiplying 3072-bit hashes mod 2^3072 - 1103717 while the latter entails adding secp256k1 EC points. Both these approaches provide security against k-sum solving however, MuHash requires fast modular multiplication/inverse implementation while ECMH is more complicated to implement from scratch. Preliminary benchmarks showed that MuHash takes 2m15s to compute the hash from just the UTXO set, 24ms to process all creations and spends in an average block, and 3ms to process precomputed per-transaction aggregates in an average block. On the other hand, ECMH takes 9m20s, 100ms, and 0.5ms respectively. These numbers are low enough to make it reasonable for full nodes and/or other software to always maintain one of them and effectively have a rolling cryptographical checksum of the UTXO set at all times. A rolling set hash would be useful in replacing Bitcoin Core's gettxoutsetinfo RPC's hash computation, assisting in the implementation of fast sync methods with known good blocks/UTXO sets, and database consistency checking.</summary>
+    <published>2017-05-15T20:53:45+00:00</published>
+  </entry>
+</feed>

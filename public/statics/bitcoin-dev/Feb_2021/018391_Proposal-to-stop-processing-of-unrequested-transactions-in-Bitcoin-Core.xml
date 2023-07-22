@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal to stop processing of unrequested transactions in Bitcoin Core</title>
+  <updated>2023-06-14T17:50:00.459052+00:00</updated>
+  <author>
+    <name>Antoine Riard 2021-02-10 13:13:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal to stop processing of unrequested transactions in Bitcoin Core</title>
+    <updated>2023-06-14T17:50:00.459052+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018391.html" rel="alternate"/>
+    <summary>Antoine proposes to stop the processing of unrequested transactions in Bitcoin Core 22.0+ at TX message reception. This change is motivated by reducing the CPU DoS surface of Bitcoin Core around mempool acceptance. An unrequested transaction is one that is defined by which a "getdata" message for its specific identifier (either txid or wtxid) has not been previously issued by the node. Currently, an attacker can open multiple inbound connections to a node and send expensive to validate, junk transactions. Once the canonical INV/GETDATA sequence is enforced on the network, a further protection would be to deprioritize bandwidth and validation resources allocation, or even to wither connections with such DoSy peers. A permissioned peer (PF_RELAY) will still be able to bypass such restrictions. Raw TX message processing has always been tolerated by Core; thus, some Bitcoin clients aren't bothering with an INV/GETDATA sequence. Such a change will break their tx-relay capabilities on the p2p network and require adaptation from them. Given deployment time of any release, Antoine hopes it provides a window time wide enough before the old tx-processing behavior becomes the minority. Antoine is eager to gather feedback on this proposal, especially if such a change is deemed too much constraining or fast on any Bitcoin software.</summary>
+    <published>2021-02-10T13:13:34+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Dynamic Commitments: Upgrading Channels Without On-Chain Transactions</title>
+  <updated>2023-05-23T13:56:37.096732+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-07-21 22:55:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Dynamic Commitments: Upgrading Channels Without On-Chain Transactions</title>
+    <updated>2023-05-23T13:56:37.096732+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-July/002768.html" rel="alternate"/>
+    <summary>A discussion on the Bitcoin-dev mailing list sparked an idea of upgrading from a Poon-Dryja channel to a Decker-Russell-Osuntokun ("eltoo") mechanism. However, due to the way `SIGHASH_ANYPREVOUT` will be deployed, it is not possible to upgrade seamlessly. A potential solution would involve creating an upgrade transaction that is a cut-through of a mutual close of the Poon-Dryja and a funding open of a Decker-Russell-Osuntokun. Once signed by both parties, the participants can keep the upgrade transaction off-chain and treat the funding outpoint of the upgrade transaction as the "internal funding outpoint" for future Decker-Russell-Osuntokun updates.Although this solution has limitations such as the fact that since the on-chain funding outpoint remains a Poon-Dryja, it can still be spent using a revoked state, it also has some benefits such as bounding the information liability of the upgraded channel and retaining the channel's short-channel-id, which may be useful since a provably-long-lived channel implies both channel participants have high reliability. Additionally, if the channel is later mutually closed, the upgrade transaction, being off-chain, never needs to appear on-chain, potentially saving blockchain space. Those wishing to retain a revocation based commitment invalidation model may instead opt to upgrade to something like the current best successor to the OG Poon-Dryja revocation mechanism.</summary>
+    <published>2020-07-21T22:55:54+00:00</published>
+  </entry>
+</feed>

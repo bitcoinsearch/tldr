@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Revisiting BIP 125 RBF policy.</title>
+  <updated>2023-06-13T00:37:30.603275+00:00</updated>
+  <author>
+    <name>Peter Todd 2018-02-12 22:58:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Revisiting BIP 125 RBF policy.</title>
+    <updated>2023-06-13T00:37:30.603275+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-February/015724.html" rel="alternate"/>
+    <summary>The replace-by-fee (RBF) policy, as defined in Bitcoin Improvement Proposal (BIP) 125, has been criticized for its problematic nature by Russell O'Connor on the Bitcoin-dev mailing list. The issue arises when a transaction becomes pinned, making it impossible to fee bump with RBF. This occurs when one makes a normal payment to a large commercial service and the service creates a low-fee-rate sweep of the payment while it remains unconfirmed. If one wants to RBF this original payment, they need to make a fee bump that exceeds the combined total fees of the original transaction and the low-fee-rate sweep of the commercial service, which can be infeasible due to the absolute size of the fee. O'Connor states that "rational miners care about fee-rates more than absolute fees" and suggests changing rules three and four to address this issue.Rule three currently states that the replacement transaction must pay an absolute fee of at least the sum paid by the original transactions, but O'Connor proposes that it should instead pay a fee rate of at least the effective fee rate of any chain of transactions from the set of original transactions that begins with the root of the original transaction set. Rule four currently requires the replacement transaction to pay for its own bandwidth at or above the rate set by the node's minimum relay fee setting, but O'Connor suggests that it should also pay for replacing the original transactions at or above the rate set by the same fee setting. While some have stated that O'Connor's proposal could be naive, he hopes it can start a conversation about addressing the problems with the current RBF policy. Additionally, a better way to solve this class of problems may be diffed tx replacement propagation, which involves broadcasting a diff between the original transaction and the proposed replacement, allowing for minimum bandwidth accounting based on the size of the diff instead.</summary>
+    <published>2018-02-12T22:58:28+00:00</published>
+  </entry>
+</feed>

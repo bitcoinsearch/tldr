@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Self-dependency transaction question...</title>
+  <updated>2023-06-09T00:49:27.946811+00:00</updated>
+  <author>
+    <name>Richard Moore 2014-07-13 23:32:51</name>
+  </author>
+  <author>
+    <name>Aaron Voisine 2014-07-14 02:25:51</name>
+  </author>
+  <author>
+    <name>Jeff Garzik 2014-07-14 02:51:50</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-07-14 11:18:22</name>
+  </author>
+  <author>
+    <name>Jeff Garzik 2014-07-14 02:51:50</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-07-14 11:18:22</name>
+  </author>
+  <author>
+    <name>Paul Lyon 2014-07-15 13:56:20</name>
+  </author>
+  <author>
+    <name>Aaron Voisine 2014-07-14 02:25:51</name>
+  </author>
+  <author>
+    <name>Jeff Garzik 2014-07-14 02:51:50</name>
+  </author>
+  <author>
+    <name>Matt Whitlock 2014-07-14 20:51:43</name>
+  </author>
+  <author>
+    <name>Richard Moore 2014-07-13 23:32:51</name>
+  </author>
+  <author>
+    <name>Aaron Voisine 2014-07-14 02:25:51</name>
+  </author>
+  <author>
+    <name>Matt Whitlock 2014-07-14 20:51:43</name>
+  </author>
+  <author>
+    <name>Paul Lyon 2014-07-15 13:56:20</name>
+  </author>
+  <author>
+    <name>Matt Whitlock 2014-07-14 20:51:43</name>
+  </author>
+  <author>
+    <name>Paul Lyon 2014-07-15 13:56:20</name>
+  </author>
+  <author>
+    <name>Richard Moore 2014-07-13 23:32:51</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-07-14 11:18:22</name>
+  </author>
+  <link href="bitcoin-dev/July_2014/006215_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006216_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006217_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006220_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006217_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006220_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006244_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006216_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006217_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006229_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006215_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006216_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006229_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006244_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006229_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006244_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006215_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006220_Self-dependency-transaction-question-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Self-dependency transaction question...</title>
+    <updated>2023-06-09T00:49:27.946811+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-July/006215.html" rel="alternate"/>
+    <summary>Richard Moore raised a question regarding the validity of self-referencing transactions in an email sent on July 13, 2014. He asked if a transaction X whose input was X and had an output Y would result in Y being a valid UTXO (unspent transaction output) without being a generation transaction input. However, even if such a transaction did exist and was valid, it still couldn't create new coins. This is because the sum of the outputs must be less than or equal to the sum of the inputs, except for coinbase transactions. If a transaction spent its own output, the input would be completely used up by the output, leaving no balance for a second output.A developer is working on the UTXO database for their Python implementation of bitcoind and has come across a situation they did not realize was valid. They are asking if the 3rd transaction of a block could use the 4th transaction from the same block as an input, or if transactions are processed strictly top to bottom. They also ask what would happen if a transaction was self-referencing and had an output Y, would Y be a new valid utxo, without being a generation transaction input.In a conversation between Aaron Voisine and Jeff Garzik, it was confirmed that transactions (tx) must be ordered sequentially within a block and cannot reference themselves or later transactions in the same block. Garzik suggested adding a test to the suite to confirm the validity of a block containing self-referential transactions. Garzik is a Bitcoin core developer and open-source evangelist at BitPay Inc.In the blockchain, all transactions are on a single timeline that is quantised into blocks. While it is a strict line, duplicated transactions can occur despite being hash-based. Satoshi assumed this would never happen, but duplicating coinbases is possible and was banned by a rule change. Older parts of the chain may still have this issue, so it is essential to be able to process them. A BIP exists to cover the new rule.In an email conversation, Mike from Plan99.net explains the concept of transactions in the blockchain. He mentions that all transactions in the blockchain exist on a single timeline, which is quantized into blocks. However, duplicated transactions can occur, and while Satoshi assumed that this could not happen due to everything being hash-based, it did happen at one point. To handle this, a rule change was implemented and there is now a BIP covering this new rule. Mike mentions that he chose to not add duplicate transactions to the UTXO when they first appeared, as they were not spent at that time. When the duplicates appear, they are added successfully to the UTXO because the earlier conflicting versions are not present. This allows for assuming that all transaction hashes are unique and enforcing that rule over the entire blockchain.</summary>
+    <published>2014-07-13T23:32:51+00:00</published>
+  </entry>
+</feed>

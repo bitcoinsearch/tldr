@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Better privacy with SNARKs</title>
+  <updated>2023-05-18T15:52:53.552669+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-11-17 21:14:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Better privacy with SNARKs</title>
+    <updated>2023-05-18T15:52:53.552669+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000309.html" rel="alternate"/>
+    <summary>Lightning Network is a decentralized network that allows instant Bitcoin transactions. However, it has a privacy limitation where different hops can be associated as being part of the same transaction due to sharing a common R value. To improve payment anonymity and make it harder to attack the system, forwarding nodes need to change R at each step in the route. This is difficult because they need to be able to calculate R1 from R2 or they'll be out of pocket.The solution to this problem lies in the magic of SNARKs (Succinct Non-Interactive Argument of Knowledge). It allows users to prove that they have some secrets that satisfy some programmable condition based on public inputs without revealing those secrets. In other words, a user can generate a proof using a 32 byte secret and XOR key proving that they have some secrets that satisfy some programmable condition based on public inputs without revealing those secrets.A developer named ajtowns has proposed a way to fill the biggest privacy hole in lightning transactions, which is that the recipient needs to know the preimage R to redeem the payment. This method involves using zero-knowledge succinct non-interactive arguments of knowledge (zk-SNARKs) to prove that you know R without revealing it. However, generating the proof data for a given R1,X pair takes about 10 seconds, and verifying the proof uses about 150MB of RAM.The computational cost would likely increase transaction fees by a few satoshis per SNARK verification, but this is still practical for transactions of 500 satoshi or more. Nonetheless, if the crypto's not fundamentally broken, using zk-SNARKs goes a long way to filling in the biggest privacy hole in lightning today. Generating proofs in advance could avoid lag being a problem. However, a drawback is that either you would have to do all this on the merchant's side or generate all the R secrets as a consumer, and you wouldn't get to use the fact that you know R as evidence that you paid the merchant.While this method seems like it's not all that far from being practical, it's not ready for prime time yet because SNARKs are still pretty new as a concept. It's best not to use it to protect real money yet. Research-level tools exist that make this practical to try out, and Lightning Network's test implementation involves the initial setup of proof/verification keys; generating a proof; and verifying the proof. If you receive a HTLC asking for a preimage for H1, along with instructions in the onion saying ask Bob for a preimage for H2, and here's X and a proof, there are several possible outcomes that prove the safety of the transaction.</summary>
+    <published>2015-11-17T21:14:36+00:00</published>
+  </entry>
+</feed>

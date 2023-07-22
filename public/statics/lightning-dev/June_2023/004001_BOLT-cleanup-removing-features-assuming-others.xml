@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>BOLT cleanup: removing features, assuming others</title>
+  <updated>2023-07-13T17:36:33.109641+00:00</updated>
+  <author>
+    <name>Rusty Russell 2023-06-30 19:22:40+00:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>BOLT cleanup: removing features, assuming others</title>
+    <updated>2023-07-13T17:36:33.109667+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-June/004001.html" rel="alternate"/>
+    <summary>This pull request proposes to simplify the process by ignoring certain features based on recent releases and node announcements. The features that are being removed include "initial_routing_sync" and "option_anchor_outputs". The former only had an effect if "gossip_queries" was not supported, while the latter was only supported by older experimental-only CLN builds.The decision to ignore these features is based on the fact that there are 449 nodes running a 4-year-old LND version with 3+ year old channels. These nodes will already have their channel_updates ignored due to the lack of "htlc_maximum_msat", which is now required by LND and CLN.Additionally, there are several features that can now be assumed without checking them. These features include "var_onion_optin" (all but 6 nodes), "gossip_queries" (all but 11 nodes), "option_data_loss_protect" (all but 11 nodes), and "option_static_remotekey" (all but 16 nodes).Overall, this PR aims to simplify the process by removing unnecessary features and assuming certain features based on recent releases and node announcements.You can find more information about this pull request [here](https://github.com/lightning/bolts/pull/1092).</summary>
+    <published>2023-06-30T19:22:40+00:00</published>
+  </entry>
+</feed>

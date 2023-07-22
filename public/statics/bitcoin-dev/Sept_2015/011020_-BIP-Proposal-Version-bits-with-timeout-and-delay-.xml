@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP Proposal] Version bits with timeout and delay.</title>
+  <updated>2023-06-10T22:22:29.598770+00:00</updated>
+  <author>
+    <name>Btc Drak 2015-09-16 15:53:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP Proposal] Version bits with timeout and delay.</title>
+    <updated>2023-06-10T22:22:29.598770+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-September/011020.html" rel="alternate"/>
+    <summary>A proposed change to the semantics of the 'version' field in Bitcoin blocks is specified in this document. This change allows multiple backward-compatible changes (soft forks) to be deployed in parallel by interpreting the version field as a bit vector, where each bit can track an independent change. The highest 3 bits are set to 001, so the range of actual possible nVersion values is [0x20000000...0x3FFFFFFF], inclusive. With every softfork proposal, a state is associated with it, which begins at defined and can be locked-in, activated, or failed. Transitions are considered after each retarget period. Software that supports the change should begin by setting B in all blocks mined until it is resolved.If bit B is set in 1916 (1512 on testnet) or more of the 2016 blocks within a retarget period, it is considered locked-in. Miners should stop setting bit B. The consensus rules related to the locked-in soft fork will be enforced in the second retarget period, and after that, the bit B may be reused for a different soft fork. A soft fork proposal should include a timeout, which is measured as the beginning of a calendar year from the date of drafting the soft fork proposal. If the soft fork is still not locked-in and the GetMedianTimePast() of a block following a retarget period is at or past this timeout, miners should cease setting this bit.To support upgrade warnings, an extra "unknown upgrade" is tracked, using the "implicit bit" mask = (block.nVersion &amp; ~expectedVersion) != 0. Whenever lock-in for the unknown upgrade is detected, the software should warn loudly about the upcoming soft fork. It should warn even more loudly after the next retarget period. The mechanism described above is very generic, and variations are possible for future soft forks. Soft forks right now are typically treated as booleans: they go from an inactive to an active state in blocks. Perhaps at some point there is demand for a change that has a larger number of stages, with additional validation rules that get enabled one by one.</summary>
+    <published>2015-09-16T15:53:08+00:00</published>
+  </entry>
+</feed>

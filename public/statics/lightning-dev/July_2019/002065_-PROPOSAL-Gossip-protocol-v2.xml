@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>[PROPOSAL] Gossip protocol v2</title>
+  <updated>2023-06-01T18:13:57.527211+00:00</updated>
+  <author>
+    <name>Rusty Russell 2019-07-14 01:38:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>[PROPOSAL] Gossip protocol v2</title>
+    <updated>2023-06-01T18:13:57.528165+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-July/002065.html" rel="alternate"/>
+    <summary>At the last summit, there was a discussion on using Schnorr sigs for gossip, and changes were suggested for taproot-based channels. Combining these two changes makes sense. The channel_announcement drops from 430 to 140 (plus feature bitmap), while channel_update drops from 136 to ~100 (assuming min &amp; max specified) and node_announcement drops from 140 to &gt;= 101 (plus alias, color, addresses).The proposed changes are: optional fields are moved into TLVs, chain_id is moved into a TLV with bitcoin mainnet being default, and timestamp should be a block number. This final rule gives natural ratelimiting where one can only add one update per block. It's suggested not to use a block number from the last 60 seconds and to use the previous block number to allow for emergency updates. It's also recommended to make the bottom bit different from the previous update.This change works well with minisketch encoding since even if we reduce the timestamp to 1 bit, propagation will Mostly Work. Lastly, it provides an implicit timestamp to channel_announcement, which avoids the current dance we have to do (for the purposes of timestamp filtering, the timestamp for channel_announcement is taken from a channel_update).Three strawmen proposals are suggested: 1. type: 267 (`channel_announcementv2`) - containing musig_combo_signature, short_channel_id, node_id_1 and node_id_2, and channel_announcementv2_tlvs.2. type: 269 (`node_announcementv2`) - containing signature, timestamp, node_id, and node_announcementv2_tlvs.3. type: 271 (`channel_updatev2`) containing signature, short_channel_id, timestamp, channel_flags, cltv_expiry_delta, fee_base_msat, fee_proportional_millionths, and channel_updatev2_tlvs.Each of these types has different data fields, but all contain a timestamp that is simply a block number. The tlvs contain optional alias, color, htlc_min_msat, htlc_max_msat, chain_hash (if not bitcoin mainnet) and separate (odd) tlv types for each of IPv4/v6/Tor2/Tor3, length shows if it encodes multiple addresses.</summary>
+    <published>2019-07-14T01:38:06+00:00</published>
+  </entry>
+</feed>

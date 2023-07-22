@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Trustless WatchTowers?</title>
+  <updated>2023-05-24T23:23:11.244520+00:00</updated>
+  <author>
+    <name>Conner Fromknecht 2018-04-17 04:28:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Trustless WatchTowers?</title>
+    <updated>2023-05-24T23:23:11.245510+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-April/001196.html" rel="alternate"/>
+    <summary>The email thread discusses various approaches to implementing a trustless watchtower for Lightning Network. One approach is the "encrypted blob" method, where the client sends a (txid, blob) pair to the watchtower, and the watchtower decrypts the blob using information from the actual transaction that matches the given txid. The blob contains the justice transaction or just a template type and its signatures. The thread also discusses the storage requirements for the watchtower, which are dominated by the number of HTLC signatures included in the encrypted blob. Due to independence of the second stage transactions, there is a combinatoric blowup in the number of signatures that would need to be pre-signed under the revocation private key if sweeping of HTLC outputs is batched. The author suggests observations that may inform an efficient set of signatures to include in the encrypted blobs. One observation is that the HTLC timeout or HTLC success transaction must be broadcast before the attacker can move funds back into their wallet. Another observation is that the second stage transactions could be broadcast sequentially such that the CSV delays don't overlap at all, allowing the watchtower to sweep the HTLCs iteratively to prevent the attacker from sweeping any of the outputs as the relative timelocks expire. The author concludes that it's necessary to sweep each HTLC independently given the complexity of how the on-chain state-space can manifest, especially if CLTVs have already expired.</summary>
+    <published>2018-04-17T04:28:35+00:00</published>
+  </entry>
+</feed>

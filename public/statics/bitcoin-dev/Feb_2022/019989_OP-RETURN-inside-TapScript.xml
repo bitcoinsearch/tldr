@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_RETURN inside TapScript</title>
+  <updated>2023-06-15T17:13:45.940845+00:00</updated>
+  <author>
+    <name>Ruben Somsen 2022-02-24 10:08:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_RETURN inside TapScript</title>
+    <updated>2023-06-15T17:13:45.940845+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019989.html" rel="alternate"/>
+    <summary>Since the activation of Taproot, there is no need for separate OP_RETURN outputs to be pushed on-chain. Instead, data can be attached to a transaction by creating an "OP_RETURN" branch in the TapScript, allowing for the storage of more than 80 bytes for free. This data can be stored off-chain, but will always be connected to a taproot address that was pushed on-chain. However, it's important to note that this has always been possible, and is not specifically related to tapscript. Committing to an ECC point allows for data to be stored inside it, and this includes P2PK and P2PKH. It's also worth mentioning that committing to large amounts of data, such as 1.5GB, has equally been possible with OP_RETURN or even an entire merkle tree of hashes, as demonstrated with Todd's opentimestamps. However, tweaking an ECC point, including tapscript, in non-deterministic ways can make it harder to recover from backup because the key cannot be recovered without knowing the full commitment.While the use of "OP_RETURN" in TapScript allows for the attachment of data, it's not actually equivalent to OP_RETURN. This is because the user must communicate out-of-band to reveal the commitment, whereas with OP_RETURN, the data is immediately visible. It's worth noting that various colored coin protocols and BIP47 rely on this immediate visibility of data.The question arises whether the implementation should change to place the "data" field in "createrawtransaction" into a TapScript instead of creating a separate OP_RETURN output.</summary>
+    <published>2022-02-24T10:08:22+00:00</published>
+  </entry>
+</feed>

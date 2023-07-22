@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improve Lightning payment reliability through better error attribution</title>
+  <updated>2023-06-02T18:44:36.489030+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-06-15 02:53:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improve Lightning payment reliability through better error attribution</title>
+    <updated>2023-06-02T18:44:36.489030+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-June/002026.html" rel="alternate"/>
+    <summary>The Lightning Network has a problem with accurately reporting payment times due to the potential for nodes to drop previous channel states. A node can only propagate an `update_fail_htlc` if the downstream `update_fail_htlc` has been committed by `revoke_and_ack`. If B sends `update_fail_htlc` to A as soon as it receives `update_fail_htlc` from C, A can use the new A-B channel state on-chain while at the same time C drops the previous B-C channel state on-chain. This causes B to lose funds. For payment fulfillment, `update_fulfill_htlc` is fine without waiting for `revoke_and_ack` since it is always reported immediately upstream anyway. In order to gather more information about these issues before they cause problems for real payments, ZmnSCPxj suggests background probing. While fat errors give more information when a problem happens for a "real" payment, they still degrade user experience. Background probing gives the same information before problems happen for "real" payments.</summary>
+    <published>2019-06-15T02:53:16+00:00</published>
+  </entry>
+</feed>

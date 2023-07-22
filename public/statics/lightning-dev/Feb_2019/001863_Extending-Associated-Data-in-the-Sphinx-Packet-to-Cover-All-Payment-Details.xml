@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Extending Associated Data in the Sphinx Packet to Cover All Payment Details</title>
+  <updated>2023-05-23T01:55:31.246288+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2019-02-08 02:57:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Extending Associated Data in the Sphinx Packet to Cover All Payment Details</title>
+    <updated>2023-05-23T01:55:31.246288+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-February/001863.html" rel="alternate"/>
+    <summary>The message warns of a potential de-anonymization vector known as a "replay" attack, which is possible if an adversary injects a stale packet into the network to observe its propagation. To prevent this, all implementations should keep a Sphinx reply cache of past shared secrets, and reject packets with identical shared secrets already in the cache. Mix nets typically enforce session lifetime identifiers to allow nodes to garbage collect old shared secrets state, but with payments having clear expiration dates, the absolute CLTV can serve as the lifetime of a payment circuit session. The sphinx packet construction allows optional plaintext data to be authenticated alongside the packet, and in the current protocol, the payment hash is bound to the packet. If the pre-image has already been revealed, the victim can instantly pull the payment, attaching a cost to a replay attempt.However, since the CLTV isn't authenticated, it's possible to inject a new HTLC with a fresher CLTV. To address this, the associated data payload can be extended to cover the CLTV and bind the adversary to using the same CLTV details, causing the victim node to reject the HTLC since it has already expired. Further payment details, such as the HTLC amount, can also be added to make the probing vector more expensive for the adversary. This can be done by using a new packet version in the Sphinx packet and signaling it with a global feature bit. Nodes that come across this new version would then include the extra information in the AD for their MAC check.Additionally, the message suggests committing to the packet version to prevent nodes from swapping it out with another version, potentially causing another node to reject the packet. In the longer term, all payment details may end up in the Sphinx packet, with only link level details such as the HTLC ID outside in the update_add_htlc message.</summary>
+    <published>2019-02-08T02:57:21+00:00</published>
+  </entry>
+</feed>

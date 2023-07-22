@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Fwd:  Post-Schnorr lightning txes</title>
+  <updated>2023-05-24T21:37:50.493760+00:00</updated>
+  <author>
+    <name>Andrew Poelstra 2018-03-06 20:58:51</name>
+  </author>
+  <author>
+    <name>Andrew Poelstra 2018-03-06 21:06:25</name>
+  </author>
+  <link href="lightning-dev/March_2018/001075_Fwd-Post-Schnorr-lightning-txes.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001076_Fwd-Post-Schnorr-lightning-txes.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Fwd:  Post-Schnorr lightning txes</title>
+    <updated>2023-05-24T21:37:50.493760+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-March/001075.html" rel="alternate"/>
+    <summary>The Lightning Development mailing list has been discussing the potential uses of blockchain technology for revoking transactions in multi-party protocols. Andrew Poelstra of Blockstream has proposed a method using adaptor signatures to revoke previous states. In this system, parties A and B send an adaptor signature for s^2_{A,i-1} and s^1_{B,i-1}, respectively, which reveal their halves of AB_i-1 if published. If either party completes tx_i-1 to post the i-1th state to the chain, the other party will learn the secret key to AB_i-1 and can take the coins. Poelstra also proposes a way to penalize disappearance with transactions spending the commitment tx A holds, giving all the channel funds to A but only after a very large CSV timeout, perhaps `to_self_delay`*50.Anthony Towns has proposed the use of Schnorr signatures for lightning transactions. He distinguishes four main scenarios for closing a lightning channel: both parties are happy to close, communications failure, disappearance uncooperative, and misbehaviour. Optimising for misbehaviour, Anthony proposes the use of 3 transactions, where (0) is 2-in-1-out, (1) is 1-in-1-out, and (2) is 1-in-1-out. The output addresses would be specified as (0) funding tx pays to [A,B], (1) commitment tx pays to [A(i),Revocation(B,i)], and (2) pays to A. The proposed solution for distributing funds in a channel is to jointly sign a transaction with [A(i), Revocation(B,i)]. The appropriate outputs no longer require the OP_CSV step, which simplifies the scripts.Additionally, both A and B need corresponding distribution transactions. If B does a non-cooperative close, A can prove misbehavior and claim all funds immediately, agree that the channel state is correct and sign and publish the un-timelocked distribution transaction, or do nothing and wait for the `to_self_delay` period. The author explores the efficient monitoring of bitcoin channels with Schnorr/muSig. The proposed solution involves generating multiple transactions when the channel state is updated, including a channel state commitment transaction and fund distribution transactions. These transactions all pay to a collection of addresses, including the channel balance for A and B, HTLC balances, and preferred addresses for A and B.The author suggests that channel monitoring could be outsourced with minimal overhead by requiring only a signature per state. However, there is still no plausible way to do constant space outsourced channel monitoring without SIGHASH_NOINPUT. The author also explores the limitations of covenants and graftroot in this context. Overall, the proposed solutions seem to simplify the scripts and make enforcing correct behavior cheaper.</summary>
+    <published>2018-03-06T20:58:51+00:00</published>
+  </entry>
+</feed>

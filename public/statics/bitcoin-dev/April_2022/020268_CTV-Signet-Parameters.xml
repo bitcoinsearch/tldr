@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CTV Signet Parameters</title>
+  <updated>2023-05-22T19:26:00.878851+00:00</updated>
+  <author>
+    <name>Anthony Towns 2022-04-22 00:58:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CTV Signet Parameters</title>
+    <updated>2023-05-22T19:26:00.878851+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-April/020268.html" rel="alternate"/>
+    <summary>A discussion on the Bitcoin-dev mailing list reveals some interesting thoughts about Consensus-enforced Transaction Verification (CTV) in Bitcoin. The discussion began with a message from Jeremy Rubin, who suggested that it is possible to use more than one CTV input in a transaction. However, other participants in the discussion pointed out that such a transaction would not be broadcastable since it is nonstandard. They argued that the whole point of testing is to identify bugs like this so that they can be fixed before making any changes to consensus or policy rules. The discussion then moved on to the benefits of using CTV. One participant noted that if you have multiple sets of customers at different fee priority levels, you might need to have N independent batches, or risk overpaying against the customer's priority level. With CTV, however, you can combine your batch into a root and N batch outputs, which eliminates the need for inputs, signatures, change outputs, etc. per batch, making it slightly smaller. Another participant noted that bare CTV only saves bytes when spending, but this is when you're creating the 1100 outputs, so an extra 34 or 67 bytes of witness data seems fairly immaterial. They went on to explain that if you don't pay all 1100 outputs in a single tx when fees go lower, you might get more benefit from bare CTV. However, in that case, you're also wasting quite a bit more block space due to the intermediate transactions you're introducing, which makes it unlikely that you care about the extra vbytes bare CTV would save you per intermediate tx. The discussion also touched on the possibility of getting rid of bare CTV. One participant observed that even if they got rid of bare CTV, segwit v0 CTV would still exist, so they couldn't use OP_SUCCESSx there either. Segwitv0 might be desired if someone has hardware modules or MPC Threshold Crypto that only support ECDSA signatures, but still want CTV. The participant concluded by suggesting that if you desire new features, then you might have to upgrade old hardware that can't support them.</summary>
+    <published>2022-04-22T00:58:04+00:00</published>
+  </entry>
+</feed>

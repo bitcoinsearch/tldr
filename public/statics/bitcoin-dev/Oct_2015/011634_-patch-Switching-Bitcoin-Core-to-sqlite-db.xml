@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[patch] Switching Bitcoin Core to sqlite db</title>
+  <updated>2023-06-11T00:37:50.083313+00:00</updated>
+  <author>
+    <name>Simon Liu 2015-10-30 03:04:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[patch] Switching Bitcoin Core to sqlite db</title>
+    <updated>2023-06-11T00:37:50.083313+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-October/011634.html" rel="alternate"/>
+    <summary>The storage of unspent transaction output (UTXO) data is considered critical, and its implementation plays a vital role in ensuring consensus protocol success. Despite UTXO storage being an implementation detail, the choice of database could affect the chances of consensus protocol failure. Btcd, a full node implementation written in Go, provides a database interface that supports different backends such as LevelDB, SQLite, Oracle, and DB2. As UTXO storage is crucial, it's reasonable to allow node operators to decide for themselves the type of database they want to use. If the storage requirements are simple, consisting mainly of puts and gets, using a dedicated key-value store could provide superior performance over a traditional SQL database. However, from a practical perspective, users with resources to operate big iron databases should be allowed to do so.However, on 29th October 2015, Luke Dashjr, via bitcoin-dev, predicted that allowing different storage engines would lead to disaster. UTXO storage is consensus-critical code, and any divergence in implementation behavior, including bugs and bugfixes, might cause consensus failure. Therefore, it's essential to choose one storage engine and maintain consensus compatibility ourselves since nobody else cares. Dashjr thinks fixing LevelDB is easier than switching to anything SQL-based, which would require more difficult-to-get consensus-compatible code that most people are unfamiliar with.</summary>
+    <published>2015-10-30T03:04:19+00:00</published>
+  </entry>
+</feed>

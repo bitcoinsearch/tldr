@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A proposal for up-front payments.</title>
+  <updated>2023-06-02T21:11:24.789719+00:00</updated>
+  <author>
+    <name>Joost Jager 2020-03-09 12:45:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A proposal for up-front payments.</title>
+    <updated>2023-06-02T21:11:24.789719+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-March/002585.html" rel="alternate"/>
+    <summary>In an email exchange, Anthony Towns and Joost Jager discussed a new way to mitigate the jamming attack on Lightning Network. The proposed solution is to reverse the direction in which the bond is paid, so that nodes pay to receive an htlc instead of paying to offer one. This ensures that there is always a cost for the attacker to jam the channel. Each node in the route receives +1 msat/minute, except for the last one who pays n msat/minute where n is the number of hops to have gotten up to the last one. However, this approach has an obvious privacy issue. Jager also experimented with jamming channels on testnet and discovered that traversing a path takes time, especially if the path is optimized for maximum length and contains loops. Even if the final node immediately fails the htlc, the nodes at the start of the path still see their outgoing htlcs being held for quite some time. This means that the channel jamming attack can also be executed without the attacker controlling the final node. In this case, the attacker constructs long routes for which it doesn't matter where they end. The attacker just needs to launch htlcs at a rate higher than one per minute to eventually saturate the channel. This variation requires more action from the attacker as they need to keep refreshing htlcs that return back to them. Therefore, it may be easier to address this with some form of rate limiting, although that has its own downsides.</summary>
+    <published>2020-03-09T12:45:24+00:00</published>
+  </entry>
+</feed>

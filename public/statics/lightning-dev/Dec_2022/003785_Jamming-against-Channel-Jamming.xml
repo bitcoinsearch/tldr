@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Jamming against Channel Jamming</title>
+  <updated>2023-06-03T10:56:07.080687+00:00</updated>
+  <author>
+    <name>Joost Jager 2022-12-03 07:50:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Jamming against Channel Jamming</title>
+    <updated>2023-06-03T10:56:07.080687+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-December/003785.html" rel="alternate"/>
+    <summary>The circuitbreaker feature adds new dynamic HTLC slot limits, which can be rate-limited based on incoming source. However, this could penalize your own routing hop, and a circuitbreaking policy should be applied recursively by your counterparty on their network topologies. While it increases the liquidity cost for an attacker to launch jamming attacks against high-value slots, it lowers the cost for jamming low-value slots. The economic proportionality is that an attacker cannot do much with severely limited channels and would need many more to achieve the same effect. Force-closes may occur due to bugs or node offline, but they are independent of the circuitbreaker feature.However, the queuing of HTLCs itself is valuable as a congestion control mechanism where you have over 100% of honest incoming HTLC traffic and want to earn routing fees on all of them. An advanced idea could be based on statistics collection, sending back-pressure messages or HTLC sending scheduling information to upstream hops. Congestion control by holding HTLCs may wake up everyone along the path back to the attacker and move them to apply congestion control too.The circuitbreaker feature's limits could be based on HTLC values, such as the Xth slots for HTLCs of value. It falls under the reputation-based family of solutions, where reputation is local and enforced through rate-limiting. A jamming attacker could open new channels during periods of low-fees in the edges of the graph and still launch attacks against distant hops by splitting the jamming traffic between many sources, therefore avoiding force-closures. The economic equilibrium and risk structure of this scheme is still uncertain and there are interdependencies between the HTLC forward "counterparty risk" (the real jamming) and the congestion and scheduling of efficient HTLC traffic. The rudimentary interface only supports JIT channels use-case, but the circuitbreaker connects to lnd's htlc interceptor and htlc events interfaces.</summary>
+    <published>2022-12-03T07:50:00+00:00</published>
+  </entry>
+</feed>

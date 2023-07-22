@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Refreshed BIP324</title>
+  <updated>2023-05-22T21:52:26.513611+00:00</updated>
+  <author>
+    <name>Anthony Towns 2023-01-05 23:12:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Refreshed BIP324</title>
+    <updated>2023-05-22T21:52:26.513611+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-January/021313.html" rel="alternate"/>
+    <summary>A discussion thread on the Bitcoin-dev mailing list revolves around the topic of having a uniform encoding scheme for Bitcoin's p2p protocol. The original proposal suggested that new commands could be introduced as short ones only, even in v1 and that there is no need for thinking of the short-binary and long-alphabetic commands as distinct. In response, the suggestion was made to have an initial assignment for 1-byte encodings or an explicit mechanism to negotiate other assignments, though it was acknowledged that this might add more complexity than necessary. The current implementation for 324 already has aliasing as part of the V2TransportDeserializer::GetMessage and V2TransportSerializer::prepareForTransport functions. However, it was noted that if short commands were to be negotiated sometime around VERSION or VERACK, it might make more sense for the aliasing to move up to the protocol layer rather than have it close to the wire layer. This would require a uniform encoding, which would allow CSerializedNetMsg to be used whether sending a short command or a multibyte ASCII command. The author of the original proposal said they were leaning towards "it doesn't matter either way." They pointed out that if short commands could be negotiated on a per-peer basis, then once negotiation's finished we'll only be using short commands so saving a byte on long commands wouldn't matter much. Additionally, there are only around 30 or 40 commands that are understood anyway, so it doesn't matter if we can do 102, 126, or 242 short commands since those are all more than we need. Finally, any tweaks to an internal struct to change the way our code is structured shouldn't really influence protocol design.</summary>
+    <published>2023-01-05T23:12:50+00:00</published>
+  </entry>
+</feed>

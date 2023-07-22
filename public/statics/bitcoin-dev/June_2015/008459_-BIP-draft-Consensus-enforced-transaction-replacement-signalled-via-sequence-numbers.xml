@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP draft] Consensus-enforced transaction replacement signalled via sequence numbers</title>
+  <updated>2023-06-09T22:08:57.169832+00:00</updated>
+  <author>
+    <name>Stephen 2015-06-02 12:52:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP draft] Consensus-enforced transaction replacement signalled via sequence numbers</title>
+    <updated>2023-06-09T22:08:57.169832+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-June/008459.html" rel="alternate"/>
+    <summary>Mark Friedenbach has proposed a soft-fork change to the consensus-enforced behavior of sequence numbers, with the goal of supporting transaction replacement via per-input relative lock-times. The proposal aims to enable safe transaction replacement by repurposing the nSequence field of a transaction input to be a consensus-enforced relative lock-time. The advantages of this approach are that it makes use of the full range of the 32-bit sequence number and does so in a way that is semantically compatible with the originally envisioned use of sequence numbers for fast mempool transaction replacement. However, external constraints often prevent the full range of sequence numbers from being used when interpreted as a relative lock-time, and re-purposing nSequence as a relative lock-time precludes its use in other contexts.The BIP draft can be found on GitHub, and Mark Friedenbach has requested that the BIP editor assign a BIP number for this work. In addition, there is a 'checksequenceverify' branch in Friedenbach's Git repository that implements OP_RCLTV using sequence numbers. Most of the interesting use cases for relative lock-time require an RCLTV opcode. Stephen Morse has expressed appreciation for Friedenbach's idea, but notes that it may not be fully-featured enough for some use cases, such as micropayment channels where the funds are locked up by multiple parties. According to Morse, the enforcement of the relative locktime can be done by the first-signing party, but there may be other, seen or unforeseen, use cases that require putting the relative locktime right into the spending contract (the scriptPubKey itself). Furthermore, Morse suggests that an OP_NOP could be repurposed to create OP_RCLTV, which would save transaction space and likely work for most cases where an OP_RCLTV would be needed.</summary>
+    <published>2015-06-02T12:52:58+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RFC: BIP 322: Generic Signed Message Format</title>
+  <updated>2023-06-13T14:52:39.618344+00:00</updated>
+  <author>
+    <name>Karl-Johan Alm 2018-09-12 07:56:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RFC: BIP 322: Generic Signed Message Format</title>
+    <updated>2023-06-13T14:52:39.618344+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-September/016396.html" rel="alternate"/>
+    <summary>The proposal to extend the existing sign/verifymessage format to a more generalized variant relying on the script verification mechanism in Bitcoin itself for message signing/verification is now outdated and replaced with an updated version. The new proposal can be found here: https://github.com/kallewoof/bips/blob/bip-generic-signmessage/bip-0322.mediawiki. A big part of the feedback received was related to whether or not proofs should be given as transactions or not. The advantages of using transaction format include compatibility with existing HSMs, easier incorporation into existing software, forward compatibility with bitcoin extensions such as mimblewimble and confidential transactions, and compatibility with HSMs regardless of whether a transaction or a message or proof of funds is being signed. On the other hand, using transaction format has some drawbacks such as danger if challenger is able to convince prover to sign a message that corresponds to an actual transaction, unupgraded software unable to make distinction between message sign and transaction sign, crippled UX for hardware wallets that show the contents of the transaction during signing, and HSMs not supporting it and not supporting upgrading, which is by design.There is also divided opinion on whether an "OP_MESSAGEONLY" opcode should be introduced, but the priority is addressing the above issues first. The proposal introduces a new structure SignatureProof which is a simple serializable scriptSig &amp; witnessProgram container. It defines two actions "Sign" and "Verify". It is not backwards compatible with the legacy signmessage/verifymessage specification. However, legacy addresses (1...) may be used in this implementation without any problems.</summary>
+    <published>2018-09-12T07:56:25+00:00</published>
+  </entry>
+</feed>

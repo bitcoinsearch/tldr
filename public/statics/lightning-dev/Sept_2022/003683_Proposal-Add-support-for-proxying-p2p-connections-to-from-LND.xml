@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Add support for proxying p2p connections to/from LND</title>
+  <updated>2023-06-03T09:44:07.121910+00:00</updated>
+  <author>
+    <name>Pierre 2022-09-03 13:09:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Add support for proxying p2p connections to/from LND</title>
+    <updated>2023-06-03T09:44:07.121910+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-September/003683.html" rel="alternate"/>
+    <summary>In a post on the Lightning-dev mailing list, Alex Akselrod from NYDIG discussed ways to harden large LND (Lightning Network Daemon) deployments. Currently, LND must verify the identity of external untrusted peers during the noise handshake before enforcing any potential key-based allow lists. To reduce the attack surface of the main node process, Akselrod proposed separating peer communication into a separate process, similar to CLN's connectd. This would involve multiplexing connections over a single network connection initiated from the node to the proxy. A draft PR demonstrating the core idea has been shared on GitHub. In response to this, Pierre-Marie Padiou from ACINQ commented that their implementation was quite similar to eclair's cluster mode and noted that they also aimed to reduce the attack surface while improving scalability. Their implementation involves having multiple instances of a proxy that can be adjusted without downtime. The proxy also performs preprocessing for gossip, such as keeping an up-to-date copy of the routing table and deduplicating incoming announcements before forwarding them to the backend for verification. Outgoing connections are initiated by the proxy, and incoming connections from Tor are directed to the proxy. A separate key hierarchy is introduced for channel management since the front needs the node key for the secure handshake. They also considered implementing a "lockdown mode" where the front only allows incoming connections from known peers that already have a channel.</summary>
+    <published>2022-09-03T13:09:15+00:00</published>
+  </entry>
+</feed>

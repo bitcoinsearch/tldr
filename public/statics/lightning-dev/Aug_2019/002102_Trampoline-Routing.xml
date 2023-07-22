@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Trampoline Routing</title>
+  <updated>2023-06-02T19:47:48.660250+00:00</updated>
+  <author>
+    <name>fiatjaf 2019-08-02 16:29:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Trampoline Routing</title>
+    <updated>2023-06-02T19:47:48.660250+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-August/002102.html" rel="alternate"/>
+    <summary>Trampoline routing is a new concept that allows users to send payments through trampoline nodes even if they do not know the full route to their destination. Trampoline routing works by sending an onion inside another onion, similar to Russian dolls. The payment is sent to a trampoline node that the sender can reach and deferred calculation of the rest of the route to that node. For example, Alice wants to send a payment to Bob but only knows three trampoline nodes: T1, T2, and T3. She also knows the details of many remote trampoline nodes that she cannot reach: RT1, RT2, RT3, and RT4. Alice selects T1 and RT2 to use as trampoline hops. She builds a small onion with Alice -&gt; T1 -&gt; RT2 -&gt; Bob. She finds a route to T1 and builds a normal onion to send a payment to T1. In the payload for T1, Alice puts the small trampoline onion. When T1 receives the payment, he peels one layer of the trampoline onion and discovers that he must forward the payment to RT2. T1 finds a route to RT2 and builds a normal onion to send a payment to RT2. In the payload for RT2, T1 puts the peeled small trampoline onion. When RT2 receives the payment, he peels one layer of the trampoline onion and discovers that he must forward the payment to Bob. RT2 finds a route to Bob and builds a normal onion to send a payment. In the payload for Bob, RT2 puts the peeled small trampoline onion. When Bob receives the payment, he peels the last layer of the trampoline onion and discovers that he is the final recipient and fulfills the payment.However, there are still some important details that need to be addressed, such as how trampoline nodes specify their fees and cltv requirements and how Alice syncs the fees and cltv requirements for her remote trampoline nodes. Trampoline nodes need to estimate a fee and cltv that allows them to route to (almost) any other trampoline node. This is likely going to increase the fees paid by end-users. To exchange fees and cltv, a new *node_update* message can be created and passed through existing gossip infrastructure. However, Alice does not want to receive every network update because she doesn't have the bandwidth to support it. A filter system (similar to BIP37) can be created where Alice sends gossip filters to her peers, and peers only forward to Alice updates that match these filters. Overall, trampoline routing is a promising new concept for Lightning Network that can help improve payment reliability and ease of use, but more feedback and discussion are needed to address the remaining technical details.</summary>
+    <published>2019-08-02T16:29:22+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CHECKSIGFROMSTACK/{Verify} BIP for Bitcoin</title>
+  <updated>2023-06-14T23:57:53.261692+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2021-07-03 20:12:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CHECKSIGFROMSTACK/{Verify} BIP for Bitcoin</title>
+    <updated>2023-06-14T23:57:53.261692+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-July/019195.html" rel="alternate"/>
+    <summary>The Elements Project is working on updating the OP_CHECKSIGFROMSTACK implementation for tapscript on elements. This new implementation would use BIP-0340 schnorr signatures, which support variable-length messages and batch verification along with other transaction signatures. The design they are working on would also be suitable for Bitcoin. Jeremy, a developer, inquired about the updated spec for elements and received links from Russell O'Connor. The key difference between this implementation and others is that the message 'm' does not have to be 32-bytes. Instead, it is recommended to be a 32-bit tagged hash or a message with a 64-bit application-specific prefix. The CHECKSIGFROMSTACK operation in tapscript would use a stack item for this m value to BIP-0340 signature verification and would not necessarily have to be 32 bytes.Jeremy also shared the BIP text from Bitcoin Cash's specification for "CheckDataSig" and asked if anyone had any issues with adapting it exactly to a BIP for Bitcoin using 2 OP_SUCCESSX opcodes. He suggested some design questions worth considering as modifications since only CheckSigFromStack would not enable sophisticated covenants without OP_CAT.The code snippet provided in the context pertains to the use of the CHECKDATASIGVERIFY opcode in Bitcoin scripting. This opcode validates a signature over some data and then allows one of two signatures to spend based on the outcome of the data processing. It is based on Andrew Stone's OP_DATASIGVERIFY proposal, which was modified after peer reviews and feedback. The spend script involves pushing transaction signature, public key, message, and signature onto the stack, while the redeem script includes OP_OVER, push data pubkey, and OP_CHECKDATASIGVERIFY operations. After writing predicates on the message, the script consumes the message and leaves a true/false condition on the stack. The references provided in the context include links to the Bitcoin wiki page for OP_CHECKSIG, information on strict DER encoding, low-S and nullfail specification, and two Bitcoin ABC implementation updates. Additionally, there are links to Andrew Stone's OP_DATASIGVERIFY proposal and his article on Bitcoin scripting applications, as well as a peer review of his proposal.</summary>
+    <published>2021-07-03T20:12:51+00:00</published>
+  </entry>
+</feed>

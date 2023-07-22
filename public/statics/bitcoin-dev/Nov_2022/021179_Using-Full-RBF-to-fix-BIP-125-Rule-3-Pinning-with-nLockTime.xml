@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Using Full-RBF to fix BIP-125 Rule #3 Pinning with nLockTime</title>
+  <updated>2023-06-16T02:57:20.504193+00:00</updated>
+  <author>
+    <name>Antoine Riard 2022-11-07 22:55:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Using Full-RBF to fix BIP-125 Rule #3 Pinning with nLockTime</title>
+    <updated>2023-06-16T02:57:20.504193+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021179.html" rel="alternate"/>
+    <summary>The email exchange between Antoine and Peter Todd on the Bitcoin-dev mailing list discusses a solution to address Rule #3 pinning in multi-party transactions. The attack involves a malicious party broadcasting a low fee transaction that is difficult to replace, tying up funds from other parties who are then unable to spend their inputs unless they pay for Mallory's transaction. To fix this problem, pre-signed, nLockTime'd transactions with a sufficiently high fee can be implemented to ensure the transaction can be cancelled/mined at some point after N blocks, defeating the attack by ensuring that Mallory will have to pay the cost of getting the multi-party transaction unstuck at some point in the future. The email also highlights many open questions and difficulties in implementing such a solution. One issue is determining the high-fee to guarantee replacements with high odds while avoiding an adversary pinning the multi-party funded transaction. Another issue is the economic lower bound on the funds that can be staked in the collaborative transaction when using a "historically-worst" sat/vb. This introduces a griefing vector, allowing a participant to deliberately pin to inflict asymmetric damage, without entering into any fee competition. The solution relying on nLocktime doesn't solve the timevalue DoS inflicted to the participants UTXOs until the pre-signed high-fee transaction is final. Thus, participants may prefer to save the timevalue of their contributed UTXOs over operation success, and a better approach could be for them to unilaterally spend after a protocol/implementation timepoint (e.g LN's funding timeout recovery mechanism). A more workable solution could be to rely on package-relay, an ephemeral anchor output, and a special replacement regime (e.g nVersion=3) to allow the multi-party funded transaction coordinator to unilateral fee-bump, in a step-by-step approach.</summary>
+    <published>2022-11-07T22:55:59+00:00</published>
+  </entry>
+</feed>

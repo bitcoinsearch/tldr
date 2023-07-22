@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Liquidity griefing for 0-conf dual-funded txs</title>
+  <updated>2023-06-03T12:59:54.210856+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2023-05-10 09:15:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Liquidity griefing for 0-conf dual-funded txs</title>
+    <updated>2023-06-03T12:59:54.210856+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-May/003943.html" rel="alternate"/>
+    <summary>In a Lightning Network mailing list, Bastien Teinturier proposed that UTXOs used in dual funded transactions should not be locked to prevent liquidity griefing attacks from malicious peers. However, this solution falls short when using 0-conf because accidentally double-spending a 0-conf channel can result in loss of funds for one of the peers. To address this issue, Matt Morehouse proposed that UTXOs should be locked after tx_completes have been exchanged only if the node is the only contributor.Although this proposal enables the common use case for 0-conf, ZmnSCPxj argued that it means "do not dual-fund 0-conf", and the simpler openv1 flow should be used instead. Another related issue is that nodes offering 0-conf services must ensure that the UTXOs they use for 0-conf are isolated from those used for non 0-conf. This can be fixed by using a "soft lock" when selecting UTXOs for a non 0-conf funding attempt.Ultimately, the post was made to raise awareness for implementers to make sure they do not accidentally double-spend 0-conf channels when implementing dual funding. Bastien Nocera, a developer of the Lightning Network, has suggested adding 0-conf support to Lightning. In an email to the Lightning-dev mailing list, Nocera acknowledged that 0-conf is a "massive implementation pain point" but that users still like it. He proposed adding support for 0-conf in Lightning's `pay` command through a pull request on GitHub. However, some developers have expressed concerns about the security implications of implementing 0-conf in Lightning. The discussion on the pull request is ongoing. The Lightning Network is a layer-two scaling solution for Bitcoin that allows for faster and cheaper transactions by routing them through off-chain channels.</summary>
+    <published>2023-05-10T09:15:25+00:00</published>
+  </entry>
+</feed>

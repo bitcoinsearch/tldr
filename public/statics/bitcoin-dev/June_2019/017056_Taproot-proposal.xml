@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Taproot proposal</title>
+  <updated>2023-05-20T20:19:31.924517+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-06-28 09:49:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Taproot proposal</title>
+    <updated>2023-05-20T20:19:31.924517+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-June/017056.html" rel="alternate"/>
+    <summary>A proposal has been made to expand the input_index of the transaction digest for taproot signatures from 2 bytes to 4 bytes, which would better support proof-of-reserves via taproot signatures. The change would also allow the proof tx to include more than 65k UTXOs with each UTXO being signed with a signature that commits to all inputs including the invalid placeholder. A possible alternative method to do proof-of-reserves over &gt;65k taproot UTXOs is using ANYONECANPAY signatures and output amounts to ensure the signatures can't be abused. The discussion also touched on the var-integer field for the number of inputs and outputs in a transaction. The P2P rules dictate that these values are immediately taken modulo 2^32 after decoding. However, ReadCompactSize throws "size too large" if the return value is greater than MAX_SIZE == 0x02000000 =~ 33.5M, which prior to the implicit cast to 32 bits in Unserialize_impl. And it looks like that check's been there since Satoshi. Therefore, as far as can be seen, that encoding is just unsupported/invalid rather than equivalent/non-canonical.</summary>
+    <published>2019-06-28T09:49:37+00:00</published>
+  </entry>
+</feed>

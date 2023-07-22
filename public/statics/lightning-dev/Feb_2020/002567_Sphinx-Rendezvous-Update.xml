@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Sphinx Rendezvous Update</title>
+  <updated>2023-06-02T23:50:35.665861+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2020-02-25 16:24:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Sphinx Rendezvous Update</title>
+    <updated>2023-06-02T23:50:35.665861+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002567.html" rel="alternate"/>
+    <summary>Christian Decker and Bastien Teinturier exchanged emails regarding a proposal for rendezvous routing in the Lightning Network. The proposal involves dropping the partial onion to fit into an outer onion, creating more space for other features such as Bolt 11 invoices without increasing the QR code's size. The receiver generates an onion with the route specifying the trimmed partial onion as a payload along with the necessary parameters. Upon receiving the HTLC with the partial onion, the rendezvous node verifies all parameters, extracts the partial onion, generates the shared secret and prefill key, then reconstitutes the original routing packet by generating the prefill stream and inserting it in the correct place before the HMAC.However, the proposal has issues with each hop's amount/cltv being fixed at invoice generation time by the recipient, which means MPP cannot be used, and if any channel along the path updates their fee, the partial onion becomes invalid unless the fees are overpaid. To address this issue, Trampoline could potentially provide more freedom for each trampoline node to find an efficient way to forward to the next trampoline. It remains unclear how to mix these two proposals to make them work together.Bastien, a Lightning Network developer, requested advice and feedback on implementing rendezvous routing, a technique used in the LN to facilitate direct payments between two nodes without a direct channel. He specifically asked for ideas on reconciling rendezvous routing with HMACs used to protect payments from malicious actors. Bastien also suggested that rendezvous on normal onions would be costly to integrate into invoices due to their size but doing rendezvous on the trampoline onion could have better properties. He encouraged others to share their thoughts and ideas on possible constructions for implementing rendezvous routing correctly. Finally, he noted that while Hornet offers many useful features for the future of Lightning, it may take some time before they can be implemented, so having a custom rendezvous scheme available soon could still make sense.</summary>
+    <published>2020-02-25T16:24:29+00:00</published>
+  </entry>
+</feed>

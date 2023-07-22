@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Better privacy with SNARKs</title>
+  <updated>2023-05-18T15:49:14.107795+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-11-26 11:15:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Better privacy with SNARKs</title>
+    <updated>2023-05-18T15:49:14.107795+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000344.html" rel="alternate"/>
+    <summary>The email thread discusses two approaches to force someone to reveal the private key corresponding to a secp256k1 public key P. The first approach, suggested by Greg Maxwell, involves generating a signature with P that has 15 leading zero bytes or more. A known value with 11 leading zero bytes can be used for this purpose. However, brute-forcing approximately 4 billion parameters is required to get a valid signature. If successful, the secret key p can be revealed. Cheating can also be done by brute-forcing a secret key N with corresponding public key r. This approach requires grinding r values at a rate of 0.08 microseconds per try. With 7 leading zeroes in r, achieving 8 leading zeroes in s would require about 213,000 GH/s worth of mining hardware running for 24 hours to achieve. With 8 leading zeroes in r, only 7 leading zeroes in s are needed, which can be achieved in 1 hour with 20GH/s of mining hardware.The second approach, suggested by andytoshi and aj, is more complicated than the first one. It involves using multisig verify and coming up with secret keys Q' and R' based on transaction hashes h1, h2, and h3. If sigA, sigB, and sigC share the same r and SIGHASH settings, two valid signatures by key P with the same r value can be obtained, letting you calculate P'. However, if different sighash types are used between the signatures, coming up with valid keys and sigs seems to require doing discrete logs on the elliptic curve, so should be intractable.Greg Maxwell also pointed out a faster and secure way to do it. Assuming Q was the public key from the incoming HTLC, and P is the public key you'll use for the outgoing HTLC, and r is your secret, p=q+r and P=Q+r*G can be used to calculate P quickly. Once p is found, calculating q=p-r is easy.The second approach requires six sigops if the transaction needs to be dropped to the blockchain, which combined with the two other signatures an HTLC needs to be usable (one for A on timeout, one for B on success), means a total of 8 sigops per output. This is about equivalent to 400B per output given the relationship between the bytes-per-block and sigops-per-block limits. Translating from pseudocode into script is also a little hard.</summary>
+    <published>2015-11-26T11:15:16+00:00</published>
+  </entry>
+</feed>

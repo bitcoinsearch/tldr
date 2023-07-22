@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Payment points without 2p-ECDSA or Schnorr</title>
+  <updated>2023-06-02T21:51:22.431776+00:00</updated>
+  <author>
+    <name>uSEkaCIO 2019-11-12 07:32:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Payment points without 2p-ECDSA or Schnorr</title>
+    <updated>2023-06-02T21:51:22.431776+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-November/002320.html" rel="alternate"/>
+    <summary>The discussion revolves around the concept of "payment points" for Lightning Network transactions, which is being explored as an alternative to using a two-party multisignature scheme. One proposal involves using a single signer ECDSA and OP_CHECKMULTISIG, which uses an adaptor signature that can be completed with the secret. The DLEQ NIZK proof is the only proof required, but there is one flaw in the scheme where the Diffie-Hellman key between the signer's key X and the auxiliary point Y can be calculated from the ECDSA adaptor signature.Another proposition by ajtowns involves the use of a SCRIPT that enables payment points using 3 `OP_CODESEPARATOR`s, but it was rejected in 2018 due to its complexity and requirement of three different signatures in the witness. However, this method allows you to identify the payment point from the transaction.The proposed method involves applying the 2pECDSA adaptor signature to single signer ECDSA and OP_CHECKMULTISIG to fill the gap. The process involves Alice giving Bob 1 BTC if he can reveal y, which is the discrete log of Y to her. They both calculate the txid of the fund transaction, which spends Alice's inputs to an OP_CHECKMULTISIG 2-of-2 with their respective public keys as the keys. Bob sends to Alice a signature under B on a refund transaction spending the OP_CMS output to her refund address. Alice sends an adaptor signature under A with an auxiliary point Y on the redeem transaction, which spends the OP_CMS output to Bob's redeem address. Bob completes the adaptor signature under A with y and makes his signature on the redeem tx under B and broadcasts it. Alice sees the redeem tx and her completed signature and extracts y from it.Additionally, a proposal has been made for a new key exchange protocol based on the Computational Diffie-Hellman assumption. This proposed scheme is simpler than 2pECDSA and even 2pSchnorr, making it a natural step up in complexity from current HTLCs towards Schnorr. The author believes this proposal is practical and wants feedback from others. It should be noted that X and Y are usually both transient keys, so learning a DDH key does not help an attacker at all. The transaction structure can be moved towards the ideal Schnorr-based endpoint or kept the same as it is today and just replace the pre-image spending path in script with OP_CMS. This new protocol could be covered under a single BOLT spec, which would make it easier to specify.</summary>
+    <published>2019-11-12T07:32:11+00:00</published>
+  </entry>
+</feed>

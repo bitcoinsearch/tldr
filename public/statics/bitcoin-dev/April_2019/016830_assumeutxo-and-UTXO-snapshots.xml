@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>assumeutxo and UTXO snapshots</title>
+  <updated>2023-06-13T17:59:49.436717+00:00</updated>
+  <author>
+    <name>Nicolas Dorier 2019-04-03 07:51:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>assumeutxo and UTXO snapshots</title>
+    <updated>2023-06-13T17:59:49.436717+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-April/016830.html" rel="alternate"/>
+    <summary>In a recent conversation on the Bitcoin-dev mailing list, James O'Beirne shared how to independently verify the utxoset and suggested that Bitcoin Core level could do minimal work for it. He proposed that signers of his UTXOSet sign the hash of the tarball of his UTXO Set instead of asking them to sign the utxoset hash from gettxoutsetinfo. To verify, a verifier downloads the tarball, syncs to the latest block, then compares the gettxoutsetinfo of the newly synched node with another trusted node. If it matches, the verifier signs the tarball. O'Beirne creates a new utxoset snapshot every six months, so people have time to verify it and add their signatures.Another idea discussed on the same mailing list was Nathan Worsley's proposal of an "integrated address" in Bitcoin. The integrated address feature would allow users to choose the amount they wish to deposit themselves but ensuring their deposits are uniquely trackable. This feature can enhance the security of exchange cold-wallet systems and eliminate the sweeping step required to move multiple customer deposits from a hot address into a single cold address. An integrated address would allow all exchanges using this automated hot-deposit service to easily switch to a more secure alternative of having all customers depositing directly into their singular cold wallet address. There are several other minor advantages such as lower fees for exchanges, less need for large rescans after loading huge amounts of customer addresses into client software, easier provision of deposit addresses to new customers in a secure manner, and easier verification for customers that no man-in-the-middle has given them an incorrect address to deposit to.The assumeutxo proposal was also discussed, which is a potential optimization for fully validating Bitcoin clients. The proposal suggests allowing nodes to initialize using a serialized version of the UTXO set rendered by another node at some predetermined height. This would enable the node to quickly reconstruct its chainstate and compare a hash of the resulting UTXO set to a preordained hash hard-coded in the software as "assumed-valid." The proposal is in the spirit of assumevalid but has some security implications that need to be considered. If implemented, assumeutxo could allow mobile devices to function as fully validating nodes with access to the complete UTXO set, offering an alternative to SPV models. A related issue has been created on the Bitcoin Github repository, and a draft implementation of snapshot usage via RPC has been submitted. The discussion continues around whether this proposal is a good fit conceptually for Bitcoin, with concrete plans for deployment steps to be discussed in the Github issue.</summary>
+    <published>2019-04-03T07:51:04+00:00</published>
+  </entry>
+</feed>

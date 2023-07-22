@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Bitcoin Secure Multisig Setup</title>
+  <updated>2023-06-14T17:34:24.543254+00:00</updated>
+  <author>
+    <name>Hugo Nguyen 2021-02-12 12:31:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Bitcoin Secure Multisig Setup</title>
+    <updated>2023-06-14T17:34:24.543254+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018406.html" rel="alternate"/>
+    <summary>The discussion on the Bitcoin-dev mailing list revolves around preventing xpub key reuse in multisig transactions. Current common practice by hardware wallets is to use the 48'/0'/0'/2' derivation for segwit multsig for ALL multisigs offered by that hardware wallet. A solution proposed by Christopher Allen, Blockchain Commons, is to create an index using a PBKDF of the Account Policy (a descriptor with all xpubs and keys removed), plus optional notes. What Blockchain Commons (and the Airgapped Wallet Community) call a policy map would be "wsh(sortedmulti(1,,,))". A PBKDF of that as would be unique for all 2 of 3 segwig transactions. With the addition of the addition of the Policy Map creators optional note, it would be truly unique. So for legacy hardware, we can use existing 48' subtree, but 3' as the format for this form (2' is segwit). The desktop can just ask for the /48'/0'/0'/3'/PBKDF' when it requests a new xpub from the hardware token. More sophisticated Airgapped apps you can send "wsh(sortedmulti(1,,,))"+label and let the cosigner app do the PBKDF, and optionally allow it return something different in a full keyset. The other advantage of this technique is that the cosigner app can know what policy it is participating in before the descriptor is completed. However, there are certain problems associated with this scheme. Firstly, losing (policy map + note) means that one will lose access to PBKDF', and hence the funds permanently. Secondly, this wouldn't necessarily prevent XPUB reuse. It seems like the above scheme depends on (a) the Coordinator keeping track accurately of all the existing PBKDF-ed indices and (b) the Signer truthfully gives the XPUB at the path that the Coordinator asks for. In reality, neither of these conditions can be guaranteed. Preventing XPUB reuse is an interesting problem, but beyond the scope of the current proposal and may need a separate BIP. Long-term, a commitment scheme should be used so that you don't reveal what xpub you offered until all the parties xpubs are shared. But we need to prevent xpub reuse NOW, and Christopher Allen's proposal may do the job easily.</summary>
+    <published>2021-02-12T12:31:24+00:00</published>
+  </entry>
+</feed>

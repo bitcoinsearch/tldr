@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Disclosure of a fee blackmail attack that can make a victim loose almost all funds of a non Wumbo channel and potential fixes</title>
+  <updated>2023-05-23T04:03:52.272933+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-06-22 01:20:23</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-06-22 01:09:28</name>
+  </author>
+  <link href="lightning-dev/June_2020/002751_Disclosure-of-a-fee-blackmail-attack-that-can-make-a-victim-loose-almost-all-funds-of-a-non-Wumbo-channel-and-potential-fixes.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2020/002750_Disclosure-of-a-fee-blackmail-attack-that-can-make-a-victim-loose-almost-all-funds-of-a-non-Wumbo-channel-and-potential-fixes.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Disclosure of a fee blackmail attack that can make a victim loose almost all funds of a non Wumbo channel and potential fixes</title>
+    <updated>2023-05-23T04:03:52.272933+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-June/002751.html" rel="alternate"/>
+    <summary>Laolu, a developer of the Lightning Network protocol, has suggested a new technique to mitigate up-front costs in commitment transactions. This technique involves adding a layer of indirection to HTLCs within the commitment transaction, creating a 2-of-2 multi-sig output that is then spent by a new transaction that creates the HTLC outputs. Jeremy Rubin, another developer, suggests using BIP-119 Congestion Control trees to help with this issue.Antoine Riard, a contributor to Bitcoin and Lightning Network projects, discusses various fixes to prevent attacks such as "Flood &amp; Loot" and blackmail attacks relying on the update_fee mechanism and unbounded commitment transaction size inflation. Anchor commitments are mentioned as a solution in the "Flood &amp; Loot" paper, but they erroneously assume an attacker could spend their HTLC with a non-replaceable transaction.A researcher has found a vulnerability in Bitcoin's Lightning Network that could allow an attacker to force a victim to incur high fees by spamming the victim with an excessive amount of micropayments. The victim will eventually have to close the channel with all those expensive micropayments, and knowing this, the attacker can blackmail the victim outside of the Lightning Network protocol.A potential attack on Lightning Network has been identified where attackers can exploit the HTLC mechanism to freeze funds. The attacker can create a channel with high liquidity and lock up the channel by adding many HTLCs, thereby preventing the victim from using the channel. In this scenario, the attacker will be able to claim the majority of the BTC frozen in tx fees as the victim has effectively lost that money and can only gain something back. Currently, only eclaire and c-lightning have mitigated this attack by setting hard caps on HTLCs. Lnd does not set a hard cap by default.Some ideas for fixes include not using up the maximum value of HTLCs, always having low fees and asking the person who wants to claim their outputs to pay fees, not overpaying fees in commitment transactions, not adding HTLCs for which the on-chain fee is higher than the HTLCs' value, being able to aggregate HTLCs, and splitting on-chain fees differently.Additionally, there should be a hint in the readme file about where and how people can disclose attacks and vulnerabilities.</summary>
+    <published>2020-06-22T01:20:23+00:00</published>
+  </entry>
+</feed>

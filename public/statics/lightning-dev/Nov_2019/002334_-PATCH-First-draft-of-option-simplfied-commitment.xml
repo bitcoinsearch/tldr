@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[PATCH] First draft of option_simplfied_commitment</title>
+  <updated>2023-05-20T09:13:34.719849+00:00</updated>
+  <author>
+    <name>Matt Corallo 2019-11-16 05:46:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[PATCH] First draft of option_simplfied_commitment</title>
+    <updated>2023-05-20T09:13:34.719849+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-November/002334.html" rel="alternate"/>
+    <summary>The purpose of the dust relay limit is to discourage outputs which are not ever economically spendable, not short-term uneconomically spendable. The min relay fee represents a short-term DoS limit and is not connected to the mempool's min relay fee. There are a number of issues with any policy change that makes several bits of the P2P network less efficient, thus generally avoided where possible. There will never be a commitment tx where the non-initiator pays fees. Generally, a unilateral close doesn't happen because they insist on a reasonable balance in the channel, but it's theoretically possible.Regarding hard-coding the constant, if done so, there won't be an ability to adapt to changes of dustRelayFee in the bitcoin network, and a peer might pick a value higher than that constant for its regular funding flow dust limit parameter. Still, Matt assures that the relay dust limit is not going to change. The dust limit is 294 for Segwit outputs, basically assuming 3x minfee. Looking at https://github.com/bitcoin/bitcoin/commit/9022aa3, it seems like dustRelayFee is never going to change, even though it is a (hidden) cmd line parameter that can be set easily. If the fee market would rise and stay high for an extended period of time, people might use this flag to raise the dust relay fee. Two options to adapt to dustRelayFee changes for new channels are adding a new anchor_msat field to the opening messages or reusing `dust_limit_satoshis` on the open_channel/accept_channel messages as the anchor size. The worst that can happen is that there is a force close with one or more pending htlcs that aren't economical to sweep. They could also add to the spec "nodes MAY reject the channel if `anchor_sat` isn't 294".</summary>
+    <published>2019-11-16T05:46:26+00:00</published>
+  </entry>
+</feed>

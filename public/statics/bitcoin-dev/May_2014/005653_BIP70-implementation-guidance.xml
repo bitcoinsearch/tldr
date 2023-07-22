@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP70 implementation guidance</title>
+  <updated>2023-06-08T22:13:26.946539+00:00</updated>
+  <author>
+    <name>Mike Hearn 2014-05-02 15:39:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP70 implementation guidance</title>
+    <updated>2023-06-08T22:13:26.947539+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-May/005653.html" rel="alternate"/>
+    <summary>BIP70 is being implemented by various individuals, and there are several important considerations that need to be addressed. Firstly, error handling during signature checking is underspecified in BIP 70 and should be fixed. If PKI checking fails, the request should be treated as unsigned, as there is no incentive for an attacker to break the signature instead of just removing it. Secondly, when a business is accepting payment, showing the name of the business is better than showing just the domain name, as domain names are more phishable than EV names. Extended validation certificates (EV certs) have the business name in the OU field, but bitcoinj nor Bitcoin Core actually check if the certificate was subject to extended validation before showing this field. Thirdly, signing is optional in BIP 70, and rejection of unsigned payment requests should not be considered, as a MITM can easily rewrite the bitcoin URI to look as if BIP70 isn't in use at all. Fourthly, email address certs look different to SSL certs, and people may wish to start creating and signing their own payment requests for individual purposes using these certs. Finally, memo contents should be useful, ideally stating what is being sold, or the name of the merchant.</summary>
+    <published>2014-05-02T15:39:44+00:00</published>
+  </entry>
+</feed>

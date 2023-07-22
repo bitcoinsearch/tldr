@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+  <updated>2023-06-02T15:35:11.037101+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-12-04 03:33:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+    <updated>2023-06-02T15:35:11.037101+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-December/001710.html" rel="alternate"/>
+    <summary>Matt Corallo has proposed a new solution to the Replace-by-fee (RBF) problem, which involves allowing transactors to mark their transactions as "likely-to-be-RBF'ed." This proposal would enable a relay policy where any children of such transactions would be rejected unless the resulting package would be "near the top of the mempool." While this theoretically implies that such attacks would not be possible to pull off consistently, it is still possible to do so with low probability in case of feerate spikes right after broadcast. Corallo believes that this idea is incentive-compatible, assuming blocks are full, miners should always take a higher feerate tx if that tx would be in the current block and the replaced txs would not. Furthermore, it reduces the problem that the current lightning proposal adds to the UTXO set with two anyone-can-spend txs for 1000 satoshis, which might be too small to cleanup later. This rule would allow a simple single P2WSH(OP_TRUE) output, or, with IsStandard changed, a literal OP_TRUE.The proposal clearly relies on some form of package relay, which comes with its own challenges, but Corallo believes client-side implementation could work. In this case, a quick check would be done to see if the transaction fee is above 250 satoshi per kweight but below minrelayfee, then it would be put in a side-cache with a 60-second timeout sweep. If something comes in which depends on it which is above minrelayfee, then process them as a pair. For Lightning, child-pays-for-grandparent is not cared about.</summary>
+    <published>2018-12-04T03:33:53+00:00</published>
+  </entry>
+</feed>

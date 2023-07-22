@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Payment Protocol Proposal: Invoices/Payments/Receipts</title>
+  <updated>2023-06-06T08:45:32.311293+00:00</updated>
+  <author>
+    <name>Mike Hearn 2012-11-28 10:43:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Payment Protocol Proposal: Invoices/Payments/Receipts</title>
+    <updated>2023-06-06T08:45:32.311293+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-November/002011.html" rel="alternate"/>
+    <summary>The discussion revolves around the ambiguity in the current spec regarding what to do if the invoice contains one fixed amount and one or more unspecified amounts. The suggestion is to move pki_type and pki_data into a separate message, making both fields required, then making the pki message optional. There are concerns about using SIGHASH_ANYONECANPAY routinely as it relaxes signature checks in ways that may open non-obvious holes when combined with other features. The possibility of recursively calculating fees including dependents in the memory pool has been discussed. There are also ambiguities with protobuf serialization, with suggestions made to resolve these ambiguities. One potential source of mistakes is the re-serialization of an Invoice message in the Payment message. There are a few solutions proposed, including changing the type of the Invoice field in Payment to be "bytes" and set it to be the hash of the originally received binary Invoice message, asking protobufs upstream to modify the spec/implementations so ordering of unknown fields is specified, changing the language of the spec to explicitly state that the received Invoice may not be binary-identical to the one that was sent, and submitting just the merchant_data instead of the entire Invoice back to the merchant. The preference is for the last option.</summary>
+    <published>2012-11-28T10:43:19+00:00</published>
+  </entry>
+</feed>

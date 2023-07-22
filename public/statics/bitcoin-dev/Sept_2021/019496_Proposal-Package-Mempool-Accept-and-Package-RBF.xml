@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Package Mempool Accept and Package RBF</title>
+  <updated>2023-06-15T02:10:43.080434+00:00</updated>
+  <author>
+    <name>Gloria Zhao 2021-09-29 11:56:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Package Mempool Accept and Package RBF</title>
+    <updated>2023-06-15T02:10:43.080434+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019496.html" rel="alternate"/>
+    <summary>The context covers several discussions related to the Bitcoin network's mempool. One of these discussions involves Package Mempool Accept, a proposal to validate packages containing transactions that may already be in the mempool. The proposal includes various checks such as topological sorting, no conflicting transactions, and a specific topology of one child with all its unconfirmed parents. Fee-related checks use the package feerate, and if a package meets the feerate requirements, the parents in the transaction are allowed to replace-by-fee mempool transactions. Changes to mempool validation logic, policy, and transaction relay would enable propagation of transactions with the highest package feerates to miners. The end goal is to make fee-bumping tools more powerful for users.Another discussion focuses on potential attacks on commitment transactions from different channels by blocking them under a high-fee child, of which the fee value is equal to the top-value HTLC + 1. There is also a debate on whether to start with multiple-parent-1-child or 1-parent-1-child and whether it's okay to require that the child not have conflicts with mempool transactions. In an email exchange between Gloria Zhao and Antoine Riard, they discuss the proposed implementation of package relay for Bitcoin. They discuss various aspects of package validation, such as the removal of transactions that are already in the mempool during package submission, how fee rates will be evaluated for packages, and how replacements will work. They also talk about potential issues with multi-parent-1-child packages and how they could be used to fee-bump replaceable transactions. Additionally, they discuss the possibility of implementing a "witness replacement" project in parallel with package mempool acceptance.There is also a discussion about the rules for Package Replace-by-Fee (RBF) in Bitcoin. The package must have a higher ancestor score than the original transactions and cannot include new unconfirmed inputs, unless they were included in one of the original transactions. The total fees of the package must be higher than the absolute fees of the mempool transactions it replaces, and the package feerate must be higher than the replaced transactions by at least minimum relay feerate. The package cannot replace more than 100 mempool transactions.Overall, these discussions aim to improve the efficiency and security of the Bitcoin network's mempool, while allowing for greater flexibility for users and applications like Lightning. There is a proposal for deploying during a first phase of 1-parent/1-child. Participants express concern about Lightning developers who may not be aware of mempool subtleties and propose constraining L2 design space by using a 1-parent + 1-child model.</summary>
+    <published>2021-09-29T11:56:24+00:00</published>
+  </entry>
+</feed>

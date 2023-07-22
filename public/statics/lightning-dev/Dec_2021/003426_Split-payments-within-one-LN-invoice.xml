@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Split payments within one LN invoice</title>
+  <updated>2023-06-03T06:58:00.765724+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2021-12-18 00:22:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Split payments within one LN invoice</title>
+    <updated>2023-06-03T06:58:00.765724+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003426.html" rel="alternate"/>
+    <summary>The context describes a method for splitting payments between multiple parties using the C-Lightning plugin. Only N-1 payees need the plugin, with the last payee issuing a normal invoice. The previous payee then uses the plugin to emit a new invoice and this continues until the first payee is reached. In the case of A paying B and C, C issues a normal invoice, which is then handed over to B. B receives the invoice and issues a plugin-provided command, adding to the invoice before it is handed over to A. Ronan pays the invoice without needing the plugin. In another example, if Ronan paid cdecker, jb55, and ZmnSCPxj, ZmnSCPxj would issue a normal invoice and hand it over to jb55. jb55 would then use a plugin-provided command to create a larger invoice, which is then handed over to cdecker. cdecker uses a similar command to create an even larger invoice, which is finally handed over to Ronan, who pays the invoice without needing the plugin. The context also discusses creating a `signfakeinvoice` command in the lightningd hsmd interface. This would allow for signing invoices without the preimage, but since the HSM might be replaced with an actual hardware signing module in the future, the plugin cannot rely on `hsm_secret` existing. Instead, a plugin could read `getsharedsecret` to consider a future where the HSM is truly a hardware module.</summary>
+    <published>2021-12-18T00:22:56+00:00</published>
+  </entry>
+</feed>

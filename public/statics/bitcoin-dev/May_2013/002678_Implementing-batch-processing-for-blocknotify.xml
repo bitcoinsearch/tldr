@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Implementing batch processing for -blocknotify</title>
+  <updated>2023-06-06T18:12:07.956880+00:00</updated>
+  <author>
+    <name>Rune Kjær Svendsen 2013-05-31 11:56:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Implementing batch processing for -blocknotify</title>
+    <updated>2023-06-06T18:12:07.956880+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-May/002678.html" rel="alternate"/>
+    <summary>The author of a Bitcoin application is looking for a way to keep up with new blocks as they come in using the -blocknotify option with bitcoind, but their app isn't necessarily quick enough to finish its work before a new block comes in. This means that bitcoind might keep executing the app even though the previous instance hasn't finished, which is inefficient resource-wise. They propose a solution that could replace -blocknotify or be put in a new function called -batchblocknotify. When bitcoind is executed with the -batchblocknotify option and it's missing a lot of blocks, upon the first incoming block, the command specified by -batchblocknotify is executed, and if additional blocks come in while this command is still running, we add the block hashes to a list instead of executing the command again. When the previous command finishes, we execute it again and pass two parameters to it: the first block hash in the list of queued blocks and the number of blocks that have come in while the last command was executing. This prevents bitcoind from "fork bombing" the system and allows the command to handle incoming blocks in batches. However, the author is not sure how to implement it, specifically how to pass an object whose state is retained between calls to the thread function (runCommand) that runs the command and contains a variable that keeps track of whether a previously executed command is still running and that contains a list of block hashes that haven't been processed. The runCommand thread is started in SetBestChain() in main.cpp, which is executed by ConnectBestBlock() in main.cpp, and so on. The author is unsure of the right way to create an object that can be passed to the runCommand thread and is considering storing it inside the CValidationState class that is passed to SetBestChain().</summary>
+    <published>2013-05-31T11:56:43+00:00</published>
+  </entry>
+</feed>

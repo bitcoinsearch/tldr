@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Do we really need a mempool? (for relay nodes)</title>
+  <updated>2023-06-10T02:58:27.186064+00:00</updated>
+  <author>
+    <name>odinn 2015-07-19 08:59:49</name>
+  </author>
+  <author>
+    <name>Jorge Timón 2015-07-20 22:14:41</name>
+  </author>
+  <author>
+    <name>Jorge Timón 2015-07-20 22:14:41</name>
+  </author>
+  <author>
+    <name>Peter Todd 2015-07-18 18:52:59</name>
+  </author>
+  <author>
+    <name>Peter Todd 2015-07-18 18:52:59</name>
+  </author>
+  <author>
+    <name>Patrick Strateman 2015-07-18 19:46:01</name>
+  </author>
+  <author>
+    <name>Peter Todd 2015-07-18 18:52:59</name>
+  </author>
+  <author>
+    <name>Patrick Strateman 2015-07-18 19:46:01</name>
+  </author>
+  <author>
+    <name>odinn 2015-07-19 08:59:49</name>
+  </author>
+  <author>
+    <name>odinn 2015-07-19 08:59:49</name>
+  </author>
+  <author>
+    <name>Patrick Strateman 2015-07-18 19:46:01</name>
+  </author>
+  <author>
+    <name>Jorge Timón 2015-07-20 22:14:41</name>
+  </author>
+  <link href="bitcoin-dev/July_2015/009482_Do-we-really-need-a-mempool-for-relay-nodes-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009499_Do-we-really-need-a-mempool-for-relay-nodes-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009499_Do-we-really-need-a-mempool-for-relay-nodes-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009479_Do-we-really-need-a-mempool-for-relay-nodes-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009479_Do-we-really-need-a-mempool-for-relay-nodes-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009480_Do-we-really-need-a-mempool-for-relay-nodes-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009479_Do-we-really-need-a-mempool-for-relay-nodes-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009480_Do-we-really-need-a-mempool-for-relay-nodes-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009482_Do-we-really-need-a-mempool-for-relay-nodes-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009482_Do-we-really-need-a-mempool-for-relay-nodes-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009480_Do-we-really-need-a-mempool-for-relay-nodes-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009499_Do-we-really-need-a-mempool-for-relay-nodes-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Do we really need a mempool? (for relay nodes)</title>
+    <updated>2023-06-10T02:58:27.186064+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-July/009482.html" rel="alternate"/>
+    <summary>The message discusses a proposed dynamic approach to transaction relay fees in Bitcoin, suggesting that the current doubling of fees per additional transaction relayed is not very dynamic. Instead, a more dynamic fee approach is proposed that would increase the fee/kB for each additional tx relayed. The proposal suggests that relay nodes should confirm and discard transactions while wallet nodes retain transactions they've relayed using a mempool. Relay nodes do not need a mempool but require an anti-DoS mechanism. Wallet nodes can use the mempool for fee estimation. To mitigate DoS concerns, a per-UTXO limit on bandwidth relayed could be accomplished by maintaining some kind of per-UTXO record of bandwidth used. It's easy to limit bandwidth moment-to-moment by asking peers for the highest fee/KB transactions they advertise first, stopping when the bandwidth limit is reached. It is suggested that IsStandard() be removed with an increasingly expensive "replacement" policy, relying on it alone to provide anti-DoS measures. Miners would still want to have a mempool, but simplifying the codebase for relaying could make it easier for them.Peter Todd discussed whether relay nodes need to keep a record of the transactions they have relayed and concluded that they do not strictly need to, as long as some mechanism is in place to avoid DoS issues. Additionally, bandwidth moment-to-moment could be limited by asking peers for highest fee/KB transactions they advertise first, stopping when the bandwidth limit is reached. While relay nodes do not require a mempool, wallet nodes can use it for fee estimation in addition to looking at past blocks. Todd suggests that IsStandard() could be removed entirely with an increasingly expensive "replacement" policy, relying on it alone to provide anti-DoS measures. Patrick Strateman suggests that relay nodes do not require a mempool but need an anti-DoS mechanism. Wallet nodes, however, can use the mempool for fee estimation. A simple cache for transaction validations could be useful for small values in -maxmempool, and a draft for this has been submitted in pull request #6448 on Github. The proposal is open for review and could potentially be rebased back to versions 0.11 and 0.10 of Bitcoin. Some questions remain about how the mempool will be limited, what is the mechanism by which the UTXO set is stored (or proposed to be stored), how dynamic fee determinations will be calculated, and the general purpose messaging network.</summary>
+    <published>2015-07-19T08:59:49+00:00</published>
+  </entry>
+</feed>

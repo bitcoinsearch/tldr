@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Alternative way to count sigops</title>
+  <updated>2023-05-20T05:13:32.914192+00:00</updated>
+  <author>
+    <name>Johnson Lau 2018-02-16 22:49:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Alternative way to count sigops</title>
+    <updated>2023-05-20T05:13:32.914192+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-February/015764.html" rel="alternate"/>
+    <summary>In the early days of Bitcoin, Satoshi introduced sigops counting as a softfork to limit the number of signature operations in a block. However, the counting was not contextual; therefore, the cost of multi-sig was greatly overestimated, and sigop in unexecuted branches were counted. As P2SH was introduced, sigop counting also covered the sigop redeemScript, which improved the counting of OP_CHECKMULTISIG but made counting without the UTXO set impossible. Segwit (BIP141) scaled the legacy sigop limit by 4x, with a block limit of 80000 new sigop.With multiple 2nd generation script proposals like BIP114, BIP117, taproot, etc., static sigop counting is not easy to implement. However, for more complicated script functions, a limit is necessary to avoid unexpected DoS attacks. Therefore, a proposal suggests that each sigop should not use more than 50 weight unit on average, with a per-input limit of (164 + input witness size) &gt;= (actual_sigop * 50), where script validation is parallel. In cases where many signatures are aggregated, the 1:50 ratio might not be enough, and it could be reduced to 1:32 or lower to ensure legitimate use would never hit the limit. This would allow relay nodes to ensure that a transaction won't spend excessive CPU power by just looking at its size, and if it does, it is invalid, and script execution could be terminated early.</summary>
+    <published>2018-02-16T22:49:17+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>TXO bitfield size graphs</title>
+  <updated>2023-05-20T16:30:19.654742+00:00</updated>
+  <author>
+    <name>Jim Posen 2018-05-23 23:48:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>TXO bitfield size graphs</title>
+    <updated>2023-05-20T16:30:19.654742+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/016017.html" rel="alternate"/>
+    <summary>The aim of the research is to explore the possibility of committing to TXO bitfields with block headers. This will enable UTXO inclusion and exclusion proofs for light clients. To achieve this, each block requires a "proof of position" which could be an absolute index in the chain or a block hash plus output index within the block. A Merkle branch in this tree would constitute a proof of position. The spentness bitfield can be constructed for the entire chain based on the absolute index in the chain as position. In order to compactly prove spentness, one could chunk up the bitfield and construct a Merkle Mountain Range (MMR) over the chunks. The MMR constructed over bitfield chunks grows far slower than building an MMR over outputs themselves.The compression ratios of the TXO bitfields were analyzed using gzip, lz4, and bz2 at block height 523,303. It was discovered that the compression ratio is much lower for older chunks and worse for recent blocks. Over the entire history, gzip achieves 34.4%, lz4 54.8%, and bz2 37.6%. Surprisingly, the ratios are not lower with off-the-shelf algorithms. Gzip performs better than bz2 due to the chunk size. Alternatively, bitfields stored separately by block showed 50% for gzip, 70% for lz4, and 61.5% for bz2 in terms of compression ratios.</summary>
+    <published>2018-05-23T23:48:33+00:00</published>
+  </entry>
+</feed>

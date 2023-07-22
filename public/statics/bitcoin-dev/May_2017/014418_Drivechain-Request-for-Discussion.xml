@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Drivechain -- Request for Discussion</title>
+  <updated>2023-06-12T00:58:17.888555+00:00</updated>
+  <author>
+    <name>Tier Nolan 2017-05-25 22:08:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Drivechain -- Request for Discussion</title>
+    <updated>2023-06-12T00:58:17.888555+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-May/014418.html" rel="alternate"/>
+    <summary>In a bitcoin-dev thread, CryptAxe suggests locking a sidechain miner’s funds to a particular bitcoin height and allowing the miner to reclaim the funds if they are not included in that block. The output should have a standard template so miners can easily find bids. The bribe transactions could be created with no fees, making it pointless for bitcoin miners to include them in blocks unless they are claiming the outputs. Relay rules would need to be modified to handle this, but pools could allow bids to be made directly. For bribe payout release, it needs to give that particular miner an advantage over all competitors, so their block forms the longest chain on the sidechain (assuming their block is actually valid). Bribe outputs could have a maturity period like generated coins. If the output is spent by the miner for block, then the sidechain miner has spent the funds. Otherwise, the sidechain miner can use the else branch to reclaim his money. The sidechain miner could also reclaim his money if the transaction was included in an earlier block, which would defeat the purpose of the bribe. Bitcoin miners would have a justified incentive to not allow Bribe outputs to be spent “early”. CryptAxe also suggests defining the critical hash as Hash(SideChainHeight|blinded h*), indicating which sidechain and giving that particular miner an advantage over all competitors. The block number in the critical hash script is a sidechain block number, not a mainchain block number. It does mean that the side-chain can have at most the same number of blocks as bitcoin. Regarding the maturity period of bribe outputs, CryptAxe suggests that it would depend on the exact rules for OP_BRIBE. If the claim transaction is block height locked, then it violates the rules that previous soft-forks have followed. Therefore, the same protection should be added to the claim transaction. This could be done by requiring all outputs of the claim transaction to start with CHECK_SEQUENCE_VERIFY DROP, which is only a few bytes extra at the start of the output script. An alternative solution would be to add the rule as part of soft-fork definition by defining a claim transaction as one that spends at least one OP_BRIBE output and therefore, has all its outputs with a 100 block delay.</summary>
+    <published>2017-05-25T22:08:00+00:00</published>
+  </entry>
+</feed>

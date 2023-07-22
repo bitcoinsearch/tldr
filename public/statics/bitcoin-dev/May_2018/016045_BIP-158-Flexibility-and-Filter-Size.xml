@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 158 Flexibility and Filter Size</title>
+  <updated>2023-06-13T02:31:57.285686+00:00</updated>
+  <author>
+    <name>Tamas Blummer 2018-05-31 14:27:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 158 Flexibility and Filter Size</title>
+    <updated>2023-06-13T02:31:57.285686+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/016045.html" rel="alternate"/>
+    <summary>Tamas Blummer has processed the historic blockchain and created a filter with spent input scripts and output scripts. The resulting chart shows the history of same-block address re-use, with a notable drop in relative filter size during the early history and in the time window where SatoshiDICE was popular. The current filter size is between 2.0% - 2.5% of block sizes. Tamas also created 1600 random (P2SH) scripts and totaled the false positive block download data size if observing 100, 200, 400, 800, 1600 of them. The result suggests that even for 1600, the false positive overhead is less than 0.1% of blockchain data size.Simulations with other parameters could be executed using this patch branch: https://github.com/tamasblummer/rust-bitcoin-spv/tree/blockfilterstats A run takes a few hours on a fast machine with release build and local bitcoind. The calculation can not be reduced to the recent history as the process builds in-memory utxo from genesis.Based on some discussions, Laolu plans to make modifications to the BIP. Firstly, he will use P=2^19 and M=784931 as gcs parameters and bind these to the filter instance so future filter types may use distinct parameters. Secondly, he will use the prev output script rather than the prev input script in the regular filter. Thirdly, he will remove the txid from the regular filter. Finally, the extended filter will be done away with altogether. These changes should slash the size of the filters yet still ensure that they're useful enough for the target use case.</summary>
+    <published>2018-05-31T14:27:50+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Extension for BIP-0070 to support recurring payments</title>
+  <updated>2023-06-08T01:49:40.833948+00:00</updated>
+  <author>
+    <name>Stephane Brossier 2014-02-26 03:53:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Extension for BIP-0070 to support recurring payments</title>
+    <updated>2023-06-08T01:49:40.833948+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-February/004453.html" rel="alternate"/>
+    <summary>The recurring payment protocol has two parts: contract negotiation and recurring payment. The contract is prompted when the user first subscribes and defines the payment bounds for the subscription. Once accepted, the wallet is in charge, and the user does not have to interact anymore. The wallet polls the merchant and issues payments as requested by the merchant within the bounds specified in the contract. The contract specifies the maximum amount per payment and maximum amount per period, and it is up to the merchant to decide whether to specify none, any or both bounds.The PaymentFrequencyType is used to define the maximum amount per period in the contract, but the frequency of payment is implicitly dictated by the merchant. The wallet polls with fine granularity to understand if there is something pending. In case of complex scenarios in the billing space, having the wallet poll the merchant to inquire for pending payments is the most flexible option, and the contract ensures the client will not be abused.There are situations where more than one contract can occur, such as when a customer downgrades to a lower product. The merchant may only allow the downgrade at the end of the paid period to avoid generating extra credit, resulting in two contracts: one for the current product and one for the future product.The protocol is designed in such a way that the wallet does not have to know the exact date of payment; instead, it polls the merchant for pending payments. This flexibility is essential in many situations where specifying an exact payment date is not an option.Feedback from BitPay and Jeff+Stephen would be valuable since they have customers who want recurring payments, and they have a clearer idea of customer requirements. The bitcoinj implementation needs to be structured to allow everything to go into the wallet file, and the code should allow wallet apps to control wakeup tasks.BIP 70 is implemented in Bitcoin Core on the C++ side, so it could be done there too.</summary>
+    <published>2014-02-26T03:53:08+00:00</published>
+  </entry>
+</feed>

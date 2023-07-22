@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reorgs on SigNet - Looking for feedback on approach and parameters</title>
+  <updated>2023-05-21T03:35:15.898397+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-09-08 07:59:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reorgs on SigNet - Looking for feedback on approach and parameters</title>
+    <updated>2023-05-21T03:35:15.898397+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019416.html" rel="alternate"/>
+    <summary>A discussion on the reorg-interval for SigNet was held among developers. The interval chosen depends on user needs with some suggesting 3 reorgs per day, each 48 blocks apart. This allows developers in all time zones to be awake during one or two reorgs per day and ensures reliable reorgs when they are not awake. However, too frequent reorgs could hinder other SigNet users. For testing deeper reorgs (10+ blocks) a survey could be sent out to members. Optech could also hold special fire-drill events for reorgs of 15, 150, or 1,500 blocks. Regarding scenario 1, at least two nodes and miner scripts need to be running with an always-miner A continuously producing blocks and rejecting blocks with the to-be-reorged version bit flag set. And a race-miner R that only mines D blocks at the start of each interval and then waits X blocks. Both have the same hash rate, and it is random which miner will first mine and propagate a block. In the end, the A miner chain will always win the race. The depth of the reorgs should also be considered. One-block reorgs are a regular feature on mainnet, and multiple ones happening daily to make testing easier would be great. Two to three block reorgs are good for testing the "your tx didn't get enough confirms to be credited to your account" case, while 4-6 block reorgs are technically plausible but likely to violate business assumptions. Seven to 100 block reorgs would indicate there was probably a bug, and 100-2000+ block reorgs would result from severe bugs that weren't found quickly or where getting over 50% of miners organized took more than a few hours. A quick draft of code for -signetacceptreorg=0 is available at https://github.com/ajtowns/bitcoin/commits/202108-signetreorg. The only concern about doing this on the default signet is ensuring nodes that set -signetacceptreorg=0 don't end up partitioning the p2p network due to either rejecting a higher work chain or rejecting txs due to double-spends across the two chains.</summary>
+    <published>2021-09-08T07:59:04+00:00</published>
+  </entry>
+</feed>

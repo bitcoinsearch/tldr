@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Drivechain -- Request for Discussion</title>
+  <updated>2023-06-12T00:58:50.009770+00:00</updated>
+  <author>
+    <name>Chris Stewart 2017-06-19 15:41:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Drivechain -- Request for Discussion</title>
+    <updated>2023-06-12T00:58:50.009770+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-June/014606.html" rel="alternate"/>
+    <summary>The discussion is about the initial block download process for the drivechain. It is suggested that the set of valid blocks be requested from a bitcoin peer first since they are in control of the mining process on the sidechain. The process is then outlined as follows: Request all hashes for the sidechain from a bitcoin peer, request all sidechain block headers for the hashes provided by the bitcoin peer, order the set of sidechain block headers by looking at hashPrevBlock, request full sidechain blocks and start validating against the consensus rule set of the sidechain.There is agreement to drop the 'sidechain_id' from the script as it is unneeded in the coinbase tx output. It is suggested that the fixing be based on index. The point of BMM is to have bitcoin miners indifferent to what happens in the sidechain. If there is an invalid OP_BRIBEVERIFY that pays more money than a valid one, we need to assume that a 'blind' bitcoin miner will choose the one that pays them the most money. There was a suggestion to exploit the fact that only miners can claim these OP_BRIBEVERIFY outputs.In response to a suggestion that the sidechain could specifically request LD data relevant only to that sidechain by providing a list of hashes to the mainchain, and the mainchain can return a list of boolean values telling the sidechain if the LD data exists, it was agreed that it would be wise to include a version byte to allow us to upgrade this commitment structure in the future. It was also suggested that the commitment structure to the coinbase tx needs to be worked on as up to 256 OP_RETURNs can be embedded in the coinbase tx signifying new blocks mined on drivechains which seems less than ideal. It was further suggested that it might be prudent to make these outputs ANYONECANSPEND, and then have miners spending these outputs to themselves for every block mined. However, it was stated that OP_RETURN outputs do not go into the UTXO set and so this scheme might not have any benefit.</summary>
+    <published>2017-06-19T15:41:01+00:00</published>
+  </entry>
+</feed>

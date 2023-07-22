@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+  <updated>2023-05-20T18:31:57.197241+00:00</updated>
+  <author>
+    <name>Bob McElrath 2018-12-02 15:08:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+    <updated>2023-05-20T18:31:57.197241+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-December/016524.html" rel="alternate"/>
+    <summary>The Lightning Network and other similar systems exchange pre-signed transactions for future broadcast but face difficulties predicting feerate or utilizing CPFP and dependent transaction relay to allow parties to broadcast low-feerate transactions with children created at broadcast-time to increase the effective feerate. Matt Corallo via bitcoin-dev suggests adding inputs to increase fees after-the-fact without CPFP by using SIGHASH_SINGLE, although this option has led to channel failures in practice. For Lightning, cross-signing would demotivate parties from picking apart transactions and broadcasting one of the two SIGHASH_SINGLE's. CPFP is difficult due to complexity around RBF/CPFP anti-DoS rules. Third parties which are able to spend an output of a transaction can delay its confirmation. Commitment transactions must be confirmed in a timely manner, as otherwise HTLCs may time out and counterparties can claim the timeout-refund before we can claim the HTLC using the hash-preimage. To partially-address the CPFP security model considerations, a next step might involve tweaking Lightning's commitment transaction to have two small-value outputs which are immediately spendable, one by each channel participant, allowing them to chain children off without allowng unrelated third-parties to chain children. Option (b) is much more natural choice if some form of as-yet-unimplemented package relay on the P2P network is available.For contracting applications like Lightning, the transaction we wish to confirm must have only two immediately-spendable (ie non-CSV) outputs, where each immediately-spendable output is only spendable by one counterparty, and is no larger than MAX_PACKAGE_VIRTUAL_SIZE - 1001 Vsize, each counterparty will always be able to independently CPFP the transaction in question. It is possible to pull off this attack with low probability in case of feerate spikes right after broadcast. Note that this clearly relies on some form of package relay, which comes with its own challenges.</summary>
+    <published>2018-12-02T15:08:39+00:00</published>
+  </entry>
+</feed>

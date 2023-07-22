@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DRAFT: interactive tx construction protocol</title>
+  <updated>2023-06-02T23:06:53.398814+00:00</updated>
+  <author>
+    <name>darosior 2020-01-30 18:18:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DRAFT: interactive tx construction protocol</title>
+    <updated>2023-06-02T23:06:53.398814+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-January/002486.html" rel="alternate"/>
+    <summary>The conversation revolves around the Lightning Network protocol and its proposed updates. One of the proposed updates is the dual-funding proposal which aims to simplify the process by breaking it into smaller, more manageable chunks. The proposed protocol update moves from a single peer constructing a transaction to two participants, allowing for the removal of inputs and outputs. There are concerns about the possibility of the funding transaction being dropped from the mempool if nLocktime is set to the tip.There are also discussions about multi-party transaction construction and convergence with Coinjoin people to avoid leaking protocol usage when Taproot comes into play. Additionally, there are suggestions for implementing anti-fee sniping and mutual closing transactions. Finally, there is a clarification on the fact that the funding transaction sig would fail verification if the tip differs between funder and fundee.The Lightning Network protocol involves several message types and subtypes. Examples include 'tx_remove_output', 'tx_complete', and 'tx_sigs'. In addition to these message types and subtypes, there are some general notes to consider such as validity of inputs/outputs is not checked until both peers have sent consecutive 'tx_complete' messages, and duplicate inputs or outputs is a protocol error.To initiate a channel closure, both peers signal opt_collaborative_close in their node_announcement, and a feerate is negotiated out of band. The closing initiator sends tx_add_input to spend the funding output and tx_add_output to add their output for the channel closure. The peer responds with tx_add_output, adding their output to the close transaction.Updating a collaborative transaction with RBF involves flagging any input as RBF’able and initiating RBF, which serves as an initiation for another round of transaction composition. The sender sets fee_step greater than zero and greater than any prior fee_step, while the recipient errors if the new fee exceeds the sender's current balance minus reserve after it is applied to the splice transaction. A minimal RBF is 1/4, satisfying Rule 4 of BIP125, which requires a feerate increase to at least surpass the minimum transaction relay setting. An additional rule will be added to the checks of an RBF transaction that it must include at least one identical, replaceable input as the original transaction.</summary>
+    <published>2020-01-30T18:18:58+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - LN without SegWit: less efficient or less secure?</title>
+  <updated>2023-05-19T15:58:52.906304+00:00</updated>
+  <author>
+    <name>Anthony Towns 2017-01-16 22:12:25</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2017-01-16 06:31:38</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2017-01-16 07:32:43</name>
+  </author>
+  <link href="lightning-dev/Jan_2017/000662_LN-without-SegWit-less-efficient-or-less-secure-.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2017/000658_LN-without-SegWit-less-efficient-or-less-secure-.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2017/000659_LN-without-SegWit-less-efficient-or-less-secure-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - LN without SegWit: less efficient or less secure?</title>
+    <updated>2023-05-19T15:58:52.906304+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2017-January/000662.html" rel="alternate"/>
+    <summary>The three levels from the Scaling Bitcoin Hong Kong talk are not tightly defined, and it's not worth reading too much into them. However, level 1 has CLTV only, no CSV, channels have a fixed end date, and every commitment has a fixed must-spend/obsolete-by date as well. Level 2 has CLTV and CSV, but second and third party malleability is still possible. The current state of affairs can only fund channels on one side or second-party malleability messes you over and may need to do something clever to avoid third party malleability. Level 3(a) has CLTV, CSV, and segwit. Outsourcing of channel monitoring is inelegant since you need to provide whoever does the monitor with signed penalty txns for every possible transaction. Level 3(b) has CLTV, CSV, and SIGHASH_NOINPUT (with or without segwit). All the benefits of 3(a), and you can cheaply get someone else to monitor the blockchain for you, making a "lite" lightning node feasible.Outsourcing is the main problem in lightning network, and it's not really ready yet. Rusty Russell proposed an idea to overcome this problem. This idea includes having only one side pay into the funding transaction, so that the other side couldn't malleate it and prevent the initial refund. In this scenario, if any third party malleability is possible, and happens to Alice's original tx, then Bob's signature on the refund tx is no longer useful, and unless Bob is kind enough to sign a new refund tx, Alice has lost her money. To avoid this scenario, they came up with another solution where two outputs and zero fee are used. The first being the funding output, and the second just being a P2PKH to yourself. In a second transaction, pay the entire second output as a fee, which will allow the unmalleated funding transaction to be propagated and mined via CPFP. This solution seems sufficient to get lightning working reliably on today's bitcoin blockchain, even prior to segwit activating.The approach described in a Bitcoin stack exchange link is to have a channel timeout. The lightning spec doesn't currently do that. Lightning uses CLTV and CSV to make the HTLC steps work, which is to make the channel bidirectional, rather than being limited to having one end take the role of customer sending money to the merchant on the other end. It's not a 100% solution on its own though because the "merchant" in this scenario can choose not to provide the second signature back to the customer ever, in which case the customer can't access their funds again until the refund time arrives.</summary>
+    <published>2017-01-16T22:12:25+00:00</published>
+  </entry>
+</feed>

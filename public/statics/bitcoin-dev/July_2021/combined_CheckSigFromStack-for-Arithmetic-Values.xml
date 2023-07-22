@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - CheckSigFromStack for Arithmetic Values</title>
+  <updated>2023-06-14T23:55:50.454246+00:00</updated>
+  <author>
+    <name>Jeremy 2021-07-03 04:01:01</name>
+  </author>
+  <author>
+    <name>Erik Aronesty 2021-07-03 11:31:04</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-07-04 13:10:36</name>
+  </author>
+  <author>
+    <name>Erik Aronesty 2021-07-03 11:31:04</name>
+  </author>
+  <author>
+    <name>Jeremy 2021-07-02 22:20:16</name>
+  </author>
+  <author>
+    <name>Jeremy 2021-07-03 04:01:01</name>
+  </author>
+  <author>
+    <name>Erik Aronesty 2021-07-03 11:31:04</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-07-04 13:10:36</name>
+  </author>
+  <author>
+    <name>Jeremy 2021-07-02 22:20:16</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-07-02 23:58:14</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-07-04 00:22:18</name>
+  </author>
+  <author>
+    <name>Jeremy 2021-07-02 22:20:16</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-07-02 23:58:14</name>
+  </author>
+  <author>
+    <name>Jeremy 2021-07-03 04:01:01</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-07-02 23:58:14</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-07-04 00:22:18</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-07-04 00:22:18</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-07-04 13:10:36</name>
+  </author>
+  <link href="bitcoin-dev/July_2021/019184_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2021/019190_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2021/019198_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2021/019190_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2021/019181_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2021/019184_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2021/019190_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2021/019198_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2021/019181_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2021/019182_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2021/019196_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2021/019181_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2021/019182_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2021/019184_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2021/019182_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2021/019196_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2021/019196_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2021/019198_CheckSigFromStack-for-Arithmetic-Values.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - CheckSigFromStack for Arithmetic Values</title>
+    <updated>2023-06-14T23:55:50.454246+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-July/019184.html" rel="alternate"/>
+    <summary>Bitcoin developer Jeremy Rubin has proposed using a Lamport signature in a script for arithmetic values through binary expanded representation. The proposed script allows for Lamport signatures for arbitrary values representable in small binary numbers, with a concrete use case illustrated where a third party can post-hoc sign a sequence lock. Merkle signatures were considered as an alternative, but the proposed approach was preferred due to the simplicity of the script and no advantage in pushing the size towards the signature rather than the pubkey. Another Bitcoin developer, ZmnSCPxj, expressed confusion over the syntax used in Rubin's code. He suggested replacing the ` operator with actual numbers to make it less confusing. ZmnSCPxj also noted that enabling `OP_ADD` could implement Lamport signatures for arbitrary values representable in small binary numbers, but this is not necessarily recommended because these signatures are single-use-only and encouraging pubkey reuse should be avoided. Additionally, it seems more of a "bad but clever thing" than something that Bitcoin should fully embrace. In a recent bitcoin-dev post, Jeremy discussed the possibility of using arithmetic operations in combination with Lamport signatures to enable signing operations. This implementation uses a bitwise expansion of a number and a Lamport signature to sign transactions. The resulting script can be used for arbitrary values representable in small binary numbers. This is demonstrated with an example of signing a sequence lock of 16 bits. ZmnSCPxj wrote an email to Erik and Jeremy discussing the cleverness of using `OP_ADD` for implementing `OP_CHECKSIGFROMSTACK`. He mentioned that this cleverness is more of an argument against ever enabling `OP_ADD` and friends. However, he also found out that `OP_ADD` is still enabled in Bitcoin, but limited to 32 bits. Despite this, it's worth discussing in case it triggers someone else to think of a related idea that takes some of the cleverness but is overall better. ZmnSCPxj also discussed the possibility of implementing the "Lamport-sign the EC sig" idea, which would mean Bitcoin is already quantum-safe. Overall, both Lamport and Merkle signatures are single-use-only, and pubkey reuse should be discouraged.</summary>
+    <published>2021-07-03T04:01:01+00:00</published>
+  </entry>
+</feed>

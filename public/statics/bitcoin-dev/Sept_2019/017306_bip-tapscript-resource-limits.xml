@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>bip-tapscript resource limits</title>
+  <updated>2023-05-20T20:58:25.134589+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2019-09-18 20:50:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>bip-tapscript resource limits</title>
+    <updated>2023-05-20T20:58:25.134589+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-September/017306.html" rel="alternate"/>
+    <summary>The draft for bip-tapscript proposes to remove the per-block sigops limit for tapscript scripts and replace it with a "budget of sigops based on its witness size." Additionally, there are other script resource limits that introduce weak optimization requirements for script constructors. These include the script size limit, the 201 non-push opcodes limit, the 1000 element limit for stack + altstack, and the 520 byte stack element size limit. Concerning these limits, only those that reduce total memory usage or verification CPU usage per witness byte are relevant. The writer suggests dropping the script size limit in tapscript, and instead have it only implicitly limited by transaction size limits. The 201 non-push opcodes limit can be removed for bip-tapscript scripts since an O(1) algorithm can prevent additional (executed) opcodes from increasing per-opcode execution time. The 1000 element limit for stack + altstack must remain due to its direct effect on memory usage and per-opcode execution time. Finally, there are no known use cases for stack elements larger than 65 bytes, so the 520 byte stack element size limit should remain. In conclusion, the writer proposes several changes to resource limits in bip-tapscript, including replacing the separate sigops counter with a "executed sigops must not exceed (witness size / 50 WU) + 1" rule, dropping the 10000 byte limit for script size, dropping the 201 non-push ops limit per script, and dropping the 100 input stack elements standardness limit, replacing it with a (consensus) 1000 limit.</summary>
+    <published>2019-09-18T20:50:48+00:00</published>
+  </entry>
+</feed>

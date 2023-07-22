@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Reason for having HMACs in Sphinx</title>
+  <updated>2023-06-03T20:44:33.996333+00:00</updated>
+  <author>
+    <name>Christian Decker 2018-12-05 12:13:40</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2018-12-06 00:22:22</name>
+  </author>
+  <author>
+    <name>Corné Plooy 2018-12-06 11:51:30</name>
+  </author>
+  <author>
+    <name>Corné Plooy 2018-12-04 10:23:28</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-12-04 10:38:58</name>
+  </author>
+  <author>
+    <name>Corné Plooy 2018-12-04 10:47:59</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-12-04 18:45:56</name>
+  </author>
+  <author>
+    <name>Christian Decker 2018-12-06 15:24:20</name>
+  </author>
+  <author>
+    <name>Corné Plooy 2018-11-29 15:31:34</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2018-12-05 00:44:44</name>
+  </author>
+  <author>
+    <name>René Pickhardt 2018-11-29 16:32:18</name>
+  </author>
+  <author>
+    <name>Christian Decker 2018-11-29 17:13:29</name>
+  </author>
+  <link href="lightning-dev/Dec_2018/001720_Reason-for-having-HMACs-in-Sphinx.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2018/001722_Reason-for-having-HMACs-in-Sphinx.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2018/001725_Reason-for-having-HMACs-in-Sphinx.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2018/001711_Reason-for-having-HMACs-in-Sphinx.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2018/001712_Reason-for-having-HMACs-in-Sphinx.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2018/001713_Reason-for-having-HMACs-in-Sphinx.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2018/001717_Reason-for-having-HMACs-in-Sphinx.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2018/001726_Reason-for-having-HMACs-in-Sphinx.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001693_Reason-for-having-HMACs-in-Sphinx.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2018/001719_Reason-for-having-HMACs-in-Sphinx.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001694_Reason-for-having-HMACs-in-Sphinx.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001696_Reason-for-having-HMACs-in-Sphinx.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Reason for having HMACs in Sphinx</title>
+    <updated>2023-06-03T20:44:33.996333+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-December/001720.html" rel="alternate"/>
+    <summary>The Lightning Network payment system is vulnerable to attacks where an intermediate node guesses the final node in a payment route. One proposed solution is to include a shared secret in the onion message to the final node, which would take around 248 days to crack for a single guess of the final node's identity. Christian Decker suggests storing the secret from the invoice in the HMAC field, although this idea is uncertain as it mixes field purposes. Another proposed solution is path decorrelation, which involves giving each hop a random point and adding it to the next SS "HTLC." However, this method does not prevent an attacker from learning the point used in the direct neighbor hop and testing whether the next node is the final hop.In addition, there are concerns about the vulnerability of using the same payment hash and ephemeral key generation in the Lightning Network. Path decorrelation replaces the payment hash/preimage part, but the use of rendezvous routing complicates matters. To address this issue, the sender can prove knowledge of the original invoice by adding a TLV field with a shared secret from the invoice.Corné Plooy suggested including a shared secret in the onion message to prevent the type of attack where an attacker can guess the final node. The payee generates the shared secret and passes it to the payer as part of the invoice, which is then included in the per hop data to the payee. The payee checks whether the received shared secret corresponds to the generated one on receiving the incoming message.There are also discussions about the necessity of HMACs in Sphinx and what could go wrong if they were not used. Corné Plooy believes that the message is encrypted anyway and questions the necessity of HMACs. However, Christian Decker explains that HMACs are necessary in Sphinx to ensure that hops cannot modify the packet before forwarding it without the next node detecting the modification. Adding HMACs solves this issue by ensuring that the next hop will return an error if anything was changed, removing the leak about which node would have failed the route. Corné Plooy argued that receiving nodes do not know what the origin node is and doesn't see any attack mode where an attacker wouldn't be able to generate a valid HMAC. He considers the only real use case of the HMAC value to be a 0-valued HMAC, indicating the end of the route, but he finds this "just silly" since it's essentially a boolean, not a cryptographic verification.</summary>
+    <published>2018-12-05T12:13:40+00:00</published>
+  </entry>
+</feed>

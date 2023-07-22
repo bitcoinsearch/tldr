@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP Proposal] Standard address format for timelocked funds</title>
+  <updated>2023-06-12T03:28:51.844839+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2017-07-12 08:30:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP Proposal] Standard address format for timelocked funds</title>
+    <updated>2023-06-12T03:28:51.844839+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-July/014746.html" rel="alternate"/>
+    <summary>The BIP proposal suggests a standard address format for timelocked funds, which has not yet received much attention. However, it has the potential to be valuable for long-term investors who want to lock their funds until a specific time arrives. The proposal offers formats for specifying an address that locks funds until a specified date and a redemption code that allows the funds to be swept on or after the specified date. These addresses and redemption codes are encoded using Bech32 encoding.To provide funds to a timelocked address, a P2SH payment is used, and a simple service or software can translate from a public timelocked address to a P2SH address. This makes timelocking backwards compatible with wallets that do not support this BIP. To sweep a timelocked redemption code after the timelock, one must provide the given redeemScript as part of the scriptSig, of all unspent outputs that pay to the given redeemScript hash.Several expected use cases are provided by the proposal, such as users wanting to purchase an amount of Bitcoin, subsequently waiting for an amount of time before cashing out, gift an amount of Bitcoins to an infant or minor, and prepare some kind of monthly subsidy or allowance to another user. The proposal also provides three options for indicating the timezone: 1. Use the earliest timezone as of now, UTC+14 0000h of the given human-readable date. 2. Use the standard timezone UTC+0 0000h of the given human-readable date. 3. Allow indicating a timezone to the human-readable part. Option 1 allows the fund to be spent no matter where you are in the world, as soon as the given date arrives, but for most of the world, the fund can be spent on some time the day before or even two days before for UTC-11 and UTC-12 timezones. Option 2 provides standard time, but for half of the world, the fund is not spendable until some time into the given date, for the other half, it will be spendable at an earlier date. Option 3 gives control over the user's expected local time, but has additional field and effectively more control, need to handle also strange timezones that have 0.5 hour difference from UTC, need to encode positive and negative preferably without using + and -, as those may break double-click selection.The bech32 separator digit is 1 and can be used to compare different versions of a Bitcoin address. A version quintet is added in case of future changes that would affect the interpretation of dates or scripting. The public address format uses "hodl" as the start of the code, while the private key uses "hedl", providing a simple mnemonic for users to hold their coins until a given date. After holding the coins on or after the given date, users can redeem them using the "hedl" code. The misspelling of "hodl" is a homage to a common meme within the Bitcoin community.</summary>
+    <published>2017-07-12T08:30:31+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Making UTXO Set Growth Irrelevant With Low-Latency Delayed TXO Commitments</title>
+  <updated>2023-06-11T05:24:46.864269+00:00</updated>
+  <author>
+    <name>Eric Lombrozo 2016-05-17 14:25:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Making UTXO Set Growth Irrelevant With Low-Latency Delayed TXO Commitments</title>
+    <updated>2023-06-11T05:24:46.864269+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-May/012716.html" rel="alternate"/>
+    <summary>On May 17, 2016, a solution to the issue of unbounded UTXO (unspent transaction output) growth in Bitcoin was proposed by Peter Todd via bitcoin-dev. Todd mentioned that UTXO growth is a significant concern for the long-term decentralization of Bitcoin and that the entire UTXO set must be in RAM to run a competitive mining operation. Currently, the maximum size of the UTXO set is unbounded. Todd proposed TXO commitments as a possible solution to this issue. The proposed solution involves using Merkle Mountain Ranges (MMRs) to allow new items to be cheaply appended to the tree with minimal storage requirements. Once an output is added to the TXO MMR, it is never removed, even if it is spent. This solution could potentially eliminate the UTXO growth problem entirely. Todd also discussed the implementation of delayed commitment full-node, which would store data such as the UTXO set, STXO set, TXO journal, and TXO MMR list. Todd explained that throughput for the TXO commitment calculation would be worse than the existing UTXO only scheme, but TXO commitments provide other possible tradeoffs that can mitigate the impact of slower validation throughput. The implementation details of the TXO MMR were also discussed, which stores a large number of TXO commitments states, where each state is a small delta of the previous state by sharing unchanged data between each state. The article further discusses the implementation of TXO commitments in Bitcoin. It explains how using MMRs allows for a significant reduction in storage requirements since only the minimum data required to append new TXouts to the TXO MMR is kept, discarding other data. The pruning behavior is consensus critical, and necessary data must be provided by transactions to maintain consensus.The security model of TXO commitments raises issues with Bitcoin's security model by allowing miners to profitably mine transactions without validating prior history. To solve this problem, one approach is to implement TXO commitments virtually, where full nodes would be forced to compute the commitment from scratch. Another approach is to assume sufficiently old blocks are valid and accept that people will skip validation. Further work needs to be done to determine whether or not TXO commitments should be implemented. This includes determining if a TXO commitment scheme can be optimized to be used directly without a commitment delay, using a metric other than age, and deciding if UTXO archiving should be based on a fixed size UTXO set rather than an age/priority/etc. threshold. Finally, there needs to be consideration of how fraud proofs interact with TXO commitments.</summary>
+    <published>2016-05-17T14:25:22+00:00</published>
+  </entry>
+</feed>

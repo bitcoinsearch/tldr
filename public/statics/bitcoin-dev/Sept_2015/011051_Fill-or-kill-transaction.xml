@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fill-or-kill transaction</title>
+  <updated>2023-06-10T22:42:26.713580+00:00</updated>
+  <author>
+    <name>jl2012 at xbt.hk 2015-09-18 03:27:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fill-or-kill transaction</title>
+    <updated>2023-06-10T22:42:26.713580+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-September/011051.html" rel="alternate"/>
+    <summary>The discussion in the bitcoin-dev forum revolves around implementing fill-or-kill as a consensus rule. The cleanest way to implement the maturity requirement is by using a "treat like Coinbase" flag in the UTXO set, which can be set when the output is created. Maturity is needed, but requiring 100 block maturity will make the system less appealing since the recipient may not like it. A fill-or-kill transaction may still be used as the initial funding transaction to the Lightning Network if the counterparty is willing to take the extra risk. A fill-or-kill transaction is slightly safer than a coinbase transaction depending on the difference between the absolute kill time and actual confirmation time. In a re-org, an orphaned coinbase transaction is permanently invalidated and cannot be included again, whereas an orphaned fill-or-kill transaction may still be confirmed by another miner. If there are still a few days until the absolute kill time, a fill-or-kill transaction is basically as safe as a normal transaction.Height-based fill-or-kill is not very useful since it is difficult for users to determine the actual kill time. It is suggested that the idea of height-based fill-or-kill should be abolished, and the resolution of time-based fill-or-kill might be improved.The fill-or-kill system is optional, using a bit flag in tx nVersion to indicate. Everything should be fine unless the nVersion is also being messed with. Implementing fill-or-kill at the P2P network level would mean everything remains the same, but nLockTime2 and nKillTime are for reference only and tx validity depends only on the nLockTime. Benevolent miners should drop the tx after the suggested kill time, but there is no guarantee.Lastly, the correct nLockTime2 in an example given previously in the forum was found to be 52500 instead of 210000 as originally stated.</summary>
+    <published>2015-09-18T03:27:54+00:00</published>
+  </entry>
+</feed>

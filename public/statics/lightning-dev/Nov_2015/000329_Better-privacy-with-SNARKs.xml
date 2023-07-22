@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Better privacy with SNARKs</title>
+  <updated>2023-05-18T15:50:49.345300+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-11-20 07:44:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Better privacy with SNARKs</title>
+    <updated>2023-05-18T15:50:49.345300+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000329.html" rel="alternate"/>
+    <summary>A proposal for a payment system has been made by Bitcoin developer Anthony Towns, using elliptic curve (EC) keys to allow users to ensure the payment is correct. The user would be given two key pairs: K1 and K2, such that K2 = K1 * p. By knowing p, the user can verify the relationship between K1 and K2. The user can then construct r2, r3, etc., by generating random bits and calculating q1, q2, ..., qN = rN * q[N-1] (where q is the public key provided by the merchant, Q is the merchant's secret, used to claim the payment and serving as a receipt). Then, the user can route the HTLC payable to qN at the first hop, q[N-1] at the second all the way to q1 when it gets to the merchant. If the user divides QN by (r2*..*rN), he or she will get back to the original receipt/proof of payment. The burden for keeping the payment private falls entirely on the consumer, rather than the merchant. Moreover, the customer doesn't even have to reveal q1/Q to any intermediate hops; he or she could just pay to q[N-1] on the final hop and provide rN in the onion message on the final hop. However, there are some issues to overcome. Firstly, it has to be ensured that everything is perfectly implemented so that the payment system works correctly. Secondly, a new operator OP_CHECKPRIVPUBKEYPAIR is needed to enforce a payment with a priv/pub key pair. Lastly, two generic crypto ops might be useful to have: OP_CHECK_SECP256K1_MUL_VERIFY (that allows you to commit to revealing a key on the blockchain) and OP_CHECK_INLINE_SIGNATURE_VERIFY (which lets you do atomic cross-chain swaps without knowing in advance who you're swapping with). It might make sense to combine them into a soft-forkable OP_CRYPTO_OP that pulls the crypto operation id from the stack, then if the operation is known, pulls the operands, and fails the script if the operands don't add up. If the operation is unknown, mark it as non-standard but acceptable for future soft-forkability.</summary>
+    <published>2015-11-20T07:44:15+00:00</published>
+  </entry>
+</feed>

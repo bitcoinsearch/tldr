@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RFC: Deterministic Entropy From BIP32 Keychains</title>
+  <updated>2023-06-14T00:04:57.707959+00:00</updated>
+  <author>
+    <name>Tim Ruffing 2020-03-24 08:07:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RFC: Deterministic Entropy From BIP32 Keychains</title>
+    <updated>2023-06-14T00:04:57.707959+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-March/017708.html" rel="alternate"/>
+    <summary>A proposal called "Deterministic Entropy From BIP32 Keychains" has recently been presented by Ethan Kosakovsky in the Bitcoin-dev mailing list. The motivation behind the proposal is to solve the problem of "too many seeds and too many backups". Kosakovsky suggests that all derivation should be done using BIP32, which uses initial entropy as a seed for deterministic derivation of hierarchical deterministic keychains. The proposal provides a way to derive entropy from an HD keychain path in order to deterministically derive the initial entropy used to create keychain mnemonics and seeds.This avoids the need for multiple seeds/mnemonics due to incompatible wallet standards, hardware wallets (HWW), seed formats and standards, and the need to use a mix of hot and cold wallets depending on the application and environment. According to the proposal, since all these derivation schemes are deterministic based on some initial entropy, this proposal aims to solve the above problems by detailing a way to deterministically derive the initial entropy used for new root keychains using a single BIP32 style "master root key".The proposal specifies that input starts with a BIP32 seed, and uses the format `m/83696968'/type'/index'` where `type` is the final seed type, and `index` in the key index of the hardened child private key. It lists five different types along with their corresponding bits and output. Entropy is calculated from the HMAC-SHA512(key=k, msg='bip-entropy-from-bip32') of the derived 32 byte private key (k). Entropy is taken from the result according to the number of bits required. This entropy can then be used as input to derive a mnemonic, wallet etc according to the `type` specified.In order to maintain the widest compatibility, the input to this function is a BIP32 seed, which may or may not have been derived from a BIP39 like mnemonic scheme. The proposal could be split into multiple discrete BIPs in the same way that BIP32 described the derivation mechanics, BIP39 the input encoding with mnemonics, and the derivation paths like BIP44, BIP49 and BIP84. However, it has been avoided to reduce complexity. The resulting private key is processed with HMAC-SHA512 and truncated as necessary. HMAC-SHA512 was chosen because it may have better compatibility in embedded devices as it's already required in devices supporting BIP32.Test vectors for two different test cases are also provided in the proposal. The first test case includes a BIP39 mnemonic and seed, along with a BIP32 root key and the conversion of entropy to WIF. The second test case includes a BIP39 mnemonic and seed, BIP32 root key, and the derivation of a child WIF and k value from the master input.The references cited in the proposal are BIP32 and BIP39, which are standards for hierarchical deterministic wallets. The context is dual-licensed under the Open Publication License and BSD 2-clause license. The mailing list provided is bitcoin-dev at lists.linuxfoundation.org.</summary>
+    <published>2020-03-24T08:07:04+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - General question on routing difficulties</title>
+  <updated>2023-05-20T07:51:32.384819+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2017-12-15 21:46:54</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2017-11-25 19:13:15</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2017-11-25 19:05:08</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2017-11-25 19:16:12</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2017-11-25 19:09:15</name>
+  </author>
+  <link href="lightning-dev/Dec_2017/000850_General-question-on-routing-difficulties.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2017/000807_General-question-on-routing-difficulties.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2017/000806_General-question-on-routing-difficulties.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2017/000804_General-question-on-routing-difficulties.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2017/000803_General-question-on-routing-difficulties.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - General question on routing difficulties</title>
+    <updated>2023-05-20T07:51:32.387819+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2017-December/000850.html" rel="alternate"/>
+    <summary>The Lightning Network's routing protocol is still in flux, with better solutions actively being worked on to find routes across a vast network of millions or billions of nodes. Currently, a minimally viable routing protocol is used, where the entire network's topology is pushed to the edges for local computation of routes. While distance vector routing such as BGP could be an option, no protocol is set in stone, and upgrading to another protocol at a later point in time is trivial. The network can currently scale to about 1 million channels even on very limited devices. The Lightning Network seems like a key first step, and even if off-chain payment rebalancing is not possible, it still seems valuable and scalable. In this context, a novel routing algorithm called SpeedyMurmurs has been developed for the Lightning Network by a team of researchers at Purdue University and the University of Waterloo. The algorithm uses an embedding-based approach and creates a spanning tree using Breadth-First Search, assigning meaningful coordinates to each node in the network. Then it calculates a path between the sender and receiver by allowing each intermediate node to choose the next node based on its neighbour's coordinates, available funds, and closeness to the receiver. The routing information is only updated locally by affected nodes in the event of topology changes. The paper also claims that SpeedyMurmurs ensures value privacy (the total value of a transaction remains hidden) and sender and receiver privacy (identities of the two transacting nodes remain hidden from the adversary). However, there are downsides to this solution. All payments must flow through landmarks since nodes break up their payment into L sub-flows, requiring landmarks to be very well capitalized and leading to strong consolidation of their selection. Furthermore, if they go down or fail, the network's throughput becomes instantly crippled. Passive channel rebalancing is not possible with distance-vector-like protocols, and value privacy within the scheme is weak. Additionally, all nodes need to be aware of an identical set of landmarks for the coordinate embedding scheme to work. Currently, there is no requirement that all nodes have a globally consistent view of the network, and it is unclear who chooses the landmarks. The article also discusses plans to achieve proper sender/receiver privacy by leveraging Sphinx usage to reduce the size of the visible network, storage, and validation overhead. However, there are challenges to adapting the protocol currently in use. The core component of the protocol, landmarks, becomes the weakest component when extended to LN, as all nodes need to be aware of an identical set of landmarks. This poses several downsides, such as strong consolidation of the selection of landmarks, fragility in the network if most of the landmarks go down, and unbalanced channels. Lastly, there is a hard coordination requirement amongst implementers to deploy the protocol as all nodes must ship with a hard-coded set of global landmarks for path finding to succeed.In another conversation, the authors discuss a recently published paper on routing within payment channel networks. The paper proposes a new approach to routing using distance-vector-like protocols and coordinate embedding to provide sender+receiver privacy in a payment network. While the protocol presents some novel traits, one of the authors notes that it lends much better to a closed-membership, credit network, such as Ripple. This is because LN is an open-membership network that requires zero initial configuration by central administrators, while Ripple has a small number of gateways that act as landmarks for routing. The discussion also touches on the issue of unbalanced channels, which can be addressed with passive channel rebalancing. Furthermore, Christian Decker, a Lightning Network developer, discusses the network's plan to reduce on-chain transaction fees by aggregating payments off-chain and automating fee payments. The goal is to encourage participants to open channels that support the network as a whole, not just themselves. Additionally, the email discusses the potential of using coordinate embedding to provide sender+receiver privacy in a payment network that uses a distance-vector-like routing system.Lastly, the cryptocurrency community needs an inventory of unproven mathematical assumptions and cryptographic primitives cataloged by the cryptocurrency technologies that require them, in order to respond more quickly, comprehensively, and transparently to cryptanalytic surprises. The ideal end state would be to only assume existence of a preimage-resistant hash function and code such that one function could be quickly swapped with another to update the entire system. Routing is still very much in flux and we are actively working on finding better solutions to the problem of finding routes across a vast network of millions if not billions of nodes, although currently the network can easily scale to about 1 million channels. There is also the possibility of centralizing flow through a small number of liquidity providers unless off-chain channel rebalancing mechanisms come about. Hubs are not as likely to form due to the high cost involved and the fees needed to cover the opportunity cost of allocating funds to channels instead of investing elsewhere.</summary>
+    <published>2017-12-15T21:46:54+00:00</published>
+  </entry>
+</feed>

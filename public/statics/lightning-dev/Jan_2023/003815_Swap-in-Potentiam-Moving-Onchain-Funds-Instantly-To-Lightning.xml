@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Swap-in-Potentiam: Moving Onchain Funds "Instantly" To Lightning</title>
+  <updated>2023-06-03T11:22:27.821461+00:00</updated>
+  <author>
+    <name>Anthony Towns 2023-01-04 03:08:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Swap-in-Potentiam: Moving Onchain Funds "Instantly" To Lightning</title>
+    <updated>2023-06-03T11:22:27.821461+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-January/003815.html" rel="alternate"/>
+    <summary>The email thread discusses the advantages of using a covenant in establishing a channel. The covenant would not have an expiry date and therefore be a first-class citizen among channels. The proposed approach involves receiving funds on the in-potentiam address with 8000 block CSV, LSP tracks immediately, user's wallet wakes up, LSP reports the address to the user, user signs a funding tx to establish the channel and the state 0 close tx. Following this, LSP considers it immediately active and broadcasts the tx, targeting confirmation within three days. If the funding tx confirms promptly, the channel becomes just an ordinary channel. However, if after 800 blocks, the tx has not confirmed, LSP fee bumps or closes the channel relying on the high-feerate unilateral close tx to do the fee bumping. There are two possible scenarios that could occur: Funding -&gt; Unilateral/Cooperative close or In-potentiam -&gt; Wherever (payment made on-chain by the user). While the tx introspection approach advocated allows the setup phase to skip the "expiry on day 14" restriction, the bigger benefit is that you wouldn't need the on-chain "in-potentiam -&gt; funding" transaction. Instead, you could leave the in-potentiam tx on chain indefinitely until it was time to close the channel, which, if it was a cooperative close, could just be a musig key path spend. Either approach probably implies that you either have multiple channels with your LSP (one for each in-potentiam payment you receive) or that your single channel with your LSP is backed by multiple UTXOs. Otherwise, you'd need an on-chain tx anyway to splice the new funds into your existing channel, which seems both annoying of itself and probably bad for privacy.</summary>
+    <published>2023-01-04T03:08:47+00:00</published>
+  </entry>
+</feed>

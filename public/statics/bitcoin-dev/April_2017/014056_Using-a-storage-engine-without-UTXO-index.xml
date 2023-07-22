@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Using a storage engine without UTXO-index</title>
+  <updated>2023-06-11T23:53:12.568452+00:00</updated>
+  <author>
+    <name>Tomas 2017-04-07 01:29:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Using a storage engine without UTXO-index</title>
+    <updated>2023-06-11T23:53:12.568452+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/014056.html" rel="alternate"/>
+    <summary>In a conversation between Gregory Maxwell and an unknown person, a discussion on how to deal with validity rules changing based on block height was held. Changes by softforks will need to be added as metadata to the transaction-index. The script validation using libbitcoinconsensus is a bit complicated because it expects the rules to be known. Bitcrust would appreciate an "is valid with X rules" instead of a "validate with X rules" approach. The software still needs a transactional access which Bitcrust uses in the form of a transaction-index where outputs can be looked up regardless of being spent. The concept of being "spent" depends on the branch, script validation ignores this and simply looks up the outputs. Transactions are split into two parts for better locality of reference when accessing outputs. To reject a transaction claiming to spend an output that never existed, the spend-tree is scanned until either the missing output is found, the transaction of the output is found or the start of the chain is reached. To prevent scanning to genesis, the spent-index catches the search after a few blocks and performs the same lookup on a simple bit index.</summary>
+    <published>2017-04-07T01:29:07+00:00</published>
+  </entry>
+</feed>

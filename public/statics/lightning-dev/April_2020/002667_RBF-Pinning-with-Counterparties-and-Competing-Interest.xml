@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-06-03T00:51:11.165924+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-04-23 12:52:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-06-03T00:51:11.165924+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002667.html" rel="alternate"/>
+    <summary>ZmnSCPxj has replied to Matt Corallo's email regarding a technique that is not compatible with payment points. The signature of the technique can only be recognized by B, which is not useful with payment points. Matt suggests that one way to solve the issue would be to send the pinning transaction directly to miner nodes. However, ZmnSCPxj argues that this approach could still be vulnerable to attacks since miners may have information not available to the network in general. One solution proposed by Matt is to bribe miners for knowledge by using a confirmed P2WPKH UTXO and spending part of its value on a scriptPubKey with OP_SHA256 OP_EQUAL. Any miner who knows the preimage is incentivized to include Bob's transaction and a child transaction spending from it in their next block. If any non-miner knows the preimage, they can also create that child transaction. The non-miner probably can't profit from this, but the non-miner can at least pat themselves on the back for being a good Summaritan. Moreover, Bob can first create a bribe via LN and send probes that reuse the earlier HTLCs. If any hop along the path knows the preimage, they can immediately claim the probe amount and any routing fees that were allocated to subsequent hops. This gives smaller miners with LN nodes an equal chance of claiming the probe-bribe as larger miners, and it allows non-miners to profit from learning the preimage from miners.However, while this solution may be useful, it requires people to run additional software to keep track of potential preimages and then compare them to hash candidates. It also requires additional complexity in LN clients. ZmnSCPxj understands why it might be less desirable than the protocol changes under discussion in other parts of this thread. With lots of effort already being put into watchtowers and other enforcement-assistance services, he wonders if this problem can be largely addressed in the same general way.</summary>
+    <published>2020-04-23T12:52:57+00:00</published>
+  </entry>
+</feed>

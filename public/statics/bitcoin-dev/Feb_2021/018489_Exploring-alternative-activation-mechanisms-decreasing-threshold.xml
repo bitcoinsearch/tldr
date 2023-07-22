@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Exploring alternative activation mechanisms: decreasing threshold</title>
+  <updated>2023-06-14T18:35:48.454608+00:00</updated>
+  <author>
+    <name>Gregorio Guidi 2021-02-27 23:49:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Exploring alternative activation mechanisms: decreasing threshold</title>
+    <updated>2023-06-14T18:35:48.454608+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018489.html" rel="alternate"/>
+    <summary>In a Bitcoin-Dev mailing list, Gregorio Guidi proposed a new activation mechanism for soft forks called "decreasing threshold activation". It works similarly to BIP8 but with the threshold that triggers the STARTED -&gt; LOCKED_IN transition starting at 100% for the first retargeting period and gradually reduced on each period in steps of 24 blocks (~1.2%). The proposal is conservative at the beginning and requires a clear majority of signaling hashrate for activation to happen in the first year. The activation will always occur in the end, except in the negligible case where less than 1.2% of hashrate supports it. Compared to LOT=true, activation is cleaner and quicker when it is relatively safe to do so while activation is pushed further and further in time when it is less safe. The proposal is quite easy to implement, avoids the extra code to deal with the MUST_SIGNAL period, and there are no parameters to set except startheight.Gregorio also discussed the basic choice to make as a first step: Option 1 (only safe soft-fork activation) where Core decides that activating the soft fork can only be done with a strong guarantee that most of the hashrate follows version Y or Option 2 (possibly unsafe soft-fork activation) where Core accepts the risk that the activation occurs even when there is no guarantee that most of the hashrate (or even a majority of the hashrate) follows Y because the advantages of activation outweigh the risks.Luke Dashjr responded to the proposal raising concerns about its ambiguity when there is no signaling, which is similar to the problems that BIP149 faced. He also mentioned that it loses the flexibility of BIP8 to move the timeout height sooner after initial deployment.The code snippet provided is related to Bitcoin development, specifically the process of determining whether a soft fork has been "locked in" or "started". The variable "threshold" is calculated as a function of the number of elapsed periods and is used as a condition for determining if the soft fork should be considered "locked in". The code uses a loop to traverse the blocks in the blockchain and count the number of blocks that have signaled support for the soft fork. If the count is greater than or equal to the threshold, the function returns "LOCKED_IN", otherwise it returns "STARTED".The bitcoin-dev mailing list is a forum for discussing technical aspects of Bitcoin development. The list is hosted by the Linux Foundation and allows developers to collaborate and share ideas.</summary>
+    <published>2021-02-27T23:49:46+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Link-level payment splitting via intermediary rendezvous nodes</title>
+  <updated>2023-05-25T15:40:57.035954+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-11-13 04:46:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Link-level payment splitting via intermediary rendezvous nodes</title>
+    <updated>2023-05-25T15:40:57.035954+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001575.html" rel="alternate"/>
+    <summary>The Lightning-dev mailing list has provisionally accepted rendez-vous routing and link-level payment splitting, but there is a potential problem with the mechanism described during the spec meeting. The padding at the rendez-vous point would usually be zero-padded and then encrypted in one go with the shared secret that was generated from the previous ephemeral key. However, that ephemeral key is not known to the recipient, so the recipient would be unable to compute the correct MACs. There are a number of solutions to this, such as setting the padding to something that the recipient could know when generating its half onion.  One proposed solution involves Rendez-vous RV receiving an onion, performing ECDH like normal to get the shared secret, decrypting its payload, and simultaneously encrypting the padding. It then extracts its per-hop payload and shifts the entire packet over, noticing that it should perform an ephemeral key switch, which deviates from the normal protocol. This requires one additional ECDH at the rendez-vous, one ChaCha20 encryption, and one scalar multiplication to generate the next ephemeral keys. It does not need more space than the single ephemeral key in the per-hop payload.There is still a problem with this scheme; it is not possible for C to find an ephemeral key that would end up identical to the one that D would require to decrypt the onion correctly. This would not be an issue if D is informed about this split and would accept whatever it gets, but that kind of defeats the transparency that they were going for with the proposal.ZmnSCPxj suggests that even if a node only has a single channel to the next node, it is possible to perform link-level payment splitting/re-routing. For instance, if C cannot send to D since the channel direction is saturated in favor of D, it can route to D via A instead. It holds the (encrypted) route from D to E. It can take that sub-route and treat it as a partial route-to-payee under rendez-vous routing, as long as node A supports rendez-vous routing. This can allow re-routing or payment splitting over multiple hops. Even though C does not know the number of remaining hops between D and the destination, its alternative is to earn nothing anyway as its only alternative is to fail the routing. At least with this, there is a chance it can succeed in sending the payment to the final destination.</summary>
+    <published>2018-11-13T04:46:53+00:00</published>
+  </entry>
+</feed>

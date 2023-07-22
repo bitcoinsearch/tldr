@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Relative txout amounts with a Merkleized Sum Tree and explicit miner fee.</title>
+  <updated>2023-06-16T03:15:37.111510+00:00</updated>
+  <author>
+    <name>Andrew Melnychuk Oseen 2022-11-18 21:11:54</name>
+  </author>
+  <author>
+    <name>Rijndael 2022-11-26 00:12:10</name>
+  </author>
+  <author>
+    <name>Andrew Melnychuk Oseen 2022-11-18 21:11:54</name>
+  </author>
+  <author>
+    <name>Andrew Melnychuk Oseen 2022-11-18 21:11:54</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2022-11-21 23:52:00</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2022-11-21 23:52:00</name>
+  </author>
+  <author>
+    <name>Rijndael 2022-11-26 00:12:10</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2022-11-21 23:52:00</name>
+  </author>
+  <author>
+    <name>Rijndael 2022-11-26 00:12:10</name>
+  </author>
+  <link href="bitcoin-dev/Nov_2022/021215_Relative-txout-amounts-with-a-Merkleized-Sum-Tree-and-explicit-miner-fee-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021221_Relative-txout-amounts-with-a-Merkleized-Sum-Tree-and-explicit-miner-fee-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021215_Relative-txout-amounts-with-a-Merkleized-Sum-Tree-and-explicit-miner-fee-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021215_Relative-txout-amounts-with-a-Merkleized-Sum-Tree-and-explicit-miner-fee-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021218_Relative-txout-amounts-with-a-Merkleized-Sum-Tree-and-explicit-miner-fee-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021218_Relative-txout-amounts-with-a-Merkleized-Sum-Tree-and-explicit-miner-fee-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021221_Relative-txout-amounts-with-a-Merkleized-Sum-Tree-and-explicit-miner-fee-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021218_Relative-txout-amounts-with-a-Merkleized-Sum-Tree-and-explicit-miner-fee-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Nov_2022/021221_Relative-txout-amounts-with-a-Merkleized-Sum-Tree-and-explicit-miner-fee-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Relative txout amounts with a Merkleized Sum Tree and explicit miner fee.</title>
+    <updated>2023-06-16T03:15:37.111510+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021215.html" rel="alternate"/>
+    <summary>The email conversation is about a proposed idea of mapping output amounts to a tap branch for secure partial spends of a single UTXO. The author has defined the Merkel tree root tweak and tree branch and leaf using tagged hash and left and right hash and relative output amount. Transaction validation involves a negative output amount flagging the transaction as relative amount spends, with the miner fee being the absolute of the output amount. Possible benefits include slightly increased privacy of output amounts and reduced growth rate of UTXOs.However, the issue faced here is that only one tap branch will ever consume the entire input amount. The solution to this problem is to have multiple tree leaves where all of them will eventually be published, but not right now. ZmnSCPxj suggests looking at covenant schemes, specifically the tree structures for `OP_CHECKTEMPLATEVERIFY`, which can achieve this. He explains that without this opcode, presigned transactions in a tree structure can be used but they are known to be larger than `OP_CHECKTEMPLATEVERIFY`. Rijndael also recommends that Andrew looks at `TAPLEAF_UPDATE_VERIFY`, which he describes as similar to what Andrew is proposing.The author poses questions regarding whether this would require a hard fork, if the sum is required in the asset tree, how big a taproot tree can get before it becomes cumbersome, and whether multiple taproot trees can be put inside a tweak. Drawbacks may include disabling the ability for output change addresses to be the same as inputs, as the spending amounts are absolute. An example transaction is given, where inputs are [1.5,.3,.1] and outputs are [-.0.001]. Alice's spending example is provided, where she sends to a new address and has a new change address. The author suggests that this idea could provide a way to onboard a lot of lightning channels with a single UTXO output. An exchange could schedule open lightning channels at certain time intervals, with people providing pubkeys and payment to be placed in a tap leaf, similar to selling seats for an aircraft flight. By exploring both `TAPLEAF_UPDATE_VERIFY` and `OP_CHECKTEMPLATEVERIFY`, Andrew can gain a better understanding of covenant schemes and how they can be utilized in his project.</summary>
+    <published>2022-11-18T21:11:54+00:00</published>
+  </entry>
+</feed>

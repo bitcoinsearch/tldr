@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP-341: Committing to all scriptPubKeys in the signature message</title>
+  <updated>2023-05-20T23:16:42.036828+00:00</updated>
+  <author>
+    <name>Anthony Towns 2020-05-02 14:26:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP-341: Committing to all scriptPubKeys in the signature message</title>
+    <updated>2023-05-20T23:16:42.036828+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-May/017813.html" rel="alternate"/>
+    <summary>In the email thread, Russell O'Connor suggested keeping the hashes of the ScriptPubKeys separate from the input values. Andrew's suggestion to add another hash to the signature message for sha_scriptPubKeys achieves this, provided sha_scriptPubKeys inclusion is conditional on hash_type not matching ANYONECANPAY. They could also make the scriptPubKey field dependent on hash_type matching ANYONECANPAY, which would mean committing to each component of the UTXOs being spent. With ANYONECANPAY, it would be the same but just for this input's prevout. However, they would still arguably miss out on whether it was a coinbase output and what the height of the coin was. Russell O'Connor also proposed separating the hashing of the output values from the output ScriptPubKeys in sha_outputs so that applications interested only in summing the values of the outputs (for instance to compute fees) do not have to wade through those arbitrary long ScriptPubKeys in the outputs. However, if one did not verify the output scriptPubKeys, they would only be able to care about fees since they couldn't verify where any of the funds went. There are links provided to prior discussions on this topic.</summary>
+    <published>2020-05-02T14:26:02+00:00</published>
+  </entry>
+</feed>

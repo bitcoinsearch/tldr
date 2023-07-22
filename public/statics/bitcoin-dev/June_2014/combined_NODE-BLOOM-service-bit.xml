@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - NODE_BLOOM service bit</title>
+  <updated>2023-06-08T23:44:32.441567+00:00</updated>
+  <author>
+    <name>Peter Todd 2014-06-06 09:04:41</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2014-06-06 09:03:29</name>
+  </author>
+  <author>
+    <name>Peter Todd 2014-06-06 09:11:34</name>
+  </author>
+  <author>
+    <name>Adam Back 2014-06-06 08:48:52</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2014-06-06 09:03:29</name>
+  </author>
+  <author>
+    <name>Peter Todd 2014-06-06 09:11:34</name>
+  </author>
+  <author>
+    <name>Peter Todd 2014-06-06 08:19:33</name>
+  </author>
+  <author>
+    <name>Peter Todd 2014-06-06 09:04:41</name>
+  </author>
+  <author>
+    <name>Peter Todd 2014-06-06 09:11:34</name>
+  </author>
+  <author>
+    <name>Adam Back 2014-06-06 08:48:52</name>
+  </author>
+  <author>
+    <name>Adam Back 2014-06-06 10:45:43</name>
+  </author>
+  <author>
+    <name>Peter Todd 2014-06-06 08:19:33</name>
+  </author>
+  <author>
+    <name>Adam Back 2014-06-06 08:48:52</name>
+  </author>
+  <author>
+    <name>Adam Back 2014-06-06 10:45:43</name>
+  </author>
+  <author>
+    <name>Peter Todd 2014-06-06 08:19:33</name>
+  </author>
+  <author>
+    <name>Peter Todd 2014-06-06 09:04:41</name>
+  </author>
+  <author>
+    <name>Adam Back 2014-06-06 10:45:43</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2014-06-06 09:03:29</name>
+  </author>
+  <link href="bitcoin-dev/June_2014/005971_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2014/005972_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2014/005973_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2014/005970_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2014/005972_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2014/005973_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2014/005967_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2014/005971_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2014/005973_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2014/005970_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2014/005974_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2014/005967_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2014/005970_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2014/005974_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2014/005967_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2014/005971_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2014/005974_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2014/005972_NODE-BLOOM-service-bit.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - NODE_BLOOM service bit</title>
+    <updated>2023-06-08T23:44:32.441567+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-June/005971.html" rel="alternate"/>
+    <summary>The email conversation between Adam Back and Peter Todd discusses the privacy tradeoffs of using prefix filters as opposed to bloom filters. While prefix filters offer better scalability and efficiency, they also compromise user privacy. However, prefix brute forcing is an engineering tradeoff that can be implemented with existing technology. The conversation concludes by suggesting that if someone can come up with a better solution and write code for it, it would be welcomed. Additionally, stealth addresses have been designed in a way that allows future blockchain filter upgrades to be added in a backwards compatible manner.Adam Back expressed his concerns regarding the privacy tradeoffs of prefix filters in Bloom filters in an email exchange with Peter Todd. He stated that prefix filters pose a similar problem as stealth address proposed use of prefixes, and can have a cumulative effect on privacy for all users. While he supports scalability, efficiency, and decentralization, he believes it should not be at the expense of nuking privacy.In a discussion about the use of bloom filters, Adam Back expressed concerns about the privacy tradeoffs involved with prefix filters. He stated that prefix filters have the same privacy issues as stealth addresses since they affect everyone, not just the user. Gregory Maxwell suggested that the use of ECDH addresses for all transactions, as seen in Bytecoin/Monero/Fantom systems, has made prefixes unnecessary. Obelisk's indexing is fast enough that Dark Wallet didn't store transaction information between sessions until recently. Prefix brute-forcing isn't yet implemented, but prefix filters are being implemented for lookups, which gives server operators plausible deniability.The proposed update in the Bitcoin Improvement Proposal (BIP) is to add NODE_BLOOM as a service bit to allow nodes to announce their support for bloom filters. This will bump the network protocol version number and the recommended behavior for nodes that do not support bloom filters is to disconnect peers who send filter messages anyway. In the long term, they will be replaced by prefix-based filtering, which is already being implemented in electrum and obelisk. The proposal has been deployed on Litecoin, Dogecoin, and other alts without issues.In a discussion thread, Adam Back and Peter Todd debated the privacy tradeoffs of prefix filters in Bitcoin. They also discussed the two types of privacy involved: privacy from the full node an SPV client is relying on to find its payments, vs privacy from analysis of the public transaction graph. The latter is more damaging, and Tor has changed recently to account for this. Additionally, they noted the importance of designing for privacy against future analysis of public info, rather than privacy by argument to select non-hostile nodes.Overall, while scalability and efficiency are important, user privacy should not be compromised. Prefix filters have questionable privacy tradeoffs, but can be implemented with existing technology. Bloom filters are not universally supported and have poor scaling properties, which can lead to high IO loads and DoS attacks. In the long term, they will be replaced by prefix-based filtering.</summary>
+    <published>2014-06-06T09:04:41+00:00</published>
+  </entry>
+</feed>

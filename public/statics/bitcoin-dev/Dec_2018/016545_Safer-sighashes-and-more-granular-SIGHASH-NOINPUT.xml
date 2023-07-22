@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-06-13T15:25:51.017321+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-12-12 23:49:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-06-13T15:25:51.017321+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-December/016545.html" rel="alternate"/>
+    <summary>The Bitcoin developers have proposed adding three new sighash flags and a new opcode. The three new sighash flags are SIGHASH_NOINPUT, SIGHASH_NOFEE, and SIGHASH_SCRIPTMASK. The proposed opcode is OP_MASK which acts as a NOP during execution. The sighash is computed like in BIP143, but if SIGHASH_SCRIPTMASK is present, for every OP_MASK in scriptCode the subsequent opcode/push is removed. However, Johnson Lau questioned why not always perform mask-removal for signing. Rusty Russell clarified that removing OP_MASKs unconditionally would introduce a hole without some explicit flag to say they've been removed.The masked script has reduced security, but this is a tradeoff with functionality. For instance, eltoo cannot work without masking part of the script. However, Johnson Lau was not sure if there is any useful NOINPUT case with an unmasked script. The role of scriptmask in a taproot world was also questioned. Rusty Russell explained that it ensures that the signature is applicable to a specific script branch, not others, assuming one uses the same pubkey in many branches, which is avoidable. Without a concrete taproot proposal, it's hard to make assertions, but if the signature flags that it's using the taproot script, it's no less safe, and more general.</summary>
+    <published>2018-12-12T23:49:02+00:00</published>
+  </entry>
+</feed>

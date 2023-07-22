@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 174 thoughts</title>
+  <updated>2023-06-13T03:17:16.312553+00:00</updated>
+  <author>
+    <name>Andrea 2018-06-27 13:39:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 174 thoughts</title>
+    <updated>2023-06-13T03:17:16.312553+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-June/016174.html" rel="alternate"/>
+    <summary>In a discussion among William, Andrew, and list, it was noted that some types are missing in the global-types definition. The parser must know the number of each map for I/O to use the correct definitions for the types. If not, a parser reading a key-value record does not know whether to read it as per-input type or per-output. To address this issue, one way is to declare the number of maps in advance and ensure they are ordered (inputs first). It was proposed to use two types for this: Number of inputs and number of outputs. For both types, the key is none, and only the type is PSBT_GLOBAL_INPUT_NUMBER = 0x01 and PSBT_GLOBAL_OUTPUT_NUMBER = 0x02 respectively. The value for both types is Varint.William raised a concern about buffer overflows in cases where someone sends a large blob of zeros to an unsuspecting implementation. He highlighted that hundreds of thousands of zero bytes in the input or output key-value arrays could be considered valid since it is just a large array of empty dictionaries. He suggested setting a hard limit on the size of the PSBT to avoid producing very large PSBT with an excessive number of Inputs and Outputs.Regarding the extensibility section, William had a question on whether "different types for the key-value pairs" refers to new types beyond the current global, input, and output types. He also questioned the statement "The number of each map that follows must be specified in the globals section so that parsers will know when to use different definitions of the data types" and did not understand its meaning.Andrea proposed solutions to the issues raised, including using specific types for the number of inputs and outputs, declaring the number of maps in advance, and setting a hard limit on the PSBT's size.</summary>
+    <published>2018-06-27T13:39:02+00:00</published>
+  </entry>
+</feed>

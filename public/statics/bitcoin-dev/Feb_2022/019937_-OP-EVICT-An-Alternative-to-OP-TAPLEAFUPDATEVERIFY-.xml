@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>`OP_EVICT`: An Alternative to `OP_TAPLEAFUPDATEVERIFY`</title>
+  <updated>2023-06-15T17:02:13.539718+00:00</updated>
+  <author>
+    <name>Erik Aronesty 2022-02-18 15:50:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>`OP_EVICT`: An Alternative to `OP_TAPLEAFUPDATEVERIFY`</title>
+    <updated>2023-06-15T17:02:13.539718+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019937.html" rel="alternate"/>
+    <summary>In an email exchange, ZmnSCPxj and Erik discuss a counterproposal for securely sharing a channel among multiple users. The proposed solution involves pre-signing on-chain transfers of funds for each participant to a new address that consists of (N-1) or (N-2) participants, with each portion of the signature encrypted for the same (N-1) participants. Any (N-1) subset of participants can collude to publish that transaction at any time to remove any other member from the pool. However, ZmnSCPxj points out that this proposal would require publishing one transaction per evicted participant and each participant has to store `N!` possible orderings in which participants can be evicted. ZmnSCPxj also highlights another thread on lightning-dev where he explains that if channel factories are used, it would be best to treat each channel as a 2-of-2 that participates in an overall N-of-N. For example, instead of the channel factory being signed by participants `A`, `B`, `C`, `D`, it should be signed by `AB`, `AC`, `AD`, `BC`, `BD`, `CD`, so that if e.g. participant B needs to be evicted, the signers `AB`, `BC`, and `BD` can be evicted. This approach increases the number of transactions that need to be evicted in one-eviction-at-a-time schemes, as well as increasing the `N!` number of signatures that need to be exchanged during setup. Nevertheless, ZmnSCPxj acknowledges that the proposed solution can work and pre-signed transactions can be used instead of `OP_CTV`.</summary>
+    <published>2022-02-18T15:50:02+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP62 and future script upgrades</title>
+  <updated>2023-06-09T03:46:41.084903+00:00</updated>
+  <author>
+    <name>Peter Todd 2014-11-04 19:13:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP62 and future script upgrades</title>
+    <updated>2023-06-09T03:46:41.084903+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-November/006864.html" rel="alternate"/>
+    <summary>Pieter Wuille has submitted a Pull Request to clarify the "clean stack" requirement in BIP62 which makes passing more inputs to a script than necessary illegal. This rule needs an exception for P2SH scripts as the test can only be done after the second stage evaluation, otherwise it would reject all spends from P2SH (which rely on "superfluous" inputs to pass data to the second stage). However, this rule is incompatible with future P2SH-like constructs, and any such upgrade would require an exception in the clean-stack rule, which - once deployed - is no longer a softfork. Luke suggested on the pull request to not apply this rule on every transaction with nVersion &gt;= 3, which solves the problem. Peter Todd agrees with Luke and suggests making the rules only apply to transactions with strict nVersion==3. He is skeptical about the choice of nVersion==3 as there will likely be more block.nVersion increases in the future that have nothing to do with transactions.</summary>
+    <published>2014-11-04T19:13:13+00:00</published>
+  </entry>
+</feed>

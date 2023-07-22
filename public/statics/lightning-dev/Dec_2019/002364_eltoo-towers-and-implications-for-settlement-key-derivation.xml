@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>eltoo towers and implications for settlement key derivation</title>
+  <updated>2023-06-02T21:55:24.728074+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-12-04 13:46:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>eltoo towers and implications for settlement key derivation</title>
+    <updated>2023-06-02T21:55:24.728074+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-December/002364.html" rel="alternate"/>
+    <summary>In this email exchange, Christian Decker and Conner Fromknecht discuss the implications of watchtowers on eltoo channel construction. Christian discusses two deployment options for watchtowers. The first option is a simple forward ratcheting method that only requires the latest update transaction, and the second option involves giving the watchtower the settlement transaction along with the update transaction. The second option ensures that the correct state is dropped on-chain but at the cost of the watchtower learning intermediate states or the size of the state. Conner brings up an issue related to NOINPUT, where any update transaction can spend from any other, which could permit a tower to reconstruct arbitrary witness scripts for any given sequence of confirmed update transactions. He proposes a workaround which involves giving the tower an extended parent pubkey for each party and deriving non-hardened settlement keys on demand given the state numbers that get confirmed. However, this solution is not the most satisfactory as leaking one hot settlement key compromises all sibling settlement keys. The discussion touches upon section 4.1.4 and the requirement for non-hardened keys as a known consequence of the eltoo construction. The email concludes with Conner asking if there are any alternative approaches to this issue.</summary>
+    <published>2019-12-04T13:46:30+00:00</published>
+  </entry>
+</feed>

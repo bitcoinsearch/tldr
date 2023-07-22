@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New BIP - v2 peer-to-peer message transport protocol (former BIP151)</title>
+  <updated>2023-06-13T17:48:54.716035+00:00</updated>
+  <author>
+    <name>Eric Voskuil 2019-03-25 06:32:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New BIP - v2 peer-to-peer message transport protocol (former BIP151)</title>
+    <updated>2023-06-13T17:48:54.716035+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-March/016810.html" rel="alternate"/>
+    <summary>On 22nd March 2019, Jonas Schnelli proposed a new Bitcoin peer to peer transport protocol with opportunistic encryption via bitcoin-dev mailing list. The current unencrypted message transport is partially inefficient and vulnerable to BGP hijack, block delay attacks and message tempering. However, this proposal does not provide mitigation for these attacks between anonymous peers. Adding opportunistic encryption introduces high risk for attackers of being detected. Peer operators can compare encryption session IDs or use other authentication schemes to identify an attack. Authentication helps mitigate attacks by requiring the identity of the peer. Data communicated between peers is entirely public, so encrypting public data between anonymous peers is pointless. This proposal describes a way how data manipulation would be identifiable by the communicating peers. Encrypting traffic between peers is already possible with VPN, tor, stunnel, curveCP or any other encryption mechanism on a deeper OSI level, however, most of those solutions require significant knowhow in how to set up such a secure channel and are therefore not widely deployed.The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119. A peer that supports the message transport protocol as defined in this proposal MUST accept encryption requests from all peers. Both communication direction shares the same shared-secret but have different symmetric cipher keys. Peers supporting the transport protocol after this proposal MUST signal NODE_P2P_V2. A peer signaling NODE_P2P_V2 MUST accept encrypted communication specified in this proposal. Peers MAY only make outbound connections to peers supporting NODE_P2P_V2. This proposal presumes that the two peers are operated by individuals who know and trust each other and have the ability to communicate over a secure side channel, and will each extract the session ID from their respective peers and use the side channel to compare them. Optional authentication schemes may be covered by other proposals. An attacker could delay or halt v2 protocol enforcement by providing a reasonable amount of peers not supporting the v2 protocol. This proposal is backward compatible (as long as not enforced). Non-supporting peers can still use unencrypted communications. The complete Bitcoin Core implementation is available on Github.</summary>
+    <published>2019-03-25T06:32:58+00:00</published>
+  </entry>
+</feed>

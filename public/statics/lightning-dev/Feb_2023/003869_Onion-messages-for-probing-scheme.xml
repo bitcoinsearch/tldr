@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Onion messages for probing scheme</title>
+  <updated>2023-06-03T12:14:10.036153+00:00</updated>
+  <author>
+    <name>vwallace 2023-02-27 21:31:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Onion messages for probing scheme</title>
+    <updated>2023-06-03T12:14:10.036153+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-February/003869.html" rel="alternate"/>
+    <summary>A proposal to use onion messages for payment probing in Lightning Network has been suggested by Val Wallace. The idea was briefly discussed at the 2022 LN summit, and Tadge Dryja has also brought up a similar concept. Currently, payment reliability is heavily dependent on having sufficient payment volume to determine current liquidity balances of channels, which is how most big nodes can tell whether a given channel has enough liquidity to forward a given amount. If a node is using HTLC probing to achieve this payment volume, they use a regular `update_add_htlc` message with a bogus payment hash, where the error returned informs the sender of whether the payment reached the final recipient. To probe without risking locked liquidity along the route, Onion Messages (OMs) present a convenient way. Sending an onion message probe directly to individual nodes along the desired route, including those to which you don't have a direct channel, would enable monitoring the payment flows of arbitrary nodes across the network without having to have a channel path to them. Therefore, it is probably best to design a scheme that probes along channel paths like HTLC probing. In this approach, each intermediate hop of a probe is encoded with a failure onion for justification. The happy path of the proposed scheme is explained through an example where Alice probes Alice &gt; Bob &gt; Carol &gt; Dave for a 100k msat payment. She constructs an onion message for Bob, the first hop, based on his ability to forward 110k msats to his next-hop Carol. Carol sees she can forward 105k msats to Dave, and forwards his onion packet. Finally, Dave receives his onion packet, sees he can receive 100k msats from Carol, and uses the provided reply path to send a simple probe success onion message back to Alice. As an example of the sad path for an intermediate node, if Carol can't forward 105k msats to Dave, she fails the probe back to Bob by sending an onion message. While there is nothing stopping nodes from lying about their ability to forward in this scheme, they may be negatively scored if they do so. Adopting this protocol could help routing nodes attract more forwarding traffic. It is viewed as a low priority enhancement at present but could be useful to spark ideas and highlight the flexibility of OMs.</summary>
+    <published>2023-02-27T21:31:15+00:00</published>
+  </entry>
+</feed>

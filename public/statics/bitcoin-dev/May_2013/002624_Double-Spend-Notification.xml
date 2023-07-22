@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Double Spend Notification</title>
+  <updated>2023-06-06T17:47:55.985118+00:00</updated>
+  <author>
+    <name>Quinn Harris 2013-05-21 00:45:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Double Spend Notification</title>
+    <updated>2023-06-06T17:47:55.985118+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-May/002624.html" rel="alternate"/>
+    <summary>The current implementation of BitCoin is susceptible to a double spend attack for 0 confirmation payments, which are necessary for in-person transactions. It is easy to transmit two transactions from the same output at the same time to different sets of nodes on the network using two instances of bitcoind with the same wallet file and a spend on each daemon initiated by RPC with some simple code. If a merchant receives the "wrong" transaction, an unsophisticated attacker can reliably get away with this attack. Right now, a node will drop any second spend of the same output in the memory pool. After the first transaction has propagated through the network, issuing a second double spend transaction isn't likely to be seen by a significant number of miners. If the second transaction is relayed instead of being dropped to notify the receiving party of the double spend, it is possible that some or even many of the miners would replace the first transaction with the second if it has a higher fee. To fix this problem, a new double spend message should be sent with proof of the double spend but not the complete transactions. This would allow the receiving end to be quickly notified of a double spend, while in no way increasing the chance over the current implementation that a double spend would be successful. The existing block chain needs to be checked to make sure the proof of double spend couldn't have been derived from the block chain and a single spend in the memory pool.Over time, this provision might become less effective. As the reward for each block mined decreases, transactions fees will become a more significant part of the mining reward, accordingly increasing the incentive to replace transactions with higher fees. Today, most BitCoin participants have a high expectation of significant future appreciation of BitCoins and recognize anything that brings into question the integrity of the system is likely to reduce that future value. It is important to work towards more robust solutions, notably various forms of 3rd party trust, such as tamper-resistant devices trusted to not duplicate spends, 3rd party certificates with proof the transaction was spent by the holder of the certificate, or multi-signature transactions on the block chain that must be signed by a trusted 3rd party to spend.</summary>
+    <published>2013-05-21T00:45:28+00:00</published>
+  </entry>
+</feed>

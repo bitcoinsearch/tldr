@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Hardware wallets and "advanced" Bitcoin features</title>
+  <updated>2023-06-14T17:10:05.399803+00:00</updated>
+  <author>
+    <name>Devrandom 2021-01-17 02:40:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Hardware wallets and "advanced" Bitcoin features</title>
+    <updated>2023-06-14T17:10:05.399803+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018360.html" rel="alternate"/>
+    <summary>The primary issue with hardware wallets is that they are assumed to not have internet access. This assumption creates problems when clawback transactions need to be broadcasted at a specific blockheight. The hardware wallet cannot know the current blockheight if it cannot be an online device, which means it must trust the software to perform the clawback. However, devrandom believes that achieving the desired "liveness" requirements without compromising too much on the air-gap is possible. This can be achieved through UTXO oracles attesting to the UTXO set, a narrow optical or serial protocol for the air-gap connection between node software and signer, and a set of operators that can react to lack of liveness. Optionally, clock oracles can attest to the current time using the roughtime protocol. The Signer periodically performs several steps, including checking if the funding UTXO has been spent, ensuring the node provided the spending tx, and signing a heartbeat message with the current time if a reaction is needed. The node software then relays the signed heartbeat message to the operators who manually intervene if a heartbeat is not seen. This setup seems to be as secure as USB hardware wallets attached to online machines and can even accommodate intermittently connected signers for slow-moving channels or signers behind Tor. However, Lightning paper wallets are not possible since participation in the network requires being online.</summary>
+    <published>2021-01-17T02:40:44+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Making OP_TRUE standard?</title>
+  <updated>2023-06-13T02:07:13.994390+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-05-31 02:47:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Making OP_TRUE standard?</title>
+    <updated>2023-06-13T02:07:13.994390+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/016050.html" rel="alternate"/>
+    <summary>Rusty Russell suggests a potential denial-of-service (DoS) attack on Bitcoin that involves sending a 100,000 vbyte transaction at 1sat/vbyte, replacing it with a 108 vbyte transaction at 2sat/vbyte which spends one of those inputs, and then replacing that spent input in the 100k transaction and repeating the process. This attack can be performed only about 86 times per block given the time it takes (3.5 seconds) for this to propagate to 50% of the network. The cost for this attack is 86 * 2 * 108 + 100000 / 2 = 68576 satoshi, assuming a 50% chance the 100k transaction gets mined. However, the 50% chance assumption is almost wrong, making the cost for the transactions much lower at 18576, i.e., 463x lower than just sending 1sat/vbyte txs under optimal conditions.To address the DoS potential directly, Rusty Russell suggests implementing a solution that delays processing of transactions by 30-60 seconds if a replacement doesn't meet certain criteria but increases the feerate by at least minrelayfee. This would eventually result in replacing-by-fee (RBF) of a larger transaction but it would take longer. It should be easy to implement as similar timers will be required for dandelion. Christian provided more detailed propagation statistics showing that larger transactions propagate slower, but only by a factor of 2.5 or so.</summary>
+    <published>2018-05-31T02:47:58+00:00</published>
+  </entry>
+</feed>

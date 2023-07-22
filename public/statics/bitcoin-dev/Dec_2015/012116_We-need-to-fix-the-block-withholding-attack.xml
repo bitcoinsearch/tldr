@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>We need to fix the block withholding attack</title>
+  <updated>2023-06-11T02:28:16.261846+00:00</updated>
+  <author>
+    <name>Eric Lombrozo 2015-12-26 08:26:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>We need to fix the block withholding attack</title>
+    <updated>2023-06-11T02:28:16.261846+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-December/012116.html" rel="alternate"/>
+    <summary>On a Bitcoin developers' mailing list, Peter Todd suggested that fixing the block withholding attack is relatively simple but requires an SPV-visible hard fork. He proposed doing this hard-fork in conjunction with any blocksize increase, which will have the desirable side effect of clearly showing consent by the entire ecosystem, including SPV clients. However, he also pointed out that it is impossible to fix this without reducing the visible difficulty and blinding the hasher to an invisible difficulty. Jl2012 then proposed a softfork solution where the first output of the second transaction of a block would contain a random nonce committed with an OP_RETURN. The resulting hash must be smaller than 2^(256-1/64) or the block is invalid, which means about 1% of blocks are discarded. For each difficulty retarget, the secondary target is decreased by 2^(1/64). After 546096 blocks or 10 years, the secondary target becomes 2^252, so only one in 16 hash returned by hasher is really valid. This should make the detection of block withholding attack much easier. All miners have to sacrifice 1% reward for 10 years. Confirmation will also be 1% slower than it should be. Eric Lombrozo responded to both proposals suggesting that Jl2012's key discovery is that if we add an invisible difficulty while keeping the retarget algo and bits semantics the same, the visible difficulty will decrease automatically to compensate. In other words, we can artificially increase the block time interval, allowing us to force a lower visible difficulty at the next retarget without changing the retarget algo nor the bits semantics. There are no other free parameters we can tweak, so it seems this is really the best we can do. Unfortunately, this also means longer confirmation times, lower throughput, and lower miner revenue. Lombrozo also suggested that we can compensate for lower throughput and lower miner revenue by increasing block size and increasing block rewards. Interestingly, it turns out we *can* do these things with soft forks by embedding new structures into blocks and nesting their hash trees into existing structures. However, this would add significant complications to the protocol and require nontrivial app migration efforts. Old nodes would not get forked off the network but backwards compatibility would still be a problem as they would not be able to see at least some of the transactions and some of the bitcoins in blocks. But if we're willing to accept this, even the "sacred" 21 million asymptotic limit can be raised via soft fork. In conclusion, it is possible to fix this attack with a soft fork and without altering the basic economics, but it's almost surely a lot more trouble than it's worth.</summary>
+    <published>2015-12-26T08:26:54+00:00</published>
+  </entry>
+</feed>

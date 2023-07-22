@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Continuing the discussion about noinput / anyprevout</title>
+  <updated>2023-06-13T21:33:50.714389+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-10-03 10:01:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Continuing the discussion about noinput / anyprevout</title>
+    <updated>2023-06-13T21:33:50.714389+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-October/017345.html" rel="alternate"/>
+    <summary>A proposal to change the allocation of SegWit v16 for SIGHASH_NOINPUT use, as well as a suggestion for an alternative solution has been made in the bitcoin-dev mailing list. The concerns raised were that an ordinary UTXO might be spent using SIGHASH_NOINPUT, and that a UTXO allocated for SIGHASH_NOINPUT use should look exactly the same as any other SegWit v1 output. The proposed solution is to not allocate SegWit v16 for SIGHASH_NOINPUT use, but instead allocate SegWit v1 Tapscript v16 for SIGHASH_NOINPUT. This way, if ordinary UTXOs are not allocated for SIGHASH_NOINPUT use, they do not commit to any Taproot that has a Tapscript v16 branch, and thus SIGHASH_NOINPUT cannot be used to claim it. Additionally, if a UTXO used for an offchain protocol ends up in a cooperative-resolution state, nobody has to know that a Tapscript v16 branch existed that could have used SIGHASH_NOINPUT. The proposal also addresses privacy concerns by avoiding publicly visible output tagging, which damages privacy. Instead, this would be an invisible tagging since the opt-in to noinput and friends is hidden inside the committed script, which only gets revealed whenever it is actually needed.For eltoo, the funding output would be invisibly tagged, and the cooperative close would use the taproot pubkey, while the uncooperative close, which would require noinput opt-in, reveals the script, proving prior opt-in, and provides a matching signature. Finally, there was a question on whether the alternate proposal would hold better muster and if AJ's alternative pubkey encoding would be required to make the opt-in visible.</summary>
+    <published>2019-10-03T10:01:58+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>General questions about channels</title>
+  <updated>2023-05-24T17:16:47.118973+00:00</updated>
+  <author>
+    <name>Andy Schroder 2017-12-27 05:18:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>General questions about channels</title>
+    <updated>2023-05-24T17:16:47.119480+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2017-December/000871.html" rel="alternate"/>
+    <summary>In a discussion between Rusty Russell and Andy Schroder, the use of millisatoshis in lightning channel transactions was questioned. While it is possible to lose up to 0.999 satoshi per payment due to rounding down to whole satoshis, payments of less than a few thousand satoshi are impractical even on the Lightning Network as they cost more than that to spend. The upper 32 bits must be zero for channels with chain_hash identifying the Bitcoin blockchain, which gives a maximum HTLC value of .04294967295 BTC, or about $10 back when the protocol was started. This limit is in place despite the extra 4 bytes being set to zero, and is intended for safety and decentralization purposes.Regarding optional initial push of millisatoshis during channel creation, it is for use in the common case where someone wants to connect to another party and make a payment immediately. It is also the only mechanism for the payer to have zero funds in a channel, but starting a channel with no funds in reserve is not recommended.As for the timeout closing out a channel when someone does not cooperate, if there is no in-progress payment, there is no reason to close a channel to an unreachable peer unless one wants to abandon the channel and get the funds back. If there is an in-progress payment, BOLT #2 specifies the requirements for closing the channel.</summary>
+    <published>2017-12-27T05:18:22+00:00</published>
+  </entry>
+</feed>

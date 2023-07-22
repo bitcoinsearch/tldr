@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Package Relay Proposal</title>
+  <updated>2023-06-15T20:59:28.084083+00:00</updated>
+  <author>
+    <name>Gloria Zhao 2022-05-24 01:13:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Package Relay Proposal</title>
+    <updated>2023-06-15T20:59:28.084083+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020512.html" rel="alternate"/>
+    <summary>Gloria Zhao and Anthony Towns had a detailed conversation about unifying size/count constraints for L2 developers. They discussed how this could lead to a more stable and easier-to-reason-about interface. The conversation also touched on network-imposed conditions for transactions to be considered as a package and whether these constraints should be standardized or configurable. Additionally, they talked about the feasibility of doing package relay with different constraints if required.Another topic discussed was the proposal to announce sendpackages based on the sender's own state. If fRelay=false, it is okay to send sendpackages, but at verack, fRelay=true and wtxidrelay are required if sendpackages were sent, otherwise, disconnection occurs. If the sender receives getpckgtxns or pckgtxns without having negotiated sendpackages ahead of time, they should ignore it instead of disconnecting. The conversation also delved into the idea of giving fees and sizes of each transaction in the package in "pckginfo1." However, they noted that it may not provide additional meaning unless one knows the exact topology. They discussed a scenario where the receiver already has a parent transaction, and it would be better to respond to a request for a package with information about each transaction, so the receiver can do the logic themselves. In the end, the sender would need to know whether there is another child that sufficiently pays for A and if there are other parents involved. The logic for a package of direct parents would depend on whether X alone is above the fee rate, and the size, fees, and R (for direct parents) will be considered for sending it as a package.In a separate discussion on the bitcoin-dev mailing list, the topic of requesting transactions based on fee rates was raised. The idea was that if a miner's mempool is not full and they receive a tx that meets their minimum fee rate floor, they could request all the txs in their mempool that meet the same criteria. The question was raised as to whether this would be a good strategy for miners to adopt. It was noted that including all the fee/size information for a tx in a package message would increase its size by around 30%, but it might be worth it.Overall, the discussion focused on strategies for optimizing transaction selection for miners.</summary>
+    <published>2022-05-24T01:13:43+00:00</published>
+  </entry>
+</feed>

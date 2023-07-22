@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Package Relay Proposal</title>
+  <updated>2023-06-15T20:59:42.558075+00:00</updated>
+  <author>
+    <name>Eric Voskuil 2022-05-24 23:43:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Package Relay Proposal</title>
+    <updated>2023-06-15T20:59:42.558075+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020518.html" rel="alternate"/>
+    <summary>The discussion on the bitcoin-dev mailing list revolves around the concept of packaging transactions into blocks. The set of transactions is referred to as the graph and also includes the fee, sigops, size, and weight. Packaging involves associating the transactions with each other for aggregate net reward consideration. There is a limit to acceptable package size, and any number of individual transactions can be transmitted without constraints on packages. A rational package is just a block or compact block without the header, and if parts of a package satisfy profitability constraints, they will be accepted/mined.The issue discussed in the thread involves the ability to associate a set of transactions for consideration where the subset may satisfy profitability constraints that would not be satisfied if the transactions were considered individually. One proposed solution involves adding the graph representation for a previous transaction in the package as a bit and using it to codify spending for the 2nd ... 24th parent. For a maximum of 25 transactions, 23*24/2 = 276, which seems like 36 bytes for a child-with-parents package.There is a debate over whether to include the fees and sizes of each transaction in the package in “pckginfo1” and whether this information provides additional meaning unless you know the exact topology, i.e. also know if the parents have dependency relationships between them. There are different opinions on whether to add the graph and its complexity to the p2p protocol.</summary>
+    <published>2022-05-24T23:43:57+00:00</published>
+  </entry>
+</feed>

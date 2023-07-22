@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[Pre-BIP] Motivating Address type for OP_RETURN</title>
+  <updated>2023-06-14T20:21:22.702286+00:00</updated>
+  <author>
+    <name>David A. Harding 2021-04-23 18:15:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[Pre-BIP] Motivating Address type for OP_RETURN</title>
+    <updated>2023-06-14T20:21:22.702286+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-April/018845.html" rel="alternate"/>
+    <summary>In a Bitcoin-dev discussion, the topic of OP_RETURN outputs was addressed. The concern was raised that Script, as a type, is too wide and should only return coins with known output types. However, if this is the case, then the arbitrary length of OP_RETURN, which can be up to almost a million bytes, is also too wide. The discussion raised three questions: whether it should be human-readable and checksummed or encoded, whether it should have a fixed length of max 40-80 bytes or support arbitrary length strings, and whether it should be possible from Core to pay into such an OP_RETURN or categorized as a non-payable address type (and just used for parsing blockdata). The first question was answered by stating that it should not be human-readable in the sense of being meaningful to humans. Rather, displaying OP_RETURN data in hex was suggested as the best option to discourage people from putting offensive or illegal text in the blockchain. The second question was met with opposition to limiting its range because someone would eventually complain and require a v2 address. The third question was addressed by highlighting that including arbitrary data in the blockchain is not currently useful for typical users. Applications that want to use OP_RETURN with Bitcoin Core can already call create(psbt|rawtransaction) with the ‘data’ field. It was suggested that if a few other wallets add the feature to pay OP_RETURN "addresses" and it seems popular, then maybe Bitcoin Core's wallet will include it in the future. Finally, it was mentioned that increasing transaction fees should increasingly push uses of OP_RETURN off the network or into more efficient constructions, so there doesn't seem to be a need to spend a lot of time trying to optimize it when it will be used less and less over time.</summary>
+    <published>2021-04-23T18:15:50+00:00</published>
+  </entry>
+</feed>

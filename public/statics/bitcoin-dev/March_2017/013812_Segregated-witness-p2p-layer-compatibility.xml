@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Segregated witness p2p layer compatibility</title>
+  <updated>2023-05-20T01:11:20.012474+00:00</updated>
+  <author>
+    <name>Matt Corallo 2017-03-27 19:32:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Segregated witness p2p layer compatibility</title>
+    <updated>2023-05-20T01:11:20.012474+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-March/013812.html" rel="alternate"/>
+    <summary>The Bitcoin Core's Segregated Witness code has been clarified to clear up misconceptions about the behavior of the block download logic after segwit activation. According to a post by Suhas Daftuar via bitcoin-dev, nodes will not be able to download any blocks from non-segwit peers after activation, as it aims to prevent nodes from downloading an invalid block that may require re-download until the block is received with the required witness data. However, non-segwit blocks are evaluated under the same rules as pre-segwit software versions of the system and remain valid to all types of nodes. The behavior of not downloading blocks from non-NODE WITNESS peers is not a requirement but an implementation detail in the Bitcoin Core code. In response to a comment made by Eric Voskuil, Suhas explains that if a miner wants to continue mining after segwit activation, but using pre-segwit software, they would need a way to relay their blocks to a segwit-enabled peer. There are several ways to achieve this, including using the RPC call "submitblock" on a segwit-enabled node, explicitly delivering the block to a segwit node over the p2p network even if unrequested, running a bridge node which advertises NODE_WITNESS and can serialize blocks with witness data, or peer directly with other miners bypassing the p2p network. Despite the limitations, non-segwit miners' blocks are expected to get relayed post-segwit activation through the handful of bridge nodes that are currently running.</summary>
+    <published>2017-03-27T19:32:30+00:00</published>
+  </entry>
+</feed>

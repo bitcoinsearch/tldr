@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Incremental Routing (Was: Making (some) channel limits dynamic)</title>
+  <updated>2023-06-03T02:24:37.814912+00:00</updated>
+  <author>
+    <name>Antoine Riard 2020-10-08 16:17:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Incremental Routing (Was: Making (some) channel limits dynamic)</title>
+    <updated>2023-06-03T02:24:37.814912+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002817.html" rel="alternate"/>
+    <summary>Antoine and Zeeman discuss the possibility of an upfront payment system for relay nodes in the Lightning Network. Zeeman raises concerns about how a newcomer would offer upfront fees to a node it is not directly channeled with, as there is a risk that the node may just fail the payment and claim the fees. Antoine suggests downgrading routing failures in the routing algorithm, incentivizing nodes to behave well to keep their routing fees. The two also consider the idea of "incremental routing", where payments are broken down into smaller amounts and sent incrementally through multiple nodes. The route of pending HTLCs doubles as an encrypted bidirectional tunnel, allowing for incremental building of the route until reaching the destination. The concept of upfront payments is integrated into this model, where part of the fund value is given forward to the next peer on the timelock branch. The upfront payment can be increased incrementally as the route is built out, with the maximum amount that can be stolen by the direct peer being limited to the upfront fee of a single hop.One advantage of incremental routing is that the time risk of money being locked up can be managed easier. Users can start with an HTLC with the minimum time and then bump up the time of the first HTLC as they build up the incremental route until they reach the destination. However, there are some drawbacks to this system. It requires more communication rounds and cryptographic operations, and intermediate nodes can guess the distance from the source by measuring timing of a previous response to the next message from the payer.It is important to note that the idea of incremental routing is completely imaginary and has not been peer-reviewed yet, so there may be actual cryptographic or practical problems with the idea.</summary>
+    <published>2020-10-08T16:17:29+00:00</published>
+  </entry>
+</feed>

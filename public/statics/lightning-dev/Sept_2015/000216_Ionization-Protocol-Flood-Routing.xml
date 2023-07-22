@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Ionization Protocol: Flood Routing</title>
+  <updated>2023-05-18T15:21:44.359068+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-09-23 05:42:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Ionization Protocol: Flood Routing</title>
+    <updated>2023-05-18T15:21:44.359068+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-September/000216.html" rel="alternate"/>
+    <summary>The Lightning Network is a decentralized payment network built on top of the Bitcoin Blockchain. The current discussion revolves around the selection of "beacon" nodes, which are nodes chosen to propagate information about the routing topology of the network. However, this method raises several questions and issues.One concern is the assumption of a global p2p network of lightning nodes. There is also a need for a consensus protocol for choosing an ordering of potential beacons and a gossip protocol to announce potential beacons and compare against ordering. Additionally, there needs to be a way to share routes to beacons with direct neighbors and use distributed hash to store or lookup route recommendations keyed by beacon/endpoint.It was suggested that when asking for a payment to be made, a payee provides their lightning public key and a set of low-cost paths from the current beacons to them, instead of storing fees in the routes. Fee updates will take effect via the dijkstra-routing-gossip protocol, but the amount of traffic generated can vary significantly depending on the number of channels and nodes and how frequently fee updates occur. The payment info must also be provided by the payee shortly before the transaction to ensure that the route and fee information is up-to-date.The conversation also addressed some twisty details, such as how many beacon nodes there should be, how long it takes for a beacon to become active, and how to prepare for new beacons. It was proposed that the size of the beacon nodes could increase on a log scale with network size, and the delay between selection and a beacon becoming active is ten blocks, giving time for others to connect to the beacon node. It was also suggested that beacons can be active as soon as they can route through them, without any artificial delay.However, one potential security concern has been raised regarding the use of beacons. Hackers could target beacons to steal funds or obtain information about every transaction within the network. Additionally, using the current system would make users more vulnerable to DoS attacks if only 12 systems were hacked. With beacons, Mallory could gain control of the beacons Bob uses, potentially blocking payments with those published R values from going through.A counterproposal suggests no beacons or routing DHT, just fees by gossip protocol. In this scenario, everyone has a complete database of node-node channel fees, and changes are propagated by gossip. The proposal assumes that most people do not end up doing routing due to the risks associated with being online with hot keys.</summary>
+    <published>2015-09-23T05:42:40+00:00</published>
+  </entry>
+</feed>

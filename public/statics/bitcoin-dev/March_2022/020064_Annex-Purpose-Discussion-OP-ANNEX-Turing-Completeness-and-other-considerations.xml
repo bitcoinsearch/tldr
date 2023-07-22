@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Annex Purpose Discussion: OP_ANNEX, Turing Completeness, and other considerations</title>
+  <updated>2023-06-15T17:39:54.222569+00:00</updated>
+  <author>
+    <name>Christian Decker 2022-03-06 13:12:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Annex Purpose Discussion: OP_ANNEX, Turing Completeness, and other considerations</title>
+    <updated>2023-06-15T17:39:54.223571+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020064.html" rel="alternate"/>
+    <summary>In a recent bitcoin-dev discussion, the use of an annex in Bitcoin was explored. The annex is a reserved area to put additional information on a transaction that can be analyzed immediately and unconditionally without necessarily knowing anything about the utxo being spent. One potential use case of the annex is to optimize SIGHASH_GROUP, allowing a group of inputs to claim a group of outputs for signing. Another use case is to specify per-input absolute locktimes or to commit to a past block height having a particular hash.The annex could also be used to amortize some of the fixed cost of getting transactions confirmed by allowing third parties or watchtowers to combine update transactions into larger transactions. However, there is a problem with using nLocktime values that are already in the past as they cannot be used for other purposes again. To address this issue, one proposal is to partition the annex into a global annex shared by the entire transaction and one for each input.It is suggested that an individual annex for each input may not make sense as it could bloat the utxo set and could be emulated by using the input that is spending it. There are concerns about the complexity of accessing the annex and determining what information it should contain. For example, if a computation requires a value that is unknown, pre-signing all possible sums of both parties' annex costs would be necessary. Another challenge is the potential for script fragments to require incompatible interpretations of the annex, similar to the CLTV issue.Despite these challenges, the annex has the potential to provide a more efficient and flexible way to include additional information on transactions. The Bitcoin opcodes CSV and nSequence can access nLockTime from script to prevent a transaction from confirming too early. However, script can also ensure that "bad" values for nLockTime and nSequence are never used in a valid transaction.The annex is an area that has been reserved for future use when consensus rules on its usage have been agreed upon. By reserving the annex now, new consensus rules can be immediately applied to utxos predating those rules without needing to update them on-chain first. This allows for off-chain contracts to be updated from per-tx to per-input locktimes instantly. Soft-fork solutions may be implemented to address any issues that arise.</summary>
+    <published>2022-03-06T13:12:52+00:00</published>
+  </entry>
+</feed>

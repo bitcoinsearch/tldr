@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Implementing Confidential Transactions in extension blocks</title>
+  <updated>2023-06-13T17:03:11.158082+00:00</updated>
+  <author>
+    <name>Kenshiro [] 2019-02-11 10:19:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Implementing Confidential Transactions in extension blocks</title>
+    <updated>2023-06-13T17:03:11.158082+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-February/016677.html" rel="alternate"/>
+    <summary>The discussion is about implementing confidential transactions (CT) in extension blocks. A position is taken that full nodes must be able to view the Unspent Transaction Output (UTXO) set, and extension blocks make it impossible for them to have an accurate view of the UTXO set. However, old nodes don't need to know the CT part of the UTXO set since it would be possible to move coins from normal addresses to CT addresses and vice versa written as "anyone-can-spend" transactions in the main block so that old nodes are fully aware of these transactions. The full details of CT transactions involving CT would be in the extension block. CT to CT transactions don't need to be written in the main block. There is a capacity increase in this approach since the CT signature is stored in the extension block, but it also means an increase in block size and network usage globally on all full nodes.The soft fork approach is discussed where old nodes see CT transactions as "sendtoany" transactions. However, the extension block is viewed as an "evil" soft fork since older nodes are forced to upgrade as their intended functionality becomes impossible. It is seen as no better than a hard fork. The safety aspect of a software bug in CT is also discussed, and it is noted that a future quantum computing breach of the algorithms used to implement confidentiality is more relevant. This issue can be addressed with a non-extension-block approach by implementing a globally-verified publicly-visible counter of the total amount in all confidential transaction outputs. This prevents inflation even if a future QC breach allows confidential transaction value commitments to be opened to any value. It is important to note that this approach is a definite hardfork. While the CT signature is stored in the extension block, it also means an increase in block size and network usage globally on all full nodes. Despite this, it is still possible for people with regular computers to run a full node, and people in developing countries could use light wallets.</summary>
+    <published>2019-02-11T10:19:15+00:00</published>
+  </entry>
+</feed>

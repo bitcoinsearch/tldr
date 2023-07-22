@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 117 Feedback</title>
+  <updated>2023-05-20T04:44:20.734699+00:00</updated>
+  <author>
+    <name>Johnson Lau 2018-03-05 15:28:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 117 Feedback</title>
+    <updated>2023-05-20T04:44:20.735698+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-March/015800.html" rel="alternate"/>
+    <summary>In a post on the bitcoin-dev mailing list, Rusty Russell expressed concerns about the flexibility of BIP 117, which he believes is trying to do too much. He notes that the use of altstack is awkward and suggests that a simpler implementation of tail recursion would be to have a single blob: if a single element is left on the altstack, pop and execute it. The treatment of concatenation seems like trying to run before we can walk. Rusty also expresses concern over the dropping of SIGOP and opcode limits in BIP 117. He calls for more justification, particularly measurements and bounds on execution times. He proposes restoring statically analyzability by limiting rules to version 3 segwit transactions, counting only the top element of the stack, and requiring the blob popped off for tail recursion to be identical to that top element of the stack.Regarding the use of altstack, Rusty suggests that it should be left untouched in v0 P2WSH. If anyone is already using altstack, BIP 117 would very likely confiscate those UTXOs because the altstack would unlikely be executable. Even in v1 witness, Rusty believes altstack should remain temporary data storage.Rusty points out that the “(many scripts) concatenated together in reverse order to form a serialized script” in BIP117 is exactly the same security hole of Satoshi’s scriptSig + OP_CODESAPARATOR + scriptPubKey. That means it is possible to skip execution of scriptPubKey by using a scriptSig with an invalid push operation, so the whole concatenated script becomes a simple push.Finally, Rusty suggests migrating to a model of limiting sigop per weight, and counting the actual number of sigops during execution, as this approach is cheaper to analyze since one only needs to look at the witness size and does not need to look at the script at all.</summary>
+    <published>2018-03-05T15:28:20+00:00</published>
+  </entry>
+</feed>

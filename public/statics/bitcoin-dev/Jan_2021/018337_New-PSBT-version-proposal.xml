@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New PSBT version proposal</title>
+  <updated>2023-06-14T16:30:05.902874+00:00</updated>
+  <author>
+    <name>Jeremy 2021-01-02 06:34:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New PSBT version proposal</title>
+    <updated>2023-06-14T16:30:05.903876+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018337.html" rel="alternate"/>
+    <summary>A proposal has been made to introduce a new version of Partially Signed Bitcoin Transactions (PSBTs) that addresses deficiencies in the current PSBT v0. This new version, PSBT v1, will contain all input and output data for each in their respective maps. The primary reason for this change is to allow PSBT to properly support adding inputs and outputs which is a feature many people have requested.To maintain compatibility between PSBT v1 and v0, it will be possible to downgrade and upgrade PSBTs between the two versions once all inputs and outputs have been decided. Additionally, the proposal introduces several new fields including PSBT_GLOBAL_PREFERRED_LOCKTIME, PSBT_GLOBAL_INPUT_COUNT, and PSBT_GLOBAL_UNDER_CONSTRUCTION. One potential issue with the proposal is the per-key restriction on specifying sighash flags instead of per-input. @JeremyRubin suggests the per-key restriction is unfitting given that there are circumstances where multisig signers may validate heterogenous logic. A concern was also raised that implementing this change could create a compatibility nightmare with some software supporting version 1, others supporting version 2, and the ones that care enough about UX and are still maintained being forced to support both versions. However, Andrew Chow explains that this change is not just "improvements in the way data is structured" but rather necessary to add inputs and outputs in a proper way.The proposed changes to BIP 174 allow for PSBT to be used in constructing transactions by adding new fields for inputs and outputs. PSBT_GLOBAL_OUTPUT_COUNT is a compact size unsigned integer representing the number of outputs in the PSBT, while PSBT_IN_PREVIOUS_TXID is a 32 byte txid of the previous transaction being spent, and PSBT_IN_OUTPUT_INDEX is a 32 bit little endian integer for the index of the output being spent. Other new fields include PSBT_IN_SEQUENCE and PSBT_IN_REQUIRED_LOCKTIME for input and PSBT_OUT_VALUE and PSBT_OUT_OUTPUT_SCRIPT for output. However, with no unique transaction identifier, more care must be taken when combining PSBTs and adding new inputs and outputs without invalidating signatures. Finalizers must choose the maximum of all of the *_LOCKTIME fields, with PSBT_IN_REQUIRED_LOCKTIME added specifically for inputs requiring a specific minimum locktime such as those involving OP_CHECKLOCKTIMEVERIFY. The PSBT_GLOBAL_PREFERRED_LOCKTIME is the locktime to use if no inputs require a particular locktime. Since these changes disallow the PSBT_GLOBAL_UNSIGNED_TX field, PSBT v1 needs the version number bump to enforce backwards incompatibility. Once inputs and outputs are decided, a PSBT can be "downgraded" back to v0 by creating an unsigned transaction from the above fields and dropping these new fields.</summary>
+    <published>2021-01-02T06:34:00+00:00</published>
+  </entry>
+</feed>

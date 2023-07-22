@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Generalizing feature negotiation when new p2p connections are setup</title>
+  <updated>2023-06-14T15:04:17.841190+00:00</updated>
+  <author>
+    <name>Jeremy 2020-08-21 19:50:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Generalizing feature negotiation when new p2p connections are setup</title>
+    <updated>2023-06-14T15:04:17.842191+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018122.html" rel="alternate"/>
+    <summary>The proposal is to replace VERACK with HANDSHAKEACK after feature negotiation in Protocol &gt;= 70016. This change should make it clear that more than just the version is being acked. The sequencing of messages has minimal impact, but it is suggested that verack come before feature negotiation to divorce the idea that protocol number and feature support are tied. Once this change is made, Verack can be replaced with HANDSHAKENACK or HANDSHAKEACK to signal success or failure to agree on a connection. AJ suggests using a FEATURE wrapper for all messages during this period, which would allow for a semantic for ACKing that a feature is enabled. This would clarify whether a node ignored a feature because it's unknown or disabled. It is proposed that a message called SYNC be added, indicating the end of a list of features and a request to send ACKs or NACKs back. This allows for multi-round negotiation where the set of features offered may be expanded based on the presence of other features. This multi-round negotiation makes it an actual negotiation rather than a pure announcement system. Although it may not be used much in the near term, it makes sense to define it correctly now and build for the future.</summary>
+    <published>2020-08-21T19:50:21+00:00</published>
+  </entry>
+</feed>

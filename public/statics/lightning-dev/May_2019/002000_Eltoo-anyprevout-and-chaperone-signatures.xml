@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Eltoo, anyprevout and chaperone signatures</title>
+  <updated>2023-06-02T18:35:54.434237+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-05-20 13:03:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Eltoo, anyprevout and chaperone signatures</title>
+    <updated>2023-06-02T18:35:54.434237+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-May/002000.html" rel="alternate"/>
+    <summary>In a Lightning-dev post, ZmnSCPxj asked for clarification on the "collaborative path" mentioned in a previous message. The collaborative path refers to using the taproot-tweaked public key to sign without revealing any scripts. The bip-taproot proposal disallows all `SIGHASH` flags except for the current set of valid ones when using this path, which means it does not include `SIGHASH_NOINPUT`/`SIGHASH_ANYPREVOUT`. However, new `SIGHASH` types are allowed in bip-tapscript. ZmnSCPxj believes there is no point in using the collaborative path unless parties are cooperatively closing anyway. Once they agree to spend the funding txo, they don't need to require `SIGHASH_ANYPREVOUT` since they already have fallbacks in case of cooperation failure. Christian later posted a response acknowledging that the updates, besides being signed by both parties, also need to enforce the correct ordering through the CLTV opcode, which cannot be part of the key path. Therefore, only collaborative closes can use the key path, and we do not gain much from using taproot in the update-settlement structure; the unilateral case is always visible on-chain.</summary>
+    <published>2019-05-20T13:03:24+00:00</published>
+  </entry>
+</feed>

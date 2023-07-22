@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CLTV/CSV/etc. deployment considerations due to XT/Not-BitcoinXT miners</title>
+  <updated>2023-06-10T20:30:26.988819+00:00</updated>
+  <author>
+    <name>Peter Todd 2015-08-19 05:50:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CLTV/CSV/etc. deployment considerations due to XT/Not-BitcoinXT miners</title>
+    <updated>2023-06-10T20:30:26.988819+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/010396.html" rel="alternate"/>
+    <summary>The proposed deployment of CLTV, CSV and other soft-forks has been complicated by the existence of XT and Not-Bitcoin-XT miners. Both produce blocks with nVersion=0x20000007, which would trigger previously suggested implementations using the IsSuperMajority() mechanism and nVersion=4 blocks. Neither implementation supports a fork deadline. The BIP101 draft was changed at the last minute from using the nVersion bits compliant 0x20000004 block nVersion, to using two more bits unnecessarily. There are three options for CLTV/CSV/etc. deployment: plain IsSuperMajority() with nVersion=4; nVersion mask, with IsSuperMajority(); and full nVersion bits implementation. The second option is favored over others, since it masks away nVersion bits set by XT/Not-Bitcoin-XT miners prior to applying standard IsSuperMajority() logic. The highest known version can remain nVersion=8, triggered by both XT/Not-Bitcoin-XT blocks as well as a future nVersion bits implementation. Equally, further IsSuperMajority() softforks can be accomplished with the same masking technique. The most complex option is full nVersion bits implementation using flag bit #4 to trigger the fork. Compliant miners would advertise 0x20000008 initially, followed by 0x20000000 once the fork had triggered. The lowest three bits would be unusable for forks for some time, although they could eventually be recovered as XT/Not-Bitcoin-XT mining ceases.</summary>
+    <published>2015-08-19T05:50:36+00:00</published>
+  </entry>
+</feed>

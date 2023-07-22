@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_SECURETHEBAG (supersedes OP_CHECKOUTPUTSVERIFY)</title>
+  <updated>2023-06-13T19:15:07.048292+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-06-02 05:35:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_SECURETHEBAG (supersedes OP_CHECKOUTPUTSVERIFY)</title>
+    <updated>2023-06-13T19:15:07.048292+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-June/016999.html" rel="alternate"/>
+    <summary>The OP_CHECKOUTPUTSHASHVERIFY has been retracted in favor of the new OP_SECURETHEBAG. This new feature ensures that the output is committed to a particular set and it lifts the restriction on the number of inputs needed. The new feature commits to both version and locktime, which was not possible with the previous feature. It allows for more flexibility and ease of use. However, this feature requires special design to be safe and a backout transaction is required before the funding transaction output is committed onchain. For Poon-Dryja channels, the initial commitment transaction is used as the backout transaction. The continued operation of the protocol requires the initial commitment to be revoked at the next update. A plausible backout for the receiver is needed for this purpose. To do so, the funding transaction address is made a Taproot with an internal pubkey 2-of-2 of the receiver and its channel counterparty. The Taproot hides a single script alternative, a `OP_SECURETHEBAG` that ensures it is paid out to a pure script. The scripts form a revocable output to the receiver. `SIGHASH_NOINPUT`/`SIGHASH_ANYPREVOUT` are needed for channel factories based on the Decker-Russell-Osuntokun mechanism ("eltoo"). For channel factories, `SIGHASH_NOINPUT` is better as it allows signatories to introduce a new possible output set later. One might compare `OP_SECURETHEBAG` to MAST, while `SIGHASH_NOINPUT` is comparable to Graftroot. MAST has a fixed set of alternatives, while Graftroot allows signatories to add new alternatives later. Channel factories using `OP_SECURETHEBAG` cannot be updated and are close-only factories.</summary>
+    <published>2019-06-02T05:35:43+00:00</published>
+  </entry>
+</feed>

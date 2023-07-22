@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP draft] Consensus-enforced transaction replacement signalled via sequence numbers</title>
+  <updated>2023-06-09T22:07:49.573346+00:00</updated>
+  <author>
+    <name>Stephen Morse 2015-06-02 03:45:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP draft] Consensus-enforced transaction replacement signalled via sequence numbers</title>
+    <updated>2023-06-09T22:07:49.573346+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-June/008450.html" rel="alternate"/>
+    <summary>In an email to Mark Friedenbach, Stephen expressed his liking for an idea proposed by Friedenbach, but also pointed out one potential issue. Specifically, Stephen believes that there may still be a need for OP_RCLTV (Relative CheckLockTimeVerify) even with Friedenbach's proposed implementation. The reason being that while the solution may work in situations where multiple parties are involved, there may be other unforeseen uses cases that require putting the relative locktime right into the spending contract. Furthermore, when only one signer is involved, there are no external constraints that prevent using nSequence and nVersion=2 to spend the output before a certain time. Despite this criticism, Stephen views the proposal as innovative. Friedenbach had previously proposed the idea of changing the consensus-enforced behavior of sequence numbers to support transaction replacement via per-input relative lock-times. In response to the discussion generated on the mailing list, Friedenbach has written a reference implementation and BIP draft for this soft-fork change. By repurposing the nSequence field of a transaction input to be a consensus-enforced relative lock-time, Friedenbach seeks to enable safe transaction replacement in a way that is semantically compatible with the originally envisioned use of sequence numbers for fast mempool transaction replacement. This approach makes use of the full range of the 32-bit sequence number, which until now, has rarely been used for anything other than a boolean control over absolute nLockTime. However, there are some disadvantages to Friedenbach's approach. External constraints often prevent the full range of sequence numbers from being used when interpreted as a relative lock-time. Additionally, re-purposing nSequence as a relative lock-time precludes its use in other contexts. To address this latter point, the relative lock-time semantics are enforced only if the most significant bit of nSequence is set. This preserves 31 bits for alternative use when relative lock-times are not required. The BIP draft can be found in a gist on GitHub and the reference implementation is available on a git repository. Friedenbach has requested that the BIP editor assign a BIP number for this work.</summary>
+    <published>2015-06-02T03:45:46+00:00</published>
+  </entry>
+</feed>

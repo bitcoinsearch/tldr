@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Segmented Block Relaying BIP draft.</title>
+  <updated>2023-06-06T07:12:03.715820+00:00</updated>
+  <author>
+    <name>Matthew Mitchell 2012-09-13 20:24:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Segmented Block Relaying BIP draft.</title>
+    <updated>2023-06-06T07:12:03.715820+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-September/001829.html" rel="alternate"/>
+    <summary>The email thread discusses ways to parallelize block downloads while preventing re-download of already known transactions. The proposal includes requesting the 8 level-3 hashes, then starting 8 parallel threads to download transactions from different peers. Comparing this with Gregory's suggestion, there is an advantage in downloading relatively less data before the threaded part can start. However, when not looking to remove redundant transaction downloads, the proposal is to download the roots of the segments, and when up-to-date, switch to downloading all the transaction hashes by specifying a high level number. The proposal recommends using one thread for all connections rather than one thread per connection. It is also clarified that only one level of the Merkle tree needs to be downloaded, after which everything can be verified for the hashes on that level. The process involves sending getblocks to find nodes with segments of the blocks needed, sending getsiginv to peers to know the segments of the blocks they have, and sending gettreelevel requesting a level of the merkle tree from a peer that can provide it. The response validates the treelevel, sends getsegment for each segment wanted to the peers that have these segments, validates the transactions in each segment received, and reverts to getdata if peers using the protocol cannot satisfy the block download. When a valid block segment is received, it is included in inv and headers messages for other peers using the protocol, thus allowing relaying to begin before the entire block is downloaded.</summary>
+    <published>2012-09-13T20:24:35+00:00</published>
+  </entry>
+</feed>

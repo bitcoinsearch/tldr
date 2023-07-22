@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Refreshed BIP324</title>
+  <updated>2023-05-22T21:54:57.300228+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2022-10-26 16:39:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Refreshed BIP324</title>
+    <updated>2023-05-22T21:54:57.300228+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021115.html" rel="alternate"/>
+    <summary>On October 8th, 2022 at 8:59 AM, Dhruv M sent a message inviting community members to review the refreshed proposal for BIP324, a new bitcoin P2P protocol featuring opportunistic encryption and the ability to negotiate upgrades before exchanging application messages. One open question regarding BIP324's design is how to deal with the coordination of assigning the message type IDs. The current BIP324 draft introduces a notion of 1-byte message type IDs, which offer a mild bandwidth reduction (3 bytes per message overall), especially since many messages on the network are fairly small. However, it raises the question of how the mapping table between the 1-byte IDs and the commands they represent should be maintained. There are several options for maintaining the mapping table between the 1-byte IDs and the commands they represent. The first option is using the BIP process as-is, introducing a fixed initial table, and future BIPs can introduce new mapping entries for it. The second option is not using 1-byte IDs but slightly longer ones; for example, 3-byte IDs, each consisting of a 2-byte BIP number and a 1-byte message index introduced by that BIP, at the cost of a smaller bandwidth improvement. The third possibility is not having a fixed table at all, and negotiating the mapping dynamically. Lastly, the whole feature could just be dropped from BIP324 and left for a follow-up or independent protocol improvement.The authors of the proposal suggest starting out with approach (1), with a mapping table effectively managed by the BIP process directly, but if and when collisions become a concern, switch to approach (3), possibly even differentially. They feel this is more a community/process question than a technical one, so it would be good to see more opinions on the topic.</summary>
+    <published>2022-10-26T16:39:02+00:00</published>
+  </entry>
+</feed>

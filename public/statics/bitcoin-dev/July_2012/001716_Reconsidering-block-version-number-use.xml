@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reconsidering block version number use</title>
+  <updated>2023-06-06T06:29:51.027694+00:00</updated>
+  <author>
+    <name>Gavin Andresen 2012-07-23 00:41:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reconsidering block version number use</title>
+    <updated>2023-06-06T06:29:51.027694+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-July/001716.html" rel="alternate"/>
+    <summary>The proposal to increase the block version number to 2 is actually related to the coinbase transaction, not the block itself. The issue with bumping the coinbase transaction version is that it will require computing the percentage of the last 1,000 blocks that support the new version during the rollout. This can be done by either storing the last 1,000 coinbases in memory or fetching them from disk. However, this may become a problem if spent transactions are aggressively pruned and the coinbase from 900 blocks back got spent and pruned.An alternative proposal is to use the block version number as an extra nonce to accommodate the increasing number of ASIC miners running at 1 TH/s per rig. This can be done by giving 3 of the 4 block version bytes as a simple extranonce, where version=0x00000001 is what they have now, version 2 blocks are any with 0x02 in the low byte, 0x03 is version 3, and so on. The changes for version 2 blocks would be "has height in the coinbase, and has a 1-byte version number with a 3-byte extranonce."There was also an issue raised regarding block 190192 having version==2 without a valid block height in the coinbase. It was suspected that this may be due to combining the current blockheight-in-coinbase pullreq with P2Pool. However, the rules are "enforce the rules when the chain has a super-majority." Since block 190192 is in a part of the chain with zero other version==2 blocks, the height-in-the-coinbase rule will not be enforced.</summary>
+    <published>2012-07-23T00:41:15+00:00</published>
+  </entry>
+</feed>

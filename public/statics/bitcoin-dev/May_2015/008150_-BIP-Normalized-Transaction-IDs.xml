@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP] Normalized Transaction IDs</title>
+  <updated>2023-06-09T20:57:04.001880+00:00</updated>
+  <author>
+    <name>Luke Dashjr 2015-05-13 16:34:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP] Normalized Transaction IDs</title>
+    <updated>2023-06-09T20:57:04.001880+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/008150.html" rel="alternate"/>
+    <summary>Christian Decker proposed a BIP to normalize transaction IDs in order to address transaction malleability and facilitate higher level protocols. The normalized transaction ID is an alias used in parallel to the current (legacy) transaction IDs to address outputs in transactions. It is calculated by removing (zeroing) the scriptSig before computing the hash, which ensures that only data whose integrity is also guaranteed by the signatures influences the hash. When validating a client supporting this BIP would use both the normalized tx ID as well as the legacy tx ID when validating transactions. Luke-Jr suggests that instead of referring to previous transactions by a normalised hash, it makes better sense to simply change the outpoints in the signed data and allow nodes to hotfix dependent transactions when/if they are malleated. Furthermore, the approach of using a hash of scriptPubKey in the input rather than an outpoint also solves dependencies in the face of intentional malleability (respending with a higher fee, or CoinJoin, for a few examples). Luke Jr. says that these aren't barriers to making the proposal or being assigned a BIP number if you want to go forward with that, but you may wish to reconsider spending time on it. Christian Decker's proposal requires a hardfork, which he believes will not be problematic, given that hardforks are no longer dreaded. He left out the details of how the hardfork is to be done, as it does not matter, and they may have a good mechanism to apply a bunch of hardforks concurrently in the future.</summary>
+    <published>2015-05-13T16:34:52+00:00</published>
+  </entry>
+</feed>

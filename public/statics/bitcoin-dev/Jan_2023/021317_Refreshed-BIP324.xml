@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Refreshed BIP324</title>
+  <updated>2023-05-22T21:51:56.825825+00:00</updated>
+  <author>
+    <name>Anthony Towns 2023-01-09 08:11:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Refreshed BIP324</title>
+    <updated>2023-05-22T21:51:56.825825+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-January/021317.html" rel="alternate"/>
+    <summary>In a recent bitcoin-dev thread, the discussion centered around using shortids as a way to encode certain types of messages in the Bitcoin peer-to-peer protocol. The current implementation for 324 aliases shortids as part of V2TransportDeserializer::GetMessage and V2TransportSerializer::prepareForTransport. This could work with a negotiated assignment of shortids, which would give each peer the ability to choose mappings that minimize their own outbound traffic, even potentially for asymmetric connections, and don't need to coordinate with the other peer to decide a common optimal mapping that they both use across their connection. This proposal also has three advantages: each peer can choose a mapping that minimizes their outbound traffic, reducing memory usage / implementation complexity by not having different serialization tables per-peer, leaving V2TransportSerializer as a `const` object, and not introducing additional locking logic to be able to update its state. However, there isn't a good way to introduce shortids for future one-shot negotiation messages like VERSION, VERACK, SENDADDRV2, WTXIDRELAY, SENDTXRCNCL. It was suggested that nodes could always have a static set of shortids they use for all their peers for outbound messages. The post-VERACK message option seems like it would make more sense to reserve shortids for this purpose. Even if you don't have any table in common with your peer, following VERACK with an immediate announcement of each shortid you want to use and its meaning would still make reasonable sense. If nodes included the ability to define their shortids concurrently with bip324 rollout, then they could always have a static set of shortids they use for all their peers for outbound messages, which would simplify implementations.Overall, the discussion revolved around the best way to implement shortids to reduce outbound traffic and reduce memory usage/implementation complexity. While there are some limitations with introducing shortids for certain types of messages, the proposal seems promising and could simplify implementations.</summary>
+    <published>2023-01-09T08:11:05+00:00</published>
+  </entry>
+</feed>

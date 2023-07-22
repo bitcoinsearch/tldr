@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] Canonical input and output ordering in transactions</title>
+  <updated>2023-05-19T20:43:50.566470+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2015-06-14 23:02:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] Canonical input and output ordering in transactions</title>
+    <updated>2023-05-19T20:43:50.566470+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-June/008656.html" rel="alternate"/>
+    <summary>The Canonical Input and Output Ordering BIP proposes a canonical ordering of inputs and outputs when creating transactions. The motivation behind this proposal is to avoid trivial linkage analysis, especially change outputs. Most bitcoin wallet implementations randomize the outputs of transactions they create; however, mistakes have been made in the past. Using a canonical ordering has the same effect but is simpler, more obvious if incorrect, and can eventually be enforced by IsStandard() and even a soft-fork to enforce it. The proposed specification requires inputs to be ordered by index (lower value first) and txid (little-endian order, lower byte first). Outputs should be ordered by amount (lower value first) and script (starting from the first byte, lower byte first, shorter wins). Any single wallet is already free to implement this, but if other wallets do not, it would reduce privacy by making those transactions stand out. A BIP is appropriate, especially if this were to become an IsStandard() rule once widely adopted. However, there are concerns regarding the strict ordering requirements that are incompatible with future soft-forks that may expose additional ordering constraints. There may also be invisible constraints in systems, such as hardware wallets that sign top-down or future transaction covenants that have constraints about ordering. If everyone else was ordered, even if it wasn't enforced, these applications would be highly distinguishable. The motivations behind this proposal are understated, and there is an unstated motivation related to collaborative transaction systems like coinjoins or micropayment channels, where multiple clients need to agree on the same ordering. Overall, alternative proposals could be considered, such as privately derandomizing the ordering or proposing a simple derandomized randomization algorithm.</summary>
+    <published>2015-06-14T23:02:51+00:00</published>
+  </entry>
+</feed>

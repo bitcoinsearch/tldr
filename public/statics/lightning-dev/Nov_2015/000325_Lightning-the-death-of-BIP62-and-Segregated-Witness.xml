@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Lightning, the death of BIP62, and Segregated Witness</title>
+  <updated>2023-05-18T15:55:19.175509+00:00</updated>
+  <author>
+    <name>Matt Corallo 2015-11-19 19:48:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Lightning, the death of BIP62, and Segregated Witness</title>
+    <updated>2023-05-18T15:55:19.175509+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000325.html" rel="alternate"/>
+    <summary>There are ongoing discussions about the possibility of retracting BIP62, which addresses many vectors for txid malleability. However, BIP62 is not helpful in the context of lightning channel creation because ECDSA sigs are inherently malleable. One of the functions needed is to be able to reliably spend from unconfirmed transactions. Segregated witness can accomplish that, but it is quite a large hard-fork change. Another option is sighash_noinput, which can also accomplish that by modifying the spending transaction while leaving counterparty signatures intact. This change has not been significantly discussed publicly yet, so opinions on what to do have yet to solidify. A new "testnet-L" similar to testnet3 is being proposed with this sighash type so that we can test malleability mitigation out.The basic idea of the soft-fork plan is to have the scriptPubKey be just the 20-byte hash of the redeem script. The scriptSig of the spending input is empty. The actual scriptSig, with the redeem script and signatures, is contained in a separate Merkle tree committed to elsewhere in the block (e.g. in the last output of the coinbase, or the last output of the last transaction). It was suggested that the segregated witness part of the plan could be done with a soft fork similar to P2SH. There are different opinions about this change. Mark Friedenbach came up with a way to do it in a soft-fork, whereas Glenn Tarbox thinks there is very little information available on Segregated Witness. He assumes that those working on it haven't felt the need to write it up. Greg Sanders thinks the hardfork variant is quite simple, as you just stick the signatures in another parallel Merkle tree. If you don't want to validate signatures, just don't download them, and validate everything else. TXIDs don't use the signature at all. It is believed that Pieter wants to push this forward, but opinions on what to do have yet to solidify.</summary>
+    <published>2015-11-19T19:48:04+00:00</published>
+  </entry>
+</feed>

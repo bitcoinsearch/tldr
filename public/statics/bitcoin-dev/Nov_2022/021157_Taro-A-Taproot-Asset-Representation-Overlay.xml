@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Taro: A Taproot Asset Representation Overlay</title>
+  <updated>2023-06-15T18:33:03.223684+00:00</updated>
+  <author>
+    <name>Johan Torås Halseth 2022-11-03 09:26:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Taro: A Taproot Asset Representation Overlay</title>
+    <updated>2023-06-15T18:33:03.223684+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021157.html" rel="alternate"/>
+    <summary>Johan suggests exploring a "teleport" feature for Taro, which would allow for the transfer of tokens to an already spent TXO, essentially burning the tokens. This presents exciting possibilities for LN channels, such as adding or topping up tokens in already open channels with just a proof that tokens were sent to the funding output. The RGB protocol also has the ability to "blind" the UTXO that tokens get teleported to, hiding the recipient UTXO.Ruben shares his experience examining the RGB protocol and believes that some of the issues he uncovered apply to Taro as well. He notes that the Taro script is not enforced by Bitcoin, meaning those who control the Bitcoin script can choose to ignore the Taro script and destroy the Taro assets as a result. However, Ruben acknowledges that the design of Taro clearly precedes and seems to have inspired RGB, so it should be acknowledged.Ruben explains that the "teleport" technique in Taro involves pointing to the outpoint (txid, index) of an existing UTXO owned by the recipient, saving on-chain space. He also cautions that the location of the Taro tree inside the taproot tree needs to be deterministic for the verifier, and the output in which you place the Taro tree needs to be as well, otherwise you can commit to a different Taro tree in each output of the transaction, allowing you to secretly fork the history.Mechanically, Dave can either merge the token histories into a single UTXO or keep them distinct in the asset tree. Asset issuers may opt to issue assets in denominations vs allowing them to be fully divisible. Ultimately, the compatibility with the LN layer will be the primary way to keep asset histories compressed. The protocol doesn't claim to achieve better privacy guarantees than the base chain, but any privacy enhancing protocol used for on-chain top-level Bitcoin UTXOs can also be applied to Taro.The email exchange discusses a potential issue with the Taro tree, in which a taproot tree may contain more than one Taro tree, enabling the owner of the commitment to show different histories to different people. The author proposes three options to achieve strong binding within the Taro tree, with option #1 resolving the issue entirely. The sparse merkle tree is discussed in terms of its use for non-inclusion proofs, history independence, uniqueness of commitments, and simplified validation.The transfer of Taro token ownership from one Bitcoin UTXO to another is also discussed, with new non-dust outputs being created for sending via the address format, and UTXOs being generated as part of MIMO transaction for interactive transfers. The author requests clarification on the RGB "teleport" technique and expresses gratitude for feedback received. Links to relevant tweets are provided.</summary>
+    <published>2022-11-03T09:26:05+00:00</published>
+  </entry>
+</feed>

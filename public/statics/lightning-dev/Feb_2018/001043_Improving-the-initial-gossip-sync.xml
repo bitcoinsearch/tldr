@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving the initial gossip sync</title>
+  <updated>2023-05-20T08:01:47.108673+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-02-24 00:45:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving the initial gossip sync</title>
+    <updated>2023-05-20T08:01:47.108673+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/001043.html" rel="alternate"/>
+    <summary>The Lightning Development team discussed the implementation of three new feature bitpairs. The first one, 'query_short_channel_id', was deemed trivial to implement. The second one, 'query_channel_range/reply_channel_range', requires channel index by block number and zlib for compression. To expedite deployment, a byte or two could be added to denote compression scheme and allow for progressive rollouts of more context-specific optimized schemes. The third feature is a gossip_timestamp field in `init`. From the perspective of Laolu Osuntokun, additional fields cannot be appended to the `init` message as it already contains two variable sized fields (and no fixed size fields). Instead, it should be a distinct `chan_update_horizon` message. Fabrice Drouin suggested adding a `data` field which contains zipped ids like in reply_channel_range so they can query several items with a single message. The team agreed that adding an additional encoding_type field before data could work. Rusty Russell tried various compression schemes, such as gzip -9 and delta, to decrease the number of bytes required. They found that the deltagz scheme worked the best.</summary>
+    <published>2018-02-24T00:45:27+00:00</published>
+  </entry>
+</feed>

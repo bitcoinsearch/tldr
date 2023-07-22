@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New paper on ant routing</title>
+  <updated>2023-06-02T23:33:25.515516+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-02-09 00:57:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New paper on ant routing</title>
+    <updated>2023-06-02T23:33:25.515516+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002509.html" rel="alternate"/>
+    <summary>In a recent discussion on Ant Routing, concerns were raised about the ability of surveillance nodes to determine the distance between two specific nodes in the Lightning Network. This is due to the pheromone system used in Ant Routing, which can reveal upper bounds on the distance between nodes, allowing a surveillor to triangulate the originator of the pheromone with just three nodes.To mitigate this issue and add privacy for both payer and payee, it was suggested that the broadcasting of pheromones should be restricted to only the payee. However, Ant Routing's use of a single pheromone seed presents challenges for implementing path decorrelation and complicated payment schemes using homomorphism of points and scalars enabled by PTLCs.Confirming the length of the path traveled by a pheromone can be done by checking that the timelock component of the HTLC/PTLC routing decrements at each hop. While this can reduce payment failures, it does not completely eliminate the possibility of under-reporting nodes hijacking pheromones to acquire information about payments.Handling routing failures is somewhat harder since the payer does not know the whole path to the payee. However, the fact that a pheromone recently reached the payer indicates that forwarding nodes along that path have recently been online and working, reducing the likelihood of failure. Forwarding nodes could also remember the second-lowest distance pheromone and report an increase in the effective pheromone distance along that path or a true failure where no second-lower distance pheromone exists.In terms of privacy, JIT Routing works similarly to reroute payments via alternate paths without revealing the exact details of payment rerouting.The Lightning network is a scaling solution that drastically reduces the number of nodes notified about a payment. On the other hand, Ant Routing requires a pheromone broadcasted for every payment that reaches every part of the network. This means that data has to reach each and every node on the network at each payment, negating the big-O scaling achieved by Lightning.Ant Routing sends data proportional to p payments to n nodes or O(pn), while current source routing just sends data proportional to p payments to a constant limit of nodes or O(p). Additionally, surveillors can easily determine payments and the maximum distance to the destination and likely source in Ant Routing, which is the same as current Lightning but path decorrelation proposal cannot be used with Ant Routing.However, constant factors are much lower with Ant Routing and it may remain practical if a pheromone emitted only by the payee is used. This approach could reduce the communications rounds between payer and payee to a single communication, the invoice.</summary>
+    <published>2020-02-09T00:57:24+00:00</published>
+  </entry>
+</feed>

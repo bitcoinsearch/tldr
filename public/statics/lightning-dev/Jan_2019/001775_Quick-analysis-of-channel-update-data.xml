@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Quick analysis of channel_update data</title>
+  <updated>2023-06-02T16:48:43.340045+00:00</updated>
+  <author>
+    <name>Fabrice Drouin 2019-01-02 19:46:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Quick analysis of channel_update data</title>
+    <updated>2023-06-02T16:48:43.340045+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-January/001775.html" rel="alternate"/>
+    <summary>In an email exchange between Christian Decker and Fabrice, they discussed the issue of disabling and enabling updates being flushed for channels that flap with a long enough period. Currently, c-lightning holds back disabling channel updates until someone actually attempts to use the channel, at which point they fail the HTLC and send out the stashed channel update, thus reducing publicly visible flapping. However, for enabling, this cannot be done, but they could consider implementing a local policy on how much to delay a channel update depending on the past stability of that peer. This is a local policy and does not warrant a spec change. Christian suggests that they should try out policies related to when to send channel updates and how to hide redundant updates, and then see which ones work best. Fabrice acknowledges that he has not yet looked into handling this with local policies. He hypothesizes that adding a basic checksum to their channel queries may greatly improve the process of syncing a routing table that is one day old, as it prevents the need to download information that they already have. However, he notes that more actionable data and hard numbers are needed for this idea.</summary>
+    <published>2019-01-02T19:46:42+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving RBF Policy</title>
+  <updated>2023-06-15T15:50:40.243724+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2022-03-17 15:59:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving RBF Policy</title>
+    <updated>2023-06-15T15:50:40.243724+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020147.html" rel="alternate"/>
+    <summary>The Bitcoin community has been discussing ways to prevent denial-of-service (DoS) attacks on the network through rate-limiting mechanisms. Two main ideas have emerged: transaction relay rate limiting with a feerate-based priority queue and staggered broadcast of replacement transactions, which would accept multiple replacements for the same prevout within a certain time interval but only relay the original transaction. Feedback is being sought on these ideas and whether adding rate-limiting in transaction relay and thinking about Replace-by-Fee (RBF) DoS protection in this way is a good idea.However, some concerns have been raised that such mechanisms could enable attackers to censor someone else's transaction by sending enough transactions to fill up the rate limit. Additionally, if users are allowed to "recycle" fees, they could potentially be placed higher in the queue multiple times without ever adding more fees to the transaction, which may not be ideal in principle.There has also been discussion on adding a "mining score" calculator to prioritize relay based on feerate, which would be helpful for ancestor-aware funding and fee-bumping in the wallet. It takes the transaction in question, grabs all of the connected mempool transactions, and builds a block template using the current mining algorithm. The mining score of a transaction is the ancestor feerate at which it is included. However, it could be computationally expensive to do all the time.One proposed solution to limit spam and improve transaction relay is a dynamic rate limiting system that competes with the effective feerate proposed by the victim transaction. Another topic discussed was user-elected descendant limits on transactions to solve the pinning problem with package RBF where the attacker's package contains a very large and high-fee descendant. However, there are concerns about this approach if the pinning transaction has a parent with a junk feerate.The group is still soliciting feedback on these proposals, which also include outbound tx relay size-based rate-limiting, prioritizing tx relay by feerate, and keeping high-feerate evicted txs around for a while in case they get mined by someone else to improve compact block relay. The Bitcoin-dev mailing list is actively seeking input on the viability of these ideas as solutions to prevent DoS attacks on the Bitcoin network.</summary>
+    <published>2022-03-17T15:59:11+00:00</published>
+  </entry>
+</feed>

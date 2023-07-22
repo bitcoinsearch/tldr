@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Security problems with relying on transaction fees for security</title>
+  <updated>2023-05-22T20:43:51.748998+00:00</updated>
+  <author>
+    <name>Anthony Towns 2022-07-14 00:54:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Security problems with relying on transaction fees for security</title>
+    <updated>2023-05-22T20:43:51.748998+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-July/020735.html" rel="alternate"/>
+    <summary>On Mon, Jul 11, 2022 at 08:21:40PM -0400, Russell O'Connor via bitcoin-dev wrote that a bribe would be needed to bypass the maturity rule, but since the coinbase cannot take other coinbase outputs as inputs, this cannot be done. The suggestion was made that advanced tx introspection could be used for this purpose. The fees in the coinbase could be spent to address A, but also create a 0sat output through a regular tx to the scriptPubKey "1 CSV". The tx's txid is noted as B, and the next miner claims the bribe B by spending the 0sat output to itself with a 1-in, 1-out tx, with scriptPubKey C.Returning to A, it is suggested that its scriptPubKey uses a script that takes "C" as input, has "B" hardcoded, calculates the txid of the tx above, call it D, and then uses tx introspection to check that one of the inputs of the tx has D as the txid. It was suggested that the bribe has to be by leaving transactions in the mempool but this would only work if tx's use the annex to commit to a recent block.The proposal is that if a block has just been mined (e.g., block 740,000 with hash 00000000000000000005f28764680afdbd8375216ff8f30b17eeb26bd98aac63), then construct a bribe tx paying to "OP_1". When signing it, add "50ee070b4aa0d98aac63" as the annex (tag=ee, length=07, value[0:3]=height=0b4aa0=470k, value[3:]=d98aac63), and nodes will only consider that tx valid if the block at "height" ends in "d98aac63". However, such txs (and anything that descends from them) would become invalid with as little as a 1-block reorg, which would pretty much defeat the entire purpose of the maturity delay.</summary>
+    <published>2022-07-14T00:54:48+00:00</published>
+  </entry>
+</feed>

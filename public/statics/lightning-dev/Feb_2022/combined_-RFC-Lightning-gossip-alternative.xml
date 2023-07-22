@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - [RFC] Lightning gossip alternative</title>
+  <updated>2023-06-04T03:06:10.772052+00:00</updated>
+  <author>
+    <name>Rusty Russell 2022-02-14 01:41:06</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-03-23 01:38:40</name>
+  </author>
+  <author>
+    <name>Joost Jager 2022-02-15 13:45:48</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2022-02-16 02:35:16</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2022-02-18 02:33:08</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2022-02-20 23:02:20</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2022-03-23 23:50:00</name>
+  </author>
+  <link href="lightning-dev/Feb_2022/003470_-RFC-Lightning-gossip-alternative.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2022/003527_-RFC-Lightning-gossip-alternative.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2022/003471_-RFC-Lightning-gossip-alternative.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2022/003474_-RFC-Lightning-gossip-alternative.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2022/003478_-RFC-Lightning-gossip-alternative.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2022/003496_-RFC-Lightning-gossip-alternative.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2022/003530_-RFC-Lightning-gossip-alternative.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - [RFC] Lightning gossip alternative</title>
+    <updated>2023-06-04T03:06:10.772052+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-February/003470.html" rel="alternate"/>
+    <summary>A new update to the Lightning Network protocol has been proposed with the aim of simplifying gossip and reducing UTXO validation requirements. The proposal suggests reducing UTXO validation from per-channel to per-node, allowing nodes to automatically prune UTXOs after an initial check. It also replaces timestamps with block heights and uses UTXOs to prevent spam.Under the proposal, nodes would send out weekly node_announcement_v2 to prove they own some UTXOs, which entitles them to broadcast channels using channel_update_v2. A channel_update_v2 from both peers means the channel exists. The total proved UTXO value is multiplied by ten to give the announcable_channel_capacity for that node. However, Rusty questions the usefulness of this in practice as it could lead to inflated numbers for the total node capacity and make path finding more challenging.The proposal allows "leasing" of UTXOs, enabling one to pay someone to sign their UTXO for their node_announcement, with some level of trust. Channel_id_and_claimant is a 31-bit per-node channel ID that can be used in onion_messages, providing a unique identifier for that specific node to refer to a peer and saving space in the onion.However, this proposal could potentially allow parties on the network to utilize existing outputs to advertise false channels and inflate the total network capacity metric. A merkle proof could be added to make it easier for constrained or mobile nodes to verify gossip data. Alex Myers is looking at using minisketch for gossip reconciliation, and there's enough spam in the network that it probably requires some consensus on filtering.Joost Jager raises several questions about the proposal, including whether the total proved utxo value can be a dynamic value and whether there is a mechanism to discourage spam. Rusty responds to these concerns and breaks down the proposal into three components, addressing Jager's questions for each component.ZmnSCPxj also proposes the idea of preparing for published channels backed by channel factories, and Rusty suggests that it is already possible with the new proposal. Overall, these conversations aim to address concerns and explore ways to make the Lightning Network more efficient and flexible.</summary>
+    <published>2022-02-14T01:41:06+00:00</published>
+  </entry>
+</feed>

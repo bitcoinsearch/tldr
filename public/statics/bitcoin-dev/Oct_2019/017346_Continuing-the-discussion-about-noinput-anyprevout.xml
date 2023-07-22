@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Continuing the discussion about noinput / anyprevout</title>
+  <updated>2023-06-13T21:32:02.673339+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-10-03 10:30:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Continuing the discussion about noinput / anyprevout</title>
+    <updated>2023-06-13T21:32:02.673339+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-October/017346.html" rel="alternate"/>
+    <summary>The context discusses the potential problem of "bad wallet designers" misusing noinput in their custom wallets. However, the writer believes that there are simpler ways to cut corners, and good wallet options exist that people can choose from. The custom wallet designers/developers should be well-versed in the issues they might encounter when implementing their wallet, especially if they decide to opt into using lesser-known sighash flags such as noinput. While scripts signed with no_input signatures are only exchanged and used for off-chain negotiations, few should ever appear on chain. Those that do should represent non-cooperative situations that involve signing parties who know not to reuse or share scripts with these public keys again. Additionally, the writer points out the downside of chaperone signatures, which require additional code complexity to flag whether or not a chaperone output is included. In comparison, the code changes required for creating a no_input digest that skips the prevout and prevscript parts of a tx are much less intrusive and easier to maintain. The writer further argues that lazy wallet design is a compelling reason to fix footguns in the Bitcoin protocol. The Mt Gox wallet designers were allegedly unaware of bitcoin protocol vulnerabilities that led to non-malleable transactions in the form of segwit being introduced to prevent this exploit. Transaction malleability issue and the introduction of a new sighash flag are fundamentally different. With transaction malleability, a wallet developer has to take active measures to guard against it since it was present even for the most minimal implementation. Whereas, with sighash flags, developers have to actively add support for it. The writer believes that one has to have a very compelling reason to opt into supporting noinput, usually because they want to support a more complex protocol, such as an off-chain contract, at which point they would know about the tradeoffs of various sighash flags. Finally, the writer advocates for fixing unused features such as SIGHASH_NONE or SIGHASH_SINGLE that have virtually no use, as they do not matter if they are secure or insecure. However, it is unrealistic to have a developer who can implement a complex off-chain system but fails to understand the importance of using the correct sighash flags in their wallet. The writer believes that this concern would be addressed by any form of explicit opt-in on the output side (whether hidden or not).</summary>
+    <published>2019-10-03T10:30:03+00:00</published>
+  </entry>
+</feed>

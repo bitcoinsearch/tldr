@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Blind Merged Mining with covenants ( sighash_anyprevout / op_ctv )</title>
+  <updated>2023-06-13T22:54:56.301185+00:00</updated>
+  <author>
+    <name>Ruben Somsen 2019-12-26 16:52:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Blind Merged Mining with covenants ( sighash_anyprevout / op_ctv )</title>
+    <updated>2023-06-13T22:54:56.301185+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-December/017537.html" rel="alternate"/>
+    <summary>Blind Merged Mining (BMM) is a decentralized consensus mechanism that allows external blockchains to outsource their mining to the Bitcoin blockchain. It requires no extra validation on the miner's part and increases the total Proof of Work (PoW) on the Bitcoin blockchain, adding to its security. BMM blocks are chosen by the highest bidder, which can be anyone. While it may be hard to justify as a soft fork, it is possible with the inclusion of sighash_anyprevout into Bitcoin, allowing for op_checktemplateverify style covenants, generating a unique location for the hash that can be competed for by anyone with the help of RBF. While the Bitcoin blockchain will be unaware of the BMM chain, the opposite does not have to be true. It enables some interesting possibilities such as conditional BMM token transfer that goes through only if a specific Bitcoin transaction occurs within a certain period, enabling atomic swaps when combined with asset issuance/colored coins/pegged tokens. It would also be possible to create contracts based on Bitcoin's hashrate. The chain will need some kind of native token to pay for fees, but perpetual one-way pegging could preserve the 21M coin limit. Given the lack of a block subsidy, there may not be enough impetus to move the chain forward instead of enacting a reorg. However, BMM reorgs are somewhat unique in that they will have to compete for the same unique location that the original chain is using. A 10-block reorg would take 100 minutes on average to catch up, during which the original chain won't move forward. Whether this mitigation is sufficient is an open question.Finally, it is worth asking whether BMM interferes too much with the existing incentive structure of Bitcoin. Since the exact signature is committed to ahead of time, private key security is actually irrelevant, and assuming taproot, the spending script will be inside a taproot leaf, meaning there is a key spend path that should be made unusable to enforce the covenant. Some technical details suggest anyone can easily pre-compute all the sighash_anyprevout signatures with s = 1 + e.</summary>
+    <published>2019-12-26T16:52:43+00:00</published>
+  </entry>
+</feed>

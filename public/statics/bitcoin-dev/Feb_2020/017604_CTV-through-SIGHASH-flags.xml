@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>CTV through SIGHASH flags</title>
+  <updated>2023-05-20T21:39:24.744745+00:00</updated>
+  <author>
+    <name>Bob McElrath 2020-02-01 20:39:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>CTV through SIGHASH flags</title>
+    <updated>2023-05-20T21:39:24.744745+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-February/017604.html" rel="alternate"/>
+    <summary>The proposal suggests that OP_CHECKTEMPLATEVERIFY should behave more like CHECKSIG and have a flags byte that specifies what is hashed, unifying the ways a SigHash is computed. The CTV-type functionality using CHECKSIG is achievable with some form of NOINPUT flag. Committing to the number of inputs and outputs makes CTV hashes easier to compute with script, but it requires OP_CAT. However, committing to the input index is a sender-specified-policy choice and can be considered using a flag instead. A new flag SIGHASH_NOSIG might work as an alternative type of CHECKSIG operator or CTV might be renamed to CHECKSIGHASH, appending flag bytes to the hash to be checked. The flags discussed above, NOINPUT, NOSIG, INPUTINDEX are all really sender-policy choices, while SIGHASH flags are redeemer-choice. CSV (CHECKSEQUENCEVERIFY) shows that redemption policies are committed to in the output by the sender via the sequence_no field. As user policy choices, NOINPUT might be considered "MAY" conditions, while covenants are a MUST condition. Txid non-malleability can be achieved by enforcing that the output must be spent using SIGHASH_ALL instead of committing to the number of inputs separately with a new opcode. Assuming a CSV-type mechanism can be devised using sequence_no, CTV is equivalent to a flag in sequence_no that is logically MUST|ALL|NOSIG|INPUTINDEX and a redeemScript of . Lightning-like use cases might put sequence_no flags that are logically MAY|ALL|NOINPUT. The other mechanism for sender policy is scriptPubKey, which is heavily restricted by isStandard, but might be another place to specify flags like the above.</summary>
+    <published>2020-02-01T20:39:42+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Protocol changes</title>
+  <updated>2023-05-26T20:17:17.783844+00:00</updated>
+  <author>
+    <name>Mike Hearn 2011-08-11 16:17:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Protocol changes</title>
+    <updated>2023-05-26T20:17:17.783886+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-August/000361.html" rel="alternate"/>
+    <summary>The discussion initially revolved around the benefits of a thin client which has done a fast startup and downloaded only the headers. However, it was suggested that tx filtering is a better option as it allows only relevant transactions + merkle branches to be downloaded rather than every block, which can still lead to high costs as blocks get bigger. The conversation then shifted towards the sequence number and its role in contract protocols where one party needs to re-issue transactions without interacting with the other parties. Having seqnums on the inputs allows for the creation of a newer version of the transaction by resigning the input with a higher sequence number. This is defined by IsNewerThan(). The SIGHASH flags limit what can be changed, but this feature allows for particular types of contracts on the network's memory pool. For instance, if you're taking part in a contract and decide to bow out, you can set the output in the same position as your input to reassign all the money you put in back to you, sign the input with SIGHASH_SINGLE and broadcast with nSequence set to UINT_MAX. After this step, you've bowed out of the negotiation completely because you can't replace the transaction anymore. It's important to note that you can't change anything about the inputs beyond scripts this way. The transaction still has to connect to the same outputs as before and import the same amount of value.</summary>
+    <published>2011-08-11T16:17:23+00:00</published>
+  </entry>
+</feed>

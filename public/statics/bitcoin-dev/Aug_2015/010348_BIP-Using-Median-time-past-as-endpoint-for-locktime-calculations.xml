@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP: Using Median time-past as endpoint for locktime calculations</title>
+  <updated>2023-06-10T20:15:17.468782+00:00</updated>
+  <author>
+    <name>Thomas Kerin 2015-08-18 01:22:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP: Using Median time-past as endpoint for locktime calculations</title>
+    <updated>2023-06-10T20:15:17.468782+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/010348.html" rel="alternate"/>
+    <summary>The proposal for BIP XX titled "Median time-past as endpoint for lock-time calculations" has been drawn up by Thomas Kerin and Mark Friedenbach. The abstract explains that this proposal redefines the semantics used in determining a time-locked transaction's eligibility for inclusion in a block. At present, transactions are excluded from inclusion in a block if the present time or block height is less than or equal to that specified in the locktime. This has the unfortunate outcome of creating a perverse incentive for miners to lie about the time of their blocks in order to collect more fees by including transactions that have not yet matured. This proposal seeks to ensure reliable behaviour in locktime calculations as required by BIP65, BIP68, and BIPXX (OP_CHECKSEQUENCEVERIFY). Lock-time constraints are checked by the consensus method IsFinalTx() or LockTime() under BIP68. These methods take the block time as one parameter. This BIP proposes comparing the locktime against the median of the past 11 block's timestamps, rather than the timestamp of the block including the transaction. A reference implementation of this proposal is provided in the following git repository: https://github.com/maaku/bitcoin/tree/medianpasttimelock. Transactions generated using time-based lock-time will take approximately an hour longer to confirm than would be expected under the old rules. It is recommended that this soft-fork deployment trigger include other related proposals for improving Bitcoin's lock-time capabilities, such as BIP65, BIP68 and CHECKSEQUENCEVERIFY.The deployment reuses the double-threshold switchover mechanism from BIPs 34 and 66, with the same thresholds, but for block.nVersion = 4. The new rules are in effect for every block (at height H) with nVersion = 4 and at least 750 out of 1000 blocks preceding it (with heights H-1000...H-1) also have nVersion = 4. Furthermore, when 950 out of the 1000 blocks preceding a block do have nVersion = 4, nVersion = 3 blocks become invalid, and all further blocks enforce the new rules. The document is placed in the public domain.</summary>
+    <published>2015-08-18T01:22:10+00:00</published>
+  </entry>
+</feed>

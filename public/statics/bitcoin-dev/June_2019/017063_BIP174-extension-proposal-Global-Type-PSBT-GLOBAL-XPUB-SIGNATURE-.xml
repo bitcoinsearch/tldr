@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+  <updated>2023-06-13T19:37:44.844883+00:00</updated>
+  <author>
+    <name>Dmitry Petukhov 2019-06-28 21:48:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+    <updated>2023-06-13T19:37:44.844883+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-June/017063.html" rel="alternate"/>
+    <summary>The email thread is discussing changes to the PSBT scheme, specifically regarding multisig wallets. Two proposed formats are suggested: one for usual cases and another for serial numbered packages that require different versions of xpub packages signed by certain cold keys. There were concerns raised about how the scheme handles multisig, as attackers could potentially create a single-sig destination address they control and move coins in a chain of two transactions if individual xpubs were signed with cold keys. To prevent this, it was suggested to sign the whole 'xpub package' of the multisig wallet or use an auxiliary message that can include a specific 'epoch' word or serial number for xpub packages.While extending PSBT to accommodate these schemes is a good idea, it may be better dealt with outside of PSBT as 'PSBT metainformation', or using vendor-specific or metainformation-specific PSBT fields. This way, each use case can be independently described in its own documentation, including particulars of the scheme. Another proposal has been made to extend PSBT to include functionality for verifying that the recipient address is not fraudulent. This would allow for verification of both an Extended Public Key (xpub) and its corresponding signature, providing an additional layer of security for cold-to-warm and warm-to-hot wallet transactions. The proposed key value specification can be found on GitHub and includes a flow for securely verifying the xpub of the warm/hot wallet and signing it with all cold keys before uploading the signature/xpub pairs to the online unsigned transaction generator.When offline signing, the wallet would detect a global keyval XPUB_SIGNATURE and verify that all outputs have BIP32_DERIVATION, allowing for derivation to the xpub and signature. Feedback on the proposal is welcome.</summary>
+    <published>2019-06-28T21:48:16+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RFC: Kicking BIP-322 (message signing) into motion</title>
+  <updated>2023-06-13T23:58:00.321922+00:00</updated>
+  <author>
+    <name>Karl-Johan Alm 2020-03-25 06:31:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RFC: Kicking BIP-322 (message signing) into motion</title>
+    <updated>2023-06-13T23:58:00.321922+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-March/017712.html" rel="alternate"/>
+    <summary>This document proposes a standard for interoperable generic signed messages based on the Bitcoin Script format. The current message signing standard only works for P2PKH (1...) addresses. By extending it to use a Bitcoin Script-based approach, it could be made more generic without causing too much burden on implementers, who most likely have access to Bitcoin Script interpreters already. A new structure SignatureProof is added, which is a simple serializable scriptSig &amp; witness container. The proof is deemed invalid if the system derives the address for the pubkey kG, and if it does not match A. The current message signing standard solves this via a cryptographic trick, wherein the signature S above is a special "recoverable signature" type. While this is a neat trick, it unnecessarily restricts and complicates the message signing mechanism; for instance, it is currently not possible to sign a message for a P2SH address because there is no pubkey to recover from the resulting signature. If the challenge consists of an address in the P2PKH (legacy) format, sign using the legacy format. Otherwise, continue as stated below.The ruleset sometimes changes. This BIP does not intend to be complete, nor does it indicate enforcement of rules. It simply lists the rules as they stand at the point of writing. Each flag is associated with some type of enforced rule (most often a soft fork). There are two sets of flags: consensus flags (which result in a block being rejected if violated), and policy flags (which result in a transaction being accepted only if it is contained within an actual block and rejected otherwise, if violated). The provided context is a test vector for a bech32 P2WPKH (native segwit) address. The vector has various components including flags, entries, scriptsiglen, wit entries, entry1len, entry1, entry2len and entry2. A discussion thread among Bitcoin developers was also included in the context. The developers were discussing different ways to improve BIP-322 and make it more appealing to users. One suggestion was to replace the sign message feature with a prove funds system. Another suggestion was to use a transaction instead of a new format and make the first input's txid the message hash to ensure the tx cannot be broadcasted. A third suggestion was to use Trezor style, which has already been adopted but has some limitations. A fourth suggestion was to introduce OP_MESSAGEONLY, which means the script following the code would never be valid. Finally, the developers discussed other possible solutions. The specification is backward compatible with the legacy signmessage/verifymessage specification through the special case as described above. The document is licensed under the Creative Commons CC0 1.0 Universal license. Thanks to David Harding, Jim Posen, Kalle Rosenbaum, Pieter Wuille, and many others for their feedback on the specification.</summary>
+    <published>2020-03-25T06:31:56+00:00</published>
+  </entry>
+</feed>

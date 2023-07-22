@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New BIP: Dealing with dummy stack element malleability</title>
+  <updated>2023-05-19T23:52:25.422253+00:00</updated>
+  <author>
+    <name>Johnson Lau 2016-09-02 04:40:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New BIP: Dealing with dummy stack element malleability</title>
+    <updated>2023-05-19T23:52:25.423288+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-September/013096.html" rel="alternate"/>
+    <summary>The proposed changes to the Bitcoin transaction validity rules are specified in this BIP, which aims to fix the malleability of extra stack element for OP_CHECKMULTISIG and OP_CHECKMULTISIGVERIFY. Signature malleability has become a problematic issue, as it allows any relay node on the network to transform the signature in transactions without requiring access to relevant private keys. To address this issue, a new consensus rule called "NULLDUMMY" is deployed that requires the dummy element to be the empty byte array. Anything else will make the script evaluate to false immediately, thereby increasing security.This BIP will be deployed by "version bits" BIP9 using the same parameters for BIP141 and BIP143, with the name "segwit" and using bit 1. The reference client has produced compatible signatures from the beginning, and the NULLDUMMY rule has been enforced as relay policy by the reference client since v0.10.0. An implementation for the reference client is available at https://github.com/bitcoin/bitcoin/pull/8636.The document specifies a new rule to fix the design flaw in OP_CHECKMULTISIG and OP_CHECKMULTISIGVERIFY, where they consume an extra stack element ("dummy element") after signature validation. The dummy element is not inspected in any manner and could be replaced by any value without invalidating the script. For non-segregated witness transactions, signature malleability will change the txid and invalidate any unconfirmed child transactions. Although the txid of segregated witness (BIP141) transactions is not third party malleable, this malleability vector will change the wtxid and may reduce the efficiency of compact block relay (BIP152).This BIP will be deployed using the same parameters as BIP141 and BIP143, with the name "segwit" and using bit 1. The reference client has produced compatible signatures from the beginning, and the NULLDUMMY rule has been enforced as relay policy by the reference client since v0.10.0. There has been no transactions violating the requirement being added to the chain since at least August 2015. In addition, every non-compliant signature can trivially be converted into a compliant one, so there is no loss of functionality by this requirement.</summary>
+    <published>2016-09-02T04:40:58+00:00</published>
+  </entry>
+</feed>

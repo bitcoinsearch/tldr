@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-06-13T15:25:01.077318+00:00</updated>
+  <author>
+    <name>Bob McElrath 2018-11-28 00:54:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-06-13T15:25:01.077318+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-November/016507.html" rel="alternate"/>
+    <summary>The author has been working on an experimental wallet that implements Bitcoin Covenants/Vaults. The concept is to deposit to an address for which you don't know the private key and instead construct a second transaction locking it for some time with a staging address for which you have the privkey. The author used Pay-to-Timelock Signed Transaction (P2TST) to achieve this. To avoid circular dependency issues, the author's construction of covenants/vaults requires NOINPUT. Sipa's proposal, which uses SIGHASH_NOINPUT | SIGHASH_SCRIPTMASK to remove scriptPubKey/redeemScript from the sighash, is compatible with the above vaulted construction. One would want to provide the fee from a separate wallet so as to be able to account for fluctuating fee pressures when the unvaulting occurs a long time after vaulting. Thus one would want to use SIGHASH_SINGLE so that a fee-wallet can add fees (or for composability of P2TSTs), and SIGHASH_NOFEE as well. The author is also excited to combine this idea with Taproot/Graftroot/g'Root.</summary>
+    <published>2018-11-28T00:54:16+00:00</published>
+  </entry>
+</feed>

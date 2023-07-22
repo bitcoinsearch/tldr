@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Draft BIP : fixed-schedule block size increase</title>
+  <updated>2023-06-10T00:24:28.600169+00:00</updated>
+  <author>
+    <name>Will 2015-06-24 13:06:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Draft BIP : fixed-schedule block size increase</title>
+    <updated>2023-06-10T00:24:28.600169+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-June/009046.html" rel="alternate"/>
+    <summary>In June 2015, Gavin Andresen proposed a BIP to replace the fixed one-megabyte maximum block size with a maximum size that grows over time at a predictable rate. The proposal was motivated by the growing transaction volume on the Bitcoin network.Opponents of the move argue that the change is too risky and could lead to the centralisation of mining power and nodes. Furthermore, some suggest that the focus should be on off-chain scaling solutions rather than increasing the block size. The deployment plan involved a hash-power supermajority vote, but with a set earliest possible activation time. Once activated, the maximum block size would be as described in the specification section, regardless of the version number of the block. However, this proposal was refuted by some who believed that introducing a highly variable and untested dynamic into an already complex system was unnecessarily risky.They proposed using Jeff Garzik's BIP-100 instead, which introduced a floating block size limit set to 1MB, and miners could vote by encoding 'BV'+BlockSizeRequestValue into coinbase scriptSig. The most common floor (minimum) would then be chosen, after dropping the bottom 20% and top 20% of votes. The largely arbitrary voting rules listed in point 9 could be gamed, leading to unnecessary vulnerabilities. Still, with a default vote that is ~9% larger than the previous maximum block size and no option to lower the max block size, BIP-100 could work without added risk or defeating the intended purpose.However, one has to ask if the benefit is there to justify the additional moving parts. This proposal represents a hard-forking change, meaning that those running code that fully validates blocks must upgrade before the activation time. Simplified Payment Verification software will not be affected unless it makes assumptions about the maximum depth of a transaction's merkle branch based on the minimum size of a transaction and the maximum block size. It is yet to be seen whether this proposal will be adopted or if alternative proposals will emerge.</summary>
+    <published>2015-06-24T13:06:40+00:00</published>
+  </entry>
+</feed>

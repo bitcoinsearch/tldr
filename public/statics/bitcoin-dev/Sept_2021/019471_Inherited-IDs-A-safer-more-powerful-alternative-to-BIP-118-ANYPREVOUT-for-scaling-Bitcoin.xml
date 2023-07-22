@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Inherited IDs - A safer, more powerful alternative to BIP-118 (ANYPREVOUT) for scaling Bitcoin</title>
+  <updated>2023-05-22T15:48:25.521177+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-09-18 11:37:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Inherited IDs - A safer, more powerful alternative to BIP-118 (ANYPREVOUT) for scaling Bitcoin</title>
+    <updated>2023-05-22T15:48:25.521177+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019471.html" rel="alternate"/>
+    <summary>A proposal for an alternative to BIP-118 has been put forward by John Law on the bitcoin-dev mailing list. The proposed method is called Inherited IDs (IIDs) and involves adding a new resettable "structural" transaction ID called an "iid" to each UTXO. The idea is that input transactions can be identified when signing, so if the details of a transaction change but not its structure, the signature remains valid. The proposal includes a tagging system using segwit v2 outputs to identify tagged outputs. The proposal also includes a protocol called "2stage" which enables fast closing of channels with two participants. However, this protocol does not work with more than two participants because two participants can collude to rob other participants. To make channel factories work in this model, invalidation trees have been introduced to allow updating the split of funds between groups of participants. This introduces a tradeoff between how many updates can be made, how long there is to notice a close is proposed and correct it before an invalidated state can be posted, and how long it will take to extract funds from the factory initially. A hierarchy of update transactions is proposed to reduce these delays substantially.The proposal is being compared to eltoo and statechains with special consideration given to two-party channels. For uncooperative cases, the multisig iid factories approach requires log(n) transactions for the invalidation tree and log(n) time for the delays to ensure invalidated states don't get published. On the other hand, eltoo requires one transaction from the user and one block after the user notices, plus the fixed CSV delay. A practical problem with lightning involves dealing with layered commitments, which is a problem for both the delays while waiting for a potential rejection in 2stage and for the invalidation tree delays in factory construction.Implementing the "iid" concept would require adding information to the UTXO database, possibly resulting in a 1.4GB increase to the database, but iid transactions are expected to be uncommon and short-lived. The proposal is compared to using ANYPREVOUT, which could simulate the construction of IIDs without requiring any changes beyond those needed for introducing ANYPREVOUT.</summary>
+    <published>2021-09-18T11:37:40+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Take 2: Removing the Dust Limit</title>
+  <updated>2023-06-03T06:50:12.506285+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2021-12-08 08:34:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Take 2: Removing the Dust Limit</title>
+    <updated>2023-06-03T06:50:12.506285+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003384.html" rel="alternate"/>
+    <summary>In a conversation between Bastien and Jeremy on the Bitcoin-dev mailing list, the topic of lightning anchor outputs and their bloat on the utxo set was discussed. The current system uses a 330 sats amount for each commitment transaction's two outputs, but only one output is spent to help confirm the transaction, while the other remains unclaimed. To avoid pinning, it is necessary to have two outputs, with each participant only being able to spend one while the parent transaction is unconfirmed. N-party protocols may require N such outputs. Jeremy brought up a proposal from earlier this year to allow 0 value outputs, which was rejected due to various reasons. However, he believes that with the launch of package relay, a simple carve-out can be implemented by allowing 0 value outputs as intermediate outputs required to be spent by another transaction in order for the creating transaction to be in the mempool. This would not allow 0 value utxos to proliferate long and still be valid to be spent by the fee-paying transaction later. Implementing this as a mempool policy would not introduce any new validation rules and could be helpful for CTV based contracts and spacechains. Jeremy states that this rule presupposes a fully working package relay system and addresses all issues with allowing 0 value outputs for immediately spendable outputs.</summary>
+    <published>2021-12-08T08:34:32+00:00</published>
+  </entry>
+</feed>

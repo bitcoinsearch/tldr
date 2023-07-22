@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Pay payment_request with an openchannel+push_sat</title>
+  <updated>2023-05-24T18:25:31.987581+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-01-12 00:30:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Pay payment_request with an openchannel+push_sat</title>
+    <updated>2023-05-24T18:25:31.987581+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-January/000922.html" rel="alternate"/>
+    <summary>A member of the Lightning Network (LN) community, Jonathan Underwood, has proposed a feature that would allow for users to pay with an open channel. The idea is that if the recipient of a payment waiting for a specific r_hash receives an open_channel message with push_msat &gt;= the value of the request where the temporary_channel_id contains the r_hash...that payment will be set to a WAITING_OPEN status. Once the channel is open, the payment moves to a PAID status. If while waiting for the channel to open in the WAITING_OPEN state, a routed payment is received with the r_hash, accept that payment and change the payment status to PAID.Rusty Russell, also of the LN community, responded to Underwood's proposal with some concerns. Russell stated that it may be better to simply open a channel then make a payment rather than using push_msat. He also pointed out that open_channel can take up to 10 minutes, but most smartphone apps kill background network processes for apps after 5 minutes or so. Additionally, open_channel can take hours if the depth requirement is high, the fees too low, or miners unlucky. Russell suggested that in cases where routing fails to pay someone, a wallet UI should ask the user whether they want to open a channel and send, send on-chain, or give up. In terms of mobile wallets doing the kind of polling needed here, Russell believes that there are ways this can be accomplished. Russell also noted that allowing the person to "pay" with an open_channel introduces trust into the system and that he doesn't believe adjustments should be made based on such a falsifiable signal. Lastly, Russell mentioned that if this feature were to be added, it would be a 1.1 thing since the spec is frozen other than outright bugs.</summary>
+    <published>2018-01-12T00:30:21+00:00</published>
+  </entry>
+</feed>

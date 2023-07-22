@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Specifications of Broadcasting Layers</title>
+  <updated>2023-05-23T21:03:07.923721+00:00</updated>
+  <author>
+    <name>Rusty Russell 2015-10-19 00:48:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Specifications of Broadcasting Layers</title>
+    <updated>2023-05-23T21:03:07.923721+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-October/000274.html" rel="alternate"/>
+    <summary>In this communication, Mats Jerratsch introduces three different broadcast messages that require different handling. The first message is Pubkey-Channel-Relationships which is static and relayed every 10 days, with a size of 264 Bytes. The second message is Node addresses/IP, which depends on the nodes, with dynamic/static IP and approximately sent every 12 hours, with an estimated size of 133 Bytes. The third message is Channel-Status (capacity, fee, ...) that varies highly depending on actual traffic and node usage, and it should be sent once an hour with an estimated size of 176 Bytes. Rusty suggests that when channels approach exhaustion, fees may rise significantly, and you want to know if capacity is sufficient for the amount you're sending.A random beacon model requires only partial topology knowledge, which makes these numbers scale much better. However, it introduces another factor. Rusty suggests realizing it as some kind of gossip protocol or using some DHT approach. Bram Cohen was supportive of using BitTorrent's DHT for (1 and 2).For #3, they need their own inline protocol. A new node would want to retrieve the full dataset before opening a channel with a new node. So they need to design a way of retrieving the full dataset for fresh nodes, probably in some load-distributed way. In the short term, Bitcoin used IRC as the peer protocol. It is easy to debug and trivial to implement, so Rusty aims for that while they research their more ambitious proposals.</summary>
+    <published>2015-10-19T00:48:30+00:00</published>
+  </entry>
+</feed>

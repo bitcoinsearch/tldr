@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>BIP32 Index Randomisation</title>
+  <updated>2023-05-19T19:52:09.348772+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2015-03-13 04:01:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>BIP32 Index Randomisation</title>
+    <updated>2023-05-19T19:52:09.348772+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-March/007689.html" rel="alternate"/>
+    <summary>Matias Alejo Garcia wrote on the Bitcoin-development mailing list about Bitcore-wallet-server (BWS), a HD multisig wallet 'facilitator'. They are using BIP32 paths to hold the set of extended public keys of the wallet's peers to derive addresses. This is a problem from the privacy point of view, so they thought of using pseudo-random BIP32 paths with a seed only known by the peers. This way the server will be able to verify that addresses submitted by peers belong to the wallet but will not be able to derive future wallet addresses. The seed could be derived from hashes of their xprivs so wallet funds can still be recovered with the complete set of xprivs or the quorum of xprivs plus the complete set of xpubs and the address seed. A suggestion was made by Peter Todd to give the server the master pubkey P only without the chaincode. When transacting, generate the address in whatever manner one likes and tell the server the scalar value iL which the user computes as iL = HMAC-SHA512(Key=cpar, Data=serP(Kpar) || ser32(i))[first 32 bytes], per BIP 32. Then the server computes P + iL*G and checks agreement with the address. It would be more private than giving people the chain code. The approach suggested is also not gratuitously incompatible with hardened derivation.</summary>
+    <published>2015-03-13T04:01:45+00:00</published>
+  </entry>
+</feed>

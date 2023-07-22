@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Multisignature transations</title>
+  <updated>2023-06-04T20:15:05.000407+00:00</updated>
+  <author>
+    <name>Gavin Andresen 2011-09-29 16:07:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Multisignature transations</title>
+    <updated>2023-06-04T20:15:05.000407+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-September/000615.html" rel="alternate"/>
+    <summary>The pull request (#541) submitted to the Bitcoin repository on Github adds initial support for three new types of transactions that enable better wallet security and backup in future versions of Bitcoin. The three new transaction types are: (a and b), (a or b), and (a and b) or c, where a/b/c are keys. These new transactions will be relayed and included in blocks but will not affect the balance or be considered available to spend until multisig_testing branch is added in the gavinandresen github fork. A discussion on bitcoin-dev has been initiated to ensure careful consideration of potential attacks during development. One potential attack involves an attacker with an account and a funding address/key (“a”) at a shared-wallet service, as well as their own address/key (“b”). If the attacker sends 100 bitcoins that can be spent by (a or b), the shared-wallet service may assume control over all the keys in its wallet and only issue a send* RPC command when coins in its wallet are spent. However, if the attacker spends using “b,” it may lead to double-credit by importing “b” depending on what the ‘import private key’ code does. This pull request avoids these issues because multisignature transactions are not credited or added to the wallet.Going forward, multisignature transactions should only be added to the wallet’s balance and made available to spend if the public half of ALL the keys involved are known to the wallet. The private half of the key may not be in the wallet and could be on another device or could be a deterministic backup master key protected by a passphrase, but the public key must be known and in the wallet.The author of the pull request, Gavin Andresen, hopes to get this into the 0.5 release because it will enable much better wallet security and backup in some future release or alternative client. However, these transaction types need to be relayed and mined before then to make that possible.</summary>
+    <published>2011-09-29T16:07:41+00:00</published>
+  </entry>
+</feed>

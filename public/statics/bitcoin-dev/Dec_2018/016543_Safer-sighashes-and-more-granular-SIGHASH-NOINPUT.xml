@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-05-20T18:04:48.373853+00:00</updated>
+  <author>
+    <name>Johnson Lau 2018-12-12 19:53:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-05-20T18:04:48.373853+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-December/016543.html" rel="alternate"/>
+    <summary>The discussion revolves around the issue of witness weight malleability in Bitcoin Script, which occurs due to certain opcodes accepting variable size inputs provided by the puzzle solver. The proposal is to use a 64-byte signature for the default "signing all" sighash and 65-byte for other sighash types to allow a few more transactions in a block, but this would make witness weight estimation difficult in multisig cases. The concern is the difficulty in estimating witness weight for complex scripts that need this feature the most. The question arises whether any script example witness size malleability is unavoidable or if there is proof that any script can be transformed into an equivalent one that avoids it. It is suggested that having an option for signature covers weight is one of the best ways to address the whole problem. Certain opcodes such as IF, NOTIF, VERIFY, DROP, 2DROP, NIP, DEPTH, and arithmetic opcode accepting CScriptNum are problematic as they accept variable size input without affecting output, which is provided by the puzzle solver. However, CHECKMULTISIG is fixed by BIP147, and non-minimal CScriptNum is banned as BIP62 policy. The MINIMAL_IF policy requires the input of OP_IF to be minimal and liberally example should be protected by it. For preventing malicious third-party witness bloating, miners need to enforce the policy by not accepting size-malleated transactions, which will reduce usable block space.</summary>
+    <published>2018-12-12T19:53:38+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Annex Purpose Discussion: OP_ANNEX, Turing Completeness, and other considerations</title>
+  <updated>2023-05-22T18:03:36.467206+00:00</updated>
+  <author>
+    <name>Anthony Towns 2022-03-07 08:08:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Annex Purpose Discussion: OP_ANNEX, Turing Completeness, and other considerations</title>
+    <updated>2023-05-22T18:03:36.467206+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020072.html" rel="alternate"/>
+    <summary>A discussion on the use of annexes in transactions and their potential benefits is taking place on the Bitcoin development mailing list. Annexes can be analyzed immediately without necessarily knowing anything about the utxo being spent, but there are cases where this would not work, such as when using delegation via the thing in the annex. The benefit of using annexes is debatable, as it only changes the ordering of the work required to be sure the transaction is valid and does not reduce the total work. The SIGHASH_GROUP parameter could be a stack value, not an annex, and should cover the actual range, not the argument itself. Signing the entire annex is necessary to prevent third-party malleability, and signing only part of the annex may reintroduce the quadratic hashing problem.There is currently no need for padding to be specifiable at spend time, and any necessary padding can be added at the same time as the script. Annexes can be used as authenticated padding because they are not malleable. The idea of accessing previous or future transactions' annexes is discussed but deemed unlikely due to limitations in the utxo database and validation time. There are also concerns about compatibility issues when using annexes in conjunction with different script fragments. As a result, some suggest banning OP_ANNEX altogether.The conversation includes discussions on CLTV, CSV, and nLockTime, as well as the introduction of new sighash flags. It is suggested that a way to access individual entries from the annex would be useful, but creating scripts with difficult solutions can be impractical. The annex could contain a short byte string indicating additional weight units, which would only increase the witness size by a few bytes.Overall, the discussion revolves around the potential benefits and drawbacks of using annexes in transactions and their implications for the Bitcoin network.</summary>
+    <published>2022-03-07T08:08:03+00:00</published>
+  </entry>
+</feed>

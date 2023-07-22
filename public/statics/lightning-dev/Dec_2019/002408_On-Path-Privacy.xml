@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>On Path Privacy</title>
+  <updated>2023-06-02T22:33:55.586904+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-12-26 03:03:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>On Path Privacy</title>
+    <updated>2023-06-02T22:33:55.586904+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-December/002408.html" rel="alternate"/>
+    <summary>The article explores privacy loss models in the context of Lightning Network, discussing the strategies used by surveillors to make themselves more central and lower channel fees. The "shortest path heuristic" is introduced as a way to achieve this. The surveillance analysis becomes more powerful when forwarding logs from multiple nodes on the network are acquired. Unremovable forwarding data such as sidereal time at which `update_add_htlc` messages are sent, the value being transmitted, and the timelock of the payment can be used to track payments. Shadow routing is suggested to reduce the ability of multiple cooperating surveillors to determine if their forwards are the same payment.The article argues that unpublished channels do not improve privacy and must be destroyed. Unpublished channels move the privacy risks from shared to concentrated on specific nodes, which become targets for surveillors. Payers have pretty good privacy otherwise, and with unpublished channels, some nodes can now identify the payer precisely, which is a major privacy loss for payers. The existence of unpublished channels is still attested on the blockchain, and on-chain analysis can give hints on which unpublished users ended up making channels with specific published nodes. If all channels were published, then this would spread out the information that forwarding nodes have, reducing the ability of any one node to surveil.Nodes keeping forwarding logs can be risky if surveillors capable of stealing these logs gather the forwarding nodes of large numbers of nodes. To prevent this, privacy-leaking information is spread out among nodes and no single node becomes a particularly juicy target for acquisition of control. However, nodes can publish themselves without publishing their IP addresses, allowing them to hide their locations at the IP layer while revealing their locations at the Lightning layer. They can also use Tor but at the cost of increased latency with the rest of the network. The article discusses improvements to the base layer that will allow nodes to elide enough information from its stored data so that a log of forwards can no longer be derived. The article also suggests techniques to avoid the shortest path heuristic, such as `permuteroute` or using Rusty Russell Random Route Algorithm. The article discusses two approaches to improving the Lightning Network routing algorithm. The first approach involves applying a random tweak to the distance heuristic in a Greedy Best First Search to approximate the Rusty Russell Random Routing Algorithm. The second approach involves usage discounting. This approach suggests incrementing a "usedness" counter on each node on a path returned by the base pathfinder and considering those nodes to have higher than normal cost on future pathfinding calls. Both approaches aim to improve the efficiency and privacy of the Lightning Network routing algorithm.</summary>
+    <published>2019-12-26T03:03:13+00:00</published>
+  </entry>
+</feed>

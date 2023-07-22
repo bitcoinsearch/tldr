@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>SIGHASH2 for version 1 witness programme</title>
+  <updated>2023-05-20T16:39:08.256047+00:00</updated>
+  <author>
+    <name>Johnson Lau 2018-05-31 18:35:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>SIGHASH2 for version 1 witness programme</title>
+    <updated>2023-05-20T16:39:08.256047+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/016047.html" rel="alternate"/>
+    <summary>Bitcoin is planning to introduce a new signature format called SIGHASH2, which is proposed by Johnson Lau in the version 1 witness program. The primary objective behind this proposal is to use compact signatures that save space and provide more SIGHASH options for greater flexibility. The specification includes rules for public key and signature format, where the public key must be exactly 33 bytes, and if the first byte is not 0x02 or 0x03, the signature is assumed valid for future upgrades.New hashtype definitions are introduced, with bit 0 to 3 of hashtype denoting a value between 0 and 15, and bit 4 and 5 denoting a value between 0 and 3. If bit 6 is set (SIGHASH2_NOFEE), nFees is set to 0x0000000000000000. This proposal builds on previous proposals such as Taproot and Graftroot, and simplifies the earlier proposal on SIGHASH2, which is a superset of the existing SIGHASH and the BIP118 SIGHASH_NOINPUT.The new format is expected to save around 8 bytes per signature when compared to the current DER format. SIGHASH2_ALL is the default and most commonly used case, making it zero size to save space. Bit flags are defined in a negative way (e.g. NOLOCKTIME). Some combinations are deliberately missing to save bits for useless flags. Reserved bits are ignored but should normally be unset. Users must not set these bits until they are defined by a future proposal, or they might lose money.The rational behind decoupling INPUT and SEQUENCE is to allow users to have NOINPUT but still have a relative lock-time, while only allowing signing all SEQUENCE if all INPUT are signed doesn't make much sense since you need to know what the inputs are. Additionally, sometimes users don't sign all inputs/outputs, but still want to ensure the fees amount is correct, which is why signing FEE is included. The NOVERSION and NOSCRIPTCODE options are placed in the second byte to make most signatures below 66 bytes.SIGHASH2 has equivalent values for other SIGHASH schemes like Legacy/BIP143 ALL, Legacy/BIP143 SINGLE with matching output, Legacy/BIP143 NONE, Legacy/BIP143 ANYONECANPAY|ALL, Legacy ANYONECANPAY|SINGLE with matching output, Legacy/BIP143 ANYONECANPAY|NONE, BIP143 SINGLE without matching output, BIP143 ANYONECANPAY|SINGLE with matching output, BIP143 ANYONECANPAY|SINGLE without matching output, and BIP118 NOINPUT.This is a soft-fork that will maintain backward compatibility. Exact deployment details are yet to be determined. More information and example code can be found on the GitHub links provided.</summary>
+    <published>2018-05-31T18:35:41+00:00</published>
+  </entry>
+</feed>

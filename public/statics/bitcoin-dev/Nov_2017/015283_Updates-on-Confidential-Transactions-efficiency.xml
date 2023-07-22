@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Updates on Confidential Transactions efficiency</title>
+  <updated>2023-05-20T04:17:37.790728+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2017-11-14 01:21:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Updates on Confidential Transactions efficiency</title>
+    <updated>2023-05-20T04:17:37.791729+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-November/015283.html" rel="alternate"/>
+    <summary>In 2013, Adam Back proposed the use of additive homomorphic commitments in Bitcoin to improve transaction privacy. This approach, known as confidential transactions, makes transaction amounts private and complements CoinJoin by avoiding the issue of joins being decoded due to different amounts being used. Confidential transactions can be constructed without any substantial new cryptographic assumptions, can be high performance compared to alternatives, have no trusted setup, and do not involve the creation of any forever-growing unprunable accumulators. However, prior to recent work, each confidential output typically required a witness which showed that the output value is in range. The smallest range proofs without trusted setup for the 0-51 bit proofs needed for values in Bitcoin would take up 160 bytes per bit of range proved, or 8160 bytes needed for 51 bits--something like a 60x increase in transaction size for a typical transaction usage. Recent work has been focused on reducing the range proof size further. In a recent publication on confidential assets, the size was reduced to 96*log3(2)*bits + 32, which still left us at ~16x size for typical usage. The exciting recent update is that Benedikt Bünz at Stanford was able to apply and optimize the inner product argument of Jonathan Bootle to achieve an aggregate range proof for CT with size 64 * (log2(bits * num_outputs)) + 288, which is ~736 bytes for the 64-bit 2-output case. This cuts the bloat factor down to ~3x for today's traffic patterns. Since the scaling of this approach is logarithmic with the number of outputs, use of CoinJoin can make the bloat factor arbitrarily small. E.g., combining 64 transactions still only results in a proof under 1.1KB, so in that case the space overhead from the range proof is basically negligible. This scheme also has a straightforward and efficient method for multi-party computation, which means that the aggregates can be used in all-party-private coinjoins like the value shuffle work mentioned above. Unlike prior optimizations, verification in this new work requires computation which is more than linear in the size of the proof (the work is linear in the size of the statement being proved). The pre-print on this new work is available at https://eprint.iacr.org/2017/1066.</summary>
+    <published>2017-11-14T01:21:14+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New serialization/encoding format for key material</title>
+  <updated>2023-06-13T02:58:14.890294+00:00</updated>
+  <author>
+    <name>shiva sitamraju 2018-05-30 06:30:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New serialization/encoding format for key material</title>
+    <updated>2023-06-13T02:58:14.890294+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/016042.html" rel="alternate"/>
+    <summary>The proposal for a new serialization and encoding format for key material up to 520 bits is being discussed in the bitcoin-dev mailing list. The current extended public and private keys defined in BIP32 have some limitations. Recovering a wallet based solely on the existence of an extended private master key (xpriv) can result in the loss of funds, and the missing birthday metadata can lead to non-optimal blockchain scans. Additionally, the current gap limit in BIP44 is set at 20, which may not be suitable for high-load merchants. The proposed format includes a version bit, a 15-bit timestamp expressed in days since genesis for key-birthday, a 12-bit gap limit delta, 3 or 5 bits for script type restriction, and 256, 512, or 520 bits for key material. The key material must contain an extended public key if it is 520 bits long, an extended private key if it is 512 bits long, and a pure private key or seed if it is 256 bits long. The first 256 bits of the 520-bit key material represents the BIP32 chain code, and the next 264 bits define the public key according to BIP32. For the 512-bit key material, the first 256 bits represent the BIP32 chain code, and the next 256 bits define the private key. The proposed encoding format uses Bech32, with different Human-Readable Parts (HRPs) for Mainnet Private Extended, Mainnet Public Extended, Testnet Private Extended, Testnet Public Extended, Mainnet Key, and Testnet Key. The compatibility issue poses a challenge as only new software will be able to use this serialization and encoding format. While adding birthday to keys is beneficial, it breaks two basic properties- visually comparing two keys to find if they are the same and different wallet software could set different birthday/gap limit, creating different xpub/xprv for the same set of mathematically derived individual keys.</summary>
+    <published>2018-05-30T06:30:25+00:00</published>
+  </entry>
+</feed>

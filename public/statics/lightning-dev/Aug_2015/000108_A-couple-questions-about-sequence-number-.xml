@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A couple questions about sequence number:</title>
+  <updated>2023-05-23T19:08:56.497081+00:00</updated>
+  <author>
+    <name>Adam Back 2015-08-10 19:08:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A couple questions about sequence number:</title>
+    <updated>2023-05-23T19:08:56.497081+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-August/000108.html" rel="alternate"/>
+    <summary>The relative lock time (RCLTV) is used to prevent channels from automatically expiring, which would require new channels to be established periodically. With RCLTV, a channel can stay running until there is a need to reclaim funds due from a hub that goes permanently offline. Channels could potentially stay up indefinitely through rebalancing of funds via users having multiple channels and being paid negative fees to move funds back to a channel that is running low on liquidity. Lightning as implemented by Rusty uses the sequence number field of the transaction format, but not as an increment-on-each-transaction sequence number in the traditional sense. Rather, BIP 68 specifies a new consensus rule by which the sequence number field can mandate a required minimum age for each input, thereby achieving a relative lock-time. The sequence number of the spending transaction (the child) must equal MAX_INT - 4320 (= 144 * 30) if you want a certain script pathway to only take effect 30 days after confirmation of the parent. In the case of a bidirectional payment channel, this value is ratcheted up (bringing the confirmation delay down) each time the payment channel switches direction. Using sequence numbers to select the right transaction to include is good, but it would seem to leak information about how many LN transactions took place, which could then make it meterable by external parties.</summary>
+    <published>2015-08-10T19:08:38+00:00</published>
+  </entry>
+</feed>

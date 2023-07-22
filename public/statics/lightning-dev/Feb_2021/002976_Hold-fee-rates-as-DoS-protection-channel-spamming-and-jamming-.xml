@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Hold fee rates as DoS protection (channel spamming and jamming)</title>
+  <updated>2023-06-03T03:43:52.959527+00:00</updated>
+  <author>
+    <name>Joost Jager 2021-02-20 18:33:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Hold fee rates as DoS protection (channel spamming and jamming)</title>
+    <updated>2023-06-03T03:43:52.959527+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-February/002976.html" rel="alternate"/>
+    <summary>In an email to the Lightning Development mailing list, Joost Jager proposed a variation of bidirectional upfront payments that uses a time-proportional hold fee rate. The hold fee rate is a fee that routing nodes charge for having an HTLC in-flight. Routing nodes advertise their hold fee rate as part of their channel forwarding policy, and the receiver of the HTLC pays the hold fee. To prevent abuse of this system, routing nodes also advertise their hold grace period, which is the maximum duration that they are willing to pay hold fees for.The update_add_htlc message is extended with two new fields: `hold_fee_rate` and `hold_fee_discount`. When an HTLC is resolved, the receiver of the HTLC pays the sender the `hold_fee_rate` minus `hold_fee_discount`. Joost provided an example calculation of fees for a three-hop route where every node charges 0.6 msat/sat/minute with a hold grace period of 1 minute. In the example, the routing fees are zero, and A wants to send 1000 sat to D. A will charge B a hold fee rate of 0.6 sat/min, B will charge C a hold fee rate of 1.2 sat/min, and C will charge D a hold fee rate of 1.8 sat/min.Joost's proposal adds flexibility to not take a step back in terms of functionality, fair pricing for holding invoices, and its applications. He believes that it also simplifies the parameter set. Joost's spreadsheet calculates the fees for a three-hop route, and users can make a copy and try out various different values.</summary>
+    <published>2021-02-20T18:33:09+00:00</published>
+  </entry>
+</feed>

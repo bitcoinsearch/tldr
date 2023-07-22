@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Simple lock/unlock mechanism</title>
+  <updated>2023-06-13T00:54:18.181892+00:00</updated>
+  <author>
+    <name>アルム　カールヨハン 2018-02-28 04:34:18</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2018-02-28 22:30:44</name>
+  </author>
+  <author>
+    <name>Adam Back 2018-02-28 23:36:05</name>
+  </author>
+  <author>
+    <name>アルム　カールヨハン 2018-02-28 04:34:18</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2018-02-28 22:30:44</name>
+  </author>
+  <author>
+    <name>Adam Back 2018-02-28 23:36:05</name>
+  </author>
+  <author>
+    <name>アルム　カールヨハン 2018-03-01 05:11:54</name>
+  </author>
+  <author>
+    <name>アルム　カールヨハン 2018-03-05 14:53:16</name>
+  </author>
+  <author>
+    <name>アルム　カールヨハン 2018-02-28 03:47:29</name>
+  </author>
+  <author>
+    <name>アルム　カールヨハン 2018-03-05 14:53:16</name>
+  </author>
+  <author>
+    <name>アルム　カールヨハン 2018-02-28 03:47:29</name>
+  </author>
+  <author>
+    <name>Adam Back 2018-02-28 23:36:05</name>
+  </author>
+  <author>
+    <name>アルム　カールヨハン 2018-03-01 05:11:54</name>
+  </author>
+  <author>
+    <name>アルム　カールヨハン 2018-02-28 03:47:29</name>
+  </author>
+  <author>
+    <name>アルム　カールヨハン 2018-03-01 05:11:54</name>
+  </author>
+  <author>
+    <name>アルム　カールヨハン 2018-02-28 04:34:18</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2018-02-28 22:30:44</name>
+  </author>
+  <author>
+    <name>アルム　カールヨハン 2018-03-05 14:53:16</name>
+  </author>
+  <link href="bitcoin-dev/Feb_2018/015794_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2018/015795_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2018/015796_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2018/015794_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2018/015795_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2018/015796_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015798_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015799_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2018/015793_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015799_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2018/015793_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2018/015796_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015798_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2018/015793_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015798_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2018/015794_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2018/015795_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015799_Simple-lock-unlock-mechanism.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Simple lock/unlock mechanism</title>
+    <updated>2023-06-13T00:54:18.181892+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-February/015794.html" rel="alternate"/>
+    <summary>In the Bitcoin community, there have been discussions about various proposals to lock up Bitcoin to prevent physical theft. One such proposal is to use an "OP_CSV" attached to a P2SH address, and then throw away the private keys. To spend the Bitcoin, one would have to broadcast the transaction and wait the given amount of time before using the new txout.A member of the community has expressed concerns about Graftroot, a proposed change to Bitcoin transactions that could potentially break the time-lock function. Suggestions were made to make the graftroot key a 2-of-2 muSig with an independent third party that commits to only signing CLTV scripts or to use multisig instead. Another proposal is for a software-only time-lock vault, but concerns were raised about deleting keys and privacy/fungibility loss. It was suggested that a third party could refuse to co-sign until a pre-arranged time. There is also a need for private key covenants where one must prove that they are met without disclosing them. To address the issue with Graftroot, Anthony suggested making the graftroot key a 2-of-2 muSig with an independent third party that commits to only signing CLTV scripts. Making it 3-of-3 or 5-of-5 could be even better if multiple independent services can be found to do it.A new standard for locking up Bitcoin has been proposed, which involves freezing Bitcoin with specific commands introduced by Bitcoin Core. This system makes it physically impossible to spend the coins until they are thawed, which should disincentivize potential robbers as it is expected that most assets will be locked up. However, there are still some drawbacks to consider, such as high-fee situations where transactions get stuck.A new standard for locking up a portion of Bitcoin has been introduced, which could be helpful in preventing physical thefts of cryptocurrencies. The idea is to create a transaction that spends a set of UTXOs to a P2SH address with an attached OP_CSV and then get rid of the private keys. To spend the Bitcoin, one must broadcast the transaction and wait for the specified amount of time before using the new txout.Kalle, a user on the Bitcoin mailing list recently suggested locking up bitcoin with an "OP_CSV" attached to it. Kalle suggests that Bitcoin Core could handle this in a fairly straightforward manner by introducing two new commands, which he calls freeze and unfreeze. This system makes it physically impossible to spend the coins until they are thawed, which should disincentivize potential robbers as it is expected that most assets will be locked up.However, there are concerns within the bitcoin-dev community regarding the possibility of a software-only time-lock vault. One concern raised is that Graftroot may break the system since someone could just sign the time-locked output with a script that has no time-lock. It has been suggested that making the graftroot key a 2-of-2 muSig with an independent third party that commits to only signing CLTV scripts could prevent this problem. Adam Back suggests creating a TX1 with a CSV timelock, discarding privkey A after broadcasting TX1, and using graftroot and privkey B with a script without timelock to spend B. However, this method has a drawback as the robber can force the user to execute step 3 since they have the privkey to B. It is pointed out that deleting keys may be difficult to assure with HD wallet seeds setup-time backup model. Therefore, it is suggested to include as part of 'freezing' a send to a new ephemeral key as 'initialization'. A simpler though less robust model would be to have a third party refuse to co-sign until a pre-arranged time, which would have the advantage of not requiring two on-chain transactions.In an email conversation, a user named Kalle expressed confusion regarding the use of graftroot and how it relates to multisig and freezing. Another user had suggested that if someone were to go through the trouble of freezing their coins, they could simply use multisig instead. However, the original user pointed out that in either case, a robber would need both signatories to access the coins, and the CLTV could be overridden with graftroot. Kalle also noted that graftroot requires a pubkey rather than a p2sh format.Overall, this new Bitcoin locking system could help prevent physical robberies of cryptocurrencies, but there are still some drawbacks to consider. A security firm could have a service where seeing an unfreeze transaction which the user has told them about without giving a heads up beforehand is equal to alarm going off.</summary>
+    <published>2018-02-28T04:34:18+00:00</published>
+  </entry>
+</feed>

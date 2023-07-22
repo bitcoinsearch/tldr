@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>32-byte public keys in Schnorr and Taproot</title>
+  <updated>2023-05-20T20:53:55.521294+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2019-08-09 18:16:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>32-byte public keys in Schnorr and Taproot</title>
+    <updated>2023-05-20T20:53:55.521294+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-August/017247.html" rel="alternate"/>
+    <summary>A suggestion has been made to drop the Y oddness bit in the witness program for Taproot outputs. This change doesn't contribute to security, and it avoids Taproot outputs from being more expensive than v0 P2WSH. Additionally, it doesn't preclude future changes that would still need the additional byte anyway. It has been explored that it seems cleanest to introduce a type of 32-byte public keys in bip-schnorr. This makes one question if we need 33-byte public keys at all. Opinions are being sought about modifying bip-schnorr to only define 32-byte public keys. The implications of this change are that bip-schnorr public keys wouldn't be exactly the same as ECDSA public keys, however, all derivation logic would still apply. The Q point in bip-taproot would just follow the 32-byte pubkey encoding, rather than needing a 33rd byte. The P point in bip-taproot would become just a 32-byte public key. In order to permit batch verification of the P to Q tweaking for script-path spending, another control block bit is now needed. All public keys inside bip-tapscript would also become 32-bytes. If desired, the "upgradable public key" construction in bip-tapscript can be kept by triggering based on the length of public keys. One question is whether it's worth such a change to bip-schnorr at this point. It's possible to keep verification compatible, but if we're going to change things, it's best to do it as cleanly as possible and also drop that byte.</summary>
+    <published>2019-08-09T18:16:29+00:00</published>
+  </entry>
+</feed>

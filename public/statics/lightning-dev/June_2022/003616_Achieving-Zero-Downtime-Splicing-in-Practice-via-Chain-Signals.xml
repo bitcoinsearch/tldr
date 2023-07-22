@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Achieving Zero Downtime Splicing in Practice via Chain Signals</title>
+  <updated>2023-06-03T09:07:32.691303+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-06-28 00:27:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Achieving Zero Downtime Splicing in Practice via Chain Signals</title>
+    <updated>2023-06-03T09:07:32.691303+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-June/003616.html" rel="alternate"/>
+    <summary>The email discusses a proposal to add a delay between when nodes see a channel closed on chain and when they remove it from their local channel graph. The goal is to give enough time for the gossip message that indicates a splice is in process to propagate through the network, allowing senders/receivers to use the old and new channels before the entire chain of transactions confirms on chain. However, this arbitrary delay won't address the issue in practice due to various factors such as gossip propagation delay and offline peers. Instead, the author suggests relying on the primary splicing signal being sourced from the chain itself, which is 100% foolproof and doesn't suffer from any of the issues with gossip/time related delays. To achieve this, the author proposes several options for what the chain signal could look like, including using the annex, reusing anchors, OP_RETURN, or fiddling with locktime+sequence. Of these, the author favors reusing anchors since they're already used for fee bumping after-the-fact for closing transactions. This would make the splicing transaction slightly larger but would be recognizable by nodes, so they don't need to remove it from the channel graph yet. The author acknowledges that the design space for splicing is large and suggests discussing isolated aspects of it at a time.</summary>
+    <published>2022-06-28T00:27:07+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP] Normalized Transaction IDs</title>
+  <updated>2023-06-09T20:59:22.456729+00:00</updated>
+  <author>
+    <name>Tier Nolan 2015-05-15 10:45:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP] Normalized Transaction IDs</title>
+    <updated>2023-06-09T20:59:22.456729+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/008178.html" rel="alternate"/>
+    <summary>In this context, s7r is asking how a certain process can be safe against malleability of the parent transaction and replays. The response explains that the signature signs everything except itself and the normalized txid doesn't include the signature, so mutations of the signature won't change the normalized txid. If the refund transaction refers to the parent using the normalized txid, then it doesn't matter if the parent has a mutated signature, as the normalized transaction ignores such changes. If there are two transactions which are mutations of each other, only one can be added to the blockchain since the other is a double spend. The normalized txid refers to all of them rather than a specific transaction. Mutation is only a problem if it occurs after signing. If you strip both the scriptSig of the parent and the txid, nothing can be mutated any longer but this isn’t safe against replays. Normalized txids are safe against replays, and better. Finally, the response discusses the new signature opcode which may fix things, but the question is whether a hard fork or soft fork should be used to implement it.</summary>
+    <published>2015-05-15T10:45:05+00:00</published>
+  </entry>
+</feed>

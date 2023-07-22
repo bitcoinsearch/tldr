@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Proposal for syncing channel updates</title>
+  <updated>2023-05-25T14:03:04.706544+00:00</updated>
+  <author>
+    <name>Fabrice Drouin 2018-10-12 08:58:41</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-10-05 08:16:34</name>
+  </author>
+  <author>
+    <name>Fabrice Drouin 2018-10-04 12:46:19</name>
+  </author>
+  <link href="lightning-dev/Oct_2018/001451_Proposal-for-syncing-channel-updates.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2018/001427_Proposal-for-syncing-channel-updates.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2018/001426_Proposal-for-syncing-channel-updates.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Proposal for syncing channel updates</title>
+    <updated>2023-05-25T14:03:04.706544+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-October/001451.html" rel="alternate"/>
+    <summary>The email thread discusses a proposal for an extension of the current “channel queries” to allow nodes to properly sync their outdated channel updates. The routing table includes both "static" and "dynamic" information, where channel updates represent edge parameters such as relay fees that can change often. Nodes need a way to keep their routing table up-to-date, which is called "routing table sync". The first routing sync scheme was very simple: nodes would request that peers they connect to send them a complete "dump" of their entire routing table. However, this quickly became impractical. The second scheme allowed nodes to ask their peers for all their channel ids in a given block range and query the ones they're missing (as well as related channel updates). But it still had issues with nodes that are offline very often. To solve this, the proposed solution is to extend query parameters to include channel update timestamps. When A connects to B, it asks for a list of [channel id (8 bytes)| channel update timestamp #1 (4 bytes)| channel update timestamp #2 (4 bytes)] in a given [start_height, number_of_blocks] block range. B replies with a list of [channel id (8 bytes)| channel update timestamp #1 (4 bytes)| channel update timestamp #2 (4 bytes)]. A checks its local routing table, and sends a query that includes a list of [channel id (8 bytes) | flag (1 byte)], where flag is a combination of send me the channel announcement for this channel id, send me the channel update #1 for this channel id, and send me the channel update #2 for this channel id. B replies with the requested items. This new method allows B to know how far behind it is and display a “sync progress” indicator as it receives the items it requested. The proposal has been tested on a mobile wallet and has shown positive results.</summary>
+    <published>2018-10-12T08:58:41+00:00</published>
+  </entry>
+</feed>

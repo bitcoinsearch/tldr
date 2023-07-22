@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Blind Merged Mining with covenants ( sighash_anyprevout / op_ctv )</title>
+  <updated>2023-06-13T22:55:33.373262+00:00</updated>
+  <author>
+    <name>Nick Gregory 2019-12-26 12:32:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Blind Merged Mining with covenants ( sighash_anyprevout / op_ctv )</title>
+    <updated>2023-06-13T22:55:33.373262+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-December/017536.html" rel="alternate"/>
+    <summary>Ruben Somsen proposed the idea of Blind Merged Mining (BMM), which is a mechanism that allows external blockchains to outsource their mining to the Bitcoin blockchain. Miners commit the hash of another blockchain into a unique location on the Bitcoin blockchain, and get paid with Bitcoin fees for capturing the fees inside the other blockchain. This increases the total PoW on the Bitcoin blockchain, adding to the security of the network. BMM does not require extra validation from miners as they only need to choose the highest bidder. A complete transaction flow diagram can be found here. BMM chain will need some kind of native token in order to pay for fees, therefore, the fairest and least speculation-inducing method is a perpetual one-way peg, where at any time 1 BTC can be burned for 1 token, preserving the 21M coin limit. Given the lack of a block subsidy, there may not be enough impetus to move the chain forward instead of enacting a reorg. However, BMM reorgs are somewhat unique in that they will have to compete for the same unique location that the original chain is using. Finally, it is worth asking whether BMM interferes too much with the existing incentive structure of Bitcoin. But Ruben believes that if it’s not supported, more wasteful methods may be utilized instead. Technical details include assuming taproot, the spending script will be inside a taproot leaf, meaning there is a key spend path which should be made unusable in order to enforce the covenant. This can be achieved with a NUMS such as hashToCurve(G) = H, which can then be used as the internal taproot key T = H + hash(H||bmm_hash)*G.</summary>
+    <published>2019-12-26T12:32:26+00:00</published>
+  </entry>
+</feed>

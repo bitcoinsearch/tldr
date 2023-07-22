@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_CAT was Re: Continuing the discussion about noinput / anyprevout</title>
+  <updated>2023-06-02T20:45:45.225495+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-10-03 23:42:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_CAT was Re: Continuing the discussion about noinput / anyprevout</title>
+    <updated>2023-06-02T20:45:45.225495+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-October/002203.html" rel="alternate"/>
+    <summary>In a recent email thread, ZmnSCPxj has discussed the importance of `OP_CAT` and how it could be used to make TumbleBit transactions smaller. However, the current limitation is that stack values cannot be concatenated in Bitcoin. He suggests enabling `OP_CAT` with a change that limits the size of each concatenated value to 64 bytes or less since this size is most suited for building Merkle trees. However, there have been issues with the use of Merkle trees in Bitcoin blocks, specifically related to determining if a hash on a Merkle node is the hash of a Merkle subnode or a leaf transaction. ZmnSCPxj also proposed a radical idea regarding `SIGHASH` flags attached to signatures, suggesting they are a misdesign and should be removed. Instead, he proposes putting `SIGHASH` on public keys. Public keys would be encoded as either 33-bytes (implicit `SIGHASH_ALL`) or 34-bytes (`SIGHASH` byte, followed by pubkey type, followed by pubkey coordinate). `OP_CHECKSIG` and friends would then look at the public key to determine sighash algorithm rather than the signature. In addition, ZmnSCPxj proposed adding the opcode `OP_SETPUBKEYSIGHASH`, which would allow the sighash to be selected at time-of-spending rather than time-of-payment. The sighash can be put in the witness stack after the signature, letting the `SIGHASH` flag be selected at time-of-signing, but only if the script specifically is formed to do so.</summary>
+    <published>2019-10-03T23:42:25+00:00</published>
+  </entry>
+</feed>

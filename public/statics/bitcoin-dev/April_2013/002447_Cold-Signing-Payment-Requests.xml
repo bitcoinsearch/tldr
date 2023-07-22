@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Cold Signing Payment Requests</title>
+  <updated>2023-06-06T15:34:42.091441+00:00</updated>
+  <author>
+    <name>Jeremy Spilman 2013-04-24 23:01:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Cold Signing Payment Requests</title>
+    <updated>2023-06-06T15:34:42.091441+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002447.html" rel="alternate"/>
+    <summary>The Payment Protocol employs x509 certificates to sign a payment request, making it easier for wallets to display metadata from the cert to the payer instead of the address. However, since payment requests must be generated live, the key used to sign them is exposed to theft similar to a hot wallet. The solution is to sign something once with a key kept offline that verifies the address in the payment request belongs to the payee. This involves using a parent cert kept offline and a child certificate of the parent kept hot on the payment server. Using BIP32, child keys are generated from a public key and chain code, and the remaining less critical data is signed with the child cert's key after signing Kpar with the parent cert's key offline. The payer then verifies Kpar and the address by calculating Hash160(Kpar * I[0:32]). It is not necessary to use BIP32 to calculate I[0:32], which could also just be randomly generated. The idea is to use a 'most trusted' cert offline to sign Kpar once and a 'less trusted' cert to sign the other stuff. However, there is no convention for identifying which cert is which, and a better idea is needed. Nonetheless, if merchants can keep the key signing the address offline, several benefits can be gained.</summary>
+    <published>2013-04-24T23:01:51+00:00</published>
+  </entry>
+</feed>

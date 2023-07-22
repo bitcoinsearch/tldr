@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Gossip Propagation, Anti-spam, and Set Reconciliation</title>
+  <updated>2023-06-03T08:20:08.151342+00:00</updated>
+  <author>
+    <name>Alex Myers 2022-06-29 18:07:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Gossip Propagation, Anti-spam, and Set Reconciliation</title>
+    <updated>2023-06-03T08:20:08.151342+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-June/003629.html" rel="alternate"/>
+    <summary>In a recent conversation posted on btctranscripts.com, Alex Myers discussed the challenges of using Minisketch for Lightning gossip compared to Erlay in Bitcoin Core. One significant difference is that source nodes of Bitcoin transactions have an interest in privacy, whereas lightning gossip is transparent by nature. Hash collisions are a concern for Lightning gossip, but not for Erlay, and the lack of timing concerns allows for global sketches infeasible for Erlay.However, given the desire to eventually decouple lightning channels from their layer one funding transaction, hashing just as in Erlay may be necessary. Alex is leaning towards per-peer sketches with inventory sets rather than global sketches, compatible with eventual removal of the SCID. Fallback will take some consideration, but flooding is still the ultimate fallback.Alex also discussed the high percentage of channel_update messages in gossip messages (97%), with 18% of publicly broadcasting half-channels violating spam-limiting rules at least once due to rate limiting. Well-connected nodes may be more susceptible to flapping due to more frequent routing attempts, resulting in returned channel updates that would otherwise not have been broadcast.A smaller subset of channels broadcasts frequent channel updates with minor adjustments to htlc_maximum_msat and fee_proportional_millionths parameters, likely due to automated channel management. Core-Lightning has updated rate-limiting in the upcoming release to achieve higher acceptance of incoming gossip, and a broader discussion of rate limits may now be worthwhile. Alex aims to create a set reconciliation gossip type, using a common, simple heuristic to accept or reject a gossip message. To understand more about this topic, Alex has shared three links on GitHub. The first link leads to a repository called "minisketch" created by sipa, who is a Bitcoin developer. The second link directs to a sample output file from the "lnspammityspam" repository created by endothermicdev. Lastly, the third link leads to a specific section in the "lightning-rfc" repository that talks about set reconciliation in routing gossip.</summary>
+    <published>2022-06-29T18:07:27+00:00</published>
+  </entry>
+</feed>

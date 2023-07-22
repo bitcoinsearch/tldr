@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Bitcoin Secure Multisig Setup</title>
+  <updated>2023-06-14T17:37:56.206626+00:00</updated>
+  <author>
+    <name>Hugo Nguyen 2021-02-15 14:19:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Bitcoin Secure Multisig Setup</title>
+    <updated>2023-06-14T17:37:56.206626+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018423.html" rel="alternate"/>
+    <summary>This document proposes a standardized process for setting up multisig wallets securely across different vendors. The proposal seeks to mitigate the risk of tampering during the initial setup phase and define an interoperable multisig configuration format. An attacker who can modify the multisig configuration can steal or hold funds to ransom by duping the user into sending funds to the wrong address. The Coordinator initiates and determines what type of multisig is used and the exact policy script. If encryption is enabled, the Coordinator also distributes a shared secret or shared secrets to the parties involved for secure communication. The Signer is a participating member in the multisig. Its responsibilities include providing its key record -- which contains an Extended Public Key (XPUB) -- to the Coordinator, verifying that its XPUB is included in the descriptor record and persisting the descriptor record in its storage. The document explains the setup process with two rounds. In the first round, the Coordinator creates a multisig wallet creation session, which should expire after some time period determined by the Coordinator, e.g., 24 hours. If encryption is enabled, the Coordinator distributes a secret TOKEN to each Signer over a secure channel. The Signer generates a key record by prompting the user for a multisig derivation path and retrieves the XPUB at that derivation path. In the second round, the Coordinator gathers key records from all participating Signers. Abort the setup if the wallet setup session has expired. For each key record, the Coordinator decrypts it using ENCRYPTION_KEY. The Coordinator verifies that the included SIG is valid given the KEY. If all key records look good, the Coordinator fills in all necessary information to generate a descriptor record, which is simply the descriptor string plus a CHECKSUM, all in one line. The Coordinator encrypts this descriptor record with ENCRYPTION_KEY. The Coordinator sends the encrypted descriptor record to all participating Signers. The proposal outlines an encryption scheme for a setup involving multiple signers. There are three modes of encryption: NO_ENCRYPTION, STANDARD (64-bit nonce), and EXTENDED (128-bit nonce). The TOKEN can be converted to various formats, including a mnemonic phrase, decimal number, or QR code. Key derivation uses PBKDF2 with PRF=SHA512, and encryption uses AES in CTR mode. For signers using QR codes, key and descriptor records can be converted to QR codes following the BCR standard. The proposal introduces two layers of protection: a temporary, secret token used to encrypt communication between the signer and coordinator during setup and a descriptor checksum and visual inspection for guarding against malicious members from being inserted into the set. The proposal acknowledges feedback from Dmitry Petukhov, Christopher Allen, Craig Raw, and others.</summary>
+    <published>2021-02-15T14:19:14+00:00</published>
+  </entry>
+</feed>

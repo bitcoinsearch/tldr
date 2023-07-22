@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Swap-in-Potentiam: Moving Onchain Funds "Instantly" To Lightning</title>
+  <updated>2023-06-03T11:25:34.430426+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2023-01-04 02:06:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Swap-in-Potentiam: Moving Onchain Funds "Instantly" To Lightning</title>
+    <updated>2023-06-03T11:25:34.430426+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-January/003813.html" rel="alternate"/>
+    <summary>The Lightning Network team has proposed a new protocol called "swap-in-potentiam," which aims to enable users to easily move funds between on-chain and off-chain channels. The traditional method of moving funds from onchain-only addresses to the Lightning Network is slow, requiring confirmation that can take a long time. The Swap-In-Potentiam proposal resolves this issue by allowing immediate transfer of already-confirmed onchain funds to Lightning, using a novel protocol that minimizes trust requirements.The protocol requires a cooperating LSP, and if multiple LSPs are available, the user must select one at the point of generating an address. The contract has two participants: Alice the funds owner and Bob its potential swap partner. Once any funds have been confirmed received into an address committing to this contract, Alice owns the funds and can dispose of them as it likes (with cooperation from Bob).The proposal uses relative locktime to allow funding of the channel address at any time. Use-cases enabled include paying to another on-chain address or a Lightning invoice/keysend with insufficient outgoing capacity, recovering funds after the timeout period if Bob is offline or uncooperative, and allowing immediate receives without requiring semi-custodial trust. Remote nodes can be used, but using direct peer LSPs is recommended. Swap-in-potentiam addresses can be derived from a root public or private key. LSPs can provide special services to improve receiving mobile wallets.For the Onchain use-case, Alice requests Bob to sign a PSBT spending a swap-in-potentiam address. For the Channel use-case, Alice wants to spend the UTXO to a Lightning receiver. The protocol messages for the Channel use-case include `request_swap_in`, `reject_swap_in`, `accept_swap_in`, `swap_in_signed`, and `swap_in_resolved`. The team suggests avoiding a 2-of-2 MuSig keyspend path between Alice and Bob as there is no publicly-reviewed security proof that FROST-in-MuSig and MuSig-in-MuSig are safe.The team proposes combining a swap-in with a splice-in, which is useful if the current total capacity of the channel is lower than the available on-chain funds. As-is, a similar result can be obtained using openv1, wherein a swap-in is combined with a channel open, with the swap-in immediately credited while the channel open is awaiting confirmation.The plan is to reserve only one odd BOLT1 message ID and embed the actual swap-in-potentiam message ID as the first 2 bytes of the BOLT1 message to reduce pollution of the limited BOLT1 message ID space and to allow more flexibility for swap-in-potentiam to expand to new messages inside its own message ID space. The team has listed out the protocol messages for the Channel use-case and has also provided a detailed description of the steps involved in the Onchain use-case and the Channel use-case.</summary>
+    <published>2023-01-04T02:06:36+00:00</published>
+  </entry>
+</feed>

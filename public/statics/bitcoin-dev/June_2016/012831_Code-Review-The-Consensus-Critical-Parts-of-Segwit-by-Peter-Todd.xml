@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Code Review: The Consensus Critical Parts of Segwit by Peter Todd</title>
+  <updated>2023-05-19T23:32:52.735628+00:00</updated>
+  <author>
+    <name>Johnson Lau 2016-06-28 16:22:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Code Review: The Consensus Critical Parts of Segwit by Peter Todd</title>
+    <updated>2023-05-19T23:32:52.735628+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-June/012831.html" rel="alternate"/>
+    <summary>Peter Todd's report on SegWit consensus critical code review raised some concerns. The reserve value of 32-byte has been criticized, as anything after 38 bytes has no consensus meaning, which could lead to new consensus critical commitments/metadata being put there with no efficient way to add a new commitment with softfork. Moreover, the fact that a transaction spending a witness output with an unknown version is valid even if the transaction doesn’t have any witnesses, was deemed odd and unnecessary by the author. SegWit's additional pay-to-witness-pubkey-hashP2WPKH option was also criticized for providing the same level of security as P2PKH but with smaller scriptPubKey. The author suggests giving users the option to choose the less secure 160-bit commitment if their use-case doesn't require the full 256-bit security level. However, P2WSH with multi-sig is subject to birthday attack, which is why 256-bit is used to provide 128-bit security, while 160-bit is enough for P2WPKH as it is single sig.Regarding the P2SH case, the author suggested removing the extra level of indirection and making the segwit redeemScript simpler. The serialized witness script is constrained to a maximum of 520 bytes, though normally nothing in the current scripts should use a push with more than 75 bytes. Lastly, the author expressed concern about hash collision, although it is unclear how it could be possible.</summary>
+    <published>2016-06-28T16:22:45+00:00</published>
+  </entry>
+</feed>

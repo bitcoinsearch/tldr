@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Enforcing inflation rules for SPV clients</title>
+  <updated>2023-06-06T05:56:32.610733+00:00</updated>
+  <author>
+    <name>Stefan Thomas 2012-06-24 16:51:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Enforcing inflation rules for SPV clients</title>
+    <updated>2023-06-06T05:56:32.610733+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-June/001631.html" rel="alternate"/>
+    <summary>In a discussion between Mike Hearn and d'aniel from the forums, it was suggested that miners could conspire to raise inflation, which could be an issue if most economic actors use SPV clients. The blocks are formatted in such a way that checking the coinbase of a transaction is not possible without knowing the fees in the block, which can only be calculated by having all the input transactions for every transaction in that block. A cartel of miners could change the inflation formula, either due to purely selfish reasons or coercion by governments/central banks who still subscribe to the "inflation is good" idea. To resolve this issue, d'aniel proposed having good nodes broadcast announcements when they detect a rule-breaker, along with a proof that it did so. If a node announces that it has a weaker chain and that the split point is a rule-breaker, the SPV client would download the headers for the side chain to verify the split, then download all the transactions in the split block along with all their inputs, and the merkle branches linking the inputs to the associated block headers. It would then check the fee, apply the inflation formula, and check the coinbase value. However, with larger blocks, non-miners would have to be SPV, and even just a 0.0001% chance of an invalid block being accepted has profound implications for the network. If a decentralized pool like that had more than 50% of the hashing power and it accepted a single invalid block, that tainted chain would be forever regarded as valid by SPV clients. Therefore, a mechanism needs to be in place to recover once an invalid block has been accidentally accepted by an imperfect miner.One solution is to create a system where miners who have over the last 10000 blocks contributed to the pool's proof-of-work are allocated a proportional piece of verification work with redundancy and deterministic randomness that makes manipulation of the allocation extremely difficult. Such a pool would be very unlikely to accept an invalid block or transaction in practice. Another solution is proofs of invalidity that would circulate. A new network message would contain the proof that a specific signature and therefore the whole block is invalid. These solutions are motivated by the desire to process more transactions, which means that hashing is a smaller part of the overall cost for miners. The number of transactions is a lever that lets Bitcoin have lower fees and more network security at the same time. The IMTUO proposal showed a way where miners don't need a copy of the set of unspent outputs at all, but this comes with greater bandwidth usage per verified transaction. However, if a small miner can do less than 100% verifications and still contribute, then IMTUO may become viable.</summary>
+    <published>2012-06-24T16:51:26+00:00</published>
+  </entry>
+</feed>

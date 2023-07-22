@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Towards a gridlike Lightning Network</title>
+  <updated>2023-05-24T22:21:38.744838+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-04-19 02:04:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Towards a gridlike Lightning Network</title>
+    <updated>2023-05-24T22:21:38.745839+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-April/001205.html" rel="alternate"/>
+    <summary>ZmnSCPxj has identified a bug in Rusty's simulation of an algorithm for finding cyclic superhubs. The code does not implement the check "if the candidate has a channel with us", which leads to smaller reachability since nodes who can afford to create multiple channels will create multiple channels to the same peer in the simulation. ZmnSCPxj suggests that if only one node uses the algorithm, it should be indistinguishable from a random connection policy, so if the reachability of this algorithm is significantly less than a random connection algorithm, something has gone wrong. The simulation also does not consider that existing nodes may break old channels or make new channels themselves; it is uncertain how often that happens on the real network. Benjamin Mord asks if there is a simulation platform yet for experimenting with ideas such as this and if there is an API to separate such strategies from the protocol itself. He also asks if there is a place yet to specify such heuristics where tight coordination on details are of mutual benefit, such as a bolt.ZmnSCPxj presents an algorithm that given a set of nodes extracted from node gossip, returns a peer to try connecting and funding a channel to. It starts with a 32-bit number i = 0 and for each node, gets hash=H(i || pubkey), where H is some standard hash algorithm, and pubkey is the public key of the node. The algorithm then performs successive filtering and while the set is larger than 2 nodes, successively compares high bits. If the highest bit of hash does not match the highest bit of our_hash, it removes it from the set. When the set is now 2 or 1 node, it backs off by one bit and adds back the most recently removed nodes, yielding a set that is at least 3 or more nodes. The nodes are then sorted according to hash, and the algorithm identifies where the node is in the sorted list. The candidate is then the next node in the list, or if it is the last node, then the first node in the list. If the candidate already has a channel with the node, or has no address info and cannot be found by DNS seed or so on, or cannot be contacted, or refuses incoming channels or some other error, then increment i and try finding again. Even if nodes have some divergence in their own local maps of the network, there is the chance that the difference will be filtered away and the nodes that are "destined" to form a superhub can still find each other in the same superhub.</summary>
+    <published>2018-04-19T02:04:52+00:00</published>
+  </entry>
+</feed>

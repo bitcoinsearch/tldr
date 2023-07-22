@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Multi-frame sphinx onion format</title>
+  <updated>2023-06-03T21:39:31.252194+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-02-24 17:59:04</name>
+  </author>
+  <author>
+    <name>Christian Decker 2019-02-18 18:39:25</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-02-24 00:53:03</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2019-02-22 03:50:59</name>
+  </author>
+  <author>
+    <name>Christian Decker 2019-02-22 15:53:50</name>
+  </author>
+  <link href="lightning-dev/Feb_2019/001884_Multi-frame-sphinx-onion-format.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2019/001875_Multi-frame-sphinx-onion-format.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2019/001883_Multi-frame-sphinx-onion-format.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2019/001880_Multi-frame-sphinx-onion-format.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2019/001882_Multi-frame-sphinx-onion-format.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Multi-frame sphinx onion format</title>
+    <updated>2023-06-03T21:39:31.252194+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-February/001884.html" rel="alternate"/>
+    <summary>During a spec meeting in Adelaide, it was decided to extend the current onion-routing capabilities with new features such as rendezvous routing, spontaneous payments, multi-part payments and more. To achieve this, Christian Decker proposed extending the per-hop payload from the current 65 bytes to multiples and using variable shifts for both the payload serialization and filler generation, depending on the payload size. The proposal suggests calling the 65 byte segment a frame to differentiate it from a hop in the route, hence the name multi-frame onion. The realm byte encodes both the payload format and how many additional frames were used to encode the payload. The decoding of an onion packet pretty much stays the same - the receiving node generates the shared secret, then generates the ChaCha20 stream, and decrypts the packet (and additional padding that matches the filler the sender generated for HMACs). It can then read the realm byte, and knows how many frames to read, and how many frames it needs to left-shift to derive the next onion. This is a competing proposal with the proposal by roasbeef on the lightning-onion repo but Christian thinks it is superior in a number of ways. In a message to Christian and Rusty, ZmnSCPxj proposed a new way to encode the realm 0 byte by creating a special type "0" with a fixed length of 1299 bytes. He also suggested using a TLV-set for the entire payload and using the old payload format as a single TLV-value with 20 bytes of size. ZmnSCPxj also proposes another special type 255, which declares the next 32 bytes as HMAC and the rest of the onion packet as the data for the next hop. However, he notes that this is not a serious proposal. Another participant in the discussion disagreed with the proposal, stating that it would blur the separation of payload encoding and onion encoding. In the discussion about how to add Type-Length-Value (TLV) to the onion, Rusty Russell presents two options. The first option involves leaving the existing fields and putting TLV in the padding: short_channel_id, amt_to_forward, outgoing_cltv_value, and padding. The second option is to replace the existing fields with TLV and flag the new format using realm &gt; 0. Russell suggests voting for making the entire payload a TLV (option 2) since it allows complete redefinition of the payload. There is also a third option of making the entire payload a TLV-set and using the old payload format as a single TLV-value with 20 bytes of size, which would result in only 2 bytes of overhead compared to the old v0 format.</summary>
+    <published>2019-02-24T17:59:04+00:00</published>
+  </entry>
+</feed>

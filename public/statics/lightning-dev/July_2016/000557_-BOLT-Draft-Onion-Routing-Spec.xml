@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BOLT Draft] Onion Routing Spec</title>
+  <updated>2023-05-18T16:53:40.940001+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2016-07-27 18:13:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BOLT Draft] Onion Routing Spec</title>
+    <updated>2023-05-18T16:53:40.940001+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-July/000557.html" rel="alternate"/>
+    <summary>A proposal for a new implementation of the Sphinx routing protocol has been put forward by Christian Decker in a draft specification. The proposed implementation includes a per-hop payload which can be used to give instructions to individual hops on how many coins to forward to the next hop. The end-to-end payload, or message in the Sphinx protocol, is currently unused and may be omitted. Payloads are of fixed size to avoid making messages collatable by size, but this could be changed if sending mostly empty messages is deemed wasteful. Feedback on the draft is welcome, and implementations are available in Go and C.In addition, the proposal suggests a solution for two issues: replay protection without unbounded storage and key rotation within the network globally with loose synchronization. Replay protection could also be achieved by adding a unique identifier to each packet that is only used once, such as a nonce. However, the current draft doesn't specify how long shared secrets should be kept in the log before being removed. This is an important consideration that should be addressed in future versions of the specification.Key rotation is an important aspect of any secure system. The current draft doesn't provide any details on when or how often keys should be rotated, nor does it specify how new keys should be distributed to nodes. These are important considerations that should be addressed in future versions of the specification. Key rotation would involve publishing two keys along with a block hash of a block beyond a "safe" re-org distance and a signature covering the advertisement. The first key can be used until N blocks after the specified block hash, with nodes switching to the second key afterwards. At the N/2 point, the original node publishes a new advertisement with the second key from the original advertisement listed as the "first", and a new fresh quasi-ephemeral onion key. The original node performs this rotation at intervals at the mid-point of expiration of the oldest key. Nodes who receive this new advertisement, aware of the previous one, record this as the node's next rotation key. Nodes who receive this advertisement, unaware of the previous one, treat it as the node's initial pair of quasi-ephemeral onion keys.Overall, there have been some great improvements made to the Sphinx implementation, including optimizations, additions to the payload, and a version byte for easier modification in the future. However, there are still some areas that require further specification, such as replay protection and key rotation.</summary>
+    <published>2016-07-27T18:13:55+00:00</published>
+  </entry>
+</feed>

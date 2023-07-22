@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>UTXO growth scaling solution proposal</title>
+  <updated>2023-06-12T03:46:22.066967+00:00</updated>
+  <author>
+    <name>Major Kusanagi 2017-07-22 06:43:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>UTXO growth scaling solution proposal</title>
+    <updated>2023-06-12T03:46:22.066967+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-July/014814.html" rel="alternate"/>
+    <summary>A proposed soft fork solution to help Bitcoin scale has been put forward. The problem with the unbounded UTXO growth is considered one of the biggest scaling issues with Bitcoin, and current solutions such as Segregated Witness, Lightning Network and larger blocks do not address this issue. By limiting the maximum size of the UTXO set, this proposal looks to solve this fundamental scaling problem. Any UTXO that is not spent within a set number of blocks would be considered invalid, meaning miners and nodes in the Bitcoin network only have to store that set number of blocks. This means the blockchain will never be larger than the set number of blocks and the size of the blockchain is capped. However, it is suggested that users may find it difficult to accept as bitcoins that have not been spent for a long time will be “lost” forever. To improve the solution, a new mechanism called luster is proposed. UTXOs less than X blocks old have not lost any luster and have a luster value of 1, while UTXOs that are Z blocks old (where Z &gt; X) and have lost all their luster have a luster value of 0. UTXOs between X and Z blocks old have a luster value between 0 and 1. The luster value is then used to compute the amount of bitcoins that must be burned in order for a transaction with that UTXO to be included in a block. Coins that have a luster value of 0 mean they have no monetary value, and it would be safe for bitcoin nodes to drop those UTXOs from the set they maintain.Coins that are continuously being used in the Bitcoin economy will never lose their luster. However, coins that are old and not circulating will start to lose their luster up until all luster is lost and they become valueless, or they re-enter the economy and regain all of their luster. To minimize the scenarios of when coins start losing their luster, a goal would be that coins should only start losing their luster after the lifespan of the average human.The proposal is seen as a good solution to the UTXO growth problem and being a soft fork is a big plus. It also keeps the blockchain size finite even if given an infinite amount of time. However, there are other things to consider such as how wallet software should handle this and how it can work with sidechains. Further thought would need to be put into this. The fact remains that if we want to make bitcoins last forever, we have to accept unbounded UTXO growth, which is unscalable. The proposed solution does not prevent Bitcoin from lasting forever.</summary>
+    <published>2017-07-22T06:43:45+00:00</published>
+  </entry>
+</feed>

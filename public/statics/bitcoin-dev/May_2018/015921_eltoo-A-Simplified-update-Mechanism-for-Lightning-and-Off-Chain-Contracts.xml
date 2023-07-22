@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>eltoo: A Simplified update Mechanism for Lightning and Off-Chain Contracts</title>
+  <updated>2023-06-13T01:40:33.140051+00:00</updated>
+  <author>
+    <name>Jim Posen 2018-05-02 01:15:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>eltoo: A Simplified update Mechanism for Lightning and Off-Chain Contracts</title>
+    <updated>2023-06-13T01:40:33.140051+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/015921.html" rel="alternate"/>
+    <summary>The conversation is about pipelining broadcasts of update transactions. However, this method may introduce a problem where a node withholds the preimage for too long and force all upstream channels to be closed at the expense of their own upstream channel being closed, which can significantly disrupt the network. A routing node needs to ensure that if they learn the preimage, that they have time to broadcast and confirm an HTLC-success transaction before the height X. The number of blocks D_success is calculated as X - D_success is the latest height that it can safely broadcast the HTLC-success transaction, assuming the settlement transaction is already final. To minimize the safe delta between the upstream and downstream CLTVs, the downstream HTLC with CLTV = Y should be broadcasted and confirmed as soon after height Y as possible. Upstream hops can watch the blockchain for preimage reveals in other closing transactions and perhaps fulfill off-chain if there is sufficient time. In response to Jim Posen's confusion on why this doesn't accumulate, Christian Decker explains that choosing the delta in such a way that one can both settle the channel and have enough time to react to turn around and reveal the preimage would be a purely reactionary behavior. So with the assumptions of CSV = 144 and CLTV delta = 144, there would be an effective delta of 288 on each hop. All that matters is that once a node is due to give the upstream hop the preimage, it has already closed the downstream channel and can now read the HTLC preimage from that channel. The CSV timeout isn't part of the delta on each hop, but the deadline computation is implemented as CLTV - CLTV delta - CSV instead of LN-penalty's CLTV - CLTV delta.</summary>
+    <published>2018-05-02T01:15:10+00:00</published>
+  </entry>
+</feed>

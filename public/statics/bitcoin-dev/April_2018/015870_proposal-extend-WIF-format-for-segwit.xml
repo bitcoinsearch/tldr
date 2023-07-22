@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>proposal: extend WIF format for segwit</title>
+  <updated>2023-06-12T18:51:45.394267+00:00</updated>
+  <author>
+    <name>Karl Johan Alm 2018-04-04 06:06:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>proposal: extend WIF format for segwit</title>
+    <updated>2023-06-12T18:51:45.394267+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-April/015870.html" rel="alternate"/>
+    <summary>The proposed BIP XXX is for extending the private key format to specify the type of public key it corresponds to. The motivation behind this proposal is due to the presence of several types of public keys which can be associated with a given private key such as P2PKH (legacy 1... format), P2SH-P2WPKH (SegWit public key inside P2SH), P2WPKH (bech32), etc. Currently, private keys are stored as a uint256 (private key data) followed by a uint8 (compressed flag). By extending the suffix, we can specify what kind of public key was associated with the given private key. The proposal provides a specification which involves adding 6 new values in the table to specify the type of public key: P2PKH_UNCOMPRESSED, P2PKH_COMPRESSED, P2PKH, P2WPKH, P2WPKH_P2SH, P2SH, P2WSH, and P2WSH_P2SH. When a wallet imports a private key, it will have two outcomes: the key is using one of the legacy types or one of the extended types, in which case the wallet need only track the specific corresponding public key. The proposal is not backwards compatible, but new wallet software will always understand the old WIF format, however, it will assume that any kind of public key is possible.This proposal is based on the initial proposal by Thomas Voegtlin and the Electrum 3.0 implementation. There is a partial implementation which adds, but does not use, the types described in this BIP here. The document is licensed under the Creative Commons CC0 1.0 Universal license.</summary>
+    <published>2018-04-04T06:06:19+00:00</published>
+  </entry>
+</feed>

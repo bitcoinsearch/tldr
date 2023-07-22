@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Trampoline Routing</title>
+  <updated>2023-06-02T19:44:59.691524+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-08-09 04:41:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Trampoline Routing</title>
+    <updated>2023-06-02T19:44:59.691524+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-August/002113.html" rel="alternate"/>
+    <summary>Trampoline routing has been introduced to Lightning Network as a way to defer payment routing to trampoline nodes. Alice sends a payment to Bob by selecting T1 and RT2 to use as trampoline hops, and building a small onion that describes the following route: Alice → T1 → RT2 → Bob. The onion routing part is simple now that we have variable-length onion payloads. Trampoline nodes need to estimate a fee and cltv that allows them to route to any other trampoline node. To tackle this issue, trampoline nodes can exchange a new node_update message containing the trampoline fees and cltv. A filter system can be created where Alice sends gossip filters to her peers, and peers only forward to Alice updates that match these filters. It is doable to return the route calculated by trampoline nodes to the original caller, allowing for caching of the route and avoiding the need for trampolines in future payments. The route returned would pass through the node that provides the route, so there is still an economic incentive to do so. It is even doable to support multipart payment, by simply allowing multiple routes to be returned. However, the current route serialization contains the exact amount to be sent, and cannot be reused if the amount is changed. Thus, the route serialization needs to be redesigned.</summary>
+    <published>2019-08-09T04:41:17+00:00</published>
+  </entry>
+</feed>

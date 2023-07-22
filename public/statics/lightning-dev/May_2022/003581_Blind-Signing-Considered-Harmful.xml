@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Blind Signing Considered Harmful</title>
+  <updated>2023-06-03T08:39:29.413922+00:00</updated>
+  <author>
+    <name>Devrandom 2022-05-10 08:02:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Blind Signing Considered Harmful</title>
+    <updated>2023-06-03T08:39:29.413922+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-May/003581.html" rel="alternate"/>
+    <summary>In a conversation between ZmnSCPxj and devrandom, they discussed the requirements for a true validating Lightning signer. ZmnSCPxj suggested that such a signer would need to be a Bitcoin node with active mitigation against eclipse attacks, the ability to monitor the blockheight, and the ability to broadcast transactions. The UTXO Oracle(s) were then mentioned as an alternative option with additional properties that improve on a plain Bitcoin node. These include providing compact attestations that can be checked in an isolated/hardened environment, sending out attestations on a broadcast medium, and covering the current block hash and a commitment for the UTXO set hash. The topic of broadcast was also addressed, with the intention being to have a disaster recovery procedure in place. This would involve the signer sending out a heartbeat if it has a quorum of non-stale oracle attestations and there are no upcoming safety deadlines. The heartbeats form a "deadman's switch" which would alert the operator to take action if needed. Routing nodes were noted as needing to be aware of the on-chain status of incoming channels to avoid an attack scenario where a compromised node lies and tells the signer that the block height is much lower than it really is.The potential exploit of an HTLC being failed and removed on the input before it is removed on the output, leading to a loss of funds, was also discussed. Heartbeats would cease and the operator would manually intervene in this scenario. There is another potential mode where the value of HTLCs in flight is limited, routing is not done, and watchtowers are used instead of the UTXO Oracle component. It was also suggested that UTXO Oracles could be embedded into the network if compact-filters or utreexo roots are committed to in the consensus and SPV-style security is used. However, it is unclear when this might be plausibly deployed.</summary>
+    <published>2022-05-10T08:02:35+00:00</published>
+  </entry>
+</feed>

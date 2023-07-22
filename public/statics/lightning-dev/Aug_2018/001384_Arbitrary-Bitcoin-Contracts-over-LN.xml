@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Arbitrary Bitcoin Contracts over LN</title>
+  <updated>2023-05-25T02:03:38.998373+00:00</updated>
+  <author>
+    <name>Michael Folkson 2018-08-01 11:11:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Arbitrary Bitcoin Contracts over LN</title>
+    <updated>2023-05-25T02:03:38.998373+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-August/001384.html" rel="alternate"/>
+    <summary>In a recent post on the Lightning-dev mailing list, ZmnSCPxj discussed the transportation of smart contracts via LN. He opined that Poon-Dryja is superior to either Decker-Wattenhofer or Decker-Osuntokun-Russell for transportation of arbitrary contracts. The only smart contract one would really want to transport is HTLC (or equivalent in scriptless script), as they can be used to even implement non-transferable swap options and can be composed to create multi-step swaps. ZmnSCPxj introduced an arbitrary contract C, ostensibly to be transported over LN. To transport C over a channel between nodes A and B, under Poon-Dryja, a channel anchoring transaction onchain is created. The symmetrical series of transactions are created with only the anchoring transaction existing on-chain. The revocation key is kept secret by A (resp. B) until they both agree to revoke the old state. The CSV-encumbrance does not affect claiming of C; it encumbers the claiming of the money, but does not interact with C itself. Thus, any CLTV conditions in C will not be interfered with by the CSV-encumbrance on the next transaction.On the other hand, under Decker-Osuntokun-Russell eltoo, the transaction series is massively simpler with no additional script that needs to be written around the transported contract C. But the CSV in the second transaction is now potentially interfering with the operation of the contract C, as the final transaction cannot be enforced on-chain until the CSV has been satisfied. This is in contrast with Poon-Dryja where the contract C appears immediately on the second transaction in the sequence and can be enforced as soon as it appears on-chain. In almost all other ways, Poon-Dryja is inferior as it does not use nLockTime in a sufficiently clever way, has dangerous "toxic waste" (old revoked transactions), and symmetrical chains of transactions, different for both parties, instead of a single chain. Arbitrary contracts are also not really particularly useful. HTLCs seem to be an important building block for digital value transfers, and they (and their equivalents under scriptless) are sufficient for most practical transfers. Thus, moving forward, Decker-Osuntokun-Russell remains a superior technology over Poon-Dryja.</summary>
+    <published>2018-08-01T11:11:08+00:00</published>
+  </entry>
+</feed>

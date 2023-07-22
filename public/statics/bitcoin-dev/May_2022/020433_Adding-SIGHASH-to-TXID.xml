@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Adding SIGHASH to TXID</title>
+  <updated>2023-06-15T20:40:04.802415+00:00</updated>
+  <author>
+    <name>Jeremy Rubin 2022-05-07 11:55:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Adding SIGHASH to TXID</title>
+    <updated>2023-06-15T20:40:04.802415+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020433.html" rel="alternate"/>
+    <summary>A proposal has been made by John Law regarding inherited ID on the bitcoin-dev mailing list. The proposal suggests using new sighash flags to calculate a transaction ID (txid) in order to have more control over the input and output of transactions. Currently, txid:vout is used as a previous transaction output to prevent any modifications. However, with the introduction of SIGHASH_PREVOUT_XYZ flags, it would be possible to use different types of sighashes to commit to specific fields of the previous transaction output. For example, using SIGHASH_PREVOUT_SINGLE would allow the addition of new outputs to the previous transaction without affecting the replaced txid. On the other hand, using SIGHASH_PREVOUT_NONE would not check any outputs of the previous transaction but would still check the inputs. By applying sighashes to the previous transaction, instead of allowing for any transaction, there would be more control over the txid, ensuring that signatures sign what is intended and are not invalidated by changes unrelated to the currently-checked signature. The proposal suggests defaulting to SIGHASH_PREVOUT_ALL, but the three SIGHASH_PREVOUT_XYZ flags could also be combined with SIGHASH_PREVOUT_ANYONECANPAY to discard all inputs except for the input number matching "vout". Overall, the proposal aims to provide better control over the flow of transactions and ensure the stability of txid.</summary>
+    <published>2022-05-07T11:55:35+00:00</published>
+  </entry>
+</feed>

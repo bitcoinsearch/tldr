@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Scaling by Partitioning</title>
+  <updated>2023-06-11T01:54:05.336461+00:00</updated>
+  <author>
+    <name>Dave Scotese 2015-12-10 04:08:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Scaling by Partitioning</title>
+    <updated>2023-06-11T01:54:05.336461+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-December/011929.html" rel="alternate"/>
+    <summary>The idea proposed for scaling Bitcoin is to run more than one simultaneous chain, each chain defeating double spending on only part of the coin. The coin would be partitioned by radix or modulus. For example, in order to multiply throughput by a factor of ten, ten parallel chains could be run and one would work on coin that ends in "0", one on coin that ends in "1", and so on up to "9". Blocks would have to contain the number of the partition they belong to, and miners would have to round-robin through partitions so that an attacker would not have an unfair advantage working on just one partition. The number of chains could increase automatically over time based on the moving average of transaction volume. If we partition the work using bits from the TxID, then every transaction may have to use all the other partitions to verify that the incoming coin is good. If all partitions are involved in validating and storing every transaction, then we may be doing more work in total, but any one node will only have to do (and store) a fraction of what it is now. To break up the work so that any participant can handle whatever fraction of the work he or she wants, one idea is to use the last bits of the address that will receive the subsidy and fees. Suppose we use eight bits so that there are 256 partitions and a miner wishes to do about 1/5 of the work. That would be 51 partitions. This is signaled in the generation transaction, where the bit-pattern of the last byte of the public key identifies the first partition, and the proportion of the total reward for the block (51/256) indicates how many partitions a solution will cover. If the last byte of the subsidy address is 0xF0, this means there are only 16 partitions left, so we define partition selection to wrap around. In this way, all mining to date has covered all partitions. The proposal has the added benefit of encouraging the assembly of blocks by miners who work on single partitions to get them out there with a one-partition solution. It seems that a miner who covers only one partition will be at a serious disadvantage, but as the rate of incoming transactions increases, the fraction of time he must spend validating makes up for this disadvantage somewhat. If we wish to encourage miners to work on smaller partitions, we can provide a difficulty break for smaller fractions of the work. In fact, the difficulty can be adjusted down for the first solution, and then slowly back up to full for the last partition(s).</summary>
+    <published>2015-12-10T04:08:04+00:00</published>
+  </entry>
+</feed>

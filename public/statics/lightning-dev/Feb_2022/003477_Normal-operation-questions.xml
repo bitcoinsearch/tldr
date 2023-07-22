@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Normal operation questions</title>
+  <updated>2023-05-23T17:01:45.382947+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-02-17 00:15:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Normal operation questions</title>
+    <updated>2023-05-23T17:01:45.382947+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-February/003477.html" rel="alternate"/>
+    <summary>Concurrent signatures in Lightning Network's Normal Operation protocol may generate additional messages due to the asymmetric state of revocation channels. This is because a new signature only commits to any remote updates included before the last revocation message, and another signature exchange is required to synchronize both commitments. As a result, this creates additional states depending on the processing order of concurrent messages.However, it is necessary to have an extra round of commitment_signed and revoke_and_ack messages to remove the HTLC from both commitment transactions. In response to a question from Ben Weintraub, Olaoluwa Osuntokun from the Lightning Network team explained that Alice does not need to send a new signature immediately after adding a new HTLC to the pending set of HTLCs. She may want to delay her signature if she has other HTLCs she wants to add to the commitment transaction.In cases where Alice is forwarding the HTLC and Bob's side of the channel has been dormant, it is in her best interest to propose a new state immediately as she may generate some routing fees from a successful forward. When Bob sends the update_fulfill_htlc, both parties exchange commitment_signed and revoke_and_ack messages again to update their commitment state off-chain.Once Alice receives the pre-image (assuming a multi-hop scenario), she can opt to not wait for the full exchange and instead pipeline the pre-image back upstream in the route. This reduces perceived user latency for payments.</summary>
+    <published>2022-02-17T00:15:05+00:00</published>
+  </entry>
+</feed>

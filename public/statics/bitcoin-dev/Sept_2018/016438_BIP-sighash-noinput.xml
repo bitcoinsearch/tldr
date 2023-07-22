@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP sighash_noinput</title>
+  <updated>2023-06-13T01:51:57.086551+00:00</updated>
+  <author>
+    <name>Jonas Nick 2018-09-26 20:40:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP sighash_noinput</title>
+    <updated>2023-06-13T01:51:57.086551+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-September/016438.html" rel="alternate"/>
+    <summary>The discussion on the bitcoin-dev mailing list revolves around NOINPUT. Johnson Lau pointed out that in BIP143, the nSequence of the same input is always signed with any hashtype, and asks why it's necessary to sign the sequence of other inputs. In response, Jonas Nick explains that if NOINPUT were to sign the hashSequence, then OP_CSV would no longer be necessary in eltoo update scripts, allowing them to be taprootified. Eltoo update transaction outputs consist of two branches, update and settlement, where the update branch can be spent by a more recent update transaction if an obsolete update transaction ends up spending the funding output. The settlement branch is a 2-of-2 multisig with a relative timelock using OP_CSV. Both parties' signatures are required to spend the update transaction, which will only occur if the input has the correct sequence numbers. However, since NOINPUT includes the sequence numbers of all transaction inputs, using NOINPUT with SINGLE should zero out the hashSequence to avoid errors. Additionally, this approach makes rebinding to an output with an OP_CSV that requires a larger sequence number impossible without also signing with SIGHASH_SINGLE. Nonetheless, the current NOINPUT proposal enables taprootifiability of eltoo unilateral closings.</summary>
+    <published>2018-09-26T20:40:02+00:00</published>
+  </entry>
+</feed>

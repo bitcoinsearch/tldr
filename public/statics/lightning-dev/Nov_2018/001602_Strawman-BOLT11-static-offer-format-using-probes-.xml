@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Strawman BOLT11 static "offer" format using probes.</title>
+  <updated>2023-05-25T17:03:18.939793+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-11-15 03:56:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Strawman BOLT11 static "offer" format using probes.</title>
+    <updated>2023-05-25T17:03:18.939793+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001602.html" rel="alternate"/>
+    <summary>The proposal suggests that reusable BOLT11 "offers" be used to provide almost-spontaneous payments without needing to generate a BOLT11 invoice for each sale. The offer will have a `p` field of 26 bytes, which is ignored by existing nodes. The payer will use a new lightning probe message using the current onion format for HTLCs to retrieve the complete invoice. The final-hop lightning onion would contain a marker, a 128-bit `p` field, and optional types such as quantity, delivery-address, and signature. The return lightning message would contain a new bolt11 invoice, possibly optimized by copying fields from the bolt11 offer if they don't appear, and an additional field `m` (27) `data_length` 52, which is a Merkle hash of fields payer provided in the onion message above, and the offer `p` value. Refinements suggested include generating alternate leaves for the merkle tree, listing the fields that weren't included in the merkle, adding a `k` field to delegate the final invoice to a separate key, setting a default expiry field for pure offers to infinite, and merkelizing the delivery-address too.This proposal provides a way to have static invoicing and a single static invoice can thus be used to approximate spontaneous donations while still providing proof of payment. It also provides a platform for recurring payments, which cannot be done with preimage-is-next-payment_hash.</summary>
+    <published>2018-11-15T03:56:31+00:00</published>
+  </entry>
+</feed>

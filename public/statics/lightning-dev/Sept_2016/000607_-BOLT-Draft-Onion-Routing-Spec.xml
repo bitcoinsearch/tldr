@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BOLT Draft] Onion Routing Spec</title>
+  <updated>2023-05-24T00:05:44.663366+00:00</updated>
+  <author>
+    <name>Christian Decker 2016-09-06 11:27:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BOLT Draft] Onion Routing Spec</title>
+    <updated>2023-05-24T00:05:44.663366+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-September/000607.html" rel="alternate"/>
+    <summary>The email conversation between Rusty Russell and Christian Decker discusses the onion routing protocol and key rotation policies. The discussion focuses on two potential key-rotations; rotating the public key used in transactions that hit the Bitcoin network, and rotating the public key used for the DH shared secret generation for the onion routing protocol. The assumptions include a single pubkey for everything about a node (its ID), medium-scale public network with 250,000 nodes and 1M channels, and every node knows the entire public network. Each node ID is 33 bytes, each channel is 6 bytes, and it needs to associate channels with IDs, which requires another 8 bytes per channel. Therefore, each node has to keep 22.25MB of data. The proofs are larger, requiring a merkle proof (12 x 32 bytes) plus the funding tx (227 bytes), two pubkeys (66 bytes), and a signature of the ID using those pubkeys (128 bytes). This adds an additional 800M that each node has to download to completely validate. To address this issue, the conversation proposes changing the assumptions by using a "comms" key for each node instead of its ID, so nodes send out a new comms key signed by ID. This approach requires nodes to keep 33 bytes each, or 8.25MB. To rotate a comms key, a new key (33 bytes) and a signature from the ID (64 bytes) are needed, along with a timestamp (4 bytes), which results in 25.25MB. The frequency of rotation is discussed, with daily rotation being feasible, but hourly rotation not.The communication overhead is identical in both proposals, but the comms key approach seems preferable because it binds the new communication key with the channel's existence by showing a derivation path from the node's (fixed) public key and the new key. Another approach that can be considered is having passive rotations, where an endpoint announces a channel's existence and sends its rotation interval along. Every node derives the new key and uses it for the DH shared secret generation should they want to talk to this node. The passive rotation incurs no communication overhead and can be bound to the node's channels, so as long as one of its channels exists, its keys can be rotated. A mix of active and passive rotations may make sense, with active rotation enabling emergency rotations in case a key was compromised.</summary>
+    <published>2016-09-06T11:27:01+00:00</published>
+  </entry>
+</feed>

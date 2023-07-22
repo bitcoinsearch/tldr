@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Dynamic Commitments: Upgrading Channels Without On-Chain Transactions</title>
+  <updated>2023-05-23T13:55:56.356657+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-07-21 01:18:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Dynamic Commitments: Upgrading Channels Without On-Chain Transactions</title>
+    <updated>2023-05-23T13:55:56.356657+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-July/002763.html" rel="alternate"/>
+    <summary>The Lightning Network is proposing protocol modifications that would enable nodes to update their commitments without any on-chain transactions. The proposed changes introduce minor alterations to the `commit_sig` and `revoke_and_ack` messages, allowing for the implementation of a "dynamic" proposal. The motivation behind the change is to allow users to upgrade existing channels to new safer types without requiring new on-chain transactions. The funding output is the only component of a channel that is set in stone and requires an on-chain transaction to modify. The introduction of schnorr and taproot to the Bitcoin protocol increases the design space for channels, and with dynamic commitments, the network can benefit from morphing the funding output to be a single-key output.This allows users/software to update to the latest commitment format that starts to utilize all the new tools available. With this new funding output format, the commitment format itself can also be updated, allowing experimentation with flow-control like ideas such as limiting the number of max allowed outstanding HTLCs. The proposed modifications include adding a `channel_type` TLV to make the channel type used in funding explicit during funding negotiation. The `channel_type` specified on a given `commit_sig` message should be the `channel_type` of the new commitment being created. The changes allow for the handling of simple upgrades where some or all of the parameters of the channel are hard-coded and/or have been negotiated out of band. More complex channel types may require the exchange of additional keys or parameters which need to be known in order to reconstruct the new commitment format and verify the new signature.Once Taproot rolls around, the funding output can be updated, and the details on the possibly new channel type(s) that take advantage of all the new tools can be worked out. These changes will allow for the network to be updated to the new safer channel types in a de-synchronized, distributed manner that doesn't require any on-chain transactions. Dynamic commitments create another point of extensibility in the protocol, allowing for the exploration of all the variants on channels that exist.</summary>
+    <published>2020-07-21T01:18:19+00:00</published>
+  </entry>
+</feed>

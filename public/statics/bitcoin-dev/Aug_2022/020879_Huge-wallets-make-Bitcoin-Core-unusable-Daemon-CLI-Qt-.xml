@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Huge wallets make Bitcoin Core unusable (Daemon+CLI &amp; Qt)</title>
+  <updated>2023-06-15T23:53:47.415969+00:00</updated>
+  <author>
+    <name>rhavar at protonmail.com 2022-08-20 15:06:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Huge wallets make Bitcoin Core unusable (Daemon+CLI &amp; Qt)</title>
+    <updated>2023-06-15T23:53:47.415969+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-August/020879.html" rel="alternate"/>
+    <summary>A user named Felipe Micaroni Lalli posted on the bitcoin-dev forum about the issue he faced with a 5-year-old production server wallet, which had 2.079.337 transactions and 446.503 generated addresses and was around 273 MB in size. The wallet's performance started to degrade exponentially, with most commands timing out. Increasing the timeout and RPC threads in the config file worsened the situation. Even after moving the wallet.dat to a fast SSD disk and increasing cache size, performance wasn't sufficient. If loaded in Bitcoin-qt, the system became unresponsive, making it difficult to use. Felipe questioned if improvements could be made or if the wallet feature should be removed altogether.To run a large Bitcoin core wallet, just call `RemovePrunedFunds` on old transactions. However, it is tricky as one has to ensure that the transaction is "safe to remove." Transactions become unsafe if they have a wallet utxo that you haven't spent or recently spent. Additionally, if transaction B spends from transaction A, removing transaction B will make the wallet think transaction A is unspent when it is not. Thus, pruning should be done depth-first.Bitcoin Core becomes almost useless for the wallet feature since the standard client is slow to sync, hard to use, and not preferred by end-users who opt for Electrum or Wasabi. It also becomes useless for servers in production, forcing them to use third-party solutions for huge wallets. The only current "solution" for huge wallets is to create a new one and send the funds there from time to time, but it can cause privacy concerns and break monitoring of old addresses. Felipe suggested caching the entire wallet in memory, but some code optimization might also be necessary. He asked whether it was possible to optimize a huge wallet without moving funds to a new one, improving cache usage, reducing wallet size, ignoring old addresses, improving I/O treatment, and CPU usage in the main thread on Bitcoin-Qt to avoid window freezing on big and huge wallets. Felipe proposed an "autoarchivehugewallets=1" feature in the file config to create a new wallet and move funds automatically. Felipe included links to several related issues and tests that he thought could be useful for developers. He also mentioned another possible bug where even after moving funds to a new wallet, the old wallet shows an old balance. Rescanblockchain command takes a long time to fix it.</summary>
+    <published>2022-08-20T15:06:27+00:00</published>
+  </entry>
+</feed>

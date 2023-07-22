@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+  <updated>2023-06-03T02:47:43.556347+00:00</updated>
+  <author>
+    <name>Christian Decker 2020-10-26 12:46:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+    <updated>2023-06-03T02:47:43.556347+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002871.html" rel="alternate"/>
+    <summary>Rusty Russell and Christian are discussing an optimization step, where a batch-ack is sent after a whole series of changes were proposed to the leader, and referenced by their `htlc_id`. The former proposal was to either reflect the whole message or send back individual acks, containing the hash of the message if they want to safe on bytes transferred. Alternatively, they could also use reference the change by its htlc_id. However, the latter means that there is a tight binding between the linearization protocol and the internals of these changes. Christian's goal ultimately is to introduce a better layering between the change proposal/commitment scheme, and the semantics of the individual changes ("which order" vs. "what"). Christian thinks that reflecting the changes as a whole, interleaving his updates with Rusty's is likely the simplest protocol, with the least implied state that can get out of sync, and cause nodes to drift apart like they had a number of times. They discussed the performance increase of the batching would be compared to just acking each update individually.</summary>
+    <published>2020-10-26T12:46:44+00:00</published>
+  </entry>
+</feed>

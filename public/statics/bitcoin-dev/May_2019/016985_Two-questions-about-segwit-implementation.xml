@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Two questions about segwit implementation</title>
+  <updated>2023-05-20T20:34:34.105142+00:00</updated>
+  <author>
+    <name>Johnson Lau 2019-05-26 14:33:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Two questions about segwit implementation</title>
+    <updated>2023-05-20T20:34:34.105142+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-May/016985.html" rel="alternate"/>
+    <summary>In a recent email on the bitcoin-dev mailing list, Aymeric Vitte stated that his implementation of segwit was incorrect. He had wrongly assumed that scriptsig would go into witness data as it was, but this is not the case. Witness is actually a stack and for each input, the witness starts with a CCompactSize for the number of stack elements for this input. Each stack element in turn starts with a CCompactSize for the size of this element, followed by the actual data. Upon reading the specs correctly, Vitte found that there were some discrepancies. He questioned why OP_0 is 00 in witness data and not 0100 and whether this applied to other op_codes. A "00" element means the size of this element is zero and will create an empty element on the stack, which is effectively the same as OP_0. A "0100" element means the element size is one, and the data for this element is "00". Vitte also questioned why for non-segwit inputs there is a 00 length in segwit data and what the rational for that was. The “00” here means "this input has no witness stack element", and you need this even for non segwit inputs because there is no way to tell whether an input is segwit-enabled or not until you look up the UTXO, which might not always be available. Transaction serialization couldn’t rely on contextual information. However, the spec requires you to always use the non-segwit serialization if all inputs have no stack element.</summary>
+    <published>2019-05-26T14:33:06+00:00</published>
+  </entry>
+</feed>

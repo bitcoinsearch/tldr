@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>"Compressed" headers stream</title>
+  <updated>2023-05-20T03:30:49.123266+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2017-12-13 00:01:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>"Compressed" headers stream</title>
+    <updated>2023-05-20T03:30:49.123266+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-December/015397.html" rel="alternate"/>
+    <summary>In a conversation between Bitcoin developers, Suhas Daftuar and Gregory Maxwell, they discuss ways to include nBits in any messages where the value is ambiguous. The proposal is to include it with the first header in a message and whenever it changes from the previous header's nBits. They suggest using a one-byte flag that indicates if nbits is the same as last, if timestamp is a full field or a small offset, if version is the same as the last distinct value, if prev is entirely there, entirely gone, first 4 bytes provided, or first 8 bytes provided. The downside of using nbits the same as last as an optimization is that if consensus rules ever change to where difficulty management works differently, nbits may change every block. The alternative suggested is for nbits to get differential encoding that could be opted into for small differences. They also discuss the consensus layer anti-dos separation, saying that nbits' minimum is so low compared to the speed of a mining device, virtually any attack that you might do with invalid headers could still be done with headers at the minimum difficulty. Maxwell suggests not changing the serialization of existing messages as nodes will have to support speaking both messages for a long time. Instead, they propose introducing a new 'cmpctheaders'/'getcmpcthdrs' message pair for syncing using this new message type, while leaving the existing 'headers'/'getheaders' messages unchanged. When communicating with upgraded peers, we'd never use 'getheaders' messages, and we'd only use 'headers' messages for potentially announcing new blocks. They acknowledge that they'll have to support the existing protocol for a long time but suggest that splitting off the headers chain-sync functionality to a new message pair seems like a nice side-effect benefit, in the long run.</summary>
+    <published>2017-12-13T00:01:32+00:00</published>
+  </entry>
+</feed>

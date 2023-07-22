@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>SPV bitcoind? (was: Introducing BitcoinKit.framework)</title>
+  <updated>2023-06-06T20:11:13.841658+00:00</updated>
+  <author>
+    <name>Mike Hearn 2013-07-16 15:09:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>SPV bitcoind? (was: Introducing BitcoinKit.framework)</title>
+    <updated>2023-06-06T20:11:13.841658+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-July/002916.html" rel="alternate"/>
+    <summary>The context is a discussion on creating an SPV (Simplified Payment Verification) bitcoind, with the aim of reducing disk storage usage while maintaining full functionality. The first step outlined is to store only block headers in blkXXXX.dat files instead of full block contents, and disable listening and addr announcements to the P2P network. The mempool logic also needs to be rewritten so it throws out irrelevant transactions. The second step is to use getheaders to catch up with the chain until the minimum wallet birthday is reached, throwing out headers downloaded until one goes past the key birthday minus some slack period. The third step involves implementing client-side support for Bloom filtering and switching from downloading full blocks to filteredblocks, verifying the Merkle branches then applying them to the wallet. The fourth step is optional, involving monitoring broadcast propagation for received transactions, assuming a non-MITMd internet connection as a rough proxy for "likely to be valid and mined upon". Finally, optimization is required, which depends on various factors such as CPU, network, and disk strength. Aggressive checkpointing is necessary to avoid users having to download more than a month or two's worth of headers. Profiling and optimizing are crucial to ensure a relatively flat profile whilst doing initial catchup and chain sync.</summary>
+    <published>2013-07-16T15:09:19+00:00</published>
+  </entry>
+</feed>

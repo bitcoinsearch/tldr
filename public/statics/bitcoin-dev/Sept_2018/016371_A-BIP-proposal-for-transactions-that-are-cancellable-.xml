@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A BIP proposal for transactions that are 'cancellable'</title>
+  <updated>2023-05-20T17:42:35.856474+00:00</updated>
+  <author>
+    <name>Matt Corallo 2018-09-06 16:33:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A BIP proposal for transactions that are 'cancellable'</title>
+    <updated>2023-05-20T17:42:35.857475+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-September/016371.html" rel="alternate"/>
+    <summary>A proposal has been made by Alejandro Ranchal Pedrosa to extend OP_CSV (and/or OP_CLTV) in order for these to allow and interpret negative values. This new BIP is intended to increase the fairness of users. In the current example shown in BIP 112, only Bob would have ownership for the first 24 hours and then whoever spends first would own it. The proposed change would mean that both parties would have ownership for the first 24 hours, but after that, only Bob would own such coins. The implementation should not be too tedious, and in fact, it simply implies considering negative values that are currently discarded as per the specification of BIP-112. Matt Corallo responded with a simple approach to accomplish what was suggested using a multisig option with a lock time pre-signed transaction which is broadcastable at the 24h mark and has different spendability. With this suggestion, before broadcast/during construction/whatever sign a new transaction that spends it and is only spendable by Alice, but is timelocked for 24 hours. At the 24h mark, Alice broadcasts the transaction and once it is confirmed only Alice can claim the money. Alejandro Ranchal Pedrosa replied to Matt stating that with his suggestion of a multisig option with a 24h timelock, once he gives Alice the chance to spend that UTXO without a negative timelock, it cannot be enforced that this is not used by Alice after the 24hs. He suggests maybe tweaking the Lightning Channel design of Breach Remedy txs to penalize Alice if she does use it, but this requires Bob to check the Blockchain in case he needs to publish a proof-of-fraud, think of adding extra funds to the transaction to account for penalization, etc.</summary>
+    <published>2018-09-06T16:33:38+00:00</published>
+  </entry>
+</feed>

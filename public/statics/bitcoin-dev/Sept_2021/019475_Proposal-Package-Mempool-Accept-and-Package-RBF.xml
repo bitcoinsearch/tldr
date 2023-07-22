@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Package Mempool Accept and Package RBF</title>
+  <updated>2023-06-15T02:04:30.097145+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2021-09-20 09:19:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Package Mempool Accept and Package RBF</title>
+    <updated>2023-06-15T02:04:30.097145+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019475.html" rel="alternate"/>
+    <summary>In a post on the Bitcoin development mailing list, Gloria Zhao proposed a set of mempool policy changes to enable package validation in preparation for package relay in Bitcoin Core. The proposal enables packages consisting of multiple parents and one child, allowing users to submit related transactions as a package rather than individually. This would help nodes better determine which transactions have the highest feerates. Zhao's proposal includes several rules for package RBF (replace-by-fee), including that a package cannot exceed `MAX_PACKAGE_COUNT=25` count and `MAX_PACKAGE_SIZE=101KvB` total size.However, there is a concern regarding an example provided in which an attacker could abuse the rule to ensure a transaction stays pinned in the mempool without confirming by broadcasting a set of child transactions that reach these limits and pay low fees. To address this, Zhao suggests a combination of changes to mempool validation logic, policy, and transaction relay, which allows better propagation of the transactions with the highest package feerates to miners, making fee-bumping tools more powerful for users.The next step in the Package Mempool Accept project is to implement submission to mempool, initially through RPC only. This allows testing of the submission logic before exposing it on P2P. There is a draft implementation available, but feedback is welcome.Bitcoin Core developers have proposed a new algorithm for child-pays-for-parent (CPFP) and replace-by-fee (RBF) fee bumps called package-based RBF. The proposal is an improvement over the current RBF implementation as it allows multiple parents to be added to a transaction, enabling fee bumping for batches of transactions. The package also has a defined topology which simplifies validation logic and helps in fee rate calculation. Additionally, the package feerate is used instead of individual feerates, solving the issue of a parent not meeting minimum fees on its own. However, the package cannot replace more than 100 mempool transactions.The proposal modifies some rules from BIP125 which include signaling, new unconfirmed inputs, absolute fee, feerate, and total replaced transactions. The proposal is expected to increase efficiency, reduce complexity, and make it easier for L2 applications to adjust their fees at broadcast time.The provided context includes a Github pull request for Bitcoin, specifically the changes made to lines 1101-1104. The context also includes links to several images, including screenshots of the proposed changes and a diagram explaining the functionality of the code. Additionally, the context includes information about the Bitcoin-dev mailing list and a link to subscribe to it.</summary>
+    <published>2021-09-20T09:19:38+00:00</published>
+  </entry>
+</feed>

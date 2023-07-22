@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fill-or-kill transaction</title>
+  <updated>2023-06-10T22:41:28.064777+00:00</updated>
+  <author>
+    <name>jl2012 at xbt.hk 2015-09-17 18:41:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fill-or-kill transaction</title>
+    <updated>2023-06-10T22:41:28.064777+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-September/011042.html" rel="alternate"/>
+    <summary>A fill-or-kill system could be built with a softfork by exploiting Satoshi's implementation of nLockTime, which wasted a huge range of timestamp from 1970 to 2009. Two new parameters, nLockTime2 and nKillTime were defined. For every nLockTime2 value greater than or equal to 720,000, the lock time with the new rule must be one to 2048 seconds later than the original rule. If nLockTime2 is 1,853,010 and nKillTime is 2047, nLockTime will be 4,294,966,527, the highest possible value with the 32-bit nLockTime. Users can set a time-based nLockTime2 according to the current median time-past, and nKillTime to get their tx either filled or killed in about three hours. Similarly, a user who wants his tx confirmed in block 630000, the first block with reward below 10BTC, can set nLockTime2 to 210,000 and nKillTime to 0.Time-based OP_CLTV could be upgraded to support time-based nLockTime2. However, height-based OP_CLTV is not compatible with nLockTime2. It is necessary to use the original nLockTime to spend a height-based OP_CLTV output. A new OP_CLTV2 may need to be created that can verify both nLockTime and nLockTime2.The height-based nLockTime2 will overflow in 55 years, which is why it is likely that a hard fork will happen to implement a better fill-or-kill system. If not, everything could be rebooted with another tx nVersion for another 55 years.</summary>
+    <published>2015-09-17T18:41:39+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>[Splicing] On the topic of commit_sigs + revoke_and_ack</title>
+  <updated>2023-06-01T19:19:44.968194+00:00</updated>
+  <author>
+    <name>niftynei 2023-03-30 22:08:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>[Splicing] On the topic of commit_sigs + revoke_and_ack</title>
+    <updated>2023-06-01T19:19:44.968194+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-March/003894.html" rel="alternate"/>
+    <summary>The question of whether to re-send all commitment-sigs after a new splice negotiation has been proposed for the Lightning Network (LN). The current CLN draft sends all of them, but the author suggests that only the newly negotiated splice should be sent. All of the commitment sigs should only be re-sent when the underlying commitment transaction is changed, such as an HTLC being added or removed. In the original splicing draft proposal, all commitment sigs were sent in a single message; however, they have since been split out into more messages, which now allow for only sending the new commitment_signed message when appropriate. After a splice tx is successfully negotiated, a commitment-sig must be sent to the peer to send the new funding tx. After `tx_complete`, the `commitment_sig` must be exchanged for the newly created splice tx. The purpose of the `commitment_signed` message is to send the peer your commitment sig for the currently proposed commitment. The purpose of `revoke_and_ack` is to send a revocation point for the previous commitment transaction, revoke the previous commitment, and ACK that the commitment sig has been received for the next commitment. Currently, the protocol sends a `commitment_sig` message for the just negotiated splice tx and resends all prior negotiated splice `commit_sigs` (if RBF) and the non-splice commit-sig. After receiving all the `commit_sig` messages, a single `revoke_and_ack` is exchanged. However, this protocol is identical for both new commitment signed workflows and a new splice negotiation, meaning the same protocol is reused for any new commitment signatures required. An alternative proposal suggests sending only a single `commitment_sig` instead of all the commit-sigs and a `revoke_and_ack`. This would result in less data being sent over the wire as only new information is transmitted, and fewer signatures would need to be (re)-generated. However, a way to communicate that the `commitment_sig` has been received is needed, which `tx_signatures` should fill. This approach is slightly different from the current protocol and may require more work to implement.</summary>
+    <published>2023-03-30T22:08:22+00:00</published>
+  </entry>
+</feed>

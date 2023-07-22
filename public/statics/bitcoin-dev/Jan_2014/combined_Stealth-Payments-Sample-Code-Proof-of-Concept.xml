@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Stealth Payments - Sample Code / Proof of Concept</title>
+  <updated>2023-06-08T00:01:24.773277+00:00</updated>
+  <author>
+    <name>Jeremy Spilman 2014-01-13 09:18:39</name>
+  </author>
+  <author>
+    <name>Jeremy Spilman 2014-01-13 09:18:39</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-01-13 11:18:28</name>
+  </author>
+  <author>
+    <name>Jeremy Spilman 2014-01-13 09:18:39</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-01-13 11:18:28</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-01-13 11:18:28</name>
+  </author>
+  <author>
+    <name>Jeremy Spilman 2014-01-13 14:10:14</name>
+  </author>
+  <author>
+    <name>Jeremy Spilman 2014-01-13 14:10:14</name>
+  </author>
+  <author>
+    <name>Jeremy Spilman 2014-01-13 14:10:14</name>
+  </author>
+  <link href="bitcoin-dev/Jan_2014/004051_Stealth-Payments-Sample-Code-Proof-of-Concept.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004051_Stealth-Payments-Sample-Code-Proof-of-Concept.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004054_Stealth-Payments-Sample-Code-Proof-of-Concept.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004051_Stealth-Payments-Sample-Code-Proof-of-Concept.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004054_Stealth-Payments-Sample-Code-Proof-of-Concept.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004054_Stealth-Payments-Sample-Code-Proof-of-Concept.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004056_Stealth-Payments-Sample-Code-Proof-of-Concept.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004056_Stealth-Payments-Sample-Code-Proof-of-Concept.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004056_Stealth-Payments-Sample-Code-Proof-of-Concept.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Stealth Payments - Sample Code / Proof of Concept</title>
+    <updated>2023-06-08T00:01:24.774278+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-January/004051.html" rel="alternate"/>
+    <summary>On January 13, 2014, a Bitcoin payment of 1BTC was made to a stealth address on TestNet with transaction ID df092896c1347b303da299bc84c92bef1946f455dbdc80ffdb01a18ea4ed8b4c. The code used to generate this transaction is available on GitHub, with one minor change from the protocol discussed. After importing the private key for the TxIn to that transaction, two rows appear in the Transaction List of Bitcoin-QT, both saying 'Sent to' with a blank address. One row has 1BTC amount and is the 2-of-2 stealth multisig, while the other has 0BTC amount and is the OP_RETURN.The author of the code queries whether the 0BTC OP_RETURN transactions should be hidden from the Transaction List as 'Transaction Details' truncates the after OP_RETURN anyway, making it not particularly useful for seeing what data you embedded. The author suggests defining the PaymentRequest extension, updating Gavin's PHP to generate PaymentRequests for stealth payments, getting Bitcoin-QT loading the PaymentRequest and generating transactions from those PaymentRequests and writing an agent to detect incoming stealth payments. However, the author notes that there would still be meaningless rows in the payer's Transaction List without additional work. In addition, the author raises questions about how to receive P2P stealth payments in Bitcoin-QT as an end-user and how to keep 'd2'/'Q2' unencrypted so it's available for doing necessary tests but has no chance of ever being used as a standalone private key. Finally, the author questions how to fully verify the transaction when 'd1'/Q1 is available decrypted and how to indicate if that has or has not been done yet.Mike Hearn and Jeremy Spilman were discussing a transaction on the Bitcoin TestNet. Spilman had spent 1BTC to a stealth address which Hearn asked if it could be redeemed. Spilman created a separate test with hard-coded values from the block chain to create a redeeming Tx that was sent successfully using sendrawtransaction. Spilman's code for generating the transaction is available on Github, and he confirmed that he used a private C# bitcoin implementation for it. There is nothing particularly special about the libraries under the hood, just standard Bitcoin/EC/BIP32 stuff using OpenSSL instead of BouncyCastle.The two discussed whether or not the 0BTC OP_RETURN transactions should be hidden from the Transaction List and decided to show "Payment received from Jeremy, 0.1 BTC" instead. They also agreed that "Merchant" might not be the best name for the address column and suggested changing it to "Recipient." Hearn suggested extending the wallet format to keep 'd2'/'Q2' unencrypted so that they are available for doing necessary tests but have no chance of ever being used as a stand-alone private key. He also expressed concern about people being able to detect such payments by testing if decrypted values are points on the curve, but was unsure how the risk worked.Finally, Spilman's stealth redemption Tx went through, and he signed off for the night. There was also a concern that the protocol should be reviewed by a professional cryptographer due to potential issues with people detecting payments.</summary>
+    <published>2014-01-13T09:18:39+00:00</published>
+  </entry>
+</feed>

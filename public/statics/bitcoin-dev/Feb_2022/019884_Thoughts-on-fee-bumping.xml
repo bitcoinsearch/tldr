@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Thoughts on fee bumping</title>
+  <updated>2023-06-15T16:32:09.772612+00:00</updated>
+  <author>
+    <name>darosior 2022-02-10 23:44:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Thoughts on fee bumping</title>
+    <updated>2023-06-15T16:32:09.773613+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019884.html" rel="alternate"/>
+    <summary>Recently, there has been discussion on fee-bumping in Bitcoin, with concerns raised about the increasing complexity of both the current situation and proposed remedies. In a message to the bitcoin-dev mailing list, James O'Beirne suggested taking a step back and reframing the issue, with aims motivated by end-user experience and incentive compatibility. One of these aims is that purely additive feerate bumps should never be impossible, although there needs to be spam prevention to prevent someone from consuming bandwidth and mempool space with a long series of infinitesimal fee-bumps. A fee bump should be given the same per-byte consideration as a normal Bitcoin transaction in terms of relay and block space. Instead of prompting a rebroadcast of the original transaction for replacement, which contains a lot of data not new to the network, it makes more sense to broadcast the "diff" which is the additive contribution towards some txn's feerate. In an ideal design, special structural foresight would not be needed in order for a txn's feerate to be improved after broadcast. Anchor outputs specified solely for CPFP, which amount to many bytes of wasted chainspace, are a hack. Planning for fee-bumps explicitly in transaction structure also often winds up locking in which keys are required to bump fees. Feerate bumps should be able to come from anywhere. This is problematic if you're using a vault structure that makes use of pre-signed transactions. Transaction sponsors allow feerates to be bumped after a transaction's broadcast, regardless of the structure of the original transaction. No rebroadcast (wasted bandwidth) is required for the original txn data. No wasted chainspace on only-maybe-used prophylactic anchor outputs. The interface for end-users is very straightforward: if you want to bump fees, specify a transaction that contributes incrementally to package feerate for some txid. Soft-forks are no fun, but the current complexity in fee management feels untenable, and as evidenced by all the discussion lately, fees are an increasingly crucial part of the system.</summary>
+    <published>2022-02-10T23:44:38+00:00</published>
+  </entry>
+</feed>

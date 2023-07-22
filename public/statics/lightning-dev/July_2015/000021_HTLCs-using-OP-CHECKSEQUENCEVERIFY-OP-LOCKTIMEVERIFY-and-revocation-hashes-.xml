@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>HTLCs using OP_CHECKSEQUENCEVERIFY/OP_LOCKTIMEVERIFY and revocation hashes.</title>
+  <updated>2023-05-23T18:19:48.967058+00:00</updated>
+  <author>
+    <name>Rusty Russell 2015-07-06 06:41:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>HTLCs using OP_CHECKSEQUENCEVERIFY/OP_LOCKTIMEVERIFY and revocation hashes.</title>
+    <updated>2023-05-23T18:19:48.967058+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-July/000021.html" rel="alternate"/>
+    <summary>In order to generate hash time-locked contracts for lightning network, both commitment transactions get an additional output. This output is spendable under four conditions: recipient knows the R value (funds go to recipient), or HTLC has timed out (funds return to initiator), or HTLC has been revoked (funds to go "non-cheating" side), or the commit transaction has been revoked (funds to go "non-cheating" side). The last two failure modes are separate from each other because HTLCs have different lifetimes from commit transactions. The use of "revocation preimages" to revoke transactions rather than sending pubkeys as in the original draft paper results in a scriptPubKey from the commitment tx for the HTLC. We need to ensure delays in the cases where payment can go to A so that B has a chance to steal the funds if the HTLC or commitment tx has been revoked. The result is one of the following scriptPubKey from the commitment tx for the HTLC like so (note: unchecked and unoptimized!). If you've read this far, congratulations! AFAICT we don't need new SIGOPS here; the logic has all been moved to the commitment transaction output (thanks to OP_CLV and OP_CSV), so each side can generate the HTLC spending transaction without needing a signature from the other. Feedback, fixed and optimizations welcome.</summary>
+    <published>2015-07-06T06:41:34+00:00</published>
+  </entry>
+</feed>

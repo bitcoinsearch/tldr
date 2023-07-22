@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>AMP: Atomic Multi-Path Payments over Lightning</title>
+  <updated>2023-05-24T20:51:45.219459+00:00</updated>
+  <author>
+    <name>Conner Fromknecht 2018-02-13 03:29:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>AMP: Atomic Multi-Path Payments over Lightning</title>
+    <updated>2023-05-24T20:51:45.220457+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/001025.html" rel="alternate"/>
+    <summary>In a post on the lightning-dev mailing list, Conner Fromknecht expressed his concerns about the soundness of using the current invoicing system to prove payments in the AMP setting. He argued that the current signed invoice + preimage is a weak proof of payment and suggested exploring proofs of stronger statements such as utilizing the ephemeral keys in the onion packets or even the onion as a witness. He also mentioned that without any modification to the spec, something like ZKBoo can be used to prove knowledge of a preimage without revealing it to the verifier. Another idea proposed by ZmnSCPxj was to use techniques like ZKCP and ZKCSP, which provide atomic access to information in exchange for monetary compensation. The proof-of-payment is the encryption key, and possession of the encryption key is sufficient to gain access to the information, with no need to bring in legal structures. However, this is dependent on new cryptography and currently not possible in AMP.Christian Decker suggested keeping things simple and sticking to the current system that allows atomic multipath payments using a single secret, and future decorrelation mechanisms allow varying the secret in such a way that multiple paths cannot be collated. He also mentioned that there is no need to overpay and trust the recipient to only claim the owed amount. The scenario commonly used in these cases is a merchant that provides a signed invoice "if you pay me X with payment_hash Y I will deliver Z". However, the user may perform the payment, learn the payment_key matching the payment_hash, but the merchant refuses to deliver, claiming it did not get the payment. In this case, the user can go to court, present the invoice signed by the merchant, and the proof-of-payment, and force the merchant to honor its commitment.</summary>
+    <published>2018-02-13T03:29:28+00:00</published>
+  </entry>
+</feed>

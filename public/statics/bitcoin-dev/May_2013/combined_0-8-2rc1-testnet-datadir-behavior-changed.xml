@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - 0.8.2rc1 - testnet datadir behavior changed</title>
+  <updated>2023-06-06T16:51:59.411142+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2013-05-12 09:04:09</name>
+  </author>
+  <author>
+    <name>Jay F 2013-05-12 06:35:59</name>
+  </author>
+  <author>
+    <name>Jay F 2013-05-12 06:35:59</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2013-05-12 09:04:09</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2013-05-12 09:04:09</name>
+  </author>
+  <author>
+    <name>Jay F 2013-05-12 06:35:59</name>
+  </author>
+  <link href="bitcoin-dev/May_2013/002567_0-8-2rc1-testnet-datadir-behavior-changed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002566_0-8-2rc1-testnet-datadir-behavior-changed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002566_0-8-2rc1-testnet-datadir-behavior-changed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002567_0-8-2rc1-testnet-datadir-behavior-changed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002567_0-8-2rc1-testnet-datadir-behavior-changed.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002566_0-8-2rc1-testnet-datadir-behavior-changed.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - 0.8.2rc1 - testnet datadir behavior changed</title>
+    <updated>2023-06-06T16:51:59.411142+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-May/002567.html" rel="alternate"/>
+    <summary>On May 10, 2013, Gavin Andresen announced the release of Bitcoin-Qt version 0.8.2 release candidate 1 via a SourceForge link provided in an email. However, there was a glitch on the testnet, prompting Jay F to report the issue on Github. The glitch involved firing up bitcoin-qt.exe -datadir=c:\testnet (with a testnet=1 bitcoin.conf file option in that directory) stored wallet/blocks/chainstate in the root with previous versions. Now the root datadir data is ignored except for the config file and a new hierarchy was created in subdirectory /testnet3.The issue seems to be related to https://github.com/bitcoin/bitcoin/issues/2605 which merged one day from being opened to committed, released six days later with no changelog. Gavin Andresen stated his confusion about the bug since the datadir previously worked as he expected with both bitcoin-qt and bitcoind interacting without problems when simply specifying a command-line datadir. However, the previous behavior might be dangerous if the config file was removed.He tested this theory by removing the config file, resulting in a cool freakout where his testnet wallet balance looked like real BTC and Bitcoin tried to reorg 67662 blocks starting from the genesis block. After receiving real block 73354 per debug log, a nice unrecoverable crash occurred with "Assertion failed!" File: src/main.cpp Line 1745 Expression: pfork != NULL. Therefore, the testnet data is now stored in the testnet3 subdirectory, enforced even when specifying datadir on command line (manually move your data first). This needs to be added to the changelog because dropping in this binary will break testnet stuff if anybody is using Bitcoin this way for their testnet faucet etc.</summary>
+    <published>2013-05-12T09:04:09+00:00</published>
+  </entry>
+</feed>

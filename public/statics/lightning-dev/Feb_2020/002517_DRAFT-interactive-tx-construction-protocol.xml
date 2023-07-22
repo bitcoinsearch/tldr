@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DRAFT: interactive tx construction protocol</title>
+  <updated>2023-06-02T23:22:30.767029+00:00</updated>
+  <author>
+    <name>lisa neigut 2020-02-10 23:43:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DRAFT: interactive tx construction protocol</title>
+    <updated>2023-06-02T23:22:30.767029+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002517.html" rel="alternate"/>
+    <summary>The email thread discusses proposals to address issues related to the Lightning Network. One proposal is to add a second commitment requirement called PoDLE (Proof of Discrete Logarithm Equality) to JoinMarket's PoDLE to limit the validity of a commitment only between an initiator and a single peer. This would prevent the "pouncing venus-flytrap attack," where malicious nodes wait until the honest node initiates an open with them, then use the provided, non-blacklisted utxo to attempt to open channels simultaneously with other nodes.To implement this proposal, the initiating node would provide two commitments: one to the shared/global J point and one to a point generated from the hash of the non-initiating node's node_id. The protocol adjustments required would be to add a second commitment to the TLV of `open_channel2`, have the initiating node provide at least one utxo of their own, extend the `tx_add_input` message to include a TLV type, and add a new gossip message for a PoDLE blacklist entry, among others. The proposal also includes some notes and open questions on how to implement and improve this proposal.The thread also discusses the PoDLE (Proof of Discrete Logarithm Equality) technique used in JoinMarket to solve a similar problem that Lightning Network is facing. A PoDLE commits to a UTXO and includes proof that the creator of the PoDLE knows the secret key behind it and can later be opened to reveal which UTXO the opener allocated. If the opener aborts, then the acceptor can gossip the UTXO and the revealed PoDLE to the rest of Lightning so that the opener cannot reuse the same UTXO to probe other potential acceptors.JoinMarket solved the issue of allowing a UTXO to be used at most N times by appending a single byte to something that is hashed, ensuring its value is less than N so that it can only be used from 0 to N - 1 and thus allow a UTXO to be used at most N times. The PoDLE construction requires the standard base point `G` and another generator point `J`. To create the generator point `J`, JoinMarket appends the counter byte to `G`, hashes it, then uses a coerce-to-point.The thread suggests sharing the PoDLE format with JoinMarket and mandating to retain PoDLE for at least a year or a month or two weeks to slow down probe attempts. It also discusses the similarity between Lightning's use-case and PayJoin, where the opener proposes to make a payment, the acceptor adds some UTXOs that will contribute to the payment output, and nLockTime anti-fee-sniping as well in multi-funded channel opens. Finally, it mentions that this interactive tx construction mechanism as well can be later used for channel factories, and PoDLE techniques would be useful as well to multi-funded channel factories.</summary>
+    <published>2020-02-10T23:43:41+00:00</published>
+  </entry>
+</feed>

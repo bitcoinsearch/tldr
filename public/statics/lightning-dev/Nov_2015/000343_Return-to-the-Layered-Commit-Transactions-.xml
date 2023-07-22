@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Return to the Layered Commit Transactions?</title>
+  <updated>2023-05-18T15:59:34.437260+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-11-25 09:07:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Return to the Layered Commit Transactions?</title>
+    <updated>2023-05-18T15:59:34.437260+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000343.html" rel="alternate"/>
+    <summary>The discussion is focused on the enforcement of constraints for HTLCs and commitment transactions in the context of Bitcoin. The constraints are imposed by Bitcoin and the conditions are defined by d (OP_CSV delay), T (top OP_CLTV timeout), C (the commitment tx signed by B given to A at time C), P (the commitment tx published at time P), S (the commitment tx spent at time S). The discussion also highlights that revocation time has to be long enough, so you can spot someone cheating, and the HTLC inter-hop-delta should be much greater than the revocation time. The proposed protocol ensures that S &gt;= P+d and S &gt;= X when A is paying the HTLC and wants to claim a refund by unilaterally closing the channel. Depending on fees paid, the transaction gets n confirmations by time T+y or else Bob manages a double spend, revealing R. The absolute CLTV timeout can decrease with each hop. If your node is online and robust, 3 hours should be sufficient for revocation time. For 20 hops and everyone using one day for revocation time and two days for HTLC timeout delta, the original HTLC times out in 40 days while the last HTLC times out in 2 days, falling to the blockchain. In case of a single hop failure at node 3 immediately after the transaction gets passed on, node 4 can reclaim uncommitted funds after a day and reveal R to claim the HTLC funds within the next 33 days. Node 3 is out of pocket, and node 2 has funds held up for the 34 days node 3 was down.</summary>
+    <published>2015-11-25T09:07:54+00:00</published>
+  </entry>
+</feed>

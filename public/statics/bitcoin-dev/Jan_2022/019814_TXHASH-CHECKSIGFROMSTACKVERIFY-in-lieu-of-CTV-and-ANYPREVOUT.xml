@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+  <updated>2023-06-15T15:35:50.442850+00:00</updated>
+  <author>
+    <name>Jeremy 2022-01-26 22:16:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+    <updated>2023-06-15T15:35:50.442850+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-January/019814.html" rel="alternate"/>
+    <summary>Russell and Jeremy exchanged emails discussing the relationship between CTV and ANYPREVOUT proposals. They agreed that there is significant overlap in their applications, but simulating CTV using ANYPREVOUT is more expensive due to the need for more bytes. Russell proposed breaking down the operations of both proposals into constituent pieces and reassembling them using OP_TXHASH and OP_CHECKSIGFROMSTACKVERIFY. This would allow users to program their own use cases from components and build more applications with fewer op codes. However, replicating the behavior of CTV and ANYPREVOUT would be costlier than using the custom proposals themselves.The possibility of upgrading TXHASH to allow for more robust flag sets was discussed on the bitcoin-dev mailing list. The proposed set of flags includes coverage for various aspects of a transaction, such as version, locktime, txids, sequence numbers, input amounts, input scriptpubkeys, number of inputs, output amounts, output scriptpubkeys, number of outputs, tapbranch, tapleaf, opseparator value, one or no inputs/outputs covered, and the sighash flags. The addition of TXHASH2 in the future is also an option.Interactions with potential future opcodes were explored, including how they might interact with CAT, rolling SHA256 opcodes, and other covenant opcodes. New opcodes added to push parts of transaction data direction onto the stack could potentially obsolete TXHASH, but this seems unlikely given its ability to compactly hash large portions of transaction data. The concept of "subtractive covenants" was also discussed, where free parts of transaction data are hashed into a fixed midstate using rolling SHA256 opcodes and verified to match a value returned by TXHASH.In his feedback on Russell's proposal, Jeremy suggested a Verify approach for OP_TXHASH and pointed out that there are approximately 20 different flags in the proposal, necessitating a formal model of scripting and transaction validity properties. He also expressed his preference for CTV as a first step for pragmatic engineering and availability timeline reasons, while acknowledging that TXHASH is an acceptable theoretical approach.Russell noted some caveats with his proposal, such as the cost of replicating the behavior of CTV and ANYPREVOUT being higher than using the custom purpose-built proposals themselves. Additionally, TXHASH is not amenable to extending the set of txflags at a later date, and it can only be implemented within tapscript.</summary>
+    <published>2022-01-26T22:16:06+00:00</published>
+  </entry>
+</feed>

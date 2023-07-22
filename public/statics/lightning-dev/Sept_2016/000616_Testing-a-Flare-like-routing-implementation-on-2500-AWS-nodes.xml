@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Testing a Flare-like routing implementation on 2500 AWS nodes</title>
+  <updated>2023-05-19T15:27:28.355916+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2016-09-20 18:47:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Testing a Flare-like routing implementation on 2500 AWS nodes</title>
+    <updated>2023-05-19T15:27:28.355916+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-September/000616.html" rel="alternate"/>
+    <summary>The Flare paper currently includes a series of simulations of various topologies/parameters which are then extrapolated to larger network sizes. The logical next step would be to deploy a proto-implementation within a live testbed with real latencies, preferential attachment, etc. In reality the authors envisioned that a DHT would acts as a substitute for a pure broadcast network, rather than to allow individual nodes to communicate with each other. For communications, they referenced that something akin to HORNET could be used to allow nodes to communicate with each other without necessarily knowing the IP address of each node or a node's selected beacons. The authors only focused on static ranking (finding a route formed of open channels between two given nodes), so it is very possible (probable?) that a route is not actually usable because the channels are not balanced. Assuming nodes are aware of the available channel capacity and current fee advertised by the each node, then optimal path (cheapest) path can be discovered by solving the for the min-cost flow within the node's subset of the network graph. Additionally, the cost function for each edge within the graph can also factor in the absolute HTLC time delay between each node.On a related note, in the past Tadge has suggested that the available channel capacity that a nodes wants to advertise should be an input to a function which derives the advertised fee across the link. One potential strategy would be to have the advertised fee be inversely proportional to a metric which captures how balanced the channel is. Following down this line of thinking further beings to invoke the concept of "negative fees" which have been discussed a bit informally in the past.In order to test their scheme, the team linked nodes to each other following a given graph using json-rpc commands. They picked 1000 random routes (random sender, random receiver), and for each route using json-rpc we (a) asks the receiver for a "payment request" (H + routing_table) and then (b) asks the sender to find a route for this payment request (without actually making a payment).</summary>
+    <published>2016-09-20T18:47:25+00:00</published>
+  </entry>
+</feed>

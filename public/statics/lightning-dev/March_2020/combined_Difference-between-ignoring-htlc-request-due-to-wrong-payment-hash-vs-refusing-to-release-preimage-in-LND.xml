@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Difference between ignoring htlc request due to wrong payment hash vs refusing to release preimage in LND</title>
+  <updated>2023-06-03T23:54:47.871682+00:00</updated>
+  <author>
+    <name>Subhra Mazumdar 2020-03-24 08:06:00</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-03-24 08:27:27</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-03-24 11:15:34</name>
+  </author>
+  <author>
+    <name>Subhra Mazumdar 2020-03-24 09:06:28</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-03-24 11:27:32</name>
+  </author>
+  <author>
+    <name>Subhra Mazumdar 2020-03-24 16:15:21</name>
+  </author>
+  <author>
+    <name>Subhra Mazumdar 2020-03-24 08:56:05</name>
+  </author>
+  <link href="lightning-dev/March_2020/002600_Difference-between-ignoring-htlc-request-due-to-wrong-payment-hash-vs-refusing-to-release-preimage-in-LND.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2020/002601_Difference-between-ignoring-htlc-request-due-to-wrong-payment-hash-vs-refusing-to-release-preimage-in-LND.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2020/002604_Difference-between-ignoring-htlc-request-due-to-wrong-payment-hash-vs-refusing-to-release-preimage-in-LND.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2020/002603_Difference-between-ignoring-htlc-request-due-to-wrong-payment-hash-vs-refusing-to-release-preimage-in-LND.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2020/002605_Difference-between-ignoring-htlc-request-due-to-wrong-payment-hash-vs-refusing-to-release-preimage-in-LND.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2020/002606_Difference-between-ignoring-htlc-request-due-to-wrong-payment-hash-vs-refusing-to-release-preimage-in-LND.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2020/002602_Difference-between-ignoring-htlc-request-due-to-wrong-payment-hash-vs-refusing-to-release-preimage-in-LND.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Difference between ignoring htlc request due to wrong payment hash vs refusing to release preimage in LND</title>
+    <updated>2023-06-03T23:54:47.871682+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-March/002600.html" rel="alternate"/>
+    <summary>The conversation between Subhra Mazumdar and ZmnSCPxj involves various aspects of the Lightning Network. They discuss the issues related to unresolved HTLCs while probing, which can cause DOS attacks on the probe route. They also talk about the locktimes for each channel in a payment route and the possibility of mimicking griefing attack scenarios in LND.ZmnSCPxj explains that A and B form an HTLC where the payment is "irrevocably committed". B then looks at the HTLC data and checks whether it knows the preimage to the payment hash. If B does not know the preimage, and there is no forwarding data (B is the final hop), then B responds with "incorrect or unknown payment details", and A waits for the channel state to advance. It is unclear if B is ignoring any formation of HTLC between them and if no money gets locked in this case. Money gets locked temporarily in the HTLC but was freed soon afterward as fast as B and A can advance the channel state.Regarding the issue of unresolved HTLCs while probing, it is explained that running multiple probes over the same channels causes a surge of irredeemable HTLCs and DOSes the probe route, forcing nodes to wait until the HTLCs time out before forwarding other payments. In order to avoid this problem, channels leading up to the final target are chosen to have a much higher balance. In addition, the conversation also discusses the scenario where funds remain locked due to locktime and how the funds in A-&gt;B and B-&gt;C still remain locked for the mentioned locktime. However, both parties can sign a new 2-of-2 transaction without the contract if they both agree to it, even if the receiver grieves up to 143 blocks. Thus, at the 144th block, the sending node is willing to sign off on an agreement to re-assign the HTLC funds back to the sender, allowing the funds to be reused again in a different payment and earning fees for intermediaries in the future.Subhra also seeks clarification on delaying the acceptance of an HTLC and asks how one can mimic a griefing attack scenario in LND. ZmnSCPxj suggests modifying LND code directly or asking LND developers if there are any hooks available. In C-Lightning, a plugin needs to be installed, and you may devise some way for the plugin to know what payment hash you want to grief. Then, the plugin hooks into `htlc_accepted` handler, performs a `waitblockheight` command, and waits for the target block height to grief for before returning from the `htlc_accepted` handler.</summary>
+    <published>2020-03-24T08:06:00+00:00</published>
+  </entry>
+</feed>

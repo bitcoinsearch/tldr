@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+  <updated>2023-06-14T22:19:51.647456+00:00</updated>
+  <author>
+    <name>Antoine Riard 2021-06-14 16:46:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+    <updated>2023-06-14T22:19:51.647456+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-June/019069.html" rel="alternate"/>
+    <summary>The discussion revolves around fee-bumping techniques for second-layer protocols. CPFP is a mature fee-bumping technique widely used in the Bitcoin ecosystem. However, using CPFP in contract protocols with distrusting counterparties can pose security issues since it can be exploited as a pinning vector to downgrade transaction confirmation odds. In contrast, input-based fee-bumping has been less studied. Still, it presents its own set of challenges. For instance, it doesn't work for bumping the first stages of contract transactions since it destroys the txid and breaks the chain of pre-signed transactions.To address these shortcomings, the SIGHASH_ANYPREVOUT softfork proposal can be deployed to allow spent transactions to be fee-bumped without altering the validity of the chain of transactions. Alternatively, tx mutation schemes can be employed. This solution allows setting a key that increases the fee by lowering a particular output after the tx is signed without invalidating the signature. A new opcode OP_CHECKSIG_MUTATED is proposed to check the validity of a witness stack against an input if the current transaction had the output reduced by some value. To bump the fee of the commit transaction after it has been signed, either party takes the witness stack and adds a signature under their fee-bump-key for the new tx and reveals their fee bump leaf.The author proposes two fee-bumping primitives for multi-party protocols. The first primitive is CPFP, which requires an anchor output per participant in the commitment transaction. The second primitive is input-based, where the bumped transaction can be attached to one input and one output if the bumping utxo's value is wide enough to cover network mempools congestion. The onchain footprint is 2 inputs + 3 outputs for the CPFP primitive and 1 input + 1 output for the input-based primitive.The author also discusses the potential future savings that could be made through soft forks, particularly in the case of batching. They suggest evaluating different package relay announcement schemes based on the odds of non-cooperative protocol broadcast and rebroadcast frequencies. Throughout the post, links to further reading are provided for those interested in exploring the topic further.</summary>
+    <published>2021-06-14T16:46:56+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP draft - Auxiliary Header Format</title>
+  <updated>2023-06-09T14:14:10.979280+00:00</updated>
+  <author>
+    <name>Tier Nolan 2014-11-12 19:00:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP draft - Auxiliary Header Format</title>
+    <updated>2023-06-09T14:14:10.979280+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-November/006912.html" rel="alternate"/>
+    <summary>The context discusses the creation of reference code for the first BIP, which would check for the presence of two special transactions and not create version 3 blocks. The author aims to make it easy for miners to mine version 3 blocks by adding a new field to the getblocktemplate that has the two transactions ready to go. There is a question about what pools actually use for generating blocks and whether they use custom code or standard software for the memory pool.Tier Nolan has added the network BIP, which only has the aheaders message and the extra field for getheaders. The transaction definitions are still available at the provided GitHub link. Nolan updated the BIP to cover only the specification of the transactions that need to be added, and planned to create a network BIP the next day.There are initial comments about tying in protocol changes, which could confuse matters and make deployment more challenging. The p2p part could be entirely separate from the committed data, but there may be a need to tie them together. The author proposes a tradeoff between overhead and delayed transactions and asks whether adding padding transactions would improve things. Creating the "seed" transactions is an implementation headache, as each node needs control over a UTXO to create the final transaction in the block that has the digest of the auxiliary header. The author proposes three potential solutions: adding a transaction with a few thousand outputs into the blockchain, mining nodes including wallets to manage their UTXO entry, or allowing nodes to detect the special transactions and use them. A server could send out timelocked transactions that pay to a particular address but the transaction would be timelocked, and the private key for the output would be known. However, miners who mine version 2 blocks wouldn't be able to spend them early. Finally, the author created a draft BIP detailing a way to add auxiliary headers to Bitcoin in a bandwidth-efficient way, using the last transaction in the block to store the hash of the auxiliary header. The context provides a link to the GitHub page for the draft BIP.</summary>
+    <published>2014-11-12T19:00:48+00:00</published>
+  </entry>
+</feed>

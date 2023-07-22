@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Year 2038 problem and year 2106 chain halting</title>
+  <updated>2023-06-15T02:45:06.641635+00:00</updated>
+  <author>
+    <name>vjudeu at gazeta.pl 2021-10-16 09:06:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Year 2038 problem and year 2106 chain halting</title>
+    <updated>2023-06-15T02:45:06.641635+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-October/019553.html" rel="alternate"/>
+    <summary>When a series of blocks has a timestamp of 0xFFFFFFFF at the appropriate time, it will lead to the halting of the chain for all old clients, as there is no 32-bit value greater than 0xffffffff. The first rule of the block timestamp, "not lower than the median of the last 11 blocks", is not violated since "not lower than" means "greater than or equal to", and after a while, the median becomes 0xFFFFFFFF and 0xFFFFFFFF is equal to 0xFFFFFFFF. The second rule, "not greater than the current time plus two hours", is also not violated since it would be a past actual real time. The third rule, "not greater than 2^32 (Sun, 07 Feb 2106 06:28:16 +0000)", is not violated since 0xFFFFFFFF is the maximum value that can be represented by a 32-bit integer. Although some argue that this issue could be addressed through a soft fork, it is generally considered not to be possible due to its distance in the future. It should be noted that the Bitcoin Core source code strictly rejects a block with a timestamp that is "lower or equal to" the required value. Therefore, it is essential to ensure that the block timestamp adheres to the specified rules to maintain the integrity of the blockchain.</summary>
+    <published>2021-10-16T09:06:17+00:00</published>
+  </entry>
+</feed>

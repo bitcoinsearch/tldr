@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>"Compressed" headers stream</title>
+  <updated>2023-05-20T03:29:39.592806+00:00</updated>
+  <author>
+    <name>Suhas Daftuar 2017-12-12 21:07:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>"Compressed" headers stream</title>
+    <updated>2023-05-20T03:29:39.592806+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-December/015394.html" rel="alternate"/>
+    <summary>The email discusses the inclusion of nBits in p2p messages without requiring the consensus-correct calculation of nBits. The purpose of this is to calculate the work on a chain, which can be used as an anti-DoS measure, even without verifying that the difficulty adjustments are following the consensus rules. However, it is messy if the p2p layer depends on intricate consensus rules to reconstruct a message. Therefore, nBits could be included in any messages where the value is ambiguous, such as with the first header in a message and whenever it changes from the previous header's nBits. It is noted that the serialization of existing messages should not be changed because nodes will have to support speaking both messages for a long time. Instead, a new 'cmpctheaders'/'getcmpcthdrs' message pair could be introduced for syncing using this new message type, while leaving the existing 'headers'/'getheaders' messages unchanged. When communicating with upgraded peers, 'getheaders' messages would never be used, and only 'headers' messages would be used for potentially announcing new blocks. In conclusion, splitting off headers chain-sync functionality to a new message pair seems like a nice side-effect benefit in the long run, as overloading a 'headers' message to be either a block announcement or a response to a 'getheaders' message results in p2p-handling logic which is more complicated than it needs to be.</summary>
+    <published>2017-12-12T21:07:11+00:00</published>
+  </entry>
+</feed>

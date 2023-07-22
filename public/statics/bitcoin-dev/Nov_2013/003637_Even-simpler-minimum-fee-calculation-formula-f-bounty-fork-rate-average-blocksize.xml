@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Even simpler minimum fee calculation formula: f &gt; bounty*fork_rate/average_blocksize</title>
+  <updated>2023-06-07T20:06:07.746142+00:00</updated>
+  <author>
+    <name>Michael Gronager 2013-11-13 11:52:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Even simpler minimum fee calculation formula: f &gt; bounty*fork_rate/average_blocksize</title>
+    <updated>2023-06-07T20:06:07.746142+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-November/003637.html" rel="alternate"/>
+    <summary>In a writeup last week, the author discussed the optimal block size and why transaction fees are too low. Peter Todd added some nice additions to it. The measured fork rate can be calculated even simpler to provide a simple number for estimating the minimum fee, which is the key assumption that the latency will depend on block size (# txns) and the fork rate will depend on latency. Using the formulas from last week: P_fork = t_propagate/t_blocks and t_propagate = t_0 + alpha*S ~= alpha*S, the author got a measure for alpha as a function of the average fork rate and average block size. Further, taking the formula for the minimum fee, f &gt; alpha*E_bounty/t_block, and inserting the formula for alpha gave f &gt; P_fork*E_bounty/S_average. The fork frequency and the average block size are easily measurable using blockchain.info that keeps historical graphs of the number of orphaned blocks per day. Average over the last year is 1.5. Average number of blocks per day over the last year is 169, which yields a P_fork of ~1/113. Average block size in the same time is 134kBytes, which yields a minimum fee, f &gt; 0.00165XBT/kb or 0.00037XBT/txn. Over the last 90 days, the average block size has been 131kBytes, and the fork rate has been ~1/118, which results in a minimum fee of f &gt; 0.00162XBT/kb or 0.00037XBT/txn, indicating a small improvement but not statistically important.Recalling that optimal revenue block size is a function of the txn-fee, the author looked at what fee it takes to support a block size of 131kBytes, where S = 1/2 * (t_block/alpha - E_bounty/f) and f = E_bounty/[(1/P_fork-2)*S] = 0.00165XBT/kB. The all-important number is alpha, the network latency which we expect to be dependent on various things such as interconnectivity, bandwidths, software quality, etc., where mainly the latter is within our hands to bring down the fee. The standard client can actually choose a better fee, as all the parameters in the formula are easily measured.</summary>
+    <published>2013-11-13T11:52:21+00:00</published>
+  </entry>
+</feed>

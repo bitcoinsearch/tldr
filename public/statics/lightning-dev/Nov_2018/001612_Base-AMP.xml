@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Base AMP</title>
+  <updated>2023-05-25T16:37:19.500299+00:00</updated>
+  <author>
+    <name>Christian Decker 2018-11-15 19:46:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Base AMP</title>
+    <updated>2023-05-25T16:37:19.501299+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001612.html" rel="alternate"/>
+    <summary>A proposal has been made by ZmnSCPxj via Lightning-dev mailing list to support Base AMP. The proposal is to allow arbitrary merges of paths but not arbitrary splits, as the safety of arbitrary splits is uncertain. The proposal introduces a `multipath_merge_per_hop` type, which indicates that payment has been split by the sender using Base AMP and that the receiver should wait for the total intended payment before forwarding or claiming the payment. If the receiving node is not the last node in the path, then succeeding hops must be the same across all splits. The contents of this hop will be the same across all paths of the Base AMP. The payment hash of the incoming HTLCs will also be the same across all paths of the Base AMP. Intended_total_payment is the total amount of money that this node should expect to receive in all incoming paths to the same payment_hash. This may be the last hop of a payment onion, in which case the HMAC for this hop will be 0. The proposal points out that there are potential issues if an intermediate merge point fails, which could lead to the failure of all partial payments. In contrast, if there is only one merge point at the destination, failures of one HTLC do not impact any other parts. The example given is that if two independent routes A-B-C-D and A-C-D exist, then A-C-D can fail independently, and we can recover by attempting A-E-D, no need to touch A-B-C-D at all. Overall, the proposal suggests that there is very little benefit to adding arbitrary merge points as it adds complexity, and we get to save some HTLC setups and teardown for just one C-D HTLC, which does not justify the added complexity. Therefore, the proposal suggests sticking with the simple mechanism of having the recipient be the only merge point.</summary>
+    <published>2018-11-15T19:46:26+00:00</published>
+  </entry>
+</feed>

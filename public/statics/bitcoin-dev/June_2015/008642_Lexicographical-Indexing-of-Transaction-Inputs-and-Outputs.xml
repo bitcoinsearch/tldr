@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Lexicographical Indexing of Transaction Inputs and Outputs</title>
+  <updated>2023-06-09T22:14:31.120809+00:00</updated>
+  <author>
+    <name>Kristov Atlas 2015-06-14 16:29:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Lexicographical Indexing of Transaction Inputs and Outputs</title>
+    <updated>2023-06-09T22:14:31.120809+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-June/008642.html" rel="alternate"/>
+    <summary>BIP 79 has been implemented in the latest release of Electrum, version 2.3.2. Kristov Atlas made a pull request to add this as an informational BIP 79 to the bips directory. The purpose of BIP 79 is to establish a deterministic order for transaction input and output values so that transactions can be more easily verified by nodes. It applies to all transactions where the order of inputs and outputs does not matter and SIGHASH_ALL is used. In the case where SIGHASH_ANYONECANPAY or SIGHASH_NONE has been used, compliant software should still emit transactions with sorted inputs and outputs, even though they may later be modified by others. Future protocol upgrades introducing new signature hash types should apply the lexographic ordering principle analogously. The actual ordering algorithm specifies that txids are sorted by little-endian byte arrays, while scriptPubKeys are not in little-endian representation and should be referred to as such. Output amounts are sorted largest to smallest. The efficiency of sorting amounts first is based on the fact that they contain fewer bytes of information compared to a standard P2PKH locking script. Backwards compatibility is unlikely to make this an IsStandard() rule anytime soon.</summary>
+    <published>2015-06-14T16:29:37+00:00</published>
+  </entry>
+</feed>

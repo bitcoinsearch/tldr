@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>An alternative: OP_CAT &amp; OP_CHECKSIGFROMSTACK</title>
+  <updated>2023-06-13T18:59:24.739853+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2019-05-22 21:01:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>An alternative: OP_CAT &amp; OP_CHECKSIGFROMSTACK</title>
+    <updated>2023-06-13T18:59:24.739853+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-May/016946.html" rel="alternate"/>
+    <summary>In recent times, there have been two tapscript proposals, SIGHASH_ANYPREVOUT and OP_CHECKOUTPUTHASHVERIFY, that aim to enable specific new features for Bitcoin via new Script operations. However, the author argues that these proposals miss the mark when it comes to how Bitcoin Script and language features should be approached. Bitcoin Script is intended to be a flexible programmable system that provides generic features to achieve various purposes. Therefore, new language features for Script should strive to build general-purpose tools that can be used for a variety of purposes. The author feels that the SIGHASH_ANYPREVOUT and OP_CHECKOUTPUTHASHVERIFY proposals fail to achieve these design goals as they are designed with very narrow applications in mind, while also extending the semantic domain of the interpretation of Bitcoin operations in new ways that complicate their specification. Instead, the author proposes the implementation of OP_CAT and OP_CHECKSIGFROMSTACKVERIFY, which are straightforward opcodes whose semantics are pure computational operations on stack values. The OP_CAT opcode pops two byte arrays off the stack and pushes their concatenation back onto the stack, whereas the OP_CHECKSIGFROMSTACKVERIFY opcode pops a signature, message, and pubkey off the stack and performs a bip-schnorr verification on the SHA256 hash of the message. These two operations enable Oracle signature verification, amortized secure multiparty computations, transaction introspection, weak covenants, and more applications. The author believes that this style of generic building blocks truly embodies what is meant by "programmable money." Although without an OP_PUBKEYTWEEK operation available, the more interesting recursive-covenants remain largely out of reach, with the exception of a recursive covenant that is only able to send back to its own address, possibly abusing its own TXO value as a state variable. Furthermore, adding these operations does not preclude adding more specialized opcodes in the future as an optimization for whatever popular constructions come up, once we know what those are.</summary>
+    <published>2019-05-22T21:01:21+00:00</published>
+  </entry>
+</feed>

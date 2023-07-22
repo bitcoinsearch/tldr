@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Multi-Stage Merge-Mine Headers Hard-Fork BIP</title>
+  <updated>2023-06-11T04:06:32.357124+00:00</updated>
+  <author>
+    <name>James Hilliard 2016-02-24 11:37:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Multi-Stage Merge-Mine Headers Hard-Fork BIP</title>
+    <updated>2023-06-11T04:06:32.357124+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-February/012459.html" rel="alternate"/>
+    <summary>A proposal for a hard fork has been made, detailing a two-stage process with a single lock-in period, which aims to kill off the previous chain by holding back ntime to artificially increase network difficulty on the original chain. The first stage is designed to make it difficult to mine the 2016 blocks needed to trigger a difficulty adjustment and make it clear to unupgraded clients that they need to upgrade. The second stage is the headers change stage, where the header format is made incompatible with merge mining; this is activated ~50,000 blocks after the Merge Mine Stage and only at the start of the 2016 block difficulty boundary. There are serious issues with pooled mining such as block withhold attacks, which can only be fixed by making major changes to the headers format. There are desirable header format changes that can only be made in a non-merge mine compatible way, and there is a high risk of there being two viable chains if a way to permanently disable the original chain is not implemented. To activate the fork, a block version flag will be used, which locks in both stages simultaneously when 3900 out of the previous 4032 blocks have the version flag set. The initial hard fork is implemented using a merge mine that requires that the original pre-fork chain be mined with a generation transaction that creates no new coins in addition to not containing any transactions. Additionally, a consensus rule requires ntime manipulation on the original chain to artificially increase difficulty and hold back the original chain so that all non-upgraded clients can never catch up with current time. The artificial ntime is implemented as a consensus rule for blocks in the new chain. The proposal mentions an attack that knocks out the main chain called the "nuclear option." The median time past will increase very slowly, needing to increase by 1 every 6th block. This gives an increase of 336 seconds for every difficulty update and caps the update rate, giving an increase of 4X every doubling. The new headers will end up not meeting the difficulty, so they will presumably repeat the last header. If the bitcoin chain stays at a constant difficulty, then each quadrupling will take more time. After 2 weeks: 4XDiff (2 weeks per diff period), after 10 weeks: 16XDiff (8 weeks per diff period), and after 42 weeks: 256XDiff (32 weeks per diff period). The proposal is still in draft stage, with a reference implementation yet to be created.</summary>
+    <published>2016-02-24T11:37:10+00:00</published>
+  </entry>
+</feed>

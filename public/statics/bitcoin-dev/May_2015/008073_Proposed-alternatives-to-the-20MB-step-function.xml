@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposed alternatives to the 20MB step function</title>
+  <updated>2023-06-09T20:12:29.309931+00:00</updated>
+  <author>
+    <name>Gavin Andresen 2015-05-10 21:21:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposed alternatives to the 20MB step function</title>
+    <updated>2023-06-09T20:12:29.309931+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/008073.html" rel="alternate"/>
+    <summary>The proposal suggests that each miner should express their preferred block size in their coinbase between a minimum and their effective maximum. The actual block size can be up to the effective maximum even if the preference is lower. There is a computed maximum which is the 33-rd percentile of the last 2016 coinbase preferences minus computed_max/52 bytes or 500k if that's larger. The effective maximum is X bytes more, where X on the range [0, computed_maximum] e.g. the miner can double the size of their block at most. If X &gt; 0, then the miners must also reach a target F(x/computed_maximum) times the bits-difficulty; with F(x) = x^2+1. The percentile is intended to give the preferences of the 33% least preferring miners a veto on increases (unless a majority chooses to soft-fork them out). Assuming miners are expressing a desire for 600,000 byte blocks in their coinbases, the computed_max would be 588,462 bytes, about 23 average-size (500-byte) transactions less than 600,000. The effective_max would be 1,176,923 bytes. To maintain status quo at 600,000 bytes, the penalty would be ((600,000-588,462)/588,462)^2 + 1 = 1.00038, which would cost an extra 70 PH out of 186,000PH per block being hashed at 310PetaHash/sec. Thus, the average transaction fee would have to be about ten cents ($2.27 spread across 23 average-sized transactions) for miners to decide to stay at 600K blocks. Any algorithm that ties difficulty to block size is just a complicated way of dictating minimum fees. It is suggested that any other dynamic algorithm would be okay as long as it doesn't grow too quickly and gives some reasonable-percentage-minority of miners the ability to block further increases. It is also mentioned that "the curious task of economics is to demonstrate to men how little they really know about what they imagine they can design."</summary>
+    <published>2015-05-10T21:21:06+00:00</published>
+  </entry>
+</feed>

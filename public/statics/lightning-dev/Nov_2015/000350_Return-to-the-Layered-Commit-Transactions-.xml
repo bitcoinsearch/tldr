@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Return to the Layered Commit Transactions?</title>
+  <updated>2023-05-18T15:58:56.911951+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-11-27 05:14:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Return to the Layered Commit Transactions?</title>
+    <updated>2023-05-18T15:58:56.911951+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000350.html" rel="alternate"/>
+    <summary>In this context, there is a discussion between Rusty Russell and Anthony Towns. The discussion revolves around the delay (d) of OP_CSV, top OP_CLTV timeout (T), commitment tx signed by B and given to A at time C, commitment tx published at time P, commitment tx spent at time S, and the timeout at which a refund can be forced (X). They also discuss the parameters t and k as well as d to drop to the blockchain well before T actually comes around. They further explain that at time T-d-f, if the HTLC hasn't been resolved off-chain, one needs to publish their commitment transaction. It'll hit the chain at time T-d. At time T, both the CTLV and CSV clauses are satisfied, so one can spend it and should attempt to do so immediately. One's tx will be confirmed at time T+f. At time T+f+n, one will be satisfied that one's tx is safe.Anthony has also proposed that if one didn't get fast resolution on an HTLC, then they'd require proof that a commit tx was published, or they'd close the channel themselves to create such proof to hand back. However, the problem arises when one doesn't know how many hops are ahead of them and the rule is "wait 1 minute, if you don't get a response, close the channel," then everyone in the chain will close the channel at once.</summary>
+    <published>2015-11-27T05:14:46+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Signing CHECKSIG position in Tapscript</title>
+  <updated>2023-06-13T22:43:55.234715+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2019-12-05 20:24:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Signing CHECKSIG position in Tapscript</title>
+    <updated>2023-06-13T22:43:55.234715+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-December/017509.html" rel="alternate"/>
+    <summary>After some discussion and consideration, it has been determined that the concern of other users masquerading pubkeys in complex scripts is a non-issue. This is because any policy expressed in a script is logically equivalent to a set of conditions and signatures on pubkeys that can be expressed in disjunctive normal form. A specific representative policy was provided as an example, which shows that even if Bob were to masquerade Alice's pubkey as his own, it only serves to hamper his own ability to sign for his clauses. However, there is still an issue with pubkey reuse within a single script, as it can allow someone to take a signature intended for one condition and transplant it to redeem under another. To avoid this, it is imperative that Alice ensures she doesn't reuse pubkeys that she considers under her control for different conditions when she wants her signature to distinguish between them. While avoiding pubkey reuse within a script should be easier than avoiding it for different UTXOs, converting a policy to disjunctive normal form can involve an exponential blowup. Additionally, there may be cases where a policy requires an exponential number of pubkeys, which isn't tractable to do in Script. Taproot's MAST (Merklized Alternative Script Tree) can provide a solution for certain cases. It is suggested that CODESEPARATOR's behavior be amended to update an accumulator so that all executed positions end up covered by the signature. However, it is noted that a policy could possibly be parameterized by some witness value, and in general, one might want their signature to cover some function of this witness value. Therefore, a CODESEPARATOR variant that pushes a stack item into the accumulator may be needed instead.</summary>
+    <published>2019-12-05T20:24:46+00:00</published>
+  </entry>
+</feed>

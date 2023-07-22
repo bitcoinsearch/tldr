@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>How to do Proof of Micro-Burn?</title>
+  <updated>2023-06-15T22:57:47.345210+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2022-07-17 22:34:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>How to do Proof of Micro-Burn?</title>
+    <updated>2023-06-15T22:57:47.345210+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-July/020748.html" rel="alternate"/>
+    <summary>The email exchange between Ruben Somsen, Veleslav and ZmnSCPxj discusses the use of basic merkle sum trees (not sparse) to burn 10, 20, 30 and 40 sats for separate use cases in a single transaction. The merkle proof contains the values, with the rightmost leaf being 40 and has 30 as its neighbor, moving up to a node of 70 which has 30 (=10+20) as its neighbor, totalling 100. The leaf hash needs to commit to the intent/recipient of the burn, to prevent "double spending" the burn by reusing it for more than one purpose. It is suggested that the burn can be outsourced to an aggregating third party by paying them over Lightning Network (LN), but it won't be atomic and they could walk away with payment without actually following through with the burn. However, if LN switches to PTLCs (payment points/scalars), it may be possible to ensure that payment only occurs if they release an opening of the commitment. ZmnSCPxj suggests a trick similar to what he came up with in `OP_EVICT` where instead of committing using a Merkle tree, there are two customers who want to commit scalars `a` and `b`, and the aggregating third party has a private key `k`. The sum commitment is then: a * G + b * G + k * G. The openings for `a` and `b` are created with signatures and a ritual to purchase a proof goes on. However, ZmnSCPxj warns that this is roll-your-own-crypto and there may be cryptographic failures in the above scheme.</summary>
+    <published>2022-07-17T22:34:24+00:00</published>
+  </entry>
+</feed>

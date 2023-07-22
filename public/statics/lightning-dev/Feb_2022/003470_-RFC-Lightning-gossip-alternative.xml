@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] Lightning gossip alternative</title>
+  <updated>2023-06-03T07:35:51.178185+00:00</updated>
+  <author>
+    <name>Rusty Russell 2022-02-14 01:41:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] Lightning gossip alternative</title>
+    <updated>2023-06-03T07:35:51.178185+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-February/003470.html" rel="alternate"/>
+    <summary>The author proposes a concrete plan for a "v2" gossip protocol that uses x-only pubkeys (point32) and BIP-340 signatures, with modern TLVs for optional or extensible fields. The proposal includes weekly node_announcement_v2 sent by nodes proving they own some UTXOs, which entitles them to broadcast channels using channel_update_v2. Anti-spam measures are in place using UTXOs, but they are not directly tied to channels. Taproot proofs are a signature of the v1 output over the `node_id`, `utxo` and `blockheight` with prefix "lightingtaproot_utxo_proofsig", while legacy proofs are two signatures similar to existing channel_announcements. Node announcements are discarded after a week, and if two node_announcement_v2 claim the same UTXO, the first seen is used and others discarded.The total proved utxo value (not counting any utxos that are spent) is multiplied by 10 to give the "announcable_channel_capacity" for that node. Channel_update_v2 includes capacity, cost, and minimum milli-satoshis, and a channel is not considered to exist until both peers have sent a channel_update_v2, at least one of which must set the `claim` flag. If there is insufficient total `announcable_channel_capacity` for a node, it is used by the lower `channel_id`s first. The proposal simplifies gossip, reducing the number of required messages from three to two and reducing UTXO validation requirements to per-node instead of per-channel. It allows "leasing" of UTXOs and adding taproot_utxo_delegated_proof where UTXOs can sign over to another key. However, between nodes, there is a question of "who claims this new channel?" that is not addressed.</summary>
+    <published>2022-02-14T01:41:06+00:00</published>
+  </entry>
+</feed>

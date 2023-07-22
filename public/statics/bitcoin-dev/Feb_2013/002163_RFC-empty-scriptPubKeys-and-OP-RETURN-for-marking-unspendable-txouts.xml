@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RFC: empty scriptPubKeys and OP_RETURN for marking unspendable txouts</title>
+  <updated>2023-06-06T10:09:03.015772+00:00</updated>
+  <author>
+    <name>Mike Hearn 2013-02-13 10:00:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RFC: empty scriptPubKeys and OP_RETURN for marking unspendable txouts</title>
+    <updated>2023-06-06T10:09:03.015772+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-February/002163.html" rel="alternate"/>
+    <summary>The OP_RETURN bug was fixed long ago by Satoshi, and the problem was related to how scripts were executed. The scripts were concatenated together and run as a single unit with the now obsolete OP_CODESEPARATOR used to control what was hashed and what wasn't. The issue was that the scriptSig ran first, allowing users to set a scriptSig to OP_RETURN and make the script evaluate to true always. The fix was to move to the current system where the two scripts are executed independently but share a stack, and only the return value of the scriptPubKey matters. The scripting system was added as a late addition to the Bitcoin design to handle various types of contracts. However, the fact that there's an obvious bug in CHECKMULTISIG is more evidence of this part being a general rush job, along with Satoshi's willingness to disable much of its functionality later with the IsStandard checks. Additionally, the design of CHECKSIG is an obvious retrofit, and despite having successfully designed all the contract types he ever mentioned, we never found a use case for 99% of the opcodes.</summary>
+    <published>2013-02-13T10:00:35+00:00</published>
+  </entry>
+</feed>

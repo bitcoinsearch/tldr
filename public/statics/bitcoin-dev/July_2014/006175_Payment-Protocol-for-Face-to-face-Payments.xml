@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Payment Protocol for Face-to-face Payments</title>
+  <updated>2023-06-08T01:07:29.322408+00:00</updated>
+  <author>
+    <name>Andreas Schildbach 2014-07-01 15:39:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Payment Protocol for Face-to-face Payments</title>
+    <updated>2023-06-08T01:07:29.322408+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-July/006175.html" rel="alternate"/>
+    <summary>In a discussion thread on the Bitcoin development mailing list, Andreas Schildbach advocates for a simple array parameter name for r[] which could be encoded as rs= ("plural" of r) instead of r%5B1%5D=. He is fine with either multiple r= params or exactly one r= plus zero to many r[]= params. He thinks it is a violation of the (current) spec to choke on more than one r= parameters, but bitcoinj is currently implemented that way. However, r= should also allow all other protocols, exactly like any of the r[]= params. Michael Wozniak notes that multiple parameters are currently undefined and suggests that the client take the first, last, or ignore it completely if there are multiple of any parameter. The Electrum implementation checks for any duplicate parameters and treats the entire URI as invalid if duplicate parameters exist, following the parameter pollution suggestions.Alex Kotenko responds by saying that while processing of multiple "r" parameters is uncertain, the array solution is somewhat better and the array parameter name is "r%5B1%5D=". If particular implementation understands the array construct, it will use it, otherwise, it will ignore the "r%5B1%5D=" and use only usual "r=". This doesn't work though for cases where particular implementation understands array construct but doesn't work well with repeating parameters since it will see two repeating "r" - an array and a string. If they add a completely new parameter to solve this, they will need to make it an array straight away to address upcoming issues with accommodating other protocols. They would modify existing BIP72 to strictly define "r=" as "http(s)" ​only parameter, while all other protocols (bluetooth, WiFi Direct, ultrasound, chirp etc) should go to the new array parameter.</summary>
+    <published>2014-07-01T15:39:42+00:00</published>
+  </entry>
+</feed>

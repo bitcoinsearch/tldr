@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] [BIP proposal] Dealing with malleability</title>
+  <updated>2023-06-08T02:39:53.513966+00:00</updated>
+  <author>
+    <name>Rune Kjær Svendsen 2014-02-12 15:12:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] [BIP proposal] Dealing with malleability</title>
+    <updated>2023-06-08T02:39:53.513966+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-February/004341.html" rel="alternate"/>
+    <summary>A proposal was made to define a new, non-malleable transaction hash/ID (cTxID), which would be a hash of the part of the transaction data that is not malleable. This cTxID could be used by clients internally, making traditional transaction hash irrelevant for client functionality. The current non-malleable transaction hash is the hash that is signed, which is the transaction with each scriptSig replaced by the scriptPubKey it redeems. However, this proposal increases the computational requirements for a node because it requires the node to index all transactions. In order to calculate a cTxID, it would be necessary to fetch all transactions referred to by the transaction in question, to pull in the scriptPubKeys that are redeemed. The proposal was made in response to related issues that have arisen. The proposed rules are expected to not be controversial, although rules 1 and 3 require modifications to wallet software and potentially invalidate some script functionality. These new rules remain optional and controlled by an nVersion increase. A suggestion was made to make CHECKMULTISIG require the dummy value to be exactly equal to OP_FALSE; verifying that in the transaction itself is laborious. Additionally, some transaction forms are significantly more compact if you can have failed signatures, but that's a source of malleability. Some counter examples were sought, but none were provided.However, it was noted that baking in assumptions about malleability when there is no solid idea if ECC signatures are or are not malleable on a fundamental level is not ideal. It could be ugly if a break is found, and some needed change makes the malleability rules difficult to work with for some new script type that is required. Instead, it was suggested to add a new CHECKSIG mode for the case where malleability absolutely must be eliminated, such as certain multi-party protocols, and fix wallet software. The malleability problems people see are closely related to the inability to handle double-spends and reorgs. However, it was acknowledged that this goal could be impossible to achieve engineering-wise.</summary>
+    <published>2014-02-12T15:12:25+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PoDLEs revisited</title>
+  <updated>2023-06-03T03:31:17.569229+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2021-01-28 06:42:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PoDLEs revisited</title>
+    <updated>2023-06-03T03:31:17.569229+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-January/002938.html" rel="alternate"/>
+    <summary>The discussion revolves around a proposal to protect against parallel attacks in Lightning Network. The proposal involves eagerly broadcasting PoDLEs (Proof of Dual Life Existence) to protect against parallel attacks. However, this scheme has several downsides, including leaking information that the UTXO associated with the signaling TX is creating a channel and being weak against parallel attacks. Consequently, the proposal needs refinement to be more effective in protecting against parallel attacks.To address the issues, the proposal suggests using H0 and H1 as 32-byte output hash functions and attaching a PoDLE containing the public key for an input and P2 (the public key projected onto a different generator) to any of the tx_add_input messages. The peer checks the validity of the PoDLE and creates a "claim" message claiming the UTXO, which it broadcasts if it hasn't received a valid claim message with H0(P2) and a valid MAC. Any node receiving the claim message checks whether it has seen it already and re-broadcasts the message to its peers. The claiming node waits ~60 seconds to see if it receives a conflicting claim message where the H0(P2) is the same and the MAC is different and valid. If they don't receive that, they carry on to add their utxos. However, there are concerns that the proposal creates a new extra bit of data that can be used for chainalysis, which could be valuable for them. Additionally, chainalysis techniques are effective at associating funding UTXOs to nodes for the most common usage patterns, making the proposal redundant. Therefore, the writer's bias is towards doing nothing and keeping things simple.</summary>
+    <published>2021-01-28T06:42:29+00:00</published>
+  </entry>
+</feed>

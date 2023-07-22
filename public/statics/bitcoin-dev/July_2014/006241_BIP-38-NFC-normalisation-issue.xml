@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 38 NFC normalisation issue</title>
+  <updated>2023-06-09T00:59:03.910409+00:00</updated>
+  <author>
+    <name>Andreas Schildbach 2014-07-15 13:19:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 38 NFC normalisation issue</title>
+    <updated>2023-06-09T00:59:03.910409+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-July/006241.html" rel="alternate"/>
+    <summary>The use of control-characters (such as \u0000) and whitespaces in passphrases is generally not recommended. However, the use of emoticons, such as pile-of-poo, is acceptable since they are easily accessible on mobile keyboards that contain emoticons. The Pile of Poo character is already in NFC form, which is intended to collapse things like umlaut control characters onto their prior code point. On the other hand, the NULL character is not included in smartphone keyboards since it would wreak havoc on systems assuming null-terminated strings, making it unlikely for sane users to include it in a passphrase entered on smartphones. The third test vector of the implementation of BIP 38 (password-protected private keys) to bitcoinj was brought to attention by Mike Hearn when he noticed that the hex version of what the NFC-normalized version of the input string provided in the test vector did not match the results of the Java Unicode normalizer. He suggested removing this test vector since "pile of poo" is not a character any sane user would put into a passphrase, and it does not represent any real-world usage of the spec. Instead, he proposed using a different, more realistic test string like Zürich or something written in Thai if there is a need to verify NFC normalization. The non-standard UTF-8 characters in this passphrase should be NFC normalized to result in a passphrase of 0xcf9300f0909080f09f92a9 before further processing.</summary>
+    <published>2014-07-15T13:19:29+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP proposal] Private Payments</title>
+  <updated>2023-06-15T22:17:56.083279+00:00</updated>
+  <author>
+    <name>Alfred Hodler 2022-06-27 18:17:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP proposal] Private Payments</title>
+    <updated>2023-06-15T22:17:56.083279+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-June/020605.html" rel="alternate"/>
+    <summary>The BIP47 standard for creating static payment codes as a way for transacting parties to create "private" addresses suffered from several issues. The new proposed standard that builds on the idea of payment codes under a new BIP has several principal differences. The new standard will allocate a 2-byte bitflag array that will signal address/script types that the receiver is deriving. Notification transactions still exist but no longer leave a privacy footprint on the blockchain. Payment code versioning is no longer done because it creates the potential for fragmentation and disparate standard updates by different parties that don't follow the BIP process. Relying on static compressed pubkeys as opposed to extended keys means shorter payment codes.A payment code is encoded in base58check, and the version byte produces "S" for the first character. Recipient's payment code pubkey `P` is derived from a master key using the following path: `m/purpose'/coin_type'/account'`. Notifier/sender's pubkey `N` is derived using the following derivation path: `m/purpose'/coin_type'/account'/*`, where each recipient gets a new index. Alice wants to notify Bob that he will receive future payments from her. Alice selects any UTXO in her wallet (preferably not associated with her) and `n_Alice`. Alice selects the public key contained in Bob's payment code `P_Bob`.Alice then constructs a 72-byte OP_RETURN output whose value is set to `BIPXXXX + notification + N_Alice` and sends it in a transaction containing no other outputs. Bob's wallet receives whole blocks but doesn't need to waste resources on decoding them if the environment is resource constrained. Since ECDH dictates that SHA256(n_Alice * P_Bob) == SHA256(N_Alice * p_Bob), Bob calculates the expected notification value and checks if it matches the first value in the payload. If so, Bob found a notification transaction addressed to himself and stores `N_Alice` in order to be able to detect and spend future payments from Alice.Alice can send transactions to Bob once they are connected. Alice calculates a secret point, S = n_Alice * P_Bob, a shared secret, s = SHA256(S, X), Bob's ephemeral public key, and its associated address where the funds will be sent. The payment codes can have anti-spam measures built in by the owner of a code that could demand that a notification transaction meets some minimum miner fee or a multiple of some trailing average.</summary>
+    <published>2022-06-27T18:17:16+00:00</published>
+  </entry>
+</feed>

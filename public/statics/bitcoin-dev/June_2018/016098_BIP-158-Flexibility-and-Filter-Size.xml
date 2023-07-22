@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 158 Flexibility and Filter Size</title>
+  <updated>2023-06-13T02:29:02.169205+00:00</updated>
+  <author>
+    <name>David A. Harding 2018-06-09 10:34:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 158 Flexibility and Filter Size</title>
+    <updated>2023-06-13T02:29:02.169205+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-June/016098.html" rel="alternate"/>
+    <summary>In a bitcoin-dev thread, Olaoluwa Osuntokun raised the issue of the size of commitment proof for coinbase transactions. They have the longest merkle proof path and could be several hundred bytes in size. Dave replied that this may not be a significant issue since the current BIP157 protocol has each filter commit to the filter for the previous block. He suggests that validating the commitment at the tip of the chain should negate the need to validate commitments for preceding blocks in the SPV trust model. Dave further explains that the gain from using a more efficient filter is saved bytes, while the gain from using block commitments is SPV-level security. Comparing them is like comparing the extra bytes used to download all blocks for full validation to the reduced bytes saved by only checking headers and merkle inclusion proofs in simplified validation.Dave argues that better security is not guaranteed with prevout+output filters and there is no evidence provided for it. The security model is "at least one of my peers is honest." Dave explains that in the case of outpoint+output filters, a client receives advertisements for different filters from different peers, downloads the corresponding block, locally generates the filter for that block, and kicks any peers that advertised a different filter than what it generated locally. This ensures that as long as the client has at least one honest peer, it will see every transaction affecting its wallet. In the case of prevout+output filters, when a client receives advertisements for different filters from different peers, it downloads the corresponding block and checks it for wallet transactions as if there had been a filter match. This also ensures that as long as the client has at least one honest peer, it will see every transaction affecting its wallet. Dave concludes that neither protocol seems significantly more complicated than keeping an associative array recording the number of false positive matches for each peer's filters.</summary>
+    <published>2018-06-09T10:34:45+00:00</published>
+  </entry>
+</feed>

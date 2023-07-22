@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - A statistical consensus rule for reducing 0-conf double-spend risk</title>
+  <updated>2023-06-08T22:21:17.179189+00:00</updated>
+  <author>
+    <name>Christophe Biocca 2014-05-04 02:54:26</name>
+  </author>
+  <author>
+    <name>Tom Harding 2014-05-12 04:41:04</name>
+  </author>
+  <author>
+    <name>Tom Harding 2014-05-06 17:49:05</name>
+  </author>
+  <author>
+    <name>Tom Harding 2014-05-12 13:04:47</name>
+  </author>
+  <author>
+    <name>Tom Harding 2014-05-12 13:04:47</name>
+  </author>
+  <author>
+    <name>Christophe Biocca 2014-05-04 02:54:26</name>
+  </author>
+  <author>
+    <name>Tom Harding 2014-05-04 00:29:00</name>
+  </author>
+  <author>
+    <name>Christophe Biocca 2014-05-04 02:54:26</name>
+  </author>
+  <author>
+    <name>Tom Harding 2014-05-06 17:49:05</name>
+  </author>
+  <author>
+    <name>Tom Harding 2014-05-12 04:41:04</name>
+  </author>
+  <author>
+    <name>Tom Harding 2014-05-04 00:29:00</name>
+  </author>
+  <author>
+    <name>Tom Harding 2014-05-06 17:49:05</name>
+  </author>
+  <author>
+    <name>Tom Harding 2014-05-12 13:04:47</name>
+  </author>
+  <author>
+    <name>Tom Harding 2014-05-04 00:29:00</name>
+  </author>
+  <author>
+    <name>Tom Harding 2014-05-12 04:41:04</name>
+  </author>
+  <link href="bitcoin-dev/May_2014/005684_A-statistical-consensus-rule-for-reducing-0-conf-double-spend-risk.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005748_A-statistical-consensus-rule-for-reducing-0-conf-double-spend-risk.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005712_A-statistical-consensus-rule-for-reducing-0-conf-double-spend-risk.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005752_A-statistical-consensus-rule-for-reducing-0-conf-double-spend-risk.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005752_A-statistical-consensus-rule-for-reducing-0-conf-double-spend-risk.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005684_A-statistical-consensus-rule-for-reducing-0-conf-double-spend-risk.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005681_A-statistical-consensus-rule-for-reducing-0-conf-double-spend-risk.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005684_A-statistical-consensus-rule-for-reducing-0-conf-double-spend-risk.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005712_A-statistical-consensus-rule-for-reducing-0-conf-double-spend-risk.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005748_A-statistical-consensus-rule-for-reducing-0-conf-double-spend-risk.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005681_A-statistical-consensus-rule-for-reducing-0-conf-double-spend-risk.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005712_A-statistical-consensus-rule-for-reducing-0-conf-double-spend-risk.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005752_A-statistical-consensus-rule-for-reducing-0-conf-double-spend-risk.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005681_A-statistical-consensus-rule-for-reducing-0-conf-double-spend-risk.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005748_A-statistical-consensus-rule-for-reducing-0-conf-double-spend-risk.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - A statistical consensus rule for reducing 0-conf double-spend risk</title>
+    <updated>2023-06-08T22:21:17.180126+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-May/005684.html" rel="alternate"/>
+    <summary>In a discussion on bitcointalk.org, an idea was proposed to address the issue of double-spending and lack of consensus in the blockchain. The proposal involves associating a timestamp with every transaction and adding a consensus rule that rejects blocks containing a transaction that respends an output spent by another locally accepted transaction if the time difference between the two transactions is greater than a certain threshold (T). The suggested threshold is T = 7.4 seconds, which would result in misidentification of the second spend by less than 1% of nodes. However, this proposal could potentially fork the network permanently since there is no magic way to achieve consensus, making it easy to split the network into two halves. To avoid this, a way to reconcile the split is necessary, such as accepting the offending block once it's two or more deep.Christophe Biocca commented that the current rule is unenforceable. He explained that no miner would wait before mining on the longest chain, which would be a rational move. Biocca then went on to discuss a scenario where a miner decided to include a "seasoned" double-spend in his block, despite the rule. In this case, the expected cost of including the respend would be any revenue loss from doing so. If only 1% of hashpower follows the rule, the miner would still lose at least .25 BTC. This amount is about 1000x the typical "double-spend premium." Biocca questioned whether the greedy-rational miner would decide to include the earlier spend instead.In a discussion about Bitcoin's transaction confirmation time, Christophe Biocca suggests that it is easy to split the network into two halves by ordering transactions in a specific way. However, Tom Harding points out that this is not a practical solution and proposes a consensus rule to prevent double-spending attacks. Joe proposed a solution to address the issue of double-spending. He suggested that nodes should associate a timestamp with every transaction upon first seeing it and add a consensus rule to reject blocks containing a transaction that respends an output spent by another locally accepted transaction after a certain amount of time has passed. The value of T, or the time threshold, was calculated based on several assumptions, resulting in the misidentification of the second spend by less than 1% of nodes if T is set to 7.4 seconds.Joe's proposed consensus rule would be the first to anticipate less than 100% agreement, but the parameters could be chosen so that it remains conservative. A fail-safe condition was also suggested: drop the rule if the block has six confirmations to prevent a fork in unusual network circumstances. The first step towards implementing this solution is to share data broadly by relaying first double-spend attempts.In an email thread between Tom Harding and some Bitcoin developers, a correction was made to the calculation of the cost of double-spending. The new approximation requires the rule-following minority to find the next two blocks, resulting in a lower bound cost of .0025 BTC for one transaction. If a miner includes a seasoned double-spend despite the rule, he still loses at least .25 BTC, which is about 1000x the typical "double-spend premium." This high cost may prompt miners to attempt to make a business out of mining double-spends to defray the cost.</summary>
+    <published>2014-05-04T02:54:26+00:00</published>
+  </entry>
+</feed>

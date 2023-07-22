@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Signing CHECKSIG position in Tapscript</title>
+  <updated>2023-05-20T21:10:59.167474+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-12-03 08:35:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Signing CHECKSIG position in Tapscript</title>
+    <updated>2023-05-20T21:10:59.168477+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-December/017506.html" rel="alternate"/>
+    <summary>The email conversation is centered around the vulnerability of signature copying attacks, particularly pertaining to the use of CODESEPARATOR in Taproot script version. The issue is that signing the CODESEPARATOR position without signing the script code is considered nonsensical as it is signing a piece of data without an interpretation of its meaning. However, the current implementation includes an index to the digest being signed, so signatures at different indexes are distinct. Participants discuss various techniques such as miniscript and fixed templates to allow limited safe changes to policy and prevent signature reuse in different scripts. The proposed solution, ANYPREVOUTANYSCRIPT, would not sign the script code but would continue signing the CODESEPARATOR position, allowing for restricted signature reuse. This means users can prevent their funds from going to certain addresses without compromising security.While the concept of CODESEPARATOR in taproot is discussed as a possible solution, some argue that it would not be widely used or sufficient. There are only two known use cases for CODESEPARATOR, one being the reveal-a-secret-key-by-forced-nonce-reuse script, which requires pubkey recovery and does not work with bip-schnorr, and the other is ntumblebit's escrow script. It is ultimately agreed that analyzing scripts before collaborating is necessary to prevent vulnerability to signature copying attacks. Although the proposal to eliminate CODESEPARATOR opcode in the Taproot script version is seen as effective enough to save most people most of the time, it may not save everyone all the time. Some participants suggest that CODESEP is a marginally more efficient/general fix than the proposal made.Additionally, removing CODESEPARATOR and treating it as OP_SUCCESS could allow bringing in whatever functionality was actually needed at the same time as introducing CAT/EC_MUL/etc. However, the default position is to keep the same functionality, so SIGHASH_ALL doesn't do anything fancy, but CODESEP can be used to prevent sig reuse. The implementation of taproot is not intended to be equivalent to signing a script suffix; all it does is add an index to the digest being signed so that signatures at different indexes are distinct. That it's equivalent to the current behavior is definitely a feature, but it seems more like a surprising coincidence than a useful way of thinking about the actual usefulness of CODESEP in tapscript.</summary>
+    <published>2019-12-03T08:35:38+00:00</published>
+  </entry>
+</feed>

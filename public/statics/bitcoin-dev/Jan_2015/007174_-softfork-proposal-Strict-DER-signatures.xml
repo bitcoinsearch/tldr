@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[softfork proposal] Strict DER signatures</title>
+  <updated>2023-06-09T15:47:07.547469+00:00</updated>
+  <author>
+    <name>David Vorick 2015-01-22 03:12:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[softfork proposal] Strict DER signatures</title>
+    <updated>2023-06-09T15:47:07.547469+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-January/007174.html" rel="alternate"/>
+    <summary>On January 21, 2015, Rusty Russell sent an email addressing the issue of relying on OpenSSL for consensus rules as part of BIP 62. The plan was to get rid of this risk, but it was postponed due to unforeseen complexities. Recently, events have made it clear that a fundamental solution for this problem is necessary sooner rather than later. In the email, Russell provides a C++ code snippet to validate signature encoding and several test cases to ensure its validity. The code includes various static unsigned char arrays with different byte sequences that are used to test the validity of signatures in Bitcoin transactions. These byte sequences include valid signature byte sequences such as normal_siglen, normal_sigval(0x1), int, normal_siglen, normal_sigval(0x2), and sighash. Other valid byte sequences are min_r, min_s, max_r, max_s, wierd_s_len, wierd_r_len, zeropad_s, and zeropad_r.The code also includes invalid byte sequences such as not_compound, short_len, long_len, r_notint, s_notint, s_oversig, r_oversig, s_negative, r_negative, zeropad_bad_s, zeropad_bad_r, zerolen_r, zerolen_s, overlen_r_by_1, overlen_s_by_1, underlen_r_by_1, missing_sighash, and extra_byte. These invalid byte sequences are tested using the bad() function, which should return an error for each of them. Finally, the main() function is used to execute these tests to verify the validity of the byte sequences used for signatures in Bitcoin transactions. Overall, the purpose of the email and code snippet is to address the issue of relying on OpenSSL for consensus rules and provide a fundamental solution for it.</summary>
+    <published>2015-01-22T03:12:31+00:00</published>
+  </entry>
+</feed>

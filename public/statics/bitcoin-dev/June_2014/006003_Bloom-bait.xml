@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Bloom bait</title>
+  <updated>2023-06-08T23:44:48.584610+00:00</updated>
+  <author>
+    <name>Jeff Garzik 2014-06-10 13:02:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Bloom bait</title>
+    <updated>2023-06-08T23:44:48.584610+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-June/006003.html" rel="alternate"/>
+    <summary>The article describes how disk activity affects the performance of Bitcoin transactions. The author asserts that when nodes act as archival data sources, the page cache pressure is immense. As a result, disks run constantly, impacting all clients, even those downloading only recent blocks. The article suggests that NODE_BLOOM tends to be slower due to the working set almost always being larger than available page cache. This causes disk activity which can cause delays and diminishes the performance of Bitcoin. Additionally, the author argues that prefix filtering may not save any disk seeks, or actively make the issue worse. For instance, filter parts of the chain for this client boil down to a handful of disk seeks at best. However, prefix filtering requires the calculation of a sorted list of all the data elements and tx hashes in the block, which maps to the location where the tx data can be found. These per-block indexes take up extra disk space and, realistically, would likely be implemented using LevelDB. This could slow down block relay and increase pressure on the page cache, making it worthwhile only at some block sizes and client loads.In conclusion, the author suggests that resources such as disk I/O are not presently scarce, so it's better to spend time increasing usage rather than worrying about such resources. The article highlights the importance of avoiding hitting the disk since once you start hitting the disk, you have already lost.</summary>
+    <published>2014-06-10T13:02:00+00:00</published>
+  </entry>
+</feed>

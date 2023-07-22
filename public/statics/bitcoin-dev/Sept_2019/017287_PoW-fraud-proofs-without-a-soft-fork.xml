@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>PoW fraud proofs without a soft fork</title>
+  <updated>2023-05-20T20:56:54.266996+00:00</updated>
+  <author>
+    <name>Ruben Somsen 2019-09-08 03:39:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>PoW fraud proofs without a soft fork</title>
+    <updated>2023-05-20T20:56:54.266996+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-September/017287.html" rel="alternate"/>
+    <summary>The utreexo work of Tadge Dryja enables the implementation of PoW fraud proofs without a soft fork. This is possible because utreexo allows efficient verification of state transitions between blocks, requiring only about a megabyte worth of merkle proofs to verify a block from a valid utreexo hash. PoW fraud proofs assume that block N is valid if no miner has tried to fork it. This assumption can be extended to the utreexo hash of block N with utreexo. There are two versions of this implementation - one requires commitments and a soft fork, while the other does not. In the version with commitments, when a fork occurs at height N+1 indicating that the block might be invalid, the user needs to download block N+1 from the most PoW chain (~1-2MB), the utreexo hash commitment inside of block N (e.g. a merkle path to the coinbase), and the utreexo merkle proofs which prove that all inputs of N+1 are part of the UTXO set (~1MB). For the non-committed version, users need to download the utreexo hash of block N from all their peers. If one peer disagrees on what the correct hash is, the last utreexo hash where that peer still agreed can be found, let's say block M, and the same three steps can be executed to find out which peer is wrong: download block M+1, then get the merkle proofs to verify whether the peer correctly transitioned their utreexo hash from M to M+1.While there may be concerns about the lack of a commitment, there seems to be no impact on security, only bandwidth. Users can only be fooled if all peers lie to them (Sybil), causing them to follow a malicious minority chain. However, even full nodes or the committed version of PoW fraud proofs can be fooled in this way if they are denied access to the valid most PoW chain. In summary, utreexo can enable PoW fraud proofs without a soft fork at the cost of downloading a couple of MB per stale block and per malicious peer.</summary>
+    <published>2019-09-08T03:39:28+00:00</published>
+  </entry>
+</feed>

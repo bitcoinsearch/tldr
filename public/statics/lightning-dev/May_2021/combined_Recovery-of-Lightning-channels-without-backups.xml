@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Recovery of Lightning channels without backups</title>
+  <updated>2023-06-04T01:01:44.674207+00:00</updated>
+  <author>
+    <name>David A. Harding 2021-04-28 20:14:38</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2021-04-20 04:09:54</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2021-04-20 04:52:01</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-12-07 00:32:27</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-12-09 02:44:51</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2020-12-09 03:52:11</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-12-10 05:23:27</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2021-04-23 04:29:30</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2021-04-27 23:36:02</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2021-04-28 02:59:35</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2021-05-03 01:01:48</name>
+  </author>
+  <author>
+    <name>Gijs van Dam 2020-12-07 08:24:20</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2021-04-20 00:53:26</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2021-04-28 01:18:10</name>
+  </author>
+  <author>
+    <name>David A. Harding 2021-05-03 12:50:16</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2021-05-03 22:42:10</name>
+  </author>
+  <link href="lightning-dev/April_2021/003027_Recovery-of-Lightning-channels-without-backups.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2021/002997_Recovery-of-Lightning-channels-without-backups.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2021/002998_Recovery-of-Lightning-channels-without-backups.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2020/002907_Recovery-of-Lightning-channels-without-backups.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2020/002909_Recovery-of-Lightning-channels-without-backups.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2020/002910_Recovery-of-Lightning-channels-without-backups.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2020/002911_Recovery-of-Lightning-channels-without-backups.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2021/003001_Recovery-of-Lightning-channels-without-backups.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2021/003022_Recovery-of-Lightning-channels-without-backups.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2021/003026_Recovery-of-Lightning-channels-without-backups.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2021/003028_Recovery-of-Lightning-channels-without-backups.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2020/002908_Recovery-of-Lightning-channels-without-backups.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2021/002996_Recovery-of-Lightning-channels-without-backups.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2021/003023_Recovery-of-Lightning-channels-without-backups.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2021/003029_Recovery-of-Lightning-channels-without-backups.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2021/003030_Recovery-of-Lightning-channels-without-backups.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Recovery of Lightning channels without backups</title>
+    <updated>2023-06-04T01:01:44.674207+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-April/003027.html" rel="alternate"/>
+    <summary>In discussions among Bitcoin Lightning Network developers, several ideas were proposed to recover lightning channels after losing channel state. One proposal involved using "static channel backups" as a means of recovery. This would involve creating a deterministically randomized version of a node's static public key as the `funding_pubkey`. Another alternative method suggested by Dave was to use signed messages to close channels with node_id 0xa11ce, preventing future replays of the message from closing later channels opened with the same seed/node_id. Elimination of "basepoints" in the network's funding protocol was also discussed. The proposal involved using SHA256 to create two different r values for each counter value. Lloyd Fournier suggested eliminating all "basepoints" using the node pubkey as the basepoint for everything and randomizing it using the shared secret for each purpose. Rusty Russell added `commit_basepoint` to overcome the issue of requiring knowledge of the node's secret key to sign the commitment_tx or htlc_tx. However, Russell expressed concerns about the implementation of this approach.LL presented another idea to eliminate the need for channel backup altogether and enable users to know what their funding outputs with each node look like non-interactively. This could be done by using deterministically randomized versions of nodes' static public keys as the `funding_pubkey`. Recreating a list of nodes users may have had channels with can help locate them in the UTXO set when channel state is lost. Rusty Russell also proposed an alternative method for establishing channels involving using an encrypted blob served by peers, assuming that at least one peer is honest. In an email exchange, Fournier and David A. Harding discussed creating rendezvous hashing to reduce the set of nodes for backups. Gijs suggested a synthetic static channel backup to trigger the data loss protection protocol. Dave suggested that nodes using the backup commons would download some number of backups each time they are restarted to check if the backups were being stored faithfully.Rusty Russell, the developer of c-lightning, has expressed his reservations about a proposed method for Lightning Network node backups. Despite concerns about removing the ability to update channels without access to a node's secret key and the need for a generation counter, Russell has not ruled out implementing the backup scheme.</summary>
+    <published>2021-04-28T20:14:38+00:00</published>
+  </entry>
+</feed>

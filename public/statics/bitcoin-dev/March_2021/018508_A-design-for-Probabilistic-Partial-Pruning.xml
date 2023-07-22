@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A design for Probabilistic Partial Pruning</title>
+  <updated>2023-06-14T18:39:49.591726+00:00</updated>
+  <author>
+    <name>Craig Raw 2021-03-01 06:22:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A design for Probabilistic Partial Pruning</title>
+    <updated>2023-06-14T18:39:49.591726+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-March/018508.html" rel="alternate"/>
+    <summary>A proposal has been made to address the problem of ongoing storage costs for full nodes and pruned nodes. Currently, users only have two options: either prune everything except the most recent blocks or keep everything since genesis. The proposed solution is to randomly prune some of the blocks from history if it passes some predicate. The node will generate a random seed unique to the node that will determine whether to keep or prune the data based on a threshold expressed as a percentage of blocks it wanted to keep. Once the node's IBD is complete, it would advertise this as a peer service so that nodes could deterministically deduce which of its peers had which blocks. This aims to increase data redundancy in a way that shares the load across nodes more uniformly, alleviating some of the pressure of full archive nodes on the IBD problem. One related thought is to have a decreasing density over blocks over time as you go backwards towards genesis, matching the actual usage of the network where more recent blocks are more heavily requested than early ones. It is also noted that many users run a node partially to use their wallets privately, and without this ability, the number of users willing to run their node in this configuration might be reduced.In response to the proposal, one person suggests that only headers need to be downloaded sequentially, making it possible to download relevant blocks from one node with gaps in between. Another person proposes deciding on a range of blocks to keep beforehand, rather than making the decision block-by-block. They also suggest reading Ryosuke Abe's paper proposing a DHT scheme to solve the same problem. Overall, the proposal aims to provide a solution to the problem of ongoing storage costs for full and pruned nodes by randomly pruning some of the blocks from history based on a unique node seed and threshold expressed as a percentage of blocks.</summary>
+    <published>2021-03-01T06:22:01+00:00</published>
+  </entry>
+</feed>

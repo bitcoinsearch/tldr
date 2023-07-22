@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[Pre-BIP] Fee Accounts</title>
+  <updated>2023-06-03T07:15:39.407649+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2022-01-19 02:37:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[Pre-BIP] Fee Accounts</title>
+    <updated>2023-06-03T07:15:39.407649+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-January/003442.html" rel="alternate"/>
+    <summary>Bitcoin developer Jeremy Rubin shared his thoughts on how fee-paying semantics could be cleaned up in bitcoin. In the current system, fees are part of the transactions they occur in, making writing smart contracts more difficult as both the logic for the transaction and the fees must be expressed. Previously, Rubin proposed a special type of transaction called a "sponsor" that allows appending fees to a transaction to bump it up in the mempool. As an alternative, Rubin suggests establishing an account-based approach in bitcoin as an "extension block." This would involve defining a special output type that is an "anyone can spend" fee account, with all deposits stored in a separate UTXO database. Fee accounts would sign only two kinds of transactions: one to specify a fee amount and TXID/Outpoint, and another to withdraw an amount, a fee, and an address. These transactions would be committed in an extension block merkle tree, and signatures must be unique in a block. The mempool logic would be updated to allow attaching of account fee spends to transactions, and the mempool would restrict an account from spending more than its balance. Rubin notes that this approach would make it easier to support fee bumping stuck transactions, DoS-resistant payment channels, and other long-lived smart contracts that cannot predict future fee rates. Additionally, it would reduce dust leakage for eltoo-like protocols and allow protocol designs to be fully abstracted from paying fees. Although accounts are generally considered bad, Rubin argues that these accounts are not bad because any funds withdrawn from the fee extension are fundamentally locked for 100 blocks as a coinbase output, eliminating issues with reorgs. Furthermore, since there is no "rich state" for these accounts, the state updates can always be applied in a conflict-free way in any order. Rubin also suggests modifications to improve the privacy of this design, such as implementing something like Tornado.cash to unlink the fee account paying from the transaction being paid for, and adding operations to allow a trustless mixing to be done by miners automatically where groups of accounts with similar values are trustlessly split into a common denominator and change. Rubin notes that this type of design works well for channels because the addition of fees to a channel state does not require any pre-planning or transaction flexibility and is naturally immune to pinning issues. Although this type of design could be done as a federated network that bribes miners without a fork, it might be sufficient to prove the concept works before a consensus upgrade is deployed. However, such an approach does mean there is a centralizing layer interfering with normal mining. Overall, Rubin's proposal offers a more general way to add a fee to any transaction, regardless of whether you are related to that transaction or not, and could potentially improve scalability and efficiency in the bitcoin network.</summary>
+    <published>2022-01-19T02:37:39+00:00</published>
+  </entry>
+</feed>

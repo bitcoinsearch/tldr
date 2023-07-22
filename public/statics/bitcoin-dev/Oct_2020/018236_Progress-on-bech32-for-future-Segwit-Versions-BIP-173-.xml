@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Progress on bech32 for future Segwit Versions (BIP-173)</title>
+  <updated>2023-06-14T16:07:50.606501+00:00</updated>
+  <author>
+    <name>Rusty Russell 2020-10-08 00:21:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Progress on bech32 for future Segwit Versions (BIP-173)</title>
+    <updated>2023-06-14T16:07:50.606501+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-October/018236.html" rel="alternate"/>
+    <summary>The author has proposed an alternative to length restrictions suggested by Russell in a Github pull request. The proposal suggests using the variant, unless the first byte is 0. There are two proposals that have been shared in the discussion. The first one suggests length restrictions where future segwits must be 10, 13, 16, 20, 23, 26, 29, 32, 36, or 40 bytes. This proposal is backwards compatible for v1 etc, and old code still works. However, it restricts future segwit versions, may require new encoding if we want a different length, or waste chainspace if we need to have a padded version for compatibility.The second proposal suggests checksum change based on the first byte. This proposal is backwards incompatible for v1 etc, and only succeeds 1 in a billion. It weakens guarantees against typos in the first two data-part letters to 1 in a billion as well. The author prefers the second proposal because it forces upgrades, since it breaks so clearly. Unfortunately, there is a need to upgrade, because the length extension bug means it's unwise to accept non-v0 addresses.It's worth noting that non-v0 segwit didn't relay before v0.19.0 anyway, so many places may already be restricting to v0 segwit. The author concludes by saying that the sooner a decision is reached on this, the sooner we can begin upgrading software for a taproot world. Lightning uses bech32 over longer lengths, but the checksum is less critical; they'd prefer to follow whatever bitcoin chooses. Technically less for non-v0: you have a 1 in 8 chance of a typo in the second letter changing the checksum algorithm, so it's 1 in 8 billion.</summary>
+    <published>2020-10-08T00:21:10+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Splicing Proposal: Feedback please!</title>
+  <updated>2023-05-25T14:06:06.452655+00:00</updated>
+  <author>
+    <name>lisa neigut 2018-10-17 01:09:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Splicing Proposal: Feedback please!</title>
+    <updated>2023-05-25T14:06:06.452655+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-October/001463.html" rel="alternate"/>
+    <summary>The email thread discusses a potential race condition when accepting Hashed Time-Locked Contracts (HTLCs) for the new balance after the parallel commitment is made but before the re-anchor is buried. This could result in a unilateral close or any revoked commitment transaction and the re-anchoring commitment transaction spending the "pre-committed" UTXO of splicing funds and the original funding transaction. To avoid this, one can wait until both the pre-commitment UTXO and the re-anchor have cleared a minimum depth before accepting HTLCs for the new balance totals. However, this method requires twice as long of a wait as the first synchronized re-commitment scheme that Rusty originally proposed. Furthermore, leaving the original funding transaction "exposed" (i.e., Rene's version of parallel splice) becomes untenable as there is always the risk of an old state being published to consume that input, which would foobar current HTLC commitments. Rusty proposes a new protocol that treats splice-in and splice-out differently and does not require any wait time. The protocol involves preparing an output with a specific script form, using types 40, 137, and 138 to update splice-in accept and reject data, and checking that the blockheight is far enough in the future. Once the recipient of splice-in sees the transaction referred to buried to its own minimum depth, checks output is what they claimed, and confirms it is happy with the blockheight, they send update_splice_in_accept, followed by commitment_signed like normal, but from this point onwards, all commitment txs signatures have one extra sig. However, Rusty later realizes that parallel splice does not work with Poon-Dryja channels because the counterparty can spend the old funding transaction output with a revoked spend. Therefore, Rusty goes back to Plan A.</summary>
+    <published>2018-10-17T01:09:02+00:00</published>
+  </entry>
+</feed>

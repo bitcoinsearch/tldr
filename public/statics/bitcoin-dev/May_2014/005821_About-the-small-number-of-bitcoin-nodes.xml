@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>About the small number of bitcoin nodes</title>
+  <updated>2023-06-08T23:04:31.399756+00:00</updated>
+  <author>
+    <name>Mike Hearn 2014-05-19 12:15:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>About the small number of bitcoin nodes</title>
+    <updated>2023-06-08T23:04:31.399756+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-May/005821.html" rel="alternate"/>
+    <summary>The article discusses the implementation of network rate limiting in Bitcoin Core. The challenge with this is that Bitcoin Core won't notice if a remote peer is working slowly and switch to a faster one, and throttling your connection would cause all remote nodes to give up and hit the other unthrottled peers even more. The article suggests that the best way to implement this is to do chain pruning, so your node will still try and shovel bytes as fast as possible, but it's limited by how many bytes it has to shovel. Remote nodes that are pulling down the block chain can then switch between nodes depending on what they have available in order to try and avoid hitting one node too hard. The article also suggests extending the p2p protocol so addr broadcasts and version messages include how much of the chain (counting blocks from the head?) the peer is willing to serve, and then updating the downloading code so it tries to be smarter about peer selection. However, all this work is sort of backed up waiting for sipa to finish merging in headers-first downloading. The author emphasizes that it would be great if someone could experiment with this.</summary>
+    <published>2014-05-19T12:15:54+00:00</published>
+  </entry>
+</feed>

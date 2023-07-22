@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fast bootstrapping with a pre-generated UTXO-set database</title>
+  <updated>2023-06-11T04:12:49.568352+00:00</updated>
+  <author>
+    <name>Tier Nolan 2016-02-29 11:49:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fast bootstrapping with a pre-generated UTXO-set database</title>
+    <updated>2023-06-11T04:12:49.568352+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-February/012480.html" rel="alternate"/>
+    <summary>A proposal was made to build the UTXO set backwards, starting from the newest block and working backwards. The database contains UTXOs (unspent transaction outputs) and "UFTXI" (unfunded transaction inputs). The procedure would be to check each transaction in last-to-first ordering, for each output checking if it is in the UFTXI set, validating the signatures if so, and adding it to the UTXO set if not. For each input, it gets added to the UFTXI set. When a transaction is received, it checks all the inputs, marking it as confirmed if all inputs are in the UTXO set and as "unknown inputs" otherwise. A counter indicating how many blocks it has validated would also exist. Transactions with an unfunded input count as validated back to the block it was included in and transactions count as confirmed to their ancestor that has the newest validation time. A reference client could mark transactions with 6+ output confirms and 1000+ input confirms as confirmed. Once it hits the genesis block, then all transactions would be 6/ and it could drop the second number.Another proposal suggested reducing node bootstrap time and network usage by loading a pre-generated UTXO-set datafile. Bitcoin-core or any other full node client will need to provide a feature to freeze the UTXO-set at a specified height and deterministic linearize it in a currently unspecified data-serializing-format. Additionally, a serialized form of the current chain-index up to the specified height will be appended to the pre-generated UTXO-set-datafile, hashed with a double SHA256, and signed by a group of developers who sign deterministic builds. Full node client implementations that support bootstrapping from a pre-generated UTXO-set need to include pubkeys from trusted developers, the hash of the pre-generated UTXO-set-datafile(s), and n signatures of the hash(es) from a subset of developers defined in the pubkeys. New nodes could download a copy of the pre-generated UTXO-set, hash it, verify the hash against the allowed UTXO-sets, verify the ECDSA signatures from various developers, and continue bootstrapping from the specified height if the user accepts the amount of valid signatures. Sharing of the pre-generated UTXO-set can be done over CDNs, bit-torrent, or any other file hosting solution.</summary>
+    <published>2016-02-29T11:49:57+00:00</published>
+  </entry>
+</feed>

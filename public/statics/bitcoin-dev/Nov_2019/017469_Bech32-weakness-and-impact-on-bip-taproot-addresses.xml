@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Bech32 weakness and impact on bip-taproot addresses</title>
+  <updated>2023-06-13T22:07:09.233989+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-11-13 05:32:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Bech32 weakness and impact on bip-taproot addresses</title>
+    <updated>2023-06-13T22:07:09.233989+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-November/017469.html" rel="alternate"/>
+    <summary>ZmnSCPxj proposes a new method for the validation of Bech32 addresses. He suggests that adding length for checksumming purposes need not require it to be actually added in the address format. Currently, Bech32 validation requires running BCH checksum on the witness program and comparing it to the checksum in the address. If the checksum matches, version 0 is validated to ensure the witness program is length 20 or 32, else it is accepted. If the checksum does not match, it is rejected. ZmnSCPxj's proposed method suggests that if the checksum matches, version 0 should validate that the witness program is length 20 or 32, else it should validate that the witness program is length 32. If the checksum does not match, the length of the witness program should be obtained, and the length should be prepended to the witness program. After this, BCH checksum should be run on concatenated length | witness program. If the checksum matches, it should be accepted, else it should be rejected. The writer of Bech32 addresses would use a non-length-prefixed checksum if the witness program is length 32 or witness version is 0 and witness program length is 20. Otherwise, they would use a length-prefixed checksum but not include the length in the address; they just change the BCH checksum. The new method retains the Bech32 address format, and no explicit length is added. It also has two checksum formats: one with just the witness program, and the other which validates with the witness program length. Readers who do not understand the new checksum format will simply reject them without mis-sending to the wrong witness program.</summary>
+    <published>2019-11-13T05:32:32+00:00</published>
+  </entry>
+</feed>

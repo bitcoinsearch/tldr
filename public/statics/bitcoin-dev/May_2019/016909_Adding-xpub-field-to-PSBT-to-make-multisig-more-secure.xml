@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Adding xpub field to PSBT to make multisig more secure</title>
+  <updated>2023-06-13T18:25:04.733330+00:00</updated>
+  <author>
+    <name>Peter D. Gray 2019-05-03 13:29:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Adding xpub field to PSBT to make multisig more secure</title>
+    <updated>2023-06-13T18:25:04.733330+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-May/016909.html" rel="alternate"/>
+    <summary>Stepan Snigirev has suggested adding xpub field to inputs and outputs metadata in PSBT specs to prevent theft of user funds in multisignature setup. He explained that currently in PSBT there is no way to verify output as a change output in multisig setup, leaving half of the keys in the change address vulnerable to theft by an attacker who can replace them with his own keys and still get the transaction signed. The xpubs can be used to verify that the same xpubs are used for public keys in inputs and outputs. He suggested adding the following key-value pairs to PSBT: Type: BIP 32 public key `PSBT_IN_BIP32_XPUB = 0x10` and Type: BIP 32 public key `PSBT_OUT_BIP32_XPUB = 0x03`. The xpubs in the PSBT would also allow a "trust on first use" which he thinks can be a good feature. Peter D. Gray, the founder of Coinkite, also added to this discussion, suggesting that the xpubs of co-signers must be stored in PSBT-signing devices to safely show an incoming address to the user without a full understanding of the other keys in a "multisig wallet".</summary>
+    <published>2019-05-03T13:29:45+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>death to the mempool, long live the mempool</title>
+  <updated>2023-05-22T16:11:59.320913+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2021-10-26 16:26:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>death to the mempool, long live the mempool</title>
+    <updated>2023-05-22T16:11:59.320913+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-October/019578.html" rel="alternate"/>
+    <summary>In a recent conversation with @glozow, Lisa Neigut suggested that the mempool is obsolete and should be eliminated. However, Pieter Wuille disagrees. He believes that mining and PoW exist to make the "censorship rights" of the network permissionless, and it is essential that anyone can become a miner if they dislike what existing miners are doing. Lisa's proposal makes it far harder to become a miner, and ideas to provide a mechanism for miners to publish their "tx submit" URL/IP/onion on chain don't help; that's dependent on other miners not censoring the publishing. Removing the mempool would also give a tremendous centralizing incentive, as it would be just far easier for most wallets to submit to the largest few pools, and there would be very little incentive to submit to a sub-1% pool for anyone.Lisa argues that removing the mempool would greatly reduce the bandwidth requirement for running a node, keep intentionality of transactions private until confirmed/irrevocable, and naturally resolve all current issues inherent in package relay and rbf rules. It also resolves the recent minimum relay questions, as relay is no longer a concern for unmined transactions. Pieter argues that there are other solutions to this, like weak blocks, which allow miners to relay partial PoW solutuon of say 10% of the difficulty to the network, and nodes which receive such a weak block can "forcibly" insert its transaction to their mempool, as there is evidence it's actually being worked on, while still being DoS resistant because partial PoW is still PoW.Provided the number of block template producing actors remains beneath, say 1000, it’d be quite feasible to publish a list of tor endpoints that nodes can independently + directly submit their transactions to. In this scenario, there is no incentive for miners to relay to each other. The fewer other miners know about a high fee-paying transaction, the better you as a miner. It is a responsibility of the full node network to relay blocks between miners quickly, to limit how much advantage well-connected miners over less-well-connected ones have. If the network doesn't have the transactions being included in those blocks, this is far harder. A direct communication channel between block template construction venues and transaction proposers also provides a venue for direct feedback wrt acceptable feerates at the time, which both makes transaction confirmation timelines less variable as well as provides block producers a mechanism for (independently) enforcing their own minimum security budget.</summary>
+    <published>2021-10-26T16:26:43+00:00</published>
+  </entry>
+</feed>

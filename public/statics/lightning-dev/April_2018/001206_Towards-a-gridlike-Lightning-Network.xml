@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Towards a gridlike Lightning Network</title>
+  <updated>2023-05-24T22:23:48.484493+00:00</updated>
+  <author>
+    <name>Benjamin Mord 2018-04-19 18:21:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Towards a gridlike Lightning Network</title>
+    <updated>2023-05-24T22:23:48.484493+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-April/001206.html" rel="alternate"/>
+    <summary>In a Lightning-dev mailing list, there was a thread discussing two concepts: the identification of a 'neighborhood' and the establishment of an order within that neighborhood for cycle formation. One member of the list suggested using bloom filters to define a neighborhood, which is considered the most valuable contribution among the suggestions. The formation of neighborhoods with high connectivity, with sparse but redundant connections among these neighborhoods, is viewed as an economically efficient approach to maintaining useful competition and redundancy. However, the emergent definition and maintenance of a unique ordering for cycle establishment within a neighborhood is viewed as a much more ambitious undertaking. One of the members presented an algorithm, which, given a set of nodes extracted from node gossip, returns a peer to try connecting and funding a channel to. The algorithm starts with a 32-bit number i = 0 and then performs successive filtering. While the set is larger than 2 nodes, successively compare high bits. If the highest bit of hash does not match the highest bit of our_hash, remove it from the set. If the resulting set is still larger than 2, match the next bit. When the set is now 2 or 1 node, back off by one bit and add back the most recently removed nodes. This yields a set that is at least 3 or more nodes. The nodes are sorted according to their hash, and the candidate is identified where the current node is in the sorted list.The above algorithm is presented as a solution towards reasonable Lightning Network topography. One issue with forming cyclic superhubs is the need for coordination to identify peers with which one forms superhubs. But the algorithm presented here suggests that coordination is needed only to identify peers, which is already present in node gossip. Therefore, the presented algorithm provides a way to identify the peers with which one can form superhubs. Furthermore, one of the members simulated an older version of the idea using C code, which has a bug. The bug is that it does not implement the check "if the candidate has a channel with us," leading to smaller reachability since nodes who could afford to create multiple channels will create multiple channels to the same peer in the simulation.</summary>
+    <published>2018-04-19T18:21:01+00:00</published>
+  </entry>
+</feed>

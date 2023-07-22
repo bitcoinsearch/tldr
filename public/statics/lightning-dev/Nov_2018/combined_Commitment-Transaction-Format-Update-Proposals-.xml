@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Commitment Transaction Format Update Proposals?</title>
+  <updated>2023-05-20T08:59:24.453830+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-11-06 04:29:21</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-11-06 06:03:19</name>
+  </author>
+  <link href="lightning-dev/Nov_2018/001518_Commitment-Transaction-Format-Update-Proposals-.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2018/001520_Commitment-Transaction-Format-Update-Proposals-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Commitment Transaction Format Update Proposals?</title>
+    <updated>2023-05-20T08:59:24.453830+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001518.html" rel="alternate"/>
+    <summary>On October 12, 2018, Rusty Russell suggested combining changes to the Lightning Network's commitment transaction format into a single feature called `commitment_style2`. This feature includes several updates such as allowing Child Pays for Parent (CPFP) with an OP_TRUE-style output for fees, using BIP-32-style `remotepubkey` to avoid data loss issues, and making CLTV timeout symmetrical to prevent gaming of the peer into closing. If `commitment_style2` is negotiated, `update_fee` becomes a protocol error. The feerate for commitment transactions is always 253 satoshi/Sipa, and it has a P2WSH OP_TRUE output of 1000 satoshi. Fees and OP_TRUE are always paid by the initial funder, and HTLC-timeout and HTLC-success txs sigs are SIGHASH_ANYONECANPAY|SIGHASH_SINGLE, allowing users to bring their own fees.In addition, the derivation of `localpubkey`, `remotepubkey`, `local_htlcpubkey`, `remote_htlcpubkey`, `local_delayedpubkey`, and `remote_delayedpubkey` now uses a two-stage unhardened BIP-32 derivation based on the commitment number. Two-stage unhardened BIP-32 derivation allows for 2^48 transactions while BIP-32 only supports 2^31, with the first 17 bits being used to derive the parent for the next 31 bits. `to_self_delay` for both sides is the maximum of either the `open_channel` or `accept_channel`. Finally, `to_remote` is now a P2WSH of `to_self_delay` OP_CSV OP_DROP OP_CHECKSIG. However, Laoluwa Osuntokun questioned whether this change was at odds with the goal of getting funds back immediately if the remote party force closes without requiring knowledge of secret data.</summary>
+    <published>2018-11-06T04:29:21+00:00</published>
+  </entry>
+</feed>

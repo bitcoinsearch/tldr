@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal to replace BIP0039</title>
+  <updated>2023-06-07T18:22:37.420251+00:00</updated>
+  <author>
+    <name>Thomas Voegtlin 2013-11-03 08:39:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal to replace BIP0039</title>
+    <updated>2023-06-07T18:22:37.420251+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-November/003532.html" rel="alternate"/>
+    <summary>On November 3, 2013, Timo Hanke wrote an email discussing communication between Trezor and a computer. Hanke suggests that Trezor should choose random s and send S=s*G to the computer, keeping s secret. The computer would then select a random t and send it back to Trezor. Trezor would then make r:=s+t its internal master private key with corresponding master public key R := (s+t)*G. This method would allow the computer to verify the master public key, which it can store and later verify for each derived pubkey. However, Hanke raises a concern about the verification of pubkeys, as the computer does not have proof that pubkeys derived through bip32's private derivations are derived from its own entropy.Trezor could not use straight bip32 out of the box, according to Hanke. The chain code would have to be SHA(R), and the seed that gets translated to mnemonic would be r itself, making it 256 bit instead of only 128 bit. Despite this, one question remains: if you only write down the mnemonic, how can you be sure that it is correct and corresponds to the secret in Trezor? You cannot verify that on paper. You would have to restore it on some device, such as another empty Trezor, and see if it brings up the same master pubkey. Hanke suggests that users must trust Trezor that it derives R from r.</summary>
+    <published>2013-11-03T08:39:42+00:00</published>
+  </entry>
+</feed>

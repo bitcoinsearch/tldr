@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Layered commitments with eltoo</title>
+  <updated>2023-05-23T02:55:05.107949+00:00</updated>
+  <author>
+    <name>Anthony Towns 2020-01-21 08:20:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Layered commitments with eltoo</title>
+    <updated>2023-05-23T02:55:05.107949+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-January/002448.html" rel="alternate"/>
+    <summary>The article discusses a proposed scheme to solve an issue with the original eltoo proposal and ANYPREVOU-based sketch. The BOLT-3 commitment transactions currently provide two-layer pay-to-self path, which reduces the three options to just two options. To solve this issue, a scheme can be used that preserves the benefits of eltoo while also having the same benefits BOLT-3 currently achieves.This can be done by dropping the commitment to the input value from ANYPREVOUTANYSCRIPT signatures, and it can be a channel-wide "shared_delay" rather than a "to_self" delay. The setup involves four types of transactions: funding transaction, update transaction, revocable claim transaction, and settlement transaction. Each state update involves constructing and calculating signatures for new update transactions, revocable claim transactions, and settlement transactions. The update transaction has k+2 outputs, where k is the number of open PTLCs. Each balance output pays to P as the internal key and contains a script. For each output of the update tx and each party that can spend it, a revocable claim transaction is constructed. These are designed to update a single output of each PTLC, and their output pays to P as the internal key, and the script. For each revocable claim transaction, a settlement transaction is constructed. The signatures are calculated using ALL|ANYPREVOUTANYSCRIPT, a locktime of 500e6+n, with the key P, and codesep_pos=0xffff_ffff. There's no locktime or adaptor signatures needed here, since they were taken care of for the revocable claim transaction.The article also discusses the process of spending a revocable claim and the funding transaction with an internal key P and tapscript. The article suggests that it is difficult to work with HTLCs because you need to encode the HTLC in script and remember the contract details perpetually in case an old state is published. The construction generalizes fine to multiparty channels, but there may be cheaper ones for two-party channels worth optimizing. It also gives away the number of participants in the channel and that Eltoo is in use as soon as an uncooperative close starts. However, this only works if ANYPREVOUTANYSCRIPT doesn't commit to the value of the input. This is a significant change to NOINPUT/BIP 118 as it stands.</summary>
+    <published>2020-01-21T08:20:18+00:00</published>
+  </entry>
+</feed>

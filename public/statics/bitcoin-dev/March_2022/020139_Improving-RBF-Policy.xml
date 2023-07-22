@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving RBF Policy</title>
+  <updated>2023-06-15T15:56:32.791638+00:00</updated>
+  <author>
+    <name>Antoine Riard 2022-03-17 02:02:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving RBF Policy</title>
+    <updated>2023-06-15T15:56:32.791638+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020139.html" rel="alternate"/>
+    <summary>The bitcoin-dev mailing list recently discussed various ideas for improving replace-by-fee (RBF) transactions. One of the concepts proposed was transaction relay rate-limiting, which aimed to provide denial-of-service (DoS) protection at the peer-to-peer level. The aim was to reduce the risk of an attacker impacting the propagation of another person's transaction by censoring it from ever being announced by a node if they send enough transactions to fill up the rate limit.Two main ideas were proposed for implementing this: feerate-based priority queue and staggered broadcast of replacement transactions. However, the discussion raised concerns that an attacker could still potentially affect the transaction propagation of others by manipulating the rate limit.Another idea discussed was user-elected descendant limits on transactions, which allows users to specify that their transactions won't have more than X vbytes of descendants. This solves the pinning problem with package RBF where the attacker's package contains a very large and high-fee descendant.There was also discussion about adding a "mining score" calculator to determine the ancestor feerate at which a transaction is included in a block. However, there are concerns about malicious child attachment downgrading the block inclusion efficiency. The author suggests being conservative to avoid such issues.The email thread discusses the limitations of the proposed mining score calculator, which takes the transaction in question, grabs all connected mempool transactions, including siblings and coparents, and builds a block template using the current mining algorithm. Some potential issues include not accounting for high feerate siblings bumping their ancestor and the need for a new calculator if the network switches to a candidate set-based algorithm for mining.The discussion highlights the need to carefully weigh the implications of these proposals for layer-two solutions and adjust fee-bumping and transaction rebroadcast strategies accordingly. The email includes links to relevant Github issues and proposals related to the discussion.</summary>
+    <published>2022-03-17T02:02:30+00:00</published>
+  </entry>
+</feed>

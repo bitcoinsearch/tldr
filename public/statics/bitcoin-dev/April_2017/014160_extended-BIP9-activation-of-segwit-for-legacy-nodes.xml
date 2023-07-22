@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>extended BIP9 activation of segwit, for legacy nodes</title>
+  <updated>2023-06-12T00:17:18.093264+00:00</updated>
+  <author>
+    <name>Ryan Grant 2017-04-14 20:12:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>extended BIP9 activation of segwit, for legacy nodes</title>
+    <updated>2023-06-12T00:17:18.093264+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/014160.html" rel="alternate"/>
+    <summary>The activation of Segwit has been more difficult than expected, despite the technical consensus being clear. It would be helpful if validating nodes that can already support Segwit could eventually participate to their fullest capacity without further upgrades. To achieve this, BIP9 assignments should reserve a backward compatibility bit which all yet-unknown Segwit-compatible proposals may utilize. These future proposals must be consensus compatible with BIPs 141, 143, &amp; 147, except that they may use different deployment logic.This approach will allow any validating node software released after the BIP9 assignment to understand if Segwit is activated by alternate means, even when the node is itself a legacy version. This is important because upgrades on the Bitcoin network occur slowly due to the security choice of not presenting an auto-upgrade feature. Although Segwit is backwards compatible with old validating nodes, there are still distinct advantages to validating and generating segregated witness transactions.If future BIP9-compatible deployment attempts include a date-dependent UASF fallback, then deployment rules might require signaling for Segwit using the backwards-compatible bit proposed here. In this case, after 95% of recent blocks signal for the alternate Segwit deployment, more legacy nodes would understand and validate transactions using segregated witnesses.An expiration time of five years is considered conservative for Alternate Deployment 1 of SegWit (BIP141, BIP143, and BIP147). The Segwit deployment logic would then look like:bool IsWitnessEnabled(const CBlockIndex* pindexPrev,                        const Consensus::Params&amp; params)  {      LOCK(cs_main);      return    (VersionBitsState(pindexPrev,                                  params,                                  Consensus::DEPLOYMENT_SEGWIT,                                  versionbitscache)                 == THRESHOLD_ACTIVE)             || (VersionBitsState(pindexPrev,                                  params,                                  Consensus::DEPLOYMENT_SEGWIT_ALT1,                                  versionbitscache)                 == THRESHOLD_ACTIVE);  }</summary>
+    <published>2017-04-14T20:12:34+00:00</published>
+  </entry>
+</feed>

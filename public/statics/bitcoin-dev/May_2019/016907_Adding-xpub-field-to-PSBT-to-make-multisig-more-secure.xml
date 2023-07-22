@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Adding xpub field to PSBT to make multisig more secure</title>
+  <updated>2023-05-20T20:13:40.970487+00:00</updated>
+  <author>
+    <name>Andrew Chow 2019-05-01 16:57:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Adding xpub field to PSBT to make multisig more secure</title>
+    <updated>2023-05-20T20:13:40.970487+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-May/016907.html" rel="alternate"/>
+    <summary>In a message sent to the bitcoin-dev mailing list on April 26th, Stepan Snigirev raised concerns about the possibility of user funds being stolen in multisignature setups using the current specifications for partially signed bitcoin transactions (PSBT) as defined by BIP174. He explained that an attacker could replace half of the keys in the change address with their own keys and still get the transaction signed, which could result in the loss of user funds if M is less than or equal to N/2. To fix this issue, Snigirev suggested adding an xpub field to the inputs and outputs metadata so that signers can verify that the same xpubs are used for public keys in inputs and outputs, ensuring that the output is indeed a change. Snigirev proposed two new key-value pairs to be added to PSBT: `PSBT_IN_BIP32_XPUB` and `PSBT_OUT_BIP32_XPUB`. The former would contain a derivation path for an xpub, while the latter would contain a 78-byte xpub value. Derivation paths are included in the key of the key-value pair for lookup purposes, while the xpub itself is the actual value being looked up. Snigirev also noted that Trezor wallets use xpubs to verify change outputs and suggested reviewing the communication protocols of existing hardware and multisignature wallets to see if there are other solutions to this issue.If the proposal is accepted, Snigirev plans to prepare a pull request to the bip.</summary>
+    <published>2019-05-01T16:57:38+00:00</published>
+  </entry>
+</feed>

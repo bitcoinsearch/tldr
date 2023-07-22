@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Take 2: Removing the Dust Limit</title>
+  <updated>2023-06-15T03:23:41.981150+00:00</updated>
+  <author>
+    <name>Ruben Somsen 2021-12-08 22:51:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Take 2: Removing the Dust Limit</title>
+    <updated>2023-06-15T03:23:41.981150+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-December/019642.html" rel="alternate"/>
+    <summary>In an email exchange between Ruben and Jeremy, they discuss the possibility of 0 value outputs in Bitcoin transactions. Jeremy argues that as long as a 0 sat output is eventually spent and confirmed, it is not a big problem even if it enters the mempool. He suggests that it would be rational for miners and users to save the transaction spending the 0 sat output to resurrect it if it is not spent again. Additionally, he believes that intentionally trying to keep the 0 value output would be uneconomical compared to creating dust outputs, and therefore, it should not be popular. Ruben agrees with Jeremy's points but sees a possibility where a user non-maliciously behaves in a way that causes the 0 sat output to never be spent. This could happen if another output gets spent at a higher feerate, the tx spending the 0 sat output does not make it into the block due to lower fees, and the user invalidates the tx spending from the 0 sat output. However, Ruben acknowledges that this scenario is somewhat unlikely. The email also discusses a possible consensus change that involves having a UTXO with drop semantics. If a UTXO with a certain flag on it is not spent in the block it is created, it expires and can never be spent. This could be used for 0 value outputs that are present only for attaching fee in the mempool and would be treated like an op_return otherwise. Two cases could be added for this: one bare segwit version (just the number, no data) and one that's equivalent to taproot. This covers OP_TRUE anchors efficiently and ones that require a signature as well. This suggestion is similar to how Transaction Sponsors works, but without full tx graph de-linkage.</summary>
+    <published>2021-12-08T22:51:50+00:00</published>
+  </entry>
+</feed>

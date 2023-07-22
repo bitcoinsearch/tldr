@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Deriving channel keys deterministically from seed, musig, and channel establishment v2</title>
+  <updated>2023-06-03T05:51:00.317678+00:00</updated>
+  <author>
+    <name>SomberNight 2021-09-17 16:14:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Deriving channel keys deterministically from seed, musig, and channel establishment v2</title>
+    <updated>2023-06-03T05:51:00.318666+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-September/003229.html" rel="alternate"/>
+    <summary>The article describes an approach to derive channel keys deterministically for certain forms of recovery from just a seed that works today. However, this approach will no longer work with certain key aggregations in the future. The article provides an idea for a proposal on how the channel-open flow (e.g. as part of channel v2) could be changed to make a similar approach work independently of key aggregation. The article also talks about the difficulty in remote-force-close cases where the to_remote output is no longer a simple p2wpkh and how Electrum sets option_static_remotekey to required and restricts lightning usage to wallets that derive p2wpkh addresses, and payment_basepoint is set to a bip32-derived pubkey. With anchors, the to_remote is now a p2wsh that involves a CSV, and we cannot easily make this script correspond to a wallet address, i.e. we lose the property that the remote-force-close pays directly to a wallet address.The article proposes three solutions to solve the problem of having seed words, having access to blockchain data, identifying channel counterparties (node IDs), and assuming we can get the remote to do a force-close. Solutions include deriving a static key to be used as payment_basepoint, reusing between all channels, and watching the single resulting p2wsh script on-chain. Alternatively, deriving a new bip32 chain/sequence of pubkeys used as payment_basepoint for channels, and watch these p2wsh scripts, with a gap limit. It's desirable to see if some entropy can be extracted from the blockchain and use that as a nonce to be combined with a static private secret derived from our seed. The article also discusses exploiting the fact that the funding output uses a 2of2 OP_CHECKMULTISIG script composed of funding pubkeys of each party. The funding pubkey itself can be used as a nonce and can be recovered from the witness of the commitment tx. Electrum will likely use (3) at least for the payment_basepoint, as part of adapting to anchors.The approach needs a blockchain-visible nonce that is already known at the time we need to construct the open_channel message. As long as the funding output uses a 2of2 OP_CHECKMULTISIG, the local funding_pubkey fits the bill. Finally, the article concludes by proposing whether such a change or something similar might be useful, and if so, whether it could/should be incorporated into the current channel establishment v2 proposal.</summary>
+    <published>2021-09-17T16:14:22+00:00</published>
+  </entry>
+</feed>

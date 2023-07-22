@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 340 updates: even pubkeys, more secure nonce generation</title>
+  <updated>2023-06-13T23:39:59.447829+00:00</updated>
+  <author>
+    <name>Jonas Nick 2020-02-26 15:34:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 340 updates: even pubkeys, more secure nonce generation</title>
+    <updated>2023-06-13T23:39:59.447829+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-February/017651.html" rel="alternate"/>
+    <summary>In a recent email discussion on bitcoin-dev mailing list, two changes were proposed for BIP 340-342. The first change involves modifying the Y coordinate of 32-byte public keys from implicitly square to implicitly even. This change will make signing faster and verification negligibly slower. Importantly, this change simplifies integration with existing key generation infrastructure like BIP32 and PSBT. The second change is related to more secure nonce generation in BIP 340. To protect against fault injection attacks and differential power analysis, it is recommended to include actual signing-time randomness into the nonce generation process. These changes will make the specification more secure while still allowing optimization for use cases. One participant suggested that including auxiliary random data in the specification and hashing the public key to get the nonce are overkill for the spec. He believes that specifying the most minimal way to produce a signature securely is the most useful thing for the document. However, another participant suggested that a standard for nonce exfiltration protection and MuSig would be important for compatibility across wallets. It was also mentioned that only providing a note about non-deterministic signatures and how to produce them may not be enough as "reasonably secure" includes misuse resistance which would be violated if the pubkey was not input to the nonce generation function. To ensure compatibility, new tagged hash tags were introduced in BIP 340. Although these changes were not expected earlier, they are believed to be worth making as they would improve the security of the specification.</summary>
+    <published>2020-02-26T15:34:04+00:00</published>
+  </entry>
+</feed>

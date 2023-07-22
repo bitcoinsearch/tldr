@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BitcoinQt eating 100% CPU</title>
+  <updated>2023-06-06T03:03:10.534353+00:00</updated>
+  <author>
+    <name>Michael Gronager 2012-02-23 20:02:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BitcoinQt eating 100% CPU</title>
+    <updated>2023-06-06T03:03:10.534353+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-February/001243.html" rel="alternate"/>
+    <summary>The email is a follow up on an issue with Bitcoin-Qt that the sender, Michael Grønager, faced. The issue was that the program was using 100% CPU after initial block chain download. The sender built the latest source of the program using qt-creator on MacOSX 10.7.3 and changed BDB version to 5.1. Upon running it, the activity in debug.log seemed normal, but the program was still consuming CPU. Sampling showed that the majority of time in each thread was used for operations like __semwait_signal, kevent, __select, mach_msg_trap, and boost::date_time::micro_sec_clock. However, the only line that seems strange is line 31 in qtipcserver.cpp: `if(mq-&gt;timed_receive(&amp;strBuf, sizeof(strBuf), nSize, nPriority, d))`. The sender believes that this should not consume CPU either, but it is the only thing that seems a bit strange. After further tweaking, the sender has found that the culprit was indeed line 31 and has fixed the issue by inserting `ipcShutdown()` into the ipcThread. Bitcoin-Qt is now running nicely using around 0.9% CPU. The sender concludes by asking if anyone else has seen similar issues.</summary>
+    <published>2012-02-23T20:02:46+00:00</published>
+  </entry>
+</feed>

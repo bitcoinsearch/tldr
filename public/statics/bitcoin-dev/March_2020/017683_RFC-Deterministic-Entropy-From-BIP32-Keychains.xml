@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>RFC: Deterministic Entropy From BIP32 Keychains</title>
+  <updated>2023-05-20T21:54:10.632893+00:00</updated>
+  <author>
+    <name>Ethan Kosakovsky 2020-03-20 15:44:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>RFC: Deterministic Entropy From BIP32 Keychains</title>
+    <updated>2023-05-20T21:54:10.632893+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-March/017683.html" rel="alternate"/>
+    <summary>The proposed BIP seeks to address the issue of managing an ever-increasing number of seeds and backups due to various wallet implementations and security models. The proposal aims to provide a way to deterministically derive initial entropy used to create keychain mnemonics and seeds, thereby maintaining the original motivation behind BIP32. This is achieved by specifying a way to derive initial entropy from a HD keychain path.The proposed method involves calculating entropy from the HMAC-SHA512 function of the derived 32 byte private key, where entropy is taken from the result according to the number of bits required. The input to this function is a BIP32 seed, which may or may not have been derived from a BIP39 like mnemonic scheme. The proposal enables one root key or mnemonic to derive any variety of different root keychains in whatever format is required.The proposal is currently in the proposed stage and has not yet received any comments. The proposed standard would allow deriving all child derivation schemes depending on the user's preference or hardware signing devices. Devices that store the HD seed as a BIP39 mnemonic, Electrum seed, or BIP32 root key would all be able to implement this standard.The proposal includes three test cases with different master BIP39 seed inputs, master BIP32 root keys, and paths. Each test case also includes the bits required, derived child WIF, derived child k value, child entropy, converted entropy to WIF, child BIP39 mnemonic, child BIP39 seed, and child BIP32 root key. The proposal references BIP32 and BIP39 and is dual-licensed under the Open Publication License and BSD 2-clause license. The proposal could potentially be split into multiple discrete BIPs but has been avoided to reduce complexity. HMAC-SHA512 was chosen as the function to process the resulting private key because it may have better compatibility in embedded devices as it's already required in devices supporting BIP32. The proposal aims to provide a solution to the problem of too many seeds and backups while maintaining the original motivation behind BIP32.</summary>
+    <published>2020-03-20T15:44:01+00:00</published>
+  </entry>
+</feed>

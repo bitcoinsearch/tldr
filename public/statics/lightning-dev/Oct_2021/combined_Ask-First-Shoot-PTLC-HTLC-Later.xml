@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Ask First, Shoot (PTLC/HTLC) Later</title>
+  <updated>2023-06-04T02:24:23.116203+00:00</updated>
+  <author>
+    <name>Joost Jager 2021-10-21 07:28:42</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-09-29 03:40:01</name>
+  </author>
+  <link href="lightning-dev/Oct_2021/003331_Ask-First-Shoot-PTLC-HTLC-Later.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2021/003256_Ask-First-Shoot-PTLC-HTLC-Later.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Ask First, Shoot (PTLC/HTLC) Later</title>
+    <updated>2023-06-04T02:24:23.116203+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-October/003331.html" rel="alternate"/>
+    <summary>A proposal has been made to improve the payment latency of the Lightning Network by asking first before shooting an HTLC. Currently, HTLCs are shot first and questions are asked later, which results in multiple round trips per hop in case of a failure along a route. The proposed method replaces this with a single large round trip from the payer to the failure point. This would reduce failures due to a node or channel failing along the way, making it more acceptable to charge for failed actual HTLCs. However, concerns have been raised that this approach may become a potential DoS vector as any node could trigger network activity by asking random stuff of random nodes. To mitigate this, the proposal suggests making generating an onion costly but validating and decrypting it cheap. Additionally, nodes could upgrade to accept "no" from any node along the path, but only accepting "yes" from the actual payee. Another suggestion was to let senders attach a random identifier to a probe. For multi-part probes, each probe would carry the same identifier. Routing nodes would deduct the outstanding probe amounts from the available balance, but only for probes within the same group (same id). This way, each probe(group) is isolated from everything else that is going on. The proposal could potentially improve payment latency, especially as multipath payments become more common. However, implementing it requires a whole-network upgrade, and intermediate nodes must upgrade as well.</summary>
+    <published>2021-10-21T07:28:42+00:00</published>
+  </entry>
+</feed>

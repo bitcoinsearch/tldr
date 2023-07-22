@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Time to worry about 80-bit collision attacks or not?</title>
+  <updated>2023-06-11T02:59:56.102808+00:00</updated>
+  <author>
+    <name>Ethan Heilman 2016-01-07 20:40:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Time to worry about 80-bit collision attacks or not?</title>
+    <updated>2023-06-11T02:59:56.102808+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-January/012202.html" rel="alternate"/>
+    <summary>The current GH/s count of 775,464,121 Bitcoin tests 2^80 every 19 days. To understand the security model of segwit, it is assumed that any collision is bad. Storing all 2^80 previous hashes requires O(2^80) storage, which is infeasible. Instead, a seed value is hashed 2^80 times, and then a cycle is looked for. The worst-case scenario costs 2**81.5 and requires storing less than a kilobyte. Gavin Andresen previously suggested using RIPEMD160(SHA256()) as the hash function to save the 12 bytes since a preimage attack against that is unlikely to happen before people die. However, Pieter argued that a collision attack could be used in a contract setup to steal coins. Gavin defended that contract wallets could protect against collision attacks and adding an extra 12 bytes to every segwit is unlikely to be a problem in practice. The general question raised on the bitcoin-dev mailing list was whether there should be concern today about collision attacks against RIPEMD160 (the 160-bit hash). A successful brute-force collision attack would require at least O(2^80) CPU, which is feasible but also requires O(2^80) storage, which is infeasible. It is estimated that we are four decades away from an attacker with the entire world's storage capacity being able to mount a collision attack.</summary>
+    <published>2016-01-07T20:40:03+00:00</published>
+  </entry>
+</feed>

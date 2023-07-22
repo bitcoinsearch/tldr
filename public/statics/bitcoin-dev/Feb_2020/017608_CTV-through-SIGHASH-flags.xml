@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CTV through SIGHASH flags</title>
+  <updated>2023-06-13T23:26:22.671945+00:00</updated>
+  <author>
+    <name>Jeremy 2020-02-03 08:20:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CTV through SIGHASH flags</title>
+    <updated>2023-06-13T23:26:22.671945+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-February/017608.html" rel="alternate"/>
+    <summary>The bitcoin-dev mailing list is currently discussing proposals to change the behavior of OP_CHECKTEMPLATEVERIFY (CTV) and how it should be specified. One proposal suggests that CTV should behave more like CHECKSIG, including a flags byte that specifies what is hashed. Another idea presented is the use of a flag called SIGHASH_NOSIG instead of an actual CheckSig SIGHASH Flag. However, this proposal has been criticized for being ill-advised due to the awkward API it would create and its incompatibility with soft-fork encoding rules.It was also suggested that committing to the input index using a flag instead of CTV may be less flexible. Enabling a flag right away may enable a big footgun right off the bat. NOINPUT as specified in a BIP isn't a great surrogate for CTV because CTV commits to the input index, which prevents half-spend. Committing to the input-index is not a sender policy choice, but a receiver policy choice. CSV is an example where redemption policies are committed to in the output by the sender via the sequence_no field, and then checked with an opcode OP_CSV to enable relative timelocks.The proposal imposes "MUST" conditions on the existence of the covenant itself, as well as the number of inputs and outputs, to prevent txid malleability so that such transactions can be used in offline protocols. Txid non-malleability can be achieved by enforcing that the output must be spent using SIGHASH_ALL instead of committing to the number of inputs separately with a new opcode. The MUST condition also helps with sighash caching for batch validation.The discussion revolves around the use of "MUST" conditions for validity caching, which is not actually helpful in precomputing information before fetching outputs from the database. Input indexes eliminate third-party malleability of input order and prevent half-spend, but there is confusion regarding their usage in transactions.CTV is equivalent to a flag in sequence_no that is logically MUST|ALL|NOSIG|INPUTINDEX and a redeemScript of &lt;&gt;. Lightning-like use cases might put sequence_no flags that are logically MAY|ALL|NOINPUT. OP_CAT already allows similar functionality with SIGHASHes, but it requires careful review due to its surprising functional consequences.The idea of expressing CTV as a sighash type today does not offer any benefits since a future soft fork can make CTV a valid hash in a new language. Instead of cramming logic into flags, it is suggested to construct the digest pattern in script or write an actual language for dealing with sighashes. However, this may lead to quadratic hashing if every output commits to a different complex thing. CTV is fully compatible with context-free validation optimizations, while other approaches may not be.</summary>
+    <published>2020-02-03T08:20:52+00:00</published>
+  </entry>
+</feed>

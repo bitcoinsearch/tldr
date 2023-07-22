@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fast Merkle Trees</title>
+  <updated>2023-06-12T18:33:05.196398+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2017-09-07 15:43:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fast Merkle Trees</title>
+    <updated>2023-06-12T18:33:05.196398+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-September/014943.html" rel="alternate"/>
+    <summary>The Fast Merkle Trees design does not distinguish between leaf nodes and internal nodes, allowing for chained invocations to validate paths longer than 32 branches. However, this lack of distinction poses a security risk as it invites vulnerabilities. An example is given where a counterparty can include specially crafted "scripts" masquerading as leaves, which can also be interpreted as fake internal nodes. This allows the counterparty to build an inclusion proof and reveal the evil code that they had designed into the MAST at a deeper level. The ambiguity about whether a node is a leaf or an internal node is a significant issue, and changing the design to make them distinguishable still allows for chained invocations.Arbitrary data can be stored in Fast Merkle Tree leaves, including the Merkle root of another Fast Merkle Tree. By storing an inner Fast Merkle Tree root inside the (explicit) leaf of an outer Fast Merkle Tree, the application can verify an Inclusion Proof of the inner Fast Merkle Tree Root in the outer Fast Merkle Tree Root and then verify a second Inclusion Proof of the desired data in the inner Faster Merkle Tree Root. The application will need to tag their data to distinguish between inner Fast Merkle Tree Roots and other application data.Russell O'Connor suggests that the fast hash for internal nodes needs to use an IV that is not the standard SHA-256 IV and instead should use some other fixed value, which should itself be the SHA-256 hash of some fixed string such as "BIP ??" or "Fash SHA-256". He believes that someone can claim a leaf node as an internal node by creating a proof that provides a phony right-hand branch claiming to have hash 0x80000..0000100 (which is really the padding value for the second half of a double SHA-256 hash).</summary>
+    <published>2017-09-07T15:43:52+00:00</published>
+  </entry>
+</feed>

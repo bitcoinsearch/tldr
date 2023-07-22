@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: extend bip70 with OpenAlias</title>
+  <updated>2023-06-10T02:36:01.965957+00:00</updated>
+  <author>
+    <name>Thomas Voegtlin 2015-07-13 13:06:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: extend bip70 with OpenAlias</title>
+    <updated>2023-06-10T02:36:01.965957+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-July/009406.html" rel="alternate"/>
+    <summary>A proposal has been made to extend the signature scheme used in the Payment Protocol (BIP70) by authorizing payment requests signed by users at domain aliases that are verified using DNSSEC (OpenAlias). Although SSL email certificates already allow for signing requests with user at domain aliases, they are not well suited for payment requests because they are not delivered by the entity that owns the same domain. This leads to no cross-verification, dilution of responsibilities, and the security of the entire scheme being based on the security of an email address. The proposal aims to solve these issues by enforcing that the certificate was delivered by the same entity that controls the domain. Two methods have been suggested: modified chain validation and DNSSEC and OpenAlias.The first method introduces a new type of user certificate where the certificate for user at domain must be issued by a domain certificate for the same domain, and validation of the user at domain certificate does not require the issuer certificate to have a CA bit. This solution would be the easiest to deploy but would break compatibility with existing certificate validation procedures. The second method uses DNSSEC and OpenAlias, which is a standard for storing Bitcoin addresses and public keys in DNS TXT records, and imposes that a record is signed by its parent. A new pki_type may be added to BIP70 payment requests that indicates that the request has been signed with a Bitcoin public key and that the chain validation uses DNSSEC. This solution has been implemented in Electrum and will be available in version 2.4.Standardizing this proposal will likely require a new BIP number since BIP70 is already final. The proposer is willing to help with this, and OpenAlias developers have expressed their support and willingness to provide assistance.</summary>
+    <published>2015-07-13T13:06:08+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Original Vision</title>
+  <updated>2023-06-10T01:35:12.711132+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2015-06-28 16:15:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Original Vision</title>
+    <updated>2023-06-10T01:35:12.711132+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-June/009218.html" rel="alternate"/>
+    <summary>The article discusses the comparison between UTXO and TXO/STXO trees with respect to their complexity and scalability. It states that the slowdown factor of TXO/STXO trees is related to the depth of the tree, and since they are always growing, the size of the entire block chain history becomes the value of N. On the other hand, for UTXO, it's just the set of unspent transaction outputs. However, the assumption of randomly-picked outputs is not fair as using the Merkle mountain range data structure in an insertion-ordered tree would have significantly shorter paths for recent outputs. Both need to be written and benchmarked. The article further points out that the append-only TXO tree may come close to offering constant time updates, but the spent or unspent tree is not insertion-ordered. There are alternatives like updating the TXO tree and requiring blocks and transactions to carry proofs with them. However, this pushes the same problem to whoever generated or assembled the proof, making it a difficult tradeoff. In response to the article, Jorge Timón suggests a TXO and STXO O(1)-append commitment, which should not cause much overhead, and UTXO can be built from TXO - STXO. However, this method may not be efficient in some respects, but it scales better. Mark Friedenbach argues that UTXO commitments are the nominal solution but maintaining a hash tree commitment over validator state is expensive and requires 15-22x more I/O during block validation. Therefore, if the UTXO commitment scheme is adopted, it may require a block size limit decrease rather than increase for better performance.</summary>
+    <published>2015-06-28T16:15:28+00:00</published>
+  </entry>
+</feed>

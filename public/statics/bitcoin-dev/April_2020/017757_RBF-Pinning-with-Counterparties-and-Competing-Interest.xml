@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-05-20T21:56:15.581771+00:00</updated>
+  <author>
+    <name>Matt Corallo 2020-04-21 02:43:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-05-20T21:56:15.581771+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-April/017757.html" rel="alternate"/>
+    <summary>The Lightning Network has been exploring potential issues with the new anchor outputs spec. There have been concerns that it could allow a user to use RBF Pinning to steal in-flight HTLCs enforced on-chain. However, there is no easy fix for this issue, and exploitation is currently unlikely. The Lightning Network currently uses a 2-of-2 multisig output to lock in the channel. This is followed by a commitment transaction that spends the output to "HTLC outputs," and HTLC transactions that spend the relevant commitment transaction HTLC outputs.The third layer of transactions is required to allow HTLC timeouts to be significantly lower than the time window during which a counterparty may be punished for broadcasting a revoked state. To address this issue, Lightning came up with "anchor outputs" or the RBF carve-out. The goal was to remove the prediction game when negotiating future fees and allowing both parties to add fees to a broadcasted transaction without getting into the quagmire of RBF pinning. However, implementing this rule introduces the potential for RBF pinning. Nonetheless, the practicality of exploiting this vulnerability today remains low.In an article discussing the issue of RBF Pinning HTLC Transactions, the author explains how a lightning counterparty could spend an HTLC using the preimage with a low-fee, RBF-disabled transaction if a commitment transaction is broadcasted by its previous party. This would leave the previous party short the HTLC value. The author suggests that some variant of the RBF Carve-Out could be used to solve this problem. However, it would need to be highly tailored to lightning, which is not ideal. Instead, the article proposes an alternative anchor outputs proposal to make lightning's security more practical in a world where Bitcoin miners are paid to operate.</summary>
+    <published>2020-04-21T02:43:14+00:00</published>
+  </entry>
+</feed>

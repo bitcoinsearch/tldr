@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Miners Dust Inflation attacks on Lightning Network</title>
+  <updated>2023-06-03T01:28:07.217759+00:00</updated>
+  <author>
+    <name>Antoine Riard 2020-05-18 10:28:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Miners Dust Inflation attacks on Lightning Network</title>
+    <updated>2023-06-03T01:28:07.217759+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-May/002714.html" rel="alternate"/>
+    <summary>The Lightning protocol allows for a floating dust output selection at channel creation, where each party declares a dust parameter applying to its local transactions. The current specification does not enforce or recommend any bound on this value beyond the requirement of being lower than `channel_reserve_satoshis`. When a HTLC is routed through the channel but its value is under the local party's dust limit, it is burned as fees and not added to the commitment transaction. This makes LN a good citizen of the Bitcoin blockchain but comes with the price of more trust in your counterparty.An attack scenario is presented where Mallory announces a channel to Alice with a dust-limit-satoshi set to 20% of channel value. Alice should accept incoming channels as long as it is under her implementation-specific `max_dust_limit_satoshis`. Now Mallory can route four dust-HTLCs to Mallet through Alice claiming ~80% of the channel value. Mallet, in collusion with Mallory, can claim the whole set of HTLCs by revealing the corresponding preimage for each. At the same time, Mallory broadcasts her latest commitment transaction on which there are no HTLCs because all of them are dust. Alice cannot claim them on-chain but has already paid Mallet forward.Although at first glance, this attack does not seem economically rational because dust-HTLCs are all committed as fees, if one assumes that Mallory can collude with some mining pool, economics change completely. It is now almost zero-cost to add Mallory's commitment transaction in a block, and fees are going back to the miner. Mallory's commitment transaction may stay in the miner pool as long as the block isn't found, without being announced to the rest of the network, and HTLCs timelocks don't expire. The attack may still be stealthy if the block isn't signed. Mitigating this may come by negotiating a new `max_dust_htlc_value_in_flight_msat` enforced by the HTLC recipient, therefore expressing its maximum trust tolerance with regards to dust.</summary>
+    <published>2020-05-18T10:28:21+00:00</published>
+  </entry>
+</feed>

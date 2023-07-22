@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Cold Signing Payment Requests</title>
+  <updated>2023-06-06T15:36:22.080698+00:00</updated>
+  <author>
+    <name>Jeremy Spilman 2013-04-25 19:12:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Cold Signing Payment Requests</title>
+    <updated>2023-06-06T15:36:22.080698+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002458.html" rel="alternate"/>
+    <summary>The context discusses ways of keeping the pay-to address secure in case the web server is compromised. The author suggests that a more trusted cert could be an EV end cert, while a less trusted one could be a DV end cert. This would make it easy for the wallet to distinguish between the two, and they are both valid certs. Another way is to get the pubKey into the cert attributes, such as encoding the pubKey or a fingerprint of the pubKey, as a Subject Alternate Name, which would mean that the attacker would need to get their own cert to change the address.On the wallet side, it comes down to additional validation code paths that get triggered by detection logic. For example, if you pass PubKey and InvoiceID in the Payment Request, the wallet needs to know if it should check for a Subject Alternate Name in the cert for a fingerprint of the PubKey, how the fingerprint is calculated, and then verify the Address is indeed PubKey * InvoiceID. The author suggests the idea of 'You have paid this recipient 4 times,' but also agrees on the crying wolf due to expiration or revocation.The author leans towards writing a prototype using a single cert with a fingerprint of PubKey in the Subject Alternate Name, and getting PubKey and InvoiceID in the Payment Request. They plan to confirm v1 doesn't do anything to prevent this from working in a clean, extensible manner, and prototype it to see how the new Payment Request is handled transparently by v1 code.</summary>
+    <published>2013-04-25T19:12:37+00:00</published>
+  </entry>
+</feed>

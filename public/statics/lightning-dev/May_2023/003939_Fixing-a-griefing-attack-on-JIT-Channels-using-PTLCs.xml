@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fixing a griefing attack on JIT Channels using PTLCs</title>
+  <updated>2023-06-03T13:02:45.707677+00:00</updated>
+  <author>
+    <name>Ben Carman 2023-05-09 19:07:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fixing a griefing attack on JIT Channels using PTLCs</title>
+    <updated>2023-06-03T13:02:45.707677+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-May/003939.html" rel="alternate"/>
+    <summary>A potential griefing attack that could occur on LSPs that provide Just-In-Time channels has been highlighted by Tony Giorgio to benthecarman. The attack is initiated when the LSP receives payment and then opens a 0-conf channel to the client, who in turn cannot claim the payment. This results in the LSP not getting paid while the client gets a free inbound lightning channel. The suggested solution to this issue is using PTLCs. Instead of broadcasting the funding transaction to the mempool, the LSP can sign it using adaptor signatures locked to the same secret as the invoice. The client can then get the funding txid from the LSP and perform the PTLC dance with them based on the funding transaction. If all goes well, the LSP can give the funding transaction signed using adaptor sigs to the client, who can decrypt the signatures and broadcast the transaction. The LSP can extract the secret they need to claim the payment once they find the transaction in the mempool. This process makes claiming the payment and opening the channel atomic so that the client can't grief the LSP.</summary>
+    <published>2023-05-09T19:07:09+00:00</published>
+  </entry>
+</feed>

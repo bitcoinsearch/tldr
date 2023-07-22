@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Request: OP_CHECKTXOUTSCRIPTHASHVERIFY</title>
+  <updated>2023-06-13T15:06:58.822096+00:00</updated>
+  <author>
+    <name>kim juan 2018-10-17 06:58:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Request: OP_CHECKTXOUTSCRIPTHASHVERIFY</title>
+    <updated>2023-06-13T15:06:58.822096+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-October/016450.html" rel="alternate"/>
+    <summary>The email thread discusses the possibility of a new opcode, OP_CHECKTXOUTSCRIPTHASHVERIFY, for the Bitcoin scripting system that allows a transaction output to be spendable only in a predefined manner. It is suggested that this could be a specific instance of "covenants". There are plans to possibly include OP_CHECKSIGFROMSTACK, which would allow covenants much more generally but with more complex SCRIPT. The specification of the behavior of the opcode is P2SH-focused and is unuseable for SegWit, but it can instead be made a SegWit-only opcode instead. The proposed OP_CHECKTXOUTSCRIPTHASHVERIFY will succeed if either it is a P2WSH whose SegWit version and hash, when concatenated together, are equal to the stack top or it is a P2WSH or P2SH-P2WSH that is the same as the transaction output being spent. Otherwise, if any output does not match either of the above, this operation will fail. The email also includes a sample use case where Acme has an ordinary key pair and a secure key pair. The private key of the secure key pair will never expose itself until the moment it needs to revoke the transaction of the ordinary key pair. The only way to spend its outputs from this ThisRedeemScript is to forward it to NextRedeemScript. Even if the original key pair is compromised, the attacker can only spend it this way and has to publish the transaction. NextRedeemScript is time-locked. Acme can monitor for unauthorized transactions and react within the sequence-defined duration. The combination of two key pairs as one multisig can spend the output immediately regardless of the timelock. The email concludes stating that CSV and CTLV already laid the groundwork for retroactive invalidation showcased in innovative protocols such as HTLC of lightning network. As illustrated from the sample use case, there are other classes of problems that may require retroactive invalidation in different and less-interactive ways from channels. Most of those problems require a primitive opcode to influence how the output can be spent. If the use case works as expected, attacks will be less rewarding.</summary>
+    <published>2018-10-17T06:58:10+00:00</published>
+  </entry>
+</feed>

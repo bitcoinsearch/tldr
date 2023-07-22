@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Normal operation questions</title>
+  <updated>2023-05-23T17:02:24.918521+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-02-15 23:13:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Normal operation questions</title>
+    <updated>2023-05-23T17:02:24.918521+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-February/003473.html" rel="alternate"/>
+    <summary>In a single-hop payment scenario between Alice and Bob over a single channel, Benjamin Weintraub had a couple of questions about the Normal Operation protocol. Firstly, he wanted to know why multiple sources suggest that after Alice sends the `update_add_htlc`, she should send the `commitment_signed` first, before Bob. It was explained that while it is not necessary for her to do so, as long as she doesn't revoke the old state before Bob commits to the new state, there shouldn't be a problem. However, if Alice is forwarding the HTLC and Bob's side of the channel has been dormant, then it's in her best interest to propose a new state immediately. Concurrent signatures aren't an issue, but will generate additional state transitions for both sides to have the exact same set of locked-in HTLCs.Secondly, he asked why both parties need to exchange `commitment_signed` and `revoke_and_ack` messages again after Bob sends the `update_fulfill_htlc`. The reason for this is that once Bob learns of the pre-image, he can go to chain if he wants to claim the HTLC, but that would be slower and cost more in chain fees than doing an update off-chain to settle the HTLC from the point of view of the commitment transaction of both parties. Therefore, both sides exchange those messages to update their commitment state off-chain. However, once Alice receives the pre-image, in a multi-hop scenario, she can opt to not wait for the full exchange and instead pipeline the pre-image back upstream in the route, which can reduce perceived user latency for payments.</summary>
+    <published>2022-02-15T23:13:47+00:00</published>
+  </entry>
+</feed>

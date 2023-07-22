@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Bech32 weakness and impact on bip-taproot addresses</title>
+  <updated>2023-05-20T21:04:16.410716+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2019-11-07 22:35:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Bech32 weakness and impact on bip-taproot addresses</title>
+    <updated>2023-05-20T21:04:16.410716+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-November/017443.html" rel="alternate"/>
+    <summary>Pieter, a developer of bitcoin, has posted a message on the Bitcoin-dev mailing list addressing a mutation weakness in bech32. Specifically, when a bech32 string ends with a "p", inserting or erasing "q"s right before that "p" does not invalidate it. While insertion/erasure robustness was not an explicit goal, this is very much not by design, and this specific issue could have been made much less impactful with a slightly different approach. The mutation weakness has little effect on the security of P2WPKH/P2WSH addresses, as those are only valid for specific lengths. However, Pieter is concerned that this property may influence design decisions around bip-taproot, as was brought up in the review session past Tuesday. In the current draft, witness v1 outputs of length other than 32 remain unencumbered, which means that for now such an insertion or erasure would result in an output that can be spent by anyone. If that is considered unacceptable, it could be prevented by outlawing v1 witness outputs of length 31 and 33.Pieter apologizes for not catching this issue earlier and asks for thoughts from the community regarding preventing such issues in the future.</summary>
+    <published>2019-11-07T22:35:42+00:00</published>
+  </entry>
+</feed>

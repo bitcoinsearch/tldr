@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A proposal for up-front payments.</title>
+  <updated>2023-06-02T21:09:19.101120+00:00</updated>
+  <author>
+    <name>Rusty Russell 2019-11-06 02:32:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A proposal for up-front payments.</title>
+    <updated>2023-06-02T21:09:19.101120+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-November/002289.html" rel="alternate"/>
+    <summary>Olaoluwa Osuntokun has been mulling over alternatives to prepaid HTLCs for a few years but none of them seem to resolve the series of routing related incentive issues that prepaid HTLCs would. For messaging, both Offers and Joost's WhatSat should be done over HORNET, so there is no need to introduce a new set of internal protocol level messages whenever there is a new control/signaling need. Instead, there would be a control/signal channel (give me routes, invoices, sign this, etc.), and a payment channel (HTLCs as used today). The prepay amount should be signaled in the update add message instead of adding an HTLC which causes a push of a number of msat on commitment_signed (new field), and a hash, as it allows HTLCs to carry a heterogeneous set of prepay amounts. In addition, a new onion field is needed to signal the incoming amount the node should have received (allows them to detect deviations in the sender's intended route). Failing shouldn't return the prepay amount; otherwise, extending long-lived HTLCs then canceling them at the last minute is still costless. This costlessness of adding an HTLC to a remote commitment is the biggest incentive flaw that exists today in the greater routing network.Nodes should be able to signal a new coefficient used to scale the prepay fee as a function of the CLTV value of the incoming HTLC through the extended channel update message to allow nodes to eliminate a number of costless attacks possible today on the routing network. With this addition, senders need to pay to add an HTLC to a remote commitment transaction (fixed base cost) and also need to pay a variable rate that scales with the duration of the proposed outgoing CLTV value (senders don't prepay to themselves). Once introduced, loop attacks and the like are no longer free to launch, and nodes can dynamically respond to congestion in the network by raising their prepay prices.</summary>
+    <published>2019-11-06T02:32:29+00:00</published>
+  </entry>
+</feed>

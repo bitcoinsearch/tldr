@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+  <updated>2023-06-03T02:49:41.726682+00:00</updated>
+  <author>
+    <name>Rusty Russell 2020-10-20 23:40:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+    <updated>2023-06-03T02:49:41.726682+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002860.html" rel="alternate"/>
+    <summary>The conversation between Christian Decker and Rusty revolves around the issue of dynamic updates in the current system. The turn-taking approach has a known state for fee changes, but it becomes invalid if incoming changes are not allowed under the new fee regime. However, this only affects changes that result in other changes no longer being applicable. To make dynamic changes in the current system, you need to make them the same way we make fee changes: first remote, then local (once they ack). This means you have to handle the cases where this causes the commit tx to not meet the new restrictions. Rusty points out that the problem still exists where you propose a fee change you can no longer afford because the other side is also adding things. They can just refuse to reflect the fee in that case. The remaining edge cases where changes can become invalid if they are in flight can be addressed by bouncing the change through the non-leader. It adds latency but these synchronization points are rare and not on the critical path when forwarding payments. The turn-based approach has an optimal situation for a non-busy channel, but it results in dead-air if both sides have a constant stream of changes to add. So we'd likely have to add a timeout to defer giving up the token, to counter dead-air, further adding delay to the changes from the other end, and adding yet another parameter. In contrast, the leader-based approach allows both parties to keep queuing updates without silent times to transferring the token from one end to the other.Christian Decker sways towards the leader-based approach, but it needs new wire msgs to indicate "these are your proposals I'm reflecting to you."</summary>
+    <published>2020-10-20T23:40:48+00:00</published>
+  </entry>
+</feed>

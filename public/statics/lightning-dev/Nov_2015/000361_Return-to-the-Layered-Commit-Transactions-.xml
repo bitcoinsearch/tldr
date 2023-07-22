@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Return to the Layered Commit Transactions?</title>
+  <updated>2023-05-18T15:58:21.436202+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-11-27 21:27:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Return to the Layered Commit Transactions?</title>
+    <updated>2023-05-18T15:58:21.436202+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000361.html" rel="alternate"/>
+    <summary>The email conversation between Anthony Towns and Rusty Russell discusses the calculations necessary to determine the timeout on outgoing HTLC. The timeout is determined by several factors such as T, the timeout in the HTLC; d, the CSV delay in the HTLC; n, how long it takes to be confident someone else can't double spend an input to the transaction and f, how long it takes for transactions to get the first confirmation given how much fee is paid.If the HTLC has not been resolved off-chain at time T-d-f, one needs to publish the commitment transaction, which will hit the chain at time T-d. At time T, both the CTLV and CSV clauses are satisfied so one can spend it. One should attempt to do so immediately. The tx will be confirmed at time T+f. At time T+f+n, one will be confident that the tx is safe. Bob wants to work out the timeout to set on the outgoing HTLC, assuming he knows Alice's f, call it f_a; Bob knows the CSV delay on his channel with Alice, call it d_a; Bob knows the CSV delay on his channel with Carol, call it d_c; Bob knows his own f and n; Bob knows the timeout on the incoming HTLC, T_a. In order to keep the channel with Alice open, he needs to resolve the outgoing HTLC by time T_a-d_a-f_a. The time he's sure his outgoing HTLC is done is T_b+f+n. So, T_b+f+n is now or there is no point forwarding the HTLC since he'd have to close the channel immediately and it is now + d + f.</summary>
+    <published>2015-11-27T21:27:42+00:00</published>
+  </entry>
+</feed>

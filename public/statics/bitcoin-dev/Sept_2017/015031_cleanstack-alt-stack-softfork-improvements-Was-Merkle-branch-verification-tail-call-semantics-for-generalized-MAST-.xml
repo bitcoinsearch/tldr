@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>cleanstack alt stack &amp; softfork improvements (Was: Merkle branch verification &amp; tail-call semantics for generalized MAST)</title>
+  <updated>2023-05-20T03:58:11.687936+00:00</updated>
+  <author>
+    <name>Johnson Lau 2017-09-21 03:58:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>cleanstack alt stack &amp; softfork improvements (Was: Merkle branch verification &amp; tail-call semantics for generalized MAST)</title>
+    <updated>2023-05-20T03:58:11.687936+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-September/015031.html" rel="alternate"/>
+    <summary>In an email conversation between Mark Friedenbach and Johnson Lau, they discuss the possibility of using a new script version for every new op code that is added to avoid confusion. Johnson suggests moving the script version to the witness, which Friedenbach clarifies as having two separate version values - one in the scriptPubKey and another in the witness which gates functionality in script or whatever else is used by that witness type. The “script version” field should be renamed “witness type” as it will only be used to encode how to check the witness commitment in the scriptPubKey against the data provided in the witness. Upgrades and improvements to the features supported by those witness types won’t require new top-level witness types to be defined. Defining a new opcode, even one with modifies the stack, doesn’t change the hashing scheme used by the witness type. Friedenbach also suggests that v0,32-bytes should have hashed the top two values, one of which would have been the real script version. This could be fixed however, even without introducing a new witness type. Do a soft-fork upgrade that checks if the witness redeem script is push-only, and if so then pop the last push off as the script version (&gt;= 1), and concatenate the rest to form the actual redeem script. v1,32-bytes would then be used for a template version of MAST, or whatever other idea comes along that fundamentally changes the way the witness commitment is calculated. Johnson agrees with Friedenbach's suggestion and reiterates that they should use v1, 32-byte to define the basic structure of Merklized Script and define the script version inside the witness.</summary>
+    <published>2017-09-21T03:58:05+00:00</published>
+  </entry>
+</feed>

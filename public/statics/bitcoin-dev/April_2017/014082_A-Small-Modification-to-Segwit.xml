@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Small Modification to Segwit</title>
+  <updated>2023-06-12T00:00:48.999371+00:00</updated>
+  <author>
+    <name>Jimmy Song 2017-04-08 00:05:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Small Modification to Segwit</title>
+    <updated>2023-06-12T00:00:48.999371+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/014082.html" rel="alternate"/>
+    <summary>Jimmy Song proposed a modification to Gregory Maxwell's proposal regarding ASICBoost. The modified proposal precludes covert ASICBoost, but leaves overt ASICBoost untouched. Overt ASICBoost requires grinding on the version bits of the block header instead of the Merkle Root, which is likely more efficient and requires less resources. The proposal suggests changing the 32-bit version field in the header to a nonce-space so miners can use it for overt ASICBoost, while moving the 32-bits to the Coinbase transaction as part of the witness commitment. The witness commitment goes from 38 bytes to 42 bytes, with the last 4 bytes being used as the version bits in the block header previously. The witness commitment becomes required as per Gregory Maxwell’s proposal. The reasoning behind this modification is that it brings ASICBoost out into the open. Covert ASICBoost becomes much more costly, while overt ASICBoost is now encouraged. The change can be deployed relatively quickly, and most of the Segwit testing stays valid. Additionally, there will not be an extra burden on upgraded light clients because they will need to get the Coinbase tx + Merkle proof to validate Segwit transactions anyway.</summary>
+    <published>2017-04-08T00:05:16+00:00</published>
+  </entry>
+</feed>

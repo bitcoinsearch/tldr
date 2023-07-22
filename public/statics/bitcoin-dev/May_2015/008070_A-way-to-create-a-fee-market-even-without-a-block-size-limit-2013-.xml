@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A way to create a fee market even without a block size limit (2013)</title>
+  <updated>2023-06-09T20:34:36.378890+00:00</updated>
+  <author>
+    <name>Sergio Lerner 2015-05-10 20:45:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A way to create a fee market even without a block size limit (2013)</title>
+    <updated>2023-06-09T20:34:36.378890+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/008070.html" rel="alternate"/>
+    <summary>Two years ago, Sergio Lerner presented a new way to create a fee market that does not depend on the blockchain limit. The proposal requires a hardfork but has minimum impact in the code and economics. The solution is to require that the set of fees collected in a block has a dispersion below a threshold using the Coefficient of Variation. If the CoVar is higher than a fixed threshold, the block is considered invalid. This means that if there are many transactions containing high fees in a block, then free transactions cannot be included. The core devs should tweak the transaction selection algorithm to take into account this maximum bound.Using this modification, spamming users would require higher fees, only if the remaining users in the community raise their fees. And miners won't be able to include enormous amounts of spamming transactions. As miners are forced to keep the CoVar below the threshold, if people raise the fees to confirm faster than spamming txs, automatically spamming txs become less likely to appear in blocks, and fee-estimators will automatically increase future fees, creating the desired feedback loop. Because if we increase the block size, miners that do not care about the fee market won't be able to fill the block with spamming txs and destroy the market that is being created.An attacker would need to spend a high amount in fees to prevent transactions with low fees from being included in a block. However, a formal analysis would be required. It does not force miners to run more complex algorithms such as linear programming to find the optimum tx subset. But it is seen as a positive stimulus for researchers to develop better tx selection algorithms.</summary>
+    <published>2015-05-10T20:45:32+00:00</published>
+  </entry>
+</feed>

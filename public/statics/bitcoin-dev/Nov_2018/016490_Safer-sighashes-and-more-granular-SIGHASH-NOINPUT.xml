@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-05-20T18:01:22.225571+00:00</updated>
+  <author>
+    <name>Anthony Towns 2018-11-20 20:29:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-05-20T18:01:22.225571+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-November/016490.html" rel="alternate"/>
+    <summary>Pieter Wuille, a Bitcoin Core developer, proposed three new sighash flags called SIGHASH_NOINPUT, SIGHASH_NOFEE and SIGHASH_SCRIPTMASK, along with the addition of a new opcode called OP_MASK. The sighash is computed like in BIP143, but with certain modifications: if SIGHASH_SCRIPTMASK is present, for every OP_MASK in scriptCode the subsequent opcode/push is removed; the scriptPubKey being spent is added to the sighash unless SIGHASH_SCRIPTMASK is set; the transaction fee is added to the sighash unless SIGHASH_NOFEE is set; and hashPrevouts, hashSequence and outpoint are set to null when SIGHASH_NOINPUT is set. NOINPUT effectively implies ANYONECANPAY. The proposal also suggests treating two classes of options affecting the input and output side respectively. For the output, one can choose either NONE, SINGLE or ALL while for the input, one can use PARTIALSCRIPT, KNOWNSCRIPT, KNOWNTX or ALL_INPUTS. A flag, NOFEE, has also been suggested to not commit to the fee. However, NONE without NOFEE doesn't make much sense. It might also be useful to warn or error on signing when asking for certain combinations, and even fail on validating them. OP_MASK seems a bit complicated as it might mask a script that looks complex, but it would be fine if the rule is "for every OP_MASK in scriptCode the *immediately* subsequent opcode/push is removed (if present)". Committing to the scriptCode feels like it reduces the "hackiness" of NOINPUT.</summary>
+    <published>2018-11-20T20:29:04+00:00</published>
+  </entry>
+</feed>

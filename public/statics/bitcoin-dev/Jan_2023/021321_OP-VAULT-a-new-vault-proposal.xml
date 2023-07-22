@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_VAULT: a new vault proposal</title>
+  <updated>2023-06-16T03:48:26.027735+00:00</updated>
+  <author>
+    <name>James O'Beirne 2023-01-09 20:32:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_VAULT: a new vault proposal</title>
+    <updated>2023-06-16T03:48:26.027735+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-January/021321.html" rel="alternate"/>
+    <summary>The email conversation discusses the proposal for a new design called OP_VAULT that focuses on creating a safer way to store Bitcoin without getting hung up on trying to solve the general problem of covenants. James O'Beirne has written a paper summarizing his findings and the resulting proposal, along with an accompanying draft implementation. The proposal aims to provide users with the safety benefits of vaults while avoiding the issue of bloated scriptPubKeys, complexity, and social-consensus quagmire regarding which covenant proposal to deploy. The OP_UNVAULT scriptPubKey must be a bare script, and it must contain the target hash, which is used when validating the spend. There is no way to make this compatible with scripthashes of any kind since the script interpreter has no insight into the OP_UNVAULT outputs' "execution script," and one of the arguments of OP_UNVAULT is freeform, resulting in an unpredictable output scriptpubkey. Greg Sanders suggests requiring a single additional witness data item during OP_VAULT spend (for unvault path), mandating the target hash to be included in the witness stack as an input to OP_VAULT opcode, and transaction introspection then checks to make sure the witness item and the corresponding output script template match the expected. This would only be necessary for the unvaulting path, not for the recovery path.The proposed design delivers the safety benefits of vaults to users without getting hung up on trying to solve the general problem of covenants. The accompanying draft implementation can be found on Github, and James may work on a BIP if there's interest.</summary>
+    <published>2023-01-09T20:32:34+00:00</published>
+  </entry>
+</feed>

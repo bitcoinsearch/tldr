@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal to Remove BIP35 P2P 'mempool' Message</title>
+  <updated>2023-06-16T17:27:50.015224+00:00</updated>
+  <author>
+    <name>David A. Harding 2023-04-18 16:57:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal to Remove BIP35 P2P 'mempool' Message</title>
+    <updated>2023-06-16T17:27:50.015224+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-April/021563.html" rel="alternate"/>
+    <summary>The `savemempool` RPC can be used to load the mempool directly into a client for trusted users. In the past, lightweight clients loaded a BIP37 filter and requested `mempool` using `getdata`. The node would then only send transactions matching the filter and false positives to the client. This approach reduced the amount of data transferred, which is crucial for lite clients with limited bandwidth or metered connections. During a backlog, the mempool contents in the `savemempool` format are about 300 MB, which is too much to transfer to lite clients.Although BIP37 and BIP35 interfaces are problematic, it's essential to build interfaces that enable people to use third-party wallets with their trusted nodes easily. It's possible to use `getheaders`, BIP157/8, and `getdata(block)` with their nodes to learn about all confirmed transactions affecting their wallet. Lite clients using a trusted node should receive a replacement for BIP35/7 support before those protocols are removed. Support for BIP324 and countersign should also be added to allow an authenticated and encrypted connection from a lite client to a trusted node. An authenticated connection is necessary to be secure, and it should ideally be encrypted.</summary>
+    <published>2023-04-18T16:57:41+00:00</published>
+  </entry>
+</feed>

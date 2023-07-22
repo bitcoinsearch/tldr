@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Disclosure: consensus bug indirectly solved by BIP66</title>
+  <updated>2023-05-19T20:54:52.977286+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2015-07-28 14:27:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Disclosure: consensus bug indirectly solved by BIP66</title>
+    <updated>2023-05-19T20:54:52.977286+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-July/009697.html" rel="alternate"/>
+    <summary>Pieter Wuille, a Bitcoin developer, recently disclosed a vulnerability that he discovered in September 2014. The vulnerability, which could have led to forking of the blockchain between nodes, became unexploitable when BIP66's 95% threshold was reached earlier this month. A specially-crafted transaction could have opened up such security flaw on systems using OpenSSL on a 32-bit system and on 64-bit Windows systems, as well as those that use some non-OpenSSL codebases for parsing signatures.Bitcoin's signature encoding rules are ASN.1 BER encoded, utilizing a complex standard that allows many different encodings for the same data. Since Bitcoin Core 0.8, a standardness rule has been in effect that only allowed subset of encodings (DER) for relay and mining, even though any BER remained valid in the blockchain - at least in theory. However, in practice, BER has many weird edge cases, and no single cryptographic codebase can parse all of them correctly, including OpenSSL, Crypto++, BouncyCastle, btcec, and libsecp256k1 library.The vulnerability is related to the signature encoding rules. One of the features of BER is the ability for internal structures to have a length descriptor whose size itself is up to 126 bytes. A block chain containing a transaction with a valid signature using such a 5-byte length descriptor would be accepted by some systems and not by others, resulting in a fork if it were mined into a block.Bitcoin Core 0.10.0 was released with support for BIP66, which enabled a consensus rule for strict DER signatures in the blockchain. This solved the vulnerability and opens the door to using non-OpenSSL signature verification in the near future.</summary>
+    <published>2015-07-28T14:27:18+00:00</published>
+  </entry>
+</feed>

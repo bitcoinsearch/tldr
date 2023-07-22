@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP proposal: No chaining off replaceable transactions</title>
+  <updated>2023-06-12T03:16:20.788565+00:00</updated>
+  <author>
+    <name>Luke Dashjr 2017-07-02 21:10:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP proposal: No chaining off replaceable transactions</title>
+    <updated>2023-06-12T03:16:20.788565+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-July/014681.html" rel="alternate"/>
+    <summary>A proposal has been made to increase the utility of BIP125, which allows transactions to opt into replaceability. The primary use case is to create a more efficient fee market place. However, this goal is hindered when the receiver of a transaction spends from the unconfirmed output. This exposes the sender to the awkward position of either having to pay an effectively unbounded amount of money as per the BIP125 rules or not fee bump at all. This situation is especially problematic in the case of batched sends with multiple independent receivers. In order to support a healthy fee marketplace, this policy aims to make transactions that spend an unconfirmed BIP125 output non-standard by specifying a max chain depth of 1 for any BIP125 transactions. The impact of this policy change is that receivers of BIP125 transactions will need to wait until the transaction has confirmed before spending from it. This will not be significantly different than it is currently since receivers need to monitor for replacements. If senders want to make further transactions before the BIP125 transaction confirms and need to utilize the change of the transaction, they will need to replace the transaction with one that makes the other send in "pass through" style or first finalize the BIP125 transaction and then chain from the spend normally. It is important to note that this policy change is local and does not fall under BIP material. Therefore, those who wish to suggest this policy change should implement it and open a merge/pull request on the applicable project.</summary>
+    <published>2017-07-02T21:10:19+00:00</published>
+  </entry>
+</feed>

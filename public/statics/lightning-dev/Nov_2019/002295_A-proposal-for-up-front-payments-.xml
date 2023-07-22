@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A proposal for up-front payments.</title>
+  <updated>2023-05-23T02:22:48.190119+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-11-07 11:37:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A proposal for up-front payments.</title>
+    <updated>2023-05-23T02:22:48.190119+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-November/002295.html" rel="alternate"/>
+    <summary>In a discussion between Rusty Russell and AJ, the former was discussing his proposal for onion routing in Lightning Network. Alice sends an HTLC to Dave via Bob then Carol. Alice generates a nonce AAAA, and calculates H^25(AAAA) = ZZZZ. She creates an onion, and sends the HTLC to Bob, revealing ZZZZ and 6,TTTT to Bob. Bob checks H^6(TTTT)=ZZZZ. If not, Bob refunds the 2500 msat, and fails the HTLC immediately. Otherwise, Bob passes the onion on to Carol, with 1900 msat and TTTT; Carol unwraps the onion revealing 15,EEEE. Carol checks H^15(EEEE)=TTTT, and fails the route if not, refunding 1900msat to Bob. After the successful route, Dave passes 2,CCCC and 200msat back to Carol, who validates and continues passing things back. AJ also suggested an alternative approach by using the prepayment hashes themselves, so you generate the nonce AAAA as the value you'll send to Dave then hash it repeatedly to get BBBB..QQQQ. If you made pow(a,b) be SHA256(a,b,shared-onion-key) the privacy will be preserved, but also mean you can't meaningfully grind unfairly cheap routing except for very short paths. The spitballed formula is "16 - X/4" where X is number of zero bits in some PoW-y thing. AJ mentioned that Alice had to overpay since anything else is very revealing of path length and implies a refund. Nonetheless, a path length of 20 is just paying for bandwidth for maybe 200kB of total traffic which at $1/GB is 2% of 1 cent, which doesn't seem that worth refunding (except for really tiny micropayments, where paying for payment bandwidth might not be feasible at all).</summary>
+    <published>2019-11-07T11:37:35+00:00</published>
+  </entry>
+</feed>

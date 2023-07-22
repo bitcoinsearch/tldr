@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Decoy node_ids and short_channel_ids</title>
+  <updated>2023-06-02T22:46:35.905479+00:00</updated>
+  <author>
+    <name>Rusty Russell 2020-02-05 01:28:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Decoy node_ids and short_channel_ids</title>
+    <updated>2023-06-02T22:46:35.905479+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002501.html" rel="alternate"/>
+    <summary>Bastien Teinturier has expressed his concerns regarding invoice fraud in Lightning Network. He explains that if Mallory gets two invoices, she can use the wrong Payment Identifier(P_I) from one of the invoices for Bob to forward an HTLC with a different route hint. Bastien believes that this attack is interesting and since payment_secret and decoy_key are both used to derive the decoy_scid, his proposal defends against this attack. However, he concedes that he may be missing something and urges others to verify his proposal.Mallory can use this same attack even if Bastien's proposal is implemented. She can include the P_I from the wrong invoice for Bob to forward an HTLC. According to Bastien, this cannot be defended against by the current RFC pull request. Bob will forward an HTLC that uses N1 with C2 if both invoices are valid because Bob has no way of knowing which node ID(N1 or N2) was used in the onion. To avoid this, Alice needs to share her decoy_node_ids with Bob (and the mapping to a decoy_scid). Rusty suggests that Bob can include the scid he used in the update_add_htlc message so that Alice can check. Rusty expresses concern about custodial lightning services restricting what they will pay to due to immense KYC pressure. He prefers a system that doesn't add any requirements on the payer.</summary>
+    <published>2020-02-05T01:28:43+00:00</published>
+  </entry>
+</feed>

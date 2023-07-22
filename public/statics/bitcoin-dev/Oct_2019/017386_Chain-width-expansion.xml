@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Chain width expansion</title>
+  <updated>2023-06-13T21:48:51.425687+00:00</updated>
+  <author>
+    <name>Braydon Fuller 2019-10-11 21:24:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Chain width expansion</title>
+    <updated>2023-06-13T21:48:51.425687+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-October/017386.html" rel="alternate"/>
+    <summary>In an email thread, David A. Harding discusses a proposed solution for DoS attacks that does not require enabling or maintaining checkpoints and provides improved security. He mentions an alternative solution proposed by Gregory Maxwell to raise the minimum difficulty with discussion links in IRC conversations and Bitcoin Core changes like PR #9053 adding minimum chain work and assumed-valid change added in Bitcoin Core 0.14.0. David then gives an overview of the minimum difficulty proposal which suggests having a new consensus rule to not fork or accept headers below a minimum difficulty once the best chain work is achieved at release time of the software. This would be instead of the rule to not fork before the last checkpoint as checkpoints are removed. The proposal has advantages over the existing checkpoint solution as it does not require checkpoints to be enabled and increases the cost of the attack without checkpoints. Long header chains would need to be built using this minimum difficulty rather than the current lowest difficulty of the genesis block.However, there are a few caveats with this approach. Nodes are vulnerable during the initial sync when joining the network until the minimum chainwork is achieved if the initial loader peer is the attacker. To mitigate this, there could be a minimum chainwork defined based on the current chainwork but this could also prevent nodes from joining the network. A contentious hardfork could leave minority hash power without the ability to softfork away without agreeing on a hardfork, and it requires period consensus changes to continue to maintain. David thinks that the solution proposed in the Bitcoin Chain Width Expansion paper solves those issues by limiting chain width and throttling based on chainwork instead of rejecting blocks based on the minimum difficulty.</summary>
+    <published>2019-10-11T21:24:27+00:00</published>
+  </entry>
+</feed>

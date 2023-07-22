@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Optional "wallet-linkable" address format - Payment Protocol</title>
+  <updated>2023-06-06T19:00:03.631476+00:00</updated>
+  <author>
+    <name>Alan Reiner 2013-06-19 14:39:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Optional "wallet-linkable" address format - Payment Protocol</title>
+    <updated>2023-06-06T19:00:03.631476+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-June/002780.html" rel="alternate"/>
+    <summary>In an email conversation between Timo Hanke and Alan, Timo brings up a subtlety related to the payment protocol. Suppose the payer wants to pay a destination address called "destination," and the payee has already spent the output, which means that the public key corresponding to "destination" is publicly known. Then anyone can create arbitrary many pairs {PublicKeyParent, Multiplier} that lead to the same "destination." Depending on what the transaction should prove, this could be an unwanted feature. To eliminate ambiguity about PubKeyParent, Timo suggests replacing PubKeyParent * Multiplier[i] with PubKeyParent * HMAC(Multiplier[i],PubKeyParent), but this modification would not be directly compatible with BIP32 anymore. Alan finds it interesting but notes that the most obvious attack vector is the discrete log problem. If someone wants to maliciously prove that a public key they control is related to PubB, they will have to find the multiplier M that solves: M*PubC = PubB. Although it's possible to produce random pairs of {PubX, Mult} pairs that give the same PubB, one won't have the private key associated with those public keys. Overall, the email conversation explores potential vulnerabilities in the payment protocol.</summary>
+    <published>2013-06-19T14:39:04+00:00</published>
+  </entry>
+</feed>

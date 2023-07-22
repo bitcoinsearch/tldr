@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP for Proof of Payment</title>
+  <updated>2023-06-09T22:27:18.961773+00:00</updated>
+  <author>
+    <name>Kalle Rosenbaum 2015-06-15 11:59:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP for Proof of Payment</title>
+    <updated>2023-06-09T22:27:18.961773+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-June/008687.html" rel="alternate"/>
+    <summary>The Proof of Payment (PoP) protocol is a method used to prove that a payment has been made without revealing any personal information. The PoP can be useful in several use cases, such as pre-paid hotel rooms, online video rental services, and parking lots where the car authenticates itself using PoP. Kalle Rosenbaum proposed the PoP output structure where the inputs are the exact same as the transaction to prove, with each sequence number set to 0 and only one output with value 0.To prevent the PoP from being included in a block, the lock_time of the PoP must be set to 499999999, and it must have a random nonce to make it harder to use a stolen PoP. Wallets will have the same ability to make PoPs as they have in making payments, but CoinJoin is not compatible with PoP.The Payment Proof (PoP) protocol outlines the process of proving a payment has been made or received. The sender creates an unsigned PoP for the transaction and asks the user to sign it. The signed UPoP is sent to the recipient. The server receiving the PoP validates it and responds with "valid" or "invalid". There are security considerations when using PoP, such as the possibility of someone intercepting the PoP-request and changing any parameter in it. This can be mitigated by using secure connections. Transaction malleability may cause the server to have another transaction id for a payment than the client's wallet, so wallets should not rely on the transaction id of the outgoing transaction.The proposed changes to the data structure include only one output, the "pop output", and no outputs from T will be copied to the PoP. The pop output will have value 0. The sequence number of all inputs of the PoP will be set to 0, and the lock_time of the PoP is always set to 499999999. A two-byte version field was added to make it extendable. A reference implementation is available on GitHub.</summary>
+    <published>2015-06-15T11:59:45+00:00</published>
+  </entry>
+</feed>

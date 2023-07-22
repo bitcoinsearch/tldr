@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BOLT Draft] Onion Routing Spec</title>
+  <updated>2023-05-19T15:09:26.042970+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2016-08-04 18:24:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BOLT Draft] Onion Routing Spec</title>
+    <updated>2023-05-19T15:09:26.043970+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-August/000559.html" rel="alternate"/>
+    <summary>The discussion revolves around the inclusion of payloads in header HMAC computation with three options available. The first option includes payload in header HMAC computation, which ensures "fail fast" behavior and adds minimal overhead. The second option enables anonymous rendezvous meetings but does not allow per-hop checkable schemes. The final recipient can still provide precompiled headers with the first option, which are protected under mix-header wide MAC. There is a tradeoff between small packets and uniform size, which can be addressed by bucketizing sizes. The taxonomy includes regular, extended, and rendezvous packets with two version bytes for processing the first two types. Timestamps need to be carefully included as they make individual hops collatable. Timestamps rounded up to the closest hour with a sliding window of accepted timestamps of +/- 1 hour can be used, which can be tuned based on the number of HTLCs/sec a large node forwards at peak times. There is a trade-off between window size and node storage overhead. The implications of "denouncing" a node and reputation scheme need to be re-visited in future brainstorming sessions.The conversation discusses the use of HD onion key derivation in Lightning Network and highlights potential vulnerabilities. The proposed solution is to use a new independent root key, authenticated via a signature of a schnorr multi-sign of the channel multi-sig key and the node's identity key. However, this approach could cancel out forward secrecy benefits if an attacker gains access to the root HD pubkey and any of the child derived onion keys. To patch this exploit, each node can generate an independent "onion derivation" key, combined with each of the child onion keys, producing the final child onion key.After precomputation, the OD key should be destroyed, safeguarding the forward secrecy of the scheme in the face of the HD root+child exploit. The conversation also touches on enabling intermediate nodes to reply to a packet, which is difficult due to the inclusion of onion routing. One idea discussed is continuing blinding the ephemeral key on the return path, while having a mechanism to tell the node the total blinding factor along the path so that it can encrypt something in the routing info for the return path. However, this alone is insufficient to allow "backwards" replies to the source without revealing the source's identity.Overall, the conversation suggests a need for further exploration of solutions to increase the robustness of onion routing within the network.</summary>
+    <published>2016-08-04T18:24:25+00:00</published>
+  </entry>
+</feed>

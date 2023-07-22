@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-06-13T15:23:18.984143+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2018-12-13 16:50:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-06-13T15:23:18.984143+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-December/016553.html" rel="alternate"/>
+    <summary>In an email thread, Johnson Lau discussed the root cause of witness weight malleability being opcodes that accept variable size input provided by the puzzle solver. He noted that certain opcodes such as VERIFY, DROP, 2DROP, NIP are not a real problem and that CHECKMULTISIG is fixed by BIP147. However, DEPTH is problematic only if its inputs are not later examined by other opcodes. The MINIMAL_IF policy could protect the liberally example and non-minimal CScriptNum is also banned as BIP62 policy. Lau suggested that for preventing malicious third-party witness bloating, miners should enforce the policy as there is no reason for them to accept size malleated txs which would reduce the usable block space.However, it is not clear cut for miners' policy since they may receive a malleated tx and may not have the non-malleated variant available. Rejecting it outright could be harmful to their bottom line or they can accept malleated tx's and implement an RBF policy that requires sufficient fee rate increases. It is uncertain which policy is better. Lau suggested making MINIMAL_IF and minimal CScriptNum consensus enforced in the next version of Script to eliminate weight malleability in practice.</summary>
+    <published>2018-12-13T16:50:10+00:00</published>
+  </entry>
+</feed>

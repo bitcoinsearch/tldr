@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - The use of tx version field in BIP62 and 68</title>
+  <updated>2023-06-10T18:57:51.269527+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2015-08-08 18:56:32</name>
+  </author>
+  <author>
+    <name>Mark Friedenbach 2015-08-08 18:56:32</name>
+  </author>
+  <author>
+    <name>jl2012 at xbt.hk 2015-08-08 19:18:54</name>
+  </author>
+  <author>
+    <name>jl2012 at xbt.hk 2015-08-08 18:51:17</name>
+  </author>
+  <author>
+    <name>jl2012 at xbt.hk 2015-08-08 18:51:17</name>
+  </author>
+  <author>
+    <name>jl2012 at xbt.hk 2015-08-08 19:18:54</name>
+  </author>
+  <author>
+    <name>jl2012 at xbt.hk 2015-08-08 18:51:17</name>
+  </author>
+  <author>
+    <name>Mark Friedenbach 2015-08-08 18:56:32</name>
+  </author>
+  <author>
+    <name>jl2012 at xbt.hk 2015-08-08 19:18:54</name>
+  </author>
+  <link href="bitcoin-dev/Aug_2015/010044_The-use-of-tx-version-field-in-BIP62-and-68.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2015/010044_The-use-of-tx-version-field-in-BIP62-and-68.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2015/010045_The-use-of-tx-version-field-in-BIP62-and-68.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2015/010043_The-use-of-tx-version-field-in-BIP62-and-68.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2015/010043_The-use-of-tx-version-field-in-BIP62-and-68.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2015/010045_The-use-of-tx-version-field-in-BIP62-and-68.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2015/010043_The-use-of-tx-version-field-in-BIP62-and-68.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2015/010044_The-use-of-tx-version-field-in-BIP62-and-68.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2015/010045_The-use-of-tx-version-field-in-BIP62-and-68.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - The use of tx version field in BIP62 and 68</title>
+    <updated>2023-06-10T18:57:51.269527+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/010044.html" rel="alternate"/>
+    <summary>The Bitcoin Improvement Proposals (BIPs) 62 and 68 have different rules that are applied based on the transaction (tx) version. BIP68 is activated for a tx if its highest bits are 0000, and the third lowest bit is 1. Meanwhile, BIP62 is active for a tx if its highest bits are 0000, and the second lowest bit is 1. The problem with some of these rules is that they could cause trouble when introducing a new script system with a softfork. To solve this issue, it is suggested to divide the tx version field into two parts: the higher four bits and lower 28 bits. With this proposed division, it will be easier to re-purpose the nSequence or take advantage of malleability in the future. Additionally, adopting this change would make the nSequence high bit requirement in BIP68 unnecessary as it could be easily switched off. By dividing the tx version field, the low bits will allow 28 independent BIPs, which should be enough for many years. When these BIPs are exhausted, the high bits can be switched to a different number between 1-15, allowing for the redefinition of the meaning of low bits.The author of an email suggests that the current version selection for transactions is not optimal, as it does not allow selective application of new consensus rules. The author proposes dividing the transaction version field into two parts, with the higher 4 bits indicating which BIPs are active and the lower 28 bits allowing for 28 independent BIPs. This would make it easier to repurpose nSequence or take advantage of malleability in the future. Additionally, the author notes that some current BIPs, such as BIP62 and BIP68, may cause issues when introducing a new script system with a soft fork. The author emphasizes the need for caution when implementing soft forks to ensure enough flexibility for future development.Although version selection is not possible for certain features with higher version numbers, moving forward, all new consensus rules should be applied to transactions without any selective picking and choosing. BIP62 and BIP68 will become mandatory for all v4 transactions. These changes may apply to other draft BIPs with similar interpretations of the transaction version. Overall, the proposed changes would allow for more flexibility and easier adaptation to future developments.</summary>
+    <published>2015-08-08T18:56:32+00:00</published>
+  </entry>
+</feed>

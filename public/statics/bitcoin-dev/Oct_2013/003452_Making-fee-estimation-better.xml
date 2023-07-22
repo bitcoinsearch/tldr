@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Making fee estimation better</title>
+  <updated>2023-06-07T18:14:30.434685+00:00</updated>
+  <author>
+    <name>Gavin Andresen 2013-10-26 00:25:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Making fee estimation better</title>
+    <updated>2023-06-07T18:14:30.434685+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-October/003452.html" rel="alternate"/>
+    <summary>In an email exchange from 2013, Gavin Andresen discussed the fee estimation changes for version 0.9 of Bitcoin. He suggested that a blog post was the best place to go for a high-level overview, while a pull request on GitHub (which is currently closed but will reopen) was the best place to find low-level details and nit-picking discussion. Andresen believed that at its core, fee estimation was about providing a data point or API, which could be used however one sees fit. He suggested that the parameters he would want to see in a "fee estimation" API included 30 minutes versus 24 hours processing time and confidence levels (50%/90%). The pull request adds an 'estimatefees' JSON-RPC api call, which estimates the priority or fee a transaction needs to be relayed across the network and included in the blockchain. The prioritymedian and feemedian values are between 0.0 to 1.0, where 0.0 returns the smallest recently-included-in-a-block priority or fee seen, 1.0 the largest, and 0.5 the median priority or fee for transactions broadcast on the network and included in a block. He added that the globally consistent API wasn't set in stone, and that nodes that have just joined the network and haven't seen enough transactions enter and leave the memory pool will have a different estimate than long-running nodes. However, in his testing, the estimate narrows down very quickly, and it takes longer to see enough free transactions to get a good estimate of the priority needed to get into the free space of a block.Andresen noted that the proposed changes were not intended to be the one true solution for transaction fees and prioritization, and welcomed better mechanisms for estimating fees. He also believed that there was already pressure on transaction fees, with evidence indicating that people/services were starting to include more than the hard-coded fees in the reference implementation to get their transactions confirmed more quickly. He was comfortable with the proposed fee changes and suggested that if the estimation code gets it very wrong, we will see free transactions taking "too long" to confirm, but they'll eventually confirm because priority increases over time.</summary>
+    <published>2013-10-26T00:25:06+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Huge wallets make Bitcoin Core unusable (Daemon+CLI &amp; Qt)</title>
+  <updated>2023-05-22T21:06:12.060525+00:00</updated>
+  <author>
+    <name>micaroni at gmail.com 2022-08-20 14:16:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Huge wallets make Bitcoin Core unusable (Daemon+CLI &amp; Qt)</title>
+    <updated>2023-05-22T21:06:12.060525+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-August/020878.html" rel="alternate"/>
+    <summary>A user with a 5-year-old wallet, containing 2.079.337 transactions, and 446.503 generated addresses, has experienced exponential performance degradation when using the Bitcoin Core client. Most of the commands, such as "getbalance", "walletpassphrase" and "getreceivedbyaddress", timed out, while the CPU was 100% used, making the machine almost unusable. The default configuration of 16 RPC threads and 15 min timeout and some attempt calls per mi did not help. Increasing the timeout and/or the RPC threads in the config file made things worse. Loading the wallet in the "bitcoin-qt" caused everything to become unresponsive, including the system (OS/UI). This is bad because the standard client becomes almost useless for the wallet feature. Wallet Qt is already unpopular among end-users, being slow to first sync, hard to use, and not modern. It becomes useless now also for servers in production, forcing them to use third-party solutions for huge wallets. Currently, the only "solution" for huge wallets is to create a new one and send the funds there from time to time. However, this solution is not elegant and can break old address monitoring, leading to privacy concerns and unifying lots of inputs in a big and expensive transaction. The issue could also potentially become an issue if we have LN nodes that use the Bitcoin Core wallet infrastructure behind to open/close many channels for a long time.The user suggests that if moving the wallet from an HDD to an SSD improved a lot, maybe caching the entire wallet in memory could improve even more, but some code optimization is necessary. The following questions were raised: Can we "optimize" a huge wallet without moving the funds to a new one? Can we improve the cache usage somehow? Is it possible to reduce the wallet size? Can we tell the CLI to ignore old addresses? How to improve the I/O treatment and/or CPU usage in the main thread on Bitcoin-Qt to avoid window freezing on big and huge wallets? If it was not possible to optimize the wallet or the CLI &amp; Qt, can the CLI just warn the user like: "the wallet is becoming too big and slow, execute the command 'archive'"?The user provided several related links to possible bugs, including some issues experienced with loadwallet.</summary>
+    <published>2022-08-20T14:16:53+00:00</published>
+  </entry>
+</feed>

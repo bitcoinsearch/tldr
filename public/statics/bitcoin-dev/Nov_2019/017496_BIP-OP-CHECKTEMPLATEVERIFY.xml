@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP OP_CHECKTEMPLATEVERIFY</title>
+  <updated>2023-06-13T22:29:31.183307+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2019-11-27 21:32:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP OP_CHECKTEMPLATEVERIFY</title>
+    <updated>2023-06-13T22:29:31.184305+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-November/017496.html" rel="alternate"/>
+    <summary>Jeremy discusses concerns with adding a new "global" state variable to the Script interpreter for tracking whether the previous opcode was a push-data operation or not, as it adds complexity for anyone trying to formally model Script semantics. Instead, he suggests making the CHECKTEMPLATEVERIFY operation fail if it isn't preceded by (or alternatively followed by) an appropriate sized (canonical?) PUSHDATA constant, even in an unexecuted IF branch, which allows implementations to consider improper use of CHECKTEMPLATEVERIFY as a parsing error. The BIP draft for OP_CHECKTEMPLATEVERIFY has been refined, and changes include changing the name to something more fitting and acceptable to the community, changing the opcode specification to use the argument off of the stack with a primitive constexpr/literal tracker rather than script lookahead, permitting future soft-fork updates to loosen or remove "constexpr" restrictions, and providing more detailed comparison to alternatives in the BIP, and why OP_CHECKTEMPLATEVERIFY should be favored even if a future technique may make it semi-redundant.RPC functions are under preliminary development to aid in testing and evaluation of OP_CHECKTEMPLATEVERIFY, and improvements to the mempool are being developed to help make it safe to lift some of the mempool's restrictions on longchains specifically for OP_CHECKTEMPLATEVERIFY output trees. Neither of these are blockers for proceeding with the BIP, as they are ergonomics and usability improvements needed once/if the BIP is activated. Prior mailing list discussions and feedback have been incorporated into the design. Jeremy plans to host a review workshop in Q1 2020.</summary>
+    <published>2019-11-27T21:32:51+00:00</published>
+  </entry>
+</feed>

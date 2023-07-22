@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Adding SIGHASH to TXID</title>
+  <updated>2023-06-15T20:40:20.316842+00:00</updated>
+  <author>
+    <name>vjudeu at gazeta.pl 2022-05-07 04:50:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Adding SIGHASH to TXID</title>
+    <updated>2023-06-15T20:40:20.316842+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020432.html" rel="alternate"/>
+    <summary>The article discusses the use of SIGHASH_PREVOUT_XYZ flags to control the flow of transactions and create a stable TXID. Currently, txid:vout is used as a previous transaction output, requiring the use of SIGHASH_ALL to prevent modifications during adding inputs and outputs. However, new sighashes such as SIGHASH_PREVOUT_NONE could allow for the removal of previous transaction outputs and greater control over calculating the txid. By introducing SIGHASH_PREVOUT_XYZ flags for all existing sighashes, including SIGHASH_PREVOUT_NONE, SIGHASH_PREVOUT_SINGLE, SIGHASH_PREVOUT_ALL, and SIGHASH_PREVOUT_ANYONECANPAY, we can apply sighashes to the previous transaction to form a new txid that will be checked during every OP_CHECKSIG-based opcode. SIGHASH_PREVOUT_ALL can be used by default to keep the txid:vout unchanged, while SIGHASH_PREVOUT_SINGLE would commit only to a particular previous transaction output, allowing the addition of new outputs without affecting the replaced txid. SIGHASH_PREVOUT_NONE means no outputs of the previous transaction are checked, but the inputs will be. All three SIGHASH_PREVOUT_XYZ flags can be combined with SIGHASH_PREVOUT_ANYONECANPAY to discard all inputs from the previous transaction except for the input number matching "vout". This method allows for greater control over signatures and prevents invalidation due to changes in unrelated transaction inputs and outputs.</summary>
+    <published>2022-05-07T04:50:12+00:00</published>
+  </entry>
+</feed>

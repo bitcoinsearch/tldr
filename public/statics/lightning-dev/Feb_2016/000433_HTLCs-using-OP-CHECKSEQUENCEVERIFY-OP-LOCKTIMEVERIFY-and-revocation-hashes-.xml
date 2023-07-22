@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>HTLCs using OP_CHECKSEQUENCEVERIFY/OP_LOCKTIMEVERIFY and revocation hashes.</title>
+  <updated>2023-05-23T18:20:57.746416+00:00</updated>
+  <author>
+    <name>CJP 2016-02-08 22:07:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>HTLCs using OP_CHECKSEQUENCEVERIFY/OP_LOCKTIMEVERIFY and revocation hashes.</title>
+    <updated>2023-05-23T18:20:57.746416+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-February/000433.html" rel="alternate"/>
+    <summary>In an old email thread, a potential problem with Lightning Network was identified where Eve could steal funds from Alice. If Eve has two channels with Alice, she could perform a payment to herself routed through Alice with the two channels and not reveal the transaction R value as a payee. This would lead to a timeout on both channels and reverting back to the original situation. Eve spends all her coins on the channel where she was RECEIVING. She then signs and broadcasts the version of the commit transaction that contained the HTLC. However, since revocation pre-images have been exchanged, Alice can immediately spend the HTLC, using either the HTLC-TIMEOUT &amp; SIG-PAYER clause or the REVOCATION-E &amp; SIG A clause, but this is not guaranteed to work. If Eve succeeds in spending the HTLC, Alice can only claim her balance and using the revocation pre-image, claim Eve's balance in the commit transaction. On the other channel, Alice could try to perform the same trick on Eve as Eve did on her, since Alice now has the transaction R value. However, that is not guaranteed to work. Worse: Eve could also have depleted her own balance on that channel, e.g. with a payment to herself through a third party. That way, Alice will never be able to get all the funds that belong to her, and Eve gets more than she deserves.The author suggests adding an OP_CSV to the R-VALUE &amp; SIG-PAYEE clause but acknowledges it would break its legitimate use. The author believes the issue cannot be solved without having a two-transaction set-up, and hence something like SIGHASH_NOINPUT (or maybe SegWitness?). Maybe a "never completely deplete the channel" rule could be a work-around? You could define a maximum for the sum of all active HTLCs in one direction in a commit transaction, and require the other side to always have at least one or two times that maximum as remaining balance. The author requests where can he find an updated design if this issue has already been resolved.</summary>
+    <published>2016-02-08T22:07:53+00:00</published>
+  </entry>
+</feed>

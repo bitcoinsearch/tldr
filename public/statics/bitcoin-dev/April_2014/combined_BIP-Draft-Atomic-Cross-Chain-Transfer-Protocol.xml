@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - BIP Draft: Atomic Cross Chain Transfer Protocol</title>
+  <updated>2023-06-08T22:10:02.951083+00:00</updated>
+  <author>
+    <name>Tier Nolan 2014-04-30 18:03:59</name>
+  </author>
+  <author>
+    <name>Tier Nolan 2014-04-30 20:48:10</name>
+  </author>
+  <author>
+    <name>Luke Dashjr 2014-04-30 18:59:07</name>
+  </author>
+  <author>
+    <name>Tier Nolan 2014-04-30 20:48:10</name>
+  </author>
+  <author>
+    <name>Tier Nolan 2014-04-30 23:02:41</name>
+  </author>
+  <author>
+    <name>Tier Nolan 2014-04-30 20:48:10</name>
+  </author>
+  <author>
+    <name>Tier Nolan 2014-04-30 23:02:41</name>
+  </author>
+  <author>
+    <name>Luke Dashjr 2014-04-30 18:59:07</name>
+  </author>
+  <author>
+    <name>Luke Dashjr 2014-04-30 18:59:07</name>
+  </author>
+  <author>
+    <name>Tier Nolan 2014-04-30 23:02:41</name>
+  </author>
+  <author>
+    <name>Tier Nolan 2014-04-30 18:03:59</name>
+  </author>
+  <author>
+    <name>Tier Nolan 2014-04-30 18:03:59</name>
+  </author>
+  <link href="bitcoin-dev/April_2014/005645_BIP-Draft-Atomic-Cross-Chain-Transfer-Protocol.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2014/005647_BIP-Draft-Atomic-Cross-Chain-Transfer-Protocol.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2014/005646_BIP-Draft-Atomic-Cross-Chain-Transfer-Protocol.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2014/005647_BIP-Draft-Atomic-Cross-Chain-Transfer-Protocol.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2014/005648_BIP-Draft-Atomic-Cross-Chain-Transfer-Protocol.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2014/005647_BIP-Draft-Atomic-Cross-Chain-Transfer-Protocol.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2014/005648_BIP-Draft-Atomic-Cross-Chain-Transfer-Protocol.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2014/005646_BIP-Draft-Atomic-Cross-Chain-Transfer-Protocol.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2014/005646_BIP-Draft-Atomic-Cross-Chain-Transfer-Protocol.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2014/005648_BIP-Draft-Atomic-Cross-Chain-Transfer-Protocol.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2014/005645_BIP-Draft-Atomic-Cross-Chain-Transfer-Protocol.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2014/005645_BIP-Draft-Atomic-Cross-Chain-Transfer-Protocol.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - BIP Draft: Atomic Cross Chain Transfer Protocol</title>
+    <updated>2023-06-08T22:10:02.952042+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005645.html" rel="alternate"/>
+    <summary>On April 30, 2014, Tier Nolan created a BIP for cross-chain atomic transfers due to popular demand. The BIP proposes a sequence of signing transactions labeled as TX0, TX1, and TX2, which requires both parties to sign before the transaction can be completed. However, there are concerns about the feasibility of this proposal, especially since either party could walk away or hold the funds hostage after TX0 is signed but before TX2 is signed. Additionally, the purpose of OP_EQUAL_VERIFY in TX4 is unclear. Nolan's suggestion to use JSON-RPC for negotiation and compressed keys to discourage the use of uncompressed ones is also under consideration. Finally, it is suggested that there should be separate BIPs for the exchange itself and the protocol to negotiate the exchange.In an email exchange on April 30, 2014, Luke Dashjr asked for meaningful identifiers to be used instead of TX0, TX1 etc. and the names were updated accordingly. The bail-in transactions are only signed by one party and kept secret until the refund/payout transactions are properly signed, with a third party needed to mitigate malleability risks. Refund principles similar to payment channels are employed, and TX0 is not broadcast until the refund transactions are complete. A full implementation was planned as the next step, although there was already an implementation of this system available. The purpose of OP_EQUAL_VERIFY in TX4 was explained as a typo. Dashjr suggested separate BIPs for the exchange itself and the protocol to negotiate it, and also recommended compressed keys to discourage use of uncompressed ones. MIME was proposed as a different way of doing things instead of JSON-RPC for the protocol.The author has updated a new version of the protocol for trading between testnet and mainnet. The new version only requires non-standard transactions on one of the two networks. The next step is to implement a simple TCP/RPC server that will enable the protocol to trade between testnet and mainnet. Timeouts of much less than 24 hours should be possible now. In response to Tier Nolan's question, Luke Dashjr explained that the names TX1 and TX2 came from the original thread where he was outlining the idea. He updated the names as per the suggestion. He further explained that the bail in transactions are only signed by one of the parties and kept secret until the refund/payout transactions are all properly signed. There is, however, a malleability risk, hence the need for the 3rd party. It works on the same refund principle as payment channels.Regarding the implementation and testing of the system, the author stated that it is still in draft mode and that there is an implementation of (almost) this system but not by him. A full implementation is the next step. In response to Luke Dashjr's recommendation of changing the protocol from JSON-RPC to some extension of the Payment Protocol, if possible, the author agreed to look into it. Lastly, Luke Dashjr suggested only supporting compressed keys to discourage the use of uncompressed ones, which the author had no objection to.A BIP for cross chain atomic transfers has been created due to popular demand. The previous version required a selector transaction based on if statements, while the new version only requires hash locking. The BIP can be found on GitHub and includes codes for OP_HASH160 OP_EQUAL_VERIFY [public key] OP_CHECKSIG and OP_HASH160 OP_EQUAL_VERIFY OP_N [public key 1] ... [public key m] OP_M OP_CHECK_MULTISIG.</summary>
+    <published>2014-04-30T18:03:59+00:00</published>
+  </entry>
+</feed>

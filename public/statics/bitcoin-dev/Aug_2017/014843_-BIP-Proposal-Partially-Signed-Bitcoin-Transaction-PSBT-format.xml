@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP Proposal] Partially Signed Bitcoin Transaction (PSBT) format</title>
+  <updated>2023-06-12T15:00:15.470613+00:00</updated>
+  <author>
+    <name>Greg Sanders 2017-08-21 18:12:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP Proposal] Partially Signed Bitcoin Transaction (PSBT) format</title>
+    <updated>2023-06-12T15:00:15.471613+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-August/014843.html" rel="alternate"/>
+    <summary>The writer discusses hardware wallet attacks through input ownership omission and suggests a possible solution. They explain that to have hardware wallets do safe automated coinjoins, users need to protect themselves from signing one set of inputs while the other owned set is hidden from the device. This could cost users money as they may end up repeating the same action with the two sets reversed. The writer also notes a more common issue involving Segwit inputs where an attacker can claim certain inputs' value is much lower than it actually is. To fix this problem, the writer consulted with andytoshi and came up with a solution that works for both cases. They propose that when a signing device receives a partially signed transaction, all inputs must come with an ownership proof. For each input ownership proof, the hardware wallet validates each signature over the hashed message, then attempts to "decode" the hash by applying its own 'x'. If the hash doesn't match, it cannot be its own input. Sign for every input that is yours. This solution ensures that the wallet's total "balance" will not go down more than the reported fee. Benefits of this approach include small memory footprint compared to legacy signing, allowing user-interactionless coinjoins without putting funds at risk, the ability to create proofs at any time and collect them at the front of any CoinJoin like protocol, and the ability to pass around these proofs as additional fields for Partially Signed Bitcoin Transactions. The writer also references a standard format proposed for unsigned and partially signed transactions and provides a link to a related thread on hardware wallet BIP drafting.</summary>
+    <published>2017-08-21T18:12:47+00:00</published>
+  </entry>
+</feed>

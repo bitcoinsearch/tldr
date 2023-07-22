@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Suggestion: Solve year 2106 problem by taking timestamps mod 2^32</title>
+  <updated>2023-06-14T15:30:07.402184+00:00</updated>
+  <author>
+    <name>yanmaani at cock.li 2020-09-19 12:36:47</name>
+  </author>
+  <author>
+    <name>yanmaani at cock.li 2020-09-19 12:36:47</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2020-10-16 21:58:20</name>
+  </author>
+  <author>
+    <name>yanmaani at cock.li 2020-09-19 12:36:47</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2020-10-16 21:58:20</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2020-10-16 21:58:20</name>
+  </author>
+  <link href="bitcoin-dev/Sept_2020/018172_Suggestion-Solve-year-2106-problem-by-taking-timestamps-mod-2-32.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2020/018172_Suggestion-Solve-year-2106-problem-by-taking-timestamps-mod-2-32.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2020/018251_Suggestion-Solve-year-2106-problem-by-taking-timestamps-mod-2-32.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2020/018172_Suggestion-Solve-year-2106-problem-by-taking-timestamps-mod-2-32.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2020/018251_Suggestion-Solve-year-2106-problem-by-taking-timestamps-mod-2-32.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2020/018251_Suggestion-Solve-year-2106-problem-by-taking-timestamps-mod-2-32.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Suggestion: Solve year 2106 problem by taking timestamps mod 2^32</title>
+    <updated>2023-06-14T15:30:07.402184+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-September/018172.html" rel="alternate"/>
+    <summary>Bitcoin has timestamp rules to prevent the block timestamp from being lower than the median of the last 11 blocks, greater than the current time plus two hours, or greater than 2^32. Hence, Bitcoin will "die" on or about February 7, 2106, when there is no timestamp below 2^32 that exceeds the median of the last 11 blocks. One proposed solution is to change the rules so that the block timestamp plus k*2^32 may not be lower than the median of the last 11 blocks and may not be greater than the current time plus two hours, where k is an integer with the same value for the calculations of both Rule 1 and Rule 2.This solution would cause a hardfork in 2106, approximately 85.5 years from now, by which time it is hoped that 95% of nodes would have updated. Another proposed solution is to use 64-bit timestamps, but this would break compatibility with other software that has specific expectations of header fields, such as ASICs' firmware, and would cause a hardfork before the date of timestamp overflow. Therefore, this solution is considered less appropriate.User yanmaani suggested an amendment to the timestamp rules in the Bitcoin network by treating block headers as having a 64-bit timestamp. The requirement is that the difference between the timestamp and the median timestamp of the past 11 blocks is at least one and at most 2^32. The higher 32 bits of the timestamp are set equal to the median of the past 11 blocks on deserialization, and if this violates the rule above, it is set one higher. User Pieter believes this solution is worth considering as a Bitcoin Improvement Proposal (BIP) in the future and is in line with what will eventually be addressed.</summary>
+    <published>2020-09-19T12:36:47+00:00</published>
+  </entry>
+</feed>

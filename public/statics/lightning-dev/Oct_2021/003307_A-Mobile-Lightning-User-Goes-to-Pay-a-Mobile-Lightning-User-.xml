@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Mobile Lightning User Goes to Pay a Mobile Lightning User...</title>
+  <updated>2023-05-23T16:42:12.995423+00:00</updated>
+  <author>
+    <name>Matt Corallo 2021-10-13 04:44:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Mobile Lightning User Goes to Pay a Mobile Lightning User...</title>
+    <updated>2023-05-23T16:42:12.995423+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-October/003307.html" rel="alternate"/>
+    <summary>Lightning users on mobile devices face issues when trying to pay or receive payments from other lightning users on mobiles as it requires coordination to ensure that both parties are online at the same time. Though invoices help, some users still prefer to use lightning for tips or accept payments without keeping their phones unlocked and with the app open 24/7. There are a few solutions available but they have drawbacks. Blockstream Greenlight reduces resource requirements, keysend/AMP works for tips but has limitations, lnurl provides an invoice but doesn't help with payment receipt, trusted LSPs can accept payments and forward them later, and untrusted LSPs can send notifications.To solve this problem, a new model is proposed where the sender sends an HTLC with a long CLTV timeout to their own LSP with instructions saying "when you get an onion message telling you nonce B, forward this HTLC, until then, just sit on it". The Tipper sends an onion message to the recipient's LSP saying "hey, when the recipient is online again, use the included reply path to send nonce B to my LSP." When the Recipient comes online, their LSP sends the reply to the Tipper's LSP, causing the Tipper's LSP to forward the original HTLC that the Recipient receives. This solution does not encumber funds for any extended period of time except for the original sender, who wants to send the funds off elsewhere anyway. The lnurl model of a trusted party not reusing invoices so that the Recipient's LSP cannot steal all funds after the first claim sucks, and the PTLCs (Payment Pointers over Lightning Channels) solution is proposed where the sender always adds some random nonce to the PTLC they're paying and sends the recipient a random nonce in the onion. This makes it difficult for anyone to collude to steal the funds.</summary>
+    <published>2021-10-13T04:44:21+00:00</published>
+  </entry>
+</feed>

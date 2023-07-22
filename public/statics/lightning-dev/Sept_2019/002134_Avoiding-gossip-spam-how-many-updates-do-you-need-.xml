@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Avoiding gossip spam: how many updates do you need?</title>
+  <updated>2023-06-02T20:10:07.112368+00:00</updated>
+  <author>
+    <name>Rusty Russell 2019-09-05 06:59:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Avoiding gossip spam: how many updates do you need?</title>
+    <updated>2023-06-02T20:10:07.112368+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-September/002134.html" rel="alternate"/>
+    <summary>The next release of c-lightning will implement a simple filter to suppress gossip that comes too fast. Each message (node_announcement or channel_update) will be allowed once per day on average, with a burst up to 4 times per day. Identical gossip messages will be discarded, except for the timestamp and signature. If people require more frequent updates, they are advised to convey it now. This will avoid scaling issues in the future. With 40,000 channels and 10,000 nodes, the limit is around 90,000 12 MB per day.Other implementations include using gossip_queries for backfilling, no longer asking for the last 24 hours of gossip on startup, suppressing duplicate gossip, issuing "refresh" updates only once every 13 days instead of the current seven, and suppressing reply gossip so that if someone sends a message, they will not receive it back. These measures are mainly motivated by a user who has an rPi on a 4G plan. Restarting their node is currently painful, hence the need for these new measures.</summary>
+    <published>2019-09-05T06:59:57+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Mitigating Channel Jamming with Stake Certificates</title>
+  <updated>2023-06-04T00:57:14.647049+00:00</updated>
+  <author>
+    <name>Gleb Naumenko 2020-11-26 21:40:46</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-11-27 06:45:59</name>
+  </author>
+  <author>
+    <name>Andrés G. Aragoneses 2020-11-27 12:04:30</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-11-27 12:26:36</name>
+  </author>
+  <author>
+    <name>David A. Harding 2020-11-28 18:24:45</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-11-30 04:38:39</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-12-02 06:16:15</name>
+  </author>
+  <author>
+    <name>Gleb Naumenko 2020-11-27 05:57:53</name>
+  </author>
+  <author>
+    <name>Gleb Naumenko 2020-11-30 08:34:35</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-12-01 00:10:20</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-12-01 12:11:14</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2020-12-01 17:35:41</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-12-02 05:02:17</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-11-27 00:16:13</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2020-11-27 11:18:23</name>
+  </author>
+  <author>
+    <name>Gleb Naumenko 2020-11-30 08:24:56</name>
+  </author>
+  <link href="lightning-dev/Nov_2020/002884_Mitigating-Channel-Jamming-with-Stake-Certificates.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2020/002887_Mitigating-Channel-Jamming-with-Stake-Certificates.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2020/002889_Mitigating-Channel-Jamming-with-Stake-Certificates.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2020/002890_Mitigating-Channel-Jamming-with-Stake-Certificates.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2020/002891_Mitigating-Channel-Jamming-with-Stake-Certificates.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2020/002893_Mitigating-Channel-Jamming-with-Stake-Certificates.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2020/002906_Mitigating-Channel-Jamming-with-Stake-Certificates.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2020/002886_Mitigating-Channel-Jamming-with-Stake-Certificates.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2020/002895_Mitigating-Channel-Jamming-with-Stake-Certificates.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2020/002898_Mitigating-Channel-Jamming-with-Stake-Certificates.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2020/002900_Mitigating-Channel-Jamming-with-Stake-Certificates.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2020/002904_Mitigating-Channel-Jamming-with-Stake-Certificates.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2020/002905_Mitigating-Channel-Jamming-with-Stake-Certificates.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2020/002885_Mitigating-Channel-Jamming-with-Stake-Certificates.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2020/002888_Mitigating-Channel-Jamming-with-Stake-Certificates.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2020/002894_Mitigating-Channel-Jamming-with-Stake-Certificates.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Mitigating Channel Jamming with Stake Certificates</title>
+    <updated>2023-06-04T00:57:14.648008+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-November/002884.html" rel="alternate"/>
+    <summary>The Lightning Network community is exploring the use of Stake Certificates to mitigate channel jamming in the Lightning Network (LN). The certificates would require a "fidelity bond" to send HTLCs, increasing the cost for attackers attempting to jam channels by requiring an upfront payment. Stake Certificates are tied to UTXO ownership and credit balance, with a stake-to-credit function defining how much credit is given per certificate. Privacy can be preserved by using zero-knowledge proofs of UTXO ownership. Implementing the solution will need novel cryptography.Stake Certificates could also be used as routing credit balance, where the sender commits to a particular channel UTXO by embedding an ownership proof in the onion packet while sending an HTLC to the recipient. If the checks succeed, the recipient decrements the sender's credit balance and relays the HTLC. Economic feasibility, integration and UX, protocol design/implementation, and privacy must be considered when implementing Stake Certificates.The proposal raises several questions regarding the implementation of Stake Certificates, such as whether credit spending should be gossiped across the entire network or only known to routing nodes involved in the payment, which zero-knowledge system should be used for Stake Certificates, and whether spending a UTXO should reveal all Stake Certificates generated from it. Payers or payees must set aside a separate non-trivial stake tied only to the stake certificate mechanism to alleviate forwarding nodes' concerns about delayed HTLC claims.Stake Certificates may not be the best near-term solution due to complexity, but its zero satoshi overhead for honest payments is appealing for future adoption. The proposed Stake Certificate system has raised important design questions, and the next step is to discuss these questions and choose a cryptosystem if the community finds it interesting.Another proposal suggests using anonymous credentials and chaumian e-cash design to secure UTXOs and payments. The existing point-to-point property in the Lightning Network is sufficient to prevent loop attacks, and the focus should be on mitigating the effects of incompetence-based non-attacks.The community is discussing various proposals and trade-offs associated with selecting the right zero-knowledge system, designing the best credit-to-value-transferred function, interactivity, and lifetime of Stake Certificates, spending a UTXO revealing all Stake Certificates generated from it, and mitigating malicious routing nodes failing payments. The feasibility of the proposed Stake Certificate system depends on the adoption of zero-knowledge protocols for general statements and the resolution of various design decisions and open questions.In a discussion between David A. Harding and Gleb Naumenko regarding a proposal about using Stake Certificates to prevent Sybil attacks in the Lightning Network, David raised concerns about allowing any UTXO for Stake Certificates, citing the possibility of a malicious user opening channels with themselves to get around this restriction. Gleb responded by acknowledging the difficulty in preventing Sybil attacks but still remaining optimistic. He suggested that there are three separate observations that make him positive about it.</summary>
+    <published>2020-11-26T21:40:46+00:00</published>
+  </entry>
+</feed>

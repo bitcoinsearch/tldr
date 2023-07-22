@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Escrow Over Lightning?</title>
+  <updated>2023-06-02T18:54:01.935952+00:00</updated>
+  <author>
+    <name>Nadav Kohen 2019-06-27 17:40:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Escrow Over Lightning?</title>
+    <updated>2023-06-02T18:54:01.935952+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-June/002051.html" rel="alternate"/>
+    <summary>An idea for implementing escrow over Lightning has been proposed on the lightning-dev mailing list. The proposal aims to enable trades between brandless entities who do not trust each other, using a common branded escrow. The protocol uses a 2-of-3 multisig amongst the two participants and the escrow. However, such a contract can only be transported over a single Lightning channel and cannot be hopped across channels safely.The proposal suggests that the escrow does not learn about an escrowed trade unless a dispute arises. To achieve this, B and S tweak the escrow public key and generate a 2-of-3 address using their own keys, plus the tweaked escrow public key. If B and S can come to an agreement, then they sign using their own keys, and the third key (the tweaked escrow key) remains tweaked, and E cannot determine that it could have been used as the escrow or the details of the transaction.But if B and S come to a dispute, either can provide E with the agreed-upon description `c` that is committed to onchain, and lets E judge where the payment should go. The proposal further discusses how the scheme can be optimized under bip-taproot by setting the taproot internal key to `MuSig(B, S)`, and having separate MAST branches for `MuSig(E + h(E | c) * G, B)` and `MuSig(E+ h(E | c) * G, S)`.The proposal highlights that tr*st is still needed in E since both B and S trust that E will not be susceptible to bribery from their counterparty.In addition to the above proposal, the message discusses a proposed payment scheme using ECDH shared secrets between escrow, buyer, and seller. The payment point is determined by adding the computed shared secrets to the initial payment point.The seller contacts the buyer if they believe the contract has been fulfilled, and if the buyer is satisfied, they provide a scalar allowing the seller to claim the payment point. However, if the buyer is unsatisfied, there is a dispute condition and the seller contacts the escrow, providing the contract and necessary information.The escrow uses ECDH to determine the shared secret and decides in favor of either the buyer or seller. If decided in favor of the buyer, the seller fails the HTLC. The ideal scheme would allow escrow to only learn of disputes and provide immediate fund recovery for the buyer without revealing anything to intermediate hop nodes.</summary>
+    <published>2019-06-27T17:40:13+00:00</published>
+  </entry>
+</feed>

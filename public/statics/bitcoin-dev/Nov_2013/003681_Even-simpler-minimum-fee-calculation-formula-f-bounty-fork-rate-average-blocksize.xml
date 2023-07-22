@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Even simpler minimum fee calculation formula: f &gt; bounty*fork_rate/average_blocksize</title>
+  <updated>2023-06-07T20:09:35.183252+00:00</updated>
+  <author>
+    <name>Peter Todd 2013-11-15 10:32:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Even simpler minimum fee calculation formula: f &gt; bounty*fork_rate/average_blocksize</title>
+    <updated>2023-06-07T20:09:35.184252+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-November/003681.html" rel="alternate"/>
+    <summary>In November 2013, Michael Gronager posted a writeup on why transaction fees were eight times too low due to the optimal block size. Peter Todd added some information, including different pool sizes, to the original post. Gronager realized that the measured fork rate would even out all the different pool sizes and network latencies to provide a simple number used to estimate the minimum fee. The assumption was that the latency depended on block size (# txns) and the fork rate depended on latency. Alpha was derived as a function of the average fork rate and average block size with units of seconds/byte. It indirectly figures out the bandwidth that blocks are propagating at, assuming t_0=0 and all links are equal. Alpha was shown to be 39.62uS/byte = 24kB/second, which is atrocious. Nodes answered queries for blocks from all peers simultaneously, dividing up the bandwidth and ruining latency. This indicated that pools haven't taken the simple step of peering with each other using high-bandwidth nodes with restricted numbers of peers. As a result, mining pulls in $1.8 million/day, so that's up to $16k wasted. However, because miners don't orphan themselves, that $16k loss is disproportionately borne by smaller miners, meaning the 24kB/sec bandwidth estimate is wrong, and the real number is even worse.</summary>
+    <published>2013-11-15T10:32:46+00:00</published>
+  </entry>
+</feed>

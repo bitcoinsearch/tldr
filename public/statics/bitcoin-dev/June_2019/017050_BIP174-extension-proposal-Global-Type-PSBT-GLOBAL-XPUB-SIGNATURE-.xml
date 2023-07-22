@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+  <updated>2023-06-13T19:35:50.341308+00:00</updated>
+  <author>
+    <name>Jonathan Underwood 2019-06-27 08:59:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+    <updated>2023-06-13T19:35:50.341308+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-June/017050.html" rel="alternate"/>
+    <summary>Jonathan Underwood, the Chief Bitcoin Officer at Bitbank, has proposed a new system to address the problem of verifying xpubs in an offline environment without importing warm private keys into cold signers. The proposal involves securely verifying the xpub of the warm/hot wallet first, followed by using an airgap signing tool to sign the xpub with all cold keys. The signature/xpub pairs are then uploaded to the online unsigned transaction generator.Underwood's proposal was made in response to the problem of how to ensure that the address being sent to is not a hacker's address that was swapped in between unsigned tx creation and first signature. He initially suggested signing individual xpubs with cold keys to check destination addresses. However, Dmitry Petukhov pointed out that this scheme does not handle multisig well as attackers can create a single-sig destination address that they control if one key from that multisig is compromised.Petukhov suggested signing the whole 'xpub package' of the multisig wallet or using an auxiliary message to be signed along with the 'xpub package'. Underwood proposed a new key value specification, but Petukhov suggested dealing with these schemes outside of PSBT or using some form of 'vendor-specific', or 'metainformation-specific' PSBT field.Underwood mentioned that his proposed scheme would fix the "send to address verification" problem for HD, but also the multisig change problem with 0x01. The proposal slightly alters the current system and is not indicative of how they work in the backend. Jonathan invites feedback on this proposal.</summary>
+    <published>2019-06-27T08:59:44+00:00</published>
+  </entry>
+</feed>

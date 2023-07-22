@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Newly introduced DoS</title>
+  <updated>2023-06-04T20:06:42.724950+00:00</updated>
+  <author>
+    <name>Gavin Andresen 2011-09-26 21:38:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Newly introduced DoS</title>
+    <updated>2023-06-04T20:06:42.724950+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-September/000597.html" rel="alternate"/>
+    <summary>The context is about a transaction with a "non-standard" signature operation count that is allowed in blocks but not accepted by the mainline rules. The reason for disallowing transactions with more than one SigOp per 34 bytes is to avoid denial-of-service attacks, as checking ECDSA signatures is a CPU bottleneck. If the GetSigOpCount() exceeds nSize / 34 or nSize &lt; GetLegacySigOpCount(), then the DoS code kicks in and kicks either the sender or receiver off the network. An attacker could use these things to get nodes to ban each other. If someone spends a transaction after it has matured beyond 100 confirmations, while you only see 99, it implies that you're on a blockchain fork of more than 99 blocks with respect to the person spending the transaction. This would indicate bigger problems, and the DoS code should kick in to prevent further damage.</summary>
+    <published>2011-09-26T21:38:41+00:00</published>
+  </entry>
+</feed>

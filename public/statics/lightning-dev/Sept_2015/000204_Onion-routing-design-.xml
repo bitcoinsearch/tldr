@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Onion routing design.</title>
+  <updated>2023-05-18T00:36:15.849660+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-09-22 01:22:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Onion routing design.</title>
+    <updated>2023-05-18T00:36:15.849660+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-September/000204.html" rel="alternate"/>
+    <summary>The email conversation between Rusty Russell and Anthony Towns discusses the vulnerability of Tor to probing attacks that reveal the length of the chain. The vulnerability is due to the fact that any random bytes on the end would be included after decryption when calculating the sha256_hash sum by the next node, leaving the system open to probing attacks. While adding random bytes to the end and letting nodes add padding may work, it enables a probing attack where you corrupt the packet, and if it succeeds anyway, those bytes weren't used. Anthony suggests having the hash only verify the current message and the following (encrypted) message, but this still leaves the system vulnerable to probing attacks. To address this problem, Rusty suggests including a pubkey and encrypting 0 padding using it. The last hop gets the privkey and boundary information, and she can verify the padding. However, this solution is missing a step since they need to generate symmetric keys for each step in an onion route, transmitting to Bob: E_B( KB ) E_KB( forward $20 to Carol; E_C( KC ) E_KC( ... ) ). Bob can append E_KB(00000..) as padding, which can be predicted, and the final message to Dave will look like: E_D( KD ) E_KD( H; here's $15 ) E_KD( grbg grbg ... grbg ) D_KC( D_KB( E_KA( 0000 ) ) ) D_KC( E_KB( 0000 ) ) E_KC( 0000 ). Using OFB or CTR mode for the symmetric cypher, one can calculate D_KD() of all the padding and use that to work out the hash H of the plaintext message. However, CBC mode cannot be used because they need to know E_KD(grbg) to know D_KD(padding), but they need to know grbg to know H, and they need to know E_KD(H + ...) to work out E_KD(grbg). They cannot use sum for Kx because they need to know Kx before working out the sum. Therefore, it is suggested that the format of a route should actually be something like required bytes hop_key; encrypted with public key and required bytes route; encrypted with hop_key.</summary>
+    <published>2015-09-22T01:22:57+00:00</published>
+  </entry>
+</feed>

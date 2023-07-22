@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Onion routing design.</title>
+  <updated>2023-05-18T20:13:43.429512+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-09-22 05:25:44</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2015-09-22 01:22:57</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2015-09-19 01:44:18</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2015-09-19 01:27:16</name>
+  </author>
+  <link href="lightning-dev/Sept_2015/000205_Onion-routing-design-.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2015/000204_Onion-routing-design-.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2015/000194_Onion-routing-design-.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2015/000193_Onion-routing-design-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Onion routing design.</title>
+    <updated>2023-05-18T20:13:43.430546+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-September/000205.html" rel="alternate"/>
+    <summary>The discussion revolves around the security of routing in Bitcoin, with a particular focus on probing attacks. There is a concern that these attacks could reveal the length of the chain, which would compromise its security. To address this issue, the sender can use two R values: one known only by the recipient and one by the sender. The recipient needs to present both R and S to redeem payment. The plaintext routing message received by the payee is denoted as X. Its hash H is prefixed to the plaintext, and then S=sha256(H+X) is set. Both S and R are required for payment redemption. Initially, there was a suggestion to add padding to the plaintext message by adding random bytes at the end. However, this approach is vulnerable to probing attacks. If the attack succeeds despite the corruption of the packet, it means that those bytes were not used. To overcome this vulnerability, OFB or CTR mode is recommended for the symmetric cipher. D_KD() of all the padding can be calculated and used to work out the hash H of the plaintext message. CBC mode is not suitable since it requires knowing E_KD(grbg) to know D_KD(padding), but grbg is needed to know H, and E_KD(H + ...) is needed to work out E_KD(grbg). Sum cannot be used for Kx because Kx needs to be known before working out the sum.Another context relates to a crypto protocol for nodes to create routes for transactions in the lightning network. Nodes create the route backwards, calculate the size of the route, and pick a random size between 1024 and 4096 bytes, which they pad with random bytes. The required bytes route is encrypted with hop_key, and the sum of the whole thing after decryption is sha256_hash sum. The next node can be either the last one or another lightning node with an int32 fee that can be taken. The remainder (route blob for the next node) is required bytes.However, there is a weakness in this protocol because it lacks a MAC, which allows a nosy node to replace the routing entirely without corrupting it beyond the next hop. There is no general solution for this issue, but one could use two R values, one known only by the recipient and the other by the sender, to rule out probing.</summary>
+    <published>2015-09-22T05:25:44+00:00</published>
+  </entry>
+</feed>

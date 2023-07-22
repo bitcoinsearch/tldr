@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>var_int ambiguous serialization consequences</title>
+  <updated>2023-06-09T16:19:16.123383+00:00</updated>
+  <author>
+    <name>Tamas Blummer 2015-02-01 09:33:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>var_int ambiguous serialization consequences</title>
+    <updated>2023-06-09T16:19:16.123383+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-February/007249.html" rel="alternate"/>
+    <summary>The author, Tamas Blummer, ponders the consequences of using var_int in longer than necessary forms. This could be of interest when applying size limits to a block, as transaction count is var_int but not part of the hashed header or merkle tree. It could also be used to create variants of the same transaction message by altering the representation of txIn and txOut counts that would remain valid provided signatures validate with the shortest form. An implementation that holds mempool by raw message hashes could be tricked into believing a modified encoded version of the same transaction is a real double spend, and one could mine a valid block with transactions that have a different hash if regularly parsed and re-serialized. Additionally, an SPV client could be confused by such a transaction as it was present in the merkle tree proof with a different hash than it gets for the tx with its own serialization or from the raw message.</summary>
+    <published>2015-02-01T09:33:48+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+  <updated>2023-06-15T15:38:41.204299+00:00</updated>
+  <author>
+    <name>Rusty Russell 2022-02-08 03:40:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+    <updated>2023-06-15T15:38:41.204299+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019871.html" rel="alternate"/>
+    <summary>Russell O'Connor, a contributor to the bitcoin-dev mailing list, has proposed decomposing the operations of CTV and ANYPREVOUT into their constituent pieces and then reassembling their behaviour programmatically. He proposes introducing two new operators, OP_TXHASH and OP_CHECKSIGFROMSTACKVERIFY. OP_TXHASH would pop a txhash flag from the stack and compute a tagged txhash in accordance with that flag, and push the resulting hash onto the stack. It can be further broken down into OP_TX and OP_TAGGEDHASH, or just reuse OP_SHA256. OP_TX concatenates selected fields onto the stack instead of hashing them, which is more compact for some tests and range testing.O'Connor believes that designing a robust set of TXHASH flags from the start can mitigate difficulties in upgrading TXHASH. He suggests having bits to control whether certain features are covered, such as versions, locktimes, txids, sequence numbers, input amounts and scriptpubkeys, output amounts and scriptpubkeys, tapbranch, tapleaf, opseparator value, input/output positions, and sighash flags. These easily map onto OP_TX, where certain values are pushed onto the stack. Pushing SHA256() of scripts instead of scripts themselves may reduce the possibility of DoS. O'Connor also suggests that defining 14 and 15 as two bits could be useful. Finally, he signs off his proposal by saying "Cheers, Rusty."</summary>
+    <published>2022-02-08T03:40:15+00:00</published>
+  </entry>
+</feed>

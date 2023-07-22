@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Multi-party channels</title>
+  <updated>2023-05-23T23:50:12.295556+00:00</updated>
+  <author>
+    <name>Tier Nolan 2016-05-27 20:38:40</name>
+  </author>
+  <author>
+    <name>Mats Jerratsch 2016-05-30 09:01:33</name>
+  </author>
+  <link href="lightning-dev/May_2016/000543_Multi-party-channels.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2016/000545_Multi-party-channels.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Multi-party channels</title>
+    <updated>2023-05-23T23:50:12.295556+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-May/000543.html" rel="alternate"/>
+    <summary>The Lightning network requires a large amount of capital for hubs, as they need to create N channels and lock 1BTC in each of them if they want to send 1 BTC to N customers. This creates an economy of scale effect for hubs, leading to cartel formation if the barrier to entry is high enough. With multi-party channels, hubs could share their capital between multiple customers. A basic multi-party channel would require all participants to sign each state update, which would incorporate the index number of the state and have a unique channel id. If the broadcaster didn't publish the most recent state update, another participant is allowed to broadcast a later update that overwrites the original state update within 24 hours. A hard fork would be required for this system since the state update is a transaction included in the blockchain, but locking the transaction outputs during the 24 hour timeout makes it safe. Since each broadcaster has to sign their broadcast, it is possible to determine who is to blame for broadcasting an expired state update, with the guilty party losing their contribution to the channel. This system requires signatures from all parties for all state updates and updates are impossible while any of the parties are offline or uncooperative. A better system is that state updates require the signatures of parties who lose out due to the state update only, and only the hub can broadcast the final state of the channel until it times out. After that point, any of the participants can broadcast to close the channel, with the outputs from the channel being locked for 24 hours to give participants a chance to challenge the final state. The hub could then respond with a later state that the participant signed, and if the hub broadcasts that proof of fraud, the participant would lose their money. The state updates could work like a blockchain with previous pointers, and parties would download the entire state chain from the hub whenever they come online and verify that it is a valid history. If the hub signs states on more than one fork, then it would lose its deposit. If the hub is honest, then the close step should be reasonably fast, and fraud claim timeouts could be handled in parallel too. It should be possible to set things up so that the channel is mostly eternal, with parties being added and removed from the channel without it having to be closed, which would require some kind of on-chain activity though unless the withdrawal is handled by moving to another channel.</summary>
+    <published>2016-05-27T20:38:40+00:00</published>
+  </entry>
+</feed>

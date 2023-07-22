@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_BEFOREBLOCKVERIFY - discussing and opcode that invalidates a spend path after a certain block</title>
+  <updated>2023-06-14T22:31:30.361671+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2021-06-11 05:59:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_BEFOREBLOCKVERIFY - discussing and opcode that invalidates a spend path after a certain block</title>
+    <updated>2023-06-14T22:31:30.361671+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-June/019057.html" rel="alternate"/>
+    <summary>Russell O'Connor has proposed an opcode called OP_BEFOREBLOCKVERIFY (OP_BBV), which is similar to previous opcodes like OP_BLOCKNUMBER. The opcode takes a parameter representing a block height and marks the transaction invalid if the current block being evaluated is greater than or equal to that block height. The motivation for this opcode is primarily to enable switch-off transactions, such as reversible payments or expiring payments, in a cheaper and more efficient way. However, there is concern that this opcode could create DOS vectors where a malicious actor might spam the mempool with transactions containing this opcode, or cause "bad" reorg behavior where in a reorg, transactions that were spent become not spendable because they were mined too near their expiry point. Some believe that waiting for 6 confirmations and software warning the user to wait for 6 confirmations in relevant scenarios where a 6-block reorg might reverse the transaction would solve these problems.However, one issue remains outstanding: with any change to Bitcoin that leads to non-monotonic validity rules, such as OP_BBV, one could design a wallet to passively take advantage of reorgs by always spending through an OP_BBV that is on the verge of becoming invalid. Then one could sit back and wait for a suitable reorg to take back the UTXO without any work, effectively creating an auto-double spend wallet. While some argue that there is no meaningful distinction between the active and passive roles in double-spending scenarios, others see a material difference and remain unconvinced that Bitcoin should give up on the "reorg safety" property that is explicitly part of its design.There are also lesser concerns with an OP_BBV proposal, including the fact that Bitcoin software tends to cache script validity so using the taproot annex instead of pure script would be necessary, and the proposal defeats limits on transaction replacement. But it is agreed that these lesser concerns are not as important as the main concern of outstanding reorg safety issues.</summary>
+    <published>2021-06-11T05:59:56+00:00</published>
+  </entry>
+</feed>

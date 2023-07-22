@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Method for Computing Merkle Roots of Annotated Binary Trees</title>
+  <updated>2023-06-12T01:07:39.795976+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2017-05-22 07:05:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Method for Computing Merkle Roots of Annotated Binary Trees</title>
+    <updated>2023-06-12T01:07:39.796086+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-May/014362.html" rel="alternate"/>
+    <summary>This document proposes a new method for computing Merkle roots for tree structures with annotated nodes. Bitcoin uses a Merkle tree construction to build a commitment to a sequence of transactions, but this construction is unnecessarily expensive and calls the SHA256 compression function three times per node. The proposed solution aims to directly use the SHA256 compression function to compute Merkle roots that can support per-node annotations.The recursive algorithm introduced in the document satisfies the Merkle-Damgård property and uses tags to dictate the kind of node it is attached to. The output of the `merkleRoot` function is always the midstate of some SHA256 hash, and the proposal supports arbitrary finitely branching trees. If one's application cannot represent the tag space with a `Word256`, then one can hash the tags and still maintain the Merkle-Damgård property.The resulting function uses one SHA256 compression function call per node and supports arbitrary 256-bit annotations per node. However, supporting arbitrary annotations comes at the cost of more hashing. The author has also shown that by using safe tags, we can additionally get a property that the `merkleRoot` will not effectively collide with the `sha256` function.The `Tree` definition in the document is a functor, and the article concludes with some remarks on further reading and extensions to other hash functions such as SHA512.</summary>
+    <published>2017-05-22T07:05:49+00:00</published>
+  </entry>
+</feed>

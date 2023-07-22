@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-05-23T03:09:18.052078+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-04-22 23:27:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-05-23T03:09:18.052078+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002657.html" rel="alternate"/>
+    <summary>The email thread discusses modifications to the state machine for lightning implementations and potential solutions to issues with HTLC output spends. The main proposal is that all HTLC output spends need to be pre-signed using a 2-of-2 multi-sig covenant. There are concerns regarding the bidding war scenario, pinning, and the use of RBF-replaceable transactions. However, it is suggested that if one party confirms within the CLTV-delta, everyone is made whole. Other Bitcoin contracts that rely on nested trees of transactions to confirm are also facing similar limitations.The Lightning Network is facing a potential attack scenario due to changes in policy rules, which could be exploited by attackers to perform the same attack on upgraded/non-upgraded nodes. Private channels on laptops or mobile phones are not affected. To mitigate the issue, watching the mempool seems like a far less involved process compared to modifying the state machine as it's defined today. By watching the mempool and implementing the changes in lightning-rfc/688, this issue can be mitigated today. Adding it should be pretty straightforward, which resolves this issue altogether.A base version of anchors still resolves several issues, including eliminating the commitment fee guessing game, allowing users to pay less on force close, being able to coalesce 2nd level HTLC transactions with the same CLTV expiry, and actually being able to reliably enforce multi-hop HTLC resolution. Instead of making the HTLC output spending more free-form with SIGHASH_ANYONECAN_PAY|SIGHASH_SINGLE, we clearly need to go the other direction - all HTLC output spends need to be pre-signed. However, this proposal needs further thinking.If we don't somehow also gain signatures (our new HTLC signatures) allowing us to spend HTLCs on their version of the commitment, then if they broadcast that commitment (without revoking), we're unable to redeem any of those HTLCs at all, possibly losing money. In an attempt to counteract this, we might say ok, the revoke message also now includes HTLC signatures for their new commitment allowing us to spend our HTLCs. This resolves things in a weaker security model but doesn't address the issue generally. Following this path would require an overhaul in the channel state machine to make presenting a new commitment actually take at least two phases (at least a full round trip). The first phase would tender the commitment but render them unable to broadcast it. The second phase would then enter a new sub-protocol which upon conclusion gives the commitment proposer valid HTLC signatures, and gives the responder what they need to be able to broadcast their commitment and claim their HTCLs in an atomic manner.</summary>
+    <published>2020-04-22T23:27:49+00:00</published>
+  </entry>
+</feed>

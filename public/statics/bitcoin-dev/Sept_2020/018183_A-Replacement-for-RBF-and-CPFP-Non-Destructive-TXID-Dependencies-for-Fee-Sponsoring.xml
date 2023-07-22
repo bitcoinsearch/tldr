@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Replacement for RBF and CPFP: Non-Destructive TXID Dependencies for Fee Sponsoring</title>
+  <updated>2023-06-14T15:23:53.238257+00:00</updated>
+  <author>
+    <name>Antoine Riard 2020-09-20 23:10:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Replacement for RBF and CPFP: Non-Destructive TXID Dependencies for Fee Sponsoring</title>
+    <updated>2023-06-14T15:23:53.238257+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-September/018183.html" rel="alternate"/>
+    <summary>The conversation discusses the issue of concurrent states being pinned and non-observable for sponsoring by an honest party. A malicious party can broadcast a thousand revoked LN states and pin them with low-feerate sponsors making it difficult for an honest party like Alice to sponsor them as she may not have a global view of network mempools. The proposed policy rule "The Sponsor Vector's entry must be present in the mempool" would not propagate Alice's sponsors. The designers of offchain protocols can limit a participant's capability to construct a pinning package by constraining its malleability and thus always have a compelling feerate, but it comes at the price of less protocol flexibility, reducing payments throughput. Additionally, a malicious counterparty can still take advantage of mempool-congestion spikes.The conversation suggests that mempool acceptance of a whole package only on the merits of feerate is the easiest solution to reason on for solving the hard cases of pinning. The consensus rules are clear that sponsor commitments are non-rival, so there's no issue with allowing as many sponsors as possible and including them in aggregate. The only issue is denial of service in the mempool. The current policy rules are designed to be minimally invasive and maximally functional. Regarding the location for the sponsor vector, the annex is a possible location, but it's a bit odd as we really only need to allow one such vector per tx, not one per input, which could enable some new use cases. Being in the witness space would mean that if two parties create a 2 input transaction with a desired sponsor vector, they would both need to specify it since you can't sign another input's witness data. However, there could be a more efficient place to put this data, but nothing jumps out as both efficient and simple in implementation.</summary>
+    <published>2020-09-20T23:10:23+00:00</published>
+  </entry>
+</feed>

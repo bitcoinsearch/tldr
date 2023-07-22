@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_VAULT: a new vault proposal</title>
+  <updated>2023-06-16T03:49:52.070729+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2023-01-19 22:49:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_VAULT: a new vault proposal</title>
+    <updated>2023-06-16T03:49:52.070729+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-January/021360.html" rel="alternate"/>
+    <summary>The discussion revolves around the implementation of efficient wallet vaults. It is suggested that storing a recovery address with every key to the vault would be prudent and the recovery path can be optionally gated by an arbitrary scriptPubKey. Gating by a scriptPubKey solves the problem of general covenants for unvaulting. However, it may add complexity to downstream code which now has to have special cases. The space savings from allowing recovery outputs with any recovery address to be batched seems negligible, and it makes the implementation decently more complicated. It is noted that if someday wallet vaults become the standard wallet construct, people might not even want to have a non-vault wallet just for use in unvaulting. The proposal for efficient wallet vaults was designed to meet all criteria and allows batching as well. OP_BEFOREBLOCKVERIFY opcode is controversial as it breaks fundamental reorgability of transactions. The design of the proposal includes a static intermediate address that has no values that are unique to the particular wallet vault address. It is necessary for dynamic unvaulting using OP_PUSHOUTPUTSTACK, adding "hidden" data onto the output that allows for committing to destination addresses. While dropping OP_BEFOREBLOCKVERIFY may cause somewhat minor degraded usability, OP_PUSHOUTPUTSTACK is necessary for the proposal to work as intended. Implementing the proposal would be valuable to assess its viability.</summary>
+    <published>2023-01-19T22:49:30+00:00</published>
+  </entry>
+</feed>

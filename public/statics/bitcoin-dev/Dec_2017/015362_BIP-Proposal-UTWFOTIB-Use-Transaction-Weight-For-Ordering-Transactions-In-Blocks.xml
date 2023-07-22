@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP Proposal: UTWFOTIB - Use Transaction Weight For Ordering Transactions In Blocks</title>
+  <updated>2023-06-12T22:34:25.960312+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2017-12-06 05:46:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP Proposal: UTWFOTIB - Use Transaction Weight For Ordering Transactions In Blocks</title>
+    <updated>2023-06-12T22:34:25.960312+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-December/015362.html" rel="alternate"/>
+    <summary>Damian Williamson proposed a BIP (Bitcoin Improvement Proposal) called "UTWFOTIB - Use Transaction Weight for Ordering Transactions in Blocks". The proposal suggests to provide each transaction with a weight function of the fee paid and the time waiting in the transaction pool. The transaction weight would serve as the likelihood of a transaction being included in the current block and then use a target block size. The curves used for the weight of transactions would have to be appropriate. The protocol would determine the target block size, assign each transaction in the pool a transaction weight based on fee and time waiting in the transaction pool, begin selecting transactions to include in the current block using transaction weight as the likelihood of inclusion until target block size is met and solve the block. ZmnSCPxj criticized the proposal, pointing out that the primary problem is that the "transaction pool" is never committed to and is not part of consensus currently. It is unlikely that the transaction pool will ever be part of consensus because putting the transaction pool into consensus is effectively lifting the block size to include the entire transaction pool into each block. The issue is that the transaction pool is transient and future fullnodes cannot find the contents of the transaction pool at the time blocks were made and cannot verify the correctness of historical blocks. Also, fullnodes using -blocksonly mode have no transaction pool and cannot verify incoming blocks for these new rules. Furthermore, ZmnSCPxj pointed out that reusing the term "weight" for something different than its current use is problematic because the "weight" of a transaction is the computed weight from the SegWit weight equation, measured in virtual units called "sipa", using the equation (4sipa / non-witness byte + 1sipa/witness byte). He concluded that applying a patch that follows this policy into Bitcoin Core without enforcing it in all fullnodes will simply lead to miners removing the patch in software they run, making it an exercise in futility to write, review, and test this code in the first place.</summary>
+    <published>2017-12-06T05:46:45+00:00</published>
+  </entry>
+</feed>

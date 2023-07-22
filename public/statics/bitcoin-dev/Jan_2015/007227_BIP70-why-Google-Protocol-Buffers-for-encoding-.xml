@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP70: why Google Protocol Buffers for encoding?</title>
+  <updated>2023-06-09T15:33:12.623650+00:00</updated>
+  <author>
+    <name>Nicolas DORIER 2015-01-28 17:27:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP70: why Google Protocol Buffers for encoding?</title>
+    <updated>2023-06-09T15:33:12.623650+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-January/007227.html" rel="alternate"/>
+    <summary>The discussion revolves around the use of BIP70 for cross platform client development. While the protocol has its uses, Nicolas Dorier argues that it puts the burden of certificate verification on developers and can be difficult to test correctly. He suggests using JSON+HTTPS instead, which would make it easier and sufficient for today's use case. Mike Hearn disagrees, stating that one of the driving goals of BIP70 was to support hardware wallets and keep the amount of code they need to run as small as possible. This means that doing it the way Dorier suggests would increase cost, complexity and decrease security. Hearn explains that embedding certificates is not arbitrary or pointless but for a very good reason. It makes the signed payment request verifiable by third parties which has all kinds of use cases. Furthermore, doing things this way means BIP70 requests can be signed by things which are not HTTPS servers. For example, you can sign with an email address cert, an EV certificate i.e. a company, a certificate issued by some user forum, etc. Dorier brings up the issue of using the platform store, stating that while BitcoinJ is able to use the Android, JRE, Windows and Mac certificate stores all using the same code, it depends what abstractions and languages you are using. He encountered the problem because he desires to target WinRT and other platforms with a single codebase.  In response, Hearn provides code to do iOS using the Apple APIs and states that Java can do OCSP checks, although no wallets currently do so. A better solution would be to implement an OCSP stapling extension to BIP70. Finally, he agrees that there are pros and cons to bundling a custom root store and that a standard that just uses JSON and HTTPS, even if less flexible than BIP70, would make it easier and sufficient for today's use case.</summary>
+    <published>2015-01-28T17:27:44+00:00</published>
+  </entry>
+</feed>

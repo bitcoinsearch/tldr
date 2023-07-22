@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP-341: Committing to all scriptPubKeys in the signature message</title>
+  <updated>2023-06-14T01:04:22.488656+00:00</updated>
+  <author>
+    <name>Greg Sanders 2020-05-01 12:25:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP-341: Committing to all scriptPubKeys in the signature message</title>
+    <updated>2023-06-14T01:04:22.488656+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-May/017809.html" rel="alternate"/>
+    <summary>The proposal to amend BIP-341 has been made in order to commit to the scriptPubKeys of all transaction inputs rather than just the output being spent, which is currently the case. This change is aimed at providing a reliable way for wallets to determine whether each input belongs to them or not. The proposed solution would require the signature message to include sha_scriptPubKeys, which is the SHA256 of the serialization of all scriptPubKeys of the previous outputs spent by the transaction. The reason for this proposal is that without such a mechanism, an adversary could potentially fool a wallet into displaying incorrect information about the amount being spent, resulting in theft of user funds. Currently, wallets have to acquire the full transaction being spent and verify its hash against that given in the outpoint to ascertain non-ownership of an input claimed to be external. However, if the signature message commits to the scriptPubKeys of all transaction inputs, then the wallet would only need to acquire the scriptPubKey of the output being spent. This proposal has already been discussed as a lightweight way of informing offline signers if inputs were segwit or not for malleability analysis reasons. Additionally, Russell O'Connor has included similar functionality in his design for Simplicity on Elements and has been leaning towards adding this kind of functionality in his Bitcoin demo application. He suggests separating the hashing of the output values from the output ScriptPubKeys in `sha_outputs` so applications interested only in summing the values of the outputs do not have to wade through those arbitrarily long ScriptPubKeys in the outputs.</summary>
+    <published>2020-05-01T12:25:53+00:00</published>
+  </entry>
+</feed>

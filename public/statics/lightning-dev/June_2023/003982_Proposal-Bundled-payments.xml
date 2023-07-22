@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Bundled payments</title>
+  <updated>2023-06-18T13:13:03.114649+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2023-06-15 09:01:32+00:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Bundled payments</title>
+    <updated>2023-06-18T13:13:03.114649+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-June/003982.html" rel="alternate"/>
+    <summary>Thomas Voegtlin has proposed an extension to BOLT-11 where an invoice can contain two bundled payments, with distinct preimages and amounts. This proposal is aimed at services that require the prepayment of a mining fee for a non-custodian exchange to take place, including submarine swaps and JIT channels. The proposal would level the field in terms of competition between lightning service providers, as currently, a dedicated client is required to use Loop, and competitors who do not have an established user base running a dedicated client are exposed to the mining fee attack. The proposal requires senders to be aware that the payment will lead to a channel creation or a splice on the receiver end, and it requires all existing software used by senders to be updated. Bolt 12 seems to make more sense than updating Bolt 11 due to this reason. There are three strategies to provide JIT liquidity, which are currently deployed on the network, while Thomas proposes a third option that involves pre-paying fees then forwarding the whole HTLC amount on that channel. If all one is concerned about is trust and regulation, solution 2 works fine as long as the mempool isn't empty. If we're not using 0-conf anymore, pre-paying fees would make more sense. But we will likely keep on using 0-conf at least until Bolt 12 is deployed, so it seems more reasonable to include this new feature in Bolt 12 rather than Bolt 11, since all implementations are actively working on this. Matt Corallo believes that the ship has probably sailed on getting any kind of new interoperable change into BOLT-11. He suggests that if they are working towards specifying some "standard" way of doing swaps, it should be built on OMs so you can do it more privately.</summary>
+    <published>2023-06-15T09:01:32+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Why the BIP-72 Payment Protocol URI Standard is Insecure Against MITM Attacks</title>
+  <updated>2023-06-12T21:22:00.070413+00:00</updated>
+  <author>
+    <name>Aymeric Vitte 2017-09-29 17:40:00</name>
+  </author>
+  <author>
+    <name>Peter Todd 2017-09-29 02:55:38</name>
+  </author>
+  <author>
+    <name>Omar Shibli 2017-09-29 04:21:09</name>
+  </author>
+  <author>
+    <name>Aymeric Vitte 2017-09-29 17:40:00</name>
+  </author>
+  <author>
+    <name>Andreas Schildbach 2017-09-30 15:33:01</name>
+  </author>
+  <author>
+    <name>Tomas 2017-09-29 13:14:03</name>
+  </author>
+  <author>
+    <name>Andreas Schildbach 2017-09-30 15:33:01</name>
+  </author>
+  <author>
+    <name>Tomas 2017-09-29 13:14:03</name>
+  </author>
+  <author>
+    <name>Omar Shibli 2017-09-29 04:21:09</name>
+  </author>
+  <author>
+    <name>Tomas 2017-09-29 13:14:03</name>
+  </author>
+  <author>
+    <name>Aymeric Vitte 2017-09-29 17:40:00</name>
+  </author>
+  <author>
+    <name>Peter Todd 2017-09-29 02:55:38</name>
+  </author>
+  <author>
+    <name>Omar Shibli 2017-09-29 04:21:09</name>
+  </author>
+  <author>
+    <name>Andreas Schildbach 2017-09-30 15:33:01</name>
+  </author>
+  <author>
+    <name>Peter Todd 2017-09-29 02:55:38</name>
+  </author>
+  <link href="bitcoin-dev/Sept_2017/015121_Why-the-BIP-72-Payment-Protocol-URI-Standard-is-Insecure-Against-MITM-Attacks.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2017/015102_Why-the-BIP-72-Payment-Protocol-URI-Standard-is-Insecure-Against-MITM-Attacks.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2017/015113_Why-the-BIP-72-Payment-Protocol-URI-Standard-is-Insecure-Against-MITM-Attacks.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2017/015121_Why-the-BIP-72-Payment-Protocol-URI-Standard-is-Insecure-Against-MITM-Attacks.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2017/015137_Why-the-BIP-72-Payment-Protocol-URI-Standard-is-Insecure-Against-MITM-Attacks.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2017/015118_Why-the-BIP-72-Payment-Protocol-URI-Standard-is-Insecure-Against-MITM-Attacks.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2017/015137_Why-the-BIP-72-Payment-Protocol-URI-Standard-is-Insecure-Against-MITM-Attacks.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2017/015118_Why-the-BIP-72-Payment-Protocol-URI-Standard-is-Insecure-Against-MITM-Attacks.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2017/015113_Why-the-BIP-72-Payment-Protocol-URI-Standard-is-Insecure-Against-MITM-Attacks.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2017/015118_Why-the-BIP-72-Payment-Protocol-URI-Standard-is-Insecure-Against-MITM-Attacks.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2017/015121_Why-the-BIP-72-Payment-Protocol-URI-Standard-is-Insecure-Against-MITM-Attacks.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2017/015102_Why-the-BIP-72-Payment-Protocol-URI-Standard-is-Insecure-Against-MITM-Attacks.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2017/015113_Why-the-BIP-72-Payment-Protocol-URI-Standard-is-Insecure-Against-MITM-Attacks.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2017/015137_Why-the-BIP-72-Payment-Protocol-URI-Standard-is-Insecure-Against-MITM-Attacks.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2017/015102_Why-the-BIP-72-Payment-Protocol-URI-Standard-is-Insecure-Against-MITM-Attacks.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Why the BIP-72 Payment Protocol URI Standard is Insecure Against MITM Attacks</title>
+    <updated>2023-06-12T21:22:00.070413+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-September/015121.html" rel="alternate"/>
+    <summary>During a discussion on the Bitcoin development mailing list, it was suggested that the BIP-70 payment protocol is insecure. This payment protocol has significant overhead and requires back and forth communication. Instead of following the BIP-72 standard, which is deemed to be very dangerous and should be deprecated, people may continue to email a bitcoin address or print it on an invoice. The problem with the BIP-72 standard is that payment QR codes don't cryptographically commit to the identity of the merchant, meaning a MITM attacker can redirect the payment if they can obtain an SSL cert that the wallet accepts.A wallet following the BIP-72 standard will ignore the bitcoin address/amount/label/message in the URI and instead fetch a PaymentRequest message and then follow the payment protocol as described in BIP 70. Wallets are also likely using an off-the-shelf SSL library, with nothing other than an infrequently updated set of root certificates to use to verify the certificate. As an ad-hoc unstandardized extension, Android Wallet for Bitcoin supports a h= parameter with a hash commitment to what the payment request should be, and will reject the MITM attacker if that hash doesn't match. But that's not actually in the standard itself, and as far as we can tell has never been made into a BIP.In a discussion on standardization years ago, BIP72 was rejected as a kludge to incorporate the payment protocol into BIP21. There are many ways to use BIP70 without BIP72, and BIP72 can easily be fixed using a hash parameter. The BIP-70 payment protocol has significant overhead and requires back and forth communication, which is why people prefer to email or print bitcoin addresses on invoices instead. However, the BIP-72 URI's used via the payment protocol are insecure as they do not cryptographically commit to the identity of the merchant. This means that a man-in-the-middle attacker can redirect payment if they can obtain an SSL cert that the wallet accepts. A new BIP is needed to replace BIP72, which is considered very dangerous in its current form.The author suggests that Bitcoin and other systems such as webrtc, Tor, bittorrent, and p2p systems should evolve into something like certificates tied to an entityID managed by a blockchain system, rather than the current domain or CA. Moreover, specifying things for Bitcoin like the web is not a good idea, as browsers can do far better than standard/usual web. Furthermore, HTTPS is secured under the assumption that certificates are secure.The author believes that the payment protocol is key to scaling and offers a range of advantages, including no more address reuse being possible. Additionally, it drops the need for mempool synchronization among non-miners, solely as a "notification" mechanism. In addition, it means light clients know exactly when a transaction is coming in, so they can efficiently rely on client-side filtering a small set of blocks, improving their privacy. The author provides some links to Github pages and websites related to Zcash wallets, Bitcoin wallets, and dynamic blocklists. Overall, the author emphasizes the need for improvement in the payment protocol and suggests using a hash parameter to fix the issues with BIP-72.</summary>
+    <published>2017-09-29T17:40:00+00:00</published>
+  </entry>
+</feed>

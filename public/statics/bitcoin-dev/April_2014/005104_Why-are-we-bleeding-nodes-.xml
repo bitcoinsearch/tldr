@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Why are we bleeding nodes?</title>
+  <updated>2023-06-08T18:39:32.896568+00:00</updated>
+  <author>
+    <name>Tier Nolan 2014-04-07 21:48:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Why are we bleeding nodes?</title>
+    <updated>2023-06-08T18:39:32.896568+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005104.html" rel="alternate"/>
+    <summary>The email conversation discusses the order of loading headers and blocks in Bitcoin blockchain. Sequential loading of headers is required to connect them and determine the longest chain, but if connected to some honest nodes, portions of the chain can be downloaded and then sub-chains can be connected together, even though the protocol does not support it. Parallel downloading of the block chain is possible while the main chain is downloading. Once the order of blocks is given by the headers, they can be loaded in random order. To compute the UTXO set, only the UTXO set needs to be stored temporarily, rather than the entire block chain. It is possible to generate the UTXO set without doing any signature verification. A lightweight node could only verify the UTXO set and do random signature verifications. The concern of storing blocks for seeding is wholly separated from syncing the UTXO, which allows the initial blockchain sync in ~6 hours when using an SSD. The project is a bitcoin learning exercise and there may be critical design flaws. Loading headers first eliminates the need for sequential loading, and validation has to be sequential, but that step can be deferred until the blocks before a point are loaded and continuous.</summary>
+    <published>2014-04-07T21:48:03+00:00</published>
+  </entry>
+</feed>

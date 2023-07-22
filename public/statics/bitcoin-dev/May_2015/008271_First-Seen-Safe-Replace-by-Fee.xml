@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>First-Seen-Safe Replace-by-Fee</title>
+  <updated>2023-06-09T21:31:35.600801+00:00</updated>
+  <author>
+    <name>Danny Thorpe 2015-05-26 21:20:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>First-Seen-Safe Replace-by-Fee</title>
+    <updated>2023-06-09T21:31:35.601803+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/008271.html" rel="alternate"/>
+    <summary>A user inquired about whether transactions in a buried block can be overridden or replaced by RBF. First-seen-safe replace-by-fee (FSS RBF) is a compromise between the standard replace-by-fee and first-seen mempool behavior. FSS RBF allows for higher fee-paying transactions to replace previous transactions, provided that all outputs in the previous transaction are still paid by the replacement. Standard replace-by-fee has criteria for determining whether to replace a transaction, including paying more fees than the previous transaction, delta fees being greater than the minimum fee required to relay the new transaction, and paying more fees per kilobyte than the previous transaction. FSS RBF adds additional criteria, such as all outputs of the previous transaction existing in the new transaction and being unspent. There are several usage scenarios for FSS RBF. In Case 1, increasing the fee on a single transaction requires adding another transaction input and output, resulting in cost savings. In Case 2, if a user needs to pay multiple recipients in succession, FSS RBF can replace the original transaction with a 2-in-3-out transaction instead of creating a 1-in-2-out transaction, saving 10%. In Case 3, FSS RBF can defragment incoming outputs to keep redemption costs low, but standard RBF is more useful for quickly replacing pending transactions sending funds to cold storage with transactions sending those funds to customers.All wallets should treat conflicting incoming transactions as equivalent so long as the transaction outputs owned by them do not change, and must not assume TXIDs are fixed until confirmed in the blockchain.</summary>
+    <published>2015-05-26T21:20:35+00:00</published>
+  </entry>
+</feed>

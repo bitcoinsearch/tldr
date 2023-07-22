@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Full disclosure on the Bitcoin-Qt on Windows problem</title>
+  <updated>2023-06-06T03:43:08.135865+00:00</updated>
+  <author>
+    <name>Gavin Andresen 2012-03-19 16:07:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Full disclosure on the Bitcoin-Qt on Windows problem</title>
+    <updated>2023-06-06T03:43:08.135865+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-March/001329.html" rel="alternate"/>
+    <summary>A bug in Bitcoin-Qt on Windows remained unnoticed for over four months and was found to be in the bitcoin-qt.pro file. The issue was that Bitcoin-Qt on Windows should have been linked with the "mingw" multithreading library and compiled with the -D_MT to turn on support for multithread-safe C++ exception handling in the "mingw" library. This caused problems when two threads throw exceptions at the same time or one thread is interrupted while in a try{} block and then resuming later. Because Bitcoin-Qt doesn't throw many exceptions usually, this bug went unnoticed for so long. Matt Corallo deserves credit for being persistent and finding the bug when investigating hard-to-reproduce reports of Bitcoin-Qt crashing sometimes when run with the -server flag and handling JSON-RPC requests.It is not known if the bug is exploitable, but it would be challenging to craft a usable exploit because it is difficult to trigger the bug reliably. Besides, Bitcoin-Qt has some security-in-depth to prevent this type of bug from becoming exploitable. Though the software industry needs to learn better lessons, there is no such thing as perfect security. It's assumed that devices get compromised, and design should revolve around that assumption. To ensure that there will be no more potential vulnerabilities, developers need to review the code, build process and let them know when they are being idiots. Unfortunately, there seem to be fewer Windows developers willing to help out with Bitcoin than Linux or Mac developers, which is unfortunate since a majority of downloads are Windows users.</summary>
+    <published>2012-03-19T16:07:13+00:00</published>
+  </entry>
+</feed>

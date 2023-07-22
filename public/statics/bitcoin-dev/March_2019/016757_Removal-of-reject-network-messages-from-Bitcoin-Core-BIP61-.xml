@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Removal of reject network messages from Bitcoin Core (BIP61)</title>
+  <updated>2023-06-13T17:14:26.315598+00:00</updated>
+  <author>
+    <name>Andreas Schildbach 2019-03-12 17:08:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Removal of reject network messages from Bitcoin Core (BIP61)</title>
+    <updated>2023-06-13T17:14:26.315598+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-March/016757.html" rel="alternate"/>
+    <summary>In a recent email thread on the bitcoin-dev mailing list, Gregory Maxwell discusses the issue of relying on reject messages in the Bitcoin network. Maxwell states that even in the presence of honest and cooperative hosts, reject messages can only provide information about first-hop behaviour and cannot confirm whether a transaction was attempted to be sent to a next hop. As such, alternative handling must be provided and must be reliable for the software to work regardless of reject messages. Maxwell also notes that rejection causes are often unstable or unreliable due to the validity criteria not being able to be tested independently. For example, if a transaction is queued due to missing a parent, it isn't rejected because missing the parent is often a temporary issue, but its feerate cannot be measured without the parent. Later, when the parent is obtained, the transaction can then be rejected due to feerate-- but no reject is sent then. However, the current code understands and handles these cases, and generally, the idea is to take reject messages seriously but not overrate their lack. Network confirmations can fill the gap, though a timeout is still useful. Similarly, error states detected for things like invalid signatures are often not very useful as the software knows that script execution returned false, but in the general case, why it returned false is not clear. A straightforward high-performance validation implementation doesn't necessarily yield a good way of figuring out and propagating up that information. Nonetheless, it has been proven useful in debugging. Wilmer Paulino summed up this point quite nicely in his reply to this thread.</summary>
+    <published>2019-03-12T17:08:52+00:00</published>
+  </entry>
+</feed>

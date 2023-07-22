@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>[Proposal][Payment Route Reservation] PTLC/HTLC with Reusable Static Invoices</title>
+  <updated>2023-06-01T19:20:18.747862+00:00</updated>
+  <author>
+    <name>g0b1el 2023-05-09 12:12:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>[Proposal][Payment Route Reservation] PTLC/HTLC with Reusable Static Invoices</title>
+    <updated>2023-06-01T19:20:18.747862+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-May/003937.html" rel="alternate"/>
+    <summary>The proposal presented here aims to adapt the existing PTLC protocol into Payment Route Reservation flow. By modifying the original PTLC protocol slightly, it enables support for reusable static invoices with atomic proof of payment and payer proofs that don't need any previous communications between sender and receiver. In addition, this modification reduces the number of cryptographic calculations that the sender needs to perform for each PTCL payment. Similarly, a similar approach is applied to HTLC, with the same benefits. The original PTLC protocol involves sharing proof of payment point Z with the sender and generating random decorrelation secrets for each hop on the route. The new PTLC protocol is applied to the Payment Route Reservation flow, where each intermediate hop gets to the expected upstream and downstream adaptor lock point during the res_success call. However, if PTLC is done this way, Bob can send Alice a lock point for which he is the one with knowledge of the secret. Therefore, Dave needs to "send" Z point to Alice; however, Dave cannot include Z as part of the res_success response because the same Z would appear on every node, reintroducing payment correlation. There are two benefits of doing PTLC this way: smaller hop onion and less work to be done by the sender and generating a single static invoice that can be paid simultaneously by multiple parties without any previous communication between the sender and receiver.Note that the adaptor lock between Carol and Dave is built solely by Dave, resulting in stuckless payments not working in such a PTLC protocol. If we want to add support for stuckless payments or increase the safety of the new PTLC protocol, we can create a third PTLC protocol by combining the previous two. Each hop will now generate two decorrelation secrets, `fi` and `bi`, and Lock adaptor points are now calculated using this formula.</summary>
+    <published>2023-05-09T12:12:18+00:00</published>
+  </entry>
+</feed>

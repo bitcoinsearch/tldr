@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Recovery of Lightning channels without backups</title>
+  <updated>2023-06-03T03:18:01.389618+00:00</updated>
+  <author>
+    <name>Gijs van Dam 2020-12-07 08:24:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Recovery of Lightning channels without backups</title>
+    <updated>2023-06-03T03:18:01.389618+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-December/002908.html" rel="alternate"/>
+    <summary>In a Lightning-dev mailing list thread, Lloyd Fournier proposed an idea to recover lightning channels after losing channel state in a boating accident. The current method of achieving this is through "static channel backups," which are lists of channel ids and the nodes you had the channels with. With this backup, users can remember who they had channels with, connect to them, and ask them to force close the channel. However, Fournier suggested that if the lightning protocol were changed slightly, this could be done without the channel backup at all. He proposed using a deterministically randomized version of the node's static public key as the `funding_pubkey` in the open channel message, so we know it up front. By doing a Diffie-Hellman operation with the remote node's public key and using the resulting shared secret to deterministically produce scalars r1 and r2, users can use 2-of-2(r1*G + P_local, r2*P_remote) as the script pubkey of funding output. Gijs contributed to the discussion by suggesting an approach that works within the current protocol. He suggested creating a synthetic static channel backup to trigger the data loss protection protocol. By restoring this synthetic SCB, a `channel_reestablish` is sent to the remote peer, containing the `next_commitment_number` and the `next_revocation_number`, both set to zero. This triggers the remote peer to force close the channel dropping its current commitment transaction to the chain. Using the `per_commitment_point` received from the remote peer, users can now derive the private key needed for sweeping their funds. While Fournier's approach covers more cases, Gijs's approach only fits certain edge cases. Nonetheless, Gijs's approach is possible today, without changes to the Lightning protocol. He has got this somewhat working in a test setup and would be interested in hearing Sjors Provoost's opinion on it since his question and answer on this topic over on the Bitcoin StackExchange was really helpful.</summary>
+    <published>2020-12-07T08:24:20+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reuse of payment_hash in lightning invoices</title>
+  <updated>2023-06-02T16:59:02.410976+00:00</updated>
+  <author>
+    <name>Andrea RASPITZU 2019-01-03 12:40:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reuse of payment_hash in lightning invoices</title>
+    <updated>2023-06-02T16:59:02.410976+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-January/001780.html" rel="alternate"/>
+    <summary>In this message, Andrea raises a concern about the reuse of payment_hash in lightning invoices. The BOLT11 example currently uses a donation invoice that seems to be "permanent" with a payment_hash that doesn't change after receiving a donation. Andrea believes that reusing known payment_hash is a security issue because an intermediary node routing a donation for the second time already knows the preimage, allowing it to pull the htlc from downstream without forwarding it to upstream. This means that a malicious receiver could provide an invoice with assisted routes where among those they control a node, which won't forward to the htlc but instead steal the funds. As the preimage is known to the intermediate node, it will be claimed that the payment hasn't been received. Andrea suggests that there should be at least a warning in the spec regarding the reuse of payment_hash in invoices.</summary>
+    <published>2019-01-03T12:40:16+00:00</published>
+  </entry>
+</feed>

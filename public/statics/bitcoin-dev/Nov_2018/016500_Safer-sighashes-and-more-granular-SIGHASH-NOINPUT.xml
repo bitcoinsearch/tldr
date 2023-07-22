@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-05-20T17:59:51.665074+00:00</updated>
+  <author>
+    <name>Anthony Towns 2018-11-23 05:03:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-05-20T17:59:51.666132+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-November/016500.html" rel="alternate"/>
+    <summary>In a recent message to the bitcoin-dev mailing list, Russell O'Connor proposed moving away from the use of OP_CODESEPARATOR, as each call to this operation takes O(script-size) time. However, a replacement for the functionality it currently provides is needed. While the original motivation for OP_CODESEPARTOR remains a mystery, it can currently be used to create signatures that cover not only which input is being signed but also which specific branch within that input Script code is being signed for. One suggestion put forth by AJ Towns was that it may be sufficient to sign the position within the script of the last OP_CODESEPARATOR. This proposal would allow for a script such as "DUP DUP CHECKSIG CODESEP CHECKSIG CODESEP CHECKSIG" to be spent by providing any public key and three different signatures by that key. The first signature commits to a "codesep position" of 0, the second to a "codesep position" of 4, and the third to a "codesep position" of 6. In each case, the signature also commits to the full (possibly masked) script as well.This proposal covers all the behavior that can currently be achieved with CODESEP, which is somewhat limited since every signature effectively commits to the full redeem script, and you cannot commit to subsets of the signature/witness. It also keeps the things you can do with the various features somewhat orthogonal: NOINPUT lets the signature apply to different transactions, OP_MASK allows the different txes to have variations in the script the signature applies to, CODESEP requires different signatures for different parts of a single script, MAST[0] provides alternative scripts but doesn't affect signatures, and IF/etc provides control flow within a script without affecting signatures.</summary>
+    <published>2018-11-23T05:03:30+00:00</published>
+  </entry>
+</feed>

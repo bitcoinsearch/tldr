@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>BIP proposal: Timelocked address fidelity bond for BIP39 seeds</title>
+  <updated>2023-05-22T19:53:31.413854+00:00</updated>
+  <author>
+    <name>Chris Belcher 2022-05-01 08:57:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>BIP proposal: Timelocked address fidelity bond for BIP39 seeds</title>
+    <updated>2023-05-22T19:53:31.413854+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020389.html" rel="alternate"/>
+    <summary>This BIP proposes a method for storing timelocked address fidelity bonds in BIP39 phrases and signing fidelity bond certificates. Fidelity bonds are used to resist sybil attacks in certain decentralized anonymous protocols, and they can be created by locking up bitcoins using the `OP_CHECKLOCKTIMEVERIFY` opcode. By defining a common derivation scheme, users of wallet software can have a backup of their fidelity bonds by storing only the BIP39 seed phrase and a reference to this BIP. The certificate keypair can be kept online and used to prove ownership of the fidelity bond. Public key derivation uses a similar account-structure as defined in BIP 44 but with change set to 2. Timelock derivation is based on the index, with the timelock always being the first of the month at midnight. This standard has already been implemented and deployed in JoinMarket, and is largely based on the approach used in BIPs 49, 84, and 86.Fidelity bonds work by sacrificing a valuable commodity, such as bitcoin value, to make a cryptographic identity expensive to obtain. A way to create a fidelity bond is to lock up bitcoins by sending them to a timelocked address. The sacrifice must be objective and verifiable, and it can help prevent sybil attacks. To keep the private keys of timelocked addresses in cold storage, an intermediate keypair called the certificate is used. Even if the hot wallet private keys are stolen, the coins in the timelocked address will still be safe, although the thief will be able to impersonate the fidelity bond until the expiry.This BIP defines two steps to derive multiple deterministic addresses based on a BIP 32 master private key, along with the format of the certificate that can be signed by the deterministic address key. Address derivation involves creating a redeemScript which locks the funds until the timelock, and then checks the signature of the derived_key. The article also explains the process of message derivation and creating a certificate needed for using fidelity bonds in cold storage. Most changes would require a protocol change of a live system since this BIP is more about documenting something that already exists than about proposing changes. The test vectors provided include example timelocked addresses and their corresponding derived public keys and private keys. Each address has a different unix locktime and redeemscript. Moreover, the article provides multiple references including BIP86 (OP_CHECKLOCKTIMEVERIFY), BIP32 (Hierarchical Deterministic Wallets), BIP44 (Multi-Account Hierarchy for Deterministic Wallets), BIP49 (Derivation scheme for P2WPKH-nested-in-P2SH based accounts), BIP84 (Derivation scheme for P2WPKH based accounts) and BIP86 (Key Derivation for Single Key P2TR Outputs).</summary>
+    <published>2022-05-01T08:57:25+00:00</published>
+  </entry>
+</feed>

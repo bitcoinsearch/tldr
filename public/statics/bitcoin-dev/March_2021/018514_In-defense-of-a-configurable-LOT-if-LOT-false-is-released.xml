@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>In defense of a configurable LOT if LOT=false is released</title>
+  <updated>2023-05-21T01:34:04.161246+00:00</updated>
+  <author>
+    <name>Jeremy 2021-03-01 20:32:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>In defense of a configurable LOT if LOT=false is released</title>
+    <updated>2023-05-21T01:34:04.161246+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-March/018514.html" rel="alternate"/>
+    <summary>The below script can be used as a cross platform method to make a LOT=False function like a LOT=true node. The script is meant to announce a to-be-marked-bad block to a similar peer that has already marked that block invalid. If LOT=false, it could lead to nodes partitioning themselves from one another. It is uncertain of the particulars of invalidate block's relationship to DoS rules. Therefore, it may be beneficial to have opt-in configurability natively if core releases with LOT=false. Configurability is superior to a situation where users are unable to switch binaries near the timeout with LOT=true seeming more likely and reach for such a convenience script. However, it seems more in the spirit of user choice to make the core release suitable for either preference. The script is untested, unverified, and needs review before running it. The script imports sys, json, subprocess, and time. LOTHEIGHT and LOTSTOP are set to 600000 and LOTHEIGHT + 2016 respectively. FORK is set to "taproot", credential is set to "blah:blah", host is set to "http://127.0.0.1:8332", and contenttype is set to 'content-type:text/plain;'. The make_command function returns json.dumps({"jsonrpc": "1.0", "id":"curltext", "method": command, "params": args}). The call function uses subprocess.run("curl", ["--user", credential, "--data-binary", make_command(command, args), "-H", contenttype, host]) to return res.stdout. The while loop sleeps for 10 seconds initially and then sets should_sleep to True. The loop tries to load data from json using call("getblockchaininfo", []) and sets possible to True. If data['blocks'] is greater than or equal to LOTHEIGHT and data['blocks'] is less than LOTSTOP, possible is set to False. If possible is True, the script calls call("invalidateblock", [data['bestblockhash']]) and should_sleep is set to False.</summary>
+    <published>2021-03-01T20:32:34+00:00</published>
+  </entry>
+</feed>

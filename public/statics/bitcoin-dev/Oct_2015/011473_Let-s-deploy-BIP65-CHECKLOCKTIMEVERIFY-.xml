@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Let's deploy BIP65 CHECKLOCKTIMEVERIFY!</title>
+  <updated>2023-05-19T22:03:48.516273+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-10-07 16:38:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Let's deploy BIP65 CHECKLOCKTIMEVERIFY!</title>
+    <updated>2023-05-19T22:03:48.516273+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-October/011473.html" rel="alternate"/>
+    <summary>A discussion was held on bitcoin-dev mailing list regarding the possibility of a soft fork to forbid transactions that would previously not have been mined anyway. Jonathan Toomim agreed with most of what was written, except for this paragraph. He pointed out that an attacker could create a transaction that is included in a block by a miner using the old version. However, he mentioned that such miners are rare and it would be hard to find someone to mine an OP_NOP2 transaction. Additionally, even if a miner is found, they would need to not upgrade to an OP_CLTV-validating codebase.Regarding Script knowledge, the email mentions an example of a transaction that would be spendable with a valid sig XOR with (far future date OR old code), which is:OP_DUP OP_HASH160 OP_EQUALVERIFY OP_CHECKSIGVERIFY OP_PUSHDATA OP_CLTVHowever, if XOR is needed, something more like the following would be required:OP_IF OP_DUP OP_HASH160 OP_EQUALVERIFY OP_CHECKSIGVERIFY OP_ELSE OP_CLTV OP_ENDIFIt was also noted that this would fail IsStandard and DISCOURAGE_UPGRADABLE_NOPS checks if spent without a valid sig, and not having a sig would allow anyone to spend it to themselves, making it difficult to use as a basis for double spends.</summary>
+    <published>2015-10-07T16:38:37+00:00</published>
+  </entry>
+</feed>

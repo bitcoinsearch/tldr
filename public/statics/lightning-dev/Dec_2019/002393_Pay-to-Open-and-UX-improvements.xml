@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Pay-to-Open and UX improvements</title>
+  <updated>2023-06-02T22:25:53.601760+00:00</updated>
+  <author>
+    <name>Antoine Riard 2019-12-18 04:49:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Pay-to-Open and UX improvements</title>
+    <updated>2023-06-02T22:25:53.601760+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-December/002393.html" rel="alternate"/>
+    <summary>The context of the conversation is about a slashing protocol for a Lightning Network (LN) node and a watchtower. The protocol is used to punish a lazy watchtower for not broadcasting a penalty transaction on a remote revoked state. The use case described by the person initiating the conversation is similar to that of the LN node and watchtower, where "if A don't do X unlock some funds for B". The proposed slashing protocol involves Alice and Bob locking funds in channel outpoint X and issuing commitment tx N. A watchtower locks funds in a 2-of-2 slashing outpoint Y with Bob as the client. When Alice and Bob update channels to N', Bob and Will use some output from commitment N to create an accountable tx M. M is either paying to Bob after timelock+Bob sig or paying to transaction success_penalty P with Will sig + Bob sig. Success_penalty P will have two inputs, one from M and from J the justice tx that Bob has given to Will. The topology of the protocol ensures that Bob cannot make false claims because he needs a revoked broadcast to enable the claim. At the same time, a justice tx output is used as proof that Will has done its monitoring and punishment job. If there is no channel breach, Will shouldn't learn the commitment balance, and Alice and Bob wouldn't be able to collude against Will if the watchtower has a penalty tx on Alice non-revoked commitment tx.In a separate part of the conversation, there is a discussion about OP_CAT and OP_SUBSTRING. The use of these opcodes can enforce ECDSA nonce reuse and fairness in layer two protocols. The conversation also touches on requiring RBF to be signaled for every spend of the output. This ensures that any output that is double-spent is directly revocable in favor of the miners. However, it requires the use of OP_CAT, which is a dangerous opcode that allows for powerful constructions.</summary>
+    <published>2019-12-18T04:49:35+00:00</published>
+  </entry>
+</feed>

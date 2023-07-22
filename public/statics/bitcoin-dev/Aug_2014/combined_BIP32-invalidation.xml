@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - BIP32 - invalidation</title>
+  <updated>2023-06-09T02:07:38.227055+00:00</updated>
+  <author>
+    <name>second isogeny 2014-08-10 00:34:19</name>
+  </author>
+  <author>
+    <name>second isogeny 2014-08-10 00:34:19</name>
+  </author>
+  <author>
+    <name>second isogeny 2014-08-10 00:34:19</name>
+  </author>
+  <author>
+    <name>Pavol Rusnak 2014-08-08 13:19:38</name>
+  </author>
+  <author>
+    <name>Pavol Rusnak 2014-08-08 13:19:38</name>
+  </author>
+  <author>
+    <name>Eric Lombrozo 2014-08-10 01:20:09</name>
+  </author>
+  <author>
+    <name>Pavol Rusnak 2014-08-08 13:19:38</name>
+  </author>
+  <author>
+    <name>Eric Lombrozo 2014-08-10 01:20:09</name>
+  </author>
+  <author>
+    <name>Eric Lombrozo 2014-08-10 01:20:09</name>
+  </author>
+  <link href="bitcoin-dev/Aug_2014/006484_BIP32-invalidation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006484_BIP32-invalidation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006484_BIP32-invalidation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006470_BIP32-invalidation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006470_BIP32-invalidation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006485_BIP32-invalidation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006470_BIP32-invalidation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006485_BIP32-invalidation.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006485_BIP32-invalidation.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - BIP32 - invalidation</title>
+    <updated>2023-06-09T02:07:38.227055+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-August/006484.html" rel="alternate"/>
+    <summary>A proposed change in the BIP32 protocol has raised security concerns. The proposed change involves assigning I_L := I_L mod n when I_L &gt;= n, which is considered less secure due to its potential to cause users to believe a key is worthless or lose funds when unable to spend them. Additionally, it would be inconsiderate to other parties who have done work to produce correct and compatible implementations. The proposed change would also make the selection of private keys uneven, which is objectively less secure and could create a devastating weakness if an incorrect implementation reflects a large class of keys to a small number of values.The email conversation highlights the importance of dealing with corner cases in cryptographic software such as handling the point at infinity cases, zero value signature, and adding colinear points. While some implementations do not check for these cases, it is important to handle them to ensure the security of the system. However, the bignum modulo operation requires complex additional logic, and there may not be a suitable modulo available due to layering issues.The author of the post proposes changing the BIP32 protocol regarding invalidation of nodes, suggesting that rather than proceeding with the next value for i when a resulting key is invalid, I_L should instead be assigned I_L := I_L mod n in all three cases (public CKD, private CKD, and master key generation). This change aims to simplify the process of marking a key as invalid and lead to more implementations actually checking for invalid keys. However, the author notes that there are still cases where a key may be invalid, such as when I_L = 0 or ki = 0 or ki = inf, but these have a low probability of occurring.In conclusion, the email conversation highlights the need to consider the security implications of proposed changes to the bitcoin specification and the importance of handling corner cases in cryptographic software. It suggests that those unprepared to deal with these complexities should leave writing this kind of software for other people.</summary>
+    <published>2014-08-10T00:34:19+00:00</published>
+  </entry>
+</feed>

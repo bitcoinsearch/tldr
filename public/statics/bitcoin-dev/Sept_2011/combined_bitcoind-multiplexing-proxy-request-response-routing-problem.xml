@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - bitcoind multiplexing proxy - request/response routing problem</title>
+  <updated>2023-06-04T19:29:05.472849+00:00</updated>
+  <author>
+    <name>Steve 2011-09-08 08:15:50</name>
+  </author>
+  <author>
+    <name>Steve 2011-09-08 10:29:50</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2011-09-08 09:29:25</name>
+  </author>
+  <author>
+    <name>Steve diy-eco-life 2011-09-08 02:11:42</name>
+  </author>
+  <author>
+    <name>Steve 2011-09-08 08:15:50</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2011-09-08 09:29:25</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2011-09-08 09:29:25</name>
+  </author>
+  <author>
+    <name>Steve 2011-09-08 08:15:50</name>
+  </author>
+  <author>
+    <name>Steve 2011-09-08 10:29:50</name>
+  </author>
+  <author>
+    <name>Steve 2011-09-08 10:29:50</name>
+  </author>
+  <author>
+    <name>Steve diy-eco-life 2011-09-08 02:11:42</name>
+  </author>
+  <author>
+    <name>Steve diy-eco-life 2011-09-08 02:11:42</name>
+  </author>
+  <link href="bitcoin-dev/Sept_2011/000480_bitcoind-multiplexing-proxy-request-response-routing-problem.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2011/000482_bitcoind-multiplexing-proxy-request-response-routing-problem.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2011/000481_bitcoind-multiplexing-proxy-request-response-routing-problem.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2011/000479_bitcoind-multiplexing-proxy-request-response-routing-problem.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2011/000480_bitcoind-multiplexing-proxy-request-response-routing-problem.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2011/000481_bitcoind-multiplexing-proxy-request-response-routing-problem.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2011/000481_bitcoind-multiplexing-proxy-request-response-routing-problem.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2011/000480_bitcoind-multiplexing-proxy-request-response-routing-problem.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2011/000482_bitcoind-multiplexing-proxy-request-response-routing-problem.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2011/000482_bitcoind-multiplexing-proxy-request-response-routing-problem.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2011/000479_bitcoind-multiplexing-proxy-request-response-routing-problem.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2011/000479_bitcoind-multiplexing-proxy-request-response-routing-problem.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - bitcoind multiplexing proxy - request/response routing problem</title>
+    <updated>2023-06-04T19:29:05.472849+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-September/000480.html" rel="alternate"/>
+    <summary>The discussion in question is centered around creating a proof of concept for the multiplexing proxy that Gavin and Mike spoke about. Initially, the author planned to create a simple proxy between one local bitcoind and one remote node. However, dealing with request-response exchanges from multiple remote nodes posed a problem. The author proposed three approaches to solve this issue. The first approach involves generating a unique key from both the request and the response. The second approach requires modifying bitcoind to accept sequence numbers for request/response type messages. The third approach involves making the proxy intelligent enough to handle these requests itself.The author prefers the first approach as an easy initial implementation, with a view to moving to the third option ultimately. However, the routing problem needs to be tackled from the beginning. The author welcomes suggestions for a simpler approach to the request/response routing problem. It is suggested that the discussion be kept on a single mailing list to avoid confusion and repetition. The presence of duplicate threads in different places can lead to redundancy and people making the same points again and again. The author initially posted the discussion in two forums to get more responses but has decided to move it to the bitcoinj list to streamline the conversation. A link to the other list has been provided for those interested in following the conversation.In the mailing list discussion, it was suggested that duplicate threads in different places should be avoided to prevent confusion and repetition of points. The author proposed a solution to address version skew by disconnecting older clients and not sending received transactions/blocks to the bitcoind. Instead, the bitcoind will hear about them from its own p2p connections, allowing for the reception of all valid transactions/blocks that can be relayed, cached, or have inbound duplicates dropped.The proposed solution in this context is to serialize all request/response exchanges. This means that when a request comes in from a remote node, the proxy acquires a lock on the proxy-localdaemon channel and sends the request. The channel remains locked until a response is received or a timeout occurs, in which case the remote node will not receive a response. Once a response is received, the channel is unlocked, and the response is sent to the client.Another suggestion is to use all 125 available bitcoind connections in a channel pool. Acquiring a lock on a channel consists of checking for an unlocked channel first, then waiting in a queue for one to become available. It is suggested that messages that do not expect a response can be pushed down a locked channel to improve performance.However, there are some disadvantages to this approach. One disadvantage is that there will be idle time for the channel while waiting for a response. As per option 2, this allows the proxy to stay thin but loses the opportunity for de-duplicating/caching unless option 1 is layered on top.</summary>
+    <published>2011-09-08T08:15:50+00:00</published>
+  </entry>
+</feed>

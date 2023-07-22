@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Year 2038 problem and year 2106 chain halting</title>
+  <updated>2023-06-15T02:46:56.102887+00:00</updated>
+  <author>
+    <name>vjudeu at gazeta.pl 2021-10-17 07:24:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Year 2038 problem and year 2106 chain halting</title>
+    <updated>2023-06-15T02:46:56.102887+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-October/019557.html" rel="alternate"/>
+    <summary>The post describes the increment of timestamp in new blocks by post-softfork nodes. It suggests that the fastest rate can be achieved by incrementing timestamps once per 6 blocks, which would mean x3600 increase. However, the difficulty is always multiplied by four, and thus time needs to be increased once per difficulty change to keep it on a real level. The fastest rate would result in the difficulty calculation becoming astronomically high since pre-softfork nodes would think that blocks are arriving at the rate of 1 per second. The context also discusses what happens if a series of blocks has a timestamp of 0xFFFFFFFF at the appropriate time. The chain will halt for all old clients because there is no 32-bit value greater than 0xffffffff. The Bitcoin Core source code rejects timestamps that are "lower or equal to" the current timestamp. Post the soft fork, nodes just increment the timestamp by 1 on each new block starting at Unix Epoch 0x80000000. Even though this imposes a limit on the maximum number of blocks, the unit is now ~10 minutes instead of 1 second, a massive x600 increase in the amount of time forced to hardfork.</summary>
+    <published>2021-10-17T07:24:43+00:00</published>
+  </entry>
+</feed>

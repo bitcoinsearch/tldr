@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Committed bloom filters for improved wallet performance and SPV security</title>
+  <updated>2023-06-11T04:54:59.174552+00:00</updated>
+  <author>
+    <name>Chris Belcher 2017-02-17 00:28:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Committed bloom filters for improved wallet performance and SPV security</title>
+    <updated>2023-06-11T04:54:59.174552+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-February/013587.html" rel="alternate"/>
+    <summary>The proposed Bloom filter method, similar to BIP37, still has a vulnerability where combining partial wallet information with transaction subgraph information can reveal which addresses belong to the wallet. The peel chain attack can identify change addresses that belong to the same wallet as an address matching the bloom filter. False positives can occur, but probability decreases as the number of transactions increases. The committed Bloom filter proposal is vulnerable to the same type of attack because it still leaks information about which addresses the wallet is interested in. The committed Bloom filter is created by deterministically creating a Bloom Filter Digest (BFD) of every block's inputs and outputs. A binary comparison between the BFD and a second bloom filter of relevant key material determines whether there are matching transactions. The BFD can be cached between clients without needing to be recomputed, and it can be used to do re-scans locally of wallets without needing the block data available to scan or reading the entire blockchain from disk. To improve probabilistic security, the bloom filters can be presented to lightweight clients by semi-trusted oracles, and the security model can be vastly improved by committing a hash of the BFD inside every block as a soft-fork consensus rule change. With a commitment to the filter, it becomes impossible to lie to lightweight clients by omission. Committing the BFD is not a hard forking change and does not require alterations to mining software as long as the coinbase transaction scriptSig is not included in the bloom filter.</summary>
+    <published>2017-02-17T00:28:59+00:00</published>
+  </entry>
+</feed>

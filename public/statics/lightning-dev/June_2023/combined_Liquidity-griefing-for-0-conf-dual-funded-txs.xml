@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Liquidity griefing for 0-conf dual-funded txs</title>
+  <updated>2023-07-07T02:47:45.448876+00:00</updated>
+  <author>
+    <name>Antoine Riard 2023-06-07 00:41:12+00:00</name>
+  </author>
+  <author>
+    <name>Matt Morehouse 2023-05-09 17:38:55+00:00</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2023-05-10 00:07:06+00:00</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2023-05-10 09:15:25+00:00</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2023-05-05 16:21:50+00:00</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2023-05-07 22:54:50+00:00</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2023-06-07 09:46:36+00:00</name>
+  </author>
+  <author>
+    <name>Matt Morehouse 2023-05-09 17:38:55+00:00</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2023-05-10 00:07:06+00:00</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2023-05-10 09:15:25+00:00</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2023-05-05 16:21:50+00:00</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2023-05-07 22:54:50+00:00</name>
+  </author>
+  <link href="lightning-dev/June_2023/003974_Liquidity-griefing-for-0-conf-dual-funded-txs.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2023/003938_Liquidity-griefing-for-0-conf-dual-funded-txs.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2023/003942_Liquidity-griefing-for-0-conf-dual-funded-txs.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2023/003943_Liquidity-griefing-for-0-conf-dual-funded-txs.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2023/003920_Liquidity-griefing-for-0-conf-dual-funded-txs.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2023/003931_Liquidity-griefing-for-0-conf-dual-funded-txs.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2023/003975_Liquidity-griefing-for-0-conf-dual-funded-txs.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2023/003938_Liquidity-griefing-for-0-conf-dual-funded-txs.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2023/003942_Liquidity-griefing-for-0-conf-dual-funded-txs.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2023/003943_Liquidity-griefing-for-0-conf-dual-funded-txs.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2023/003920_Liquidity-griefing-for-0-conf-dual-funded-txs.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2023/003931_Liquidity-griefing-for-0-conf-dual-funded-txs.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Liquidity griefing for 0-conf dual-funded txs</title>
+    <updated>2023-07-07T02:47:45.449003+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-June/003974.html" rel="alternate"/>
+    <summary>Bastien Teinturier, a member of the Lightning Network development team, raised concerns about protecting against liquidity griefing attacks in dual funded transactions. Locking UTXOs used in these transactions can result in locked and unusable liquidity if the remote node goes silent. To address this issue, Bastien proposed never locking UTXOs in dual funded transactions. However, accidental double-spending of 0-conf channels remains a challenge. Nodes offering 0-conf services must isolate the UTXOs used for 0-conf from those used for non-0-conf. Eclair currently uses an "opportunistic" approach for 0-conf, but it cannot be used when mixing 0-conf and non-0-conf funding attempts due to soft locks on UTXOs. Bastien seeks ideas to improve the situation and protect nodes offering 0-conf services.The email thread discusses the challenges of offering 0-conf services while protecting against liquidity griefing attacks from malicious peers. The dual funding protocol involves exchanging utxo data and broadcasting the resulting transaction. If a peer locks their utxos and goes silent, honest nodes have locked and unusable liquidity. One solution is to never lock utxos used in dual-funded transactions. However, using 0-conf can lead to accidental double-spending, resulting in loss of funds. Nodes offering 0-conf services also need to isolate the utxos used for 0-conf from those used for non-0-conf. Eclair currently uses an "opportunistic" approach for 0-conf, but it cannot be used with mixed funding attempts. The proposal suggests locking utxos after tx_completes have been exchanged if the node is the only contributor and selecting non-soft-locked utxos for option_zeroconf channels.In the Lightning-dev mailing list, Bastien Teinturier proposed that UTXOs used in dual funded transactions should not be locked to prevent liquidity griefing attacks. However, using 0-conf can result in accidental double-spending of channels. Matt Morehouse suggested locking UTXOs after tx_completes have been exchanged only if the node is the only contributor. ZmnSCPxj argued for using the simpler openv1 flow instead of dual funding to avoid issues with 0-conf. Nodes offering 0-conf services must also ensure the isolation of utxos used for 0-conf from those used for non-0-conf. A "soft lock" approach can be used when selecting utxos for non-0-conf funding attempts. The post aimed to raise awareness among implementers to avoid accidental double-spending of 0-conf channels in dual funding implementations.Bastien Nocera proposed adding support for 0-conf in Lightning's `pay` command through a pull request on GitHub. However, there are concerns about the security implications of implementing 0-conf in Lightning. The discussion on the pull request is ongoing. The Lightning Network is a layer-two scaling solution for Bitcoin that allows faster and cheaper transactions through off-chain channels.The introduction of dual funded transactions in Lightning has posed challenges in protecting against liquidity griefing attacks. Locking utxos can result in unusable liquidity if the remote node goes silent. One solution is to never lock utxos used in dual funded transactions. However, accidental double-spending of 0-conf channels remains a risk. Nodes offering 0-conf services must isolate utxos used for 0-conf from those used for non-0-conf. Eclair uses an "opportunistic" approach for 0-conf but faces limitations with mixed funding attempts. Ideas are sought to improve protections against liquidity griefing for nodes offering 0-conf services.The safety of dual-funded 0-conf transactions is discussed, suggesting the use of swap-in-potentiam addresses between the initiator and acceptor to prevent liquidity griefing. The initiator can retaliate against a silent acceptor by refusing to sign the swap-in-potentiam UTXOs, locking their funds until the timeout. This ensures that liquidity griefing is not cost-free. Dual-funded 0-conf transactions are suitable when on-chain operations are slow, and deep confirmations are expected. However, trust issues still exist, and LSPS3 Promise To Unconditionally Fund 0-conf can address this concern. In dual-funding flows, the initiator can trust the acceptor.</summary>
+    <published>2023-06-07T00:41:12+00:00</published>
+  </entry>
+</feed>

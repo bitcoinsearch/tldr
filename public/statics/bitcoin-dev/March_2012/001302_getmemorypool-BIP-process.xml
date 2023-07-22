@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>getmemorypool BIP process</title>
+  <updated>2023-06-06T03:20:32.003052+00:00</updated>
+  <author>
+    <name>Stefan Thomas 2012-03-04 00:18:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>getmemorypool BIP process</title>
+    <updated>2023-06-06T03:20:32.003052+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-March/001302.html" rel="alternate"/>
+    <summary>There is no explicit standard way to do S-&gt;C JSON-RPC. The JSON-RPC 1.0 spec does not require a certain transport protocol and the serialized request and response objects are sent to peers through byte streams. The JSON-RPC 2.0 spec is transport agnostic, which means that it can be used within the same process, over sockets, over HTTP, or in many various message passing environments. The de-facto standard for bidirectional JSON-RPC is plain TCP sockets. Many JSON-RPC libraries come with TCP socket support out of the box. However, plain TCP sockets have no standardized authentication mechanism, so an extra RPC call auth("username", "password") needs to be added. Also, the TCP packets may or may not correspond to JSON-RPC messages, so a streaming JSON parser or counting non-string-literal curly braces to detect when a complete message has arrived can be used. BitcoinJS currently implements plain TCP sockets and detects whether an incoming connection is HTTP or raw JSON-RPC based on the first character.JSON-RPC over TLS sockets, challenge-response authentication, and TLS client handshake (certificate authentication) are planned features to be added to the JSON-RPC API in the future. On the other hand, HTTP Keep-Alive works, but it's not very widely supported among client libraries, and HTTP isn't really made for this type of thing. It's not practical to expect clients to run their own JSON-RPC server since many cannot listen on WAN ports at all. Stefan had in mind HTTP keep-alive combined with an event system, similar to the way a web chat application works, just for JSON-RPC. BitcoinJS already uses this for real-time updating a web wallet. Michael Grønager asks Stefan what he considers the standard/defacto-standard/right/best-practice way of doing S-&gt;C JSON-RPC and what JavaScript library he uses for this.</summary>
+    <published>2012-03-04T00:18:09+00:00</published>
+  </entry>
+</feed>

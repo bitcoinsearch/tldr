@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP for Proof of Payment</title>
+  <updated>2023-06-09T22:26:39.381852+00:00</updated>
+  <author>
+    <name>Tom Harding 2015-06-16 05:26:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP for Proof of Payment</title>
+    <updated>2023-06-09T22:26:39.381852+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-June/008723.html" rel="alternate"/>
+    <summary>The Proof of Payment (PoP) feature is a process that enables a wallet to prove to a server that it has the ability to sign a certain transaction. The PoP can be used in various scenarios where it would be useful to prove that you have paid for something without any personal information being involved. An example of this is a pre-paid hotel room where your PoP functions as a key to the door. To generate a PoP, the wallet identifies a transaction T and creates an unsigned PoP (UPoP) for T. The user confirms the UPoP(T), which is then signed by the wallet, creating PoP(T), and sent to the destination in the original request. To validate the PoP, the server checks the format of the PoP, lock_time, number of outputs, and nonce. It also runs the scripts of all the inputs and checks that the txid in the PoP output is the transaction for which proof is requested.The PoP has the exact same structure as a Bitcoin transaction with the same inputs as T and in the same order as in T, but with each sequence number set to 0. There is exactly one output, called the pop output, with value 0. If an input script type is P2SH, any satisfying script should do, just as if it was a payment. The lock_time of the PoP must be set to 499999999 to prevent the PoP from being included in a block, should it appear on the Bitcoin p2p network.The PoP feature eliminates many kinds of vouchers because the money itself can be vouched for, wirelessly, with ECDSA security. Coinjoin or simulfunding transactions wouldn't be PoP-able since no one signer has all the private keys. If you pay for dry cleaning with a shared wallet, a different 1-of-N signer can pick up the clothes with no physical transfer of a claim check, by proving the money that paid for the cleaning was his. Merchants need to ensure that they only accept a PoP provided as a response to their challenge.Security considerations include intercepting and changing parameters in the PoP-request, stealing a PoP, or relying on the transaction id of the outgoing transaction. Proposed changes to the data structure include having only one output, the "pop output," with no outputs from T copied to the PoP, setting the sequence number of all inputs of the PoP to 0, and setting the lock_time of the PoP to 499999999.There are references to BIP0021 URI Scheme and BIP0070 Payment Protocol, as well as a reference implementation available on GitHub. Something like a coffee gift example was also mentioned. The buyer could export the private keys to the beneficiary's wallet after the purchase, by using an 'export gift claim check' function on the spent transaction. Then the beneficiary picks up the coffee (car, concert seats...) just as if they had paid.</summary>
+    <published>2015-06-16T05:26:03+00:00</published>
+  </entry>
+</feed>

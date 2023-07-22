@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Generalizing feature negotiation when new p2p connections are setup</title>
+  <updated>2023-05-20T23:43:11.761789+00:00</updated>
+  <author>
+    <name>Matt Corallo 2020-08-18 18:25:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Generalizing feature negotiation when new p2p connections are setup</title>
+    <updated>2023-05-20T23:43:11.761789+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018101.html" rel="alternate"/>
+    <summary>The Bitcoin protocol has implemented version negotiation in the past, which is the opposite expectation of clients ignoring unknown messages. However, some features can be optional within an actual protocol, and there have been post-handshake negotiations implemented for optional messages that are valid at the negotiated version. It is argued that the protocol may remain flexible while remaining verifiable, and that there is no reason to force a client to accept unknown message traffic. Bitcoin is no longer a homogeneous network of one client, and different clients have different features implemented in each. The Bitcoin protocol hasn't fully evolved to capture that reality. A proposal has been made for feature negotiation to take place before the VERACK message is received by each side. This would allow for a negotiation phase to occur where the list of features that each client supports can be sent to negotiate what the connection will be capable of.It is suggested that the current method of protocol version bumping isn't scalable, and something more flexible is required. In the past, Bitcoin protocol changes have been made via new dummy "negotiation" messages, which take advantage of the fact that the Bitcoin protocol has always expected clients to ignore unknown messages. Given that pattern, it makes sense to have an explicit negotiation phase. Some things may need further negotiation, and it is proposed that the existing numeric version can be reserved exclusively for “must” implement, and can be used to signal an extension to the verack. The verack can then carry a list of “may” or “should” sub-protocols for final negotiation. Although the format of the matrix is arbitrary, there is still some ownership requirement. However, human-readable names have shown to be relatively non-colliding in past Bitcoin protocol changes.</summary>
+    <published>2020-08-18T18:25:26+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>The difficulty of writing consensus critical code: the SIGHASH_SINGLE bug</title>
+  <updated>2023-06-09T03:51:52.830995+00:00</updated>
+  <author>
+    <name>Peter Todd 2014-11-06 21:32:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>The difficulty of writing consensus critical code: the SIGHASH_SINGLE bug</title>
+    <updated>2023-06-09T03:51:52.830995+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-November/006878.html" rel="alternate"/>
+    <summary>The 'bug-for-bug' compatibility refers to the fact that each version which has a bug, must behave in the same way. An example of this is the SIGHASH_SINGLE bug in the SignatureHash() function. When found, it was used to fork bitcoin-ruby amongst others. The alt-implementations handled this edge-case as an exception, which caused the script to fail. Thus, they would reject blocks containing transactions using such scripts and be forked off the network. Another way to use this bug is for the CHECKSIG* opcode evaluation. This method iterates through all the opcodes in the script. Every opcode is compared at the byte level to the bytes in the argument. As FindAndDelete() is always called with CScript(vchSig) the signature being found and deleted is reserialized. Serialization of bytes isn't unique; there are multiple valid encodings for PUSHDATA operations. Recently, as part of BIP62, the concept of a 'minimal' PUSHDATA operation was added. Using the minimum-sized PUSHDATA opcode is obvious, while not so obvious is that there are few "push number to stack" opcodes that push the numbers 0 through 16 and -1 to the stack, bignum encoded. If one is pushing data that happens to match the latter, one is supposed to use those OP_1...OP_16 and OP_1NEGATE opcodes rather than a PUSHDATA. Calling CScript(b'\x81') will result in a non-standard script. The exact encoding of CScript() is consensus critical by virtue of being called by the FindAndDelete() code!</summary>
+    <published>2014-11-06T21:32:15+00:00</published>
+  </entry>
+</feed>

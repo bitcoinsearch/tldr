@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Hash of UTXO set as consensus-critical</title>
+  <updated>2023-06-10T22:47:41.489663+00:00</updated>
+  <author>
+    <name>Vincent Truong 2015-09-18 22:22:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Hash of UTXO set as consensus-critical</title>
+    <updated>2023-06-10T22:47:41.489663+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-September/011084.html" rel="alternate"/>
+    <summary>The context discusses a proposal for reducing the security model of Bitcoin from 'always secure' to 'secure, as of last year'. The proposal suggests hashing the UTXO set and storing it on disk, along with a copy of the utxo set at that time. After a year, a new copy is created and wait for H2 before being stored. Blocks before H1 can be pruned, only keeping D1 for reference/validation. This reduces the security model from 'always secure' to 'secure, as of last year' by increasing the difficulty for an attacker with hidden hashing power to overwrite a year's worth of blocks. The nodes also serve as automated checkpoints to prevent them from overwriting all of it. The context also discusses the issue of &gt;50% attacks and how they are a problem for Bitcoin. Currently, an attacker with &gt;50% of the network hashrate can rewrite history. However, if full nodes rely on UTXO set commitments, such an attacker could create an infinite number of bitcoins. Before considering mechanisms for UTXO set commitments, it is necessary to discuss whether the security model reduction is reasonable. Currently, when a new node wants to join the network, it needs to retrieve the entire blockchain history in order to derive a UTXO set that it can verify new blocks/transactions against. With a blockchain size of 40GB and a UTXO size of around 1GB, the extra bandwidth required is significant. A newly mined block could include the UTXO set hash of the chain up until the previous block, allowing new nodes to acquire the UTXO set trustlessly by only verifying proof-of-work headers. Including the hash of the current UTXO set in a newly created block alleviates Bitcoin Core nodes and saves bandwidth for Bitcore Core nodes. It also forces miners to maintain a UTXO set, rather than just build on top of the chain with the most proof-of-work. The proposal requires additional computation, but most modern CPUs have a SHA256 throughput of around 500 MB/s. A small sacrifice for the added ease of initial syncing.</summary>
+    <published>2015-09-18T22:22:35+00:00</published>
+  </entry>
+</feed>

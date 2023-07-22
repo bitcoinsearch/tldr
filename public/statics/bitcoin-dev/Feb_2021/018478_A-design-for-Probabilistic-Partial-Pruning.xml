@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>A design for Probabilistic Partial Pruning</title>
+  <updated>2023-05-21T01:19:10.957816+00:00</updated>
+  <author>
+    <name>Keagan McClelland 2021-02-26 18:40:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>A design for Probabilistic Partial Pruning</title>
+    <updated>2023-05-21T01:19:10.957816+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018478.html" rel="alternate"/>
+    <summary>The problem of pruned nodes and ongoing storage costs for full nodes has led to the proposal of a new idea. The current settings are either pruning everything except the most recent blocks down to the cache size or keeping everything since genesis. The proposal is to allow a partially pruned node that can help bear the load of bootstrapping other nodes and helping with data redundancy in the network without dedicating hundreds of Gigabytes of storage space. The proposed solution involves a randomly generated seed at node startup, carrying a "threshold" expressed as some percentage of blocks it wanted to keep. Based on the threshold, the block hash, and the node's unique seed, the node would decide whether to prune the data or keep it during IBD. The uniqueness of the node's hash should ensure that no block is systematically overrepresented in the set of nodes choosing this storage scheme. Once the node's IBD is complete, it would advertise this as a peer service, advertising its seed and threshold, so that nodes could deterministically deduce which of its peers had which blocks. The goals are to increase data redundancy in a way that more uniformly shares the load across nodes, alleviating some of the pressure of full archive nodes on the IBD problem. The author is working on a draft BIP for this proposal but is seeking feedback on the initial design before going into specification levels of detail. Feedback is welcome on the protocol design itself and the barriers to putting this kind of functionality into Core.</summary>
+    <published>2021-02-26T18:40:35+00:00</published>
+  </entry>
+</feed>

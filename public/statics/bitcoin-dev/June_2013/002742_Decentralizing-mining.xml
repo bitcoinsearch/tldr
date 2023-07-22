@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Decentralizing mining</title>
+  <updated>2023-06-06T18:16:21.440903+00:00</updated>
+  <author>
+    <name>Luke-Jr 2013-06-10 21:23:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Decentralizing mining</title>
+    <updated>2023-06-06T18:16:21.440903+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-June/002742.html" rel="alternate"/>
+    <summary>In an email dated June 10, 2013, Peter Todd discussed the protocol work for miners. The miner makes two connections to their pool and a local bitcoind. They work on the subset of transactions common to both getblocktemplate and their local one. If they find a share that doesn't meet difficulty, they hand it over to the pool by handing the whole block over. However, they should optimize this to just hand over tx hashes where possible. If the share does meet difficulty, they hand it to both the pool and the local bitcoind. For normal shares, they can pass only the block header and have the pool randomly pick a subset of transactions to audit. Todd also addressed the issue of reducing bandwidth. He suggested using higher difficulty shares (each one audited) as an alternative. Block proposals allow the miner to tell the pool its transaction set once (per txset change) for any number of shares. In addition, he had a draft of a "GBT 2.0" that does more improvement in this area. Regarding pool work, Todd asked if eliopool already accepts arbitrary shares like this and does the correct accounting already. He also had some possible protocol extensions in mind. As for miner work, Todd said they need code to merge the two block templates together to find commonality. They also want an automatic fallback to local solo mining if the pool can't be contacted. Todd mentioned that failover already functions, but it probably could use a rewrite.</summary>
+    <published>2013-06-10T21:23:14+00:00</published>
+  </entry>
+</feed>

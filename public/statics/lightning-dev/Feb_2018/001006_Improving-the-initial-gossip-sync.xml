@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving the initial gossip sync</title>
+  <updated>2023-05-24T20:42:44.491100+00:00</updated>
+  <author>
+    <name>Fabrice Drouin 2018-02-07 17:50:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving the initial gossip sync</title>
+    <updated>2023-05-24T20:42:44.492101+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/001006.html" rel="alternate"/>
+    <summary>The context discusses the proposal of optimizing channel announcements and updates for nodes that are mostly payers, called mobile nodes. These nodes have specific properties such as being offline quite a lot and requiring an accurate routing table. The proposal suggests partitioning nodes into three generic roles: payers, relayers, and payees. While most nodes play all roles, mobile nodes would likely be mostly payers. The proposed solution involves creating filters for each bucket, grouping channel announcements by short channel id and computing a marker height, then exchanging and using these filters to filter out channel announcements before sending them. This approach optimizes for learning of new channels instead of learning of the freshest state you haven't yet seen.The discussion also highlights the importance of having a good routing table for payer nodes and mentions that it is harder to achieve synchronised routing tables for nodes with many peers. The proposed solution was tested on testnet and found to work fairly well for nodes connected to a small number of peers. While the proposal is not meant to allow perfect synchronization of the topology between peers, the proposal believes that this is not strictly necessary to make the routing successful.Overall, the proposed solution aims to solve the short-term issues faced during initial sync while waiting for a real sync protocol. The proposal suggests a simple solution to fix the problem at hand but does not aim to provide perfect synchronization between nodes.</summary>
+    <published>2018-02-07T17:50:19+00:00</published>
+  </entry>
+</feed>

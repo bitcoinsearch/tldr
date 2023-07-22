@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fixing a griefing attack on JIT Channels using PTLCs</title>
+  <updated>2023-06-03T13:03:18.937542+00:00</updated>
+  <author>
+    <name>SomberNight 2023-05-09 21:10:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fixing a griefing attack on JIT Channels using PTLCs</title>
+    <updated>2023-06-03T13:03:18.937542+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-May/003940.html" rel="alternate"/>
+    <summary>In a conversation with Tony Giorgio, Ben Carman was made aware of a potential griefing attack on LSPs that provide Just-In-Time channels. The attack involves the client receiving payment and then not being able to claim it after the LSP opens a 0-conf channel. This results in the LSP not getting paid and the client getting a free inbound lightning channel. To solve this issue, Ben proposes using PTLCs. Instead of broadcasting the funding transaction to the mempool, the LSP can sign the funding transaction using adaptor signatures locked to the same secret as the invoice. Then, when the client wants to claim the funds, they can do the PTLC dance with the LSP based on the funding transaction. If it all goes as planned, the LSP can give the funding transaction signed using adaptor sigs to the client, who can then decrypt the signatures and broadcast the transaction. This makes claiming the payment and opening the channel atomic, so the client can't grief the LSP. However, ghost43 brings up a concern: what if, after the client has the funding transaction locally, it waits for the PTLC held by the LSP to time out (i.e., days) and then broadcasts the funding transaction? In this case, the LSP could no longer claim the PTLC, and it would have paid for the channel-open. To prevent this, the LSP would have to actively double-spend the channel funding tx given to the client when the PTLC is close to expiring. This double-spending would cost mining fees of course, but perhaps the conflicting tx itself could be useful if the LSP has enough users and high enough traffic.</summary>
+    <published>2023-05-09T21:10:18+00:00</published>
+  </entry>
+</feed>

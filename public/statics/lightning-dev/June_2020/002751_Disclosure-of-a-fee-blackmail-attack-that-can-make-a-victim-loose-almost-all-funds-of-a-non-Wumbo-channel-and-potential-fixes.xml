@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Disclosure of a fee blackmail attack that can make a victim loose almost all funds of a non Wumbo channel and potential fixes</title>
+  <updated>2023-05-23T03:57:33.855125+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-06-22 01:20:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Disclosure of a fee blackmail attack that can make a victim loose almost all funds of a non Wumbo channel and potential fixes</title>
+    <updated>2023-05-23T03:57:33.855125+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-June/002751.html" rel="alternate"/>
+    <summary>Laolu, a contributor to the Lightning Protocol, suggested a new technique for mitigating up-front costs without using something like Channel Factories. This is done by adding a layer of in-direction with regards to how HTLCs are manifested within the commitment transactions. The technique involves adding a new 2-of-2 multi-sig output to the commitment transactions, called an HTLC indirect block, which is then spent by a new transaction that actually creates the HTLC outputs, called an HTLC block. With this change, the cost to have a commitment mined in the chain is now independent of the number of HTLCs in the channel. Different flavors of this technique are possible as well, allowing both sides to craft varying HTLC indirection trees which may factor in traits like HTLC expiration time.Jeremy Rubin, another contributor to the Lightning Protocol, weighed in on the issue of congestion control and suggested BIP-119 Congestion Control trees could help mitigate this issue. By bucketing a tree through a histogram of HTLC size, small HTLCs can live in a common CTV subtree and not interfere with higher value HTLCs. Additionally, sequencing can prevent long chains in the mempool until they're above a certain value.Antoine Riard, yet another contributor to the Lightning Protocol, discussed a vulnerability related to "Flood &amp; Loot" attacks and the unbounded commitment transaction size inflation. He recommended capping commitment size to ensure competitive propagation/block selection and limiting HTLC exposure. Riard also discussed other potential solutions such as dynamic dust_limit based on HTLC economic value, feerate of its output, feerate of HTLC-transaction, feerate estimation of any CPFP to bump it, encoding all HTLC in some Taproot tree in the future, switching fee from pre-committed ones to a single-party dynamic one, and hinting in the readme file about where and how people can disclose attacks and vulnerabilities.Finally, there was some discussion about fee futures and how they could help with this issue. The conversation also touched on the need for a hint in the readme file about where and how people can disclose attacks and vulnerabilities.</summary>
+    <published>2020-06-22T01:20:23+00:00</published>
+  </entry>
+</feed>

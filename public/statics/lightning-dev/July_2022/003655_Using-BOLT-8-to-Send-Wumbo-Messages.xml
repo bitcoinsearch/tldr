@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Using BOLT 8 to Send Wumbo Messages</title>
+  <updated>2023-06-03T09:36:57.866451+00:00</updated>
+  <author>
+    <name>Thibaut Le Guilly 2022-07-04 00:29:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Using BOLT 8 to Send Wumbo Messages</title>
+    <updated>2023-06-03T09:36:57.866451+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-July/003655.html" rel="alternate"/>
+    <summary>In a discussion about specifying a way to send messages larger than 65 KB using BOLT 8 (Noise based encrypted transport), Thibaut shared his motivation for having the segment explicit. One of the reasons was to handle disconnects/reconnects without requiring access to the low level network layer. Additionally, Christian Decker mentioned the ability to send an urgent message in the middle of sending a large one. However, Thibaut does not have a strong opinion on what is the best and believes it would be nice to use something similar in LN to reduce the need for maintaining multiple things. Olaoluwa Osuntokun clarified that it is possible to send large messages without adding any new application layer messages. The sender can chunk their messages, and the receiver reads out messages into a read buffer exposed over a stream-like interface. This method is no different from using TCP/IP to send a 65 KB message over the wire. This behavior was actually in the original spec but was removed to make things simpler. To re-introduce this behavior, a new wumbo message feature bit could be added to indicate that a peer knows how to properly chunk and aggregate larger messages. The discussion was held among the dlcspecs developers and other contributors who provided comments and feedback. Links were provided to relevant discussions and commits related to the topic.</summary>
+    <published>2022-07-04T00:29:14+00:00</published>
+  </entry>
+</feed>

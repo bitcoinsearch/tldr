@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Draft BIP for Bloom filtering</title>
+  <updated>2023-06-06T08:04:43.186185+00:00</updated>
+  <author>
+    <name>Mike Hearn 2013-01-11 14:13:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Draft BIP for Bloom filtering</title>
+    <updated>2023-06-06T08:04:43.186185+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-January/002124.html" rel="alternate"/>
+    <summary>Mike Hearn, a software developer, conducted some initial performance tests to sync the local peer and found that syncing from a local peer gives about 50 blocks per second in the later parts of the chain (post SD), which is about a 10-20x speedup over what he could do before. However, at those points, bitcoind has saturated its CPU core. Mike Hearn believes filtering can be fairly well parallelized on the server side. Multi-threading the filtering process in bitcoind so transactions can be checked in parallel will make it 4x faster at filtering blocks. Assuming it's not too busy doing other stuff, this could maybe sync at more like 200 blocks per second - more than a day's worth of history for each second of syncing. Making the client smarter so the FP rate is adapted during the sync process is essential. An FP rate that makes sense post-SD results in no false positives pre-SD. The client needs to shard its wallet keys over multiple peers, for better privacy, and it needs to suck down filtered blocks in parallel from multiple peers, for better speed. Jeff Garzik stated that 0.8rc1 will probably happen when the core ultraprune/leveldb stuff is stable.</summary>
+    <published>2013-01-11T14:13:15+00:00</published>
+  </entry>
+</feed>

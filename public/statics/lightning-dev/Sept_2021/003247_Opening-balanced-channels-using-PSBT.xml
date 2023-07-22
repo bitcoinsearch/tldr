@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Opening balanced channels using PSBT</title>
+  <updated>2023-06-03T06:01:29.664478+00:00</updated>
+  <author>
+    <name>Ole Henrik Skogstrøm 2021-09-21 18:42:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Opening balanced channels using PSBT</title>
+    <updated>2023-06-03T06:01:29.664478+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-September/003247.html" rel="alternate"/>
+    <summary>The writer has found a way to open balanced channels using LND's psbt option, which involves joining funded PSBTs before signing and submitting them. This method enables opening a balanced channel between two nodes or a ring of balanced channels between multiple nodes (ROF). Collaboration among nodes is required for efficient operation, and the process can be automated through a client. The writer is unsure if this method is safe or not.The complete flow for a single channel involves Node A generating a new address and sending it to Node B, starting an Interactive channel with Node B using psbt, funding the channel address, joining the two PSBTs, verifying and signing the joined PSBT, and completing channel open by publishing the fully signed PSBT. In the case of a ring of channels between multiple nodes, Node A starts an Interactive open channel with Node B using psbt and funds the channel address. Node B starts an Interactive open channel with Node C using psbt and funds the channel address. Node C starts an Interactive open channel with Node A using psbt and funds the channel address. Nodes B and C send their PSBTs to Node A, who joins all the PSBTs using bitcoin-cli joinpsbts. Node A verifies and signs the PSBT and sends it to Node B, who verifies and signs the PSBT and sends it to Node C, who verifies and signs the PSBT and sends it back to Node A and B to complete channel open. Finally, Node C completes channel open and publishes the transaction.</summary>
+    <published>2021-09-21T18:42:54+00:00</published>
+  </entry>
+</feed>

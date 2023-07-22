@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New form of 51% attack via lightning's revocation system possible?</title>
+  <updated>2023-05-24T21:49:24.906367+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-03-14 03:46:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New form of 51% attack via lightning's revocation system possible?</title>
+    <updated>2023-05-24T21:49:24.906367+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-March/001085.html" rel="alternate"/>
+    <summary>A new form of 51% attack has been discovered in the Lightning Network, which allows an attacker to steal an arbitrary amount of funds by secretly mining enough blocks after fraudulently spending old commitment transactions. The attacker needs to be a large 51% miner with many channels share-owned by them and large capacities in each channel. However, individual nodes can protect against these attacks by contributing hashpower to a decentralized mining aggregator, disallowing more than n channels with a single node, insisting on a blocksize limit and limiting capacities per channel. The block size limit and the channel capacity limit are vital protections against this attack. An attacker can run many nodes to bypass protection #2.1, but each node at least consumes some resource that could have been used for hashing. In addition, if one side refuses to make larger than a certain capacity, the channel cannot be established. The number of channels that can be stolen in a single block is bounded by the blocksize. If we impose a limit of 167.77216mBTC per channel, we need six channels to steal 1BTC. To steal 1M BTC, six million channels would be required, which cannot fit in a block. About 2000 transactions can fit in a block so that is 2000 channels closed per block. Thus, closing 6 million channels requires secretly mining 3000 blocks, which takes about 20 days. Note that this only closes the channels; the commitment transactions must also be claimed, requiring another 3000 blocks (an additional 20 or so days). The revocation system in its current form allows for a new form of a 51% attack, which seems to be way more harmful than a successful 51% attack on the bitcoin network. An attacker could steal up to 99% of all the bitcoins allocated in the sum of all payment channels the attacker was connected to. The attack would be interesting in particular for the power nodes created by the Barabasi-Albert model of lnd's autopilot. There is currently no (reasonable) way of preventing this form of a 51% attack other than creating payment channels that do not offer the possibility of revocation, as it abuses exactly the core idea of lightning to do something in secret without broadcasting it.</summary>
+    <published>2018-03-14T03:46:11+00:00</published>
+  </entry>
+</feed>

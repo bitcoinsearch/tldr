@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Gossip Propagation, Anti-spam, and Set Reconciliation</title>
+  <updated>2023-06-03T08:28:37.539735+00:00</updated>
+  <author>
+    <name>Alex Myers 2022-04-21 20:31:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Gossip Propagation, Anti-spam, and Set Reconciliation</title>
+    <updated>2023-06-03T08:28:37.539735+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-April/003558.html" rel="alternate"/>
+    <summary>Alex Myers, a developer in the Lightning Network community, has been investigating set reconciliation as a means to reduce bandwidth and redundancy of gossip message propagation. This process involves encoding, transmitting and merging minisketches of each node's gossip set to identify missing messages. However, the sets must match closely for this process to work efficiently, and each lightning implementation may have its own rules for gossip acceptance and propagation. Core-Lightning implements rate limiting for incoming channel updates and node announcements, but Alex analyzed his node's gossip over a 14 day period and found that 18% of publicly broadcasting half-channels violated spam-limiting rules at least once. Some channels broadcast frequent channel updates with minor adjustments to htlc_maximum_msat and fee_proportional_millionths parameters. To address these issues, Alex proposes a common listing of current default rate limits across lightning network implementations, internal checks of RPC input to limit or warn of network propagation issues if certain rates are exceeded, and a commonly adopted rate-limit standard. He also suggests implementing a set reconciliation gossip type which will use a common, simple heuristic to accept or reject a gossip message. Additionally, Bastien Teinturier suggested avoiding sending a disabled channel update every time a channel goes offline, waiting a bit before failing an htlc on a disabled channel, and adding a block_height in the channel update tlv to enable a simple rate-limit heuristic.</summary>
+    <published>2022-04-21T20:31:46+00:00</published>
+  </entry>
+</feed>

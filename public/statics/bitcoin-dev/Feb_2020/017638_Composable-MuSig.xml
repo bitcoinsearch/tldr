@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Composable MuSig</title>
+  <updated>2023-06-13T22:23:31.804810+00:00</updated>
+  <author>
+    <name>Erik Aronesty 2020-02-23 07:27:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Composable MuSig</title>
+    <updated>2023-06-13T22:23:31.804810+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-February/017638.html" rel="alternate"/>
+    <summary>The MuSig protocol is a three-phase process for generating public keys and signing messages. The original proposal only had two phases, which was found to be potentially unsafe due to a flaw in the security proof. The MuSig composition problem arises when one or more participants are an aggregate, and there is a risk of using a two-phase protocol. To solve this problem, a signature timeout has been added to the message. If the time is too far in the future, in the past, or if a previous message within that time window is the same as the current one, the participant refuses to sign.However, it has been noted that the MuSig protocol can still be attacked by an adversary using multiple signing sessions in parallel. The adversary selects a message that will not be signed, delays each session, computes R values from different sessions, and uses the Wagner Generalized Birthday Paradox technique to find R[selected] values with specific constraints, which allows them to compute a signature for the chosen message. This makes the MuSig protocol insecure when used in compositions such as `MuSig(MuSig(A, B), C)`.To address this issue, the author proposes the Remote R Replacement Remanded: Redundant R Required Realistically (Multi-R) proposal. This extends the MuSig protocol by allowing participants to submit multiple R commitments in the first phase and revealing each R in the second phase. This proposal does not affect the security proof of MuSig and reduces to the original MuSig proposal when all participants are singletons.In the email discussing the security flaws in the MuSig scheme, alternative proposals have also been suggested. These include using Pedersen or ElGamal commitments in Phase 1 to exchange r and q values. However, Pedersen commitments are vulnerable to a Wagner attack, while ElGamal commitments prevent the Wagner attack but still allow a delaying participant to control the aggregate R.In conclusion, while the MuSig protocol is an effective way of generating public keys and signing messages, it can still be vulnerable to attacks. The proposed solutions aim to address these issues and make the MuSig protocol more secure. The author acknowledges those who helped identify these issues.</summary>
+    <published>2020-02-23T07:27:39+00:00</published>
+  </entry>
+</feed>

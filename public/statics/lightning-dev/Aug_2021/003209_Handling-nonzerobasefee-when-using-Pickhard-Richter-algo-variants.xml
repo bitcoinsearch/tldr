@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Handling nonzerobasefee when using Pickhard-Richter algo variants</title>
+  <updated>2023-06-03T05:42:42.671479+00:00</updated>
+  <author>
+    <name>René Pickhardt 2021-08-30 12:32:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Handling nonzerobasefee when using Pickhard-Richter algo variants</title>
+    <updated>2023-06-03T05:42:42.671479+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-August/003209.html" rel="alternate"/>
+    <summary>The email exchange discusses a proposed protocol change for the transport layer of HTLCs/PTLCs to support local payment splits and merges. The author and recipient agree that there is a problem with the base fee when dissecting flows into paths that share a channel. However, this issue is not related to the convexity problem in the cost function. The email proposes a new lightning message called `update_update_htlc` to update the amount of an HTLC committed/offered to a channel to reflect flows more accurately. The email outlines five consequences for the protocol, including the need for a cancellable payment mechanism, adopting a transport mechanism to reflect flow optimization for success probabilities, and adding Friend of a Friend Balance sharing to reduce uncertainty around senders and recipients. Finally, the author suggests deprecating the base fee on a protocol level.In another email thread, a user suggests creating something similar to local payment splitting and merging to solve the issue of an HTLC of size X arriving at a channel with less liquidity than X. The email also discusses the cost function defined in Pickhard-Richter and the possibility of including a base fee. An alternative solution discussed is to optimize for a maximum fee rather than optimizing for the exact fee. This converts the base fee to a proportional fee, removing the zerobasefee requirement imposed by the disect algorithm.The Lightning Network (LN) protocol can be modified such that instead of Multi-Path Payments (MPP) having individual sub-payments that split at the source and join at the destination, the source can instruct arbitrary intermediate nodes to join and/or split payments. This will allow the output of the mincostflow algorithm to be used directly without the problematic disect stage. However, if any hop fails, the entire payment fails and has to be restarted "from the top," unlike the current scheme of splitting only at the source and joining only at the destination. On the other hand, the failure would be propagated back to the source, and privacy may increase as less information can be extracted by surveillors. The practicality of whole-flow payment is yet to be considered. If a hop were to fail to deliver, then some join nodes would be left hanging, waiting for an incoming HTLC that will not arrive. The failure would have to be handled by a split node when it receives an update_fail_htlc. However, that split node cannot propagate the failure backward to the source if other outgoing HTLCs are still in play, leading to some interesting choices.</summary>
+    <published>2021-08-30T12:32:30+00:00</published>
+  </entry>
+</feed>

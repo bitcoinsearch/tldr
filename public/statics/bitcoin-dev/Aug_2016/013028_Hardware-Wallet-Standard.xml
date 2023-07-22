@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Hardware Wallet Standard</title>
+  <updated>2023-06-11T19:42:41.424625+00:00</updated>
+  <author>
+    <name>Thomas Kerin 2016-08-17 00:25:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Hardware Wallet Standard</title>
+    <updated>2023-06-11T19:42:41.424625+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-August/013028.html" rel="alternate"/>
+    <summary>In this Bitcoin development discussion, Thomas proposes a protocol to facilitate offline signing for transactions that are initiated on merchant websites. He suggests that the procedure is largely the same as approaching the problem of multi-signature addresses where the user needs to sign offline instead of using javascript code or Coinb.in. However, he does emphasize Jochen's point that there should be a way to request an xpub/public key. Additionally, he highlights that redeemScript and witnessScript are also required fields for full validation &amp; signing a transaction input if it's P2SH, or just the witnessScript if it's bare V0_P2WSH. Thomas further explains that since output amounts are required, serialized TxOut's or UTXOs can be provided instead of the output amounts for the protocol. The protocol should be as stateless as possible, as it cannot be assumed whether the redeemScript and other details will ever be saved on the device. Thus, the redeemScript + witnessScript should be provided as the final fields on the Utxo structure above. Thomas believes that his proposal enables two important choices for bitcoin users: firstly, providing their own xpub instead of generating a brand new HD key and potentially losing it. Secondly, leveraging services provided by GreenAddress without necessarily having to rely on signing code provided by them, thereby trusting only one ECDSA implementation when interacting with a wide number of services.Jochen, in his response to Jonas' draft, suggests that a wallet must connect with a hardware wallet at some time to learn the xpubs controlled by the hardware. He highlights several points missing from the specification that a fully checking hardware wallet needs to know, such as the amount spent by each input (necessary for SegWit). Moreover, he notes that multisig change addresses require more extensive checks. All inputs must be multisig addresses signed with public keys derived from the same set of xpubs as the change address and use the same "m of n" scheme. Finally, Jochen believes that specifying the inputscript is ambiguous, especially for P2SH transactions. In principle, he suggests putting witness and scriptSig in the raw transaction and making inputscript always the scriptPubKey of the corresponding output.</summary>
+    <published>2016-08-17T00:25:29+00:00</published>
+  </entry>
+</feed>

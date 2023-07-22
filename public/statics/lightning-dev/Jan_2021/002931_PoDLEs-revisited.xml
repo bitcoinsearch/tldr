@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PoDLEs revisited</title>
+  <updated>2023-06-03T03:36:15.904034+00:00</updated>
+  <author>
+    <name>Rusty Russell 2021-01-08 01:37:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PoDLEs revisited</title>
+    <updated>2023-06-03T03:36:15.904034+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-January/002931.html" rel="alternate"/>
+    <summary>In a recent discussion, Lloyd Fournier proposed a solution to achieve all desired properties for dual-funded channels except for one. He suggested that peers can use the SINGLE|ANYONECANPAY signature as backups in case of abort. This involves six rounds of communication and cannot use the "interactive tx building" protocol developed for the original proposal. However, it is close to the ideal solution in terms of privacy and security. If the malicious initiator learns an output, they will always have to spend one of their inputs otherwise they will quickly get hit by the TX_temp + TX_backup-funding. It also allows both parties to have a fully functional transaction chain with which to open the channel.The protocol proposed by Lloyd Fournier requires two transactions per channel open but is pretty close to the ideal solution in terms of privacy and security. The advantage of this protocol over other proposals is that a malicious peer can only blacklist the UTXO (not necessarily force you to spend it). The downsides are that it involves six rounds of communication and cannot use the "interactive tx building" protocol developed for the original proposal.As a solution to signaling transactions, whenever the initiator adds an input in the interactive tx building they provide signatures on a "signaling" transaction spending that input (and any inputs they have added so far). The signaling transactions will typically spend the funds back to the initiator's wallet. Before revealing any of their inputs, the peer checks that none of the inputs added by the initiator are in their mempool/chain. If the initiator aborts the protocol after learning one of the peer's inputs the peer broadcasts one of the signaling transactions. The advantage of signaling transactions over PoDLE is that it doesn't involve any wonky crypto or new gossip messages. The advantage of the PoDLE proposal over this is that a malicious peer can only blacklist the UTXO (not necessarily force you to spend it). The initiator sends a "good faith" signed tx, which spends one of its UTXOs, to the accepter. 1sat-per-byte is probably too low, but the accepter can provide a feerate for it. Opener aborts if that "good-faith" feerate is too high.</summary>
+    <published>2021-01-08T01:37:02+00:00</published>
+  </entry>
+</feed>

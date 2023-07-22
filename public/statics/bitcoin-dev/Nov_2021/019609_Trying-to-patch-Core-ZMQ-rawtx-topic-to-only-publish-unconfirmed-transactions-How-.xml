@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Trying to patch Core ZMQ "rawtx" topic to only publish unconfirmed transactions: How?</title>
+  <updated>2023-05-22T16:21:40.827022+00:00</updated>
+  <author>
+    <name>Ali Sherief 2021-11-26 16:56:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Trying to patch Core ZMQ "rawtx" topic to only publish unconfirmed transactions: How?</title>
+    <updated>2023-05-22T16:21:40.827022+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-November/019609.html" rel="alternate"/>
+    <summary>The author of a post on the Bitcointalk forum is seeking help from someone more knowledgeable in regards to an issue they are experiencing with their software. They explain that the ZeroMQ topic they are listening to, "rawtx", emits a raw transaction not only when it appears on the mempool but also once it has been confirmed. This causes their software to add txids and addresses twice inside arrays, meaning that the same transaction is received twice in total. Array de-duping is not a viable long-term solution, so the author is attempting to nip the problem at its source by instructing Core to only publish unconfirmed Bitcoin transactions. However, according to a post on Bitcoin Stack Exchange, it is not possible to configure this from a configuration or command-line option. The source code must be edited directly. The author knows that something inside src/zmq/zmqnotificationinterface.cpp needs to be patched, but they are unsure which function to patch or how to do it. They believe that either CZMQNotificationInterface::TransactionRemovedFromMempool or void CZMQNotificationInterface::BlockDisconnected needs to be patched for their own build as both call NotifyTransaction() method which they assume fires a message on the "rawtx" channel.The author references Jonas Schnelli's suggestion from the Stack Exchange question to add an `if (!pblock)` check several years ago, but the function he was referencing no longer exists. The author still wonders if the pblock check is still applicable in the present day, indicating a block the transaction is inside.</summary>
+    <published>2021-11-26T16:56:48+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP sighash_noinput</title>
+  <updated>2023-05-20T08:11:10.295004+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2018-07-02 18:11:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP sighash_noinput</title>
+    <updated>2023-05-20T08:11:10.295004+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-July/016187.html" rel="alternate"/>
+    <summary>On April 30th, 2018, Christian Decker proposed a new sighash flag for Bitcoin, called `SIGHASH_NOINPUT`, which removes the commitment to the previous transaction. However, this flag has been deemed insecure for traditional applications where a third party might pay to an address a second time. As a result, it should only be used in special protocols which make that kind of mistake unlikely. The formal name of this flag is suggested to be "SIGHASH_REPLAY_VULNERABLE" or "SIGHASH_WEAK_REPLAYABLE" or something similar. The concern is that wallets might start using this sighash without realizing that when a third party reuses a script pubkey, completely outside of control of the wallet that uses the flag, funds will be lost as soon as a troublemaker shows up (but not, sadly, in testing). This sort of risk is magnified because the third party address reuser has no way to know that this sighash flag has (or will) be used with a particular scriptpubkey. One could even argue that the possibility that someone might use this flag means that it's generally unsafe to reuse a scriptpubkey. There is no apparent argument for this same level of risk applying to NONE or the single-bug flags because they render even a single use insecure. The best mitigation strategy would be defense in depth to ensure that anyone who uses this sighash flag fully understands the consequences.</summary>
+    <published>2018-07-02T18:11:54+00:00</published>
+  </entry>
+</feed>

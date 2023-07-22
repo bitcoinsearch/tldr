@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Testing a Flare-like routing implementation on 2500 AWS nodes</title>
+  <updated>2023-05-24T00:28:34.108684+00:00</updated>
+  <author>
+    <name>Viacheslav Zhygulin 2016-09-23 14:10:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Testing a Flare-like routing implementation on 2500 AWS nodes</title>
+    <updated>2023-05-24T00:28:34.108684+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-September/000620.html" rel="alternate"/>
+    <summary>The author of this email is asking Pierre about their implementation in tests and the difference between it and the original paper. The main difference is in the way nodes communicate with each other, where there is no DHT in their implementation as inter-nodes communication only occurs on existing open channels and all routing-related messages are onion-encrypted and routed themselves. This means that a node cannot talk directly to a node it doesn't already have a route to. Regarding route selection, the Flare paper proposed a 3-step process which includes sender using its own routing table, requesting receiver's table and using a combination of both tables, and iterating over nodes close to the receiver to request their tables. However, in their test, they only did the second step which is a strong tradeoff. It means that the time allowed to find a route is short and predictable, but it is very suboptimal in terms of probability of finding a route. The author's question is how the sender requests the receiver's routing table if the sender cannot communicate with the receiver. The email ends with a confidentiality notice.</summary>
+    <published>2016-09-23T14:10:19+00:00</published>
+  </entry>
+</feed>

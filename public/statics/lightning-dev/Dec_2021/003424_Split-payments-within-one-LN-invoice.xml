@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Split payments within one LN invoice</title>
+  <updated>2023-06-03T07:01:13.277500+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2021-12-17 15:06:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Split payments within one LN invoice</title>
+    <updated>2023-06-03T07:01:13.277500+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003424.html" rel="alternate"/>
+    <summary>In a conversation between cdecker and ZmnSCPxj, it was mentioned that the `createinvoice` command does almost what is needed, but requires the preimage and stores the invoice in the database. As a result, a `signfakeinvoice` command is required as they cannot know the preimage at invoice creation time, and their invoice database assumes every invoice has a preimage known and recorded in the database. However, if one has access to the `hsm_secret`, they could sign in the plugin itself without needing `lightningd`. The `lightningd` `hsmd` interface includes commands for invoice signing, and `signfakeinvoice` would essentially just expose that interface. A plugin cannot rely on `hsm_secret` existing because the signer might not be emulated in software, but an actual hardware signer that does not keep the secret keys on the same disk. Hence, `getsharedsecret` was created and exposed to consider a future where the HSM is truly a hardware module.</summary>
+    <published>2021-12-17T15:06:44+00:00</published>
+  </entry>
+</feed>

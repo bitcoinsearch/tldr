@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reorgs on SigNet - Looking for feedback on approach and parameters</title>
+  <updated>2023-06-15T01:32:51.898678+00:00</updated>
+  <author>
+    <name>0xB10C 2021-09-07 16:07:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reorgs on SigNet - Looking for feedback on approach and parameters</title>
+    <updated>2023-06-15T01:32:51.898678+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019413.html" rel="alternate"/>
+    <summary>SigNet is considering implementing planned chain reorganizations, and is seeking feedback on approach and parameters. They have proposed two scenarios that could be implemented in the current SigNet miner script. Scenario 1 simulates a race scenario where two chains compete for D blocks, while scenario 2 simulates a chain rollback where the top D blocks get replaced by a chain that outgrows the earlier branch. The reorg-interval X would depend on user needs, but too frequent reorgs could hinder other SigNet users. The reorg depth D is proposed to be deterministically random between a minimum and maximum based on the block hash or nonce of the last block before the reorg. For scenario 1, at least two nodes and miner scripts need to be running. An always-miner A continuously produces blocks and rejects blocks with the to-be-reorged version bit flag set. And a race-miner R that only mines D blocks at the start of each interval and then waits X blocks. A and R both have the same hash rate. In the end, the A miner chain will always win the race. For scenario 2, this scenario only requires one miner and Bitcoin Core node but also works in a multiminer setup. SigNet is seeking feedback from interested parties on how they currently test their application's reorg handling, whether the two discussed scenarios cover their needs, and how often reorgs should happen on the default SigNet. SigNet is planning to implement Scenario 1 first, and if there is interest in the second approach, chain rollbacks can be implemented too.</summary>
+    <published>2021-09-07T16:07:47+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - SURBs as a Solution for Protocol-Level Payment ACKs</title>
+  <updated>2023-06-03T21:37:06.622185+00:00</updated>
+  <author>
+    <name>Kulpreet Singh 2019-02-11 21:03:43</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2019-02-19 00:50:25</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2019-02-08 01:19:13</name>
+  </author>
+  <link href="lightning-dev/Feb_2019/001865_SURBs-as-a-Solution-for-Protocol-Level-Payment-ACKs.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2019/001876_SURBs-as-a-Solution-for-Protocol-Level-Payment-ACKs.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2019/001862_SURBs-as-a-Solution-for-Protocol-Level-Payment-ACKs.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - SURBs as a Solution for Protocol-Level Payment ACKs</title>
+    <updated>2023-06-03T21:37:06.622185+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-February/001865.html" rel="alternate"/>
+    <summary>Rusty Russell, a well-known Bitcoin Lightning Network developer, has suggested using single-use-reply-blocks (SURBs) to implement a "payment ACK" for each sent Hashed Time-Locked Contract (HTLC). Currently, HTLC routing is mainly a game of "send and hope it arrives", as there is no clear indication of the arrival of an HTLC at the destination. The payment ACK feature would allow the sender to know when a payment has reached the receiver, enabling the development of higher-level protocols and aiding in Assured Message Payment (AMP) implementation.SURBs were originally envisioned to allow the receiver to send a replay email/message back to the sender without knowing who they were, and also in a manner that was bit-wise indistinguishable from a regular forwarded packet. To implement payment ACKs, the sender crafts a SURB, and marks the receipt of the SURB as the payment ACK itself. Creating and processing a SURB is identical to the regular HTLC packets we use today. The code impact to the code sphinx packet logic is minimal. They then also re-introduce the end-to-end payload so they can carry the SURB in the forward direction (HLTC add).Moreover, this approach is better than a potential client-server payment negotiation protocol as it doesn't require any additional servers alongside the node, maintains sender anonymity, and doesn't rely on any sort of public key infrastructure. Each time a payment is sent, the receiver can use the extra payload to stack on details such as: a new invoice to pay for the metered service being paid for, an invoice along with a deadline for when this must be paid, etc. This payload can further be put to use in order to implement streaming or subscription payments.However, one downside is that this would essentially double the size of HTLC messages on the network today, as they need to carry SURB. Most candidates for possible rendezvous schemes to deploy would also increase the packet size if up to 20 hops it be allowed in both directions.</summary>
+    <published>2019-02-11T21:03:43+00:00</published>
+  </entry>
+</feed>

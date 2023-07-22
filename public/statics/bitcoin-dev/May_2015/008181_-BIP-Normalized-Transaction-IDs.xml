@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP] Normalized Transaction IDs</title>
+  <updated>2023-06-09T20:56:20.433651+00:00</updated>
+  <author>
+    <name>Stephen 2015-05-16 03:58:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP] Normalized Transaction IDs</title>
+    <updated>2023-06-09T20:56:20.433651+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/008181.html" rel="alternate"/>
+    <summary>Christian Decker proposed a Bitcoin Improvement Proposal (BIP) to normalize transaction IDs that aims to solve transaction malleability and facilitate higher level protocols. The normalized transaction ID is an alias that is calculated by removing the scriptSig before computing the hash, ensuring that only data whose integrity is guaranteed by the signatures influences the hash. This guarantees that if anything causes the normalized ID to change, it will automatically invalidate the signature. When validating, a client supporting this BIP would use both the normalized tx ID as well as the legacy tx ID when validating transactions. Normalization of transaction IDs would simplify higher-level protocols, allowing template transactions upon which sequences of transactions can be built before signing them. However, it would require a hard fork to implement and upgrade, since old clients would not find the prevTx identified by the normalized transaction ID and would deem the spending transaction invalid. Stephen also discusses how BIP34 affects normalized transaction IDs, since the height of the block is included in the scriptSig ensuring that the txid will be different; replay attacks in the form of spending coinbase outputs in the same way they were spent from a previous block must be prevented. Stephen suggests that normalized txids should strip the scriptSigs of all transactions except for coinbase transactions, since coinbase transactions are inherently not malleable anyway. s7r linked to Stephen's 'Build your own nHashType' proposal, suggesting that flags from the proposal could be used to choose which parts of the transaction become signed. Additionally, s7r raises concerns about how exactly normalization would prevent normal malleability, second-level malleability, and replays, as well as how the transition into mapping the txes in the blockchain to normalized txids would occur.</summary>
+    <published>2015-05-16T03:58:56+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Annex Purpose Discussion: OP_ANNEX, Turing Completeness, and other considerations</title>
+  <updated>2023-06-15T17:40:54.866786+00:00</updated>
+  <author>
+    <name>Jeremy Rubin 2022-03-06 13:21:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Annex Purpose Discussion: OP_ANNEX, Turing Completeness, and other considerations</title>
+    <updated>2023-06-15T17:40:54.866786+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020066.html" rel="alternate"/>
+    <summary>The bitcoin-dev mailing list has been discussing the use of an extra data item called checksigextra, proposed by Christian Decker. This new implementation can be generalized and used for Eltoo by giving signatures an explicit extra seqnum. In addition to this, the annex is being discussed as a way to add extra data to a transaction that is analyzed immediately and unconditionally without knowing anything about the UTXO spent. The main benefit of using annex is to optimize SIGHASH_GROUP to allow a group of inputs to claim a group of outputs for signing. The annex is committed to by signatures in a similar way to nVersion, nLockTime, and nSequence. However, if script fragments require incompatible interpretations of the annex, a conflict may arise. To solve this problem, per-input by-height absolute locktimes can be specified as annex entry 3, and per-input by-time absolute locktimes as annex entry 4.There have been suggestions to banish the OP_ANNEX opcode, which is an unassigned opcode reserved for future use. It has been pointed out that accessing the annex through script does not make sense at this time, but it can be used to enforce new consensus rules in the future without needing to evaluate any scripts. The reservation of the annex ensures that it can be immediately used once a use case is defined, and allows for off-chain contracts to be updated without having to update the utxo on-chain first.It was concluded in taproot review meetings that there needs to be a simple way of encoding entries into the annex. A tag/length/value scheme like lightning uses could be used. An example scenario is given where a zero-knowledge proof requires more validation time than a signature; in this case, 6 bytes can be added to the annex instead of adding witness bytes.In cases where cross-input signature aggregation is used, agreement on the message being signed must be established beforehand, and therefore the annex cannot be delayed until after signing. Lastly, it is noted that signatures pay for themselves, and every signature is 64 or 65 bytes but only has 50 units of validation weight.</summary>
+    <published>2022-03-06T13:21:57+00:00</published>
+  </entry>
+</feed>

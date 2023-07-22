@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Getting trusted metrics from the block chain in an untrusted environment ?</title>
+  <updated>2023-06-07T23:58:13.909797+00:00</updated>
+  <author>
+    <name>Clément Elbaz 2014-01-08 19:44:29</name>
+  </author>
+  <author>
+    <name>Clément Elbaz 2014-01-08 22:29:15</name>
+  </author>
+  <author>
+    <name>Rob Golding 2014-01-09 14:03:08</name>
+  </author>
+  <author>
+    <name>Clément Elbaz 2014-01-08 22:29:15</name>
+  </author>
+  <author>
+    <name>Clément Elbaz 2014-01-08 19:38:14</name>
+  </author>
+  <author>
+    <name>Rob Golding 2014-01-09 14:03:08</name>
+  </author>
+  <author>
+    <name>Clément Elbaz 2014-01-09 17:46:05</name>
+  </author>
+  <author>
+    <name>Clément Elbaz 2014-01-08 19:38:14</name>
+  </author>
+  <author>
+    <name>Clément Elbaz 2014-01-08 19:44:29</name>
+  </author>
+  <author>
+    <name>Clément Elbaz 2014-01-08 22:29:15</name>
+  </author>
+  <author>
+    <name>Clément Elbaz 2014-01-09 17:46:05</name>
+  </author>
+  <author>
+    <name>Clément Elbaz 2014-01-08 19:38:14</name>
+  </author>
+  <author>
+    <name>Rob Golding 2014-01-09 14:03:08</name>
+  </author>
+  <author>
+    <name>Clément Elbaz 2014-01-09 17:46:05</name>
+  </author>
+  <author>
+    <name>Clément Elbaz 2014-01-08 19:44:29</name>
+  </author>
+  <link href="bitcoin-dev/Jan_2014/004029_Getting-trusted-metrics-from-the-block-chain-in-an-untrusted-environment-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004030_Getting-trusted-metrics-from-the-block-chain-in-an-untrusted-environment-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004031_Getting-trusted-metrics-from-the-block-chain-in-an-untrusted-environment-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004030_Getting-trusted-metrics-from-the-block-chain-in-an-untrusted-environment-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004028_Getting-trusted-metrics-from-the-block-chain-in-an-untrusted-environment-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004031_Getting-trusted-metrics-from-the-block-chain-in-an-untrusted-environment-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004033_Getting-trusted-metrics-from-the-block-chain-in-an-untrusted-environment-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004028_Getting-trusted-metrics-from-the-block-chain-in-an-untrusted-environment-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004029_Getting-trusted-metrics-from-the-block-chain-in-an-untrusted-environment-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004030_Getting-trusted-metrics-from-the-block-chain-in-an-untrusted-environment-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004033_Getting-trusted-metrics-from-the-block-chain-in-an-untrusted-environment-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004028_Getting-trusted-metrics-from-the-block-chain-in-an-untrusted-environment-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004031_Getting-trusted-metrics-from-the-block-chain-in-an-untrusted-environment-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004033_Getting-trusted-metrics-from-the-block-chain-in-an-untrusted-environment-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2014/004029_Getting-trusted-metrics-from-the-block-chain-in-an-untrusted-environment-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Getting trusted metrics from the block chain in an untrusted environment ?</title>
+    <updated>2023-06-07T23:58:13.910798+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-January/004029.html" rel="alternate"/>
+    <summary>Clément Elbaz is designing a program that needs metrics computed from the Bitcoin blockchain, specifically some address balances or the occurrence of a specific transaction. However, his program will run on lightweight/embedded hardware and does not provide enough resources to set up a trusted node along with it. Therefore, he needs a way to ask an untrusted Bitcoin node to compute some 'metric request' on his behalf and having the result of that metric request validated by the network. Clément suggests using an alternate, small and fixed-length 'metric request block chain' to store structures defined as [metric request | current block number when request was made | hash of the response] instead of financial transactions. These structures are verifiable so it could work the same way as a regular financial blockchain. In an email exchange, Clément proposed the idea of paying a fee to the network for every metric request sent, with the aim of executing the request on the blockchain and having the response approved by the Bitcoin network. He suggested the need for proof of work and the creation of a specific blockchain that would store metric requests, current block number when they were asked, and hash of their responses. However, he received feedback that it would be more practical to set up a node, create an API interface and have the 'app' use the API on the node. Clément also proposed an alternate, small and fixed-length 'metric request blockchain,' which would temporarily store structures defined as [metric request | current block number when request was made | hash of the response] instead of financial transactions. Ultimately, he received private answers, and after studying them, he concluded that SPV mode of bitcoinj will be just fine for his specific needs.Additionally, Clément suggested that it would make sense to pay a fee every time a metrics request is made since they can be expensive to compute and validate. The 'metric request block chain' should not be part of the main Bitcoin protocol but could be a plugin interacting with the data managed by the fullnode bitcoin software. The email conversation is between Clément Elbaz and a group of people, where he is asking if there are any available or work-in-progress projects that would come close to this need or if he should do it himself. Another person suggests setting up a node, creating an API interface, and having the app use the API on the node. Overall, Clément's proposed solution involves using a 'metric request blockchain' to store verifiable structures instead of financial transactions. He also suggests paying a fee for every metrics request made, as they can be expensive to compute and validate. While he received feedback suggesting other methods, he ultimately concluded that SPV mode of bitcoinj will be sufficient for his specific needs.</summary>
+    <published>2014-01-08T19:44:29+00:00</published>
+  </entry>
+</feed>

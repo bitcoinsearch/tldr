@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>More thoughts on NOINPUT safety</title>
+  <updated>2023-05-23T01:57:32.935640+00:00</updated>
+  <author>
+    <name>Johnson Lau 2019-03-22 04:23:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>More thoughts on NOINPUT safety</title>
+    <updated>2023-05-23T01:57:32.935640+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-March/001934.html" rel="alternate"/>
+    <summary>The discussion on the bitcoin-dev mailing list regarding the eltoo paper suggests that OP_CSV (BIP112) is not necessary for update and settlement purposes. Instead, BIP68 relative-time is sufficient. A and B will co-sign a muSig with nLockTime = t for update purposes without committing to the scriptCode and BIP68 lock time, while for settlement purposes, they will co-sign with an agreed BIP68 locktime and commit to the scriptCode. The update sig could be bound to any previous update tx immediately, while the settlement sig would only bind to a specific update tx after the relative locktime has passed. The eltoo paper incorrectly suggests using OP_CSV; however, it is only needed if one party could single-handedly decide the relative locktime, which is not the case with a muSig. Finally, even a script using OP_CHECKLOCKTIMEVERIFY OP_DROP OP_CHECKSIGVERIFY OP_CHECKSIG doesn't require OP_CSV because the two signatures must use the same relative locktime, or the transaction is invalid.</summary>
+    <published>2019-03-22T04:23:28+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Optimized Header Sync</title>
+  <updated>2023-06-13T01:16:11.697601+00:00</updated>
+  <author>
+    <name>Riccardo Casatta 2018-03-29 08:17:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Optimized Header Sync</title>
+    <updated>2023-06-13T01:16:11.697601+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-March/015855.html" rel="alternate"/>
+    <summary>A new P2P network extension has been proposed to improve the syncing of block headers in Bitcoin clients. Optimized clients fetch all block headers before fetching all blocks themselves. The current protocol for fetching headers can be optimized further by compressing header data and downloading more headers simultaneously.To take advantage of these possible savings, a variable-sized "compressed encoding" of block headers that occur in a range has been defined. The compressed header format is versioned by a 256-bit unsigned integer. This definition is per the code comments in Bitcoin Core written by Pieter Wuille. The proposed messages enable sync strategies that are resilient against types of attacks. The NODE_HEADERS_V2 service bit is used to list block hashes at specified intervals. The proposed header download protocol reduces bandwidth usage by ~40%-50% and supports downloading headers ranges from multiple peers in parallel, which is not possible with the current mechanism. This also enables sync strategies with better resistance to denial-of-service attacks.Sync strategies include forward sequential syncing, parallel header download, and random sampling proof-of-work. The rationale behind including the coinbase transaction in the headers messages is due to its cryptographic commitments to a block's height. A simpler approach could be to encode the headers in groups of 2016 headers. The P2P messages are designed to be flexible, supporting multiple header sync strategies and leaving room for future innovations. A checkpoint is defined for a block as a tuple of its hash and the chain work. The proposed messages enable sync strategies that are resilient against types of attacks. The checkpts response includes a start height, end height, start checkpoint, end checkpoint, interval, checkpoints length, and checkpoints.The full BIP specification can be found at https://github.com/jimpo/bips/blob/headers-sync/headersv2.mediawiki. Credit is given to Gregory Maxwell, Suhas Daftuar, and Pieter Wuille for their contributions. The proposed protocol is backwards compatible and has no changes to consensus rules.</summary>
+    <published>2018-03-29T08:17:12+00:00</published>
+  </entry>
+</feed>

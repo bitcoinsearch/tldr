@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Simple tx ID malleability fix, opcode proposal: OP_TXHASHVERIFY</title>
+  <updated>2023-06-11T20:00:06.723750+00:00</updated>
+  <author>
+    <name>Nick ODell 2016-09-17 22:34:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Simple tx ID malleability fix, opcode proposal: OP_TXHASHVERIFY</title>
+    <updated>2023-06-11T20:00:06.723750+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-September/013119.html" rel="alternate"/>
+    <summary>The discussion thread on the bitcoin-dev mailing list revolves around creating transactions that are immune to transaction ID malleability. Rune K. Svendsen proposed a solution called OP_TXHASHVERIFY, which could be added to a scriptSig as the very first operation and would abort if the hash of the transaction with all OP_TXHASHVERIFY operations (including stack push) removed does not match what has been pushed on the stack. This would add 34 bytes per input for each input you wish to protect against tx ID malleability. However, Matt Corallo pointed out that the tx hash in the construction is not signed, which means someone wishing to manipulate a transaction may do so by also updating the hash in the scriptSig. Nick raised another issue that Hash1 must contain Hash2 and the transaction, but Hash2 must contain Hash1 and the transaction - a circular dependency. Rune replied that there is a solution, but it makes the operation less simple. If a transaction contains at least two OP_TXHASHVERIFY-protected inputs, signed without ANYONECANPAY, their signatures would cover the other input's OP_TXHASHVERIFY hash. The proposed solution is simple and valuable to not worry about tx ID malleability until something better becomes available, such as Segwit.</summary>
+    <published>2016-09-17T22:34:43+00:00</published>
+  </entry>
+</feed>

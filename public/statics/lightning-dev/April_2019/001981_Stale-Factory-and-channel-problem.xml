@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Stale Factory (and channel) problem</title>
+  <updated>2023-06-02T18:20:20.594946+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-04-17 03:39:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Stale Factory (and channel) problem</title>
+    <updated>2023-06-02T18:20:20.594946+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-April/001981.html" rel="alternate"/>
+    <summary>A multiparticipant offchain system can experience a stale off-chain system, where one participant sends a signature to advance the protocol but is unable to receive signatures from other participants, causing a stall in the protocol. This issue requires some timeout and a backoff path, aborting the protocol, and performing corrective action on-chain. The more participants involved in the offchain system, the higher the chances of this disruption occurring. For payment channels, this issue can be fixed by exchanging signatures of the most recent state upon re-establishing communication, as required by BOLT. However, for channel factories, it is unclear whether on-factory channels should be rooted from the old state or the new state if a participant drops out. It is suggested that `SIGHASH_NOINPUT` may help resolve this issue. If an on-factory channel is not affected by a channel reorganization operation at the factory level, it can continue to operate using `SIGHASH_NOINPUT`. Unaffected channels can continue operating even if a factory-level operation is in an indeterminate state, such as when a participant drops out.</summary>
+    <published>2019-04-17T03:39:09+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Taro: A Taproot Asset Representation Overlay</title>
+  <updated>2023-06-15T18:35:39.535442+00:00</updated>
+  <author>
+    <name>Johan Torås Halseth 2022-11-07 13:51:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Taro: A Taproot Asset Representation Overlay</title>
+    <updated>2023-06-15T18:35:39.535442+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021172.html" rel="alternate"/>
+    <summary>Johan and Olaoluwa Osuntokun are discussing the "utxo teleport" scheme. Johan believes that the scheme is sound as long as clients do not send tokens to a spent UTXO. However, he agrees with Olaoluwa's concern about losing the blockchain as the main synchronization point. Johan thinks that the scheme is not compatible with LN channels. If someone wants to refill an existing channel with tokens, but the channel is force-closed with a pre-existing commitment from before the token transfer took place, the tokens will be burned. Olaoluwa, on the other hand, thinks that the "utxo teleport" scheme is not actually sound. He states that by the time the transaction hits the chain, the UTXO may no longer exist, and there is no total ordering to ensure safety. Taro's state transition model, in contrast, ensures that everything is fully bound to a single synchronization point: a normal Bitcoin transaction with inputs consumed and outputs created. Taro transfers inherit the same re-org safety traits as regular Bitcoin transactions, and it is possible to withdraw from an exchange into a Loop In address, and have everything work as expected, with users topping off their channels. Olaoluwa also mentions that he does not think that the "utxo teleport" scheme is a great model for anchoring assets in channels. With Taro, when someone makes a channel, they know how many assets are committed since they're all committed to in the funding output when the channel is created. However, with the "utxo teleport" scheme, at which point would the new asset "deposits" be recognized? Olaoluwa thinks that the "utxo teleport" scheme either requires an OP_RETURN or additional out-of-band synchronization to complete the transfer. On the other hand, with Taro, sending to an address creates an on-chain taproot output just like sending to a P2TR address. The creation of the output directly creates the new asset anchor/output as well, which allows the receiver to look for that address on-chain just like a normal on-chain transaction. The send process is fully async, with the sender and receiver using the blockchain itself as a synchronization point like a normal Bitcoin wallet.</summary>
+    <published>2022-11-07T13:51:12+00:00</published>
+  </entry>
+</feed>

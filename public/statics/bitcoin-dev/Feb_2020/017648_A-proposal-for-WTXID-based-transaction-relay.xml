@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>A proposal for WTXID-based transaction relay</title>
+  <updated>2023-05-20T21:48:27.077527+00:00</updated>
+  <author>
+    <name>Suhas Daftuar 2020-02-25 19:48:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>A proposal for WTXID-based transaction relay</title>
+    <updated>2023-05-20T21:48:27.078524+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-February/017648.html" rel="alternate"/>
+    <summary>Suhas has proposed a new feature to add support for relaying transactions based on their wtxid, rather than just their txid. Currently, the INV messages sent on the Bitcoin peer-to-peer network to announce transactions refer to transactions by their txid, which is a hash of the transaction that does not include the witness (see BIP 141). This creates inefficiencies as a transaction's witness can be malleated without altering the txid. To eliminate this concern, Suhas proposes using the wtxid in place of the txid when announcing and fetching transactions. Suhas seeks feedback on feature negotiation for efficiency purposes. He believes it makes sense for peers to negotiate at the beginning of a connection whether they are going to use wtxid- or txid-based, prior to announcing any transactions. His proposal is to send a message between receiving a VERSION message and prior to sending VERACK (to nodes advertising version at least 70016) to announce support for this new feature. If both sides send it then they each know to enable it on the link. Suhas thinks it would be great to use messages sent between VERSION and VERACK to negotiate features prior to fully initializing a peer connection. However, he welcomes feedback on whether inserting a message before VERACK would break any assumptions of other software on the network.</summary>
+    <published>2020-02-25T19:48:23+00:00</published>
+  </entry>
+</feed>

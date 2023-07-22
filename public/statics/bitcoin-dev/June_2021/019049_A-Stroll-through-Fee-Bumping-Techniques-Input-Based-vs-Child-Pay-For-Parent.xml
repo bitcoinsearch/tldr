@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+  <updated>2023-06-14T22:16:09.212962+00:00</updated>
+  <author>
+    <name>darosior 2021-06-10 13:18:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+    <updated>2023-06-14T22:16:09.212962+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-June/019049.html" rel="alternate"/>
+    <summary>The email thread discusses the comparison between two techniques for fee-bumping, input-based and output-based, and the anti-fee sniping protection. The use of nLockTime in the revocation transaction while adding inputs to it is a concern since it could be included in any reorged block, which could lead to high fee-paying transactions being snipped. A new sighash type that does not mask nLockTime could help with this issue. The recent BIP proposal by Chris Belcher also uncovered a new hack where setting the nSequence of coins less than 65,535 blocks old can achieve the same purpose. The email also discusses the use of a well-laid-out pool of fee-bumping UTXOs, which is necessary since ACP | SINGLE is trivially pinable and requires ACP | ALL for Revault. It is suggested to create a single fan-out transaction that creates an entire UTXO pool in advance, with one coin per contract used to bump transaction feerate and smaller coins attached to any transaction to bump by a certain threshold. This method is more optimal and ensures that the feebump does not depend on the confirmation of a first stage transaction. In case of rebroadcast, the fee-bumping input is attached to the root of the chain of transactions, which breaks the chain validity in itself. However, attaching it at the tail of the chain would effectively be a CPFP for the entire chain. The discussion concludes with considerations for using these strategies for vaults and LN, with higher cells of feerate reserve being necessary for the former.</summary>
+    <published>2021-06-10T13:18:53+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>MIN_STANDARD_TX_NONWITNESS_SIZE and OP_RETURN</title>
+  <updated>2023-06-14T01:46:30.158780+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2020-05-27 15:15:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>MIN_STANDARD_TX_NONWITNESS_SIZE and OP_RETURN</title>
+    <updated>2023-06-14T01:46:30.158780+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-May/017904.html" rel="alternate"/>
+    <summary>In a recent discussion on the bitcoin-dev mailing list, Thomas Voegtlin inquired about the reasoning behind the current minimum transaction size of 82 bytes. Specifically, he was looking to construct a 60-byte transaction that was being rejected due to this minimum size requirement. ZmnSCPxj responded by explaining that the reason for the high minimum size is to protect against the CVE-2017-12842 attack, which involves using a 32-bit hash collision to create a 'bad' block. ZmnSCPxj further explained that even with SHA256 padding, which includes a length value of the original message data, it is not safe to accept 60-byte transactions, as they will be padded to 64 bytes and could still be vulnerable to attacks. It may be safe to accept 65-byte or larger transactions, but this would not help Thomas's specific application. Lastly, ZmnSCPxj noted that SHA256 also includes 10* padding, which ensures that messages of different lengths have different padding.Overall, the discussion centered around the reasoning behind the minimum transaction size of 82 bytes and the potential vulnerabilities associated with smaller transactions.</summary>
+    <published>2020-05-27T15:15:47+00:00</published>
+  </entry>
+</feed>

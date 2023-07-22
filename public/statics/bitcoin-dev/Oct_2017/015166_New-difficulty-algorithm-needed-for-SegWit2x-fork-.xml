@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>New difficulty algorithm needed for SegWit2x fork?</title>
+  <updated>2023-05-20T04:08:37.539243+00:00</updated>
+  <author>
+    <name>Scott Roberts 2017-10-09 21:26:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>New difficulty algorithm needed for SegWit2x fork?</title>
+    <updated>2023-05-20T04:08:37.539243+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-October/015166.html" rel="alternate"/>
+    <summary>The Bitcoin difficulty algorithm is not ideal, and a fork may occur if miners prioritize profit over security. If 90% of hashrate goes toward using SegWit2x, BTC would face 10x delays in confirmations, negatively affecting its price relative to BTC1. This situation could lead to miner abandonment and potentially cause an oscillation between the two coins worse than what BCH is experiencing. The solution proposed is a hard fork to implement a new difficulty algorithm that uses a simple rolling average with a smaller window. Additionally, the reward should be adjusted based on recent solvetimes to keep the coin issuance rate on schedule. The recommended difficulty algorithm for Bitcoin is Zawy v6, which has been modified for Bitcoin. The algorithm keeps negative solvetimes to correct bad timestamps and avoids temptation to use next_D = sum(last N Ds) * T / [max(last N TSs) - min(last N TSs]. The constants until the next hard fork are set as T=600 and N=30 for the averaging window, X=5 for the size of sudden hashrate changes expected as multiple of base hashrate, limit = X^(2/N) to limit rise and fall to protect against timestamp errors and manipulation, and adjust = 1/(1+0.67/N) to keep avg solvetime on track for small N. The difficulty algorithm begins with avg_ST=0 and avg_D=0 and goes through the N most recent blocks to calculate the average SolveTime and Difficulty. If avg_ST exceeds T*limit or is less than T/limit, it is adjusted accordingly.</summary>
+    <published>2017-10-09T21:26:50+00:00</published>
+  </entry>
+</feed>

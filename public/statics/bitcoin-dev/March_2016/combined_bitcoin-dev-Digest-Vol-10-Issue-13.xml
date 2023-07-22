@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - bitcoin-dev Digest, Vol 10, Issue 13</title>
+  <updated>2023-06-11T04:29:46.569364+00:00</updated>
+  <author>
+    <name>Bob McElrath 2016-03-09 06:17:50</name>
+  </author>
+  <author>
+    <name>Daniele Pinna 2016-03-09 01:27:22</name>
+  </author>
+  <author>
+    <name>Bob McElrath 2016-03-09 06:17:50</name>
+  </author>
+  <author>
+    <name>Daniele Pinna 2016-03-09 01:27:22</name>
+  </author>
+  <author>
+    <name>Daniele Pinna 2016-03-09 01:27:22</name>
+  </author>
+  <author>
+    <name>Bob McElrath 2016-03-09 06:17:50</name>
+  </author>
+  <link href="bitcoin-dev/March_2016/012536_bitcoin-dev-Digest-Vol-10-Issue-13.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2016/012535_bitcoin-dev-Digest-Vol-10-Issue-13.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2016/012536_bitcoin-dev-Digest-Vol-10-Issue-13.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2016/012535_bitcoin-dev-Digest-Vol-10-Issue-13.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2016/012535_bitcoin-dev-Digest-Vol-10-Issue-13.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2016/012536_bitcoin-dev-Digest-Vol-10-Issue-13.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - bitcoin-dev Digest, Vol 10, Issue 13</title>
+    <updated>2023-06-11T04:29:46.569364+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-March/012536.html" rel="alternate"/>
+    <summary>A discussion on the Bitcoin-dev mailing list centered around finding a solution for hashrate rebalancing. Daniele Pinna proposed adjusting the difficulty adjustment at each new block using the current method, but this would lead to oscillation between blocks even if miners were switching hardware on and off. To prevent this, Pinna suggested performing a weighted average of the previous 2016 blocks to find an optimal weighting based on historical interblock timing data. Pinna noted that the optimal solution is the critically damped oscillator. Mike Wozniak added that Simplified Payment Verification (SPV) wallets must also calculate retargeting, but it is a simple calculation that would not affect the runtime of SPV wallets.Bob McElrath presented a solution called the "critically damped harmonic oscillator" which finds the first and second derivatives of the hashrate over time resulting in a damped harmonic oscillator system with two parameters: oscillation frequency and damping factor. The maximum oscillation frequency is the block rate and any oscillation faster than that cannot be measured by block times. The damping rate is an exponential decay and for critical damping is twice the oscillation frequency. While this solution is a numeric approximation to a differential equation, it provides a zero-parameter, optimal damping solution for a varying hashrate. It is also possible for weak block proposals to get better approximations to the hashrate.Dave Hudson suggests that the community adjust difficulty at each new block using the current method instead of adopting McElrath's proposal. However, if faster relaxation in case of adversity is required, a weighted average of the previous 2016 blocks could be performed, based on historical interblock timing data. An optimal weighting could then be found to address this issue. Overall, the Bitcoin-dev mailing list discussion focused on finding a solution for hashrate rebalancing and included various proposals and suggestions for achieving this goal.</summary>
+    <published>2016-03-09T06:17:50+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Data Lightning Atomic Swap (DLAS-down, DLAS-up)</title>
+  <updated>2023-06-02T21:48:19.843037+00:00</updated>
+  <author>
+    <name>Subhra Mazumdar 2020-01-21 01:47:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Data Lightning Atomic Swap (DLAS-down, DLAS-up)</title>
+    <updated>2023-06-02T21:48:19.843037+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-January/002445.html" rel="alternate"/>
+    <summary>The conversation in this context is about the use of Zero Knowledge (ZK) proofs in the Lightning Network to verify the transfer of an entire file or asset. ZmnSCPxj suggested using a protocol that involves sending an encrypted form of the entire file, where a single payment is made, and the payment preimage is the decryption key. A zk proof is necessary to show that the file is indeed encrypted using the decryption key that is the preimage of the given hash. The linked thread has details on this. There is no need to consider blocks of a file when using this protocol instead of DLAS. However, a zk-proof of some property of the entire file that can be understood by an end-user may not be possible. It is likely that one might want to prove of a video file that a thumbnail of the video file is extracted from a frame of the video, and show that thumbnail to the end-user. One should be careful as looking at the rest of the frames of the video (after paying for its decryption) may reveal them to be frames of a video of Rick Astley singing "Never Gonna Give You Up". Matt Corallo advises against using data in lightning payments unless necessary, as it is super DoS-y and rude to your peers. If you are just transferring a file, you can use ZKCP to send an encrypted copy of the file with the encryption key being the payment_preimage, making the whole thing one big atomic action. When partitioning a file into several units (say chunks of file), one has to give a ZK proof "block x is part of File F" as and when the block of file is received. ZK proofs are incredibly fast these days for small-ish programs. They're much too slow for a consensus system where every party needs to download and validate them, but for relatively simple programs, a two-party system using them is very doable. However, Subhra Mazumdar is concerned that the use of ZK proof might render the system slow and hence defy the very purpose of the lightning network, which intends to make things scalable as well as faster transactions. Matt Corallo suggests using Zero Knowledge Contingent Payments, originally designed for on-chain applications but can be used in lightning as it only requires a method to lock funds to a hash preimage.</summary>
+    <published>2020-01-21T01:47:49+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Imposing minimum 253 sat/ksipa feerate?</title>
+  <updated>2023-05-25T01:02:37.596164+00:00</updated>
+  <author>
+    <name>Sjors Provoost 2018-06-15 11:39:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Imposing minimum 253 sat/ksipa feerate?</title>
+    <updated>2023-05-25T01:02:37.596164+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-June/001308.html" rel="alternate"/>
+    <summary>The Lightning Network has been facing the issue of imposing a minimum 250 sat/ksipa fee rate, which is not accepted by bitcoind nodes. This causes a few issues in C-lightning where they close unilaterally when the counterparty proposes a 250sat/ksipa feerate. Eclair has discovered the same issue and seems to have imposed the same solution as C-lightning. Ucoin has 253 in a constant somewhere. Lnd and lit, on the other hand, have not imposed any minimums and it is unclear whether they have encountered issues with 250 sat/ksipa transactions getting propagated on the Bitcoin-level network. Nodes regulate their minimum fee rates dynamically deepening on the size of their mempools, and even a value of 253 may be too low if a large fee spike occurs. The best current candidate for managing these fee issues seems to be utilizing a permanent op_true output. It should be noted that dynamic minimum relay fees create a problem since many nodes may never relay transactions if the fee is on the low end of the permitted range, and even the default 300 MB mempool setting only fits ~150 blocks worth of transactions.</summary>
+    <published>2018-06-15T11:39:59+00:00</published>
+  </entry>
+</feed>

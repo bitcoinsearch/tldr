@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-05-23T03:05:18.515271+00:00</updated>
+  <author>
+    <name>Matt Corallo 2020-04-23 22:47:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-05-23T03:05:18.515271+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002669.html" rel="alternate"/>
+    <summary>In a discussion on 23rd April, ZmnSCPxj and Matt proposed a new method for miners to confirm transactions. The proposal suggests that if A wants to pay C but can't directly connect to C, they should use a hashlock smart contract. In this mechanism, B acts as an intermediary between A and C. However, the current implementation has some flaws. Matt's suggestion is that B and C should agree to show the preimage of some hash H, and then B provides a signature spending the hashlock branch to a transaction with normal payment to C and hook outputs to both B and C. This new proposal still allows B to not maintain a mempool by broadcasting its timelock transaction and trying to CPFP (Child Pays For Parent) the above hashlock transaction. If CPFP succeeds, it means the above hashlock transaction exists and B queries the peer for this transaction, extracting the preimage and claiming the A-&gt;B HTLC without any query required. Once the transaction makes it into the mempool, it can be CPFP'd and all the regular sub-package CPFP calculation will pick it and its descendants up. However, this relies on it not spending any other unconfirmed inputs.Even if C hooks a tree of low-fee transactions on its hook output or normal payment, miners will still be willing to confirm this and the B hook CPFP transaction without any issues.</summary>
+    <published>2020-04-23T22:47:46+00:00</published>
+  </entry>
+</feed>

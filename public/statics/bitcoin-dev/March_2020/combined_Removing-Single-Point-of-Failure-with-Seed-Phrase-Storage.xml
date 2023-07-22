@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Removing Single Point of Failure with Seed Phrase Storage</title>
+  <updated>2023-06-13T23:46:39.853193+00:00</updated>
+  <author>
+    <name>Jeremy 2020-02-26 19:56:09</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-02-28 13:10:27</name>
+  </author>
+  <author>
+    <name>Russell O'Connor 2020-03-06 11:11:11</name>
+  </author>
+  <author>
+    <name>Jeremy 2020-02-26 19:56:09</name>
+  </author>
+  <author>
+    <name>Contact Team 2020-02-26 13:02:20</name>
+  </author>
+  <author>
+    <name>Jeremy 2020-02-26 19:56:09</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-02-28 13:10:27</name>
+  </author>
+  <author>
+    <name>Contact Team 2020-02-26 13:02:20</name>
+  </author>
+  <author>
+    <name>Christopher Allen 2020-02-26 20:26:44</name>
+  </author>
+  <author>
+    <name>Christopher Allen 2020-02-26 20:26:44</name>
+  </author>
+  <author>
+    <name>Contact Team 2020-02-26 13:02:20</name>
+  </author>
+  <author>
+    <name>Christopher Allen 2020-02-26 20:26:44</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-02-28 13:10:27</name>
+  </author>
+  <author>
+    <name>Russell O'Connor 2020-03-06 11:11:11</name>
+  </author>
+  <author>
+    <name>Russell O'Connor 2020-03-06 11:11:11</name>
+  </author>
+  <link href="bitcoin-dev/Feb_2020/017653_Removing-Single-Point-of-Failure-with-Seed-Phrase-Storage.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017659_Removing-Single-Point-of-Failure-with-Seed-Phrase-Storage.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017678_Removing-Single-Point-of-Failure-with-Seed-Phrase-Storage.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017653_Removing-Single-Point-of-Failure-with-Seed-Phrase-Storage.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017652_Removing-Single-Point-of-Failure-with-Seed-Phrase-Storage.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017653_Removing-Single-Point-of-Failure-with-Seed-Phrase-Storage.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017659_Removing-Single-Point-of-Failure-with-Seed-Phrase-Storage.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017652_Removing-Single-Point-of-Failure-with-Seed-Phrase-Storage.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017654_Removing-Single-Point-of-Failure-with-Seed-Phrase-Storage.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017654_Removing-Single-Point-of-Failure-with-Seed-Phrase-Storage.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017652_Removing-Single-Point-of-Failure-with-Seed-Phrase-Storage.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017654_Removing-Single-Point-of-Failure-with-Seed-Phrase-Storage.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2020/017659_Removing-Single-Point-of-Failure-with-Seed-Phrase-Storage.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017678_Removing-Single-Point-of-Failure-with-Seed-Phrase-Storage.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2020/017678_Removing-Single-Point-of-Failure-with-Seed-Phrase-Storage.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Removing Single Point of Failure with Seed Phrase Storage</title>
+    <updated>2023-06-13T23:46:39.853193+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-February/017653.html" rel="alternate"/>
+    <summary>Various solutions have been proposed for seed phrase security, each with its own set of advantages and limitations. While paper or metal engraving options are commonly used to secure seed phrases, they act as a single point of failure when it comes to secure storage. Hardware wallets, even those using a secure element, can still be vulnerable to hacking. One potential solution is the Cypherock X1 Wallet, which uses Shamir Secret Sharing to split the seed phrase into four different shares, each stored in a PIN-protected card with a secure element. Any two of these four cards are needed to recover the seed or make a transaction, making the loss of the seed phrase highly improbable. The storage and computation aspects of this hardware wallet are decoupled, providing added security through distribution.However, Shamir's shares have the issue that the key does exist plaintext on a device at some point. Non-interactive multisig provides an alternative benefit by allowing transactions to be signed without having keys in the same room/place/device ever. Feedback from the community is welcomed regarding the Cypherock X1 Wallet. Additionally, there are still more issues that need to be addressed before one could even think about using Shamir split backups for actual valuable data. Although Shamir split backups have a place in operational security scenarios, there are vulnerabilities such as restoring keys in one place and denial edge cases where someone can deny knowledge of who gave corrupted share. Verifiable Secret Sharing (VSS) is considered better than Shamir Secret Sharing for seed sharding in the long-term. Bitcoin multisig transactions are recommended as the best solution for self-sovereign recovery of funds. The email thread discusses the benefits and issues with using Shamir's Secret Sharing as a replacement for paper. A concept has been proposed for creating secret shares using paper computers (slide charts), and can be found at https://github.com/roconnor-blockstream/SSS32/blob/master/SSS32.ps. This design splits a secret encoded in the Bech32 alphabet into 2-of-n shares. Protecting the secret data is crucial, so checksum BCH code longer than 6 characters should be designed to get strong error-correcting capabilities. While this scheme may be workable for the subset of people that it would appeal to, it requires manual computation, which may lead to errors. The document is open source and available for those who want to tinker with it.In conclusion, there are various solutions available for seed phrase security, each with its own benefits and limitations. It is important to carefully consider the security models being used and seek feedback from the community before deciding on a specific solution. The email thread also discusses the limitations of Shamir split backups and suggests non-interactive multisig as a better alternative, allowing signing transactions without having keys in the same room/place/device ever. However, Shamir split backups still have a place in operational security scenarios. The best C-library for Shamir sharding of recovery seeds is available at the Blockchain Commons Github but needs refactoring to be a good standalone library. They are working on air-gapped open-source open hardware for seed creations and Shamir restoration. Longer-term, they want to leverage the VSS (Verifiable Secret Sharing) that future Bitcoin musig uses, which has advantages over Shamir Secret Sharing. Bitcoin multisig transactions are recommended as the best solution for self-sovereign recovery of funds vs using Shamir or SLIP39. The free #SmartCustody book offers current best practices for single seed recovery and is now working on v2 of the book, which will cover multisign and fiduciary scenarios now that PSBT is maturing and more wallets are improving multisig support.</summary>
+    <published>2020-02-26T19:56:09+00:00</published>
+  </entry>
+</feed>

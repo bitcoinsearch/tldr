@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Lightning over taproot with PTLCs</title>
+  <updated>2023-05-23T16:20:16.017923+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-10-19 06:26:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Lightning over taproot with PTLCs</title>
+    <updated>2023-05-23T16:20:16.017923+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-October/003325.html" rel="alternate"/>
+    <summary>Anthony Towns proposed a replacement of BOLT#2 and BOLT#3 in order to implement PTLCs and take advantage of taproot. During the in-person LN summit, it was concluded that these features should be split up and implemented gradually. The plan for implementation is as follows: Firstly, taproot funding/anchor output will be implemented. This has several benefits such as better privacy for LN utxos, mutual closes that look normal and require only one signature and no script, and it does not require updating any HTLC scripts. However, it comes with complexities such as the implementation of musig/musig2/similar for mutual closes and signing commitment txs, affects gossip which needs to understand the new utxo format, and it may affect splicing. Secondly, commitment outputs will be updated to taproot. This has the benefit of slightly cheaper unilateral closes and possibly more privacy. However, it only requires support for taproot script path spends. Thirdly, PTLC outputs will be implemented. This has several benefits such as having a different "hash" at every hop which arguably provides better privacy, and it can easily do cool things with points/secrets that would require zkp's to do with hashes/secrets. However, it comes with complexities such as the need for a routing feature bit, and it is not usable unless lots of the network upgrades to support PTLCs. Fourthly, a symmetric commitment tx (revocation via signature info) will be implemented. This has the benefit of reducing the complexity of layered txs and reduces gamesmanship of who posts the commitment tx. It also enables low-latency/offline payments. However, it requires careful nonce management. Fifthly, low-latency payments will be implemented. This has the benefit of halving the time to complete payments that have no problems, and the latency introduced by synchronous commitment updates does not matter for successful payments, so peer protocol can be simplified. However, there are complexities that need to be addressed. Lastly, offline receipt, eltoo channels, and eltoo factories will be implemented.</summary>
+    <published>2021-10-19T06:26:50+00:00</published>
+  </entry>
+</feed>

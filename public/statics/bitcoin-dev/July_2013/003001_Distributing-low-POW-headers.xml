@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Distributing low POW headers</title>
+  <updated>2023-06-07T14:27:23.335922+00:00</updated>
+  <author>
+    <name>Tier Nolan 2013-07-24 11:55:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Distributing low POW headers</title>
+    <updated>2023-06-07T14:27:23.335922+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-July/003001.html" rel="alternate"/>
+    <summary>In an email exchange discussing Bitcoin network consensus, Peter Todd requested equations and data justifying the 'magic constants' in a proposal. The first "magic number" discussed was 1/64 of the standard Proof of Work (POW) for distributing headers. This means that headers would be broadcast once every nine seconds, which should not represent much load on the network. The second magic number is how much credit to give for mini-headers. Setting it at 1/16 means that the headers will be worth around four times as much as a block. This creates an incentive for miners to take headers into account. A fork will only become the main chain due to a new block if it is within 16 mini-confirms. The proposal means that if the network is split 80/20, then miners should stick with the 80% fork, even if the 20% fork wins the race for the next block. Winning a few rounds is easier than winning many rounds worth of mini-confirms. The key is that as long as the honest miners stay on the main chain, they will eventually overwhelm any rewrite attack with less than 50% of the mining power. This is a system to agree on what is the main chain in the face of a re-write attack.The proposal also discusses changes to the current behavior of not relaying blocks to peers if they conflict with blocks in the best known chain. Headers would still be broadcast, but blocks would not be forwarded. If a header extends the header tree and meets full POW, it is broadcast. Full blocks would only be sent if they extend the main chain. Additionally, if a header builds on a header in the header tree, it is broadcast, even if it does not meet full POW (only 1/64 required). A warning could be displayed on the client if a fork is getting more than 15% of the hashing power. This proposal is a system to agree on the main chain in the face of consensus loss forks where a significant number of miners are following an alternative chain.</summary>
+    <published>2013-07-24T11:55:33+00:00</published>
+  </entry>
+</feed>

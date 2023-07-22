@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Free Rebalancing Proposals</title>
+  <updated>2023-05-25T02:14:41.403611+00:00</updated>
+  <author>
+    <name>Robert Olsson 2018-08-13 12:24:45</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-08-14 02:46:45</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-08-13 10:16:10</name>
+  </author>
+  <author>
+    <name>Robert Olsson 2018-08-11 23:31:52</name>
+  </author>
+  <link href="lightning-dev/Aug_2018/001391_Free-Rebalancing-Proposals.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2018/001392_Free-Rebalancing-Proposals.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2018/001390_Free-Rebalancing-Proposals.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2018/001389_Free-Rebalancing-Proposals.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Free Rebalancing Proposals</title>
+    <updated>2023-05-25T02:14:41.403611+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-August/001391.html" rel="alternate"/>
+    <summary>Robert Olsson has proposed using rebalancing to improve the redundancy and maximum possible routes in a Lightning Network. The solution is called "Free Rebalancing Proposals," which aims to address the problem of small amounts that are too small individually to justify on-chain transfers, but can be batched together to justify the on-chain transfer. This can be done through a separate layer/software that interacts with ordinary existing LN software without requiring additional changes at the LN protocol level.The proposed solution works by sending a proposal-for-balancing message over channel A and the max amount you would propose to balance in that direction. Each node analyzes the in and out channels and adjusts the max to its own desire to balance. If everyone is happy, the origin node sends a payment along this node, *without* dropping off any fees along the way, since all nodes agreed and benefit from the rebalancing act. ZmnSCPxj raises concerns that if the "free rebalancing" protocol is transported via onion-routing-packet style, it could be used by a payer and payee to coordinate to locate some route that would charge fees if paid normally but could be made free using the protocol. However, intermediate hop routes cannot detect this, and Robert explains that this is not a problem as all nodes benefit from the rebalancing act. ZmnSCPxj also expresses his opinion that rebalancing is not a good solution for improving the routing in a Lightning Network, and he suggests that purchasing more incoming balance could be a better solution for nodes to achieve a balanced state on their channels. The proposed solution for optimizing channels in a payment network involves sending a proposal-for-balancing-message over a channel and allowing each node to adjust the maximum amount they are willing to balance, as determined by a function that checks the proximity of the channels' balances to a desired value. The adjusted message is then passed on to the next node until it reaches the origin with the final maximum value. However, there may be a risk of flooding the network with creative attempts to find a fee-free hop, which could be stopped with a general throttle functionality.The proposed solution prevents multiple attempts at rebalancing from oscillating the balances and allows for equilibrium as long as the freeBalancerMax function is used consistently. The intermediate nodes do not need to keep track of agreements to balancing proposals, but rather call the freeBalancerMax function to determine if a payment should be passed on or failed.</summary>
+    <published>2018-08-13T12:24:45+00:00</published>
+  </entry>
+</feed>

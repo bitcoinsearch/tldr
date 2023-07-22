@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Hold fees: 402 Payment Required for Lightning itself</title>
+  <updated>2023-06-03T02:31:00.015039+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-10-23 10:50:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Hold fees: 402 Payment Required for Lightning itself</title>
+    <updated>2023-06-03T02:31:00.015039+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002867.html" rel="alternate"/>
+    <summary>In this conversation, ZmnSCPxj discusses the scenario of delaying refunds in a Lightning Network transaction. They explain that if the final recipient delays settling the HTLC before the grace period ends, it is fair for them to pay the intermediary node C for this. However, if the delaying party is not the final recipient, C cannot immediately propagate the update_fail_htlc upstream since the latest commitment transaction for the CD channel still contains the HTLC. There is also a small window where two valid commitment transactions exist. Thus, C can only safely propagate its own upstream update_fail_htlc once it receives revoke_and_ack from D. The grace period between C and D should be measured from C sending update_add_htlc to C receiving revoke_and_ack from D in case the HTLC fails. This is when D is allowed to consume time, and if it exceeds the grace period, it is penalized. For success case update_fulfill_htlc, C can immediately propagate this back to its upstream since it can now. Thus, in that case, we can stop the timer at the update_fulfill_htlc. The start point of the grace period is C-&gt;commitment_signed-&gt;D containing the HTLC. ZmnSCPxj explains that the D grace period has two smaller grace periods that D imposes on C using the threat of channel drop to protect against the C-side griefing.</summary>
+    <published>2020-10-23T10:50:12+00:00</published>
+  </entry>
+</feed>

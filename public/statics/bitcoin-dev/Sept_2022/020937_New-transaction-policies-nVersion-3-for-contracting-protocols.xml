@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New transaction policies (nVersion=3) for contracting protocols</title>
+  <updated>2023-06-16T00:25:01.648983+00:00</updated>
+  <author>
+    <name>Gloria Zhao 2022-09-23 15:18:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New transaction policies (nVersion=3) for contracting protocols</title>
+    <updated>2023-06-16T00:25:01.648983+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-September/020937.html" rel="alternate"/>
+    <summary>Gloria proposes a set of mempool/transaction relay policies to help L2/contract protocols. This proposal incorporates feedback on the PR, and Gloria has written an implementation for Bitcoin Core. The new policies include a set of additional policy rules applying to V3 transactions and modifications to package RBF rules. Existing standardness rules apply to V3 transactions, and additional rules apply to V3, including that a V3 transaction can be replaced, even if it does not signal BIP125 replaceability. An unconfirmed V3 transaction cannot have more than 1 descendant. A V3 transaction that has an unconfirmed V3 ancestor cannot be larger than 1000 virtual bytes. Commitment transactions should be V3 and have 1 anchor output. They can be signed with 0 fees (or 1sat/vbyte) once package relay is deployed on a significant portion of the network. If the commitment tx must be broadcast, determine the desired feerate at broadcast time and spend the anchor output in a high feerate transaction. The V3 descendant limit restricts both you and your counterparty, and assuming nodes adopted this policy, you may reasonably assume that you only need to replace the commitment transaction + up to 1000vB. Feedback and review would be much appreciated.</summary>
+    <published>2022-09-23T15:18:21+00:00</published>
+  </entry>
+</feed>

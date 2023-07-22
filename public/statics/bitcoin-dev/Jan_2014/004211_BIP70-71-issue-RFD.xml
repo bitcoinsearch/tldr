@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP70/71 issue, RFD</title>
+  <updated>2023-06-08T00:48:17.832563+00:00</updated>
+  <author>
+    <name>Andreas Schildbach 2014-01-26 22:14:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP70/71 issue, RFD</title>
+    <updated>2023-06-08T00:48:17.832563+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-January/004211.html" rel="alternate"/>
+    <summary>Andreas Schildbach, an experienced developer in the Bitcoin industry, wrote an email to the Bitcoin development mailing list on January 26, 2014. In this email, he discussed his experimentation with BIP70/71 (payment protocol) usage in face-to-face payments. He highlighted an issue with the protobuf format and noted that Protobufs are not self-delimiting. This means that if you're reading from an undelimited stream, you will read endlessly because you don't know how much to read. The current BIP70 implementations probably work because they're reading either from a file or from an HTTP resource which sets the Content-Length header. However, the Content-Length header is optional, and also there are many kinds of streams that don't have this built-in delimiting mechanism. The Java protobuf API solves this by offering delimited I/O like payment.writeDelimitedTo(os).Schildbach suggested that it might be a good idea to apply this to all messages if any, but he specifically encountered this with PaymentMessage and PaymentACK. He further explained that if it turns out we need to retrofit messages with length prefixes, we would have to restart with new mime-types since the nature of prefixes being always at the start rules out simply incrementing a protocol version number.Mike Hearn, another member of the Bitcoin development community, responded to Schildbach's email. Hearn agreed with Schildbach's suggestion, saying that for "binding" the payment protocol to those transports, they should indeed use protobuf varint length prefixes. However, he noted that it's unnecessary for all cases and suggested skipping the delimiter for NFC NDEF and QR codes. Hearn also mentioned that unless Gavin feels it'd be better to be consistent everywhere and is willing to change the spec and code - as far as he knows though they're trying to ship 0.9rc1 soonish. The email thread concluded with a link to CenturyLink Cloud's services and the Bitcoin-development mailing list details.</summary>
+    <published>2014-01-26T22:14:52+00:00</published>
+  </entry>
+</feed>

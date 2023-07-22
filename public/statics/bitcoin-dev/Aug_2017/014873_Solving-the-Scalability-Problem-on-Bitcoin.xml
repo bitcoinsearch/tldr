@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Solving the Scalability Problem on Bitcoin</title>
+  <updated>2023-06-12T15:03:29.913142+00:00</updated>
+  <author>
+    <name>Leandro Coutinho 2017-08-27 12:10:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Solving the Scalability Problem on Bitcoin</title>
+    <updated>2023-06-12T15:03:29.913142+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-August/014873.html" rel="alternate"/>
+    <summary>The issue with node pruning is that it is not standardized, and for a new node to enter the network and verify the data, it needs to download all data and prune it by itself. This will drastically lower the information needed by the full nodes by getting rid of the junk. Currently, the blockchain size is around 140GB, which is increasing exponentially with the number of users and transactions created, and could reach a Terabyte sooner than expected. To solve this scalability problem, Adam Tamir Shem-Tov proposes the concept of "trusted" nodes, where one can choose some nodes to connect and from which block they want to download. These nodes would do this at their own risk, but there are ways to minimize the risk, like checking the latest blocks for matching hashes in sites like blockchain.info, or downloading and comparing the unspent transaction outputs (UTXO) from all connected nodes. Thomas Guyot-Sionnest points out that pruning is already implemented in nodes, where only unspent inputs and the most recent blocks are kept, and that there was also a proposal to include UTXO in some blocks for SPV clients to use, but that would be additional to the blockchain data. Implementing Shem-Tov's solution is impossible because there is no way to determine the authenticity of the blockchain midway. The proof that a block hash leads to the genesis block is also a proof of all the work that's been spent on it (the years of hashing). At the very least, all blocks would have to be kept until a hard-coded checkpoint in the code, which means that as nodes upgrade and prune more blocks, older nodes will have difficulty syncing the blockchain. Saving just the addresses and balances is not enough; one would also need to save each unspent output block number, transaction position, and script required for validation on input. That's a lot of data to save every 1000 blocks, and it doesn't even guarantee that older blocks can be dropped. Shem-Tov's proposed solution involves combining and pruning the blockchain in its entirety every 999 blocks to one block (Genesis block not included in count). Once block 1000 has been created, the network would be waiting for a special "pruned block," and until this block was created and verified, block 1001 would not be accepted by any nodes. This pruned block would prune everything from block 2 to block 1000, leaving only the Genesis block. Blocks 2 through 1000 would be calculated to create a summed-up transaction of all transactions which occurred in these 999 blocks. Its hash pointer would be the Genesis block. This block would then be verified by full nodes, which if accepted, would then be willing to accept a new block (block 1001, not including the pruned block in the count). The new block 1001 would use the pruned block as its hash pointer reference, and the count would begin again to the next 1000. In this way, the ledger will always be a maximum of 1000 blocks.</summary>
+    <published>2017-08-27T12:10:19+00:00</published>
+  </entry>
+</feed>

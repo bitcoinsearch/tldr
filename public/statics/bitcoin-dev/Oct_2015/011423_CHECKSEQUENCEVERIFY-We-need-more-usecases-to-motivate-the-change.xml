@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CHECKSEQUENCEVERIFY - We need more usecases to motivate the change</title>
+  <updated>2023-06-10T23:46:55.136003+00:00</updated>
+  <author>
+    <name>Alex Morcos 2015-10-05 22:03:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CHECKSEQUENCEVERIFY - We need more usecases to motivate the change</title>
+    <updated>2023-06-10T23:46:55.136003+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-October/011423.html" rel="alternate"/>
+    <summary>In this email thread, Peter Todd expresses concerns about whether implementing a relative (instead of absolute) CLTV mechanism using the nSequence field is the best approach. He suggests that it may be better to provide more high order bits to signal different uses of the field instead. Alex responds by asking about the reasoning for having single second resolution on the time-based sequence number locks and proposes reducing the resolution to leave more low order bits. Anthony Towns joins the conversation and discusses the differences between RCLTV and CLTV. He explains that RCLTV/OP_CSV is used in lightning commitment transactions to enforce a delay between publishing the commitment transaction and spending the output. This delay is necessary so that the counterparty has time to prove the commitment was revoked and claim the outputs as a penalty. Using absolute CLTV instead would mean that once the effective delay a commitment transaction has decreases over time -- initially it will be longer than desirable, causing unwanted delays in claiming funds when no cheating is going on; but over time it will become too short, which means there is not enough time to prove cheating (and the channel has to be closed prematurely). Towns also suggests that OP_CRLTV alone works fine for BIP68 use cases, which are of the form: 1) published input; here's a signed tx that spends it to you, usable after a delay; 2) here's an unpublished input, you can build your own transaction to spend it, just not immediately after it's published; and 3) here's an unpublished input, and a signed transaction spending it, that you can use to spend it after a delay.</summary>
+    <published>2015-10-05T22:03:48+00:00</published>
+  </entry>
+</feed>

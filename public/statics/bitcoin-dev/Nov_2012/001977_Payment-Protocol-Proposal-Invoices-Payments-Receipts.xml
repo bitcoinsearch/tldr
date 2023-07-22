@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Payment Protocol Proposal: Invoices/Payments/Receipts</title>
+  <updated>2023-06-06T08:36:29.778450+00:00</updated>
+  <author>
+    <name>Rick Wesson 2012-11-26 23:38:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Payment Protocol Proposal: Invoices/Payments/Receipts</title>
+    <updated>2023-06-06T08:36:29.778450+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-November/001977.html" rel="alternate"/>
+    <summary>The discussion begins with a preference for using DANE over X.509 for certificates and roots. Gavin Andresen introduces the idea of a "payment protocol" that could improve upon Bitcoin addresses. The protocol would offer features such as refund address provision, proof-of-payment, and payment requests tied to authenticated identities using widely-deployed identity authentication systems (X.509 certificates signed by root certificate authorities).The proposed Bitcoin Payment Protocol would allow for a more streamlined and secure payment process by using X.509 certificates as the identity system for merchants, and multi-signature-capable Bitcoin clients to authorize payments. The protocol utilizes binary message formats instead of JSON due to issues with signing JSON data.Andresen's proposal includes protocol buffer-based formats for signed, authenticated "invoices" and "receipts". Additional documents propose an extension to the Bitcoin URI syntax and new MIME types to support them. The proposal also covers use cases like merchant payment service, SatoshiDice, and multiperson wallet.The document specifies in detail how invoices, signed invoices, payments, receipts, and certificates will work under this proposal. An invoice contains information about outputs where Bitcoins are to be sent, DER-encoded X.509 certificates that identify the merchant, the timestamp when the invoice was created, expiration time, whether it can be used once or multiple times, a note that should be displayed to the customer explaining what the invoice is for, secure URI where a Payment message may be sent to obtain a SignedReceipt as proof-of-payment, and arbitrary data ignored by the client that may be used by the merchant to identify the Invoice. Similarly, specifications for Payment, Receipt, SignedInvoice, and SignedReceipt are also mentioned in detail.Finally, the document discusses issues related to root certificates and certificate management, suggesting that each Bitcoin client should determine which root CAs are trustworthy. There are several ways to allow merchants to pay for Bitcoin network transaction processing fees, including adding a 'maxfee' field to the invoice or changing the transaction selection code used by Bitcoin miners. However, checking for revoked certificates using the Online Certificate Checking Protocol (OCSP) is not ideal due to slow response times from Certificate Authorities.The proposal does not address implementing a better global PKI, but suggests that if one were adopted, it would replace the Invoice.x509chain with whatever infrastructure is used to identify entities. The Bitcoin Payment Protocol could improve on existing proposals such as sipa's payment protocol proposal and ThomasV's "Signed Aliases" proposal. Developers can utilize Protocol Buffers, which is a simple, robust, multi-programming-language format for encoding messages, to implement the proposed protocol.</summary>
+    <published>2012-11-26T23:38:31+00:00</published>
+  </entry>
+</feed>

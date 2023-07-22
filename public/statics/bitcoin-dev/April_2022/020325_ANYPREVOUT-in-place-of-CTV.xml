@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>ANYPREVOUT in place of CTV</title>
+  <updated>2023-06-15T19:25:36.681738+00:00</updated>
+  <author>
+    <name>darosior 2022-04-25 16:35:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>ANYPREVOUT in place of CTV</title>
+    <updated>2023-06-15T19:25:36.681738+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-April/020325.html" rel="alternate"/>
+    <summary>A discussion on the activation of CTV and SIGHASH_ANYPREVOUT is taking place, with concerns about scarce reviewer time. APO-AS without ANYONECANPAY is used to approximate CTV, but it misses committing to the nSequences hash and number of inputs. Anthony Towns previously compared the two, while Jeremy Rubin pointed out its flaws. The fields covered in the CTV hash are similar to what the ANYPREVOUT_ANYSCRIPT's signature hash covers. However, APO_AS does not commit to the number of inputs and the hash of the inputs' sequences. The current behaviour of ANYONECANPAY can be combined with other signature hash types, making APO_AS mandatory, and to emulate CTV completely, it should be optional. The discussion involves tweaking BIP118 to replace or precede BIP119. Richard Myers believes that both proposals compete for scarce reviewer time and their ordering will depend on priorities. He focuses on BIP-118 as his priority is eltoo. In eltoo commit txs, ANYONECANPAY is always paired with APO-AS, while settlement txs in eltoo use only APO and do not necessarily need ANYONECANPAY. Making ANYONECANPAY the default for APO-AS was a way to add one more sighash flag, but there may be another way to do it. Including SIGHASH_GROUP with APO for eltoo is tempting so that the counter-party who commits a settlement tx can use their settled to_self balance for fees. It is worth discussing how to rejigger the sighash flags to accommodate both APO and GROUP. The BIP-118 proposal would benefit from input from reviewers looking at other protocols besides eltoo.</summary>
+    <published>2022-04-25T16:35:14+00:00</published>
+  </entry>
+</feed>

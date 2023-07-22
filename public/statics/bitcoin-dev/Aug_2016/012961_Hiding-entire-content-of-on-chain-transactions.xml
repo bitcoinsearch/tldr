@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Hiding entire content of on-chain transactions</title>
+  <updated>2023-06-11T19:27:25.461757+00:00</updated>
+  <author>
+    <name>James MacWhyte 2016-08-09 00:03:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Hiding entire content of on-chain transactions</title>
+    <updated>2023-06-11T19:27:25.461757+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-August/012961.html" rel="alternate"/>
+    <summary>A proposal has been made to address the privacy concerns associated with Bitcoin transactions. The email thread discusses how exchanges and large merchants are able to track large outputs and accumulate coin histories, making it difficult for users to maintain their anonymity.To solve this problem, the author proposes a separate currency called Bitcoin Blender Coin (BBC) that would operate on top of the bitcoin blockchain and provide better privacy protection through the use of multiple addresses and smaller denominations. No hard or soft fork is required for this design, as the same private keys and addresses can be used for both BBC and the base currency BTC.The proposed solution involves hiding all inputs and outputs of Bitcoin transactions and publishing only the hash of inputs and outputs in the blockchain as an OP_RETURN. The plaintext of inputs and outputs is sent directly to the payee via a private message, and never goes into the blockchain.To prove that the outputs being spent are valid, the payer also has to send the plaintexts of the earlier transaction(s) that produced them, then the plaintexts of even earlier transactions that produced the outputs spent in those transactions, and so on, up until the issue transactions that created the initial private coins.Each new owner of the coin will have to store its entire history, and when he spends the coin, he forwards the entire history to the next owner and extends it with his own transaction. One technical nuance is that every output in a private payment must also include a blinding factor, which is just a random string. When the output is spent, the corresponding spend proof will therefore depend on this blinding factor.To issue the new private coin, one can burn regular BTC by sending it to one of several unspendable bitcoin addresses, one address per denomination. Burning BTC would entitle one to an equal amount of the new private coin, called black bitcoin or BBC.However, there are limitations that ought to be mentioned. The proposal would shift the burden of verification to the owners of the coin, who would have to back up entire histories of every output that has been sent to them if they want to secure their funds. It also requires them to be online to receive payments.The author acknowledges that the proposed design may have flaws and is seeking feedback from the community.</summary>
+    <published>2016-08-09T00:03:17+00:00</published>
+  </entry>
+</feed>

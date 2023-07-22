@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-06-13T15:24:03.693517+00:00</updated>
+  <author>
+    <name>Christian Decker 2018-11-21 11:15:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-06-13T15:24:03.693517+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-November/016491.html" rel="alternate"/>
+    <summary>Pieter Wuille proposed some additions to the sighash for future segwit versions. He suggested committing to the absolute transaction fee and scriptPubkey in addition to the scriptCode, which would prevent lying to devices about the type of output being spent. To ensure these additional pieces of information are not committed to in all circumstances, it makes sense to make these optional. These proposals interact with SIGHASH_NOINPUT in two ways, either by changing the prevout or changing the script. Wuille's proposal is to add three new sighash flags: SIGHASH_NOINPUT, SIGHASH_NOFEE, and SIGHASH_SCRIPTMASK. He also proposed adding a new opcode OP_MASK, which acts as a NOP during execution. The sighash would be computed like in BIP143, but if SIGHASH_SCRIPTMASK is present, for every OP_MASK in scriptCode the subsequent opcode/push is removed. Additionally, the scriptPubKey being spent would be added to the sighash unless SIGHASH_SCRIPTMASK is set; the transaction fee would be added to the sighash unless SIGHASH_NOFEE is set, and hashPrevouts, hashSequence, and outpoint are set to null when SIGHASH_NOINPUT is set. Christian expressed concern that introducing a new opcode to mask things in the sighash looks like a similar layering violation as codeseparator was, but it is only a minor issue in his opinion. Christian also noted that Wuille's proposal may address some downsides of BIP118 by committing to the script when possible.  Finally, Wuille asked whether anyone can see ways in which this introduces redundant flexibility or misses obvious use cases.</summary>
+    <published>2018-11-21T11:15:44+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Message signing (again)</title>
+  <updated>2023-05-20T23:55:16.279277+00:00</updated>
+  <author>
+    <name>Karl-Johan Alm 2020-10-01 08:56:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Message signing (again)</title>
+    <updated>2023-05-20T23:55:16.280273+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-October/018218.html" rel="alternate"/>
+    <summary>The proposed update to the Generic Signed Message Format (BIP-322) aims to simplify the process of supporting psbt and remove the need for a custom signer and validator. It utilizes a Bitcoin Script based approach, making it more generic without causing too much burden on implementers who most likely have access to Bitcoin Script interpreters already. The proposed specification follows the BIP-325 challenges and solutions.A message signature is considered valid, inconclusive, or invalid based on whether the corresponding virtual transactions are valid. Further details about the proposal can be found on the GitHub page.To sign a message using the new format, the pubkey-hash function pkh(P) = ripemd160(sha256(P)) is used. A compact signature is created using x on digest. The resulting proof is serialized using the base64 encoding. To verify the signature, the pubkey recovery is attempted for digest using the signature sig and the resulting pubkey is stored into Q. If pubkey recovery fails, verification also fails. After that, let q be the pubkey-hash pkh(Q) for the pubkey Q, if p == q, the proof is valid, otherwise it is invalid. This specification is backwards compatible with the legacy signmessage/verifymessage specification through a special case.The BIP specifies that a proof that validates for both consensus and policy rulesets is valid, a proof that validates for consensus rules, but not for policy rules, is "inconclusive", and a proof that does not validate for consensus rules is "invalid" (regardless of policy rule validation). The document lists the consensus and policy rules associated with enforced flags in Bitcoin transactions.The proposed standard is based on the Bitcoin Script format for interoperable generic signed messages, which involves two actors: a prover P and a verifier V. P wants to prove they own the private key associated with a given address A, which in turn is derived from the pubkey kG. V generates a message M and hands it to P. P generates a signature S by signing the message M using k. Given S, V can prove that P has the private key associated with A. However, the current message signing standard unnecessarily restricts and complicates the mechanism, making it impossible to sign a message for a P2SH address.The document is licensed under the Creative Commons CC0 1.0 Universal license. Test vectors are yet to be added to the document. The pull request and viewable versions of the proposal are available on GitHub.</summary>
+    <published>2020-10-01T08:56:15+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>User Activated Soft Fork Split Protection</title>
+  <updated>2023-06-12T02:01:05.827600+00:00</updated>
+  <author>
+    <name>Erik Aronesty 2017-06-07 19:59:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>User Activated Soft Fork Split Protection</title>
+    <updated>2023-06-12T02:01:05.827600+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-June/014528.html" rel="alternate"/>
+    <summary>A proposed soft fork called "splitprotection" may allow miners to coordinate activation of the existing segwit deployment with less than 95% hashpower before BIP148 activation. This would reduce the risk of a chain split as much as possible and use a simple miner majority of 65% over a 504 block interval rather than a higher percentage. The splitprotection BIP is essentially BIP91 but using BIP8 instead of BIP9 with a lower activation threshold and immediate mandatory signaling lock-in.Any miners already running BIP148 should be encouraged to use splitprotection. The truly defensive logic is "If the majority supports orphaning non-segwit blocks starting Aug 1, I'll join them." However, it might not be possible for BIP91 to enforce mandatory signaling of segwit before the Aug 1st activation of BIP148, so splitprotection provides a method for rapid miner activation of SegWit mandatory signaling ahead of the BIP148 activation date.The splitprotection BIP will be deployed by "version bits" with a 65% activation threshold BIP9 with the name "splitprotection" and using bit 2. This context is related to a deployment named "splitprotection-v0.14.1" which is compatible with the existing "segwit" bit 1 deployment scheduled between midnight November 15th, 2016 and midnight November 15th, 2017 and also compatible with the existing BIP148 deployment. The document contains the code for this deployment and explains its rationale.Historically, IsSuperMajority() has been used to activate soft forks such as BIP66. This technique can be leveraged to lower the signaling threshold of a soft fork while it is in the process of being deployed in a backwards compatible way. By orphaning non-signaling blocks during the BIP9 bit 1 "segwit" deployment, this BIP can cause the existing "segwit" deployment to activate without needing to release a new deployment.As we approach BIP148 activation, it may be desirable for a majority of miners to have a method that will ensure that there is no chain split. The deployment mentioned requires miners to upgrade their nodes to support split protection otherwise they may build on top of an invalid block. While this bip is active, users should either upgrade to split protection or wait for additional confirmations when accepting payments.The document also includes various references related to this deployment including mailing list discussions, version bits with timeout and delay, pay to script hash, reduced threshold Segwit MASF, segregated witness (consensus layer), transaction signature verification for version 0 witness program, dealing with dummy stack element malleability, mandatory activation of segwit deployment, segregated witness (second deployment), and segwit benefits. Finally, this document is dual licensed as BSD 3-clause, and Creative Commons CC0 1.0 Universal.</summary>
+    <published>2017-06-07T19:59:23+00:00</published>
+  </entry>
+</feed>

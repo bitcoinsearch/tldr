@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-06-13T15:22:45.995250+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-12-13 00:37:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-06-13T15:22:45.995250+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-December/016548.html" rel="alternate"/>
+    <summary>Rusty Russell in a message thread mentioned that he is uncertain if there is any useful NOINPUT case with unmasked script. However, someone corrected him stating it is not true for Eltoo, as the script itself need not change for the rebinding. But Rusty re-checked and found out the constant for timelock comparison changes on each new update. Therefore, his opinion changed, and he wonders what’s the use of NOINPUT &amp;&amp; !NOMASK. He questions whether it is worthwhile doing the mask complexity rather than just removing the commitment to script with NOINPUT. He also points out that NOINPUT is only helpful when you cannot re-sign the transaction, and you need to be able to create a new one even if this input is spent once. An attacker can do this with SIGHASH_MASK or not. Furthermore, he notes that both key-reuse and amount-reuse need to be exploited. Additionally, he explains that an attacker can clone channel state to another channel. Rusty concludes that it's not worth using SIGHASH_NOINPUT because it's simply dangerous with key-reuse, and Don't Do That.</summary>
+    <published>2018-12-13T00:37:28+00:00</published>
+  </entry>
+</feed>

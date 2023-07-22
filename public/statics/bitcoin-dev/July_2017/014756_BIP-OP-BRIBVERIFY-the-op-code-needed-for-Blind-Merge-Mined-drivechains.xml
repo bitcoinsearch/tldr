@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP: OP_BRIBVERIFY - the op code needed for Blind Merge Mined drivechains</title>
+  <updated>2023-06-12T02:57:00.110380+00:00</updated>
+  <author>
+    <name>Chris Stewart 2017-07-12 18:02:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP: OP_BRIBVERIFY - the op code needed for Blind Merge Mined drivechains</title>
+    <updated>2023-06-12T02:57:00.110380+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-July/014756.html" rel="alternate"/>
+    <summary>In a conversation between Chris Stewart, Russell O'Connor and ZmnSCPxj on the bitcoin-dev mailing list, they discussed the issue of replaceability of the bribe transaction. If the 'bribe' is the fee on the transaction it isn't clear what the best way to replace or remove it is. They proposed having the amount in the output instead of the fee which would allow for a contract to be constructed that would still incentivize the miner to include your redemption even if they didn't include the bribe. Another proposal was to only have an OP_RETURN output and replace the 'bribe' transaction with a double spend transaction which would refund yourself and allow the miner to collect their normal mining fee. It is unclear if there are mempool policies that would reject this double spend transaction. They also discussed the issue of coinbase commitments and searching for drivechain commitments. One suggestion was to remove the necessity of coinbase commitments and have the miner commit to the sidechain_id and h* in the transaction that pays the OP_BRIBEVERIFY. This ensures that at most one OP_BRIBEVERIFY exists for each sidechain_id in a mainchain block. Another suggestion was to eliminate the need to use the scripting system altogether and just use a special OP_RETURN output to hold the sidechain_id and h*. They can soft fork in a rule that at most one such output can appear in a block per sidechain_id. The possibility of a 'drivechain commitment tx' was also floated around but it is still up in the air.</summary>
+    <published>2017-07-12T18:02:30+00:00</published>
+  </entry>
+</feed>

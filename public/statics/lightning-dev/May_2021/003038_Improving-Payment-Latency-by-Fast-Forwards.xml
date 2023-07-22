@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving Payment Latency by Fast Forwards</title>
+  <updated>2023-06-02T18:25:40.189722+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2021-05-23 07:26:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving Payment Latency by Fast Forwards</title>
+    <updated>2023-06-02T18:25:40.189722+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-May/003038.html" rel="alternate"/>
+    <summary>The email discusses the use of Fast Forwards in Lightning Network to reduce the privkey online requirement for lightning. The proposal allows the receiver to keep privkeys offline while being online. However, the proposal as made cannot support this feature. The HTLC is safe when the receiver provides its signature if the channel drops onchain. Channels can be dropped onchain at any time, and if the receiver is unable to provide its signature before the `to_self_delay` finishes, then the sender can revoke all HTLCs it sent. The additional requirement that the receiver privkeys have to be regularly brought online is not onerous since it is needed for channel safety. Fast Forwards are designed for a modified form of Poon-Dryja, and the scheme can't be used in Decker-Russell-Osuntokun ("eltoo"). In Decker-Russell-Osuntokun, the "main" outputs are simple singly-signed outputs, and the timeout is placed "before" the state transactions that contain the "main" outputs. The "main" output of a Decker-Russell-Osuntokun cannot be used in a Fast Forwarded manner as the Fast Forwarded transaction needs to be signed by both participants. We could add another timeout at the main output simply to support Fast Forwards; however, this increases the effective delay in case the channel is dropped unilaterally on-chain. In addition, when forwarding, Decker-Russell-Osuntokun requires that the CLTV at a particular hop be larger than the `to_self_delay` at that hop. Properly designed, a Decker-Russell-Osuntokun construction could also have payment latency approaching the latency of the Fast Forward scheme, so that advantage of Fast Forwards is lost as well.</summary>
+    <published>2021-05-23T07:26:30+00:00</published>
+  </entry>
+</feed>

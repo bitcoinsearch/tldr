@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - reducing the number of blockchain transactions used by the LN, and the fees paid to confirm them</title>
+  <updated>2023-05-24T18:06:17.220397+00:00</updated>
+  <author>
+    <name>Jim Renkel 2017-12-21 01:52:43</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2017-12-21 06:44:27</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2017-12-21 08:12:44</name>
+  </author>
+  <author>
+    <name>Jim Renkel 2017-12-21 00:52:24</name>
+  </author>
+  <author>
+    <name>Dario Sneidermanis 2017-12-21 01:07:24</name>
+  </author>
+  <link href="lightning-dev/Dec_2017/000863_reducing-the-number-of-blockchain-transactions-used-by-the-LN-and-the-fees-paid-to-confirm-them.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2017/000865_reducing-the-number-of-blockchain-transactions-used-by-the-LN-and-the-fees-paid-to-confirm-them.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2017/000866_reducing-the-number-of-blockchain-transactions-used-by-the-LN-and-the-fees-paid-to-confirm-them.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2017/000861_reducing-the-number-of-blockchain-transactions-used-by-the-LN-and-the-fees-paid-to-confirm-them.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2017/000862_reducing-the-number-of-blockchain-transactions-used-by-the-LN-and-the-fees-paid-to-confirm-them.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - reducing the number of blockchain transactions used by the LN, and the fees paid to confirm them</title>
+    <updated>2023-05-24T18:06:17.220397+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2017-December/000863.html" rel="alternate"/>
+    <summary>Jim Renkel, a computer networking developer, has proposed an idea to reduce the number of blockchain transactions used by the Lightning Network (LN) and fees paid to confirm them in a common LN use case. The use case is when a customer makes frequent purchases from the same merchant over an extended period of time. Jim suggests enhancing the LN with an operation to deposit and withdraw funding in the channel to and from the blockchain without closing the channel. This could be done with a single blockchain transaction that merges the closing and re-opening blockchain transactions. This would result in a significant reduction in the number of blockchain transactions required.The concept of "splice in/out" has been discussed occasionally on the lightning-dev mailing list. It involves an input of the previous funding transaction output and an output of the next funding transaction output. For any splice-in, there is a possibility that inputs could be forcibly double-spent while the splicing transaction is unconfirmed, so the channel cannot be safely used until the splicing transaction is confirmed. To get around this, an asynchronous splice-in protocol can be used where both parties sign an escape transaction before the pre-splice-in transaction is signed and broadcasted. For additional security, the escape and splicing transactions should be RBF, and the splicing transaction should have a higher feerate than the escape transaction. The synchronous splice-in involves only one transaction but cannot use the channel until the splicing transaction is confirmed.Closing and re-opening the channel each take one blockchain transaction. If the LN were enhanced with an operation to deposit and withdraw funding in the channel to and from the blockchain without closing the channel, this could be done with a single blockchain transaction that is essentially the merge of the closing and re-opening blockchain transactions. The analysis shows that the number of inputs and the number of outputs in the funding adjustment transaction are each never greater than the sum of the number of inputs and the number of outputs, respectively, in the channel opening and closing transactions that the adjustment transaction replaces. The fee paid for the adjustment transaction, assuming the same fee rate for all the transactions, is never more than the sum of the fees paid for the closing and re-opening transactions, sometimes less, and occasionally significantly less.Because the channel remains open while waiting for the adjustment transaction to confirm, there may be less urgency in having it confirm. So its fee rate can be reduced, reducing the fee paid by a multiplicative amount. Combined, these two effects lead to a reduction in total fees paid for operating the channel, sometimes a significant reduction.Overall, this idea presents a potential solution for reducing the number of blockchain transactions and fees paid by the LN in a common use case. Comments and feedback are welcome, and if consensus can be reached on a detailed specification, the author would like to participate in the implementation of it.</summary>
+    <published>2017-12-21T01:52:43+00:00</published>
+  </entry>
+</feed>

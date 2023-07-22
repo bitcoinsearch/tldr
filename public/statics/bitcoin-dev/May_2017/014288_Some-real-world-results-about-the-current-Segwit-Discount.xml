@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Some real-world results about the current Segwit Discount</title>
+  <updated>2023-06-12T00:41:06.218106+00:00</updated>
+  <author>
+    <name>Sergio Demian Lerner 2017-05-09 13:49:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Some real-world results about the current Segwit Discount</title>
+    <updated>2023-06-12T00:41:06.218106+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-May/014288.html" rel="alternate"/>
+    <summary>The article discusses witness spam, which is free space in the witness part of a block that can be filled by miners to create bigger blocks with low latency for a cluster of miners, leading to centralization. The current 75% discount on witness space does not prevent witness spam and instead leaves extra space for it. The maximum block weight is set to 2.7M, where each byte of non-witness block costs 1.7 and each byte of witness costs 1. A normal filled block would be 2.7M bytes, and there would be no need to create ever a 4 Mbyte block. The current 75% discount can only achieve more transactions per second if the type of transactions change. 80% of all inputs/outputs are P2PKH. The only way to make use of the extra witness space is if most P2PKH transactions are replaced by multisigs (typically for LN). The 75% discount has been chosen with the idea that in the future the current transaction pattern will shift towards multisigs as it is the only direction Bitcoin can scale without a HF. However, using a 50% witness discount would be a much better option and less risky in case a 2X blocksize increase HF occurs in the future. Sergio Demian Lerner processed 1000 blocks starting from Block #461653 and computed several metrics, including the supposed size of witness data and non-witness data, assuming all P2SH inputs/outputs are converted to P2PWSH and all P2PKH inputs/outputs are converted to P2WPKH. This analysis doesn't take into account that LN transactions may affect the current state, increasing the segwit/nosegwit ratio. Lerner found that the real-world results indicated that the 75% discount is not the best option to prevent witness spam in a block of 4 MB. The non-witness data weight factor should not be 4 but 2.35, which leads to a 50% witness discount. The Bitcoinj source code is available for anyone to review and double-check.</summary>
+    <published>2017-05-09T13:49:05+00:00</published>
+  </entry>
+</feed>

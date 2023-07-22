@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for skip channel confirmation.</title>
+  <updated>2023-06-03T01:57:58.956999+00:00</updated>
+  <author>
+    <name>Roei Erez 2020-08-25 10:01:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for skip channel confirmation.</title>
+    <updated>2023-06-03T01:57:58.956999+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-August/002784.html" rel="alternate"/>
+    <summary>In a mailing list discussion, Roei Erez proposes the ability to skip a channel funding transaction confirmation, making the channel fully operational before its on-chain confirmation (aka a zero-conf channel). The motivation comes from the "Immediate on-boarding" use case where Bob issues an invoice with a routing hint that points to a fake channel between him and a routing node. When Alice pays Bob's invoice, the routing node intercepts the HTLC and holds it. The routing node then opens a channel to Bob where Bob has a choice of skipping funding confirmation or waiting for confirmation. Different implementations support zero-conf channels in different ways, with each defining their own way of agreeing on a short_channel_id (fake one) before the transaction is confirmed.Roei suggests some changes to the funding flow to support the zero-conf channel. In the accept_channel message, if the fundee wants to skip confirmation, they should send minimum_depth=0. In the funding_locked message, both parties send funding_locked while the channel_id is derived using a convention agreed on by both parties. The proposed convention takes it from the temporary_channel_id provided in previous open_channel messages. When the channel is confirmed, gossip messages such as channel_update are re-broadcasted and refers to the confirmed channel_id. Roei created a PR in LND that implements these changes.Matt Corallo adds notes to the discussion. He believes that gossip messages will be rejected by many nodes if no on-chain transaction exists, so re-broadcasting gossip messages at that time is not possible. Instead, he believes that gossiping should be avoided until the funding transaction has some confirmations. However, this should not prevent receiving payments, as invoices carrying a last-hop hint should be able to indicate any short_channel_id value and have it be accepted. Matt also highlights that unidirectional 0-conf is not captured in this protocol, leaving only the push_msat value payable and only once.</summary>
+    <published>2020-08-25T10:01:53+00:00</published>
+  </entry>
+</feed>

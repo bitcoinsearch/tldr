@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Waiting SIGHASH_ANYPREVOUT and Packing Packages</title>
+  <updated>2023-06-03T04:03:41.333321+00:00</updated>
+  <author>
+    <name>Antoine Riard 2021-06-19 01:34:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Waiting SIGHASH_ANYPREVOUT and Packing Packages</title>
+    <updated>2023-06-03T04:03:41.333321+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-June/003058.html" rel="alternate"/>
+    <summary>Antoine Riard has identified two safety issues related to Lightning in an email. The first issue is the pre-signed feerate problem with future broadcasted time-sensitive transactions, which can result in a loss of funds. The second issue is malicious transaction pinnings, which are attacks against LN nodes.To solve the pre-signed feerate problem, either package-relay or SIGHASH_ANYPREVOUT could be used. While SIGHASH_ANYPREVOUT is a better long-term solution, package-relay could provide a fallback plan. The mempool needs to be hardened against Tx-Relay Jammings to solve the problem of malicious transaction pinnings.The package relay system being considered by the Bitcoin Core team for mempool transactions could potentially reduce bandwidth waste caused by package redundancy. However, it also poses security concerns and requires careful consideration of upgradeability. The deployment timeline for this feature includes early 0.24 or 0.25 for the LN/L2 ecosystem to provide feedback on package API, followed by mempool hardening in early 0.26 or 0.27 for the whole Bitcoin ecosystem to adapt their clients. The SIGHASH_ANYPREVOUT softfork will allow any LN/L2 implementation to migrate its fee-bumping backend on top of it, and an optimized/multi-party fee-bumping primitive softfork will be considered in the coming decade. The p2p design process belongs to the Bitcoin Core dev process and should involve careful consideration of interdependencies between components, potential security concerns, and outreach to potentially affected downstream projects. One open design question for the higher half of the package relay is the package-size of the acceptance logic. Feedback is expected during next Thursday's transaction relay workshops.</summary>
+    <published>2021-06-19T01:34:28+00:00</published>
+  </entry>
+</feed>

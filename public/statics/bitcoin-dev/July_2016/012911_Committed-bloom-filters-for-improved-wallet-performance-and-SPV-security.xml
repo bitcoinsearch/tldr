@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Committed bloom filters for improved wallet performance and SPV security</title>
+  <updated>2023-06-11T04:54:39.671179+00:00</updated>
+  <author>
+    <name>Leo Wandersleb 2016-07-28 21:07:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Committed bloom filters for improved wallet performance and SPV security</title>
+    <updated>2023-06-11T04:54:39.671179+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-July/012911.html" rel="alternate"/>
+    <summary>Leo, a developer, was made aware of a mail thread by gmaxwell. A few days prior, Leo had started implementing something similar to the topic discussed. Although his version ignored the commitment and signing part, he thought that 12GB was an overkill. His code is currently broken, and he does not have much time to work on it. However, he shared his thoughts, stating that the difference between 80GB and 3GB makes the difference in being able to store it on a phone or not. Unfortunately, with segWit, this will be worse due to the higher transaction count per MB. The conversation on the mail thread was about the proposal to create a Bloom Filter Digest deterministically created from every block. The size of the filter for a desired false-positive rate depends on the number of elements it contains and the logarithm of the false-positive rate. To prevent light clients from downloading more blocks than necessary, the false-positive rate should be less than 1/ (block height). If the false positive rate is 1e-6 for today's block height (~410000), approximately 20 bits per element are needed. Therefore, for today's blocks, a 30kb filter is required, which is a 3% increase in block size if blocks commit to the filter. If Bitcoin had these filters from the beginning, a light client would have to download about 12MB of data in filters. Bob McElrath suggested using a Cuckoo filter instead of a Bloom filter since it is faster and makes more sense, given expected wallet sizes. He also stated that the required size of the filter commitment is roughly N log2H, where H is the block height.</summary>
+    <published>2016-07-28T21:07:29+00:00</published>
+  </entry>
+</feed>

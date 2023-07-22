@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[Pre-BIP] Fee Accounts</title>
+  <updated>2023-06-03T07:18:36.007893+00:00</updated>
+  <author>
+    <name>Jeremy 2022-01-19 07:32:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[Pre-BIP] Fee Accounts</title>
+    <updated>2023-06-03T07:18:36.007893+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-January/003445.html" rel="alternate"/>
+    <summary>Jeremy Rubin has proposed a solution to simplify the fee paying process in Bitcoin by establishing an account system as an "extension block". This system would allow for a special anyone-can-spend output type that is a "fee account" and can sign only two kinds of transactions: a fee amount and a TXID or outpoint; or a withdraw amount, a fee, and an address. Deposits to these outputs get stored in a separate UTXO database for fee accounts and committed in an extension block merkle tree where they can be released into fees if there is a corresponding transaction.Rubin's proposal aims to solve issues presented by the current design of Bitcoin's transactions, which makes writing smart contracts more difficult as fees must also be expressed in the logic. The proposed account system offers a more general way to add a fee to any transaction regardless of whether the user is related to that transaction or not. It is less vulnerable to pinning issues, fixes dust leakage for eltoo-like protocols, and allows protocol designs to be fully abstracted from paying fees.Although the actual signature must cover the TXID/outpoint, the committed data need only cover the index in the block of the transaction. The public key for account lookup can be recovered from the message and signature. The mempool restricts accounts from spending more than their balance, making this design scalable and not requiring substantial amounts of new state. The proposed system could potentially be modified to improve privacy, using something like Tornado.cash or a trustless mixing protocol. The Lightning network also works well with this type of design for channels. However, implementing this as a federated network that bribes miners could create a centralizing layer interfering with normal mining.</summary>
+    <published>2022-01-19T07:32:36+00:00</published>
+  </entry>
+</feed>

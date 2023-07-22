@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Bloom io attack effectiveness</title>
+  <updated>2023-06-07T16:11:18.432570+00:00</updated>
+  <author>
+    <name>Mike Hearn 2013-08-19 09:29:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Bloom io attack effectiveness</title>
+    <updated>2023-06-07T16:11:18.432570+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-August/003174.html" rel="alternate"/>
+    <summary>In an email conversation, Peter Todd suggested that SPV peers should be deprioritized since they don’t contribute back to the network. He proposed a scoring function for node importance, which would make nodes he connected to more important than nodes that connected to him to prevent attacks. Within these subsets, the connection's active duration could also be considered. The prioritization code would have a thread pool that pops requests off a queue and multiple queues for different priority bands or re-ordering when something new is added. To address I/O exhaustion, a patch should include a thread pool of 2-3 threads that take in CBlock load requests and then do the load/parse/filter in the background. Each thread would start by blocking on a counting semaphore representing the total number of requests. The network thread message loop would also be adjusted so that it can receive futures/callbacks/closure object with scores of the node. A thread-local or global variable would contain the current score of the node, which would decide whether to handle new network data or run a closure. The handling of "getdata" would call a function that requests a load of a block from disk and runs a closure when it's finished. The closure inherits the nodes' current score, and when executed, it writes the loaded/filtered data out over the network socket and deletes. The function that takes a CBlockIndex and yields a future would internally lock the job queue(s), add the new task, and do a stable sort of the queue using the scoring function, which would use the node score as the job score. This approach would ensure that good nodes outcompete bad nodes for disk IO.</summary>
+    <published>2013-08-19T09:29:55+00:00</published>
+  </entry>
+</feed>

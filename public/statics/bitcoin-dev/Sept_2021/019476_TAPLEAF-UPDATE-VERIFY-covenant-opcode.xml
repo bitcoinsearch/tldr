@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TAPLEAF_UPDATE_VERIFY covenant opcode</title>
+  <updated>2023-05-21T03:48:21.833695+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-09-20 14:52:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TAPLEAF_UPDATE_VERIFY covenant opcode</title>
+    <updated>2023-05-21T03:48:21.833695+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019476.html" rel="alternate"/>
+    <summary>In an email exchange, Antoine Riard shared his thoughts on combining scope-minimal opcodes like MERKLESUB with sighash malleability to update a subset of the off-chain contract transactions fields after the funding phase. He suggested using graftroot or just updating the utxo onchain as a better general purpose way of doing that. However, he recognized that it is definitely a tradeoff. Antoine also proposed a different contract policy where he expressed a set of capabilities such as splitting the 4 BTC funds between Alice/Bob and Caroll/Dave, allowing Alice, Bob, Caroll, and Dave to withdraw 1 BTC each after 2 weeks, and allowing Alice or Caroll to withdraw 2 BTC if the USDT price is X. However, there were some issues that needed to be addressed to avoid trust in the remaining counterparty when C4 is exercised. Both Alice or Caroll should be able to conserve the C5 option without relying on the updated key path.To address this issue, they came up with a solution involving a tree setup: (((AB, (A,B)), (CD, (C,D))), ACO), where AB and CD are contracts for splitting funds between Alice/Bob and Caroll/Dave, respectively, and A, B, C, D, A', C', D' are contracts for allowing Alice, Bob, Caroll, and Dave to withdraw 1 BTC each after 2 weeks. ACO is a contract that allows Alice or Caroll to withdraw 2 BTC if the USDT price is X. They also added a CLTV delay to each contract to ensure smooth transactions. Finally, they resolved the issue of G path not being neutralized on the Caroll/Dave fork and could be replayed by Alice or Bob by deleting the relevant contracts after they are spent.</summary>
+    <published>2021-09-20T14:52:46+00:00</published>
+  </entry>
+</feed>

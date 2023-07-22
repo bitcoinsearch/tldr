@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>`OP_EVICT`: An Alternative to `OP_TAPLEAFUPDATEVERIFY`</title>
+  <updated>2023-06-15T17:04:31.611860+00:00</updated>
+  <author>
+    <name>Greg Sanders 2022-02-19 01:46:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>`OP_EVICT`: An Alternative to `OP_TAPLEAFUPDATEVERIFY`</title>
+    <updated>2023-06-15T17:04:31.611860+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019947.html" rel="alternate"/>
+    <summary>In a Bitcoin-dev email thread, the topic of statechains and commitment schemes for multi-party constructions was discussed. The use of LN-Penalty in the context of a multi-party construction remains an unsolved issue. However, safe constructions for N&gt;2 include Decker-Wattenhofer and Decker-Russell-Osuntokun (eltoo). The conversation also delved into the use of Taproot Leaf Versioning (TLV) and its ability to create an "N-of-N With Eviction" construction. However, TLUV imposes an arbitrary ordering due to tapleaf revelation. In contrast, OP_EVICT does not require any ordering during commitment. It allows participants to evict an offline participant, creating a smaller N-of-N where all participants are online, and continue operating. OP_EVICT requires participant cooperation after the state update to allow a single participant to withdraw their funds unilaterally.To prevent signature replay, each update of an updateable scheme like CoinPool should use a different pubkey for each participant for each state. Additionally, non-punitive channels may not be suitable for high-value channels in a congested blockspace world, as punishments incentivize correct behavior. Thus, both fully punitive and non-punitive channels will likely exist for N==2.The discussion in this context revolves around the advantages and disadvantages of non-hardened derivation, specifically in relation to eviction transactions and the revival of CoinPool. The benefit of non-hardened derivation is that multiple evictions and the revival of CoinPool can be put into a single transaction, reducing the number of eviction transactions. However, it requires point operations and may require at least one signature validation. It is suggested that TLUV can be modified to make it functional for CoinPool revival while preventing equivocation among the remaining signers. TLUV has advantages over CTV, and OP_EVICT is a redesigned OP_TLUV. The author previously discussed their thoughts on revivable constructs with participant eviction in another forum.</summary>
+    <published>2022-02-19T01:46:07+00:00</published>
+  </entry>
+</feed>

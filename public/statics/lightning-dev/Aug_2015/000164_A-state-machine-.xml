@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A state machine.</title>
+  <updated>2023-05-23T19:55:05.783578+00:00</updated>
+  <author>
+    <name>Rusty Russell 2015-08-31 00:34:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A state machine.</title>
+    <updated>2023-05-23T19:55:05.783578+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-August/000164.html" rel="alternate"/>
+    <summary>A user named Pierre asked several questions regarding a new branch called 'state' which Rusty Russell answered in detail. The following were the questions: 1) Why is the field amount an int32 and not a uint32 in PKT_UPDATE_ADD_HTLC? 2) Is the htlc flow always A-&gt;B PKT_UPDATE_ADD_HTLC, B-&gt;A PKT_UPDATE_COMPLETE_HTLC, A-&gt;B PKT_UPDATE_ADD_HTLC, B-&gt;A PKT_UPDATE_COMPLETE_HTLC? Can there be two successive PKT_UPDATE_ADD_HTLC with the same H, the latter updating the former and then a single completion? 3) What is the use case of PKT_UPDATE since an HTLC is completed with a PKT_UPDATE_COMPLETE_HTLC? 4) Why is there no PKT_UPDATE_DECLINE? 5) How do high/low priorities resolve conflicts? 6) In a closing by mutual consent, who publishes the final transaction? 7) How are fees managed? Russell explained that the field amount has been fixed to become uint32 from int32. Regarding the htlc flow, he explained that adding an HTLC goes like so: A: PKT_UPDATE_ADD_HTLC, B: PKT_UPDATE_ACCEPT (or PKT_UPDATE_DECLINE_HTLC, in which case end), A: PKT_UPDATE_SIGNATURE, B: PKT_UPDATE_COMPLETE. There are three ways to remove it: it has timed out so A wants to cancel it, B finally gets a failure upstream so wants to cancel it, B gets the R value and wants to complete it. All these cases lead to the PKT_UPDATE_ACCEPT/PKT_UPDATE_SIGNATURE/PKT_UPDATE_COMPLETE sequence. He also renamed PKT_UPDATE_COMPLETE_HTLC to PKT_UPDATE_FULFILL_HTLC.PKT_UPDATE is a non-htlc transfer that was useful for writing test utilities, but he has taken it out of the state machine since it's not useful in practice. All updates are now HTLC updates. There is no PKT_UPDATE_DECLINE.Russell explained that the protocol can only do one update at a time. In the case where both peers propose an update, they need to decide which goes first. Thus, each peer alternates between high and low priority states. If you're high priority, your update takes precedence. Arbitrarily, the anchor funder starts in high priority, the other one in low priority. Both sides should publish in a closing by mutual consent, as they should be identical anyway, but it doesn't matter. Regarding fees management, that's mainly unresolved. A node will decline if not enough fees are offered, but how those are advertised (and how routes are advertised) is still TBA. They'll probably implement fixed fees and terrible routing to begin with.</summary>
+    <published>2015-08-31T00:34:03+00:00</published>
+  </entry>
+</feed>

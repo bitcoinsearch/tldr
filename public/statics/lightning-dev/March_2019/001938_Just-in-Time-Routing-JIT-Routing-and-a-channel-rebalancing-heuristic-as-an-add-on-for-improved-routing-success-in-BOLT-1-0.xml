@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Just in Time Routing (JIT-Routing) and a channel rebalancing heuristic as an add on for improved	routing success in BOLT 1.0</title>
+  <updated>2023-06-02T17:50:27.039090+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-03-26 03:26:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Just in Time Routing (JIT-Routing) and a channel rebalancing heuristic as an add on for improved	routing success in BOLT 1.0</title>
+    <updated>2023-06-02T17:50:27.039090+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-March/001938.html" rel="alternate"/>
+    <summary>ZmnSCPxj has been considering how to handle the modified Luaces-Pickhardt JIT-Routing, which reuses the same payment hash as the message to forward. If hop routes are given more time than their reported `cltv_delta`, then either JIT-Routing cannot be done or it is done despite the lack of blocks, at the major risk of possibly getting attacked by fooling around with lock times. The "reverse the polarity" operation proposed by Pickhardt in response to Luaces needs to respect timelocks if the payment preimage is reused. ZmnSCPxj provides an example of a simple network graph where C-Lightning has taken over the world and everyone uses a sensible 14-block `cltv_delta`. In this example, B receives an onion from A, but it doesn't have enough money in channel B-D. B can augment it with money from B-C by rebalancing. However, if nodes boost their `cltv_delta`s, then JIT-routing becomes impossible. The "reverse the polarity" operation is not feasible for JIT-Routing since it requires much more time than its `cltv_delta` declares. Instead, the hop node B needs to incur the entire risk in rebalancing. It also means that the JIT-Routing technique cannot be used by unidirectional-only implementations like Eclair Mobile. An intermediate route node could decide for any reason to re-route a payment through any subset of nodes to arrive at the next hop. This requires "Rendezvous Routing", which cdecker and cjp are working on. However, timelocks need to be respected, and if a hop node cannot find a route that fits its own time risk and the time risk allocated to it by the source payer, it becomes problematic.</summary>
+    <published>2019-03-26T03:26:27+00:00</published>
+  </entry>
+</feed>

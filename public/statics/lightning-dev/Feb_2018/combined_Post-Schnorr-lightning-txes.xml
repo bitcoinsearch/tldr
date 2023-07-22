@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Post-Schnorr lightning txes</title>
+  <updated>2023-05-20T08:08:02.912200+00:00</updated>
+  <author>
+    <name>Anthony Towns 2018-02-19 22:59:07</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2018-02-22 19:28:45</name>
+  </author>
+  <link href="lightning-dev/Feb_2018/001031_Post-Schnorr-lightning-txes.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2018/001038_Post-Schnorr-lightning-txes.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Post-Schnorr lightning txes</title>
+    <updated>2023-05-20T08:08:02.912200+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/001031.html" rel="alternate"/>
+    <summary>The lightning network has four main scenarios for closing a channel, namely cooperative closing, communication failure, disappearance uncooperative, and misbehavior. The optimization for the last case might be interesting, so this is where optimizing graftroot comes into play. This case would require three transactions but only one output per transaction.If B misbehaves by publishing the commitment tx after revealing the revocation secret, A can calculate A(i) and Revocation(B,i) and claim all the funds immediately. To distribute the funds easily, joint signature transactions with [A(i),Revocation(B,i)] can be used. HTLCs via Schnorr would make them mostly indistinguishable from regular transactions as a "scriptless script" or "discreet log contract". The idea then is to have the HTLC payment hash be R=r*G, where r is the secret/payment receipt. Supposing your current commitment has n HTLCs in-flight, some paying A if the HTLC succeeds and "r" is revealed, others paying B. We'll focus on one paying A. Once A knows r, A can construct a full signature by adding R, r to the values.The writer proposes a solution for Bitcoin to handle multisig channel funding and monitoring. The proposed method involves generating six or more transactions every time the channel state is updated, with the fund distribution transactions all paying the same collection of addresses. All transactions can use Schnorr signatures when available and are secured by muSig-style construction. The proposed method also makes it possible to outsource channel monitoring with minimal data storage requirements. However, there still seems to be no plausible way of doing constant space outsourced channel monitoring without some sort of SIGHASH_NOINPUT.The email thread discusses the possibility of using Schnorr/muSig/scriptless-scripts to redo all current transaction types in lightning network. The proposed approach involves having two phases for HTLC-Success/HTLC-Timeout transactions, one that demonstrates the relevant condition has been met and a second with a CSV delay to ensure cheating can be penalized. The partial signatures for each transaction require the sender to have sent a unique ECC point J, for which they know the corresponding secret. The drawback of this approach is that it requires sending signatures for 2+2N outputs for every channel update, rather than just 1. Additionally, trustless outsourcing would require storing about 2000 signatures per update, which at 64B per signature, is 13MB/second, or about a terabyte per day.However, reducing the rate of incoming HTLCs to 2 per second on average and capping channel updates at 1 per second gives an average of 40 HTLCs at any one time and 81 signatures per update, for 450MB per day or 163GB per year. The writer expresses their disappointment that covenants and graftroot didn't turn out to be a potential use case for this solution.</summary>
+    <published>2018-02-19T22:59:07+00:00</published>
+  </entry>
+</feed>

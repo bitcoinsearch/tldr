@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - New BIP - v2 peer-to-peer message transport protocol (former BIP151)</title>
+  <updated>2023-06-13T17:50:35.517282+00:00</updated>
+  <author>
+    <name>Jonas Schnelli 2019-03-22 21:04:46</name>
+  </author>
+  <author>
+    <name>David A. Harding 2019-03-24 13:29:10</name>
+  </author>
+  <author>
+    <name>Jonas Schnelli 2019-03-22 21:04:46</name>
+  </author>
+  <author>
+    <name>David A. Harding 2019-03-24 15:38:56</name>
+  </author>
+  <author>
+    <name>David A. Harding 2019-03-24 13:29:10</name>
+  </author>
+  <author>
+    <name>David A. Harding 2019-03-24 15:38:56</name>
+  </author>
+  <author>
+    <name>Jonas Schnelli 2019-03-24 19:35:45</name>
+  </author>
+  <author>
+    <name>Eric Voskuil 2019-03-25 06:32:58</name>
+  </author>
+  <author>
+    <name>David A. Harding 2019-03-24 13:29:10</name>
+  </author>
+  <author>
+    <name>Jonas Schnelli 2019-03-24 19:35:45</name>
+  </author>
+  <author>
+    <name>Eric Voskuil 2019-03-25 06:32:58</name>
+  </author>
+  <author>
+    <name>David A. Harding 2019-03-24 15:38:56</name>
+  </author>
+  <author>
+    <name>Jonas Schnelli 2019-03-24 19:35:45</name>
+  </author>
+  <author>
+    <name>Eric Voskuil 2019-03-25 06:32:58</name>
+  </author>
+  <author>
+    <name>Jonas Schnelli 2019-03-22 21:04:46</name>
+  </author>
+  <link href="bitcoin-dev/March_2019/016806_New-BIP-v2-peer-to-peer-message-transport-protocol-former-BIP151-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2019/016807_New-BIP-v2-peer-to-peer-message-transport-protocol-former-BIP151-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2019/016806_New-BIP-v2-peer-to-peer-message-transport-protocol-former-BIP151-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2019/016808_New-BIP-v2-peer-to-peer-message-transport-protocol-former-BIP151-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2019/016807_New-BIP-v2-peer-to-peer-message-transport-protocol-former-BIP151-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2019/016808_New-BIP-v2-peer-to-peer-message-transport-protocol-former-BIP151-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2019/016809_New-BIP-v2-peer-to-peer-message-transport-protocol-former-BIP151-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2019/016810_New-BIP-v2-peer-to-peer-message-transport-protocol-former-BIP151-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2019/016807_New-BIP-v2-peer-to-peer-message-transport-protocol-former-BIP151-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2019/016809_New-BIP-v2-peer-to-peer-message-transport-protocol-former-BIP151-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2019/016810_New-BIP-v2-peer-to-peer-message-transport-protocol-former-BIP151-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2019/016808_New-BIP-v2-peer-to-peer-message-transport-protocol-former-BIP151-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2019/016809_New-BIP-v2-peer-to-peer-message-transport-protocol-former-BIP151-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2019/016810_New-BIP-v2-peer-to-peer-message-transport-protocol-former-BIP151-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2019/016806_New-BIP-v2-peer-to-peer-message-transport-protocol-former-BIP151-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - New BIP - v2 peer-to-peer message transport protocol (former BIP151)</title>
+    <updated>2023-06-13T17:50:35.517282+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-March/016806.html" rel="alternate"/>
+    <summary>In a recent bitcoin-dev discussion, Dave Harding questioned why short-ids were optional and only specified for certain message types rather than being required for all message types. However, Jonas Schnelli argues that adding short IDs for some message types can help avoid collisions in the future, especially for messages with high frequency. He also mentions that there are only 26 different message types at present and short IDs may not be necessary for all of them.On 22nd March 2019, Jonas Schnelli proposed a new Bitcoin peer-to-peer transport protocol with opportunistic encryption via bitcoin-dev mailing list. The current unencrypted message transport is partially inefficient and vulnerable to BGP hijack, block delay attacks and message tempering. However, this proposal does not provide mitigation for these attacks between anonymous peers. Adding opportunistic encryption introduces high risk for attackers of being detected. Peer operators can compare encryption session IDs or use other authentication schemes to identify an attack. Authentication helps mitigate attacks by requiring the identity of the peer.The Version 2 Peer-to-Peer Message Transport Protocol is a proposal for a new Bitcoin peer-to-peer transport protocol that aims to provide a more efficient and secure communication method. The protocol requires an optimized AEAD construct, a NODE_P2P_V2 signal, a 32bytes-per-side "pseudorandom" key exchange, the removal of the multi-message envelope, and the use of a 3-byte integer with 23 available bits to determine packet length. It also introduces short-command-ID and specifies the key derivation and what communication direction uses what key.To request encrypted communication, the initiating peer generates an EC secp256k1 ephemeral key and sends the corresponding 32-byte public key to the responding peer and waits for the remote 32-byte public key from the counterparty. The handshake involves exchanging public keys through ECDH key exchange. Once the ECDH secret is calculated on each side, the symmetric encryption cipher keys are derived with HKDF. Both parties also calculate the 256-bit session ID using HKDF_EXPAND. The ChaCha20-Poly1305 encryption scheme is used in the Bitcoin protocol for encrypted communication between peers.This proposal suggests a new encryption protocol for the Bitcoin network called version 2 (v2). The maximum message size is 8,388,608 bytes with future communication exceeding this limit needing to be split into different messages. The v2 message format supports short IDs for message types with high frequency to save valuable bandwidth. Re-keying can be signaled by setting the most significant bit in the length field before encryption. The next symmetric cipher key must be calculated by SHA256(SHA256(session ID || old_symmetric_cipher_key)) and the packet sequence number of the according encryption direction must be set to 0. This proposal is backward compatible, and non-supporting peers can still use unencrypted communications.</summary>
+    <published>2019-03-22T21:04:46+00:00</published>
+  </entry>
+</feed>

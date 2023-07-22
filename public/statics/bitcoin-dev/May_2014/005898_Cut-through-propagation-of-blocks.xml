@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Cut-through propagation of blocks</title>
+  <updated>2023-05-19T18:55:31.176260+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2014-05-24 23:16:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Cut-through propagation of blocks</title>
+    <updated>2023-05-19T18:55:31.176260+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-May/005898.html" rel="alternate"/>
+    <summary>In a discussion about techniques to speed up block propagation and reduce the orphan risk carried by larger blocks, Ashley Holman suggested that the current store-and-forward method causes larger blocks to propagate with higher latency. However, there are improvements that could be made before more complex changes are implemented, such as cut-through-forwarding that change the protocol. One example is replacing the 100ms sleep in p2p message processing with a semaphore, which would drastically lower latency for block relaying.Nodes that become bandwidth overloaded could adapt their concurrent connection counts down, while underloaded ones could accept more connections. Relaying to multiple peers could be done in parallel instead of serialized, and the order in which peers are relayed to could be adapted to prioritize apparently useful and faster peers. Luke-Jr had previously implemented cut-through behavior and posted a patch, but without other network processing improvements, it did not appear to help.For those who want to optimize further in this space, there are fancier things that can be done to reduce latency and increase efficiency. These include block network coding, which can be used as a separate protocol. There is no need to have Bitcoin transport all using a single protocol, and better robustness and feature velocity can be achieved if there are a couple of protocols in use. It is possible to run a block-transport-protocol daemon that connects to your local node via the classic protocol.</summary>
+    <published>2014-05-24T23:16:43+00:00</published>
+  </entry>
+</feed>

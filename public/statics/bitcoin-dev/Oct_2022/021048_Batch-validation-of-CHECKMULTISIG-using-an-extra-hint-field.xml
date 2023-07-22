@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Batch validation of CHECKMULTISIG using an extra hint field</title>
+  <updated>2023-05-22T21:47:21.139519+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2022-10-19 03:51:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Batch validation of CHECKMULTISIG using an extra hint field</title>
+    <updated>2023-05-22T21:47:21.139519+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021048.html" rel="alternate"/>
+    <summary>When Satoshi wrote the first version of bitcoin, s/he made an unintentional mistake in the original CHECKMULTISIG implementation causing an extra item to be popped off the stack upon completion. This extra value is often provided in the witness and provides a malleability vector as anybody can change the extra/dummy value in the signature without invalidating a transaction. In legacy scripts NULLDUMMY is a policy rule that states this value must be zero, and this was made a consensus rule for segwit scripts.Another issue with CHECKMULTISIG is that the algorithm seemingly precludes batch validation for threshold signatures. For both ECDSA and Schnorr signatures, batch validation could enable an approximate 2x speedup, especially during the initial block download phase. The algorithm cannot batch validate these signatures because it doesn't know which signatures map to which pubkeys. After SegWit was released, Luke-Jr observed that this new rule was suboptimal and Satoshi's mistake gave extra parameter to CHECKMULTISIG. It was within our means to use this parameter to convey extra information to the CHECKMULTISIG algorithm and thereby enable batch validation of threshold signatures using this opcode.The updated CHECKMULTISIG algorithm requires the final parameter on the stack to be a minimally-encoded bitmap specifying which keys are used or which are not used and must therefore be skipped. Before attempting validation, ensure for a k-of-n threshold only k bits are set in the bitfield indicating the used pubkeys (or n-k bits set indicating the keys to skip). During validation, check the associated bit in the bitfield to see if the pubkey is used. If the bitfield indicates that the pubkey is not used, then skip it without even attempting validation. This is a soft-fork as any validator operating under the original rules would still arrive at the correct pubkey-signature mapping through trial and error. This solution to the CHECKMULTISIG batch validation problem had been completely forgotten and did not come up during Tapscript review. The justification given in the footnotes is that CHECKMULTISIG is not compatible with batch validation. One could make the argument that threshold signatures are implementable with the new CHECKSIGADD opcode, but this requires six opcodes in addition to the pubkey pushes, instead of just 3, and the number of wasted opcodes scales linearly with the size of the threshold. Also, there remain many use cases where for whatever reason interactive signing is not possible, due to signatures being pre-calculated and shared with third parties, for example, and therefore explicit thresholds must be used instead. For such applications, a batch-validation friendly CHECKMULTISIG would be useful.</summary>
+    <published>2022-10-19T03:51:42+00:00</published>
+  </entry>
+</feed>

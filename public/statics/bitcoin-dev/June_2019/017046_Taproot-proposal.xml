@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Taproot proposal</title>
+  <updated>2023-06-13T18:38:30.858766+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2019-06-27 00:08:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Taproot proposal</title>
+    <updated>2023-06-13T18:38:30.858766+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-June/017046.html" rel="alternate"/>
+    <summary>A proposal has been made to increase the 'input_index' of the transaction digest for taproot signatures from 2 bytes to 4 bytes as the current transaction format limits the number of inputs and outputs to 2^32-1 or less. While the two byte limit is derived from the block size/weight limit, it is considered a mistake to mix limits from the block layer into the transaction layer of consensus rules. Doing so would require consensus changes in the transaction format/interpretation if a hardfork was needed to handle larger transaction sizes, which would be undesirable. Moreover, adding 2 bytes to the signed transaction digest isn't a big deal, and keeping block limits and transaction limits separate is probably better. The var-integer field for the number of inputs (and outputs) in a transaction may look like it should allow up to 2^64-1 inputs, but due to P2P rules, these values are immediately taken modulo 2^32 after decoding. For example, if the number of inputs is a var-integer encoding of 0x0100000001, it is actually just a non-canonical way of encoding that there is 1 input.Another proposal has also been made for a Taproot softfork. The BIP drafts specify a number of ideas, including making all outputs and cooperative spends indistinguishable from each other, using merkle branches to hide unexecuted branches in scripts, enabling wallet software to use key aggregation/thresholds within one input through Schnorr signatures, improving the signature hashing algorithm, replacing OP_CHECKMULTISIG(VERIFY) with OP_CHECKSIGADD, using tagged hashing for domain separation, and providing extensibility through leaf versions, OP_SUCCESS opcodes, and upgradable pubkey types. The consensus changes have been implemented in a reference implementation, and are around 520 LoC. However, the proposals do not include several other ideas, such as a way to integrate SIGHASH_NOINPUT, which is being worked on separately as an independent proposal. The document explains basic wallet operations, but more complex constructions exist and standardizing them is out of scope for now. It may also be desirable to define extensions to PSBT (BIP174) for interacting with Taproot.</summary>
+    <published>2019-06-27T00:08:01+00:00</published>
+  </entry>
+</feed>

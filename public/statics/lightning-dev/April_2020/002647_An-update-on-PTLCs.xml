@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>An update on PTLCs</title>
+  <updated>2023-06-03T01:00:01.061238+00:00</updated>
+  <author>
+    <name>Nadav Kohen 2020-04-22 14:41:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>An update on PTLCs</title>
+    <updated>2023-06-03T01:00:01.061238+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002647.html" rel="alternate"/>
+    <summary>The current state of thinking and coding for replacing Hash-TimeLock Contracts (HTLCs) with Point-TimeLock Contracts (PTLCs) in lightning payments is discussed, with hopes of sparking interest, discussion, development, and more. PTLCs provide an improvement over HTLCs as they use point-locks instead of hash-locks, allowing for payment de-correlation along routes and improving privacy, protecting against wormhole attacks, and opening the door to a variety of interesting applications. Several of these applications include stuckless payments with proof of payment, escrow contracts over Lightning, high/DLOG AMP, stuckless + AMP (an improvement on Boomerang), pay-for-signature, pay-for-commitment, monotonic access structures on payment completion, ideal barrier escrow implementation, atomic multi-payment setup, Lightning Discreet Log Contract, atomic multi-payment update, and Lightning Discreet Log Contract Novation/Transfer.Eventually, Taproot can be used for 2p-Schnorr adaptor signatures in Lightning channels; however, for now, a way to do 1p-ECDSA adaptor sigs has been written about by Lloyd, which can be paired with OP_CHECKMULTISIG to execute PTLCs on Bitcoin today. Nickler has implemented this in a branch of secp256k1, and it has been tested with Bouncy Castle in Bitcoin-S. A demo of an on-chain PTLC executed using nickler's implementation on the backend + bitcoin-s is available. A fork of at least one Lightning implementation can be created for a proof of concept ECDSA-PTLC node with which to test and play with the plethora of PTLC-based proposals above. Only a few changes to existing nodes are required. Commitment_signed will have 162 byte adaptor ptlc_signatures rather than valid ECDSA signatures on PTLC-success transactions, and the in-flight outputs on the commitment transaction itself become a little simpler as the payment pre-image is implicitly enforced by the witness. The hope is for a PTLC-based Lightning Network that is safe and stable, so further thinking, development, and experimentation with PTLCs is encouraged now to move towards a more ideal Lightning when Taproot is available.</summary>
+    <published>2020-04-22T14:41:29+00:00</published>
+  </entry>
+</feed>

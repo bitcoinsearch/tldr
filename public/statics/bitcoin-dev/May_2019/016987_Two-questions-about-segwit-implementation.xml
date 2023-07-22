@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Two questions about segwit implementation</title>
+  <updated>2023-05-20T20:33:53.665625+00:00</updated>
+  <author>
+    <name>Johnson Lau 2019-05-26 17:24:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Two questions about segwit implementation</title>
+    <updated>2023-05-20T20:33:53.665625+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-May/016987.html" rel="alternate"/>
+    <summary>In the context provided, it is explained that an empty scriptSig does not necessarily imply a segwit input. This means that if the previous scriptPubKey is OP_1 and does not allow witness, it could still be spent with an empty scriptSig. Similarly, a scriptSig resembling a spend of P2SH-segwit also does not imply a segwit input. If the previous scriptPubKey is empty, it can be spent with a push of any non-zero value.There was a discussion on this topic between Aymeric Vitte and Johnson Lau on May 27th, 2019. Aymeric Vitte initially stated that if the validator sees an empty or witness script in scriptSig, then this is a segwit input. However, Johnson Lau replied that this is not how it works. While the transaction creator may know which inputs are segwit, the validators have no way to tell until they look up the UTXO set. Validators do not have any information about the input except for the 36-byte outpoint (txid + index). There is no way to tell whether it is segwit-enabled or not just by looking at the outpoint. Therefore, there needs to be a way to tell the validator that "the witness for this input is empty", and it is the "00". Aymeric Vitte responded that for non segwit inputs, the one doing the transaction knows which inputs are segwit or not, and parsing the transaction can associate the correct input to the correct witness data without the need for "00".</summary>
+    <published>2019-05-26T17:24:13+00:00</published>
+  </entry>
+</feed>

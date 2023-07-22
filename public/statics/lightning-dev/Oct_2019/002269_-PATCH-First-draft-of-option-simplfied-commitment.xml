@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[PATCH] First draft of option_simplfied_commitment</title>
+  <updated>2023-05-25T17:26:24.641961+00:00</updated>
+  <author>
+    <name>Joost Jager 2019-10-31 11:34:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[PATCH] First draft of option_simplfied_commitment</title>
+    <updated>2023-05-25T17:26:24.641961+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-October/002269.html" rel="alternate"/>
+    <summary>In an email exchange on October 30th, 2019, Joost Jager proposed an additional spending path for normal P2WKH outputs with an unconditional condition except for a 10-block CSV lock to prevent UTXO set pollution. The intention was to allow anyone to clean up, but it also opened the possibility for an attacker to use up the CPFP carve-out after those 10 blocks, which could cause the commitment transaction to remain unconfirmed while an important HTLC expires. However, this proposal didn't work as expected and there was no Bitcoin rule that allowed a single anyone-can-spend output. With the mempool acceptance carve-out in bitcoind 0.19, it wasn't possible to safely produce a single OP_TRUE output for anyone to spend because an attacker could attach low fee child transactions, reach the limits, and block further fee bumping. There was a suggestion to stick with the original design from Adelaide with a spending path with a 1CSV that is anyone can spend or that is revealed by spending another output. However, it is unclear what script this would be exactly because while still unconfirmed, the anchor needs to be protected from being spent by anyone for the carve-out to work, and anyone spending after the CSV needs to know that script too.</summary>
+    <published>2019-10-31T11:34:48+00:00</published>
+  </entry>
+</feed>

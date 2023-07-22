@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New BIP32 structure for P2SH multisig wallets [BIP-45]</title>
+  <updated>2023-06-10T23:42:18.518106+00:00</updated>
+  <author>
+    <name>Jean-Pierre Rupp 2015-10-04 15:18:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New BIP32 structure for P2SH multisig wallets [BIP-45]</title>
+    <updated>2023-06-10T23:42:18.518106+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-October/011363.html" rel="alternate"/>
+    <summary>A user has identified a privacy issue with BIP-45, the Bitcoin Improvement Proposal that specifies the structure for multi-signature wallets. The problem is caused by using the same extended public key for all multi-sig activity, which means that all co-signers from all accounts can monitor multi-sig activity from every other co-signer in every other account. HD wallet's non-reuse of public keys provide some defense against wallets that do not implement deterministic signing and use poor entropy for signature nonces. The user suggests including privacy and potential security degradation due to increased public key reuse in the BIP-45 document. To solve the issue, the user proposes a solution that involves taking all public keys encoded in the purpose-specific extended public keys (m/45') of all co-signers and sorting them lexicographically according to BIP-45. Serialize this information and calculate its HASH160 (RIPEMD160 ∘ HASH256). Split the output into five 32-bit chunks, setting the MSB on all of them to 0. Use these 32-bit chunks to build a derivation path from the purpose-specific extended public keys. This scheme will avoid public key sharing, and as long as you share your purpose-specific extended public key only with your co-signers, it should be relatively hard for a passive observer to link activity between different co-signing accounts.</summary>
+    <published>2015-10-04T15:18:07+00:00</published>
+  </entry>
+</feed>

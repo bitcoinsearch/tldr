@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Testing a Flare-like routing implementation on 2500 AWS nodes</title>
+  <updated>2023-05-24T00:29:14.569835+00:00</updated>
+  <author>
+    <name>Pierre 2016-09-18 12:58:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Testing a Flare-like routing implementation on 2500 AWS nodes</title>
+    <updated>2023-05-24T00:29:14.569835+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-September/000614.html" rel="alternate"/>
+    <summary>Flare is a routing protocol for Lightning Network. The protocol combines local neighborhood maps and paths to remote beacons, which promises efficient simulations. The team attempted to implement Flare in Eclair and ended up with a close variant of it. In the implementation, inter-node communication occurs only on existing open channels, and all routing-related messages are onion-encrypted and routed themselves, like htlc messages. The neighbor discovery/beacons selection is pretty similar to what's in the paper but a little bit simplified. However, they only focused on static ranking, so it is very possible that a route is not actually usable because channels are not balanced. They made the assumption that the network graph is undirected, which is not true. In their tests on AWS, they started a certain number of m1.medium instances then linked nodes to each other following a given graph using json-rpc commands. After waiting for a few minutes for the gossip to calm down, they picked 1000 random routes and asked the receiver for a "payment request" (H + routing_table) and then asked the sender to find a route for this payment request (without actually making a payment). The test parameters varied, and the results showed a high probability of finding a route to any given node, except in one case where it was only ~20%. The main concern was that the graph is directed and that at creation channels are actually one-way, which might make finding routes difficult at bootstrapping. The modified version of Flare works on a decent size network, but the value of the radius parameter should be taken with caution. Also, the team discovered a bug that leads to nodes not knowing all the nodes in their radius, which probably has a significant negative impact on the results.</summary>
+    <published>2016-09-18T12:58:03+00:00</published>
+  </entry>
+</feed>

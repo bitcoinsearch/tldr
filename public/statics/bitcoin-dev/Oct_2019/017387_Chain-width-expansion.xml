@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Chain width expansion</title>
+  <updated>2023-06-13T21:46:19.805785+00:00</updated>
+  <author>
+    <name>Tier Nolan 2019-10-12 16:27:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Chain width expansion</title>
+    <updated>2023-06-13T21:46:19.805785+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-October/017387.html" rel="alternate"/>
+    <summary>A proposal was made to create a succinct chainwork proof for all cases in the Bitcoin network. The proposal suggests using a "seed" based system where a header with a very low digest is defined as a seed. When a new peer connects, they are asked to send the header with the lowest digest on their main chain. Chains ending at the strongest seeds are kept preferentially when discarding chains. This requires a way to download chains backwards, which the protocol doesn't support at the moment. The most chain work chain is overwhelmingly likely to contain the header with the strongest digest, meaning that the honest peer's chain would be kept preferentially. The proposal also includes allocating each connected peer a certain bandwidth per minute for headers as in a token bucket system and giving them a RAM allowance sufficient to hold one header per minute since genesis. Nodes should stay "headers-only" until they have hit the threshold, which is similar to a checkpoint. The proposal also addresses the vulnerability of nodes during initial sync when joining the network until the minimum chainwork is achieved. To mitigate this, there would need to be a minimum chainwork defined based on the current chainwork. However, such could also be used to prevent nodes from joining the network as it's rejecting rather than throttling. The proposal suggests using two different concepts to avoid making the problem more complex than needed. Overall, the proposal suggests creating a true statement regarding the minimum chain work and using it to optimize things without breaking the requirement for compatibility between clients.</summary>
+    <published>2019-10-12T16:27:42+00:00</published>
+  </entry>
+</feed>

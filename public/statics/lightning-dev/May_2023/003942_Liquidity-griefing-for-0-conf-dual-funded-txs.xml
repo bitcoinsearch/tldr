@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Liquidity griefing for 0-conf dual-funded txs</title>
+  <updated>2023-06-03T12:58:30.299058+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2023-05-10 00:07:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Liquidity griefing for 0-conf dual-funded txs</title>
+    <updated>2023-06-03T12:58:30.299058+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-May/003942.html" rel="alternate"/>
+    <summary>The email thread is discussing the challenges of offering 0-conf services while protecting against liquidity griefing attacks from malicious peers. Dual funding protocol exchanges data about the utxos each peer adds to the shared transaction, then exchange signatures and broadcast the resulting transaction. If peers lock their utxos as soon as they've decided to add them to the shared transaction, the remote node may go silent, and honest nodes have some liquidity that is locked and unusable. An elegant solution to this issue is to never lock utxos used in dual-funded transactions. Still, this falls short when using 0-conf because accidentally double-spending a 0-conf channel can result in loss of funds for one of the peers. Nodes offering 0-conf services expose themselves to liquidity griefing. Nodes that want to offer 0-conf channels must ensure that the utxos they use for 0-conf are isolated from the utxos they use for non 0-conf. In eclair, they are currently doing "opportunistic" 0-conf when they receive `channel_ready` immediately and are the only contributor to the funding transaction. They cannot do that with mixed 0-conf and non 0-conf funding attempts because the utxos may be soft-locked, preventing them from "upgrading" to 0-conf. The proposal is to lock UTXOs after tx_complete exchange if they are the only contributors and select UTXOs that are not soft-locked for option_zeroconf channels.</summary>
+    <published>2023-05-10T00:07:06+00:00</published>
+  </entry>
+</feed>

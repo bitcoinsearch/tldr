@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Multiparty signatures</title>
+  <updated>2023-06-13T03:53:27.636376+00:00</updated>
+  <author>
+    <name>Erik Aronesty 2018-07-09 15:02:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Multiparty signatures</title>
+    <updated>2023-06-13T03:53:27.636376+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-July/016228.html" rel="alternate"/>
+    <summary>A new threshold multi-signature scheme has been proposed, which seems to have a simpler mechanism than musig and security assumptions that match the original Schnorr construction more closely. Each party has a public key g*x', where x' is their private key, and rolls a random k' and computes r' = g*k'. They broadcast r' as a share and compute g*k via lagrange interpolation across shares. At this point, k is not known to any party unless Shamir is vulnerable or DL is not hard. Verification is the same as Scnhorr but only after using interpolation to get the needed (s, e, g*x). The security assumptions are based on Shamir + discrete log. This scheme can produce multisig signatures offline, each device produces a signature using its own k-share and x-share. It is only necessary to interpolate M of n shares and there are no round trips. The only thing that needs to be proven is that H(M) * r does not reveal any information about k. This relies on the same DL assumptions as Bitcoin itself. Overall, this seems to have a smaller attack surface because there are fewer moving parts. However, it is important to note that novel cryptography should not be included in Bitcoin based on one person's opinion. A complete write-up is needed before making any decisions.</summary>
+    <published>2018-07-09T15:02:30+00:00</published>
+  </entry>
+</feed>

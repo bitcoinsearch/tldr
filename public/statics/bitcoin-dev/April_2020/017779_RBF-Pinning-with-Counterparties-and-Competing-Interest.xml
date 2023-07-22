@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-05-20T22:02:41.750002+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-04-22 23:27:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-05-20T22:02:41.750002+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-April/017779.html" rel="alternate"/>
+    <summary>The lightning network community is discussing potential changes to policy rules that could be exploited by attackers. One proposed change involves requiring lightning nodes to have an active full node with an in-sync mempool, which could increase CPU, bandwidth, and complexity for lightning users. However, this requirement would only affect lightning nodes seeking to participate in HTLC forwarding on the public routing network and not those with private channels.To mitigate this class of attack, one proposal is to implement changes described in the open lightning-rfc PR that involves mempool-watching. Another proposal involves adding a base version of anchors to eliminate the commitment fee guessing game, allow users to pay less on force close, coalesce 2nd level HTLC transactions with the same CLTV expiry, and reliably enforce multi-hop HTLC resolution.During the discussion, it was suggested that all HTLC output spends need to be pre-signed, with an off-chain 2-of-2 multi-sig covenant. However, concerns were raised about bidding wars even if restricted in certain ways. The use of RBF-replaceable transactions was also mentioned as a possible solution, but it was noted that this will not be enough for pinning. Instead, other methods of pinning may be necessary, such as participating in a progressive absolute fee increase.There was further discussion around monitoring the global mempool for safe monitoring, but some debate arose around the complexity of this approach. Additionally, pre-signing all HTLC output spends may not be immediately workable as it would require gaining signatures allowing users to spend HTLCs on their counterpart's version of the commitment. If they broadcast their commitment without revoking, the user would be unable to redeem any of those HTLCs, possibly losing money. To address this issue, presenting a new commitment would need to take at least two phases, requiring an overhaul in the channel state machine. The first phase would tender the commitment but render them unable to broadcast it, while the second phase would give the commitment proposer valid HTLC signatures and give the responder what they need to broadcast their commitment and claim their HTCLs in an atomic manner.</summary>
+    <published>2020-04-22T23:27:49+00:00</published>
+  </entry>
+</feed>

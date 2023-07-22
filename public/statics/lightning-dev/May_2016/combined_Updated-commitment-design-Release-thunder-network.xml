@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Updated commitment design + Release thunder.network</title>
+  <updated>2023-05-23T23:46:31.823739+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-06-01 06:47:33</name>
+  </author>
+  <author>
+    <name>Mats Jerratsch 2016-05-30 08:56:44</name>
+  </author>
+  <author>
+    <name>Mats Jerratsch 2016-05-17 13:58:17</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2016-05-26 06:41:20</name>
+  </author>
+  <link href="lightning-dev/June_2016/000546_Updated-commitment-design-Release-thunder-network.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2016/000544_Updated-commitment-design-Release-thunder-network.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2016/000538_Updated-commitment-design-Release-thunder-network.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2016/000541_Updated-commitment-design-Release-thunder-network.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Updated commitment design + Release thunder.network</title>
+    <updated>2023-05-23T23:46:31.823739+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-June/000546.html" rel="alternate"/>
+    <summary>Mats Jerratsch has proposed a solution to the problem of high refund times and low revocation times in transacting with Bitcoin called 'dual-tx'. This approach is backward compatible, but it is not possible to relay optimized dual-tx payments over hops that don't support it. Dual-tx approach makes it possible to set revocation delay and payment timeouts to completely separate values.However, there are two downsides to this approach: clearing a payment on blockchain is more expensive because fees for redeeming the payment are higher, and updating the commitment transaction becomes problematic when channels have lots of uncleared payments for a long time. High revocation timeout is not suitable for 24/7 nodes but rather to ease problems for end-users when adopting to this new way of transacting.The proposed solution uses SegWit, where each payment and refund will not directly pay to their respective owner but to an intermediate 2-of-2 transaction. For redeeming a payment, one has to use R to broadcast Redeem-TX, and for broadcasting Refund-TX, one has to wait the agreed refund time. Clearing a payment on the blockchain becomes more expensive, but it is a minor issue since most channels will not get settled on the blockchain.Updating the commitment transaction requires producing and sending a new signature for each currently included payment, which might be problematic for channels with lots of uncleared payments for a long time. Node and Wallet software can be downloaded at https://github.com/blockchain/thundernetwork/releases, and further information can be found at https://github.com/blockchain/thundernetwork and https://blockchain.com/thunder.</summary>
+    <published>2016-06-01T06:47:33+00:00</published>
+  </entry>
+</feed>

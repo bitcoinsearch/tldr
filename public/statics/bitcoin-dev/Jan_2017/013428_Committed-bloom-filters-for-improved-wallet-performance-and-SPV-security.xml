@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Committed bloom filters for improved wallet performance and SPV security</title>
+  <updated>2023-06-11T05:00:04.973610+00:00</updated>
+  <author>
+    <name>Adam Back 2017-01-04 11:00:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Committed bloom filters for improved wallet performance and SPV security</title>
+    <updated>2023-06-11T05:00:04.973610+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-January/013428.html" rel="alternate"/>
+    <summary>The discussion began around the block bloom filter, which contains a commitment in the block that can be downloaded and is much smaller than the block. An SPV node based on this model would download headers and bloom filters, verify the bloom filter is committed to, and test locally if any addresses managed by the wallet are in the filter (or false positives for being in it), and then download blocks with hits. There are compact alternatives to bloom filters which are 50% more efficient, but people have been using bloom filter as a short-hand for that. The block bloom filter has higher overhead than the query model, but it offers much better privacy. In previous discussion, there was talk about doing something with portions of blocks so you can know which half or quarter of the block etc.Jorge Timón suggested implementing SPV mode for Bitcoin Core without using bloom filters. Although less efficient because it downloads full blocks, it is better for privacy. It is important to note that unconfirmed transactions are essential for real-world use cases. Merchants, for example, are willing to accept credit card payments of thousands of dollars and ship the goods despite the fact that the transaction can be reversed up to 60 days later. There is a high cost to losing the ability to have instant transactions in many or even most situations. However, offering users/merchants a feature (SPV 0-conf against random peers) that is fundamentally insecure could lead to some large-scale fiasco. It is recommended to eliminate this through education and by offering different solutions. One option is to co-use a wallet-service with centralized verification and use them in watch-only mode. For end-users SPV software, it is recommended to disable unconfirmed transactions during SPV against random peers, enable unconfirmed transactions when using SPV against a trusted peer with pre-shared keys after BIP150, and educate users that a transaction with no confirmation can be "stopped" or "redirected" at any time. Additionally, for the sake of stability and risk-scaling, it may be recommended to sacrifice the "incoming funds..." feature in SPV wallets and use privacy-preserving BFDs instead.</summary>
+    <published>2017-01-04T11:00:55+00:00</published>
+  </entry>
+</feed>

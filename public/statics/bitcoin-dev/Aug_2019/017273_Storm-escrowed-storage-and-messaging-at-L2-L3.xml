@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Storm: escrowed storage and messaging at L2/L3</title>
+  <updated>2023-06-13T21:02:55.591278+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-08-21 04:14:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Storm: escrowed storage and messaging at L2/L3</title>
+    <updated>2023-06-13T21:02:55.591278+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-August/017273.html" rel="alternate"/>
+    <summary>ZmnSCPxj has written a letter to Maxim pointing out issues with the probabilistic checkable proof for data storage on Lightning network. The main issue is that the probabilistic proof, by itself, can only prove that the encrypted data corresponds to the given plaintext and not if the source data is the same as the source data originally stored by Alice. Bob can use the output of any PRNG as the "source data", which may cause problems when Alice validates the proof. To overcome this, Alice must first compute a Merkle Tree of the data chunks and store the Merkle Tree root before sending its local copy of the data to Bob for storage and deleting it. The probabilistic checkable proof has to include the Merkle Tree Path proofs of the selected source data chunks together with the source chunks.ZmnSCPxj also points out that the encryption used must be an asymmetrical encryption where the decryption key is a private key that Bob can share only once it has acquired its funds. However, the assurance given to Alice that the hash of the decryption key is indeed the hash of the decryption key and not, say, the output of a PRNG is unclear. Bob must prove that the given hash h is the hash of the secret decryption key d whose equivalent encryption key is e while revealing only h and e to Alice. ZmnSCPxj suggests using some asymmetric encryption using EC to atomically pay for knowledge of the scalar / decryption key, while knowing the encryption key instead of a hash of the decryption key.Finally, ZmnSCPxj notes that any mechanism that requires multiple participants to put up money into a contract (as in the case of Storm) can only live inside a single LN channel and is not transportable across intermediate nodes because intermediate nodes potentially become subject to attack in case of routing failure. This makes LN difficult to work with multiple asset types due to HTLCs naturally forming premium-free American Call Options. The storage provider can route a payment to Alice to serve as stake, which can be claimed only if knowing some secret, then Alice routes the stake+reward to Bob, and use some of the EC magic homomorphism while keeping intermediate nodes unaware.</summary>
+    <published>2019-08-21T04:14:13+00:00</published>
+  </entry>
+</feed>

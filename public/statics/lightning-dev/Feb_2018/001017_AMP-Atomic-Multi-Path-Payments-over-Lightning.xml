@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>AMP: Atomic Multi-Path Payments over Lightning</title>
+  <updated>2023-05-24T20:58:47.360214+00:00</updated>
+  <author>
+    <name>Cezary Dziemian 2018-02-11 13:58:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>AMP: Atomic Multi-Path Payments over Lightning</title>
+    <updated>2023-05-24T20:58:47.360214+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/001017.html" rel="alternate"/>
+    <summary>Conner Fromknecht and Olaoluwa Osuntokun have developed the Atomic Multi-path Payments (AMP), a new payment protocol for Lightning Network. This protocol allows sending a large payment non-atomically over multiple routes, with the recipient unable to settle any of the partial payments until all have arrived. The AMP protocol does not require fundamental changes to the current protocol and is end-to-end between sender and receiver. Its goals are atomicity, avoiding payment hash reuse, order invariance, and non-interactive setup. One of the benefits of using the AMP protocol is that it eliminates the constraint of a single path from sender to receiver, reducing strain on individual paths, and potential fee savings for larger payments. Additionally, AMPs allow for logical payments larger than the current maximum value of an individual payment in the Lightning Network. With AMPs, each flow can be up to the maximum size, with the sum of all flows exceeding the max. Furthermore, given sufficient path diversity, AMPs may improve the privacy of LN as intermediaries are now unaware of how much of the total payment they are forwarding or even if they are forwarding a partial payment at all.The sender requires a random identifier ID, the number of partial payments n, and the total payment value V to use the AMP protocol. The sender constructs the n partial payments, and for each i in [1,n], the sender deterministically computes the partial preimage r_i = H(BP ||  i) by concatenating the sequence number i to the base preimage and hashing the result. Using smaller payments increases the set of possible paths a partial payment could have taken, which reduces the effectiveness of static analysis techniques involving channel capacities and plaintext values being forwarded.The proposed protocol uses additive shares for Atomic Multipath Payments (AMPs) and requires padding bytes in the payload to signal version 0x01 of the AMP protocol. The receiver does not need to know the order in which partial payments were sent, as it iteratively reconstructs the payment and settles them back once all have arrived. Despite the design outline presented on the lightning-dev mailing list, there are still open questions before something like this can be feasibly deployed.</summary>
+    <published>2018-02-11T13:58:49+00:00</published>
+  </entry>
+</feed>

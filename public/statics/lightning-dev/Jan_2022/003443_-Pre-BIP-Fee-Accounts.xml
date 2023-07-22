@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[Pre-BIP] Fee Accounts</title>
+  <updated>2023-06-03T07:11:53.368260+00:00</updated>
+  <author>
+    <name>Jeremy 2022-01-19 02:51:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[Pre-BIP] Fee Accounts</title>
+    <updated>2023-06-03T07:11:53.368260+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-January/003443.html" rel="alternate"/>
+    <summary>Bitcoin transaction fees are currently integrated into the transactions where they occur, making it challenging to separate the logic for transactions and fees. In response, Jeremy Rubin proposes an account system in Bitcoin as an "extension block" to allow for a more abstracted fee payment process. This system would use special "fee account" outputs that can sign two types of transactions: one to add a fee amount to a transaction and another to withdraw an amount and fee to a designated address.These transactions would be committed in a separate UTXO database for fee accounts and signed with a unique key. In any block, any of the fee account deposits can be released into fees if there is a corresponding transaction, consolidated together to reduce the number of UTXOs, or released into fees and paid back into the requested withdrawal key. This design space has several benefits, including fixing dust leakage for eltoo-like protocols, allowing protocol designs to be fully abstracted from paying fees, and making writing contracts much easier.Rubin's proposal could be modified to implement something like Tornado.cash to unlink the fee account paying from the transaction being paid for, improving privacy at the expense of being more expensive. Other operations could be added to allow a trustless mixing to be done by miners automatically where groups of accounts with similar values are trustlessly split into a common denominator and change.Keys could be derived via a verifiable stealth address-like protocol so that fee balances can be discovered by tracing the updates posted. The Lightning Network (LN) can also be used with PTLCs to have another individual paid to sponsor a transaction on behalf of someone only if they reveal a valid signature from their fee-paying account. However, this model makes it hard to ensure that the owner doesn't pay a fee and then 'cancel' by withdrawing the rest. Reputable fee accounts could be used to solve this problem by measuring reputation somewhat decentralized-ly by longevity of the account and transactions paid for historically. In addition to Rubin's proposal, the context provided includes a link to the mailing list of bitcoin developers hosted by the Linux Foundation. This mailing list is a platform for developers to discuss technical aspects of bitcoin and propose improvements or changes to the cryptocurrency's code. It is an essential tool for the development of bitcoin and its ongoing evolution. Users interested in bitcoin development can subscribe to the mailing list through the provided link.</summary>
+    <published>2022-01-19T02:51:42+00:00</published>
+  </entry>
+</feed>

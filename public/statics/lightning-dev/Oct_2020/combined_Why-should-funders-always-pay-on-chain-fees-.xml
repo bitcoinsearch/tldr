@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Why should funders always pay on-chain fees?</title>
+  <updated>2023-06-04T00:41:30.523368+00:00</updated>
+  <author>
+    <name>darosior 2020-10-05 13:25:15</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-10-12 18:48:57</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2020-10-14 08:24:49</name>
+  </author>
+  <author>
+    <name>Johan Torås Halseth 2020-10-16 10:30:55</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2020-10-05 13:12:51</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2020-10-05 13:30:47</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-10-05 16:06:46</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2020-10-06 16:30:31</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2020-10-08 15:30:34</name>
+  </author>
+  <link href="lightning-dev/Oct_2020/002805_Why-should-funders-always-pay-on-chain-fees-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2020/002829_Why-should-funders-always-pay-on-chain-fees-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2020/002842_Why-should-funders-always-pay-on-chain-fees-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2020/002850_Why-should-funders-always-pay-on-chain-fees-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2020/002804_Why-should-funders-always-pay-on-chain-fees-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2020/002806_Why-should-funders-always-pay-on-chain-fees-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2020/002807_Why-should-funders-always-pay-on-chain-fees-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2020/002809_Why-should-funders-always-pay-on-chain-fees-.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2020/002815_Why-should-funders-always-pay-on-chain-fees-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Why should funders always pay on-chain fees?</title>
+    <updated>2023-06-04T00:41:30.523368+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002805.html" rel="alternate"/>
+    <summary>Bastien Teinturier has proposed a change to the current "funder pays all the commit tx fees" rule in a Lightning-dev mailing list. He suggests that in some cases, fundees should be paying a portion of the commit-tx on-chain fees. This would prevent the creation of a web-of-trust network where channels would only exist between peers that trust each other. Routing nodes may be at risk when they receive HTLCs, and all the attacks that steal funds come from the fact that a routing node has paid downstream but cannot claim the upstream HTLCs.To solve this issue, Bastien proposes two possible solutions: deducting the HTLC cost from the offerer's primary output instead of the funder's primary output, or tying the total commit-tx fee to the channel usage. The latter model uses the on-chain fee as collateral for the usage of the channel. If there are no pending HTLCs, the funder pays all the fee, and if there are pending HTLCs, each node pays a proportion of the fee proportional to the number of HTLCs they offered. This model forces the fundee to care about on-chain feerates, which is a healthy incentive. It may create a feedback loop between on-chain feerates and routing fees, which he believes is also a good long-term thing.Antoine Riard agreed with Bastien's proposal of using a minimal relay fee. However, he raised concerns about the issue of not being able to cancel HTLC on-time to force the honest counterparty to pay on-chain fees to close the channel. Bastien responded that there's no silver bullet to completely avoid being bitten by such malicious nodes, but it can reduce exposure and ban them after the fact. The Lightning Network developers are also discussing the issue of estimating a good enough `min_relay_fee` that works for end-to-end transaction propagation over the network. Darosior proposed that fundees should be paying a portion of the commit-tx on-chain fees in some cases to avoid having a web-of-trust network where channels would only exist between peers that trust each other. However, in an anchor outputs future, the funder only pays for the "backbone" fees of the channel, and the fees necessary to secure the confirmation of transactions are paid in the second stage by each interested party. This seems to be a reasonable middle-ground. The Lightning Network community is exploring this as a potential short-term solution, but they should focus more on anchors and `min_relay_fee`.Overall, the discussion revolves around changing the current rule that the funder pays all the commit transaction fees in channel openings. While this rule exists for simplicity, there are risks associated with pending HTLCs, such as flood-and-loot type attacks, pinning, and channel jamming. The suggestion is that fundees should pay a portion of the fees to avoid creating a web-of-trust network. Routing nodes may also be at risk when they receive HTLCs, so it is proposed that nodes pay for the on-chain fees of the HTLCs they offer while they're pending in the commit-tx, regardless of whether they're funder or fundee. A more extreme proposal suggests tying the total commit-tx fee to the channel usage, where each node pays a proportion of the fee proportional to the number of HTLCs they offered. The Lightning Network community welcomes feedback and challenges to the proposal. In the end, the conversation concludes with the decision to put the issue aside for now and revisit it later if needed.</summary>
+    <published>2020-10-05T13:25:15+00:00</published>
+  </entry>
+</feed>

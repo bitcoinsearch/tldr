@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Warning to rawtx creators: bug in SIGHASH_SINGLE</title>
+  <updated>2023-05-19T04:08:55.490532+00:00</updated>
+  <author>
+    <name>Matt Corallo 2012-08-20 16:06:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Warning to rawtx creators: bug in SIGHASH_SINGLE</title>
+    <updated>2023-05-19T04:08:55.490532+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-August/001805.html" rel="alternate"/>
+    <summary>It has been reported that the rawtx API contains a vulnerability when using SIGHASH_SINGLE. If an invalid transaction is created with this signature, any future outputs to the public key associated with the signature would be immediately steal-able by anyone. The issue could be fixed by blocking such transactions in the rawtx API rather than risking a hardfork or further complicating transaction verification. The vulnerability occurs when parsing a transaction input and the given input's index is greater than or equal to the total number of outputs in the current transaction. Bitcoind will sign the constant 1 instead of anything useful. This issue was identified in the code under SIGHASH_SINGLE in script.cpp:SignatureHash. It is important for those using the rawtx API to exercise caution when working with SIGHASH_SINGLE to avoid falling victim to this vulnerability.</summary>
+    <published>2012-08-20T16:06:14+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Removal of reject network messages from Bitcoin Core (BIP61)</title>
+  <updated>2023-05-20T19:58:49.647944+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2019-03-08 00:52:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Removal of reject network messages from Bitcoin Core (BIP61)</title>
+    <updated>2023-05-20T19:58:49.647944+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-March/016730.html" rel="alternate"/>
+    <summary>In a recent message on bitcoin-dev, Andreas Schildbach discussed the importance of reject messages and their role in confirming transactions. Without reject messages, the software would need to rely on a timeout for confirmation of network confirmations. Reject messages are necessary because they indicate that a transaction will not confirm. However, even with these messages, alternative handling must be provided to ensure reliable software function. One reason for rejection is due to low fees, which happens when the node's mempool is full. This can lead to extended waiting times for confirmation of transactions. Rejection causes are also unstable and unreliable, as the validity criteria cannot always be tested independently. For example, if a transaction is queued due to missing a parent, it is not rejected because the missing parent is often a temporary issue. Later, when the parent is obtained, the transaction can then be rejected due to its feerate. Additionally, output already spent can be indistinguishable from a missing parent, making it difficult to generate rejects for this issue. Invalid signatures can also cause errors but detecting the exact problem is challenging. In general, the reasons for returning false are not clear, and a high-performance validation implementation does not necessarily provide an efficient way to figure out and propagate that information up.</summary>
+    <published>2019-03-08T00:52:56+00:00</published>
+  </entry>
+</feed>

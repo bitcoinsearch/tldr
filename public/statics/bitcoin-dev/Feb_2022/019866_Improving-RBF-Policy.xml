@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving RBF Policy</title>
+  <updated>2023-06-15T15:55:47.175735+00:00</updated>
+  <author>
+    <name>Gloria Zhao 2022-02-07 11:16:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving RBF Policy</title>
+    <updated>2023-06-15T15:55:47.175735+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019866.html" rel="alternate"/>
+    <summary>In a recent Bitcoin-dev thread, developers have been discussing potential changes to Replace-by-Fee (RBF) policies in the mempool. Suggestions include using verifiable delay functions to rate-limit transaction replacement, prioritizing transactions by ancestor feerate, and relay rate limiting to prevent spam attacks. However, there are concerns about the impact on descendant transactions and the need for backwards compatibility. There is also discussion around how RBF policies may affect Lightning Network and other second layer protocols.The current rules for Bitcoin's RBF feature are causing some problems in the context of Lightning Network and other Layer 2 protocols, according to a proposal made by Bastien Teinturier on the bitcoin-dev mailing list. The biggest pain point is BIP 125 rule 2, which requires paying high fees twice instead of once if the feerate has been rising since a transaction was broadcasted. In addition, the non-deterministic nature of the rules means that transactions must always assume they will need to abide by replacement rules even if they have been evicted from the mempool. To improve the RBF policy, some ideas have been discussed, including removing Rule #3, which requires the replacement to pay higher absolute fees, and making it impossible for a replacement transaction to have a lower mining score than the original transaction(s). It is noted that there will be a deployment issue to warn of if moving to a new set of RBF rules due to Bitcoin applications needing to rewrite their RBF logics. The post provides links to resources for further reading.In another article, a different model for fees is suggested where the transaction's expected fees to be paid in the next few blocks are considered instead of paying for its own bandwidth. Mining score is seen as relevant in multiple places, especially for ancestor-aware funding of transactions. Suggestions for RBF improvement proposals include rate-limiting replacements per prevout and transaction validation in general, as well as calculating the mining priority of unconfirmed transactions. The article also discusses the challenges in calculating the "mining score" of a transaction in the mempool and suggests dividing the mempool into high and low feerate layers.Lastly, the context is a list of names at the beginning followed by links to various GitHub pull requests, commits, and discussions related to Bitcoin development. The links include topics such as mempool replacements, unconfirmed inputs rule, candidate set-based block building, and fee bumping. The context also includes the mailing list for bitcoin-dev. Overall, these links provide insight into ongoing discussions and developments in the Bitcoin community.</summary>
+    <published>2022-02-07T11:16:26+00:00</published>
+  </entry>
+</feed>

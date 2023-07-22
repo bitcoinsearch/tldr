@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Per-block non-interactive Schnorr signature aggregation</title>
+  <updated>2023-06-12T00:39:27.326023+00:00</updated>
+  <author>
+    <name>adiabat 2017-05-10 14:59:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Per-block non-interactive Schnorr signature aggregation</title>
+    <updated>2023-06-12T00:39:27.326023+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-May/014310.html" rel="alternate"/>
+    <summary>In this conversation, a potential vulnerability in Bitcoin's signature aggregation feature is discussed. The Wagner generalized birthday attack could be used to manipulate the system by varying the R values and colliding hashes. One possible defense against this attack is proposed where the miner calculates s-aggregate and aggregates all the public keys from all the aggregated signatures in the block (P0, P1...) then sorts them and hash the concatenated list of pubkeys. They could then multiply s by this combo-pubkey hash (call it h(c)). Verification would involve going through all the pubkeys in the block, creating the same combo-pubkey hash, and multiplying s by the multiplicative inverse of the h(c) they calculate, then verifying s. However, it is not clear how much this will impact the verification speed. Another possible optimization proposed was instead of sorting, concatenate all the R's or P's in the order they appear in the block. Then have the miner commit to s*h(c)^1, the multiplicative inverse of the hash of all those values. When nodes are verifying in IBD, they can just multiply by h(c) and they don't have to compute the inverse.</summary>
+    <published>2017-05-10T14:59:08+00:00</published>
+  </entry>
+</feed>

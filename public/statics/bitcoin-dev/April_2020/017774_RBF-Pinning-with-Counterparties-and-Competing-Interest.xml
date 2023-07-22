@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-05-20T22:05:46.398177+00:00</updated>
+  <author>
+    <name>Matt Corallo 2020-04-22 22:53:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-05-20T22:05:46.398177+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-April/017774.html" rel="alternate"/>
+    <summary>The discussion on the Lightning-dev mailing list involves a potential attack on the Lightning Network. The attack is based on spending an HTLC using the preimage with a low-fee, RBF-disabled transaction and then getting it mined via some out-of-band agreement with a small miner. If Bob broadcasts a conflicting transaction without realizing that it conflicts with a pinned transaction already in most node's mempools, he will face a problem. One solution suggested by David A. Harding is re-implementing something like a BIP61 reject message but with an extension that returns the txids of any conflicts. This way, when Bob connects to a bunch of Bitcoin nodes and sends his conflicting transaction, the nodes would reply with something like "rejected: code 123: conflicts with txid 0123...cdef". Bob could then reply with a getdata('tx', '0123...cdef') to get the pinned transaction, parse out its preimage, and resolve the HTLC. However, there are practical design issues as well, such as the need for the node to provide reject messages for each input which is conflicted, something which needs to be thought hard about the DoS implications of. It is unclear whether this solution is reliable enough to rely on for one's own funds.</summary>
+    <published>2020-04-22T22:53:37+00:00</published>
+  </entry>
+</feed>

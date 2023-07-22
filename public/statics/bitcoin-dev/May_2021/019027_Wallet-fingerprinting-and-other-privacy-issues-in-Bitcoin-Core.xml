@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Wallet fingerprinting and other privacy issues in Bitcoin Core</title>
+  <updated>2023-05-21T02:36:28.877825+00:00</updated>
+  <author>
+    <name>Prayank 2021-05-26 14:47:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Wallet fingerprinting and other privacy issues in Bitcoin Core</title>
+    <updated>2023-05-21T02:36:28.877825+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-May/019027.html" rel="alternate"/>
+    <summary>The privacy issues in Core wallet have been a matter of concern for many, but recently, a new issue has come to light that can identify if someone is using Bitcoin Core by just the bitcoin address and a couple of transactions. Although people have given up on privacy in Core wallet, this information can still be useful for some users who are unaware of this specific issue and developers who use Bitcoin Core wallet in their projects. The issue is explained in detail on Github and it can affect privacy in some cases. If Alice wants to confirm whether Bob is using Bitcoin Core wallet, she can send 2 small amounts to one of the addresses in different transactions, and one transaction should have such a low fee rate that it doesn't get confirmed.This issue was discovered while reviewing PR, which was also discussed in a 'Core Review PR club' meeting recently. Moreover, there are two things that help identify the wallet using the address, including not being able to spend unconfirmed UTXO and OUTPUT_GROUP_MAX_ENTRIES. The latter was set at 10 earlier but increased to 100 after PR #18418 got merged. This will help in confirming if someone is using the latest Bitcoin Core once it is available in the next release. For instance, Carol sends small amounts to the same address in 11 transactions to both Alice and Bob and confirms that Bob is using the latest Bitcoin Core wallet, while Alice is using an older version.The author plans to fix both of these issues, which may take a few days or might never get merged. In his opinion, he suggests locking all UTXOs associated with a scriptpubkey until all are confirmed, which will help fix issue 1. As for issue 2, it can be fixed by using an approach similar to Electrum (All or None).</summary>
+    <published>2021-05-26T14:47:43+00:00</published>
+  </entry>
+</feed>

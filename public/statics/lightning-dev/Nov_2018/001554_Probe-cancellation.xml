@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Probe cancellation</title>
+  <updated>2023-05-20T09:02:22.889857+00:00</updated>
+  <author>
+    <name>Anthony Towns 2018-11-10 03:26:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Probe cancellation</title>
+    <updated>2023-05-20T09:02:22.889857+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001554.html" rel="alternate"/>
+    <summary>The issue of ensuring reliability in payment routing involves nodes taking active measures to probe routes regularly, but there is a risk that if the probe discovers a failing node or channel, the probe HTLC will get stuck and consume HTLC slots and memory for well-behaved nodes. The solution could be to allow for cancelling stuck probes from the sending direction as well as the receiving direction. To do so, a payment hash would be generated as SHA256("something") XOR 0xFF..FF or similar, and everyone can safely drop the incoming transaction because they know that even if they forwarded the tx, it will be refunded eventually anyway. All one has to do is send a packet saying this was a probe, and telling you the "something" to verify, and free up the slot/funds from the probe, as can everyone else except for the actual failing nodes.From the perspective of the sending node, one would generate a 128b random number X, calculate H=bitwise-not(SHA256(X)), make a probe payment over path P, hash H, amount V, and wait for responses such as success, error, unknown hash, routing failed, and timeout.</summary>
+    <published>2018-11-10T03:26:06+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+  <updated>2023-06-14T22:15:28.621946+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2021-06-13 05:56:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Stroll through Fee-Bumping Techniques : Input-Based vs Child-Pay-For-Parent</title>
+    <updated>2023-06-14T22:15:28.621946+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-June/019065.html" rel="alternate"/>
+    <summary>The post discusses fee-bumping primitives for multi-party protocols and compares two approaches - Child-Pays-For-Parent (CPFP) and Input-based. CPFP requires rebroadcasting the entire chain of transactions in case of a fee bump, which may lead to wastage of bandwidth consumption. On the other hand, Input-based approach attaches the fee-bumping input to the root of the chain of transactions. However, it breaks the chain validity, and all remaining transactions must be updated and rebroadcasted. The post evaluates the Fee-Bumping Batching mechanism for both approaches. In optimistic scenarios, multiple chains of transactions can be aggregated using CPFP, whereas, in the Input-based approach, one bumping input must be attached per chain. Further, the post discusses Fee-Bumping Mempool Flexibility, where the root of the chain of transactions is the package's oldest ancestor, and package limits do not restrain its acceptance. The post highlights that future soft forks allow significant on-chain footprint savings, especially in case of batching. Additionally, future package relay bandwidth efficiency should account for rebroadcast frequency of CPFPing multi-party protocols. In the context of multi-party protocols, we should assume bounded rationality of the participants w.r.t to an unconfirmed spend of the contract utxo across network mempools. The bumped transaction might have been replaced by a concurrent state. To guarantee efficiency, the tx mutation proposal relies on interactivity in the worst-case scenario where a counterparty wants to increase its fee-bumping output from the contract balance. This interactivity may lure a counterparty to always lock the worst-case fee-bumping reserve in the output. One variant of input-based fee-bumping usable today is the leverage of the SIGHASH_ANYONECANPAY/SIGHASH_SINGLE malleability flags. If the transaction is the latest stage of the contract, a bumping input can be attached just-in-time, thus increasing the feerate of the whole package. Even assuming SIGHASH_ANYPREVOUT, if the first stage contract transaction includes multiple outputs, SIGHASH_SINGLE can't be used and the fee-bumping input value might be wasted. This edge can be smoothed by broadcasting a preliminary fan-out transaction with a set of outputs providing a range of feerate points for the bumped transaction. This overhead could be smoothed even further in the future with more advanced sighash malleability flags like SIGHASH_IOMAP, allowing transaction signers to commit to a map of inputs/outputs.The post concludes by inviting thoughts and feedback from readers. Links to relevant resources have also been provided.</summary>
+    <published>2021-06-13T05:56:43+00:00</published>
+  </entry>
+</feed>

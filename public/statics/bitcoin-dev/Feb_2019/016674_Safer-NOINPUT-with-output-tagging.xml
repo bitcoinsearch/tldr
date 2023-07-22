@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer NOINPUT with output tagging</title>
+  <updated>2023-05-20T18:49:56.814642+00:00</updated>
+  <author>
+    <name>Johnson Lau 2019-02-09 17:43:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer NOINPUT with output tagging</title>
+    <updated>2023-05-20T18:49:56.814642+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-February/016674.html" rel="alternate"/>
+    <summary>In a 3-party channel, when one party is unresponsive, the remaining participants want to remove the party from the channel without downtime. Output tagging may result in reduced fungibility in multiparty eltoo channels. However, it is possible to make 2 settlement txs during semi-cooperative channel closing (SCCC).Outputs of the settlement tx X are tagged(A&amp;B) and C. Outputs of the settlement tx Y are untagged(A&amp;B) and C. Both X and Y are BIP68 relative-time-locked, but Y has a longer time lock. The branch channel is opened on top of the tagged output of tx X.If A and B want to close the channel without C, they need to publish the last update tx of the main channel. Once the update tx is confirmed, its txid becomes permanent, so are the txids of X and Y. If A and B decide to close the channel cooperatively, they could do it on top of the untagged output of tx Y, without using NOINPUT. There won’t be any fungibility loss.Other people will only see the uncooperative closing of the main channel, and couldn’t even tell the number of parties in the main channel. Unfortunately, the unusual long lock time of Y might still tell something.The bitcoin-dev mailing list has discussed the risks associated with signature replay that come with NOINPUT. If a payer accidentally sends to a previous address with the same amount, double payment can occur and the previous UTXO may have been spent using NOINPUT, resulting in loss of funds.To mitigate this risk, an output must be "tagged" for it to be spendable with NOINPUT, and the "tag" must be made explicitly by the payer. There are two possible ways to do the tagging: a certain bit in the tx version must be set or a certain bit in the scriptPubKey must be set. Tagging in either way should not complicate the eltoo protocol in any way nor bring extra block space overhead.ScriptPubKey tagging is advantageous as it enables per-output basis tagging but is only possible with native-segwit, not P2SH. On the other hand, tagging with tx version will also protect P2SH-segwit, and all existing wallets are protected by default. However, it is somewhat a layer violation, and you can only tag all or none output in the same tx.NOINPUT brings more smart contract capacity, and at the same time, we are one step closer to dumb contracts. The target is to find a design that enables exactly the smart contracts we want while minimizing the risks of misuse. However, the tradeoff of NOINPUT is the risks of signature replay. Key-pair reuse has been a social and technical norm since the creation of Bitcoin, making it difficult to stop payers from reusing an address. If the expectation is that the unresponsive party returns, fungibility is not reduced due to output tagging because the above scheme can be used off-chain until the original channel can be continued. A similar eltoo-like protocol has not yet been designed that works if you can't predict in advance who will become absent.</summary>
+    <published>2019-02-09T17:43:50+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Rebatable fees &amp; incentive-safe fee markets</title>
+  <updated>2023-06-12T19:14:42.939537+00:00</updated>
+  <author>
+    <name>Nathan Wilcox 2017-09-29 02:09:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Rebatable fees &amp; incentive-safe fee markets</title>
+    <updated>2023-06-12T19:14:42.939537+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-September/015104.html" rel="alternate"/>
+    <summary>A recent article by Ron Lavi, Or Sattath, and Aviv Zohar proposes a new way to approach Bitcoin's fee market. The current auction model is flawed in that it does not achieve maximum clearing price and can lead to strategic bidding behavior. The proposed "pay lowest winning bid" model would have all transactions pay only the smallest fee rate paid by any transaction in the block. This would eliminate the need for fee estimate mechanisms and adjusting transaction fees through RBF or CPFP. In addition, this proposal could be easily soft-forked to allow for pre-signed transactions and explicit fees in multi-party transaction creation protocols. However, there are concerns about the UX issues with RBF and CPFP, as well as the implications of high-latency/low-fee usage. One potential solution is to try a tiny fee and then increase it if necessary. Another concern is whether there is a clear/clean game-theoretic-compatible UX for users and whether the implementation would be simple enough. Mark Friedenbach offers a strawman implementation that would allow old-style implicit fees and rebateable fee txns. New consensus rules would require one UTXO in the coinbase for the rebate. While this implementation may carry a marginal cost of 70-100 vbytes per instance, it could be heavily used in things like payment channel refund and uncooperative close-out transactions. Friedenbach also proposes a more worked out proposal that would establish the marginal fee rate and allow for rebateable fees to contribute proportionally towards meeting the remaining marginal fee requirement. The last transaction in the block would claim ALL explicit fees and forward them on to the coinbase. The miner would be allowed to claim subsidy + the miner's fee tally + the explicit fee tally for themselves in the coinbase. Overall, while the proposed "pay lowest winning bid" model and soft-fork implementation offer potential benefits, there are still concerns and questions that need to be addressed.</summary>
+    <published>2017-09-29T02:09:13+00:00</published>
+  </entry>
+</feed>

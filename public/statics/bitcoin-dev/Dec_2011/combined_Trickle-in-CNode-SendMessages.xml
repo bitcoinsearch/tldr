@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Trickle in CNode::SendMessages</title>
+  <updated>2023-06-05T01:36:28.695602+00:00</updated>
+  <author>
+    <name>Michael Grønager 2011-12-30 07:38:22</name>
+  </author>
+  <author>
+    <name>Michael Grønager 2011-12-30 07:38:22</name>
+  </author>
+  <author>
+    <name>Michael Grønager 2011-12-29 22:05:55</name>
+  </author>
+  <author>
+    <name>Michael Grønager 2011-12-29 22:05:55</name>
+  </author>
+  <author>
+    <name>Michael Grønager 2011-12-29 22:05:55</name>
+  </author>
+  <author>
+    <name>Michael Grønager 2011-12-30 07:38:22</name>
+  </author>
+  <link href="bitcoin-dev/Dec_2011/001009_Trickle-in-CNode-SendMessages.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2011/001009_Trickle-in-CNode-SendMessages.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2011/001008_Trickle-in-CNode-SendMessages.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2011/001008_Trickle-in-CNode-SendMessages.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2011/001008_Trickle-in-CNode-SendMessages.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2011/001009_Trickle-in-CNode-SendMessages.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Trickle in CNode::SendMessages</title>
+    <updated>2023-06-05T01:36:28.695602+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-December/001009.html" rel="alternate"/>
+    <summary>The CNode::SendMessages function in the peer-to-peer network uses a trickle algorithm to send messages to nodes. At each update round, a new random trickle node is chosen from 120 nodes, and with an average round time of 100ms for sleep, all nodes are moved through roughly every 12-15 seconds. When a node is chosen as the trickle node, it sends all its pending addresses to its corresponding peer. However, when a node is not the trickle node, only one-fourth of the transaction-invs are sent and the rest are pushed to wait for the next round. The selection process for the 1/4 invs that get sent is based on a hashSalt constant generated during start-up, resulting in the other 3/4 never getting sent. In an email dated 29th December 2011, Michael Grønager points out the flaw in the trickle algorithm used in CNode::SendMessages. He suggests changing the algorithm and pushing tx'es into a multimap. He proposes choosing the first 25% in each round or removing the redundant vInvWait stuff. The current implementation divides the inv forwarding hash space into 4, similar to DHTs. As long as there are more than four nodes, all transactions will be sent around, given the different hashSalt for each node in the peer-to-peer network. Michael clarifies that if a node is the trickle node, it receives all invs, not just the special quarter. In conclusion, the suggested changes can fix the issue pointed out by Michael Grønager regarding the flaw in the trickle algorithm used in CNode::SendMessages.</summary>
+    <published>2011-12-30T07:38:22+00:00</published>
+  </entry>
+</feed>

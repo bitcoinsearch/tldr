@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Silent Payments – Non-interactive private payments with no on-chain overhead</title>
+  <updated>2023-06-15T18:27:03.571207+00:00</updated>
+  <author>
+    <name>Ruben Somsen 2022-03-29 15:36:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Silent Payments – Non-interactive private payments with no on-chain overhead</title>
+    <updated>2023-06-15T18:27:03.571207+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020182.html" rel="alternate"/>
+    <summary>Ruben Somsen has proposed a new scheme for private non-interactive address generation without on-chain overhead. The recipient generates a silent payment address and makes it public, while the sender uses a public key from one of their chosen inputs to derive a shared secret that tweaks the silent payment address. The recipient detects the payment by scanning every transaction in the blockchain. This scheme does not require interaction between sender and recipient and avoids using the Bitcoin blockchain as a messaging layer. However, there are downsides such as the scanning requirement, lack of light client support, and the need to control your own input(s).There are several improvements that can be made to this scheme. For example, UTXO set scanning can limit the protocol to only scanning transactions that are part of the UTXO set when restoring from backup, which may be faster. Another improvement is tweaking the silent payment address with the combination of all input keys of a transaction, which further lowers the scanning cost but requires the willingness of other participants to follow the Silent Payment protocol. Finally, a blinding scheme exists that allows hiding the silent payment address from other participants when performing a coinjoin transaction.The article discusses various protocols that provide fresh address generation and are compatible with one-time seed backups. It compares various protocols including Payment code sharing, Xpub sharing, and Regular address sharing. Payment code sharing is BIP47 where an OP_RETURN message is sent on-chain to establish a shared secret prior to making payments. Xpub sharing involves handing out an xpub instead of an address upon first payment to enable repeat payments. Regular address sharing is how Bitcoin is commonly used today and requires interaction for every single payment. The article also raises some open questions such as how slow are the required database lookups and if there is any way to make light client support more viable. It questions whether single input tweaking or using all inputs is preferred in terms of increased coinjoin complexity. Additionally, it explores if there are any security issues with the proposed cryptography and if the added complexity of the scheme is worth it when compared to alternatives.Various references have been provided in the article including Stealth Payments by Peter Todd, BIP47 payment codes by Justus Ranvier, Reusable taproot addresses by Kixunil, BIP32 HD keys by Pieter Wuille, and Blind Diffie-Hellman Key Exchange by David Wagner. The author acknowledges the contributions of Kixunil, Calvin Kim, Jonas Nick, holihawt, Lloyd Fournier, and all the authors of previous schemes.</summary>
+    <published>2022-03-29T15:36:13+00:00</published>
+  </entry>
+</feed>

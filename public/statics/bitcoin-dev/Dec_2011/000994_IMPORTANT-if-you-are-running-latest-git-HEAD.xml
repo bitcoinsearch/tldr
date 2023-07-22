@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>IMPORTANT: if you are running latest git HEAD</title>
+  <updated>2023-06-05T01:21:54.701464+00:00</updated>
+  <author>
+    <name>Gavin Andresen 2011-12-25 16:05:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>IMPORTANT: if you are running latest git HEAD</title>
+    <updated>2023-06-05T01:21:54.701464+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-December/000994.html" rel="alternate"/>
+    <summary>On December 20, a remote vulnerability was reported by makomk and pulled into the master bitcoin/bitcoin tree. Those running git-HEAD code on the production network should pull the latest code to get the bug fixed. The vulnerability affects only those who have pulled and compiled their own bitcoind/bitcoin-qt from the source tree in the past five days. The vulnerability was caused by a mistake made while refactoring the ConnectInputs() function into two pieces (FetchInputs() and ConnectInputs()). A check for an out-of-range previous-transaction-output in the FetchInputs() method was not duplicated in ConnectInputs(), which resulted in a new method called AreInputsStandard() crashing with an out-of-bounds memory access if given an invalid transaction. The bug-fix puts a check in FetchInputs() and an assertion in AreInputsStandard(). However, this does not affect the back-ported "mining only" code that some miners and pools are using. Fortunately, the vulnerability was found and reported before binaries with the vulnerability were released. However, it was not found before the code was pulled, and could have made it into the next release if makomk had not been testing some unrelated code. Before releasing version 0.6, Gavin Andresen would like to have an "intelligent, bitcoin-specific fuzzing tool" that can automatically find this type of bug that they can run before every release. He has asked if anyone already has one to speak up.</summary>
+    <published>2011-12-25T16:05:42+00:00</published>
+  </entry>
+</feed>

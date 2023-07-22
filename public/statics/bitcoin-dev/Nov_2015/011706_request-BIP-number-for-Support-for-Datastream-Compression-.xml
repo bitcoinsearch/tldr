@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>request BIP number for: "Support for Datastream Compression"</title>
+  <updated>2023-06-11T00:59:05.047725+00:00</updated>
+  <author>
+    <name>Peter Tschipper 2015-11-10 17:09:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>request BIP number for: "Support for Datastream Compression"</title>
+    <updated>2023-06-11T00:59:05.047725+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-November/011706.html" rel="alternate"/>
+    <summary>On November 10, 2015, members of the bitcoin-dev mailing list discussed the use of compressed blocks and transactions to save on bandwidth. The group agreed that cblock was a reasonable way to extend the protocol, and further wrapping should be done at the stream level. However, concerns were raised about the security of zlib, which has a bad buffer overflow bug but was fixed in version 1.2.3. A fallback path to non-compressed data was required should compression fail or crash.The group noted that most blocks and transactions have runs of zeroes and/or highly common bit-patterns, which contributes to useful compression even at smaller sizes. Peter Ts's most recent numbers bore this out, and zlib has a dictionary (32K?) which works well with repeated patterns such as those seen with concatenated runs of transactions. While LZO was suggested as an alternative, the group was unsure if it would provide better compression and planned to do some benchmarking.Discussions continued regarding the best plan for historical data, with suggestions including sticking to just blocks and defining a "cblocks" message that handles multiple blocks by concatenating the block messages as payload before compression. Transactions could be combined together and compressed "ctxs," with inv messages modified so that groups of 10-20 transactions could be requested. It was noted that trade-off decisions should be local and negotiated between peers, not a required feature of the network P2P.Overall, the group discussed the benefits and potential drawbacks of implementing compressed blocks and transactions to save bandwidth, while also considering the security and performance implications of different compression methods.</summary>
+    <published>2015-11-10T17:09:06+00:00</published>
+  </entry>
+</feed>

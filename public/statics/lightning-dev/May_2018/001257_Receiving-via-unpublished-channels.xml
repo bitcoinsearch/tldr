@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Receiving via unpublished channels</title>
+  <updated>2023-05-24T23:37:50.995405+00:00</updated>
+  <author>
+    <name>Hiroshi UENO 2018-05-09 04:49:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Receiving via unpublished channels</title>
+    <updated>2023-05-24T23:37:50.995405+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-May/001257.html" rel="alternate"/>
+    <summary>ZmnSCPxj, a developer who is implementing support for 'r' field in invoices has stumbled upon some issues regarding creating invoices with 'r' fields. In order to receive via an unpublished channel, one needs to know what onLightning fees the other side of that channel wants to charge. But in case of an unpublished channel, we do not send channel_announcement and in that case, we do not send channel_update. So the other side of the channel never informs us of the onLightning fees they want to charge if we would receive funds by this channel. An idea that he wants to consider is to simply send `channel_update` as soon as they lock in the channel, which seems back-compatible. Software which does not expect this behavior will simply drop the `channel_update` (as they do not follow a `channel_announcement`). He is asking for inputs from other LN implementations (lnd, eclair, ucoin, lit) whether standardizing this behavior is a good idea or not. He also asks what was the intended way to get the onLightning fee rates to put into invoice `r` fields for private routes. On a different note, Nayuta-ueno, who is running a node called ptarmigan, discards `channel_update` without `channel_announcement`. However, they want to implement it. They have some questions like whether `channel_update` sends only for `announce_channel == 0`(in` open_channel.channel_flags`) and whether `channel_update` sends every time after `funding_locked` sending(established and reconnection).</summary>
+    <published>2018-05-09T04:49:40+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Alternative to OP_EVAL</title>
+  <updated>2023-06-05T01:23:28.088580+00:00</updated>
+  <author>
+    <name>roconnor at theorem.ca 2011-12-29 06:55:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Alternative to OP_EVAL</title>
+    <updated>2023-06-05T01:23:28.089614+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-December/000997.html" rel="alternate"/>
+    <summary>Gavin requested an alternative to OP_EVAL, and a proposal by Russell O'Connor for adding a third "codehash" stack has been made. The proposal suggests adding an OP_CODESEPARATOR that pushes the hash of the remaining code in the script onto the codehash stack, and a new operator, OP_CODEHASH, which pops the codehash stack and pushes it onto the main stack. This will produce send-to-script addresses. A new transaction will be added with the format: OP_CODEHASH OP_HASH160 {20-byte-hash-value} OP_EQUAL, which can only be redeemed by knowing the hash of the script. When the code runs, it will consume all the signatures, leaving the 20-byte-code-hash on the stack. If interpreted as a NOP, it is skipped, and the hash is hashed and compared to the 20-byte-hash-value, requiring a match to succeed. The proposal covers all desired behavior from OP_EVAL but with less radical change. Additionally, the language remains a weak stack-based language that is clearly terminating, with the number of operations executed still bounded by the number of operations occurring in the script.With the OP_EVAL proposal, the script language becomes essentially Turing complete, where there is no way to know what code will run without executing it, and there is no way to statically analyze the script without executing it. The proposal has no dynamically generated code that is executed, and variations can be done to improve it further. Overall, the proposal aims to provide a secure solution while avoiding radical changes.</summary>
+    <published>2011-12-29T06:55:03+00:00</published>
+  </entry>
+</feed>

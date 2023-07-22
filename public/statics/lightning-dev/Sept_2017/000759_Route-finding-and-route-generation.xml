@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Route finding and route generation</title>
+  <updated>2023-05-24T02:10:48.479540+00:00</updated>
+  <author>
+    <name>Billy Tetrud 2017-09-04 20:48:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Route finding and route generation</title>
+    <updated>2023-05-24T02:10:48.479540+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2017-September/000759.html" rel="alternate"/>
+    <summary>A new proposal for a protocol to replace the current flood-the-network style route discovery for the Lightning Network has been put forward by Olaoluwa Osuntokun, one of the co-authors of Flare paper. The proposed protocol involves each node knowing its own local network topology and querying a number of connections for routes to the intended destination.When a node joins the network, it broadcasts its information to all its channels and requests local network topology information from all its channels for information about channels 1 hop beyond its direct connection. It then requests topology information for channels 2 hops beyond until it has filled its cache to its satisfaction.When a node receives an announcement message from a node joining the network, it stores that node's info in its cache and forwards the info to any node subscribed to topology changes that fall within the relevant distance. When a node wants to construct a route for a transaction, it checks to see if it has a path to that node in its cache. If it does, it finds the cost of the cheapest path it has.The protocol uses an initial routing cache for a neighborhood of N nodes. All the route information can be encrypted and signed so that relaying nodes cannot read the information inside, and so the requesting source node can verify which nodes sent that information. This should keep both node-announcement messages and route request messages highly localized.Laoluwa acknowledged that multiple heterogeneous routing protocols can be used within the network just as within the internet, so different sub-graphs can choose protocols that achieve their goals in light of the various tradeoffs. However, the current stop-gap used in Flare is a pure proactive protocol, where nodes gather all link state data and make forwarding and routing decisions based on that data. It is suggested that protocols that have a reactive element for each circuit establishment may not necessarily scale better due to computational overhead. The proposed protocol will help to make route discovery less taxing on the network in terms of bandwidth and storage space, as nodes are not required to receive or store the entire network topology.</summary>
+    <published>2017-09-04T20:48:54+00:00</published>
+  </entry>
+</feed>

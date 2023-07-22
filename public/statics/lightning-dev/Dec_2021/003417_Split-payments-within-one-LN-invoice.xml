@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Split payments within one LN invoice</title>
+  <updated>2023-06-03T07:00:23.770099+00:00</updated>
+  <author>
+    <name>William Casarin 2021-12-16 17:05:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Split payments within one LN invoice</title>
+    <updated>2023-06-03T07:00:23.770099+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003417.html" rel="alternate"/>
+    <summary>Christian Decker suggests a solution he calls "Poor man's rendez-vous" to route payments through multiple parties. This ensures atomicity, meaning once the circuit is set up, no participant can cheat the others and it's seamless from the payer's perspective. To pay parties `B` and `C` atomically, `C` creates an invoice for 90ksat and sends it to `B`, who then creates an invoice for 100ksat (including routing fees) with the same payment hash as `C`. The payer, `A`, receives an invoice from `B` for the expected total of 100ksat and pays it like normal. `B` then forwards the payment to `C`, who reveals the preimage to them, allowing them to claim the incoming 100ksat covering both `B` and `C`'s share. Although this method requires creating two invoices and `B` sees two payments, it guarantees that either all parties get paid or no one gets paid. It can be extended to any number of parties with reduced success probability, and does not require any changes on the sender side, only minimal setup between the payees. However, coordination is needed to ensure the payment hash `H` remains the same along the entire chain of payments.The solution could have been useful in the music industry, where it is common to split payments between 1-5 individuals. Christian wonders if anyone has coded up a "Poor man's rendez-vous" demo yet and suggests using a clightning plugin to implement the solution.</summary>
+    <published>2021-12-16T17:05:42+00:00</published>
+  </entry>
+</feed>

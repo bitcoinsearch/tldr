@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Reference example bech32m address for future segwit versions</title>
+  <updated>2023-06-16T04:10:43.521406+00:00</updated>
+  <author>
+    <name>Greg Sanders 2023-02-01 00:37:06</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2023-01-31 14:30:34</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2023-01-31 14:30:34</name>
+  </author>
+  <author>
+    <name>David A. Harding 2023-01-31 23:33:13</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2023-02-01 00:37:06</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2023-02-01 00:37:06</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2023-02-01 01:13:49</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2023-01-31 14:30:34</name>
+  </author>
+  <author>
+    <name>David A. Harding 2023-01-31 23:33:13</name>
+  </author>
+  <author>
+    <name>David A. Harding 2023-01-31 00:02:51</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2023-02-01 01:13:49</name>
+  </author>
+  <author>
+    <name>David A. Harding 2023-01-31 00:02:51</name>
+  </author>
+  <author>
+    <name>David A. Harding 2023-01-31 23:33:13</name>
+  </author>
+  <author>
+    <name>David A. Harding 2023-01-31 00:02:51</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2023-02-01 01:13:49</name>
+  </author>
+  <link href="bitcoin-dev/Feb_2023/021385_Reference-example-bech32m-address-for-future-segwit-versions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2023/021381_Reference-example-bech32m-address-for-future-segwit-versions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2023/021381_Reference-example-bech32m-address-for-future-segwit-versions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2023/021384_Reference-example-bech32m-address-for-future-segwit-versions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2023/021385_Reference-example-bech32m-address-for-future-segwit-versions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2023/021385_Reference-example-bech32m-address-for-future-segwit-versions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2023/021386_Reference-example-bech32m-address-for-future-segwit-versions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2023/021381_Reference-example-bech32m-address-for-future-segwit-versions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2023/021384_Reference-example-bech32m-address-for-future-segwit-versions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2023/021379_Reference-example-bech32m-address-for-future-segwit-versions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2023/021386_Reference-example-bech32m-address-for-future-segwit-versions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2023/021379_Reference-example-bech32m-address-for-future-segwit-versions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2023/021384_Reference-example-bech32m-address-for-future-segwit-versions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Jan_2023/021379_Reference-example-bech32m-address-for-future-segwit-versions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2023/021386_Reference-example-bech32m-address-for-future-segwit-versions.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Reference example bech32m address for future segwit versions</title>
+    <updated>2023-06-16T04:10:43.521406+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-February/021385.html" rel="alternate"/>
+    <summary>In an email exchange on the Bitcoin-dev mailing list, David A. Harding and Greg Sanders discussed the best practices for wallets when it comes to spending to the output indicated by any valid bech32m address. David argued that wallets should spend to any valid bech32m address and that the more restrictive approach of only sending to secured outputs seemed unnecessary. However, Greg suggested that most custodians may be hesitant to whitelist a witness version that they know is insecure.David proposed having a reserved address space for future segwit versions that are unlikely to interfere with future soft forks but can still exercise wallets supporting bech32m. He suggested using HRP "bc" for mainnet and "tb" for testnet, witness version 16, and witness program 0x0000. This would help developers of future soft forks deal with existing outputs paid to templates used in the proposed soft fork. However, Greg noted that most exchanges will not enable sends to future segwit versions due to the risk perspective of sending funds there. To avoid this issue, a proposal has been made for a canonical example of future segwit addresses that are designed to be very unlikely to interfere with future soft forks but which would still reasonably exercise wallets supporting bech32m. The proposed addresses include one each for mainnet and testnet. The Witness version is 16, while the Witness program is 0x0000.Reserved addresses will enable testing without using block space that could otherwise be used by actual value transfers and also avoid polluting the UTXO set. Outputs paid to reserved addresses will still be anyone-can-spend, so there's no change required to Bitcoin Core or other software, and those outputs can still be cleaned out of the UTXO set. Additionally, if the address space is ever needed for a soft fork, it will be available.In another email exchange on the bitcoin-dev mailing list, David A. Harding raised a question about the best practice for wallets when it comes to spending to the output indicated by any valid bech32m address. The response from aj was that it depends on whether the wallet is custodial or non-custodial. If it's a non-custodial wallet that may not be upgraded by the time witness v2 addresses are in use, then sending to such addresses now makes sense and is worth testing. However, if it's a custodial wallet, then there's a strong argument against allowing sending to such addresses until they're actually in use. It's worth testing for non-custodial wallets as they might not be able to find compatible software in the future to move their private keys and have to resort to using the current software. However, in that case, they should be able to capture the transaction it generates before broadcasting it and don't need to publish it on-chain. It's a different matter for libraries and non-wallet software like block explorers or alternate node implementations. In another email exchange, David also sought suggestions from others on the list regarding what script to use and whether OP_16 OP_PUSH2 0000 would be a problematic script or if they can think of a better one. The email conversation references BIP350, which recommends ensuring that wallet implementations support sending to v1 and higher versions.</summary>
+    <published>2023-02-01T00:37:06+00:00</published>
+  </entry>
+</feed>

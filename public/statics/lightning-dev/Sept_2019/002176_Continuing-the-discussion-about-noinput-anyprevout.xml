@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Continuing the discussion about noinput / anyprevout</title>
+  <updated>2023-06-02T20:31:28.306491+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-09-30 13:23:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Continuing the discussion about noinput / anyprevout</title>
+    <updated>2023-06-02T20:31:28.306491+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-September/002176.html" rel="alternate"/>
+    <summary>Recently there has been renewed interest in eltoo and discussions regarding clean abstractions for off-chain protocols. This has led to a revisit of the `sighash_noinput` proposal (BIP-118) and AJ's `bip-anyprevout` proposal. Both proposals allow rebinding of transactions to new outputs by adding a sighash flag that excludes the output when signing. BIP-118 explains the details of signature verification but omits anything related to deployment and dependency on other proposals. On the other hand, `bip-anyprevout` builds on top of BIP-118, adding integration with `bip-taproot`, chaperone signatures, limits the use of the sighash flag to script path spends, as well as a new pubkey serialization which uses the first byte to signal opt-in. It is important to note that both proposals are complementary and not competing. However, there remain a couple of unclear points such as the dangers of `sighash_noinput` and the use of chaperone signatures. Chaperone signatures are additional signatures that ensure that there is no third-party malleability of transactions. They have downsides such as additional size and protocols can still use globally known privkeys. Output tagging has been proposed as an alternative solution to disincentivize the use of non-smart-contract cases. The concern with output tagging is that it hurts fungibility, marking outputs used in a contract as such and making them identifiable.During the CoreDev meeting, it was agreed that the proposals being discussed were useful beyond just eltoo. However, not everyone could attend, so feedback from the wider community is being sought. The discussion topics include support or opposition to chaperone signatures in anyprevout/anyprevoutanyscript and output tagging/explicit opt-in. The goal is to have a concrete set of pros and cons, rather than abstract discussions about potential advantages or dangers. Additionally, there is consideration being given to merging BIP-118 and bip-anyprevout to reduce confusion and simplify discussions. Finally, Christian is asking if there is anything else that needs to be addressed. The questions that remain to be addressed are the usefulness of noinput/anyprevoutanyscript/anyprevout.</summary>
+    <published>2019-09-30T13:23:56+00:00</published>
+  </entry>
+</feed>

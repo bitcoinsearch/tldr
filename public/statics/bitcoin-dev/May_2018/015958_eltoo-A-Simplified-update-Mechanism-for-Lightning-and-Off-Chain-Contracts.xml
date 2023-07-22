@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>eltoo: A Simplified update Mechanism for Lightning and Off-Chain Contracts</title>
+  <updated>2023-06-13T01:40:50.038932+00:00</updated>
+  <author>
+    <name>Christian Decker 2018-05-10 13:57:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>eltoo: A Simplified update Mechanism for Lightning and Off-Chain Contracts</title>
+    <updated>2023-06-13T01:40:50.038932+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/015958.html" rel="alternate"/>
+    <summary>A developer on the Bitcoin-dev mailing list has provided insight into how the Lightning Network (LN) protocol's state commitment affects hash time-locked contracts (HTLCs) and CSV delays. The introduction of symmetric state increases the dependency between the CSV value of the commitment and the HTLC timeouts. This would have an adverse effect if extremely long CSV timeouts were allowed, as it would increase the total CLTV timeout along the entire route. To mitigate this, the 2-stage HTLC scheme was implemented and deployed as part of BOLT 1.0. However, the requirement for large CLTV deltas would already create incredibly long CLTV deltas between endpoints since the endpoint delta accumulates along the path. As a result, the simpler watchtowers may reduce both the CLTV deltas and settlement timeouts for eltoo, so that they become negligible. With the symmetric state commitment protocol, the "clock" starts ticking after the latest update transaction has hit the chain, and there are no further challenges. This means the commitment transaction itself doesn't need to have any CSV delays within the Script branches of the outputs it creates.The old/replaced HTLCs have no way of ever touching the blockchain. Therefore, we can throw away a whole heap of data about these HTLCs, which we would have to carry around indefinitely otherwise. Christian, the developer, also mentioned that with symmetric state, the HTLC outputs would now be symmetric themselves and look very much like an HTLC output that one would use in a vanilla on-chain cross-chain atomic swap.</summary>
+    <published>2018-05-10T13:57:30+00:00</published>
+  </entry>
+</feed>

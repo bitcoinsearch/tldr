@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 118 and SIGHASH_ANYPREVOUT</title>
+  <updated>2023-05-20T23:33:09.865654+00:00</updated>
+  <author>
+    <name>Matt Corallo 2020-08-04 13:10:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 118 and SIGHASH_ANYPREVOUT</title>
+    <updated>2023-05-20T23:33:09.865654+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018075.html" rel="alternate"/>
+    <summary>In the context of recent relay-based attacks, there have been concerns about the security of Hash Time-Locked Contract (HTLC) transactions. ZmnSCPxj raises a design consideration for the p2p protocol layer that would allow relaying a transaction to a full node without knowing which input transaction that full node has in its mempool or active chain. This is important for systems like lighting where you may not know which counterparty commitment transaction(s) are in a random node’s mempool and you should be able to describe to that node that you are spending then nonetheless. However, this is a nontrivial problem both in p2p protocol complexity and mempool optimization.ZmnSCPxj also points out a possible attack on the victim's fullnode by connecting to it and miners separately. The attacker broadcasts an old transaction to the victim but sends a different old transaction to miners. The victim reacts only to the first transaction since it does not see the second one in the mempool. However, what the victim needs to react to is onchain confirmed transactions. Therefore, in a Lightning universe utilizing primarily SIGHASH_NOINPUT-based mechanisms, the victim only needs to monitor onchain events and ignore mempool events. To ensure security, deep timeouts for mechanisms are necessary so that once a transaction is confirmed, its txid does not malleate without a reorg and a SIGHASH_NOINPUT signature can then be "locked" to that txid, unless a reorg unconfirms the transaction. Additionally, implementing scorch-the-earth, keep-bumping-the-fee strategies can help keep rebroadcasting new versions of the spending transaction, and spending from a transaction that is confirmed. Overall, the solution to ensuring HTLC security seems to lie in monitoring onchain events and ignoring mempool events while implementing scorch-the-earth, keep-bumping-the-fee strategies.</summary>
+    <published>2020-08-04T13:10:02+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Full-RBF in Bitcoin Core 24.0</title>
+  <updated>2023-06-14T22:36:13.761915+00:00</updated>
+  <author>
+    <name>Antoine Riard 2021-12-19 18:55:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Full-RBF in Bitcoin Core 24.0</title>
+    <updated>2023-06-14T22:36:13.761915+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-December/019699.html" rel="alternate"/>
+    <summary>In a Bitcoin Core developer mailing list, Antoine Riard proposes the deprecation of opt-in Replace-by-Fee (RBF) in favor of full-RBF as the default replacement policy. The rationale for this proposal is to mitigate the risk of denial-of-service (DoS) attacks on multi-party funded transactions enabled by RBF opt-out. A malicious counterparty can broadcast its low-feerate, opt-out spending of its own collateral input far before engaging in cooperative funding, leading to a DoS. Opt-in RBF doesn't suit deployment of robust second-layer protocols; as those issues are still early, they deserve more research. The current state of discussion is to introduce a `fullrbf` config-knob turned to false. Jeremy Rubin suggests easing into getting rid of full-RBF by keeping the flag working but making enforcement of non-replaceability something that happens n seconds after first seen, reducing the ability to partition mempools by broadcasting irreplaceable conflicts all at once. This approach introduces an overhead cost in the funding of multi-party transactions as collateral inputs have to be sanitized by sending them first to a replaceable nVersion output.Opt-in RBF is also a low-cost partitioning tool, and its existence nullifies most potential progress to mitigate malicious partitioning. To enhance the security of 0-confs, Bitcoin services could react after detecting successful double-spend attempts by attaching a CPFP to the merchant transaction or slash the service account if the sender is already known to the service provider. Other approaches include "side-trust" models and economic reputation-based compensations. Overall, the conversation highlights how a transaction relay/mempool acceptance policy might be beneficial to some class of deployed Bitcoin applications while being detrimental to newer ones, and preserving the interests of 0-confs users while enabling upcoming interests of fancy L2s to flourish is a good conversation to have.</summary>
+    <published>2021-12-19T18:55:01+00:00</published>
+  </entry>
+</feed>

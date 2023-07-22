@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Trustless Watchtowers</title>
+  <updated>2023-05-25T15:58:57.309108+00:00</updated>
+  <author>
+    <name>Conner Fromknecht 2018-11-14 00:28:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Trustless Watchtowers</title>
+    <updated>2023-05-25T15:58:57.309108+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001591.html" rel="alternate"/>
+    <summary>The Lightning-dev mailing list has been discussing various issues regarding watchtowers, including the need for watchtowers to store all encrypted blobs that are keyed to the same partial txid. Conner Fromknecht has been working on a watchtower design where the server side has been implemented and accepts encrypted blobs from clients and stores them. The functionality related to scanning blocks and publishing justice transactions has also been implemented, but has not been merged yet. One of the main concerns is that if a watchtower is identified by a counterparty, the counterparty could give the commitment transaction's txid with a randomly-generated blob to the watchtower before giving the revocation key to the owner, thus spamming the watchtower until it runs out of resources and crashes. To prevent this, the chosen design uses a two-level bucketing structure that maps client_pubkey1 to encrypted_blob1 and client_pubkey2 to encrypted_blob2, ensuring that different clients can't overwrite each other. In terms of Decker-Russell-Osuntokun channels, if a watchtower identifies the user, then this leaks the privacy of the user to the watchtower, and what would then be the point of encrypted blob? The design should be readily able to serve eltoo clients, with some slight modifications to breach detection and justice txn construction. However, the update-and-replace model leaks timing information about a particular channel to the tower, since the tower must know which prior state needs replacing. Overall, the watchtower design seems mostly solidified, and there will likely be follow-up posts on the ML. The tower could raise its price point if it detects such behavior and should only ever accept sessions if it can be certain it has the appropriate disk-space to facilitate them, so there isn't much risk in the node crashing due to a spam attack. Finally, the tower can't be sure which client is uploading the "real" blob, so the chosen design uses a two-level bucketing structure that maps client_pubkey1 to encrypted_blob1 and client_pubkey2 to encrypted_blob2.</summary>
+    <published>2018-11-14T00:28:38+00:00</published>
+  </entry>
+</feed>

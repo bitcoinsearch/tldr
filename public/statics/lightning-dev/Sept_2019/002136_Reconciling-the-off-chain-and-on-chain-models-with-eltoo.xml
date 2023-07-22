@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reconciling the off-chain and on-chain models with eltoo</title>
+  <updated>2023-06-02T20:12:44.272937+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-09-06 13:18:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reconciling the off-chain and on-chain models with eltoo</title>
+    <updated>2023-06-02T20:12:44.272937+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-September/002136.html" rel="alternate"/>
+    <summary>The recently published proof-of-concept of eltoo on signet by Richard has led to discussions on how to build the system. Eltoo provides strong guarantees regarding the state that will eventually end up confirmed on-chain, which makes it a natural fit to represent proposed off-chain state-changes while they are being negotiated. With the clean separation provided by eltoo, we can reconcile many on-chain and off-chain concepts, simplify the reasoning to build more complex functionality beyond simple HTLCs and reduce the complexity and our on-chain footprint. The update layer now includes only two very simple operations: `add_output` and `remove_output`. The next layer up is the negotiation layer. Each output in the agreed-upon state needs to be assigned one or more owners who sign off on removal of an output and the creation of new outputs which redistribute the funds contained in the removed outputs to newly created outputs. The use of transactions as a means to represent off-chain negotiations, and then applying them to the off-chain state via cut-through has several advantages over other schemes. It allows for experimentation even inside a running eltoo instance. Ifyou can find another participant that supports a fancy new protocol, you can use that protocol even though some of the other participants may not know anything about it. As long as you can understand the Bitcoin transaction model, you can participate in a multi-party channel. Using the Bitcoin object model as an interface, we can reuse a lot of tools that we have already built for on-chain transactions, including things like miniscript and hardware wallets, without explicitly requiring them in our own specification.This reconciliation between the off-chain model and the on-chain model, with many concepts cleanly mapping from one context to another (state outputs = UTXO, off-chain update = on-chain transactions, cut-through = confirmation, operation batching = block creation) is rather nice.</summary>
+    <published>2019-09-06T13:18:03+00:00</published>
+  </entry>
+</feed>

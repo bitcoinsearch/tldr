@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Making OP_CODESEPARATOR and FindAndDelete in non-segwit scripts non-standard</title>
+  <updated>2023-06-12T22:13:24.171924+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2017-11-15 19:54:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Making OP_CODESEPARATOR and FindAndDelete in non-segwit scripts non-standard</title>
+    <updated>2023-06-12T22:13:24.172927+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-November/015293.html" rel="alternate"/>
+    <summary>The proposal to make OP_CODESEPARATOR and FindAndDelete non-standard in non-segwit scripts has been put forward by Johnson Lau via bitcoin-dev. However, removing these features from the code base could potentially destroy value and cross a boundary that has not been previously crossed except under extraordinary circumstances. The nature of bitcoin means that there may be pre-signed transactions using these features, and it is impossible to know what they are. It may be a better idea to make these features non-standard to discourage their use without completely disabling them for all transactions. FindAndDelete is considered one of the most complicated and useless functions in the script language, and it is omitted from segwit but still needs to be supported in non-segwit scripts. Disabling both functions would guarantee that scriptCode serialized inside SignatureHash() must be constant. If a softfork were used to remove FindAndDelete() and OP_CODESEPARATOR from non-segwit scripts, it would be possible to completely remove FindAndDelete() from the consensus code later by whitelisting all blocks before the softfork block. However, OP_CODESEPARATOR in segwit scripts remains useful for Tumblebit and is not disabled in this proposal.</summary>
+    <published>2017-11-15T19:54:17+00:00</published>
+  </entry>
+</feed>

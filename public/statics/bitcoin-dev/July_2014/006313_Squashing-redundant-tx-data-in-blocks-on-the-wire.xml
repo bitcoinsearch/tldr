@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Squashing redundant tx data in blocks on the wire</title>
+  <updated>2023-06-09T01:12:14.239078+00:00</updated>
+  <author>
+    <name>Emin Gün Sirer 2014-07-19 00:54:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Squashing redundant tx data in blocks on the wire</title>
+    <updated>2023-06-09T01:12:14.239078+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-July/006313.html" rel="alternate"/>
+    <summary>A new technique for solving the problem of "set reconciliation" has been described in a paper from Cornell. Set reconciliation is where peer A believes the set of transactions that should be in the block is S_A, and peer B has included the set S_B. The aim is to reduce the communication complexity between A and B to O(delta), rather than O(S_B) as it is now, and for B to send a single message to A so that A can figure out the difference between the two sets, without any lengthy back and forth communication. This approach has three benefits over the Bloom filter approach: (1) Bloom filters require packets that are still O(S_A), (2) Bloom filters are probabilistic, which means extra complications when there is a hash collision, and (3) Bloom filters are interactive, which leads to more messages being sent. Set reconciliation is O(delta), non-probabilistic, and non-interactive. The naive version requires that one have some idea of the size of the delta. The author has not yet applied this trick to the Bitcoin p2p protocol, but invites anyone interested in applying this to communicate further off list. There is also discussion about how to handle some legitimate miner-privately-mined cases such as miner payout TXs (outside coinbase) or side chain conditional TXs. Kaz Wesley has updated the gist, and added an additional proposal that meshes well with UFBV which would tighten the new-block process when txes have been received in advance. The benefits of these changes only occur when the transactions have been seen in advance, but incentivizing ahead-of-block transaction propagation is a plus.</summary>
+    <published>2014-07-19T00:54:14+00:00</published>
+  </entry>
+</feed>

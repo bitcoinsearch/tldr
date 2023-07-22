@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Forcenet: an experimental network with a new header format</title>
+  <updated>2023-05-20T00:15:30.346726+00:00</updated>
+  <author>
+    <name>Johnson Lau 2016-12-14 15:45:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Forcenet: an experimental network with a new header format</title>
+    <updated>2023-05-20T00:15:30.346726+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-December/013376.html" rel="alternate"/>
+    <summary>The conversation between Tier Nolan and Johnson Lau revolves around the concept of sum tree and softfork in Bitcoin. The idea is to make the sum tree an independent tree with a separate commitment, which can be used for partial validation and fraud proofs. However, any redefinition requires either a hardfork or a new sum tree, which would create a new tree for every softfork of this type. To fix this, the weight and nSigOp should be explicitly committed, and the committed value must be equal to or larger than the real value to redefine it with a softfork. This would mean that each transaction will have an overhead of 16 bytes. Furthermore, the weight and sigop count could be transmitted as variable length integers, which would be around 2 bytes for the sigops and 3 bytes for the weight per transaction. However, the block format would have to include the raw transaction, "extra"/tree information, and witness data for each transaction. It is suggested that the two costs could be combined into a unified cost, where a sigop could have equal cost to 250 bytes. This would make it easier for miners to decide what to charge. It is also mentioned that CPU cost and storage/network costs are not completely interchangeable. Additionally, the current size weight limit is 4,000,000, and the sigop limit is 80,000. If the size weight and sigOp weight are combined, a block may have millions of sigOps, which is unacceptable. Signature aggregation will make this a bigger problem as one signature may spend thousands of sigOps. Finally, there is a discussion about whether fees, raw tx size, weight, and sigOps need to be summed, and it is suggested that the greater or equal rule would cover them.</summary>
+    <published>2016-12-14T15:45:37+00:00</published>
+  </entry>
+</feed>

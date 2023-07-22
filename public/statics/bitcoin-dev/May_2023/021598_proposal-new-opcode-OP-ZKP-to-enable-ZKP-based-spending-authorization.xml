@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>proposal: new opcode OP_ZKP to enable ZKP-based spending authorization</title>
+  <updated>2023-06-16T18:03:40.255735+00:00</updated>
+  <author>
+    <name>Weiji Guo 2023-05-01 12:46:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>proposal: new opcode OP_ZKP to enable ZKP-based spending authorization</title>
+    <updated>2023-06-16T18:03:40.255735+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-May/021598.html" rel="alternate"/>
+    <summary>In this email exchange, Weiji and ZmnSCPxj discuss the issue of verification keys potentially exceeding the MAX_SCRIPT_ELEMENT_SIZE (520 bytes) and the need to consider system limitations. ZmnSCPxj highlights that `scriptPubKey` is consensus-critical and any new P2P messages regarding verification keys would also have to be consensus-critical as all nodes need to learn the new verification keys. Thus, there is a need to adjust weight units for propagation of verification keys, similar to how `scriptPubKey`s and amounts are included in block data and weighted accordingly. ZmnSCPxj suggests that if verification keys are permanent, they should be weighted heavier than `scriptPubKey`s and amounts as UTXOs can theoretically be deleted later by spending them while any data that must be permanently stored in a database must correspondingly be weighted higher. Additionally, if ZKP witnesses translate to higher resource consumption compared to ECC signatures, the weighting of ZKP witnesses should also be higher. Weiji agrees with ZmnSCPxj's insights and mentions that they will carry out some benchmarking to recommend a reasonable weight when they start to develop a GitHub PR. They also note that as they can potentially aggregate many proofs or recursively verify even more, the average cost might still be manageable.</summary>
+    <published>2023-05-01T12:46:30+00:00</published>
+  </entry>
+</feed>

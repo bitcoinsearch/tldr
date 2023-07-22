@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>ECDH in the payment protocol</title>
+  <updated>2023-06-08T22:30:00.243298+00:00</updated>
+  <author>
+    <name>Chris Pacia 2014-05-12 22:40:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>ECDH in the payment protocol</title>
+    <updated>2023-06-08T22:30:00.243298+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-May/005758.html" rel="alternate"/>
+    <summary>The discussion begins with a query about the potential need for backing up wallets if the payment protocol is used for stealth. The response notes that the nonces cannot be derived from the wallet seed and would have to be stored in the wallet or on a server with a backup. However, this approach would require constant backups, which goes against the goal of moving away from that practice. The conversation then shifts to a proposal made by Pieter Wuille regarding the use of PaymentACK messages as proof of payment. Wuille suggests that PaymentACK messages become signed and that a Payment message contains a scriptSig-less Bitcoin transaction and a limit on its byte size. The sender would send such a Payment to the receiver before signing the transaction, and the receiver would only acknowledge it if it satisfies the request and meets certain criteria. Once the sender receives the ACK, they can either send the full transaction (with the receiver taking responsibility for broadcasting) or broadcast it themselves. This approach ensures that both parties have a chance to disagree with the transaction and are certain all communicated data in both directions happened correctly before committing. It also removes the chance that the Bitcoin transaction gets broadcast without the receiver liking it, or without the backchannel functioning correctly. Additionally, it is compatible with doing multiple payments in one Bitcoin transaction. However, there is still the possibility of the sender withholding the signed transaction or the receiver claiming to have never received it. In these cases, the sender can broadcast the transaction themselves after obtaining an ACK.</summary>
+    <published>2014-05-12T22:40:14+00:00</published>
+  </entry>
+</feed>

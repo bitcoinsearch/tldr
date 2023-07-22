@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Segwit Upgrade Procedures &amp; Block Extension Data</title>
+  <updated>2023-06-11T03:24:02.861662+00:00</updated>
+  <author>
+    <name>Peter Todd 2016-01-28 18:51:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Segwit Upgrade Procedures &amp; Block Extension Data</title>
+    <updated>2023-06-11T03:24:02.861662+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-January/012301.html" rel="alternate"/>
+    <summary>The segregated witness is a soft-fork that poses a major problem during deployment. Nodes need witness data to function after segwit has activated, and if full node adoption lags behind miner adoption, the segwit-supporting P2P network can partition and lose consensus. This issue is not yet fixed in Pieter Wuille's segwit branch, but one obvious solution is to add a new service bit such as NODE_SEGWIT, and/or bump the protocol version, and for outgoing peers only connect to peers with segwit support. The worst case scenario would be for segwit to not be widely adopted by full node operators, resulting in a more vulnerable network. Segwit isn't going to be the last thing that adds new block data, and future upgrades will require the relay network to upgrade. BIP141 suggests an Extensible Commitment Structure consisting of a hashed linked list of consensus-critical commitments, with a redefinable nonce at the end of the list for future soft-forks. Unfortunately, this means that the next soft-fork upgrade to add additional data will have the same relaying problem again. The proposal is to remove the restriction that the coinbase witness contain exactly one 32byte value, hash the contents of the coinbase witness (e.g. as a merkle tree) and commit them in place of the current nonce commitment, and include that data in the blocksize limit. This allows future soft-forks to add additional data, which non-upgraded nodes see as unvalidated extension data. All nodes can validate that data came from the miner, and thus they can freely propagate that data without risk of attack. This method is more efficient because most future upgrades are expected to be additional commitments where full nodes can deterministically recalculate the commitment, and the additional data for each new commitment is just 32 bytes.</summary>
+    <published>2016-01-28T18:51:24+00:00</published>
+  </entry>
+</feed>

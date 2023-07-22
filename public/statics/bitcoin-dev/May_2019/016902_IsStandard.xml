@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>IsStandard</title>
+  <updated>2023-06-13T18:29:22.038512+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-05-02 00:10:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>IsStandard</title>
+    <updated>2023-06-13T18:29:22.038512+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-May/016902.html" rel="alternate"/>
+    <summary>In an email exchange between Aymeric Vitte and ZmnSCPxj, Aymeric raised a question about whether nodes will relay non-usual transactions or not and how to know what they will accept or not. Aymeric gave some examples of such transactions including his modified multisig 2-of-3 which he put OP_2 out of the usual redeem script, BCH segwit recovery which is a P2SH transaction without any signature verification, and SHA bounties which are also P2SH transactions without signatures. ZmnSCPxj explained that any custom script can be wrapped in P2SH and P2WSH and it will be propagated since the P2SH/P2WSH hides the details of the custom script so cannot be filtered based on it. However, once a claim on a modified x-of-3 is propagated, the redeemScript is known and someone can attempt to RBF (or coordinate with a miner) with a modified witness stack or scriptSig to claim the UTXO. ZmnSCPxj could not answer for BCH as it was off-topic but noted that the old SHA bounty transactions were propagated in the days before `isStandard`. An SHA bounty can still be propagated today if they are wrapped in a P2SH or P2WSH, but the `redeemScript` must be published by the creator or bribed a miner if the transaction is not time-sensitive.</summary>
+    <published>2019-05-02T00:10:37+00:00</published>
+  </entry>
+</feed>

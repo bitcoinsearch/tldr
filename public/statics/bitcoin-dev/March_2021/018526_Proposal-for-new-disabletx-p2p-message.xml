@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for new "disabletx" p2p message</title>
+  <updated>2023-05-21T00:32:52.240116+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-03-02 16:31:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for new "disabletx" p2p message</title>
+    <updated>2023-05-21T00:32:52.241116+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-March/018526.html" rel="alternate"/>
+    <summary>In a Bitcoin development mailing list, John Newbery proposed the increase of inbound block-relay-only peers with minimal resource requirement and improved addr record propagation, without any changes to the p2p protocol required. He found an image helpful in analyzing the possibilities. The greyed circles indicate when one node does not need to send txs to the other node and thus can avoid allocating the tx relay data structures. For Bitcoin Core version 22.0, he proposes initializing only the transaction relay data structures after the `version` message is received, and only if fRelay=true and NODE_BLOOM is not offered on this connection. The tx relay data structure should always be initialized if you offer NODE_BLOOM services on the connection. The ideal rules for address and tx relay are slightly more complicated. Address relay should do GETADDR on every outbound connection except block-relay-only and self-announcements on every connection but only having received an ADDR message of some kind. Set fRelay=false when running with -blocksonly=1, making a block-relay-only outbound connection, or accepting an inbound connection but out of normal slots and can only offer a lightweight slot. Tx relay inbound (you accept the connection) should advertise bloom services to the node, accept inbound txs, unless advertised fRelay=false, and send outbound txs if they didn't specify fRelay=false or you've run out of normal slots and can only offer a lightweight slot. Tx relay outbound (you make the connection to someone else) should accept inbound txs unless advertised fRelay=false and send outbound txs if they did not specify fRelay=false and not using them as a blocks-relay-only node. To support -blocksonly=1 nodes who want to relay their own wallet addresses occasionally, assigning inbound txs who have fRelay=false to a much lower MAX_PEER_TX_ANNOUNCEMENTS (perhaps 10 or 20, instead of 5000) and not allocating TxRelay for them at all would ensure they're both functional and lightweight.</summary>
+    <published>2021-03-02T16:31:27+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - [BIP Proposal] Partially Signed Bitcoin Transaction (PSBT) format</title>
+  <updated>2023-06-12T15:01:23.864573+00:00</updated>
+  <author>
+    <name>Greg Sanders 2017-08-22 19:26:30</name>
+  </author>
+  <author>
+    <name>Andrew Chow 2017-08-18 22:11:14</name>
+  </author>
+  <author>
+    <name>Bryan Bishop 2017-08-21 00:00:19</name>
+  </author>
+  <author>
+    <name>Jochen Hoenicke 2017-08-21 21:36:24</name>
+  </author>
+  <author>
+    <name>Andrew Chow 2017-08-18 22:11:14</name>
+  </author>
+  <author>
+    <name>Bryan Bishop 2017-08-21 00:00:19</name>
+  </author>
+  <author>
+    <name>Jochen Hoenicke 2017-08-21 21:36:24</name>
+  </author>
+  <author>
+    <name>Andrew Chow 2017-08-18 22:11:14</name>
+  </author>
+  <author>
+    <name>Bryan Bishop 2017-08-21 00:00:19</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2017-08-21 18:12:47</name>
+  </author>
+  <author>
+    <name>Jochen Hoenicke 2017-08-21 21:36:24</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2017-08-21 18:12:47</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2017-08-22 19:26:30</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2017-08-21 18:12:47</name>
+  </author>
+  <author>
+    <name>Greg Sanders 2017-08-22 19:26:30</name>
+  </author>
+  <link href="bitcoin-dev/Aug_2017/014853_-BIP-Proposal-Partially-Signed-Bitcoin-Transaction-PSBT-format.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2017/014838_-BIP-Proposal-Partially-Signed-Bitcoin-Transaction-PSBT-format.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2017/014839_-BIP-Proposal-Partially-Signed-Bitcoin-Transaction-PSBT-format.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2017/014844_-BIP-Proposal-Partially-Signed-Bitcoin-Transaction-PSBT-format.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2017/014838_-BIP-Proposal-Partially-Signed-Bitcoin-Transaction-PSBT-format.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2017/014839_-BIP-Proposal-Partially-Signed-Bitcoin-Transaction-PSBT-format.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2017/014844_-BIP-Proposal-Partially-Signed-Bitcoin-Transaction-PSBT-format.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2017/014838_-BIP-Proposal-Partially-Signed-Bitcoin-Transaction-PSBT-format.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2017/014839_-BIP-Proposal-Partially-Signed-Bitcoin-Transaction-PSBT-format.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2017/014843_-BIP-Proposal-Partially-Signed-Bitcoin-Transaction-PSBT-format.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2017/014844_-BIP-Proposal-Partially-Signed-Bitcoin-Transaction-PSBT-format.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2017/014843_-BIP-Proposal-Partially-Signed-Bitcoin-Transaction-PSBT-format.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2017/014853_-BIP-Proposal-Partially-Signed-Bitcoin-Transaction-PSBT-format.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2017/014843_-BIP-Proposal-Partially-Signed-Bitcoin-Transaction-PSBT-format.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2017/014853_-BIP-Proposal-Partially-Signed-Bitcoin-Transaction-PSBT-format.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - [BIP Proposal] Partially Signed Bitcoin Transaction (PSBT) format</title>
+    <updated>2023-06-12T15:01:23.864573+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-August/014853.html" rel="alternate"/>
+    <summary>The discussion is centered around improving the security of partially signed transactions while ensuring privacy. One solution suggested is to have each input with an ownership proof, which is a signature over H(A || x) using the key for A. However, 'x' should be private and unique to prevent re-use of signatures as ownership proof for different purposes. To avoid this, a message like HMAC("ownership proof", H(A || x)) should be signed instead. Public verifiers see HMAC("ownership proof", some_random_hash_connected_to_A), while the owner can recreate some_random_hash_connected_to_A by H(A || x). The aim is to create a proof of non-ownership or a proof that the hardware wallet doesn't own the address.Greg Sanders proposed a solution to fix a problem with partially signed transactions on August 21, 2017. He consulted with andytoshi and came up with a solution that works for both cases. The proposal states that when a signing device receives a partially signed transaction, all inputs must come with an ownership proof. For each input ownership proof, the hardware wallet validates each signature over the hashed message, then attempts to "decode" the hash by applying its own private fixed key that only the signing device knows. If the hash doesn't match, it cannot be its own input. The hardware wallet then signs for every input that belongs to it.To ensure interoperability between wallets, Andrew Chow proposed a standard format for unsigned and partially signed transactions. This format allows offline signers such as air-gapped wallets and hardware wallets to sign transactions without needing direct access to the UTXO set, reducing the risk of being defrauded. It also enables users to pass around the same transaction to sign and combine their signatures, making it easier for people who use different wallet software to create unsigned or partially signed transactions.This solution has benefits such as having a small memory footprint compared to legacy signing, allowing user-interactionless coinjoins without putting funds at risk, the ability to create proofs at any time and collect them at the front of any CoinJoin-like protocol, and the ability to pass around these proofs as additional fields for Partially Signed Bitcoin Transactions. The proposed format is a binary transaction format that can hold signatures for an input while it lacks a complete set of signatures. The format is designed to be easily extended for future use, which is harder to do with existing transaction formats.</summary>
+    <published>2017-08-22T19:26:30+00:00</published>
+  </entry>
+</feed>

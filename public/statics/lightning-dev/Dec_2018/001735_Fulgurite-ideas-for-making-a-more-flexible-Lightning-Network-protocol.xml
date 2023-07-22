@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fulgurite: ideas for making a more flexible Lightning Network protocol</title>
+  <updated>2023-06-02T15:48:22.939497+00:00</updated>
+  <author>
+    <name>Trey Del Bonis 2018-12-10 20:37:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fulgurite: ideas for making a more flexible Lightning Network protocol</title>
+    <updated>2023-06-02T15:48:22.939497+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-December/001735.html" rel="alternate"/>
+    <summary>In a discussion between Trey Del Bonis and ZmnSCPxj, the topic of interoperability of Fulgurite and Burchert-Decker-Wattenhofer (BDW) was brought up. While BDW is being incorporated into the Lightning Network (LN), there needs to be a way to interoperate a Fulgurite system as masquerading as a BDW factory. The issue of lying on gossip was also discussed as it would allow fake channels that cannot actually route payments. To prevent such attacks, funds must be visibly locked on-chain. However, if low-capacity channels far away from a node are removed from their routemap, it reduces memory consumption. The idea of having peers lie in channel announcements which particular channel has the funds moving when routing a payment was also discussed. ZmnSCPxj suggested some solutions for using Fulgurite in LN. In the first solution, users and their peers can lock their funds in Fulgurite and split it into two subchannels - one for HTLC-only and the other for HTLC and DLC. This Fulgurite system will appear as an ordinary channel to everyone else on LN. If someone routes through the user, they prefer the HTLC-only subchannel, but if it has insufficient capacity, the user can either swallow the cost of signing all 1 million DLC sub-contract signatures for every update of the HTLC or pretend they're out of funds in the specified direction.In the second solution, when BDW gets onto BOLT, the user and their peer can pretend to create a BDW channel factory that contains a single channel (the HTLC-only subchannel), with the rest of the funds not claimed to be used on LN. If someone routes through the user, they prefer the HTLC-only subchannel, but if it has insufficient capacity, the user can follow the same two options as in the first solution. Additionally, BOLT 1.1 allows short channel IDs to be used as a cheap indicator for the next node in the route, and if there is some private unannounced channel or some other channel on the route, the forwarding node may use that if the publicly announced channel has insufficient capacity on the forwarding node side.Finally, it would be nice to have update_channel messages to say the balances and fees in each direction in a channel, especially for scenarios where privacy is not as important as usability. In a discussion about the Fulgurite proposal, a user suggests that if a payment fails due to an expired HTLC, one solution is to either update the HTLC or pretend to be out of funds in the specified direction. Another user notes that implementing Fulgurite in the Burchert-Decker-Wattenhofer channel is straightforward and would still provide scalability benefits. The conversation ends with a mention of how the channel gossip in the Burchert-Decker-Wattenhofer channel will have to work.</summary>
+    <published>2018-12-10T20:37:46+00:00</published>
+  </entry>
+</feed>

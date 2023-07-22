@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Making OP_CODESEPARATOR and FindAndDelete in non-segwit scripts non-standard</title>
+  <updated>2023-05-20T04:19:23.100742+00:00</updated>
+  <author>
+    <name>Johnson Lau 2017-11-15 18:02:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Making OP_CODESEPARATOR and FindAndDelete in non-segwit scripts non-standard</title>
+    <updated>2023-05-20T04:19:23.100742+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-November/015292.html" rel="alternate"/>
+    <summary>The proposal being made on https://github.com/bitcoin/bitcoin/pull/11423 is to make OP_CODESEPARATOR and FindAndDelete in non-segwit scripts non-standard. The author thinks that the FindAndDelete() function is one of the most useless and complicated functions in the script language. Although it is omitted from segwit (BIP143), it still needs to be supported in non-segwit scripts. However, it would only be triggered in some weird edge cases like using out-of-range SIGHASH_SINGLE. Non-segwit scripts also use a FindAndDelete()-like function to remove OP_CODESEPARATOR from scriptCode. OP_CODESEPARATOR in segwit scripts are useful for Tumblebit so it is not disabled in this proposal. By disabling both functions, it guarantees that scriptCode serialized inside SignatureHash() must be constant.If a softfork is used to remove FindAndDelete() and OP_CODESEPARATOR from non-segwit scripts, it could completely remove FindAndDelete() from the consensus code later by whitelisting all blocks before the softfork block. The first step is to make them non-standard in the next release.</summary>
+    <published>2017-11-15T18:02:48+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reorgs on SigNet - Looking for feedback on approach and parameters</title>
+  <updated>2023-05-21T03:35:41.771572+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-09-14 04:56:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reorgs on SigNet - Looking for feedback on approach and parameters</title>
+    <updated>2023-05-21T03:35:41.771572+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019452.html" rel="alternate"/>
+    <summary>A discussion thread on the Bitcoin-dev mailing list regarding the Signet network has brought up concerns about its complexity. The original proposal for Signet was to have a different reorg signing key, which would have been simpler. However, two issues arose with this approach, one of which being that the signet block signature encodes the signet challenge. As blocks on Signet get mined at a similar rate to mainnet, users will always have to wait a little bit (up to an hour). If users don't want to wait, they can use regtest or a custom signet. The motivation behind having blocks be chosen by a signature rather than entirely by PoW competition is that it's how mainnet works and requires the smallest changes. For integration testing across many services, a ten-minute average between blocks still makes sense. Changing things to target an average of 2 or 5 minutes would require propagating that logic back into apps. Switching back to doing blocks exactly every 10 minutes doesn't seem like a huge win and makes it hard to test that things behave properly when blocks arrive in bursts.One member expressed concern that Signet's slow and irregular blocks make it difficult for developers to test their applications, particularly those working across different time zones. However, Signet is less expensive in fees and takes far less time for IBD than testnet. Nonetheless, Signet is not trying to sell anyone on a subscription plan, and those who prefer testnet3/mainnet testing are free to continue using them.</summary>
+    <published>2021-09-14T04:56:10+00:00</published>
+  </entry>
+</feed>

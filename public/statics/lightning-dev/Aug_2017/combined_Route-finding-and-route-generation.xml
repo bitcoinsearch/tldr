@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Route finding and route generation</title>
+  <updated>2023-05-24T02:16:38.213951+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2017-09-04 20:02:02</name>
+  </author>
+  <author>
+    <name>Johan Torås Halseth 2017-09-04 09:13:15</name>
+  </author>
+  <author>
+    <name>Billy Tetrud 2017-09-04 20:48:54</name>
+  </author>
+  <author>
+    <name>Billy Tetrud 2017-08-22 01:08:50</name>
+  </author>
+  <link href="lightning-dev/Sept_2017/000758_Route-finding-and-route-generation.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2017/000755_Route-finding-and-route-generation.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2017/000759_Route-finding-and-route-generation.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2017/000750_Route-finding-and-route-generation.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Route finding and route generation</title>
+    <updated>2023-05-24T02:16:38.213951+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2017-September/000758.html" rel="alternate"/>
+    <summary>Billy Tetrud, a member of the Bitcoin development community, proposed a new protocol for the Lightning network to improve its routing. The proposed protocol involves each node knowing its own local network topology and a transaction originator querying some of its connections for routes to the intended destination.Olaoluwa Osuntokun, one of the co-authors of the Flare paper, commented on Billy's proposal and said that what he described is essentially Dynamic Source Routing (DSR), with a mix of components from Fisheye State Routing (FSR) making it a hybrid protocol that combines reactive and proactive elements in order to achieve its goals.The author proposes a protocol for lightning network route discovery and generation that is less taxing on the network than flood-the-network style routing, but not as complicated as some research projects. The proposed protocol keeps both node-announcement messages and route request messages highly localized.When a node joins the network, it broadcasts its information to its channels, requests local network topology information from those channels for channels one hop beyond its direct connection, requests topology information for channels two hops beyond until its cache is full, and subscribes to topology changes for nodes at those distances. When a node wants to construct a route for a transaction, it checks its cache for a path to the node and asks all channels on the edge of its cached local view for their cheapest path, constructing a path from the responses it receives.When a node receives a path request from a node, it checks its cache for its cheapest cache-only path, asks nodes on the edge of its cached local view for their cheapest path, and reports the results that satisfy the max-cost requirements of the requesting node. All route information can be encrypted and signed so relaying nodes cannot read the information inside and so the requesting source node can verify which nodes sent that information.Osuntokun also mentioned that their current stop-gap is a pure proactive protocol, meaning that nodes gather all link state data and then make forwarding and routing decisions based off of that. One downside is the increase in table state and bandwidth incurred due to keeping up with the announcements. However, protocols that have a reactive element for each circuit establishment may not necessarily scale better. This is due to the computational overhead of circuit establishment.Regarding Billy's proposal, Osuntokun said that simply asking nodes for a path to a destination defeats the point of using onion routing at all. If one is prepared to make that tradeoff, then far more scalable routing protocols can be explored as at that point, one would move to distance vector-based algorithms. Multiple heterogeneous routing protocols can be used within the network just as within the Internet (eBGP vs iBGP), so different sub-graphs can choose protocols that achieve their goals in light of the various tradeoffs.</summary>
+    <published>2017-09-04T20:02:02+00:00</published>
+  </entry>
+</feed>

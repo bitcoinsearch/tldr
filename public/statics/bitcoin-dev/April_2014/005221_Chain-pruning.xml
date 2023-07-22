@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Chain pruning</title>
+  <updated>2023-06-08T19:35:48.903643+00:00</updated>
+  <author>
+    <name>Paul Rabahy 2014-04-10 18:19:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Chain pruning</title>
+    <updated>2023-06-08T19:35:48.903643+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005221.html" rel="alternate"/>
+    <summary>The blockchain's actual "state" is the UTXO set, which is the set of all unspent transaction outputs at the currently active point in the block chain. The problem with giving someone the UTXO set and expecting them to trust it is that there is no way to prove that it was the result of processing the actual blocks. In order to establish the validity of the current UTXO set, Bitcoin's full node uses a "zero trust" model where it never assumes any data received from the outside is valid, which means it has to see the previous blocks. This is what initial block syncing does, as nothing but the actual blocks can provide this data. However, it does not require everyone to have all blocks; they just need to have seen them during processing. A related evolution is merkle UTXO commitments, where the UTXO set is shaped as a merkle tree, and its root is computed after every block. The block then commits to this root hash, which allows a full node to copy the chain state from someone else and check that its hash matches what the block chain commits to.Combining the two ideas gives "superblocks," which are essentially the summary of the result of all past blocks. While some argue that this method is strictly more secure than SPV, since it requires syncing headers, picking a committed UTXO that is deep enough to avoid getting orphaned, and syncing blocks from commitment to head, others believe it is a strict reduction in security since it trusts that the longest chain commits to a valid UTXO set at some point in the past. However, it is important to note that this change is not modifying the networking code, so there are no sybil attacks that are strengthened by this change. If miners began rejecting blocks with invalid UTXO commitments or no UTXO commitments, it would lower the overall network hash rate, but it would be self-harming for the miners to do so, which gives them an incentive to not do it.</summary>
+    <published>2014-04-10T18:19:05+00:00</published>
+  </entry>
+</feed>

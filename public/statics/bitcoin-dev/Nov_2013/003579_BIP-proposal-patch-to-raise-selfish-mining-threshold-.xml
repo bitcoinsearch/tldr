@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP proposal - patch to raise selfish mining threshold.</title>
+  <updated>2023-06-07T19:24:50.307257+00:00</updated>
+  <author>
+    <name>Jeremy Spilman 2013-11-05 18:57:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP proposal - patch to raise selfish mining threshold.</title>
+    <updated>2023-06-07T19:24:50.307257+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-November/003579.html" rel="alternate"/>
+    <summary>The email exchange involves a discussion on the threshold in bitcoin mining, with Fig. 2 showing that the threshold is zero only if 'y' is 1. The sender argues that the sybil attack described in Section 6 and 6.1 could be used by all sophisticated miners to ensure their blocks are widely propagated, not just selfish miners. The current 'first seen' algorithm leads to competing longest chains happening about every 60 blocks, and selfish mining requires exploiting a race condition between learning about a competing block and publishing one's own. Selfish mining chooses to 'race the network' every time instead of minimizing publishing latency and relying on being uncontested 59/60 times. To achieve this, it relies on a private low-latency side-network to outrace the competitor. The sender suggests that assuming 'y' is 0 with good connectivity is a stretch because even the best connected mining pools are concerned with this factor. In trying to find a solution to prevent selfish miners from accumulating longer private chains, the sender proposes propagating an encrypted block header that honest miners timestamp when they receive it, then propagating the decryption key 10 seconds later. The catch is that the decryption may result in junk or a new longer block, and if it's a real block, it gets priority based on when the ciphertext was received instead of when the decryption key was received. Selfish miners cannot race the network anymore as they can't tell if they're up against a ghost or a real competing block.</summary>
+    <published>2013-11-05T18:57:34+00:00</published>
+  </entry>
+</feed>

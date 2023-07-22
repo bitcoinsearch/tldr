@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Onion routing design.</title>
+  <updated>2023-05-23T20:11:00.626577+00:00</updated>
+  <author>
+    <name>Rusty Russell 2015-09-18 23:39:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Onion routing design.</title>
+    <updated>2023-05-23T20:11:00.626577+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-September/000191.html" rel="alternate"/>
+    <summary>The author of the post has shared a format for onion routing which requires `required bytes route`. The node decrypts this using its own pubkey and any error in the decryption is considered as a failure of the routing. The nodes create the route backward to calculate the size, then pick a random total size between 1024 and 4096, and pads it with at least 32 bytes of random padding. This offers protection from guessing the route length. However, there is a potential vulnerability due to the lack of MAC. If a nosy node guesses the final destination right, they can replace the routing entirely, leading to a successful or failed HTLC. One partial defense could be disallowing two HTLCs with the same R value, forcing probe serialization. However, this would allow a simple way to probe back to the source. Probabilistic backoff of duplicate R values may be another option, but a sophisticated probe sequence could still get a probability. Another issue is that nodes should not leak information to passive observers on the route due to errors. Signing errors and using the 'sum' field as a secret key seems sensible. This means that the padding in the original message needs to be "random" so 'sum' is random. It is also noted that nodes can easily correlate HTLCs by R value, so onioning the routing only provides partial protection.</summary>
+    <published>2015-09-18T23:39:44+00:00</published>
+  </entry>
+</feed>

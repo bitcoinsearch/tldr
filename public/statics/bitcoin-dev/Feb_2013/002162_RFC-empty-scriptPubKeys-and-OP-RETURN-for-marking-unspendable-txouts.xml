@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RFC: empty scriptPubKeys and OP_RETURN for marking unspendable txouts</title>
+  <updated>2023-06-06T10:08:42.862857+00:00</updated>
+  <author>
+    <name>Peter Todd 2013-02-13 04:12:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RFC: empty scriptPubKeys and OP_RETURN for marking unspendable txouts</title>
+    <updated>2023-06-06T10:08:42.862857+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-February/002162.html" rel="alternate"/>
+    <summary>In a discussion of the fidelity bond concept in Bitcoin, Gavin Andresen expressed his opposition to using the OP_RETURN opcode due to its history as the cause of a severe bug in Bitcoin's past. Instead, he suggested using either OP_FALSE or OP_INVALIDOPCODE for an "unspendable" transaction, with the latter specifically set as 0xFF and placed at the start of the scriptPubKey. However, Todd pointed out that using anyone-can-spend transactions might lead to a "spend storm" on the network if there were suddenly a large amount of BTC sitting in an unclaimed txout. This would encourage attempts to identify as many Bitcoin nodes as possible, particularly miners, and incentivize the development of infrastructure to exploit it. Todd suggested that this could be addressed by making empty scriptPubKeys standard and adding code so that miners would always try to spend such outputs at the same time. To make non-fidelity-bond uses viable as well, Todd proposed adding code to detect and spend fidelity bonds and making publish transactions IsStandard(). He also discussed various issues and potential optimization problems that could arise from implementing fidelity bonds, including transaction mutability, recursive publish transactions, and determining the true value sacrificed. Ultimately, both Todd and Andresen agreed that fidelity bonds require further thought and a testnet implementation.</summary>
+    <published>2013-02-13T04:12:09+00:00</published>
+  </entry>
+</feed>

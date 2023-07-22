@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+  <updated>2023-05-20T18:29:54.950686+00:00</updated>
+  <author>
+    <name>Matt Corallo 2018-11-29 19:37:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+    <updated>2023-05-20T18:29:54.950686+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-November/016518.html" rel="alternate"/>
+    <summary>Lightning Network works by exchanging pre-signed transactions for future broadcast, which requires predicting the required feerate for timely confirmation in the future or utilizing CPFP. Option (a) is impossible to implement due to implementation complexity, and option (b) is difficult due to complexity around RBF/CPFP anti-DoS rules. A counterparty can prevent the confirmation of/significantly increase the fee cost of confirming the pre-signed transaction by chaining a large-but-only-moderate-feerate transaction off the anyone-can-spend output available for use as a CPFP output. The attack doesn't have to be permanent to work, so it's important to get such commitment transactions confirmed in a timely manner. To address the CPFP security model considerations, a next step might involve tweaking Lightning's commitment transaction to have two small-value outputs that are immediately spendable, one by each channel participant, allowing them to chain children off without allowing unrelated third-parties to chain children. As an alternative proposal, there have been discussions around solving the "RBF-pinning" problem by allowing transactors to mark their transactions as "likely-to-be-RBF'ed," enabling a relay policy where children of such transactions would be rejected unless the resulting package would be "near the top of the mempool." This would theoretically imply such attacks are not possible to pull off consistently. However, this clearly relies on some form of package relay, which comes with its challenges.The last transaction which is added to a package of dependent transactions in the mempool must have no more than one unconfirmed parent and be of size no greater than 1K in virtual size. For contracting applications like lightning, this means that as long as the transaction we wish to confirm has only two immediately-spendable outputs, where each is only spendable by one counterparty, and is no larger than MAX_PACKAGE_VIRTUAL_SIZE - 1001 Vsize, each counterparty will always be able to independently CPFP the transaction in question.</summary>
+    <published>2018-11-29T19:37:54+00:00</published>
+  </entry>
+</feed>

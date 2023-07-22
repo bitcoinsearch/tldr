@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Regarding setting a lower minrelaytxfee</title>
+  <updated>2023-06-15T23:24:23.884012+00:00</updated>
+  <author>
+    <name>vjudeu at gazeta.pl 2022-07-27 12:18:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Regarding setting a lower minrelaytxfee</title>
+    <updated>2023-06-15T23:24:23.884012+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-July/020801.html" rel="alternate"/>
+    <summary>The idea of changing the dust limit in Bitcoin transactions has been discussed on the bitcoin-dev mailing list. One user suggested removing the fixed dust limit entirely and relying purely on the mempool size limit to determine what is or is not dust. However, another user pointed out that it's pointless for individual nodes to make changes like this on their own, without network-wide defaults. The only time these settings are useful is in special situations like miners who want to push transactions to their own mempools. Batching is definitely possible using different sighashes, particularly in one-input-one-output transactions. Using SIGHASH_SINGLE|SIGHASH_ANYONECANPAY allows for multiple transactions to be combined into a single transaction, saving some bytes and reducing fees for each user. It should be possible to use SIGHASH_ANYONECANPAY by default and use SIGHASH_PREVOUT_SOMETHING to make signatures from next transactions resistant to changes like adding more inputs and outputs.If miners could mine a block with lower than required difficulty and be rewarded for that in a P2P way, using these settings would be even more useful. For example, if a miner collected 7 BTC as a reward (6.25 BTC plus 0.75 BTC in fees), they could create a 100 times easier block than needed and be rewarded with 0.07 BTC in a P2P way. If block rewards are based on fees, then collecting transaction fees in this way makes sense, leaving the rest for other miners to incentivize building on top of that block.</summary>
+    <published>2022-07-27T12:18:56+00:00</published>
+  </entry>
+</feed>

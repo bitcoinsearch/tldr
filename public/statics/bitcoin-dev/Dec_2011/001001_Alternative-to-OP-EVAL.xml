@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Alternative to OP_EVAL</title>
+  <updated>2023-06-05T01:28:33.311901+00:00</updated>
+  <author>
+    <name>roconnor at theorem.ca 2011-12-29 17:01:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Alternative to OP_EVAL</title>
+    <updated>2023-06-05T01:28:33.311901+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-December/001001.html" rel="alternate"/>
+    <summary>A proposal for OP_EVAL has been under discussion and scrutiny, with Gavin Andresen highlighting some issues with the proposal and its alternatives. In particular, he sympathizes with concerns surrounding the "OP_EVAL starts down the code-as-data path" argument, but argues that the proposed alternative would not be any better. He cites two main disadvantages over OP_EVAL: it is about 20-bytes larger and would mean going back to where we were two months ago, writing more code, reviewing it, finding bugs in it, backporting it so miners running old software can support it, etc. There are also some other minor disadvantages, such as 'standard' scripts needing to be slightly different in the scriptSig and the scriptPubKey or OP_EVALs not being executed, which could be good for privacy and reducing block-chain size. The issue of possible changes to the OP_EVAL BIP to make it less subject to abuse was raised, particularly surrounding allowing arithmetic or bit operations on the serialized script that will be EVAL'ed. This led to a suggestion that BIP 12 be amended to state that OP_EVAL shall cause script validation to fail if the top item on the stack is less than 8 bytes long. The idea of a rule that OP_EVAL shall fail if the top item on the stack is the result of any calculation was also suggested, although it was deemed unnecessary. On the issue of not being able to tell how many CHECKSIG operations will be performed before executing the script, it was noted that this is already true, as the parameters to CHECKMULTISIG that determine how many signatures it checks might be computed. Finally, theymos observed that something very much like OP_EVAL might be done in the future to support a quantum-computing-resistant signature algorithm or SHA3, and that it might make sense to do a bottom-up redesign of Script based on what we've learned when that happens.</summary>
+    <published>2011-12-29T17:01:20+00:00</published>
+  </entry>
+</feed>

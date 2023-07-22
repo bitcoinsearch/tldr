@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-06-03T00:47:54.773231+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2020-04-22 08:55:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-06-03T00:47:54.773231+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002645.html" rel="alternate"/>
+    <summary>In a recent email exchange on the Bitcoin-dev mailing list, participants discussed a new type of attack called "mempool-pinning." This attack involves a malicious party causing an honest party's transaction to be delayed in the mempool by deliberately sticking their own transactions there. The attack can be used to provoke an unbalanced settlement for the victim. Different scenarios and solutions for the mempool-pinning problem were discussed. One proposed solution was resuscitating old work to ensure peering through a full-RBF propagation path. Another more long-term solution is getting a Contracting-Protocols-Enhanced mempool with a multiparty-safe-API bundled with package relay deployment.The lightning protocol currently faces a severe issue with RBF pinning HTLC transactions. If a lightning counterparty (C) receives an HTLC from B and if B broadcasts the commitment transaction, C can spend an HTLC using the preimage with a low-fee, RBF-disabled transaction. After a few blocks, A could claim the HTLC from B via the timeout mechanism, and then after a few days, C could get the HTLC-claiming transaction mined via some out-of-band agreement with a small miner, leaving B short the HTLC value. This vulnerability means that the current time must now be L + 1 or greater. In a recent discussion on the Bitcoin-dev mailing list, user ZmnSCPxj discussed the issue of censorship attacks on Bitcoin transactions. They explained that censored transactions can be fee-bumped, which attracts non-censoring miners to try their luck at mining and evict the censoring miner. To combat this issue, they suggested letting B bump the fee on HTLC-Timeout, which sets up a bidding war between C requesting miners to censor, versus B requesting miners to confirm. However, this results in an additional output that bloats the UTXO set and requires another transaction to claim later.ZmnSCPxj also mentioned that with SIGHASH_NOINPUT, Decker-Russell-Osuntokun sidesteps this issue as any timed-out HTLC can be claimed with a fee-bumpable transaction directly without RBF-carve-out. Additionally, they suggested that if both nodes support doing so, a Poon-Dryja channel can be upgraded without on-chain activity by signing a transaction spending the funding tx to a txo that has been set up as Decker-Russell-Osuntokun. They noted that HTLCs now sidestep the issue under discussion here.Overall, the discussions centered around how to prevent censorship attacks on Bitcoin transactions and potential solutions to this issue. The Lightning-dev mailing list was also mentioned as a resource for further discussion on the topic.</summary>
+    <published>2020-04-22T08:55:42+00:00</published>
+  </entry>
+</feed>

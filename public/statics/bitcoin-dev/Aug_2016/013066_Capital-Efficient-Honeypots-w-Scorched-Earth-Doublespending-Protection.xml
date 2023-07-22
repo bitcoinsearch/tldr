@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Capital Efficient Honeypots w/ "Scorched Earth" Doublespending Protection</title>
+  <updated>2023-06-11T19:53:14.691647+00:00</updated>
+  <author>
+    <name>Matthew Roberts 2016-08-24 15:37:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Capital Efficient Honeypots w/ "Scorched Earth" Doublespending Protection</title>
+    <updated>2023-06-11T19:53:14.691647+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-August/013066.html" rel="alternate"/>
+    <summary>A Bitcoin-based honeypot incentivizes hackers to reveal that they have broken into a server by allowing them to claim a reward based on secret information obtained during the intrusion. Spending a bitcoin can only be done by publishing data to a public place, i.e., the Bitcoin blockchain, allowing detection of the intrusion. The honeypot secret key is shared among all N servers, and left on them, while the discriminator secret key is kept secret. For each server, a unique signature is created with SIGHASH_SINGLE, paying a token amount to a notification address, and a pre-signed signature created with the discriminator secret key is then left on the associated server along with the honeypot secret key.Using a 2-of-2 multisig and the SIGHASH_SINGLE feature, this functionality can be implemented with the existing Bitcoin protocol. A potential disadvantage of using non-standard SIGHASH flags is that the transactions involved are somewhat unusual and may be flagged by risk analysis at exchanges and the like, a threat to the fungibility of the reward. To improve on this concept, a pre-signed standard transaction can be used instead that spends the honeypot txout to two addresses, a per-server canary address, and a change address. A subtlety in the two transactions concept is that the intruder doesn't have the necessary private keys to modify the first transaction, which means that the honeypot owner can respond to the compromise by doublespending that transaction, potentially recovering the honeypot while still learning about the compromise. We can use the "scorched earth" concept to improve the credibility of the honeypot reward by making it costly for the honeypot owner to doublespend. Here a second version of the honeypot pre-signed transaction would also be provided which spends the entirety of the honeypot output to fees, and additionally spends a second output to fees. An economically rational intruder will publish the first version, which maximizes the funds they get out of the honeypot. If the owner tries to dishonestly doublespend, they can respond by publishing the "scorched earth" transaction, encouraging the honeypot owner's honesty and making CPFP-aware transaction replacement irrelevant. The additional complexity may discourage intruders from making use of the honeypot entirely.</summary>
+    <published>2016-08-24T15:37:34+00:00</published>
+  </entry>
+</feed>

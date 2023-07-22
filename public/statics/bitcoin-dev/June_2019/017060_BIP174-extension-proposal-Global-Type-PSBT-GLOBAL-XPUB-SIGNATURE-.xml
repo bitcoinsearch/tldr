@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+  <updated>2023-06-13T19:35:12.595263+00:00</updated>
+  <author>
+    <name>Jonathan Underwood 2019-06-28 15:00:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP174 extension proposal (Global Type: PSBT_GLOBAL_XPUB_SIGNATURE)</title>
+    <updated>2023-06-13T19:35:12.595263+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-June/017060.html" rel="alternate"/>
+    <summary>The conversation between Jonathan Underwood and Peter D. Gray is regarding the proposal of a new PSBT standard to solve the problem of how a signer can verify an address with HD changing the address every time. Currently, the best way to prevent this issue is reusing the same address every time one wants to send to the warm wallet. The proposal suggests that a signer can sign if it sees a signature that itself has signed, then from that signed xpub(s) derives the BIP32_DERIVATION in the outputs, and if the output doesn't match, it will reject and not sign. This creates a sort of "chain of trust" for the wallet. This proposal aims to allow Trezor etc. to create an enforceable whitelist feature for high-security requirement environments. Some potential problems have been pointed out, such as the complexity of parsing XPUBs and that the proposal would only help P2PKH and M-of-N multisig users. However, the proposal is not a requirement, but a reservation for a slot in the key-value scheme for a use case that many exchanges and hardware wallets should implement.Peter suggested some solutions, such as signing the entire "outputs" section of the PSBT or supporting multiple signers for individual outputs and also multiple signatures for the same output section. He also mentioned that the signature should cover every byte and, therefore, cover any future BIP additions to the outputs area, and also help non-multisig cases today. However, the suggestions seem to be predicated on a misunderstanding of the proposal, so Jonathan has held off for now.Overall, the conversation highlights the importance of creating a more secure environment for HD wallets and the need for a standardized solution that can be adopted by various hardware wallets.</summary>
+    <published>2019-06-28T15:00:22+00:00</published>
+  </entry>
+</feed>

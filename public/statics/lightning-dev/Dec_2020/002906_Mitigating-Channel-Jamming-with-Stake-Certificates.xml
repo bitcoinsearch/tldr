@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Mitigating Channel Jamming with Stake Certificates</title>
+  <updated>2023-06-03T03:05:48.511642+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-12-02 06:16:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Mitigating Channel Jamming with Stake Certificates</title>
+    <updated>2023-06-03T03:05:48.511642+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-December/002906.html" rel="alternate"/>
+    <summary>A proposal to refine the idea of "stake certificates" has been suggested by ZmnSCPxj. He suggests dropping the idea in favor of a chaumian e-cash kind of design where the owner (owners?) of leach LN UTXO can go to any node in the network and request a kind of token for their UTXO (i.e. channel id). However, not all forwarding nodes have a directly-contactable address published, and many publish only an .onion address. It would be possible to use an onion routing (without an attached HTLC) to remotely contact such forwarding nodes. When making a payment, you present a randomized version of the token to each node and prove that the UTXO it represents is large enough to support the payment. If your HTLC fails your token is deleted (and have to wait some period before requesting a new one). If your payment succeeds your token is renewed on the spot (and maybe forwarded back along the path covertly).ZmnSCPxj thinks that it should not be success or failure that matters. A particular UTXO size provides so many msat-seconds of lockup credit. If a forwarding node has issued a credential for a UTXO of particular size, offering so many msat-seconds of lockup, if he receives the unblinded credential, after he sends out the outgoing HTLC, he measures its size and how long before it gets resolved (in either success or failure), multiplies those together, and debits that particular credential. If that credential later reappears on an incoming HTLC and it has been debited to 0 or negative, he just fails it without risking sending out his funds in an outgoing HTLC. This prevents the trivial variation of the loop attack. However, this exacerbates the effects of accidental incompetence-based failures of other forwarding nodes.In conclusion, ZmnSCPxj suggests using anonymous credentials as a better way to build stake certificates.</summary>
+    <published>2020-12-02T06:16:15+00:00</published>
+  </entry>
+</feed>

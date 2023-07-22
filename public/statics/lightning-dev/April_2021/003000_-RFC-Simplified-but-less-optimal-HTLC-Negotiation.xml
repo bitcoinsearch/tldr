@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+  <updated>2023-06-03T02:48:02.621686+00:00</updated>
+  <author>
+    <name>Rusty Russell 2021-04-20 21:19:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+    <updated>2023-06-03T02:48:02.621686+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-April/003000.html" rel="alternate"/>
+    <summary>In a discussion between Christian Decker and Rusty Russell, they consider different approaches for sending updates and commitments in the Lightning Network. Rusty argues that a leader-based approach is not optimal, as parties have to wait for the other to transfer the token before queuing updates. Instead, he proposes an alternation approach that allows parties to send updates and commitment_signed messages even when it's not their turn. Rusty suggests a simple implementation that never sends a commitment_signed message until it receives a "giving way" message or the leader ignores changes and sends its own. A more complex implementation can send opportunistically but must remember that it committed if it loses the race. Rusty revisits this approach because it simplifies splicing negotiations, eliminating the need to stop changes while splicing is negotiated. Christian agrees with Rusty's proposal, which he considers one optimization step further than his suggestion. He had proposed reflecting the whole message or sending back individual acknowledgments containing the hash of the message. Christian believes that the new approach can work and will reference the change by its htlc_id.</summary>
+    <published>2021-04-20T21:19:24+00:00</published>
+  </entry>
+</feed>

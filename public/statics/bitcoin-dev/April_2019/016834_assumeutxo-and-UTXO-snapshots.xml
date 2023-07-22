@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>assumeutxo and UTXO snapshots</title>
+  <updated>2023-06-13T17:56:01.720025+00:00</updated>
+  <author>
+    <name>James O'Beirne 2019-04-03 19:51:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>assumeutxo and UTXO snapshots</title>
+    <updated>2023-06-13T17:56:01.720025+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-April/016834.html" rel="alternate"/>
+    <summary>The assumeutxo proposal is a potential optimization for Bitcoin, which could allow fully validating client nodes to sync the headers chain from the network, obtain and load one of these UTXO snapshots. Based upon the snapshot, the node is able to quickly reconstruct its chainstate and validate incoming blocks and transact with the benefit of the full (assumed-valid) UTXO set. The total resource burden needed to start a node from scratch based on a snapshot is, at time of writing, a ~(3.2GB + blocks_to_tip * 4MB) download and a few minutes of processing time, which sounds manageable for many mobile devices currently in use. Although there are security implications, the attacker need not construct a valid PoW chain to get the victim's node into a false state; they simply need to get the user to accept a bad `-assumeutxo` parameter and then supply them an easily made UTXO snapshot containing, say, a false coin assignment. For this reason, it is recommended that if we were to implement assumeutxo, we not allow its specification via commandline argument. Even though the proposal is in the spirit of assumevalid, practical attacks may become easier, making it difficult for users to transact under a false history. This is because unlike in assumevalid, the attacker does not have to construct a valid PoW chain to get the victim's node into a false state. The same attack is made easier in assumeutxo as all the attacker needs to do is get the user to accept a bad `-assumeutxo` parameter and then supply them an easily made UTXO snapshot containing a false coin assignment.Overall, the author believes that if Bitcoin were able to initialize from scratch in a comparable amount of time and then populate the full chain in the background, we may have many more people incidentally running full nodes. Therefore, the pattern of doing some kind of quick initialization (whether it's with assumed-valid data or headers-contingent data like BIP157) and then performing full validation in the background is a good way to ensure that we have a healthier population of full nodes than we would otherwise.</summary>
+    <published>2019-04-03T19:51:32+00:00</published>
+  </entry>
+</feed>

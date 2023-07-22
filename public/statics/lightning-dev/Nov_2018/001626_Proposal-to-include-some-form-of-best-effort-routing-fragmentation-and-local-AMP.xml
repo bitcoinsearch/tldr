@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal to include some form of best effort routing, fragmentation and local AMP</title>
+  <updated>2023-05-25T17:21:41.432397+00:00</updated>
+  <author>
+    <name>René Pickhardt 2018-11-16 10:27:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal to include some form of best effort routing, fragmentation and local AMP</title>
+    <updated>2023-05-25T17:21:41.432397+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001626.html" rel="alternate"/>
+    <summary>In a discussion in Adelaide, it was highlighted that slow and failing payments are still a major issue for users of the lightning network. While design changes after BOLT1.1 may help mitigate this problem, Rene Pickhardt proposed an additional solution to improve path finding. This proposal involves implementing a second routing algorithm based on best effort routing/forwarding with the help of local payment fragmentation (or local AMP). The idea is to allow intermediate nodes to fragment a payment to reach the next hop specified in the onion, without compromising privacy. For instance, if Alice needs to forward a payment to Bob but doesn't have enough funds on her side, she could try to fragment the payment and find several paths (or maybe just one path) to Bob. One way to do this would be by sharing friend-of-a-friend information to find nodes that both Alice and Bob are connected to and use them as bridge nodes for the payment. If Bob shares information about the channel balance of mutual friends, it could be determined whether the original HTLC could be forwarded from Alice to Bob in a fragmented way. Autopilot can also create many triangles in the network so that there is always the chance for friend-of-a-friend nodes which could be used with this approach.While the original payer can still select the basic route and the full route remains private, the sender could choose paths with common friends for each pair of nodes on the path to increase the probability of successful local fragmentation. However, the original payer would have to allow a package to be locally fragmented by including more fees at each hop and increasing the CLTV deltas in each hop so that an additional hop can be included and financed. In case local AMP is too complex and expensive, two nodes that fail to forward HTLCs could work collaboratively to find a path between them and return this information as a routing suggestion in the error message, so that the adapted onion package could be tried and sent by the payer.</summary>
+    <published>2018-11-16T10:27:41+00:00</published>
+  </entry>
+</feed>

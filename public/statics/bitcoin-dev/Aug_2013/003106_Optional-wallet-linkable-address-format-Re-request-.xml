@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Optional "wallet-linkable" address format (Re-request)</title>
+  <updated>2023-06-07T15:42:06.961190+00:00</updated>
+  <author>
+    <name>Alan Reiner 2013-08-09 20:12:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Optional "wallet-linkable" address format (Re-request)</title>
+    <updated>2023-06-07T15:42:06.961190+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-August/003106.html" rel="alternate"/>
+    <summary>The email exchange discusses the implementation of sub-wallets in Bitcoin. Alan Reiner requested an alternate address serialization in payment protocol, believing that it has several other uses and is a valid address representation that can be safely ignored by others. He suggested creating chains with j&gt;=2, which would be independent address chains carved out for individual relationships. This would allow certain services to be set up between wallet software and a business or exchange without any risk of man-in-the-middle attack.Mike Hearn replied to Alan, stating that the payment protocol is locked down for v1 and payments are specified in terms of a list of outputs which can contain any script. He suggested defining an extension that lets you send payment requests containing public keys+chain codes, so further payments can be made push-style with no recipient interaction. However, developers of much simpler/lightweight clients would probably find this prohibitive. Mike agreed with Jeremy Spilman that the multiplication trick for deterministic keys is worth doing but as a v2 feature.Alan again replied suggesting that he preferred his original request. BIP 32 already specifies how to use the first three tree levels: M/i/j/k, i~wallet, j~Internal/External, k~address. For the case of generating new receive chains from a *watch-only* wallet, options are to either keep a cache of PubKey/ChainCode for unused [m/i'] or simply increment 'j' past 1 for an existing [m/i'/j]. Alan believes that this would all be totally unnecessary with a simple alternate encoding. But he thinks the multi-chain idea is good and one that he will probably implement anyway, but it seems like overkill in terms of developer complexity and interface complexity to achieve something much simpler. In the end, Mike agreed with Jeremy and said that incrementing 'j' is the way to go here.The second contributor proposed passing Kpar and cpar and leaving 'k' out of it, letting the receiver choose 'k'. They also suggested using static public keys as a means for persistent identity and security from MitM by combining both ideas into a data structure consisting of ParentPubKey, Addend, and ChainCode. From the user perspective, all transactions under [m/i'] can be presented in a single ledger or not.The feedback given is that if designing for persistent long-term relationships, a mechanism for generating address chains could be built in so that no further communication is needed after the initial exchange, without complicating the wallet. While it is possible to support separate ledgers and balances for sub-wallets, it is not required.</summary>
+    <published>2013-08-09T20:12:52+00:00</published>
+  </entry>
+</feed>

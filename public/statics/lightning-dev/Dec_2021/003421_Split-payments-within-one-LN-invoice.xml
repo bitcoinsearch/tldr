@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Split payments within one LN invoice</title>
+  <updated>2023-06-03T06:59:04.908773+00:00</updated>
+  <author>
+    <name>Ronan McGovern 2021-12-17 10:21:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Split payments within one LN invoice</title>
+    <updated>2023-06-03T06:59:04.908773+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003421.html" rel="alternate"/>
+    <summary>In an email conversation between Ronan and ZmnSCPxj, the topic of a "Poor man's rendez-vous" is discussed. ZmnSCPxj suggests that a new command called "signfakeinvoice" be implemented at the protocol level to enable the rendez-vous. He explains that each intermediate payee would need to sign an invoice for which it does not know the preimage, which could be done through the use of a clightning plugin. If this command were implemented, intermediate payees could use the `htlc_accepted` hook for the rendez-vous. ZmnSCPxj goes on to explain how the invoice generation process would work, stating that the payees should be arranged in some agreed fixed order and that the last payee generates a normal invoice. From the last payee to the second, each payee would pass its invoice to the previous payee who would then create its own signed invoice with `signfakeinvoice` to itself, adding its payout plus a fee budget, as well as adding its own delay budget. The previous payee plugin would store the next-payee invoice and the details of its own invoice to the database.On payment, the sender would send the payment to the first hop. From the first payee to the second-to-last, the plugin would trigger the `htlc_accepted` hook and check if the incoming payment has a hash that is in the scheme stored in the database. The plugin would gather `htlc_accepted` hook invocations until they sum up to the expected amount (this handles multipath between payees) and mark that it has gathered all `htlc_accepted` hooks for that hash in durable storage. The plugin would then check if there is already an outgoing payment for that hash, and if so, wait for it to resolve to either success or failure. If not, the plugin would perform a `pay`, giving `maxfeepercent` and `maxdelay` based on its fee budget and delay budget. ZmnSCPxj concludes the email by stating that there needs to be a discussion regarding whether it would make more sense to have split payments at the protocol level.</summary>
+    <published>2021-12-17T10:21:53+00:00</published>
+  </entry>
+</feed>

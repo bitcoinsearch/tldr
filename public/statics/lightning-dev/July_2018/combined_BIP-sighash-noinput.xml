@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - BIP sighash_noinput</title>
+  <updated>2023-05-20T08:23:58.805183+00:00</updated>
+  <author>
+    <name>Anthony Towns 2018-05-14 09:23:29</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-05-09 23:01:39</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2018-05-08 14:40:21</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2018-07-03 23:45:22</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2018-07-02 18:11:54</name>
+  </author>
+  <link href="lightning-dev/May_2018/001274_BIP-sighash-noinput.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2018/001265_BIP-sighash-noinput.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2018/001253_BIP-sighash-noinput.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2018/001345_BIP-sighash-noinput.xml" rel="alternate"/>
+  <link href="lightning-dev/July_2018/001333_BIP-sighash-noinput.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - BIP sighash_noinput</title>
+    <updated>2023-05-20T08:23:58.806180+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-May/001274.html" rel="alternate"/>
+    <summary>On the Bitcoin-dev mailing list, there has been a discussion about the proposed SIGHASH_NOINPUT proposal. The concern with NOINPUT is that if a user signs one input with NOINPUT and the same key is used for multiple inputs, then all of the inputs will be spent. Although the current proposal limits the potential damage by committing to the prevout amount, it still poses a risk for those who reuse addresses. In comparison, SIGHASH_NONE only lets others take the coin you're trying to spend, while NOINPUT could cause you to lose other coins as well. The suggestion has been made to either drop support for SIGHASH_NONE or limit it in the same way as SIGHASH_NOINPUT. It has also been suggested to introduce a new opcode for NOINPUT, which would allow the use of existing segwit versions rather than needing a new version for regular coins and a new version for NOINPUT coins. This would mean that any output spendable via a NOINPUT signature would have to have been deliberately created as being spendable by NOINPUT. In essence, there are two sorts of addresses generated from a public key X: addresses where you spend each coin individually, and different addresses where you spend the wallet of coins with that public key (and value) at once. The benefit of a separate opcode is that support can be soft-forked in independently of a new segwit version, either earlier or later. It's slightly more reasonable to worry about signing with NOINPUT compared to signing with SIGHASH_NONE, as a bug or mistake could cause you to cross-contaminate keys into your lightning subsystem and not be sufficiently protected by other measures. However, defense in depth makes sense even though you'd have to do really stupid things to get a benefit from it. Regular wallets wouldn't update to use this sighash flag, and we've seen with SegWit that wallet authors are slow to pull in the latest and greatest features available.The proposal of a new sighash flag, `SIGHASH_NOINPUT`, that removes the commitment to the previous transaction output has been suggested. However, it is suggested that having _NOINPUT be a flag to a signature for a hypothetical "OP_CHECK_SIG_FOR_SINGLE_USE_KEY" opcode instead would be more realistic and safer for use by everyone who reuses addresses. The concern being that if you use the same key for multiple inputs and sign one of them with _NOINPUT, then all of them are spent. A new opcode can have theoretical advantages as it could be deployed into the existing segwit v0 address space without waiting for segwit v1. The formal name of this flag is suggested to be something like "SIGHASH_REPLAY_VULNERABLE" or likewise because of the insecurity of noinput in traditional applications where a third party might pay to an address a second time.</summary>
+    <published>2018-05-14T09:23:29+00:00</published>
+  </entry>
+</feed>

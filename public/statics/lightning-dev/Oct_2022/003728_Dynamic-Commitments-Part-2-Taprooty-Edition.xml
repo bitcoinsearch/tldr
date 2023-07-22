@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Dynamic Commitments Part 2: Taprooty Edition</title>
+  <updated>2023-06-03T07:57:37.896357+00:00</updated>
+  <author>
+    <name>Johan Torås Halseth 2022-10-27 09:16:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Dynamic Commitments Part 2: Taprooty Edition</title>
+    <updated>2023-06-03T07:57:37.896357+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-October/003728.html" rel="alternate"/>
+    <summary>In a recent email exchange, Johan proposed dividing the taprootyness of a channel into two - taproot funding output and taproot commitment outputs. This approach would enable upgrading existing channels on the commitment level without needing to close or re-anchor channels using an adapter. New channels would use taproot multisig (musig2) for the funding output. Antoine provided feedback on the proposal, highlighting some downsides of adapter commitments. He also questioned the economic gain of adapter commitments.Olaoluwa discussed the concept of dynamic commitments and how they can be used to upgrade channel types on the fly, remove hard-coded limits, and upgrade all public channels to taproot without any on-chain transactions. Olaoluwa also outlined an alternative approach that would allow upgrading nearly all channel/commitment related values. This approach is inspired by the way the Raft consensus protocol handles configuration/member changes. Overall, both proposals aim to make channel upgrades more efficient and less disruptive to the existing network.Laolu Osuntokun proposed a new protocol for updating commitments on the fly using the adapter commitment idea. The LN currently uses hard-coded parameters limiting the number of maximum HTLCs and minimum/maximum HTLC values which can lead to congestion and inflexibility in the network. With this new protocol, parties involved in a channel can propose a commitment/channel parameter update and the initiator can apply it. The proposal includes two new messages: `commitment_update_propose` and `commitment_update_apply`.The messages are retransmitted like any other message and the signature prevents spoofing by one of the parties. An initial target would be a `chan_type` field with future feature bits governing what type of commitment updates both parties understand in the future. This protocol allows the network to be updated without relying on on-chain transactions. It also gives a way to protect the network against future unforeseen widespread policy changes. This proposal has been submitted as a pull request on GitHub.</summary>
+    <published>2022-10-27T09:16:58+00:00</published>
+  </entry>
+</feed>

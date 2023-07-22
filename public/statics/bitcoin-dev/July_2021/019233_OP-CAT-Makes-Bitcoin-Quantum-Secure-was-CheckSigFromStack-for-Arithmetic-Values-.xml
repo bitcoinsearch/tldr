@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>OP_CAT Makes Bitcoin Quantum Secure [was CheckSigFromStack for Arithmetic Values]</title>
+  <updated>2023-05-21T03:15:06.970767+00:00</updated>
+  <author>
+    <name>Jeremy 2021-07-07 05:58:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>OP_CAT Makes Bitcoin Quantum Secure [was CheckSigFromStack for Arithmetic Values]</title>
+    <updated>2023-05-21T03:15:06.970767+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-July/019233.html" rel="alternate"/>
+    <summary>In a recent blog post, Jeremy Rubin explains how OP_CAT (or similar operation) can be used to make Bitcoin "quantum safe" by signing an EC signature. This should work in both Segwit V0 and Tapscript, although you have to use HASH160 for it to fit in Segwit V0. By signing the HASH160 digest of a signature, even if a quantum computer were able to crack ECDSA, it would yield revealing the private key but not the ability to malleate the content of what was actually signed. The 5 byte signing scheme discussed previously is a Lamport signature, which is quantum secure. Unfortunately, we need at least 20 contiguous bytes, so we need some sort of OP_CAT like operation. OP_CAT can't be directly soft forked to Segwit v0 because it modifies the stack, so instead, they'll need to show how to use a new opcode that uses verify semantics, OP_SUBSTRINGEQUALVERIFY that checks a splice of a string for equality. The long script fits, and this can probably be made a bit more efficient by expanding to a ternary representation. As far as Rubin is aware, the commitment scheme (`Q = pG + hash(pG || m)G`) can be securely opened to m even with a quantum computer, and therefore this script can nest inside of a Tapscript path -- Tapscript also does not impose a length limit, 32 byte hashes could be used as well.Furthermore, to make keys reusable, there could be many Lamport keys committed inside a taproot tree so that an address could be used for thousands of times before expiring. Lastly, Schnorr actually has a stronger non-malleability property than ECDSA, the signatures will be binding to the approved transaction and once Lamport signed, even a quantum computer could not steal the funds.</summary>
+    <published>2021-07-07T05:58:15+00:00</published>
+  </entry>
+</feed>

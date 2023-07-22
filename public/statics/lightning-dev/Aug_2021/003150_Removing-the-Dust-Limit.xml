@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Removing the Dust Limit</title>
+  <updated>2023-06-03T05:13:43.566062+00:00</updated>
+  <author>
+    <name>Jeremy 2021-08-08 23:07:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Removing the Dust Limit</title>
+    <updated>2023-06-03T05:13:43.566062+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-August/003150.html" rel="alternate"/>
+    <summary>Jeremy suggests removing the dust limit entirely, as there is no difference between zero-value outputs and outputs with a fixed 1 sat. Allowing such outputs incentivizes people to use low feerate periods for more important work like consolidation, eliminating the low fee period. The impact of this on routing could be significant, as nodes would have stricter constraints on which nodes they can route payments through.Regarding smart contracts using dust outputs, a bond to clean it up may be reasonable, but it might not make sense to clean up the UTXO otherwise. Any LN node can refuse to accept or route HTLCs below the dust limit, but this has implications for routing and capacity. Losing value to transaction fees is treated the same as losing value to uneconomical conditions, so Jeremy doubts that proposed solutions will fix the problem. LN operators would likely aggregate uneconomic HTLCs into a fan-out UTXO and cooperate, failing that, polluting the chain by O(1) for O(n) non-economic HTLCs.</summary>
+    <published>2021-08-08T23:07:27+00:00</published>
+  </entry>
+</feed>

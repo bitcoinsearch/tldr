@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Trampoline Routing</title>
+  <updated>2023-06-02T19:44:07.284850+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-08-03 03:48:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Trampoline Routing</title>
+    <updated>2023-06-02T19:44:07.284850+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-August/002104.html" rel="alternate"/>
+    <summary>Trampoline routing is a simple concept which involves Alice sending a payment to Bob, even though she doesn't know how to reach him. This is done by using trampoline nodes. Alice selects the trampoline node that she can reach and defers the calculation of the rest of the route to that node. In this example, Alice selected T1 and RT2 as trampoline hops and built an onion routing with the following route: Alice -&gt; T1 -&gt; RT2 -&gt; Bob. To answer the question of how Alice knows if RT2 has a route to Bob, trampoline nodes must estimate a fee and CLTV (Check Lock Time Verify) that allows them to route to any other trampoline node. The existing gossip infrastructure is used to exchange a new node_update message that contains the trampoline fees and CLTV. To avoid receiving every network update, Alice sends gossip filters to her peers, and peers only forward updates that match these filters.Nodes are mapped to virtual space under this system, and nodes should preferably retain the part of the network graph that connects itself to those nodes near it in this virtual space. If T1 knows a route to T1.5, and it knows that T1.5 is nearer to T2 than to itself in the virtual space, it can try to route through T1.5 in the hope T1.5 knows a route from itself to T2. Other ways of knowing some distillation of the public network without remembering the channel level details are also possible. The onion routing part is quite simple now that there are variable-length onion payloads. Trampoline routing involves putting a small onion inside a big onion, and HTLC (Hashed TimeLock Contract) management forwards very naturally.</summary>
+    <published>2019-08-03T03:48:48+00:00</published>
+  </entry>
+</feed>

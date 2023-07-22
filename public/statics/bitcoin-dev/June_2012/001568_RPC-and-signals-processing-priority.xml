@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RPC and signals - processing priority</title>
+  <updated>2023-06-06T05:23:27.741603+00:00</updated>
+  <author>
+    <name>Wladimir 2012-06-16 07:04:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RPC and signals - processing priority</title>
+    <updated>2023-06-06T05:23:27.741603+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-June/001568.html" rel="alternate"/>
+    <summary>In a forum post from 2012, a user named grarpamp raised an issue with bitcoind not responding to certain rpc queries and signals. They suggested that the program should check and process all user interrupts once per block and do the chain in the background. However, Wladimir, another user, responded explaining that this has nothing to do with priority or user interrupts but with the locks on the wallet and client. Every RPC command takes both locks, and releases them only when finished. Shutting down also requires both locks, so the operations will be serialized. This is done to protect the database and critical data structures. While there may be some cases where the locks are not necessary or read/write locks could be used instead for improved concurrency, caution must be exercised in implementing such changes.</summary>
+    <published>2012-06-16T07:04:34+00:00</published>
+  </entry>
+</feed>

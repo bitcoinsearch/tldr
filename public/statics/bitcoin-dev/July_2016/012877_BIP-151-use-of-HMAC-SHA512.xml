@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 151 use of HMAC_SHA512</title>
+  <updated>2023-06-11T18:53:05.749900+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-07-01 03:25:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 151 use of HMAC_SHA512</title>
+    <updated>2023-06-11T18:53:05.749900+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-July/012877.html" rel="alternate"/>
+    <summary>In a discussion about the use of HMAC vs SHA256 for a Message Authentication Code (MAC), Ethan Heilman questions the need for HMAC. However, it is noted that SHA256 is extremely insecure for a MAC due to its length extension property. If an attacker has a tag value generated with SHA256(key|cipher-type|mesg), they can compute a new value without knowing the key or message by appending any values they want. While SHA256 appends the bitlength making it more difficult to generate a new value, this is not being used for a MAC in BIP151. Arthur Chen explains that HMAC has proven security properties, even when the underlying crypto hashing function has weaknesses, and it is still secure even with MD5 which is considered completely insecure. For MACs, it is always better to use HMAC rather than custom constructions. Although Bitcoin already relies on SHA256's robustness, there is no need for a MAC in this particular case.</summary>
+    <published>2016-07-01T03:25:17+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Packaged Transaction Relay</title>
+  <updated>2023-05-22T20:24:00.347018+00:00</updated>
+  <author>
+    <name>Suhas Daftuar 2022-10-04 15:15:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Packaged Transaction Relay</title>
+    <updated>2023-05-22T20:24:00.347018+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/020972.html" rel="alternate"/>
+    <summary>The email thread discusses a proposal for packaged transaction relay that aims to propagate incentive-compatible transactions for mining, even if they don't meet the minimum feerate alone. However, additional goals such as bandwidth waste minimization should be included in any protocol change involving transaction relay.The proposed dynamic package construction based on knowledge a node should have of its peers doesn't take into account the complexities of what a peer's "minimum feerate" might mean, making it difficult to accurately guess whether a given transaction should be sent in a package to a given peer or not. To address this issue, the proposal suggests adding protocol support for a receiving peer to retrieve a package as well.Additionally, the concept of feerate itself is not well-defined when applied to arbitrary transaction graphs, which makes it difficult to come up with proposals ensuring all incentive-compatible transactions get relayed successfully across the network. Gloria's efforts seem to be a combination of two approaches: adding some amount of packaged transaction relay for simple cases and allowing for a fallback mechanism where the recipient of a transaction can efficiently retrieve dependencies.There seems to be a tradeoff between latency, bandwidth, and robustness of these two approaches. The design proposal suggests a new approach to transaction relay that aims to reduce orphaned transactions by creating packages of transactions based on the fee rate of each transaction and the node's peer fee rate. The proposed design requires maintenance of a transaction DAG with tx.feerate on each transaction. Sufficiently low-fee nodes will see only single transactions, while moderate-fee nodes may cause partial breakup of packages. Higher fee nodes will cause peers to accept packages until reaching transactions above their fee rate or confirmed.The proposed design includes additional constraints such as all elements of MSG_TX_PACKAGE in one INV message must be of the same package, a package must define a set that can be mined into one block (size/sigops constraint), and a package should not contain confirmed transactions. The proposed design aims to avoid predictable orphans and create minimal packages through graph search algorithms.Overall, the proposed design is worth discussing further, and some details may need refinement.</summary>
+    <published>2022-10-04T15:15:42+00:00</published>
+  </entry>
+</feed>

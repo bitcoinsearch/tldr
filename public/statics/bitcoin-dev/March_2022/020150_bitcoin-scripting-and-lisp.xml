@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>bitcoin scripting and lisp</title>
+  <updated>2023-06-15T17:30:44.753841+00:00</updated>
+  <author>
+    <name>Bram Cohen 2022-03-19 17:34:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>bitcoin scripting and lisp</title>
+    <updated>2023-06-15T17:30:44.753841+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020150.html" rel="alternate"/>
+    <summary>In a discussion about the costs of cross-input compression of puzzles/solutions, ZmnSCPxj suggests that it merits a discussion as it would require less heavy crypto math and save bytes. When using BLS signatures, all the math is much simpler as a single aggregated signature is used and everything is always aggregated. The costs involved include CPU, bytes, and making outputs. In Chia, the costs for a standard transaction in all three buckets are roughly the same. However, in Bitcoin, the three are implicitly tied to each other by design which makes vbytes work okayish for Bitcoin Script as it exists today.Regarding the use of lisp-generating-lisp compression, ZmnSCPxj believes that it could reduce the cost of bytes transmitted but increase the CPU load. However, CPU costs are dominated by signatures, and simple operations like applying some parameters to a template don't add much. On the topic of BLS signatures, ZmnSCPxj clarifies that it includes an extra cryptographic assumption but it's extremely theoretical. It has more to do with guessing what size of group provides comparable security in number of bits than whether the whole approach is in question. BLS12-381 is considered fairly conservative. ZmnSCPxj notes that PTLC signatures have the property of being indistinguishable from non-PTLC signatures to anyone without the adaptor, but this property is lost when aggregated. In response to a suggestion about a covenant language implementation, ZmnSCPxj explains that the point of adding in a lisp-family language would be to make it so that covenants and capabilities can be implemented in the same language as is used for regular coin scripting. This way, it would be possible to implement all that on chain and get off the treadmill of soft forking in language features every time new functionality is wanted.</summary>
+    <published>2022-03-19T17:34:34+00:00</published>
+  </entry>
+</feed>

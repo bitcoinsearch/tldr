@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>request BIP number for: "Support for Datastream Compression"</title>
+  <updated>2023-06-11T00:58:22.095830+00:00</updated>
+  <author>
+    <name>Jeff Garzik 2015-11-10 16:46:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>request BIP number for: "Support for Datastream Compression"</title>
+    <updated>2023-06-11T00:58:22.095830+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-November/011704.html" rel="alternate"/>
+    <summary>In a discussion on the bitcoin-dev mailing list, Tier Nolan suggested that for historical data, sticking to just blocks would be the best plan. He proposed defining a "cblocks" message that handles multiple blocks by concatenating block messages as payload before compression. The sending peer could combine blocks so that each cblock is compressing at least 10kB of block data and it is probably worth specifying a maximum size for network buffer reasons (either 1MB or 1 block maximum). Similarly, transactions could be combined together and compressed "ctxs." The inv messages could be modified so that you can request groups of 10-20 transactions. The discussion also raised some points regarding the use of compression protocols such as zlib and LZO. While most blocks and transactions have runs of zeroes and/or highly common bit-patterns, which contributes to useful compression even at smaller sizes, zlib has a dictionary (32K?) that works well with repeated patterns such as those you see with concatenated runs of transactions. However, zlib has a crappy security track record, and a fallback path to non-compressed is required, should compression fail or crash. LZO should provide much better compression, at a cost of CPU performance and using a less-reviewed, less-field-tested library. Overall, the discussion focused on ways to save bandwidth in sending historical blocks and transactions while considering the pros and cons of various compression protocols. Johnathan Corgan emphasized that trade-off decisions should be local and negotiated between peers, not a required feature of the network P2P.</summary>
+    <published>2015-11-10T16:46:15+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>proposal: new opcode OP_ZKP to enable ZKP-based spending authorization</title>
+  <updated>2023-06-16T18:02:16.186948+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2023-04-30 02:15:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>proposal: new opcode OP_ZKP to enable ZKP-based spending authorization</title>
+    <updated>2023-06-16T18:02:16.186948+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-April/021595.html" rel="alternate"/>
+    <summary>In a recent message, a consensus-critical issue related to the `scriptPubKey` was discussed. The issue involves dealing with system limitations around verification keys that can exceed the maximum script element size of 520 bytes. One solution proposed is to store verification keys in configurations and only use their hash in the `scriptPubKey`. Propagation of new verification keys can be done through P2P messages, which would need to be consensus-critical. As verification keys must be seen by all nodes before validating an `OP_ZKP`, it is suggested that they should be included in block data with weight unit adjustments, similar to how `scriptPubKey`s and amounts are included. The weight calculation methodology currently used via "weight units" computation reflects resources spent on acquiring block data and maintaining the UTXO database. Verification keys would require a similar adjustment for weight units as they will consume resources on each node just to maintain and remember them. If verification keys are permanent, they should be weighted heavier than `scriptPubKey`s and amounts. It is also noted that the CPU resources needed to validate generic ZKPs are higher than those required for validation of ECC signatures. This means that if ZKP witnesses translate to higher resource consumption, the weighting of ZKP witnesses should also be higher than the current witness-discounted weight of ECC signatures.</summary>
+    <published>2023-04-30T02:15:50+00:00</published>
+  </entry>
+</feed>

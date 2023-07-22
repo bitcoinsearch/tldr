@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Possible Solution To SM Attack</title>
+  <updated>2023-06-07T19:28:27.522798+00:00</updated>
+  <author>
+    <name>Quinn Harris 2013-11-06 00:26:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Possible Solution To SM Attack</title>
+    <updated>2023-06-07T19:28:27.522798+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-November/003591.html" rel="alternate"/>
+    <summary>The email conversation discusses the issue of choosing the block with the lowest hash when mining in bitcoin. Quinn Harris suggests that it is not the best option since both good and bad miners have an equal probability of finding a lower hash. Alice can determine the probability of someone else finding a lower hash value and decide to work on the next block or find a lower value hash to increase the chance her block is used. Drak suggests making it unpredictable by choosing based on a hash of the blockhash and chose the lowest from two. Alice can calculate the hash of her blockhash, and if the block to mine is chosen based on the lowest result, she will know the probability Bob's block will be used. The complexity does not change anything since if hers is more than 50% likely to be used, she should mine the next block; otherwise, it's best to work to find a better current block.However, if the block determination takes into account the current difficulty, we can prevent Alice from knowing if Bob's or any block she mines is more likely to win. Assuming a = hash of block A, b = hash of block B, difficulty = current difficulty such that A = d), choice = b &gt; a || bm  a &amp;&amp; bm  b ? a : b) : (a &gt; b ? b : a);}. The basic idea is to find a range over 0 to difficulty starting at A and B that is 1/4 of the range of the difficulty. If the two ranges overlap which should be 1/2 of the time pick the greater hash is used otherwise the lower hash.Drak suggests adding another unpredictable factor, deciding the rules of whether higher or lower wins by hashing both competing blockhashes. If the leading two hex digits are below 128 lower wins, and if above, higher wins. This should be completely unpredictable but deterministic so all the miners should end up working on the same block.</summary>
+    <published>2013-11-06T00:26:59+00:00</published>
+  </entry>
+</feed>

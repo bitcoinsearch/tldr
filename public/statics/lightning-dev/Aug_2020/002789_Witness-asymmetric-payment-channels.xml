@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Witness asymmetric payment channels</title>
+  <updated>2023-06-03T01:59:30.358672+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-08-27 01:48:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Witness asymmetric payment channels</title>
+    <updated>2023-06-03T01:59:30.358672+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-August/002789.html" rel="alternate"/>
+    <summary>The author proposes a solution to the "simultaneous HTLC" problem while upgrading to Decker-Russell-Osuntokun in the future. The proposal involves performing a coin toss whenever simultaneous HTLC offers occur without using token-passing. The HTLC hashes are used to seed the random numbers of the coin toss. The proposal considers two messages: `add_htlc` and `ack_htlc`. Whenever a node wants to add one or more HTLCs, it sends `add_htlc`, then waits for either `add_htlc` or `ack_htlc`. If it receives an `ack_htlc`, then it is the only one with HTLCs to add, so they add the HTLCs and send partial signatures of the new state to each other. However, if both peers sent `add_htlc` to each other, they perform a coin toss ritual. They concatenate their node IDs (lexicographic order) and the set of HTLCs being added by each side, hash the concatenation, and take the lowest bit of that hash. If it is 0, then the node that owns the `/0` direction won, and the HTLCs it added are what goes in the next update (and the loser has to buffer up its changes until after the update ritual completes). If it is 1, then the node that owns the `/1` direction won.</summary>
+    <published>2020-08-27T01:48:13+00:00</published>
+  </entry>
+</feed>

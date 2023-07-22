@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[PATCH v3] daemon: encrypted communication (version 3)</title>
+  <updated>2023-05-23T21:14:10.151373+00:00</updated>
+  <author>
+    <name>Mats Jerratsch 2015-10-27 18:01:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[PATCH v3] daemon: encrypted communication (version 3)</title>
+    <updated>2023-05-23T21:14:10.151373+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-October/000296.html" rel="alternate"/>
+    <summary>The code in question involves encrypted packets that are protected by an HMAC and include a serialized protobuf message. The totlen field is meant to track the total data transmitted, but it appears to actually track the size of the unencrypted message. Additionally, totlen includes its own length, which seems unnecessary since it doesn't define the encrypted message boundaries. The field was originally intended for replay protection, but as AES-CTR already provides this, totlen is not needed. This is because there is a dedicated counter in the IV that keeps track of all messages in each direction and prevents decryption if an attacker tries to replay the same message.</summary>
+    <published>2015-10-27T18:01:32+00:00</published>
+  </entry>
+</feed>

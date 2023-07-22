@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposed alternatives to the 20MB step function</title>
+  <updated>2023-06-09T20:10:21.122201+00:00</updated>
+  <author>
+    <name>Steven Pine 2015-05-28 16:30:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposed alternatives to the 20MB step function</title>
+    <updated>2023-06-09T20:10:21.122201+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/008323.html" rel="alternate"/>
+    <summary>In an email discussion between Gavin Andresen and Matt Whitlock on the Bitcoin-development mailing list, Whitlock resubmitted several ideas for consideration and discussion. One of the ideas proposed was a hard block size limit that is a function of the actual block sizes over some trailing sampling period. This allows Bitcoin to scale up gradually and organically, rather than having human beings guessing at what is an appropriate limit. Many people liked this idea because it is simple and consensus-critical code. Andresen created histograms of block sizes to infer what policy miners are actually following today with respect to block size. He found that using an average block size is about 400K, so a 1.5x rule would make the max block size 600K. Miners would definitely be squeezing out transactions/putting pressure to increase transaction fees. Even a 2x rule (implying 800K max blocks) would, today, be squeezing out transactions/putting pressure to increase fees. Using a median size instead of an average means the size can increase or decrease more quickly. Andresen thinks using an average is better because it means the max size will change (up or down) more slowly. However, he thinks that 2016 blocks is too long, because transaction volumes change quicker than that. An average over 144 blocks (last 24 hours) would be better able to handle increased transaction volume around major holidays and would also be able to react more quickly if an economically irrational attacker attempted to flood the network with fee-paying transactions.Therefore, his straw-man proposal would be: max size 2x average size over last 144 blocks, calculated at every block. Additionally, he proposes other changes, such as making the default mining policy for Bitcoin Core neutral, and using something like Greg's formula for size instead of bytes-on-the-wire, to discourage bloating the UTXO set. Finally, there are concerns about miners having complete control over the max block size. However, until we have size-independent new block propagation, there is an incentive for miners to keep their blocks small, and we see miners creating small blocks even when there are fee-paying transactions waiting to be confirmed. Andresen thinks that the combination of the random timing of block-finding plus a dynamic limit as described above will create a healthy system. If he's wrong, then it seems to him that miners will have a very strong incentive to collectively impose whatever rules are necessary (maybe a soft-fork to put a hard cap on block size) to make the system healthy again.</summary>
+    <published>2015-05-28T16:30:34+00:00</published>
+  </entry>
+</feed>

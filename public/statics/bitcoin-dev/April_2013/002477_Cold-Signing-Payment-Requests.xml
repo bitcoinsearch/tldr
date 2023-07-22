@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Cold Signing Payment Requests</title>
+  <updated>2023-06-06T15:35:35.725887+00:00</updated>
+  <author>
+    <name>Jeremy Spilman 2013-04-29 18:40:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Cold Signing Payment Requests</title>
+    <updated>2023-06-06T15:35:35.725887+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002477.html" rel="alternate"/>
+    <summary>The use of a payment address as an implicit signature by hashing something and multiplying it into the payee's pubKey is an interesting concept, but it has its downsides. One such downside is that it complicates the merchant's wallet since the payment is going to a pseudo-random address that the merchant will have to explicitly add to their wallet, which can complicate backups. Another challenge with this approach is how to handle errors when posting to the payment_url. In the original specification, the payer would only broadcast the transaction themselves if there wasn't a payment_url. However, in the current version, it appears that the payer will broadcast the transaction either way. This creates a problem with what state to put the payer's wallet into if a PaymentAck is not received.Furthermore, the threat model for signing the refund address is unclear since the same process that signs the transaction is also doing an HTTPS POST with the refund address. If an attacker can defeat that, they can redirect the payment in the first place. Although the payer can prove the refund address they specified with the payment using this method, it may be easier to get the merchant to sign the PaymentAck instead of relying on HTTPS.</summary>
+    <published>2013-04-29T18:40:29+00:00</published>
+  </entry>
+</feed>

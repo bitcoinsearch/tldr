@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A proposal for up-front payments.</title>
+  <updated>2023-06-02T21:11:47.585599+00:00</updated>
+  <author>
+    <name>Rusty Russell 2020-02-24 02:59:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A proposal for up-front payments.</title>
+    <updated>2023-06-02T21:11:47.585599+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002563.html" rel="alternate"/>
+    <summary>In a recent discussion, Rusty Russell proposed to charge an up-front fee for accepting any HTLC and hang-up after grace period unless you either prove a channel close or gain another grace period by decrypting onion. This proposal is simpler and covers this case quite nicely. Meanwhile, Anthony Towns suggested that if there is a grace period, he can gum up the network with lots of slow-but-not-slow-enough HTLCs. He reduced the "gum up the network for blocks" to "gum up the network for seconds," which seems like a pretty big win. It was also suggested that B could send C a "1 microsecond grace period, rate of 3e11 msat/minute, HTLC for 100 sat, timeout of 2016 blocks" and if C couldn't reject it immediately would owe B 50c per millisecond it took to cancel. However, grace period (and penalty rate) are either fixed in the protocol or negotiated up-front, not per-HTLC. Additionally, it was pointed out that if C goes silent before B receives a new commitment, B can cancel the HTLC with A with no risk. But if C goes silent after B receives the new commitment, B can drop the new commitment to the blockchain and pay A's fees out of it. Although this adds a trip, it doesn't add latency since C can still count on the HTLC being locked in at step 3.</summary>
+    <published>2020-02-24T02:59:36+00:00</published>
+  </entry>
+</feed>

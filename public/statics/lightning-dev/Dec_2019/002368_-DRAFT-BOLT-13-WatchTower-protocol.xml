@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[DRAFT] BOLT 13(?): WatchTower protocol</title>
+  <updated>2023-06-02T22:07:24.694822+00:00</updated>
+  <author>
+    <name>Sergi Delgado Segura 2019-12-05 16:46:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[DRAFT] BOLT 13(?): WatchTower protocol</title>
+    <updated>2023-06-02T22:07:24.694822+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-December/002368.html" rel="alternate"/>
+    <summary>In the email exchange between Rusty Russell and Sergi Delgado Segura, they discuss the appointment message in the Watchtower protocol. The appointment message is sent by a client to a server and contains all the information regarding the appointment that the client wants to arrange with the server. The server must reject the appointment if it does not meet certain requirements such as invalid `auth_token`, `locator` of wrong size, or unreasonable `encrypted_blob` size. Russell suggests that the watchtower should respond with the start time so that the caller knows how much work they have to do. Also, the minimum and maximum viable transaction sizes need to be defined because accepting `encrypted_blob` outside those boundaries will increase DoS attacks on the server. They also discuss the appointment_accepted message which contains information about the acceptance of an appointment by the WatchTower.This context provides the expected behavior of the server and client in terms of appointment and appointment_accepted messages, as well as appointment_rejected message. The appointment_rejected message contains information about the rejection of an appointment by the WatchTower. Quality of Service data is a list where each field specifies the type and associated data of the offered/requested qos. So far, only accountability is defined. The accountability qos defines a pair of qos_data blobs, associated with customer_evidence and tower_evidence messages respectively. The format for customer_evidence and tower_evidence messages are also defined. If accountability is being requested, the client must set dispute_delta to the CLTV value specified in the commitment_transaction. If accountability is being offered, the server must compute the customer_signature verification using customer_public_key and should compute the fee_rate set in the justice_tx using transaction_size and transaction_fee. The server must reject the appointment if any of the fields is missing, transaction_size is unreasonable, customer_signature_algorithm does not match any of the supported signing algorithms or customer_signature cannot be verified using customer_public_key. The server should reject the appointment if dispute_delta is too small or fee_rate is too low.The Watchtower protocol specifies the process of outsourcing penalty transaction surveillance to an entity that can monitor the blockchain on behalf of the user. The protocol defines the relationship between the client and the watchtower, including the communication process for sending information to the watchtower, along with a receipt format and encryption algorithms and parameters to secure the data sent to the watchtower. The payment modes are also discussed, where micropayments and subscriptions are favorable for a watchtower, and on-chain bounty is not ideal for a watching network. Finally, it is recommended that shachain not be implemented due to the relatively cheap storage requirements.</summary>
+    <published>2019-12-05T16:46:23+00:00</published>
+  </entry>
+</feed>

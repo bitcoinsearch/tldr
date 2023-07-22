@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving the initial gossip sync</title>
+  <updated>2023-05-24T20:42:19.641907+00:00</updated>
+  <author>
+    <name>Jim Posen 2018-02-07 21:27:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving the initial gossip sync</title>
+    <updated>2023-05-24T20:42:19.641907+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/001007.html" rel="alternate"/>
+    <summary>The discussion revolves around proposing a solution for the initial sync issue between nodes in the Lightning Network, specifically between mobile nodes which are often offline and need to resync frequently. Christian suggests adding a simple announcement cutoff timestamp with the intention of designing something more sophisticated given more time. However, Fabrice prefers the approach of having an optional feature bit signaling that a `set_gossip_timestamp` message must be sent immediately after `init`. The proposal involves grouping channel announcements by "buckets" and creating a filter for each bucket, exchange, and use them to filter out channel announcements. A new `use_channel_announcement_filters` optional feature bit (7 for example) and a new `channel_announcement_filters` message would be added. When a node receives an `init` message with the `use_channel_announcement_filters` bit set, it sends back its channel filters. When a node receives a `channel_announcement_filters` message, it uses it to filter channel announcements before sending them. The filters would be sorted by short channel id and grouped by 144 blocks or 1 block, depending on when they were created. The proposed solution aims to optimize the case where nodes are connected to few peers and are online a few times every day.</summary>
+    <published>2018-02-07T21:27:05+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Mitigations for loop attacks</title>
+  <updated>2023-05-25T00:44:39.046092+00:00</updated>
+  <author>
+    <name>Jim Posen 2018-05-02 06:59:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Mitigations for loop attacks</title>
+    <updated>2023-05-25T00:44:39.047092+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-May/001232.html" rel="alternate"/>
+    <summary>The author discusses attacks on lightning routing nodes, particularly the Loop Attack which involves collusion between a sender and receiver to create a long circuit and refuse to settle or fail the HTLC at the end until the last possible moment. This attack is problematic because it gives the attacker leverage, causing funds to be locked up in every channel on the route, and also makes it difficult to attribute blame to a single node and defend against a repeated attack. The author proposes three potential solutions: 1) protocol support for decrypting the onion route if the HTLC is kept in-flight for too long, 2) requiring fees even if the payment fails as a cost to the attacker, and 3) implementing a reputation system for nodes. Option 1 is complex and may not be effective against attackers who control multiple successive hops in the route. Option 2 only protects against collusion between sender and receiver and not against opportunistic delay by routing nodes. Option 3, the author's preferred solution, involves only forwarding payments through nodes with a good reputation, based on their history of quickly fulfilling or failing offered HTLCs. The author suggests using money as a way of measuring reputation, with fees collected through routing payments across channels raising the reputation of the channel peer and accepting an HTLC but not failing or fulfilling it quickly resulting in a loss of reputation proportional to the value of the HTLC and time to respond. An important additional property that the system should have is limiting an attacker's ability to disrupt network connectivity and induce throttling on other channels. The author proposes a modification where each hop loses a quantity of reputation units equal to the total amount of Bitcoin-seconds lost upstream, removing any attack leverage. However, this strategy has downsides in terms of centralization and privacy, as telling the downstream node the rate at which they must stake reputation may allow them to determine the number of upstream hops in the circuit. Despite these downsides, the author believes that a simple local reputation mechanism of this form could be implemented with minor changes to the BOLT spec and could provide decent resistance against DOS/loop attacks.</summary>
+    <published>2018-05-02T06:59:16+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Nonce blinding protocol for hardware wallets and airgapped signers</title>
+  <updated>2023-06-13T23:49:23.631724+00:00</updated>
+  <author>
+    <name>Dustin Dettmer 2020-03-02 20:01:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Nonce blinding protocol for hardware wallets and airgapped signers</title>
+    <updated>2023-06-13T23:49:23.631724+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-March/017665.html" rel="alternate"/>
+    <summary>In a Bitcoin development mailing list, Stepan Snigirev has proposed a protocol for signing messages using an air-gapped computer or hardware wallet. He acknowledged that these devices can still be compromised through supply chain attacks or malicious firmware updates. The proposed protocol involves the use of additional entropy from the host to prevent nonce generation by the signer and therefore reduce the attack surface. The protocol requires the host to pick a random number `n` and send its hash together with the message `m` to the signer. The signer calculates a nonce `k` and sends the corresponding point `R=kG` to the host, committing to the chosen nonce. The host then sends the preimage `n` to the signer, who tweaks the nonce by this number and signs the message. The signed message is then sent back to the host, who verifies that the public point in the signature is tweaked by `n`. Stepan Snigirev also suggests some extensions to the protocol. One such extension involves the use of multiple hosts, where all hosts don't trust each other and the signer. In this case, the hosts can concatenate hashes and preimages to add external entropy to the nonce. Another extension involves the use of stateless random signer. If the signer wants to generate a nonce non-deterministically but doesn't have the ability to store it, the signer can send back to the host some meta-information that would help it to re-generate the same nonce later.The proposed protocol can be implemented for PSBT using key-value pairs added to BIP-174. The key-value per-input pairs assuming multiple hosts want to mix in external entropy are: {PSBT_IN_EXT_NONCE_HASH}|{pubkey}, Value: {sha256(n1)}|{sha256(n2)}|...; {PSBT_IN_NONCE_COMMITMENT}|{pubkey}, Value: {33-byte R point}; {PSBT_IN_NONCE_SIGNER_METADATA}|{pubkey}, Value: {anything}; and {PSBT_IN_EXT_NONCE_PREIMAGE}|{pubkey}, Value: {n1}|{n2}|....Stepan Snigirev believes that this protocol solves the problem of compromising air-gapped computers and hardware wallets. However, he also acknowledges that the number of communication rounds doubles, making it inconvenient for air-gapped remotely located signers. He seeks feedback on the proposal and whether it would be interesting to have this protocol standardized and deployed.</summary>
+    <published>2020-03-02T20:01:51+00:00</published>
+  </entry>
+</feed>

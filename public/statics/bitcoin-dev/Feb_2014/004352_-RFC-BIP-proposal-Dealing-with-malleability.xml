@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] [BIP proposal] Dealing with malleability</title>
+  <updated>2023-05-19T18:07:44.839508+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2014-02-12 18:03:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] [BIP proposal] Dealing with malleability</title>
+    <updated>2023-05-19T18:07:44.839508+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-February/004352.html" rel="alternate"/>
+    <summary>In a discussion about transaction malleability in Bitcoin, Rune Kjær Svendsen suggests defining a new "canonical transaction hash/ID" (cTxID) that would be a hash of the non-malleable parts of the transaction data. This cTxID would be used internally by clients, making the traditional transaction hash irrelevant for client functioning. However, this solution only addresses some of the problems created by malleability, particularly for more complex transaction protocols. Mutation can invalidate an unconfirmed transaction chain by mutating the parent, breaking any protocol that depends on creating a precomputed locked time refund transaction.Although a canonical ID can prevent some buggy behavior, it does not fix the underlying problem. Alan Reiner suggests encouraging Bitcoin software developers to design their software to use the static ID instead of the full transaction hash. According to him, if MtGox had used these IDs instead of the TX ID, their software would have correctly identified the mutated transactions, and there would be no problem. This is proved incorrect as MtGox was automatically issuing replacement transactions resulting in double payments.If someone tries to replace/reissue/cancel a transaction, they must double-spend the original transaction. If the original transaction has not been conflicted, then it is possible that both the replacement and the original will be confirmed if someone pulls the original transaction out of a hat. It's not safe at any time to look to see if the original has been confirmed yet, and if not reissue because the state of the world could change nano-seconds after you looked. Double-spending the original ensures atomic exclusion, and only one transaction or the other will be confirmed.</summary>
+    <published>2014-02-12T18:03:21+00:00</published>
+  </entry>
+</feed>

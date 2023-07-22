@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Why should funders always pay on-chain fees?</title>
+  <updated>2023-06-03T02:20:22.591248+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-10-05 16:06:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Why should funders always pay on-chain fees?</title>
+    <updated>2023-06-03T02:20:22.591248+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002807.html" rel="alternate"/>
+    <summary>The "funder pays all the commit tx fees" rule in Lightning Network exists for simplicity, but it prevents a griefing attack. This attack involves creating a temporary throwaway node and using it to make a large channel to another node. The attacker then sends out all of their funds on the new channel, making it difficult for the other node to route and earn routing fees. The attacker can then delete the throwaway node and force the other node to unilateral close the channel so they can send it to an onchain-to-offchain swap and reload their channels into the proper balance it had before the attack. It is better if the unilateral close were paid by the attacker, even if ultimately the unilateral close is performed by the other node. This is the "initiator pays" principle.However, as time goes by and both peers earn value from the channel, this rule becomes questionable due to some risks associated with having pending HTLCs, such as flood-and-loot type of attacks, pinning, channel jamming, etc. Thus, in some cases, fundees should be paying a portion of the commit-tx on-chain fees to avoid a web-of-trust network where channels would only exist between peers that trust each other. Routing nodes may be at risk when they receive HTLCs. All the attacks that steal funds come from the fact that a routing node has paid downstream but cannot claim the upstream HTLCs. Therefore, one proposal suggests that nodes pay for the on-chain fees of the HTLCs they offer while they're pending in the commit-tx, regardless of whether they're funder or fundee. Another more extreme proposal ties the total commit-tx fee to the channel usage. If there are no pending HTLCs, the funder pays all the fee. If there are pending HTLCs, each node pays a proportion of the fee proportional to the number of HTLCs they offered. This model uses the on-chain fee as collateral for usage of the channel. It forces the fundee to care about on-chain feerates, which is a healthy incentive and may create a feedback loop between on-chain feerates and routing fees, which is also a good long-term thing. The fees for HTLC transactions (second-level txs) are always paid by the party that broadcasts them, but this is not enough and can even be abused by fundees in some setups.</summary>
+    <published>2020-10-05T16:06:46+00:00</published>
+  </entry>
+</feed>

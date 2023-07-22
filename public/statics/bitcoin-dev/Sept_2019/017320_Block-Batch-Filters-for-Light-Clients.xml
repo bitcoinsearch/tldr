@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Block Batch Filters for Light Clients</title>
+  <updated>2023-06-13T21:26:40.593928+00:00</updated>
+  <author>
+    <name>Tamas Blummer 2019-09-21 21:16:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Block Batch Filters for Light Clients</title>
+    <updated>2023-06-13T21:26:40.593928+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-September/017320.html" rel="alternate"/>
+    <summary>In a recent Bitcoin-dev mailing list, Tamas Blummer shared his thoughts on the use of filters in deciding whether a newly announced block should be downloaded or not. He opined that whole chain scans would be better served with plain sequential reads in map-reduce style. The majority of clients do not care about filters for blocks before the birth date of their wallet’s keys, so they skip over the majority of history which is a bigger saving than any aggregate filter. Blummer wished to get a filter committed as commitment would unlock more utility than any marginal savings through a more elaborate design.Aleksey Karpov also shared a link for a draft of a BIP for compact probabilistic block filters alternative of BIP 158. According to the summary, BIP 158 false positive rate is low, and we can achieve lower bandwidth with higher false positive rate filter while syncing blockchain. However, it does not support filter batching by design of used parameters for siphash and Golomb coding optimal parameters. The alternative compression method uses delta coding and splitting data to 2 bit string sequences. The second sequence has a lot of duplicates, compressed with 2 rounds of Huffman algorithm with an effectiveness of about 98% vs Golomb with optimal parameters. Block filters batching reduces filter size significantly. Separation of filters by address type allows lite client not to download redundant information without compromising privacy. For lite client filters download strategy, they get the biggest filter (smallest blocks/size rate) for the blocks range. In case of a positive test, they get medium filters to reduce blocks range, get block filters for affected range, and download affected blocks over TOR. An implementation (python) is available on Github. Exact information from mainnet about size for separated filters by address types and batch size will be added within a few days.</summary>
+    <published>2019-09-21T21:16:25+00:00</published>
+  </entry>
+</feed>

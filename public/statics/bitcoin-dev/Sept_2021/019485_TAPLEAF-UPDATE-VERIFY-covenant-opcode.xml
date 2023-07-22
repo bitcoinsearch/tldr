@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TAPLEAF_UPDATE_VERIFY covenant opcode</title>
+  <updated>2023-05-21T03:43:50.775378+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2021-09-23 00:29:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TAPLEAF_UPDATE_VERIFY covenant opcode</title>
+    <updated>2023-05-21T03:43:50.775378+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019485.html" rel="alternate"/>
+    <summary>The author of the message expresses excitement about a proposal for a new opcode called "TAPLEAF_UPDATE_VERIFY" (TLUV) that could provide an upgrade mechanism for any tapscript output. Currently, the proposal requires three inputs: one for updating the internal public key, one for specifying a new step for the merkle path, and one for specifying whether to remove the current script and/or how many merkle path steps to remove. The author suggests a modification to obtain the script from the "annex," which would allow a new script to be passed dynamically after the output has been created by a threshold of controlling parties. This serves to create a generic "upgrade" mechanism for contracts and allows developers to progressively upgrade or fix issues in prior versions of their deployed contracts. The author believes this modification is secure because unlike the witness itself, the annex is actually signed within the sighash. Incorporating the proposal would require the addition of an OP_PUSH_ANNEX opcode, which makes doing things like output delegation to a given key passed into the witness secure since the prior "owner" of the output commits to the key within the sighash. The author further explains that even with a more powerful type of covenant that allows partial application of binding logic, this proposal is still super useful since the action of re-creating a new tapscript tree based on dynamic input data would generate a rather large witness if only something like OP_CAT was available. The author continues to discuss the benefits of the proposed modification, stating that it would augment any other type of covenant. For example, it would take something like a CTV congestion tree and add in new users at the tree that is already being unrolled. This modification would also allow individuals to join the payment pool construct described earlier, making it 1000x more useful. The author believes this, along with something like CTV or CSFS, makes it possible to implement a Plasma Cash-like Commit Chain, which is super exciting. The author then briefly discusses the issue of utxos not being able to "interact," due to the fact that the op code doesn't allow any late binding or pattern matching to constrain where the coins can be sent to. The author suggests that one solution to this concurrency issue, which is already employed by Chia, is to allow "contracts" to be identified via a fixed ID. Transactions then specify their contract and "regular" inputs, with the requirement that every transaction spends at least a single regular input. The trade-off here is that nodes need to maintain an extra index into the UTXO set. However, this can be alleviated by applying a utreexo-like solution: nodes maintain some merklized data structure over the index and require that spending transactions provide an inclusion proof of the active contract.</summary>
+    <published>2021-09-23T00:29:18+00:00</published>
+  </entry>
+</feed>

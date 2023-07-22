@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Signing CHECKSIG position in Tapscript</title>
+  <updated>2023-05-20T21:12:29.178969+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2019-12-01 16:09:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Signing CHECKSIG position in Tapscript</title>
+    <updated>2023-05-20T21:12:29.178969+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-December/017500.html" rel="alternate"/>
+    <summary>In an email exchange, Anthony Towns shares a link to a discussion on Taproot BIP review. The conversation revolves around signing the position of the enclosing OP_IF/OP_NOTIF/OP_ELSE of the OP_IF/OP_NOTIF/OP_ELSE block that the checksig is within, or signing the byte offset instead of the opcode number offset. It is suggested that signing the enclosing OP_IF... would allow sharing of the hashed signed data in a normal multisig sequence of operations. A sighash flag could control whether or not the signature covers the CHECKSIG position or not, with SIGHASH_ALL including the CHECKSIG position.It is argued that when constructing a script, it is reasonable for one party to come to the table with their own custom script that they want to use because they have some sort of 7-of-11 scheme but in one of those cases is really a 2-of-3 and another is 5-of-6. The MAST aspect of taproot captures this clearly. It is sufficient for one to know that there exists a branch that contains a particular script without need to know what every branch contains. It is suggested that if there are many branches in the script, it's probably more efficient to do them via different branches in the merkle tree as it would make them easier to analyze independently. While learning about CODESEPARATOR is a reasonable thing to do, it may not be most people's choice of Script design to rely on it to protect themselves from this sort of signature-copying attack.An example is given with a "leaf path root OP_MERKLEPATHVERIFY" opcode, and a script that says "anyone in group A can spend if the preimage for X is revealed, anyone in group B can spend unconditionally". If one's pubkey is in both groups, their signature will sign for position 10, and still be valid on either path, even if the signature commits to the CHECKSIG position. It is suggested that to fix this script, one could have two CHECKSIG opcodes (one for each branch) and also duplicating the MERKLEPATHVERIFY; or add a CODESEPARATOR in either IF branch.It is argued that given that MAST design of taproot greatly reduces this problem compared to legacy script, it makes sense to choose designs that are safer by default and include as much user intention within the signed data as we can reasonably get away with. Finally, it is noted that signing the CODESEPERATOR position without signing the script code is nonsensical. When you remove the Script from the data being signed, signing an offset is no longer equivalent to signing a Script suffix, and an offset into an unknown data structure is a meaningless value by itself.</summary>
+    <published>2019-12-01T16:09:54+00:00</published>
+  </entry>
+</feed>

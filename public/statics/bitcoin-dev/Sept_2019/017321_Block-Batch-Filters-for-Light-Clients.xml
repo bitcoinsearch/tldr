@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Block Batch Filters for Light Clients</title>
+  <updated>2023-06-13T21:26:08.008001+00:00</updated>
+  <author>
+    <name>nopara73 2019-09-23 05:20:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Block Batch Filters for Light Clients</title>
+    <updated>2023-06-13T21:26:08.008001+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-September/017321.html" rel="alternate"/>
+    <summary>In a recent post on the Bitcoin-dev mailing list, Aleksey Karpov shared a draft of a BIP for compact probabilistic block filters as an alternative to BIP 158. Karpov explains that while BIP 158 has a low false positive rate, a higher false positive rate filter could achieve lower bandwidth while syncing the blockchain. However, BIP 158 does not support filter batching due to the design of the used parameters for siphash and Golomb coding optimal parameters. Karpov proposes an alternative compression method using delta coding and splitting data into 2-bit string sequences. The first sequence is for data without prefixes, while the second one contains information about the bit length written in the first sequence. The second sequence has many duplicates, which are compressed with two rounds of Huffman algorithm. This method has an effectiveness rate of about 98% compared to Golomb with optimal parameters.Block filters batching reduces filter size significantly, and separating filters by address type allows lite clients not to download redundant information without compromising privacy. Karpov also suggests a lite client filters download strategy: get the biggest filter (smallest blocks/size rate) for the blocks range, and in case of a positive test, get medium filters to reduce the blocks range, then get block filters for the affected range and download affected blocks over TOR. Tamas Blummer responded to the post, stating that he believes most clients do not care about filters for blocks before the birthdate of their wallet's keys, so they skip over the majority of history, which is a bigger saving than any aggregate filter. Blummer wishes that a filter would be committed as it could unlock more utility than any marginal savings through more elaborate design. It is interesting to note that academics came up with a similar scheme independently to applying private information retrieval to lightweight Bitcoin clients, but were not aware of BIP 158 at all. Karpov's implementation of the proposed method in Python can be found on GitHub.</summary>
+    <published>2019-09-23T05:20:31+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Structure for Trustless Hybrid Bitcoin Wallets Using P2SH for Recovery Options</title>
+  <updated>2023-05-20T03:23:48.015554+00:00</updated>
+  <author>
+    <name>Colin Lacina 2017-08-09 18:49:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Structure for Trustless Hybrid Bitcoin Wallets Using P2SH for Recovery Options</title>
+    <updated>2023-05-20T03:23:48.015554+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-August/014819.html" rel="alternate"/>
+    <summary>A new structure has been proposed to allow trustless use of hybrid wallets without having to actually trust them. The TX script running this structure is given as "IF 1 2 CHECKMULTISIGVERIFY ELSE 2 2 CHECKMULTISIG ENDIF". In the case of a lost wallet, recovery of funds can be done using the userRecoveryPrivKey. Authentication with the server can be done using 2FA like Authy or Google Authenticator. When the user forgets their password and/or loses access to their userWalletPrivKey, they rely on the serverRecoveryPrivKey. During wallet setup, basic identity information is provided along with a recovery password and/or questions and answers. This information is not sent to the server except for the hash used to identify the recovery wallet. The server creates a nonce, encrypts it, stores it, and transmits it to the user's client. The client generates the serverRecoveryPrivKey, which is encrypted using SHA512 on the combination of identity information, recovery password, questions and answers, and the nonce. When the user needs to use the recovery option, they hash their information to build their recovery identifier. The server may request e-mail and/or SMS confirmation from the user before proceeding. The server decrypts the saved nonce and the first layer of encryption on the serverRecoveryPrivKey, then encrypts both for transmission to the user's client. After the transmission encryption is removed by the client, the user can decrypt the airbitzServerRecoveryPrivKey and send a transaction to any chosen destination. The author suggests that this structure could make a good informational BIP.</summary>
+    <published>2017-08-09T18:49:59+00:00</published>
+  </entry>
+</feed>

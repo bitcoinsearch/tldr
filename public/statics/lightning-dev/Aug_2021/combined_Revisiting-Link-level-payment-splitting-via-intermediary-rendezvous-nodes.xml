@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Revisiting Link-level payment splitting via intermediary rendezvous nodes</title>
+  <updated>2023-06-04T02:02:15.400720+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2021-08-10 00:51:01</name>
+  </author>
+  <author>
+    <name>Gijs van Dam 2021-08-07 08:44:10</name>
+  </author>
+  <link href="lightning-dev/Aug_2021/003152_Revisiting-Link-level-payment-splitting-via-intermediary-rendezvous-nodes.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2021/003144_Revisiting-Link-level-payment-splitting-via-intermediary-rendezvous-nodes.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Revisiting Link-level payment splitting via intermediary rendezvous nodes</title>
+    <updated>2023-06-04T02:02:15.401264+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-August/003152.html" rel="alternate"/>
+    <summary>The email exchange discusses a proposal for creating a route from C to E that bypasses a saturated channel D-C. The proposed solution is for C to create a sub-route from D to E, which is treated as a partial route-to-payee under rendezvous routing. To achieve this, C passes an ephemeral key into the payload of the rendezvous node D in the alternate route, signaling to D it needs to swap out the key. However, there is a risk that the payment may fail at some point for JIT rebalancing, and C paid for a rebalance without actually benefiting from it.The email revisits a topic previously discussed between ZmnSCPxj and Christian Decker, proposing a trick to mitigate certain attacks. Instead of node A supporting rendezvous routing, now node D supports it. C creates a new route from C to D via A, and then uses the hop payload found when unwrapping the onion of the original route to signal to D that it needs to swap out the ephemeral key. This allows the payment to be split over multiple hops, and the author believes this could be useful for atomic JIT rebalancing, offloading HTLC's to another channel, and mitigating Balance Disclosure Attacks.In summary, the email presents a proposal for using a modified version of rendezvous routing to split payments over multiple hops. The author believes this could have several useful applications, including atomic JIT rebalancing, offloading HTLC's to another channel, and mitigating Balance Disclosure Attacks. However, there are risks involved, such as the payment failing and C paying for a rebalance without benefiting from it.</summary>
+    <published>2021-08-10T00:51:01+00:00</published>
+  </entry>
+</feed>

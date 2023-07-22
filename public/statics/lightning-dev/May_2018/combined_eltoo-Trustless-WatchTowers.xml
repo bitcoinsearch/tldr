@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - eltoo Trustless WatchTowers</title>
+  <updated>2023-05-25T00:59:12.027484+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-05-10 04:10:49</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-05-09 22:51:55</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-05-02 10:43:22</name>
+  </author>
+  <link href="lightning-dev/May_2018/001267_eltoo-Trustless-WatchTowers.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2018/001264_eltoo-Trustless-WatchTowers.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2018/001233_eltoo-Trustless-WatchTowers.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - eltoo Trustless WatchTowers</title>
+    <updated>2023-05-25T00:59:12.027484+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-May/001267.html" rel="alternate"/>
+    <summary>Bitcoin developer ZmnSCPxj has proposed a new method for a Watchtower to protect users from fraud when they are offline. The proposal involves using a "blob" of data containing information about the channel state and update transactions. However, each update of a single channel generates a `(txid[:16], blob)` pair with the same `txid[:16]` key, which allows WatchTowers to correlate the timing and number of updates. One solution that has been suggested is that WatchTowers should demand a public key + signature, but this approach can also be attacked.To prevent key-reservation attacks, ZmnSCPxj suggests charging for each `(txid[:16], blob)` pair and storing multiple pairs with the same `txid`. This approach would enable the service to be used anonymously and limit correlation from a single ticket.ZmnSCPxj has also suggested a half-baked idea for encrypted-blob, slightly-blinded Decker-Russell-Osuntokun WatchTowers. This involves generalizing WatchTower pairs to `(hash[:16], blob)`, where `hash` is the message that is signed in the witness program, not just the `txid`. Under Poon-Dryja, clients can distribute revocation data to a subset of all serving WatchTowers, while under Decker-Russell-Osuntokun, several watchtowers could advance the update transaction towards the final most up-to-date state.The main loop of the WatchTower is now something like verifying each transaction when a block comes in, and if during signature validation, they match the hash of the message being signed to a watched blob hash[:16], they decrypt the blob and proceed to justice depending on the type of decrypted blob. The proposal is to use the trigger transaction instead of txid in update transactions in Decker-Russell-Osuntokun channels, but this would allow the WatchTower to correlate the timing and number of updates of each channel. It is desirable to retain the property that the WatchTower cannot correlate updates to channels.The Watchtower would not know if a `(hash[:16], blob)` pair even belongs to a Poon-Dryja or Decker-Russell-Osuntokun channel unless a theft attempt was made, thus retaining high anonymity sets while transitioning the network from Poon-Dryja to Decker-Russell-Osuntokun. When the WatchTower finds the last channel update for the channel and it is different from the message that triggered us, then it knows that the current published update transaction is not the latest. It knows the latest update and can now publish the latest update transaction and eventually its corresponding settlement transaction, in order to provide justice.</summary>
+    <published>2018-05-10T04:10:49+00:00</published>
+  </entry>
+</feed>

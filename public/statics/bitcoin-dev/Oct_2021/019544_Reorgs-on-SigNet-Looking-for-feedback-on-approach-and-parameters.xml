@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reorgs on SigNet - Looking for feedback on approach and parameters</title>
+  <updated>2023-05-21T03:33:08.656722+00:00</updated>
+  <author>
+    <name>Anthony Towns 2021-10-15 04:41:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reorgs on SigNet - Looking for feedback on approach and parameters</title>
+    <updated>2023-05-21T03:33:08.656722+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-October/019544.html" rel="alternate"/>
+    <summary>The discussion on the bitcoin-dev mailing list centered around the purpose of signet and its target users. Signet is a Bitcoin test network that aims to provide a more stable environment than other testnet options. The conversation started with Anthony Towns asking about the initial thinking and design analysis that went into the decision to use a poisson-ish distribution for block times. However, he was more interested in understanding if there were any drawbacks to doing things another way that could make it easier for him to do what he wanted. Matt Corallo responded by saying that changing the block time to target an average of 2 or 5 minutes would require propagating that logic back into applications that rely on blocks as a measure of time, such as lightning's to_self_delay. He also explained that having significant surges of blocks could cause uninteresting bugs for protocols relying on CSV/CLTV to ensure there's a delay they can use to recover funds. The conversation then turned to the target users of signet. Corallo suggested that signet is best suited for integration testing across many services, different services validating they interoperate, or users seeing if a service works the way they expect in a nearly-live environment. For private signets, the advantage over regtest is you don't risk some random participant causing major reorgs, and can reasonably use it over the internet without having to worry too much about securing things. In conclusion, the participants agreed that developers making software should use regtest for complete control, while those trying out software could use the default public signet to get a good idea of how it will behave on mainnet. It was also suggested that collaborations/partnerships with other development teams should use their own private signet for the test environment. Finally, it was noted that there is no definitive answer to who the target user is, but signet makes sense as a "demo mainnet" that allows users to do all the things they can on mainnet, with pretty similar constraints, but some more interesting behaviors.</summary>
+    <published>2021-10-15T04:41:50+00:00</published>
+  </entry>
+</feed>

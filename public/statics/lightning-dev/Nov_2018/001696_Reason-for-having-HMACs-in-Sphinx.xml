@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reason for having HMACs in Sphinx</title>
+  <updated>2023-06-02T15:24:45.892609+00:00</updated>
+  <author>
+    <name>Christian Decker 2018-11-29 17:13:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reason for having HMACs in Sphinx</title>
+    <updated>2023-06-02T15:24:45.892609+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001696.html" rel="alternate"/>
+    <summary>In a Lightning-dev email thread, Christian Decker explains that HMACs are necessary in Sphinx to ensure that hops cannot modify the packet before forwarding it, without the next node detecting the modification. Christian suggests that an attacker could learn the path length by messing with different per-hop payloads, flipping bits until no error is returned. Adding HMACs solves this issue by ensuring that the next hop will return an error if anything was changed, removing the leak about which node would have failed the route. Corné Plooy asks why we need HMACs in Sphinx and what could go wrong if we didn't have them. He argues that receiving nodes do not know what the origin node is, and he doesn't see any attack mode where an attacker wouldn't be able to generate a valid HMAC. Corné thinks that the only real use case of the HMAC value is a 0-valued HMAC, indicating the end of the route, but he considers this "just silly" since it's essentially a boolean, not a cryptographic verification.</summary>
+    <published>2018-11-29T17:13:29+00:00</published>
+  </entry>
+</feed>

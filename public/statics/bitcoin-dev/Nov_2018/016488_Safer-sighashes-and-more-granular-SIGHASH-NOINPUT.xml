@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-05-20T18:09:16.762455+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2018-11-19 22:37:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-05-20T18:09:16.762455+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-November/016488.html" rel="alternate"/>
+    <summary>A proposal has been made to add additional features to the Segwit version's Sighash. These include committing to the absolute transaction fee in addition to the amount being spent in each input, and committing to the scriptPubKey in addition to the scriptCode. The latter would prevent lying to devices about the type of output being spent, even when the scriptCode is correct. The proposal suggests making these optional as they may not be desirable in all circumstances. This interacts with SIGHASH_NOINPUT, which adds two ways of rebinding signatures to inputs: changing the prevout and changing the script. The proposal suggests three new sighash flags: SIGHASH_NOINPUT, SIGHASH_NOFEE, and SIGHASH_SCRIPTMASK. It also proposes adding a new opcode, OP_MASK, which acts as a NOP during execution. The sighash would be computed like in BIP143 but with some modifications. If SIGHASH_SCRIPTMASK is present, for every OP_MASK in scriptCode, the subsequent opcode/push is removed. The scriptPubKey being spent is added to the sighash unless SIGHASH_SCRIPTMASK is set. The transaction fee is added to the sighash unless SIGHASH_NOFEE is set. hashPrevouts, hashSequence, and outpoint are set to null when SIGHASH_NOINPUT is set.The proposal seeks to explicitly state what can change in signatures/scripts by indicating exactly what in a script is subject to change. The author asks if anyone can see ways in which this introduces redundant flexibility or misses obvious use cases.</summary>
+    <published>2018-11-19T22:37:57+00:00</published>
+  </entry>
+</feed>

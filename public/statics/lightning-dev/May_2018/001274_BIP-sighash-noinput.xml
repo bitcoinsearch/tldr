@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP sighash_noinput</title>
+  <updated>2023-05-20T08:20:19.673834+00:00</updated>
+  <author>
+    <name>Anthony Towns 2018-05-14 09:23:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP sighash_noinput</title>
+    <updated>2023-05-20T08:20:19.673834+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-May/001274.html" rel="alternate"/>
+    <summary>The discussion revolves around the risk involved in using _NOINPUT and SIGHASH_NONE. It is argued that both pose a risk of losing money, but NOINPUT is worse because it can cause the loss of multiple coins, while SIGHASH_NONE only lets others take the coin you're trying to spend. The suggestion is made to either drop support for SIGHASH_NONE altogether or limit it in a similar way to limiting SIGHASH_NOINPUT. Taproot and graftroot scripts are also mentioned as having similar trade-offs to NOINPUT, where a SIGHASH_ALL signature is used in the normal case and a SIGHASH_NOINPUT (multi)sig is used in the abnormal case for NOINPUT. It is suggested to use a different segwit version for NOINPUT rather than creating a new one. For segwit v0, addresses would need to be deliberately created to allow for NOINPUT signatures. A taproot witness script is suggested for a new segwit version, which includes an opcode. Two sorts of addresses are generated from a public key X, namely, addresses where each coin is spent individually and different addresses where the wallet of coins with that public key is spent at once. Signing with NOINPUT is seen as more concerning than signing with SIGHASH_NONE. While defense-in-depth makes sense, it is acknowledged that people make mistakes, which can lead to the cross-contamination of keys into a lightning subsystem. The benefit of a separate opcode is that support can be soft-forked independently of a new segwit version. Passing an extra flag to TransactionSignatureChecker::CheckSig() is seen as sufficient for implementing this change.</summary>
+    <published>2018-05-14T09:23:29+00:00</published>
+  </entry>
+</feed>

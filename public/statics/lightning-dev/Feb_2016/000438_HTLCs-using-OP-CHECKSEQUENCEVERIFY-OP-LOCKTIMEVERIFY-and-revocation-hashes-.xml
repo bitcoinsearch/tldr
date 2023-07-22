@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>HTLCs using OP_CHECKSEQUENCEVERIFY/OP_LOCKTIMEVERIFY and revocation hashes.</title>
+  <updated>2023-05-23T18:22:04.906413+00:00</updated>
+  <author>
+    <name>CJP 2016-02-09 19:48:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>HTLCs using OP_CHECKSEQUENCEVERIFY/OP_LOCKTIMEVERIFY and revocation hashes.</title>
+    <updated>2023-05-23T18:22:04.906413+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-February/000438.html" rel="alternate"/>
+    <summary>In a post by Rusty Russell, he clarifies that all outputs to A in A's commit transaction must be delayed via OP_CSV, including HTLC outputs. The "HTLC Receiver Redeemscript" is structured as R-VALUE &amp; OP_CSV &amp; SIG-PAYEE OR HTLC-TIMEOUT &amp; SIG-PAYER OR REVOCATION-B &amp; SIG A. Rusty then goes on to explain a hypothetical scenario involving Alice and Eve where Eve becomes unresponsive on one channel after sending the R value to Alice on both channels. Alice has to broadcast her commit transaction containing the HTLC before the CLTV of the HTLC times out. It is crucial for Alice's CSV delay to be set at less than a day to ensure that she can claim the HTLC funds. However, this means that Alice's node must be up and running and connected to the Bitcoin network within 0.5 days remaining in the time window. Rusty suggests longer delays are better to catch the use of revoked commit transactions, while shorter HTLC timeout increments are better to lock up funds for shorter periods. This is important since systems can fail, and manual intervention may be needed to restore them, thus avoiding downtime/DoS attack -&gt; theft escalation.</summary>
+    <published>2016-02-09T19:48:59+00:00</published>
+  </entry>
+</feed>

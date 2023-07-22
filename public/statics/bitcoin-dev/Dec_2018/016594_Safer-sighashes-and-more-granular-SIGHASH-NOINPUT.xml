@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-05-20T18:01:50.451364+00:00</updated>
+  <author>
+    <name>Johnson Lau 2018-12-24 21:23:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-05-20T18:01:50.451364+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-December/016594.html" rel="alternate"/>
+    <summary>In a discussion about proposed uses of CODESEPARATOR, a script was provided that involved two separate scripts. The first script (S1) contained the OP_CHECKSIGVERIFY and OP_CHECKSIG commands, while the second script (S2) contained the commands OP_CSV, OP_DROP, and OP_CHECKSIG. Under taproot, it is possible to make Q = P + H(P||S2)G, where P = MuSig(KeyA, KeyB), making S1 a direct spending with Q, eliminating the need for OP_IF or CODESEPARATOR in S2 altogether. There was also discussion of using CODESEPARATOR to force R reuse, but it was noted that this could be achieved with fewer bytes without its use. It was suggested that a much better way would be to use SWAP CAT CHECKSIG. Additionally, it was mentioned that the discrete log of R could be a shared secret between A and B, and if the purpose was to publish the private key to the whole world, R = G could be used.Finally, there was mention of a previous email on Lightning-dev about the use of CODESEPARATOR to impose Scriptless Script even without Schnorr. This involved three signatures with different CODESEPARATOR places and forced R reuse so that the signatures to claim funds revealed the privkey. However, the script shown had all CODESEPARATOR in a single branch, and the details were difficult to parse through the mailing list.</summary>
+    <published>2018-12-24T21:23:44+00:00</published>
+  </entry>
+</feed>

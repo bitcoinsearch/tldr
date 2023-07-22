@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+  <updated>2023-05-23T01:44:04.347724+00:00</updated>
+  <author>
+    <name>Matt Corallo 2019-01-07 15:18:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+    <updated>2023-05-23T01:44:04.347724+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-January/001801.html" rel="alternate"/>
+    <summary>The proposal of allowing transactors to mark their transactions as "likely-to-be-RBF'ed" is being discussed as an alternative solution. This would enable a relay policy where children of such transactions would be rejected unless the resulting package would be "near the top of the mempool". Although it theoretically implies that such attacks are not possible to pull off consistently, it is still possible to pull off this attack with low probability in case of feerate spikes right after broadcast. However, defining a "near the top of the mempool" criteria for Lightning's requirements is very different from the original problem. Lightning needs certainty that the transaction will confirm by some deadline, rather than wanting a high probability that the transaction in question confirms "soon". The original RBF-pinning proposal was included as a comparison but it is less clean and less convincingly secure.The proposal is somewhat of a hack, but it is a hack on the boundary condition where packages meet local anti-DoS rules in violation of the "incentive compatible" goal anyway. This proposal is very different and isn't incentive compatible if blocks come in a bit fast for an hour or two, as all of a sudden that "near the top of the mempool" criterion makes no sense and you should have accepted the new transaction(s). Giving up the ability to RBF/CPFP more than once in case the fee moves away from us seems to be a rather significant restriction. The package relay is another issue that needs to be addressed. A simpler solution can be done for this specific case, but it depends on what the scope of that design is. Suhas opened an issue to try to scope it out a bit more at https://github.com/bitcoin/bitcoin/issues/14895.</summary>
+    <published>2019-01-07T15:18:52+00:00</published>
+  </entry>
+</feed>

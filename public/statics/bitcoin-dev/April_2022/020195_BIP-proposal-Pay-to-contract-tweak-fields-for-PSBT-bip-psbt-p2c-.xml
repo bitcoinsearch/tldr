@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>BIP proposal: Pay-to-contract tweak fields for PSBT (bip-psbt-p2c)</title>
+  <updated>2023-05-22T18:44:42.524235+00:00</updated>
+  <author>
+    <name>Dr Maxim Orlovsky 2022-04-01 08:32:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>BIP proposal: Pay-to-contract tweak fields for PSBT (bip-psbt-p2c)</title>
+    <updated>2023-05-22T18:44:42.524235+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-April/020195.html" rel="alternate"/>
+    <summary>Dr. Maxim Orlovsky has proposed a new standard called BIP (Bitcoin Improvement Proposal) which aims to add pay-to-contract key tweaking data fields to PSBTs (Partially Signed Bitcoin Transactions). The proposal is an extension of the existing PSBT standard suggested by Andrew Poelstra in March 2019. The BIP proposal introduces a commitment called P2C, which creates a cryptographic commitment to some message using elliptic curve properties. This commitment allows for extra-transaction information required for the signer to produce valid signatures spending previous outputs. The proposal includes a new per-input type, PSBT_IN_P2C_TWEAK, which has a compact public key serialization and a 32-byte value that is added to a private key to produce correct ECDSA and/or Schnorr signature.This new field provides sufficient information for creating valid signatures for spending outputs containing tweaked public keys such as bare scripts, P2PK, P2PKH, P2SH, witness v0 P2WPKH and P2WSH, nested witness v0 P2WPKH-P2SH and P2WSH-P2SH, and witness v1 P2TR outputs. The proposal is compatible with existing consensus rules and does not require any modifications.However, it is important to note that possible future witness versions, including witness v1 non-taproot outputs may not be supported or covered by this BIP and may require the addition of new fields to the PSBT inputs. External signers who may not have any information about such commitment can use this proposal to produce valid signatures.The scope of this proposal is limited to spending transaction outputs containing P2C tweaks and it does not address construction of new P2C commitments or transactions containing them in their outputs. It only touches the question of spending an output which contained previously created P2C commitment, which does not create a new commitment and does not provide that kind of risk of extra-blockchain value loss.Overall, this proposal is aimed at providing a universal method for spending previous outputs containing P2C tweaks, applied to the public key contained within any standard form of the scriptPubkey.</summary>
+    <published>2022-04-01T08:32:36+00:00</published>
+  </entry>
+</feed>

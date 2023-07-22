@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>To prevent arbitrary data storage in txouts — The Ultimate Solution</title>
+  <updated>2023-06-06T14:51:44.856525+00:00</updated>
+  <author>
+    <name>Peter Todd 2013-04-10 03:03:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>To prevent arbitrary data storage in txouts — The Ultimate Solution</title>
+    <updated>2023-06-06T14:51:44.856525+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002393.html" rel="alternate"/>
+    <summary>In an email sent to the Bitcoin-development mailing list, Gregory Maxwell discusses a possible solution to data stuffing on the Bitcoin network. He suggests creating a new address type called P2SH^2, which is a hash of a P2SH address. This would limit data stuffing to brute forcing hash collisions. Maxwell acknowledges that it would be interesting to work out the math for how effective this method would be, but notes that it would certainly be expensive in terms of time and hashing power that could solve shares instead.Maxwell proposes two steps to implement this solution. Firstly, defining a new address type, P2SH^2, which is H(H(ScriptPubKey)) instead of H(ScriptPubKey). Secondly, making a relay rule so that to relay a P2SH^2, you must include along the inner P2SH address. All nodes can verify it by hashing it. If miners mine P2SH^2 addresses where the P2SH wasn't relayed, we introduce a block discouragement rule where a block is discouraged if you receive it without receiving the P2SH^2 pre-images for it.With this minor change there is no non-prunable location for users to cram data into except values. The same thing could also be done for OP_RETURN PUSH value outputs used to link transactions to data. Make the data be a hash, outside of the txn include the preimage of the hash.</summary>
+    <published>2013-04-10T03:03:01+00:00</published>
+  </entry>
+</feed>

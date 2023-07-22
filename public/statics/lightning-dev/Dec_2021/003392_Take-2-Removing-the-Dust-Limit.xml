@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Take 2: Removing the Dust Limit</title>
+  <updated>2023-06-03T06:48:50.314976+00:00</updated>
+  <author>
+    <name>Ruben Somsen 2021-12-08 22:51:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Take 2: Removing the Dust Limit</title>
+    <updated>2023-06-03T06:48:50.314976+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003392.html" rel="alternate"/>
+    <summary>Ruben and Jeremy were discussing the possibility of 0 sat outputs entering the mempool and not being spent. Jeremy argued that this is not a big problem as long as the output is eventually spent, even if another transaction with a higher fee rate enters the mempool first. Ruben agreed but added that it is possible for a user to unintentionally behave in a way that causes the 0 sat output to not be spent. He outlined a scenario where another output gets spent at a higher fee rate, the transaction spending the 0 sat output does not make it into the block due to lower fees, and the user invalidates the transaction spending from the 0 sat output. Ruben questioned whether this scenario is acceptable.Jeremy suggested that if it is more costly to intentionally keep the 0 sat output than to create a dust output, users should opt for the latter. He also proposed the idea of a UTXO with drop semantics, which would expire and become unspendable if not spent in the block it was created. This could be used for 0 value outputs that are only meant to attach fees in the mempool and could be treated like an OP_RETURN otherwise. Two cases could be added for this: a bare segwit version and one equivalent to Taproot. While Ruben acknowledged the potential benefits of this solution, he noted that it may require a consensus change.</summary>
+    <published>2021-12-08T22:51:50+00:00</published>
+  </entry>
+</feed>

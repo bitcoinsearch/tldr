@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CTV vaults in the wild</title>
+  <updated>2023-06-15T17:43:44.547302+00:00</updated>
+  <author>
+    <name>Antoine Riard 2022-03-10 22:31:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CTV vaults in the wild</title>
+    <updated>2023-06-15T17:43:44.547302+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020105.html" rel="alternate"/>
+    <summary>Antoine and James O'Beirne had a conversation about the implementation of hashchain-based vault designs. Antoine expressed concern about bugs slipping in and affecting the output amount or relative-timelock setting correctness. However, James did not consider the vaults case to be any different from other sufficiently involved uses of bitcoin script.They also discussed the immutability of the flow paths once the funds are locked to the root vault UTXO in any hashchain-based vault design. The presence of trusted hardware in the vault design and its security advantage compared to classic multisig setup was also considered. Antoine argued that being able to lock coins up for an arbitrary amount of time and then have advance notice of an attempted spend only seems possible with some kind of covenant technique.Regarding the security advantage of recursive design, where the partial unvault sends back the remaining funds to the vault UTXO, Antoine said that if you would like to be able to partially unvault arbitrary amounts while still precommitting to the flow of funds, you might need a sighash flag extension like SIGHASH_ANYAMOUNT. They also talked about introducing an intermediary, out-of-chain protocol step where the unvault broadcast is formally authorized by the vault stakeholders.Both Antoine and James agreed that the critical data surface sounds to be better with hashchain-based vaults designs, but there are trade-offs between security and reliability that need to be conveyed well to the vault users. They also discussed the need for better fee-bumping needs like SIGHASH_GROUP or transaction sponsors.The conversation revolved around the idea of a vault scheme for custodians and individual users to function as a single trusted entity. The concern arises when someone unexpectedly hacks the fee keys that encumber all of the anchor outputs, which can possibly pin the attempted response to the unvault transaction. However, this doesn't seem like a fault unique to this scheme and points to the need for better fee-bumping needs. Space efficiency is considered of secondary concern, but if every major custodian ends up implementing some type of vault scheme, it might be a lot of space. The suggestion is to facilitate the flow of bitcoin from major custodians to miners more cleanly with a block size reduction. Additionally, the idea of watchtowers serving double-duty for lightning channels and vault schemes like this is considered a good one.</summary>
+    <published>2022-03-10T22:31:32+00:00</published>
+  </entry>
+</feed>

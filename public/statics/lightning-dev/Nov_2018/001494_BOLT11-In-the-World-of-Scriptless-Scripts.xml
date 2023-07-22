@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BOLT11 In the World of Scriptless Scripts</title>
+  <updated>2023-05-20T08:53:11.353530+00:00</updated>
+  <author>
+    <name>Anthony Towns 2018-11-03 04:43:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BOLT11 In the World of Scriptless Scripts</title>
+    <updated>2023-05-20T08:53:11.353530+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001494.html" rel="alternate"/>
+    <summary>In a recent email conversation on the Lightning-Dev mailing list, Anthony Towns proposed adding optional support for using secp256k1 public/private keys for payment hashes/preimages to version 1.1 of the lightning spec. This would require nodes in the payment path to support it, however, so considerable buy-in would be needed before committing to it. The plan would be to provide two `p` fields in transition for invoices, supporting both old and new payment hash variants. Channel announcements would need to specify whether they support secp256k1 or just sha256. Rusty Russell expressed concern that continuous paths of channels with the same feature would be needed. However, Towns argued that only the two nodes directly involved in the channel needed to understand the commitment transactions they're signing. Other nodes just needed to know that they can put in a public key based HTLC and get back the corresponding private key when the HTLC goes through.Russell also raised the issue of generating multiple nonces R=r*G values from n*32B worth of random data. Generally, if you're going to have n signatures with a public key P, this is required. However, there are three levels that could be implemented: laolu/conner, just send multiple payments with the same hash, and secp256k1. Laolu/conner works with sha256 and provides some privacy improvement but loses proof-of-payment and can't claim unless all payments arrive. Just sending multiple payments with the same hash works with sha256 but doesn't improve privacy much, provides proof-of-payment as soon as partial payments arrive, and accepts any partial payment. Secp256k1 needs secp256k1 preimages, works fine with decorrelation improving privacy at every step, and can be set up to only claim once all partial payments arrive, providing proof-of-payment upon accepting partial payment.</summary>
+    <published>2018-11-03T04:43:32+00:00</published>
+  </entry>
+</feed>

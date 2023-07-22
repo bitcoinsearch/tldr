@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Scalability issues</title>
+  <updated>2023-06-06T06:37:46.902441+00:00</updated>
+  <author>
+    <name>grarpamp 2012-07-27 19:26:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Scalability issues</title>
+    <updated>2023-06-06T06:37:46.902441+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-July/001752.html" rel="alternate"/>
+    <summary>The conversation revolves around using a filesystem (ZFS) and the issues with the bdb backend that Bitcoin uses, which performs many I/O operations and writes them synchronously to disk. This process kills the caching provided by the filesystem. To solve this issue, the user needs to figure out how to turn off sync or determine if it is on for everything or just the wallet. It is advised to put ZFS's intent log on a separate SSD-backed device to get fast synchronous writes when running a large database on ZFS. The user suggests that Bitcoin's writes are likely small, so a RAM dev intent would be cheaper and faster than an SSD for that purpose. The discussion also touches on switching the Bitcoin block verifier to use a different style database layout ("ultraprune"), which is smaller, faster, and supports pruning. This approach deletes old blocks, transactions, and coins that have both been validated in the past and fully spent in the future since there is no need to validate further back beyond them unless you're a historian or have some other usage other than casual transactions.</summary>
+    <published>2012-07-27T19:26:35+00:00</published>
+  </entry>
+</feed>

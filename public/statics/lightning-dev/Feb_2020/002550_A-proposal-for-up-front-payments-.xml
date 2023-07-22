@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A proposal for up-front payments.</title>
+  <updated>2023-05-23T02:22:11.759033+00:00</updated>
+  <author>
+    <name>Anthony Towns 2020-02-20 06:02:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A proposal for up-front payments.</title>
+    <updated>2023-05-23T02:22:11.759033+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002550.html" rel="alternate"/>
+    <summary>In a mailing list discussion, ZmnSCPxj raised a concern about what happens if a payment is forwarded and the outgoing channel is dropped onchain while the peer disconnects. Since the onchain HTLC may have a timelock of a few hundred blocks from now, the outgoing peer can claim it until the timelock, and if they don't claim it, the incoming peer cannot safely fail it. The pre-signed close transaction will have already deducted fees, which means that holding fees are worth committing to upfront. It's necessary anyway since if the channel drops to chain, the HTLC cannot be cancelled, and Bob will have to pay waiting for the timeout. To avoid bad incentives for the other guy to drop to the chain, one should not accept a (rate, amount, timelock) tuple for an incoming HTLC unless the rate*amount*timelock product is substantially less than what one is putting towards the blockchain fees anyway. The rate increases with the number of hops, so if it's 1% pa per hop, the 11th peer will emit 10% pa, but this is probably okay as BTC's deflationary nature implies that earning much interest is unnecessary. One can choose the rate dynamically based on how many HTLCs are open and how much of the channel funds are being used up by the HTLC. One would presumably update their channel state every hundred blocks, reducing the 10c by half a cent or so each time to reduce risk. There could be some way of bumping the timelock across an HTLC path so that the risk is capped, but if the HTLC is still being paid for, it doesn't have to be canceled.</summary>
+    <published>2020-02-20T06:02:25+00:00</published>
+  </entry>
+</feed>

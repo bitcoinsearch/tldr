@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Suggestions to improve opcodes with O(N) complexity</title>
+  <updated>2023-06-12T00:26:35.766838+00:00</updated>
+  <author>
+    <name>Sergio Demian Lerner 2017-04-17 13:25:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Suggestions to improve opcodes with O(N) complexity</title>
+    <updated>2023-06-12T00:26:35.766838+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/014191.html" rel="alternate"/>
+    <summary>The article discusses the O(N) behavior of two scripting opcodes, OP_IF and OP_ROLL, and how they can be exploited to simulate a Segwit block that takes up to 5.6 seconds to verify on a single Core i5 processor running Ubuntu VM. However, the findings are not considered as vulnerabilities as Bitcoin employs several worker threads for verifying scripts in parallel. The article explains how the handling of OP_IF/OP_NOTIF/OP_ELSE should be re-written with a O(1) algorithm to count the number of true conditions and false or skipped conditions. The second problem lies in the OP_ROLL opcode, which removes a value at a given index from the value stack and pushes it on top, taking almost 5.6 seconds to move each stack element 200 times. One solution is to use a linked list data structure instead of a std::vector to allow O(1) removal of items, but it still requires O(N) for element lookup. It may be the case that optimizing OP_ROLL will never really be required.</summary>
+    <published>2017-04-17T13:25:14+00:00</published>
+  </entry>
+</feed>

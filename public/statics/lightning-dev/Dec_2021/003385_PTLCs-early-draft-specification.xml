@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PTLCs early draft specification</title>
+  <updated>2023-06-03T06:46:56.788669+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2021-12-08 08:40:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PTLCs early draft specification</title>
+    <updated>2023-06-03T06:46:56.788669+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003385.html" rel="alternate"/>
+    <summary>Bastien requests a first version of transactions with minimal changes to the transaction structure and update protocol, to ensure agreement and shipping in 2022. A new message in each direction may need to be added to avoid additional round-trips, but it's not that bad since no extra data is being added. ZmnSCPxj suggests adding `SIGHASH_NONE | SIGHASH_NOINPUT` or a similar covenant opcode, such as `OP_CHECKTEMPLATEVERIFY`, without any commitments or an `OP_CHECKSIGFROMSTACK` on an empty message. Alternatively, fast-forwards would avoid this by only changing commitment transactions once enough changes justify collapsing them. Whenever A wants to add a new A-&gt;B PTLC, it only changes the tx inputs of the other A-&gt;B PTLCs without affecting the B-&gt;A PTLCs. Payment forwarding is fast, and the "big" commitment tx is only changed occasionally to clean up claimed and failed PTLCs, moving the extra messages out of the forwarding hot path.</summary>
+    <published>2021-12-08T08:40:35+00:00</published>
+  </entry>
+</feed>

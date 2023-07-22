@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New form of 51% attack via lightning's revocation system possible?</title>
+  <updated>2023-05-24T21:50:21.534234+00:00</updated>
+  <author>
+    <name>Christian Decker 2018-03-13 14:55:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New form of 51% attack via lightning's revocation system possible?</title>
+    <updated>2023-05-24T21:50:21.534234+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-March/001081.html" rel="alternate"/>
+    <summary>A Lightning developer, Rene Pickhardt, has raised concerns regarding a new form of 51% attack that could be more harmful than a successful 51% attack on Bitcoin. The new attack is made possible due to the revocation system in its current form allowing an attacker to steal an arbitrary amount of funds as long as they have enough payment channels with enough balance open. If a 51% attacker secretly mines enough blocks after fraudulently spending old commitment transactions and no one sees it during the to_self_delay period, the commitment transactions may have been spent. The attacker keeps track of her revocable commitment transactions in which the balance is mostly on the attackers side. Once the attacker knows enough of these commitments, the attack is executed by the attacker secretly mining on her own but not broadcasting any successfully mined block. Since the attacker has 51% of the hash power, she will most likely be faster than the network to mine the 72 blocks of the safety period in which fraudulent commitment transactions could be revoked. The attacker spends all the fraudulent (old) commitment transactions in the first block of her secret mining endeavor while simultaneously spending her own funds of her payment channels on decentralized exchanges for any other cryptocurrency. As soon as the attacker has mined enough blocks that the commitment transactions cannot be revoked, she broadcasts her secretly mined blockchain, which will be accepted by the network as it is the longest chain. Since according to the spec channels should never be balanced worse than 99% to 1%, the attacker could steal up to 99% of all the Bitcoins allocated in the sum of all payment channels the attacker was connected to. This amount could obviously be way higher than just double spending her own funds. The attack would be interesting in particular for the power nodes created by the Barabasi-Albert model of lnd's autopilot. There is currently no reasonable way of preventing this form of a 51% attack other than creating payment channels that don't offer the possibility of revocation. However, it is important to note that not having a participant in the network that can 51% attack over a prolonged period is one of the base assumptions in Lightning. These attacks are deadly to all blockchains, and Lightning is certainly no different in that regard.</summary>
+    <published>2018-03-13T14:55:10+00:00</published>
+  </entry>
+</feed>

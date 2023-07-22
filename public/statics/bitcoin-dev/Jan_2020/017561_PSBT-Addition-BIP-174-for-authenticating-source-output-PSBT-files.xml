@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PSBT Addition (BIP 174) for authenticating source/output PSBT files</title>
+  <updated>2023-05-20T21:36:51.150160+00:00</updated>
+  <author>
+    <name>Andrew Chow 2020-01-13 06:39:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PSBT Addition (BIP 174) for authenticating source/output PSBT files</title>
+    <updated>2023-05-20T21:36:51.150160+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-January/017561.html" rel="alternate"/>
+    <summary>In a bitcoin-dev mailing list, Andrew Poelstra argues against including MiTM protection within the partially signed bitcoin transaction (PSBT) structure as it is largely unnecessary and would add complexity to PSBT processing. He states that if there is an attacker who can modify the PSBT, they can just modify the result of the signed PSBT to drop the auth signatures. Instead, he suggests verifying the signatures of the inputs for any inputs with signatures. If MiTM protection is desired, it should be done with out-of-band communication such as PGP signing the PSBT and sending the signature along separately.Dmitry Petukhov responds by saying that he is not sure this task should be done with data embedded in the PSBT itself but rather in a container that includes PSBT and authentication information. He notes that authenticating the contents of PSBT is independent of the signing action as PSBT might be altered on the path from creator to signer. He suggests having participants work from the same PSBT file if they all receive the same PSBT at the start and checking the signature by that authority. In addition, he argues against adding higher-level structure to PSBT for the reasons that he does not find strong enough for the amount of complexity added.Andrew Poelstra later suggests getting two officially-assigned BIP-174 key numbers assigned for two signatures and then adding them to Coldcard's firmware immediately. However, Dmitry Petukhov thinks that it is unnecessary to wait for officially-assigned key numbers and suggests implementing the envisioned scheme with proprietary keys, documenting and promoting it.</summary>
+    <published>2020-01-13T06:39:28+00:00</published>
+  </entry>
+</feed>

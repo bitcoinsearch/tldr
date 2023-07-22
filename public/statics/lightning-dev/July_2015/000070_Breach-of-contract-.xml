@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Breach of contract?</title>
+  <updated>2023-05-23T18:41:59.103547+00:00</updated>
+  <author>
+    <name>Joseph Poon 2015-07-27 19:37:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Breach of contract?</title>
+    <updated>2023-05-23T18:41:59.103547+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-July/000070.html" rel="alternate"/>
+    <summary>The email conversation discusses the issue of broadcasting older commitments and stealing the HTLC payout, and proposes a solution to mitigate the risk. The proposed solution involves having some funds in reserve available on one's own channel balance to ensure honesty and making sure that the total value of the HTLCs must be below one's own reserve balance for both parties. The reserve balance must never be used. The email example shows a valid HTLC, where Alice and Bob have a channel with the latest commitment: 0.49 to Alice (0.02 in permanent reserve) and 0.50 to Bob (0.02 in permanent reserve), and 0.01 HTLC Alice to Bob. The sum of all HTLCs going from Alice to Bob must be at or below the 0.02 limit at all times before closing out the channel. This ensures that if Alice broadcasts an old commitment, Bob is assured that the balance of the HTLC will be at or below 0.02.The proposed solution works better with dual-funder, and to fund it using single-funder requires very shallow rebalancing of funding for symmetric trust. There are some reservations for models which have funds in permanent reserve, but this model is a fairly good stop-gap before a real malleability fix. Finally, the email also suggests that to maximize fun under this model to mitigate when a counterparty is a jerk, one should always make sure the amount in permanent reserve is always above (not equal to) the value encumbered in HTLCs.</summary>
+    <published>2015-07-27T19:37:57+00:00</published>
+  </entry>
+</feed>

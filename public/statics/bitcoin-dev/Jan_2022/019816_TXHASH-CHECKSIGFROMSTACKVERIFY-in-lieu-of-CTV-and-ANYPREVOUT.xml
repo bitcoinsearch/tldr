@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+  <updated>2023-06-15T15:40:13.036409+00:00</updated>
+  <author>
+    <name>James Lu 2022-01-27 04:20:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+    <updated>2023-06-15T15:40:13.036409+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-January/019816.html" rel="alternate"/>
+    <summary>The email thread on the bitcoin-dev mailing list discussed the relationship between CTV and ANYPREVOUT proposals, which allow for programmatic solutions from different pieces. Jeremy Rubin and Russell O'Connor proposed an alternative approach using OP_TXHASH and OP_CHECKSIGFROMSTACKVERIFY. Jeremy had concerns about the number of flags involved and the potential for quadratic hashing bugs with flexible hashing. He advocated for CTV as a first step due to its pragmatic engineering and availability timeline reasons but acknowledged that OP_TXHASH is an acceptable theoretical approach and may be useful in the future. Russell outlined the similarities and differences between CTV and ANYPREVOUT and proposed decomposing their operations into primitive pieces and reassembling them programmatically using OP_TXHASH and OP_CHECKSIGFROMSTACKVERIFY. This approach would allow for more applications with fewer op codes. However, this proposal has some caveats, such as the higher cost of simulating CTV with ANYPREVOUT and the potential for quadratic hashing bugs with flexible hashing.The email also discusses how future opcodes such as CAT or rolling SHA256 opcodes might interact with these proposals. The CHECKSIGFROMSTACKVERIFY opcode could verify signatures on programmatically assembled messages with CAT or rolling SHA256 opcodes. In combination with multiple calls to TXHASH, these opcodes could create signatures that commit to complex subsets of transaction data. The email suggests that new opcodes may obsolete TXHASH if they push parts of the transaction data direction onto the stack. However, given that TXHASH can compactly create a hash of large portions of transaction data, it seems unlikely that TXHASH would fall into disuse.The implementation of CTV and ANYPREVOUT proposals was also discussed in the email. While CTV is compatible with NOP, TXHASH can only be implemented within Tapscript and is not amenable to extending the set of txflags at a later date. However, this proposal doesn't preclude the possibility of having CTV added to legacy script while having TXHASH added to Tapscript. A robust set of TXHASH flags can mitigate difficulties with upgrading TXHASH. Finally, the email suggests that a combination of TXHASH and transaction introspection opcodes can be used to build "subtractive covenants". These covenants push all the parts of the transaction data that should remain free onto the stack, and use rolling SHA256 opcodes starting from a fixed midstate that commits to a prefix of the transaction hash data.</summary>
+    <published>2022-01-27T04:20:40+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Multi party Schnorr Rust implementation</title>
+  <updated>2023-05-20T18:28:03.565397+00:00</updated>
+  <author>
+    <name>Anthony Towns 2018-11-28 10:49:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Multi party Schnorr Rust implementation</title>
+    <updated>2023-05-20T18:28:03.565397+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-November/016514.html" rel="alternate"/>
+    <summary>In a discussion on the bitcoin-dev mailing list, a user asked for non-interactive threshold signatures that are more suitable for air-gapped use cases. In response to this, another user suggested a workaround by "batching" signing requests. To do this, one doesn't strictly need deterministic nonces, but rather has to ensure that the same nonce is never used with a different message. This can be achieved by keeping some state instead of generating r=H(p,m) based on the message being signed and your private key. The process involves four phases. In phase 1, secret nonces r1..r1024 are produced, and R1..R1024 are calculated. H(R1)..H(R1024) is then shared. In phase 2, other parties' hashes are stored (as H1..H1024), and R1..R1024 is shared. In phase 3, received nonces are checked to match (i.e., H(R1)=H1, etc.), and in phase 4, a request to sign msg m, with nonce n is made. If nonce n has already been used, the signing process is aborted. The user then marks the nonce n as having been used, looks up other signer's nonces n and sums them to get R', calculates s = rn + H(R',P',m)*p and shares s.This process can be combined so that when a signing request is received, the user checks H(R4) = previously received "H(R4)", calculates R4' by summing up the user's and everyone else's R4s, bumps the state to n=5, and does the signature. Then sends sig=(s,R4), R5, H(R6). This lets the user have an untrusted app that coordinates and shares nonces and nonce-hashes, and gets all the needed air-gapped communication in a single round. It is almost as good as true non-interactivity if the signing hardware is capable of securely storing (and updating) a few kB of state.</summary>
+    <published>2018-11-28T10:49:46+00:00</published>
+  </entry>
+</feed>

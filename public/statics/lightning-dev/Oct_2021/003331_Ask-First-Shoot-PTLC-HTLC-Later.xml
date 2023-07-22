@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Ask First, Shoot (PTLC/HTLC) Later</title>
+  <updated>2023-06-03T06:04:10.467178+00:00</updated>
+  <author>
+    <name>Joost Jager 2021-10-21 07:28:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Ask First, Shoot (PTLC/HTLC) Later</title>
+    <updated>2023-06-03T06:04:10.467178+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-October/003331.html" rel="alternate"/>
+    <summary>The lightning-dev mailing list discussed a potential improvement to the Lightning Network's payment latency. The proposal suggests that instead of shooting an HTLC first and then asking whether it can be resolved, nodes will ask first before sending the actual transaction. This could reduce multiple round trips per hop in case of a failure along a route, with a single large round trip from the payer to the failure point. However, one concern raised was that this approach may become a potential DoS vector as any node could trigger network activity by asking random stuff of random nodes. To mitigate this, the proposal suggests making generating an onion costly but validating and decrypting it cheap. The sender would use an encryption scheme that is more computationally expensive to encrypt but cheap to decrypt or require proof-of-work on the onion, where each unwrapped onion layer must have a hash that is less than some threshold. Additionally, nodes could upgrade to accept "no" from any node along the path, but only accepting "yes" from the actual payee. Another suggestion was to let senders attach a random identifier to a probe. For multi-part probes, each probe would carry the same identifier. Routing nodes would deduct the outstanding probe amounts from the available balance, but only for probes within the same group (same id). This way, each probe(group) is isolated from everything else that is going on.  The proposal could potentially improve payment latency, and since failures due to a node or channel failing along the way are lessened compared to today, charging for failed actual HTLCs could be more acceptable. However, the proposal requires a whole-network upgrade, and intermediate nodes must upgrade as well.</summary>
+    <published>2021-10-21T07:28:42+00:00</published>
+  </entry>
+</feed>

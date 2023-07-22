@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP Proposal: The Great Consensus Cleanup</title>
+  <updated>2023-05-20T19:53:00.969611+00:00</updated>
+  <author>
+    <name>Matt Corallo 2019-03-07 19:44:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP Proposal: The Great Consensus Cleanup</title>
+    <updated>2023-05-20T19:53:00.969611+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-March/016721.html" rel="alternate"/>
+    <summary>In an email exchange between Luke Dashjr and Matt Corallo, Matt requested that the BIP editor assign a BIP number. Luke suggested that a Backward Compatibility section be included and that a bips repo PR should be opened after discussion on the ML. Matt proposed making non-standard signature hash types invalid in order to limit the number of potential signature hashes which could be used per-input (allowing us to cache them to avoid re-calculation), while also suggesting caching the just-before-the-last-byte sighash midstate and hashing only the last byte when checking signatures. In response, Luke sought clarity on what was being removed with regards to the spec change. Luke further explained that fixing the timewarp vulnerability is important as the only potential use for exploiting it would be either to inflate the currency supply maliciously by miners or forking in what amounts to extension blocks. Although extension blocks are typically a bad choice, the arguments in favor of timewarp-based inter-block-time reductions apply equally to extension blocks. Transactions smaller than 65 bytes when serialized without witness data are now invalid and their rationale will include reasons why the size doesn't count the witness. It is strongly recommended that SPV clients enforce the new nTime rules to avoid following any potential forks which occur as miners today only enforce increasing timestamps against the median-timestamp-of-last-11-blocks.Several early-stage proposals, including Schnorr signatures, Taproot, Graftroot, and MAST may affect the execution of scripts, but they are not expected to have any interaction with the changes in this BIP since they are likely to only apply to SegWit scripts. Thus, the sighash type byte rule defined above only applies to current signature-checking opcodes, as any new signature-checking is likely to be implemented via the introduction of new opcodes.</summary>
+    <published>2019-03-07T19:44:23+00:00</published>
+  </entry>
+</feed>

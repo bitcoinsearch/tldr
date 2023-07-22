@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Taro: A Taproot Asset Representation Overlay</title>
+  <updated>2023-06-03T08:13:42.348089+00:00</updated>
+  <author>
+    <name>Hiroki Gondo 2022-10-07 09:33:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Taro: A Taproot Asset Representation Overlay</title>
+    <updated>2023-06-03T08:13:42.348089+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-October/003708.html" rel="alternate"/>
+    <summary>In an email to Laoluwa Osuntokun, Hiroki Gondo expressed concerns about the verification of the provenance of the asset UTXOs in Taro's specs. He explained that it is necessary to verify the state transitions of all transaction graphs without gaps from the genesis transaction of the asset to the current location to ensure that a UTXO has not changed at any point in the transaction. The absence of this validation implies that asset inflation (double spending) is possible. UTXOs in the input asset tree must have its inclusion proof in the input asset tree and its inclusion and non-inclusion proofs in each of the output asset trees directly proving that it hasn't changed. However, generating these proofs for every unchanging UTXO present in the input asset tree when a transaction occurs may not be practical. Instead, it's better to set a constraint that no part of the asset tree except the explicitly changed UTXOs should change and verify that.Laoluwa had shared a new protocol he has been working on over the past few months called Taro. Taro is a Taproot Asset Representation Overlay that allows the issuance of normal and collectible assets on the main Bitcoin chain. Taro uses the Taproot script tree to commit extra asset structured meta data based on a hybrid merkle tree called Merkle Sum Sparse Merkle Tree (MS-SMT). An MS-SMT combines the properties of a merkle sum tree with a sparse merkle tree enabling things like easily verifiable asset supply proofs and also efficient proofs of non-existence. Taro asset transfers are then embedded in a virtual/overlay transaction graph that uses a chain of asset witnesses to provably track the transfer of assets across taproot outputs. The Taro design supports integration with the Lightning Network (BOLTs) as the scripting system can emulate the existing HTLC structure, allowing for multi-hop transfers of Taro assets.</summary>
+    <published>2022-10-07T09:33:08+00:00</published>
+  </entry>
+</feed>

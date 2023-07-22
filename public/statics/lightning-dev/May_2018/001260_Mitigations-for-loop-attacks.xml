@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Mitigations for loop attacks</title>
+  <updated>2023-05-25T00:38:31.480168+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-05-09 06:50:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Mitigations for loop attacks</title>
+    <updated>2023-05-25T00:38:31.480168+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-May/001260.html" rel="alternate"/>
+    <summary>The Lightning Network has been looking for solutions to prevent opportunistic attackers from delaying payments. Jim Posen suggested three possible directions for solutions: protocol support for decrypting the onion route if the HTLC is kept in-flight for too long, requiring fees even if the payment fails as a cost to the attacker, and some sort of reputation system for nodes. Option one could be quite complex because the attacker can control multiple successive hops in the route and then keep the channel alive and try again. Option two only protects against the sender colluding with the receiver, but not where a routing node is opportunistically delaying payments. The models tried in Milan created an incentive to fail payments. Therefore, option three, which involves a reputation system for nodes, became Posen's preferred solution. Under this option, for each node that one has channels with, it only forwards payments through them if they have a good history; otherwise, it fails the payment. This type of solution fits best into the Lightning model of independent, linked channels where each node has private contracts with its direct peers. However, this solution has significant risks. If the system does not work perfectly, it creates an incentive to de-anonymize payments so you can determine which are likely to fail, and also means nodes are safest not forwarding payments, lest they ruin their reputation. Proving that you have committed to a particular HTLC in a channel is difficult due to dust HTLCs and partially-committed ones. To address these issues, we may need an OP_RETURN output, which is a merkle tree of trimmed HTLCs to cover the dust case. Furthermore, we may need to present a merkle tree of uncommitted HTLCs (limited, say, to 16) to prove that you committed to an HTLC, but the peer did not respond.</summary>
+    <published>2018-05-09T06:50:27+00:00</published>
+  </entry>
+</feed>

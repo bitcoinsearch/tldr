@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_CAT was Re: Continuing the discussion about noinput / anyprevout</title>
+  <updated>2023-06-02T20:44:09.132740+00:00</updated>
+  <author>
+    <name>Peter Todd 2019-10-06 09:12:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_CAT was Re: Continuing the discussion about noinput / anyprevout</title>
+    <updated>2023-06-02T20:44:09.132740+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-October/002210.html" rel="alternate"/>
+    <summary>In an email conversation, ZmnSCPxj and Peter Todd discussed the efficiency of OP_CAT compared to SHA256STREAM. ZmnSCPxj stated that theoretically OP_CAT is less efficient as it can have a degenerate case where new backing memory must be allocated elsewhere and the existing data copied resulting in possible O(n^2) behavior. However, every execution step in script evaluation has a maximum output size, and the number of steps is limited, so even in the worst-case scenario, the entire possible stack can be allocated upfront at relatively little cost. ZmnSCPxj also suggested that a sufficiently-limited maximum OP_CAT output would be helpful in reducing the worst-case behavior. However, 64 bytes feels too small for Merkle tree proofs due to the lack of typechecking. Instead, 256 bytes should be more than enough for even the most complex summed merkle tree with 512-byte hashes and full-sized sum commitments. This limit is still less than the proposed ~500byte limit.</summary>
+    <published>2019-10-06T09:12:21+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP proposal: Inhibiting a covert attack on the Bitcoin POW function</title>
+  <updated>2023-06-11T23:43:52.575559+00:00</updated>
+  <author>
+    <name>Jared Lee Richardson 2017-04-06 20:21:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP proposal: Inhibiting a covert attack on the Bitcoin POW function</title>
+    <updated>2023-06-11T23:43:52.575559+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/014043.html" rel="alternate"/>
+    <summary>The discussion revolves around an optimization technique to find Merkle roots in which the rightmost 32 bits are identical, also known as partial hash collisions. The approach involves computing as many Merkle root hashes as possible and taking the top level of the Merkle tree to collect a set of left branches and right branches that can be independently manipulated. The left branch can easily be changed by modifying the extranonce in the coinbase transaction, but the right branch would need to be modified by changing one of the transactions or by changing the number of transactions in the right branch. It is suggested that this optimization could be used with non-stratum mining farms.A sqrt number of candidates of the left side of the hash tree can be computed by grinding the coinbase extra-nonce. Similarly, an additional sqrt number of candidates of the right side of the tree can be generated using transaction permutation or substitution of a small number of transactions. All combinations of the left and right side can be combined with only a single hashing operation, substantially reducing tree-related overhead. With this final optimization, finding a 4-way collision with a moderate amount of memory requires ~2^24 hashing operations instead of the &gt;2^28 operations required for extra-nonce grinding, which erodes the attack's benefit.It is noted that Stratum mining protocol does not allow the client to supply any modifications to the merkle tree (including the right side) back to the stratum server. Therefore, any implementation of this optimization would need to use a protocol other than stratum, like getblocktemplate. Consumer-grade hardware defaults to stratum-only operation, and no hardware has been seen or heard of running more efficiently using getblocktemplate.It is suggested that some large private farms have deployed a special system for solo mining that uses this optimization. However, this optimization would require significant retooling among pools and probably a redesign of their core algorithms to help discover and share these partial collisions more frequently. The discussion also examines a workable approach in large mining farms where the central server calculates the left and right merkle treeset to be combined and assigns each miner a unique workspace within those combinatorics. The miners compute each hash in their workspace and shard the results within themselves according to the last 16 bits, allowing the collisions to be found quickly.Finally, the discussion highlights the need to know if this optimization is currently being used or not and how widely it is being employed. The discussion concludes by asking whether there are any ways to perform this optimization via stratum, and if not, whether there is any evidence that this optimization is being used by private solo mining farms.</summary>
+    <published>2017-04-06T20:21:12+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposed additional options for pruned nodes</title>
+  <updated>2023-06-09T20:52:48.759708+00:00</updated>
+  <author>
+    <name>Tier Nolan 2015-05-12 18:23:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposed additional options for pruned nodes</title>
+    <updated>2023-06-09T20:52:48.759708+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/008107.html" rel="alternate"/>
+    <summary>Peter Todd proposed the idea of partial archival nodes that can store a subset of blocks so that collectively, the entire blockchain would be available even if no single node had the complete chain. To mitigate fingerprint attacks, a compact way of describing which blocks are stored is necessary. A node could indicate which blocks it stores with service bits by picking two numbers: W (window), a power of 2, and P (position), a random value less than W. The node would store all blocks with a height of P mod W. This approach has the benefit of allowing a node to throw away half of its data while still representing what is stored. It also increases the probability that at least someone has every block. If N nodes each store 1% of the blocks, then the odds of a block being stored is pow(0.99, N). For 1000 nodes, that gives odds of 1 in 23,164 that a block will be missing. Nodes could inform peers of their W and P parameters on connection through an amended version message or a "getparams" message. W could be encoded with 4 bits and P could be encoded with 16 bits, making 20 in total. As long as all of the 128 buckets are covered by some nodes, then all blocks are stored. With 1000 nodes, that gives odds of 0.6% that at least one bucket will be missed.</summary>
+    <published>2015-05-12T18:23:48+00:00</published>
+  </entry>
+</feed>

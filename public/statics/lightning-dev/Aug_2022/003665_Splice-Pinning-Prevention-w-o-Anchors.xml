@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Splice Pinning Prevention w/o Anchors</title>
+  <updated>2023-06-03T09:41:25.471074+00:00</updated>
+  <author>
+    <name>Dustin Dettmer 2022-08-09 20:14:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Splice Pinning Prevention w/o Anchors</title>
+    <updated>2023-06-03T09:41:25.471074+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-August/003665.html" rel="alternate"/>
+    <summary>The risk of mempool pinning with splices that allow arbitrary script and input inclusion has been raised by @crypto-iq and @roasbeef. This can be done by building a very large “junk” transaction that spends from an important pending one, which pushes transactions to the bottom of the priority list without a practical way of bumping it up. To mitigate this, anchor outputs were introduced to lightning to mitigate the junk pinning vector. However, splice transactions are susceptible to both junk and bulk pinning attacks. To mitigate these, every output included directly in a splice transaction must be a v0 P2SH witness script which begins with a minimum of `1 CSV` relative timelock. Moreover, every `tx_add_input` proposed by a peer must be included in the UTXO set, and a node must verify the presence of a proposed input before adding it to the splicing transaction. There are two side effects: 1) You cannot CPFP a splice transaction. All splices must be RBF’d to be fee-bumped. The interactive tx protocol already provides a protocol for initiating an RBF, which is re-used for splicing. 2) Arbitrary 3rd party scriptPubKeys are not permissible directly into the splice tx. In order for this to work, every output has to have a 1 block CSV. There are two output types to consider: new channel outpoints and arbitrary splice out funds. For arbitrary splice out, funds can be included in a “fan-out” transaction, where standard pay-to-address etc outputs can live. The output leading to the fan-out transaction will be a P2WSH that also begins with [OP_1, OP_CHECKSEQUENCEVERIFY] (referred to from here on as ‘1 CSV’). Each splice party should build a fan-out transaction for all arbitrary spliced outputs. Splice-in transactions will not require any fan-out children as long as all change goes into the channel outpoint. For new channel outpoints, the v0 witness script should be modified to start with [OP_1, OP_CHECKSEQUENCEVERIFY]. It needs to be the first item in the script to allow easy validation that it is used and not hidden in a false conditional. The interactive tx protocol changes mandate that `tx_add_output` must include the `witness_script` in the TLV. Upon receiving outputs, nodes must validate the script matches the script hash in the output, and that it begins with a minimum of 1 CSV.Finally, when this technique is used, one or two anchor outputs are added to purposely allow for CPFP fee bumping. But, it turns out, there is already a usable anchor in the original commitment transaction. The interactive tx protocol mandates that splice txs are RBF-enabled. Broadcast splice proposals can be replaced out for the original commitment transaction at any time. Since the original commitment transaction has existing anchors, these may be used to increase fees on a force close. This combined with every other output in the tree being locked behind a 1 CSV means the force close will always have top mempool priority, mitigating the “output junk” style pin.</summary>
+    <published>2022-08-09T20:14:59+00:00</published>
+  </entry>
+</feed>

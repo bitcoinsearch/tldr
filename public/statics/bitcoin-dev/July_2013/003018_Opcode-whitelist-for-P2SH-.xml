@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Opcode whitelist for P2SH?</title>
+  <updated>2023-06-07T14:44:44.372109+00:00</updated>
+  <author>
+    <name>Peter Todd 2013-07-29 08:13:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Opcode whitelist for P2SH?</title>
+    <updated>2023-06-07T14:44:44.372109+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-July/003018.html" rel="alternate"/>
+    <summary>The email exchange between John Dillon and Peter Todd discusses the potential uses of non-standard transactions to implement oracles and one-time-password protection of wallet funds. While implementing the wallet fund case as a single standard type is possible, the oracle case would be more useful with arbitrary rules. The proposal also suggests creating a whitelist for specific opcodes that would apply to scripts serialized using P2SH, while retaining the existing standard whitelist for scriptPubKeys. However, it is important to retain the IsStandard() check, or more specifically, the AreInputsStandard() check, if a P2SH serialized script follows a standard form. This is because transaction mutability can affect unconfirmed transaction chains in flight. The proposal suggests considering transactions non-standard, or not allowed at all in a future soft-fork, if at the end of execution there is more than one stack item left. A opcode whitelist should probably do this. CHECKMULTISIG isn't helped here because the value really is ignored, so a soft-fork to force it always to be zero might not be a bad idea, though it's far from the only example of mutability. The proposal asks for an example where imposing a one-stack-item-at-the-end-of-execution rule causes problems. In general, the email suggests that Bitcoin should have been designed so that CHECKSIG signed hashes of scriptPubKeys instead of txid:vout outputs so that malleability wouldn't affect the validity of a signature. The proposal acknowledges that this would mean that signatures could be reused if scriptPubKeys were reused, but address re-use is a bad thing anyway. The email concludes with the signature of Peter Todd.</summary>
+    <published>2013-07-29T08:13:55+00:00</published>
+  </entry>
+</feed>

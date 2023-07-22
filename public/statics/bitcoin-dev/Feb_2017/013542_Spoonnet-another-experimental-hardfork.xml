@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Spoonnet: another experimental hardfork</title>
+  <updated>2023-05-20T00:52:03.348720+00:00</updated>
+  <author>
+    <name>Johnson Lau 2017-02-06 12:39:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Spoonnet: another experimental hardfork</title>
+    <updated>2023-05-20T00:52:03.348720+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-February/013542.html" rel="alternate"/>
+    <summary>Bitcoin developers have proposed a hardfork to increase the block weight limit and make changes to the transaction and coinbase formats. The current block weight limit will be raised from 4MB to 16MB, with growth dependent on median-time-past rather than the actual hardfork time. The maximum serialized size of transactions will also increase from 2MB to between 2.5MB and 8MB over the next eight years.Transaction weight will be calculated using one of four metrics: the total serialized size, adjusted size, number of signature operations, or SigHashSize. A new coinbase format has been defined that allows for more inputs and requires a valid scriptSig and/or witness for spending. The witness merkle root will become mandatory and put in the extended header 2, not as an OP_RETURN output in the coinbase tx. Other consensus changes include BIP9 ignoring the sign bit.The proposal for a new Bitcoin block format includes several features such as a fixed starting time, backward compatibility with existing light wallets, dedicated space for miners to put anything they want, and small header space for miners to include non-consensus enforced bitcoin related data. The extended header is located at the witness field of the coinbase transaction and requires exactly three witness items. The hardfork signaling block is a block with the sign bit of the header nVersion is set and if the median-time-past of the past 11 blocks is smaller than the HardForkTime (exact time to be determined), a hardfork signaling block is invalid. The main header commitment is H(Header1|H(H(Header2)|H(Header3))) and to place the ext header, segwit becomes mandatory after hardfork. A backdoor softfork is defined to relax the size limit of Header 2 and Header 3. Anti-tx-replay is implemented by making a tx invalid if the highest nVersion byte is not zero, and the network version bit is not set. Sighash O(n^2) protection for legacy (non-segwit) outputs is included and an optional anti-transaction replay feature is also added.There are several potential second stage changes that could be made to fix issues such as SHA256 shortcut like ASICBoost and the block withholding attack. These changes would require firmware upgrades for all existing miners and light wallet upgrades. The proposal suggests waiting at least two years after the initial hardfork activation before implementing these second stage changes. An experimental implementation of these changes can be found at https://github.com/jl2012/bitcoin/tree/spoonnet1, but it is not recommended for production use.</summary>
+    <published>2017-02-06T12:39:21+00:00</published>
+  </entry>
+</feed>

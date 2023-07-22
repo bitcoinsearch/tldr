@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP draft - Auxiliary Header Format</title>
+  <updated>2023-06-09T14:13:07.323603+00:00</updated>
+  <author>
+    <name>Tier Nolan 2014-11-10 00:39:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP draft - Auxiliary Header Format</title>
+    <updated>2023-06-09T14:13:07.323603+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-November/006907.html" rel="alternate"/>
+    <summary>Tier Nolan proposed a way to add auxiliary headers to Bitcoin in a bandwidth efficient manner through a soft fork. The draft BIP involves using the last transaction in the block to store the hash of the auxiliary header, with an overhead of only around 104 bytes per header. However, there is a tradeoff between overhead and delayed transactions as 12.5% transactions may be delayed to the next block. To improve this, padding transactions could be added. Creating "seed" transactions is also an implementation headache as each node needs control over a UTXO to create the final transaction in the block with the auxiliary header digest. This means that it is not possible for a node to simply start mining without somehow being given the private key, which can cause issues if two nodes are given the same key by accident.There are different approaches to address these issues. One approach would involve adding a transaction with a few thousand outputs into the blockchain, with the signatures for locktime restricted transactions hard-coded into the software. However, this would require a large table of signatures and trust in the person who generates the signature list not to spend the outputs early. On the other end of the scale, mining nodes would need to include wallets to manage their UTXO entry, allowing them to split a zero value output into many outputs if they wish. A middle ground would be for nodes to detect special transactions and use them, such as timelocked transactions that pay to a particular address but are timelocked, with the private key for the output known. However, miners who mine version 2 blocks wouldn't be able to spend them early.</summary>
+    <published>2014-11-10T00:39:20+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Committing to extra block data/a better merge-mine standard</title>
+  <updated>2023-06-07T19:17:21.868003+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2013-11-04 19:11:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Committing to extra block data/a better merge-mine standard</title>
+    <updated>2023-06-07T19:17:21.868003+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-November/003558.html" rel="alternate"/>
+    <summary>In this email exchange, Peter Todd proposes defining a standard for using the last txout so midstate compression can be applied in the future. The proposed standard involves generating a random 128-bit UUID for each thing one might want to commit, such as a merge-mined coin, a p2pool share, or a UTXO commitment. The bits of the UUID are then interpreted as an allowed path: 0 = left, 1 = right, from the top of the tree. When building the tree, everything that is going to be committed to uses its allowed path, resulting in a jagged tree. Validating that some given data was committed properly is simple and easy: just check the path and check that the directions from the top of the tree followed the spec.Mark responds by suggesting an authenticated prefix tree, where composable/commutative properties are not needed, so the path validation, traversal, and proof size can be smaller by using level compression. Mark had previously proposed using a hash256-to-UUID mechanism for this purpose but is now leaning towards simply using the hash of the genesis block directly to identify aux chains since level compression will allow longer keys with the same path length. Mark also mentions that he's in the middle of writing BIPs on this topic among his other tasks. Essentially, Mark's proposal is the same as Peter Todd's ("OP_RETURN" for the last output), except keys don't necessarily have to be UUIDs. Finally, Mark offers to make finishing this a higher priority if there is general interest.</summary>
+    <published>2013-11-04T19:11:34+00:00</published>
+  </entry>
+</feed>

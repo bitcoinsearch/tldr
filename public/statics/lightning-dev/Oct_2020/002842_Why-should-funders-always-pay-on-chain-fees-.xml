@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Why should funders always pay on-chain fees?</title>
+  <updated>2023-06-03T02:18:27.088497+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2020-10-14 08:24:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Why should funders always pay on-chain fees?</title>
+    <updated>2023-06-03T02:18:27.088497+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002842.html" rel="alternate"/>
+    <summary>Bastien Teinturier initiated a discussion on the Lightning-dev mailing list about whether fundees should be responsible for paying a portion of the commit-tx on-chain fees. The "funder pays all the commit tx fees" rule exists solely for simplicity, but as time goes by and both peers earn value from this channel, this rule becomes questionable. Routing nodes may be at risk when they receive HTLCs. Thus, Bastien suggests nodes pay for the on-chain fees of the HTLCs they offer while they're pending in the commit-tx, regardless of whether they're funder or fundee. The simplest way to do this would be to deduce the HTLC cost (172 * feerate) from the offerer's main output (instead of the funder's main output, while keeping the base commit tx weight paid by the funder). A more extreme proposal would be to tie the total commit-tx fee to the channel usage. This model uses the on-chain fee as collateral for usage of the channel. If Alice wants to forward HTLCs through this channel, she should be taking on some of the associated risk, not Bob. Bob will be taking the same risk downstream if he chooses to forward.Bastien believes it also forces the fundee to care about on-chain feerates, which is a healthy incentive. It may create a feedback loop between on-chain feerates and routing fees, which he believes is also a good long-term thing. However, there may be negative side-effects that he is missing, making this a fragile game of incentives.Laolu Olaoluwa Osuntokun believes that simplicity can go a long way when doing anything that involves multi-party on-chain fee negotiating/verification/enforcement. He thinks that even with HTLCs, they could only be signed at 1 sat/byte from the funder's perspective, once again putting the burden on the broadcaster/confirmer to make up the difference. Anchor commitments in their final form (fixed fee rate on commitment transaction, only "emergency" use of update_fee) significantly simplifies things as it shifts from "funding pay fees", to "broadcaster/confirmer pays fees".</summary>
+    <published>2020-10-14T08:24:49+00:00</published>
+  </entry>
+</feed>

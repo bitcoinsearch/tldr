@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Transaction signalling</title>
+  <updated>2023-06-12T00:27:23.897802+00:00</updated>
+  <author>
+    <name>Erik Aronesty 2017-05-03 19:41:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Transaction signalling</title>
+    <updated>2023-06-12T00:27:23.897802+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-May/014251.html" rel="alternate"/>
+    <summary>BIP XXXX proposes a change to the usage of the 'OP_RETURN' script opcode in Bitcoin transactions, allowing multiple changes (features) to be deployed in parallel. The proposal relies on interpreting the output field as a bit vector, where each bit can be used to track an independent change. BIP9 introduced a mechanism for doing soft-forking changes relying on measuring miner support indicated by version bits in block headers. However, any change which may conflict with miners but is acceptable to users may be difficult to deploy. BIP XXXX can be used in conjunction with BIP 9 to more safely deploy soft-forking changes that do not require a supermajority of miners but do require a large percentage of active users. Alternatively, BIP XXXX signalling can be used to gauge user support for "features" - independent of its use as a direct deployment mechanism. Each "feature" is specified by the same set of per-chain parameters as in BIP9, with the same usage and meaning (name, bit, starttime and timeout). If the outputs contain a zero valued OP_RETURN, and the length of the key is 2 bytes, and if the first byte (prefix) of that OP_RETURN's key parameter is 0x012, then the remaining byte is to be interpreted as an 8-bit little-endian integer, and bits are selected within this integer as values.The alternative to flag-day deployment can cause issues for users of a feature that has failed to achieve adequate miner support. BIP XXXX proposes a solution to this problem. However, using addresses creates vulnerability, so an OP_RETURN signal seems the safest way to go for UA signalling. Nodes can activate features based on an "economic majority" defined in this way. The best field to signal would be the output script, which is specified by the recipient of the funds, i.e., the current owner, and is already stored in the UTXO, so a single pass can tally up the votes. The opt-in should make sure that the majority of votes are actually voluntary votes, and not just users that randomly select a pubkey/pubkeyhash, and can be adjusted as desired, though higher values require more grinding on behalf of the users.</summary>
+    <published>2017-05-03T19:41:07+00:00</published>
+  </entry>
+</feed>

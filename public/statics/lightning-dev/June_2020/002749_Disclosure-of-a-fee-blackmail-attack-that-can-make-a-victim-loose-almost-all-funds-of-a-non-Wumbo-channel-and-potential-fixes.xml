@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Disclosure of a fee blackmail attack that can make a victim loose almost all funds of a non Wumbo channel	and potential fixes</title>
+  <updated>2023-06-03T01:44:59.144299+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-06-21 23:30:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Disclosure of a fee blackmail attack that can make a victim loose almost all funds of a non Wumbo channel	and potential fixes</title>
+    <updated>2023-06-03T01:44:59.144299+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-June/002749.html" rel="alternate"/>
+    <summary>The Lightning HTLCs use absolute timelocks, and the timelocks are pre-arranged by the original sender. A forwarding node has to ensure that the outgoing HTLC timeout is respected, or else it could lose funds. If we cannot use relative timelocks in the timelock branches of the HTLCs because we are coordinating possibly up to 20 different nodes, and we do not want to leak the entire route to any of the intermediate nodes, so everyone has to use the same clock. ZmnSCPxj suggested that HTLC D could have a relative timelock of 10 blocks instead of 1 using CTV deferral to get independent HTLC relative timelocks start points per output. But all that means is that if the timelock of D is at height L, then the forwarder has to ensure that the commitment transaction appears on-chain no later than height L - 10. In current C-Lightning, for a timelock in my favor at height L, I have to broadcast the commitment transaction at time L - 1 so it goes into block L and I can claim it. Thus, I have the option to publish from now up to L - 1. With a further delay of 10 on the HTLC tx D, I now only have the option to publish from now up to L - 11, thus I have less leeway in when I can publish the commitment tx. The fund-security of the forwarding node is based on the absolute timelock of every HTLC it offers, so the timelock is an absolute bound on whatever techniques I might use to reduce fees.The attacker can arrange to have the 400 low-value HTLCs have the same timelock L. So even if the `| ..... |` is a tree of CTVs, the entire tree needs to be published at the same time so that the final HTLCs appear at timelock L and the funds can be reclaimed. Therefore, it is better to just rate-limit simultaneous HTLCs, to limit what can be stolen. A better solution might be to allow only one HTLC at each absolute timelock, and use a single CTV tree, with one leaf for each of the absolute timelocks. Such a singly-linked list would take up more absolute block space, incidentally, and makes high-fee spikes more likely.</summary>
+    <published>2020-06-21T23:30:45+00:00</published>
+  </entry>
+</feed>

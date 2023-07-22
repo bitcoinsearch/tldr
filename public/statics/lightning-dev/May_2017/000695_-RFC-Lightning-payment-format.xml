@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] Lightning payment format</title>
+  <updated>2023-05-24T01:16:45.380247+00:00</updated>
+  <author>
+    <name>Rusty Russell 2017-05-04 04:42:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] Lightning payment format</title>
+    <updated>2023-05-24T01:16:45.380247+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2017-May/000695.html" rel="alternate"/>
+    <summary>The conversation between Pierre and Rusty Russell centers around optimizing lightning network payments. Pierre raises the point that users cannot verify the validity of a signature without first having a mapping. He also mentions that optimizing for size may not be as important since the payreqs are already long. However, he is hesitant to replace the chanID with the compressed serialized public key due to concerns about network propagation and future visibility.Rusty Russell addresses this issue by dropping the channel ID and implementing key recovery instead. He adds an additional byte to identify which key to recover, allowing users to verify signatures without an external mapping. The signature is over human-readable parts and data in 5-bit bytes, with tagged parts having five bits. It includes a recovery byte of above 520 bits.Moving on to the code script for generating lightning network invoices, the lightning-address.py file is used to encode transactions into bech32 format. Invoices for $24 USD are generated, including ten items hashed together. The first invoice has no fallback address, while the second invoice has a fallback address in case the lightning network invoice fails. The third invoice includes extra routing information to reach node 029e03a901b85534ff1e92c43c74431f7ce72046060fcf7a95c37e148f78c77255.The lightning-address.py script uses secp256k1 for private key signing, with HRP containing ln plus options.currency plus amount, and the payment hash in hexadecimal format. A private key in hexadecimal format is also needed for signing the transaction. The script has two arguments: parser_enc and parser_dec. The parser_enc includes five arguments: description-hashed for the item list, amount for the amount of the transaction in millisatoshi, paymenthash for the payment hash in hex, privkey for the private key in hex, and func for the function to execute. The parser_dec includes three arguments: bolt11 for the encoded invoice string, privkey for the private key in hex, and func for the function to execute.</summary>
+    <published>2017-05-04T04:42:51+00:00</published>
+  </entry>
+</feed>

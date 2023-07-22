@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Thoughts on Improving MPP</title>
+  <updated>2023-06-03T01:54:55.133482+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-08-12 18:20:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Thoughts on Improving MPP</title>
+    <updated>2023-06-03T01:54:55.133482+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-August/002776.html" rel="alternate"/>
+    <summary>The C-Lightning MPP implementation is facing a limit on the number of HTLCs a channel can have. The initial consideration was to count the number of channels with outgoing capacity and allocate 10 HTLCs for every channel. However, the incoming number-of-HTLCs limit of the payee was neglected, which resulted in overloading local connectivity. The use of the same failure code temporary_channel_failure for hitting both msat capacity and number of HTLCs limits exacerbated the issue. To fix this, it is suggested to count the number of channels the payee has and use it as the basis of the number of HTLCs the receiver can get, and get the lower of this and the outgoing channels of the payer. Considering the number of channels of both the payer and the payee may solve the issue, and limiting based on the smaller of these two numbers may be sufficient.</summary>
+    <published>2020-08-12T18:20:13+00:00</published>
+  </entry>
+</feed>

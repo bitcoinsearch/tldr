@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>An alternative: OP_CAT &amp; OP_CHECKSIGFROMSTACK</title>
+  <updated>2023-06-13T18:58:17.946783+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-05-24 03:51:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>An alternative: OP_CAT &amp; OP_CHECKSIGFROMSTACK</title>
+    <updated>2023-06-13T18:58:17.946783+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-May/016966.html" rel="alternate"/>
+    <summary>Russell O'Connor, a Bitcoin developer, has proposed that Bitcoin Script and language features should be designed to provide general purpose tools rather than specific features. He suggests implementing OP_CAT and OP_CHECKSIGFROMSTACKVERIFY instead of the recently proposed SIGHASH_ANYPREVOUT and OP_CHECKOUTPUTHASHVERIFY, which he believes have limited use cases and complicate the interpretation of Bitcoin operations. OP_CAT concatenates two byte arrays off the stack, while OP_CHECKSIGFROMSTACKVERIFY verifies a bip-schnorr signature on the SHA256 hash of a message popped off the stack along with a pubkey and signature. These two operations enable various applications, including oracle signature verification, amortized secure multiparty computations, and transaction introspection. To use these two operations for transaction introspection, the transaction must be split into three parts, with those parts provided in the witness stack: "data before the field", then "the field", then "data after the field". In addition, a signature for the transaction is required, along with normal `OP_CHECKSIGVERIFY` to ensure that the signature signs the actual transaction. The message to be signed is equivalent to the sighash digest using `SIGHASH_ALL`, allowing SCRIPT to introspect any field of the transactions. By adding these operations, Russell believes that more specialized opcodes can be added in the future as optimizations for popular constructions.</summary>
+    <published>2019-05-24T03:51:13+00:00</published>
+  </entry>
+</feed>

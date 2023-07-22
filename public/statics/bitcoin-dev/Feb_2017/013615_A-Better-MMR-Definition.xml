@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Better MMR Definition</title>
+  <updated>2023-06-11T21:41:07.273439+00:00</updated>
+  <author>
+    <name>Peter Todd 2017-02-24 04:36:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Better MMR Definition</title>
+    <updated>2023-06-11T21:41:07.273439+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-February/013615.html" rel="alternate"/>
+    <summary>The discussion between Bram Cohen and Peter Todd focused on the UTXO commitments scheme that required random access. While the ordering is by the bits in the hash, technically it's a Patricia Trie that hashes together the txid and output number. The intention is to nail down a simple format and demonstrate good performance and leave those semantics to a higher layer. Uniformly distributed outpoints will be distributed in the set, and thus the access pattern of data in the set is uniform. Ten years from now, if for every 1 UTXO that corresponds to funds in someone's wallet that are likely to be spent, there are 2^12 = 4096 UTXO's that have been permanently lost and/or created in spam attacks and thus will never be spent. Lost UTXO's are also uniformly distributed. If a new block spends 2^12 = 4096 UTXO's, on average for each UTXO spent, one will have to update log2(4096) = 12 more digests than one would have had those "dead" UTXO's not existed. An insertion-ordered TXO commitment scheme works better because each new UTXO added to the data set goes in the same place - the end. So almost none of the existing data needs to be touched to add the new UTXOs. Equally, the hashing required for the new UTXO's can be done in an incremental fashion that's very L1/L2 cache friendly. Precisely because access patterns in TXO commitments are not uniform, we'll find that from an L1/L2/etc cache perspective alone, TXO commitments will result in better performance than UTXO commitments. Bitcoin's current design means a map of confirmed outpoints to TXO insertion order indexes is needed. However, it's not particularly hard to add that "metadata" to transactions on the P2P layer in the same way that segwit added witnesses to transactions without modifying how txids were calculated. Finally, note how this makes transactions smaller in many circumstances: it's just an 8-byte max index rather than a 40 byte outpoint.</summary>
+    <published>2017-02-24T04:36:13+00:00</published>
+  </entry>
+</feed>

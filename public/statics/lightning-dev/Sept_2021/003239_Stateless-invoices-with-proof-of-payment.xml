@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Stateless invoices with proof-of-payment</title>
+  <updated>2023-06-03T05:55:40.464359+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2021-09-21 11:40:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Stateless invoices with proof-of-payment</title>
+    <updated>2023-06-03T05:55:40.465360+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-September/003239.html" rel="alternate"/>
+    <summary>The email thread discusses the possibility of implementing a "pay-for-signature" protocol using PTLCs to reduce payment confirmation to one round. However, it is revealed that this cannot work as signing requires an 'R' and setting up a pay-for-signature requires the sender to know an 'R' from the recipient. Furthermore, if a sender requests for an 'R' and then initiates a PTLC, it would be more efficient to simply request an invoice. The sender generating 'r' and 'R' would result in revealing the privkey 'a'. It is suggested that any secure single-round multisignature Schnorr scheme can be adapted for this problem. Another mechanism is suggested where the receiver knows two scalars A=a*G and B=b*G. To make a payment, the sender adds A+B and locks an outgoing PTLC to that point. The proof-of-payment is the sum a+b. If keyed to some data, then the sender makes a payment to the receiver using d*A + B and receives the scalar behind the above point: d*a + b. Despite knowledge of d, the sender cannot learn a or b, thus locking the proof-of-payment to a specific d.</summary>
+    <published>2021-09-21T11:40:37+00:00</published>
+  </entry>
+</feed>

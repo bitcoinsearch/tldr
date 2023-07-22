@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Concurrent sigs in BOLT #2</title>
+  <updated>2023-05-23T23:27:51.182291+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-04-26 02:21:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Concurrent sigs in BOLT #2</title>
+    <updated>2023-05-23T23:27:51.182291+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-April/000522.html" rel="alternate"/>
+    <summary>The author of the email is discussing how concurrent updates should be handled. They suggest using an ordering system to resolve conflicts by comparing signatures. In this case, if two nodes send each other a signature at the same time, they could agree that the one that sent the "greatest" signature has to immediately resend a new signature including all pending changes. The author then provides a diagram that shows how nodes track two commitment states and the rules nodes must follow when processing packets. When a node sends an ADD HTLC, it modifies the other side's state, but only modifies its own state when it receives an ack covering that ADD HTLC. The ADD HTLC receiver modifies its own state and modifies the other side's state when it sends the next ack. Both nodes have outstanding changes, so they can send another SIG (which acks the received changes, thus modifying the other state). The minimum single-update case is still 1.5 round-trips.</summary>
+    <published>2016-04-26T02:21:00+00:00</published>
+  </entry>
+</feed>

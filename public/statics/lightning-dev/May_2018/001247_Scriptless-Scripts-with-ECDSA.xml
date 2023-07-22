@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Scriptless Scripts with ECDSA</title>
+  <updated>2023-05-20T08:11:31.999512+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-05-08 05:01:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Scriptless Scripts with ECDSA</title>
+    <updated>2023-05-20T08:11:32.000516+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-May/001247.html" rel="alternate"/>
+    <summary>The discussion concerns two end-to-end payment routing schemes, namely the 2pc pailier technique and the OG SS technique based on schnorr. The former can replace regular multi-sig with a single pay-to-witness-public-key-hash (p2wkh) without requiring any end-to-end changes. This would result in lower fees for opening/closing channels and smaller transaction sizes. On the other hand, the latter allows the use of randomized payment identifiers across the route but requires additional cryptographic overhead.To integrate the OG SS scheme into the existing protocol, parties need to complete an initial setup and verification phase before the signing process. Three proofs are required for the setup phase, including a proof that the Paillier public key is well-formed, a dlog proof for the signing keys, and a proof that the value encrypted is actually the dlog of the public key to be used for signing. The third proof is interactive and contains a ZK range proof as a sub-protocol. However, it can be replaced with Bulletproofs to make the section non-interactive, allowing the proof itself to take 1.5 RTT.Pedro Moreno Sanchez proposes a scriptless version of adaptor signatures and contracts for the Lightning Network using only 2-party ECDSA signatures. The proposed scheme is an alternative to Poelstra's scriptless scripts, which require Schnorr signatures not yet deployed in Bitcoin. The scheme utilizes the Paillier cryptosystem and a modified range proof. The channel opening process can piggyback the extra proofs on top of the existing funding protocol, but will require more computational cost and increased message size.Adding HTLCs will take 2.5 RTTs, but settling them will remain unchanged. The onion payload will need to be re-interpreted to encode G*alpha. A new feature bit will be needed to roll out this scheme, and it may partition the network as it will only be able to be carried among paths that understand this new feature. Laolu summarizes some takeaways from the discussion. The subproofs can use bulletproofs to make the proof shorter and non-interactive. Adding an HTLC would take 2.5 RTT's, but settling is just as quick as before. The onion payload would either need to be hacked or extended to support packaging the point. The utility of the scheme won't shine until all/most of the network uses it, and they could start with just the introduction of the OG 2PC scheme as a multi-sig replacement.</summary>
+    <published>2018-05-08T05:01:49+00:00</published>
+  </entry>
+</feed>

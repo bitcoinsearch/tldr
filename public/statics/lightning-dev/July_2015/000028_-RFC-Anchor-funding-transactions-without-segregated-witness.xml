@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] Anchor (funding) transactions without segregated witness</title>
+  <updated>2023-05-23T18:26:20.579718+00:00</updated>
+  <author>
+    <name>Joseph Poon 2015-07-13 22:26:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] Anchor (funding) transactions without segregated witness</title>
+    <updated>2023-05-23T18:26:20.579718+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-July/000028.html" rel="alternate"/>
+    <summary>Rusty Russell has proposed a basic lightning implementation that may be theoretically possible in real bitcoin, once OP_CHECKLOCKTIMEVERIFY soft-forks into bitcoin. Thaddeus Dryja had come up with a similar implementation to resolve malleability in multisig by involving a clock and 2-input/2-output. However, a true malleability fix is still ideal. Russell believes it's possible to make the Commitment Transactions malleability-safe under his construction. The Commitment Transaction requires spending from the two inputs separately and the output would require having OP_CLTV or OP_CSV in the script output to determine whether a Commitment has been revoked. If the inputs are 0.5 Alice and 0.5 Bob, the first Commitment Transaction would refund 0.5 to Alice and 0.5 to Bob. There are a pair of Commitment Transactions per commitment state. The Commitment Transaction which only Alice can broadcast, Commitment 1a, would have specific outputs. For the second output (output 1), the first path gives Alice the funds at channel expiration. The second path is so if the current Commitment transaction is not Commitment 1 and Alice should lose all her money for incorrectly broadcasting Commitment 1. Bob also has a Commitment Transaction which is the opposite. This construction will allow LN channels to exist with OP_CLTV; however, in case of uncooperative counterparties, waiting until channel expiration would be required to get the money back. Nevertheless, this indicates the possibility of playing with LN on the real bitcoin chain in the near future.</summary>
+    <published>2015-07-13T22:26:59+00:00</published>
+  </entry>
+</feed>

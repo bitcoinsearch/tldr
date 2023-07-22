@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Floating fees and SPV clients</title>
+  <updated>2023-06-07T21:34:28.080912+00:00</updated>
+  <author>
+    <name>Jeremy Spilman 2013-12-04 01:45:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Floating fees and SPV clients</title>
+    <updated>2023-06-07T21:34:28.080912+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-December/003793.html" rel="alternate"/>
+    <summary>The proposed specifications, 'allowfee' and 'minfee,' are being discussed in the context of Bitcoin network transaction fees. According to the 'allowfee' specification, a wallet implementation cannot reduce the amount paid for fees by more than allowfee satoshis, and transaction fees must be equal to or greater than the amount reduced. With 'minfee,' wallet software should add minfee satoshis to the amount the user pays and include at least minfee in the transaction created to pay miner's transaction fees. However, wallet software may request that the user pays more if it creates a complex transaction or judges that minfee is not sufficient for the transaction to be accepted by the network.The author finds 'allowfee' more useful than 'minfee' as it provides a definitive understanding of what the merchant will permit while making payments. They argue that merchants choosing the 'allowfee' intelligently can provide real value to their customers without exposing them to undue risk. In contrast, 'minfee' is just a data point for wallet software to consider and may be noisy enough for wallets to ignore.The sender's wallet software will always be free to choose the fee, and paying less than the 'allowfee' or 'minfee' can still get a transaction included in the next block. If there is some time criticality, a wallet might need to choose a higher fee to guarantee the transaction clears in time. Instead of 'minfee,' the author suggests using the 'expires' field to communicate this requirement, allowing merchants to express their needs rather than telling the wallet how to achieve them.In case of a transaction with too-low fee, either the payer can double-spend with a higher fee or wait longer for the transaction to make it into a block. If it hits the blockchain before the 'expires' time, the merchant should have no standing to refute it, regardless of the amount of fees paid. Refunds come into play if the payer reduced the total amount by more than an agreed-upon 'allowfee' or if the transaction doesn't hit the blockchain until after 'expires.' In these cases, the payer would end up paying the fees in both directions.However, if a wallet pays the 'minfee' and broadcasts one block before 'expires,' but the payment does not make the block, the liability for too-slow transactions falls on the merchant due to their insufficient 'minfee' value. The author finds 'allowfee' extremely useful but considers 'minfee' somewhat problematic.</summary>
+    <published>2013-12-04T01:45:44+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Soft-forks and schnorr signature aggregation</title>
+  <updated>2023-05-20T05:20:32.133802+00:00</updated>
+  <author>
+    <name>Anthony Towns 2018-03-21 11:21:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Soft-forks and schnorr signature aggregation</title>
+    <updated>2023-05-20T05:20:32.133802+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-March/015839.html" rel="alternate"/>
+    <summary>In an email conversation, Zeeman suggested a simplified solution 2 for aggregated signatures which uses OP_ADD_AGG_PUBKEY and OP_CHECK_AGG_SIG[VERIFY] opcodes. However, AJ explained that checking the gathered public keys match the aggregated signature only happens for the entire transaction as a whole, so there is no need for an opcode for it in the scripts as they are per-input. AJ further explained that during the script, public keys and messages are collected which then go into the signing/verification algorithm to produce/check the signature. While gathering signatures from each private key holder when producing the aggregate signature happens at the wallet/p2p level, rather than the consensus level.AJ also mentioned that pre-softfork nodes not doing any checking does not work with cross-input signature aggregation. If it did, it would be possible to steal people's funds by mining a non-standard transaction. This is because every node sees the OP_RETURN_TRUE and stops validating signatures, accepting the transaction as valid, even though the sender cannot actually produce the recipient's signature. Finally, AJ provided a detailed explanation of the Bellare-Neven verification algorithm which requires two communication phases amongst the signers. The algorithm involves generating a random variable r_i and sharing the corresponding curve point R_i=r_i*G, and then calculating R=sum(R_i) and m, and hence H(R,L,i,m), at which point each party calculates a partial signature using their respective private key, x_i. These s_i values are then communicated to each signer to give the final signature (s,R), allowing each signer to verify that the signing protocol completed successfully, and any signer can broadcast the transaction to the blockchain.</summary>
+    <published>2018-03-21T11:21:19+00:00</published>
+  </entry>
+</feed>

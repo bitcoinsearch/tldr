@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Moving away from BIP37, unsetting NODE_BLOOM</title>
+  <updated>2023-05-20T08:20:43.850115+00:00</updated>
+  <author>
+    <name>Caius Cosades 2018-05-16 21:22:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Moving away from BIP37, unsetting NODE_BLOOM</title>
+    <updated>2023-05-20T08:20:43.850115+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/015968.html" rel="alternate"/>
+    <summary>There is a growing consensus among developers to disable BIP37 in network nodes, due to significant denial of service issues. BIP37 allows "lightweight wallets" to connect to nodes and request that they load an arbitrary bloom filter to their block files and mempool. This puts undue load on the network and doesn't provide an acceptable amount of security and reliability to lightweight wallets. In addition, BIP37 was intended to have stronger privacy than it does in reality, as any node that can capture `filterload` and `filteradd` responses can trivially de-anonymize an entire wallet that has connected irrespective of the amount of noise they add to their filters. This is counter-able by further destroying privacy and loading down the network by having multiple peers simultaneously return filter results and hoping that at least one isn't lying.NODE_BLOOM has been implemented which allows nodes to signal whether or not they support filtering. The author suggests that in the next major release, this should be defaulted to 0, and any software relying on BIP37 move to using other filtering options or a dedicated piece of software to serve the requests. Future releases of the reference software should remove BIP37 commands entirely. Links to mailing lists, github issues, and research papers are provided to support the argument against BIP37.</summary>
+    <published>2018-05-16T21:22:47+00:00</published>
+  </entry>
+</feed>

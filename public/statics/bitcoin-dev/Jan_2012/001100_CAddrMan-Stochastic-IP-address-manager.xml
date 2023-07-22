@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CAddrMan: Stochastic IP address manager</title>
+  <updated>2023-05-18T22:58:47.813776+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2012-01-30 02:31:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CAddrMan: Stochastic IP address manager</title>
+    <updated>2023-05-18T22:58:47.813776+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-January/001100.html" rel="alternate"/>
+    <summary>The developer of the Satoshi bitcoin client has decided to move towards IPv6 support in the future. Due to the management of IP addresses, currently all addresses seen are kept on-disk and in-memory, which caused multi-megabyte addr.dat files that took a while to load for some users. To solve this problem, the developer wrote a specialized address manager based on an entirely different principle: only keep a limited number of addresses, keep and index them in-memory, and occasionally dump them to disk. However, this approach led to the weakness of potential Sybil attacks by attackers who could try to poison the entire address cache with addresses they control, especially in the context of IPv6.To protect against such attacks, the developer came up with a design that keeps two tables: one table that keeps addresses that had actual connections with and another table that maintains untried/new addresses. Both tables are separated into several limited-size buckets. Addresses in the first table are placed in one of only a few buckets based on the address range (/16 for IPv4), so an attacker cannot have many active nodes in the same /16 range. Addresses in the second table are placed in one of a few buckets chosen based on the address range the information came from, instead of the address itself. Moreover, all crucial decisions (selection of addresses, picking a place in a bucket, which entry to evict if necessary) are randomized with biases to improve efficiency. Selection of buckets is based on a cryptographic hash using a secret key to deterministically randomize behavior. The implementation of this design is available in pull request 787 on GitHub, but testing and improvements are needed. Test reports, comments, constructive criticism, suggestions, and improvements are welcome.</summary>
+    <published>2012-01-30T02:31:02+00:00</published>
+  </entry>
+</feed>

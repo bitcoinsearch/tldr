@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>BIP: OP_BRIBVERIFY - the op code needed for Blind Merge Mined drivechains</title>
+  <updated>2023-05-20T03:07:48.017435+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2017-06-28 04:07:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>BIP: OP_BRIBVERIFY - the op code needed for Blind Merge Mined drivechains</title>
+    <updated>2023-05-20T03:07:48.017435+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-June/014664.html" rel="alternate"/>
+    <summary>In a Bitcoin-dev email thread, a new block rule has been proposed which mandates that the miner's coinbase reward must be at index 0 in the coinbase transaction's output vector. However, this proposal has been heavily criticized as it would ban decentralized or less centralized mining pooling, including P2Pool. Additionally, the proposal fixes the witness commitment output to be at index 1 of the coinbase transaction's output vector, removing important flexibility that was intentionally preserved. The concern is that if an additional commitment is needed for Bitcoin, some sidechain will be irreparably destroyed. For instance, the mimblewimble sidechain could correspond to index 2 of the vector outputs on the coinbase transaction. Furthermore, there is a concern about what happens if index 1 isn't present and whether 34 dummy outputs must be used if index 35 is used. This proposal looks into the coinbase transaction's output vector at the given index (which is derived from the sidechain id) and checks to see if the hash in the block matches the hash inside of the BRIBEVERIFY program. However, this is not monotone/reorg safe, which means that the output coins (if any) are not equivalently fungible with other bitcoins for, e.g. 100 blocks because if there is a reorg, this transaction cannot be restored to the chain. Additionally, it's impure and not compatible with caching, which would be unfortunate and slow block propagation.</summary>
+    <published>2017-06-28T04:07:43+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New P2P commands for diagnostics, SPV clients</title>
+  <updated>2023-06-06T05:03:50.990289+00:00</updated>
+  <author>
+    <name>Andreas Petersson 2012-07-23 07:54:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New P2P commands for diagnostics, SPV clients</title>
+    <updated>2023-06-06T05:03:50.990289+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-July/001722.html" rel="alternate"/>
+    <summary>During a conversation with Stefan Thomas at Hackathon Berlin, concerns regarding the current plan for Bloom filters were discussed. As per the plan, the client will request the server to replay the entire blockchain but filtered, which is not optimal as it requires the server to scan all data and filter out non-matching entries. This implementation will be complicated and inefficient, especially for lightweight clients or those with shared private keys. Instead, Andreas suggests adding a command for given public keys/addresses to retrieve a list of unspent outputs. To optimize query flexibility, server load, and client privacy, Andreas proposes using a binary tree data structure of unspent outputs arranged by the Bloom filter bits. The client would hash their list of addresses to a fixed-length bit array and combine them with | to add more 1's with each address. The server would calculate the 64KiB bits for each address and arrange them in a binary tree to traverse easily for a given bloom query. If a client wants to query more broadly, they can calculate the bloom filter to 64KiB and fill up the last 50% or 95% Bits with 1. The trailing 1 bits do not need transmitting to the server when querying. If privacy is a concern, the client could also fill random bits with 1. According to Andreas' experimentation using BloomFilter from Guava, even 8KiB would suffice to have a 3% false positive rate for the 40000 active addresses currently in use. However, Andreas suggests seeking an opinion from someone more familiar with hashing to determine if cutting a bloom filter in half has any negative consequences.</summary>
+    <published>2012-07-23T07:54:48+00:00</published>
+  </entry>
+</feed>

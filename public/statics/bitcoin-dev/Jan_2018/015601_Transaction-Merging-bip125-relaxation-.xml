@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Transaction Merging (bip125 relaxation)</title>
+  <updated>2023-06-13T00:01:59.668233+00:00</updated>
+  <author>
+    <name>Moral Agent 2018-01-22 18:50:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Transaction Merging (bip125 relaxation)</title>
+    <updated>2023-06-13T00:01:59.668233+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-January/015601.html" rel="alternate"/>
+    <summary>The discussion in the Bitcoin-dev mailing list on January 22, 2018 revolves around transaction merging and replacing old transactions with economically equivalent summary transactions. The main idea is to merge unrelated transactions that are not confirming into a CoinJoin transaction with a higher fee rate, which would be more economical. However, this is currently not possible due to the bip125 rule that states 'the replacement transaction pays an absolute fee of at least the sum paid by the original transactions' unless there is a considerable feerate bump. The suggestion is to relax or change this rule to allow for transaction merging. The use case presented involves a scenario where a user owes another user 1 bitcoin and has promised to pay immediately. Instead of creating a whole new transaction, the user can replace an in-flight (unconfirmed) transaction with one that accomplishes this goal using the rules of bip125. The problem arises when the original transaction gets confirmed, and it's unclear if it's safe to send payment to the other user without waiting for n transactions. One possible solution is to consider a transaction "replaceable" only if it has change so that payments can immediately be made that source the change and provide safety in a reorg. However, this will only work for transactions with change and adds complexity. Merging N unconfirmed transactions would offer some pretty nice savings for everyone, but there is no straight forward way to do this at present.</summary>
+    <published>2018-01-22T18:50:31+00:00</published>
+  </entry>
+</feed>

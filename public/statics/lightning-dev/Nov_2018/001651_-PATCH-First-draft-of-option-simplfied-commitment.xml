@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[PATCH] First draft of option_simplfied_commitment</title>
+  <updated>2023-05-25T17:42:46.635536+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-11-21 22:45:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[PATCH] First draft of option_simplfied_commitment</title>
+    <updated>2023-05-25T17:42:46.635536+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001651.html" rel="alternate"/>
+    <summary>The Lightning Network specification provides detailed rules for commitment transactions used to enforce payment channels between two parties. The `funding_pubkey` is used for the initial commitment transaction in a Lightning Network Channel. To make the carve-out exception available for an honest party when broadcasting a commitment transaction, there needs to be at least a CSV delay of 1 block on the HTLC transaction outputs. If `option_simplified_commitment` applies to the commitment transaction, an additional 2000 satoshis are subtracted from the funder. For every offered HTLC, an offered HTLC output is added, while for every received HTLC, a received HTLC output is added. There are six types of outputs in a commitment transaction: two main outputs, two offered HTLCs, and two push outputs (if applicable). Each output has its own value (in bytes) and script length, in addition to the version, witness header, and lock time. If the sender is not responsible for paying the Bitcoin fee, the channel should fail.For HTLC outputs, separate transactions are required to allow penalty transactions in case of a revoked commitment transaction. This is so that HTLCs can timeout or be fulfilled even though they are within the `to_self_delay` delay. If `option_simplified_commitment` applies to the commitment transaction, then the `to_self_delay` used for all transactions is the greater of the `to_self_delay` sent by each peer. Otherwise, each peer sends the `to_self_delay` to be used for the other peer's commitment and HTLC transactions.Each commitment transaction uses a unique `localpubkey` and a `remotepubkey`. The HTLC-success and HTLC-timeout transactions use `local_delayedpubkey` and `revocationpubkey`. The weight of a commitment transaction is calculated based on the different types of outputs present in it. Finally, if a node needs to go on-chain, it has to select a commitment transaction and use it to perform a unilateral close.The Lightning Network specification also provides guidelines for channel closure procedures. One such guideline is that a node must spend any `to_local_pushme` output, providing sufficient fees as incentives to include the commitment transaction in a block. Additionally, mutual close fees tend to be less exaggerated than those of commitment transactions. The signature from `closing_signed` would only be unnecessary if the fee offered was too small for it to be processed.The Lightning Network specification includes a flag for option_simplified_commitment, which enables simplified commitment transactions. This flag may only be used in the init message.</summary>
+    <published>2018-11-21T22:45:23+00:00</published>
+  </entry>
+</feed>

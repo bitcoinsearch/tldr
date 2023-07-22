@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 158 Flexibility and Filter Size</title>
+  <updated>2023-06-13T02:27:37.089565+00:00</updated>
+  <author>
+    <name>Jim Posen 2018-05-23 07:38:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 158 Flexibility and Filter Size</title>
+    <updated>2023-06-13T02:27:37.089565+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/016009.html" rel="alternate"/>
+    <summary>The author checked filter sizes as a proportion of block size for each sub-filter and attached a graph. The first ~120,000 blocks are too small for Golomb-Rice coding to compress the filters efficiently. However, after block 120,000, the filter compression converges quickly to near-optimal value. The ratio of the combined size of separated filters versus the size of a filter containing all of them is pretty much the same size. After block 150,000, the mean of the ratio between them is 99.4%. Therefore, not much compression efficiency is lost when separating the basic filter into sub-filters.Jim Posen suggested advertising a bitfield for each filter type that the node serves where the bitfield indicates what elements are part of the filters. This removes the notion of decided filter types and instead leaves the decision to full-nodes. The author thinks it makes more sense to construct entirely separate filters for different types of elements and allow clients to download only the ones they care about. If there are enough elements per filter, the compression ratio shouldn't be much worse by splitting them up. The suggestion is to create three separate filter types, one for output scripts, one for input outpoints, and one for TXIDs, each signaled with a separate service bit. There is also the question of whether to separate or combine the headers. The author would lean towards keeping them separate because it's simpler that way. The option of a prev output script filter or rolling that into the block output script filter was not included because it changes the security model (cannot be proven to be correct/incorrect succinctly).</summary>
+    <published>2018-05-23T07:38:40+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Async payments proof-of-payment: a wishlist for researchers</title>
+  <updated>2023-06-03T11:29:59.889453+00:00</updated>
+  <author>
+    <name>vwallace 2023-01-12 23:05:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Async payments proof-of-payment: a wishlist for researchers</title>
+    <updated>2023-06-03T11:29:59.889453+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-January/003823.html" rel="alternate"/>
+    <summary>The Lightning Development mailing list recently discussed a proposal for a payment system that would allow users to prove they sent a specific amount of money at a specific time. The proposed system involves using keysend, but with additional data encoded by the sender in the form of a nonce, payment time and amount, which would then be used by the recipient when fulfilling the payment. While this scheme wouldn't technically provide proof-of-payment, it would allow the sender to prove when and how much they sent.In a Lightning-dev email, Val Wallace shared a wish list for researchers to solve an open question in lightning regarding asynchronous payments. The question is how the sender will get an invoice from the receiver when they are offline at sending-time. One solution presented was PTLCs, but it turns out that wouldn't solve the problem. Another solution is using Trampoline payments, which allows the sender's LSP to retry the payment without needing to fetch a fresh onion each time. With AMP usage, the receiver doesn't need to be online for the sender to attempt to make a payment.Posting an AMP invoice or serving it over LNURL/BOLT12 seems equivalent to the keysend scheme outlined in the email. The current design is based on BOLT12 because it has broader support. It would be useful to see a spec PR for the AMP reusable invoice format rather than high-level API docs, otherwise, it's hard to evaluate using it for async payments. Trampoline payments are a critical part of any sort of async payment scheme as async payments are not very interesting without trampoline.Conner gave a talk about an AMP extension he called "invoice tunneling." The idea is that you force the receiver to reveal a unique secret bound to the invoice or payment attempt. PoP is necessary or not seems like a separate discussion. The proposal is currently being considered by the community and feedback is welcome. Links to relevant resources, including the proposal itself and the Lightning Improvement Proposal (BLIP) for the Lightning Network, were provided.</summary>
+    <published>2023-01-12T23:05:29+00:00</published>
+  </entry>
+</feed>

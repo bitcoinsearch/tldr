@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Transition to post-quantum</title>
+  <updated>2023-06-13T00:29:53.883420+00:00</updated>
+  <author>
+    <name>Tim Ruffing 2018-02-15 15:59:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Transition to post-quantum</title>
+    <updated>2023-06-13T00:29:53.883420+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-February/015758.html" rel="alternate"/>
+    <summary>The proposal is to include a classic signature to ensure that if, for any reason, one has revealed classic_pk already. The problem with this proposal is that if the classic_pk has been revealed, then anyone can prevent you from spending the funds as you wish by including the first commit entry with an arbitrary tx in the blockchain. A fixed variant has been presented which supports basically any hash-based addresses. The scheme works without changing the conditions under which a UTXO can be spent. The proposed setup requires multiple hash functions, KDF, H, and authenticated symmetric encryption Enc/Dec. It assumes that there is a UTXO with address addr = H_addr(chal), where chal is a challenge, and H_addr is the hash function used to form addresses. To spend this UTXO with a transaction tx, the user performs two steps. The first is the commit step where the user creates and publishes a commitment in the blockchain that references the UTXO as inputs and contains the following data: c = Enc(k, tx). The second is the decommit step where the user creates and publishes a decommitment with the following data: d = chal. The decommitment d = chal spends a UTXO with address H_addr(chal) if there exists a commitment c in the blockchain which references the UTXO and which is the first commitment (among all referencing the UTXO) in the blockchain such that k = KDF(chal) correctly decrypts Dec(k, c), and tx = Dec(k, c) is a valid transaction to spend UTXO. The UTXO is spent as described by tx. The trick is that the encryption ensures that the user commits to tx (including the classic signature) already in the commit step, while still keeping the decommitment unique. This scheme is a variant of Adam Back's proposal for committed transactions from 2013. The above variant is pretty simple, and it has the advantage over Adam's proposal that it does not rely on ECDSA specifically and can be used for any address type. The main problem of an approach like this is that everybody can flood the blockchain with commitments. One can require fees to create commitments, but if this UTXO is the only money one has, then they need to borrow some to pay the transaction fees upfront. A proactive measure is required, but there is no need to change something now already. Even if the proposal is enabled today, people are not forced to use it. As long as ECDSA and the other schemes we use today remain secure, people can and will continue to perform conventional transactions. Ideally, people will need a recovery protocol only for those UTXOs which they haven't touched for years and have forgotten to convert to PQ in time. Double-spending is excluded after the first step is confirmed, making the protocol secure against quantum attackers who want to steal the money.</summary>
+    <published>2018-02-15T15:59:27+00:00</published>
+  </entry>
+</feed>

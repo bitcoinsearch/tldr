@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Highly Available Lightning Channels</title>
+  <updated>2023-06-04T04:44:17.844079+00:00</updated>
+  <author>
+    <name>Joost Jager 2023-02-13 11:45:54</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2023-02-13 16:12:02</name>
+  </author>
+  <author>
+    <name>Joost Jager 2023-02-14 10:34:05</name>
+  </author>
+  <author>
+    <name>Joost Jager 2023-02-15 07:36:26</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2023-02-13 14:40:24</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2023-02-14 03:05:52</name>
+  </author>
+  <author>
+    <name>Joost Jager 2023-02-14 11:00:26</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2023-02-14 21:27:07</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2023-02-14 21:42:24</name>
+  </author>
+  <author>
+    <name>Christian Decker 2023-02-13 15:32:44</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2023-02-14 21:38:34</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2023-02-15 04:44:32</name>
+  </author>
+  <author>
+    <name>Joost Jager 2023-02-15 10:56:23</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2023-02-16 00:42:54</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2023-02-17 01:26:32</name>
+  </author>
+  <author>
+    <name>Joost Jager 2023-02-17 10:47:51</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2023-02-17 11:19:01</name>
+  </author>
+  <link href="lightning-dev/Feb_2023/003842_Highly-Available-Lightning-Channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003845_Highly-Available-Lightning-Channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003848_Highly-Available-Lightning-Channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003854_Highly-Available-Lightning-Channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003843_Highly-Available-Lightning-Channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003847_Highly-Available-Lightning-Channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003849_Highly-Available-Lightning-Channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003850_Highly-Available-Lightning-Channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003852_Highly-Available-Lightning-Channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003844_Highly-Available-Lightning-Channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003851_Highly-Available-Lightning-Channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003853_Highly-Available-Lightning-Channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003855_Highly-Available-Lightning-Channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003856_Highly-Available-Lightning-Channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003858_Highly-Available-Lightning-Channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003859_Highly-Available-Lightning-Channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2023/003860_Highly-Available-Lightning-Channels.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Highly Available Lightning Channels</title>
+    <updated>2023-06-04T04:44:17.844079+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-February/003842.html" rel="alternate"/>
+    <summary>The Lightning Network is a payment protocol built on top of the Bitcoin blockchain that enables faster and cheaper transactions. However, one issue is routing nodes failing, which can impact routing revenue and lead to less efficient use of capital. To address this issue, the Lightning Network may implement strict penalties for routing nodes that fail to operate flawlessly, such as being avoided for an extended period of time. The conversation between Joost Jager and Matt Corallo revolved around whether nodes should aggressively prefer routes through nodes that reliably route payments, with Joost suggesting that measurement should be used instead of signaling.In addition, ZmnSCPxj categorized reputation systems into three types: first-hand experience, inferred experience, and hearsay. While the first two are ideal, they are limited by the rarity of repeat interactions and out-of-date knowledge. The solution to this problem is forwardable peerswaps, which creates paths for payment routing without pervasive monitoring. They ensure that "beneficial for me" is also "beneficial to everyone", making them beneficial to every participant, and should be part of the law of lightning network protocol.The email thread discusses the Lightning Network and how to fetch scoring data for different types of nodes. The conversation revolves around three relevant "buckets" of nodes: large nodes sending lots of payments, client nodes that just connect to an LSP or two, and nodes that route some but don't send a lot of payments. The sender, Joost Jager, proposes that network maturing and improving scoring algorithms are sufficient for category (a) nodes. Category (b) nodes can download data from category (a) nodes, while category (c) nodes can rely on semi-trusted data from a third party.However, another participant argues that this approach may lead to centralization and favors the ha flag, which allows small nodes to build up their view of the network independently and efficiently. Matt Corallo suggests fetching scoring data from relevant buckets of nodes to maintain outbound liquidity when running an HA channel. He proposes trusting third-party scoring data for routing nodes and mentions that everyone can have a similar experience as the River report.The Lightning Network community is discussing proposals to increase payment success rates, including extending the `channel_update` field `channel_flags` with a new bit for routing nodes to signal `highly_available`. This flag would allow payers to prefer `highly_available` channels during pathfinding, but the routing node would face a stronger penalty than usual if it returns a failure. The proposal also includes a variation that signals availability implicitly through routing fees, but it may disincentivize cheap but reliable channels on high traffic links.Overall, the discussion emphasizes the importance of neutral protocol development and design. Different viewpoints are presented on how to fetch scoring data for different types of nodes, and the speakers also consider the potential risks of relying on third-party data. It remains to be seen how the proposed solutions will be received by the Lightning network community.</summary>
+    <published>2023-02-13T11:45:54+00:00</published>
+  </entry>
+</feed>

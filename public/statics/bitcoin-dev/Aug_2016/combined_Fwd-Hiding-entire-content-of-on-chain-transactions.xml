@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Fwd: Hiding entire content of on-chain transactions</title>
+  <updated>2023-06-11T19:35:57.589559+00:00</updated>
+  <author>
+    <name>Tony Churyumoff 2016-08-10 07:51:34</name>
+  </author>
+  <author>
+    <name>Tony Churyumoff 2016-08-10 07:50:25</name>
+  </author>
+  <author>
+    <name>Tony Churyumoff 2016-08-10 07:52:11</name>
+  </author>
+  <author>
+    <name>Tony Churyumoff 2016-08-10 07:53:01</name>
+  </author>
+  <author>
+    <name>Tony Churyumoff 2016-08-10 07:50:25</name>
+  </author>
+  <author>
+    <name>Tony Churyumoff 2016-08-10 07:52:11</name>
+  </author>
+  <author>
+    <name>Tony Churyumoff 2016-08-10 07:53:01</name>
+  </author>
+  <author>
+    <name>Tony Churyumoff 2016-08-10 07:50:25</name>
+  </author>
+  <author>
+    <name>Tony Churyumoff 2016-08-10 07:51:34</name>
+  </author>
+  <author>
+    <name>Tony Churyumoff 2016-08-10 07:52:11</name>
+  </author>
+  <author>
+    <name>Tony Churyumoff 2016-08-10 07:53:01</name>
+  </author>
+  <author>
+    <name>Tony Churyumoff 2016-08-10 07:51:34</name>
+  </author>
+  <link href="bitcoin-dev/Aug_2016/012981_Fwd-Hiding-entire-content-of-on-chain-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2016/012980_Fwd-Hiding-entire-content-of-on-chain-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2016/012982_Fwd-Hiding-entire-content-of-on-chain-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2016/012983_Fwd-Hiding-entire-content-of-on-chain-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2016/012980_Fwd-Hiding-entire-content-of-on-chain-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2016/012982_Fwd-Hiding-entire-content-of-on-chain-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2016/012983_Fwd-Hiding-entire-content-of-on-chain-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2016/012980_Fwd-Hiding-entire-content-of-on-chain-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2016/012981_Fwd-Hiding-entire-content-of-on-chain-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2016/012982_Fwd-Hiding-entire-content-of-on-chain-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2016/012983_Fwd-Hiding-entire-content-of-on-chain-transactions.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2016/012981_Fwd-Hiding-entire-content-of-on-chain-transactions.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Fwd: Hiding entire content of on-chain transactions</title>
+    <updated>2023-06-11T19:35:57.589559+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-August/012981.html" rel="alternate"/>
+    <summary>In a recent discussion on bitcoin transaction design, concerns were raised about the proposed design of hiding entire inputs and outputs. James MacWhyte explained that users would have to back up entire histories of every output that has been sent to them instead of just backing up a single HD private key if they want to secure their funds. Additionally, users would need to be online to receive payments, which may pose challenges in sending the private message containing the coin's history. Tony Churyumoff agreed with these concerns and suggested using hubs to route end-to-end encrypted messages so peers don't have to be online at the same time and don't have to connect directly.A new proposal has been put forward to hide the entire content of bitcoin transactions. This goes beyond previous privacy measures such as CoinJoin, ring signatures, and Confidential Transactions. The idea is to publish only the hash of inputs and outputs in the blockchain as OP_RETURN, while hiding the entire inputs and outputs. To prevent double-spends, the payer must also publish another hash known as the spend proof, which is the hash of the output being spent. Each private transaction must have exactly one input and one previous output, and every output in a private payment must include a blinding factor, which is just a random string.To issue the new private coin, one can burn regular BTC by sending it to one of several unspendable bitcoin addresses, entitling one to an equal amount of the new private coin called Black Bitcoin or BBC. The bitcoin network protocol can be extended with a new message type to facilitate the exchange of private transaction data. However, this extension currently lacks encryption, so private payments are only truly private when using bitcoin over Tor. After user A sends a private payment to user B, user A will know what the spend proof is going to be when B decides to spend the coin. This means that A will know when the coin was spent by B, but nothing more. The new owner of the coin and its future movements will not be known to A.No hard or soft fork is required for Bitcoin Blockchain Confidential (BBC), which is a separate privacy-preserving currency on top of the bitcoin blockchain. The same private keys and addresses are used for both BBC and the base currency BTC. Every BBC transaction must be enclosed into by a small BTC transaction that stores the OP_RETURNs and pays for the fees. Although originally posted to BCT, there has been no feedback so far.Peter Todd, a well-known Bitcoin developer, responded to a message on the bitcoin-dev mailing list regarding a proposal made by James MacWhyte. MacWhyte proposed a change to the Bitcoin protocol that would obscure transaction details from miners in order to increase privacy. Todd responded by stating that while verifying transactions is an optimization, preventing double-spending is a fundamental requirement of Bitcoin and this proposal does prevent double-spending perfectly well. He further stated that MacWhyte's proposal sounds similar to his own proposal from 2016 which focused on closed seal sets and truth lists for privacy. Todd's proposal aimed to improve user privacy without sacrificing the ability to prevent double-spending.Furthermore, a user on Bitcointalk.org has proposed a new private coin called 'Black Bitcoin' or 'BBC'. To issue the new private coin, users would burn regular BTC by sending it to one of several unspendable bitcoin addresses, one address per denomination. Burning BTC would entitle one to an equal amount of BBC. BBC would then be transferred from user to user by creating a private transaction, which consists of one input and several outputs.Storing the hash of the transaction and the spend proof of the consumed output into the blockchain in an OP_RETURN, the sender pays the corresponding fees in regular BTC, and sends the transaction, together with the history leading to its input, directly to the payee over a private communication channel. To verify the payment, the payee makes sure that the amount of the input matches the sum of outputs, and all are divisible by the denomination and calculates the hash of the private transaction. They look up an OP_RETURN that includes this hash and is signed by the payee. The proposal forbids any coin merges but still allows coin splits.Over time, larger outputs will likely be split into many smaller outputs whose amounts are not much greater than their denominations. More inputs will have to be combined to send the same amount. When sending a very large amount that is much greater than the highest available denomination, many private transactions will need to be sent. This could cause privacy leakage, but it applies to a small number of users. It is easy to avoid by using multiple addresses and storing a relatively small amount on each address. Exchanges and large merchants will likely accumulate large coin histories, which, although fragmented, far from complete, and likely outdated, should be kept in mind.</summary>
+    <published>2016-08-10T07:51:34+00:00</published>
+  </entry>
+</feed>

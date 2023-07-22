@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improve Lightning payment reliability through better error attribution</title>
+  <updated>2023-06-02T18:43:16.177701+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2019-06-13 11:14:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improve Lightning payment reliability through better error attribution</title>
+    <updated>2023-06-02T18:43:16.177701+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-June/002016.html" rel="alternate"/>
+    <summary>In the Lightning Network, reliability of payments depends on the reliability of chosen routes. To improve payment experience, implementations track past performance of nodes and channels. Non-ideal payment attempts are those that fail or take a long time to complete and for which it is not possible to determine the node that should be penalized. The current solution proposes to change the failure message such that every hop along the backward path adds an HMAC to the message. In addition, all hops could add two timestamps to the failure message: the HTLC add time and the HTLC fail time. The challenge here is to design the failure message format in such a way that hops cannot learn their position in the path. A fixed length message in which hops shift some previous (unused) data out from the message to create space to add their own data does not seem to work. An alternative solution would be to use a very big fixed-size message starting with some padding followed by a variable-length message. Every node would add its mac to the internal variable-length message and decrease the size of the initial padding. However, this becomes complex to handle when a malicious node reduces the padding so that previous nodes don't have enough space to include their own MACs and timestamps.Another direction might be to use a variable-length message, but have the error source add a seemingly random length padding. The actual length could be deterministically derived from the shared secret so that the erring node cannot just not add padding. What about having each node add some padding along the way? The erring node's padding should be bigger than intermediate nodes' padding (ideally using a deterministic construction as suggested) so details need to be fleshed out, but it could mitigate even more the possibility of intermediate nodes figuring out their approximate position. Probing can also be used to locate bad nodes by trying to probe with different route lengths and coming from different angles. However, this requires more attempts and more complex processing of the outcomes. A malicious node may act differently if it recognizes the probes.</summary>
+    <published>2019-06-13T11:14:39+00:00</published>
+  </entry>
+</feed>

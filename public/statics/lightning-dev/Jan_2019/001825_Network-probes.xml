@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Network probes</title>
+  <updated>2023-05-23T01:53:22.418908+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2019-01-18 21:06:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Network probes</title>
+    <updated>2023-05-23T01:53:22.418908+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-January/001825.html" rel="alternate"/>
+    <summary>The Lightning Network is a decentralized network that allows for fast and cheap transactions of Bitcoin. One issue the network faces is how to probe the network to check for the liveliness of a path before sending out a payment. Currently, a random payment hash is issued that is not redeemable by anyone; if the destination (and the path) is lively, it will respond with an error. To improve this process, the padding of the per_hop field of the onion can be used. With a single bit of the padding, the final node can be informed that this is a probe and not an actual payment. This saves the receiving node from doing a database lookup and does not reveal anything to intermediate nodes. Nodes may opt to maintain a series of hierarchical bloom filters, with the highest tier filter containing only payment hashes for non-expired invoices, which would allow them to avoid almost all database lookups for incoming unknown payment hashes (probes or not). Laolu recently implemented a type of spontaneous payment that works today in the wild. A requirement for this was fully functional EOB packing logic at the sender, and multi-packet unwrapping at the receiver. All that would need to be done is specify an EOB type for this special probe type of HTLC. As it doesn't need any additional data, it only consumes a single pivot hop and doesn't require the route to be extended. Aj's prior post on this front suggested making probe HTLCs identifiable to the receiver, allowing intermediate nodes to drop them. Allowing intermediate nodes to identify probe HTLCs has privacy implications, as it creates two path-level classes of HTLCs. However, this may help with QoS scheduling on the forwarding plane for nodes, as they may want to prioritize actual payments over probes, with some nodes opting to not forward probes at all.</summary>
+    <published>2019-01-18T21:06:51+00:00</published>
+  </entry>
+</feed>

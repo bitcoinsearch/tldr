@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>negative fees for HTLC relay</title>
+  <updated>2023-05-24T18:36:44.307677+00:00</updated>
+  <author>
+    <name>Benjamin Mord 2018-01-18 18:10:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>negative fees for HTLC relay</title>
+    <updated>2023-05-24T18:36:44.308274+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-January/000950.html" rel="alternate"/>
+    <summary>The idea of a distribution network created from links with negotiated fees and limited unidirectional capacity that can be corrected via rebalancing is not new, as there are several very large and mature markets around the world that we can study which illustrate what people have found to work well in such contexts. One class of such markets is wholesale electricity distribution, such as PJM. FTRs, a specific financial instrument traded on the PJM, for the purpose of managing load on transmission lines, is similar to how power flows in one direction on a line can be canceled with power flows in the opposite direction like lightning payment channels. Despite the similarities, there are differences between the two, such as the time scales being long enough for manual intervention in PJM negotiations compared to the high degree of automation required in lightning negotiation. Additionally, payment channel balance is still more analogous to energy than power, whereas transmission capacity limits are in power and not energy. However, at a technical level, there is no complexity in allowing fees to go negative, and implementing signed versus unsigned integers in the protocol is easy enough.While simplifying assumptions in the early implementations of Lightning are applauded as a matter of triage, it is discouraged to prematurely neuter underlying protocol expressiveness since the resulting limitations can then linger or even come to motivate harmful or risky forks down the road. Passingly along signed instead of unsigned ints is easy enough, and we can just cast to unsigned internally, wherever that may be our local preference.There are instances where negative fees would be useful, such as when the network becomes too weighted in one side of the graph or when the other side is a non-routable endpoint. However, it is better to change the topology of the network to remove the cut or balance traffic over it. Non-publicly announced nodes in the network cannot be routed over by fee tricks since they cannot even construct the onion to talk to it. Overall, while exploring specific applications of lightning to the electricity markets is an opportunity for collaborative and complimentary work that could boost lightning adoption, it is important to be careful not to distract the lightning project from its already ambitious and laudable mission. Lightning must beware scope creep of a harmful sort, and we should still walk before we run.</summary>
+    <published>2018-01-18T18:10:53+00:00</published>
+  </entry>
+</feed>

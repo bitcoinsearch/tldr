@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Detailed protocol design for routed multi-transaction CoinSwap</title>
+  <updated>2023-06-14T03:15:18.017119+00:00</updated>
+  <author>
+    <name>Chris Belcher 2020-08-20 22:15:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Detailed protocol design for routed multi-transaction CoinSwap</title>
+    <updated>2023-06-14T03:15:18.017119+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018110.html" rel="alternate"/>
+    <summary>ZmnSCPxj and Chris had a discussion about the implementation of CoinSwap to improve Bitcoin privacy and fungibility. They discussed how CoinSwap has advantages over CoinJoin and potential leakages in the process, as well as the issue of miner fees. The taker will pay all the miner fees since makers are only willing to wait long periods for transactions that earn them an income. They also discussed the concept of contract transactions, which can be spent either by waiting for a relative timelock or providing a hash preimage value. While they acknowledged the dangers of this approach, they also mentioned the possibility of using watchtowers to monitor the blockchain. Additionally, they considered adding random delays to make it more difficult for makers to time communication with the taker.The CoinSwap protocol involves two parties, the taker and maker, exchanging coins via atomic cross-chain trading. The protocol starts with the taker broadcasting a funding transaction to a 2-of-2 multisig address and creating a set of HTLCs (Hash Time-Locked Contracts) that specify the amounts and addresses involved in the trade. The maker then signs the HTLCs, creating contract transactions, which are not broadcast but only exchanged between the parties. To reduce round trips required for agreeing on public keys, the EC tweak trick can be used. However, they also discussed a possible attack by a malicious taker who intentionally aborts the swap, forcing makers to lose more money than the attacker. Therefore, parties must be ready to respond to contract transactions at all times, as the outputs of the funding transactions can stay unspent indefinitely.</summary>
+    <published>2020-08-20T22:15:34+00:00</published>
+  </entry>
+</feed>

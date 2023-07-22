@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Specifications of Broadcasting Layers</title>
+  <updated>2023-05-18T15:36:14.958744+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-10-19 23:55:01</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Specifications of Broadcasting Layers</title>
+    <updated>2023-05-18T15:36:14.958744+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-October/000278.html" rel="alternate"/>
+    <summary>Rusty Russell has proposed using IRC as the peer protocol for the Lightning Network. The network includes three types of information that need to be shared: pubkey-channel-relationships, node addresses/IP, and channel-status. These three types of data are static and relayed every 10 days, every 12 hours, and once an hour respectively. The estimate for the size of these transmissions is 264 bytes, 133 bytes, and 176 bytes respectively. While these estimates seem reasonable, Russell believes that once per hour transmission may be optimistic when channels approach exhaustion. The goal for the Lightning Network is to accommodate one million nodes, ideally on a cell phone. Bitcoin used IRC as the peer protocol in the short term. Rusty Russell plans to use IRC as well while researching more ambitious proposals. He also wants to log the entire network dynamics. However, doing this over IRC would require doubling the byte size to encode keys/sigs into hex and adding maybe 32B per message for IRC protocol overhead. This would result in 560B/channel/10 days, 298B/node/12h, and 384B/channel/1h. Assuming ~10 channels per node and converting to bytes/node/day, this results in 560B/node/day, 564B/node/day, and 92,160B/node/day. Therefore, the total is 93,284B/node/day which is about 1.054 KiB/s per thousand nodes. If a single server relays this to a thousand nodes, that’s 8.2 megabit/s outgoing already. Thus, the plan probably maxes out somewhere between 500-3000 nodes. Finally, it is noted that bitcoin only used IRC to get IP addresses to connect to, which were encoded in the nicks used, rather than anything being actually said. It seems like that got up to 10000 nodes.</summary>
+    <published>2015-10-19T23:55:01+00:00</published>
+  </entry>
+</feed>

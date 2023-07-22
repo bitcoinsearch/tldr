@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[ANN] Micropayment Channel Implementation</title>
+  <updated>2023-06-06T19:20:21.392624+00:00</updated>
+  <author>
+    <name>bitcoin-list at bluematt.me 2013-06-27 12:29:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[ANN] Micropayment Channel Implementation</title>
+    <updated>2023-06-06T19:20:21.392624+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-June/002824.html" rel="alternate"/>
+    <summary>Bitcoinj, a Java-based implementation of the Bitcoin protocol has merged micropayment channels onto its master branch. The implementation is designed to make it easier for users to create payment channel servers and clients based on the design at https://en.bitcoin.it/wiki/Contracts#Example_7:_Rapidly-adjusted_.28micro.29payments_to_a_pre-determined_party by creating a simple TCP socket and exchanging protobufs to initialize and make payments. The implementation supports various levels of abstractions, allowing users to drive the state machines which do basic channel init/verification themselves, allow bitcoinj to handle all the complexity of channel management/expiry/etc and simply exchange protobufs over whatever connection they wish to make with the server. Clients and servers exchange version handshake, and client may optionally request that an existing channel be reopened (the channels last for 24 hours by default, so if the connection gets killed, reopening an existing channel is useful).The protocol described on the wiki is followed, exchanging (canonical!) signatures and transactions until a multisignature contract is established and broadcast which locks money into the channel, and a refund transaction is created and signed which allows the client to spend the entire multisignature transaction to wherever they want (SIGHASH_NONE|SIGHASH_ANYONECANPAY) after some lock time (by default, 24 hours). Both the client and server store a copy of the channel in their wallet so that if the app itself crashes the refund transaction can still be broadcast/the channel can still be resumed.When the client sends a CLOSE message or the channel approaches the refund transaction unlock time, the server adds any necessary fees to the latest payment transaction and broadcasts it, closing the channel, disconnecting the client if the connection is still open and removing the stored channel state from its wallet. A more full protocol description will be written up in the form of a BIP as the code matures a bit more. See https://code.google.com/p/bitcoinj/wiki/WorkingWithMicropayments for details on how to use the implementation in bitcoinj.</summary>
+    <published>2013-06-27T12:29:30+00:00</published>
+  </entry>
+</feed>

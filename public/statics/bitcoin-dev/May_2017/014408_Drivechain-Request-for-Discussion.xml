@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Drivechain -- Request for Discussion</title>
+  <updated>2023-06-12T00:59:24.774086+00:00</updated>
+  <author>
+    <name>Tier Nolan 2017-05-24 08:50:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Drivechain -- Request for Discussion</title>
+    <updated>2023-06-12T00:59:24.774086+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-May/014408.html" rel="alternate"/>
+    <summary>In an email conversation, Paul Sztorc and ZmnSCPxj discussed the technical details of implementing sidechains using OP codes. The critical hashes for sidechains are added when a coinbase is processed and any output having the form "OP_RETURN" counts as a potential critical hash. When a block is processed, the key-value pair (hash, block_height) is added to a hash map. The “OP_BRIBE” opcode checks that the given hash is in the hash map and replaces the top element on the stack with the pass/fail result. However, the height matching the current block is not checked, though it is noted as a TODO. There is also the issue of multiple bribes for the same chain in a single coinbase, which would not be fair. Therefore, it is suggested that only the first hash with a particular sidechain ID counts and miners can only accept the bribe from one miner for each sidechain for each block.“OP_BRIBE_VERIFY” would cause the script to fail if the hash wasn't in the coinbase or cause a script failure otherwise. Transactions can be propagated over the network by having the rule that the opcode passes as long as the hash is near the current block height. In case of deposit/withdrawal code, further details are still being examined.</summary>
+    <published>2017-05-24T08:50:22+00:00</published>
+  </entry>
+</feed>

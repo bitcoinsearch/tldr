@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Speedy covenants (OP_CAT2)</title>
+  <updated>2023-06-15T20:31:43.503157+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2022-05-07 03:06:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Speedy covenants (OP_CAT2)</title>
+    <updated>2023-06-15T20:31:43.503157+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020429.html" rel="alternate"/>
+    <summary>The removal of `OP_CAT` was not due to enabling covenants but because it led to 2^N memory usage. Covenants were first expressed as a possibility during discussions around P2SH, where the sender was paying for the security of the receiver with k-of-n multisignature. The solution became the `OP_EVAL` and P2SH concept, which created a separate script containing the public keys, hashed it, and contained the hash of the script in the `scriptPubKey`. Then the `OP_EVAL` could take the stack top vector and treat it as a Bitcoin SCRIPT. It was then pointed out that `OP_EVAL` could be used to create recursive SCRIPTs by quining using `OP_CAT`. Because of concerns about recursive covenants, modern P2SH is now "just a template" with an implicit `OP_EVAL` of the `redeemScript`, without any `OP_EVAL` being actually enabled. Re-enabling `OP_CAT` would be a hardfork, but creating a new `OP_CAT2` that does the same would be a softfork. If one is willing to work in Taproot, the same OP-code can be enabled in a softfork by using a new Tapscript version. In particular, in combination with `OP_CAT`, `OP_EVAL` not only allows recursive covenants, but also recursion within a SCRIPT, i.e., unbounded SCRIPT execution. Thus, `OP_EVAL` is simply not going to fly at all. The proposal for speedy covenants (aka `OP_CAT2`) has been implemented for longer, and it should be easier to deploy in principle. However, deploying simplicity in Bitcoin is harder to review and test than other proposals because it wouldn't simply add covenants but a complete new scripting language that is better in many senses.</summary>
+    <published>2022-05-07T03:06:23+00:00</published>
+  </entry>
+</feed>

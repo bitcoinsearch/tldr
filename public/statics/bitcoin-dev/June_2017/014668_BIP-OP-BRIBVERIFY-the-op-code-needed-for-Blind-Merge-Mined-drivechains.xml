@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP: OP_BRIBVERIFY - the op code needed for Blind Merge Mined drivechains</title>
+  <updated>2023-06-12T03:04:03.436150+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2017-06-28 08:26:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP: OP_BRIBVERIFY - the op code needed for Blind Merge Mined drivechains</title>
+    <updated>2023-06-12T03:04:03.436150+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-June/014668.html" rel="alternate"/>
+    <summary>Chris Stewart has proposed a new opcode, OP_BRIBEVERIFY for the Bitcoin scripting system in order to enable Blind Merge Mining. This allows sidechains in Bitcoin and enables users to bribe miners to include their block hash in the bitcoin blockchain. If their block is included in the coinbase transaction's vout, it is assumed that block is a mined block on the sidechain. The benefit of this is that various factions of the community can use Bitcoin as a 'reserve currency' for their own network. A new block rule is added which requires that the miner's coinbase reward be at index 0 in the coinbase transaction's output vector. It also fixes the witness commitment output to be at index 1 of the coinbase transaction's output vector. The commitment is recorded in a scriptPubKey of the coinbase transaction. It must be at least 34 bytes in size. A standard BRIBEVERIFY program has the format: 1-byte - Push the following 32 bytes (0x20) 32-byte - block hash 1 byte - Push operation? (needed if number can't be encoded as OP_0 - OP_16) 1 byte - sidechain id 1 byte - OP_BRIBEVERIFY op code. ZmnSCPxj suggested an alternate proposal for sidechains and altcoins that want to do "blinded" merge mining without requiring a softfork. This involves encoding a block header as a simple cons-pair, with the head as the block and the tail as the parent cons-pair. When a sidechain-node wants to know the consensus, it downloads mainchain-blocks and looks for OP_RETURN's. Starting with its genesis cons-pair hash as the current cons-pair it scans each OP_RETURN transaction. If an OP_RETURN is 64-byte with the parent cons-pair equal to the current cons-pair, look for the side block indicated and confirm its correctness. If correct, update the current cons-pair for the hash of the OP_RETURN data.</summary>
+    <published>2017-06-28T08:26:37+00:00</published>
+  </entry>
+</feed>

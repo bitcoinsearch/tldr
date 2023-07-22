@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A Replacement for RBF and CPFP: Non-Destructive TXID Dependencies for Fee Sponsoring</title>
+  <updated>2023-06-14T15:24:07.514732+00:00</updated>
+  <author>
+    <name>David A. Harding 2020-09-21 14:52:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A Replacement for RBF and CPFP: Non-Destructive TXID Dependencies for Fee Sponsoring</title>
+    <updated>2023-06-14T15:24:07.514732+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-September/018186.html" rel="alternate"/>
+    <summary>The email thread discusses the issue of concurrent states being pinned in a sponsor mechanism. Bob can broadcast a thousand revoked Lightning Network (LN) states and pin them with low-feerate sponsors, making it impossible for Alice to fee-sponsor them as she doesn't have a global view of network mempools. Due to the proposed policy rule, "The Sponsor Vector's entry must be present in the mempool," Alice's sponsors won't propagate. The proposal suggests that instead of sponsor vectors pointing to transaction IDs, they should point to input outpoints. This mechanism involves Alice and Bob opening a channel with a funding transaction, after which Alice unilaterally broadcasts a commitment transaction with minimal fees. Bob then broadcasts a sponsor transaction with a vector of 0123...cdef:0, and miners can include that sponsor transaction in any block that has a transaction with an input of 0123...cdef:0. This proposal does not require any consensus changes but may not solve RBF transaction pinning or ancestor/dependent limit pinning. Dave mentions that package relay based only on feerate may not solve the issue of RBF transaction pinning and ancestor/dependent limit pinning. However, he acknowledges that package relay has the advantage of not requiring any consensus changes and is useful in fixing other protocol rough edges.</summary>
+    <published>2020-09-21T14:52:21+00:00</published>
+  </entry>
+</feed>

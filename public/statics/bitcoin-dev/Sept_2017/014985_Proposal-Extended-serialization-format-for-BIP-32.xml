@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Extended serialization format for BIP-32</title>
+  <updated>2023-06-12T18:38:05.247168+00:00</updated>
+  <author>
+    <name>Thomas Voegtlin 2017-09-12 09:06:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Extended serialization format for BIP-32</title>
+    <updated>2023-06-12T18:38:05.247168+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-September/014985.html" rel="alternate"/>
+    <summary>The email thread on the bitcoin-dev mailing list is focused on proposing an extended serialization format for BIP-32 wallets. Shiva Sitamraju expressed his discomfort regarding the inclusion of a birthdate field in public key serialization, citing privacy implications for both the birthday field and having the complete derivation path which takes up space. He approves of Thomas's proposal of {x,y,z} and suggests using the existing version field in BIP32 instead of adding more bytes.Thomas Voegtlin expresses concern that adding an extra byte field will make the value user invisible while using base58 or bech32 encoding. He explains that he wrote in his initial proposal that the OutputType value should be user visible, and he used version bytes for this purpose. It is better to make the flag user visible for creating wallets with multisig scripts because all master public keys should be of the same type to ensure that all cosigners agree on the script type that will be used to derive addresses. In other words, if users are exposed to master keys and need to manipulate them, it is better to let them see what they are doing.Pavol Rusnak suggested adding another byte field OutputType for wallets that do not follow BIP43, with values such as P2PKH output type, P2WPKH-in-P2SH output type, and native Segwit output type. Andreas Schildbach agreed with this suggestion. However, Thomas Voegtlin believes that if users do not plan to expose their users to these keys, they probably do not need a serialization format.Mark Friedenbach discussed the problem of trust in scripts given by another party and the possibility of attacks on MAST policy.</summary>
+    <published>2017-09-12T09:06:15+00:00</published>
+  </entry>
+</feed>

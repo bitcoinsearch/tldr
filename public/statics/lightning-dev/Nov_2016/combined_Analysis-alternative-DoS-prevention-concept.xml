@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Analysis: alternative DoS prevention concept</title>
+  <updated>2023-05-24T00:49:57.296263+00:00</updated>
+  <author>
+    <name>CJP 2016-11-10 23:11:54</name>
+  </author>
+  <author>
+    <name>David A. Harding 2016-11-11 12:19:07</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2016-11-14 04:08:27</name>
+  </author>
+  <link href="lightning-dev/Nov_2016/000648_Analysis-alternative-DoS-prevention-concept.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2016/000649_Analysis-alternative-DoS-prevention-concept.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2016/000650_Analysis-alternative-DoS-prevention-concept.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Analysis: alternative DoS prevention concept</title>
+    <updated>2023-05-24T00:49:57.296263+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-November/000648.html" rel="alternate"/>
+    <summary>The Lightning Network has a vulnerability that can be exploited through a DoS attack. An attacker can send large transactions to themselves over a long route and allow them to time out, which results in funds becoming locked up. Milan proposed a solution to limit the freedom in channel design, but this interferes with the vision of a heterogeneous network. Instead, an alternative solution was explored where the payer pays transaction fees at the beginning of the transaction. Two variations were considered, one with a constant fee and another where the fee depends on the time it takes for the transaction to roll back.However, the fees are much smaller than the time value of the locked-up money for a single node, and they do not significantly impact the attacker. This solution does not scale well with the length of the route, and a security solution that depends so much on market conditions is probably a bad idea if we aren't sure about these market conditions.David A. Harding responded to CJP's concern about the proposed solution limiting channel design. David argues that this DoS mitigation proposal does not require a homogeneous network because only direct peers need to receive commit, roll-back, or channel close proof. Rusty Russell points out that the proposal is incompatible with crossing networks since the information needs to be routed back to prove somebody was punished for the delay.It is unclear how nodes can be trusted when onion routing removes all information on the origin of transactions. The time value of money lost to transactions that block all the way to their HTLC time-out is enormous compared to the tx fees. The spreadsheet used to set up the solution provides insight into the expected parameters for both the occupation rate of channels and the fee rate of nodes. Investing funds in channels is still profitable even when both rates are low. However, Alice will always have to close with Bob, which increases risk for the network since the attacker does not have to close her own channels now.</summary>
+    <published>2016-11-10T23:11:54+00:00</published>
+  </entry>
+</feed>

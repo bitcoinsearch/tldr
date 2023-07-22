@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_LOOKUP_OUTPUT proposal</title>
+  <updated>2023-06-13T20:56:12.177617+00:00</updated>
+  <author>
+    <name>Runchao Han 2019-08-12 03:19:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_LOOKUP_OUTPUT proposal</title>
+    <updated>2023-06-13T20:56:12.177617+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-August/017254.html" rel="alternate"/>
+    <summary>In the email exchange between Runchao Han and ZmnSCPxj, they discuss the protocol for atomic swaps proposed by Fournier et al. They specifically focus on the responsibilities of Alice and Bob in the swap and the potential for arbitrage. The protocol involves Alice and Bob creating a payment channel on the WJT blockchain, with Bob responsible for preparing the WJT transaction and Alice responsible for preparing the BTC transaction and broadcasting both transactions.However, there are some issues with this protocol. If Alice stalls by withholding the WJT transaction, Bob cannot do anything except close the payment channel and quit. It is also not clear whether Bob can spend his money in the payment channel while it is still valid. Even if Bob can close the payment channel without Alice's consent, he cannot get the 10,000 WJT premium. This means that Bob should be responsible for broadcasting the WJT transaction to make the protocol fair for him.They also discuss the potential for arbitrage in the swap and propose a solution where premium payment is made contingent on Bob participating. Alice and Bob agree on swap parameters and generate a preimage+hash. Alice pays 1 BTC to a HTLC with hashlock going to Bob and timelocked at T+48 going to Alice. Alice reveals the WJT UTXOs to be spent to pay for the 10,000 WJT premium to Bob. Alice and Bob generate, but do not sign, a funding transaction spending some of Bob's coin as well as the premium coin from Alice. This pays out to 1,010,000 WJT (the value plus the premium) HTLC.Alice and Bob generate a claim transaction which spends the funding transaction HTLC output and pays out 1,000,000 WJT to Alice and 10,000 WJT to Bob. They sign the claim transaction but it does not become valid by itself as it still requires the preimage, which only Alice knows at this point. Both of them sign the funding transaction and broadcast it. Alice completes the claim transaction by adding the preimage and broadcasts it.If Bob stalls at step 8, then there is no way to claim the premium because the funding transaction, which is the source of the claim transaction that pays the premium, is not valid yet. After step 9, Bob is forced to participate and cannot back out and claim the premium only. This proposal sets up the American Call Option, but by the time it has been set up, the premium has already been paid and the rest of the execution is claiming the American Call Option. The described ritual only sets up the American Call Option. Thus, there is no need to add `OP_LOOKUP_OUTPUT`. However, this proposal requires the destination coin to support SegWit.</summary>
+    <published>2019-08-12T03:19:53+00:00</published>
+  </entry>
+</feed>

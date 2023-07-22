@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - on CDB::Rewrite()</title>
+  <updated>2023-06-07T17:20:43.337508+00:00</updated>
+  <author>
+    <name>Olivier Langlois 2013-10-04 03:23:49</name>
+  </author>
+  <author>
+    <name>Ron 2013-10-03 03:16:03</name>
+  </author>
+  <author>
+    <name>Ron 2013-10-03 03:16:03</name>
+  </author>
+  <author>
+    <name>Olivier Langlois 2013-10-04 03:23:49</name>
+  </author>
+  <author>
+    <name>Olivier Langlois 2013-10-04 03:23:49</name>
+  </author>
+  <author>
+    <name>Ron 2013-10-03 03:16:03</name>
+  </author>
+  <link href="bitcoin-dev/Oct_2013/003325_on-CDB-Rewrite-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2013/003316_on-CDB-Rewrite-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2013/003316_on-CDB-Rewrite-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2013/003325_on-CDB-Rewrite-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2013/003325_on-CDB-Rewrite-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2013/003316_on-CDB-Rewrite-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - on CDB::Rewrite()</title>
+    <updated>2023-06-07T17:20:43.337508+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-October/003325.html" rel="alternate"/>
+    <summary>The author of the context mentions an issue with not being able to raise https://bitcointalk.org. They then examine the CDB:Rewrite() code in db.h and db.cpp files and note that it is declared as 'bool static' in db.h but not in db.cpp. It is not clear whether this is a problem or an intentional feature. The function CDB:Rewrite() is called only in wallet.cpp --&gt;CWallet::EncryptWallet(), but its return value is ignored, prompting the author to ponder if this was intentional or a bug. CWallet::EncryptWallet() is called by AskPassphraseDialog::accept() and WalletModel::setWalletEncrypted(), both of which are interested in the return value of CWallet::EncryptWallet(). The author wonders if this could be related to an old issue with wallet encryption on bitcoin-qt 0.8.1. This may be considered a minor bug since over 99% of the time the function is called, it succeeds.One possible solution could be for CWallet::EncryptWallet() to return false to its callers when CDB::Rewrite fails. The author concludes by suggesting there may be more 'suspicious' code to investigate in their IDE during quiet moments, finding amusement in trying to infer the meaning and intent behind the use of 'return 0' and 'return 1'.</summary>
+    <published>2013-10-04T03:23:49+00:00</published>
+  </entry>
+</feed>

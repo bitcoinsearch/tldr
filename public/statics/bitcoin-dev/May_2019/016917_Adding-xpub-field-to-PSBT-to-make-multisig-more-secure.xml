@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Adding xpub field to PSBT to make multisig more secure</title>
+  <updated>2023-06-13T18:24:38.415804+00:00</updated>
+  <author>
+    <name>Dmitry Petukhov 2019-05-07 13:40:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Adding xpub field to PSBT to make multisig more secure</title>
+    <updated>2023-06-13T18:24:38.415804+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-May/016917.html" rel="alternate"/>
+    <summary>In order to safely show an incoming address to the user, PSBT-signing devices still need to store the xpubs of their co-signers. This represents data that should not change between PSBT instances. However, hardware wallets need to be stateless for easy wiping and recovering. To solve this, at the setup phase, the user can verify a multisignature address or xpub on the screens of all devices, then verify that xpubs in the inputs and in the change output are the same. Hardware wallets can sign a message consisting of xpubs of participants and auxiliary text during the setup phase. It can use the key derived from the master key, with path chosen specifically for this purpose. The software stores the message and signature and sends a 'trusted-xpub-package' to the hardware wallet along with the transaction. Hardware wallet can then mark outputs that use the pubkeys derived from 'verified' xpubs as 'trusted' outputs. It can also display the auxiliary text along with information about the 'trusted' output.This way, hardware wallet does not need to store anything extra besides the master key. This allows distinguishing trusted output even if the inputs are not all derived from the same set of xpubs. If the user loses the signature for the 'trusted-xpub-package', it can be re-created again but the procedure should be more involved than ordinary signing since creating such a package with malicious keys could enable attackers to bypass these checks.</summary>
+    <published>2019-05-07T13:40:34+00:00</published>
+  </entry>
+</feed>

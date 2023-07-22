@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Unclear HTLC scenario</title>
+  <updated>2023-06-04T04:33:48.401029+00:00</updated>
+  <author>
+    <name>SomberNight 2022-12-13 15:53:51</name>
+  </author>
+  <author>
+    <name>Benjamin Weintraub 2022-12-13 14:51:17</name>
+  </author>
+  <author>
+    <name>Benjamin Weintraub 2022-12-13 20:36:02</name>
+  </author>
+  <link href="lightning-dev/Dec_2022/003803_Unclear-HTLC-scenario.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2022/003802_Unclear-HTLC-scenario.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2022/003804_Unclear-HTLC-scenario.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Unclear HTLC scenario</title>
+    <updated>2023-06-04T04:33:48.401029+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-December/003803.html" rel="alternate"/>
+    <summary>A user named Benjamin Weintraub asked the Lightning-dev mailing list for clarification on how update_fail_htlcs are handled in cases where a node forwards an HTLC along a channel that cannot support the payment size. BOLT #2 states that nodes must not send an `update_fulfill_htlc`, `update_fail_htlc`, or `update_fail_malformed_htlc` until the corresponding HTLC is irrevocably committed in both sides' commitment transactions. This raised a question for Weintraub about whether nodes still need to commit to a payment that cannot be supported. However, SomberNight explained that this scenario is handled earlier than update_fail_htlc. When the recipient sees the update_add_htlc, some sanity checks will fail and it won't commit it to the commitment tx.BOLT #2 also specifies that when receiving an `amount_msat` that the sending node cannot afford at the current `feerate_per_kw`, the receiving node should send a `warning` and close the connection, or send an `error` and fail the channel. There is no need to wait until an invalid transaction is received to send an update_fail_htlc. If the recipient decides to simply close the transport connection, the update_add_htlc message is forgotten, and the channel is back to a usable state. The original email from Ben is included for context.</summary>
+    <published>2022-12-13T15:53:51+00:00</published>
+  </entry>
+</feed>

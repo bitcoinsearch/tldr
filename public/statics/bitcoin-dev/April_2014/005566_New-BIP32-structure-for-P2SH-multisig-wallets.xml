@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New BIP32 structure for P2SH multisig wallets</title>
+  <updated>2023-06-08T21:41:50.602119+00:00</updated>
+  <author>
+    <name>Manuel Araoz 2014-04-25 22:27:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New BIP32 structure for P2SH multisig wallets</title>
+    <updated>2023-06-08T21:41:50.602119+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005566.html" rel="alternate"/>
+    <summary>A team building a multisignature P2SH HD wallet has shared their approach to address generation and transaction signing for a multisig HD wallet, in response to discussions on standardising the structure for branches. The team has made several assumptions, including that N parties want to share an m-of-n wallet, each party must generate their master private keys independently, and multisig P2SH be used for all addresses, among others. They have proposed that they will use BIP43, with levels defined as m / purpose' / cosigner_index / change / address_index, and detail the meaning of each level. The team's high-level description of their wallet involves each party generating their own extended master keypair and sharing the extended purpose' public key with the others, which is stored encrypted. When generating an address, each party can independently generate the N needed public keys. In the receive address case, only one of the n cosigners generates addresses and knows the last used index in his own branch, while in the change address case, one of the n cosigners wants to create an outgoing payment, for which he'll need a change address. When creating a transaction, one of the parties creates a Transaction Proposal which is sent to the other parties who decide if they want to sign it. Once the proposal reaches m signatures, any cosigner can broadcast it to the network. There are still some questions left unanswered by the team, including whether cosigners will be able to generate public keys knowing the extended purpose public key for each copayer, and the benefits of sorting the master public keys before using them.</summary>
+    <published>2014-04-25T22:27:45+00:00</published>
+  </entry>
+</feed>

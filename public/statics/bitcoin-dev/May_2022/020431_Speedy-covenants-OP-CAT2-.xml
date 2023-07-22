@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Speedy covenants (OP_CAT2)</title>
+  <updated>2023-06-15T20:32:06.568184+00:00</updated>
+  <author>
+    <name>vjudeu at gazeta.pl 2022-05-07 03:52:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Speedy covenants (OP_CAT2)</title>
+    <updated>2023-06-15T20:32:06.568184+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020431.html" rel="alternate"/>
+    <summary>The removal of OP_CAT was due to its ability to cause an O(2^N) memory usage problem with a script of N size. However, it is possible to re-enable it using TapScript in a soft-fork way by adding restrictions to it. Introducing a new opcode, OP_CAT2, is not necessary unless it is completely different, and it would be better if it were named something else. Instead of using OP_CAT, other string-based functions can be used such as OP_SUBSTR or OP_SPLIT. Changing sighashes can also help solve the problem of transaction costs being paid by the sender instead of the receiver. For example, creating a "negative fee transaction" where all transaction costs are paid by the receiver is possible by using SIGHASH_SINGLE | SIGHASH_ANYONECANPAY with a higher amount in outputs than inputs.Covenants were first expressed as a possibility during discussions around P2SH. The problem was that some receivers wanted to use k-of-n multisignature for improved security, but the sender was paying for the size of the scriptPubKey, which was considered unfair. This led to the creation of OP_EVAL and the P2SH concept. However, recursive scripts using OP_CAT created concerns about recursive covenants, and even with a limit on its output size, people are reluctant to re-enable it. In combination with OP_CHECKSIGFROMSTACK and OP_CHECKSIG, recursive covenants could be created. Re-enabling OP_CAT with the exact same OP would require a hardfork, but a new Tapscript version could enable the same opcode in a soft-fork way. If there are concerns about quantum-computing-break, a new SegWit version can also be used. Deploying other covenant proposals later is not incompatible with this proposal. OP_CAT, by itself, does not implement any covenants --- instead, it creates recursive covenants when combined with almost all covenant opcodes. The simplicity proposal is considered the best among all the covenant proposals, but it requires a new scripting language that would be harder to review and test than other proposals. Speedy covenants, on the other hand, have been implemented for longer and should be easier to deploy in a speedy manner.</summary>
+    <published>2022-05-07T03:52:48+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposed Extensions to BIP 174 for Future Extensibility</title>
+  <updated>2023-05-20T20:45:26.468676+00:00</updated>
+  <author>
+    <name>Andrew Chow 2019-07-31 01:13:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposed Extensions to BIP 174 for Future Extensibility</title>
+    <updated>2023-05-20T20:45:26.468676+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-July/017188.html" rel="alternate"/>
+    <summary>The author, Andrew Chow, proposes some extensions to BIP 174 PSBT that would allow for future expansion. The first proposal is to reserve certain types for proprietary use by individuals and organizations who want to attach additional data to a PSBT. These 15 type values will be the same for global, per-input, and per-output types, and it is expected that these types will only be used for internal processes.The next proposal is a global version type and field with a 32-bit unsigned little endian integer representing the version number. A PSBT without a version number is considered version 0, and if a parser does not understand a version number, it should exit immediately as the PSBT may contain unsafe types. This version number is a safeguard in case a backwards incompatible change is introduced to PSBT.Lastly, the author proposes a canonical method for multi-byte types using 0xFF as the designated type to indicate that the type is multiple bytes. When a parser sees an 0xFF value as the type, it reads the next byte as part of the type and keeps track of the number of bytes read. This method allows for quick identification of the type being used and can also be used for proprietary types. Although there may be more space efficient methods, the author chose this method due to its simplicity and the expectation that only one-byte types will be needed for a long time.The author intends to open a PR to the bips repo to add these extensions to BIP 174 unless there are objections.</summary>
+    <published>2019-07-31T01:13:46+00:00</published>
+  </entry>
+</feed>

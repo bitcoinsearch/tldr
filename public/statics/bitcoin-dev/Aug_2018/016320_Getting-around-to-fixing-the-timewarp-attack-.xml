@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Getting around to fixing the timewarp attack.</title>
+  <updated>2023-05-20T17:35:11.964392+00:00</updated>
+  <author>
+    <name>Johnson Lau 2018-08-24 09:35:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Getting around to fixing the timewarp attack.</title>
+    <updated>2023-05-20T17:35:11.964392+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-August/016320.html" rel="alternate"/>
+    <summary>Bitcoin's non-overlapping difficulty calculation has been vulnerable to gaming since 2012 due to inaccurate timestamps. This vulnerability can be fixed with a soft-fork that further constrains block timestamps, and several proposals have been suggested. A demonstration of timewarp was put early in the testnet3 chain for people to test mitigations against it. The risk of deploying these mitigations would be minimal and several proposals are fully compatible with existing behavior and only trigger in exceptional circumstances. However, a majority hashrate is required to fix this vulnerability which could be easily blocked if someone started using it. To determine the new difficulty, it is supposed to compare the timestamps of block (2016n - 1) with block (2016n - 2017). An off-by-one bug makes it compare with block (2016n - 2016) instead. A naive but perfect fix is to require every block (2016x) to have a timestamp not smaller than that of its parent block. However, a chain-split would happen even without any attack unless a super-majority of miners are enforcing the new rules. The best way is to do it with something like BIP34, which also requires new pool software.A weaker version of this fix involves requiring the timestamp of block (2016x) not to be smaller than its parent block by t-seconds, with 0&lt;t&lt;2 hours. A mandatory upgrade of pool software is required for this fix. Pool software upgrade is not mandatory for segwit. Gregory Maxwell via bitcoin-dev suggested asking the list if anyone else was aware of a favorite backwards compatible timewarp fix proposal they wanted to point out before dusting off his old fix and perhaps prematurely causing fixation on a particular approach.</summary>
+    <published>2018-08-24T09:35:11+00:00</published>
+  </entry>
+</feed>

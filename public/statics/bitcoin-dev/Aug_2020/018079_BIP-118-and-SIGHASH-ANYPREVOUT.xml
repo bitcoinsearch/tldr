@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 118 and SIGHASH_ANYPREVOUT</title>
+  <updated>2023-05-20T23:31:50.408251+00:00</updated>
+  <author>
+    <name>Matt Corallo 2020-08-11 00:14:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 118 and SIGHASH_ANYPREVOUT</title>
+    <updated>2023-05-20T23:31:50.408251+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018079.html" rel="alternate"/>
+    <summary>In a conversation on the Bitcoin-dev mailing list, Matt Corallo discussed the possibility of a relay network that could handle transactions with SIGHASH_ANYPREVOUT. Such a network would need to be able to rewrite transactions before passing them on to a local bitcoind. For example, a sender could relay a transaction with one input that is valid for any output index 0 in a transaction spending output B. The receiver would then look up which transaction in its mempool or chain spends output B and fill in the input with that outpoint. Richard Myers asked if such a relay network could be more "smart about replacement" in the context of ANYPREVOUT by RBF-ing parts of a package. Matt responded that SIGHASH_NOINPUT would make these issues much simpler to address, but only if nodes could be "smart" about replacement when they see a SIGHASH_NOINPUT spend that can spend an output already spent by something else in the mempool. While shoving this complexity into the Bitcoin P2P network may not be feasible, a relay network of lightning nodes could potentially handle the calculation and pass the transactions to their local full nodes.</summary>
+    <published>2020-08-11T00:14:29+00:00</published>
+  </entry>
+</feed>

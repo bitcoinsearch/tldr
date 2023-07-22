@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Trying to patch Core ZMQ "rawtx" topic to only publish unconfirmed transactions: How?</title>
+  <updated>2023-06-15T03:02:11.008605+00:00</updated>
+  <author>
+    <name>Ali Sherief 2021-11-29 14:13:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Trying to patch Core ZMQ "rawtx" topic to only publish unconfirmed transactions: How?</title>
+    <updated>2023-06-15T03:02:11.008605+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-November/019613.html" rel="alternate"/>
+    <summary>Ali Sherief is trying to patch Core ZMQ "rawtx" topic to only publish unconfirmed transactions. Currently, the ZeroMQ topic Ali is listening to, "rawtx", emits a raw transaction when it appears on the mempool and once it's already confirmed too. This causes his software to add txids, addresses, etc. a second time inside arrays, meaning that the same transaction is received twice in total. Ali needs to receive the unconfirmed messages as part of a casino which must display the status of new deposits that are made, even when they are unconfirmed. According to a Stack Exchange post, it is not possible to configure this from a configuration or command-line option. The source code must directly be edited. 0xB10C has opened a draft PR adding a rawmempooltx publisher. In zmq/zmqnotificationinterface.cpp, the CZMQNotificationInterface is notified about TransactionAddedToMempool. Currently, this calls NotifyTransaction() (the publisher with the rawtx topic) and NotifyTransactionAcceptance() (the publisher with the sequence topic). 0xB10C has added a call to a new NotifyMempoolTransaction() function (the publisher with the rawmempooltx topic). A mempool transaction publisher with both the raw transaction and transaction fee would also be useful, but this requires changes to the chain notifications in interfaces/chain.h. Ali knows that something inside src/zmq/zmqnotificationinterface.cpp needs to be patched, but he's not sure which function or how to do it. He needs to patch one of these two functions for his own build: CZMQNotificationInterface::TransactionRemovedFromMempool or void CZMQNotificationInterface::BlockDisconnected. Both of these call NotifyTransaction() method, which fires a message on "rawtx" channel. Jonas Schnelli suggested adding an `if (!pblock)` check several years ago, but the function he was referencing no longer exists. Ali still wonders if the pblock check is still applicable in the present day (i.e. if it's indicating a block the transaction is inside).</summary>
+    <published>2021-11-29T14:13:37+00:00</published>
+  </entry>
+</feed>

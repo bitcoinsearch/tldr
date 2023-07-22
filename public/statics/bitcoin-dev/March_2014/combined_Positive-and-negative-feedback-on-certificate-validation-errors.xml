@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Positive and negative feedback on certificate validation errors</title>
+  <updated>2023-06-08T03:40:02.603305+00:00</updated>
+  <author>
+    <name>Jeremy Spilman 2014-03-01 06:26:39</name>
+  </author>
+  <author>
+    <name>Wladimir 2014-03-01 07:26:57</name>
+  </author>
+  <author>
+    <name>Jeremy Spilman 2014-03-01 06:26:39</name>
+  </author>
+  <author>
+    <name>Wladimir 2014-03-01 07:26:57</name>
+  </author>
+  <author>
+    <name>Wladimir 2014-03-01 07:26:57</name>
+  </author>
+  <author>
+    <name>Jeremy Spilman 2014-03-01 07:50:32</name>
+  </author>
+  <author>
+    <name>Troy Benjegerdes 2014-03-02 18:18:18</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-03-02 10:37:48</name>
+  </author>
+  <author>
+    <name>Jeremy Spilman 2014-03-01 07:50:32</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-03-02 10:37:48</name>
+  </author>
+  <author>
+    <name>Jeremy Spilman 2014-03-01 07:50:32</name>
+  </author>
+  <author>
+    <name>Troy Benjegerdes 2014-03-02 18:18:18</name>
+  </author>
+  <author>
+    <name>Jeremy Spilman 2014-03-01 06:26:39</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-03-02 10:37:48</name>
+  </author>
+  <author>
+    <name>Troy Benjegerdes 2014-03-02 18:18:18</name>
+  </author>
+  <link href="bitcoin-dev/March_2014/004467_Positive-and-negative-feedback-on-certificate-validation-errors.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2014/004468_Positive-and-negative-feedback-on-certificate-validation-errors.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2014/004467_Positive-and-negative-feedback-on-certificate-validation-errors.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2014/004468_Positive-and-negative-feedback-on-certificate-validation-errors.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2014/004468_Positive-and-negative-feedback-on-certificate-validation-errors.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2014/004469_Positive-and-negative-feedback-on-certificate-validation-errors.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2014/004490_Positive-and-negative-feedback-on-certificate-validation-errors.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2014/004480_Positive-and-negative-feedback-on-certificate-validation-errors.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2014/004469_Positive-and-negative-feedback-on-certificate-validation-errors.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2014/004480_Positive-and-negative-feedback-on-certificate-validation-errors.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2014/004469_Positive-and-negative-feedback-on-certificate-validation-errors.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2014/004490_Positive-and-negative-feedback-on-certificate-validation-errors.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2014/004467_Positive-and-negative-feedback-on-certificate-validation-errors.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2014/004480_Positive-and-negative-feedback-on-certificate-validation-errors.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2014/004490_Positive-and-negative-feedback-on-certificate-validation-errors.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Positive and negative feedback on certificate validation errors</title>
+    <updated>2023-06-08T03:40:02.603305+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-March/004467.html" rel="alternate"/>
+    <summary>Bitcoin developers are discussing a bug (#3628) and pull request (#3684) regarding negative feedback for missing or invalid signatures. The open bug and pull request aim to provide negative feedback in the form of a yellow background for requests with missing or invalid signatures. However, it is debated whether this should be implemented in bitcoind as there may not be a security benefit to singling out badly signed payment requests from unsigned ones. Instead, the root problem could be that the positive feedback (green background) is not noticeable enough to the end user. There is also discussion on implementing the equivalent of HTTP Strict Transport Security for payment protocol to prevent trivial signature stripping attacks in the future.In an email conversation, Bitcoin developers discuss the possibility of a future BIP standard. They point out that unsigned payment requests do not have an "origin" or referrer, making it difficult to differentiate them. If the request has a certificate, the CN becomes the "Pay To" string displayed for the merchant. However, without a certificate, the best way to differentiate signed requests is by prominently displaying the Merchant string. The green part of the display should only show the "Pay To" line, with the rest as content. A blank "Pay To" line would make the lack of a certificate apparent.Jeremy Spilman expresses concerns over the use of third-party "root certificates" as a form of positive feedback for signed payment requests made through a cryptographic currency. Currently, signed payment requests are indicated by a green background while unsigned requests do not have this indication. However, Spilman questions the need for external certificates and their potential impact on security. He suggests that if the payment is signed by the ECDSA private key to which it's being sent, then it should be marked with the green background. Furthermore, he proposes implementing a "signing fee" extension or a compile-time option to disable this feature for small businesses who may find it too expensive to take secure payments.In another email conversation, Wladimir suggests a green stamp watermark for future BIP standard to differentiate signed requests. However, Jeremy Spilman points out that for an unsigned payment request there isn't really an "origin" and the best way to differentiate signed requests is by prominently displaying that Merchant string in the green part of the stamp. The rest of the content should be displayed as normal and if there's no cert then all you have is memo.The email threads suggest that there is debate around how to provide feedback for missing or invalid signatures and how to differentiate between signed and unsigned payment requests. There are proposals to implement the equivalent of HTTP Strict Transport Security for payment protocol to prevent signature stripping attacks in the future. Additionally, there are concerns about the use of third-party root certificates and proposals to mark payments signed by the ECDSA private key with a green background.</summary>
+    <published>2014-03-01T06:26:39+00:00</published>
+  </entry>
+</feed>

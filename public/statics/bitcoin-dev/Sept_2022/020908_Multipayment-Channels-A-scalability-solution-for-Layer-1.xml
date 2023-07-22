@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Multipayment Channels - A scalability solution for Layer 1</title>
+  <updated>2023-05-22T21:09:58.344434+00:00</updated>
+  <author>
+    <name>Ali Sherief 2022-09-04 22:31:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Multipayment Channels - A scalability solution for Layer 1</title>
+    <updated>2023-05-22T21:09:58.344434+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-September/020908.html" rel="alternate"/>
+    <summary>The author has developed a novel way to batch transactions together into blocks, increasing the transactions-per-second without hardforks. The idea was born after a discussion with Greg Maxwell about implementing multisig using Taproot, in which he suggested adding MuSig1 signatures into the Taproot script paths. The author realized a use case for MuSig1 signatures as a kind of on-chain Lightning Network. The author's scheme makes use of MuSig1, OP_CHECKLOCKTIMEVERIFY (OP_CLTV) timelock type, and negligible OP_RETURN data. It revolves around constructs called "multipayment channels", allowing multiple people to pay in one transaction. Each channel consists of a fixed amount of people N. These people open a channel by creating an address with the following script: OP_CTLV OP_DROP OP_CHECKMUSIG. Simultaneously, each of the N participants receives the N signatures and constructs the N-of-N MuSig.Each participant will use this MuSig to generate his own independent "commitment transaction" with a single input, the MuSig output, and outputs corresponding to the addresses and balances of each of the participants in the agreed-upon distribution. A second output with a script OP_RETURN can be added to the transaction to enable L1 channel discovery. Full nodes parsing the blockchain can maintain a list of connection IDs to connect to. A connection only lasts for one transaction. Spending the output to another MuSig of the above format will create a new connection if it spends to a similarly-constructed MuSig output with different signature. In all cases, the current connection is destroyed. This introduces a variable grace period, in blocks, after which anybody can broadcast this transaction to commit the channel funds distribution to each of the participants' addresses. However, this scheme has some disadvantages - the N-of-N signature might be leaked into the public, and all the participants must be trustworthy.</summary>
+    <published>2022-09-04T22:31:38+00:00</published>
+  </entry>
+</feed>

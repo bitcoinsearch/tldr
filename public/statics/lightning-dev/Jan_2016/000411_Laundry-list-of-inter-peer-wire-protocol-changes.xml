@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Laundry list of inter-peer wire protocol changes</title>
+  <updated>2023-05-23T22:08:41.952848+00:00</updated>
+  <author>
+    <name>CJP 2016-01-27 19:34:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Laundry list of inter-peer wire protocol changes</title>
+    <updated>2023-05-23T22:08:41.952848+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-January/000411.html" rel="alternate"/>
+    <summary>The Amiko Pay protocol is a decentralized payment network that offers privacy and security to users. According to the protocol description, TCP is used for transport layer as it works well over TOR, but retransmission features are not needed since they will be implemented in a higher layer. JSON with some conventions added on top of it is used for serialization, which is bloated but easily debuggable and extensible. Manual message confirmation is done instead of relying on TCP so that nodes know which messages were received and need to be re-transmitted even after a crash and restart. In addition, there is bi-directional routing between payer and payee, necessary for Amiko Pay's routing, and useful for transmitting meta-data that doesn't fit in a QR code. The protocol transmits an arbitrary-contents "receipt" from payee to payer, which in the future might be digitally signed by the payee as proof of transfer of ownership of non-cryptographic goods. Bi-directional routing allows the network to grow without large hubs noticing it in both payer and payee directions, which is good for privacy.Multiple channels per link are also used, which makes it easy to route transactions while one of the channels is temporarily closed. Different channel classes are used as well, enabling the micro-transaction design and its implications on what information needs to be transferred in which situations. An optimization strategy called reserving before locking is used to reduce the risk of locking funds in payment channels on a part of the route, and then having to undo the locking when it turns out that the remaining part of the route doesn't exist anymore. Reserving is an informal, temporary locking of funds for use in the transaction, and can be done and undone very fast, without any channel operations. It is done together with route searching and establishment. The author warns against trusting protocol specs that don't have an implementation, and using implementations that don't have a protocol spec, to avoid future compatibility issues.</summary>
+    <published>2016-01-27T19:34:15+00:00</published>
+  </entry>
+</feed>

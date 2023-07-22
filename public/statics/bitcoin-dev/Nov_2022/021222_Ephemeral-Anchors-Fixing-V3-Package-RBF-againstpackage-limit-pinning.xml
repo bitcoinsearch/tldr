@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Ephemeral Anchors: Fixing V3 Package RBF againstpackage limit pinning</title>
+  <updated>2023-05-22T22:57:23.909771+00:00</updated>
+  <author>
+    <name>Greg Sanders 2022-11-30 15:32:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Ephemeral Anchors: Fixing V3 Package RBF againstpackage limit pinning</title>
+    <updated>2023-05-22T22:57:23.909771+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021222.html" rel="alternate"/>
+    <summary>Bitcoin developer Greg Sanders has proposed a solution called "Ephemeral Anchors" to solve package limit pinning for fee-paying transactions. This is a problem as these transactions cannot enter the mempool due to an existing large mempool package. The proposal allows anyone to bump the transaction without transaction key material and ensures that change outputs can no longer be pinned. Sanders believes that this policy would also magnify composability of smart contracts, safely splicing directly into new channels, statechains, custodial wallet accounts, cold wallets, etc., without requiring other wallets to support arbitrary scripts. He is seeking feedback on the complexity of the implementation and whether requiring these outputs for v3 would help with anonymity set and keep the v3 surface smaller. Maxwell has two proposed solutions, of which he strongly prefers the latter. The first proposal would expand a carveout for "sibling eviction." The second proposal is Ephemeral Anchors. An output is watermarked as an output that MUST be spent in a V3 package. The proposal raises open questions regarding MEV (miner extractable value) concern and SIGHASH_GROUP like constructs that would allow uncommitted ephemeral anchors to be added at spend time, depending on spending requirements.In the RBF proposal package, if the parent transaction is identical to an existing transaction in the mempool, the parent will be detected and removed from the package proposal. However, in the case of another parent output already being spent, this is simply rejected, regardless of feerate of the new child.</summary>
+    <published>2022-11-30T15:32:36+00:00</published>
+  </entry>
+</feed>

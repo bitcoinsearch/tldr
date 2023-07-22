@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Multisignature transaction support in the GUI</title>
+  <updated>2023-06-06T02:47:03.815391+00:00</updated>
+  <author>
+    <name>Gavin Andresen 2012-02-06 16:07:00</name>
+  </author>
+  <author>
+    <name>Wladimir 2012-02-06 17:27:20</name>
+  </author>
+  <author>
+    <name>Aidan Thornton 2012-02-07 11:52:19</name>
+  </author>
+  <author>
+    <name>Wladimir 2012-02-06 17:27:20</name>
+  </author>
+  <author>
+    <name>Wladimir 2012-02-06 17:27:20</name>
+  </author>
+  <author>
+    <name>Aidan Thornton 2012-02-07 11:52:19</name>
+  </author>
+  <author>
+    <name>Gavin Andresen 2012-02-06 16:07:00</name>
+  </author>
+  <author>
+    <name>Wladimir 2012-02-06 18:03:35</name>
+  </author>
+  <author>
+    <name>Aidan Thornton 2012-02-07 11:52:19</name>
+  </author>
+  <author>
+    <name>Wladimir 2012-02-06 18:03:35</name>
+  </author>
+  <author>
+    <name>Gavin Andresen 2012-02-06 16:07:00</name>
+  </author>
+  <author>
+    <name>Wladimir 2012-02-06 18:03:35</name>
+  </author>
+  <link href="bitcoin-dev/Feb_2012/001201_Multisignature-transaction-support-in-the-GUI.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2012/001202_Multisignature-transaction-support-in-the-GUI.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2012/001204_Multisignature-transaction-support-in-the-GUI.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2012/001202_Multisignature-transaction-support-in-the-GUI.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2012/001202_Multisignature-transaction-support-in-the-GUI.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2012/001204_Multisignature-transaction-support-in-the-GUI.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2012/001201_Multisignature-transaction-support-in-the-GUI.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2012/001203_Multisignature-transaction-support-in-the-GUI.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2012/001204_Multisignature-transaction-support-in-the-GUI.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2012/001203_Multisignature-transaction-support-in-the-GUI.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2012/001201_Multisignature-transaction-support-in-the-GUI.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Feb_2012/001203_Multisignature-transaction-support-in-the-GUI.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Multisignature transaction support in the GUI</title>
+    <updated>2023-06-06T02:47:03.815391+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-February/001201.html" rel="alternate"/>
+    <summary>Bitcoin developer Gavin Andresen discovered that the Bitcoin-Qt GUI can display multisignature transactions without any issues but doesn't support sending multisig/BIP16 transactions, which are not yet ready for the main network. He suggests two possible paths: leaving the GUI as-is and requiring multisig testing to use the RPC interface, or starting to implement multisig support in the GUI during the 0.6 release process but only enabling it for the test network. The advantage of path one is that it should mean 0.6 gets to final release faster, whereas the advantage of path two is more testing of multisig with fewer bug reports.In an email exchange on February 6th, 2012, Gavin Andresen suggested two options for multisig address implementation, with the second option being more preferable as it would lead to more testing and fewer bug reports. However, he believed that creating multisig addresses via the GUI should wait until the next release, while allowing send-to-multisig-address through GUI was a simple change. Wladimir agreed to go with the second option, which involved changing the maximum address length and validation, but questioned whether WalletModel::sendCoins had to be changed as well.A discussion took place regarding changes to BitcoinAddressValidator::MaxAddressLength and WalletModel::sendCoins. The validation of addresses is performed through walletmodel-&gt;validateAddress, which in turn calls CBitcoinAddress addressParsed(addr) and then isValid(). Both the GUI and RPC commands use CBitcoinAddress and IsValid to validate addresses. It was concluded that it should work unless BIP 16 caused any issues. CScript.SetBitcoinAddress is used for the new address type and should work with the RPC commands for sending Bitcoins. The only change that needs to be made is to MaxAddressLength, which is necessary when sending coins to multisig addresses on testnet. However, sending coins on mainnet should still work without any changes. Overall, there are minimal changes needed for the new address types.</summary>
+    <published>2012-02-06T16:07:00+00:00</published>
+  </entry>
+</feed>

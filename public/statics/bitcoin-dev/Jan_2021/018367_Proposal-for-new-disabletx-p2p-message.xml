@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for new "disabletx" p2p message</title>
+  <updated>2023-05-21T00:33:10.044095+00:00</updated>
+  <author>
+    <name>Suhas Daftuar 2021-01-19 19:19:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for new "disabletx" p2p message</title>
+    <updated>2023-05-21T00:33:10.044095+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018367.html" rel="alternate"/>
+    <summary>In an email thread, Suhas Daftuar proposed a new disabletx message to be added in the bitcoin protocol. This message would prevent nodes from sending inv messages for transactions to any peer that had sent or received the disabletx message. It was also recommended that nodes not send addr or addrv2 messages to these peers. However, the implementation of this proposal would differ for nodes running with -blocksonly and non-listening nodes running with -connect to one/more preselected peers. For nodes running with -blocksonly, sending disabletx would mean they can't maintain their addr db and find other nodes to connect to. Additionally, they sometimes relay transactions themselves so the proposal is not compatible with them. On the other hand, non-listening nodes running with -connect could not send disabletx generally because they want txes, but they don't need addr information and are essentially blackholes. While some developers have criticized the mention of addr-relay in a BIP about tx-relay, Daftuar thinks that it should still be mentioned until there is an address relay protocol extension that governs it explicitly. He also does not think that adding a "disableaddr" type of message now makes sense since it would be made redundant by a more extensive protocol in the future. Daftuar believes that if there is some software that someone plans to deploy soon that would seek to use disabletx but would prefer addr relay on these links, then he would re-evaluate the proposal to figure out the best way to achieve both use cases.</summary>
+    <published>2021-01-19T19:19:12+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Signature and Script Independent Hierarchy for Deterministic Wallets.</title>
+  <updated>2023-05-21T01:57:32.013256+00:00</updated>
+  <author>
+    <name>Robert Spigler 2021-03-14 01:51:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Signature and Script Independent Hierarchy for Deterministic Wallets.</title>
+    <updated>2023-05-21T01:57:32.013256+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-March/018630.html" rel="alternate"/>
+    <summary>Robert Spigler is working on a draft BIP for a signature and script independent hierarchy for deterministic wallets. He believes that with the implementation of descriptor wallets, the typical use case of a BIP43 `purpose’` level per script type is redundant. The differentiation of separate BIPs for multisignature derivation paths, with BIP45 and “BIP” 48, is also redundant – with path levels such as cosigner_index and script_type. Descriptors can set the order of the public keys with multi or have them sorted lexicographically with sortedmulti. Robert proposes that keys and scripts should not be mixed in the same layer. The wallet should create extended private/public keys independent of the script or signature type, whereas the descriptor language tells wallets to watch (single or multi-sig) outputs with the specified public keys. The BIP defines the following 5 levels in the BIP32 path: m / purpose' / coin_type' / account' / change / address_index.It is crucial that the `account’` level is increased for each new wallet joined or private/public keys created; for both privacy and cryptographic purposes. For example, in multisignature wallets, before sending a new key record to a coordinator, the wallet must increment the `account’` level. Before creating its own single signature wallet, the `account’` level must again be incremented. This prevents key reuse across single signature and multisignature wallets, across ECDSA and Schnorr signatures, and between the same wallet types.For more details, one can check the BIP here: https://github.com/Rspigler/bips-1/blob/Sane_Mulitisg_deriv/Modern%20Derivation%20Standard.mediawiki. The PR link for the same is https://github.com/Rspigler/bips-1/pull/1.</summary>
+    <published>2021-03-14T01:51:15+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>UHS: Full-node security without maintaining a full UTXO set</title>
+  <updated>2023-05-20T13:12:51.810477+00:00</updated>
+  <author>
+    <name>Matt Corallo 2018-05-17 15:28:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>UHS: Full-node security without maintaining a full UTXO set</title>
+    <updated>2023-05-20T13:12:51.810477+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/015973.html" rel="alternate"/>
+    <summary>A proposal has been made to replace the current Unspent Transaction Output (UTXO) model used in Bitcoin with a new model called the Unspent Hash Set (UHS). The UHS would store only hashes of previous transaction outputs instead of their full data, resulting in a reduction in disk space and network overhead. Storing only hashes would enable the UHS to be substantially smaller than a full UTXO set. Additionally, entire blocks could potentially be verified out-of-order because all input data is provided; only the inclusion checks have to be in-order. Pay-to-pubkey outputs would use no more space on-disk than pay-to-pubkey-hash or pay-to-script-hash.However, non-standard output scripts would still need to be sent in full, but they account for only around 1% of all current UTXOs. Intra-block script de-duplication is also possible, but it has been found to have little practical benefit. Assuming sha256 for the UHS's hash function, no fundamental changes to Bitcoin's security model are introduced because the unspent transaction output hashes commit to all necessary data, including output types.The primary disadvantage of using a UHS is a small increase in network traffic. However, some properties of transactions can be exploited to offset most of the difference. If a peer is sending a scriptPubKey and a scriptSig together, there would likely be some redundancy. Using a P2SH output, the scriptPubKey contains the script hash, and the scriptSig contains the script, so the script doesn't need to be sent twice.Transitioning from the current UTXO model to the UHS model could be annoying but not particularly painful, and wallets would begin holding full prevout data for their unspent outputs. A new service-bit should be allocated to indicate that a node is willing to serve blocks and transactions with dereferenced prevout data appended. The proposal is still in its early stages, and implementation details need to be worked out. Cory Fields proposed storing all unspent transaction output (UTXO) hashes instead of the full dereferenced prevout entries in a UTXO set for validation. The hashes would be stored to an Unspent Transaction Output Hash Set (UHS), which could be queried for previous output inclusion. This change could result in disk and memory savings, as well as a validation speedup, without requiring any consensus changes. The burden of holding UTXO data is technically shifted from the verifiers to the spender.The drawback of using a UHS is a significant network traffic increase, estimated to be around 5%. There may be a need for a few "bridge nodes" for some time. Migration issues aside, the UHS concept is an evolution of Bram Cohen's TXO bitfield idea. Pieter Wuille's work on Rolling UTXO set hashes served as a catalyst for rethinking how the UTXO set may be represented. Preliminary testing has been done with a naive POC implementation patched into Bitcoin Core, but it is not consensus-safe.</summary>
+    <published>2018-05-17T15:28:28+00:00</published>
+  </entry>
+</feed>

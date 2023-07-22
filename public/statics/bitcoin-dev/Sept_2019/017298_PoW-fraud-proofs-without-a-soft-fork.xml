@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PoW fraud proofs without a soft fork</title>
+  <updated>2023-06-13T21:17:46.193038+00:00</updated>
+  <author>
+    <name>David A. Harding 2019-09-16 16:48:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PoW fraud proofs without a soft fork</title>
+    <updated>2023-06-13T21:17:46.193038+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-September/017298.html" rel="alternate"/>
+    <summary>Ruben Somsen suggested using Tadge Dryja's utreexo work to implement PoW fraud proofs without a soft fork in Bitcoin. However, Dave pointed out that the worst-case size of just the UTXO entries that need to be communicated over can be more than 200 MB and lying peers can get honest listening nodes on one of these checks which could lead to bandwidth-wasting DoS attacks on honest SPV clients. Additionally, each node capable of providing fraud proofs will need to persistently store the state transition proof for each new block, which requires significant additional system resources beyond the minimum required to operate a full node. As a result, such nodes might be rare, and it would be relatively easy to eclipse attack an SPV client depending on these proofs. Furthermore, this system depends on SPV clients implementing all the same consensus checks that full nodes can currently perform but most SPV clients do not even perform the full range of checks possible to run on block headers. On top of that, each client must implement those checks perfectly or they could be tricked into a chainsplit the same as a full node that follows different rules than the economic consensus. One thing Dave didn't like in Ruben's original proposal is that the SPV client will accept confirmations on the bad chain until a fork is produced. Even if we widely deploy fraud proofs depending on forks as a signal, we'd have to retrain SPV users to wait for much higher confirmation counts before accepting transactions as reasonably secure.</summary>
+    <published>2019-09-16T16:48:21+00:00</published>
+  </entry>
+</feed>

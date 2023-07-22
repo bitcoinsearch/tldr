@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Force close of channel with unresolved htlc</title>
+  <updated>2023-06-04T00:20:11.312283+00:00</updated>
+  <author>
+    <name>Subhra Mazumdar 2020-05-05 18:06:14</name>
+  </author>
+  <author>
+    <name>René Pickhardt 2020-05-05 18:40:46</name>
+  </author>
+  <link href="lightning-dev/May_2020/002683_Force-close-of-channel-with-unresolved-htlc.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2020/002684_Force-close-of-channel-with-unresolved-htlc.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Force close of channel with unresolved htlc</title>
+    <updated>2023-06-04T00:20:11.312283+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-May/002683.html" rel="alternate"/>
+    <summary>The user has a query regarding force closure of a channel in the Lightning Network protocol. The scenario involves an HTLC established between parties A and B for transferring funds, but if B does not have the necessary witness to resolve the HTLC and A suffers a crash fault, B cannot resolve the HTLC due to the lack of a witness. The user asks whether B can close the channel even though there is no way out of resolving the HTLC. In case of a force closure, the channel is closed unilaterally by one of the parties and the latest state of the channel is broadcasted to the blockchain. However, if B forces the closure of the channel, the HTLC will remain unresolved, and the funds in question will be locked up until the timeout period expires. As a result, it is not advisable for B to force close the channel as it will lead to a loss of funds.If A becomes unresponsive and B has to force close the channel, then a commitment transaction with three UTXOs will hit the chain. One UTXO with 2 tokens spendable by A, another one with 6 tokens spendable by B and the received HTLC output with 2 tokens. In such a case, there are two different conditions to spend the output. Firstly, before the timelock of the HTLC has passed, B can spend the output if B knows his to_local HTLC secret AND the preimage. Secondly, after the timelock, A can spend the output if A knows the to_remote HTLC secret. The mechanism with HTLCs can be read upon in BOLT 2 and the scripts can be seen in BOLT 3.It is important to note that while force-closing a channel is a possibility in the Lightning Network protocol, it is not recommended in scenarios where an HTLC remains unresolved due to the lack of a witness. Instead, parties should seek to resolve the HTLC before closing the channel. A less technical summary that is more focused on explaining the concepts is currently being developed in the routing chapter of mastering the lightning network.</summary>
+    <published>2020-05-05T18:06:14+00:00</published>
+  </entry>
+</feed>

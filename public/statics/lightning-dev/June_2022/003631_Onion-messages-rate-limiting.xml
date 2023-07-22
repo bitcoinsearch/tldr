@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Onion messages rate-limiting</title>
+  <updated>2023-06-03T09:21:58.330023+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-06-30 00:22:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Onion messages rate-limiting</title>
+    <updated>2023-06-03T09:21:58.330023+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-June/003631.html" rel="alternate"/>
+    <summary>During the Oakland Dev Summit, lightning engineers discussed a rate-limiting scheme for onion messaging. The scheme involves applying per-peer rate limits on incoming onion messages that should be relayed, allowing more onion messages from peers with whom the node has channels. When relaying an onion message, nodes keep track of where it came from by using the `node_id` of the peer who sent that message. A new message, `onion_message_drop`, is introduced and sent when an incoming onion message reaches the rate limit. The receiver sends `onion_message_drop` to the sender, who then relays it to the last sender, halving their rate limits with that peer. If the sender doesn't overflow the rate limit again, the receiver should double the rate limit after 30 seconds until it reaches the default rate limit again.The `shared_secret_hash` field contains a BIP 340 tagged hash of the Sphinx shared secret of the rate limiting peer, which allows the node that created the onion message to know which part of the route is congested, allowing them to retry through a different path. However, there may be latency between nodes and many onion messages, causing `onion_message_drop` to be relayed to the incorrect incoming peer, resulting in a statistical penalty for the right incoming peer with a probability depending on the volume of onion messages that the spamming peer is generating compared to the volume of legitimate onion messages.There are two classes of proposals for rate limiting onion messaging: back propagation based rate limiting and allowing nodes to express a per-message cost for their forwarding services. One issue with the first category is that a single party can flood the network and cause nodes to trigger their rate limits, which then affects the usability of the onion messages for all other well-behaving parties. With the second route, if an attacker floods the network, they need to directly pay for the forwarding usage themselves, though they may also directly cause nodes to adjust their forwarding rate accordingly. However, in this case, the attacker has incurred a concrete cost, and even if the rates rise, then those that really need the service can continue to pay that new rate.The email thread mentions the ongoing DDoS attack on Tor, which has started to affect Lightning Network (LN) and other related systems like Umbrel that rely on Tor for networking traversal. Tor developers have suggested adding some PoW to attempt to mitigate DDoS attacks. In that same post, they throw around the idea of using anonymous tokens to allow nodes to give them to "good" clients, which is pretty similar to the Forwarding Pass idea as relates to onion messaging, and also general HTLC jamming mitigation. It still seems to be an open question if the same network can be both a reliable micro-payment system and also a reliable arbitrary message transport layer.</summary>
+    <published>2022-06-30T00:22:08+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Trusted merkle tree depth for safe tx inclusion proofs without a soft fork</title>
+  <updated>2023-05-20T17:00:11.271572+00:00</updated>
+  <author>
+    <name>Peter Todd 2018-06-07 17:13:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Trusted merkle tree depth for safe tx inclusion proofs without a soft fork</title>
+    <updated>2023-05-20T17:00:11.271572+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-June/016091.html" rel="alternate"/>
+    <summary>The Bitcoin merkle tree algorithm fails to distinguish between inner nodes and 64 byte transactions, which causes a potential problem for tx inclusion proofs. An odd-numbered inner/leaf node is concatenated with itself and hashed twice, fixing the depth of all leaves in the tree. To avoid this vulnerability, a known depth of the merkle tree can be compared to the length of the merkle path. Saving the depth prior to pruning the block contents would allow for completely safe verification of tx inclusion proofs without a soft-fork and storing this data in the block header database would be simple. Additionally, this protection makes for a fairly simple addition to any lite client protocol. Assuming a valid Tx, an attacker could create a transaction that committed to a transaction that was not in fact in the blockchain, with approximately 60 bits of brute-forcing. However, there are free choice bits such as prevhash, prev_n, seq, nValue, pubk, and nLockTime that can be used to limit the number of bits to be brute-forced to 61. Furthermore, if inflation is not controlled, brute force becomes trivial, and it is possible that other cryptocurrencies have this vulnerability.</summary>
+    <published>2018-06-07T17:13:11+00:00</published>
+  </entry>
+</feed>

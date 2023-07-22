@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Electrum 1.9.8 release</title>
+  <updated>2023-05-19T18:15:16.808957+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2014-03-16 13:54:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Electrum 1.9.8 release</title>
+    <updated>2023-05-19T18:15:16.808957+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-March/004720.html" rel="alternate"/>
+    <summary>In an email correspondence, Thomas Voegtlin stated that the encryption algorithm used in Bitcoin wallet is ECIES and the code was borrowed from a particular repository. To know the public key corresponding to a Bitcoin address in the wallet, one can use the 'getpubkeys' command, while the 'decrypt' command assumes that the wallet has the private key corresponding to the public key passed as an argument.However, the cryptosystem used in the repository appears insecure in several ways and is not actually implementing ECIES. The primary issue is that it uses a trivial 16-bit check value instead of a cryptographically strong MAC tied to the ephemeral secret. This means that an arbitrary message encrypted to a third person can be decoded if they allow no more than 65536 queries to a decryption oracle to decrypt some other message.Moreover, if a random query yields a result, the result directly reveals the ECDH value since it is only additively combined with the message value. If the implementation does not check if the nonce point is on the curve, the result can yield a point on the twist instead of the curve, which is more vulnerable to recovery of the private key. To avoid this, ECIES uses a KDF instead of using the ECDH result directly.Apart from these issues, there may be other problems or mitigating factors that are hard to follow in the implementation. The particular implementation also has several other issues, such as not using a cryptographically strong RNG for its EC nonce.</summary>
+    <published>2014-03-16T13:54:49+00:00</published>
+  </entry>
+</feed>

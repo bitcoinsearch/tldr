@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] IBLT block testing implementation</title>
+  <updated>2023-06-10T00:43:46.097602+00:00</updated>
+  <author>
+    <name>Rusty Russell 2015-06-23 05:53:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] IBLT block testing implementation</title>
+    <updated>2023-06-10T00:43:46.097602+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-June/009021.html" rel="alternate"/>
+    <summary>Rusty Russell has created a model for using Invertible Bloom Lookup Tables (IBLTs) to communicate blocks between peers. The details of the model can be found on GitHub, but it is not integrated with Bitcoin and is a standalone C++ app for testing. The base idea comes from Gavin's Block Propagation gist which relies on similarity in mempools, with some selection hints, to make fewest assumptions on transaction selection policy. The selection hints are: minimum fee-per-byte (fixed point) and bitmaps of included-despite-that and rejected-despite-that. It covers cases like child-pays-for-parent and priority area, as well as cases like Eligius censoring "spam", bitcoin version differences, etc. The cost to represent these exceptional added or excluded transactions is on average log2(transactions in mempool) bits. At Peiter Wuille's suggestion, it is designed to be reencoded between nodes. Rusty's 100 block sample in bitcoin-corpus shows that the model performs reasonably well in terms of Average block range, Block size mean, Minimal decodable BLT size range and Minimal decodable BLT size mean. However, actual results will have to be worse than these minima, as peers will have to oversize the IBLT to have reasonable chance of success. Though there is more work to do and investigation to be done, Rusty doesn't expect more than a 25% reduction in this "ideal minimum" result. He also thanks Kalle Rosenbaum for helping investigate IBLTs last year and adds that he works for Blockstream, while supposed to be working on Lightning.</summary>
+    <published>2015-06-23T05:53:27+00:00</published>
+  </entry>
+</feed>

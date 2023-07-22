@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Detailed protocol design for routed multi-transaction CoinSwap</title>
+  <updated>2023-06-14T03:13:07.548688+00:00</updated>
+  <author>
+    <name>Chris Belcher 2020-09-03 09:00:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Detailed protocol design for routed multi-transaction CoinSwap</title>
+    <updated>2023-06-14T03:13:07.548688+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-September/018151.html" rel="alternate"/>
+    <summary>The email exchange between Antoine and ZmnSCPxj discusses the use of Scriptless Script with absolute locktimes to remove most possible shenanigans and make 30xRBF safe for any range of fees. With Scriptless Script, a single onchain PTLC can be arranged where one participant holds a completely-signed timelock transaction while the other participant holds a completely-signed pointlock transaction. This reduces the risk of having funds locked up for an extended period of time. ZmnSCPxj also suggests using private key turnover to reduce blockspace required by each hop in a swap. The email also proposes solutions to the vulnerability found in the previous proposal, including separating timelock and hashlock cases into two separate transactions and introducing collateral payments, which adds a cost to broadcasting the contract transaction. Separating timelock and hashlock cases into two separate transactions is similar to the 2013 CoinSwap design and solves many problems. However, it ruins the property of allowing coins to remain unspent indefinitely. To solve the riskless theft attempt problem, the email proposes adding collateral payments, which adds a cost to broadcasting a fully-signed contract transaction. The value of K can be set by the protocol and made high enough so that doing a riskless payment attempt is not worth it. If Bob broadcasts his contract transaction but fails to take the money from the HTLC output, then Bob will have lost money. If Bob spends his collateral input in another transaction, then his contract transaction becomes invalid.</summary>
+    <published>2020-09-03T09:00:00+00:00</published>
+  </entry>
+</feed>

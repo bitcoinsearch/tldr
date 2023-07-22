@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Split payments within one LN invoice</title>
+  <updated>2023-06-04T02:49:11.252090+00:00</updated>
+  <author>
+    <name>Ronan McGovern 2021-12-15 17:33:51</name>
+  </author>
+  <author>
+    <name>Christian Decker 2021-12-16 10:27:33</name>
+  </author>
+  <author>
+    <name>William Casarin 2021-12-16 17:05:42</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-12-16 23:44:12</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-12-17 15:06:44</name>
+  </author>
+  <author>
+    <name>Ronan McGovern 2021-12-17 18:29:39</name>
+  </author>
+  <author>
+    <name>Christian Decker 2021-12-17 11:02:02</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2021-12-18 00:22:56</name>
+  </author>
+  <author>
+    <name>William Casarin 2021-12-15 21:59:49</name>
+  </author>
+  <author>
+    <name>William Casarin 2021-12-15 22:13:06</name>
+  </author>
+  <author>
+    <name>Ronan McGovern 2021-12-17 10:21:53</name>
+  </author>
+  <link href="lightning-dev/Dec_2021/003410_Split-payments-within-one-LN-invoice.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2021/003415_Split-payments-within-one-LN-invoice.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2021/003417_Split-payments-within-one-LN-invoice.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2021/003418_Split-payments-within-one-LN-invoice.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2021/003424_Split-payments-within-one-LN-invoice.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2021/003425_Split-payments-within-one-LN-invoice.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2021/003423_Split-payments-within-one-LN-invoice.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2021/003426_Split-payments-within-one-LN-invoice.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2021/003411_Split-payments-within-one-LN-invoice.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2021/003412_Split-payments-within-one-LN-invoice.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2021/003421_Split-payments-within-one-LN-invoice.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Split payments within one LN invoice</title>
+    <updated>2023-06-04T02:49:11.252512+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003410.html" rel="alternate"/>
+    <summary>A Dublin-based entrepreneur named Ronan is building Trelis.com, a platform that accepts simple payment links through Lightning. Ronan wanted to know if it's possible to create an invoice that splits the payment to two Lightning addresses. However, splitting payments to two Lightning addresses is typically done at the application level, and applications such as the Fountain podcasting app work in this way.Handling partially failed payments can be tricky. In an email exchange between William Casarin and the developer, they discussed the possibility of developing a protocol for splitting Lightning Network payments. Designing a protocol-level solution would require handling complex business logic, but standard protocols might be useful in the future.ZmnSCPxj suggested implementing a new command called "signfakeinvoice" at the protocol level to enable the rendez-vous. A "Poor man's rendez-vous" could be achieved by each intermediate payee signing an invoice for which it does not know the preimage, which could be done through the use of a C-Lightning plugin. If this command were implemented, intermediate payees could use the `htlc_accepted` hook for the rendez-vous.The process involves arranging payees in some agreed fixed order, with the last payee generating a normal invoice. Each payee from the last to the second passes its invoice to the previous payee who creates its own signed invoice with `signfakeinvoice` to itself, adding its payout plus a fee budget, as well as adding its own delay budget. On payment, the sender sends the payment to the first hop.From the first payee to the second-to-last, the plugin triggers the `htlc_accepted` hook and checks if the incoming payment has a hash that is in the scheme stored in the database. The plugin gathers `htlc_accepted` hook invocations until they sum up to the expected amount (this handles multipath between payees) and marks that it has gathered all `htlc_accepted` hooks for that hash in durable storage. The plugin then checks if there is already an outgoing payment for that hash, and if not, it performs a `pay`, giving `maxfeepercent` and `maxdelay` based on its fee budget and delay budget.Christian Decker suggested his solution called "Poor man's rendez-vous" which routes a payment through all the parties that are to be paid and ensures atomicity so that no participant can cheat others. The solution requires creating two invoices and `B` sees two payments, but it guarantees that either all parties get paid or no one gets paid. It can be extended to any number of parties with reduced success probability, and does not require any changes on the sender side.In a conversation between cdecker and ZmnSCPxj, it was mentioned that the `createinvoice` command does almost what is needed but requires the preimage and stores the invoice in the database. As a result, a `signfakeinvoice` command is required. A plugin cannot rely on `hsm_secret` existing because the signer might not be emulated in software, but an actual hardware signer that does not keep the secret keys on the same disk. Hence, `getsharedsecret` was created and exposed to consider a future where the HSM is truly a hardware module.ZmnSCPxj suggests the possibility of a "Poor man's rendez-vous" scheme for split payments. While there is no such command at the protocol level yet, each intermediate payee could sign an invoice for which it does not know the preimage using a hypothetical `signfakeinvoice` command, and then use the `htlc_accepted` hook for the rendez-vous. Christian notes that `createinvoice`, which almost does what the scheme requires, requires the preimage and stores the invoice in the database, which the scheme does not want. However, if one has access to the `hsm_secret`, then they could sign in the plugin itself and sidestep `lightningd`.</summary>
+    <published>2021-12-15T17:33:51+00:00</published>
+  </entry>
+</feed>

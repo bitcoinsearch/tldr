@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>commitment update steps</title>
+  <updated>2023-05-18T00:21:27.809749+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-07-25 08:44:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>commitment update steps</title>
+    <updated>2023-05-18T00:21:27.809749+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-July/000062.html" rel="alternate"/>
+    <summary>Joseph Poon proposes using nLockTime with values below current unix-time as a filter/counter, to overload it for long-term use. This would give over 937 million values at the time of writing, so around a billion updates per channel. However, this solution is not possible to use with HTLC outputs. The solution proposed by Joseph Poon is to store prior Commitment Transactions in order to work out which value to use when claiming cheating. For every commitment and each HTLC output, the timeout and the original Commitment Transaction height when the HTLC was first made are stored. A small storage of prior commitment transactions is suggested for now. Every time a new HTLC output is seen, its details can be stored and the nLockTime trick can be used to store the height of your HTLC storage. When a new HTLC output is seen, the information is stored and if it's just a commitment bump, the active HTLC that's furthest from the top of the stack or all 0s is stored. Depending on the hash rate, an extra 5MB of storage may be needed. For each HTLC output, it amounts to 48 bits (6 bytes) of storage per fully expired Commitment Transaction. It’s also mentioned that OP_RETURN is viewed as acceptable and should be able to fit 3 outputs per OP_RETURN metadata output.</summary>
+    <published>2015-07-25T08:44:26+00:00</published>
+  </entry>
+</feed>

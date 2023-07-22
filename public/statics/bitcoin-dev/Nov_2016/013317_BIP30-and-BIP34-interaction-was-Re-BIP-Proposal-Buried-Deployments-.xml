@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP30 and BIP34 interaction (was Re: [BIP Proposal] Buried Deployments)</title>
+  <updated>2023-06-11T20:37:52.528017+00:00</updated>
+  <author>
+    <name>Eric Voskuil 2016-11-18 16:47:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP30 and BIP34 interaction (was Re: [BIP Proposal] Buried Deployments)</title>
+    <updated>2023-06-11T20:37:52.528017+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-November/013317.html" rel="alternate"/>
+    <summary>The post discusses the difference between downloading a hash and comparing it to a hash versus downloading a hash and then a block and comparing it to a block. The former is seen as a non-optimization trade against correctness, while caching invalidity for DOS protection is fine. However, caching information that is neither validity nor invalidity and using it to validate blocks is a break, as it allows attackers to place information into the cache and read it back later from another connection.Bitcoin provides the mechanism to reject cheaply-produced invalid blocks quickly through headers first, avoiding arbitrary nodes that create non-determinism in exchange for speed. Any situation in which a node cannot provide deterministic validation of unordered blocks constitutes a non-consensus error, and fixing/preventing these bugs is responsible development behavior.The BIP30 regression hard fork is seen as a case of non-determinism, which produces undesired consequences such as destruction of all unspent outputs in the "replaced" transaction. The proposed fork is deemed as a premature optimization, and there are more significant opportunities to better organize code and improve performance.Finally, the post recommends people contemplate the difference between unlikely and impossible, highlighting that the chance of random collision is very small but not zero. Betting Bitcoin and potentially the world's money on the unknowable is poor reasoning, especially given that the cost of not doing so is low.In addition, the discussion also touches on the permanent blocking of a block in a peer-to-peer protocol design. The hash of that block is important, but permanent blocking is not related to consensus. Libbitcoin doesn't ban invalidated hashes; it just discards the block and drops the peer.</summary>
+    <published>2016-11-18T16:47:09+00:00</published>
+  </entry>
+</feed>

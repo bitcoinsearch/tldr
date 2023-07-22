@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Would anyone object to adding a dlopen message hook system?</title>
+  <updated>2023-06-12T14:52:11.523485+00:00</updated>
+  <author>
+    <name>Jonas Schnelli 2017-08-13 20:00:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Would anyone object to adding a dlopen message hook system?</title>
+    <updated>2023-06-12T14:52:11.523485+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-August/014824.html" rel="alternate"/>
+    <summary>In response to Erik's proposal for modularisation, Jonas expresses concern about adding modules like dlopen() to the core. He asserts that the current set-up of running too many things in the same process is problematic and that such a module approach would be a security nightmare. Instead, Jonas suggests using existing IPC interfaces like RPC/ZMQ, which can be bidirectional using long poll. Erik had proposed a module extension system that would leave the base P2P layer undisturbed but allow for "enhanced features" that some peers support. The idea is that when messages are received, modules' hooks are called with the message data, and they can handle, mark the peer invalid, push a message to the peer or pass through an alternate command. The end goal is to support using lightning network micropayments to create a market for node services. However, Jonas believes that this should not be "baked in" to core or be a "patch," but instead, it should be a linked-in module, optionally compiled and added to bitcoin conf, then loaded via dlopen(). Modules should be slightly robust to Bitcoin versions changing out from under them, but not if the network layer is changed. This can be ensured by keeping a module version number and treating module responses as if they were just received from the network. Any module incompatibility should throw an exception to ensure broken peers don't stay online.</summary>
+    <published>2017-08-13T20:00:41+00:00</published>
+  </entry>
+</feed>

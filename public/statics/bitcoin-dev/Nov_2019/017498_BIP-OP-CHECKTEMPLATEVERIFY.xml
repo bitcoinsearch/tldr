@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP OP_CHECKTEMPLATEVERIFY</title>
+  <updated>2023-06-13T22:29:50.940839+00:00</updated>
+  <author>
+    <name>Jeremy 2019-11-28 19:59:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP OP_CHECKTEMPLATEVERIFY</title>
+    <updated>2023-06-13T22:29:50.940839+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-November/017498.html" rel="alternate"/>
+    <summary>Jeremy Rubin responded to Russell O'Connor's feedback on the proposed OP_CHECKTEMPLATEVERIFY BIP. While Rubin considered O'Connor's concerns about adding a new "global" state variable to the Script interpreter for tracking whether the previous opcode was a push-data operation or not, he argued that it was reasonable with this choice of constexpr rule since it only adds one parameter which is a bool and is only ever a literal. In terms of upgrade-ability, Rubin said that enabling OP_CTV for non-constexpr arguments would make the issue disappear and the OP becomes "pure" without any state tracking. However, O'Connor suggested making the CHECKTEMPLATEVERIFY operation fail if it isn't preceded by (or alternatively followed by) an appropriate sized (canonical?) PUSHDATA constant, even in an unexecuted IF branch, so that implementations can consider improper use of CHECKTEMPLATEVERIFY as a parsing error. This will lose the soft-fork upgrade path to reading values off the stack, but O'Connor thought it's a reasonable tradeoff.Rubin refined the BIP draft for OP_CHECKTEMPLATEVERIFY, changing the name to something more fitting and acceptable to the community, and changed the opcode specification to use the argument off of the stack with a primitive constexpr/literal tracker rather than script lookahead. He also permitted future soft-fork updates to loosen or remove "constexpr" restrictions and provided more detailed comparison to alternatives in the BIP, and why OP_CHECKTEMPLATEVERIFY should be favored even if a future technique may make it semi-redundant.Rubin announced that he planned to host a review workshop in Q1 2020, most likely in San Francisco. He also developed RPC functions to aid in testing and evaluation of OP_CHECKTEMPLATEVERIFY, and improvements to the mempool which will help make it safe to lift some of the mempool's restrictions on longchains specifically for OP_CHECKTEMPLATEVERIFY output trees. These are ergonomics and usability improvements needed once/if the BIP is activated.</summary>
+    <published>2019-11-28T19:59:42+00:00</published>
+  </entry>
+</feed>

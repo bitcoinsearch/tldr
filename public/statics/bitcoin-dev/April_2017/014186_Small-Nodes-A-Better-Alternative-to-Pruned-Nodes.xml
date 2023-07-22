@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Small Nodes: A Better Alternative to Pruned Nodes</title>
+  <updated>2023-06-12T00:19:42.201160+00:00</updated>
+  <author>
+    <name>David Vorick 2017-04-17 06:54:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Small Nodes: A Better Alternative to Pruned Nodes</title>
+    <updated>2023-06-12T00:19:42.201160+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/014186.html" rel="alternate"/>
+    <summary>Disk space consumption is identified as a significant factor preventing more people from running full nodes on the Bitcoin network. Pruned nodes, which keep only the UTXO set and throw away already verified blocks, are currently the best alternative to storing the full blockchain, but this puts pressure on archival nodes, reducing the number of people who can run them. The proposed solution is a new node type called a "small node." This node would only need to store 20% of the blockchain and could recover the entire blockchain by connecting to six random small node peers. A small node would store a fragment of every block using Reed-Solomon coding to erasure code the block to create 256 pieces that are 20% of the size of the block each. A small node would pick an index between 5 and 256, and when storing a block, instead of storing the full block, it would store the piece that corresponds to its index. Nodes can optionally store more than one fragment each. At five fragments, the node becomes a full archival node with indexes 0-4 reserved for archival nodes. When connecting to new peers, the indexes of each peer need to be known, and once peers totaling five unique indexes are discovered, blockchain download can begin. Connecting to just five small node peers provides a &gt;95% chance of getting five uniques. One challenge is preventing denial-of-service attacks where a malicious node may provide garbage data instead of the actual piece. One option is to seek out an archival node that could verify the correctness of the pieces, and identify the malicious node. Another option is to have the small nodes store a cryptographic checksum of each piece, but this incurs nontrivial hashing overhead. Another solution would be to find additional pieces and brute-force combinations of five until a working combination was discovered. Small nodes are completely useless unless the critical mass of five pieces can be obtained. The first version that supports small node block downloads should default everyone to an archival node. Once there are enough small-node-enabled archive nodes, the default can be switched so that nodes only have a single index by default. The proposed solution represents a non-trivial amount of code, but it is believed that the result would be a non-trivial increase in the percentage of users running full nodes and a healthier overall network.</summary>
+    <published>2017-04-17T06:54:49+00:00</published>
+  </entry>
+</feed>

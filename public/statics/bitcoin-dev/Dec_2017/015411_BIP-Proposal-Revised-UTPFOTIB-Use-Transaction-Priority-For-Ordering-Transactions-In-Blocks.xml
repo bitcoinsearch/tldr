@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP Proposal: Revised: UTPFOTIB - Use Transaction Priority For Ordering Transactions In Blocks</title>
+  <updated>2023-06-12T22:52:38.594843+00:00</updated>
+  <author>
+    <name>Rhavar 2017-12-15 16:38:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP Proposal: Revised: UTPFOTIB - Use Transaction Priority For Ordering Transactions In Blocks</title>
+    <updated>2023-06-12T22:52:38.594843+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-December/015411.html" rel="alternate"/>
+    <summary>The proposal to revise bitcoin's transaction prioritization algorithm is fundamentally broken due to several technical issues. The proposal suggests assigning a probability value to each transaction based on its fee and time waiting in the pool, and then ordering transactions based on their priority for inclusion in the block. However, this approach has flaws, such as every node having a different mempool that can't be used to decide consensus values like the maximum block size. Additionally, increasing the entropy in a block to make it more unpredictable doesn't make sense. Furthermore, the proposal asks miners to ignore their best interests and confirm transactions by "priority", which may lead to malicious miners deciding to go after their profits and order transactions by what makes them the most money. The author argues that transaction bandwidth is still a serious issue for the operation, reliability, safety, consumer acceptance, uptake, and the value of Bitcoin. He proposes a revised BIP (Bitcoin Improvement Proposal) for a technical solution, UTPFOTIB (Use Transaction Priority For Ordering Transactions In Blocks), which provides each transaction with an individual transaction priority each time before choosing transactions to include in the current block. The priority is a function of the fee paid (on a curve), and the time waiting in the transaction pool (also on a curve) out to n days (n=60 ?). The proposal aims to maximize transaction reliability, scalability, and total fees paid per block without reducing reliability. However, the proposal has several cons. It may initially lower total transaction fees per block and must first be programmed. The actual operation will need to be determined in a spec for the programmer. Finally, the proposal needs a clever mathematician to verify if blocks conform to the proposal. The author implores that at the very least, some method validates full transaction reliability and enables scalability of block sizes.</summary>
+    <published>2017-12-15T16:38:46+00:00</published>
+  </entry>
+</feed>

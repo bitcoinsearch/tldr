@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-05-20T22:03:54.483094+00:00</updated>
+  <author>
+    <name>Matt Corallo 2020-04-22 23:20:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-05-20T22:03:54.483094+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-April/017778.html" rel="alternate"/>
+    <summary>The conversation among Matt Corallo and Olaoluwa Osuntokun revolves around Bitcoin's nested trees of transactions and the economic rationality of accepting higher fee rate packages from a miner's perspective. While Corallo believes it's economically rational, Osuntokun suggests an alternative solution. They also discuss the challenges of monitoring the global mempool, which is necessary for Lightning nodes that want to forward HTLCs. There are concerns about bandwidth when considering the necessity of a "proper" routing node on the network being backed by a full-node. Concrete numbers are needed to compare the overhead of mempool awareness with the overhead of channel update gossip and gossip queries over head that LN nodes face today. Some suggest designing partially-offline local lightning hubs, but this would be impractical if mempool-watching were possible. Watching the mempool seems like a less involved process compared to modifying the state machine as it's defined today. By watching the mempool and implementing the changes in #lightning-rfc/688, the issue can be mitigated today. Lnd 0.10 doesn't watch the mempool yet, but it should be straightforward to add, which resolves the issue altogether. A base version of anchors resolves several issues, including eliminating the commitment fee guessing game, allowing users to pay less on force close, coalescing 2nd level HTLC transactions with the same CLTV expiry, and reliably enforcing multi-hop HTLC resolution. The proposal to make the HTLC output spending more free-form may not be immediately workable because the commit_sig message includes HTLC signatures for the remote party's commitment transaction. If we don't gain signatures allowing us to spend HTLCs on their version of the commitment, we may lose money if they broadcast that commitment without revoking it. Following this path would require an overhaul in the channel state machine to make presenting a new commitment actually take at least two phases. The first phase would tender the commitment, but render them unable to broadcast it. The second phase would then enter a new sub-protocol which upon conclusion, gives the commitment proposer valid HTLC signatures, and gives the responder what they need to be able to broadcast their commitment and claim their HTCLs in an atomic manner.</summary>
+    <published>2020-04-22T23:20:03+00:00</published>
+  </entry>
+</feed>

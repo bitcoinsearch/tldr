@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_LOOKUP_OUTPUT proposal</title>
+  <updated>2023-06-13T20:57:54.354163+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-08-09 14:29:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_LOOKUP_OUTPUT proposal</title>
+    <updated>2023-06-13T20:57:54.354163+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-August/017245.html" rel="alternate"/>
+    <summary>The letter discusses a problem with atomic swaps where Bob can receive a premium without paying anything by never participating. To solve this, the transaction verifier needs to know the status of a dependent transaction, but Bitcoin does not support stateful transaction functionalities. The letter proposes introducing a new opcode called OP_LOOKUP_OUTPUT that takes the ID of an output and produces the address of the output’s owner. This way, the script can decide whether Alice or Bob should take the premium by `OP_LOOKUP_OUTPUT  OP_EQUALVERIFY`. However, the design principle of SCRIPT opcode is that no opcode can look at anything that is not in the transaction spending from the SCRIPT. This underlying issue affects previous proposals like OP_PUBREF as well. The reason for this is that if OP_LOOKUP_OUTPUT exists, pruning mode cannot be supported since it might refer to a TXO that has been spent in very early historical blocks. Additionally, the SCRIPT interpreter runs only once at the time the transaction enters the mempool, and thus, it cannot get information about the block it is in. The letter also proposes a solution to the problem of Bob receiving the premium without paying anything by introducing a set of swap parameters and steps taken by Alice and Bob to complete the swap. If Bob stalls at step 8, there is no way to claim the premium as the funding transaction is not valid yet. After step 9, Bob has been forced to participate and cannot back out and claim the premium only. Finally, the author believes there is no need to add `OP_LOOKUP_OUTPUT` and presents an alternative method of executing a premium payment in the form of an American Call Option.</summary>
+    <published>2019-08-09T14:29:25+00:00</published>
+  </entry>
+</feed>

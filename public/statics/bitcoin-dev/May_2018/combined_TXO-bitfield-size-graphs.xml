@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - TXO bitfield size graphs</title>
+  <updated>2023-06-13T02:56:34.223687+00:00</updated>
+  <author>
+    <name>Jim Posen 2018-05-23 23:48:33</name>
+  </author>
+  <author>
+    <name>Bram Cohen 2018-05-24 02:43:44</name>
+  </author>
+  <author>
+    <name>Jim Posen 2018-05-24 04:02:17</name>
+  </author>
+  <author>
+    <name>Jim Posen 2018-05-23 23:48:33</name>
+  </author>
+  <author>
+    <name>Jim Posen 2018-05-24 04:02:17</name>
+  </author>
+  <author>
+    <name>Bram Cohen 2018-05-24 02:43:44</name>
+  </author>
+  <author>
+    <name>Jim Posen 2018-05-24 04:02:17</name>
+  </author>
+  <author>
+    <name>Jim Posen 2018-05-23 23:48:33</name>
+  </author>
+  <author>
+    <name>Bram Cohen 2018-05-24 02:43:44</name>
+  </author>
+  <link href="bitcoin-dev/May_2018/016017_TXO-bitfield-size-graphs.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2018/016021_TXO-bitfield-size-graphs.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2018/016023_TXO-bitfield-size-graphs.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2018/016017_TXO-bitfield-size-graphs.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2018/016023_TXO-bitfield-size-graphs.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2018/016021_TXO-bitfield-size-graphs.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2018/016023_TXO-bitfield-size-graphs.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2018/016017_TXO-bitfield-size-graphs.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2018/016021_TXO-bitfield-size-graphs.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - TXO bitfield size graphs</title>
+    <updated>2023-06-13T02:56:34.223687+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-May/016017.html" rel="alternate"/>
+    <summary>The email thread discusses the compression ratios of TXO (transaction output) bitfields and their feasibility for committing to block headers. The aim is to enable UTXO (unspent transaction output) inclusion/exclusion proofs for light clients. To achieve this, a "proof of position" is required for each block, which could be an absolute index in the chain or a block hash plus output index within the block. The spentness bitfield can be constructed for the entire chain based on the absolute index in the chain as position. In order to compactly prove spentness, one could chunk up the bitfield and construct a Merkle Mountain Range (MMR) over the chunks.The compression ratios possible on a TXO bitfield split into 4 KiB chunks using gzip (level=9) and lz4 was analyzed. It was discovered that the compression ratio is much lower for older chunks and worse for more recent blocks. Over the entire history, gzip achieves 34.4%, lz4 54.8%, and bz2 37.6%. Alternatively, bitfields stored separately by block showed 50% for gzip, 70% for lz4, and 61.5% for bz2 in terms of compression ratios.The per-block bitfield sizes are shown in the bottom graph, which are more compatible with constructions where an output's position is its block hash plus relative index. Bram Cohen suggests that run length encoding on the number of repeated bits and compressing that using elias omega encoding would work better than standard compression algorithms as it handles bitfields natively. Overall, the research explores the possibility of committing to TXO bitfields with block headers and presents insights into the compression ratios achievable with different algorithms.</summary>
+    <published>2018-05-23T23:48:33+00:00</published>
+  </entry>
+</feed>

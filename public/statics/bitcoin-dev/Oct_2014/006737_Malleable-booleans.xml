@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Malleable booleans</title>
+  <updated>2023-05-19T19:24:03.150902+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2014-10-14 02:45:47</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Malleable booleans</title>
+    <updated>2023-05-19T19:24:03.150902+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-October/006737.html" rel="alternate"/>
+    <summary>On October 14, 2014, Pieter Wuille discovered another type of malleability while working on a BIP62 implementation. He found that any byte array with non-zero bytes in it is interpreted as true, while anything else is interpreted as false. This means that scripts using booleans as inputs will be inherently malleable. Given the usefulness of passing in booleans to guide some OP_IF's during execution of several alternatives, Pieter proposed changing BIP62 to state that interpreted booleans must be of minimal encoded size (in addition to numbers). However, an argument against this proposal is that currently, one can use OP_DUP OP_IF OP_HASH160 PUSH OP_EQUALVERIFY OP_ELSE OP_CHECKSIGVERIFY OP_ENDIF to perform operations depending on whether the input is zero or non-zero. While this logic can also be used to encode scripts in other ways, the inconsistency in handling makes it more likely that script authors will make mistakes with bad consequences. It is unclear whether Pieter meant "minimal encoded size" or "must be 0 or 1 minimally encoded." The former would not fix the malleability issue, while the latter would be more disruptive.</summary>
+    <published>2014-10-14T02:45:47+00:00</published>
+  </entry>
+</feed>

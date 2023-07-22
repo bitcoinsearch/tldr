@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Signing CHECKSIG position in Tapscript</title>
+  <updated>2023-06-13T22:43:37.878819+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2019-11-27 21:29:32</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Signing CHECKSIG position in Tapscript</title>
+    <updated>2023-06-13T22:43:37.878819+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-November/017495.html" rel="alternate"/>
+    <summary>The proposal is to amend the current tapscript proposal that requires a signature on the last executed CODESEPARATOR position. Instead, it is proposed to always sign the position of the CHECKSIG (or other signing opcode) being executed and deprecate CODESEPARATOR. The motivation behind this proposal is to increase robustness against various signature-copying attacks in Scripts that have multiple spending conditions. Bitcoin's signed data only covers which input is being signed, and not the specific conditions being signed for. This leaves room for attacks where there are multiple participants that have signing conditions within a single UTXO. By signing the CHECKSIG position by default, it will automatically enforce conditions with the signature in most cases and reduce the risk of users leaving out CODESEPARATOR for cost savings when it ends up being required for security after all. Signing the CHECKSIG position is not an undue burden on those signers who have no conditions they require enforcement for. In simple Script templates (e.g. those with only one CHECKSIG operation), the signed position will be a fixed known value. Complex Script templates are precisely the situations where one wants to be careful about enforcement of conditions with their signature. Additionally, eliminating CODESEPARATOR removes a fairly awkward opcode from this script version.</summary>
+    <published>2019-11-27T21:29:32+00:00</published>
+  </entry>
+</feed>

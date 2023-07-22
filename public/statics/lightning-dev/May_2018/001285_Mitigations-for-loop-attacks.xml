@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Mitigations for loop attacks</title>
+  <updated>2023-05-25T00:46:50.606864+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-05-16 00:04:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Mitigations for loop attacks</title>
+    <updated>2023-05-25T00:46:50.607865+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-May/001285.html" rel="alternate"/>
+    <summary>The context discusses the reputation system in Lightning Network and how it can be manipulated by malicious nodes to route payments inefficiently. Rusty1 is shown to be able to manipulate the reputation view of other nodes towards Rusty2, while also making Jim look bad. However, Jim argues that this manipulation can be avoided by stopping forwarding to Rusty2, and the reputation loss rate needs to be tuned carefully. The trade-off between network efficiency and privacy is also discussed. The proposed design for the reputation system involves each node having a local configuration of its "reputation loss rate" per channel, which is not explicitly advertised to peers. Each update_add_htlc has an additional field, the "reputation loss rate," calculated as the reputation loss rate of the upstream HTLC plus the local reputation loss rate times the offered HTLC value. When forwarding an HTLC, the upstream hop measures the elapsed time between delivery of a commitment signature on the add and receipt of the fail/update. For each peer node, a reputation score in units of satoshis is kept, and the amount collected in fees is added to their reputation score for each payment where they are the upstream or downstream hop. For each payment where they are the downstream hop, the reputation loss rate on the offered HTLC times its elapsed time is subtracted from their reputation score. Reputation score is not explicitly shared between peered nodes, but can be estimated to within differences in elapsed time measurements.Finally, ZmnSCPxj asks for clarification on the behavior if payment fails after T time in addition to the behavior described for payment succeeding after T time.</summary>
+    <published>2018-05-16T00:04:44+00:00</published>
+  </entry>
+</feed>

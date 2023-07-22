@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Trying to patch Core ZMQ "rawtx" topic to only publish unconfirmed transactions: How?</title>
+  <updated>2023-06-15T03:02:29.897639+00:00</updated>
+  <author>
+    <name>LORD HIS EXCELLENCY JAMES HRMH 2021-11-29 14:10:11</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Trying to patch Core ZMQ "rawtx" topic to only publish unconfirmed transactions: How?</title>
+    <updated>2023-06-15T03:02:29.897639+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-November/019612.html" rel="alternate"/>
+    <summary>The email thread on the bitcoin-dev mailing list discusses an issue with the ZeroMQ topic "rawtx," which emits a raw transaction when it appears on the mempool. However, it also emits the same transaction once it's already confirmed, causing problems with software that de-duplicates arrays. The proposed solution is to instruct Core to only publish unconfirmed transactions, but it requires editing the source code as there are no configuration or command-line options available. A draft PR has been opened to add a rawmempooltx publisher, but changes to the chain notifications in interfaces/chain.h would be required for a mempool transaction publisher with both the raw transaction and transaction fee. There is a discussion on which function should be patched in src/zmq/zmqnotificationinterface.cpp to only publish unconfirmed transactions, and Jonas Schnelli's suggestion of adding an `if (!pblock)` check from several years ago is no longer applicable as the function he was referencing no longer exists.</summary>
+    <published>2021-11-29T14:10:11+00:00</published>
+  </entry>
+</feed>

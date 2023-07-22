@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for rendez-vous routing</title>
+  <updated>2023-05-25T15:12:27.739208+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-11-05 00:26:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for rendez-vous routing</title>
+    <updated>2023-05-25T15:12:27.739208+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001507.html" rel="alternate"/>
+    <summary>In the context provided, CJP points out that BOLT 4 assumes source routing and has a shared secret between hop and source. However, it may be possible to use rendezvous routing and only provide the blinding key. Rusty then proposes a "merchant forward" service for Alice who wants to remain anonymous even from the lightning network. Bob's node offers a forwarding service where Alice pays Bob (base + percentage) for a path Bob-&gt;Alice, and Bob gives Alice a short-channel-id (BobAliceSCID) and privkey (BobAliceSecretKey) to use. Anything sent from Bob to this short channel id and pubkey is forwarded via a new HTLC to Alice. To create an invoice, Alice uses BobAliceKey and includes a route-hint with pubkey=Bob and short_channel_id=BobAliceSCID. Alice signs the invoice and Bob decodes the incoming payment to create a new HTLC to pay Alice. The payer does not know about this arrangement as it looks like Alice has a private channel with Bob. The minor downside of this method is that Bob can issue invoices as Alice since invoice keys are conflated with onion keys. However, this is not very useful since Alice won't honor them, but it is an argument for a separate invoice key in the future.</summary>
+    <published>2018-11-05T00:26:06+00:00</published>
+  </entry>
+</feed>

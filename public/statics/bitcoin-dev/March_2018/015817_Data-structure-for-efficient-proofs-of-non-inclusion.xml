@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Data structure for efficient proofs of non-inclusion</title>
+  <updated>2023-05-20T05:17:08.493001+00:00</updated>
+  <author>
+    <name>Peter Todd 2018-03-14 00:37:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Data structure for efficient proofs of non-inclusion</title>
+    <updated>2023-05-20T05:17:08.493001+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-March/015817.html" rel="alternate"/>
+    <summary>Daniel Robinson is interested in Peter Todd's client-side verified single-use-seals via proof-of-publication model, which creates an anti-double-spend primitive via a proof-of-publication, and many proofs-of-non-publication. The seal is closed by publishing a valid signature for the seal to a ledger, and the first signature is the valid one. Therefore, if Alice wants to convince Bob that she closed a seal correctly (e.g. to pay Bob), she has to supply Bob with a proof that the signature _was_ published - a proof-of-publication - as well as proof that prior to being published, no valid signature was previously published - a proof-of-non-publication. In order to create a system using this model, Daniel is looking at what Merkle-tree-like structure for the "transaction root" would best allow efficient proofs of non-inclusion in a block. Peter Todd suggests a bitfield where each possible value under that node is represented by a single bit, where m values under that point in the tree, the marginal size of the non-inclusion proof is m bits. This method is competing against a Merkle tree built from a hash function with k bits takes approximately k*log2(m) bits to prove non-inclusion. Peter Todd then introduces a new type of inner node that commits to a merkle-mountain-range (MMR) tip and a 2^j element bitfield. He discusses the hard part about choosing when to use a bitfield-based inner node instead of a standard one. Assuming keys are randomly distributed, it makes sense to do so when the bitfield table is partially empty, but how empty? It's a trade-off between multiple parameters, including the size of proofs-of-publication - although the latter may be OK to ignore as the number of proof-of-non-publication needed should usually greatly outnumber proofs-of-publication. Furthermore, for a proof-of-publication to be secure, it must ensure that any attempt to construct a false proof-of-non-publication will fail. In the pruning model, that means that a proof-of-publication is simply the data necessary for the proof-of-non-publication verifier to return false. Peter Todd discusses how using probabilistic data structures such as bloom filters may be more space efficient than a bitfield.</summary>
+    <published>2018-03-14T00:37:52+00:00</published>
+  </entry>
+</feed>

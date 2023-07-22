@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Array-based Routemap Representation, and the Advantages of Cheney 2-Finger Garbage Collection</title>
+  <updated>2023-06-04T00:24:47.481913+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-05-21 15:36:02</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-05-21 05:01:36</name>
+  </author>
+  <link href="lightning-dev/May_2020/002723_Array-based-Routemap-Representation-and-the-Advantages-of-Cheney-2-Finger-Garbage-Collection.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2020/002722_Array-based-Routemap-Representation-and-the-Advantages-of-Cheney-2-Finger-Garbage-Collection.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Array-based Routemap Representation, and the Advantages of Cheney 2-Finger Garbage Collection</title>
+    <updated>2023-06-04T00:24:47.481913+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-May/002723.html" rel="alternate"/>
+    <summary>The Lightning Network is a system that allows for fast and affordable transactions on the Bitcoin blockchain. To make it more practical to run a Lightning Network node on less-capable devices, reducing routemap representation size is important. The proposal involves using an array-based storage system where nodes and channels are stored in two large arrays. Deletion of channels and nodes from the routemap can be done using a freelist but the writer proposes using Cheney 2-finger Garbage Collection instead. Cheney's algorithm can be used as a guide for which nodes to open first but can also evaluate paths using fees and other factors. The article discusses the issue of semispace collection, which requires twice the memory during collection. To address this issue, the author suggests writing the tospace objects into a disk file and reloading the in-memory arrays from the tospace file(s) after the Cheney run has completed. The article goes on to discuss incremental collection and the use of the tri-color abstraction to determine if a fromspace object is black, gray, or white without adding any more memory to represent those sets. The author suggests that the Cheney collector gives some easy ways to determine the colors of fromspace objects. Changes to the routemap can be handled by making the collection algorithm incremental, allowing incoming changes to the routemap graph to be accepted while retaining responsiveness even while a collection is being performed.Finally, the article discusses tenuring and how it can help against losing subgraphs. The author suggests selecting some nodes with particularly long-lived channels and adding them to the root set, executing Cheney as follows: first put our own node to the root set and execute Cheney as normal; when Cheney completes (scan pointer == allocation pointer), check if any tenured nodes are still white (have no forwarding pointer) and add them to the gray set (copy them to tospace and advance the allocation pointer).</summary>
+    <published>2020-05-21T15:36:02+00:00</published>
+  </entry>
+</feed>

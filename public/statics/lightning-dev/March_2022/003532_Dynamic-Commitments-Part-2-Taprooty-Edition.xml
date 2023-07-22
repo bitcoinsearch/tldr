@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Dynamic Commitments Part 2: Taprooty Edition</title>
+  <updated>2023-05-23T17:39:49.817006+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-03-24 23:36:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Dynamic Commitments Part 2: Taprooty Edition</title>
+    <updated>2023-05-23T17:39:49.817006+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-March/003532.html" rel="alternate"/>
+    <summary>Laolu Osuntokun, a Lightning Network developer, has proposed an idea to upgrade all 80k+ segwit v0 channels to taproot without any on-chain transactions. He suggested using an adaptor commitment combined with a protocol for updating commitments on-the-fly. The proposal would allow deferring the two transactions (open+close) potentially indefinitely as another layer of spends are held off-chain. This approach is more generalized and allows upgrading nearly all channel/commitment related values.ZmnSCPxj proposed an "adaptor commitment" to update across witness versions within the context of converting from segwit v0 to v1 (taproot). This upgrade transaction spends one witness version type and produces an output with the next upgraded type. Rusty made a spec PR outlining a way to upgrade the commitment type upon channel re-establish leveraging the new commitment type feature bits. However, this proposal doesn't allow both sides to do things like only allowing your peer to attach N HTLCs to start with, slowing increasing their allotted slots and possibly reducing them.Osuntokun's alternative approach involves introducing two new messages, with one party proposing a commitment/channel param update and only the initiator applying it. The message structure includes opaque nested TLV fields that make it extensible to add other things like tweaking the total number of max HTLCs and current dust values.Deploying a generalised on-the-fly dynamic commitment update protocol gives us a tool to future proof the existing anchored multi-sig outputs in the chain. This concept allows for the removal of hard-coded limits such as the 483 HTLC in-flight limit that is currently present.</summary>
+    <published>2022-03-24T23:36:51+00:00</published>
+  </entry>
+</feed>

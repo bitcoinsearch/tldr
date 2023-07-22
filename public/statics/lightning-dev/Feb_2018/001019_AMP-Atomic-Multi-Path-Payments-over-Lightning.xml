@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>AMP: Atomic Multi-Path Payments over Lightning</title>
+  <updated>2023-05-24T20:50:38.084118+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-02-12 03:03:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>AMP: Atomic Multi-Path Payments over Lightning</title>
+    <updated>2023-05-24T20:50:38.084118+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/001019.html" rel="alternate"/>
+    <summary>The Lightning Network has the potential to become more reliable with the use of Atomic Multi-Path (AMP) payments. This method involves splitting payments into smaller ones and using a pseudorandom number generator to ensure that the receiver can only receive all payments at once before claiming them. The proposed algorithm splits the random seed into two seeds so that the receiver cannot claim partial amounts, and the payment proceeds recursively until the receiver receives all branches of the payment.AMPs deliver additive shares of a base preimage, from which the payment preimages of partial payments can be derived. The protocol allows users to send funds through multiple payment paths, providing higher availability and privacy compared to single-path payments. It uses additive secret sharing to ensure the receiver does not receive payment until all partial payments are received while avoiding payment hash reuse and order invariance. The sender can determine the number of partial payments without directly coordinating with the receiving node, potentially reducing strain on individual paths and allowing for logical payments larger than the current maximum value.The article outlines the details of the AMP protocol, including the reconstruction of partial preimages and payment hashes, and the handling of dynamically chosen n by iteratively constructing shared secrets. It also mentions possible use cases of AMPs, such as cross-chain payments, and raises open research questions related to the deployment of AMP, such as how the sender decides how many chunked payments to send and the size of each payment.Integrating AMP into Lightning allows a sender to atomically split a payment flow amongst several individual payment flows, eliminating the need for larger channels as one total outbound payment bandwidth can be utilized to send several channels. Internal routing nodes are incentivized to have more active channels to support the increased load. In order to integrate HORNET, a distinct communication session can be established to allow sender+receiver to exchange up-to-date partial payment information. The sender's initial strategy can be governed by an instance of the Push-relabel max flow algorithm. The current onion packet format can be utilized to deliver additional data from a sender to receiver that is still e2e authenticated. Conner and Laolu have presented the above-mentioned points and have shown how AMP and HORNET can be composed.</summary>
+    <published>2018-02-12T03:03:37+00:00</published>
+  </entry>
+</feed>

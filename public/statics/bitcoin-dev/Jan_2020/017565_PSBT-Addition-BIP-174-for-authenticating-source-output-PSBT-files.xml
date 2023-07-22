@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PSBT Addition (BIP 174) for authenticating source/output PSBT files</title>
+  <updated>2023-05-20T21:36:28.404927+00:00</updated>
+  <author>
+    <name>Andrew Chow 2020-01-13 17:05:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PSBT Addition (BIP 174) for authenticating source/output PSBT files</title>
+    <updated>2023-05-20T21:36:28.404927+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-January/017565.html" rel="alternate"/>
+    <summary>In a bitcoin-dev thread, Peter D. Gray suggested adding signatures to the Partially Signed Bitcoin Transactions (PSBT) to detect and mitigate some broad "bug-classes." However, in a Bitcoin mailing list, Andrew Chow disagreed with Gray's proposal to add man-in-the-middle (MiTM) protection within the PSBT structure itself. He argued that it is largely unnecessary to add new fields and recommended verifying the signatures of each participant in the transaction. Chow also suggested PGP signing the PSBT as a means of MiTM protection.Dmitry Petukhov expressed skepticism about Gray's proposal, arguing that authenticating the contents of the PSBT is independent of the signing action and that participants should check the signature by an authority who created the PSBT. Petukhov believed that adding additional ordering or other structural requirements over a simple key-value structure would add complexity to PSBT processing, increasing the chance of bugs. However, he acknowledged that if Gray's scheme shows its usefulness, it could become a de-facto standard with proprietary keys.Gray's proposal is byte-level on the whole file contents, not based on sub-sections or fields inside the file. He wants these signatures to protect against PSBT parsing bugs, but there are non-linear PSBT paths that will be difficult or impossible to support with this approach. Gray thinks it is possible to block signers from looking at MitM'ed files using the same signature features and a pre-shared public key between the PSBT Creator and the Signer.</summary>
+    <published>2020-01-13T17:05:10+00:00</published>
+  </entry>
+</feed>

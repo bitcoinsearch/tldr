@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Bitcoin at POS using BIP70, NFC and offline payments - implementer feedback</title>
+  <updated>2023-06-09T17:49:20.001891+00:00</updated>
+  <author>
+    <name>Eric Voskuil 2015-02-23 00:46:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Bitcoin at POS using BIP70, NFC and offline payments - implementer feedback</title>
+    <updated>2023-06-09T17:49:20.002657+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-February/007566.html" rel="alternate"/>
+    <summary>The email conversation between Eric Voskuil, Jan Vornberger, and Andy Schroder revolved around the proposal of Schroder and Schildbach. They discussed the generalization of the "r" and "payment_url" parameters and an additional 'h' parameter proposed in TBIP75. The 'h' parameter is a hash of the BIP70 payment request that prevents a MITM attack on the Bluetooth channel even if the BIP70 payment request isn't signed.Eric expressed concerns about the privacy implications of the proposal and suggested using a session key for symmetric block cipher over the Bluetooth channel to transfer the tap. This would also resolve the issue of needing to formulate the payment request before the NFC. He deemed the establishment of two Bluetooth services unnecessary and proposed that the MAC address (and session key) should be encoded using base58.Jan shared his experience implementing NFC and offline payments and hoped to move the discussion forward around standardizing some of these procedures. He preferred the NFC interaction of "I touch what I want to pay" rather than "a payment request comes to me through the air and I figure out whether it is meant for me/is legitimate". Jan Møller proposed changes to the payment_url parameter in TBIP75 and shared his experience with implementing BIP70 payment requests. He discussed various scenarios for providing payment requests, including QR codes, NFC, and Bluetooth. Jan suggested using the NFC URI record instead of complete payment requests via NFC as it is more robust and less fragile. However, he continued to have problems with the NFC stack he was using and planned to try the NXP NFC library next. Jan proposes changing the 'bt' parameter to 'r1' as part of a more generic approach of numbering different sources for the BIP70 payment request. He also proposes adding an additional 'h' parameter, which would be a hash of the payment request to prevent a MITM attack on the Bluetooth channel. Jan asks for feedback on whether to change 'optional string payment_url' into 'repeated string payment_url' or introduce a new field 'additional_payment_urls'. Overall, the email conversation covered various aspects of implementing NFC and offline payments, proposing changes to the payment_url parameter in TBIP75, and discussing different scenarios for providing payment requests, including QR codes, NFC, and Bluetooth.</summary>
+    <published>2015-02-23T00:46:28+00:00</published>
+  </entry>
+</feed>

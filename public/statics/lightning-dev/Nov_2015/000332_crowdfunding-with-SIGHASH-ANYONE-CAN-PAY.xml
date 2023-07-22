@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>crowdfunding with SIGHASH_ANYONE_CAN_PAY</title>
+  <updated>2023-05-23T21:38:59.104632+00:00</updated>
+  <author>
+    <name>Ryan Grant 2015-11-23 20:12:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>crowdfunding with SIGHASH_ANYONE_CAN_PAY</title>
+    <updated>2023-05-23T21:38:59.104632+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000332.html" rel="alternate"/>
+    <summary>Alice plans to pledge to Bob's crowdfunded project using a one-input, one-output, anyone-can-pay transaction valid for one month. Bob has provided his address anchored to an open channel on the Lightning Network, and Alice has received Bob's hashed preimage R. To facilitate the transaction, Alice will use an intermediary node run by Hubab. However, Alice needs a special Lightning protocol option to indicate that only the final hop should be rewritten and signed as anyone-can-pay, while all other anyone-can-pay donors pay to the same output. To solve this issue, Alice can send Hubab a normal channel transaction using the HTLC to cover the cost plus fees, and then send Hubab special instructions on how to create a SIGHASH_ANYONE_CAN_PAY for Bob using the HTLC. Once Bob receives the pledge transaction from Alice, it should not be revoked until the anyone-can-pay output is claimed. Bob's crowdfunding software will concatenate scriptPubKeys of the pledges delivered by Hubab, with their HTLCs, to claim the anyone-can-pay output, releasing R.However, crowdfunding events could lock up money for a long time, and the Lightning Network nodes will price their fees accordingly. Additionally, there is a need for an update_revoke_pledge_htlc to revoke accepted pledges that have not yet expired or caused other errors. If Hubab needs to route further to Carol, she must be aware of more in the route than her handoff address, such as whether the next destination is final. Finally, when signing the SIGHASH_ANYONE_CAN_PAY transaction, Hubab (or Carol) needs to select an input matching the exact amount. Overall, while there are some complexities involved in crowdfunding with the Lightning Network, the routed option described above provides a viable solution.</summary>
+    <published>2015-11-23T20:12:55+00:00</published>
+  </entry>
+</feed>

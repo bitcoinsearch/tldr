@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>vtxPrev</title>
+  <updated>2023-06-04T20:24:09.909521+00:00</updated>
+  <author>
+    <name>Michael Grønager 2011-10-05 13:44:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>vtxPrev</title>
+    <updated>2023-06-04T20:24:09.910556+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-October/000637.html" rel="alternate"/>
+    <summary>In an email exchange between Michael Grønager and Gregory Maxwell on October 5th, 2011, Grønager misread the code for AddSupportingTransactions. After reviewing the code again, he realized that vtxPrev only contains a list of supporting confirmations up to three confirmations back. It is only relevant and filled if coins that are less than three confirmations old are accepted. In this case, the depending transactions should be resent to the network in case of chain splits. This feature is only relevant when accepting newly earned coins and will only be useful for about half an hour. Maxwell corrected Grønager's statement that transactions need seven blocks to maturity and respendability. The software can use older inputs when available, but if not, it will use what it has. The software is also prone to respending its own outputs quickly because it trusts it won't double spend its own transactions. In the event of a deep split, inputs might have been spent differently in the new split, making it possible for transactions to become invalid after they have been confirmed. Retransmitting one of the transaction's parents if it was dropped but not yet impossible sounds prudent to Maxwell.</summary>
+    <published>2011-10-05T13:44:08+00:00</published>
+  </entry>
+</feed>

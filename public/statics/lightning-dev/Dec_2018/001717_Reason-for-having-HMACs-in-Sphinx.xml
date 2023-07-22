@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reason for having HMACs in Sphinx</title>
+  <updated>2023-06-02T15:22:26.378419+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-12-04 18:45:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reason for having HMACs in Sphinx</title>
+    <updated>2023-06-02T15:22:26.378419+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-December/001717.html" rel="alternate"/>
+    <summary>ZmnSCPxj suggests that including a shared secret in the onion message to the final node could prevent certain types of attacks. This can be achieved by using path decorrelation and points+privkeys instead of hashes+preimages. Path decorrelation involves giving each hop a random point, which is added to the next SS "HTLC." The final node needs to be given the total of the scalars of each hop random point along the route. However, an intermediate node cannot guess this, and the final node will give the same error, i.e. "invoice point not found." Although this technique may stop an attacker from testing 2nd-degree, 3rd-degree, etc. neighbors, it does not stop an attacker from testing whether or not the next node is the final hop. To demonstrate this, ZmnSCPxj uses an example where C creates an invoice secret i and the invoice point I = i * G, and gives I to node A. Node A then creates two secrets k[a] and k[b], and a total sum k = k[a] + k[b]. Node A creates points K[A] = k[a] * G and K[B] = k[b] * G, and creates an onion with layer 0 (to B): decorrelation_secret = k[b] and layer 1 (to B): total_decorrelation_secrets = k = k[a] + k[b]. Node A offers the HTLC to B for the secret to the point (I + K[A]), and B offers the HTLC to C for the secret to the point ((I + K[A]) + K[B]). The total_decorrelation_secrets serves as the payer-generated shared secret between payer and payee. B cannot learn this, and thus cannot fake its own secret. Even if it instead offers ((I + K[A]) + k[z] * G) for a new secret k[z], it cannot know how to change total_decorrelation_secrets from k[a] + k[b] to k[a] + k[z] instead.</summary>
+    <published>2018-12-04T18:45:56+00:00</published>
+  </entry>
+</feed>

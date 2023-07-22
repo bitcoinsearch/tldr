@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Hold fee rates as DoS protection (channel spamming and jamming)</title>
+  <updated>2023-06-03T03:44:45.734579+00:00</updated>
+  <author>
+    <name>Joost Jager 2021-02-14 18:05:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Hold fee rates as DoS protection (channel spamming and jamming)</title>
+    <updated>2023-06-03T03:44:45.734579+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-February/002974.html" rel="alternate"/>
+    <summary>Joost Jager has proposed a variation of bidirectional upfront payments that uses a time-proportional hold fee rate to address the limitation of not considering hold invoices and other long-term held packets in previous bidirectional upfront payments. This "hodl_fee_rate" binds the hold fee to the effectively consumed timelocked period of the liquidity and reduces the number of parameters. However, routing nodes might still include the risk of hitting the chain in the computation of their `hodl_fee_rate` and the corresponding cost of having onchain timelocked funds. Joost suggests that routing nodes advertise their `hold_grace_period` and only pay hold fees if they added a delay greater than `hold_grace_period` for relaying the payment and its response. If the sender is also a routing node, the sender should expect the node before them to cover it. However, Antoine Riard raises some concerns about the proposal. Firstly, he questions whether assuming increasing `hodl_fee_rate` along a payment path is at odds with the ordering of timelocks. Secondly, he points out an edge case where the HTLC settlement happens at different periods on outgoing and incoming links, causing a routing node to pay a higher `hodl_fee_rate` than received. The more concerning case is when the HTLC settlement happens on the outgoing link, but the incoming counterparty goes offline, causing the `hodl_fee_rate` to be inflated until the counterparty goes back online, resulting in the routing node being at loss. Despite these concerns, Antoine believes this proposal is an improvement and would merit a specification draft, at least to ease further reasoning on its economic and security soundness. He suggests that Stake Certificates may be better for long-term network economics by not adding a new fee burden on payments. However, if channel jamming is concerning enough in the short-term, a bidirectional upfront payment-style of proposal can be deployed now and a better solution considered when it's technically mature.</summary>
+    <published>2021-02-14T18:05:08+00:00</published>
+  </entry>
+</feed>

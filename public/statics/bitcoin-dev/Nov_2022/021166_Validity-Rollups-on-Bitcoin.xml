@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Validity Rollups on Bitcoin</title>
+  <updated>2023-06-16T01:47:21.652989+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2022-11-04 23:07:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Validity Rollups on Bitcoin</title>
+    <updated>2023-06-16T01:47:21.652989+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021166.html" rel="alternate"/>
+    <summary>ZmnSCPxj suggests the implementation of a new opcode in Taproot which would remove the necessity for introspection, and avoid duplicating data in the witness. Another potential new opcode is a form of OP_MERKLEUPDATEVERIFY that checks a merkle proof against a root and verifies if replacing the leaf with some hash using the proof yields a specified updated root. ZmnSCPxj also proposes a limited version of OP_EVAL, if it's not possible to split the different spend paths into different tapleafs. ZmnSCPxj then explores the idea of reusing pay-to-contract to store a commitment to the state. In Taproot, the Taproot outpoint script is the public key corresponding to the pay-to-contract of the Taproot MAST root and an internal public key. The internal public key can itself be a pay-to-contract, where the contract being committed to would be the state of some covenant. The proposed opcode would take an "internal internal" pubkey, a current state, and an optional expected new state. It would determine if the Taproot internal pubkey is actually a pay-to-contract of the current state on the internal-internal pubkey. If the optional expected new state exists, then it also recomputes a pay-to-contract of the new state to the same internal-internal pubkey, which is a new Taproot internal pubkey, and then recomputes a pay-to-contract of the same Taproot MAST root on the new Taproot internal pubkey. This retains the same MASTed set of Tapscripts and the same internal-internal pubkey, only modifying the covenant state, which is committed to on the Taproot output, indirectly by two nested pay-to-contracts. With this, there is no need for quining and OP_PUSHSCRIPT. The mechanism only needs some way to compute the new state from the old state. Additionally, you can split up the control script among multiple Tapscript branches and only publish onchain (== spend onchain bytes) the one you need for a particular state transition.</summary>
+    <published>2022-11-04T23:07:56+00:00</published>
+  </entry>
+</feed>

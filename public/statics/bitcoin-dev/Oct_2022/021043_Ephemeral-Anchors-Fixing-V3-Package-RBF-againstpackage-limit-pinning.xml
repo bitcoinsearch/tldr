@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Ephemeral Anchors: Fixing V3 Package RBF againstpackage limit pinning</title>
+  <updated>2023-06-16T01:58:55.291959+00:00</updated>
+  <author>
+    <name>Greg Sanders 2022-10-18 18:18:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Ephemeral Anchors: Fixing V3 Package RBF againstpackage limit pinning</title>
+    <updated>2023-06-16T01:58:55.291959+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021043.html" rel="alternate"/>
+    <summary>In this email thread, Greg Sanders proposes a potential follow-on work that could make pinning severely constrained in many setups. V3 transactions may solve bip125 rule#3 and rule#5 pinning attacks under some constraints. This means that when a replacement is to be made and propagated, it costs the expected amount of fees to do so. However, what's left in this subset of pinning is package limit pinning, in which a fee-paying transaction cannot enter the mempool due to the existing mempool package it is being added to already being too large in count or vsize.Greg proposes two solutions, one of which he strongly prefers. The first solution is to expand a carveout for "sibling eviction", where if the new child is paying "enough" to bump spends from the same parent, it knocks its sibling out of the mempool and takes the one child slot. The second solution is Ephemeral Anchors, which is a term that means an output is watermarked as an output that MUST be spent in a V3 package. Implications of this proposal include allowing any value, even dust, even 0, without worrying about bloating the UTXO set and anyone being able to bump the transaction without any transaction key material. Furthermore, ephemeral anchors must be spent, and this allows for robust multi-party fee bumping and benefits more traditional wallet scenarios. Open questions include whether allowing non-zero value in ephemeral outputs opens up a MEV that we are worried about and whether SIGHASH_GROUP like constructs would allow uncommitted ephemeral anchors to be added at spend time, depending on spending requirements.</summary>
+    <published>2022-10-18T18:18:45+00:00</published>
+  </entry>
+</feed>

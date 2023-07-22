@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Outsourcing route computation with trampoline payments</title>
+  <updated>2023-06-02T18:03:59.196775+00:00</updated>
+  <author>
+    <name>Johan Torås Halseth 2019-04-03 08:27:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Outsourcing route computation with trampoline payments</title>
+    <updated>2023-06-02T18:03:59.196775+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-April/001960.html" rel="alternate"/>
+    <summary>In a Lightning-dev mailing list, Johan commented on the proposal of implementing trampoline payments in the network. Johan thinks that the high-level direction of the proposal is good and it ties together several concepts proposed earlier. The correct design could give the sender all the flexibility needed to craft payments according to its own reliability/privacy/fee tradeoff. In an ideal world, multi-hop locks, packet-switched routing, rendezvous routing, and fees would be implemented. Johan admitted that he hasn't thought about the technical implications of all this and it would require a lot of work to get this actually implemented.On the same thread, ZmnSCPxj brought up an unrelated issue with trampoline nodes creating overlapping routes unintentionally. For example, when A creates an inner trampoline onion "E-&gt;C", and an outer onion "A-&gt;B-&gt;E". E, on receiving the inner trampoline onion "E-&gt;C", finds that E-&gt;B direction is low capacity, so routes over the outer onion "E-&gt;D-&gt;B-&gt;C" with the inner trampoline onion "C". This creates an overall route A-&gt;B-&gt;E-&gt;D-&gt;B-&gt;C. When the B-&gt;C HTLC is resolved, B can instead claim the A-&gt;B HTLC and just fail the D-&gt;B HTLC, thereby removing D and E from the route and claiming their fees, even though they participated in the route. There was also a suggestion to switch to payment points/scalars soon.</summary>
+    <published>2019-04-03T08:27:13+00:00</published>
+  </entry>
+</feed>

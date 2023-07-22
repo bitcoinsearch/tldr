@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BOLT Draft] Onion Routing Spec</title>
+  <updated>2023-05-24T00:07:08.371838+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-09-27 01:47:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BOLT Draft] Onion Routing Spec</title>
+    <updated>2023-05-24T00:07:08.371838+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-September/000622.html" rel="alternate"/>
+    <summary>In a discussion on the Lightning-dev mailing list, Olaoluwa Osuntokun and Rusty Russell addressed issues regarding channel identification and proof sizes. Osuntokun pointed out that using blocknum+txnum to identify a channel does not account for the possibility of a single transaction which opens multiple channels concurrently. To remedy this, an extra byte or two would need to be added to encode the output index of the channel within the transaction. Additionally, identifying channels based solely from blockheight+offsets conjures up some re-org safety concerns. On the other hand, the compactness is worth it. Russell commented that the proofs are larger, requiring each ID to have a merkle proof (12 x 32 bytes) plus the funding tx (227 bytes), pubkeys (66 bytes), and a signature of the ID using those pubkeys (128 bytes). Christian Decker joined in, suggesting a passive rotation scheme would be superior due to the bandwidth savings of pushing the onion key rotations to the edges themselves. But as there is no passive scheme for forward secrecy, there is no need to rotate keys in that case. Russell suggested enumerating the different secrets they need to protect and separating commit keys from identity key allows nodes to post-hoc announce channels by associating them with the public identity. Separating onion privkey allows rotation, but only if there is forward secrecy. The comms symmetric key should also be rotated with forward secrecy.</summary>
+    <published>2016-09-27T01:47:44+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Thoughts on fee bumping</title>
+  <updated>2023-06-15T16:30:34.726243+00:00</updated>
+  <author>
+    <name>Jeremy Rubin 2022-02-15 21:37:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Thoughts on fee bumping</title>
+    <updated>2023-06-15T16:30:34.726243+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019913.html" rel="alternate"/>
+    <summary>The discussion revolves around the technical reasons for sponsors not being monotone. Sponsors require an additional permanent TX-Index, which makes Bitcoin's state grow at a much worse rate. Instead, a time-bound for inclusion could be introduced, but this has the issue of validity stopping after a certain time, hurting reorganization. The suggestion is to have an output with exactly the script OP_CSV and allow sponsor references to be pruned after that output is "garbage collected" by pruning it out of a block. This would be a way that sponsorship would be opt-in (must have the flag output) and then sponsors' observations of txid existence would only be guaranteed to work for 100 blocks. It is suggested to make this behavior entirely "virtual." It is also suggested to make the outputs from sponsor txn subject to a 100 block cool-off period. A constraint can be added to all outputs that have something similar to fCoinbase set on them (for spending timelocks only). Lastly, it would be natural to see if users would want to cancel their stale fee bumps by replacing them with something more useful to them if they pay a high enough fee. All things considered, Jeremy favors the simple version of just having sponsors only valid for the block their target is co-resident in.</summary>
+    <published>2022-02-15T21:37:43+00:00</published>
+  </entry>
+</feed>

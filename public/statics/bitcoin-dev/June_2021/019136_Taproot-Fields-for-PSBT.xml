@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Taproot Fields for PSBT</title>
+  <updated>2023-05-21T02:45:40.920992+00:00</updated>
+  <author>
+    <name>Andrew Chow 2021-06-28 16:04:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Taproot Fields for PSBT</title>
+    <updated>2023-05-21T02:45:40.920992+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-June/019136.html" rel="alternate"/>
+    <summary>Salvatore Ingala suggested a small change to the proposal regarding Taproot Leaf Script as specified in BIP 341. The current control block for this leaf can be up to 4129 bytes long, which is much larger than other defined PSBT types. Salvatore proposed splitting it into two PSBT types, PSBT_IN_TAP_LEAF_SCRIPT and PSBT_IN_TAP_LEAF_CONTROL_BLOCK, both with no keydata. However, Andrew Chow pointed out that a taproot tree can have multiple leaf scripts, and the actual script to be used may not be known at the time of adding them to the PSBT. Using only two fields with no keydata would not allow multiple leaf scripts to be specified. Additionally, the same leaf script can appear multiple times in the tree, so using the leaf hash as keydata would not be sufficient as it would only allow one control block for a script that appears multiple times. Therefore, the only way to enable multiple different leaf scripts and the same leaf script to appear multiple times is to use the control block as keydata.</summary>
+    <published>2021-06-28T16:04:19+00:00</published>
+  </entry>
+</feed>

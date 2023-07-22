@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[PROPOSAL]: FAST - Forked Away Simultaneous Transactions</title>
+  <updated>2023-06-02T19:02:35.077284+00:00</updated>
+  <author>
+    <name>Ugam Kamat 2019-06-25 11:06:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[PROPOSAL]: FAST - Forked Away Simultaneous Transactions</title>
+    <updated>2023-06-02T19:02:35.077284+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-June/002031.html" rel="alternate"/>
+    <summary>A proposal has been made for simultaneous payments to multiple parties using the same partial route. The idea is that if Alice wants to pay the bill at a restaurant to Eric (the restaurant owner) and a tip to Grace (her waiter), she would have to send two separate payments in the current scenario. However, if the onion blob is repurposed in the same way as needed for Spontaneous Payments, there can be no path duplication and Dave would split the payments, one going to Eric and the other going to Grace through Frank. This proposal works similarly to Spontaneous Payment proposal by packing additional data in the unused hops. For B and C, the onion blob will be identical to other lightning payments, and when D parses the onion, the 4 MSB of the realm will tell D how much data can be extracted. The payload can be 64 + 33 bytes = 97 bytes, and the first byte would indicate how many hashes are packed, so we have 96 bytes for the payload, meaning we can pack a maximum of 3 hashes for 3 route payments from D. Calculating the pre-images, Eric and Grace will parse the onion and use the pre-images for settlement. PM = f(P1, P2), where P1 represents the pre-images of D-&gt;E and P2 of D-&gt;F and F-&gt;G. When the pre-images arrive at node D, it will combine them such that PM = f(P1, P2). The easiest way for both A and D to calculate that will be PM = SHA256(P1 || P2 || ss_d), where || represents concatenation and ss_d is the shared secret created using the ephemeral public key of sender and private key of Dave. The advantages of this proposal include lower fees in case of on-chain settlement, lower routing fees for Alice, and more number of HTLCs in flight. However, the probability of transaction failures increases as now the transaction is dependent on 2/3 branches. Not all nodes need to support this feature, and the nodes that can handle branching of payments can signal that using global features.</summary>
+    <published>2019-06-25T11:06:59+00:00</published>
+  </entry>
+</feed>

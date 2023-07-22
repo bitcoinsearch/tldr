@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+  <updated>2023-06-03T02:51:41.274446+00:00</updated>
+  <author>
+    <name>Rusty Russell 2020-10-15 01:00:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] Simplified (but less optimal) HTLC Negotiation</title>
+    <updated>2023-06-03T02:51:41.274446+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002845.html" rel="alternate"/>
+    <summary>In a recent email exchange, Christian Decker suggests a leader-based mechanism for Bitcoin's Lightning Network. This mechanism involves determining the leader based on the lexicographically lower node_id, who then receives proposals for changes from itself and its peer. The leader orders these changes into a logical sequence and applies them locally before streaming them to the peer. Any node can initiate a commitment by proposing a "flush" change, which leads to both nodes computing the commitment transaction and exchanging signatures. Although this approach does away with turn changes, it requires the ability to propose two types of changes: updates from oneself and updates from the peer.However, this deeper protocol change means losing the benefit of turn-taking, which provides a known state for fee changes. Even if the proposal is changed to have the opener always be the leader, incoming changes that are not allowed under the new fee regime must still be handled. The downside of this mechanism is that it adds a constant overhead to one side's operations, but since changes are pipelined and mostly synchronous during commitment tx signing, it only adds 1 RTT for each commitment.Rusty Russell, in response, suggests a token-passing approach, which alternates between nodes to optimize for non-busy channels. Although this approach requires a synchronous token handover whenever the direction of updates changes, it adds just over half an RTT on average compared to the leader-based mechanism.</summary>
+    <published>2020-10-15T01:00:12+00:00</published>
+  </entry>
+</feed>

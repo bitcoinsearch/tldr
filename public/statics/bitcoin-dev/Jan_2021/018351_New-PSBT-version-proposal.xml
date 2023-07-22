@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New PSBT version proposal</title>
+  <updated>2023-05-21T00:05:55.988629+00:00</updated>
+  <author>
+    <name>Andrew Chow 2021-01-14 17:07:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New PSBT version proposal</title>
+    <updated>2023-05-21T00:05:55.988629+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018351.html" rel="alternate"/>
+    <summary>On January 7th, 2021, Rusty Russell and Andrew Chow engaged in a discussion on the progress of PSBT. Rusty expressed his excitement about the progress and apologized for the delayed feedback. Andrew then proposed the addition of a new global field called "PSBT_GLOBAL_UNDER_CONSTRUCTION = 0x05". This field is used to signal whether inputs and outputs can be added to the PSBT. The flag may be set to True when inputs and outputs are being updated, signed, and finalized, but care must be taken when there are existing signatures. Rusty questioned whether this flag could be flagged simply by omitting the redundant PSBT_GLOBAL_INPUT_COUNT and PSBT_GLOBAL_OUTPUT_COUNT fields. Andrew explained that those fields are necessary to know how many input and output maps there are. Rusty suggested that it would have been nice to have an input map be a distinctly marked type from global or output maps. However, changing that is a bigger change, so he suggested requiring a double-00 terminator between the global, input, and output sections instead.Andrew mentioned that there are some protocols where signed inputs are added to transactions, and Rusty disagreed with the goal of providing no way to modify the set of inputs or outputs after the Creator role is done. Instead, Rusty proposed adding data to PSBT_GLOBAL_UNDER_CONSTRUCTION, such as a flag to indicate whether inputs are modifiable, a flag to indicate whether outputs are modifiable, and a bitmap of what inputs are SIGHASH_SINGLE. If you add a signature which is not SIGHASH_NONE, you clear the "outputs modifiable" flag. If you add a signature which is not SIGHASH_ANYONECANPAY, you clear the "inputs modifiable" flag.</summary>
+    <published>2021-01-14T17:07:44+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposed new policy for transactions that depend on other unconfirmed transactions</title>
+  <updated>2023-06-10T19:33:07.048751+00:00</updated>
+  <author>
+    <name>Alex Morcos 2015-09-21 15:02:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposed new policy for transactions that depend on other unconfirmed transactions</title>
+    <updated>2023-06-10T19:33:07.048751+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-September/011144.html" rel="alternate"/>
+    <summary>A proposal for accepting new transactions into the mempool and relay them has been made to limit the size of a mempool. The proposal aims to ensure that a new transaction can pay not only for the transaction it would evict but also any dependent transactions that would be removed from the mempool as well. The proposal suggests four new policy limits that are command-line configurable. The limits include Max number of descendant txs, Max descendant size, Max number of ancestor txs, and Max ancestor size, which would have affected less than 2% of transactions entering the mempool in April or May of this year. During the period of 7/6 through 7/14, while the network was under stress test, as many as 25% of the transactions would have been affected by these limits. The code to implement the descendant package tracking and new policy limits can be found in 6557 which is built off of 6470. These policy changes have been merged into master in 6654, which implements these limits and no mempool limiting yet. The default ancestor package size limit is 900kb not 1MB.Although the limits proposed are generous, they were designed to be as generous as was computationally feasible so they were unobjectionable since the existing policy was no limits. This does not preclude future changes to policy that would reduce these limits. A comment on the proposal suggested that dropping down the limits to allowing only two levels of chained unconfirmed transactions may not be a problem. However, it limits the use case of brokered asset transfers that may require sets of transactions with a dependency tree depth of 3 to be published together.</summary>
+    <published>2015-09-21T15:02:20+00:00</published>
+  </entry>
+</feed>

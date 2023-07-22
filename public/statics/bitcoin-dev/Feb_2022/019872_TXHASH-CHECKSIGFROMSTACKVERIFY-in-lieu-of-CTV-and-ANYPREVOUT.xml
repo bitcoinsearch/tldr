@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+  <updated>2023-06-15T15:38:58.237144+00:00</updated>
+  <author>
+    <name>Jeremy Rubin 2022-02-08 04:34:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TXHASH + CHECKSIGFROMSTACKVERIFY in lieu of CTV and ANYPREVOUT</title>
+    <updated>2023-06-15T15:38:58.237144+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019872.html" rel="alternate"/>
+    <summary>In a discussion on the Bitcoin-dev mailing list, Russell O'Connor proposed decomposing the functionality of CTV (CheckTemplateVerify) and ANYPREVOUT into their constituent pieces and programmatically reassembling their behavior. He suggested introducing two new opcodes: OP_TXHASH and OP_CHECKSIGFROMSTACKVERIFY. The former would pop a txhash flag from the stack, compute a tagged txhash in accordance with that flag, and push the resulting hash onto the stack. Rusty Russell noted that OP_TXHASH could be further decomposed into OP_TX (which places concatenated selected fields onto the stack) and OP_TAGGEDHASH or just reuse OP_SHA256. O'Connor believes that the difficulties with upgrading TXHASH can be mitigated by designing a robust set of TXHASH flags from the start. These flags would control whether various aspects of a transaction are covered, such as version, locktime, txids, sequence numbers, input amounts, input scriptpubkeys, number of inputs, output amounts, output scriptpubkeys, number of outputs, tapbranch, tapleaf, opseparator value, and sighash flags. To simplify this process, Rusty suggested defining two bits for 14 (and similarly 15), specifying no inputs, all inputs, current input, and popping a number from the stack. Additionally, he suggested pushing SHA256() of scripts instead of scripts themselves to reduce the potential for DoS attacks. Finally, Jeremy noted that this sort of design introduces recursive covenants similarly to how previously described, but he deferred to others on whether this is an issue or not precluding this sort of design.</summary>
+    <published>2022-02-08T04:34:30+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>We need to fix the block withholding attack</title>
+  <updated>2023-06-11T02:32:24.019460+00:00</updated>
+  <author>
+    <name>Natanael 2015-12-20 12:42:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>We need to fix the block withholding attack</title>
+    <updated>2023-06-11T02:32:24.019460+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-December/012071.html" rel="alternate"/>
+    <summary>The email thread between Tier Nolan and Emin Gun Sirer discusses a potential solution to the problem of attacker pools using their hashpower to mine on behalf of victim pools but discarding any full blocks they discover. The proposed solution involves altering the mining protocols so that miners have to indicate their identity with a public key included in their blocks. This public key can be registered with DNSSEC+DANE and the pool could point to their domain in the block template as an identifier. For each block generated, the pool would generate a nonce and for each miner's worker, it double-hashes that nonce with their own public key and the miner's worker ID and the previous block hash. The double-hash is a commitment hash, which is used along with the candidate block PoW hash to determine block validity. The ratio for full blocks to candidate blocks shared with the pool is used to determine the total difficulty required for block validity. This solution would prevent withholding attacks as miners wouldn't know if their blocks are valid before the pool does. Additionally, the public key identifiers would stop a pool from telling honest but naive miners to attack other pools using other schemes. The main differences are that there's a public key identifier the miners are told about in advance and expect to see in block templates, and that now the pool has to publish this commitment value together with the block that also contains the commitment hash, and that this is verified together with the PoW.</summary>
+    <published>2015-12-20T12:42:10+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-05-20T21:58:30.745765+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-04-22 23:11:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-05-20T21:58:30.745765+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-April/017776.html" rel="alternate"/>
+    <summary>The email thread discusses a potential vulnerability in the Bitcoin Lightning Network's hash locked time contracts (HTLC). The vulnerability arises when a transaction from A to C has already timed out, and B and C can engage in a bidding war with miners to get their version of the transaction committed on-chain. To prevent this, B must ensure that before the timeout, the HTLC-Timeout is committed on-chain, which prevents the bidding war from starting.However, B faces a challenge because it is using a pre-signed HTLC-timeout, which prevents it from RBF-ing the HTLC-Timeout transaction. The proposed mitigation involves using `OP_CHECKSEQUENCEVERIFY` to enforce RBF-flagging and allowing B to fee-bump the HTLC-Timeout signature from C with some on-chain funds if L+1 timeout is approaching. This approach has several advantages such as not needing a mempool, not requiring extra RBF carve-out txo, and being resilient to future changes in mempool rules.If B can get the HTLC-Timeout confirmed before L+1, then C cannot steal the HTLC value at all because the UTXO it could steal from has already been spent. However, this only delays the bidding war and sets the stage for a second bidding war later between C and B. C can bribe a miner to prevent HTLC-Timeout from confirming between L and L+1, but this is a censorship attack and only delays the bidding war.In addition, the current anchors proposal already enforces a CSV of 1 block before the HTLCs can be spent, meaning that the malicious node is already forced to use an RBF-replaceable transaction. Moreover, if both nodes support doing so, a Poon-Dryja channel can be upgraded without on-chain activity to a Decker-Russell-Osuntokun channel. This mechanism sidesteps the issue under discussion here.In summary, the thread discusses a vulnerability in the lightning protocol where a malicious node can steal funds in an HTLC transaction by using a low-fee, non-RBF signalled transaction. The proposed solution involves using `OP_CHECKSEQUENCEVERIFY` to enforce RBF-flagging and allowing B to fee-bump the HTLC-Timeout signature from C with some on-chain funds if L+1 timeout is approaching. The current anchors proposal already enforces a CSV of 1 block before the HTLCs can be spent, and a Poon-Dryja channel can be upgraded without on-chain activity to a Decker-Russell-Osuntokun channel if both nodes support doing so.</summary>
+    <published>2020-04-22T23:11:08+00:00</published>
+  </entry>
+</feed>

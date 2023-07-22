@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Embedded consensus system upgrade procedures</title>
+  <updated>2023-06-08T02:24:49.200770+00:00</updated>
+  <author>
+    <name>Peter Todd 2014-02-09 17:12:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Embedded consensus system upgrade procedures</title>
+    <updated>2023-06-08T02:24:49.200770+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-February/004297.html" rel="alternate"/>
+    <summary>The problem addressed in this context is the potential for double-spending assets due to a transition period where some users interpret new consensus rules, while others only interpret old ones. The solution proposed is to split actions into separate "decrement" and "increment" operations and ensure that v1 software can view the "decrement" of a balance even if it doesn't see the corresponding "increment." This solves the double-spend problem and ensures that v1 users can't be ripped off. The analogy drawn is to proof-of-work (PoW) cases, and the general principle is referred to as an embedded consensus system soft-fork. Colored coins technology implements this principle implicitly and with miner validation by ensuring that moving transaction outputs from one owner to another results in the destruction of the colored coin from any older software version's point of view. Asset definitions created by issuers should ensure that kernels chosen are designed such that their action can't be interpreted differently by another kernel, and they should be clearly incompatible with each other. In a balance-based system like Mastercoin, transactions increment and decrement balances, and addresses associated with a maximum version number higher than what the software understands are considered null and have no value of any kind. Implementations should record in their databases the blockhash associated with transactions that affected the state of the consensus but were not yet recognized. After upgrading, these "last transaction understood" markers can be used to replay blockchain data and arrive at the new consensus. In all systems, it is useful to have a way of generating a master digest representing the state of the consensus in the database, which different implementations and instances can use to ensure that they have arrived at a consensus.</summary>
+    <published>2014-02-09T17:12:14+00:00</published>
+  </entry>
+</feed>

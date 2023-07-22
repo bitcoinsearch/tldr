@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Refreshed BIP324</title>
+  <updated>2023-05-22T21:54:23.800352+00:00</updated>
+  <author>
+    <name>Anthony Towns 2023-02-17 15:51:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Refreshed BIP324</title>
+    <updated>2023-05-22T21:54:23.800352+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-February/021478.html" rel="alternate"/>
+    <summary>A discussion was held on bitcoin-dev mailing list regarding the issue of 1-byte message type IDs. It was pointed out that multiple in-flight BIPs proposing new message types are lacking a co-ordination mechanism as the id space is reduced to 1 byte, which is scarce and should be allocated judiciously. Solutions proposed included uniform encoding using the high-bit and making type IDs negotiable per direction per connection. It was suggested to optimize for the least additional complexity that doesn't close the doors on any of the solutions. Two questions were raised- how to distinguish the command from the payload for non short-ids, and whether short ids are available/meaningful to send prior to VERACK being completed. A suggestion was made to use short ids to minimize bandwidth, reserve short id 0 for long commands, and treat them exactly the same as a v1 p2p message if received. Short ids 1-255 were suggested to be used as aliases of particular long commands, leaving 32 commands that get short ids initially. It was suggested to remove 1 byte allocations for messages that are sent at most once per connection per direction. This drops some commands compared to bip 324 currently, while some commands are missing from the current list but not currently in use by Bitcoin Core. It was also suggested to move the type id mapping to the p2p layer away from the transport layer.</summary>
+    <published>2023-02-17T15:51:19+00:00</published>
+  </entry>
+</feed>

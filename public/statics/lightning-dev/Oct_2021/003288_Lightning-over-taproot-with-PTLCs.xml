@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Lightning over taproot with PTLCs</title>
+  <updated>2023-06-03T06:17:19.390308+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2021-10-11 10:23:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Lightning over taproot with PTLCs</title>
+    <updated>2023-06-03T06:17:19.390308+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-October/003288.html" rel="alternate"/>
+    <summary>In an email thread on 11th October 2021, Anthony Towns expressed his concern regarding the layering issue in a payment forwarding system. He stated that if Alice forwarded a payment to Bob with a timeout of T, she could only reclaim the funds or know the preimage by closing the channel on-chain at time T-to_self_delay. If Bob posted the inflight transaction at T+x and layered transaction (4) revealing the preimage, it would prevent Alice from claiming the refund. However, the problem may not be as bad as it seems because in Eltoo, you are delayed both when you are offering and receiving the HTLC whereas, in this case, you are only delayed on offered HTLC.To solve this issue, the protocol needs to be adjusted so that the in-flight txs are reciprocated. To do this, when a party offers a HTLC, they first forward it and then lazily send the signature for the inflight tx. By doing this, the receiver does not have to wait to get the HTLC on the chain and does not have to close the channel early. In case of a malicious node, going on-chain to_self_delay earlier than usual is necessary, but if both parties are honest, this step is not required. The problem with Eltoo is that even if both parties are honest, achieving this is difficult.</summary>
+    <published>2021-10-11T10:23:19+00:00</published>
+  </entry>
+</feed>

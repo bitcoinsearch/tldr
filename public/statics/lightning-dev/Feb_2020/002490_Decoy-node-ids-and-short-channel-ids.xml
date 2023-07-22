@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Decoy node_ids and short_channel_ids</title>
+  <updated>2023-06-02T22:41:03.661049+00:00</updated>
+  <author>
+    <name>m.a.holden 2020-02-03 06:50:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Decoy node_ids and short_channel_ids</title>
+    <updated>2023-06-02T22:41:03.661049+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002490.html" rel="alternate"/>
+    <summary>A potential way for Alice and Bob to agree on a set of 256 scids without additional messages or changes to existing messages is proposed by Mark Holden. They can agree on a random integer 'r', which could be negotiated on open_channel, and use the `temporary_channel_id`. When a channel is locked, Bob computes n=256 scids using something approximating `concat(n, trunc_bytes(sha256(ec_mult(2^n*r, Q)), 7))`, where `Q` is Alice's public key for the channel funding transaction. The chance of scid collisions between channels is 2^56, which is not a cause for concern.Bob can use a cuckoo filter instead of keeping a map of 256 scids for each channel. The filter can be used for a quick membership test and also as an associative map from scids to channels. It can also support scid deletion in the event of channel closure at the cost of recomputing 256 ec_mults again. When Bob receives a new HTLC to forward, he tests it against his cuckoo filter and retrieves a candidate set of possible channels to which it may refer. For each channel, he takes the most significant byte of the scid as `m` and performs `trunc_bytes(sha256(ec_mult(2^m*r, Q)), 7)` and tests the least-significant 7 bytes of the result against the scid. Alice does not need to keep all of the scids she may use for invoices because they can be computed on the fly, but she will need to keep a copy of the `temporary_channel_id`. In the reverse direction of Alice forwarding HTLCs to Bob, Bob's public key for the funding transaction is used instead.</summary>
+    <published>2020-02-03T06:50:20+00:00</published>
+  </entry>
+</feed>

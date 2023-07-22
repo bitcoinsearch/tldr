@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>HTLCs using OP_CHECKSEQUENCEVERIFY/OP_LOCKTIMEVERIFY and revocation hashes.</title>
+  <updated>2023-05-23T18:19:00.620353+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-02-08 23:39:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>HTLCs using OP_CHECKSEQUENCEVERIFY/OP_LOCKTIMEVERIFY and revocation hashes.</title>
+    <updated>2023-05-23T18:19:00.620353+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-February/000434.html" rel="alternate"/>
+    <summary>In an email thread, CJP raises a potential issue with the Lightning Network's HTLC (hash time-locked contract) system. He describes a scenario where Eve (E) intends to steal funds from Alice (A) by routing a payment to herself through two channels with A, but not revealing the transaction R value as a payee. When the transaction times out on both channels, the HTLCs are removed, and Eve can spend all her coins on the channel where she was receiving the transaction. She can then sign and broadcast the version of the commit transaction that contained the HTLC, potentially obtaining the transaction R value before Alice and spending it first.To prevent this, Rusty proposes delaying all outputs to A in A's commit transaction via OP_CSV, including HTLC outputs. Appendix A of the paper outlines the HTLC Receiver Redeemscript, which shows the CSV delay on the "using R preimage" path. Rusty suggests further delaying all non-revocation paths in HTLCs and straight payment outputs to avoid game theory when doing a unilateral close. Joseph is expected to have thoughts on this proposal.</summary>
+    <published>2016-02-08T23:39:12+00:00</published>
+  </entry>
+</feed>

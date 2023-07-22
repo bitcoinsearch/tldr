@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DRAFT: interactive tx construction protocol</title>
+  <updated>2023-06-02T23:23:02.898351+00:00</updated>
+  <author>
+    <name>Rusty Russell 2020-02-13 05:10:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DRAFT: interactive tx construction protocol</title>
+    <updated>2023-06-02T23:23:02.898351+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002536.html" rel="alternate"/>
+    <summary>A developer on Lightning-dev has suggested improvements to protocol messages used in transactions. The suggestion involves adding a serial_id to inputs and outputs which can be reused for deletions. The serial id can then be used as the ordering heuristic for transaction inputs during construction, replacing current BIP69 usage. Inputs can be shared amongst peers by flipping the bottom bit of the serial_id before relaying them to another peer. If the initiator deliberately provides serial IDs 0x1, 0x3, etcetera while the acceptor naively provides serial IDs from /dev/urandom, it is probable that the initiator inputs and outputs are sorted before the acceptor. However, this will not be an issue since both participants know which inputs and outputs belong to them. If a block height is communicated in the initiation step, it should be set to blockheight-6; otherwise, it should be set to zero. This minus 6 is unclear; however, if block height disagreements are feared, this could be a good opportunity to introduce block headers. This way, if the acceptor thinks the initiator's block height is too high, it could challenge the initiator to give block headers from its known block height to the initiator block height. If the acceptor thinks the initiator's block height is too low, it could provide block headers itself as proof. For multiparty constructions, the initiator must flip the bottom bit of any received inputs before relaying them to a peer. Collisions of serial ids between peers are considered a protocol error.</summary>
+    <published>2020-02-13T05:10:27+00:00</published>
+  </entry>
+</feed>

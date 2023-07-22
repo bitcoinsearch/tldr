@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - QR code alternatives (was: Proposal: extend bip70 with OpenAlias)</title>
+  <updated>2023-06-10T03:00:53.177330+00:00</updated>
+  <author>
+    <name>Mike Hearn 2015-07-20 14:40:36</name>
+  </author>
+  <author>
+    <name>Andreas Schildbach 2015-07-21 08:20:17</name>
+  </author>
+  <author>
+    <name>Clément Elbaz 2015-07-21 08:42:02</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2015-07-20 14:40:36</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2015-07-21 10:25:33</name>
+  </author>
+  <author>
+    <name>Thomas Voegtlin 2015-07-21 14:58:39</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2015-07-21 10:25:33</name>
+  </author>
+  <author>
+    <name>Thomas Voegtlin 2015-07-21 14:58:39</name>
+  </author>
+  <author>
+    <name>Thomas Voegtlin 2015-07-21 14:58:39</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2015-07-20 14:40:36</name>
+  </author>
+  <author>
+    <name>Andreas Schildbach 2015-07-21 08:20:17</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2015-07-21 10:25:33</name>
+  </author>
+  <author>
+    <name>Andreas Schildbach 2015-07-21 08:20:17</name>
+  </author>
+  <author>
+    <name>Clément Elbaz 2015-07-21 08:42:02</name>
+  </author>
+  <author>
+    <name>Clément Elbaz 2015-07-21 08:42:02</name>
+  </author>
+  <link href="bitcoin-dev/July_2015/009488_QR-code-alternatives-was-Proposal-extend-bip70-with-OpenAlias-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009500_QR-code-alternatives-was-Proposal-extend-bip70-with-OpenAlias-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009501_QR-code-alternatives-was-Proposal-extend-bip70-with-OpenAlias-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009488_QR-code-alternatives-was-Proposal-extend-bip70-with-OpenAlias-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009503_QR-code-alternatives-was-Proposal-extend-bip70-with-OpenAlias-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009506_QR-code-alternatives-was-Proposal-extend-bip70-with-OpenAlias-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009503_QR-code-alternatives-was-Proposal-extend-bip70-with-OpenAlias-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009506_QR-code-alternatives-was-Proposal-extend-bip70-with-OpenAlias-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009506_QR-code-alternatives-was-Proposal-extend-bip70-with-OpenAlias-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009488_QR-code-alternatives-was-Proposal-extend-bip70-with-OpenAlias-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009500_QR-code-alternatives-was-Proposal-extend-bip70-with-OpenAlias-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009503_QR-code-alternatives-was-Proposal-extend-bip70-with-OpenAlias-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009500_QR-code-alternatives-was-Proposal-extend-bip70-with-OpenAlias-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009501_QR-code-alternatives-was-Proposal-extend-bip70-with-OpenAlias-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2015/009501_QR-code-alternatives-was-Proposal-extend-bip70-with-OpenAlias-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - QR code alternatives (was: Proposal: extend bip70 with OpenAlias)</title>
+    <updated>2023-06-10T03:00:53.178329+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-July/009488.html" rel="alternate"/>
+    <summary>The email from Mike Hearn proposed an idea for generating QR codes for Bitcoin payment requests. He suggested using a single payment address with no merge avoidance tricks and provided an example of what such a QR code could look like. However, this method would require text mode and waste bytes at the front for the URI type. To avoid this issue, it was suggested that assuming the payment request is a single standard output + amount would cover 99% of cases and generate a serialized bip70 PR from the parameters found in the URI. The string would then be signed, and the signature added to the URI. An example was provided, including a timestamp, duration of validity, domain name of the signer, and signature. This approach saves a few bits by expressing the duration of validity as one week. The resulting QR code can be scanned with a phone.The email suggests a possible solution to the BIP 70 usability problem without servers by using upgraded QR codes that have more space and optimizing BIP 70. The first topic discussed is the High Capacity Colored Two Dimensional Codes paper, which extends standard QR codes with color for increased capacity while maintaining scanning robustness. Another interesting paper is DualCodes, which overlays one QR code on top of another using shades of gray for an enhanced reader to extract the second code, with digital signatures as a possible use case. The authors could be contacted to see if they would open source their work. If a certificate's format was defined, including its own Certificate Authorities (CAs), a certificate could be as small as 32 bytes for the ECC signature plus the length of the asserted email address. A weaker curve with 64 bits of security could also be used instead of the 128-bit curve for Really Strong Security™, as long as the short CA keys expired frequently, like once a month. Defining our own PKI would allow for these shorter expirations, and certificates that expire monthly is not an issue if the wallet has a way to automatically refresh the certificate by using a longer term stronger credential. A QR code with a single payment address could look like 'bitcoin:1aBcD1234....?x=serialized_payment_request,' but if an embedded reader was required, legacy could be scrapped and a binary BIP70 request could be serialized directly into the QR code. Andreas' wallet can already handle this, but it is unknown what the situation on iOS is like. If the DualCodes system was used, the primary QR code could be an unsigned payment request, and the second layer could be the signature/pki data.Lastly, the email discusses getting response data back to the recipient and the idea of having a store/forward network for private responses or implementing the well-known "Stealth Address" / ECDH in the payment protocol proposals. However, these ideas come at the cost of restoring a wallet from seed words not being possible. The email suggests using servers to store Payment messages for people, and nodes could shard themselves by announcing in their addr messages that they only store Payment metadata for e.g. the half which has a hash starting with a one bit. Regular DoS issues would be present, but any P2P network that stores data on the behalf of others has these.The 2D-Doc is a standard that encodes a summary of a protected document inside a Datamatrix barcode, followed by an ECDSA signature. The technical specification of the standard can be found in the provided link. The signature is done by an official government-approved 2D-Doc emitter and contains a reference to designate which emitter signed it. To check the signature, one can look up the 2D-Doc TSL supplied by the French government to get all the X509 Certificates from every emitter they are interested in. Though the 2D-Doc solves a different problem than Bitcoin+BIP70, it may be interesting to know about it as hundreds of thousands have been emitted successfully while solving one of the problems faced: embedding an ECDSA signature inside a 2D barcode.</summary>
+    <published>2015-07-20T14:40:36+00:00</published>
+  </entry>
+</feed>

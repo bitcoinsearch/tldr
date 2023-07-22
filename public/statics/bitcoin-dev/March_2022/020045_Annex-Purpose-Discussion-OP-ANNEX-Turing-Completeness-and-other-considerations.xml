@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Annex Purpose Discussion: OP_ANNEX, Turing Completeness, and other considerations</title>
+  <updated>2023-05-22T18:06:38.254862+00:00</updated>
+  <author>
+    <name>Jeremy Rubin 2022-03-04 23:21:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Annex Purpose Discussion: OP_ANNEX, Turing Completeness, and other considerations</title>
+    <updated>2023-05-22T18:06:38.254862+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020045.html" rel="alternate"/>
+    <summary>There has been some discussion regarding the use of the Annex in Bitcoin, with potential uses including data field for additional authenticated data or delegation. However, before developers get too excited, there should be an open discussion regarding its purpose and any constraints to using it. The BIP defines the Annex as a reserved space for future extensions, such as indicating validation costs of computationally expensive new opcodes in a way that is recognizable without knowing the scriptPubKey of the output being spent. It is important to note that until the meaning of this field is defined by another softfork, users should not include it in transactions as it may lead to permanent fund loss. The Annex essentially allows for padding a transaction with an additional string of 0's that contribute to the virtual weight of a transaction but have no validation cost themselves. This could potentially be used to validate more signatures than one per 50 virtual weight units by adding padding to buy extra gas. Alternatively, the witness could be made into a small language so that an equivalent number of zeros can be charged without consuming space but still consuming a linearizable resource. The Annex can also be used to reserve something else like the amount of memory, allowing for the expression of a resource constraint efficiently. One suggestion is to introduce OP_ANNEX, an opcode that would push the annex on the stack along with a 0 or 1 to differentiate the annex from no annex. This would allow for the Annex to be used as a register/tape for some sort of computational model, making witness construction turing complete. However, this is at odds with the idea of using the Annex to guess computation costs, and it raises issues with Miniscript, where multiple annex values may need to be pre-signed. One solution to these issues would be to soft-fork the Annex out and always make it equal to 0 until a use case is found. Another option would be to make the Annex unobservable from the script but still a hint for validation rules. Overall, there needs to be further discussion regarding the purpose and constraints of the Annex before its use can be determined.</summary>
+    <published>2022-03-04T23:21:41+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Interactive tx construction and UTXO privacy, some thoughts</title>
+  <updated>2023-06-03T04:25:20.425422+00:00</updated>
+  <author>
+    <name>Cycryptr 2021-06-29 15:27:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Interactive tx construction and UTXO privacy, some thoughts</title>
+    <updated>2023-06-03T04:25:20.425422+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-June/003082.html" rel="alternate"/>
+    <summary>The lightning network's dual-funding proposal has been reviewed and objections have been raised. One concern is the need to share UTXOs with a channel peer, however, this is only limited to the UTXOs used for funding transactions. The current opening protocol already publicly associates all UTXOs in a wallet to a single party, so it is not advisable to mix lightning funds with private/unassociated funds.The interactive transaction protocol of dual-funding makes it more difficult to determine which UTXOs belong to whom, making it no worse than the current protocol for on-chain coin-analysis heuristics and potentially much better. Another concern is that an active prober can use the interactive transaction protocol to discover a wallet's entire UTXO set. However, JoinMarket's PoDLE protocol has been employed to make the discovery of every UTXO more costly to potential attackers. Reusing the same UTXO across every open attempt and being choosy about which peers liquidity is offered to can also slow down this type of attack.Nadav of SuredBits and DLC has pointed out that the protocol is quite interactive, but modifications such as batching can be made to transmit input/output sets. This allows for multiparty coinjoins and is currently possible with c-lightning using the multifundchannel command. The interactive transaction protocol is flexible and offers plausible deniability regarding UTXOs sent to any peer.Cryptographic protocols require succinctness in rounds of required interaction. Lightning channel relationships, however, are highly interactive and adding rounds of communication to the channel open is not significant in terms of performance and uptime requirements. UTXO privacy is important on lightning, but not as important as not associating one's identity with their node. The progress of Taproot scripts is not known, but assuming the current requirements, on-chain transactions will still be assignable to a node given gossip data.Sharing UTXOs with other peers in the process of opening a channel raises concerns. The current protocol introduces mechanisms for plausible deniability and building multi-party coinjoins as opens. Best practice is to never tie one's identity to their lightning node and reconsider the wallet source used to fund announced channel opens.</summary>
+    <published>2021-06-29T15:27:52+00:00</published>
+  </entry>
+</feed>

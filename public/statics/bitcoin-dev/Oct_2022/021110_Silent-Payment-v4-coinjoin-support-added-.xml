@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Silent Payment v4 (coinjoin support added)</title>
+  <updated>2023-06-16T01:43:54.554901+00:00</updated>
+  <author>
+    <name>alicexbt 2022-10-23 20:54:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Silent Payment v4 (coinjoin support added)</title>
+    <updated>2023-06-16T01:43:54.554901+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021110.html" rel="alternate"/>
+    <summary>The update to Silent Payment v4 now uses all inputs to create transactions, making it compatible with coinjoin and increasing privacy. The `getspaddress` RPC command has been renamed to `getsilentaddress` for clarity. Support for silent payment in PSBT via `walletcreatefundedpsbt` RPC has also been added. A new index scheme was introduced which stores the sum of input public keys for each transaction, making the previous index `bitcoin/signet/indexes/silentpaymentindex` incompatible. The silent payments scheme only relies on transaction data that is publicly available on the blockchain, unlike multi-party schemes that can be susceptible to rogue-key attacks. There is a warning in the output of `getsilentaddress` RPC when used with a label, suggested by Aurèle Oulès, which warns users that the address is not a new identity but a re-use of an existing one with a different label. The implementation uses the scheme `hash(i1*X + i2*X + i3*X + ...)*G + X == hash(x*(I1+I2+I3+...))*G + X`, which allows for Taproot inputs. However, this introduced a problem as `bitcoin-core/secp256k1` does not support x-only public key sum due to a missing prefix byte. To solve this, a new PR (#1143) has been opened to add a function to convert from x-only to compressed public key with even y. The tutorial has also been updated.</summary>
+    <published>2022-10-23T20:54:26+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-05-23T03:12:18.200517+00:00</updated>
+  <author>
+    <name>Matt Corallo 2020-04-22 22:53:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-05-23T03:12:18.200517+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002652.html" rel="alternate"/>
+    <summary>In a recent discussion on the Lightning-dev mailing list, Matt Corallo raised concerns about an attack that could be launched by a counterparty on the Lightning Network. The attack involves spending an HTLC using the preimage with a low-fee, RBF-disabled transaction and then getting the HTLC-claiming transaction mined via some out-of-band agreement with a small miner. This leaves the original party short the HTLC value. The main problem with this attack is that honest nodes may broadcast a transaction without realizing it conflicts with a pinned transaction that's already in most node's mempools. David A. Harding suggested a solution to this problem: re-implementing something like a BIP61 reject message but with an extension that returns the txids of any conflicts. For example, when a node connects to a bunch of Bitcoin nodes and sends its conflicting transaction, the nodes would reply with something like "rejected: code 123: conflicts with txid 0123...cdef". The node could then reply with a getdata('tx', '0123...cdef') to get the pinned transaction, parse out its preimage, and resolve the HTLC. However, there are practical design issues to consider such as if claiming multiple HTLC output in a single transaction, the node would need to provide reject messages for each input which is conflicted. Corallo suggested aggressively querying various sources to find new blocks. Although, there is no consensus mechanism for nodes to ensure the transactions in their mempools are the same as others, so this solution may not be reliable. To pull off the attack now, one would have to wait for the counterparty to broadcast the corresponding timeout transaction (once it is confirmable, and can thus get into mempools), turning the whole thing into a mempool-acceptance race. It is unclear if this solution is really the kind of thing one would want to rely on for their own funds.</summary>
+    <published>2020-04-22T22:53:37+00:00</published>
+  </entry>
+</feed>

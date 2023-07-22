@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>SURBs as a Solution for Protocol-Level Payment ACKs</title>
+  <updated>2023-06-02T17:21:29.392382+00:00</updated>
+  <author>
+    <name>Kulpreet Singh 2019-02-11 21:03:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>SURBs as a Solution for Protocol-Level Payment ACKs</title>
+    <updated>2023-06-02T17:21:29.392382+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-February/001865.html" rel="alternate"/>
+    <summary>Olaoluwa Osuntokun, a developer on the Lightning Network project, has suggested implementing single-use-reply-blocks (SURBs) to provide an ACK (acknowledgment) for each sent Hashed Time-Locked Contract (HTLC). The current protocol only provides a message if an HTLC fails or is redeemed. The payment ACK feature would allow the sender to know when a payment has reached the receiver, enabling the development of higher-level protocols and aiding in Assured Message Payment (AMP) implementation. Enforcing and relying on ACKs may also thwart games receivers might play, claiming that the HTLC "didn't actually arrive". The original Sphinx packet format has a way for the receiver to send a message back to the sender. This was originally envisioned to allow the receiver to send a replay email/message back to the sender without knowing who they were, and also in a manner that was bit-wise indistinguishable from a regular forwarded packet. This is called a SURB or "single use reply block". A SURB is composed of: a pre-crafted sphinx packet for the "backwards route" (which can be distinct from the forwards route), the first hop of the backwards route, and finally a symmetric key to use when encrypting the reply.To implement payment ACKs, the sender crafts a SURB, and marks the receipt of the SURB as the payment ACK itself. Creating and processing a SURB is identical to the regular HTLC packets we use today. The code impact to the code sphinx packet logic is minimal. They then also re-introduce the end-to-end payload so they can carry the SURB in the forward direction (HLTC add). The backwards packet would also have a payload of random bytes with the same size as a regular packet to make them look identical on the wire.This payload can further be put to use in order to implement streaming or subscription payments. Since they must add a payload for in order to send/reply look the same, they can also piggy-back some useful additional data. Each time a payment is sent, the receiver can use the extra payload to stack on details such as: a new invoice to pay for the metered service being paid for, an invoice along with a deadline for when this must be paid, etc. This approach is better than a potential client-server payment negotiation protocol as it doesn't require any additional servers alongside the node, maintains sender anonymity, and doesn't rely on any sort of public key infrastructure.One downside is that this would essentially double the size of HTLC messages on the network today, as they need to carry SURB. Most candidates for possible rendezvous schemes to deploy would also increase the packet size if up to 20 hops it be allowed in both directions. We also don't really have a feel on how much of an issue the 1.2KB HTLC packet size is today in the network.</summary>
+    <published>2019-02-11T21:03:43+00:00</published>
+  </entry>
+</feed>

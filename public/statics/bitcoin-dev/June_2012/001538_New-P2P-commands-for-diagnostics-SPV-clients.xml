@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New P2P commands for diagnostics, SPV clients</title>
+  <updated>2023-06-06T05:02:20.360810+00:00</updated>
+  <author>
+    <name>Jeff Garzik 2012-06-15 13:26:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New P2P commands for diagnostics, SPV clients</title>
+    <updated>2023-06-06T05:02:20.360810+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-June/001538.html" rel="alternate"/>
+    <summary>The discussion in this email thread is about combining 'filterinit' and 'filterload' commands, which are used to initialize a bloom filter table metadata and data. The consensus is that 'filterload' command includes all necessary metadata required to initialize a bloom filter, and therefore 'filterinit' would only be needed for 'filteradd'. It is suggested that if the 'filteradd' command does not have compelling use case, then 'filterinit' and 'filteradd' can be dropped. Further, it is noted that 'filterload' and 'filteradd' enable special behavior changes for 'mempool' and existing P2P commands. These changes allow only transactions matching the bloom filter to be announced to the connection, and only matching transactions will be sent inside serialized blocks. However, there is a need to specify the format of how these arrive, as when a new block is found instead of invgetdatablock we'd see something like invgetdatamerkleblock where a "merkleblock" structure is a header + list of transactions + list of merkle branches linking them to the root. It is suggested that input from potential users is required to determine what information they might need.</summary>
+    <published>2012-06-15T13:26:18+00:00</published>
+  </entry>
+</feed>

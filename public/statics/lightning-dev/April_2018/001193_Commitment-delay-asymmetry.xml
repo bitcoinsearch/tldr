@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Commitment delay asymmetry</title>
+  <updated>2023-05-24T23:14:20.930260+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-04-16 11:56:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Commitment delay asymmetry</title>
+    <updated>2023-05-24T23:14:20.930260+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-April/001193.html" rel="alternate"/>
+    <summary>The discussion is about the addition of a new attack vector to mitigate another attack vector. The concern is that the new attack may be easier to perform, and there is no guarantee that it will eliminate the previous attack vector. In the symmetric-delay world, an attacker can trigger the lockup period immediately in the active attack. However, the risk is that the other side may decide not to close the channel unilaterally anyway. The two attacks in the symmetric case do not seem any different from one another. In both cases, an attacker forces a unilateral close by becoming unresponsive and forcing the other side to eventually broadcast the commitment. The difference is that in the second case, an attacker forces a unilateral close by broadcasting himself, which is a weaker attack. The suggestion is to scale the delay in proportion to the time-money lost by the broadcasting party. In terms of setting up a channel, the commitment delays do not need to be the same in both commitment transactions. A better rule might be to set the delay as min(to_remote_delay, to_local_delay * to_local_value / to_remote_value), so the punishment duration is reduced if the attacker broadcasts a commitment transaction in which the balance of funds is skewed towards the victim's end of the channel. However, an attacker should always prefer to become unresponsive rather than broadcast the commitment themselves. The proposal is to make the delays equal as in the original proposal, with each side having its own `to_self_delay` that currently applies to the other side.</summary>
+    <published>2018-04-16T11:56:16+00:00</published>
+  </entry>
+</feed>

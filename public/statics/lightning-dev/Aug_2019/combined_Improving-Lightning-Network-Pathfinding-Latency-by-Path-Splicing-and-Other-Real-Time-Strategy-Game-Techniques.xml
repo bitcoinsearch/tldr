@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Improving Lightning Network Pathfinding Latency by Path Splicing and Other Real-Time Strategy Game Techniques</title>
+  <updated>2023-06-03T22:20:38.000069+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-08-01 01:35:21</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2019-08-01 08:33:33</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-08-03 07:27:42</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2019-08-08 05:56:13</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-08-01 05:02:59</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2019-08-02 08:30:30</name>
+  </author>
+  <author>
+    <name>Olaoluwa Osuntokun 2019-08-01 02:29:46</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-08-09 10:37:38</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-08-01 23:02:39</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-08-02 13:26:53</name>
+  </author>
+  <link href="lightning-dev/Aug_2019/002095_Improving-Lightning-Network-Pathfinding-Latency-by-Path-Splicing-and-Other-Real-Time-Strategy-Game-Techniques.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2019/002097_Improving-Lightning-Network-Pathfinding-Latency-by-Path-Splicing-and-Other-Real-Time-Strategy-Game-Techniques.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2019/002105_Improving-Lightning-Network-Pathfinding-Latency-by-Path-Splicing-and-Other-Real-Time-Strategy-Game-Techniques.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2019/002111_Improving-Lightning-Network-Pathfinding-Latency-by-Path-Splicing-and-Other-Real-Time-Strategy-Game-Techniques.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2019/002096_Improving-Lightning-Network-Pathfinding-Latency-by-Path-Splicing-and-Other-Real-Time-Strategy-Game-Techniques.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2019/002099_Improving-Lightning-Network-Pathfinding-Latency-by-Path-Splicing-and-Other-Real-Time-Strategy-Game-Techniques.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2019/002103_Improving-Lightning-Network-Pathfinding-Latency-by-Path-Splicing-and-Other-Real-Time-Strategy-Game-Techniques.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2019/002114_Improving-Lightning-Network-Pathfinding-Latency-by-Path-Splicing-and-Other-Real-Time-Strategy-Game-Techniques.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2019/002098_Improving-Lightning-Network-Pathfinding-Latency-by-Path-Splicing-and-Other-Real-Time-Strategy-Game-Techniques.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2019/002101_Improving-Lightning-Network-Pathfinding-Latency-by-Path-Splicing-and-Other-Real-Time-Strategy-Game-Techniques.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Improving Lightning Network Pathfinding Latency by Path Splicing and Other Real-Time Strategy Game Techniques</title>
+    <updated>2023-06-03T22:20:38.000069+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-August/002095.html" rel="alternate"/>
+    <summary>The Lightning Network is a payment system that is facing challenges in pathfinding, which is the process of finding a route between nodes. One of the major issues with the current pathfinding algorithm is that it takes a significant amount of time for nodes to find a route between themselves and an arbitrary payee node. To address this issue, the permuteroute algorithm was introduced to limit the search space to within 3 hops.To further improve latency, engineers can use techniques used in real-time strategy games such as A* algorithm, double-buffering, and flocking system. Differential heuristics can be used for A* algorithm to preprocess maps and speed up the search process in pathfinding algorithms. Engineers should focus on low hanging engineering fruits and incremental algorithmic updates rather than distant "pie in the sky" ideas. They should also consider recording average payment sizes to determine how to balance fixed and proportional costs. Trampoline nodes can leverage multipath payments at each hop, allowing them to join/split incoming payments to reach the next trampoline node. However, most solutions to the network flow problem require an accurate view of flows at each node, which is not available in this case. A solution proposed by ZmnSCPxj is to use flocking, a technique used to retain cohesion of a blob of units.The Lightning Network team has proposed several improvements to the pathfinding algorithm of their payment system. One of these improvements called permuteroute is faster and helpful in supporting JIT-Routing nodes. Another improvement, getroutequick command, can be implemented to speed up payment routing to arbitrary nodes. A* algorithm can also be used on Lightning if we have precomputed and cached the costs from a node to all other nodes.Trampoline Routing is a new routing algorithm proposed by the Lightning Network that aims to reduce the amount of computation needed for pathfinding. The Lightning Network's routing algorithm differs from game path-finding algorithms because paths are consumed by payments, and the algorithm does not know remote channel balance allocation which changes constantly. The cost of a path depends on the value being sent, which encourages algorithms to search for fast and good enough solutions with retries rather than optimal solutions using outdated/incomplete data. Flocking behavior can be used to retain the cohesion of a blob of units to avoid walking nearly the exact same path in multi-part payments.In a conversation between Bastien and ZmnSCPxj, the latter discusses his plans for implementing the multi-path payments (MPP) feature in eclair. He explains that most solutions to the network flow problem require an accurate view of flows at each node, which they do not have. However, for the first hop, they have the exact balance available for sending, and for next hops, they can consider the channels balanced with a random perturbation of X%. ZmnSCPxj's initial implementation of MPP for eclair uses an algorithm similar to flocking, but he is open to trying something similar to permuteroute if the results are not satisfactory. Despite the proposed improvements, the current Lightning Network pathfinding search algorithms are not sufficient for the size of the network. Most of the public channels in the network today are underutilized, with capital largely being over-allocated. The latest version of the software factors in past pathfinding attempts into its central "mission control," allowing it to learn from each attempt and even import existing state into its pathfinding memory. JIT-Routing is still strictly superior to permuteroute, as the node reporting the failure has more information about local conditions. However, permuteroute gets immediate benefits to the node that upgrades to utilize it.</summary>
+    <published>2019-08-01T01:35:21+00:00</published>
+  </entry>
+</feed>

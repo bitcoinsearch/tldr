@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Timeframes for refunds and revocation</title>
+  <updated>2023-05-23T20:04:37.591593+00:00</updated>
+  <author>
+    <name>Mats Jerratsch 2015-09-03 11:18:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Timeframes for refunds and revocation</title>
+    <updated>2023-05-23T20:04:37.591593+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-September/000182.html" rel="alternate"/>
+    <summary>The writer has been considering reasonable timeframes for payments and revocation, taking into account everyday users who may not have access to their computer for a few days. They suggest that 7 days would be an appropriate timeframe for revocation in most cases. The writer also thinks that 1 day is sufficient for revealing the payment R, as giving the receiver too much time to accept and clear the payment can lock up funds for everyone else in the route.The HTLC Receiver Redeemscript is considered in light of these values. If A has the REVOKE-PREIMAGE, they can claim the payment at any time. If B has R, they have to wait 7 days before they can claim the output and reveal R. Furthermore, if B wants to clear the payment, they have to do so within one day by either settling with the other party or broadcasting the channel.If B broadcasts the channel within one day, they can claim the output, but A has to wait for the full 7 days until learning R. However, A might not be the original sender, but just one of the nodes on the route, and if A does not provide R to the node before them within 2 days (1 day per hop), they cannot pull the funds, although B can pull theirs. This means all nodes along the route must broadcast their channel to avoid losing money.In conclusion, the payment-timeout and revoke-time must be the same in this channel design. While the payment-timeout should be as short as possible, a long revoke-time is healthy in many instances. The optimal trade-off is likely to be 1 or 2 days, although this can be dangerously short in case of full blocks. The writer invites thoughts on this matter.</summary>
+    <published>2015-09-03T11:18:39+00:00</published>
+  </entry>
+</feed>

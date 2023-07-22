@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DRAFT: interactive tx construction protocol</title>
+  <updated>2023-06-02T23:23:28.524836+00:00</updated>
+  <author>
+    <name>lisa neigut 2020-02-06 22:51:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DRAFT: interactive tx construction protocol</title>
+    <updated>2023-06-02T23:23:28.524836+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002506.html" rel="alternate"/>
+    <summary>The email thread discusses several suggestions for improving the Lightning Network protocol. One suggestion is to add a serial ID to inputs and outputs, which can be reused for deletions and used as an ordering heuristic for transaction inputs during construction. The serial IDs are also used as a sorting heuristic for input ordering in the final transaction, replacing BIP69. Initiators must use odd serial IDs, while non-initiators must use even ones, and collisions between peers are considered a protocol error. The removal of the signal_rbf makes everything RBF eligible, simplifying the verification process during an RBF round.The purpose of setting nLocktime to blockheight-6 is to keep the funding transaction from being evicted in case of a reorg, but it may not be necessary to include this at the protocol level. Instead, peers can relay the "blocktip" they're using for the nLocktime to be at the depth they desire, limiting the acceptable range for an initiator to 5. It's suggested that bitcoind fuzzes the nLocktime value to obfuscate exactly what block height the outgoing transaction was composed or broadcast at, which should be encouraged in Lightning implementations as well.In multiparty constructions, initiators must flip the bottom bit of any received inputs before relaying them to a peer, and serial IDs should be chosen randomly. While it may be possible for an initiator to provide lousy serial IDs, it's unlikely to happen in practice since the two participants already know whose money is whose. Finally, the email suggests introducing block headers to address potential block height disagreements and limit gross differences in block height, with the acceptor challenging the initiator to give block headers from its known block height to the initiator block height or providing block headers itself as proof.</summary>
+    <published>2020-02-06T22:51:24+00:00</published>
+  </entry>
+</feed>

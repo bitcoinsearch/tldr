@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Transaction signalling</title>
+  <updated>2023-06-12T00:28:38.690474+00:00</updated>
+  <author>
+    <name>Erik Aronesty 2017-04-20 16:14:18</name>
+  </author>
+  <author>
+    <name>Erik Aronesty 2017-04-18 18:01:52</name>
+  </author>
+  <author>
+    <name>Christian Decker 2017-04-18 18:07:25</name>
+  </author>
+  <author>
+    <name>Erik Aronesty 2017-04-20 16:14:18</name>
+  </author>
+  <author>
+    <name>Erik Aronesty 2017-05-03 19:41:07</name>
+  </author>
+  <author>
+    <name>Tim Ruffing 2017-04-18 22:29:17</name>
+  </author>
+  <author>
+    <name>Erik Aronesty 2017-05-03 19:41:07</name>
+  </author>
+  <author>
+    <name>Marcel Jamin 2017-04-18 14:52:04</name>
+  </author>
+  <author>
+    <name>Erik Aronesty 2017-04-17 15:50:51</name>
+  </author>
+  <author>
+    <name>Marcel Jamin 2017-04-18 14:52:04</name>
+  </author>
+  <author>
+    <name>Tim Ruffing 2017-04-18 22:29:17</name>
+  </author>
+  <author>
+    <name>Marcel Jamin 2017-04-18 14:52:04</name>
+  </author>
+  <author>
+    <name>Christian Decker 2017-04-18 18:07:25</name>
+  </author>
+  <author>
+    <name>Erik Aronesty 2017-04-18 18:01:52</name>
+  </author>
+  <author>
+    <name>Christian Decker 2017-04-18 18:07:25</name>
+  </author>
+  <author>
+    <name>Erik Aronesty 2017-04-17 15:50:51</name>
+  </author>
+  <author>
+    <name>Erik Aronesty 2017-05-03 19:41:07</name>
+  </author>
+  <author>
+    <name>Tim Ruffing 2017-04-18 22:29:17</name>
+  </author>
+  <author>
+    <name>Erik Aronesty 2017-04-18 18:01:52</name>
+  </author>
+  <author>
+    <name>Erik Aronesty 2017-04-20 16:14:18</name>
+  </author>
+  <author>
+    <name>Erik Aronesty 2017-04-17 15:50:51</name>
+  </author>
+  <link href="bitcoin-dev/April_2017/014217_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014201_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014202_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014217_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2017/014251_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014203_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2017/014251_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014200_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014193_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014200_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014203_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014200_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014202_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014201_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014202_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014193_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2017/014251_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014203_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014201_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014217_Transaction-signalling.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2017/014193_Transaction-signalling.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Transaction signalling</title>
+    <updated>2023-06-12T00:28:38.691476+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/014217.html" rel="alternate"/>
+    <summary>In a bitcoin-dev thread, Christian Decker proposed the extension of signaling capabilities to end-users as a way to give stakeholders a voice in network decisions. He suggested using output scripts as the best field for signaling since they are specified by the recipient of funds and are already stored in the UTXO. The last 4 bits of the pubkey/pubkeyhash could be used to opt-in, with the vote (0/1) depending on the stakeholders' desired signal. However, unlike the OP_RETURN proposal, users who do not intend to signal will also be included in the tally.To ensure voluntary votes, the opt-in should be adjusted accordingly, but too many opt-in bits may exacerbate existing problems with HD Wallet lookahead. Tim Ruffing added that using addresses creates vulnerabilities, so an OP_RETURN signal seems the safest way to go for UA signaling. He suggested modeling a BIP after BIP9, with some discussion of how to properly collect statistics and the ability for nodes to activate features based on an "economic majority" defined in this way.BIP XXXX proposes a change to the usage of the 'OP_RETURN' script opcode in Bitcoin transactions, allowing multiple changes (features) to be deployed in parallel. The proposal relies on interpreting the output field as a bit vector, where each bit can be used to track an independent change. Each "feature" is specified by the same set of per-chain parameters as in BIP9, with the same usage and meaning (name, bit, starttime and timeout).If the outputs contain a zero valued OP_RETURN, and the length of the key is 2 bytes, and if the first byte (prefix) of that OP_RETURN's key parameter is 0x012, then the remaining byte is to be interpreted as an 8-bit little-endian integer, and bits are selected within this integer as values. BIP9 introduced a mechanism for doing soft-forking changes relying on measuring miner support indicated by version bits in block headers. However, any change which may conflict with miners but is acceptable to users may be difficult to deploy.BIP XXXX can be used in conjunction with BIP9 to more safely deploy soft-forking changes that do not require a supermajority of miners but do require a large percentage of active users. Alternatively, BIP XXXX signalling can be used to gauge user support for "features" - independent of its use as a direct deployment mechanism.A proposal has been made to tag fee-paying transactions with information about the capabilities of the node that created it. The tagging would occur on the addresses, and the weighting would be by value, so it's a measure of economic significance. This could be useful in gauging economic support for certain upgrades, especially if excluding long transaction chains. However, this might interfere with "other uses of op_return", such as colored coins. The purpose is to tag economically meaningful nodes to the Bitcoin ecosystem, and colored coins, by definition, only have value to "other ecosystems". There is a counterargument that in some future where this is used as an alternative to BIP9 for a user-coordinated code release, it might be irresponsible to exclude colored coin ICOs that use op-return to float the shares of major corporations from coordinating protocol changes.BIP XXXX proposes a solution to the issues caused by the alternative to flag-day deployment, which can cause problems for users of a feature that has failed to achieve adequate miner support. The proposal suggests using a signal added to OP_RETURN to tag all validated input addresses. This would allow a node to activate a new feature after a certain percentage of tagged input addresses are reached within a specified time period. The idea is to use this in addition to a flag day to trigger feature activation with some reassurance of user uptake.</summary>
+    <published>2017-04-20T16:14:18+00:00</published>
+  </entry>
+</feed>

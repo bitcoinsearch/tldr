@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Splicing Proposal: Feedback please!</title>
+  <updated>2023-05-25T14:17:41.986082+00:00</updated>
+  <author>
+    <name>Conner Fromknecht 2018-10-23 05:16:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Splicing Proposal: Feedback please!</title>
+    <updated>2023-05-25T14:17:41.986082+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-October/001472.html" rel="alternate"/>
+    <summary>The Lightning Network community is exploring the implementation of splicing channels with desired properties such as non-blocking usage of the channel, a single on-chain transaction, and the ability to RBF. One proposal suggests sending a distinct message referencing the active_channel_id and a splice_channel_id for the pending splice to address handling multiple pending splices and preventing size constraints. A concern was raised regarding the potential for a race condition between a unilateral close (or any revoked commitment transaction) and the re-anchoring commitment transaction. The proposed solution is to not enable any splicing mechanism that allows off-chain use of spliced-in funds before the new funding output confirms.A proposed approach involves sending channel updates with the `option_channel_moving` bit set that allows both parties to keep the channel in their routing table and assumes successful splicing if two `channel_update`s are received whose `short_channel_id`s reference the spending transaction. The discussion also includes making the original proposal work with multiple funding outputs on one splice and pre-seating inputs to allow clients to generate addresses that others could deposit to and have spliced directly into the channel.There is debate over whether to lift from the multiple funding output approach the "pre-seating of inputs" as it would allow for splicing of funds without needing to modify the `revoke_and_ack` or `channel_reestablish` messages. Atomicity perspective is essential since the current channel and (potentially) N pending channels can be revoked using a single commitment secret and message.The email thread on the Lightning-dev mailing list discusses the implications of having multiple funding TXOs for a single channel in splice proposals. The sender argues that creating the equivalent of multiple funding TXOs for a single channel in splice proposals could be problematic since a commitment transaction that has multiple inputs to consume the multiple funding TXOs can be replaced with a commitment (or update) transaction that was created before the splice. They suggest deriving a static address or publicly derivable address specific to the channel from their HD seed, which can be used to refund the parties' funds if the splice isn't successful.The email exchange between Lisa Neigut and Rusty Russell on the Lightning-dev mailing list discusses the potential race condition that may occur between a unilateral close (or any revoked commitment transaction) and the re-anchoring commitment transaction. Lisa suggests waiting until both the pre-commitment UTXO and the re-anchor have cleared a minimum depth before accepting HTLC's for the new balance totals, but this would take twice as long as the first, synchronized re-commitment scheme that Rusty originally proposed. Rusty then proposes a different protocol for side splice-in which involves preparing an output with script of specific form.</summary>
+    <published>2018-10-23T05:16:13+00:00</published>
+  </entry>
+</feed>

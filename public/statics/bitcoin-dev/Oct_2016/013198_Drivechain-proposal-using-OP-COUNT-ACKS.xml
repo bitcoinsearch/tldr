@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Drivechain proposal using OP_COUNT_ACKS</title>
+  <updated>2023-06-11T20:15:38.820622+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2016-10-02 23:26:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Drivechain proposal using OP_COUNT_ACKS</title>
+    <updated>2023-06-11T20:15:38.820622+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-October/013198.html" rel="alternate"/>
+    <summary>On the Bitcoin-dev mailing list, Sergio Demian Lerner and Russell O'Connor discussed a proposal involving OP_COUNT_ACKS and its potential issues. Transactions that redeem an output containing or referencing by means of P2WSH an OP_COUNT_ACKS are not broadcast by the network. The only parties that can include the redeem transaction are the miners themselves. If someone uses OP_EQUALVERIFY after OP_COUNT_ACKS, then the transaction probably won't be able to be included at a different height. However, it can be included at another block at a different height, during the liveness period which starts 100 blocks later than the poll period ends. A related problem is that if this transaction is reorged out during an innocent reorg, one that doesn't involve a double spend, the transaction may never get back in unless it occurs at exactly the same height, which is not guaranteed. This affects fungibility of coins generated from these transactions. While the proposed use of this operation is somewhat less objectionable, nothing stops users from using OP_EQUALVERIFY and causing their transaction to fluctuate between acceptable and unacceptable, with no party doing anything like a double spend. Transactions that redeem an output containing (or referencing by means of P2WSH) an OP_COUNT_ACKS are not broadcast by the network, which means that the network cannot be DoS attacked by flooding with a transaction that will not verify due to being too late. The only parties that can include the redeem transaction are the miners themselves. Therefore, Sergio sees no problem that an OP_COUNT_ACKS scriptSig transaction is invalidated after the liveness times expires. If there is no expiration, then polls can last forever and the system fails to provide DoS protection for block validation since active polls can accumulate forever.</summary>
+    <published>2016-10-02T23:26:18+00:00</published>
+  </entry>
+</feed>

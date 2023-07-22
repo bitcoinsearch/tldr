@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP draft] Consensus-enforced transaction replacement signalled via sequence numbers</title>
+  <updated>2023-06-09T22:08:08.521896+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2015-06-02 04:16:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP draft] Consensus-enforced transaction replacement signalled via sequence numbers</title>
+    <updated>2023-06-09T22:08:08.521896+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-June/008452.html" rel="alternate"/>
+    <summary>Mark Friedenbach has proposed a soft-fork change to the consensus-enforced behaviour of sequence numbers in Bitcoin for supporting transaction replacement via per-input relative lock-times. The proposal seeks to enable safe transaction replacement by re-purposing the nSequence field of a transaction input to be a consensus-enforced relative lock-time. The proposal makes use of the full range of the 32-bit sequence number, which until now has rarely been used for anything other than a boolean control over absolute nLockTime. The relative lock-time semantics are enforced only if the most-significant bit of nSequence is set, preserving 31 bits for alternative use when relative lock-times are not required. The proposed architecture cleanly separates the relative lock-time (sequence numbers) from the OP_CHECKSEQUENCEVERIFY opcode both in concept and in implementation. Most of the interesting use cases for relative lock-time require an RCLTV opcode. But in this architecture, it is possible to separate the relative lock-time from the RCLTV opcode. The BIP proposal only touches the transaction validation logic without any impact on script. However, external constraints often prevent the full range of sequence numbers from being used when interpreted as a relative lock-time, and repurposing nSequence as a relative lock-time precludes its use in other contexts. The reference implementation is available at the following git repository: https://github.com/maaku/bitcoin/tree/sequencenumbers. Mark Friedenbach also maintains a 'checksequenceverify' branch in his git repository for implementing OP_RCLTV using sequence numbers: https://github.com/maaku/bitcoin/tree/checksequenceverify.Stephen Morse has given constructive criticism that unless an OP_RCLTV is implemented, there may still be need of one with multiple signing parties involved in use cases such as micropayment channels where funds are locked up by multiple parties. In such cases, putting the relative lock-time right into the spending contract may be required. Morse thinks that repurposing an OP_NOP to create OP_RCLTV would be a more fully-featured idea, which saves transaction space by repurposing unused space and works for most cases where an OP_RCLTV would be needed.</summary>
+    <published>2015-06-02T04:16:03+00:00</published>
+  </entry>
+</feed>

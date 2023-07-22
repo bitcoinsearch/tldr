@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Hash of UTXO set as consensus-critical</title>
+  <updated>2023-06-10T22:48:26.090567+00:00</updated>
+  <author>
+    <name>Patrick Strateman 2015-09-18 19:43:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Hash of UTXO set as consensus-critical</title>
+    <updated>2023-06-10T22:48:26.090567+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-September/011066.html" rel="alternate"/>
+    <summary>Bitcoin's security model is undergoing a change with the introduction of UTXO set commitments. Currently, an attacker with more than 50% of the network hashrate can rewrite history. However, if full nodes rely on UTXO set commitments, such an attacker could create an infinite number of bitcoins, which would exceed the current 21 million bitcoin limit. Therefore, before considering mechanisms for UTXO set commitments, it is necessary to discuss the reduction in the security model seriously.When a new node wants to join the network, it needs to retrieve the blockchain history from January 2009 until now to derive a UTXO set that it can verify new blocks/transactions against. With a blockchain size of 40GB and a UTXO size of around 1GB, the extra bandwidth required is significant and will keep increasing indefinitely. To solve this issue, a newly mined block should include the UTXO set hash of the chain up until the previous block - the hash of the UTXO set on top of which this block builds. This allows new nodes to acquire the UTXO set in a trustless manner by only verifying proof-of-work headers and knowing that a block with an invalid UTXO set hash would be rejected.The inclusion of the UTXO set hash in a newly created block saves bandwidth for Bitcoin Core nodes, who only need to send roughly 1GB of data to synchronise a node, rather than 40GB+. Additionally, it forces miners to maintain a UTXO set, rather than just building on top of the chain with the most proof-of-work. Producing a UTXO set and verifying a block against a chain is the same thing, so by including the hash of the UTXO set, miners are forced to verify the block that they want to build on top of.While the addition of UTXO set commitments requires additional computation, most modern CPUs have a SHA256 throughput of around 500 MB/s, which means it takes only two seconds to hash the UTXO set. This can be further improved using GPUs, which can do 2-3 GB/s. Therefore, this is a small sacrifice for the added ease of initial syncing. Overall, the inclusion of UTXO set commitments alleviates the burden on Bitcoin Core nodes and saves bandwidth while maintaining Bitcoin's security model.</summary>
+    <published>2015-09-18T19:43:13+00:00</published>
+  </entry>
+</feed>

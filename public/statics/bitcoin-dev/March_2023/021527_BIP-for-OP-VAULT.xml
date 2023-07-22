@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP for OP_VAULT</title>
+  <updated>2023-06-16T15:33:28.287596+00:00</updated>
+  <author>
+    <name>Greg Sanders 2023-03-06 16:07:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP for OP_VAULT</title>
+    <updated>2023-06-16T15:33:28.287596+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-March/021527.html" rel="alternate"/>
+    <summary>In an email exchange between James O'Beirne and Greg, they discussed the proposed implementation of a TLUV-ified OP_VAULT. This would allow for withdrawal authorization to be committed at deposit time and prevent cheeky opcodes from being prepended to the script at spend time. The benefits of this implementation include avoiding nested and recursive script execution, making the spec easier to reason about, and reducing general indirection. Additionally, using CTV (CheckTemplateVerify) solves issues with the existing proposal's txid malleability. The required opcodes for this implementation include OP_VAULT, OP_VAULT_RECOVER, and OP_CHECKTEMPLATEVERIFY. To create an initial deposit, vaulted coins are spent to an output with the taproot structure that includes $recovery_leaf and $trigger_leaf. To trigger a withdrawal request, an output of the same form is spent with a witness that contains the Taproot control block pointing to $trigger_leaf and indicating the trigger output, which must abide by certain rules. The output structure for withdrawal includes $recovery_leaf and $expr_withdraw. The validation rules are essentially unchanged from the existing proposal, and all batching and fee management characteristics remain the same. Finally, recovery can happen from any of the above outputs using the $recovery_leaf script path in a way similar to the existing OP_VAULT proposal.</summary>
+    <published>2023-03-06T16:07:38+00:00</published>
+  </entry>
+</feed>

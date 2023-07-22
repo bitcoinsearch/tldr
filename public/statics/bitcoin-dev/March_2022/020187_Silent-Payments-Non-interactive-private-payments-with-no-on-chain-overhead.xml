@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Silent Payments – Non-interactive private payments with no on-chain overhead</title>
+  <updated>2023-06-15T18:24:06.411492+00:00</updated>
+  <author>
+    <name>Billy 2022-03-30 16:09:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Silent Payments – Non-interactive private payments with no on-chain overhead</title>
+    <updated>2023-06-15T18:24:06.411492+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020187.html" rel="alternate"/>
+    <summary>Ruben Somsen has proposed a new scheme called "Silent Payments" for Bitcoin that allows users to receive private payments from anyone on a single static address without requiring any interaction or on-chain overhead. The protocol avoids using the Bitcoin blockchain as a messaging layer and requires no interaction between sender and recipient (other than needing to know the silent payment address). However, there are downsides to this scheme such as the scanning requirement, the lack of light client support, and the requirement to control your own input(s).Improvements to the basic scheme include UTXO set scanning and tweaking the silent payment address with the combination of all input keys of a transaction rather than just one input key. These variants further lower the scanning cost but require all participants to follow the Silent Payment protocol. A scanning key can be added to the silent payment address to allow for separation of detecting and spending payments.The proposed Silent Payments scheme aims to provide privacy by allowing fresh address generation for each transaction, without requiring any scanning. This is achieved by tweaking the output address with a private key, and introducing a blinding protocol to prevent input-output linkage. Light clients cannot be easily supported, but BIP32 HD keys won't be needed for address generation, eliminating the need for gap limits.Any wallet that wants to support making silent payments needs to support a new address format, pick inputs for the payment, tweak the silent payment address using the private key of one of the chosen inputs, and then proceed to sign the transaction. A potential weakness of Silent Payments is that the input is linked to the output, which can be mitigated with a blinding scheme that allows hiding the silent payment address from other participants. However, a limitation of the protocol is that the sender must control one of the inputs in order to be fully private.Compared to alternatives, Silent Payments is worth the added complexity as it provides fresh address generation and is compatible with one-time seed backups. The most important protocols that provide similar functionality with slightly different tradeoffs are Payment code sharing, Xpub sharing, and Regular address sharing.</summary>
+    <published>2022-03-30T16:09:22+00:00</published>
+  </entry>
+</feed>

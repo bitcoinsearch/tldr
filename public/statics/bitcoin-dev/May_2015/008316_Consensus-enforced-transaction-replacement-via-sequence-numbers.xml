@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Consensus-enforced transaction replacement via sequence numbers</title>
+  <updated>2023-06-09T21:40:38.127747+00:00</updated>
+  <author>
+    <name>Tier Nolan 2015-05-28 13:35:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Consensus-enforced transaction replacement via sequence numbers</title>
+    <updated>2023-06-09T21:40:38.127747+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-May/008316.html" rel="alternate"/>
+    <summary>The discussion begins with Peter Todd suggesting that a feature flag should be used rather than treating the change as a version change. However, the other person in the conversation disagrees and believes it is still a version change. They discuss the relative locktime verify use cases, which could be block count based and don't need to count very high. The main topic of discussion is the Fast Channel Close, assuming malleability is fixed. Alice creates TXA and Refund, sends Refund to Bob who signs it and sends it back to Alice. Alice verifies the signature, adds her own and broadcasts TXA (waiting until Bob confirms acceptance). Both Alice and Bob have the refund transaction and can use it to close the channel, given TXA is not mutated. Alice can send money to Bob by creating a transaction which spends the output of the refund transaction. She can force Bob to close the channel by broadcasting the refund transaction and gets the channel deposit 150 blocks later if he doesn't act. If she had sent some money to Bob, he has 150 blocks to sign the transaction that pays him the most money and broadcast it. Alice cannot broadcast earlier versions since Bob doesn't send her the signed versions. This means the channel doesn't need a defined end date, and either party can close the channel whenever they want.TXA could be protected against malleability by adding a locktime path, which would only be for use if the transaction is mutated.</summary>
+    <published>2015-05-28T13:35:57+00:00</published>
+  </entry>
+</feed>

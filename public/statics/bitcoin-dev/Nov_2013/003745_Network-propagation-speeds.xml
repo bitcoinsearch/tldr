@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Network propagation speeds</title>
+  <updated>2023-06-07T21:26:49.145487+00:00</updated>
+  <author>
+    <name>Peter Todd 2013-11-24 17:13:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Network propagation speeds</title>
+    <updated>2023-06-07T21:26:49.145487+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-November/003745.html" rel="alternate"/>
+    <summary>Christian Decker shared his measurement code on the Information Propagation paper and automated it as much as possible to create the Network Propagation page on bitcoinstats.com. This page takes a daily snapshot of the situation, calculates the time until blocks and transactions reach a certain percentile of the nodes in the network, and shows the density function describing at what times nodes learn about the existence of a block/transaction. Decker intends to add more information and plots over time, but he wanted to push this out quickly as there were some people asking for it. To save raw log data, one needs to save transaction timestamp data because whether or not a given node has a transaction already matters regarding propagation. However, given pool centralization, all these statistics might not mean all that much. The number that's important isn't seconds, rather rather seconds/actual block interval as long as hashing power is growing. Actually determining that is tricky - block interval is inherently noisy so one will want to use a fairly aggressively smoothed average. With a simplistic model where it takes exactly t seconds for a block to propagate to 100% of the hashing power, and until then 0% has it, one can calculate the orphan rate. Blockchain.info reports about 2 orphans a day, which means an orphan rate of 1.2%. Using the above formula, it turns out that 6.2 seconds are needed for a block to propagate to 100% of the hashing power. However, the distribution of hashing power is concentrated into pools, so the propagation data may not give any insight into real-world orphan rates.</summary>
+    <published>2013-11-24T17:13:10+00:00</published>
+  </entry>
+</feed>

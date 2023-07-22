@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Codex32</title>
+  <updated>2023-06-16T15:48:44.156596+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2023-02-23 18:26:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Codex32</title>
+    <updated>2023-06-16T15:48:44.156596+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-February/021504.html" rel="alternate"/>
+    <summary>The Codex32 project offers a way to verify the integrity of shares and seeds, even those that aren't being actively used, without exposing them to threats associated with active use. One method for verification is performing 2 character quick checks, which come with a prescribed order that accumulates BCH guarantees as you go along. For example, after the 1st table, you are guaranteed to detect any 1 character error, while after the 7th table, you are guaranteed to detect any 8 character error, which is the guarantee of the full 13 character checksum. These checks can be performed out of order but following the prescribed order will lead to reaching the BCH levels of guarantees more quickly. Performing a series of 7 different 2 character quick checks is overall more work than doing the full 13 character checksum validation, but there is an advantage in spreading the work out over time. Each time one visits, they still have the guarantee of catching any new 1 character error introduced since the last visit and a 99.9% chance of catching random errors introduced since the last visit. The idea of doing partial verification is novel, and it is suggested to visit shares regularly and perform a different 2 character quick check each time, rotating through the 7 different ways of performing it. Another method for verification is by using a simple mod N = 0 checksum, either by creating the seed such that each share passes or by storing an additional word/symbol with the seed in such a way that sum(words) mod N = 0 passes. This approach is much simpler than Codex32's complex checksum and is possible to compute by hand with a word/symbol-to-number lookup table, pen and paper or a calculator. It is also possible to generate Shamir's secret sharing shards such that every shard can share the same checksum. In this case, the share verification procedure would be to ask every share holder to verify the checksum manually using the mod N procedure and then verify that each share holder has the same checksum. The Codex32 project provides a "quick check" worksheet to evaluate strings modulo (x - T) to verify a 5 bit checksum, whose operation would be similar to the existing checksum worksheet in structure but significantly less work. It is suggested that 5 bits may be too short and it is more reasonable working modulo (x - T)*(x - S) to get a 10 bit checksum. A worksheet for a 15 bit checksum is also an option, and possibly others well depending on the size of the other factors. The process is about as simple as any other comparable hand-operated checksum over the Bech32 alphabet would be.</summary>
+    <published>2023-02-23T18:26:17+00:00</published>
+  </entry>
+</feed>

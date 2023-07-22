@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Revocations with OP_CSFS &amp; signed sequence commitments</title>
+  <updated>2023-06-03T21:36:02.801337+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-02-01 05:15:17</name>
+  </author>
+  <author>
+    <name>James Chiang 2019-02-01 09:01:20</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-02-01 09:33:53</name>
+  </author>
+  <author>
+    <name>James Chiang 2019-02-01 10:18:44</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-02-04 04:07:01</name>
+  </author>
+  <author>
+    <name>James Chiang 2019-01-30 22:31:47</name>
+  </author>
+  <link href="lightning-dev/Feb_2019/001857_Revocations-with-OP-CSFS-signed-sequence-commitments.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2019/001858_Revocations-with-OP-CSFS-signed-sequence-commitments.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2019/001859_Revocations-with-OP-CSFS-signed-sequence-commitments.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2019/001860_Revocations-with-OP-CSFS-signed-sequence-commitments.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2019/001861_Revocations-with-OP-CSFS-signed-sequence-commitments.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2019/001856_Revocations-with-OP-CSFS-signed-sequence-commitments.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Revocations with OP_CSFS &amp; signed sequence commitments</title>
+    <updated>2023-06-03T21:36:02.801337+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-February/001857.html" rel="alternate"/>
+    <summary>The email exchange between James Chiang and ZmnSCPxj revolves around understanding how channel commitment transactions can be revoked using op_checksigfromstack(msg, sig, key) and signed sequence commitments. The commitment c(n, randomness) is signed by both parties for each state, and this signature can be verified with op_csfs(c, sig(A+B), key(A+B)). The sequence number n is incremented for each new state. ZmnSCPxj suggests obfuscating the initial 'n=0' with a pre-negotiated m and applying some kind of deterministic step to this obscured initial state number. However, this method cannot result in an obfuscated number where the only requirement is that the sequence number be monotonically increasing. Instead, they suggest adding an obfuscating number to the sequence number which allows comparison of sequence numbers while obscuring the number of updates.James asks for clarification on how sequence numbers are committed to the nth commitment tx and accessible on-stack during script evaluation. Johnson Lao's and Roasbeef's Talk from Scaling Bitcoin at Stanford is referred to in response. James also wonders if n and n++ will necessarily be revealed during a unilateral close.The author learned about the concept of sequence numbers being committed to the nth commitment tx and accessible on-stack during script evaluation from Johnson Lao's and Roasbeef's Talk from Scaling Bitcoin at Stanford. To verify the existence of a newer signed commitment sequence from an older, revoked commitment transaction, an output script can examine op_checksigfromstack(c++, sig(A+B), key(A+B)) where c++ == commitment(n++, r). However, it must also have information about its own sequence number n, so it can verify that this is indeed lower than n++ (current).</summary>
+    <published>2019-02-01T05:15:17+00:00</published>
+  </entry>
+</feed>

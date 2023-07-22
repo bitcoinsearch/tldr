@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Electrum 1.9.8 release</title>
+  <updated>2023-06-08T15:07:50.667132+00:00</updated>
+  <author>
+    <name>Thomas Voegtlin 2014-03-16 14:31:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Electrum 1.9.8 release</title>
+    <updated>2023-06-08T15:07:50.667132+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-March/004721.html" rel="alternate"/>
+    <summary>In an email exchange between Gregory Maxwell and Thomas Voegtlin dated March 16, 2014, Maxwell informed Voegtlin that the encryption algorithm used in the code from https://github.com/jackjack-jj/jeeq was insecure in several ways and was not actually implementing ECIES. The most significant issue with the cryptosystem was that instead of using a cryptographically strong mac tied to the ephemeral secret, it used a trivial 16-bit check value. This allowed anyone with access to a decryption oracle to decrypt any message encrypted to a third person by making no more than 65536 queries. In addition, in the event that a random query to a decryption oracle yields a result, the result directly reveals the ECDH value because it is only combined additively with the message value. If the implementation does not check if the nonce point is on the curve, the result can yield a point on the twist instead of the curve, which is far more vulnerable to recovery of the private key. Maxwell also noted that there may be other problems or mitigating factors, as it was challenging for him to follow what the code was doing. Although the particular implementation had a number of other issues, such as apparently not using a cryptographically strong RNG for its EC nonce, Maxwell assumed that Voegtlin did not copy that particular flaw. In response to this feedback, Voegtlin thanked Maxwell for informing him about the flaws in the implementation and promised to fix the code.</summary>
+    <published>2014-03-16T14:31:24+00:00</published>
+  </entry>
+</feed>

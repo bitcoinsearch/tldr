@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>convention/standard for sorting public keys for p2sh multisig transactions</title>
+  <updated>2023-06-09T15:23:57.399122+00:00</updated>
+  <author>
+    <name>Jean-Pierre Rupp 2015-01-16 18:40:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>convention/standard for sorting public keys for p2sh multisig transactions</title>
+    <updated>2023-06-09T15:23:57.399122+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-January/007123.html" rel="alternate"/>
+    <summary>The conversation in the email thread is about narrowing down how a multisig scripthash address should be determined. Thomas Kerin suggests anticipating only compressed keys for scripts, as it can cause confusion if one puts forward a compressed key at some time and an uncompressed key at another, resulting in a different script hash being produced even though there is no difference to the keys involved. Ruben de Vries suggests that it would make the most sense to sort the pubkey by the way it is represented in the context of creating the scriptPubKey since sorting is only needed for creating the scriptPubKey. Alan Reiner sees no reason to restrict compressed/uncompressed strings, stating that strings do not have to be the same length to sort them lexicographically. If a multi-sig participant provides an uncompressed key, they are declaring that the key will only be used uncompressed, and clients do not have to go looking for all combinations of compressed and uncompressed. Jean-Pierre and Ruben agree that there is a 100% need for a BIP outlining this issue, and that everyone has had the idea at some point, with some already using it, but people should not have to go digging in BIP45 for the two lines which mention it. A place to put the docs is needed. In response to Matt Whitlock's question about pubkeys being DER-encoded integers, Wladimir explains that OP_CHECKSIG (and OP_CHECKSIGVERIFY) takes a DER-encoded pubkey and a DER-encoded signature on the stack. He clarifies that possibly Matt is confused with OP_HASH160 OP_EQUALVERIFY as used in outputs, which compares the 160-bit hash of the pubkey against the given hash (usually taken from a bitcoin address), and that it doesn't help understanding to consider either as integers since they are binary blob objects with either a fixed format (DER) or a fixed size (hashes).</summary>
+    <published>2015-01-16T18:40:17+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Nonce blinding protocol for hardware wallets and airgapped signers</title>
+  <updated>2023-06-13T23:48:31.783566+00:00</updated>
+  <author>
+    <name>freedom at reardencode.com 2020-02-27 03:26:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Nonce blinding protocol for hardware wallets and airgapped signers</title>
+    <updated>2023-06-13T23:48:31.783566+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-February/017656.html" rel="alternate"/>
+    <summary>Stepan Snigirev, on the bitcoin-dev mailing list, discussed a protocol to prevent compromise of hardware wallets or air-gapped computers used in signing transactions. The proposed protocol takes away the privilege of picking nonce from the signer and requires no secret material outside the signer. It forces the signer to use additional entropy from the host. The protocol is implemented by having the host pick a random number `n` and sending its hash together with the message `m` to the signer. The signer then computes a nonce `k` and commits to the chosen nonce by sending the corresponding point `R=kG` to the host. The host sends the preimage `n` to the signer. The signer tweaks the nonce by this number `k'=k+n`, signs the message and sends back the signature (R',s). Finally, the host verifies that the public point in the signature is tweaked by `n: R'==R+nG`. If the signer wants to generate a nonce non-deterministically but does not have an ability to store a generated nonce, it may send back to the host some meta-information that would help it to re-generate the same nonce later. For PSBT implementation, Snigirev suggests using the following key-value per-input pairs assuming multiple hosts want to mix in external entropy: Key: {PSBT_IN_EXT_NONCE_HASH}|{pubkey}, Value: {sha256(n1)}|{sha256(n2)}|..., Key: {PSBT_IN_NONCE_COMMITMENT}|{pubkey}, Value: {33-byte R point}, Key: {PSBT_IN_NONCE_SIGNER_METADATA}|{pubkey}, Value: {anything}, and Key: {PSBT_IN_EXT_NONCE_PREIMAGE}|{pubkey}, Value: {n1}|{n2}|.... The signature from the signer is placed into existing PSBT_IN_PARTIAL_SIG. Combiner and Finaliser should verify that nonce in the signature includes external entropy and may remove their own entropy from the set. They should also verify that the values of the fields did not change between rounds.</summary>
+    <published>2020-02-27T03:26:07+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DataSig -- Data signatures over Lightning</title>
+  <updated>2023-06-03T09:05:28.253517+00:00</updated>
+  <author>
+    <name>George Tsagkarelis 2022-06-17 10:18:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DataSig -- Data signatures over Lightning</title>
+    <updated>2023-06-03T09:05:28.253517+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-June/003612.html" rel="alternate"/>
+    <summary>In a recent post on the Lightning-dev mailing list, George Tsagkarelis introduced two proposed specs for transmitting data over the Lightning Network: DataSig and DataStruct. The former is focused on authenticating data with regards to its source and destination, while the latter concerns the fragmentation of data for transmission. Tsagkarelis argues that pairing payments with other transmission methods is unnecessary because messaging nodes directly is more secure, private, and simple than using out-of-band hybrid solutions. Furthermore, small-footprint data can utilize a handful of HTLCs to reach their destination without being harmful to LN. However, he clarifies that DataStruct does not encourage content streaming over LN, and larger downloads should be done through an out-of-band solution.Regarding DataSig, Tsagkarelis describes the structure as being placed inside a custom TLV record and allowing the receiving end to validate that the data was authored by the source node and meant to be received by the receiving node. His post includes a detailed breakdown of the steps involved in generating and verifying a DataSig. Finally, Tsagkarelis acknowledges that developers and users will ultimately decide what solution best fits their needs.The email proposes a specification for data fragmentation over custom records, enabling transmission of data exceeding the maximum allowed size over a single HTLC using protobuf to describe the structure. The purpose of this spec is to define a structure that describes fragmented data, allowing for transmission over separate HTLCs and assisting reassembly on the receiving end, while the proposed fragmentation structure also allows out-of-order reception of fragments.A sender intending to transmit the data should split the bytes of `D`  into fragments of certain sizes and generate an identifier for this data transmission. For each fragment created, a `DataStruct` instance should be created containing information like version, payload, and fragment, among others. On the other hand, the receiving node can execute several steps for each received fragment in order to assemble the data. It is important to note that there are no specific TLV keys defined for this spec regarding data fragment transmission, and it is the responsibility of the sender to properly coordinate simultaneous transmissions to a destination node by using different `fragset_id` values for each fragment set. Additionally, there is room for optimization in terms of signing larger chunks of data and not each transmitted fragment, transmitting less DataSig instances and leaving more available space for the fragment data.A working proof of concept that utilizes DataSig and DataStruct over single path payments can be found at https://github.com/GeorgeTsagk/satoshi-read-write.</summary>
+    <published>2022-06-17T10:18:34+00:00</published>
+  </entry>
+</feed>

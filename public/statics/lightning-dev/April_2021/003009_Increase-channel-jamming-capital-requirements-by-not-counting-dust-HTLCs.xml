@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Increase channel-jamming capital requirements by not counting dust HTLCs</title>
+  <updated>2023-05-23T14:39:46.884298+00:00</updated>
+  <author>
+    <name>Matt Corallo 2021-04-24 04:02:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Increase channel-jamming capital requirements by not counting dust HTLCs</title>
+    <updated>2023-05-23T14:39:46.884298+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-April/003009.html" rel="alternate"/>
+    <summary>In a recent Lightning-dev mailing list, Eugene Siegel proposed a simple mitigation to increase the capital requirement of channel-jamming attacks. The proposal is to prevent an unsophisticated attacker with low capital from jamming a target channel. In the commitment transaction, dust HTLC outputs are trimmed, and the reason for the 483 HTLC limit each side has in the spec is to prevent commitment tx's from growing unreasonably large. The proposal suggests that if dust HTLCs are not included in the calculation, since they are not on the commitment tx, 483 (x2) non-dust HTLCs can still be included on the commitment tx. There could be a configurable limit on the number of outstanding dust HTLCs, but the point is that it doesn't affect the non-dust throughput of the channel. Bastien TEINTURIER responded to this proposal stating that dust HTLCs count for the 483 HTLC limit due to `update_fee`. If they are not counted and the limit is exceeded, the fee cannot be lowered anymore. This can lead to more than 483 HTLC outputs in the commitment, opening the door to other kinds of attacks. While this is the first issue that comes to mind, there may be other drawbacks if the proposal is scrutinized enough with an attacker's mindset.Eugene Siegel's proposal aims to raise the capital requirement of channel-jamming so that each HTLC must be non-dust, rather than spamming 1 sat payments. He believes it is a free mitigation without any downsides, besides code-writing. He asked for others' thoughts on the proposal.</summary>
+    <published>2021-04-24T04:02:38+00:00</published>
+  </entry>
+</feed>

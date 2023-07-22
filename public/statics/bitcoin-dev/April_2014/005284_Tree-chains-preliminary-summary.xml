@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Tree-chains preliminary summary</title>
+  <updated>2023-06-08T15:46:20.798246+00:00</updated>
+  <author>
+    <name>Tier Nolan 2014-04-17 21:41:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Tree-chains preliminary summary</title>
+    <updated>2023-06-08T15:46:20.798246+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005284.html" rel="alternate"/>
+    <summary>The system handles problems with the lower chains after they have been "locked-in" by applying a rule that if a block in the child chain is pointed to by its parent, then it effectively has infinite POW. This means that a node monitoring the parent chain only has to watch the header chain for its two children and a parent block header could point to an invalid block in one of the child chains that could end up built on top of before the problem was discovered. A child chain problem could cause a roll-back of a parent chain, violating the principle that parents are dominant over child chains. Alternatively, the child chain could discard the infinite POW blocks since they are illegal.In case C4 (or C5) was an invalid block, a valid sequence would be P5 -&gt; C4' -&gt; P6 -&gt; --- -&gt; P7 -&gt; C8', and once P7 points at C8, the alternative chain displaces C5. However, this displacement could require a compact fraud proof to show that C4 was an illegal block and that C5 was built on it. It cannot be guaranteed against if the miner was not actually watching the log(N) chains, but the proof of stake "nothing is at stake" principle might apply here. Miners aren't putting anything at stake by merge mining the lower chains, so they should at least get tx-fees for the lower chains that they merge mine. The rule could require that the minting reward is divided over the merge mined chains.</summary>
+    <published>2014-04-17T21:41:55+00:00</published>
+  </entry>
+</feed>

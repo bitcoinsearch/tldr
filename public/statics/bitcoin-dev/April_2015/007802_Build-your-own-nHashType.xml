@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Build your own nHashType</title>
+  <updated>2023-06-09T19:05:47.215191+00:00</updated>
+  <author>
+    <name>Peter Todd 2015-04-18 23:33:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Build your own nHashType</title>
+    <updated>2023-06-09T19:05:47.215191+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-April/007802.html" rel="alternate"/>
+    <summary>In a discussion on #bitcoin-wizards, Bitcoin Core developer Mike Hearn suggested that OP_CODESEPARATOR could be used to implement efficient payword schemes. He also claimed that early on you could have used it to do some really useful after-the-fact signing delegation by wrapping an IF ENDIF around the CODESEPARATOR introduced into the middle of the scriptSig/scriptPubKey pair. This would enable users to create a signature that delegates signing authority to another pubkey. However, this feature was removed without thinking the design through and Satoshi believed in one implementation. Satoshi put CODESEPARATOR into the scriptSig/scriptPubKey concatenation so that you had to opt-in to making that feature possible to use in any particular scriptPubKey. Without the mis-matched ENDIF you can't pull off that trick because you can't turn CODESEPARATOR off. To delegate signing authority after the fact sign a signature on the script 0 IF ENDIF CHECKSIGVERIFY, then create another signature with pubkey2 signing the script CHECKSIGVERIFY 0 IF ENDIF CHECKSIG again, and finally spend it with the scriptSig: CODESEPARATOR 0 IF. After concatenation, CODESEPARATOR 0 IF CODESEPARATOR ENDIF CHECKSIG is evaluated, the inner signature satisfies, and the outer signature is satisfied only if the scriptPubKey was essentially changed after the fact to also require the inner, second, pubkey2 to be satisfied. A nice use-case would have been to have a signing robot be able to create signatures offline for a given txout with SIGHASH_SINGLE such that you had a spending limit enforced, and exactly who was then allowed to spend the funds - say a department of a company - could be picked after the fact without re-spending the txout.</summary>
+    <published>2015-04-18T23:33:52+00:00</published>
+  </entry>
+</feed>

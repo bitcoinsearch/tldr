@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Fixing a griefing attack on JIT Channels using PTLCs</title>
+  <updated>2023-06-04T05:03:18.250538+00:00</updated>
+  <author>
+    <name>Ben Carman 2023-05-09 19:07:09</name>
+  </author>
+  <author>
+    <name>SomberNight 2023-05-09 21:10:18</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2023-05-10 12:52:56</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2023-05-10 00:00:27</name>
+  </author>
+  <link href="lightning-dev/May_2023/003939_Fixing-a-griefing-attack-on-JIT-Channels-using-PTLCs.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2023/003940_Fixing-a-griefing-attack-on-JIT-Channels-using-PTLCs.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2023/003945_Fixing-a-griefing-attack-on-JIT-Channels-using-PTLCs.xml" rel="alternate"/>
+  <link href="lightning-dev/May_2023/003941_Fixing-a-griefing-attack-on-JIT-Channels-using-PTLCs.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Fixing a griefing attack on JIT Channels using PTLCs</title>
+    <updated>2023-06-04T05:03:18.250538+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-May/003939.html" rel="alternate"/>
+    <summary>A potential griefing attack on Just-In-Time channels provided by Lightning Service Providers (LSPs) has been highlighted. The attack involves the client receiving payment and not being able to claim it after the LSP opens a 0-conf channel, resulting in the LSP not getting paid while the client gets a free inbound lightning channel. To solve this issue, PTLCs have been proposed, where the LSP can sign the funding transaction using adaptor signatures locked to the same secret as the invoice. The client can then get the funding txid from the LSP and perform the PTLC dance with them based on the funding transaction. However, there are concerns about what if the client waits for the PTLC held by the LSP to time out and then broadcasts the funding transaction. In this case, the LSP could no longer claim the PTLC, and it would have paid for the channel-open. Thus, the LSP would have to actively double-spend the channel funding tx given to the client when the PTLC is close to expiring.ZmnSCPxj explains possible mitigations and their drawbacks for LSPs and clients. These mitigations involve either "LSP trusts client" or "client trusts LSP". A trust-minimized solution requires a third party that both LSP and client agree upon to enforce that the second mover does not cheat or steal from the first mover. This third party should be the blockchain, but other options include Liquid, which is custodial, and requires trust in a federation. Without a trusted third party, the choices for LSPs and clients include LSP issuing a promise to make a 0-conf funding transaction confirmed before some future target block height, or the client can wait for the funding transaction to appear on its local mempool before sending channel_ready. The Open LSP Specifications group prefers "LSP trusts client" as the LSP is a big target for out-of-LSPS attacks, but the only truly "LSP trusts client" scheme involves the LSP issuing a cryptographically third-party-verifiable promise to get the funding tx confirmed by some later block height.In a Lightning-dev mailing list, benthecarman brought up a possible griefing attack on Just-In-Time channels provided by LSPs. The proposed solution is PTLCs, however, they do not solve the problem entirely as either the client or the LSP has to move first without assurance that the other will actually do what they promised. The default arbiter is the blockchain layer itself, but 0-conf just wants to avoid the blockchain layer for being too slow. Additionally, the LSP can attempt to coordinate with a miner to double-spend the funding transaction after the client has broadcasted the signed funding transaction on the mempool.</summary>
+    <published>2023-05-09T19:07:09+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Using a storage engine without UTXO-index</title>
+  <updated>2023-06-11T23:51:09.937968+00:00</updated>
+  <author>
+    <name>Tomas 2017-04-07 16:02:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Using a storage engine without UTXO-index</title>
+    <updated>2023-06-11T23:51:09.937968+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/014069.html" rel="alternate"/>
+    <summary>Tomas van der Wansem, a developer, has been working on a new bitcoin implementation that uses a different approach to indexing for verifying the order of transactions. Instead of using an index of unspent outputs, double spends are verified by using a spend-tree where spends are scanned against spent outputs instead of unspent outputs. He explains the approach at https://bitcrust.org, and source code is available at https://github.com/tomasvdw/bitcrust. Tomas shares this not only to ask for feedback but also to call for a clear separation of protocol and implementations. As his solution seems to have excellent performance characteristics and updates to the protocol addressing the UTXO growth might not be worth considering as protocol improvements. The results show that Bitcrust with high-end hardware has better results, but the difference for total block validations is mostly diminished at 2 vCPU, 7.5 gb. Note that the spend-tree optimization primarily aims to improve peak load order validation. When a block with pre-synced transactions comes in, but this is tricky to accurately bench with Core using this simple method of comparison by logs. Tomas will upgrade to, and show the results against 0.14 in the next weeks. Marcos Mayorga, who read the details about Bitcrust, thinks it is an excellent work and would like to see it integrated into Bitcoin-core as a 'kernel module.' He believes that there are a lot of proof of concepts out there, and every one deserves a room in the Bitcoin client as a selectable feature, to make the software more flexible and less dictatorial, so that users could easily select which features they want to run.Greg Sanders asks what specs for the machine being used as preliminary benchmark is here: https://bitcrust.org/results. He'd be interested to also see comparisons with 0.14 which has some improvements for script validation with more cores.</summary>
+    <published>2017-04-07T16:02:35+00:00</published>
+  </entry>
+</feed>

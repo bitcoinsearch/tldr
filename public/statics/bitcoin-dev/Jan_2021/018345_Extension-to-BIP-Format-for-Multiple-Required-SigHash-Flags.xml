@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Extension to BIP Format for Multiple Required SigHash Flags</title>
+  <updated>2023-05-21T00:39:25.886459+00:00</updated>
+  <author>
+    <name>Jeremy 2021-01-10 19:39:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Extension to BIP Format for Multiple Required SigHash Flags</title>
+    <updated>2023-05-21T00:39:25.887460+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018345.html" rel="alternate"/>
+    <summary>The PSBT BIP currently has a "conceptual gap" where it is not possible to have a PSBT that obtains multiple signatures per-input with a fixed sighash type applying to a specific key's signature and gracefully handle a PSBT with multiple uses of the same key, but different code-separators. To solve this issue, a new key type compatible with the existing PSBT Spec should be introduced. One example where this may be relevant is when dealing with a script with 2 HSMs operating each key, where Key 2 verifies internal business logic only about the permissibility of spending an output, but does not sign off on any other logic, and Key 1 checks that transaction sends only to the currently allowed addresses and is signed by Key 1. To address this, a new key type PSBT_IN_SIGHASH_PER_KEY_TYPE should be added, which is followed by a public key, a 8-bit bool (must be 0 or 1) if the next field will be a sighash flag, optionally a 32-bit unsigned integer representing the sighash type, and a compact size integer representing the codeseparator position + 1. Finalizers should verify that each requested signature is available. PSBT_IN_SIGHASH_PER_KEY_TYPE is fully compatible with existing PSBT as long as PSBT_IN_SIGHASH_TYPE is not set.Finalizers could deduce which codeseparator was used if multiple PSBT_IN_PARTIAL_SIGS are delivered, thus a new PSBT_IN_PARTIAL_SIG type to specify codeseparator is not required. However, in the case of multiple signatures, PSBT_IN_PARTIAL_SIG would lead to a duplicated key-pair specification error so we should also introduce the type PSBT_IN_PARTIAL_SIG_EXTRA which has a key of a public key followed by a compact size integer code separator and a signature as a value. Finalizers shall check that the PSBT_IN_PARTIAL_SIG_EXTRA values match the corresponding PSBT_IN_SIGHASH_PER_KEY_TYPE requests. Compatibility-wise, PSBT_IN_PARTIAL_SIG does not overlap with PSBT_IN_PARTIAL_SIG_EXTRA as '_EXTRA must specify a codeseparator. Thus, as long as no repeated key/codeseparators are used, the new PSBT remains fully backwards compatible.</summary>
+    <published>2021-01-10T19:39:15+00:00</published>
+  </entry>
+</feed>

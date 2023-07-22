@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Payment channel without timeout protected from malleability</title>
+  <updated>2023-05-18T16:03:06.891559+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-11-27 20:11:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Payment channel without timeout protected from malleability</title>
+    <updated>2023-05-18T16:03:06.891559+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000360.html" rel="alternate"/>
+    <summary>Nicolas Dorier and AJ discussed a protocol for channel creation, in which A passes the original unsigned commitment to B, who verifies that it's in the right format and hashes to the hash that he signed. However, if A passes the unsigned commitment to B before the anchor is confirmed in the blockchain, B can malleate the anchor. Both A and B can't reuse pubkeys between different channels with this protocol, but that's good practice anyway. If A reuses a key, then B can guess the redeem hash and identify the transaction to malleate at broadcast time, before A's announcement. B will be providing a signature for a tx that has the anchor as input and has a single refund output payable to (A &amp;&amp; OP_CSV) | (B &amp;&amp; OP_HASH  OP_EQUALVERIFY). But B won't be able to guess what the hash is, so won't be able to correlate with potential anchor transactions at all. Although Nicolas prefers segregated witness to fix the problem cleanly, opening the channel as AJ said is a good enough workaround until it happens.</summary>
+    <published>2015-11-27T20:11:13+00:00</published>
+  </entry>
+</feed>

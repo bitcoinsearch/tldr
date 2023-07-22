@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>A proposal for up-front payments.</title>
+  <updated>2023-06-02T21:10:27.911753+00:00</updated>
+  <author>
+    <name>Joost Jager 2020-02-18 09:23:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>A proposal for up-front payments.</title>
+    <updated>2023-06-02T21:10:27.911753+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002547.html" rel="alternate"/>
+    <summary>The Lightning Network team has been discussing the issue of channel jamming, or preventing liquidity-consuming spam. The current prepay system leaves senders vulnerable to nodes stealing their upfront payment. One idea proposed is reversing the direction of bond payments, so that nodes pay to receive an HTLC instead of offering one. Channel peers would charge each other for the time that the other party holds an HTLC. As long as the HTLC is forwarded quickly, the difference between what the receiving node pays and what it receives from the next node will be tiny. This method would also fix concerns around hodl invoices. Another proposal was presented by Rusty Russell regarding up-front payments for messages in order to avoid Type 2 spam. His proposal involves adding an HTLC that pushes a number of msat on commitment_signed and a hash. Failing/succeeding an HTLC returns some of those msat and a count and preimage. The user would have to present a series of preimages, which they get by decoding the onion, to forward the payment. The base rate is 16 preimages, but this can be reduced one for each leading 4 zero bits of the SHA256(blockhash | hmac) of the onion. The final node gets some variable number of preimages for added noise. This proposal makes an explicit tradeoff for the sender between amount spent and privacy.</summary>
+    <published>2020-02-18T09:23:29+00:00</published>
+  </entry>
+</feed>

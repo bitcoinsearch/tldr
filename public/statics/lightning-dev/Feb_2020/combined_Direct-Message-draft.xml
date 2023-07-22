@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Direct Message draft</title>
+  <updated>2023-06-03T23:46:03.413170+00:00</updated>
+  <author>
+    <name>Rusty Russell 2020-02-24 03:15:58</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-02-20 10:17:30</name>
+  </author>
+  <author>
+    <name>Christian Decker 2020-02-21 21:22:41</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2020-02-20 09:36:55</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2020-02-21 00:03:33</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-02-21 08:45:34</name>
+  </author>
+  <author>
+    <name>René Pickhardt 2020-02-20 10:01:01</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2020-02-20 23:33:22</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-02-23 23:21:23</name>
+  </author>
+  <link href="lightning-dev/Feb_2020/002564_Direct-Message-draft.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2020/002555_Direct-Message-draft.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2020/002560_Direct-Message-draft.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2020/002552_Direct-Message-draft.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2020/002557_Direct-Message-draft.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2020/002559_Direct-Message-draft.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2020/002554_Direct-Message-draft.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2020/002556_Direct-Message-draft.xml" rel="alternate"/>
+  <link href="lightning-dev/Feb_2020/002562_Direct-Message-draft.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Direct Message draft</title>
+    <updated>2023-06-03T23:46:03.413170+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002564.html" rel="alternate"/>
+    <summary>Rusty Russell and Christian Reitwiessner engage in a conversation about circular payment in onion routing. Christian proposes a construction of the onion routing packet that allows compression to fit inside the payload itself. The discussion also touches on the Lightning Network, with directed messages proposed as an obvious candidate for messaging over lightning. However, ZmnSCPxj raises concerns about timing attacks, proposing the use of a circular path instead of using the same path each time.Rusty suggests creating a circular path for onion routing and tying it to an HTLC to provide spam-limit. Rene Pickhardt expresses delight on Rusty's proposal but raises a concern about spam prevention. Rusty suggests adding an up-front 1msat payment when they figure out how to do that. The email thread also discusses the reasonable timeout of HTLC and its subsequent forgetting if not replied. In a conversation between Rusty and René, Rusty explains that the non-persistent storage costs for remembering how to forward the reply are only 200 bytes in his implementation. René asks if he can use this protocol to create a fee-free rebalancing protocol or communicate with nodes further away than just his peers. Rusty confirms that both of these are possible with this protocol.However, Rusty adds that he hasn't prevented spam because it cannot be prevented. The conversation mainly revolves around creating a circular path for onion routing, but it has some potential risks associated with it. The lack of reply function eliminates all storage requirements for the intermediaries. To address this issue, separating the request/response from the onion is suggested, treating the onion as establishing a non-encrypted temporary tunnel and adding an asymmetric encryption between the sender and receiver for the request and response.Each hop effectively peels a layer of encryption until it reaches the receiver, who learns that it is the true destination by some TLV in the onion part. Bob generates its reply and encrypts the reply with the shared secret between its static key and the level 2 ephemeral key. It creates a MAC using the level 2 ephemeral key and its static key, sends it together with the rest of the onion onward. This method uses a "full" onion to establish a circuit and then uses simpler symmetric ciphers during circuit operation. The advantage of this method is that the recipient can construct a reply without modifying (and invalidating) the routing onion.</summary>
+    <published>2020-02-24T03:15:58+00:00</published>
+  </entry>
+</feed>

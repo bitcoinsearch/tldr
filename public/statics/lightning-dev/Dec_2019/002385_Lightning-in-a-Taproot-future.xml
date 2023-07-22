@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Lightning in a Taproot future</title>
+  <updated>2023-05-23T02:44:22.500721+00:00</updated>
+  <author>
+    <name>Anthony Towns 2019-12-17 14:02:29</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Lightning in a Taproot future</title>
+    <updated>2023-05-23T02:44:22.500721+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-December/002385.html" rel="alternate"/>
+    <summary>The Lightning Network development team has been discussing an upgrade from Hash Time-Locked Contracts (HTLCs) to Pointlocked Timelocked Contracts (PTLCs). They have determined that Decker-Russell-Osuntokun is a better option than Poon-Dryja only if all required features are enabled simultaneously. This includes using MuSig for the internal key, which is always superior to a NUMS point, and implementing an alternative script path to reduce communication round trips needed to generate signatures.To set up payment channels on the lightning network, the funding transaction output is MuSig(A,B), and commitment transactions are held by A with obscured commitment numbers. PTLCs pay to MuSig(Rn,B), while HTLCs pay to MuSig(Rn,B) but are tweaked by a script. B needs to provide A with signatures for various transactions, including the funding tx and each PTLC/HTLC paying/refunding to A from A's commitment and B's commitment. Each of these signatures needs to be updated every commitment update.The team also discussed "purely scriptless" PTLCs as a potential replacement for revocable HTLCs in current Poon-Dryja Lightning Network channels. The author proposes using Poon-Dryja PTLCs prior to eltoo, scriptless revocation via MuSig(Rn,B) internal keys, support for HTLCs via taproot, and optionally allowing the use of script paths to minimize round trip delay. In case A unilaterally closes the channel by publishing the commitment tx, symmetric delays are possible, and the settlement tx can be simplified. By implementing these upgrades and improvements, the Lightning Network can become even more efficient and secure for users.</summary>
+    <published>2019-12-17T14:02:29+00:00</published>
+  </entry>
+</feed>

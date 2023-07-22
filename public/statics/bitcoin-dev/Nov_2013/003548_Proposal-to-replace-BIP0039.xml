@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal to replace BIP0039</title>
+  <updated>2023-06-07T18:23:05.795764+00:00</updated>
+  <author>
+    <name>Timo Hanke 2013-11-04 15:10:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal to replace BIP0039</title>
+    <updated>2023-06-07T18:23:05.795764+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-November/003548.html" rel="alternate"/>
+    <summary>Trezor is a hardware wallet for Bitcoin users. In an email conversation between Timo Hanke and Thomas Voegtlin on November 3, 2013, Hanke proposed a way for Trezor to commit to a value first, which involves sending a random s to the computer and keeping it secret. The computer then sends a random t back to Trezor, which makes r = s + t its internal master private key with corresponding master public key R = (s+t)*G. Hanke questioned the method of verifying that pubkeys derived through bip32's private derivations are derived from the user's own entropy, regardless of whether the derivation is private or public. He also raised the question of how to verify a backup, which is a seed or private key too long to compute by hand. To use Trezor, one would need to trust that it derives R from r. Trezor could not use straight bip32 out of the box; the chaincode would have to be something like SHA(R), and the seed would be r itself, making it 256-bit instead of only 128-bit. It was suggested that if the longer seed is bearable, this is a good way to do it. However, it was noted that if a user only writes down the mnemonic, they cannot verify that it is correct and corresponds to the secret in Trezor. Thus, they would have to restore it on another device, such as another empty Trezor, and see if it brings up the same master pubkey.</summary>
+    <published>2013-11-04T15:10:36+00:00</published>
+  </entry>
+</feed>

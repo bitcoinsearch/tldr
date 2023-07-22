@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Request for review/testing: headers-first synchronization in Bitcoin Core</title>
+  <updated>2023-06-09T03:04:46.931459+00:00</updated>
+  <author>
+    <name>Jameson Lopp 2014-10-12 19:13:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Request for review/testing: headers-first synchronization in Bitcoin Core</title>
+    <updated>2023-06-09T03:04:46.931459+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-October/006731.html" rel="alternate"/>
+    <summary>Pieter Wuille has developed a change in Bitcoin Core which he refers to as headers-first synchronization. This new method of syncing the blockchain brings with it several advantages that include much faster sync on typical network connections, no more stalled downloads, and being much more robust against unresponsive or slow peers. Further to this, headers-first removes a class of DoS attacks that have been related to peers feeding low-difficulty valid large blocks on a side branch. According to Pieter, headers-first is a major step towards an SPV mode using the reference codebase. The headers-first synchronization works by replacing the single-peer blocks download by a single-peer headers download (which typically takes seconds/minutes) and verification, and simultaneously fetching blocks along the best known headers chain from all peers that are known to have the relevant blocks. Downloading is constrained to a moving window to avoid unbounded unordering of blocks on disk (which would interfere with pruning later). At the protocol level, headers-first increases the minimally supported version for peers to 31800 (corresponding to bitcoin v3.18, released in December 2010), as earlier versions did not support the getheaders P2P message. The code is available as a Github pull request, or packaged on http://bitcoin.sipa.be/builds/headersfirst where users can also find binaries to test with.There are some known issues with headers-first including the fact that at the very start of the sync, downloading is slow due to a limited number of blocks that are requested per peer simultaneously. Blocks will also be stored on disk out of order, which makes it incompatible with some tools or other programs. Additionally, the block index database will now hold headers for which no block is stored on disk, which earlier versions won't support. Despite these issues, headers-first synchronization is set to revolutionize the way the best chain is discovered, downloaded, and verified in Bitcoin Core.</summary>
+    <published>2014-10-12T19:13:06+00:00</published>
+  </entry>
+</feed>

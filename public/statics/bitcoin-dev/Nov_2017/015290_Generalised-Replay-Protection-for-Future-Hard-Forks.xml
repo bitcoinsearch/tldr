@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Generalised Replay Protection for Future Hard Forks</title>
+  <updated>2023-06-12T22:02:29.775826+00:00</updated>
+  <author>
+    <name>Spartacus Rex 2017-11-13 17:02:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Generalised Replay Protection for Future Hard Forks</title>
+    <updated>2023-06-12T22:02:29.775826+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-November/015290.html" rel="alternate"/>
+    <summary>The discussion is around a replay protection scheme for Bitcoin, specifically for Lightning Network (LN) transactions. One suggestion is to put the hash of a block that must be on the chain the transaction can eventually be added to. This allows users to choose which forks they want to allow their transaction on, pre-fork for both or post-fork for only one, without requiring an `nForkId` value. However, there are concerns about this method missing some cases due to forks forming a partial order while IDs form a total order. The discussion also touches on the nForkId values for LN transactions, where the funding transaction needs to be protected by setting `nForkId&gt;=1`, while the commitment transaction should have `nForkId=0`. This ensures that the payment channel is non-existent on any past forks and valid on all chains for future forks, but the parent transaction it tries to spend (the funding transaction) exists only on two chains - the original one and the one that forked away. There are potential pitfalls with using nForkId 0 for LN transactions, as it could be valid not just for future forks, but also on past ones.</summary>
+    <published>2017-11-13T17:02:07+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>eltoo: A Simplified update Mechanism for Lightning and Off-Chain Contracts</title>
+  <updated>2023-06-13T01:38:37.864384+00:00</updated>
+  <author>
+    <name>Jim Posen 2018-04-30 23:00:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>eltoo: A Simplified update Mechanism for Lightning and Off-Chain Contracts</title>
+    <updated>2023-06-13T01:38:37.864384+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-April/015910.html" rel="alternate"/>
+    <summary>The Lightning Network team has announced a new update mechanism for off-chain protocols called eltoo. The mechanism is a drop-in replacement for the penalty-based invalidation mechanism currently used in the Lightning specification. It addresses some of the issues encountered while specifying and implementing the Lightning Network and can be used as a generic update mechanism for an off-chain contract, for a larger number of participants. Before implementing eltoo, however, a minor change to Bitcoin is required: the introduction of the SIGHASH_NOINPUT flag for signatures. This was first discussed in the context of watchtowers to help secure Lightning channels. A formal proposal may now be found in the eltoo paper. The full announcement can be found at [1], and the paper with the full details can be found at [2]. The current mechanism used in Lightning is penalty-based, meaning that publishing an old state automatically results in the faulty node losing funds. In contrast, eltoo is not penalty-based, and publishing an old state does not result in lost funds. Rather, it is similar to the duplex micropayment channel construction, and all participants share an identical set of transactions. Eltoo ensures that the last agreed-upon state is settled on-chain, with similar tradeoffs as today's Lightning (timelock vs. online requirement). Eltoo also allows for the attachment of fees when settling, and even allows for fees to be bumped using CPFP or RBF. Outsourcing becomes very simple since old states becoming public cannot harm anyone anymore. The construction completely removes the need to estimate fees ahead of time. Beyond Lightning, eltoo can be used for other protocols such as the channel factories. In combination with Schnorr signatures, it allows for very large off-chain contracts with minimal on-chain footprint. However, this construction would significantly increase the safe CLTV delta requirements because HTLCs cannot be timed out immediately on the settlement transaction. When a downstream channel is closed on-chain, it must wait for the CSV timeout on the update transaction before locking in the timed-out HTLC. This means that the CLTV delta has to be greater than the CSV timeout, plus some extra (whereas it is currently safe to make it significantly shorter).</summary>
+    <published>2018-04-30T23:00:55+00:00</published>
+  </entry>
+</feed>

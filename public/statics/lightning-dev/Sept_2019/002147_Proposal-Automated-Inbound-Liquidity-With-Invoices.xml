@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Automated Inbound Liquidity With Invoices</title>
+  <updated>2023-06-02T20:03:07.355187+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-09-10 01:40:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Automated Inbound Liquidity With Invoices</title>
+    <updated>2023-06-02T20:03:07.355187+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-September/002147.html" rel="alternate"/>
+    <summary>The Muun wallet team has added a new feature that allows users to scan an invoice and open a channel directly if there isn't enough capacity to the destination node. However, due to block times, the process can take up to an hour from locking the channel to fulfilling the payment. This presents user experience challenges as users expect lightning payments to be completed instantly. Therefore, this feature is best used for topping up one's own node in a non-custodial manner.Trampoline routing can aid this idea by indicating the node id of the next trampoline hop, eliminating the need for implementations to remember who a closed short-channel-id used to be connected to. Trampoline nodes will require a much larger fee and timelock budget, but if the budgets are sufficient, the trampoline node may choose to open a direct channel to the next trampoline node "just-in-time" for the next trampoline hop. The use case for this flow could be improved by applying it to other scenarios, such as onchain-to-offchain/onchain-to-onchain swaps that target outbound capacity to the network, allowing users to make outgoing channels themselves with their on-chain funds.Regarding a previous message, the sender suggested using push_msat, although it was cautioned that until confirmed deeply, the channel opening can still be cancelled by double-spending. Therefore, the sender suggested waiting until the channel is deeply confirmed before delivering the product.The proposal for automated inbound liquidity with invoices aims to solve the problem of waiting for inbound liquidity when first coming online and wanting to receive a Lightning Network payment. The proposal involves embedding the node URI of the invoice creator, along with the amount to be routed, so that routing nodes can establish channels and push payments automatically, enabling users to receive payments instantly. The proposal is directed towards full Lightning Network nodes and can possibly be extended to neutrino LN wallets if they are public. Routing nodes who provide this service can charge a premium, and while it requires on-chain funds, Bitcoin is the most sensible way to store and transport financial capital.As it is still early days, much infrastructure needs to be written, including the implementation of the auto-system. However, the proposal is considered a good investment in future accessibility over the Lightning Network. Presumably, new merchants or businesses will have capital in some form before starting their business.</summary>
+    <published>2019-09-10T01:40:31+00:00</published>
+  </entry>
+</feed>

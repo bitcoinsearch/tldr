@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>SIGHASH_NOINPUT in Segregated Witness</title>
+  <updated>2023-05-18T16:44:37.360565+00:00</updated>
+  <author>
+    <name>Anthony Towns 2016-03-02 22:36:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>SIGHASH_NOINPUT in Segregated Witness</title>
+    <updated>2023-05-18T16:44:37.361563+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-March/000453.html" rel="alternate"/>
+    <summary>In a discussion on Mar 02, 2016, Rusty Russell mentions that with SIGHASH_NOINPUT, only the timeout/rval per new HTLC is required to be sent. Assuming no batching, every second new commit tx adds a new HTLC and that is 50 bytes per commit tx. Without SIGHASH_NOINPUT, add 64 bytes per commit tx output plus there is a need to generate those signatures which is probably going to be less than 1 TCP packet. The addition of 70 bytes of signature data for every HTLC for every commitment creates a 70% increase in storage requirements. The confusion regarding what size a "TCP packet" actually is these days arises as it is unclear whether it is 65kB or 1500B or somewhere in between. 1500 bytes only gives about 14 HTLCs open on a channel simultaneously. It is suggested that anyone doing high volume/rate should run their own bitcoin node anyway. For low volume channels where only five transactions an hour are being done every hour, a whole six months of full transactions is only 21MB.It appears that "end users" can outsource by generating a new payment tx and sending that off while high volume users can run a bitcoin node themselves and only do the signatures if/when someone cheats, so SIGHASH_NOINPUT isn't very useful in either case. The fact that people running lightning on their phone will not be forwarding many transactions also supports this conclusion. There is no big problem with sending that info to a third party who's doing transaction reclaiming; it might hurt privacy a bit. It is mentioned that you can avoid sending the 4 byte commitment index (ie, what you need to recover your shachain seed) by encoding that in the commitment transaction's locktime, but you still need to store/send the HTLC timeouts aiui. MAST is not useful since it only lets you trade the 32+4 bytes of R+timeout for 32 bytes of unknown-AST-hash. We'd need a "script is one of these hashes" form, which bloats the UTXO set. So not likely to be acceptable until lightning is the main bitcoin user.</summary>
+    <published>2016-03-02T22:36:27+00:00</published>
+  </entry>
+</feed>

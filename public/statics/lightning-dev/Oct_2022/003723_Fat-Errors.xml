@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Fat Errors</title>
+  <updated>2023-06-03T10:23:23.991141+00:00</updated>
+  <author>
+    <name>Joost Jager 2022-10-19 11:12:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Fat Errors</title>
+    <updated>2023-06-03T10:23:23.991141+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-October/003723.html" rel="alternate"/>
+    <summary>The Lightning network has two vulnerabilities that have been identified. The first vulnerability is related to gaps in error attribution, where certain nodes on the route can hide themselves by returning random data as the failure message. This makes it difficult for the sender to determine where the failure occurred and penalize the responsible node(s). To address this weakness, a new failure message format has been proposed which allows each node on the route to append a timestamp and HMAC to the failure message without revealing their position in the path. The new failure message consists of three parts: `message`, `payloads`, and `hmacs`.The second vulnerability is related to delayed failure messages that can be exploited by an attacker to force the commitment transaction to be revoked, resulting in funds being stolen. A solution proposed is to increase the size of the failure message to include HMACs for all possible routes up to 27 hops. Another option suggested is to reduce the maximum number of hops to 10, which would significantly decrease the message size.To ensure backwards compatibility, nodes need to signal what algorithm they should run to generate or transform the failure message via a TLV onion field. Intermediate nodes also need to advertise their capability to transform the new format through a feature bit. Additionally, successes can also be delayed, and it may be an option to add the same `payloads` and `hmacs` blocks to the `update_fulfill_htlc` message.The downside of the proposed scheme to address the first vulnerability is its size, as given a maximum of 27 hops, the `hmacs` block contains 378 HMACs of 32 bytes each, making for a total size of 12 KB. Nonetheless, it may not be possible to devise a more compact scheme that also preserves existing privacy guarantees. Several links to relevant sources are provided as references.</summary>
+    <published>2022-10-19T11:12:26+00:00</published>
+  </entry>
+</feed>

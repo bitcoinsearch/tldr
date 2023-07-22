@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[PROPOSAL] Merkle tree of unspent transactions (MTUT),	for serverless thin clients and self-verifiable prunned blockchain.</title>
+  <updated>2023-06-05T02:02:53.719037+00:00</updated>
+  <author>
+    <name>Elden Tyrell 2012-01-29 18:40:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[PROPOSAL] Merkle tree of unspent transactions (MTUT),	for serverless thin clients and self-verifiable prunned blockchain.</title>
+    <updated>2023-06-05T02:02:53.719037+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-January/001094.html" rel="alternate"/>
+    <summary>A proposal has been made to add a hash-tree based check in the blockchain that allows for the verification of unspent transactions without downloading and checking the entire blockchain. Although the idea is not new, there isn't any technical description of how this should be done at the time of writing. The proposal suggests using an acronym "MTUT" to represent "unspent transaction outputs". Once 55% of blocks include a valid MTUT hash in a two-week timespan, they should reject any block with an invalid MTUT hash block while accepting blocks without MTUT. This creates a risk of blockchain split similar to OP_EVAL/p2sh. However, it's possible to eliminate this risk by giving each MTUT an additional "prev" pointer which points to the latest prior block with a correct MTUT. This produces a "chain within the chain" of blocks that have valid MTUTs. Hostile miners are free to add bogus-MTUT-blocks but those will never be included in the "inner chain". By downloading the last day's worth of blocks, a client can see which "inner chain" the majority of the hashpower believed during the last 24 hours. This eliminates the need for a vote in any specific block. This "inner chain" approach can be broadened to a K-ary tree by including K-many prior-block pointers. With one of these in every block (and sensible choices), you wind up with O(log_K(chain_length))-operation hash-secure access to arbitrary blocks in the middle of the chain. This is an important building block for ultra-high-security thin clients. Even if only a 1/K of the network's hashpower starts adding these pointers, the worst-case number of operations needed to reach an arbitrary block will still converge towards this ideal. Alberto Torres who proposed this has received positive feedback and the proposal has been added to the Thin Client Security wiki page.</summary>
+    <published>2012-01-29T18:40:23+00:00</published>
+  </entry>
+</feed>

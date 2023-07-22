@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Implementing Covenants with OP_CHECKSIGFROMSTACKVERIFY</title>
+  <updated>2023-06-11T20:30:50.238365+00:00</updated>
+  <author>
+    <name>Tim Ruffing 2016-11-04 14:35:51</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Implementing Covenants with OP_CHECKSIGFROMSTACKVERIFY</title>
+    <updated>2023-06-11T20:30:50.238365+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-November/013273.html" rel="alternate"/>
+    <summary>The implementation of "opt-in miner takes double-spend" can be done using either OP_CAT or OP_CHECKSIGFROMSTACKVERIFY. By creating an output that is spendable by everyone if it is double-spent with two different transactions, the next miner who mines the double-spent transaction will take all the money. The recipient may accept a zero-conf transaction, knowing that the sender will lose the money when they attempt to double-spend. In the case of OP_CHECKSIGFROMSTACKVERIFY, a case is added to the script that allows spending if two valid signatures on different messages under the public key of the output are given. This implementation is straightforward. OP_CAT can also achieve the same functionality in a simpler way by turning Bitcoin's ECDSA into an opt-in one-time signature scheme. An output that is only spendable using a signature with a specific already fixed first part can be created using OP_CAT. Signing two different transactions with the same r will allow everybody to extract the secret key from the two signatures. However, the drawbacks of this implementation are that every double-spend is penalized, and it is not possible to distinguish between legitimate or illegitimate double-spends. Russell O'Connor has explained how to construct covenants using both these op codes in a blog post at Elements Alpha. Though minor trade-offs exist, the Moeser-Eyal-Sirer vault has been constructed as an example of the construction that works. Any ideas for implementing useful covenants are welcome.</summary>
+    <published>2016-11-04T14:35:51+00:00</published>
+  </entry>
+</feed>

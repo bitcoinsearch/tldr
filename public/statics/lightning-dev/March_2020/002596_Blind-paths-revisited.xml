@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Blind paths revisited</title>
+  <updated>2023-06-02T23:59:44.030785+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-03-16 00:06:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Blind paths revisited</title>
+    <updated>2023-06-02T23:59:44.030785+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-March/002596.html" rel="alternate"/>
+    <summary>The message exchange between Bastien and ZmnSCPxj indicates that they are discussing a proposal for multi-hop locks. The proposed change would require the recipient to give all blinding points for each hop in the blinded path instead of just one blinding point, as is the case in the current proposal. However, this change may open up some attack vectors on the sender and requires further verification to ensure it works end-to-end.ZmnSCPxj explains that not every secret is chosen by the sender in multi-hop locks since the final target payment scalar comes from the receiver. Therefore, whether the final receiver secret is a single scalar or multiple scalars summed together seems to be immaterial. ZmnSCPxj also provides an example where the sender creates blinding scalars and creates an initial PTLC that requests for (s0 + s1 + s2) * G + N, with each hop subtracting some s[i]. The rendezvous point receives only N and unwraps the receiver-side onion, revealing a path with blinding scalars r0 r1 r2, which are subsequently subtracted until the receiver receives a PTLC asking for the scalar behind N - (r0 + r1 + r2) * G. The sender can treat the rendezvous point as the "real" receiver, with an abnormally high `final_cltv_expiry`, and the receiver pays for the fees deducted by each hop the receiver chose. As far as the sender is concerned, the payment point and scalar are N = n * G.</summary>
+    <published>2020-03-16T00:06:12+00:00</published>
+  </entry>
+</feed>

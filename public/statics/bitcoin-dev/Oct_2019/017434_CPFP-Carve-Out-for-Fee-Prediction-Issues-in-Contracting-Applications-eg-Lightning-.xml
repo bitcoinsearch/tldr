@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+  <updated>2023-06-13T15:48:41.614335+00:00</updated>
+  <author>
+    <name>Jeremy 2019-10-27 19:13:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>CPFP Carve-Out for Fee-Prediction Issues in Contracting Applications (eg Lightning)</title>
+    <updated>2023-06-13T15:48:41.614335+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-October/017434.html" rel="alternate"/>
+    <summary>The email thread discusses mempool limits for OP_SECURETHEBAG and the two main categories of mempool issues at stake: relay cost and mempool walking. To fix the relay cost issue, Replace By Fee update fees should appropriately assess all descendants to prevent invalidation of children if an ancestor can be replaced. The walking issue is related to algorithms used in the mempool that can be N log N or N^2 in the number of descendants, which causes inefficiencies in computing descendants or ancestors for transactions with high indegree or outdegree. A PR was opened to address some of the walking issues by caching which nodes have been visited on a run. Regarding OP_SECURETHEBAG, it is desired that an unlimited number of child OP_SECURETHEBAG transactions may extend from a confirmed parent, and at the leaf nodes, the same rule as lightning (one dangling unconfirmed to permit channels) should be applied. This can be achieved by putting all HTLCs into a tree where they are individualized leaf nodes with a preceding CSV and ensuring each HTLC always has time to close properly with individualized lockpoints.There is also a discussion on relaxing the carve-out rule added in bitcoind 0.19 in order to pave the way for more robust CPFP of on-chain contracts. The special case rule could be relaxed to allow adding a large transaction to each output of the unconfirmed parent, but this could allow an attacker to exceed the MAX_PACKAGE_VIRTUAL_SIZE limit in some cases. It is asked whether the current mempool acceptance code in bitcoind can handle this scenario.</summary>
+    <published>2019-10-27T19:13:09+00:00</published>
+  </entry>
+</feed>

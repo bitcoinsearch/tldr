@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>commitment update steps</title>
+  <updated>2023-05-23T18:37:31.586123+00:00</updated>
+  <author>
+    <name>Rusty Russell 2015-07-24 00:49:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>commitment update steps</title>
+    <updated>2023-05-23T18:37:31.586123+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-July/000057.html" rel="alternate"/>
+    <summary>In a recent email discussion, Anthony Towns raises concerns about the security of payment channels in the Lightning Network. If Alice were to cheat, and publish an old commitment, Bob would need to work out which of the 100 Alice_N hashes he knows or can work out is being abused; prior to the DELAY expiring. This could potentially require millions of hash calculations or a 100MB lookup table. To make this calculation trivial, it might make more sense to have a dummy output of "0: OP_RETURN 42". In this way, it could be easily verified as part of the "forms hash chain as expect" and "txn structure" checks.If Bob sees the anchor being spent, checks if it's the latest commitment transaction, and finds that it is not, he does a backwards search to find the revocation key. The time taken for that search is O(N), where N is the current commitment transaction number. However, measurements on a laptop show that 1M transactions take 5.4 seconds, so there may not be any need to optimize this "never happens" scenario.When it comes to HTLCs, things get harder if pay2scripthash is assumed to be used. Alice could try stealing most of the channel's funds by publishing R1..R4 after they are known and Alice_55 is revealed. Bob would only be able to claim the final outputs if he could unhash the scripts, which would require having remembered R1..R4 even after those contracts had long been resolved. To solve this problem, Rusty suggests having the extra output be "0: OP_RETURN 42 #R1 #R2 #R3 #R4".With p2sh, one would need to know the R hash values and timeouts to spend the output (40 bytes). Since OP_RETURN is length-limited to 80 bytes, one cannot fit more than 2. If the HTLC outputs are not P2SH, they're non-standard and won't be relayed.Lastly, in an unattached footnote, Rusty mentions that the project's motto is "The lightning network: it's off the chain!"</summary>
+    <published>2015-07-24T00:49:49+00:00</published>
+  </entry>
+</feed>

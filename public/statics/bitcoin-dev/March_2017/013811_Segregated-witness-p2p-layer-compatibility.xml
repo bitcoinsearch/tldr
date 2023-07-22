@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Segregated witness p2p layer compatibility</title>
+  <updated>2023-05-20T01:10:54.040851+00:00</updated>
+  <author>
+    <name>Suhas Daftuar 2017-03-27 19:22:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Segregated witness p2p layer compatibility</title>
+    <updated>2023-05-20T01:10:54.040851+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-March/013811.html" rel="alternate"/>
+    <summary>The Bitcoin Core's Segregated Witness code has been recently discussed with regard to peer-to-peer implementation details. After SegWit activation, Bitcoin Core nodes will not attempt to download any blocks from non-SegWit peers (nodes that do not set the NODE WITNESS service bit) in a bandwidth optimization effort. However, non-SegWit blocks will still be evaluated under the same rules as prior versions of the software, and thus, valid to SegWit-nodes. Eric Voskuil suggested that miners running pre-SegWit code would produce blocks that no SegWit node would ever receive due to the protocol requirements of SegWit, but this is not entirely accurate. At the consensus layer, non-SegWit blocks that are valid to older nodes are also valid to SegWit-nodes. At the P2P layer, SegWit-enabled Bitcoin Core nodes will only try to download those blocks if announced by a SegWit-enabled peer. However, other implementations could remain compatible even if they take different approaches. Miners who want to continue mining post-SegWit activation using pre-SegWit software would need a way to relay their blocks to a SegWit-enabled peer. This can be done through several ways: use the RPC call "submitblock" on a SegWit-enabled node, explicitly deliver the block to a SegWit node over the P2P network, run a bridge node, or peer directly with other miners. Although saying that "A miner running pre-segwit code will produce blocks that no segwit node will ever receive" is not entirely correct, it is still an important detail that needs better documentation.</summary>
+    <published>2017-03-27T19:22:43+00:00</published>
+  </entry>
+</feed>

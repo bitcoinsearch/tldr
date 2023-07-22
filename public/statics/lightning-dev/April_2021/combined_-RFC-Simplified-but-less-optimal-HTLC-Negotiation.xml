@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - [RFC] Simplified (but less optimal) HTLC Negotiation</title>
+  <updated>2023-05-23T14:45:10.013812+00:00</updated>
+  <author>
+    <name>Matt Corallo 2021-04-28 02:16:30</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2021-04-24 14:11:33</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2021-04-28 02:13:01</name>
+  </author>
+  <author>
+    <name>Matt Corallo 2021-04-24 04:20:44</name>
+  </author>
+  <link href="lightning-dev/April_2021/003025_-RFC-Simplified-but-less-optimal-HTLC-Negotiation.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2021/003016_-RFC-Simplified-but-less-optimal-HTLC-Negotiation.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2021/003024_-RFC-Simplified-but-less-optimal-HTLC-Negotiation.xml" rel="alternate"/>
+  <link href="lightning-dev/April_2021/003011_-RFC-Simplified-but-less-optimal-HTLC-Negotiation.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - [RFC] Simplified (but less optimal) HTLC Negotiation</title>
+    <updated>2023-05-23T14:45:10.013812+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-April/003025.html" rel="alternate"/>
+    <summary>Rusty Russell and Matt Corallo are discussing a proposal to simplify the state machine logic for sending messages in the Lightning Network. The proposal involves using an alternation method where nodes take turns sending updates and commitment_signed messages. This is seen as less complex than the current system since it avoids having to debug issues based on logs which can be challenging.Additionally, it is noted that this proposal makes splicing easier since it does not require stopping changes while splicing is being negotiated, which can be non-trivial. Rusty has drafted a proposal making the update_fee message compulsory, requiring both sides to send a splice message to synchronize after all in-flight changes have cleared. They have to resolve simultaneous splice attempts and keep track of this stage while clearing in-flight changes.Matt suggests taking the rules around splicing pausing other HTLC updates and making them generic for future use, and then also using them for update_fee in a simpler-to-make-compulsory change. Rusty responds by saying that he would rather not have bugs than try to catch them all. However, there are some concerns raised about how this proposal handles certain cases such as when there are no changes to make. It is suggested that nodes can either send yields back and forth every Nms or resolve the issue when both parties try to claim turn at once. Rusty also suggests that deterministic throwing out one splice and keeping it in a "pending slice" buffer on the sending side would essentially do what is needed to implement turns while keeping the non-turn slice protocol a bit easier.The discussion also touches on the importance of testing the state machine logic for bugs using fuzzing techniques. While simplifying the state machine where possible is desirable, replacing parts with fresh code that would need similar testing may not necessarily decrease complexity.</summary>
+    <published>2021-04-28T02:16:30+00:00</published>
+  </entry>
+</feed>

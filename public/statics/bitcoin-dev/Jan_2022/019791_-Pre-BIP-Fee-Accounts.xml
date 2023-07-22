@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[Pre-BIP] Fee Accounts</title>
+  <updated>2023-06-15T03:58:14.457119+00:00</updated>
+  <author>
+    <name>Jeremy 2022-01-19 20:08:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[Pre-BIP] Fee Accounts</title>
+    <updated>2023-06-15T03:58:14.458120+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-January/019791.html" rel="alternate"/>
+    <summary>Jeremy Rubin has proposed a new account system in Bitcoin that aims to clean up fee-paying semantics in the cryptocurrency. The system defines a special output type, called a "fee account," which can be used for deposits and withdrawals. All deposits made to these outputs are stored in a separate UTXO database specifically for fee accounts. Fee accounts can sign only two types of transactions: a fee amount and a TXID or Outpoint, or a withdraw amount, a fee, and an address. These transactions are committed in an extension block merkle tree.In any given block, fee account deposits can be released into fees if there is a corresponding transaction. They can also be consolidated to reduce the number of UTXOs or released into fees and paid back to the requested withdrawal key, encumbered with a 100-block timeout. The state updates can always be applied in a conflict-free way, regardless of the order in which they occur.Rubin's proposal aims to enable protocol designs that are fully abstracted from paying fees, making it easier to write smart contracts with more complex fee requirements. Although accounts are typically considered bad, Rubin's design ensures that funds withdrawn from the fee extension are fundamentally locked for 100 blocks as a coinbase output, so there should be no issues with any series of reorgs.Rubin's proposal could likely be modified to implement something like Tornado.cash so that the fee account paying can be unlinked from the transaction being paid for, improving privacy at the cost of added expense. Other operations could be added to allow trustless mixing to be done by miners automatically where groups of accounts with similar values are trustlessly split into a common denominator and change, and keys are derived via cycles involving more than one transaction.In addition to Rubin's proposal, the email discusses the potential use of a verifiable stealth address-like protocol that would allow for fee balances to be traced. This could be achieved through updates posted by individuals rather than solely miners, with miners simply honoring these updates for better privacy. The Lightning Network can also be used in conjunction with PTLCs to allow for another individual to sponsor a transaction on your behalf, with reputation potentially being measured in a decentralized manner based on longevity and transactions paid for historically.This design is scalable as adding fees to a transaction does not require substantial amounts of new state. It is also well-suited for channels since the addition of fees does not require pre-planning or transaction flexibility. This type of design could potentially be implemented without a fork as a federated network that bribes miners, although this approach may introduce a centralizing layer interfering with normal mining.</summary>
+    <published>2022-01-19T20:08:23+00:00</published>
+  </entry>
+</feed>

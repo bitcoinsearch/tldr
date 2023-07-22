@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reward for P2SH IsStandard() patch.</title>
+  <updated>2023-06-06T19:56:01.418788+00:00</updated>
+  <author>
+    <name>John Dillon 2013-07-14 19:05:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reward for P2SH IsStandard() patch.</title>
+    <updated>2023-06-06T19:56:01.418788+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-July/002887.html" rel="alternate"/>
+    <summary>The author of the message is offering a reward of 1BTC to whomever creates a patch to change IsStandard() to accept only P2SH and pubkeyhash in a raw scriptSig, allowing other forms only when used with P2SH. The problem with IsStandard() code accepting up to 120 bytes of junk data as a pubkey, allowing injection of 240 bytes of spendable data into the UTXO set with bare OP_CHECKMULTISIG has to be stopped. The author also states that long-term P2SH with an inner OP_CHECKSIG should be used for most addresses as it's a 1-byte savings. The size of the UTXO set must be kept small which is critical, and there have been problems with distasteful data being added to the UTXO set. Gregory Maxwell has an excellent solution to the distasteful data problem in the form of P2SH, and Peter Todd pointed out how it can be implemented with the existing P2SH form. They are going to implement some kind of OP_RETURN soon which handles timestamping and similar use-cases without UTXO impact. Right now, the only scriptPubKey form with any significant use is the checksighash. Bare pubkey gets used by the odd miner and by Deepbit due to their ancient codebase. However, all that will soon change as hardware wallets and the payment protocol make hardware wallets worthwhile, and we should make sure these protocols take the extra step of using P2SH before we get locked into a bunch OP_CHECKMULTISIG implementations.OP_CHECKMULTISIG is used by Peter Todd's timestamper, but that can be changed to OP_RETURN without difficulty. Change addresses can have this done first, although bitcoinj support will help so that satoshidice and similar sites can pay to P2SH change. As for multisig's P2SH overhead for a 1-of-2 and 2-of-2 and 3-of-3, is 10%, 8.6%, and 6.2% respectively, all pretty minor, especially if you assume the blocksize limit will be raised.</summary>
+    <published>2013-07-14T19:05:26+00:00</published>
+  </entry>
+</feed>

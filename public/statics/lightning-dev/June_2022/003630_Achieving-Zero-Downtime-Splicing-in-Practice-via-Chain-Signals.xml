@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Achieving Zero Downtime Splicing in Practice via Chain Signals</title>
+  <updated>2023-06-03T09:09:33.788067+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-06-29 23:57:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Achieving Zero Downtime Splicing in Practice via Chain Signals</title>
+    <updated>2023-06-03T09:09:33.788067+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-June/003630.html" rel="alternate"/>
+    <summary>The email is discussing potential design choices for splicing transactions in the Lightning Network. The author acknowledges that the design space for spicing is large and suggests discussing isolated aspects of it at a time. They also mention that they are not up to date on the latest design drafts but note that communicating the splice to other peers has been an outstanding design question. Olaoluwa Osuntokun has proposed a delay between the time a channel is closed on chain and when it is removed from the local channel graph, to give the gossip message that indicates a splice is in process enough time to propagate through the network. However, this sort of arbitrary delay won't address the issue in practice because the proposal suffers from some issues. Laolu thinks we need to rely on the primary splicing signal being sourced from the chain itself. If someone sees a channel close, and a closing transaction "looks" a certain way, then they know it's a splice.This would be used in concert with any new gossip messages, as the chain signal is a 100% foolproof way of letting an aware peer know that a splice is actually happening (not a normal close). There are a few options for the chain signal: stuff something in the annex, re-use the anchors for this purpose, re-use the same multi-sig output, use OP_RETURN, or fiddle with the locktime+sequence somehow to make it identifiable to verifiers. All nodes on the network can realize that it is actually a splice, and they don't need to remove it from the channel graph yet.Rusty Russell thinks that waiting for reliable gossip is an over-design because if one fails to get reliable gossip, their routing will suffer anyway. Matt's proposal to simply defer treating on-chain closes is elegant and minimal. We could go further and relax requirements to detect on-chain closes at all and optionally add a perm close message. The author suggests that using anchors, which are already used for fee bumping after-the-fact for closing transactions, could be a sensible option. However, this would make the splicing transaction slightly larger.The email includes links to the relevant GitHub pull request and a Bitcoin-dev mailing list thread.</summary>
+    <published>2022-06-29T23:57:40+00:00</published>
+  </entry>
+</feed>

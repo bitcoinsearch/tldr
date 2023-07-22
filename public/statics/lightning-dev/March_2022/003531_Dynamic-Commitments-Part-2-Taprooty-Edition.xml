@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Dynamic Commitments Part 2: Taprooty Edition</title>
+  <updated>2023-05-23T17:31:46.244715+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2022-03-24 22:52:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Dynamic Commitments Part 2: Taprooty Edition</title>
+    <updated>2023-05-23T17:31:46.245715+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-March/003531.html" rel="alternate"/>
+    <summary>The Lightning Network is considering upgrading channel types and eliminating hard coded limits by using dynamic commitments. The idea of upgrading existing channels to anchor output commitment variant was suggested two years ago to create a more resilient internal routing network. With taproot now active on mainnet, the concept can be used to upgrade all 80k+ public channels to taproot without any on-chain transactions. The dynamic commitments concept involves an "adaptor commitment" that upgrades to future segwit witness versions, enabling peers to collaboratively create a new adapter commitment that spends the old v0 multi-sig output and produces a new v1 multi-sig output. However, to implement this concept, a concrete protocol is needed for dynamic commitment updates. Last year, a spec PR was made outlining a way to upgrade the commitment type upon channel re-establish, but it doesn't allow both sides to adjust parameters like the number of HTLCs allowed.An alternative approach inspired by the Raft consensus protocol has been proposed, allowing upgrading nearly all channel/commitment related values and involving sending a new config to the leader who synchronizes the config change with other members of the cluster. Laolu, a Lightning Network developer, has proposed a protocol for updating commitments on-the-fly in the Lightning Network. The proposal suggests introducing two new messages, `commitment_update_propose` and `commitment_update_apply`, to allow either party to propose a commitment/channel parameter update, but only the initiator can apply it. The proposal aims to introduce flexibility by allowing floating some inflexible parameters like the 483 HTLC limit, which would enable peers to apply similar congestion avoidance algorithms used in TCP today. The proposal also allows for the extension of the message structure to add other things like tweaking the total number of max HTLCs, min/max HTLCs, etc.Ultimately, this proposal will help in upgrading the commitment type upon channel re-establish and introduce more flexibility in the Lightning Network.</summary>
+    <published>2022-03-24T22:52:42+00:00</published>
+  </entry>
+</feed>

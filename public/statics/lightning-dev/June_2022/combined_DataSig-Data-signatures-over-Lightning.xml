@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - DataSig -- Data signatures over Lightning</title>
+  <updated>2023-06-04T03:45:49.862087+00:00</updated>
+  <author>
+    <name>George Tsagkarelis 2022-06-16 15:36:28</name>
+  </author>
+  <author>
+    <name>George Tsagkarelis 2022-06-17 10:18:34</name>
+  </author>
+  <author>
+    <name>John Carvalho 2022-06-17 07:19:44</name>
+  </author>
+  <author>
+    <name>Azz 2022-06-17 08:55:25</name>
+  </author>
+  <link href="lightning-dev/June_2022/003609_DataSig-Data-signatures-over-Lightning.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2022/003612_DataSig-Data-signatures-over-Lightning.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2022/003611_DataSig-Data-signatures-over-Lightning.xml" rel="alternate"/>
+  <link href="lightning-dev/June_2022/003613_DataSig-Data-signatures-over-Lightning.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - DataSig -- Data signatures over Lightning</title>
+    <updated>2023-06-04T03:45:49.862087+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-June/003609.html" rel="alternate"/>
+    <summary>The Lightning Network is being used by a few projects to transmit data over HTLC custom records. The proposed DataSig spec aims to describe a structure representing a signature over arbitrary data for assisting with data verification, allowing the receiver to validate that the data were authored by the source node and intended for the receiving node. The DataSig structure is placed inside a custom TLV record. On the other hand, for transmitting data exceeding the maximum allowed size over a single HTLC, the proposed DataStruct spec defines a structure that describes fragmented data allowing for transmission over separate HTLCs and assisting reassembly on the receiving end. The fragmentation structure allows out-of-order reception of fragments and uses a compact encoding mechanism with protobuf.John Carvalho argues against putting the whole internet &amp; web inside the Lightning Network. He claims that using LN for broad communication use cases ends up crippling both the use case and LN. Instead, he suggests using messaging nodes directly as it's more secure, private, and simple than using out-of-band hybrid solutions. However, a working proof of concept that utilizes DataSig and DataStruct over single path payments can be found at https://github.com/GeorgeTsagk/satoshi-read-write.Regarding DataSig, George Tsagkarelis describes the structure as being placed inside a custom TLV record and allowing the receiving end to validate that the data was authored by the source node and meant to be received by the receiving node. His post includes a detailed breakdown of the steps involved in generating and verifying a DataSig. Meanwhile, for transmitting data exceeding the maximum allowed size over a single HTLC, the sender should split the bytes of `D` into fragments of certain sizes and generate an identifier for this data transmission. For each fragment created, a `DataStruct` instance should be created containing information like version, payload, and fragment, among others. When receiving a fragment, the receiving node can execute certain steps to assemble the data, such as decoding the `DataStruct`, checking the `version` field, and retrieving the reconstruction buffer identified by `fragset_id`. There are no specific TLV keys defined for this spec regarding data fragment transmission, and it is the responsibility of the sender to properly coordinate simultaneous transmissions to a destination node by using different `fragset_id` values for each fragment set. Additionally, there is room for optimization, such as signing larger chunks of data instead of each transmitted fragment.The purpose of the proposed DataSig spec is to describe a structure representing a signature over arbitrary data for assisting with data verification. The DataSig structure is placed inside a custom TLV record and allows the receiver to validate that the data was authored by the source node and intended for the receiving node. For transmitting data exceeding the maximum allowed size over a single HTLC, the proposed DataStruct spec defines a structure that describes fragmented data allowing for transmission over separate HTLCs and assisting reassembly on the receiving end.</summary>
+    <published>2022-06-16T15:36:28+00:00</published>
+  </entry>
+</feed>

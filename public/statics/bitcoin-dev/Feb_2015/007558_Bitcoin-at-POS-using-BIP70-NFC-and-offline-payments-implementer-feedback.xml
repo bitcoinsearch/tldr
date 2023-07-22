@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Bitcoin at POS using BIP70, NFC and offline payments - implementer feedback</title>
+  <updated>2023-06-09T17:43:55.336714+00:00</updated>
+  <author>
+    <name>Andy Schroder 2015-02-22 22:37:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Bitcoin at POS using BIP70, NFC and offline payments - implementer feedback</title>
+    <updated>2023-06-09T17:43:55.336714+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-February/007558.html" rel="alternate"/>
+    <summary>Jan Vornberger is developing a Bitcoin point of sale terminal based on Raspberry Pi that displays QR codes and provides payment requests via NFC. He prefers using NFC interaction where the sender touches the payment option rather than receiving a payment request through the air. To use NFC with Bitcoin, most wallets support NDEF format and create a URI record containing a Bitcoin URI. Schildbach's wallet also supports the mime type record, which sets as 'application/bitcoin-paymentrequest', and the NFC data becomes a complete BIP70 payment request. Jan tested both scenarios of providing the complete BIP70 payment request or using an NFC URI record, but found the latter more reliable in his setup. The phone then fetches the BIP70 payment request via Bluetooth.Jan wants to discuss securing the Bluetooth connection as it is possible for an eavesdropper to monitor the transferred data. He suggests wrapping the current connection with SSL or running https over a Bluetooth socket. However, he does not prefer the Airbitz proposal as it may not be efficient and trouble-free day to day.Another contributor to Bitcoin development, Jan Møller, has proposed changes to the BIP70 payment request format, mainly changing the 'bt' parameter to 'r1' to number different sources for the payment request. This change requires listing additional 'payment_url's in the payment request, and Jan suggests adding a new field called 'additional_payment_urls.' He also proposes including an additional 'h' parameter, a hash of the BIP70 payment request, to prevent MITM attacks on the Bluetooth channel. Jan asks the Bitcoin development community for their preferences between changing 'optional string payment_url' to 'repeated string payment_url' or introducing a new field 'additional_payment_urls,' whether the r, r1, r2 mechanism is already implemented in Bitcoin Wallet, if there are other comments regarding the 'h' parameter, and any general feedback. Relevant resource links are included in the email.</summary>
+    <published>2015-02-22T22:37:16+00:00</published>
+  </entry>
+</feed>

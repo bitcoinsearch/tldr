@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - An initial replace-by-fee implementation is now available</title>
+  <updated>2023-06-06T16:40:40.997062+00:00</updated>
+  <author>
+    <name>Peter Todd 2013-05-09 12:20:05</name>
+  </author>
+  <author>
+    <name>Adam Back 2013-05-09 11:19:13</name>
+  </author>
+  <author>
+    <name>Adam Back 2013-05-09 11:19:13</name>
+  </author>
+  <author>
+    <name>Adam Back 2013-05-09 11:19:13</name>
+  </author>
+  <author>
+    <name>Adam Back 2013-05-09 12:07:23</name>
+  </author>
+  <author>
+    <name>John Dillon 2013-05-09 09:58:50</name>
+  </author>
+  <author>
+    <name>Peter Todd 2013-05-09 11:46:05</name>
+  </author>
+  <author>
+    <name>John Dillon 2013-05-09 09:58:50</name>
+  </author>
+  <author>
+    <name>Adam Back 2013-05-09 12:07:23</name>
+  </author>
+  <author>
+    <name>John Dillon 2013-05-09 09:58:50</name>
+  </author>
+  <author>
+    <name>Peter Todd 2013-05-09 11:46:05</name>
+  </author>
+  <author>
+    <name>Adam Back 2013-05-09 12:07:23</name>
+  </author>
+  <author>
+    <name>Peter Todd 2013-05-09 12:20:05</name>
+  </author>
+  <author>
+    <name>Peter Todd 2013-05-09 12:20:05</name>
+  </author>
+  <author>
+    <name>Peter Todd 2013-05-09 11:46:05</name>
+  </author>
+  <link href="bitcoin-dev/May_2013/002557_An-initial-replace-by-fee-implementation-is-now-available.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002554_An-initial-replace-by-fee-implementation-is-now-available.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002554_An-initial-replace-by-fee-implementation-is-now-available.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002554_An-initial-replace-by-fee-implementation-is-now-available.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002556_An-initial-replace-by-fee-implementation-is-now-available.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002552_An-initial-replace-by-fee-implementation-is-now-available.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002555_An-initial-replace-by-fee-implementation-is-now-available.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002552_An-initial-replace-by-fee-implementation-is-now-available.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002556_An-initial-replace-by-fee-implementation-is-now-available.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002552_An-initial-replace-by-fee-implementation-is-now-available.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002555_An-initial-replace-by-fee-implementation-is-now-available.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002556_An-initial-replace-by-fee-implementation-is-now-available.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002557_An-initial-replace-by-fee-implementation-is-now-available.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002557_An-initial-replace-by-fee-implementation-is-now-available.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2013/002555_An-initial-replace-by-fee-implementation-is-now-available.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - An initial replace-by-fee implementation is now available</title>
+    <updated>2023-06-06T16:40:40.997062+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-May/002557.html" rel="alternate"/>
+    <summary>Bitcoin developers Peter Todd and Adam Back have been discussing concerns about double-spends with different payee and change addresses. Todd believes that the current no replacement mechanism for Bitcoin is the best available, but he acknowledges the possibility of net-splits. Privacy management is also a concern, and Todd suggests that people who do not want to reveal their change address should put a big enough fee upfront based on a margin over prevailing fee statistics. The discussion also explores the idea of stopping both bids from being processed if they are too flexibly different.In response to a thread on BitcoinTalk, Todd explains that the patch makes the concept of a 0-confirm double-spend obsolete. The new model replaces the vague, insecure, easily broken, de-facto no-replacement rule with something easy to reason about. In this system, users bid for blockchain space and can adjust their bid after the fact. He argues that zero-conf double-spends are not that big of a problem because most payments have other mechanisms they can use instead of relying on the de-facto behavior of major miners and nodes.Todd and Back have released a replace-by-fee implementation on the testnet, which allows users to bid for blockchain space and adjust their bids after the fact. The implementation does not include an "undo" RPC command or adjust fees, and it is vulnerable to DoS attack, so users are discouraged from mining on the mainnet with it. Features will be added as they become available, but patches are welcome. The decision was made after consultation with affected sites and requests from vulnerable parties who wanted to remain undisclosed. In terms of rewards, Peter Todd will receive the full amount for the work done even though it is not 100% complete due to his concern about staging an implementation properly, working with vulnerable sites, and overall genuine interest in the issues at hand rather than the reward.The discussion on the Bitcoin forum involves concerns about a patch that replaces the current behavior of double-spending with a new model. Although some are worried that it could make double-spending easier, the patch makes it impossible by allowing users to bid for blockchain space and adjust their bids after the fact. The patch also allows for more use cases, such as combining transactions to save on blockchain space. There is a debate on whether accepting a fee revision should be valid only if every aspect of the revision except the reward remains unchanged or not.In an email conversation, Adam Back expresses his concerns about conflicting double-spends floating around with different payee and change addresses. The response suggests that the blockchain's purpose is to vote on a true transaction history to achieve consensus and eliminate inconsistencies. The current defacto no replacement is the best Bitcoin currently has; however, it weakens net-splits. Double-spend proof propagation is not available, so the net-split attack is entirely trivial. It is rare for sites to have protection against this, but blockchain.info's shared-send mixer is one of the few exceptions. Regarding privacy, people will inherently disclose which is the change address because they will decrease the change when they increase the fee. Todd proposes to move the mechanism into spec (specification) which can cause a weakening of the attack on 1-confirmation. Todd discusses privacy management, suggesting that putting a big enough fee upfront based on a margin over prevailing fee statistics protects against after-the-fact blockchain analysis. When everyone adds a safety margin, some people can afford to wait, so for them, starting at a low bid and raising it makes a lot of sense. Finally, the problem of stopping both bids from being processed is discussed, and the response asks to think about that problem a bit harder.Overall, the discussion suggests that the patch offers a better solution than the current behavior of double-spending and provides more flexibility for users. The debate involves various concerns, including privacy and net-splits, but there are suggestions on how to address these issues.</summary>
+    <published>2013-05-09T12:20:05+00:00</published>
+  </entry>
+</feed>

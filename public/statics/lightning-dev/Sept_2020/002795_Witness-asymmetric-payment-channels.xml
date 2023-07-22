@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Witness asymmetric payment channels</title>
+  <updated>2023-06-03T02:00:00.750334+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2020-09-10 03:56:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Witness asymmetric payment channels</title>
+    <updated>2023-06-03T02:00:00.751332+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-September/002795.html" rel="alternate"/>
+    <summary>The author proposes a solution to eliminate publication points in favor of "revocable signatures" for OP_CHECKMULTISIG. The proposal suggests replacing the publication point with a static key that remains the same with each commitment transaction. The encryption key for each commitment transaction adaptor signature is (Ra + A)  for Alice and (Rb + B) for Bob. The revocation key acts as a blinding factor for the static key in the same way a nonce blinds the secret key in a schnorr signature. This eliminates the need to store the other party's per-commitment publication point and enables O(1) storage when 2-of-2 multi-signatures are instantiated with or without key aggregation (i.e. MuSig or OP_CHECKMULTISIG).The proposed solution also allows efficient punishment if a party learns the secret key of the other. The balance output for Alice is  2-of-2(A , Rb + B), and the balance output for Bob is   2-of-2(Ra + A, B). If a revoked commitment transaction is broadcasted, the other party can take their output and the output of the broadcaster immediately. For MuSig, there is still O(n) storage if using key aggregation on the funding transaction output. However, the author suggests a natural way to revoke a key aggregated signature you helped produce without using adaptor signatures at all: just reveal the nonce you used for it to the other party. This prevents you from broadcasting it since the other party can now extract your secret key from it. The advantage of witness asymmetric channels using discrete keys over present lightning seems to boil down to a simpler transaction structure. However, for key aggregation, there is a measurable improvement in communication complexity as it halves the amount of interactive signatures that need to be computed per payment.</summary>
+    <published>2020-09-10T03:56:02+00:00</published>
+  </entry>
+</feed>

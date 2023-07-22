@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - How to create a pull tester JAR</title>
+  <updated>2023-06-09T01:53:07.276093+00:00</updated>
+  <author>
+    <name>Jeff Garzik 2014-08-05 15:45:35</name>
+  </author>
+  <author>
+    <name>Jorge Timón 2014-08-06 10:01:39</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-08-05 15:00:10</name>
+  </author>
+  <author>
+    <name>Andreas Schildbach 2014-08-05 16:11:39</name>
+  </author>
+  <author>
+    <name>Jorge Timón 2014-08-06 10:01:39</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-08-05 15:00:10</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-08-05 15:11:17</name>
+  </author>
+  <author>
+    <name>Andreas Schildbach 2014-08-05 16:11:39</name>
+  </author>
+  <author>
+    <name>Jeff Garzik 2014-08-05 15:45:35</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-08-05 16:58:31</name>
+  </author>
+  <author>
+    <name>Jeff Garzik 2014-08-05 15:45:35</name>
+  </author>
+  <author>
+    <name>Andreas Schildbach 2014-08-05 16:11:39</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-08-05 15:00:10</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-08-05 16:58:31</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-08-05 15:11:17</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-08-05 15:11:17</name>
+  </author>
+  <author>
+    <name>Mike Hearn 2014-08-05 16:58:31</name>
+  </author>
+  <author>
+    <name>Jorge Timón 2014-08-06 10:01:39</name>
+  </author>
+  <link href="bitcoin-dev/Aug_2014/006409_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006420_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006407_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006410_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006420_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006407_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006408_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006410_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006409_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006411_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006409_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006410_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006407_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006411_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006408_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006408_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006411_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Aug_2014/006420_How-to-create-a-pull-tester-JAR.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - How to create a pull tester JAR</title>
+    <updated>2023-06-09T01:53:07.276093+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-August/006409.html" rel="alternate"/>
+    <summary>The email thread discusses the recent change made to bitcoinj git master that simplifies creating a pull tester JAR. The instructions provided include the requirement of a Java Development Kit (JDK), version 6 or up, Apache Maven, and git. Once these requirements are met, one can clone bitcoinj from git master and build it using the command "mvn -DskipTests package". This will create a bundled executable JAR called core/target/pull-tests.jar that can be used with the QA scripts in the bitcoin core qa/pull-tester directory or run directly. To use the pull tester JAR file, users should use "./configure --disable-silent-rules --disable-ccache --with-comparison-tool=/path/to/your/BitcoindComparisonTool.jar" instead of the regular "./configure". "make check" will run most of the tests the pull tester does. The BitcoindComparisonTool entry point can be found on GitHub. However, the author warns that the library will soon be renamed from com.google.bitcoin to org.bitcoinj, and this link may break in the future. Matt is planning to refactor the code, so anyone who wants to add tests to the framework should coordinate with him first to avoid conflicts.On August 5th, 2014, Mike Hearn mentioned that the default package repository Maven uses was not protected by SSL until recently. While it is now available via SSL, users need to inform Maven about the new URL before running 'mvn'. In the future, Maven will release a new version where SSL is the default setting. For now, users can save the provided settings.xml file to their path ~/.m2/ in order to use SSL. Despite criticism of Maven's use of XML for configuration, these settings are necessary to ensure secure access to the central repository. The settings.xml file includes information on the two repositories, with one being the newly secured 'securecentral' and the other being 'central', which still uses the unsecured URL. To build with the JAR file, users should use "./configure --disable-silent-rules --disable-ccache --with-comparison-tool=/path/to/your/BitcoindComparisonTool.jar" instead of the regular "./configure". The BitcoindComparisonTool entry point can be found at https://github.com/bitcoinj/bitcoinj/blob/master/core/src/test/java/com/google/bitcoin/core/BitcoindComparisonTool.java. Using "make check" will run most of the tests that the pull tester does. It is worth noting that the library will soon have a new namespace from com.google.bitcoin to org.bitcoinj, which means that the link provided will break in the near future. Additionally, the code itself is an example of copy/paste coding and will soon be refactored by Matt. Therefore, anyone who wants to add tests to the framework should coordinate with Matt first to avoid conflicts with the forthcoming refactor/rewrite process.</summary>
+    <published>2014-08-05T15:45:35+00:00</published>
+  </entry>
+</feed>

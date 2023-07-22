@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Pruning in the reference client: ultraprune mode</title>
+  <updated>2023-05-19T03:55:01.747422+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2012-07-06 16:52:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Pruning in the reference client: ultraprune mode</title>
+    <updated>2023-05-19T03:55:01.747422+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-July/001645.html" rel="alternate"/>
+    <summary>A new block/transaction validation system known as "ultraprune" has been implemented for the reference client. Pruning is usually the ability to delete full transactions from storage once all their outputs are spent, and they are buried deeply enough in the chain. Instead of using a fully indexed blockchain with almost all operations that do not require full previous transactions but only their unspent outputs, it was deemed wasteful. Instead, a database with only the unspent transaction outputs was kept, requiring custom compact serializations, reducing the storage required for such a dataset to less than 70 MB. The stored data is kept in a BDB database file (coins.dat) with indexing and overhead, taking around 130 MB. However, this is not sufficient for a full node; non-indexed blocks with metadata about all stored blocks were added to compensate for things like block connections, wallet transactions, and serving the chain to other nodes. The next step would be pruning by deleting block files and undo information for old blocks.The ultraprune system allows one to run a full node now with coins.dat taking up 130 MB, chain.dat occupying 40 MB, and the size of retained blocks plus approximately 12% of that for undo information. It is also faster and was benchmarked on a laptop with a full import of the blockchain taking 22 minutes. The ultraprune branch can be found on GitHub for those who want to experiment with it.Although experimental, ultraprune has some disadvantages. Firstly, you cannot find a full transaction from its txid. Secondly, if you have transactions that depend on unconfirmed transactions, those will not get rebroadcasted. Thirdly, only block download and reorganization are somewhat tested, so use at your own risk. Finally, fewer consistency checks are possible on the database, and even fewer are implemented. Although not directly related to recent pruning proposals that use an alt chain with an index of unspent coins and addresses merged mined with the main chain, ultraprune could be a step towards such a system.</summary>
+    <published>2012-07-06T16:52:04+00:00</published>
+  </entry>
+</feed>

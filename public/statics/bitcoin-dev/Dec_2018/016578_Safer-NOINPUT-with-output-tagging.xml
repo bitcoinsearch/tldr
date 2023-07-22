@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer NOINPUT with output tagging</title>
+  <updated>2023-06-13T16:15:13.090475+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-12-21 11:40:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer NOINPUT with output tagging</title>
+    <updated>2023-06-13T16:15:13.090475+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-December/016578.html" rel="alternate"/>
+    <summary>The proposed solution to tag an output for it to be spendable with NOINPUT, and the “tag” must be made explicitly by the payer. However, it prevents the use of SIGHASH_NOINPUT to support walletless offchain protocols. The idea of "walletless offchain software" is motivated by the fact that various onchain wallets exist with many features such as privacy-enhancement. There are requests to include such features in Lightning software. Unfortunately, a typical onchain wallet cannot be used to set up a funding transaction for an offchain system. Therefore, the proposed solution is to take advantage of `SIGHASH_NOINPUT` and modify the offchain system setup so that an offchain system need not require its implementing software to implement its own wallet. This can be helpful when building overall software as it allows spending and receiving onchain and offchain. However, this idea has limitations. People will make wrong assumptions that address reuse is safe and will attempt to "refill" their channel by paying to the same address again in the future. Dual-funding, which for some reason is asked for as a feature, cannot be done with this anyway. Nevertheless, output tagging still seems fine, even if this particular use cannot be supported.</summary>
+    <published>2018-12-21T11:40:06+00:00</published>
+  </entry>
+</feed>

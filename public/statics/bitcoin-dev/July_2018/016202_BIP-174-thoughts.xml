@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 174 thoughts</title>
+  <updated>2023-05-20T17:08:10.833111+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2018-07-05 22:06:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 174 thoughts</title>
+    <updated>2023-05-20T17:08:10.833111+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-July/016202.html" rel="alternate"/>
+    <summary>The conversation revolves around the safety concerns of allowing combiners to arbitrarily choose a value. It is stated that conflicts in UTXOs, sighash type, redeem/witness scripts, derivation paths, etc. can cause recoverable or unrecoverable errors and sometimes indicate malicious activity. The safest option is to reject conflicts but allow intelligent processing by combiners if they understand the relevant fields. Two possible topologies for multiparty signing are explained where a PSBT T is turned into T1 and T2 by signers 1 and 2, respectively, then combined into T12 by a combiner in topology B. The only case where malicious conflicting values can occur is when one of the signers produces an invalid signature or modifies any of the other fields present in the PSBT. It is said that combiners can always be replaced with just a different topology of data flow. The worst that can happen is an invalid signature caused by intentionally or unintentionally created incorrect fields in a PSBT. Additional sanity checks for known fields can be implemented to catch such errors early. Rejecting invalid fields doesn't matter as an attacker can always drop the fields you don’t understand before giving you the PSBT. A suggestion is made to have fields with an explicit flag bit that says "Don't sign if you don't understand this," but it can be left for future extensions. A rule like "if the highest bit of the field type is set, don't sign" could be used, but there is no current field where such a flag would be necessary right now.</summary>
+    <published>2018-07-05T22:06:53+00:00</published>
+  </entry>
+</feed>

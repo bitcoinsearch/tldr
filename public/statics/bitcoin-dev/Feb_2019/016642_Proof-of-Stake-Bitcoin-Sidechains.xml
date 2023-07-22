@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Proof-of-Stake Bitcoin Sidechains</title>
+  <updated>2023-05-20T19:40:30.314448+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-02-01 09:19:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Proof-of-Stake Bitcoin Sidechains</title>
+    <updated>2023-05-20T19:40:30.314448+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-February/016642.html" rel="alternate"/>
+    <summary>The writer observes that there are limits to the number of operations in a script which can restrict the number of signatories for sidechain funds in the mainchain. They present a design for a proof-of-mainstake sidechain without any modifications to Bitcoin mainchain. They observe that a blockchain is nothing more than a Merklized singly-linked list where each block header commits to the previous block header and the block data. The sidechain "blockchain" under this system is the transaction chain. The writer proposes embedding the sidechain block headers on the mainchain by spending the previous transaction, which requires authorization from the sufficient signatory set of stakers. Two mainchain-to-sidechain requests have been defined: an indication that a mainchain coin owner wants to stake coins to the sidechain, and an indication that a mainchain coin owner wants to transfer coins to the sidechain. The sidechain-to-mainchain withdrawals are left up to the sidechain to define. The indication to stake is a UTXO with a special script that has two branches: a signature from the current signatory set or 2 OP_CSV and the staker's signature. A similar technique is used for mainchain-to-sidechain transfers. Ideally, every mainchain block would have a sidechain managing transaction. Some fraction of fees will be spent for the sidechain managing transaction to be confirmed on the mainchain. If the sidechain wishes to have a faster (or more regular) block rate than the mainchain, it may maintain a "real" blockchain, and each sidechain managing transaction would commit to the latest sidechain block header agreed upon by the stakers. These sidechain blocks need not be signed; they only become "real" if they are committed to, directly or indirectly, in a sidechain managing transaction. At each sidechain block, the signatory set (the stakers) create a sidechain managing transaction. If it is immediately put into a mainchain block, then the next sidechain managing transaction spends it. Otherwise, if it is not put into a mainchain block, then the stakers just recreate the sidechain managing transaction with RBF.</summary>
+    <published>2019-02-01T09:19:00+00:00</published>
+  </entry>
+</feed>

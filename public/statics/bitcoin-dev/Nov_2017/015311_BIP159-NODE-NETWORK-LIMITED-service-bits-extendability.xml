@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP159 - NODE_NETWORK_LIMITED service bits, extendability</title>
+  <updated>2023-06-12T22:18:49.462955+00:00</updated>
+  <author>
+    <name>Jonas Schnelli 2017-11-21 19:00:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP159 - NODE_NETWORK_LIMITED service bits, extendability</title>
+    <updated>2023-06-12T22:18:49.462955+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-November/015311.html" rel="alternate"/>
+    <summary>BIP159 is a Bitcoin Core implementation aimed at improving the block relay state around the tip (24h) and allowing pruned nodes to serve a limited number of historical blocks. The proposal initially included two service bits for signaling states, but it was narrowed down to a single 288blocks-available signaling as it was not clear what use-cases the bits signaling &gt;288 blocks would fulfill. Pruned peer operators may observe an increase in CPU and bandwidth usage once BIP159 gets active on the network. SPV peers may also connect to BIP159 nodes, scan the mempool, and wait for unconfirmed transactions. BIP159 recommends fixing the fingerprinting weakness by limiting it to 288 blocks, making it impossible for an attacker to fingerprint a peer by scanning how deep the peer can serve blocks. Future extensions of BIP159 are possible, and a p2p command that tells more information about the pruning state may be useful. However, the scope of BIP159 should be kept as it is, and flexibility can be added later during its deployment. The proposal's implementation has reached an advanced stage, with two pull requests available on GitHub.Sjors Provoost, in a mailing list discussion, proposed future extensions to allow more flexibility in serving archived blocks and limit the ability to fingerprint nodes. He suggested limiting the number of choices to e.g. 288 + 1000 * 2^n, yielding only eight possibilities at the current chain size. Upgraded nodes may need a new message type to communicate the chosen prune depth, or that information could tag along some existing message. Waiting for BIP150 would be appropriate, as whitelisted peers can be exempted from the anti-fingerprinting measure. However, restricting it to just whitelisted peers may not be desirable. Sjors also made minor suggestions to improve the BIP itself, such as adding a link to the mailing list discussion(s) in the reference section and explaining that 288 is not just the minimum limit for Bitcoin Core but also the bulk of traffic.</summary>
+    <published>2017-11-21T19:00:21+00:00</published>
+  </entry>
+</feed>

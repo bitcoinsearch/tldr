@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Ephemeral Anchors: Fixing V3 Package RBF againstpackage limit pinning</title>
+  <updated>2023-06-16T01:58:40.441188+00:00</updated>
+  <author>
+    <name>Jeremy Rubin 2022-10-18 16:41:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Ephemeral Anchors: Fixing V3 Package RBF againstpackage limit pinning</title>
+    <updated>2023-06-16T01:58:40.441188+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021041.html" rel="alternate"/>
+    <summary>The email thread discusses solutions to package limit pinning attacks on V3 transactions. The proposed solution is Ephemeral Anchors, which mark outputs that MUST be spent in a V3 package and are watermarked as bare script 'OP_TRUE.' The policy requires the parent transaction with such an output to be 0-fee. Any spending of other outputs in the same parent transaction MUST directly double-spend prior spends of the ephemeral anchor, removing the 1 block CSV timelock on outputs in these situations, and magnifying composability of smart contracts. Additionally, anyone can bump the transaction without any transaction key material, achieving Jeremy's Transaction Sponsors proposal without consensus changes. The proposed solution also benefits traditional wallet scenarios, as change outputs can no longer be pinned, and RBF/CPFP becomes robust. The only drawbacks are that they do not work for lower tx version contracts, and the requirement to sweep the output must be incentive compatible for the miner, or else they won't enforce it. The proposal is seen as a great start towards solving bip125 rule#3 and rule#5 pinning attacks under some constraints. However, there is still something to be desired as it doesn't solve the problem of lower tx version contracts. There is also an open question regarding whether allowing non-zero value in ephemeral outputs opens up a MEV issue.</summary>
+    <published>2022-10-18T16:41:19+00:00</published>
+  </entry>
+</feed>

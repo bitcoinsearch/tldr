@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Note on Sequence Lock Upgrades Defect</title>
+  <updated>2023-06-15T01:28:29.713101+00:00</updated>
+  <author>
+    <name>Antoine Riard 2021-09-09 00:02:45</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Note on Sequence Lock Upgrades Defect</title>
+    <updated>2023-06-15T01:28:29.713101+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019421.html" rel="alternate"/>
+    <summary>In a discussion thread on bitcoin-dev, a user named Jeremy has proposed patching a flaw in the Sequence lock implementation with respect to upgradability. The flaw is related to the fact that the current mempool policies signaling are not separated from consensus data, which can cause problems for L2 nodes and set of counterparties who want to update their mempool policies non-interactively. The user suggests introducing a new field to signal policy through p2p packages but notes that this could be vulnerable to tampering by malicious peers. The user also discusses the implications of taking back the `nSequence` field for consensus-semantic sounds and how it could deprive the application-layer from a discrete, zero-cost payload, while increasing the price of such applications if they're still willingly to relay application specific data through the p2p network. The user suggests distinguishing between different types of policy deployments: loosening changes, tightening changes, and new feature introductions. The user suggests that loosening changes do not require much ecosystem coordination, whereas flag day activations might make sense for tightening changes to create a higher level of commitment by the base layer software. However, the user warns against reversing the process and asking for Bitcoin applications/higher layers to update first as it could result in never making the change. Regarding the proposed policy change in #22871, the user suggests deploying full-rbf first, giving time for higher applications to free up the `nSequence` field, and then starting to discourage its usage. The user notes that introducing discouragement waivers would move away from the policy design principle of separating mempool policies signaling from consensus data.</summary>
+    <published>2021-09-09T00:02:45+00:00</published>
+  </entry>
+</feed>

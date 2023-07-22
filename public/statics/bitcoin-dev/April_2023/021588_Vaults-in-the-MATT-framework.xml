@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Vaults in the MATT framework</title>
+  <updated>2023-06-16T17:46:44.551160+00:00</updated>
+  <author>
+    <name>Salvatore Ingala 2023-04-24 19:37:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Vaults in the MATT framework</title>
+    <updated>2023-06-16T17:46:44.551160+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-April/021588.html" rel="alternate"/>
+    <summary>The MATT proposal for smart contracts in Bitcoin has two core opcodes that can be used to create vaults comparable to those built with OP_VAULT. These opcodes enhance Script with capabilities such as deciding the taptree of the output and embedding dynamically computed data in the output. However, further implementation is required since the opcodes only operate on scriptPubkey and not on the amounts.The first attempt at creating a vault using MATT's opcodes involved generalizing two key elements from OP_VAULT's semantics: forcing the script/amount of the next step and storing some data for future Script's access. A contract that represents a vault has alternate_pk, spend_delay, recover_pk, and unvault_pk needed to authorize the unvaulting process. The P2TR structure for [V] (vault) has two scripts - "trigger" and "recover". The "trigger" script requires in the witness an output index and the ctv-hash that describes the withdrawal transaction. That's followed by the unvaulting condition in this example, a simple signature check. The "recover" script doesn't require any signature and it simply forces the output specified in the witness to be a P2TR output with recover_pk as its pubkey. The P2TR structure for [U] (unvaulting state) has two scripts - "withdrawal" and "recover". The "withdrawal" finalizes the transaction, by checking that the timelock expired and the outputs satisfy the CTV hash that was committed to in the previous transaction.Salvatore Ingala, a Bitcoin developer, has shared his thoughts on the potential implementation of vaults in the cryptocurrency network. In his post on the Bitcoin-dev mailing list, he discussed the differences between the current version of OP_VAULT and his proposed improvements. He noted that the "recover" script remains unchanged.Ingala pointed out that unlike the current implementation based on OP_VAULT, the utxos do not have an option to add an additional output that is sent back to the same exact vault. This use case would require a more general way of handling the distribution of amounts than what has been discussed previously. To avoid the need to dynamically create taptrees and replace leaves in the covenant-encumbered UTXOs, Ingala suggests separating the ctv-hash (considered "data") from the scripts in the taptree. This means that the taptrees of [V] and [U] are already set when [V] utxos are created, and only the "data" portion of [U]'s scriptPubKey is dynamically computed. This makes it easier to program "state machines" that control the behavior of coins, including vaults.He concluded by sharing links to relevant documents for those interested in learning more about Bitcoin's vaults and inviting comments on his proposed changes.</summary>
+    <published>2023-04-24T19:37:20+00:00</published>
+  </entry>
+</feed>

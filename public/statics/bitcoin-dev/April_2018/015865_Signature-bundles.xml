@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Signature bundles</title>
+  <updated>2023-06-13T01:22:40.750804+00:00</updated>
+  <author>
+    <name>Rusty Russell 2018-04-03 05:31:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Signature bundles</title>
+    <updated>2023-06-13T01:22:40.750804+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-April/015865.html" rel="alternate"/>
+    <summary>Anthony Towns discusses a potential problem when combining bundles with different fees. He suggests putting a SIGHASH_ALL sig in the bundle that overpays to prevent miners from making their own tx of just the overpaying bundle. He proposes replacing SINGLE|ANYONECANPAY with an extra couple of witness bytes. Additionally, he suggests that BUNDLESTART is arguably redundant as it can be inferred if there's an INBUNDLE flag when not already in a bundle. In response, they discuss trying to guess future fees for commitment transactions and using parent-pays-for-child. However, the outputs they can spend are timelocked, so it cannot work with HTLC-Success/HTLC-Timeout transactions as they spend outputs from the commitment transaction and need to be pre-signed by the channel partner to ensure the output address is correct. They suggest adding a zero-value anyone-can-spend output to commitment transactions that can then be used with CPFP to bump the fees or having after-the-fact fee-bumping via special sighash flags at the block level.To implement this, they propose using an output script with a zero-amount output which is literally a push of txids and is itself unspendable. However, this would be non-witness data and pretty large. They suggest using 'OP_NOP4' instead and bundling those tx all together.</summary>
+    <published>2018-04-03T05:31:24+00:00</published>
+  </entry>
+</feed>

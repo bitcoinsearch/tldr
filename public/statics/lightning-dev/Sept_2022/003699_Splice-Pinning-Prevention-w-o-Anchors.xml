@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Splice Pinning Prevention w/o Anchors</title>
+  <updated>2023-06-03T09:42:16.420207+00:00</updated>
+  <author>
+    <name>Antoine Riard 2022-09-26 19:50:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Splice Pinning Prevention w/o Anchors</title>
+    <updated>2023-06-03T09:42:16.420207+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-September/003699.html" rel="alternate"/>
+    <summary>The issue of splice pinning in Lightning Network has been addressed by Dustin Dettmer and his team. Splice pinning can occur when there is a large "junk" transaction that spends from an important pending one. This causes transactions to be pushed to the bottom of the priority list without a practical way of bumping it up, leading to funds loss for HTLCs that have timed out for a pinned commitment transaction. An anchor output was introduced to mitigate the junk pinning vector, but splices are still susceptible to bulk and junk pinning attacks. To mitigate this, the team proposed several changes including modifying the v0 witness script to start with [OP_1, OP_CHECKSEQUENCEVERIFY] and verifying the presence of proposed inputs before adding them to the splicing transaction. However, the proposal requires reliable access to the UTXO set, which may be a significant constraint for LN mobile clients relying on lightweight validation backends.Moreover, every output included directly in a splice transaction MUST be a v0 P2SH witness script that begins with a minimum of 1 CSV relative timelock, making it impossible to CPFP a splice transaction. Instead, all splices must be RBF'd to be fee-bumped, using the interactive tx protocol that already provides a protocol for initiating an RBF. The team also suggests building fan-out transactions for arbitrary splice out funds, while new channel outpoints should have the v0 witness script modified to start with [OP_1, OP_CHECKSEQUENCEVERIFY]. The interactive tx protocol changes mandate that `tx_add_output` includes the `witness_script` in the tlv, which nodes must validate. Finally, the original commitment transaction's existing anchors may be used to increase fees on a force close, providing a usable anchor to prevent HTLC timeouts and splices.</summary>
+    <published>2022-09-26T19:50:57+00:00</published>
+  </entry>
+</feed>

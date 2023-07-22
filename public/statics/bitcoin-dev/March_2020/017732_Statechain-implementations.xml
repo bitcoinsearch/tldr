@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Statechain implementations</title>
+  <updated>2023-06-14T00:20:56.085734+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-03-28 02:20:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Statechain implementations</title>
+    <updated>2023-06-14T00:20:56.085734+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-March/017732.html" rel="alternate"/>
+    <summary>In this email thread, ZmnSCPxj discusses the issue of a kickoff transaction that ruins the stages and proposes a solution to refresh the UTXO by agreeing with the statechain entity to spend it to a new statechain 2-of-2 UTXO on-chain. He suggests that it should be more costly to CPFP the kickoff tx than it is to refresh the UTXO so that the defender is at an advantage. ZmnSCPxj also proposes another solution where the first stage never drops to 0 relative locktime, and if somebody broadcasts the kickoff, the current owner can ask the statechain entity to sign an alternative to the first stage, with 0 relative locktime, that can now be a new funding transaction to anchor a (actually new, but logically a continuation) statechain.Ruben suggests that it might be worth adopting the late fee binding they have in eltoo. However, ZmnSCPxj points out that altering the txid causes the settlement tx to become invalid and proposes a secondary output that can be spent by anyone, which can be used to fee bump the kickoff tx with CPFP. He mentions that using an `OP_TRUE` `redeemScript` would allow any third party to make you cry by opportunistically spending such an output and suggests giving each participant its own attach-your-fees output that only that participant can spend, which works for Lightning because the set of participants in a channel is permanently fixed, but probably not for statechains.ZmnSCPxj concludes by saying that the broadcasting of the kickoff simply means that the first stage cannot be easily changed, and you might still be able to make further updates by updating only the later stages, until the last stage is confirmable, so the kickoff being broadcast simply creates a "dead man walking" statechain. However, the implementation complexity would probably increase tremendously.</summary>
+    <published>2020-03-28T02:20:33+00:00</published>
+  </entry>
+</feed>

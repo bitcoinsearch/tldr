@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Using a storage engine without UTXO-index</title>
+  <updated>2023-06-11T23:55:08.400882+00:00</updated>
+  <author>
+    <name>Eric Voskuil 2017-04-07 19:55:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Using a storage engine without UTXO-index</title>
+    <updated>2023-06-11T23:55:08.400882+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/014075.html" rel="alternate"/>
+    <summary>In a discussion on optimizing input validation for Bitcoin, Bram Cohen via bitcoin-dev suggested that maximizing memory usage and minimizing disk access would be the optimal approach given that hard drive access is not parallel and memory access is very fast. However, this overlooks other considerations such as startup time, warm-up time, shutdown time, fault tolerance, block validation, chain validation, RAM consumption, disk consumption, query response, server vs desktop use, mining vs wallet use, and SSD vs HDD. Even in the case of input validation alone, there are many factors to consider.Ideally, one wants a simple implementation that is optimal across all considerations, but this may be unrealistic. Instead, it is possible to create a simple implementation that allows for trade-offs to be managed through configuration by the user or implementation. Shoving the entire blockchain data set into RAM is not feasible due to limited RAM, and the operating system will eventually need to page data back to disk. Creating separate data structures for disk and memory increases complexity and denies the platform visibility into the trade-off between "disk" and "memory".An on-disk structure that is not mapped into memory by the application allows the operating system to maintain an optimal amount of state in memory, depending on the other tasks the user has given it. Memory-mapped files enable everything from zero to full store to be memory resident. Optimization for lower memory platforms involves reducing the need for paging, which can be achieved through a cache. A cache of about 10k transactions worth of outputs is optimal for 8GB RAM, requiring just a few blocks for warm-up that can be primed at startup. Fault tolerance can be managed by flushing after all writes, which also reduces shutdown time to zero. For higher performance systems, flushing can be disabled entirely, increasing write performance but also increasing shutdown time. The same model works well with both HDD and SSD, although the latter performs better overall.</summary>
+    <published>2017-04-07T19:55:58+00:00</published>
+  </entry>
+</feed>

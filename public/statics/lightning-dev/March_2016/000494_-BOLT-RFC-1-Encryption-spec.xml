@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>[BOLT RFC#1] Encryption spec</title>
+  <updated>2023-05-18T16:46:10.073551+00:00</updated>
+  <author>
+    <name>Anthony Towns 2016-03-18 06:03:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>[BOLT RFC#1] Encryption spec</title>
+    <updated>2023-05-18T16:46:10.073551+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-March/000494.html" rel="alternate"/>
+    <summary>In an email conversation, Rusty Russell explains the derivation of shared secret and encryption keys. Upon receiving the initial handshake, a node can derive the shared secret using the received sessionpubkey point and its own sessionsecretkey scalar using EC Diffie-Hellman. However, he suggests that sessionsecretkey is calculated per libsecp256k1 (used in bitcoin protocol) rather than NIST specification which just uses the x coordinate of the point directly, ignoring y and not necessarily hashing it. He has added wording for this in a GitHub pull request. While multiple choices are possible for public-key cryptography, reusing the secp256k1 elliptic curve used in the bitcoin protocol avoids additional dependencies. However, if secp256k1 breaks and gets deprecated, it would be a backward incompatible change. To handle this, the protocol could increment the high byte of "length" in the first message and old clients would see that as an invalid length, &gt;16M, and refuse the connection. New clients could just treat it as a version byte.</summary>
+    <published>2016-03-18T06:03:17+00:00</published>
+  </entry>
+</feed>

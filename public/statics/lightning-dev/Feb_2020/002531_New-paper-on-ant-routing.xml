@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New paper on ant routing</title>
+  <updated>2023-06-02T23:35:07.161928+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-02-12 22:50:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New paper on ant routing</title>
+    <updated>2023-06-02T23:35:07.162931+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-February/002531.html" rel="alternate"/>
+    <summary>The discussion revolves around the Ant Routing proposal for Lightning Network. The proposal aims to obfuscate the counter to avoid giving information to immediate neighbors about the origin or end of the transaction in a highly connected network. The assumption is made that the network has thousands of nodes and node connection larger than ten, where triangulation is not feasible. However, there may be sections of the network that are more "plane"-like than the assumed infinite number of dimensions, meaning a limited number of nodes can be used to usefully triangulate. The proposal solves the problem of payment failures during the pheromone phase by forwarding the pheromone to a neighbor only if the channel balance allows the amount of the transaction to go through. However, the possibility of an intermediate node failing after propagating a pheromone but before it could be routed through must also be considered. Additionally, if the payer has only one channel, intermediate nodes need to store other pheromones with higher distance counters as well. It is important to consider the assumption that "the payee must be online to receive" which should be upgraded to "the payee is *contactable by the payer* to receive". This is because the payee may be online but not contactable due to various reasons such as being on an onion service. Any routing proposal that requires continuous communication between payer and payee makes this unreasonable assumption. Finally, the proposal suggests using just a one-byte distance counter, assuming that the network graph cannot have a diameter greater than 127 hops. With wraparound, a less than operation based on subtraction modulo 256 can be implemented to determine which of two distance counters is lesser or greater.</summary>
+    <published>2020-02-12T22:50:58+00:00</published>
+  </entry>
+</feed>

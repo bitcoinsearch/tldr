@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - statoshi.info is now live</title>
+  <updated>2023-06-08T22:33:48.029670+00:00</updated>
+  <author>
+    <name>Wladimir 2014-05-13 11:43:14</name>
+  </author>
+  <author>
+    <name>Wladimir 2014-05-13 11:43:14</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2014-05-14 13:10:52</name>
+  </author>
+  <author>
+    <name>Wladimir 2014-05-13 11:43:14</name>
+  </author>
+  <author>
+    <name>Jameson Lopp 2014-05-14 11:38:48</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2014-05-14 13:10:52</name>
+  </author>
+  <author>
+    <name>Pieter Wuille 2014-05-14 13:10:52</name>
+  </author>
+  <author>
+    <name>Jameson Lopp 2014-05-11 17:14:18</name>
+  </author>
+  <author>
+    <name>Josh Lehan 2014-05-13 17:48:19</name>
+  </author>
+  <author>
+    <name>Jameson Lopp 2014-05-14 11:38:48</name>
+  </author>
+  <author>
+    <name>Jameson Lopp 2014-05-11 17:14:18</name>
+  </author>
+  <author>
+    <name>Josh Lehan 2014-05-13 17:48:19</name>
+  </author>
+  <author>
+    <name>Jameson Lopp 2014-05-11 17:14:18</name>
+  </author>
+  <author>
+    <name>Josh Lehan 2014-05-13 17:48:19</name>
+  </author>
+  <author>
+    <name>Jameson Lopp 2014-05-14 11:38:48</name>
+  </author>
+  <link href="bitcoin-dev/May_2014/005768_statoshi-info-is-now-live.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005768_statoshi-info-is-now-live.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005772_statoshi-info-is-now-live.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005768_statoshi-info-is-now-live.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005771_statoshi-info-is-now-live.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005772_statoshi-info-is-now-live.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005772_statoshi-info-is-now-live.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005746_statoshi-info-is-now-live.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005769_statoshi-info-is-now-live.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005771_statoshi-info-is-now-live.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005746_statoshi-info-is-now-live.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005769_statoshi-info-is-now-live.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005746_statoshi-info-is-now-live.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005769_statoshi-info-is-now-live.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2014/005771_statoshi-info-is-now-live.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - statoshi.info is now live</title>
+    <updated>2023-06-08T22:33:48.029670+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-May/005768.html" rel="alternate"/>
+    <summary>Jameson Lopp created a public Statoshi instance with a better interface than an integrated stats/monitoring feature. Wladimir, while appreciating the graphs in the 'connected peers' chart, suggested adding some random stats such as the number of connected peers that are SPV clients or full nodes (NODE_NETWORK), current block height, the number of transactions in mempool and UTXO set, fee statistics, number of orphan blocks/orphan transactions. Josh Lehan brainstormed the idea of adding the ping time from one node to other peers, however, fitting it into the current design would be a challenge since the graphs seem to be comprised of overall statistics for this node and not per-peer statistics that can vary between peers. There is currently no support for overlapping pings, and something would have to send the "ping" RPC command regularly to ensure the graph is updated with new information. A post made by Jameson Lopp on coinchomp.com notes a lack of pong messages. He adds that tracking per-peer pings is a different type of metric than what he's currently collecting. He says that adding metrics for sent messages validated his theory: his node has never sent a single ping request to a peer and thus has never received a pong message. He also says that he can't even add sent pings or received pongs to the chart because they don't exist in his graphite instance. Josh Lehan, in an email to Jameson Lopp, suggests adding the ping time from one node to other peers. However, he says that it would be a challenge to fit that information into the current design as the graphs seem to be comprised of overall statistics for this node, not per-peer statistics that can vary between peers (such as ping time). He suggests sending the "ping" RPC command on a regular schedule to ensure the graph is updated with new information. In an email conversation between Jameson Lopp and Wladimir, they discussed the difficulties of shipping an integrated stats/monitoring feature in the short term. As a solution, Jameson created a public Statoshi instance with a nicer interface. Wladimir provided feedback on the graphs, suggesting that visualizing smaller quantities made them invisible due to scale. He also suggested adding random stats such as the number of connected peers that are SPV clients or full nodes, current block height to detect stuck nodes, number of transactions in mempool and UTXO set, fee statistics, and number of orphan blocks/orphan transactions.This all stems from Jameson Lopp setting up a public Statoshi instance and throwing a nicer interface on top of it. Jameson has set up a public Statoshi instance and added a nicer interface on top of it since it seems unlikely that an integrated stats/monitoring feature will be shipped in the short term. The public Statoshi instance can be accessed at http://statoshi.info, while the raw Graphite stats can be viewed at http://statoshi.info:8080/. Jameson also invites those with metrics that they think would be helpful for development or monitoring purposes to let him know so he can add them.</summary>
+    <published>2014-05-13T11:43:14+00:00</published>
+  </entry>
+</feed>

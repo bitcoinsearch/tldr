@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Onion messages rate-limiting</title>
+  <updated>2023-06-03T09:17:21.075937+00:00</updated>
+  <author>
+    <name>Antoine Riard 2022-07-05 19:58:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Onion messages rate-limiting</title>
+    <updated>2023-06-03T09:17:21.075937+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-July/003660.html" rel="alternate"/>
+    <summary>During the recent Oakland Dev Summit, engineers discussed DoS protection for onion messages in Lightning Network. Rusty proposed a rate-limiting scheme that statistically propagates back to the correct sender. Nodes apply per-peer rate limits on incoming onion messages that should be relayed and allow more onion messages from peers with whom they have channels. When relaying an onion message, nodes keep track of where it came from using the node_id of the peer who sent that message. Nodes only need the last such node_id per outgoing connection, which ensures the memory footprint is very small. If an incoming onion message reaches the rate limit, the receiver sends onion_message_drop to the sender. The sender looks at its per-connection state to find where the message was coming from and relays onion_message_drop to the last sender, halving their rate limits with that peer. The shared_secret_hash field contains a BIP 340 tagged hash of the Sphinx shared secret of the rate limiting peer. This value is known by the node that created the onion message: if onion_message_drop propagates all the way back to them, it lets them know which part of the route is congested, allowing them to retry through a different path.While establishing the rate limiting based on channel topology can be effective to mitigate DoS attackers, there is still a concern that the damage inflicted might be beyond the channel cost. If HTLC traffic is substitutable, the attacker could extract income from the DoS attack, compensating for the channel cost. Such targeted onion bandwidth attacks would be fairly sophisticated so it might not be a concern for the short-term, but it might need some proportion between onion bandwidth units across the network and the cost of opening channels in the future.There is also a concern that we might have "spontaneous" bandwidth DoS in the future, if the onion traffic is leveraged beyond offers for discovery of LSP liquidity services. For confidentiality reasons, a LN node might not use the Noise connections to learn about such services. The LN node might be also interested to do real market-discovery by fetching the services rates from all the LSP, while engaging with only one, therefore provoking a spike in onion bandwidth consumed across the network without symmetric HTLC traffic. This concern is hypothetical as that class of traffic might end up announced in gossip.Backpressure based rate limiting is good to bootstrap as a naive DoS protection for onion messages though it may not be robust enough in the long-term. It is an interesting research problem to find formulas for those probabilities to evaluate how efficient this will be against various types of spam.</summary>
+    <published>2022-07-05T19:58:59+00:00</published>
+  </entry>
+</feed>

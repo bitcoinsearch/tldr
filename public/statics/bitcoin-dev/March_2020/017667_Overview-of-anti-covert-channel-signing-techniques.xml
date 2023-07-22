@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Overview of anti-covert-channel signing techniques</title>
+  <updated>2023-05-20T21:50:59.726892+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2020-03-03 21:35:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Overview of anti-covert-channel signing techniques</title>
+    <updated>2023-05-20T21:50:59.726892+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-March/017667.html" rel="alternate"/>
+    <summary>This article discusses various anti-covert channel signing schemes and their trade-offs. The author provides an overview of the techniques used, credit goes to various authors who provided the schemes. The focus is on two distinct attack models: MSW (malicious software wallet) and MHW (malicious hardware wallet). The author assumes Schnorr-like signature protocol.Scheme 1 is a simple protocol where HW computes a deterministic nonce value k=H(d,m), R=kG, s=k+H(R,Q,m)d, and sends (R,s) to SW which verifies it. However, this scheme is vulnerable to an attack under MHW where the entire private key can be leaked undetectably using a single signature.To prevent predictable k values and avoid covert channels, SW needs to provide entropy that is included in the nonce computation. Scheme 2 turns R into a binding commitment to R0 and t, using pay-to-contract or sign-to-contract methods. In this scheme, SW generates random t, and requests a signature by sending (Q,m,t) to HW, then HW computes k0=H(d,m,t), R0=k0G, R=R0+H(R0,t)G, s=k+H(R,Q,m)d, and sends (R0,R,s) to SW, which verifies sG=R+H(R,Q,m)Q, R=R0+tG.Another approach to avoid covert channels is Scheme 3, which involves only revealing t after HW has revealed their R0. In this scheme, SW generates random t and sends (Q,m) to HW. HW computes k0=H(d,m,t), R0=k0G, and sends R0 to SW. Then SW sends t to HW, and HW computes R=R0+tG, s=k+H(R,Q,m)d, and sends (R,s) to SW which verifies sG=R+H(R,Q,m)Q.The article discusses six issues related to the Schnorr signature scheme. These include predictable k, replay attacks, k0 grinding, statefulness, failure bias, and side-channel attacks. The article notes that any reasonable solution should protect against (a), (b), and (c). However, no solution is optimal for all of (d), (e), and (f).Scheme 6 appears to be the best solution if statelessness and protection against failure bias are prioritized. Schemes 4 and 5 with synthetic nonces seem best if resistance against side-channels is prioritized. Additionally, Scheme 2 could be used, but in that case, protection against k0 grinding is reduced to spot checking, and randomness would need to be added for side-channel resistance.Another issue to consider when implementing Schnorr signatures with deterministic nonces is failure bias. Schemes 2, 4, and 5 protect against predictable k values and replay attacks, but if an error occurs during signature generation, it may result in a bias towards certain values of k. This is known as failure bias. To address this issue, the libsecp256k1 library uses a technique called "adaptor signatures" which involves generating two signatures instead of one, and using them to cancel out the bias. This technique also allows for off-chain communication between parties to further enhance security.The article provides several references for further reading on the topic. It emphasizes that while hardware wallets can be hacked, this is not necessarily a significant concern.</summary>
+    <published>2020-03-03T21:35:55+00:00</published>
+  </entry>
+</feed>

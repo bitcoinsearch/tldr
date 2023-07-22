@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>PTLCs early draft specification</title>
+  <updated>2023-06-03T06:44:04.677913+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2021-12-07 13:11:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>PTLCs early draft specification</title>
+    <updated>2023-06-03T06:44:04.677913+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003381.html" rel="alternate"/>
+    <summary>In a discussion between t-bast and ZmnSCPxj, it was agreed that PTLC adaptor signatures should be included in the `commitment_signed` message rather than `update_add_ptlc`. However, it was noted that whenever the commitment changes, peers need to create new signatures and adaptor signatures for all pending PTLCs. This includes new pre-signed transactions that spend a PTLC from the remote commitment, which may require an additional round-trip. In a simple example where one pending PTLC exists in each direction, the party making unrelated updates cannot immediately send their `commitment_signed` to the other party, as this would invalidate their ability to claim the PTLC from the other party's new commitment. Instead, the other party must first send a new message (`remote_ptlcs_signed`) containing their adaptor signatures for the PTLC-remote-success transactions that would spend their future commitment. Only then can the first party safely send their `commitment_signed`. This adds one message in each direction but doesn't add more data to existing messages. ZmnSCPxj also noted that fast-forwards could avoid this issue by delaying the change of the commitment tx. Overall, this protocol change simplifies the process and improves efficiency.</summary>
+    <published>2021-12-07T13:11:00+00:00</published>
+  </entry>
+</feed>

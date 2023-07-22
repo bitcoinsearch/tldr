@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proof-of-closure as griefing attack mitigation</title>
+  <updated>2023-06-03T00:20:06.038883+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2020-04-13 02:50:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proof-of-closure as griefing attack mitigation</title>
+    <updated>2023-06-03T00:20:06.038883+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002628.html" rel="alternate"/>
+    <summary>The Lightning Network is a protocol that enables off-chain transactions between Bitcoin nodes. However, it is not without its security risks, such as the possibility of a node failing to fulfill its commitment. One solution to this issue is the use of proof-of-closure, which allows a node to provide evidence that it has fulfilled its obligations.Proof-of-closure proposes a softer timeout that protects intermediate nodes against payer/payee collusions without imposing strict evaluation behavior on non-malicious payments. In Lightning Network, there are two types of timeouts for each invoice - a block-based `final_cltv` and a sidereal-time-based `final_timeout` in units of 0.1 seconds. The former is enforceable on-chain, while the latter is not. If the hard timeout is approached, the channel is dropped on-chain to reclaim funds in the HTLCs. For violation of soft timeout, the channel is dropped on-chain and reported upstream.There are two types of payment channels in the Lightning Network: Decker-Wattenhofer and Decker-Russell-Osuntokun. With Decker-Russell-Osuntokun, a ritual is required to remove the risk of collusion between nodes. This ritual involves C requesting exclusive access to update their shared state, providing the details of the new HTLC to E, generating a new state transaction, exchanging signatures for it, generating (without signing) the new update transaction, and providing the signature for the new update transaction to E.A potential issue with proof-of-closure is that an attacking node could create a false proof-of-closure. However, the overhead of simulating a Lightning channel is the same as actually creating and closing a Lightning channel. The sketch of proof-of-closure can be used for any update mechanism.To address privacy concerns, payment points will be used instead of HTLCs in the future. Additionally, payment decorrelation will be added, which involves changing the payment point at each hop to prevent decorrelation. C will need to provide proofs that an apparent singlesig on the unilateral close output is a PTLC and that the PTLC belongs to the same payment attempt as what B offered to C. When B needs to propagate the proof-of-closure back to A, B simply adds its own blinding factor to the reported blinding factor to convince A that this is the same payment attempt.</summary>
+    <published>2020-04-13T02:50:57+00:00</published>
+  </entry>
+</feed>

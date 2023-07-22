@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Just in Time Routing (JIT-Routing) and a channel rebalancing heuristic as an add on for improved routing success in BOLT 1.0</title>
+  <updated>2023-06-03T21:40:37.743248+00:00</updated>
+  <author>
+    <name>René Pickhardt 2019-03-14 22:18:26</name>
+  </author>
+  <author>
+    <name>René Pickhardt 2019-03-05 13:47:18</name>
+  </author>
+  <link href="lightning-dev/March_2019/001910_Just-in-Time-Routing-JIT-Routing-and-a-channel-rebalancing-heuristic-as-an-add-on-for-improved-routing-success-in-BOLT-1-0.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2019/001891_Just-in-Time-Routing-JIT-Routing-and-a-channel-rebalancing-heuristic-as-an-add-on-for-improved-routing-success-in-BOLT-1-0.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Just in Time Routing (JIT-Routing) and a channel rebalancing heuristic as an add on for improved routing success in BOLT 1.0</title>
+    <updated>2023-06-03T21:40:37.743248+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-March/001910.html" rel="alternate"/>
+    <summary>The Lightning Network is considering introducing Just-In-Time (JIT) routing as an alternative to the current source-based routing. JIT Routing would reduce payment failures and increase privacy, but it may not be economically incentivized for a routing node in every situation. Additionally, while doing JIT routing, capacity for channels should be reserved before HTLCs are set up to prevent hostile recursive chains of rebalancing operations. Base AMP is suggested to be put into BOLT 1.1 to help resolve the challenge of routing single big payments. Smaller payments have a higher chance to be routed successfully, but the downside is that there will be more payments, increasing the likelihood of payment failure.Rene Pickhardt responds to concerns raised by ZmnSCPxj and Ariel Lorenzo-Luaces regarding his proposal for JIT Routing. ZmnSCPxj suggested introducing a 'success_rate' for JIT routing, but Rene advises against including it in the protocol. He believes that rebalancing should only take place when liquidity is actually needed, and it is up to the node to decide whether or not to engage in the JIT-rebalancing operation. The protocol should not make economical decisions for the node. Regarding Ariel's concern about a spoofed-payment attack, Rene suggests reusing the payment hash with JIT Routing, which could mitigate probing-based network analysis and reduce payment failures. However, he notes some technical challenges that would need to be addressed, such as the possibility of a deadlock problem when using the same payment hash for JIT routing.To fix this, Rene proposes a MUST-rule to create a new channel state with a new offer from the node if it offers an HTLC to a partner from whom it already received an HTLC of smaller value. Rene also suggests setting either the base-AMP feature flag or creating a new one for JIT-routing, which would signal that more HTLCs are coming, needing to be combined to forward an onion. Alternatively, nodes could do a local base-AMP to the next recipient instead of forwarding the onion. Despite these challenges, Rene believes that reusing the payment hash is desirable, especially if they can prove that it is not a problem and address the technical challenges described in the email.In a message to the Lightning-dev mailing list, ZmnSCPxj proposed a rule for determining when rebalancing would be beneficial to a node. The rule involves comparing the fee offered for forwarding (`offered_fee_amount`) with the estimated probability of success after forwarding (`success_rate`) and the cost of rebalancing (`rebalancing_fee_amount`). If `offered_fee_amount * success_rate - rebalancing_fee_amount &gt; 0`, then it is profitable to engage in JIT-routing. The success rate can be computed statically from node data, but it is better for the node to augment this information over time with its own experienced success rates for all forwards. The email also includes information on how to compute the fee amounts and provides links to the Lightning-dev mailing list for further discussion.</summary>
+    <published>2019-03-14T22:18:26+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Using Full-RBF to fix BIP-125 Rule #3 Pinning with nLockTime</title>
+  <updated>2023-06-16T02:57:03.554772+00:00</updated>
+  <author>
+    <name>Peter Todd 2022-11-09 12:41:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Using Full-RBF to fix BIP-125 Rule #3 Pinning with nLockTime</title>
+    <updated>2023-06-16T02:57:03.554772+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021193.html" rel="alternate"/>
+    <summary>The email thread discusses a proposed solution to address Rule #3 pinning by pre-signing a transaction with nLockTime set far into the future and spending one or more inputs of the transaction with a high enough fee to replace transactions attempting to exploit the rule. However, there are open questions regarding determining the high fee needed to guarantee replacements with high odds. The sat/vb is an unknown fact at the time of signature exchange among participants, so solving this issue may require overshooting and adopting a historical worst-case mempool feerate. However, this introduces economic lower bounds on the funds that can be staked in the collaborative transaction and constitutes a griefing vector where a participant could deliberately pin to inflict asymmetric damage without entering into any fee competition. A better approach may be for participants to unilaterally spend after a protocol/implementation timepoint to save the time value of their contributed UTXOs over operation success. A proposed more workable solution is to rely on package-relay, an ephemeral anchor output, and a special replacement regime (e.g., nVersion=3) to allow the multi-party funded transaction coordinator to unilateral fee-bump, step-by-step, without making assumptions on the knowledge of network mempools and burning directly the worst amount in fees. Additionally, if considering miner harvesting attacks as part of the threat model, it's unclear if the v3 rules that depend on miners arbitrarily rejecting transactions from their mempools are sufficiently incentive compatible to work.</summary>
+    <published>2022-11-09T12:41:30+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Quick analysis of channel_update data</title>
+  <updated>2023-06-02T16:51:05.433667+00:00</updated>
+  <author>
+    <name>Rusty Russell 2019-01-08 23:38:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Quick analysis of channel_update data</title>
+    <updated>2023-06-02T16:51:05.433667+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-January/001816.html" rel="alternate"/>
+    <summary>The article discusses a scenario where a node in a network receives updates from another node through multiple paths. If a channel of the sender node A is flapping, and it sends out two updates - one disables and the other re-enables the channel, both of which are identical except for timestamps and signature - before the flush interval of the intermediate node B, then both updates get dropped and nothing gets changed. However, if the flush interval of C triggers after receiving the re-enable update, D gets the disabling update followed by the enabling update once C's flush interval triggers again. In such an event, gossip from B to D is saved, but not C to D. In general, there won't be any coalescing of the DOWN/UP combo if it spans gossip flush. To suppress flap, the gossip timer should be set to 90 +/- 30 seconds instead of the standard 60 seconds. If the connection between A-C gets severed between the updates, C and D would learn that the channel is disabled but wouldn't receive the re-enabling update because B has already dropped it. In this case, B needs to remember the last timestamp of the update it discarded and ignore ones prior. To reduce the number of flapping updates, local policies at the senders of the update should be used, rather than building in-network deduplications. The article suggests "eager-disable" and "lazy-enable," where disables are sent right away, and enables are put on an exponential backoff timeout. The routing protocol should also be less chatty. Finally, the article argues that lazy-disable is the current best practice since it assumes that the channel is still advertised as available, while eager-enable is used only when a disable message has been sent.</summary>
+    <published>2019-01-08T23:38:12+00:00</published>
+  </entry>
+</feed>

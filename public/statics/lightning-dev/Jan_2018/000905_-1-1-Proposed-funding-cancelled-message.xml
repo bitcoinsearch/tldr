@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[1.1] Proposed `funding_cancelled` message</title>
+  <updated>2023-05-24T18:23:44.761625+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-01-08 03:26:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[1.1] Proposed `funding_cancelled` message</title>
+    <updated>2023-05-24T18:23:44.762622+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-January/000905.html" rel="alternate"/>
+    <summary>ZmnSCPxj, a contributor to the Lightning Network's RFC repository, has proposed a new message called `funding_cancelled` in a pull request. The proposed message is intended to inform the fundee node that the funder node is certain that the channel funding transaction can never confirm. The objective behind including this message is to allow replace-by-fee funding transactions and multi-channel funding transactions. Implementing the `funding_cancelled` message should not be onerous as it triggers the code that forgets the channel after a timeout if the channel funding transaction times out or if the message is received. If the funder wishes to replace an RBF funding transaction, they re-initiate the opening protocol from `open_channel` -&gt; `acccept_channel` -&gt; `funding_created` -&gt; `funding_signed`, then broadcast the replacement funding transaction. Once one of the transactions is confirmed deeply enough, the funder cancels the other funding transaction via `funding_cancelled`. The message also allows multi-channel funding transactions. The funder initiates the opening protocol to each node separately and must not broadcast the funding transaction until all fundees reply `funding_signed`. If some fundees complete the protocol up to `funding_signed` but some do not, the funder cannot safely broadcast the funding transaction at all. The funder node can then send `funding_cancelled` to each fundee that completed up to `funding_signed` to free resources of those nodes.While the message may be unnecessary if funding timeout is implemented by the fundee node, it lets the funder node free up resources on the fundee node. Though implementing RBF funding transactions and multi-channel funding transactions is more involved than implementing `funding_cancelled`.</summary>
+    <published>2018-01-08T03:26:23+00:00</published>
+  </entry>
+</feed>

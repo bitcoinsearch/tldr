@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Bitcoin Secure Multisig Setup</title>
+  <updated>2023-06-14T17:25:53.650086+00:00</updated>
+  <author>
+    <name>Christopher Allen 2021-02-11 22:29:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Bitcoin Secure Multisig Setup</title>
+    <updated>2023-06-14T17:25:53.650086+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018404.html" rel="alternate"/>
+    <summary>The key issue here is avoiding xpub key reuse in multisig, not only in the future with Schnorr, but today as well. The current common practice by hardware wallets is the 48'/0'/0'/2' derivation for segwit multsig. This is the only one used for all multisigs offered by that hardware wallet. A HD path parameter could help, but a better, less reusable path for the index is needed. One suggestion is to create an index using a PBKDF of the Account Policy (a descriptor with all xpubs and keys removed), plus optional notes. A PBKDF of that would be unique for all 2 of 3 segwit transactions. With the addition of the Policy Map creators' optional note, it would be truly unique. For legacy hardware, the existing 48' subtree can be used, but 3' as the format for this form (2' is segwit). The desktop can just ask for the /48'/0'/0'/3'/PBKDF' when it requests a new xpub from the hardware token. More sophisticated Airgapped apps can send "wsh(sortedmulti(1,,,))"+label and let the cosigner app do the PBKDF, and optionally allow it return something different in a full keyset. The other advantage of this technique is that the cosigner app can know what policy it is participating in before the descriptor is completed. Long-term, a commitment scheme should be used so that you don't reveal what xpub you offered until all the parties' xpubs are shared, but as Pieter said, we can do that at the same time we do the musig. But we need to prevent xpub reuse NOW, and the proposal is easy and could do the job. Christopher Allen, Blockchain Commons suggests a simpler solution which would be easy to implement.</summary>
+    <published>2021-02-11T22:29:46+00:00</published>
+  </entry>
+</feed>

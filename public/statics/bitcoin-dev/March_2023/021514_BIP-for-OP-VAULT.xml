@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP for OP_VAULT</title>
+  <updated>2023-06-16T15:34:08.075732+00:00</updated>
+  <author>
+    <name>Anthony Towns 2023-03-02 04:46:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP for OP_VAULT</title>
+    <updated>2023-06-16T15:34:08.075732+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-March/021514.html" rel="alternate"/>
+    <summary>A proposal has been made to replace two opcodes. The new opcode, OP_TRIGGER_FORWARD, takes three arguments: output index to match against, target-outputs-hash and spend-delay. This can be generalised to idx .. npush script OP_FORWARD_LEAF_UPDATE (OP_FLU) with the behaviour being pop script from the stack, pop npush from the stack. A derived tapscript is embedded in a output scriptpubkey of the form tr(NUMS,{...,EXPR_WITHDRAW}). If the output scriptpubkey doesn't match, it fails. An existing OP_VAULT cleverness could work here, allowing for two inputs to the same output, accumulating their values. However, there is no way to refund values without having a doubled delay. A solution to this would be an additional "idx OP_FORWARD_REFUND" opcode, which has the same sPK as this input, and the total value of this input is accumulated amongst all the outputs specified by OP_FORWARD opcodes. There would be three new opcodes to cover the "accumulate value from one or more inputs into specified outputs": OP_FORWARD_LEAF_UPDATE, OP_FORWARD_DESTINATION and OP_FORWARD_REFUND, along with OP_CTV. Doing TLUV payment pools wouldn't require much more than the ability to combine OP_FLU and OP_FDEST in a single script, explicitly specifying how much value is extracted via OP_FDEST with the rest assigned to OP_FLU.</summary>
+    <published>2023-03-02T04:46:25+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Revocations and Watchtowers</title>
+  <updated>2023-06-03T22:32:00.639927+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-09-19 06:43:22</name>
+  </author>
+  <author>
+    <name>Christian Decker 2019-09-19 10:14:34</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2019-09-19 14:54:56</name>
+  </author>
+  <link href="lightning-dev/Sept_2019/002156_Revocations-and-Watchtowers.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2019/002158_Revocations-and-Watchtowers.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2019/002160_Revocations-and-Watchtowers.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Revocations and Watchtowers</title>
+    <updated>2023-06-03T22:32:00.640928+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-September/002156.html" rel="alternate"/>
+    <summary>The email thread discusses the storage advantages of using SIGHASH_NOINPUT in lightning, which allows one to keep state around in just one transaction. Rusty created shachain to store O(n) transactions in O(1) space and O(log n) time to extract in case of breach. However, watchtowers still need to store O(n) transactions they receive for a channel to protect against "poisoned blob" attacks. Even Decker-Russell-Osuntokun watchtowers either need to identify their clients or store all encrypted blobs related to a channel. ZmnSCPxj suggests establishing an authenticated session with a watchtower by signing all encrypted updates using a session key, and the watchtower only replacing updates that match the session. Multiple sessions with a single watchtower would still reveal all activity on a channel. Spreading across multiple watchtowers assumes other watchtowers are not sybils of an existing watchtower. ZmnSCPxj proposes adding the channel outpoint to the update in plaintext so that the watchtower can prune states for closed channels. However, this would mean revealing funding outpoints for unpublished channels to the watchtower, resulting in significant privacy loss. Before, ZmnSCPxj proposed continuing to use encrypted-blob watchtowers and triggering them on sighash[:16], rather than txid[:16], which would allow watchtowers to rebuild the entire sequence of updates in case of a breach, but only in case of a breach.In a conversation between Christian and ZmnSCPxj, they discuss the storage requirements for nodes and watchtowers in relation to state data. They mention that even with shachain, the storage requirements are not constant due to the need to keep information around to react to old states, including anything built on top of them. When it comes to eltoo, reusing the same watchtower protocol designed for LN-penalty is likely too simplistic. Privacy is less important for most users than convenience and low price, so a privacy-conscious person might run one or more private watchtowers for their nodes and distribute them physically as much as possible. Nonetheless, the watchtowers created should have as little practical information to reveal as possible. These proposals could effectively reduce the storage space for watchtowers in eltoo to O(1). The main advantage of Decker-Russell-Osuntokun is the possibility of having multiparticipant offchain updateable cryptocurrency systems.</summary>
+    <published>2019-09-19T06:43:22+00:00</published>
+  </entry>
+</feed>

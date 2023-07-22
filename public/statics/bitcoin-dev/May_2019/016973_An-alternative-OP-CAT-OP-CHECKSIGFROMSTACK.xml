@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>An alternative: OP_CAT &amp; OP_CHECKSIGFROMSTACK</title>
+  <updated>2023-06-13T19:00:02.475942+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2019-05-24 23:07:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>An alternative: OP_CAT &amp; OP_CHECKSIGFROMSTACK</title>
+    <updated>2023-06-13T19:00:02.475942+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-May/016973.html" rel="alternate"/>
+    <summary>The writer suggests four amendments to OP_COSHV, with the first being the replacement of peeking at surrounding data with a pushdata-like opcode that uses subsequent 32 bytes directly. The second suggestion is that the number-of-input-verification and outputhash-verification operations ought to be split into different opcodes as they are logically unrelated. The third idea is to implement transaction reflection operations of OP_PUSHOUTPUTHASH and OP_NUMINPUTS instead of recursive covenants, which appear to be effectively impossible without either an OP_TWEEKPUBKEY or an OP_PUSHSCRIPTPUBKEY.If OP_CHECKSIGFROMSTACKVERIFY is anticipated to be added, the writer suggests preferring the third option over OP_COSHV. Alternatively, abandoning the RISC-style Bitcoin Script and instead adding an alternative CISC-style taproot leaf type that directly provides the various popular common policies such as channel opening, coinjoins, hashlocks, timelocks, congestion control, etc., could be considered.In response to Jeremy's query about the exact byte cost for OP_CHECKSIGFROMSTACK, the writer notes that OP_COSHV scripts, with templating changes to taproot, can be a single byte. They also point out that OP_COSHV uses less per-block bandwidth, making it preferable for a measure intended to decongest blocks. Additionally, OP_COSHV has less potential to have a negative interaction with future opcodes like OP_PUBKEYTWEAK.The writer concludes by suggesting that if the main complaint about OP_COSHV is that it peeks at surrounding data, it's possible to implement it more closely to a multi-byte pushdata opcode or do the template optimization. Lastly, OP_LEFT is probably safer to implement than OP_CAT and should be more efficient for OP_CHECKSIGFROMSTACK scripts.</summary>
+    <published>2019-05-24T23:07:28+00:00</published>
+  </entry>
+</feed>

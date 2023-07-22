@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_RETURN inside TapScript</title>
+  <updated>2023-06-15T17:15:26.835436+00:00</updated>
+  <author>
+    <name>Kostas Karasavvas 2022-03-21 11:00:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_RETURN inside TapScript</title>
+    <updated>2023-06-15T17:15:26.835436+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020154.html" rel="alternate"/>
+    <summary>In a Bitcoin-dev discussion, a user named vjudeu proposed that since Taproot activation, separate OP_RETURN outputs are no longer needed to be pushed on-chain. Instead, "OP_RETURN" can be created as a branch in the TapScript to attach any data to a transaction. However, another user named Kostas pointed out that vjudeu's assumption that such data is only useful to the transaction maker is wrong. In reality, no one publishes the actual data with an OP_RETURN; they publish the hash (typically merkle root) of that data, meaning that the overhead is just 32 bytes for arbitrarily large datasets. Kostas further explained that using this method, the hash of the data becomes visible to anyone who can verify it without active participation of the hash publisher. Vjudeu argued that committing to data has a lot of use cases, such as NameCoin, which could be implemented on such OP_RETURNs. By placing some hidden commitment and revealing it later, there would be no need to produce any new coins out of thin air, as everything would be merge-mined by default, providing Bitcoin-level Proof of Work protection all the time. Vjudeu also noted that since Taproot, it is possible to spend using TapScript and reveal some public key and tapbranches, making it possible to push more than 80 bytes. This begs the question of whether direct OP_RETURN is needed, except for backward-compatibility, such as in Segwit commitments. However, there is only one problem with spending by TapScript when it comes to publishing data: only the first item is the public key. If public keys could be used instead of tapbranch hashes, unspendable public keys could be used to push data, making OP_RETURN obsolete. Overall, the discussion focused on the different use-cases for OP_RETURN and how it can be used effectively in different scenarios.</summary>
+    <published>2022-03-21T11:00:38+00:00</published>
+  </entry>
+</feed>

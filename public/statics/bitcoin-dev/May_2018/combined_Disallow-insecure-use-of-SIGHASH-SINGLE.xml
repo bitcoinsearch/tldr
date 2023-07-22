@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Disallow insecure use of SIGHASH_SINGLE</title>
+  <updated>2023-06-13T03:12:55.105271+00:00</updated>
+  <author>
+    <name>Chris Stewart 2018-06-06 00:17:52</name>
+  </author>
+  <author>
+    <name>Peter Todd 2018-06-06 00:49:01</name>
+  </author>
+  <author>
+    <name>Johnson Lau 2018-05-31 18:53:01</name>
+  </author>
+  <author>
+    <name>Johnson Lau 2018-05-31 18:53:01</name>
+  </author>
+  <author>
+    <name>Peter Todd 2018-06-06 00:49:01</name>
+  </author>
+  <author>
+    <name>Chris Stewart 2018-06-06 00:17:52</name>
+  </author>
+  <author>
+    <name>Peter Todd 2018-06-06 00:43:26</name>
+  </author>
+  <author>
+    <name>Chris Stewart 2018-06-06 00:17:52</name>
+  </author>
+  <author>
+    <name>Peter Todd 2018-06-06 00:49:01</name>
+  </author>
+  <author>
+    <name>Peter Todd 2018-06-06 00:43:26</name>
+  </author>
+  <author>
+    <name>Peter Todd 2018-06-06 00:43:26</name>
+  </author>
+  <author>
+    <name>Johnson Lau 2018-05-31 18:53:01</name>
+  </author>
+  <link href="bitcoin-dev/June_2018/016078_Disallow-insecure-use-of-SIGHASH-SINGLE.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2018/016080_Disallow-insecure-use-of-SIGHASH-SINGLE.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2018/016048_Disallow-insecure-use-of-SIGHASH-SINGLE.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2018/016048_Disallow-insecure-use-of-SIGHASH-SINGLE.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2018/016080_Disallow-insecure-use-of-SIGHASH-SINGLE.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2018/016078_Disallow-insecure-use-of-SIGHASH-SINGLE.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2018/016079_Disallow-insecure-use-of-SIGHASH-SINGLE.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2018/016078_Disallow-insecure-use-of-SIGHASH-SINGLE.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2018/016080_Disallow-insecure-use-of-SIGHASH-SINGLE.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2018/016079_Disallow-insecure-use-of-SIGHASH-SINGLE.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2018/016079_Disallow-insecure-use-of-SIGHASH-SINGLE.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2018/016048_Disallow-insecure-use-of-SIGHASH-SINGLE.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Disallow insecure use of SIGHASH_SINGLE</title>
+    <updated>2023-06-13T03:12:55.105271+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-June/016078.html" rel="alternate"/>
+    <summary>A new policy has been proposed to prevent the usage of SIGHASH_SINGLE without matched output. The signature of this form is considered insecure as it commits to no output while users might think it commits to one. This becomes even worse in non-segwit scripts, which results in any UTXO of the same key being stolen. While it's restricted to only one UTXO in segwit, it's still like a SIGHASH_NONE. This is one of the earliest unintended consensus behaviors and is inherently unsafe. To disable this unintended "feature" with a softfork, these signatures need to be made non-standard. A pull request has already been made to add this policy to Bitcoin's Github repository. As these signatures are currently allowed, making them non-standard is the first step towards disabling them.In a discussion on the bitcoin-dev mailing list, Chris Stewart enquired about the possibility of expanding to SIGHASH_NONE. He was curious if there is a current use case for SIGHASH_NONE that would suffer from it being non-standard. Peter Todd replied that SIGHASH_NONE is important because it's the only way that multisig signers can relinquish the need for them to sign without giving up the private key. He also mentioned that the SIGHASH_SINGLE bug can be used in similar ways too.One developer has proposed a change in the Bitcoin core code that would disallow using SIGHASH_SINGLE without matched output, as it is an insecure signature form that commits to no output while users might think it commits to one. This makes it easier for UTXO of the same key to be stolen in non-segwit scripts. The developer suggests that this unintended consensus behavior should be disabled with a softfork since these signatures are inherently unsafe. However, another developer questions the need for a softfork on security grounds and proposes that it may be better to consider soft-forking the code out on the basis of code complexity instead. He also wonders if the non-standardness of the signature means it is secure.Johnson Lau has made a pull request to add a new policy to disallow using SIGHASH_SINGLE without matched output, as it is insecure and could lead to theft of any UTXO of the same key in non-segwit scripts. This unintended consensus behavior is one of the earliest ones and these signatures are inherently unsafe, so Johnson believes it does no harm to disable this feature with a softfork. However, since these signatures are currently allowed, the first step is to make them non-standard.</summary>
+    <published>2018-06-06T00:17:52+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Splice Lock Race Condition Solution</title>
+  <updated>2023-06-03T12:31:58.780513+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2023-04-06 15:49:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Splice Lock Race Condition Solution</title>
+    <updated>2023-06-03T12:31:58.780513+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-April/003904.html" rel="alternate"/>
+    <summary>In a Lightning-dev mailing list, Dustin Dettmer shared his discovery of a race condition that could occur during the 'splice_locked' workflow, which must be addressed correctly. The issue arises if any channel activity occurs between the sending and receiving of 'splice_locked'. This means that sometimes after sending 'splice_locked', you may receive some 'commit_sig' messages that are for commitments that you no longer care about. However, this is only an edge case that implementations need to handle correctly, not a protocol issue. Dustin provided a solution that requires the temporary storing of two items: the last_short_channel_id (the pre-splice short channel id) and splice_await_commitment_succcess (a boolean flag). After sending and receiving 'splice_locked', the last_short_channel_id should be set to the pre-splice short channel id, and splice_await_commitment_success should be flagged as true. If an 'announcement_signatures' message is received with an scid matching last_short_channel_id, the message should be ignored, and the channel connection should not be aborted. If a 'commitment_signed' message is received with the tlv splice_info-&gt;splice_channel_id set to something other than the successfully confirmed splice channel_id, the message should be ignored. Once revoke_and_ack is successfully sent or received, last_short_channel_id and splice_await_commitment_success should be reset, and normal validation of 'announcement_signatures' and 'commitment_signed' should be resumed. Dustin concluded that his solution solves the race condition while preserving as strict a validation of messages as possible and removes the need to add new fields to these messages.</summary>
+    <published>2023-04-06T15:49:46+00:00</published>
+  </entry>
+</feed>

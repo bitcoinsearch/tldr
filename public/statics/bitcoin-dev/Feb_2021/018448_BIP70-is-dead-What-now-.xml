@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP70 is dead. What now?</title>
+  <updated>2023-06-14T18:18:33.637975+00:00</updated>
+  <author>
+    <name>Andrew Kozlik 2021-02-19 13:34:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP70 is dead. What now?</title>
+    <updated>2023-06-14T18:18:33.637975+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018448.html" rel="alternate"/>
+    <summary>Andrew, a developer at Trezor, has created an experimental implementation of a new payment request format in Trezor T that is similar to BIP-70 but without reliance on X.509. The main feature of the new format is protection against man-in-the-middle attacks. It can also be used to solve a problem with coin exchange where users want to ensure they have the correct BTC address and that the exchange service has their correct LTC address. The new format uses an optional nonce for replay protection. The interesting parts of the implementation are the `TxAckPaymentRequest` protobuf message and the signature verification. The protobuf message is only intended for communication between Trezor and the host software running on the user's computer and is not intended for interchange between wallets. Andrew intends to create a SLIP documenting all this. On another note, Charles Hill has developed a URL signing scheme for use with LNURL as a method for authorizing payments on behalf of offline devices/applications. The scheme requires the generation of an API key to be shared between a server and an offline device/application before generating a signature. The query string is built using the `id`, `nonce`, `tag`, "Server parameters", and any custom parameters, which should be URL encoded. The payload is sorted by key (alphabetically) and then signed using HMAC-SHA256, where the API key secret is the key. The signature is then appended to the payload. Thomas Voegtlin, the founder of Electrum, posted on the bitcoin-dev mailing list asking if anyone is working on a standard for signed requests for on-chain payments. He mentioned that he finds payment requests signed by exchanges useful as proof that the exchange asked him to send coins to the address provided. If such a feature was implemented by an exchange, it would guide his decision to use that exchange over its competitors.</summary>
+    <published>2021-02-19T13:34:16+00:00</published>
+  </entry>
+</feed>

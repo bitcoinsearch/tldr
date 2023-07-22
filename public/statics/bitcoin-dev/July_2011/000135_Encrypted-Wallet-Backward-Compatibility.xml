@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Encrypted Wallet Backward Compatibility</title>
+  <updated>2023-05-18T16:25:44.859898+00:00</updated>
+  <author>
+    <name>Matt Corallo 2011-07-05 01:10:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Encrypted Wallet Backward Compatibility</title>
+    <updated>2023-05-18T16:25:44.859898+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-July/000135.html" rel="alternate"/>
+    <summary>Matt Corallo wants to release version 0.3.24 as soon as possible so that any solution to the problem can be in as many hands as possible and network issues can be resolved. To make it happen, he asks for agreement on either of two pull requests: https://github.com/bitcoin/bitcoin/pull/378 or https://github.com/bitcoin/bitcoin/pull/381. He prefers https://github.com/bitcoin/bitcoin/pull/378 because it is simpler, but he is open to either one. According to him, the users don't have to keep track of what features they have or have not used in a wallet, instead, just write and let the keys take care of themselves.Gavin Andresen mentions an issue where an attacker packs the key pool with key pairs that they know about. If they can read/write wallet.dat, then they can delete encrypted keypool keys and insert a bunch of unencrypted keypool keys that they know how to spend, and rely on the user to click "OK" because users are trained to just click "OK". Matt Corallo replies that it is not entirely true because if the keys are loaded but not added to mapAddressBook or setKeyPool, they won't be used for any new transactions or shown to the user, but the user is still able to receive Bitcoins to those keys.Regarding breaking backup scripts, Gavin Andresen says that if they use the backupwallet RPC command, then they will Just Work. However, Matt Corallo disagrees because most backupwallet-based scripts will backup wallet.dat, encrypt wallet.dat, upload wallet.dat. Now it backs up wallet.dat, and the encrypt part fails because there is no wallet.dat, only wallet_e.dat. If they rename to wallet.dat on output, now the user's restore might not work. Gavin Andresen suggests creating a wallet_e.dat (encrypted wallet) on wallet encryption, then truncating wallet.dat and setting its file-permissions to 000, so if old versions of bitcoin OR any dumb wallet backup scripts try to read it they fail. However, Matt Corallo doesn't like the idea of renaming wallet.dat because everything knows the filename and is used to it.Regarding future-proofing, Gavin Andresen suggests adding a nMinVersion that specifies "you must be at least THIS version to read this file" seems like a good idea so if you have version 0.4 or later future wallet upgrades give you a reasonable message if you try to downgrade after an incompatible change. Matt Corallo agrees and thinks that the older version should freak out if it sees keys that it doesn't know about (as it could also indicate wallet corruption in some rare cases), but nMinVersion works just as well. In any case, this should only very rarely be a problem.</summary>
+    <published>2011-07-05T01:10:39+00:00</published>
+  </entry>
+</feed>

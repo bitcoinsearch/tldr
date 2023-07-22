@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Add support for proxying p2p connections to/from LND</title>
+  <updated>2023-06-03T09:45:45.469854+00:00</updated>
+  <author>
+    <name>Pierre 2022-09-03 13:04:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Add support for proxying p2p connections to/from LND</title>
+    <updated>2023-06-03T09:45:45.469854+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-September/003684.html" rel="alternate"/>
+    <summary>At NYDIG, Alex Akselrod and Joost talked about hardening large LND deployments. They discussed that currently, when external untrusted peers make inbound connections, LND must verify the identity of the peer during the noise handshake before enforcing any potential key-based allow lists. To reduce the attack area of the main node process, they proposed a means to optionally separate the peer communication into a separate process: something like CLN's connectd, running separately, and the connections would be multiplexed over a single network connection initiated from the node to the proxy. The core of their current idea is demonstrated in a draft PR. Pierre from ACINQ replied to this proposal saying this is quite similar to eclair's cluster mode. He added that their rationale was as much reducing the attack surface as improving scalability. Their implementation includes several specific points like there can be N instances of proxy and their number can be adjusted without downtime, preprocessing for gossip, outgoing connections initiated by the proxy, and a separate key hierarchy for channel management. They have also considered a "lockdown mode" where the front would only allow incoming connections from known peers that already have a channel. If the setup has a separate db server (e.g. postgres), and logs are properly rotated/streamed out, then the resources that typically run out when scaling up should be really under control on the main node.</summary>
+    <published>2022-09-03T13:04:22+00:00</published>
+  </entry>
+</feed>

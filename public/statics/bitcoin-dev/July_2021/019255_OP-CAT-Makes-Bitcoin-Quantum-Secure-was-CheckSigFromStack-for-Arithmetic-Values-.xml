@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_CAT Makes Bitcoin Quantum Secure [was CheckSigFromStack for Arithmetic Values]</title>
+  <updated>2023-06-15T00:15:37.082143+00:00</updated>
+  <author>
+    <name>Ethan Heilman 2021-07-09 23:25:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_CAT Makes Bitcoin Quantum Secure [was CheckSigFromStack for Arithmetic Values]</title>
+    <updated>2023-06-15T00:15:37.082143+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-July/019255.html" rel="alternate"/>
+    <summary>The implementation of Winternitz requires a limited-repeat construct that is not available in SCRIPT; it may, however, be emulated using `OP_IF` and brute force. However, the gain in smaller signatures would result in a more complex and longer SCRIPT, and there are limits to SCRIPT size. Using depth 4 Winternitz would increase the number of instructions in SCRIPT by 4*(signature bits/2) instructions, but decrease the signature size by (signature bits/2) hash preimages. Merkle signatures trade off shorter pubkeys for longer signatures, but in the modern post-SegWit Bitcoin context both pubkeys and signatures are stored in the witness area, which have the same weight, thus it is actually a loss compared to Lamport. To sign longer messages, a pattern-based mechanism can be used where if particular chunks of the message fit a pattern, a seed higher in the commitment tree can be released. This would bloat the SCRIPT and decrease signature size but at a favorable ratio. Although such mechanisms are fun to think about, they should not necessarily be implemented. Jeremy Rubin proposed using OP_CAT or a similar operation to make Bitcoin "quantum safe" by signing an EC signature. This scheme uses Lamport signatures, which are quantum secure, but unfortunately, it requires at least 20 contiguous bytes to work. To implement Winternitz, one needs some kind of limited-repeat construct, which is not available in SCRIPT, but may be emulatable with enough `OP_IF` and sheer brute force. The commitment scheme (`Q = pG + hash(pG || m)G`) in Taproot can be securely opened to m even with a quantum computer. Additionally, Schnorr has a stronger non-malleability property than ECDSA, and once Lamport signed in Schnorr, even a quantum computer could not steal the funds.</summary>
+    <published>2021-07-09T23:25:06+00:00</published>
+  </entry>
+</feed>

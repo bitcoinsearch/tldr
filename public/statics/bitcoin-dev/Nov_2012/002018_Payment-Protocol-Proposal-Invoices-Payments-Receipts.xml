@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Payment Protocol Proposal: Invoices/Payments/Receipts</title>
+  <updated>2023-06-06T08:33:33.837678+00:00</updated>
+  <author>
+    <name>Roy Badami 2012-11-28 23:36:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Payment Protocol Proposal: Invoices/Payments/Receipts</title>
+    <updated>2023-06-06T08:33:33.837678+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-November/002018.html" rel="alternate"/>
+    <summary>The context explains the scenario where a payment transaction fails due to the non-receipt of payment receipt by the Bitcoin client. If Payment.transactions has not been broadcasted by the merchant on the Bitcoin P2P network, then the Bitcoin client should assume that the payment failed and return coins to the customer's wallet while informing them of the same. However, this raises concerns about the credibility of the merchant as they may still have a copy of the transaction which they could broadcast in the future, leading to user distrust in Bitcoin.The author suggests that instead of assuming that the payment failed, the buyer should resend the Payment message to resolve any temporary problems with the transaction. If the status of the transaction remains undefined after several retries, the buyer should take steps to return to a state of certainty about their wallet balance quickly. Two possible solutions are suggested - broadcasting the transaction itself or invalidating the transaction by broadcasting a pay-to-self transaction that spends one or more of the same outputs.The author also proposes a simpler and cleaner solution where the buyer always broadcasts the transaction on the P2P network, regardless of whether the Invoice includes a receiptURI. The merchant tries to broadcast the transaction as well, unless their bitcoind has already seen it. This approach seems to have fewer edge cases and would prevent situations where merchants could mislead buyers by withholding the transaction.</summary>
+    <published>2012-11-28T23:36:19+00:00</published>
+  </entry>
+</feed>

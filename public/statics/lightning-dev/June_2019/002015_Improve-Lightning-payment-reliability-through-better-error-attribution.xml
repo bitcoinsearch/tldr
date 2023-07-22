@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improve Lightning payment reliability through better error attribution</title>
+  <updated>2023-06-02T18:42:35.440392+00:00</updated>
+  <author>
+    <name>Joost Jager 2019-06-12 12:59:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improve Lightning payment reliability through better error attribution</title>
+    <updated>2023-06-02T18:42:35.440392+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-June/002015.html" rel="alternate"/>
+    <summary>The reliability of payments in Lightning is dependent on the reliability of the chosen route, which is why implementations track the past performance of nodes and channels. However, non-ideal payment attempts can make it difficult to determine the node that should be penalized. This includes failed payment attempts as well as successful payments for which it took a long time to receive the `htlc_fulfill` message. One potential solution is to change the failure message so that every hop along the backward path adds an hmac to the message, allowing the source of a corruption to be narrowed down to a pair of nodes. Additionally, all hops could add timestamps to the failure message, allowing the sender of the payment to identify the source of the delay down to a pair of nodes. The challenge is to design the failure message format in such a way that hops cannot learn their position in the path. A fixed length message in which hops shift some previous data out from the message to create space to add their own data does not seem to work, as earlier nodes calculate their hmac over data that is shifted out and cannot be recovered by the sender. Another solution is to have every hop add hmacs for every possible (real) message length, but this would require n^2 hmacs in total. Alternatively, a variable length message could be used, with the error source adding a seemingly random length padding that could be deterministically derived from the shared secret. However, this still reveals some information about the distance to the error source. Another approach is to locate bad nodes by probing with different route lengths and coming from different angles, but this requires more attempts and more complex processing of the outcomes. There is also a level of indirectness because not all information is gathered in a single roundtrip. The importance of being able to locate bad nodes irrefutably is discussed, as well as ideas around the failure message format.</summary>
+    <published>2019-06-12T12:59:40+00:00</published>
+  </entry>
+</feed>

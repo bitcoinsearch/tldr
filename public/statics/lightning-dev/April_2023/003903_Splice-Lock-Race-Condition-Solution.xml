@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Splice Lock Race Condition Solution</title>
+  <updated>2023-06-03T12:32:20.648034+00:00</updated>
+  <author>
+    <name>Dustin Dettmer 2023-04-04 19:45:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Splice Lock Race Condition Solution</title>
+    <updated>2023-06-03T12:32:20.648034+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-April/003903.html" rel="alternate"/>
+    <summary>During the testing of `splice_locked` workflow, an important race condition was discovered which needs to be solved immediately. The issue arises if any channel activity occurs after `splice_locked` is sent but before it is received, and this can trigger the race condition quite frequently. `splice_locked` is considered locked only when it is sent and received. To understand the problem, a test case can be built where a node continually sends payments while `splice_lock`ing is taking place. This race condition affects two messages: `commitment_signed` and `announcement_signatures`. The flow for announcement is similar to commitment.When `splice_locked` is sent, Node B considers the channel spliced (Chan 106). However, if `splice_channel_id` is set to something other than the successfully confirmed splice channel_id, the message should be ignored. Once `revoke_and_ack` is successfully sent or received, `last_short_channel_id` and `splice_await_commitment_success` should be reset, and normal validation of `announcement_signatures` and `commitment_signed` should resume. The solution solves the race condition while preserving strict validation of messages without adding new fields to these messages.</summary>
+    <published>2023-04-04T19:45:03+00:00</published>
+  </entry>
+</feed>

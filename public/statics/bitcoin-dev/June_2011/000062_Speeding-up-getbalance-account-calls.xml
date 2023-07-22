@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Speeding up "getbalance &lt;account&gt;" calls</title>
+  <updated>2023-05-26T18:29:41.172527+00:00</updated>
+  <author>
+    <name>jan at uos.de 2011-06-23 21:51:43</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Speeding up "getbalance &lt;account&gt;" calls</title>
+    <updated>2023-05-26T18:29:41.172564+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-June/000062.html" rel="alternate"/>
+    <summary>Jan, the founder of Instawallet, is facing a bottleneck issue with "getbalance" function taking a long time to complete due to bitcoind running through all relevant transactions each time anew to compute the balance. Jan seeks advice from the community on how he can improve this without doing invasive changes. He plans to implement a simple cache in bitcoind that caches calls to getbalance and invalidates the cache as soon as a new block or a transaction that affects the wallet comes in. However, he acknowledges that this solution is not perfect since blocks arrive every 10 minutes on average.Jan is considering a better solution where cache entries affected by a new transaction or arriving in a block are invalidated. This would require accounting for block chain reorgs which is complicated. He suggests invalidating the whole cache on reorgs since they occur seldom enough that it's not a big problem. Jan seeks suggestions on where in the source code to hook into to notice block chain reorgs.Although the perfect solution would be for bitcoind to keep running balances of all accounts and update them as new information becomes available, Jan doesn't feel confident enough to make such an improvement. He believes extensive testing of esoteric block chain reorgs would be necessary to achieve this. For now, he would like to continue letting bitcoind handle account handling to avoid worrying about block chain reorgs.</summary>
+    <published>2011-06-23T21:51:43+00:00</published>
+  </entry>
+</feed>

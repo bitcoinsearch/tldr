@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Request for review/testing: headers-first synchronization in Bitcoin Core</title>
+  <updated>2023-06-09T03:03:54.361133+00:00</updated>
+  <author>
+    <name>21E14 2014-10-13 22:43:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Request for review/testing: headers-first synchronization in Bitcoin Core</title>
+    <updated>2023-06-09T03:03:54.361133+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-October/006735.html" rel="alternate"/>
+    <summary>Pieter Wuille has worked on a large change for Bitcoin Core, which is ready for review and testing. Headers-first synchronization changes the way the best chain is discovered, downloaded and verified, providing several advantages including parallel block downloading, no more stalled downloads, much more robust against unresponsive or slow peers, removes a class of DoS attacks related to peers feeding you low-difficulty valid large blocks on a side branch, reduces the need for checkpoints in the code, no orphan blocks stored in memory anymore, reducing memory usage during sync and a major step towards an SPV mode using the reference codebase. The code is available as a Github pull request or packaged on bitcoin.sipa.be/builds/headersfirst, where binaries can be found to test with. At the protocol level, it increases the minimally supported version for peers to 31800 (corresponding to Bitcoin v3.18, released in December 2010), as earlier versions did not support the getheaders P2P message. There are some known and unknown issues. Jameson Lopp has been spooling up several nodes per week lately and has testified that stalled downloads during initial syncing are a pain. He usually forgoes bootstrapping on VPSes because he doesn't want to have to adjust the disk space allocation. With headers-first, he is saturating his home cable connection with download rates of 4 MB/s until block 295,000 at which point CPU becomes the bottleneck and it settles down in the 1 MB/s range. It took him 6 minutes for his node to sync to block height 100,000, 22 minutes to reach height 200,000, 62 minutes to reach height 250,000, 125 minutes to reach height 295,000, 144 minutes to reach height 300,000 and 248 minutes to reach height 325,000. There is an interesting point: the improvements related to the headers-first approach are likely to increase, however marginally, the percentage of block exchange-related traffic, as it is less painful now to be catching up. It would be interesting to see the statistics, not from a single node perspective but from the viewpoint of an Internet backbone provider, say through the cables coming ashore in Cornwall. For the incurred bandwidth expense would invariably trickle down to transaction fees in an equilibrium model. There is an opportunity somewhere in this.</summary>
+    <published>2014-10-13T22:43:35+00:00</published>
+  </entry>
+</feed>

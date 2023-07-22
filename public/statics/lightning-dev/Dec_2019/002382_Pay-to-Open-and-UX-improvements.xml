@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Pay-to-Open and UX improvements</title>
+  <updated>2023-06-02T22:23:15.956909+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-12-17 09:31:56</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Pay-to-Open and UX improvements</title>
+    <updated>2023-06-02T22:23:15.956909+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-December/002382.html" rel="alternate"/>
+    <summary>The Lightning onboarding process can be made smoother by using pay-to-open, which provides a good UX for newcomers but requires temporary trust between the user and the node. The trust relationship appears in two places: the user releases the preimage, then we fund the channel; and the user trusts that we won't double-spend the funding transaction. It is easy to fix the former once Bitcoin supports Schnorr. HTLC-like constructions can be used to assure this today, similar to what is used in HTLC-success/HTLC-timeout in BOLT 3. However, fixing the latter issue is more complex as there's a risk of double-spending by the funder. There are no clear solutions proposed yet, but the mailing list's brainpower is being leveraged to find possible solutions. The above procedure probably fixes this issue as well by setting things up so that the funder cannot double-spend the funds that will eventually get into the channel after it is capable of receiving the preimage. Funder can double-spend, but then is unable to learn the preimage and cannot steal the payment (and is indistinguishable from any other payment failure). However, the above procedure makes Alice vulnerable to Bob aborting after the pre-funding is confirmed, thus on-chain fees are paid by Alice to pay for the pre-funding and the timelock branch. This can be fixed by forcing Bob to provide funds to the pre-funding, which get returned to the channel on Bob's side, and having the timelock branch be `(A &amp;&amp; B &amp;&amp; timelock)` and pre-signing a backout that returns the funds back to Alice and Bob, with Bob paying all on-chain fee.</summary>
+    <published>2019-12-17T09:31:56+00:00</published>
+  </entry>
+</feed>

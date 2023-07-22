@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_SECURETHEBAG (supersedes OP_CHECKOUTPUTSVERIFY)</title>
+  <updated>2023-06-13T19:13:05.537808+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2019-06-18 20:57:34</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_SECURETHEBAG (supersedes OP_CHECKOUTPUTSVERIFY)</title>
+    <updated>2023-06-13T19:13:05.537808+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-June/017035.html" rel="alternate"/>
+    <summary>A proposal for a new opcode called OP_CHECKTXDIGESTVERIFY has been suggested on the Bitcoin-dev mailing list, and it has been discussed whether this opcode can enable covenants through the use of Turing-complete smart contracts. The proposed opcode would pull a 33-byte value from the stack consisting of a sha256 hash and a sighash-byte and add a new sighash value corresponding to the set of information in the hash. However, some are not seeing any reason to complicate the spec to ensure the digest is precommitted as part of the opcode. The use case for the OP_CHECKTXDIGESTVERIFY opcode would involve passing in the spent transaction (serialized for txid) and the spending transaction (serialized for sighash) as part of the witness of the spending transaction. The script would then verify that the spending transaction witness value is indeed the spending transaction with an OP_SHA256 operation followed by an OP_SWAP and an OP_CAT operation before using the OP_CHECKTXDIGESTVERIFY operation to verify the spent transaction witness value. The script can then extract a commitment of itself by extracting the output of the spent transaction to check that the spending transaction also pays to the same script.With this approach, the script can access a state value, for example from an OP_RETURN output of the spent transaction, and enforce that a correct next-state is used in the spending transaction. If the state is too large to fit in a standard OP_RETURN, then the current state can be passed in as a witness and validated against a hash commitment in an OP_RETURN output. Although there is discussion around whether OP_SECURETHEBAG can create covenants, it probably cannot create covenants unless an OP_TWEEKPUBKEY operation is added to Script because the "commitment of the script itself" isn't part of the OP_SECURETHEBAG.</summary>
+    <published>2019-06-18T20:57:34+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Warning: many 0.7 nodes break on large number of tx/block; fork risk</title>
+  <updated>2023-05-19T16:37:00.588086+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2013-03-12 11:44:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Warning: many 0.7 nodes break on large number of tx/block; fork risk</title>
+    <updated>2023-05-19T16:37:00.588086+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-March/002249.html" rel="alternate"/>
+    <summary>In an email thread between Bitcoin developers, Michael Gronager explained that the upgrade to 0.7 was unsuccessful due to it having an undocumented and unknown criteria for block rejection. The bug is a limit in the number of lock objects that was reached. Despite efforts to make 0.8 more tolerable, it seems to be coming back to haunt them.The real problem regarding missing space in the block is proper handling of mem-pool transactions which should be pruned based on two criteria: if they become too old (&gt;24hrs) or if the client is running out of space, then the oldest should probably be pruned. Dropping free/old transactions is a much better behavior than dying. Mempools are relatively small in memory usage but with small block sizes, there is a risk of it increasing. In 0.8, conflicting transactions cause clearing the mempool of conflicts so it is bounded by the size of the UTXO subset being spent. Regarding block space, the competition for blockchain space is mostly an issue for client software which doesn't deal correctly with non-confirming transactions, and misleading users. Increasing block sizes may just make more space for spam. The presence of this bug and the fact that a full solution is available (0.8), probably helps achieving consensus fixing it (=a hardfork) is needed, and we should take advantage of that.</summary>
+    <published>2013-03-12T11:44:28+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP] Normalized transaction IDs</title>
+  <updated>2023-06-11T00:31:48.408714+00:00</updated>
+  <author>
+    <name>Luke Dashjr 2015-11-03 22:01:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP] Normalized transaction IDs</title>
+    <updated>2023-06-11T00:31:48.408714+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-November/011660.html" rel="alternate"/>
+    <summary>Christian Decker proposed a solution for the malleability issue in Bitcoin transactions. He suggested that if a connected component of upgraded nodes can relay both the transaction and the associated external scripts, then it would be possible to piggyback the external scripts on top of the normal messages. Non-upgraded nodes will read the entire two-part message but only parse the classical transaction, dropping the external script. Validation rules for upgraded nodes are the same as before: if the attached signatures are invalid the entire TX is dropped. The external scripts used during the creation of a block need to be committed to, and this can be achieved by using the coinbase input. If miners do not get the SW transactions, then they won't mine them, and the wallets will continue to rebroadcast until they do. Luke Dash Jr pointed out that double spending to the same destination(s) and malleability are literally the same thing, and things affected by malleability are still just as broken even with this BIP. He suggested that the way to make an anti-malleable wallet would be to strictly enforce the no-address-reuse rule on payments received and rely only on the hash of that scriptPubKey+value for the input in subsequent transactions. This way, no matter what inputs or other outputs the transaction paying the address/invoice uses, the subsequent transaction ignores them and remains valid. Luke also mentioned that this does not help someone receiving funds from a sender to build new transactions on top since the sender may simply doublespend its output before it is confirmed.</summary>
+    <published>2015-11-03T22:01:20+00:00</published>
+  </entry>
+</feed>

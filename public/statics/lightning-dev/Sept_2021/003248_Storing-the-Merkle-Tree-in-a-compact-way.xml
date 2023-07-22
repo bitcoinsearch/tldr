@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Storing the Merkle Tree in a compact way</title>
+  <updated>2023-06-03T05:48:35.223826+00:00</updated>
+  <author>
+    <name>shymaa arafat 2021-09-16 15:05:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Storing the Merkle Tree in a compact way</title>
+    <updated>2023-06-03T05:48:35.223826+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-September/003248.html" rel="alternate"/>
+    <summary>A simple idea to save storage and simplify traversing of the UTXOS Merkle Tree/ forest is introduced by Shymaa M Arafat. The tree can be viewed as a simple complete tree to 1D array with no pointers, as described in lecture 8 at MIT OpenCourseWare. This method saves approximately 76 million * 2 (size of pointer, probably 4 bytes) * ~600MB with almost no effort. Since all trees in Utreexo forest are full binary trees, this method is perfect to use. However, Shymaa suggests putting it in a 2D array to make it easier to handle the indexing math since they traverse in many ways, normally to delete or insert, and the parent siblings for the proofs. The Intuition behind this idea is some discussion on the Utreexo project about storage saving and some traversing issues in handling the UTXOS Merkle Tree/ forest. N internal nodes need to be stored along with 2N pointers (left&amp;right), plus maybe 1 more pointer in the leaves special nodes to handle different traversing options (insert, delete, &amp; differently proof fetch that traverse aunt or niece node according to your implementation). Shymaa's approach gets rid of all the pointers, which is especially appealing when all trees are full (complete) in the forest but can work for any Merkle Tree.The idea is to use a 2D array with variable row size. R[j] is of length (N/2^j). For example, when N=8 nodes, R[0]=0,1,2,...,7, R[1]=8,9,10,11, R[2]=12,13, and R[3]=14. The total storage is just 2N-1 nodes, and there is no need for pointers. Traversing could be neat in any direction with the right formula. Pseudo code to fetch proof[i] is provided, which is just the simple primitive approach of transforming a recursion to an iteration. Even if Utreexo team solved their problem differently, Shymaa thinks it is worth telling as it can work for any Merkle Tree.</summary>
+    <published>2021-09-16T15:05:24+00:00</published>
+  </entry>
+</feed>

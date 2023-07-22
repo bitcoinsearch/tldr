@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Thoughts on HTLC Scripts</title>
+  <updated>2023-05-23T18:34:57.117156+00:00</updated>
+  <author>
+    <name>Rusty Russell 2015-07-25 05:04:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Thoughts on HTLC Scripts</title>
+    <updated>2023-05-23T18:34:57.117156+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-July/000063.html" rel="alternate"/>
+    <summary>Mats Jerratsch is currently working on a Lightning Implementation Client/Server in Java, using bitcoinj as a basic framework. He plans to push it into GitHub within few weeks. Mats had an implementation ready but after reading through Rusty's paper, he threw it off the ship. His previous implementation was based on some trust dependencies and channel transactions were highly asynchronous, meaning that a LN-Network would not be possible. First, Mats wanted to write up his solution for the anchor problem, but then he realized Rusty's solution makes it possible to have channels open indefinitely, while his doesn't. It is important to wait for the anchor tx of the other party otherwise the server has to pay transaction fees for releasing his funds again and again. While implementing the new redeemscripts, Mats noticed there is no delay for the 'HTLC Receiver Redeemscript', when redeeming the contract using R. In response, Rusty said that any output condition which pays to "self" must be delayed so A's HTLC output to A must be delayed, similarly B's HTLC output to B. Rusty also mentioned that he just rewrote his test-cli utils to support dual anchors.</summary>
+    <published>2015-07-25T05:04:46+00:00</published>
+  </entry>
+</feed>

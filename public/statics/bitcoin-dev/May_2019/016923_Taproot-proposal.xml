@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Taproot proposal</title>
+  <updated>2023-06-13T18:36:34.762620+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-05-08 05:16:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Taproot proposal</title>
+    <updated>2023-06-13T18:36:34.762620+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-May/016923.html" rel="alternate"/>
+    <summary>In this message, ZmnSCPxj discusses the technique of "hash to a point" and how it can be used in Bitcoin's Taproot. The scalar behind a point generated from the hash cannot be known unless the hash function is broken or ECDLP is broken. As the point is arbitrary, it is unknown if someone knows the scalar or not. Everyone can use the same point generated from an arbitrary "hash to a point." For example, we can define the "script-only point" as the point whose X coordinate is equal to SHA256("Pieter Wuille is really great!"). Provided everyone knows what the exact data to hash is, and the exact hash function, the above procedure is sufficient for everybody to verify that Pieter Wuille cannot spend the coin unilaterally, and that nobody can actually spend the coin except via a script.Since the point on the output is tweaked by the script merkle tree root, varying your pubkey for each use will be enough to blind the use of the "script-only point" until you have to reveal it during spending anyway. If you insist on reusing your pubkeys, then adding a `OP_PUSH() OP_DROP` to at least one script, with a random salt, should be enough to blind the use of the script-only point until you have to reveal the script you want to use. Or even just further tweak the point before using it as the taproot internal pubkey, so that not even a coin spend reveals that the "everyone agrees" branch was never actually an option.ZmnSCPxj also suggests another technique where participants use pubkeys given by both parties, ensuring the "everyone agrees" branch is never taken. Each side can erase the scalar generating it from memory and whatever caches exist on the system. A node might even generate a single random point from a scalar it subsequently erases and use some non-hardened derivation path from that for every HTLC it has to make. This technique is "sufficiently provably unknown" since each participant knows that it deliberately erased the only means of knowing the complete discrete log by erasing its share.Under the taproot assumption, any "truster" that assigns time-limited control of a coin to a "trustee" is part of that finite set interested in the coin spend conditions. So the truster should be asked for a pubkey to be added in the taproot internal pubkey that enables the "everyone agrees" branch. Then the truster can generate a point without knowing its private key, or by forgetting this private key. If one is sufficiently schizophrenic, they can split themselves into a "truster" and "trustee" as above and deliberately forget the truster private key. It should be enough for everyone to agree to lock the "everyone agrees" branch and throw away their own key, to keep that branch locked.</summary>
+    <published>2019-05-08T05:16:03+00:00</published>
+  </entry>
+</feed>

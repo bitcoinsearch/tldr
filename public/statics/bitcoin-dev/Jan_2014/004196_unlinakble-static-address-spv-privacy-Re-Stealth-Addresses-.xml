@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>unlinakble static address? &amp; spv-privacy (Re: Stealth Addresses)</title>
+  <updated>2023-06-08T00:09:31.326649+00:00</updated>
+  <author>
+    <name>Peter Todd 2014-01-24 09:17:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>unlinakble static address? &amp; spv-privacy (Re: Stealth Addresses)</title>
+    <updated>2023-06-08T00:09:31.326649+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-January/004196.html" rel="alternate"/>
+    <summary>The conversation is regarding the implementation of reusable payment addresses on the blockchain. One concern raised is that if the payee's address doesn't have a length indicator, then the payer would have to put the whole address verbatim into the OP_RETURN without knowing how many bits of the payee actually wants to see there. To solve this, a proposal is made where the address has a 2-byte prefix and 1-byte number of bits representing the number of bits of prefix that should be fixed. This way, the payer will know how much of the address should be taken verbatim, and the rest of the two bytes would be replaced with random data, and exactly two bytes would be put in the OP_RETURN. If the number of bits is zero, the 2-byte prefix in the reusable address must be ignored, and an entirely random 2-byte prefix would be put into the OP_RETURN. A concern is raised about broken implementations copying the prefix from the reusable address into OP_RETURN when the number of bits is zero and ending up basically identifying the payee. To prevent the opportunity to screw it up, it is suggested to make the number of bits optional in the reusable address. However, even if the fields weren't in the address at all, a 2-byte random prefix would still be put in the OP_RETURN.It is also mentioned that the indexes available will likely be over H(scriptPubKey) for creating succinct proofs of fraud in indexes, miner committed, and otherwise. The only way they are succinct is if you limit the length. Hashes naturally do that because it's so expensive to generate partial collisions. Grinding nonces isn't much of a burden given it's fast hash functions. The prefixes in question are fairly small and will be small for the foreseeable future.</summary>
+    <published>2014-01-24T09:17:33+00:00</published>
+  </entry>
+</feed>

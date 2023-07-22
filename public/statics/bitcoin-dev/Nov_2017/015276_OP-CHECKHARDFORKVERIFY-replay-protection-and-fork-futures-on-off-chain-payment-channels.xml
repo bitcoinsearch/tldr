@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_CHECKHARDFORKVERIFY - replay protection and fork futures on off-chain payment channels</title>
+  <updated>2023-06-12T22:07:15.938739+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2017-11-10 23:33:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_CHECKHARDFORKVERIFY - replay protection and fork futures on off-chain payment channels</title>
+    <updated>2023-06-12T22:07:15.938739+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-November/015276.html" rel="alternate"/>
+    <summary>The author of this message proposes the addition of an opcode that would provide replay protection and allow for the chain-backed trustless creation of hardfork futures payment channels. In order for this to work, a hardfork must "cooperate" by changing the operation of OP_CHECKHARDFORKVERIFY in the hardfork. The proposed opcode is simple - if the top stack is not the exact value 1, it fails. To prepare funds for splitting, a P2SH/P2WSH script is used. This allows transactions to spend the first branch on the legacy chain post-fork and create transactions that spend the second branch on the hardfork chain post-fork. It also allows for the recovery of funds before the fork date if needed. The author then proposes making a bet with another individual regarding the economic consensus of the hardfork. They use a transaction spending their funds and paying a single combined output to a P2SH/P2WSH. This can be used with an nLockTime transaction after the fork date to claim the legacy coin if it has value, or on the hardfork chain if it has value. Alternatively, they can both agree to cancel the bet. In order to perform price discovery of legacy and hardfork future coins to determine consensus, payment channel techniques are needed. The author suggests forming a payment channel between themselves and the other party. Before signing the anchor transaction, commitment transactions should be created first. For a Poon-Drjya channel, two commitment transactions should be created, one for each party, as well as two versions of both for the legacy token and the hardfork token. Commitment transactions can only be claimed after the fork, but they can be updated continuously using normal Poon-Dryja channel operations. Unfortunately, this method can only reach up to payment channels. To create a futures market, a payment channel network is needed. For Lightning, HTLCs are used to create atomic swaps of coins in different payment channels. However, commitment transactions can only be claimed after the fork, so any HTLCs on top of that will have expired before the commitment transactions can be claimed and the HTLCs enforced. The author does not know of any other construction that would allow the creation of a payment channel network on top of a payment channel primitive.</summary>
+    <published>2017-11-10T23:33:31+00:00</published>
+  </entry>
+</feed>

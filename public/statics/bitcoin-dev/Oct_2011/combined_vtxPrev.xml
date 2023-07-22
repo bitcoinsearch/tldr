@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - vtxPrev</title>
+  <updated>2023-06-04T20:25:14.124681+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2011-10-05 12:50:52</name>
+  </author>
+  <author>
+    <name>Michael Grønager 2011-10-05 12:31:40</name>
+  </author>
+  <author>
+    <name>Michael Grønager 2011-10-05 13:44:08</name>
+  </author>
+  <author>
+    <name>Michael Grønager 2011-10-05 12:31:40</name>
+  </author>
+  <author>
+    <name>Michael Grønager 2011-10-05 12:31:40</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2011-10-05 12:50:52</name>
+  </author>
+  <author>
+    <name>Michael Grønager 2011-10-05 13:44:08</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2011-10-05 12:50:52</name>
+  </author>
+  <author>
+    <name>Michael Grønager 2011-10-05 13:44:08</name>
+  </author>
+  <link href="bitcoin-dev/Oct_2011/000636_vtxPrev.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2011/000635_vtxPrev.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2011/000637_vtxPrev.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2011/000635_vtxPrev.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2011/000635_vtxPrev.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2011/000636_vtxPrev.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2011/000637_vtxPrev.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2011/000636_vtxPrev.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Oct_2011/000637_vtxPrev.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - vtxPrev</title>
+    <updated>2023-06-04T20:25:14.124681+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-October/000636.html" rel="alternate"/>
+    <summary>In October 2011, Michael Grønager, the owner of Ceptacle and NDGF Director at NORDUnet A/S, was exploring ways to enable a split between thin clients holding the wallet and server(s) holding the blocks and txdb. He came across vtxPrev in the code and raised a concern about it storing transactions that are three blocks back. Michael questioned whether it was necessary for transactions to mature for seven blocks before they can be considered respendable.Gregory Maxwell corrected Michael's assumption that transactions need 7 blocks to maturity and respendability. He explained that software will try to use older inputs when available but will use what it has if not. The system also trusts its own transactions and is prone to respending its own outputs quickly. In case of deep splits, it is possible that inputs might have been spent differently in the new split. Therefore, retransmitting one of your own transaction's parents if it's dropped but not yet impossible seems prudent.It was later clarified that vtxPrev contains a list of the supporting confirmations up to 3 confirmations back. This feature is only relevant if you accept newly earned coins that are less than 3 confirmations old. It will only be of relevance for half an hour or so. In case of chain splits, it is suggested to resend the depending transactions to the network.Overall, Michael Grønager's initial concern about vtxPrev storing transactions that were overkill was cleared up and the purpose of vtxPrev was better understood.</summary>
+    <published>2011-10-05T12:50:52+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Formalizing Blind Statechains as a minimalistic blind signing server</title>
+  <updated>2023-06-13T19:26:32.356332+00:00</updated>
+  <author>
+    <name>Ruben Somsen 2019-06-06 05:20:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Formalizing Blind Statechains as a minimalistic blind signing server</title>
+    <updated>2023-06-13T19:26:32.356332+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-June/017009.html" rel="alternate"/>
+    <summary>Ruben Somsen proposed the use of blind signatures to transfer ownership of a Bitcoin UTXO off-chain. The functionality is general and can be used for more than just Bitcoin. The server is kept completely unaware that it's handling a BTC transaction, since it's signing blindly. Assuming the server is honest, we can use it to transfer over the signing rights of a private key without actually changing the key itself. Trust can be distributed by turning the server into a multisig threshold key, so serverPubkey A becomes e.g. 8-of-12 multisig. This means security can be on par with federated sidechains, and is similar to how ZmnSCPxj replaced the escrow key with a federation in “Smart Contracts Unchained”. The worst case for security still comes down to having to trust the federation, but the transitory key, as well as the blind signature scheme, does add an interesting layer of separation that makes it essentially "non-custodial". A Decker-Russell-Osuntokun construction ("eltoo") is not strictly required as we can still make use of the Decker-Wattenhofer construction instead. The core of Decker-Wattenhofer is a sequence of decrementing-`nSequence` update systems. Number of maximum updates is limited by the starting `nSequence`, however if we put an update system inside an update system, we can "reset" the `nSequence` of the inner update system by updating the outer update system. We can chain this concept further and add more update systems nested inside update systems to gain more leverage from the maximum relative wait time. As we expect fewer updates are needed for state chains than e.g. actual Lightning channels, this is usually a good tradeoff. It is thus possible to use state chains in case `SIGHASH_ANYPREVOUT` is too controversial to get into Bitcoin, provided Schnorr does get into Bitcoin.The resulting output is a public ECC chain (one blind signature per user, one chain per serverPubkey) of blindly signed messages. A and B can collude to take the money from C, but since all instances of userSignature and blindSignature are published openly, cheating is publicly detectable (e.g. the server signed two messages from B instead of one). This still admits the possibility of an exit scam once a few "big enough" swaps are in position to be stolen, trading off earned reputation for cold-stored cash.</summary>
+    <published>2019-06-06T05:20:31+00:00</published>
+  </entry>
+</feed>

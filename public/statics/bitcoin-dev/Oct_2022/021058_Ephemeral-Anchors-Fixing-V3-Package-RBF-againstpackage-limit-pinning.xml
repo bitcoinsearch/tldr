@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Ephemeral Anchors: Fixing V3 Package RBF againstpackage limit pinning</title>
+  <updated>2023-06-16T01:59:25.587003+00:00</updated>
+  <author>
+    <name>James O'Beirne 2022-10-19 15:11:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Ephemeral Anchors: Fixing V3 Package RBF againstpackage limit pinning</title>
+    <updated>2023-06-16T01:59:25.587003+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021058.html" rel="alternate"/>
+    <summary>The email thread discusses a proposal for V3 transactions that would make pinning severely constrained in many setups. While V3 transactions may solve bip125 rule#3 and rule#5 pinning attacks under some constraints, package limit pinning remains an issue. The proposal suggests using Ephemeral Anchors, which are watermarked outputs marked as ones that MUST be spent in a V3 package. This allows for any value to be used without worrying about bloating the utxo set. Additionally, anyone can bump the transaction without any transaction key material, achieving Jeremy's Transaction Sponsors proposal without consensus changes. This also benefits more traditional wallet scenarios, as change outputs can no longer be pinned, and RBF/CPFP becomes robust. One possible advantage of the sponsors interface is that multiple uncoordinated parties can collaboratively bump a tx's feerate assuming the "one sponsor per sponsoree" constraint is relaxed. A simple example would be a batch withdrawal from an exchange could be created with a low feerate, and then multiple users with a vested interest of expedited confirmation could all "chip in" to raise the feerate with multiple sponsor transactions. Having a single ephemeral output creates a situation where a single UTXO has to shoulder the burden of CPFPing a package. There is a suggestion to amend the ephemeral anchor interface to allow for collaborative sponsoring, possibly by using chained ephemeral anchors.One question raised is if V3 is designed for lightning and this proposal is also designed for lightning, is there any sense in requiring these outputs for v3? This might help with anonymity set, as well as potentially keep the v3 surface smaller. Another concern raised is that the requirement to sweep the output must be incentive compatible for the miner, or else they won't enforce it (pass the buck onto the future bitcoiners). The Ephemeral UTXO concept can be a consensus rule, which we add later on in lieu of managing them by incentive. The proposal offers two solutions to package limit pinning: expanding a carveout for "sibling eviction" or using Ephemeral Anchors.</summary>
+    <published>2022-10-19T15:11:57+00:00</published>
+  </entry>
+</feed>

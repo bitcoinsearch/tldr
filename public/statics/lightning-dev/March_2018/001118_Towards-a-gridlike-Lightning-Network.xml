@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Towards a gridlike Lightning Network</title>
+  <updated>2023-05-24T22:25:57.134189+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-03-24 12:07:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Towards a gridlike Lightning Network</title>
+    <updated>2023-05-24T22:25:57.134189+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-March/001118.html" rel="alternate"/>
+    <summary>ZmnSCPxj, a Lightning Network developer, has proposed an algorithm that given a set of nodes extracted from node gossip, returns a peer to try connecting and funding a channel to. The algorithm involves starting with a 32-bit number i = 0 and computing hash = H(i || pubkey) for each node, where H is some standard hash algorithm, and pubkey is the public key of the node. Successive filtering is then performed until a set of at least 3 or more nodes is obtained. The nodes are sorted according to hash, and the candidate is identified as the next node in the list after our node or the first node in the list if we are the last node. If the candidate already has a channel with us or cannot be contacted, or refuses incoming channels, or has no address info and cannot be found by DNS seed or so on, then increment i and try finding again.ZmnSCPxj has also modified the termination condition for the decimation loop. The working set is decimated (i.e., match the next bit in the hashes and remove those that do not match our own hash in that bit) if it is 7 nodes or more. If the working set is 3 to 6 nodes, the members of the superhub are stopped, sorted by hash, and their position in the superhub decided. If the working set is 1 or 2 nodes, the attempt to form a superhub fails, and `i` is incremented, and the process restarted.According to ZmnSCPxj, even if nodes have some divergence in their own local maps of the network, the difference will be filtered away, and the nodes that are "destined" to form a superhub can still find each other in the same superhub. Assuming all nodes have the same routemap, then all nodes will form their own, non-overlapping superhubs for each i. However, if some nodes get to increment i because it already has a channel with its destined candidate peer at one value of i, it can then potentially form superhubs with other nodes that have also reached higher i.</summary>
+    <published>2018-03-24T12:07:52+00:00</published>
+  </entry>
+</feed>

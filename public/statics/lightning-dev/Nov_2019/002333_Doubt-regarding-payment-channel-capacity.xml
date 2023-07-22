@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Doubt regarding payment channel capacity</title>
+  <updated>2023-06-02T21:52:51.950261+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-11-16 03:43:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Doubt regarding payment channel capacity</title>
+    <updated>2023-06-02T21:52:51.950261+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-November/002333.html" rel="alternate"/>
+    <summary>There was an issue of lightning-dev emails being undelivered, but it seems to be resolved now. The discussion between ZmnSCPxj and Subhra regarding routing has been shared. Subhra had some questions about the possibility of misreporting channel balances by nodes B and C in a cluster. ZmnSCPxj explained that there is no facility to remotely report channel balances and that nobody particularly cares about the exact balance on the BC channel. He also pointed out that if B and C are part of the same economic entity, the BC channel is no different from that entity keeping funds on a hot online wallet. Subhra had another question about whether it's a problem if the cluster size increases from B-&gt;C to B-&gt;C-&gt;X-&gt;Y-&gt;Z, to which ZmnSCPxj replied that it's not a problem at all as such long chains are economically irrational behavior and will be selected against. He argued that anyone creating such a chain would lose out on earnings than if they had multiple nodes creating the shortest paths between many nodes. Furthermore, if fees between A and D become too high, A and D might decide that the onchain fee to open a direct channel between them would be cheaper than paying the long chain of nodes between them, destroying the ability of the aggregate B C X Y Z to earn funds. In general, he believes that economic rationality will lead to such attacks being routed around.In a payment channel network, there is a possibility of two malicious parties opening a low-value channel and still accepting multiple transactions where the total payment value of all transactions exceeds the channel capacity. However, it is not possible for them to outright steal from other nodes or even steal routing since payers will prefer a single node over the aggregate nodes. Additionally, they cannot advertise a channel without telling others where it was funded on the chain due to antispam reasons. This means that such behavior is not a problem for other nodes as long as the two parties are cooperating between themselves. No one keeps track of residual values in the channel, but this does not pose a violation since it cannot be used to steal.</summary>
+    <published>2019-11-16T03:43:58+00:00</published>
+  </entry>
+</feed>

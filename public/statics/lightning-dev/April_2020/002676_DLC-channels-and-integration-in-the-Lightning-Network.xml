@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DLC channels and integration in the Lightning Network</title>
+  <updated>2023-06-03T01:06:20.966059+00:00</updated>
+  <author>
+    <name>LE GUILLY THIBAUT 2020-04-29 13:14:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DLC channels and integration in the Lightning Network</title>
+    <updated>2023-06-03T01:06:20.966059+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002676.html" rel="alternate"/>
+    <summary>Thibaut, Ichiro Kuwahara, and Takatoshi Nakagawa have proposed a solution to integrate Discreet Log Contracts (DLC) channels into the Lightning Network. Their paper discusses the implementation of DLC channels without the need for additional on-chain transactions after a contract expires. They propose a solution to the "free option" problem where neither party can pick the most favorable outcome from a previous or latest contract result. Their proposal also permits multiple concurrent channels, using a single fund transaction, and it does not require any changes to the Bitcoin transaction structure. The proposed DLC channel construction is standalone and can be deployed outside or alongside the Lightning Network. It also allows for more separation of concerns between the channels, as they can be updated separately without influencing each other.The approach differs from Juraj Bednár and René Pickhardt's Lightning DLC channel construction, which works by adding an output to an LN commitment transaction, from which the regular set of DLC transactions can be attached. Their proposed construction involves two types of transactions: the update transaction, which keeps the balance of the channel and is revocable, and the buffer transaction, which solves the free option problem in the protocol.An informal analysis of the protocol is provided in the paper, but the main point is that either party can enforce the outcome of the previous contract or force their counterparty into the new contract. The proposed solution to integrate DLC channels in the Lightning Network is simple, but not previously suggested.A "split" transaction is used, which spends the output of the fund transaction and contains a single output for every channel to be created. This split transaction can be revoked to reallocate funds between channels and open/close channels as desired. The advantage of this construction is the ability to support as many sub-channels as desired for a single fund transaction and rebalance between channels. However, twice as many transactions need to be created and tracked due to the revocation mechanism in the split transaction.The proposal includes creating DLC channels that can be done with existing cryptographic constructs and Bitcoin transactions. It is worth pursuing considering the recent development of ECDSA adaptor signatures enabling simpler constructions. Finally, Thibaut invites feedback on the approach, its implementation complexity, and whether it should be pursued given recent developments.</summary>
+    <published>2020-04-29T13:14:25+00:00</published>
+  </entry>
+</feed>

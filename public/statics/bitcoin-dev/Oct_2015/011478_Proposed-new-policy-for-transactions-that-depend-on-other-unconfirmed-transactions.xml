@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposed new policy for transactions that depend on other unconfirmed transactions</title>
+  <updated>2023-05-19T21:42:42.619946+00:00</updated>
+  <author>
+    <name>Matt Corallo 2015-10-08 03:33:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposed new policy for transactions that depend on other unconfirmed transactions</title>
+    <updated>2023-05-19T21:42:42.619946+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-October/011478.html" rel="alternate"/>
+    <summary>Developers of Bitcoin Core are currently discussing a proposal to update the policy limits on unconfirmed transaction chains. The existing limits are 1000 transactions and 2500kb total size for descendant packages and 100 transactions and 900kb total size for ancestor packages. The proposed new limits would be 25 transactions and 100kb total size for both types of packages. The most restrictive limit, affecting 5.8% of transactions, would be the 25 transaction count on descendant packages. Feedback is being requested from developers regarding any legitimate use cases that might be hindered by these limits. It is important to note that these limits are not a change to consensus rules and can easily be changed on an individual node basis in Bitcoin Core.In addition, Alex Morcos has put forward a proposal for a new set of requirements to be used as a policy on when to accept new transactions into the mempool and relay them. This policy would affect transactions which have other transactions not yet confirmed in the blockchain as inputs. The motivation for this policy is to limit the size of a mempool, which can become full, requiring a new transaction to pay not only for the transaction it would evict but also any dependent transactions that would be removed from the mempool as well.Morcos proposes four new policy limits, all of which are command line configurable. The first two limits aim to ensure that no chain of transactions will be too large for the eviction code to handle, while the third limit ensures that calculating the state required for sorting and limiting the mempool and enforcing the first two limits is computationally feasible. Finally, the fourth limit is required to maintain the pre-existing policy goal that all transactions in the mempool should be mineable in the next block.These limits would have affected less than 2% of transactions entering the mempool in April or May of this year. However, during a period of stress testing from 7/6 through 7/14, as many as 25% of the transactions would have been affected. The code to implement the descendant package tracking and new policy limits can be found in 6557, which is built off of 6470.</summary>
+    <published>2015-10-08T03:33:07+00:00</published>
+  </entry>
+</feed>

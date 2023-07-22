@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP: OP_BRIBVERIFY - the op code needed for Blind Merge Mined drivechains</title>
+  <updated>2023-06-12T03:01:19.275806+00:00</updated>
+  <author>
+    <name>Russell O'Connor 2017-06-28 22:49:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP: OP_BRIBVERIFY - the op code needed for Blind Merge Mined drivechains</title>
+    <updated>2023-06-12T03:01:19.275806+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-June/014672.html" rel="alternate"/>
+    <summary>A new opcode called OP_BRIBEVERIFY has been proposed in the Bitcoin scripting system. The purpose of this opcode is to enable users to bribe miners to include a hash in the coinbase transaction's output. This, in turn, allows the implementation of sidechains in Bitcoin and enables different factions of the community to realize their own separate blockchain.The commitment structure requires that the miner's coinbase reward be at index 0 in the coinbase transaction's output vector, and it fixes the witness commitment output to be at index 1 of the coinbase transaction's output vector. A standard BRIBEVERIFY program has a specific format, which includes a 32-byte block hash, a push operation, a sidechain ID, and the OP_BRIBEVERIFY opcode.There are some issues with bribe attempts, such as taking up space in main chain blocks, which could be mostly unsuccessful. To address these problems, an alternate proposal suggests using a 0 output value with some currently non-standard OP_RETURN output script that specifies the critical hash and sidechain ID. The user creates and signs a transaction containing one or more of these special bribe outputs, where the fee constitutes the bribe. Any change the user has can be sent back to themself.The proposed method doesn't require a softfork and is prunable from the UTXO set. When a sidechain node wants to know the consensus, it downloads mainchain blocks and looks for OP_RETURNs. Starting with its genesis cons-pair hash as the current cons-pair, it scans each OP_RETURN transaction. If an OP_RETURN is 64-byte and has the parent cons-pair equal to the current cons-pair, look for the side block indicated and confirm its correctness. If correct, update the current cons-pair for the hash of the OP_RETURN data. The code snippet provided is a part of the drivechain project and implements OP_BRIBEVERIFY. The implementation checks the sidechain ID and block hash before accepting the payment, and the deployment details are yet to be determined. The original idea for Blind Merge Mined sidechains is credited to Paul Sztorc, while CryptAxe is credited with writing the foundational layer of software for drivechains. Links to the Blind Merge Mined Sidechains paper and a mailing list discussion on bitcoin-dev are also provided. This document is in the public domain.</summary>
+    <published>2017-06-28T22:49:54+00:00</published>
+  </entry>
+</feed>

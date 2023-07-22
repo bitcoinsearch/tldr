@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>0.4rc1 known bugs</title>
+  <updated>2023-05-18T22:15:47.685453+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2011-09-06 11:55:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>0.4rc1 known bugs</title>
+    <updated>2023-05-18T22:15:47.685453+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2011-September/000463.html" rel="alternate"/>
+    <summary>On Sep 4, 2011, Pieter Wuille informed Gavin about the deadlock issues he found in bitcoind while using DEBUG_LOCKORDER. However, later he realized that all locking of cs_vRecv/cs_vSend happens inside TRY_CRITICAL_SECTION blocks, hence there are no actual potential deadlocks.Sipa found a deadlock between the addr-handling and IRC-join-handling code which was caused due to the db transaction for the entire message created by processing of "addr" while only locking cs_mapAddresses inside AddAddress. For IRC seeded addresses, no db tx was pre-created causing a lock inside AddAddress. A solution was proposed by adding CRITICAL_BLOCK(cs_mapAddresses) before addrDB.TxnBegin() in main.cpp, ProcessMessage, case "addr".</summary>
+    <published>2011-09-06T11:55:30+00:00</published>
+  </entry>
+</feed>

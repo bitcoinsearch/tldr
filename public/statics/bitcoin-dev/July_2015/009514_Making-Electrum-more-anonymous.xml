@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Making Electrum more anonymous</title>
+  <updated>2023-06-10T03:06:38.677691+00:00</updated>
+  <author>
+    <name>Joseph Gleason ⑈ 2015-07-22 16:41:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Making Electrum more anonymous</title>
+    <updated>2023-06-10T03:06:38.677691+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-July/009514.html" rel="alternate"/>
+    <summary>The topic being discussed is about improving anonymity for Electrum clients. One proposed solution is to combine all the addresses a client is interested in into a single bloom filter and send it to the server. Although the server could check every address against the bloom filter, it would be expensive but manageable. The client could also include a set of static and dynamic ruse addresses in the filter to confuse the server. Another alternative is for the server to send a bloom filter of addresses in each block and for the client to request entire blocks, which would use more bandwidth but be simple to implement. The idea is to spend more bandwidth and CPU to keep the server from knowing what the client really wants.There have been various proposals to improve anonymity for Electrum clients, but none have been convincing. One proposal is to create subsets of wallet addresses and send them to separate servers, but this would require trusting more servers and not really improve anonymity. An idea inspired by TOR is to create an anonymous routing layer between Electrum servers and clients. Each server publishes an RSA public key, and each client receives a list of available servers and their pubkeys. For each wallet address, a client chooses a server and a RSA keypair and creates a list of encrypted requests, which are sent to a main server that dispatches them to corresponding servers without revealing the client's IP address. Each server performs the request and encrypts the result with the keypair, which is forwarded to the client. It is noted that this approach will not work if all servers or a large fraction of them are controlled by the same entity that controls the main server.</summary>
+    <published>2015-07-22T16:41:24+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Merkleize All The Things</title>
+  <updated>2023-06-16T03:06:15.412743+00:00</updated>
+  <author>
+    <name>Johan Torås Halseth 2023-05-04 08:34:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Merkleize All The Things</title>
+    <updated>2023-06-16T03:06:15.412743+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-May/021611.html" rel="alternate"/>
+    <summary>A discussion about the generalization of the construct of access to the hash of embedded data of inputs and outputs, and the enforcement of output keys and static taptrees, took place. It was suggested that if one can dynamically compute the output embedded data in Script, they can enforce more or less anything, making it possible to simulate coin pools. The commitment to the set of pubkeys and amounts owned by the participants in the pool and an output taptree where each participant has their own spending path would be required. To exit the pool unilaterally, the participant must present a proof that their pubkey+amount is committed to in the input and an output where it is no longer committed. However, the question of how one would efficiently prove the inclusion/exclusion of the data in the commitment arises. One could naively hash all the data twice during script execution, but it is costly. Hence, it would be natural to show merkle tree inclusion/exclusion in script, but perhaps there are more efficient ways to prove it.In another email, Salvatore Ingala apologized for a couple of oversights in his previous email. m_B can't be committed as-is in the contract's embedded data, with the current semantics of OP_COCV, which only allows 32-byte values. A solution could be to store its hash SHA256(m_B), instead. Salvatore also corrected an incomplete statement regarding Alice and Bob settling their game. Alice cannot trust Bob by revealing her move as he could then cheat on-chain and play a different move. After adding the requirement that the internal pubkey of [S1] is a musig2 of both players, after Bob reveals his move (say, Rock), Alice will only agree to continue the game off-chain if Bob pre-signs transactions for the state [S1] (where m_B = Paper, and m_B = Scissors) that send all the money to Alice, which guarantees that a cheating Bob is punished.</summary>
+    <published>2023-05-04T08:34:07+00:00</published>
+  </entry>
+</feed>

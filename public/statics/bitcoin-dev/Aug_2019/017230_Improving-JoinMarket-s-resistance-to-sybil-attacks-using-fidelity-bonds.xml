@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving JoinMarket's resistance to sybil attacks using fidelity bonds</title>
+  <updated>2023-06-13T20:27:49.798909+00:00</updated>
+  <author>
+    <name>Dmitry Petukhov 2019-08-07 15:10:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving JoinMarket's resistance to sybil attacks using fidelity bonds</title>
+    <updated>2023-06-13T20:27:49.799906+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-August/017230.html" rel="alternate"/>
+    <summary>Chris Belcher has discussed two schemes to prevent easy mindless renting TXO method, which allows someone with coins on a hardware wallet to create a signature and copy-paste it into a website to get free money. The second scheme requires all locked TXOs to be spendable by any key that controls any TXO in the 'bond TXO package'. This scheme is similar to simple consolidation, and not better than it. However, the first scheme, which allows revocation of the whole bond by the key controlling even a single TXO in a bond, seems more promising.In the shared ownership rent scheme described by ZmnSCPxj, the 'TXO rentier' has a signed timelocked 'backout' transaction that spends the locked TXO and assigns the reward to the rentier. If any transaction spends any TXO in the bond, ignoring the timelock, it invalidates the bond when presented to takers. Therefore, the TXO rentier can revoke the bond by publishing this transaction (not to the blockchain, but by some other means so that takers can receive it). Verification of transaction validity ignores the timelock, and after verification, takers mark the whole bond as revoked and will not consider it when choosing makers. The inconvenience here is that takers need to store the data about revoked bonds, but there's no need for that information to be synchronized instantly between the participants. It is enough for takers to get the revoked-set eventually. Rentiers are still incentivized not to spoil the bond to receive the profit, but if their goal is to attack the attacker, the opportunity cost of these locked funds is the cost of the attack. If the renter rents TXOs from several entities to include in one bond, revocation by one rentier spoils the whole bond, and the total loss for all participants is bigger than the opportunity cost of locked funds of a single rentier that made the revocation. The possibility of such revocation increases risk for the renter and co-rentiers, and is likely to limit the possible scale of such TXO-renting operation.</summary>
+    <published>2019-08-07T15:10:17+00:00</published>
+  </entry>
+</feed>

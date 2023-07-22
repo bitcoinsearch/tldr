@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP] Normalized transaction IDs</title>
+  <updated>2023-06-11T00:21:33.416011+00:00</updated>
+  <author>
+    <name>Christian Decker 2015-10-20 10:30:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP] Normalized transaction IDs</title>
+    <updated>2023-06-11T00:21:33.416011+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-October/011570.html" rel="alternate"/>
+    <summary>The email thread from bitcoin-dev mailing list discusses the normalization process for transaction IDs and its implementation. The normalization involves two steps: stripping the scriptSig scripts in the inputs and replacing the hashes referencing the outputs being spent with the normalized hashes of the transaction that created the outputs. However, the second part is not yet explained in the draft. Non-coinbase transactions cannot be replayed since the normalized transaction still includes a the normalized transaction hashes of claimed outputs, hence any attempt to replay a transaction would fail since the outputs were already spent. For coinbase transactions, multiple transactions can be created with the same hash, relying on BIP 34 to make the coinbase transactions unique except for blocks 91842 and 91880 which are the reason BIP 34 was introduced. The computation of the normalized transaction ID replaces input hashes with their normalized counterpart making a chain of any depth non-malleable. The proposal is recursive in nature and the rule is that txids are what they would have been if n-txids had been used right from the start.</summary>
+    <published>2015-10-20T10:30:33+00:00</published>
+  </entry>
+</feed>

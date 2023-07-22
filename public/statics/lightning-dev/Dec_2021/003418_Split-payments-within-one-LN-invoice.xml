@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Split payments within one LN invoice</title>
+  <updated>2023-06-03T07:00:54.558432+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2021-12-16 23:44:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Split payments within one LN invoice</title>
+    <updated>2023-06-03T07:00:54.558432+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-December/003418.html" rel="alternate"/>
+    <summary>The email discusses a possible implementation of a "Poor man's rendez-vous" demo, which would require each intermediate payee to sign an invoice for which it does not know the preimage. A command called `signfakeinvoice` could be used to generate and sign the invoice, but not insert it into the database at all. The last payee generates a normal invoice, and from the last payee to the second, each one passes its invoice to the previous payee. The previous payee then creates its own signed invoice with `signfakeinvoice` to itself, adding its payout plus a fee budget, as well as adding its own delay budget. The first payee sends the sender the invoice, and on payment, the sender sends the payment to the first hop. From the first payee to the second-to-last, the plugin checks if the incoming payment has a hash that is in this scheme stored in the database and gathers `htlc_accepted` hook invocations until they sum up to the expected amount (this handles multipath between payees). The plugin checks if there is already an outgoing payment for that hash, and if it exists and is pending, waits for it to resolve to either success or failure. If the outgoing payment exists and succeeded, it resolves all the gathered `htlc_accepted` hooks. If the outgoing payment exists and failed, it fails all the gathered `htlc_accepted` hooks. Otherwise, it performs a `pay`, giving `maxfeepercent` and `maxdelay` based on its fee budget and delay budget. When the `pay` succeeds or fails, it propagates it to the gathered `htlc_accepted` hooks. Finally, the last payee receives a normal payment using the normal invoice-receive scheme.</summary>
+    <published>2021-12-16T23:44:12+00:00</published>
+  </entry>
+</feed>

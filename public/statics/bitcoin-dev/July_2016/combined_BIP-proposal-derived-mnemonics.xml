@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - BIP proposal: derived mnemonics</title>
+  <updated>2023-06-11T19:13:43.974197+00:00</updated>
+  <author>
+    <name>millibitcoin 2016-07-26 18:31:36</name>
+  </author>
+  <author>
+    <name>millibitcoin 2016-07-26 18:31:36</name>
+  </author>
+  <author>
+    <name>Jochen Hoenicke 2016-07-27 10:39:36</name>
+  </author>
+  <author>
+    <name>Jonas Schnelli 2016-07-27 10:53:24</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2016-07-27 20:59:54</name>
+  </author>
+  <author>
+    <name>Jonas Schnelli 2016-07-27 10:53:24</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2016-07-27 20:59:54</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2016-07-27 20:59:54</name>
+  </author>
+  <author>
+    <name>millibitcoin 2016-07-26 18:31:36</name>
+  </author>
+  <author>
+    <name>Jonas Schnelli 2016-07-26 20:10:15</name>
+  </author>
+  <author>
+    <name>Jochen Hoenicke 2016-07-27 10:39:36</name>
+  </author>
+  <author>
+    <name>Jonas Schnelli 2016-07-27 10:53:24</name>
+  </author>
+  <author>
+    <name>Jonas Schnelli 2016-07-26 20:10:15</name>
+  </author>
+  <author>
+    <name>Jochen Hoenicke 2016-07-27 10:39:36</name>
+  </author>
+  <author>
+    <name>Jonas Schnelli 2016-07-26 20:10:15</name>
+  </author>
+  <link href="bitcoin-dev/July_2016/012901_BIP-proposal-derived-mnemonics.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012901_BIP-proposal-derived-mnemonics.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012906_BIP-proposal-derived-mnemonics.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012907_BIP-proposal-derived-mnemonics.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012909_BIP-proposal-derived-mnemonics.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012907_BIP-proposal-derived-mnemonics.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012909_BIP-proposal-derived-mnemonics.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012909_BIP-proposal-derived-mnemonics.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012901_BIP-proposal-derived-mnemonics.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012902_BIP-proposal-derived-mnemonics.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012906_BIP-proposal-derived-mnemonics.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012907_BIP-proposal-derived-mnemonics.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012902_BIP-proposal-derived-mnemonics.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012906_BIP-proposal-derived-mnemonics.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2016/012902_BIP-proposal-derived-mnemonics.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - BIP proposal: derived mnemonics</title>
+    <updated>2023-06-11T19:13:43.974197+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-July/012901.html" rel="alternate"/>
+    <summary>The article discusses a draft BIP proposal for derived mnemonics from a master mnemonic that can be used to generate deterministic wallets using BIP-0032 or similar methods. The proposal aims to make it easier to split funds into smaller fractions and use them in an HD-wallet without putting the master mnemonic at risk on an online computer. The author explains how a master mnemonic is generated from standard mnemonic as described in BIP39. A new string is created from the master mnemonic using Count and Strength, where Count denotes the different derived mnemonics of a given strength and Strength is calculated based on the number of words desired for the derived mnemonic. The string is then hashed using sha512. The author suggests using sha512_hmac with a passphrase and salt and highlights security downsides of using checksum based on predetermined wordlist. However, there are concerns over the security of Bip39's use of PBKDF2 with 2048 iterations to protect large amounts of funds. Jonas Schnelli raised concerns over the use of PBKDF2 with 2048 iterations in Bip39, saying it is "not enough" to protect large amounts of funds. He questioned the alternatives, including putting an expensive processor and memory in every hardware wallet, waiting ten minutes after entering a passphrase with a million iterations, or computing the secret key on an online computer. He also considered how many iterations would be secure, suggesting that adding two random lowercase letters to the end of a passphrase with 2048 iterations could provide better protection than using a million iterations. Ultimately, Schnelli advised users to choose a good passphrase or ensure their seed is not stolen.In response to these concerns, the Digital Bitbox team uses PBKDF2 to secure user-entered passphrases for their hardware wallet by performing over 20,000 iterations on the computer and an additional 2048 rounds on-chip. This makes it more difficult for a potential thief to derive the key from a stolen backup file or SD card. While it's unclear how many iterations are truly considered secure, users can add two random lowercase letters to their passphrase to increase security. However, relying solely on the user to choose a strong passphrase is not recommended as it may lead to lost funds due to forgotten or lost passphrases.On a bitcoin-dev discussion, Jonas Schnelli raised concerns about the security of Bip39's use of PBKDF2 with 2048 iterations to protect large amounts of funds. Jochen Hoenicke responded by asking for alternative methods of protection and questioned how many iterations are secure. Two alternatives were proposed in public discussion: the use of a scheme that supports delegatable hardening or eschewing pretextual 'hardening' that serves no purpose but to make users think the scheme is more secure than it is. However, both alternatives were rejected by the authors of the Bip39 spec. Hoenicke concluded by saying that Bip39 is not a brainwallet that is only protected by the passphrase after all, which ignores the history of the spec and widespread use as a brainwallet.Despite these concerns, the proposal for derived mnemonics from a master mnemonic has several use cases, including splitting funds into fractions and sending them to multiple addresses, giving derived mnemonics to family members with bitcoin and memorizing only a 12-word seed. The reference implementation generates addresses based on BIP44 for a 24 word master mnemonic and is available on the website provided. The author also expresses concerns about users only storing and backing up the bip39 mnemonic as reconstructing funds from a seed can be difficult without access to a trusted TX-indexed full node, and novice users might underestimate the risk of losing metadata coupled with their transactions when they only store the wallet seed.</summary>
+    <published>2016-07-26T18:31:36+00:00</published>
+  </entry>
+</feed>

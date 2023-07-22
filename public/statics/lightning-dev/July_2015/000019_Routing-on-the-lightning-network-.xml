@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Routing on the lightning network?</title>
+  <updated>2023-05-23T18:08:04.807902+00:00</updated>
+  <author>
+    <name>Rusty Russell 2015-07-03 02:10:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Routing on the lightning network?</title>
+    <updated>2023-05-23T18:08:04.807902+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-July/000019.html" rel="alternate"/>
+    <summary>In a discussion on how routing will work in LN, Rusty proposed some assumptions to create a strawman for the same. Firstly, it was assumed that each node is known by its pubkey. Secondly, source routing is deemed the easiest route due to its privacy benefits and better tradeoffs between reliability and price. Thirdly, onion routing should be done where each node knows the source and next step. However, this method isn't perfect as R values can identify connections and timeouts imply a minimum TTL. Fourthly, a recipient gives the payer 100 routes from some nodes to them, and the payer hopefully can route to one of the mentioned nodes (probably the cheapest), which also ensures that if the payer has to do a route query it doesn't trivially reveal who the recipient is. In terms of route broadcast, Rusty's original idea was to have a subset of hubs to which nodes would connect, making full discovery routing easy within that network. A more ambitious idea involved selecting N "beacons" based on the block hash which every node figures out their best routes to/from.However, the beacons and their neighbors could get slammed, so Rusty suggests allowing beacons to become usable after 10 blocks, giving them a chance to boost their connections in preparation. Additionally, Joseph pointed out that the anchor transactions in the blockchain imply the network topology.</summary>
+    <published>2015-07-03T02:10:15+00:00</published>
+  </entry>
+</feed>

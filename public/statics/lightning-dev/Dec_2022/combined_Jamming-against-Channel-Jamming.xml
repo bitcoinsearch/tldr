@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Jamming against Channel Jamming</title>
+  <updated>2023-06-04T04:28:29.410188+00:00</updated>
+  <author>
+    <name>Joost Jager 2022-12-02 17:59:23</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2022-12-03 01:05:08</name>
+  </author>
+  <author>
+    <name>Joost Jager 2022-12-03 07:50:00</name>
+  </author>
+  <author>
+    <name>Antoine Riard 2022-12-06 04:27:12</name>
+  </author>
+  <link href="lightning-dev/Dec_2022/003781_Jamming-against-Channel-Jamming.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2022/003784_Jamming-against-Channel-Jamming.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2022/003785_Jamming-against-Channel-Jamming.xml" rel="alternate"/>
+  <link href="lightning-dev/Dec_2022/003787_Jamming-against-Channel-Jamming.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Jamming against Channel Jamming</title>
+    <updated>2023-06-04T04:28:29.410188+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-December/003781.html" rel="alternate"/>
+    <summary>In a recent email exchange, Joost Jager and Antoine Riard discussed the issues of channel jamming and spamming in the Lightning Network. Jager suggested using circuitbreaker as a solution to set limits on pending HTLCs or rate limits. However, the approach has limitations, such as failures leading to extra retries and penalization of routing nodes that apply limits. As an alternative, Jager proposed holding and queuing HTLCs that exceed the limit instead of failing them, which could punish upstream nodes for facilitating bad traffic. This strategy could lead to recursive propagation of limits across the network and push bad senders into corners where they cannot cause much harm. The Circuitbreaker feature adds new dynamic HTLC slot limits, which can be rate-limited based on incoming source. However, this could penalize your own routing hop, and a circuitbreaking policy should be applied recursively by your counterparty on their network topologies. While it increases the liquidity cost for an attacker to launch jamming attacks against high-value slots, it lowers the cost for jamming low-value slots. The conversation between Antoine and Joost revolves around the issue of preventing jamming attacks on the Lightning Network. They discuss various solutions to make routing hops "jamming safe" by defining the goals, either putting a high cost on the attacker or guaranteeing routing fees incomes to the routing hop. The economic proportionality is that an attacker cannot do much with severely limited channels and would need many more to achieve the same effect. There is also a discussion about the mode of queuing HTLCs as a congestion control mechanism and scheduling efficient HTLC traffic.Jager updated circuitbreaker with a queue mode for experimentation. The email also mentioned the potential impact of fat errors and the importance of routing nodes taking a careful look at the source of bad traffic and applying limits. Overall, the discussion highlighted the challenge of balancing countering channel jamming and spamming while maintaining efficient HTLC traffic scheduling.</summary>
+    <published>2022-12-02T17:59:23+00:00</published>
+  </entry>
+</feed>

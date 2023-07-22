@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Hold fee rates as DoS protection (channel spamming and jamming)</title>
+  <updated>2023-06-03T03:41:19.024497+00:00</updated>
+  <author>
+    <name>Joost Jager 2021-02-11 14:28:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Hold fee rates as DoS protection (channel spamming and jamming)</title>
+    <updated>2023-06-03T03:41:19.024497+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-February/002958.html" rel="alternate"/>
+    <summary>The vulnerability of channel jamming on the Lightning Network still exists and an experiment confirmed its seriousness. A proposal by t-bast's remix of forward and backward upfront payments, called bidirectional upfront payment, is considered the most promising direction. This proposal has a time-independent hold fee, which forces the receiver of the htlc to pay the full hold fee if it doesn't resolve within the grace period. However, this can be expensive for applications like atomic onchain/offchain swaps that rely on locking funds for some time. To address this limitation, a variation of bidirectional upfront payments that uses a time-proportional hold fee rate is presented. The hold fee rate compensates routing nodes for the time their outgoing htlc is in flight, which is communicated as part of their channel forwarding policy. In this system, the receiver of the htlc pays the hold fee primarily and routing nodes advertise their hold_grace_period to prevent anyone from collecting hold fees unconditionally. To coordinate the payment of fees, the update_add_htlc message is extended with hold_fee_rate and hold_fee_discount. The sender constructs the onion payloads such that all nodes along the route have their costs covered. An example is given where every node charges 0.6 msat/sat/minute with a hold grace period of 1 minute. In the happy flow, the sender of the payment is paying 6 sat per payment attempt, which is used to compensate the intermediate hops for the short unavailability of their funds.Overall, this proposal adds the flexibility needed to not take a step back in terms of functionality. It simplifies the parameter set and provides fair pricing for hodl invoices and its applications.</summary>
+    <published>2021-02-11T14:28:14+00:00</published>
+  </entry>
+</feed>

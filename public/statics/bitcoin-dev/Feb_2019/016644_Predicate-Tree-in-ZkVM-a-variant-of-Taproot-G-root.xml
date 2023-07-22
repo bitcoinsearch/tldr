@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Predicate Tree in ZkVM: a variant of Taproot/G'root</title>
+  <updated>2023-06-13T16:50:49.083916+00:00</updated>
+  <author>
+    <name>Oleg Andreev 2019-02-01 17:56:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Predicate Tree in ZkVM: a variant of Taproot/G'root</title>
+    <updated>2023-06-13T16:50:49.083916+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-February/016644.html" rel="alternate"/>
+    <summary>ZkVM is a blockchain virtual machine with multi-asset transfers and zero-knowledge programmable constraints. In ZkVM, there are linear types Contract and Value (in addition to plain data types), where Contract also implements "object capabilities" pattern: Contract "locks" a collection of data and Values under a "predicate" which is represented by a single group element ("point" in ECC terms). The predicate can be "satisfied" in a number of allowed ways which makes the contract unlock its contents, e.g. release the stored Value which can then be locked in a new unspent output. The Predicate Tree is a variant of Taproot by Greg Maxwell and G'root by Anthony Towns that is used in ZkVM. The Predicate is a point that represents one of three things, which allows composing conditions in an arbitrary tree: Public key, Program, and Disjunction of two other predicates. To use the predicate trees, ZkVM provides 4 instructions: `signtx` to verify the signature over the transaction ID treating the predicate as a pubkey, `call` to reveal the committed program and execute it, `left`/`right` to replace the contract's predicate with one of the sub-predicates in a disjunction, and `delegate` to check a signature over a program and execute that program (pay-to-signed-program pattern). For performance, the following rules are built into ZkVM: All point operations are deferred. Signature checks, disjunction proofs, program commitment proofs - are not executed right away, but deferred and verified in a batch after the VM execution is complete. This enables significant savings, especially since half or third of the terms reuse static points B and B2. `signtx` does not accept individual signatures, but uses a single aggregated signature for the whole transaction. All the pubkeys are remembered in a separate set and combined via MuSig-style protocol to check the single 64-byte signature over txid in the end of the VM execution. Another feature is inspired by old proposal by Pieter to treat checksig as all-or-nothing. ZkVM does not do dynamic branching based on outcomes of expensive operations. Signature checks, predicate tree traversal - all have to unconditionally succeed. This makes the program execution (w/o ECC ops) very fast and proportional to the length of the program. Then, all the collected ECC ops give precise metric of how expensive the rest of the validation would be. Plus, the constraint system proof blob (that comes with the transaction) by itself gives an exact measurement of the bulletproofs validation cost.The upstream protocol ("blockchain rules") can have soft- or hard- caps on both program length and amount of ECC operations (similar to the limit on sig checks per block in Bitcoin).</summary>
+    <published>2019-02-01T17:56:49+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Implementing batch processing for -blocknotify</title>
+  <updated>2023-06-06T18:10:38.856709+00:00</updated>
+  <author>
+    <name>Andy Parkins 2013-05-31 12:54:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Implementing batch processing for -blocknotify</title>
+    <updated>2023-06-06T18:10:38.856709+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-May/002681.html" rel="alternate"/>
+    <summary>In an email sent on May 31, 2013, Rune Kjær Svendsen sought a solution to the problem of his application not being fast enough to finish its work before a new block comes in. He noted that using the -blocknotify option with bitcoind would execute the application for each new block, but multiple instances of his app might be running simultaneously without finishing their tasks efficiently. Dr. Andy Parkins replied to this email and suggested creating a unix-domain socket when the program started. If it could not create one, then it should connect to it, and there would be two modes: the creator of the socket which listens to the socket for more incoming data and adds it to some sort of internal block queue, and the client to the socket which pushes output of -blocknotify to the socket and exits. Therefore, concurrency problems would be eliminated because only one process would be doing something with the data. The server would consist of two threads, one listening on the socket and then briefly locking and updating a queue, and another thread briefly locking and removing from the queue.</summary>
+    <published>2013-05-31T12:54:03+00:00</published>
+  </entry>
+</feed>

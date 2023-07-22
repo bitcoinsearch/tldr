@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP-341: Committing to all scriptPubKeys in the signature message</title>
+  <updated>2023-06-14T01:06:21.078540+00:00</updated>
+  <author>
+    <name>Andrew Kozlik 2020-04-29 14:57:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP-341: Committing to all scriptPubKeys in the signature message</title>
+    <updated>2023-06-14T01:06:21.078540+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-April/017801.html" rel="alternate"/>
+    <summary>In the current draft of BIP-0341, the signature message only commits to the scriptPubKey of the output being spent by the input. Andrew Kozlik proposes that the signature message should commit to the scriptPubKeys of all transaction inputs. This is important in applications such as CoinJoin, where a wallet has to deal with transactions containing external inputs. Without committing to all scriptPubKeys, an adversary can fool the wallet into displaying incorrect information about the amount being spent, resulting in theft of user funds. The wallet needs the scriptPubKey of the previous output spent by the input to ascertain non-ownership of an external input. However, this is an obstacle in implementing lightweight air-gapped wallets and hardware wallets. If the signature message would commit to the scriptPubKeys of all transaction inputs, then the wallet would only need to acquire the scriptPubKey of the output being spent without having to acquire and verify the hash of the entire previous transaction. An attacker providing an incorrect scriptPubKey would cause the wallet to generate an invalid signature message. Committing only to the scriptPubKey of the output being spent is insufficient for this application because the scriptPubKeys which are needed to ascertain non-ownership of external inputs are precisely the ones that would not be included in any of the signature messages produced by the wallet. The proposed solution is to add another hash to the signature message: sha_scriptPubKeys (32), which is the SHA256 of the serialization of all scriptPubKeys of the previous outputs spent by this transaction. This would allow wallets to reliably determine for each input whether it belongs to the wallet or not.</summary>
+    <published>2020-04-29T14:57:46+00:00</published>
+  </entry>
+</feed>

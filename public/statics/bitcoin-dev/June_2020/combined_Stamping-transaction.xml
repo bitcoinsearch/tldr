@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Stamping transaction</title>
+  <updated>2023-06-14T02:17:23.617454+00:00</updated>
+  <author>
+    <name>Chris Riley 2020-06-09 14:16:27</name>
+  </author>
+  <author>
+    <name>Mostafa Sedaghat joo 2020-06-07 07:27:48</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-06-07 15:01:42</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-06-07 15:01:42</name>
+  </author>
+  <author>
+    <name>Chris Riley 2020-06-09 14:16:27</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-06-07 00:40:51</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-06-07 15:01:42</name>
+  </author>
+  <author>
+    <name>Mostafa Sedaghat joo 2020-06-09 09:34:57</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-06-07 00:40:51</name>
+  </author>
+  <author>
+    <name>Mostafa Sedaghat joo 2020-06-05 12:05:20</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-06-07 00:40:51</name>
+  </author>
+  <author>
+    <name>Mostafa Sedaghat joo 2020-06-07 07:27:48</name>
+  </author>
+  <author>
+    <name>Mostafa Sedaghat joo 2020-06-05 12:05:20</name>
+  </author>
+  <author>
+    <name>Mostafa Sedaghat joo 2020-06-07 07:27:48</name>
+  </author>
+  <author>
+    <name>Mostafa Sedaghat joo 2020-06-05 12:05:20</name>
+  </author>
+  <author>
+    <name>Mostafa Sedaghat joo 2020-06-09 09:34:57</name>
+  </author>
+  <author>
+    <name>Chris Riley 2020-06-09 14:16:27</name>
+  </author>
+  <author>
+    <name>Mostafa Sedaghat joo 2020-06-09 09:34:57</name>
+  </author>
+  <link href="bitcoin-dev/June_2020/017945_Stamping-transaction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017932_Stamping-transaction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017933_Stamping-transaction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017933_Stamping-transaction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017945_Stamping-transaction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017931_Stamping-transaction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017933_Stamping-transaction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017944_Stamping-transaction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017931_Stamping-transaction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017930_Stamping-transaction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017931_Stamping-transaction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017932_Stamping-transaction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017930_Stamping-transaction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017932_Stamping-transaction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017930_Stamping-transaction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017944_Stamping-transaction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017945_Stamping-transaction.xml" rel="alternate"/>
+  <link href="bitcoin-dev/June_2020/017944_Stamping-transaction.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Stamping transaction</title>
+    <updated>2023-06-14T02:17:23.617454+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-June/017945.html" rel="alternate"/>
+    <summary>In a recent email exchange on the Bitcoin-dev mailing list, Mostafa Sedaghat joo proposed the idea of stamping transactions to decouple them from blocks and keep the size of the blockchain as small as possible. He argued that blockchain size matters, even though data storage is cheap and easy, and suggested that if you need a data-center to keep a copy of a blockchain, then you are far from a decentralization system.Mostafa has proposed a simple yet impactful idea of stamping transactions by putting the previous block hash in the transaction header. This technique can decouple translation from the block. He has explained his idea in detail on his website and suggests that the bitcoin developers consider it for the next big change, even though they tend to not change the core. The proposed mechanism can be made into a softfork by using an unspendable `scriptPubKey` with 0 output value.ZmnSCPxj countered that stamped transactions are not a solution to reduce the blockchain size. The reason why old history is retained is to prove to new nodes that one is the correct owner of the current coins. This is what separates Bitcoin from previous currency systems. Stamped transactions will require a hardfork, which is risky and unlikely to be accepted by everyone. Moreover, validation becomes more expensive as the blockchain grows. ZmnSCPxj proposes using a set of the most recent N block hashes instead of memorizing the last N block hashes. Since stamped transactions have a time-to-live, using a set creates a constant data structure and is good for validation.Another issue is incentives. The stamp takes up blockchain space that is paid for by the creator of the transaction. Further, the creator of the transaction gains no advantage from the stamped transaction; it is others who gain an advantage (the stamped transaction is more likely to be dropped from the mempool). Discounting the stamp somehow will probably make this into a hardfork. It might be sneaked into the witness somehow by adding it as a field somewhere in the new parts of Taproot.Stamped transactions are larger and more expensive than unstamped transactions, making them less incentivized. Users may prefer running older versions and never upgrading to the new version that requires stamped transactions. Furthermore, validating the stamp on every node is still a cost, and it is an incentive problem if individual users are not incentivized to use it. Stamping transactions does not help reduce mempool size as resending the transaction with a fresh stamp increases bandwidth usage.In conclusion, while the idea of stamping transactions to reduce blockchain size is an interesting one, it faces several challenges and may not be the most effective solution. The need for a hardfork, increased validation costs, and incentives problems make it less likely to be widely adopted. Additionally, the stamp does not help reduce mempool size and can even increase bandwidth usage. Therefore, further exploration and discussion are needed to find the best solutions for maintaining a decentralized and efficient blockchain system.</summary>
+    <published>2020-06-09T14:16:27+00:00</published>
+  </entry>
+</feed>

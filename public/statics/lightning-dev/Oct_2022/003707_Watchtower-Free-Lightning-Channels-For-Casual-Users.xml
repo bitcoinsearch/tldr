@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Watchtower-Free Lightning Channels For Casual Users</title>
+  <updated>2023-06-03T10:04:33.548463+00:00</updated>
+  <author>
+    <name>jlspc 2022-10-03 16:55:35</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Watchtower-Free Lightning Channels For Casual Users</title>
+    <updated>2023-06-03T10:04:33.548463+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-October/003707.html" rel="alternate"/>
+    <summary>This post introduces a new Watchtower-Free (WF) protocol that can improve the usability and scalability of the Lightning Network. The WF protocol is designed to enable casual users to send and receive Lightning payments with minimal availability requirements or the need for watchtower services. The protocol achieves this without any changes to the underlying Bitcoin protocol.The WF protocol has two parameters, I_S and I_L, which regulate the online time required from casual users to safeguard funds in their Lightning channel. The first attempt to use the current Lightning protocol to motivate the new protocol faced three problems: high "to_self_delay" values that would result in channel rejections, excessive "cltv_expiry_delta" values that prevent payment routing, and potential on-chain payments if a casual user sends a payment.The WF protocol solves these problems by modifying the Lightning protocol. First, it requires the casual user to pre-pay their partner for the cost of their capital tied up in the channel. Second, casual users are designated as Casual-Lightning-Users (CLUs) who can only partner with Dedicated-Lightning-Users (DLUs) to open unannounced channels and must not route payments. Third, the Commitment transactions of both users are modified so that the CLU can be offline for nearly I_L without forcing their DLU partner to go on-chain.The resulting protocol involves parties Bob and Alice committing to a payment through a hashed time-locked contract (HTLC). If Bob fails to update the commitment transactions off-chain after I_L time, he can submit his commitment and HTLC-success transactions to the blockchain. Alice implements the protocol similarly to the current Lightning channel protocol but can intentionally be unavailable, provided she remains available for at least I_S every I_L. She waits for a grace period of G following the expiry of her offered HTLC before putting her commitment transaction on-chain.Overall, the WF protocol requires three changes relative to the current Lightning protocol: a relative delay of tsdB is enforced before Alice can spend the HTLC output, only Alice's signature is required to spend the HTLC output in Alice's Commitment transaction, and both parties update the channel state off-chain at least once every I_L to reflect Bob's cost of capital. The post includes a diagram that shows the resulting protocol with a single payment from Alice outstanding.</summary>
+    <published>2022-10-03T16:55:35+00:00</published>
+  </entry>
+</feed>

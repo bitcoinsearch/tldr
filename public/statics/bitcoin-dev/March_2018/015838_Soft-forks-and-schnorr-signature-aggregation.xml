@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Soft-forks and schnorr signature aggregation</title>
+  <updated>2023-05-20T05:19:40.426892+00:00</updated>
+  <author>
+    <name>Anthony Towns 2018-03-21 04:06:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Soft-forks and schnorr signature aggregation</title>
+    <updated>2023-05-20T05:19:40.426892+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-March/015838.html" rel="alternate"/>
+    <summary>Bitcoin Core developers recently discussed implementing signature aggregation, which would enable multiple inputs to be authorized by a single signature. However, several considerations need to be addressed before this feature can be implemented. One of the challenges is the validation of every signature, which can be limited by using aggregation "buckets." One solution proposed is to create a new segwit witness version (v2) that supports Schnorr signature verification and a "pay to public key (hash?)" witness format, enabling direct signatures of the transaction to be aggregatable. Additionally, v2 should support MAST scripts and have a CHECK_AGG_SIG_VERIFY opcode for aggregating signatures.However, soft-forking new opcodes presents challenges, as new classes of addresses cannot be validated by existing nodes. The use of RETURN_VALID opcodes was suggested as an alternative, allowing for any behavior, including stack manipulation. Still, there are potential pitfalls where any aggregatable signature operations that occur after it have to go into separate buckets, leading to a hard fork if old nodes fail to interpret new transactions correctly.The proposed solutions aim to make aggregate signatures possible while ensuring compatibility with existing Bitcoin infrastructure. Core will maintain a config setting allowing users to prevent the hard fork from activating via UASF until the next release after activation.</summary>
+    <published>2018-03-21T04:06:18+00:00</published>
+  </entry>
+</feed>

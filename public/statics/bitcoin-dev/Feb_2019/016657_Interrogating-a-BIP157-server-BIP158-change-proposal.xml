@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Interrogating a BIP157 server, BIP158 change proposal</title>
+  <updated>2023-05-20T19:44:24.371931+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2019-02-06 00:17:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Interrogating a BIP157 server, BIP158 change proposal</title>
+    <updated>2023-05-20T19:44:24.371931+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-February/016657.html" rel="alternate"/>
+    <summary>In a recent email exchange, Tamas Blummer suggested a change to BIP158 in order to enable better decision-making regarding which filter chain is correct with lower bandwidth use. He argued that lightweight clients are currently unable to determine the integrity of a block filter in a bandwidth-efficient manner due to inclusion of input scripts. Blummer proposed an alternate filter chain on created and spent outpoints, as is currently implemented by Murmel, which would offer a match for every spent output of the block with the divergent filter. Blummer suggested changing BIP158 to have a base filter that contains exactly the following items for each transaction in a block: spent outpoints and the scriptPubKey of each output, aside from all OP_RETURN output scripts. He explained that this would simplify interrogation of a filter server since the filter of the block can be checked entirely against the contents of the same block, without requiring more bandwidth than download of a block at the mismatching checkpoint.Laolu Osuntokun disagreed with Blummer's proposal, stating that it was too late to change the current deployment of the BIPs. Instead, he suggested adding new filter types as an alternative. Osuntokun also pointed out that the current design choice offers space savings and intra-block compression while not cutting off any anticipated application level use cases. He noted that the BIP already has measures in place for adding new filter types in the future.Jim Posen added that he was in favor of option #2, which requires the smallest number of changes and is supported by the BIP 157 P2P protocol as currently written. Clients track multiple possible filter header chains and essentially consider the union of their matches. So if any filter received for a particular block header matches, the client downloads the block. The client can ban a peer if they ever return a filter omitting some data that is observed in the downloaded block, repeatedly serve filters that trigger false positive block downloads where such a number of false positives is statistically unlikely, or repeatedly serves filters that are significantly larger than the expected size.</summary>
+    <published>2019-02-06T00:17:05+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Structure for Trustless Hybrid Bitcoin Wallets Using P2SH for Recovery Options</title>
+  <updated>2023-06-12T14:49:25.271465+00:00</updated>
+  <author>
+    <name>Nick ODell 2017-08-09 20:14:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Structure for Trustless Hybrid Bitcoin Wallets Using P2SH for Recovery Options</title>
+    <updated>2023-06-12T14:49:25.271465+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-August/014821.html" rel="alternate"/>
+    <summary>Colin has proposed a structure for a trustless use of hybrid wallets that would allow for emergency recovery of funds in the case of a lost wallet. The proposed transaction script involves a user signing a transaction with their userWalletPrivKey, authenticating with the server, which then signs with their serverWalletPrivKey. In the event that the server goes rogue and starts refusing to sign, the user can use their userRecoveryPrivKey to send the funds anywhere they choose. In the more likely event that the user forgets their password and/or loses access to their userWalletPrivKey as well as loses their recovery key, they rely on the serverRecoveryPrivKey. When setting up their wallet, users answer basic identity information, set up a recovery password, and/or set up recovery questions and answers, none of which is sent to the server except for the 256-bit hash used to identify the recovery wallet. The server creates a 1025-bit nonce, encrypts it, stores it, and transmits it to the user's client along with the server's recovery private key. The client uses SHA512 on the combination of the identity questions and answers, the recovery password (if used), the recovery questions and answers, and the nonce. It uses the resulting hash to encrypt the serverRecoveryPrivKey, which is then encrypted again for transmission to the server. When the user needs to resort to using this option, they use their information to build their recovery identifier, which the server may optionally request e-mail and/or SMS confirmation for. The server decrypts the saved nonce and the first layer of encryption on the serverRecoveryPrivKey, then encrypts both for transmission to the user's client. The client removes the transmission encryption, calculates the 512-bit hash that was used to originally encrypt the serverRecoveryPrivKey by using the provided information and the nonce. After all of that the user can decrypt the airbitzServerRecoveryPrivKey and use it to send a transaction anywhere they choose. Nick has provided feedback on Colin's proposal, stating that it is a good start but is missing details such as the key used to encrypt the nonce by the server. Nick also questions the recovery questions asked and whether there are any mitigations in place to prevent the server from stealing the wallet using a dictionary of common pet names.</summary>
+    <published>2017-08-09T20:14:18+00:00</published>
+  </entry>
+</feed>

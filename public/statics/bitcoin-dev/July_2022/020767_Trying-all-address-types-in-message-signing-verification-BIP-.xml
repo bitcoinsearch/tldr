@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Trying all address types in message signing verification (BIP)</title>
+  <updated>2023-06-15T23:01:49.409964+00:00</updated>
+  <author>
+    <name>Ali Sherief 2022-07-22 15:20:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Trying all address types in message signing verification (BIP)</title>
+    <updated>2023-06-15T23:01:49.409964+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-July/020767.html" rel="alternate"/>
+    <summary>Ali Sherief proposed a BIP to address the lack of standardization for Segwit message signatures. Currently, wallets that support signing and verifying a Bitcoin message can only sign legacy addresses. Although it is technically possible to sign and verify segwit addresses, the absence of an accepted standard for signing segwit messages means that wallets that do support this feature simply insert the segwit address into the address field. Verification also only works using the procedure on that specific wallet software. This BIP does not enforce anything but sets guidelines for writing a message signing and verification procedure. The proposal standardizes the practice of placing the segwit address into the address field and does not require alterations to the message signing format like those in BIPs 173 or 322.In the verification part, the following address hashing algorithms will be tried in sequence in an attempt to reconstruct the address in the signed message: P2PKH (legacy address), P2WPKH-P2SH (nested segwit), and P2WPKH with version from 0 to MAX_WITNESS_VERSION (covers native segwit with version 0 as well as future native segwit address types such as Taproot) - where MAX_WITNESS_VERSION is the maximum supported witness version by the bech32 encoding. The verification procedure stops if any of these hashes yield the correct address, and fails if all of the above methods fail to reproduce the address in the signed message.In the signing procedure, the only modification is the insertion of the segwit address in place of the legacy address in the signed message. The proposal does not require any changes to existing signed messages, and the original sign/verify algorithms will continue to interoperate with this improved sign/verify algorithm, without any action necessary from the developers.Craig Raw verifies the signature by converting the message and signature to a public key, trying first BIP137 and then the approach used by Electrum. The script type is extracted from the provided address and compared against the address constructed with the public key using the same script type. BIP322 is suggested as a reference, which was not widely accepted.The original approach for signing segwit messages was directly from Satoshi himself and has never been codified in a BIP. The proposal does not replace, supersede, or obsolete BIPs 173 or 322 and only aims to standardize the practice of placing the segwit address into the address field. However, any universal BIP that encompasses all signatures would have to check for BIP137 signatures. Fortunately, only the verification algorithm needs to be adjusted to identify BIP137 signatures.</summary>
+    <published>2022-07-22T15:20:24+00:00</published>
+  </entry>
+</feed>

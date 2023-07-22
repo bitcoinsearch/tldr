@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Why should funders always pay on-chain fees?</title>
+  <updated>2023-06-03T02:18:53.947491+00:00</updated>
+  <author>
+    <name>Johan Torås Halseth 2020-10-16 10:30:55</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Why should funders always pay on-chain fees?</title>
+    <updated>2023-06-03T02:18:53.947491+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002850.html" rel="alternate"/>
+    <summary>The email thread on the Lightning-dev mailing list discusses the idea of changing the current rule that the funder pays all the commit transaction fees in channel openings. While this rule exists for simplicity, there are risks associated with pending HTLCs, such as flood-and-loot type attacks, pinning, and channel jamming. Routing nodes may be at risk when they receive HTLCs, and it is suggested that nodes pay for the on-chain fees of the HTLCs they offer while they are pending in the commit-tx, regardless of whether they're funder or fundee. The simplest way to achieve this would be to deduct the HTLC cost from the offerer's main output. A more extreme proposal would be to tie the total commit-tx fee to the channel usage, where each node pays a proportion of the fee proportional to the number of HTLCs they offered. This model uses the on-chain fee as collateral for usage of the channel and forces the fundee to care about on-chain feerates. It may create a feedback loop between on-chain feerates and routing fees, which is believed to be a good long-term thing. However, some members caution against adding complexity to fee splitting and the potential for obscure edge cases that may lead to a channel temporarily or permanently being "borked". They suggest that if a fairer way of splitting fees is added, it should be thoroughly explored pre-deployment to ensure any resulting edge cases within the solution space are addressed. The discussion concludes with the decision to put the issue aside for now and revisit it later if needed.</summary>
+    <published>2020-10-16T10:30:55+00:00</published>
+  </entry>
+</feed>

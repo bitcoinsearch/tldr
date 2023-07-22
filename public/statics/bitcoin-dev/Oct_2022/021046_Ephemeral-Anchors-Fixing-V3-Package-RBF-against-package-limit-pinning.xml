@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Ephemeral Anchors: Fixing V3 Package RBF against package limit pinning</title>
+  <updated>2023-06-16T01:57:52.870559+00:00</updated>
+  <author>
+    <name>Antoine Riard 2022-10-19 00:33:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Ephemeral Anchors: Fixing V3 Package RBF against package limit pinning</title>
+    <updated>2023-06-16T01:57:52.870559+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021046.html" rel="alternate"/>
+    <summary>In an email thread discussing efficient mempool design within the constraints of existing Lightning Network protocols, Greg Sanders proposed a policy change called Ephemeral Anchors. This policy involves watermarked outputs that must be spent in V3 packages, with the anchor being marked by the bare script `OP_TRUE`. The proposal has several implications, including allowing any value (even dust) to be included without bloating the UTXO set, and enabling anyone to bump the transaction without key material. Sanders pointed out that V3 transactions may solve rule #3 and #5 pinning attacks under some constraints, but they don't address package limit pinning. He suggested two solutions: expand a carveout for "sibling eviction" or implement Ephemeral Anchors. With sibling eviction, a new child that pays enough to bump spends from the same parent would knock its sibling out of the mempool and take the one child slot. However, this mechanism might lead participants to overbid far beyond the top mempool block fees. Ephemeral Anchors would allow for more robust multi-party fee bumping, superseding the Lightning Carve-out. Change outputs would no longer be pinned, and RBF/CPFP would become more robust. The proposal also magnifies composability of smart contracts by removing the 1 block CSV timelock on outputs in certain situations. However, there are still open questions about whether allowing non-zero value in ephemeral outputs would open up MEV concerns, and whether SIGHASH_GROUP-like constructs would enable uncommitted ephemeral anchors to be added at spend time.</summary>
+    <published>2022-10-19T00:33:13+00:00</published>
+  </entry>
+</feed>

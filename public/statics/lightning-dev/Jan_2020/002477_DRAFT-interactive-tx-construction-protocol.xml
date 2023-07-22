@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DRAFT: interactive tx construction protocol</title>
+  <updated>2023-06-02T23:14:30.612213+00:00</updated>
+  <author>
+    <name>Antoine Riard 2020-01-30 18:09:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DRAFT: interactive tx construction protocol</title>
+    <updated>2023-06-02T23:14:30.612213+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-January/002477.html" rel="alternate"/>
+    <summary>The email exchange is focused on the integration of nLockTime into C-lightning as a part of the Lightning Network protocol. The proposal suggests breaking down the dual-funding protocol update into smaller, more manageable chunks to simplify the process. The messages that need to be exchanged between peers include `tx_add_input`, `tx_add_output`, `tx_remove_input`, `tx_remove_output`, `tx_complete`, and `tx_sigs`. It is important to note that the validity of inputs/outputs is not checked until both peers have sent consecutive `tx_complete` messages.In case of reorg, where the funding tx may be dropped from mempool, the broadcaster should always be ready to resend it or bump feerate. Other details discussed in the email exchange include payment of fees, RBF'able signal, output scripts, and nLocktime.There are different cases discussed in the email exchange such as Simple Open, Splice, and Close. In the Simple Open case, both parties signal `opt_dual_fund`, and the opener initiates a channel open with `open_channel2` message, indicating the feerate for the opening transaction. The accepter signals their acceptance of the channel open as proposed via `accept_channel2`, and then both parties exchange messages like `tx_add_input`, `tx_add_output`, and `tx_complete` before exchanging commitment signatures.Similarly, in the Splice case, both parties signal `opt_splice_ok`, and one peer initiates a splice while signaling the feerate for the transaction. The initiator sends `tx_add_input`, `tx_add_output`, and `tx_add_input/output` as needed before sending `tx_complete`. The peer then sends `tx_add_input/output` as needed before sending `tx_complete`. Finally, the initiator and peer exchange commitment signatures.In the Close case, both parties signal `opt_collaborative_close` in their `node_announcement`, and a peer initiates a close by sending a `shutdown`. A feerate is negotiated out of band, and the closing initiator sends `tx_add_input` and `tx_add_output`. The peer responds with `tx_add_output`, and if `option_upfront_shutdown_script` is flagged but no such output with a value at or within a reasonable feerate gap of the peer's funding output is present, then the peer must fail the channel.If any input is flagged as RBF’able, then the transaction is considered eligible for RBF. RBF can be initiated by either party and serves as an initiation for another round of transaction composition. Each `fee_step` adds 1/4 (rounded down) to the initial transaction feerate. A rule will be added to the checks of an RBF transaction that it must include at least one identical, replaceable input as the original transaction.</summary>
+    <published>2020-01-30T18:09:42+00:00</published>
+  </entry>
+</feed>

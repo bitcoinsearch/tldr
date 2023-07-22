@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Anti-transaction replay in a hardfork</title>
+  <updated>2023-05-20T00:41:49.027235+00:00</updated>
+  <author>
+    <name>Matt Corallo 2017-01-26 03:29:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Anti-transaction replay in a hardfork</title>
+    <updated>2023-05-20T00:41:49.027235+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-January/013483.html" rel="alternate"/>
+    <summary>A proposal for a pre-BIP has been made in order to address the possibility of permanent ledger split during hard forks. The proposal aims to prevent replay attacks, which occur when an attempt is made to replay a transaction on another network. In a blockchain split, since both forks share the same historical ledger, replay attack would be possible unless some precautions are taken. The proposal suggests that anti-replay should be optional and not mandatory for users on both existing and new fork. For transactions created before the proposal was made, they are not protected from anti-replay. The new fork must accept these transactions as there is no guarantee that the existing fork would survive nor maintain any value. The proposal does not require any consensus changes in the existing network to avoid unnecessary debate. As a beneficial side effect, the O(n^2) signature checking bug could be fixed for non-segregated witness inputs, optionally. The proposal includes rules for both the new and existing networks. These rules ensure that transactions with only existing network characteristic bit set are invalid in the new network. Time-locked transactions made before the proposal are valid in the new network. Transactions made specifically for the new network are invalid in the existing network. To avoid a replay of such transactions, users should first spend at least a relevant UTXO on the new network so the replay transaction would be invalidated. It is up to the designer of a hardfork to decide whether this proposal is respected. The size of network characteristic byte is limited to 8 bits. However, if we are sure that some of the networks are completely abandoned, the bits might be reused. A demo is available in the forcenet2 branch and this proposal should be taken into account when creating hardfork proposals.</summary>
+    <published>2017-01-26T03:29:14+00:00</published>
+  </entry>
+</feed>

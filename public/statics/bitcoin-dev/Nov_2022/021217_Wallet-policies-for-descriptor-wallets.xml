@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Wallet policies for descriptor wallets</title>
+  <updated>2023-06-15T20:23:14.962831+00:00</updated>
+  <author>
+    <name>Salvatore Ingala 2022-11-21 11:27:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Wallet policies for descriptor wallets</title>
+    <updated>2023-06-15T20:23:14.962831+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021217.html" rel="alternate"/>
+    <summary>Salvatore Ingala has proposed a solution to address the security concerns and user experience challenges when integrating descriptors and miniscript support in hardware wallets. The proposal is called "wallet policies," which provide a native, compact representation of the wallet receive/change. Wallet policies are designed to benefit the UX of software wallets using descriptors/miniscript for multisignature or other complex locking conditions.Hardware wallets have limitations compared to general-purpose machines running bitcoin-core, such as limited RAM, computational power, and permanent storage. These limitations present challenges for the security and UX of scripts in hardware wallets. To address these concerns, a registration flow is proposed for the wallet policy in the hardware wallet. Before a new policy is used for the first time, the user will register a `wallet policy` into the hardware wallet.A wallet policy consists of a wallet descriptor template and a vector of key information items. The wallet descriptor template is a `SCRIPT` expression that can include various expressions such as `sh(SCRIPT)`, `wsh(SCRIPT)`, `pkh(KP)`, `wpkh(KP)`, `multi(k,KP_1,KP_2,...,KP_n)`, `sortedmulti(k,KP_1,KP_2,...,KP_n)`, `tr(KP)`, or any valid miniscript template. The key information vector includes key origin information and the actual key, which can be a hex-encoded pubkey or a serialized extended public key (`xpub`).From a wallet descriptor template and its associated vector of key information, one can obtain the 1-dimensional descriptor for receive and change addresses by replacing each key placeholder with the corresponding key origin information, and replacing every `/**` with `/0/*` for the receive descriptor and `/1/*` for the change descriptor. Restrictions on the supported descriptors have been put in place to simplify implementation, while attempting to capture all common use cases.Implementations must not necessarily implement all possible wallet policies defined by this standard, but it is recommended to document any limitation. Examples of wallet descriptor templates are provided, such as a native segwit account, a taproot BIP86 account, a native segwit 2-of-3, and a template with miniscript for "1 of 2 equally likely keys". The document also outlines additional rules, implementation guidelines, and examples.The references for this document include Output Script Descriptors, BIP-129 (Bitcoin Secure Multisig Setup), BIP-44, BIP-49, BIP-84, BIP-86, BIP-48, and BIP-87. It is important to note that avoiding key reuse among different wallet accounts is important but out of scope for this document.</summary>
+    <published>2022-11-21T11:27:25+00:00</published>
+  </entry>
+</feed>

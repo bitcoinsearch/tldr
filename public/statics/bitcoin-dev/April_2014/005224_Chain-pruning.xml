@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Chain pruning</title>
+  <updated>2023-06-08T19:36:09.041697+00:00</updated>
+  <author>
+    <name>Tier Nolan 2014-04-10 20:12:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Chain pruning</title>
+    <updated>2023-06-08T19:36:09.041697+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005224.html" rel="alternate"/>
+    <summary>Pieter Wuille discusses the issues with using hashrate to determine which UTXO set is valid in an email thread. He argues that if you rely on hashrate alone, a 51% attack can make you believe an invalid version of history. However, if there are invalidation proofs available, this is not strictly true. For example, if you are connected to 10 nodes and only one is honest, it can send you proof that your main chain is invalid. In the case of bad scripts or double spends, the node can present the input transaction for the invalid input along with the merkle path to prove that it is in a previous block. Double spends are pretty much the same as trying to spend non-existent outputs anyway. If the UTXO set commit was actually a merkle tree, then all updates could be included. To update the UTXO set, one would need the paths for all spent inputs, which puts a large load on miners to keep things working since they have to run a full node. If miners commit the data to the chain, then SPV nodes can do local checking. One of them will find invalid blocks eventually even if one of the other miners doesn't.</summary>
+    <published>2014-04-10T20:12:00+00:00</published>
+  </entry>
+</feed>

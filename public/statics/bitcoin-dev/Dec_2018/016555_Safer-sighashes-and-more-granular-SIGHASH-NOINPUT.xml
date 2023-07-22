@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+  <updated>2023-05-20T18:10:38.316758+00:00</updated>
+  <author>
+    <name>Anthony Towns 2018-12-14 09:30:02</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer sighashes and more granular SIGHASH_NOINPUT</title>
+    <updated>2023-05-20T18:10:38.316758+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-December/016555.html" rel="alternate"/>
+    <summary>In a recent discussion on the bitcoin-dev mailing list, the topic of whether or not it is worthwhile to do the mask complexity in Bitcoin rather than just removing the commitment to script with NOINPUT was raised by Rusty Russell. While restricting what scripts can be signed may feel safer, it is important to consider if it is actually safer in practice. If it is not safer, then committing to a subset of the script in each signature would result in extra complexity for no gain. However, if it is safer, then it would prevent people from losing funds. Russell argues that committing to more information than script masking does for use cases where different scripts need to be spent with the same signature is not feasible. Script masking seems general enough to prevent footguns even if key and value reuse across eltoo channels were a requirement, rather than prohibited. On the other hand, SIGHASH_NOINPUT commits to dangerously little context and doesn't feel safe to include as a primitive, as evidenced by the suggestion to add "_UNSAFE" or similar to its name. Personally, Russell is willing to accept a bit of risk, so that feeling doesn't make him strongly against the idea; but it also makes it hard for him to want to support adding it. To Russell, committing to a masked script is a huge improvement and if it also makes it easier to do something safer, that's probably a win.</summary>
+    <published>2018-12-14T09:30:02+00:00</published>
+  </entry>
+</feed>

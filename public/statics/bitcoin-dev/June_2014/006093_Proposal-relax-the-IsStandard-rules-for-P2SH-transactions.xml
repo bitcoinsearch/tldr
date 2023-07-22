@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: relax the IsStandard rules for P2SH transactions</title>
+  <updated>2023-06-09T00:19:55.491123+00:00</updated>
+  <author>
+    <name>Peter Todd 2014-06-18 00:15:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: relax the IsStandard rules for P2SH transactions</title>
+    <updated>2023-06-09T00:19:55.491123+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-June/006093.html" rel="alternate"/>
+    <summary>The discussion in this context is about opening up the "IsStandard" transaction rules on the main Bitcoin network to allow the use of multi-signature and other more complicated transaction forms in applications. There are two main risks to doing this, which include seldom-used opcodes having not-yet-discovered chain-forking bugs and opening up a denial-of-service attack. However, Gavin Andresen believes that the risk of such bugs is low, and there are protections in place to mitigate the potential for DoS attacks. The proposal is to allow any script containing 15 or fewer signature operations as a pay-to-script-hash (P2SH) script to be relayed and mined by the reference implementation. In addition to these changes, a soft-fork-safe patch is also being worked on. This patch defines an opcode whitelist of soft-fork-safe opcodes and considers scripts that leave extra items on the stack after execution to be non-standard. The latter is due to extra scriptSig pushes being a malleability source. This patch includes every opcode except the invalid ones and the OP_NOPx opcodes that may be redefined in a future soft-fork with new behavior. Rejecting transactions with unknown nVersion's ensures that a miner running an old version of Bitcoin Core will only mine transactions that the new version of Bitcoin Core considers valid. Gavin Andresen offers to add these changes to an existing patch and submit the pull-req for the concerned person.</summary>
+    <published>2014-06-18T00:15:03+00:00</published>
+  </entry>
+</feed>

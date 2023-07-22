@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>RBF Pinning with Counterparties and Competing Interest</title>
+  <updated>2023-06-03T00:53:32.879850+00:00</updated>
+  <author>
+    <name>David A. Harding 2020-04-22 18:24:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>RBF Pinning with Counterparties and Competing Interest</title>
+    <updated>2023-06-03T00:53:32.879850+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002650.html" rel="alternate"/>
+    <summary>On the Lightning-dev mailing list, Matt Corallo raised a concern where a lightning counterparty could potentially spend an HTLC using the preimage with a low-fee, RBF-disabled transaction. If Bob broadcasts the commitment transaction, A could claim the HTLC from B via the timeout mechanism, leaving B short the HTLC value. The main issue appears to be that Bob may broadcast a transaction without realizing it conflicts with a pinned transaction already in most nodes' mempools. To address this, Dave suggested re-implementing something like a BIP61 reject message with an extension that returns the txids of any conflicts. When Bob connects to a bunch of Bitcoin nodes and sends his conflicting transaction, the nodes would reply with a message containing the conflicting txid. Bob could then use this information to parse out the preimage and resolve the HTLC. This approach may not be perfect due to the unreliability of reject messages causing BIP61 to be disabled in Bitcoin Core. However, if Bob had at least one honest peer with the pinned transaction in its mempool and which implemented reject-with-conflicting-txid, he might be okay.</summary>
+    <published>2020-04-22T18:24:54+00:00</published>
+  </entry>
+</feed>

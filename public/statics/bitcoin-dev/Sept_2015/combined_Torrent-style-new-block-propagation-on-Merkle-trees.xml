@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Torrent-style new-block propagation on Merkle trees</title>
+  <updated>2023-06-10T23:00:56.761886+00:00</updated>
+  <author>
+    <name>Jonathan Toomim (Toomim Bros) 2015-09-23 23:12:14</name>
+  </author>
+  <author>
+    <name>Angel Leon 2015-09-24 00:31:27</name>
+  </author>
+  <author>
+    <name>Angel Leon 2015-09-24 00:31:27</name>
+  </author>
+  <author>
+    <name>Tier Nolan 2015-09-24 08:52:34</name>
+  </author>
+  <author>
+    <name>Angel Leon 2015-09-24 00:31:27</name>
+  </author>
+  <author>
+    <name>Jonathan Toomim (Toomim Bros) 2015-09-23 23:12:14</name>
+  </author>
+  <author>
+    <name>Tier Nolan 2015-09-24 08:52:34</name>
+  </author>
+  <author>
+    <name>Jonathan Toomim (Toomim Bros) 2015-09-23 23:12:14</name>
+  </author>
+  <author>
+    <name>Tier Nolan 2015-09-24 08:52:34</name>
+  </author>
+  <link href="bitcoin-dev/Sept_2015/011176_Torrent-style-new-block-propagation-on-Merkle-trees.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2015/011177_Torrent-style-new-block-propagation-on-Merkle-trees.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2015/011177_Torrent-style-new-block-propagation-on-Merkle-trees.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2015/011180_Torrent-style-new-block-propagation-on-Merkle-trees.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2015/011177_Torrent-style-new-block-propagation-on-Merkle-trees.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2015/011176_Torrent-style-new-block-propagation-on-Merkle-trees.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2015/011180_Torrent-style-new-block-propagation-on-Merkle-trees.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2015/011176_Torrent-style-new-block-propagation-on-Merkle-trees.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Sept_2015/011180_Torrent-style-new-block-propagation-on-Merkle-trees.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Torrent-style new-block propagation on Merkle trees</title>
+    <updated>2023-06-10T23:00:56.762877+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-September/011176.html" rel="alternate"/>
+    <summary>A proposal has been made to improve the block propagation algorithm in Bitcoin. The current algorithm is slow and requires a peer to have the full block before uploading to other peers. A new algorithm inspired by Bittorrent has been proposed which splits the transactions into chunks and hashes each chunk, allowing leech peers to upload chunks of data as soon as they get them and confirm both PoW and hash/data integrity instead of waiting for a fully copied block. However, this algorithm may not always perform better in situations where the bandwidth to ping latency ratio is high relative to the blocksize. Another proposal on the Bitcoin-dev mailing list by user jtoomim suggests using a protocol to supply resources in a parallelized and decentralized manner. Although it is unclear what specific resources are being referred to, it could potentially improve efficiency and distribution of said resources. Moreover, the current block propagation algorithm used by Bitcoin requires a peer to have the full block before it starts uploading to other peers in the p2p mesh, which slows down block propagation. On September 24, 2015, Jonathan Toomim from Toomim Bros posted on the Bitcoin-dev mailing list about the current block propagation algorithm. The algorithm consists of a node mining a block, notifying its peers that it has a new block with an "inv," and the peers responding that they have not seen it, and request the block with "getdata" [hash]. The node then sends out the block in parallel to all eight peers simultaneously, and once a peer completes the download, it verifies the block, then enters step two. This prevents a DOS attack where one could send invalid blocks to the relay node and cause the local full node to kick it. Mining pools currently connect to the "fast relay network" which is optimised for fast block distribution. Each miner runs a normal full node and a relay node on the same computer, where the full node tells the relay node whenever it receives a new transaction via the inv message, and the node requests the full transaction. The relay node tells its relay peers that it knows about the transaction (hash only) and its 4-byte key. Each relay node keeps a mapping of txid to key for each of its peers, and there is some garbage collection and entries are removed once the transaction is included in a block. When a block is found, the local node sends it to the relay node, which then forwards it to all of its peers in a compact form.</summary>
+    <published>2015-09-23T23:12:14+00:00</published>
+  </entry>
+</feed>

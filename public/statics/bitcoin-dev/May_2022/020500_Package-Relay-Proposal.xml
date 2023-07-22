@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Package Relay Proposal</title>
+  <updated>2023-06-15T20:52:48.924235+00:00</updated>
+  <author>
+    <name>Gloria Zhao 2022-05-18 18:40:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Package Relay Proposal</title>
+    <updated>2023-06-15T20:52:48.924235+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020500.html" rel="alternate"/>
+    <summary>The email thread focuses on the implementation of package relay in Bitcoin, specifically version 1 and potential improvements for version 2. The sender clarifies that version 1 is only meant to solve one of two use cases, with orphan-fetching being added as an afterthought. Version 2 could include a "pckginfo2" message containing a transaction with all of its ancestors.The conversation also touches on various technical details, such as configurable values for the maximum number of transactions and maximum weight per package a node is willing to accept, disconnecting peers who set "fRelay=false" in their version messages, and how to determine whether or not a peer will be interested in a package based on their feefilter. Additionally, it is suggested that the messages "getpckgtxns" and "pcktxns" could be renamed to "getbatchtxns" and "batchtxns" to allow for more general use, potentially unrelated to packages/cpfp.The discussion is centered around the process of how transactions are requested and sent between sender and receiver in the Bitcoin network. The package information is used by the receiver to decide how to request the transactions. For instance, if the receiver already has some of the transactions in their mempool, they only request the missing ones. They could also decide not to request the package at all based on the fee information provided.Rules are defined for packages such as ''Only 1 child with unconfirmed parents'' and ''Total fees and weight''. It's mentioned that the 'total_fee' and 'total_weight' fields must accurately represent the sum total of all transactions' fees and weights, respectively. A question arises about whether "getpckgtxns" and "pckgtxns" messages can contain only one transaction, which would be normal if requesting a single missing parent for an orphan you've received.Lastly, there is a discussion about the process of announcing the package fee info, which is announced in the second message after INV PCKG1 C. It's suggested that it would be more efficient to announce the package fee info in the first message. However, if the sender is already applying the feefilter to the package before announcing it, it probably doesn't matter, and means you're only getting a 32B INV from every peer, rather than a 32*(n+2) PCKGINFO1 message from every peer.</summary>
+    <published>2022-05-18T18:40:58+00:00</published>
+  </entry>
+</feed>

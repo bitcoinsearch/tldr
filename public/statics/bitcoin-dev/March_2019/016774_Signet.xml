@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Signet</title>
+  <updated>2023-06-13T17:36:51.819956+00:00</updated>
+  <author>
+    <name>Karl-Johan Alm 2019-03-14 01:07:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Signet</title>
+    <updated>2023-06-13T17:36:51.819956+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-March/016774.html" rel="alternate"/>
+    <summary>In an email exchange between Anthony Towns and Kalle Alm, the two discuss the idea of making signatures optional in headers to allow for "light nodes" that don't download or verify signatures. This approach would make signatures a "p2p level agreement" for a block to be considered fully valid. The signature would only sign the traditional 80-byte header, and wouldn't be included in the block's tx merkle root, while the prevHash would reflect the hash of the previous block's 80-byte header without the signature.However, this approach comes with added complexity as a signature-aware node talking to a non-signature-aware node should reject/discard headers sent from the peer. If the signature is detached from the header, it also creates a situation where a malicious user could send garbage data as the signature for a valid header, forcing peers to mark that header as invalid.One solution to this problem is to enforce including the previous block's header signature in the current block's coinbase. While this doesn't prevent someone from spamming invalid headers at block height current_tip+1, it allows for all but the latest signature to be obtained. As long as the latest signature can be fetched, theoretically, the entire chain could be verified just from the blocks and that one signature.</summary>
+    <published>2019-03-14T01:07:20+00:00</published>
+  </entry>
+</feed>

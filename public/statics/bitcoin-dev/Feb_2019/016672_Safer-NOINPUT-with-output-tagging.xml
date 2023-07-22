@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Safer NOINPUT with output tagging</title>
+  <updated>2023-06-13T16:14:30.451574+00:00</updated>
+  <author>
+    <name>Jonas Nick 2019-02-09 16:52:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Safer NOINPUT with output tagging</title>
+    <updated>2023-06-13T16:14:30.451574+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-February/016672.html" rel="alternate"/>
+    <summary>Johnson Lau proposed a modification to the eltoo protocol to address output tagging, which reduces fungibility in multiparty channels. He suggested that in a semi-cooperative channel closing scenario where one party is unresponsive, the remaining participants can create two settlement transactions (txs) with different locktimes to fund a new channel, where one settlement tx is tagged and the other is untagged. The branch channel is opened on top of the tagged output of the settlement tx X, and if A and B decide to close the channel cooperatively, they could do it on top of the untagged output of tx Y, without using NOINPUT. In this way, there won't be any fungibility loss, and other people will only see the uncooperative closing of the main channel. Johnson proposed that for NOINPUT to be safer, an output must be "tagged" for it to be spendable with NOINPUT, and the tag must be made explicitly by the payer. He analyzed two ways of tagging: setting a certain bit in the tx version or setting a certain bit in the scriptPubKey. Tagging in either way should not complicate the eltoo protocol and should not bring extra block space overhead. Tagging with scriptPubKey provides the advantage of per-output basis tagging but is only possible with native-segwit, not P2SH. On the other hand, tagging with tx version will also protect P2SH-segwit, and all existing wallets are protected by default. However, it is somewhat a layer violation and could only tag all or none output in the same tx. Johnson also suggested an extension to the version tagging to make NOINPUT even safer, where NOINPUT will also sign the version of the previous tx.</summary>
+    <published>2019-02-09T16:52:07+00:00</published>
+  </entry>
+</feed>

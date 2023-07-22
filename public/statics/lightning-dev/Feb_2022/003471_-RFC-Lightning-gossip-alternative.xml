@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[RFC] Lightning gossip alternative</title>
+  <updated>2023-06-03T07:31:28.845737+00:00</updated>
+  <author>
+    <name>Joost Jager 2022-02-15 13:45:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[RFC] Lightning gossip alternative</title>
+    <updated>2023-06-03T07:31:28.845737+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-February/003471.html" rel="alternate"/>
+    <summary>Joost has made some inquiries regarding the proposal and raised several questions. One of the questions is whether the total proved utxo value can be a dynamic value similar to the minimum relay fee on L1. Another question concerns the meaning of capacity outside the context of a real channel, and whether it will be reduced to the maximum htlc amount that the nodes want to route, to save as much of the announceable budget as possible. Additionally, Joost asks whether 10 x 10k channels should weigh as much on the budget as a 1 x 100k channel, and whether there is some mechanism to discourage spam. The proposal suggests the use of tlv_stream channel_update_v2_tlvs with two types: "capacity" and "cost". The "capacity" type has a data of tu64:satoshis, while the "cost" type has a data of u16:cltv_expiry_delta, u32:fee_proportional_millionths, and tu32:fee_base_msat. There is also another type called "min_msat" which contains a data of tu64:min_htlc_sats. Regarding the `channel_id_and_claimant`, Joost suggests increasing the budget multiplier from 10 to 20, which could simplify applying the cost to both nodes. It is also mentioned that a channel is not considered to exist until both peers have sent a channel_update_v2, at least one of which must set the `claim` flag. If a node sets `claim`, the capacity of the channel is subtracted from the remaining announcable_channel_capacity for that node (minimum 10,000 sats). Finally, Joost inquires about the magic value and whether it can be dynamic.</summary>
+    <published>2022-02-15T13:45:48+00:00</published>
+  </entry>
+</feed>

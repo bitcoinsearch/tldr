@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Thoughts on fee bumping</title>
+  <updated>2023-06-15T16:30:18.586448+00:00</updated>
+  <author>
+    <name>Antoine Riard 2022-02-11 05:26:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Thoughts on fee bumping</title>
+    <updated>2023-06-15T16:30:18.586448+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019888.html" rel="alternate"/>
+    <summary>The conversation around mempools, fee-bumping, and Layer 2 solutions has become increasingly complex, leading to concerns over the difficulty in reasoning about them. The goal is to keep complexity reasonably sane to enable human auditing. There are several design principles that have been proposed to address the issue of fee-bumping. Purely additive feerate bumps should never be impossible, and the bandwidth and chain space consumed by a fee-bump should be minimal. Special transaction structures should not be required to bump fees, and feerate bumps should be able to come from anywhere. One downside of CPFP is that it requires the transaction to pre-specify the keys needed to sign for fee bumps. Another issue is that replace-by-fee (RBF) is kind of a hack, as a special sequence number should not be necessary for post-broadcast contribution toward feerate.Instead of prompting a rebroadcast of the original transaction for replacement, which contains a lot of data not new to the network, it makes more sense to broadcast the "diff" which is the additive contribution towards some txn's feerate. The mining ecosystem behavior after the reward is drained and their incentives towards L2 confirmations is still uncertain. While there is no simple way forward, this is a relevant discussion to have ecosystem-wise.The email discusses the use of transaction sponsors as a way to manage Bitcoin fees. Transaction sponsors allow for feerates to be adjusted after a transaction is broadcast, without requiring rebroadcasting or prophylactic anchor outputs, making it a straightforward interface for end-users. There were some objections to the original proposal, such as a potential pinning attack and breaking the classic invariant, but the author suggests possible solutions to these issues.The use of transaction sponsors would require a soft-fork, but the author argues that the benefits of simplifying fee management may outweigh the cost. The author encourages further discussion and consideration of the transaction sponsor proposal. Links to previous discussions on this topic are also provided.</summary>
+    <published>2022-02-11T05:26:53+00:00</published>
+  </entry>
+</feed>

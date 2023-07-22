@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Distributing low POW headers</title>
+  <updated>2023-06-07T14:27:53.827585+00:00</updated>
+  <author>
+    <name>Tier Nolan 2013-07-23 11:27:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Distributing low POW headers</title>
+    <updated>2023-06-07T14:27:53.827585+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-July/002976.html" rel="alternate"/>
+    <summary>The proposed change to the rules for distinguishing between forks suggests that low POW headers should be broadcast by the network. If a header has more than 1/64 of the POW of a block, it should be broadcast to provide information on which fork is getting most of the hashing power. The fork selection rule for miners should bias towards staying on the fork that has the most hashing power, meaning they might keep hashing on a fork that is 1-2 blocks shorter. This lowers the probability of natural and malicious reversals. To distribute low POW headers, the client needs to maintain a short term view of the entire header tree. The first block header messages that have more than 1/64 of the standard POW requirements would be forwarded. The storage could be limited, and headers could be discarded after a while. This informs clients of forks that are receiving hashing power and could be linked to a protocol version to prevent disconnects due to invalid header messages.To determine the longest chain, each link would get extra credit for headers received. As long as miners keep headers for 30-40 blocks, they will likely have all headers back to any reasonable fork point. This means that the top fork is considered longer, even though it has two less blocks. If 75% of the miners follow this rule, then the top fork will eventually catch up and win, so it is in the interests of the other 25% to follow the rule too. Even if there isn't complete agreement on headers received, the fork that is getting the most hashing will naturally gain most of the headers, so ties will be broken quickly.</summary>
+    <published>2013-07-23T11:27:03+00:00</published>
+  </entry>
+</feed>

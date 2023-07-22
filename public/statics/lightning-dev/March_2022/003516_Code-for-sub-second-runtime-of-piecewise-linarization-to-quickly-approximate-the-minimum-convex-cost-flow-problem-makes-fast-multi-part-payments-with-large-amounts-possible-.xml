@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Code for sub second runtime of piecewise linarization to quickly approximate the minimum convex cost flow problem (makes fast multi part payments with large amounts possible)</title>
+  <updated>2023-06-03T07:53:36.665566+00:00</updated>
+  <author>
+    <name>René Pickhardt 2022-03-14 17:46:57</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Code for sub second runtime of piecewise linarization to quickly approximate the minimum convex cost flow problem (makes fast multi part payments with large amounts possible)</title>
+    <updated>2023-06-03T07:53:36.665566+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-March/003516.html" rel="alternate"/>
+    <summary>In this email, Rene thanks Carsten and other Lightning developers for discovering some minor inaccuracies in his piecewise linearization. They discuss Mission Control information provided by lnd, which primarily focuses on a statistic of the ratio of successful payments over the past X attempts on a channel given a certain time interval. However, from a probabilistic model, it can be done mathematically precise by looking at the conditional probabilities. He has written hands-on instructions in the rust repo and they have been fully implemented in the mainnet test and simulations. It is necessary to know the effective uncertainty by only looking at the effective amount that goes above the minimum certain liquidity and the effective capacity. Regarding leftovers after Piecewise Linearization, there is a quantization of 10,000, where a channel of size 123,456 ends up as an arc with a capacity of 12 units. Cutting this into 5 pieces gives us 5*2 with 2 units not ending up in any of those pieces. This could easily be fixed, but fully saturated channels mean very low probabilities, so even in the situation where a significant part of the channel is cut off, the flow will and should most likely fail as the min cust is probably just lower than the amount they would attempt to send. If the quantization makes a channel so small that they cannot even create 5 (or N) disjoint segments, then the likelihood of being included in the final result is too small anyway. Although it may not be very likely, ignoring 20k sat or up to 4*quantization sats doesn't feel right. In practice, he doubts it would ever become a problem as this will only be an issue when the payment amount is very close to the min cut which would make flows so unlikely to begin with that they would use other ways to conduct the payment anyway.</summary>
+    <published>2022-03-14T17:46:57+00:00</published>
+  </entry>
+</feed>

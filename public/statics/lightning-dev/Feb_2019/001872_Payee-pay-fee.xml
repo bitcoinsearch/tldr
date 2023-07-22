@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Payee pay fee</title>
+  <updated>2023-06-02T17:26:09.349811+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-02-15 05:40:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Payee pay fee</title>
+    <updated>2023-06-02T17:26:09.349811+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-February/001872.html" rel="alternate"/>
+    <summary>In a recently shared email, ZmnSCPxj alludes to the issue of withdrawing funds from a service in the Lightning Network (LN). The issue is that when a user withdraws funds using LN, the payer bears the cost of the transaction fees. However, this is not ideal for services such as exchanges where the payee should bear the fees. Therefore, there is a need for a solution where the payee provides one or more complete paths from the payer to the payee node. These paths will be provided as fully encrypted onions to the payer, providing benefits such as improved privacy and fairness in fee calculation. ZmnSCPxj suggests that the payee generates the route and controls its fees, which ensures that the payee knows exactly how much it will lose in fees. The payer cannot correlate a particular user with its LN node, and cannot bias the route towards other nodes it controls that happen to charge high LN fees. The use-case scenario is where the payer is a publicly-useable service such as an exchange. In this case, the payer provides its node address to the user, but the user never provides its node address to the service. There is no spec yet, and ZmnSCPxj is too busy with other considerations to actually work on anything Lightning-related, but others can pick up this issue and continue its development. There is a need for some standard of transporting multiple *encrypted* onions from the user (payee) to the service (payer), and some implementation must provide some method of generating multiple routes from the user (payee) to the service (payer). The implementation needs to have some heuristic, and if it finds a route that loses more than 1% of the value being paid, then it probably should reject that route and not provide it to the service (payer).The issue shows the "other side" of merchants, which is exchanges, and current LN is biased towards merchants because the merchant exposes its node ID. For exchanges, there is a need to perform a dual transformation, where the exchange exposes its node ID somehow (via a mechanism that does not yet exist).</summary>
+    <published>2019-02-15T05:40:46+00:00</published>
+  </entry>
+</feed>

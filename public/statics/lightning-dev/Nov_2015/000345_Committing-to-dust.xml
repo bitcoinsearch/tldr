@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Committing to dust</title>
+  <updated>2023-05-18T16:01:32.723872+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-11-27 02:38:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Committing to dust</title>
+    <updated>2023-05-18T16:01:32.723872+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2015-November/000345.html" rel="alternate"/>
+    <summary>In a lightning channel with balances of 2 BTC on one side and 1 BTC on the other, sending a micropayment of 42 satoshi across the channel results in an updated commitment. However, the third output will hit the IsDust() test and the entire transaction will be rejected, making it impossible to close the channel. This is similar to sub 1-satoshi payments, but different in that they can be represented as soon as they complete. One solution is to treat them much the same way by accounting for them exactly in the lightning state but approximating the results in the actual commitments. The issue is that adding dust to the commitment might prevent access to any funds if the counterparty goes AWOL. Even though the amount may not matter, it cannot be treated like any other case in the code. A possible solution is to weaken the dust protection in the network, allowing anyone to clear the dust after three months if it weren't otherwise claimed. However, this would mean paying to an actual (non-standard) script, rather than a scripthash, which would be annoying in its own way. Moreover, adding that output to the transaction would probably cost more in additional fees than it's going to pay in any case.</summary>
+    <published>2015-11-27T02:38:07+00:00</published>
+  </entry>
+</feed>

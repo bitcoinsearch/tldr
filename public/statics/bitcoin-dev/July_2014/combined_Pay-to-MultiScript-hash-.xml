@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Pay to MultiScript hash:</title>
+  <updated>2023-06-09T01:04:25.757918+00:00</updated>
+  <author>
+    <name>Jeremy 2014-07-16 17:56:54</name>
+  </author>
+  <author>
+    <name>Jeff Garzik 2014-07-17 04:52:14</name>
+  </author>
+  <author>
+    <name>Jeremy 2014-07-17 05:59:25</name>
+  </author>
+  <author>
+    <name>Jeremy 2014-07-16 17:56:54</name>
+  </author>
+  <author>
+    <name>Jeremy 2014-07-17 05:59:25</name>
+  </author>
+  <author>
+    <name>Jeff Garzik 2014-07-17 06:21:42</name>
+  </author>
+  <author>
+    <name>Jeremy 2014-07-17 19:55:10</name>
+  </author>
+  <author>
+    <name>Jeremy 2014-07-16 17:56:54</name>
+  </author>
+  <author>
+    <name>Jeremy 2014-07-17 05:59:25</name>
+  </author>
+  <author>
+    <name>Jeff Garzik 2014-07-17 06:21:42</name>
+  </author>
+  <author>
+    <name>Jeremy 2014-07-17 19:55:10</name>
+  </author>
+  <author>
+    <name>Jeff Garzik 2014-07-17 06:21:42</name>
+  </author>
+  <author>
+    <name>Jeremy 2014-07-17 19:55:10</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2014-07-17 20:08:24</name>
+  </author>
+  <author>
+    <name>Jeff Garzik 2014-07-17 04:52:14</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2014-07-17 20:08:24</name>
+  </author>
+  <author>
+    <name>Jeff Garzik 2014-07-17 04:52:14</name>
+  </author>
+  <author>
+    <name>Gregory Maxwell 2014-07-17 20:08:24</name>
+  </author>
+  <link href="bitcoin-dev/July_2014/006272_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006276_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006277_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006272_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006277_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006278_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006286_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006272_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006277_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006278_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006286_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006278_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006286_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006287_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006276_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006287_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006276_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2014/006287_Pay-to-MultiScript-hash-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Pay to MultiScript hash:</title>
+    <updated>2023-06-09T01:04:25.758919+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-July/006272.html" rel="alternate"/>
+    <summary>The discussion is primarily about the costs associated with implementing a new transaction type in Bitcoin's network. Jeremy Rubin proposed a new transaction type that matches on script hashes to create "permission groups" where multiple groups can spend a utxo. However, expressing this would require additional costs in terms of complicated control flows.Jeremy suggested using OP_HASH160 [20-byte-hash-value 1]...[20-byte-hash-value N] OP_N OP_MULTISCRIPTHASHVERIFY which could be spent with signatures and serialized script. This would lead to an increased utxo pool bloat and increased transaction complexity. Jeremy proposed an interesting way to push the sigs onto the stack and have implicit orders, then do expressions with their aliases, and then be able to assign "spending groups". He also mentioned that doing boolean logic with multisig groups is quite possible, such as "group AND group" or "group OR (group AND group)," which he called "multi-multisig" for lack of a better name.In an email conversation on July 16, 2014, Jeremy proposed a solution to express multiple ways that would incur additional costs in terms of complicated control flows. He suggested using a normal P2SH output and a script with OP_IF and friends, which seems more straightforward when considering the costs. However, there is an implication in terms of increased utxo pool bloat and increased transaction complexity.When comparing the proposed method to P2SH, which is already analyzed by developers, rolled out and working, the cost of updating everybody to relay this new transaction type is considered. The cost of increasing the rate of UTXO growth versus P2SH, and "default public" versus P2SH's "default private" are discussed as well.Publishing the script in the txout has the advantage of being easily audited by third parties scanning the blockchain, but it may be accomplished by offering the script upon request out-of-band. An interesting idea is presented of creating a "cookbook" of useful scripts like those described in the discussion.Jeremy had another idea for a new transaction type that matches on script hashes similar to pay to script hash, but it checks for one of N scripts. However, this idea seems less flexible and efficient compared to the Merkelized Abstract Syntax Tree construction. Although it may be slightly easier to implement, it would not be any easier to deploy.In terms of space efficiency, each 20-byte hash allows for a 500-byte script, and only one of the 500 byte scripts has to be permanently stored on the blockchain. The proposal suggests doing a p2sh with a switch statement that lets you select one of n scripts each 520 bytes long without bloating the utxo pool more than a p2sh, the cost being purely on disk.</summary>
+    <published>2014-07-16T17:56:54+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Witness asymmetric payment channels</title>
+  <updated>2023-06-04T00:32:26.078834+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2020-10-08 04:58:04</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-08-25 12:45:50</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-09-10 03:56:02</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2020-08-27 01:48:13</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-08-25 11:39:11</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-09-01 02:53:49</name>
+  </author>
+  <author>
+    <name>Lloyd Fournier 2020-09-01 20:27:15</name>
+  </author>
+  <link href="lightning-dev/Oct_2020/002812_Witness-asymmetric-payment-channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2020/002786_Witness-asymmetric-payment-channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2020/002795_Witness-asymmetric-payment-channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2020/002789_Witness-asymmetric-payment-channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Aug_2020/002785_Witness-asymmetric-payment-channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2020/002791_Witness-asymmetric-payment-channels.xml" rel="alternate"/>
+  <link href="lightning-dev/Sept_2020/002793_Witness-asymmetric-payment-channels.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Witness asymmetric payment channels</title>
+    <updated>2023-06-04T00:32:26.079823+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002812.html" rel="alternate"/>
+    <summary>In the world of cryptocurrency transactions, punishing a particular transaction efficiently can be challenging. This is because extracting the publication secret and keeping the encrypted signature (known as an adaptor signature) for that specific commitment transaction requires O(n) storage. The current spec's method involves deriving the previously revealed revocation secret from the present one, which only requires O(1) storage. This flaw seems to be unaddressed in the original work.Lloyd Fournier proposes a new protocol for witness asymmetric channels that eliminates per-commitment publication points and enables O(1) storage for 2-of-2 multi-signatures instantiated with or without key aggregation. He uses "revocable signatures" as the main primitive, allowing for O(1) storage complexity in both key aggregated and "multisig" constructions. The proposed solution also allows efficient punishment if a party learns the secret key of the other.The proposal addresses the "simultaneous HTLC" problem while upgrading to Decker-Russell-Osuntokun in the future. The proposal involves performing a coin toss whenever simultaneous HTLC offers occur without using token-passing. The proposed protocol retains the time-lock precedence of BOLT 3 transactions, where absolute time-locks are settled before relative time-locks to avoid having to account for relative time-locks when calculating absolute time-locks.In an email exchange, Lloyd Fournier and ZmnSCPxj discuss the complexity of a new proposal for Lightning Network channel updates. Fournier believes there is an improvement in conceptual complexity over the current BOLT spec, but also notes a worse storage complexity due to the need to keep around encrypted signatures. This could be a fatal flaw unless addressed.The article also discusses the application of Scriptless Scripts to Lightning channels. Using MuSig may require storing each two-party-generated encrypted signature, but the likely way forward would be to use MuSig on an output that has a taproot hiding a discrete 2-of-2. This would make the storage issue not much of a problem.</summary>
+    <published>2020-10-08T04:58:04+00:00</published>
+  </entry>
+</feed>

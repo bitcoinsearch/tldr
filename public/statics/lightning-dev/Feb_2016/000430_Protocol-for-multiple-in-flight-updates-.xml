@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Protocol for multiple in-flight updates.</title>
+  <updated>2023-05-23T22:29:04.445829+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-02-04 06:35:03</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Protocol for multiple in-flight updates.</title>
+    <updated>2023-05-23T22:29:04.445829+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-February/000430.html" rel="alternate"/>
+    <summary>In this context, Joseph Poon and Rusty Russell are discussing a protocol for preventing cut-through HTLCs. According to Rusty's explanation, the "signature covers you up to X me up to Y" resolves the in-flight issue, but he questions whether it is more of a request ID than an HTLC ID. Poon agrees that it is more like a request "staging" ID, with the "counter" aspect requiring two counters - one for each originator. Two IDs sent in the commitment message allow for simultaneous action on accept/reject/etc, whereas only one would require a lock on accepting/rejecting modifications. Poon wrote up the entire protocol as he gleaned it from Russell's explanations, but he couldn't quite figure out the commitment steps, so he asked Russell if there was anything missing. Russell then asked if Poon's scheme prevents cut-through HTLCs, citing an example where A sends B an "add request" and B wants to send the corresponding "add request" to C immediately to minimize latency. However, B doesn't want to be locked into HTLCb in case A vanishes before HTLCa is committed. Russell ends his message by saying that reading Go is surprisingly nice.</summary>
+    <published>2016-02-04T06:35:03+00:00</published>
+  </entry>
+</feed>

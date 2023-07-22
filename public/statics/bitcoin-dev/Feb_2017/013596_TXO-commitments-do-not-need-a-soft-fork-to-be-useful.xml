@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TXO commitments do not need a soft-fork to be useful</title>
+  <updated>2023-06-11T21:36:30.982157+00:00</updated>
+  <author>
+    <name>Eric Lombrozo 2017-02-23 03:30:37</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TXO commitments do not need a soft-fork to be useful</title>
+    <updated>2023-06-11T21:36:30.982663+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-February/013596.html" rel="alternate"/>
+    <summary>The email thread posted on the Bitcoin-dev mailing list discusses the implementation of TXO (Transaction Output) commitments in Bitcoin. Peter Todd, a Bitcoin developer, proposed that TXO commitments do not necessarily need to be implemented as a consensus protocol change; instead, they can be implemented without miners committing to the TXO commitment itself. Todd explains that a TXO commitment allows the data set - the TXO set - to be securely provided by an untrusted third party, allowing the data itself to be discarded. Thus, if a valid TXO commitment exists, the TXO data itself can be discarded and untrusted entities can provide that data on demand.Todd argues that the implementation of a TXO commitment scheme would allow full nodes with limited storage space to keep track of a TXO commitment and prune older UTXOs from it that are unlikely to be spent. In the event those UTXOs are spent, transactions and blocks spending them can trustlessly provide the necessary data to temporarily fill-in the node's local TXO set database, allowing the next commitment to be calculated. Todd suggests a deployment plan for implementing a TXO commitment scheme, which includes adding P2P support for advertising to peers what parts of the TXO set have been pruned, and producing, consuming, and updating TXO unspentness proofs as part of transaction and block relaying.Todd also proposes that a snapshot with an attestation from known individuals that you trust is a better security model than having miners attest to validity. This security model is not unlike the recently implemented -assumevalid scheme, in that auditing the validity of the assumed valid TXO commitments is something anyone can do provided they have a full node. However, Todd notes that this is a weaker security model, in that a false TXO commitment can more easily be used to trick a node into accepting invalid transactions/blocks. A compromise may be to use assumed valid TXO commitments, extending Todd's partial UTXO set suggestion of having nodes validate the chain backwards to eventually validate 100% of the chain.</summary>
+    <published>2017-02-23T03:30:37+00:00</published>
+  </entry>
+</feed>

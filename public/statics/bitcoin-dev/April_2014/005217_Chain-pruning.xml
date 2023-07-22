@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Chain pruning</title>
+  <updated>2023-05-19T18:38:33.319378+00:00</updated>
+  <author>
+    <name>Pieter Wuille 2014-04-10 16:59:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Chain pruning</title>
+    <updated>2023-05-19T18:38:33.319378+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005217.html" rel="alternate"/>
+    <summary>A suggestion was made to form blocks into "superblocks" that could be pieced together from different nodes to get the full blockchain. However, the actual state of the blockchain is the UTXO set, which is stored in chainstate/ by the reference client and is the set of all unspent transaction outputs at the currently active point in the block chain. Giving someone the UTXO set cannot be trusted as there is no way to prove that it was the result of processing the actual blocks. Bitcoin's full node uses a "zero trust" model and never assumes any data received from the outside is valid. The previous blocks need to be available for initial block syncing to establish the validity of the current UTXO set. Merkle UTXO commitments are a related evolution where the UTXO set is shaped as a merkle tree, its root is computed after every block, and the block commits to this root hash. This means a full node can copy the chain state from someone else and check that its hash matches what the block chain commits to. However, this is a strict reduction in security as it trusts that the longest chain with most proof of work commits to a valid UTXO set at some point in the past. Combining both ideas means getting "superblocks" in a way that is less-than-currently-but-perhaps-still-acceptably-validated.</summary>
+    <published>2014-04-10T16:59:54+00:00</published>
+  </entry>
+</feed>

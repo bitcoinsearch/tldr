@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>An update on PTLCs</title>
+  <updated>2023-06-03T01:03:39.786388+00:00</updated>
+  <author>
+    <name>Nadav Kohen 2020-04-23 14:52:31</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>An update on PTLCs</title>
+    <updated>2023-06-03T01:03:39.786388+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-April/002668.html" rel="alternate"/>
+    <summary>The Lightning Network is undergoing changes to replace Hash-TimeLock Contracts (HTLCs) with Point-TimeLock Contracts (PTLCs). Nadav Kohen highlights the advantages of using PTLCs, which include opening up a variety of interesting applications that cannot be accomplished with HTLCs. Eventually, with Taproot, 2p-Schnorr adaptor signatures can be used in Lightning channels. However, in the meantime, Lloyd has devised a way to do 1p-ECDSA adaptor signatures, which can be paired with OP_CHECKMULTISIG to execute PTLCs on Bitcoin today. Nadav would like to have a fork of at least one lightning implementation or Rust Lightning to be a proof-of-concept ECDSA-PTLC node with which they can test and play with the plethora of PTLC-based proposals. However, Olaoluwa Osuntokun cautions against underestimating how long all of this will take in practice and the degree of synchronization required to pull it off properly.The new technique allows for an even larger set of deployment possibilities, but there's also a risk as depending on how quickly things can be rolled out, schnorr may become available mid-development, which would possibly cause them to reconsider the ECDSA path and have the network purely use schnorr to make things nice and uniform. The solution space of how channels can look post scriptless-scripts + taproot is rather large, and the addition of this new technique allows for an even larger set of deployment possibilities.Nadav clarifies that their intention is not to implement a PTLC-based lightning network on top of ECDSA adaptor signatures, as they believe that using Schnorr will be superior. Also, they agree that they've probably understated somewhat the changes that will be needed in most implementations. The Lightning Network is working towards a PTLC-based network that is safe and stable as soon as possible. In order to achieve this, some changes need to happen. Firstly, the last hop_data will include a 32 byte scalar equal to the sum of all tweaks. Secondly, commitment_signed will have 162 byte adaptor ptlc_signatures rather than valid ECDSA signatures on PTLC-success transactions. Finally, the in-flight outputs on the commitment transaction itself become simpler as we no longer need to explicitly check the payment pre-image against a hash. Instead, delete all instances of "OP_HASH160 OP_EQUALVERIFY" in the scripts and require no pre-image in the witness, only a valid signature. The pre-image check is implicitly enforced by the witness since only an adaptor signature was provided by remote so that the payment pre-image is required to create the valid signature. Nadav believes it would be super beneficial to have more fleshed out with respect to what some challenges of a Payment Point LN are going to be than we understand now, before Schnorr is implemented and it is time to commit to some PTLC scheme for real.</summary>
+    <published>2020-04-23T14:52:31+00:00</published>
+  </entry>
+</feed>

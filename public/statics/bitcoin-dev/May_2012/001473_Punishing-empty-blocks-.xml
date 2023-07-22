@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Punishing empty blocks?</title>
+  <updated>2023-06-06T04:38:18.811922+00:00</updated>
+  <author>
+    <name>Robert McKay 2012-05-24 17:27:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Punishing empty blocks?</title>
+    <updated>2023-06-06T04:38:18.811922+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2012-May/001473.html" rel="alternate"/>
+    <summary>Jeff Garzik, a software engineer, brought up the issue of non-trivial mining power being devoted to mining empty blocks in 2012. Despite Satoshi's observation to hash a fixed 80-byte header instead of the entire block, some miners still preferred mining empty blocks rather than monitoring the network for new transactions. Garzik suggested an implementation change where empty blocks aren't stored or relayed if time since last block is 60 minutes or ensure that the latest block includes at least X percent of mempool unconfirmed TXs. However, some believe that miners would simply stuff the empty blocks with a dummy transaction of their own and spam them to the p2p network to get around these new rules. In a few months, once the block reward halves, receiving transaction fees will become more important to miners' profit and loss calculations, which may incentivize proper transaction processing. Refusing transactions seems like an important part of game theory of transaction pricing; miners are supposed to be able to raise transaction costs by declining to process no fee or too low fee transactions. If block sizes are increased and miners aren't allowed to refuse transactions, it would get rid of the financial motivation for mining, resulting in less mining happening. Setting percentage quotas of stuff in the mempool sounds dangerous as miners who hear about a block from a rival miner could possibly DOS the mempool on the rest of the network to get the block rejected. Therefore, not publishing a transaction to the p2p network at all should be legitimate. In the future, there may be numerous networks other than the p2p network where not all transactions will make it back to the old legacy IPv4 p2p network or into the mempool of bitcoin nodes on that network. Nevertheless, they should still be able to get into the blockchain.</summary>
+    <published>2012-05-24T17:27:42+00:00</published>
+  </entry>
+</feed>

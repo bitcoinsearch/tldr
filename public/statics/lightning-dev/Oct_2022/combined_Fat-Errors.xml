@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Fat Errors</title>
+  <updated>2023-06-04T04:15:20.291776+00:00</updated>
+  <author>
+    <name>Thomas HUET 2022-11-03 15:12:00</name>
+  </author>
+  <author>
+    <name>Joost Jager 2022-11-04 06:53:53</name>
+  </author>
+  <author>
+    <name>Joost Jager 2022-10-20 15:45:16</name>
+  </author>
+  <author>
+    <name>Joost Jager 2022-10-19 11:12:26</name>
+  </author>
+  <author>
+    <name>Joost Jager 2022-11-01 21:09:27</name>
+  </author>
+  <author>
+    <name>Joost Jager 2022-11-10 15:24:28</name>
+  </author>
+  <author>
+    <name>Bastien TEINTURIER 2022-10-20 15:36:03</name>
+  </author>
+  <author>
+    <name>Rusty Russell 2022-10-24 22:32:52</name>
+  </author>
+  <link href="lightning-dev/Nov_2022/003739_Fat-Errors.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2022/003741_Fat-Errors.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2022/003725_Fat-Errors.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2022/003723_Fat-Errors.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2022/003734_Fat-Errors.xml" rel="alternate"/>
+  <link href="lightning-dev/Nov_2022/003750_Fat-Errors.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2022/003724_Fat-Errors.xml" rel="alternate"/>
+  <link href="lightning-dev/Oct_2022/003727_Fat-Errors.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Fat Errors</title>
+    <updated>2023-06-04T04:15:20.292773+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-November/003739.html" rel="alternate"/>
+    <summary>In the Lightning Network, there was a vulnerability in error attribution that needed to be addressed. To tackle this issue, Joost Jager proposed a new failure message format that includes a chain of HMACs. This ensures the integrity of the message and makes it impossible for any node to modify the failure message without revealing their involvement. The proposed solution is seen as justified despite its size, which can be up to 12 KB due to the maximum of 27 hops and the inclusion of 378 HMACs of 32 bytes each.To maintain backward compatibility, signaling is used to determine what algorithm should be run to generate or transform the failure message through a tlv onion field. Advertising intermediate nodes' capability to transform the new format through a feature bit is also necessary. Furthermore, successes can be delayed, and adding the same payloads and HMACs blocks to the update_fulfill_htlc message could be an option.Another proposal from Rusty suggests using a pre-pay scheme where N sats and a secp point are sent, and every chained secret returned earns the forwarder 1 sat. The answers are placed in each layer of the onion, and the distance traveled by the onion is determined based on how much money is received back on failure. However, the error message may be corrupted. Rusty suggests truncating the point to a new secret key as the simplest solution, with each node applying a tweak for decorrelation. The best scheme would be where payment is only received if the next node decrypts, but this requires more thought. Finally, Rusty proposes reducing the number of hops to 16, which is the closest power of 2 to the legacy hop limit, and makes this 4.5k for payloads and hmacs.Overall, these proposals aim to improve the reliability and security of the Lightning Network. Several links to relevant sources are provided as references, including a link to a code repository on GitHub for the Lightning Network project. The context appears to be related to development work being done on the Lightning Network, with discussion potentially taking place on a mailing list called "lightning-dev" hosted by the Linux Foundation.</summary>
+    <published>2022-11-03T15:12:00+00:00</published>
+  </entry>
+</feed>

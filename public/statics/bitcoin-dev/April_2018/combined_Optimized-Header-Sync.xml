@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Optimized Header Sync</title>
+  <updated>2023-06-13T01:17:48.963369+00:00</updated>
+  <author>
+    <name>Jim Posen 2018-04-03 05:34:39</name>
+  </author>
+  <author>
+    <name>Jim Posen 2018-03-27 23:31:58</name>
+  </author>
+  <author>
+    <name>Riccardo Casatta 2018-03-30 08:06:24</name>
+  </author>
+  <author>
+    <name>Jim Posen 2018-03-30 00:50:30</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2018-03-30 06:14:18</name>
+  </author>
+  <author>
+    <name>Jim Posen 2018-03-27 23:31:58</name>
+  </author>
+  <author>
+    <name>Riccardo Casatta 2018-03-29 08:17:12</name>
+  </author>
+  <author>
+    <name>Jim Posen 2018-03-30 00:50:30</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2018-03-30 06:14:18</name>
+  </author>
+  <author>
+    <name>Riccardo Casatta 2018-03-30 08:06:24</name>
+  </author>
+  <author>
+    <name>Jim Posen 2018-04-03 05:34:39</name>
+  </author>
+  <author>
+    <name>Riccardo Casatta 2018-03-29 08:17:12</name>
+  </author>
+  <author>
+    <name>Jim Posen 2018-03-30 00:50:30</name>
+  </author>
+  <author>
+    <name>Anthony Towns 2018-03-30 06:14:18</name>
+  </author>
+  <author>
+    <name>Jim Posen 2018-04-03 05:34:39</name>
+  </author>
+  <author>
+    <name>Jim Posen 2018-03-27 23:31:58</name>
+  </author>
+  <author>
+    <name>Riccardo Casatta 2018-03-29 08:17:12</name>
+  </author>
+  <author>
+    <name>Riccardo Casatta 2018-03-30 08:06:24</name>
+  </author>
+  <link href="bitcoin-dev/April_2018/015866_Optimized-Header-Sync.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015851_Optimized-Header-Sync.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015860_Optimized-Header-Sync.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015857_Optimized-Header-Sync.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015858_Optimized-Header-Sync.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015851_Optimized-Header-Sync.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015855_Optimized-Header-Sync.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015857_Optimized-Header-Sync.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015858_Optimized-Header-Sync.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015860_Optimized-Header-Sync.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2018/015866_Optimized-Header-Sync.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015855_Optimized-Header-Sync.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015857_Optimized-Header-Sync.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015858_Optimized-Header-Sync.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2018/015866_Optimized-Header-Sync.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015851_Optimized-Header-Sync.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015855_Optimized-Header-Sync.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2018/015860_Optimized-Header-Sync.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Optimized Header Sync</title>
+    <updated>2023-06-13T01:17:48.963369+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-April/015866.html" rel="alternate"/>
+    <summary>The bitcoin-dev mailing list has discussed various proposals to improve the syncing of block headers in Bitcoin clients. One proposed approach involves encoding headers more efficiently by omitting prev_hash and downloading evenly spaced checkpoints throughout history from all peers first. The proposal includes a definition of checkpoints for each block, a new service bit called NODE_HEADERS_V2, and two new messages, getcheckpts and checkpts, which enable nodes to respond to queries for headers. The proposed protocol reduces bandwidth usage by around 40%-50% and supports downloading headers ranges from multiple peers in parallel, which is not possible with the current mechanism. Sync strategies include forward sequential syncing, parallel header download, and random sampling proof-of-work. The inclusion of the coinbase transaction in the headers messages is due to its cryptographic commitments to a block's height. In a recent bitcoin-dev discussion, it was suggested that checkpoints and compressed header streams should be handled in chunks of 2016 headers and queried by chunk number instead of height, falling back to the current method if the chunk is not full yet, to make it cache-friendly. Another suggestion was to treat checkpoints as commitments to chain work, having a checkpoint every 2016 blocks and including the corresponding bits value for that set of blocks. This would allow every node to commit to approximately how much work their entire chain has by sending something like 10kB of data.The proposal also suggests using total chain work instead of nBits as a short specifier in Bitcoin's consensus protocol. Using total chain work instead of nBits is worth the extra 1KB and can save up to 16% in the size of a checkpoints message. Additionally, the proposal suggests allocating only 2 bits in the encoding header rather than 3, and handling checkpoints and compressed headers streams in chunks of 2016 headers queried by chunk number instead of height for cache-friendly purposes.The proposed P2P network extension provides new structures such as compressed headers and VarInt, which is a variable-length unsigned integer encoding that supports a greater range of numbers than the standard CompactSize. The proposal is backwards compatible with no changes to consensus rules. Credit for the VarInt encoding goes to Pieter Wuille, while Gregory Maxwell provided suggestions on the compressed header encoding and the DOS-resistant sync strategies, and Suhas Daftuar contributed helpful discussions.Overall, the proposed P2P extension aims to optimize Bitcoin clients' syncing of block headers by reducing bandwidth usage and enabling resilient sync strategies. The P2P messages are designed to be flexible, supporting multiple header sync strategies and leaving room for future innovations.</summary>
+    <published>2018-04-03T05:34:39+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP70 extension to allow for identity delegation</title>
+  <updated>2023-06-08T03:31:36.514836+00:00</updated>
+  <author>
+    <name>Mike Hearn 2014-02-28 11:46:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP70 extension to allow for identity delegation</title>
+    <updated>2023-06-08T03:31:36.514836+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-February/004461.html" rel="alternate"/>
+    <summary>The implementation of BIP70 has led to the need for identity delegation, which is not included in version 1. This issue mostly affects payment processors, such as BitPay and Coinbase, who have to sign payment requests as themselves. Furthermore, the lack of identity delegation results in a confusing user interface, as the user may think they are paying one entity but their wallet UI tells them they are paying another. The proposed solution involves creating an "extended certificate," which is similar to an X.509 certificate but simpler and Bitcoin-specific. To create this certificate, an ECDSA public key from the payment processor is formatted into an ExtensionCert message, signed using an SSL private key, and added to the X509Certificates message provided by the PP. The PaymentRequest then contains two signature fields for backwards compatibility: one using the PP's SSL cert and the other using the delegated ECDSA key. If there is no X.509 cert available, the pki_type is set to "x509+sha256+excert," and the request is treated as unverified by old wallets. The merchant may choose to set short expiry times for security purposes and upload a new ExtensionCert at the end of each period to quickly reseal the system in case of PP compromise. It was considered to use a User-Agent field to customize the PaymentRequest according to client capabilities but this would not work for non-HTTP requests. Also, creating the extension cert as an X.509 cert may lead to acceptance by a bogus SSL stack that did not check the key usage constraints extension. Therefore, a custom format for the extended certificate was deemed safer.</summary>
+    <published>2014-02-28T11:46:49+00:00</published>
+  </entry>
+</feed>

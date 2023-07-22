@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>deterministic transaction expiration</title>
+  <updated>2023-06-09T01:43:04.173046+00:00</updated>
+  <author>
+    <name>Kaz Wesley 2014-08-05 19:10:50</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>deterministic transaction expiration</title>
+    <updated>2023-06-09T01:43:04.173046+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-August/006417.html" rel="alternate"/>
+    <summary>The issue of unconfirmed transactions in Bitcoin has been a long-standing concern for users. Transaction expiration is one solution that has been suggested to improve the user experience. However, it is important to note that even if a transaction expires, it cannot be presumed to disappear entirely from the internet. Instead, the majority of the network should forget the transaction and become willing to relay a respend of some or all of the inputs. One approach to address this issue is Gavin's idea from the block-squashing thread, where miners explicitly provide information about their policies. However, even when mechanisms for reconciling nodes' expectations about miners' behavior with miners' actual behavior are available, it may be desirable to keep an expiry mechanism in place in case of glitches.The mempool janitor has been suggested as a garbage collector design to solve the issue of unconfirmed transactions. However, this approach seems unviable because once a node has forgotten a transaction, it must be susceptible to reaccepting it. This means all the functionality of such an expiry mechanism depends on the network not containing any nodes with slightly different relay behavior from bitcoind. Therefore, including information in the transaction itself is necessary for transactions to reliably eventually die off from mempools. One proposed modification is to allow a transaction's lifetime to be refreshed by a child transaction, along the lines of child-pays-for-parent fee policy. With child-refreshes-parent, a transaction's receivers and senders would have the ability to keep trying to get their payment confirmed, but anyone on the network can't just keep all transactions alive.In summary, there are several solutions to improve the user experience of unconfirmed transactions in Bitcoin. While transaction expiration is one approach, it is important to consider other alternatives like including information in the transaction itself and refreshing the transaction's lifetime through child transactions.</summary>
+    <published>2014-08-05T19:10:50+00:00</published>
+  </entry>
+</feed>

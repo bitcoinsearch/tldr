@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Denial of Service using Package Relay</title>
+  <updated>2023-07-13T17:26:16.529230+00:00</updated>
+  <author>
+    <name>alicexbt 2023-07-06 16:22:44+00:00</name>
+  </author>
+  <author>
+    <name>Andrew Chow 2023-07-06 17:24:47+00:00</name>
+  </author>
+  <link href="bitcoin-dev/July_2023/021784_Denial-of-Service-using-Package-Relay.xml" rel="alternate"/>
+  <link href="bitcoin-dev/July_2023/021785_Denial-of-Service-using-Package-Relay.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Denial of Service using Package Relay</title>
+    <updated>2023-07-13T17:26:16.529274+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-July/021784.html" rel="alternate"/>
+    <summary>In a recent discussion on the bitcoin-dev mailing list, a user named alicexbt raised concerns about a potential Denial of Service (DoS) attack in coinjoin using the package relay feature. They suggested that this attack could affect not only coinjoin but also other projects relying on packages. The proposal for package relay involves adding new peer-to-peer messages and transaction relay, making it an important consideration for developers.The attack scenario described by alicexbt involves two coinjoin implementations, referred to as A and B. In this attack, the attacker registers an input in implementation A and then double spends the same input with zero fee to their own address. They then register the unconfirmed UTXO from the double spend in implementation B. Finally, implementation B relays a package in which a coinjoin transaction (child) pays for the double spend (parent).Both users and implementation B have incentives to carry out this attack. However, there are some limitations to this approach. If the input is included in a coinjoin transaction broadcasted by implementation A, there is little that implementation B can do about it. Replace-by-Fee (RBF) with multiple users is not easy and can be costly. Additionally, implementations with fewer users participating in a round may have an advantage in this attack.The email thread also addressed some questions and concerns raised by other participants. One user questioned why unconfirmed inputs would be accepted in a coinjoin, regardless of package relay. It was argued that this would be unsafe, as the sender of the unconfirmed transaction could already replace it, potentially invalidating the coinjoin. Furthermore, it was noted that the coordinator implementation B should not accept the unconfirmed UTXO from the double spend because it is unaware of that transaction and it has no fee, so it is unlikely to be relayed.It was also mentioned that a similar attack could be carried out by registering the same UTXO with multiple coordinators, without needing package relay. This suggests that the potential attack described by alicexbt may not be specific to package relay.On a positive note, it was mentioned that package relay could actually benefit coinjoins. One participant explained that with package relay, any participant in a coinjoin could rebroadcast it with a Child Pays for Parent (CPFP) transaction if the coinjoin is below the minimum relay fee. Additionally, upcoming proposals for Replace-by-Fee (RBF) in packages could allow other child transactions to RBF the entire package, eliminating the need for everyone to re-sign the coinjoin for RBF purposes.Overall, the discussion highlighted potential vulnerabilities and considerations related to package relay in coinjoin implementations. The concerns raised by alicexbt prompted further examination of the attack scenario and the implications for the security and functionality of coinjoin.</summary>
+    <published>2023-07-06T16:22:44+00:00</published>
+  </entry>
+</feed>

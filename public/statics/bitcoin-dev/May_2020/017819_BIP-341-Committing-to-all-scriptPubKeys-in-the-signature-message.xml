@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP-341: Committing to all scriptPubKeys in the signature message</title>
+  <updated>2023-06-14T01:06:36.438406+00:00</updated>
+  <author>
+    <name>Jonas Nick 2020-05-05 10:20:18</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP-341: Committing to all scriptPubKeys in the signature message</title>
+    <updated>2023-06-14T01:06:36.438406+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-May/017819.html" rel="alternate"/>
+    <summary>A proposal has been made to modify the current draft of BIP-0341 in order to commit to the scriptPubKeys of all transaction inputs instead of just the output being spent by the input. This change is aimed at improving the reliability of determining ownership of external inputs, particularly in applications like CoinJoin where transactions contain external inputs. Without this mechanism, an adversary could display incorrect information about the amount being spent, resulting in theft of user funds. The proposed solution commits to every spent scriptPubKey and therefore every element of the TxOut instead of just the amount. Committing to the input values in the transaction digest would allow for compact fee proofs, and the same reasoning applies to scriptPubKeys. Coinjoin with offline signers would be substantially harder without this proposal. The proposal requires additional review, but the downsides seem to be limited. It does not invite further scope creep because the full TxOut would already be included. The costs to verifiers is only slightly increased using Anthony Town's suggested sighash change. The availability of the scriptPubKeys for signing devices does not seem to be an issue because the input amounts are already required. If all inputs belong to the signing device, no additional data is sent to the device. Overall, this change would provide a more reliable way to determine ownership of external inputs and improve security.</summary>
+    <published>2020-05-05T10:20:18+00:00</published>
+  </entry>
+</feed>

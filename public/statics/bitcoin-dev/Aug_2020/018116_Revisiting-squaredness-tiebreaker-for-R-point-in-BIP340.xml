@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Revisiting squaredness tiebreaker for R point in BIP340</title>
+  <updated>2023-06-14T03:34:43.738674+00:00</updated>
+  <author>
+    <name>John Newbery 2020-08-21 08:50:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Revisiting squaredness tiebreaker for R point in BIP340</title>
+    <updated>2023-06-14T03:34:43.739684+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018116.html" rel="alternate"/>
+    <summary>In a recent post on the bitcoin-dev mailing list, Pieter Wuille proposed changing the tiebreaker used in conveying the Y coordinate of points in the BIP340 draft. Currently, squaredness is used as the tiebreaker for the R point inside signatures, while evenness is used for public keys. However, recent developments have shown that determining evenness may be more efficient than squaredness, which slows down signing and is a less conventional choice. The numbers provided by Wuille give the expected performance change from squareness to evenness, with positive numbers indicating that evenness is faster. While changes to the BIP and libsecp256k1 are relatively straightforward, the impact of changing the standard at this stage must be weighed against the benefits. One benefit of using a single tiebreaker for R points and public keys is that it is much simpler to explain and easier for implementers and developers to understand. This is particularly important given the confusion around which type of tiebreaker to use where. Additionally, changing to even tiebreakers everywhere may improve cryptographic code speedups by a couple of percent. Wuille also provides context on the history of tiebreakers in the BIP340 draft, including how the choice of squaredness as the tiebreaker was intended to improve verification speed but may not actually benefit it. He notes that the long lead time of taproot allows for improvements to be made as more information becomes available. Overall, Wuille suggests that changing the proposal and implementation to use even tiebreakers everywhere would be beneficial and worth considering, despite being late in the process.</summary>
+    <published>2020-08-21T08:50:49+00:00</published>
+  </entry>
+</feed>

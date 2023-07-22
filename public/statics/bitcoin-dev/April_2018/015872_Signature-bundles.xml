@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Signature bundles</title>
+  <updated>2023-06-13T01:22:26.268030+00:00</updated>
+  <author>
+    <name>Jim Posen 2018-04-04 23:11:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Signature bundles</title>
+    <updated>2023-06-13T01:22:26.268030+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-April/015872.html" rel="alternate"/>
+    <summary>In a discussion on the bitcoin-dev mailing list, some potential problems were raised with regards to combining bundles of transactions with varying fee amounts. The issue is that if one bundle overpays while another underpays, they can only be safely combined if a SIGHASH_ALL signature is included in the overpaying bundle. Otherwise, miners could create their own transaction using just the overpaying bundle. A possible solution suggested was committing to a set of keys that are allowed to bundle, but this would defeat the generality of outsourcing. Another issue discussed was guessing future fees for commitment transactions in lightning. Pre-signing HTLC-Success/HTLC-Timeout transactions by channel partners is necessary to ensure that the output address is correct, but if the commitment transaction gets bundled, its txid will change, making pre-signing impossible without SIGHASH_NOINPUT. One idea proposed to solve this problem was adding a zero-value anyone-can-spend output to commitment transactions that can be used with CPFP to bump the fees, but this would cause UTXO bloat and fail to pass the dust threshold. A potential solution suggested was having after-the-fact fee-bumping via special sighash flags at the block level. This involves providing a third transaction whose witness is [txid-for-X, txid-for-Y, signature committing to (txid-for-X, txid-for-Y)], and can only be included in a block if X and Y are also in the same block. However, it was noted that this raises the question of what it would spend since an existing output cannot be used. It was suggested that an unspendable zero-amount output script could be used instead, with 'OP_NOP4' as a possible option.</summary>
+    <published>2018-04-04T23:11:52+00:00</published>
+  </entry>
+</feed>

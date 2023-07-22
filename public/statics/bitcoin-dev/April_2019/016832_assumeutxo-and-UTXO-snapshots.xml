@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>assumeutxo and UTXO snapshots</title>
+  <updated>2023-06-13T18:00:12.722177+00:00</updated>
+  <author>
+    <name>Luke Dashjr 2019-04-03 09:55:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>assumeutxo and UTXO snapshots</title>
+    <updated>2023-06-13T18:00:12.722177+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-April/016832.html" rel="alternate"/>
+    <summary>James O'Beirne via bitcoin-dev has proposed a new optimization called assumeutxo, which is similar to the existing default 'assumevalid', and can help modest clients transact under a security model that closely resembles full validation within minutes instead of hours or days. The basic idea behind this optimization is to allow nodes to initialize using a serialized version of the UTXO set rendered by another node at some predetermined height. Based upon the snapshot, the node is able to quickly reconstruct its chainstate, and compares a hash of the resulting UTXO set to a preordained hash hard-coded in the software a la assumevalid.This all takes around 23 minutes, not accounting for download of the 3.2GB snapshot. The node then syncs to the network tip and afterwards begins a simultaneous background validation up to the base height of the snapshot in order to achieve full validation. Even while the background validation is happening, the node can validate incoming blocks and transact with the benefit of the full (assumed-valid) UTXO set.The proposal is considered appealing and simple, as it could help fully validating Bitcoin clients run on such hardware, which is rare and basically unrealistic. Clients with even moderate resource constraints are encouraged to rely on the SPV trust model. The proposal would allow mobile devices to function as fully validating nodes with access to the complete UTXO set as an alternative to SPV models. The total resource burden needed to start a node from scratch based on a snapshot is, at time of writing, a ~(3.2GB + blocks_to_tip * 4MB) download and a few minutes of processing time, which sounds manageable for many mobile devices currently in use. However, there are potential security implications due to practical attacks. An attacker could trick a user into transacting under a false history if they convince them to start bitcoind with a malicious `-assumevalid` parameter or a bad `-assumeutxo` parameter and then supply them an easily made UTXO snapshot containing a false coin assignment. For this reason, it is recommended that assumeutxo not be specified via command-line argument.</summary>
+    <published>2019-04-03T09:55:26+00:00</published>
+  </entry>
+</feed>

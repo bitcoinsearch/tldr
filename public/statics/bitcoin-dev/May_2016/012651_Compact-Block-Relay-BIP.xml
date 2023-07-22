@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Compact Block Relay BIP</title>
+  <updated>2023-05-19T23:20:05.425091+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2016-05-10 10:07:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Compact Block Relay BIP</title>
+    <updated>2023-05-19T23:20:05.425091+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-May/012651.html" rel="alternate"/>
+    <summary>In a bitcoin-dev email, Rusty Russell discussed using variable-length bit encodings to transmit blocks. He proposed using the shortest encoding that is unique to each node, including those in the mempool, which would result in approximately 12 bits per transaction for an average node transmitting a block with 1300 transactions and another ~3000 in the mempool. This would reduce the size of transmission by about 1/5 of the current size and could fit into two or three TCP packets. The failure rate targeted was not specified.Set reconciliation was suggested as being much more efficient for reducing block size than packing or twiddling. It was estimated to reduce block size by 90%. However, the savings from going from 20kb to 3kb was deemed not interesting enough to justify. Expectations were that set reconciliation would be deployed later to fix relay efficiency where the savings would be much larger, and infrastructure would be put in place to define another compactblock mode that used it.Russell also suggested avoiding the nonce and instead defining an id. Though this would increase the cost of a collision, it would happen in many places in the network at once over the network rather than just happening on a single link and hardly impacting overall propagation. Using the same nonce means there would be no recovery gain from jointly decoding using compact blocks sent from multiple peers. With a nonce, a sender does have the option of reusing what they got, but the actual encoding cost is negligible. 64-bits was suggested as the maximum length with a known negligible failure rate so long as it is salted. Peter R pointed out that the receiver could enhance brute force collisions in the future by sending an XOR of all the txids. Russell responded that the band between "no collisions" and "infeasible many" is narrow and that adding a small amount more space to the ids would immediately be in the no collision zone. Some earlier work involved sending a small amount of erasure coding data of the next couple bytes of the IDs, but the added cost of encoding and software complexity seemed not worth it.</summary>
+    <published>2016-05-10T10:07:27+00:00</published>
+  </entry>
+</feed>

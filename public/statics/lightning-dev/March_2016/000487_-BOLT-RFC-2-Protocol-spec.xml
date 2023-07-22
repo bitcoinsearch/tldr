@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>[BOLT RFC#2] Protocol spec</title>
+  <updated>2023-05-23T23:07:20.680090+00:00</updated>
+  <author>
+    <name>Rusty Russell 2016-03-11 05:15:07</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>[BOLT RFC#2] Protocol spec</title>
+    <updated>2023-05-23T23:07:20.680090+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-March/000487.html" rel="alternate"/>
+    <summary>The Lightning Technology RFC 2 draft by Rusty Russell of Blockstream describes the protocol used between nodes for creating and operating channels, as well as closing them in the Lightning Network. The wire protocol used is protobufs, passed over an encrypted channel set up and used as specified in BOLT#1.To establish a channel, messages such as 'open_channel', 'open_anchor' and 'open_commit_sig' are exchanged between the nodes. Once the anchor has reached `min_depth` in the blockchain, the node sends `open_complete` to indicate readiness for normal operation mode.If a Hash TimeLocked Contract (HTLC) needs to be added, either node can offer it to the other, which is redeemable in return for a hash preimage. However, a node should not offer `amount_msat` it cannot pay for in both commitment transactions, and `amount_msat` must be greater than 0. In addition, a node should not offer a HTLC with a timeout less than `delay` in the future and should not add a HTLC if it would result in offering more than 1500 HTLCs in either commitment transaction.To remove an HTLC, a node can only remove HTLCs added by the other node. An update_fee message is used to specify a range of acceptable fees for the next commitment transaction. Nodes must not broadcast old (revoked) commitment transactions, as doing so will allow the other node to seize all the funds.Closing a connection between nodes happens in two stages: the first is initiated by one side indicating that it wants to clear the channel, and once all HTLCs are resolved, the final channel close negotiation begins. The Lightning Network protocol specifies the process for closing a channel between two nodes.The blockchain is used to enforce commitments in case communication or cooperation breaks down between two nodes. When a valid commitment transaction is broadcast, any HTLC outputs must be monitored and handled per the protocol. However, failure can happen under various circumstances, including protocol failures, unreachability, timeouts, or deliberate abort decisions.Finally, a node must fail the connection if it receives an `err` message and must not send an `err` message in this case.</summary>
+    <published>2016-03-11T05:15:07+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>DRAFT: interactive tx construction protocol</title>
+  <updated>2023-06-02T23:10:42.798515+00:00</updated>
+  <author>
+    <name>Antoine Riard 2020-01-30 00:21:14</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>DRAFT: interactive tx construction protocol</title>
+    <updated>2023-06-02T23:10:42.798515+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-January/002470.html" rel="alternate"/>
+    <summary>The email being discussed on the Lightning-dev mailing list contains high-level questions about multi-party transaction construction and transaction format coordination with Coinjoin to converge on a common format. The email is primarily focused on the dual-funding protocol update, which simplifies the process by allowing two participants to construct a transaction instead of just one. Inputs and outputs can be added or removed by either peer until both have successfully exchanged a `tx_complete` message in succession. If a `tx_complete` agreement cannot be reached, either peer may fail the channel or open protocol.The email also discusses splicing, closing, and updating collaborative transactions with RBF. In the splice case, both peers signal opt_splice_ok and one peer initiates the splice while signaling the feerate for the transaction. In the close case, both parties signal opt_collaborative_close in their node_announcement, and a peer negotiates the feerate out of band. In updating a collaborative transaction with RBF, if any input is flagged as RBF’able, then the transaction is considered eligible for RBF. RBF can be initiated by either party, and each fee_step adds 1/4 (rounded down) to the initial transaction feerate. An additional rule will be added to the checks of an RBF transaction that it must include at least one identical, replaceable input as the original transaction.The email also includes an example scenario for the simple open case involving two parties. The email emphasizes the importance of adhering to standard output scripts and sets nLocktime to 0x00000000. The validity of inputs/outputs is not checked until both peers have sent consecutive `tx_complete` messages. Duplicate inputs or outputs are a protocol error.</summary>
+    <published>2020-01-30T00:21:14+00:00</published>
+  </entry>
+</feed>

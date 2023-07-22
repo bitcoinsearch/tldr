@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 174 thoughts</title>
+  <updated>2023-06-13T03:26:19.791151+00:00</updated>
+  <author>
+    <name>Andrea 2018-06-24 09:00:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 174 thoughts</title>
+    <updated>2023-06-13T03:26:19.791151+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-June/016158.html" rel="alternate"/>
+    <summary>The discussion on the Partially Signed Bitcoin Transactions (PSBT) specification continues. Andrew Chow disagrees with the idea of removing global types from the revised spec, citing that it is less of a breaking change to leave them there than to remove them entirely. He also states that there may be a point in the future where they would be useful/necessary and by having them still be there, we allow for future extensibility. Meanwhile, Andrea suggests that in the revised spec, "global types" as a map or even as typed record can be completely removed since there is only one type (the transaction) and it's compulsory to have one (and only one). After the header + separator, there must be a transaction. She also agrees that having per-input key derivation and per-output data is a lot more handy for signers but has no special feeling regarding the encoding. In an earlier message, the suggestion of having a human-readable part like lightning invoices was brought up, but Andrew does not think this is necessary. The magic code is still necessary for the binary format in order to prevent normal transaction deserializers from accidentally deserializing a psbt. While having a base encoding that excludes + and / characters, such as base62 (gmp-style), would be ideal, it is better to use an encoding that most wallets already support. Peter D. Gray thinks that PSBTs should not have a specified encoding but should be binary-only and hex for developers and JSON interfaces. Nonetheless, he acknowledges that strings will likely be the primary way people move PSBTs around initially and favors using Base64 encoding since the strings will be smaller. Additionally, he suggests using a filename extension (.PSBT?) and a mime-type to match for better interoperability. Finally, Andrew agrees with the feedback on the BIP as it stands now and will update Appendix A, define symbols for numeric key values, and work on reformatting the tables.</summary>
+    <published>2018-06-24T09:00:53+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Reorgs on SigNet - Looking for feedback on approach and parameters</title>
+  <updated>2023-05-21T03:34:40.341895+00:00</updated>
+  <author>
+    <name>Matt Corallo 2021-09-10 18:24:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Reorgs on SigNet - Looking for feedback on approach and parameters</title>
+    <updated>2023-05-21T03:34:40.341895+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019433.html" rel="alternate"/>
+    <summary>In an email thread discussing the default Signet, Michael Folkson expressed his concern about making the behavior on the default Signet deviate significantly from what users might experience on mainnet. He argued that reorgs don't occur that often on mainnet, so making them more regular (every 8 hours) on the default Signet seems reasonable to him, but every block is excessive. Folkson believed that opting into reorgs means you are looking to test reorgs and that waiting around for a reorg after restarting Bitcoin Core with the reorg flag set seems like the experience of testnet3 today. Thus, he suggested not replicating the "gotta wait for blocks before I can go to lunch" experience of testnet on signet.Regarding the proposal to introduce a version bit, Folkson noted that it introduces a need for users to sign blocks when currently with the default Signet, the user does not need to concern themselves with signing blocks. Instead, the network block signers of the default Signet are responsible for signing blocks. Folkson didn't think this additional complexity was needed on the default Signet when one could set up their custom Signet if they wanted to test edge case scenarios that deviate significantly from what they are likely to experience on mainnet. He suggested introducing a flag set via a configuration argument as the AJ, 0xB10C proposal, with no-reorgs (or 8-hour re-orgs) as the default, which would introduce no additional complexity to the casual or alpha stage tester experience, though of course, it introduces implementation complexity.Regarding Matt Corallo's suggestion of having a different reorg signing key, Folkson said that his suggestion was not correctly understood. He clarified that he was not suggesting users sign blocks or otherwise do anything manually but only that the existing block producers each generate a new key, and then only sign reorgs with those keys. Users will be able to set a flag to indicate whether they want to accept sigs from either sets of keys and see reorgs or only want sigs from the non-reorg keys and will consider the reorg keys-signed blocks invalid. Folkson also stated that one of the goals of the default Signet was to move it in the direction of resembling mainnet even closer, enabling random batches of transactions to fill up blocks and create a fee market, which would allow testing features like RBF and Lightning unhappy paths (justice transactions, perhaps even pinning attacks, etc.) on the default Signet in the future.</summary>
+    <published>2021-09-10T18:24:15+00:00</published>
+  </entry>
+</feed>

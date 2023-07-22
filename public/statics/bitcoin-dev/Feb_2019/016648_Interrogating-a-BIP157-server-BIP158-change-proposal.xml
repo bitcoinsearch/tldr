@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Interrogating a BIP157 server, BIP158 change proposal</title>
+  <updated>2023-06-13T16:56:09.960730+00:00</updated>
+  <author>
+    <name>Tamas Blummer 2019-02-04 11:41:20</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Interrogating a BIP157 server, BIP158 change proposal</title>
+    <updated>2023-06-13T16:56:09.960730+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-February/016648.html" rel="alternate"/>
+    <summary>The proposed solution is to change BIP158 by creating a filter chain that only includes created scripts and spent outpoints. Currently, a BIP157 client can detect alternate realities by regularly requesting filter chain checkpoints after connecting to a new BIP157 server. If there is a divergence at a checkpoint, the client would request the filter headers between the last matching and first divergent checkpoint, and quickly figure which block's filter is the first that does not match previous assumptions, and request that filter from the server.However, having all output scripts in the filter does not guarantee its correctness since it might omit input scripts, which are not part of the downloaded block. A remedy would be another filter chain on created and spent outpoints, as implemented currently by Murmel. This outpoint filter chain must offer a match for every spent output of the block with the divergent filter; otherwise, the interrogated server is lying since a PoW secured block cannot spend coins out of nowhere.A better solution is to modify BIP158 to have a base filter that contains spent outpoints and the scriptPubKey of each output, aside from all OP_RETURN output scripts. Wallets would recognize payments to their addresses by the filter, and spends from the wallet would be recognized as a wallet already knows outpoints of its previously received coins, so it can query the filters for them. Interrogation of a filter server also simplifies since the filter of the block can be checked entirely against the contents of the same block. The decision on filter correctness does not require more bandwidth than download of a block at the mismatching checkpoint.</summary>
+    <published>2019-02-04T11:41:20+00:00</published>
+  </entry>
+</feed>

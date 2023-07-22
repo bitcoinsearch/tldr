@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Base AMP</title>
+  <updated>2023-05-25T16:30:12.633692+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-11-14 23:35:30</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Base AMP</title>
+    <updated>2023-05-25T16:30:12.633692+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001600.html" rel="alternate"/>
+    <summary>ZmnSCPxj made a pull request for Base AMP. He proposed a change regarding `intended_payment_amount` which can be removed since it is unnecessary for both intermediate nodes and the payee node to have it. Rusty suggested sticking with BOLT #4 which requires the following: type: `per_hop`, data of [`8`:`short_channel_id`], [`8`:`amt_to_forward`], and [`4`:`outgoing_cltv_value`]. ZmnSCPxj proposed an even simpler solution where if `amt_to_forward` plus fees charged by this node are greater than the actual incoming HTLC, this is an AMP attempt. If `amt_to_forward` is greater than the incoming HTLC value, this is also considered an AMP attempt. However, an explicit flag is more sensible as it is more explicit. ZmnSCPxj suggests using a new `per_hop_type` or a byte in padding for flags, but notes that either option is fine with him. He proposes that a new `per_hop_type` should have a 2-byte `flags` and a 10-byte `padding` explicitly specced as "MUST be all 0". An explicit flags field would allow delivery of higher-layer application data in each payment.</summary>
+    <published>2018-11-14T23:35:30+00:00</published>
+  </entry>
+</feed>

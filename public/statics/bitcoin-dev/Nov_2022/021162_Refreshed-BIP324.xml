@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Refreshed BIP324</title>
+  <updated>2023-06-16T01:33:08.170792+00:00</updated>
+  <author>
+    <name>Jonas Schnelli 2022-11-03 22:26:54</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Refreshed BIP324</title>
+    <updated>2023-06-16T01:33:08.170792+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021162.html" rel="alternate"/>
+    <summary>The network is expected to have 35 message types with the addition of BIP324 and there are around 256 possible IDs for these messages. However, to be more conservative, the first bit could be used to signal a 2-byte message ID, which would allow the expression of 128 IDs with 1 byte and a total of 2^15 IDs across 2 bytes if needed. Another alternative would be to reserve the short ID 0xFF as an indication for a 2-byte short ID which would lead to approximately 207 unused 1-byte short IDs while the signal bit two-byte approach would lead to ~32k more two-byte message IDs. The main benefit of short IDs is bandwidth, but short IDs 1-12 are reserved for string-based IDs and new and rarely sent message types need not always use a short ID. The BIP assigns short IDs to all message types, including low-frequency messages like SENDHEADERS. To optimize short ID usage, it may be helpful to state in the BIP that only frequently sent messages should reserve a short ID or exclude message types that are expected to be sent only once from assigning a short ID.</summary>
+    <published>2022-11-03T22:26:54+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>OP_CAT was Re: Continuing the discussion about noinput / anyprevout</title>
+  <updated>2023-06-13T21:42:11.928043+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-10-04 07:00:13</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>OP_CAT was Re: Continuing the discussion about noinput / anyprevout</title>
+    <updated>2023-06-13T21:42:11.928043+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-October/017358.html" rel="alternate"/>
+    <summary>A proposal has been made to replace OP_CAT with an OP_SHA256STREAM that uses streaming properties of a SHA256 hash function. The proposal suggests using the new opcode to start a new hash with an item, add an item to the hash in state and finalize it. However, the proposal brings up the tension between generically-useable components, which are less efficient, and specific-use components, which may end up not being useable in the future, as OP_SHA256STREAM would no longer be usable if SHA256 is eventually broken. In another email thread, Ethan Heilman proposed tagging nodes to avoid derailing the NO_INPUT conversation, adding that he likes ZmnSCPxj's idea better as it increases performance. He further suggested increasing the size of the two inputs to OP_CAT to be 260 Bytes each where 520 Bytes is the maximum allowable size of an object on the stack. However, ZmnSCPxj disagreed with the 64-byte maximum output size for OP_CAT, stating that it would not be sufficient to check merkle tree proofs. ZmnSCPxj proposed removing SIGHASH from signatures and putting SIGHASH on public keys. Public keys would be encoded as either 33-bytes (implicit SIGHASH_ALL) or 34-bytes (SIGHASH byte followed by pubkey type, followed by pubkey coordinate). OP_CHECKSIG and friends would then look at the public key to determine sighash algorithm rather than the signature. The proposal also suggests adding the opcode OP_SETPUBKEYSIGHASH, which retains the old feature where the sighash is selected at time-of-spending rather than time-of-payment.</summary>
+    <published>2019-10-04T07:00:13+00:00</published>
+  </entry>
+</feed>

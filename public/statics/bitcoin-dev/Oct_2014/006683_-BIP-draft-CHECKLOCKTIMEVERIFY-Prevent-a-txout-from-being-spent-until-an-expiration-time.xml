@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>[BIP draft] CHECKLOCKTIMEVERIFY - Prevent a txout from being spent until an expiration time</title>
+  <updated>2023-05-19T19:20:07.201298+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2014-10-03 16:17:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>[BIP draft] CHECKLOCKTIMEVERIFY - Prevent a txout from being spent until an expiration time</title>
+    <updated>2023-05-19T19:20:07.201298+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-October/006683.html" rel="alternate"/>
+    <summary>In an email conversation regarding the implementation of a new opcode, Matt Whitlock suggested replacing the top stack item with the block height of the txout being redeemed. However, this suggestion would not be soft-forking compatible and could result in transactions that cannot be restored in a reorg, making the coins less fungible and differently safe to accept. This risk could create weird pressures around immediate block admission, increasing the power of single miners to censor or steal.Furthermore, implementing this suggestion would require violating the script/transaction/block layering more substantially, complicating implementations and making the validity of a script no longer a deterministic pure function of the transaction. These issues are consciously avoided in OP_CHECKLOCKTIMEVERIFY, which covers the intended use cases, including ones with alternative key groups. It also avoids the risks mentioned above and justifies the 100 block maturity of newly generated coins.Matt Whitlock also suggested that arbitrary logic could be implemented using the new opcode, including "output cannot be spent until a certain time" and "output can ONLY be spent until a certain time," as well as complex logic with alternative key groups with differing time constraints. However, these functionalities can already be achieved with a cancellation spend that moves the coin in the usual way, which doesn't even require the participant to be online, with the help of some network service to queue unlocked transactions.</summary>
+    <published>2014-10-03T16:17:48+00:00</published>
+  </entry>
+</feed>

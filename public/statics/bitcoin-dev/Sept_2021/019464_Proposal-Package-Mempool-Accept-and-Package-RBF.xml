@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Package Mempool Accept and Package RBF</title>
+  <updated>2023-06-15T01:53:48.261868+00:00</updated>
+  <author>
+    <name>Gloria Zhao 2021-09-16 07:51:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Package Mempool Accept and Package RBF</title>
+    <updated>2023-06-15T01:53:48.261868+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-September/019464.html" rel="alternate"/>
+    <summary>The author proposes changes to the mempool policy in Bitcoin Core to enable package validation. The proposed changes aim to make it easier for nodes to determine which transactions have the highest feerates by allowing packages consisting of multiple parents and 1 child. This is especially useful for time-sensitive transactions that do not meet fee requirements individually or are better Replace-by-Fee (RBF) candidates as a package. The proposed changes do not involve consensus or P2P protocol changes, but since mempool policy significantly affects transaction propagation, it is considered relevant for the mailing list. The proposed Package Relay project enables us to consider multiple transactions at the same time, making it easier to propagate the transactions with the highest package feerates to miners, and makes fee-bumping tools more powerful for users.The proposed changes include allowing packages that may contain already-in-mempool transactions, Multi-Parent-1-Child packages, and using the total package feerate instead of the individual feerate to meet the two feerate requirements of a mempool. The author provides a draft implementation of the proposal in Bitcoin Core PR#22290 and an illustrated version of the post can be found on gist.github.com. The post also clarifies the terminology used in the proposal and provides details on existing package rules, previous work, and examples of package policies.The proposed package RBF (Replace-By-Fee) for Bitcoin transactions allows for replacing multiple mempool transactions that meet feerate requirements as a package. However, the child cannot replace mempool transactions, and none of the transactions in the package can try to replace an ancestor of another transaction in the same package. A set of rules modified from BIP125 are used, including signaling for replaceability, requiring a higher ancestor feerate for any new unconfirmed inputs in the package, requiring the total fees of the package to be higher than the absolute fees of the mempool transactions it replaces, and requiring the package feerate to be higher than the replaced transactions by at least the minimum relay feerate. The package cannot replace more than 100 mempool transactions. Package RBF's rule regarding new unconfirmed inputs is less strict than BIP125#2 to avoid breaking the package for packages with parents already in the mempool, but still requires the replacement transactions to have an ancestor score at least as high as the original ones. It is possible for only some of the package to make it into the mempool, and packages cannot contain already-confirmed transactions due to the stateful nature of transaction relay.</summary>
+    <published>2021-09-16T07:51:25+00:00</published>
+  </entry>
+</feed>

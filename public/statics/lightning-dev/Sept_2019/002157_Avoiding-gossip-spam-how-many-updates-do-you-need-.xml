@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Avoiding gossip spam: how many updates do you need?</title>
+  <updated>2023-06-02T20:10:26.667831+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-09-18 13:52:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Avoiding gossip spam: how many updates do you need?</title>
+    <updated>2023-06-02T20:10:26.667831+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-September/002157.html" rel="alternate"/>
+    <summary>A user on Lightning-dev suggested that it is fine to use zero routing fees for rebalancing a channel. This helps with Just-In-Time routing of nearby nodes and allows cheaper rebalances to support. However, this falls outside the scope of `channel_update`s as they are meant to communicate coarse-grained information about the channel to the rest of the network, not in a local group of nodes. A `local_channel_update` with a small TTL was suggested instead to limit its spread for this kind of communication. It is still desirable to rate-limit such updates, and the user proposed maintaining a "latest broadcast is zero" flag and broadcasting a 0-fee `channel_update` if the channel has been &gt;=75% in your favor for more than 10 minutes. However, this will probably still lead to more than a burst of 4 `channel_update`s per day. The user suggests having separate negotiation logic for these scenarios rather than adding more logic to an already complex set of rules.The user also advocates for active rebalancing over indirect signaling through negative fees and suggests using local updates as offers for zero-fee forwarding without telling the wider world about the balances in your channel.</summary>
+    <published>2019-09-18T13:52:46+00:00</published>
+  </entry>
+</feed>

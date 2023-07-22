@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Package Relay Proposal</title>
+  <updated>2023-06-15T20:58:24.292682+00:00</updated>
+  <author>
+    <name>Gloria Zhao 2022-06-14 09:59:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Package Relay Proposal</title>
+    <updated>2023-06-15T20:58:24.292682+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-June/020558.html" rel="alternate"/>
+    <summary>The email thread discusses the proposal for package relay in the Bitcoin network. The conversation between Gloria Zhao and Suhas Daftuar focuses on potential issues with package relay, a proposed method for compactly relaying sets of unconfirmed transactions. One concern raised is that nodes on the network that have implemented package relay but do not accept a low-fee and non-standard transaction will still likely send getdata(PKGINFO1, T) to every node that announces T, which could lead to bandwidth waste from downloading duplicate data from all peers.To mitigate this concern, several suggestions are made, such as including a hash of the package wtxids along with the wtxid of the child in the initial announcement or limiting the use of v1 packages to transactions with very few parents. The conversation also considers the benefit of including the blockhash to prioritize transaction relay from peers with the same chain tip to maximize the likelihood of transaction acceptance, but it is considered a negligible concern.The conversation further discusses the rules for validating v1 packages, specifically the requirement for the topological sort of transactions within the package and the use of a blockhash in transaction relay. Nodes should order transactions based on topological sort in the complete transaction graph so that if missing-from-package ancestors are already known by a peer, then the remaining transactions are already properly ordered.Additionally, the discussion suggests using BIP 152 shortids to save bandwidth, but it may create a DoS vector if nodes are required to calculate shortids for every transaction in their mempools every time they receive a package.Eric Voskuil proposes using BIP152 as the fundamental structure for packaging without the header field. He also suggests accepting the largest subgraph of the package that conforms to fee constraints and dropping any peer that provides a package for which the full graph does not. The discussion touches on the issue of sending potentially bogus fee rates with every package and the use of the 'feefilter' message. Finally, there is a suggestion to replace 'header' and 'blockhash' fields with a Merkle root for the package identity. Overall, the conversation suggests that there are potential issues with package relay, but with further consideration, it could be a useful addition to Bitcoin's protocol.</summary>
+    <published>2022-06-14T09:59:23+00:00</published>
+  </entry>
+</feed>

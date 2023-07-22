@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for Advertising Lightning nodes via DNS records.</title>
+  <updated>2023-05-24T22:59:16.778761+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2018-04-10 00:58:10</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for Advertising Lightning nodes via DNS records.</title>
+    <updated>2023-05-24T22:59:16.778761+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-April/001150.html" rel="alternate"/>
+    <summary>In a recent conversation, ZmnSCPxj clarified that the proposed BOLT does not replace bootstrapping seed functionality and it is not intended to do so. It is possible for a client to supplement their view of the network by getting the graph from well-known nodes if they wish, but this should not centralize the network. The term "autoconnect" used in the mobile wallet is misleading. Instead, it should be "autochannel". ZmnSCPxj also explained the risk associated with public and private nodes owned by the same entity. If the public-facing node gets hacked, it cannot draw funds from the private node but can only send them out to the attacker on the network, or close channels and send the funds + wallet balance to an on-chain address. The warmer funds sit on the C side of the B → C channel. To better understand the concept, ZmnSCPxj breaks down the situation. Suppose A pays 1 BTC to C, and we have the state A 1 1 B 1 1 C. If public node B is hacked, B can close the channels and move the funds on-chain to the hacker's on-chain address, resulting in a total of 2 BTC stolen from node B. However, if Tyler &amp; Rompert Enterprises decides not to have a private node C, the state would be A 2 0 B, and if A pays 1 BTC to B, the state would be A 1 1 B. In case public node B is hacked, only 1 BTC can be stolen from node B, which is less than the previous situation where 2 BTC could be stolen from node B due to the existence of BC.Therefore, it is better to use a public node directly instead of running a public node and one or more private nodes as it reduces the risk. Alternatively, one could contract an external party who takes on the risk of running a public node in exchange for higher feerates to your private node.</summary>
+    <published>2018-04-10T00:58:10+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving JoinMarket's resistance to sybil attacks using fidelity bonds</title>
+  <updated>2023-06-13T20:28:24.391135+00:00</updated>
+  <author>
+    <name>Chris Belcher 2019-08-06 10:27:17</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving JoinMarket's resistance to sybil attacks using fidelity bonds</title>
+    <updated>2023-06-13T20:28:24.391135+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-August/017218.html" rel="alternate"/>
+    <summary>The bitcoin-developer mailing list has been discussing the problem of Sybil attacks in JoinMarket, which uses coinjoins to increase privacy. Chris Belcher, a bitcoin privacy researcher and developer, has said that a Sybil attacker can potentially control a large number of makers, either through running multiple bots or by renting coins from other holders. However, there is a cost to being a Sybil attacker, as running such an operation requires a sacrifice of fee income compared to running an honest maker. The most important part of this is the quadratic V^2 term in the formula calculating the fidelity bond value, which provides the incentive for lumping together fidelity bonds and is probably the most important part for privacy. The supporting document "Financial mathematics of JoinMarket fidelity bonds" contains calculations for exactly how many makers with the top 5 most valuable bonds will be chosen. With realistic real-world data, the makers with the top 5 most valuable bonds will be chosen 48% of the time. Another way to stop Sybil attacks is requiring the bond signature proofs to involve the one-time taker identifier, which would require fidelity bond privkeys to be online in hot wallets. This should massively increase the difficulty of renting TXOs because the maker and the TXO owner need to be in constant real-time communication. Hodlers could have coins already in a hardware wallet or cold storage and just sign proofs renting their UTXOs to earn extra income without changing their setup at all. Therefore, it seems only coin age fidelity bonds would be required to be on hot wallets. Another option worth considering is to have a separate lower interest rate for coin age bonds compared to OP_CLTV bonds.To incentivise becoming makers, developers are proposing introducing a mandatory fee of 1% per maker. Those who become makers offset the costs of being takers. However, apart from the inability of developers to enforce any kind of price, this scheme would not fix the Sybil attack problem, because Sybil attackers still have a higher gain compared to honest makers.</summary>
+    <published>2019-08-06T10:27:17+00:00</published>
+  </entry>
+</feed>

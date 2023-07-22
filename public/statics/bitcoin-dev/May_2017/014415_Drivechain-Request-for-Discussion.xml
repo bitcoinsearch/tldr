@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Drivechain -- Request for Discussion</title>
+  <updated>2023-06-12T00:57:12.553356+00:00</updated>
+  <author>
+    <name>CryptAxe 2017-05-24 17:32:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Drivechain -- Request for Discussion</title>
+    <updated>2023-06-12T00:57:12.553356+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-May/014415.html" rel="alternate"/>
+    <summary>The conversation is regarding the bribe process and BMM, which is still a work in progress. The "ratchet" system on Github only has the block hash part of the critical hash script. The completed version needs to check the sidechain number (ID) and the sidechain block number in the script. Also, the block number can only change by +1 or -1, so when a new h* is added to the queue it must be compared to the most recent h* in the queue. std::abs(queue.back().nHeight - ToAdd.nHeight) must equal 1. OP_BRIBE_VERIFY could then operate as follows: This causes the script to fail if it does not match the block height, or is not the hash for the sidechain with, or there is no hash for that sidechain in the block's coinbase.There is a suggestion to add an additional rule that OP_BRIBE checks fails unless the output is locked 100 or more blocks. The output script would end up something like IF OP_BRIBE_VERIFY ELSE OP_CHECKSIG ENDIF. This output acts like "anyone can spend" for the one block height. Otherwise, only the sidechain miner can spend the output. This allows the sidechain miner to reclaim their coins if the transaction ends up in a different block. OP_BRIBE_VERIFY would have an additional rule where the script to fails if one or more of the transaction outputs start with something other than the template and does not match the block height, or is not the hash for the sidechain with, or there is no hash for that sidechain in the block's coinbase. The template is OP_CHECKSEQUENCE_VERIFY.</summary>
+    <published>2017-05-24T17:32:22+00:00</published>
+  </entry>
+</feed>

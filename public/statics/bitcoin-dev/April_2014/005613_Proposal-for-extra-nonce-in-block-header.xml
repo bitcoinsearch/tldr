@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal for extra nonce in block header</title>
+  <updated>2023-06-08T21:54:21.031662+00:00</updated>
+  <author>
+    <name>Mark Friedenbach 2014-04-27 09:38:06</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal for extra nonce in block header</title>
+    <updated>2023-06-08T21:54:21.031662+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-April/005613.html" rel="alternate"/>
+    <summary>A BIP proposal was made on April 27, 2014, to address the incentives for miners to find cheaper ways to generate new work that are not in the best interest of the protocol. The proposal aims to reduce these incentives by re-assigning two bytes from the version field of the block header to a new extra nonce field. The motivation behind this is to provide miners with a cheap constant-complexity method to create new work without altering the transaction tree and to protect the version and timestamp fields in the block header from abuse. Traditionally, the extra nonce is part of the coinbase field of the generation transaction, which is always the first transaction of a block. After incrementing the extra nonce, the minimum amount of work a miner has to do to re-calculate the block header is to hash the coinbase transaction and re-calculate the left-most branch of the merkle tree all the way to the merkle root. This is necessary overhead a miner has to do besides hashing the block header itself. The process that leads to a new block header from the same transaction set is called pre-hashing.The relative cost of pre-hashing depends on the block size, which may create an unwanted incentive for miners to keep the block size small. As ASIC cost per hash performance drops, the relative cost of pre-hashing increases, creating an incentive for miners to find cheaper ways to create new work than through pre-hashing. An example of this currently happening is the on-device rolling of the timestamp into the future, which is unlikely to be in the best interest of the protocol.The solution proposed is to reduce the range of version numbers from 2^32 to 2^16 and to declare the third and fourth bytes of the block header as legitimate space for an extra nonce. This will reduce the incentive for a miner to abuse the shortened version number by a factor in the order of 2^16. As a side effect, this proposal greatly reduces the bandwidth requirements of a blind pool protocol by only submitting the block header to the miner.Old versions of the client will accept blocks of this kind but will throw an alert at the user to upgrade. The only code change required is a cast of the version number to a short. There is no need to introduce a new block version number or to phase-out old block versions.</summary>
+    <published>2014-04-27T09:38:06+00:00</published>
+  </entry>
+</feed>

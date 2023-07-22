@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP Proposal: Wallet Labels Export Format</title>
+  <updated>2023-06-16T00:02:52.118620+00:00</updated>
+  <author>
+    <name>Ali Sherief 2022-08-27 21:26:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP Proposal: Wallet Labels Export Format</title>
+    <updated>2023-06-16T00:02:52.118620+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-August/020901.html" rel="alternate"/>
+    <summary>The proposal for a CSV export format for Bitcoin wallets has received feedback and suggestions. One suggestion is to write inputs and outputs as descriptors, but this approach has some problems. Ali Sherief is considering merging Inputs and Outputs into one classification called just "Outputs" because no wallet software labels outputs. There are concerns about the unnecessary types that are kept in the format, which can cause information leaks leading to privacy issues. Moreover, most people do not label inputs or outputs.To export records in ascending order of their address type, a third column will be needed to identify the item type if this approach is used. It's better to mandate that all fields should always be double-quoted since only wallets will generate label exports anyway. The proposed BIP specifies a format for the export and import of labels from a wallet. The format is a simple two-column CSV file with a reference to a transaction, address, input, or output in the first column and the label in the second column. CSV was chosen for its wide accessibility, especially for users without specific technical expertise. The CSV file may be compressed using the ZIP format and optionally encrypted using AES.The BIP provides guidelines for importing labels, including that importing applications may truncate labels if necessary. It is possible to disambiguate between transactions, addresses, inputs, and outputs. The BIP proposes several changes to improve the proposed format's robustness, including converting the header into a version line with optional flags, adding a 3rd column for item type, requiring double quotes around the label, and requiring sorting the records according to the order they are stored in the wallet implementation. The BIP also suggests removing Input and Output item types and writing a more robust importer algorithm in the example given by the BIP. The proposed format aims to make manual or bulk management of labels accessible to users without specific technical expertise while reducing file size and retaining wide accessibility. The proposed format will ensure that users do not experience lock-in to a particular wallet application.</summary>
+    <published>2022-08-27T21:26:58+00:00</published>
+  </entry>
+</feed>

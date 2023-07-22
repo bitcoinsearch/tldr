@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Dynamic Commitments Part 2: Taprooty Edition</title>
+  <updated>2023-06-03T08:00:30.142907+00:00</updated>
+  <author>
+    <name>Johan Torås Halseth 2022-10-28 07:35:42</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Dynamic Commitments Part 2: Taprooty Edition</title>
+    <updated>2023-06-03T08:00:30.142907+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-October/003731.html" rel="alternate"/>
+    <summary>The Lightning Network has been exploring ways to upgrade existing channels to taproot without involving on-chain transactions. One proposal is the "adapter commitment" by ZmnSCPxj, which upgrades transaction outputs from one witness version type to the next upgraded type using a deferred two-transaction process. However, there is uncertainty regarding the fee overhead at closing time. Another proposal involves dividing the taprootyness of a channel into funding and commitment outputs, allowing for existing channels to be upgraded only on the commitment level and new channels to use taproot multisig for the funding output.Laolu Osuntokun proposed a two-phase dynamic commitment update protocol that would enable upgrades to channel/commitment related values like dust limit and max-in-flight without involving on-chain transactions. The proposal includes two new messages, "commitment_update_propose" and "commitment_update_apply," which encode new sets of updates and include up to two commitment_update_propose messages. The initiator would be the "leader" in this process, as they are the only ones who can trigger fee updates. The proposal also suggests that allowing the value of HTLCs to float would allow peers to apply similar congestion avoidance algorithms used in TCP today and protect the network against future unforeseen widespread policy changes.The concept of dynamic commitments was proposed a couple of years ago as a way to upgrade channel types on the fly and remove hard-coded limits such as the 483 HTLC in-flight limit. With Taproot now active on the mainnet, it is possible to upgrade all 80k+ public channels to Taproot without any on-chain transactions. An earlier mailing list post concluded that the dynamic commitments concept would only work within the confines of a "static" multi-sig output. However, ZmnSCPxj outlined a way to achieve this in practice with the "adapter commitment." Rusty made a spec PR last year outlining a way to upgrade the commitment type upon channel re-establish, which relies on another message that both sides send (`stfu`) to clear the commitment before the switch-over happens.Using the adapter commitment idea combined with a protocol for updating commitments on the fly would potentially allow us to update all 80k+ segwit v0 channels to the base level of taprooty channels without any on-chain transactions. Two transactions (open+close) must happen eventually, but by holding another layer of spends off-chain we can defer them indefinitely.</summary>
+    <published>2022-10-28T07:35:42+00:00</published>
+  </entry>
+</feed>

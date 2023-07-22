@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Commitment transaction format suggestions/proposals.</title>
+  <updated>2023-05-24T00:53:38.016796+00:00</updated>
+  <author>
+    <name>Rusty Russell 2017-01-25 00:53:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Commitment transaction format suggestions/proposals.</title>
+    <updated>2023-05-24T00:53:38.016796+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2017-January/000663.html" rel="alternate"/>
+    <summary>Proposed changes for commitment transactions in the Lightning Network are being discussed outside of GitHub to reach a wider audience. The first change under consideration is whether to make the to-remote output P2WPKH instead of P2PKH in order to save some bytes. The second proposed change entails making commitment transaction outputs directly spendable by the penalty transaction, which would eliminate the use of revocation key with HTLC-success or HTLC-timeout transactions. The proposed changes were made on Github and have been included in this discussion. The proposed changes would simplify BOLT2 and relieve the need to generate and send signatures, thereby reducing potential bottlenecks in the system. However, there is still complexity involved, as offered htlcs require handling both the HTLC-success and commit tx cases, while received htlcs require watching for HTLC-timeout transactions.The solution proposed is to use a multisig 2-of-3 with localkey, remotekey, and revocationkey for the Offered HTLC Output script. This output can be spent with the remote key and payment preimage, or with the remote key and local key, but it can also be spent with the remote key and revocation key. The Received HTLC Output script uses an additional IF branch and can be spent with the payment preimage and the remote and local keys, with the remote key after a delay, but can also be spent with the remote key and revocation key.The weight of the commitment tx may increase by about 6%, if the proposed changes are implemented. While optimizing for the smallest possible on-chain footprint is a valid concern, the tradeoffs will need to be discussed before any decisions are made.</summary>
+    <published>2017-01-25T00:53:24+00:00</published>
+  </entry>
+</feed>

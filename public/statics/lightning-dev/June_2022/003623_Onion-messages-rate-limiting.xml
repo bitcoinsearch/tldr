@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Onion messages rate-limiting</title>
+  <updated>2023-06-03T09:13:10.866086+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2022-06-29 08:28:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Onion messages rate-limiting</title>
+    <updated>2023-06-03T09:13:10.866086+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-June/003623.html" rel="alternate"/>
+    <summary>At the recent Oakland Dev Summit, lightning engineers discussed DoS protection for onion messages. Rusty proposed a simple rate-limiting scheme that applies per-peer rate limits on incoming onion messages which should be relayed. Nodes only need to keep track of the last node_id per outgoing connection to ensure a small memory footprint. It is recommended to allow more onion messages from peers with whom you have channels. The sender looks at its per-connection state to find where the message was coming from and relays onion_message_drop to the last sender, halving their rate limits with that peer. If the sender doesn't overflow the rate limit again, the receiver should double the rate limit after 30 seconds until it reaches the default rate limit again. A new message will be sent when dropping an incoming onion message because it reached rate limits. This message has two types of data: rate_limited: u8 and shared_secret_hash: 32-byte. The flow of this mechanism is illustrated in an example between Alice, Bob, and Carol along with the messages exchanged by them.</summary>
+    <published>2022-06-29T08:28:26+00:00</published>
+  </entry>
+</feed>

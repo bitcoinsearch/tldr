@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>HTLCs using OP_CHECKSEQUENCEVERIFY/OP_LOCKTIMEVERIFY and revocation hashes.</title>
+  <updated>2023-05-18T00:22:20.400003+00:00</updated>
+  <author>
+    <name>Anthony Towns 2016-02-10 16:50:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>HTLCs using OP_CHECKSEQUENCEVERIFY/OP_LOCKTIMEVERIFY and revocation hashes.</title>
+    <updated>2023-05-18T00:22:20.400003+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-February/000441.html" rel="alternate"/>
+    <summary>In an email thread, CJP provided a detailed explanation of a hypothetical scenario involving two parties, Alice and Eve, connected with two channels. The channels have delay parameters for both channels set at the value "D". Alice's commitments include a fee that she expects will result in confirmation in less than a delay of "F", and she's confident that a transaction can be spent so long as it has been in the blockchain for "N" units of time. The HTLCs are explained in detail. When forwarding the HTLC, Alice calculates T' such that T' = now + D + F. The scenario explains what happens when Eve becomes unresponsive on one channel and fails to send Alice a commit transaction update. At this point, Alice starts the timer ticking, and if she does not get an acknowledgment from Eve before T-D-F, she must go to the blockchain. This forces Alice to broadcast her commit transaction, containing the HTLC, before the CLTV of the HTLC times out; otherwise, Eve can try to claim the HTLC funds. Alice publishes her commitment transaction at T-D-F. The transaction gets mined before "F" time units transpire, so the time is now T-D-x. After an additional "D" time units, the time is T-x, at which point Alice can spend the transaction, but Eve cannot.The email thread further discusses the question of which times out first, Alice's CSV or Eve's CLTV, and concludes that Alice's CSV should be the first to time out. Finally, the thread assumes that the HTLC timeout is T0 + 1 day on the channel where Eve receives, T0 + 2 days on the channel where Eve sends, and states that Alice's CSV should have a delay less than one day. If the CSV delay is set to 0.5 days, that means Alice has a remaining 0.5-day time window in which her node must be up and running and connected to the Bitcoin network to claim the HTLC funds.</summary>
+    <published>2016-02-10T16:50:49+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Revault: a multi-party vault architecture</title>
+  <updated>2023-06-14T01:02:16.946353+00:00</updated>
+  <author>
+    <name>darosior 2020-05-08 10:34:49</name>
+  </author>
+  <author>
+    <name>darosior 2020-04-24 15:00:16</name>
+  </author>
+  <author>
+    <name>darosior 2020-05-08 10:34:49</name>
+  </author>
+  <author>
+    <name>darosior 2020-04-24 15:00:16</name>
+  </author>
+  <author>
+    <name>darosior 2020-05-08 10:34:49</name>
+  </author>
+  <author>
+    <name>darosior 2020-04-24 15:00:16</name>
+  </author>
+  <link href="bitcoin-dev/May_2020/017835_Revault-a-multi-party-vault-architecture.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2020/017793_Revault-a-multi-party-vault-architecture.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2020/017835_Revault-a-multi-party-vault-architecture.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2020/017793_Revault-a-multi-party-vault-architecture.xml" rel="alternate"/>
+  <link href="bitcoin-dev/May_2020/017835_Revault-a-multi-party-vault-architecture.xml" rel="alternate"/>
+  <link href="bitcoin-dev/April_2020/017793_Revault-a-multi-party-vault-architecture.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Revault: a multi-party vault architecture</title>
+    <updated>2023-06-14T01:02:16.946353+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-May/017835.html" rel="alternate"/>
+    <summary>Revault is a newly developed multiparty vault architecture designed to secure shared storage of coins without relying on a trusted third party and disincentivizing theft attempts while not restricting the usage of funds for day-to-day operations. The system uses pre-signed and revocable transactions, using N-of-N multisigs. Revault relies on six transaction types with N stakeholders: Vault Transaction, Emergency Transaction, Unvault Transaction, Unvault Emergency Transaction, Cancel Transaction, and Spend Transaction. To avoid weak security assumptions, stakeholders exchange SINGLE | ANYONECANPAY signatures for the revaulting transactions and append their own as SIGHASH_ALL before broadcasting. Stakeholders can add another input (and potentially output) to bump the fees before doing so. The protection from the bug is leveraged by the fact that revaulting transactions only have strictly one input and one output. The change being part of the spend transaction. Revaulting transactions may signal for RBF to cover a feerate increase after the broadcast. ALL | ANYONECANPAY signatures are now exchanged for revaulting transactions to restrict the creation of a new output only spendable by one party. The fee bumping is now done in two stages to avoid consuming an entire UTXO. If anything nasty happens, any stakeholder can trigger an emergency transaction at any point.Antoine and Kevin have developed the architecture. It aims to secure the shared storage of coins without relying on a trusted third party and by disincentivizing theft attempts. The system uses N-of-N multisigs but does not protect against intentional locking of funds, so it assumes its users are able to solve intentional blockage outside the Bitcoin network through legal contracts. Stakeholders would exchange the signatures of all the revaulting transactions after the reception of a new vault utxo, and then exchange the signatures of the unvaulting transaction. Before doing so, the coins are not available to be spent. In order to spend a vault, the subset of the stakeholders who manages the funds would make the cosigning server sign the spend transaction. They would then present it to the other watchers which would ACK the spend (if paying to an authorized address), and broadcast the "unvault" transaction. If a stakeholder's watcher detects an unvaulting transaction without knowing about its child “spend” transaction, it triggers an automatic “cancel” transaction. At any point, any of the stakeholders can trigger an emergency transaction if anything nasty is happening.The architecture was first designed by Kevin Loaec, who was hired by NOIA to do so, and was inspired by Bryan Bishop’s single-party vault architecture. A WIP draft/demo/PoC/ is available on Github, which uses 4 stakeholders, 2 or 3 traders, a CSV of 6 blocks for the unvault script, and a CSV of ~1 month for the emergency scripts. The transactions used are detailed in the doc/ directory of the same repo and are coded in the revault/transactions/ module.</summary>
+    <published>2020-05-08T10:34:49+00:00</published>
+  </entry>
+</feed>

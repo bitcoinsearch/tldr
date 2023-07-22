@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Blinded channel observation</title>
+  <updated>2023-05-24T00:09:02.664556+00:00</updated>
+  <author>
+    <name>Tadge Dryja 2016-08-11 03:12:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Blinded channel observation</title>
+    <updated>2023-05-24T00:09:02.664556+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2016-August/000575.html" rel="alternate"/>
+    <summary>The conversation starts with Alice and Bob sharing their idea of building a revocable pubkey. Alice takes their elkrem sender hash from state n, which is EHn and multiples it by G to get a point EPn (Elkrem point n). Alice then sends EPn to Bob who adds their commitment pubkey (BP) to EPn. This scheme gives them a slightly smaller script and makes previous commit transactions underivable. The property they were hoping for was the ability for Alice and Bob to independently predict each other's future revocation hashes/pubkeys that would allow an arbitrary number of commitment transactions in flight each way at once.They discuss the possibility of having a bi-directional trap door function, but RSA comes to mind where repeated exponentiation to the e can be reversed by exponentiation to the d. However, in RSA private keys (d) and public keys (e) are the same thing (scalars) but here they're different. They also discuss the possibility of setting up a homomorphic relationship such that Pubkey0 lets you compute Pubkey1, but it seems like it would also allow you to compute from Scalar0 to Scalar1.The conversation then moves towards changing the timeout key. Changing the revocation key is sufficient for each commitment script unguessably different from the last one, but changing the timeout key helps keep the channel private from the observer in case you just send them signatures. For privacy, the points you add to the timeout key and revocable key also need to be different points. If you add the same point to both, an observer who knows the base points can try subtracting the timeout and revocable base points from the observed pubkeys.In conclusion, Alice and Bob share their ideas and discuss the possibility of a bi-directional trap door function and changing the timeout key to improve privacy.</summary>
+    <published>2016-08-11T03:12:59+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New PSBT version proposal</title>
+  <updated>2023-05-21T00:10:56.323595+00:00</updated>
+  <author>
+    <name>Andrew Chow 2020-12-22 20:12:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New PSBT version proposal</title>
+    <updated>2023-05-21T00:10:56.323595+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-December/018319.html" rel="alternate"/>
+    <summary>A new version of Partially Signed Bitcoin Transactions (PSBT) called PSBT v1 has been proposed by Andrew Chow to address the deficiencies in the current PSBT v0. In this new version, all input and output data will be contained within their respective maps. The proposal includes adding several new fields such as PSBT_GLOBAL_TX_VERSION, PSBT_GLOBAL_PREFERRED_LOCKTIME, PSBT_GLOBAL_INPUT_COUNT, PSBT_GLOBAL_OUTPUT_COUNT, PSBT_IN_PREVIOUS_TXID, PSBT_IN_OUTPUT_INDEX, PSBT_IN_SEQUENCE, PSBT_IN_REQUIRED_LOCKTIME, PSBT_OUT_VALUE, and PSBT_OUT_OUTPUT_SCRIPT.Having two lock time fields is necessary due to the behavior where all inputs must use the same type of lock time (height or time). PSBT_GLOBAL_PREFERRED_LOCKTIME is changed to purely be the fallback option if no input lock time fields are present. Additionally, a new global field PSBT_GLOBAL_UNDER_CONSTRUCTION has been added which signals whether inputs and outputs can be added to the PSBT.Inputs may only be added if all existing signatures use SIGHASH_ANYONECANPAY. Outputs may only be added if all existing signatures use SIGHASH_NONE. If an input has a signature using SIGHASH_SINGLE, the same number of inputs and outputs must be added before that input and its corresponding output. For all other sighash types, no inputs or outputs may be added to the PSBT. Newly added inputs must follow additional lock time rules.Furthermore, to uniquely identify transactions for combiners, a txid can be computed from the information present in the PSBT. PSBT v1 needs to choose the maximum locktime value, as a Bitcoin transaction only has a single locktime, yet a PSBT may have multiple locktimes. PSBT_IN_REQUIRED_LOCKTIME is added to specify the minimum locktime required for specific inputs, such as those involving OP_CHECKLOCKTIMEVERIFY. The PSBT_GLOBAL_PREFERRED_LOCKTIME is the locktime to use if no inputs require a particular locktime.PSBT v1 requires a version number bump to enforce backward incompatibility, as it disallows the PSBT_GLOBAL_UNSIGNED_TX field. However, once the inputs and outputs are decided, a PSBT can be downgraded back to v0 by creating an unsigned transaction from the above fields and dropping these new fields. If these changes are reasonable, Andrew Chow will write a pull request to modify BIP 174 to incorporate them.</summary>
+    <published>2020-12-22T20:12:22+00:00</published>
+  </entry>
+</feed>

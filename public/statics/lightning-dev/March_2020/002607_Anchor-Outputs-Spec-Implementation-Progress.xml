@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Anchor Outputs Spec &amp; Implementation Progress</title>
+  <updated>2023-05-23T03:00:57.437731+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2020-03-30 19:00:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Anchor Outputs Spec &amp; Implementation Progress</title>
+    <updated>2023-05-23T03:00:57.437731+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-March/002607.html" rel="alternate"/>
+    <summary>The implementation of anchor outputs is now fully supported in the master branch of lnd. Users can opt into this new format by specifying a new command line parameter: --protocol.anchors (off by default). During the last spec meeting, the concern was raised about having two anchors at all times, which adds extra bytes to the commitment transaction, increasing the fee burden for force closing and polluting the UTXO set. In response to this concern, it is indeed the case that these new commitments are more expensive, but they're only _slightly_ so.On the topic of UTXO bloat, re-purposing the to_remote output as an anchor is arguably worse, as only a single party in the channel is able to spend that output in order to remove its impact on the UTXO set. On the other hand, using two anchors allows anyone to sweep these outputs several blocks after the commitment transaction has confirmed. The final factor to consider is if we wish to properly re-introduce a CSV delay to the to_remote party in an attempt to remedy some game theoretical issues w.r.t forcing one party to close early without a cost to the instigator.In the future, if the scheme changes, then users will be able to easily update all their users, as they are also concurrently working on a dynamic commitment update protocol. By dynamic, users will be able to update their commitment type on the fly, compared to being locked into a commitment type when the channel opens as is today.</summary>
+    <published>2020-03-30T19:00:12+00:00</published>
+  </entry>
+</feed>

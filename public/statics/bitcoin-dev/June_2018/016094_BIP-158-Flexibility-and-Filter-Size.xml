@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP 158 Flexibility and Filter Size</title>
+  <updated>2023-05-20T08:27:39.471394+00:00</updated>
+  <author>
+    <name>Olaoluwa Osuntokun 2018-06-08 05:03:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP 158 Flexibility and Filter Size</title>
+    <updated>2023-05-20T08:27:39.471394+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-June/016094.html" rel="alternate"/>
+    <summary>The discussion on Bitcoin-dev mailing list is regarding the proposal to commit filters that can be used for scanning a wallet's transactions and verifying that the filters are not giving out incorrect results. The two suggestions made were (a) which includes scriptPubKeys of the block's outputs and prevouts of the block's inputs, and (b) which includes scriptPubKeys of the block's outputs and scriptPubKeys of outputs being spent by the block's inputs. Both these suggestions have their advantages, with (a) making it possible to verify against a full block without access to the outputs being spent by it, and (b) being more compact with script reuse and outputs spent within the same block as they are created. While there is no immediate cost in deferring the inclusion/creation of a filter, using (b) in the short term would be costly for already deployed applications. Maintaining the outpoint allows reliance on a "single honest peer" security model in the short term. A long-term barrier to committing the filters is the actual proposal to add new consensus enforced commitments to Bitcoin in the first place. Such a proposal would need to be generalized enough to allow several components to be committed and also provide the necessary extensibility to allow additional items to be committed in the future. Therefore, there is no reason to delay the p2p filter deployment (with the outpoint) in the short term, as the long lead time a soft-fork to add extensible commitments to Bitcoin would give application+wallet authors ample time to switch to the new model. There is also no reason that full-node wallets which wish to primarily use the filters for rescan purposes cannot construct them locally for this particular use case independent of what's currently deployed on the p2p network.</summary>
+    <published>2018-06-08T05:03:04+00:00</published>
+  </entry>
+</feed>

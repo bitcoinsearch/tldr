@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Preventing/detecting pinning of jointly funded txs</title>
+  <updated>2023-05-22T22:44:29.493456+00:00</updated>
+  <author>
+    <name>Anthony Towns 2022-11-07 11:46:28</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Preventing/detecting pinning of jointly funded txs</title>
+    <updated>2023-05-22T22:44:29.493456+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-November/021171.html" rel="alternate"/>
+    <summary>Antoine Riard has proposed a solution to the DoS issue in an opt-in RBF world for coinjoins/splicing/dual-funded transactions. He suggests deploying a distributed monitoring of network mempools called "mempools watchdog". However, this infrastructure can be subject to mempool partitioning attacks by adversaries.To solve this problem, victims could outsource the monitoring to dedicated entities. However, there is a belief that there is a lack of compensation mechanism, leading to only a low number of public ones.Another issue that arises is assigning blame reliably among a set of trust-minimized joint funding protocol participating UTXOs. A potential problem is two double-spends from two sybilling participants, aiming to halt the assignment process. To avoid this situation, anyone who wants to continue as part of the group never signs a conflicting tx and if someone does sign it, they are saying "I don't want to be part of this group anymore". If a way of saying "I want to abort this coinjoin, but stay a part of the group" is needed, 51% of the rest of the group must sign off on that claim.In a full-rbf world, any participant should be able to fee-bump the joint transaction. However, it is suggested not to do coinjoins with a ridiculously large number of untrusted counterparties. It is better to quickly say "oops, someone cheated, let's exclude them, and split the remainder into two groups" until you either succeed or are down to a more reasonable group size of perhaps 10 or 20. It is important to note that broadcasting a double-spend with a feerate equivalent to the honest transaction doesn't tighten the attack scenario because the attacker can still do low feerate pinning that's not recoverable by fee bumping the alternative.</summary>
+    <published>2022-11-07T11:46:28+00:00</published>
+  </entry>
+</feed>

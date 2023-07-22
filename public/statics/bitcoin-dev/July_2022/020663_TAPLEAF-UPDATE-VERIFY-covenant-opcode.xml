@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>TAPLEAF_UPDATE_VERIFY covenant opcode</title>
+  <updated>2023-06-15T01:38:26.120126+00:00</updated>
+  <author>
+    <name>Tim Ruffing 2022-07-08 19:52:12</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>TAPLEAF_UPDATE_VERIFY covenant opcode</title>
+    <updated>2023-06-15T01:38:26.120126+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-July/020663.html" rel="alternate"/>
+    <summary>The context is about finding a workaround for the x-only issue with TAPLEAF_UPDATE_VERIFY. It suggests using an opcode that needs a function f to ensure that the new internal key f(P') has even y. The canonical choice of f(P') leads to issues because negation turns around the signs of A and B. However, using additive tweaking instead of multiplicative tweaking will not change the coefficients. This choice of f will succeed after 1 addition on average. Pool members will need to track the accumulated tweak t and take the tweak into account when signing.Moving on to the pooled scheme and actually updating the internal pubkey is where things start to come apart. Since taproot uses 32-byte x-only pubkeys (with implicit even-y) for the scriptPubKey and the internal public key, it is essential to worry about what happens if A,B,C and A+B+C all have even-more elegy, but (A+B)=(A+B+C)-C does not have even-y. In that case allowing C to remove herself from the pool might result in switching from the scriptPubKey Qabc to the scriptPubKey Qab, which is fine so far, but what happens if B then removes himself from the pool? In this scenario, you take the internal public key, which turns out to be -(A+B) since (A+B) did not have even y, and then subtract B, but that gives you -A-2B instead of just A. So B obtains his funds, but B's signature hasn't been cancelled out from the internal public key, so it is still required to do key path spends, which is definitely not what we want.</summary>
+    <published>2022-07-08T19:52:12+00:00</published>
+  </entry>
+</feed>

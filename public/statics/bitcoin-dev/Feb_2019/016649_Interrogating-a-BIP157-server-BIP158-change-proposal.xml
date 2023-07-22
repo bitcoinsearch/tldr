@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Interrogating a BIP157 server, BIP158 change proposal</title>
+  <updated>2023-06-13T16:58:03.450721+00:00</updated>
+  <author>
+    <name>Jim Posen 2019-02-04 20:18:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Interrogating a BIP157 server, BIP158 change proposal</title>
+    <updated>2023-06-13T16:58:03.450721+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-February/016649.html" rel="alternate"/>
+    <summary>In a Bitcoin-dev thread from 2018, there was discussion over the decision to remove outpoints from the filter. It was noted that clients cannot reliably determine the integrity of a block filter in a bandwidth-efficient manner due to inclusion of input scripts. Three possibilities were proposed: 1) introducing a new P2P message to retrieve all prev-outputs for a given block and verifying scripts against the block by executing them, 2) clients tracking multiple possible filter header chains and considering the union of their matches, and 3) committing filters into the chain via witness reserved value or coinbase OP_RETURN. The author favors option #2 despite its downsides. In a more recent Bitcoin-dev post, Tamas Blummer suggests a change to BIP158 to have a base filter containing exactly spent outpoints and the scriptPubKey of each output (aside from all OP_RETURN output scripts). This would simplify interrogation of filter servers, as the filter of the block could be checked entirely against the contents of the same block. The decision on filter correctness would not require more bandwidth than downloading a block at the mismatching checkpoint, and the client would only be forced at maximum to download 1/1000th of the blockchain in addition to the filter header history.</summary>
+    <published>2019-02-04T20:18:08+00:00</published>
+  </entry>
+</feed>

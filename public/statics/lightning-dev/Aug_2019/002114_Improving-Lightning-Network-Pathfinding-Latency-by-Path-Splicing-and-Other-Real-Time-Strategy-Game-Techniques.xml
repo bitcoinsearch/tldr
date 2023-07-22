@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Improving Lightning Network Pathfinding Latency by Path Splicing and Other Real-Time Strategy Game Techniques</title>
+  <updated>2023-06-02T19:36:58.554501+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2019-08-09 10:37:38</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Improving Lightning Network Pathfinding Latency by Path Splicing and Other Real-Time Strategy Game Techniques</title>
+    <updated>2023-06-02T19:36:58.554501+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-August/002114.html" rel="alternate"/>
+    <summary>A lightning implementation returns random routes on the mainnet in a maximum of 347 milliseconds and a mean of 220 milliseconds. On a Raspberry Pi 2B with optimized compilation, it takes between 21 to 3330 milliseconds, with a mean of 388 milliseconds. Dijkstra and other non-heuristic-guided algorithms explore a "ball" around the starting node, which increases the practical algorithm runtime when the other end of the path is far. A\* uses a heuristic that tends to form balls around large obstacles but otherwise has a much smaller frontier it explores, which helps reduce the worst-case times. The author is working on an implementation of `getroutequick` for C-Lightning. The implementation periodically measures the distance of each node from our node and stores this in a cache in each node. During pathfinding, they use A\* and use the stored distance-to-our-node as part of a differential heuristic. Dijkstra, A\*, and another algorithm called "Greedy Best First Search" all require a priority queue where nodes are sorted in order from least-cost to most-cost. Greedy Best First scans fewer nodes, but may yield non-optimal paths. Dijkstra assures optimal paths, but scans many nodes due to its scanning a "ball" around the source. The paper suggests that having a "decrease priority" operation was a drawback, not a benefit. Thus, the visited-ness of a node can be stored in the structure that also stores the f(n) of that node. f(n) is the priority of the node, and is basically the cost: under Dijkstra, the cost of reaching that node; under A\*, the estimated cost of reaching the goal node via the path that goes through this node. And costs in Lightning are measurable in millisatoshis. The maximum number of satoshis is known to fit in 53 bits, and millisatoshis require 1000x larger numbers, which requires 10 additional bits. Thus, 63 bits can fit the largest possible cost, and we can add one more bit as a flag meaning "we have pulled this node out of the priority queue and expanded its neighbors already," thus fitting into 64 bits.</summary>
+    <published>2019-08-09T10:37:38+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Bundled payments</title>
+  <updated>2023-06-18T13:12:47.215307+00:00</updated>
+  <author>
+    <name>Thomas Voegtlin 2023-06-15 08:22:39+00:00</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Bundled payments</title>
+    <updated>2023-06-18T13:12:47.215307+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-June/003981.html" rel="alternate"/>
+    <summary>Thomas Voegtlin proposes an extension to BOLT-11 where an invoice can contain two bundled payments with distinct preimages and amounts. The use case is for services that require the prepayment of a mining fee in order for a non-custodian exchange to take place such as Submarine swaps and JIT channels. The proposal would level the field in terms of competition between lightning service providers. Currently, you need to use a dedicated client in order to use Loop, and competitors who do not have an established user base running a dedicated client are exposed to the mining fee attack. Thomas believes that ACINQ would benefit from this because it would make it possible for them to make their pay-to-open service fully non-custodian. The proposed change should be implemented in BOLT-11, and not using BOLT-12 or onion messages. The semantics of bundled payments will be: 1. the BOLT-11 invoice contains two preimages and two amounts: prepayment and main payment. 2. the receiver should wait until all the HTLCs of both payments have arrived before they fulfill the HTLCs of the pre-payment. If the main payment does not arrive, they should fail the pre-payment with a MPP timeout. 3. once the HTLCs of both payments have arrived, the receiver fulfills the HTLCs of the pre-payment, and they broadcast their on-chain transaction. The decision to make this feature required or optional remains with the service provider. Matt Corallo replied to Thomas's proposal stating that he thinks the ship has probably sailed on getting any kind of new interoperable change in to BOLT-11. He believes that rolling out yet another new incompatible version of BOLT-11 and expecting the entire ecosystem to support it doesn't seem all that likely. He suggests working towards specifying some "standard" way of doing swaps, and why it shouldn't be built on OMs so you can do it more privately. Regarding Thomas's question about the distinction between splice-out and submarine swaps, he said that submarine swaps make it possible to add receiving capacity to a channel.</summary>
+    <published>2023-06-15T08:22:39+00:00</published>
+  </entry>
+</feed>

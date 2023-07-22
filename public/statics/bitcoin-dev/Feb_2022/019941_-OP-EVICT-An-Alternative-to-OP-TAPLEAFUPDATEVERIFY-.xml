@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>`OP_EVICT`: An Alternative to `OP_TAPLEAFUPDATEVERIFY`</title>
+  <updated>2023-06-15T17:00:45.905595+00:00</updated>
+  <author>
+    <name>ZmnSCPxj 2022-02-18 23:39:49</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>`OP_EVICT`: An Alternative to `OP_TAPLEAFUPDATEVERIFY`</title>
+    <updated>2023-06-15T17:00:45.905595+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-February/019941.html" rel="alternate"/>
+    <summary>In this context, ZmnSCPxj discusses the use of statechains and CoinPool constructions. He notes that multi-party construction using LN-Penalty is an unsolved issue as it raises questions on how to distribute outputs fairly among honest users in a case of invalidated state being published on-chain. ZmnSCPxj then explains Decker-Wattenhofer and Decker-Russell-Osuntokun constructions, which are safe with N &gt; 2 but have tradeoffs in locktime and require `SIGHASH_NOINPUT`/`SIGHASH_ANYPREVOUT`. Further, he discusses the commitment scheme that does not impose any ordering during the commitment and dissociates output publication order from spend paths ordering. He states that TapLeaf uses a unique tapleaf for each participant to get evicted, and TLUV imposes an arbitrary ordering because of the sort-by-hash requirement. However, he wishes to avoid O(log N) space consumption with `OP_EVICT`, which is just a redesigned `OP_TLUV`.ZmnSCPxj also explains the "N-of-N With Eviction" construction, where if a participant is offline, they can be evicted by the remaining participants to create a smaller N-of-N where all participants are online and continue operating. He differentiates eviction by the pool unanimity from unilateral withdrawal by a participant because of liquidity allocation policy.Finally, ZmnSCPxj talks about the advantage of reduced number of eviction transactions with `OP_EVICT` and how it requires point operations, while `OP_TLUV` may require at least one signature validation. He believes that TLUV can be modified to make it functional for CoinPool revival, where you want to prevent equivocation among the remaining set of signers.</summary>
+    <published>2022-02-18T23:39:49+00:00</published>
+  </entry>
+</feed>

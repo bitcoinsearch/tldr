@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Asymmetric features</title>
+  <updated>2023-06-01T18:45:04.972034+00:00</updated>
+  <author>
+    <name>Bastien TEINTURIER 2021-07-08 07:42:19</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Asymmetric features</title>
+    <updated>2023-06-01T18:45:04.972034+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-July/003113.html" rel="alternate"/>
+    <summary>The Lightning Network's mechanism for feature bits works well for symmetric features, but not for asymmetric ones. For example, if Alice has a mobile lightning wallet that can be woken up via push notifications, and Bob runs a lightning node that can send push notifications to wake them up on important events, we can't use a single feature bit to model that. This is because Alice supports "I can be woken up via push notifications", but she can't send push notifications to other nodes, and similarly, Bob only supports waking up other nodes, not receiving push notifications. So we must use two feature bits: `wake_me_up_plz` and `i_say_wake_up`, which makes it clear what part of the protocol each node can handle.However, the issue arises when Alice requires her peers to support `i_say_wake_up`. She can't turn on the feature with the mandatory bit because then her peers would be confused and think she can wake up other devices. There are two potential solutions: 1) repurpose the meaning of `optional` and `mandatory` bits for asymmetric features, where the odd bit means "I support this feature" and the even bit means "I require my peer to support this feature"; or 2) add a requirement to send a warning and disconnect when a client connects to a provider that hasn't activated the provider-side feature. Bastien, who opened an issue for this on Github, is interested in hearing thoughts and ideas from the community.</summary>
+    <published>2021-07-08T07:42:19+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP draft: OP_CHECKBLOCKATHEIGHT</title>
+  <updated>2023-06-11T20:06:55.198360+00:00</updated>
+  <author>
+    <name>Tom 2016-09-24 09:37:52</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP draft: OP_CHECKBLOCKATHEIGHT</title>
+    <updated>2023-06-11T20:06:55.198360+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-September/013167.html" rel="alternate"/>
+    <summary>In a discussion on the Bitcoin-dev mailing list, Luke Dashjr proposed a new opcode called OP_CHECKBLOCKATHEIGHT that would address reissuing bitcoin transactions when the coins they spend have been conflicted or double-spent. Tom asked for a real-life use case where this solves a problem, but it was pointed out that the scenario assumed so many stupid mistakes from software and people that it's unlikely to happen. The proposed solution requires the victim to suddenly be super smart and use a solution specifically designed for this unlikely use case. Luke responded with an example where Joe sends Alice 5 BTC, Fred sends Alice 4 BTC, Alice sends Bob 4 BTC using UTXO 1 (creating UTXO 2), and Fred double-spends UTXO 1 with UTXO 1-B, invalidating Alice's transfer to Bob. Alice has UTXO 0 which she can send to Bob (UTXO 3), but if she does so, it is possible that UTXO 0 could be mined, resulting in her giving Bob a total of 8 BTC rather than merely 4 BTC. Using OP_CHECKBLOCKATHEIGHT, however, Alice can create UTXO 3 such that it is valid only in the blockchain where Fred's UTXO 1-B has confirmed. This way, if that block is reorganized out, UTXO 3 is invalid, and either Bob receives only the original UTXO 2 or Alice can create a UTXO 3-B which is valid in the reorganized blockchain if it confirms the UTXO 1-B double-spend again.</summary>
+    <published>2016-09-24T09:37:52+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Covert channel recovery with Oblivious Signatures</title>
+  <updated>2023-06-03T03:28:37.724612+00:00</updated>
+  <author>
+    <name>Lloyd Fournier 2020-12-15 03:43:46</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Covert channel recovery with Oblivious Signatures</title>
+    <updated>2023-06-03T03:28:37.724612+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-December/002917.html" rel="alternate"/>
+    <summary>The discussion is about the different methods of recovering funds in a channel. The author discusses YOLO commitment transactions, oblivious settlements, and the current system. They note that recommending YOLO commitments becoming the standard way to recover funds is difficult as it may not be preferable to the current system. However, they feel they can recommend oblivious settlements because they are covert like YOLO commitments and guarantee recovery of presented funds when triggered.Claims regarding YOLO commitments and oblivious mutual close are made. Before revealing doing recovery, one is guaranteed to have a transaction in hand that can be broadcasted first, and the fee can be chosen as high as desired. This transaction is not replaceable. If the malicious party is not willing to risk broadcasting a revoked transaction, the face value of the transactions presented can be recovered. An honest party is never at risk of broadcasting a revoked commitment transaction. The channel can continue without revealing that a recovery was being done.The author notes that the current system has claim three, and oblivious mutual close has claims one, two, and three. YOLO commitments have claim one and five. The question is whether paying the price of losing claims two and three is worth the upgrade from claim one to five.The concern with claim one is that once the obliquely transferred "mutual close" transaction is broadcasted, the malicious party may have a hint that data was lost. They can then try to broadcast a favorable revoked transaction. However, this should be challenging since the transaction is broadcasted first and can have a high fee. The revoked transaction will signal replaceability.The author also notes that they are trying to avoid losing claim three to keep claim one applicable. In YOLO commitment transactions, additional metadata needs to be recovered from the other party, specifically the compressed revocation keys. A signature on the compressed revocation keys must be given to the other party before data loss and returned when given the commitment transaction upon reconnection.The author discusses revocable signature-based channels and the consequence of losing the static secret key if a revoked commitment transaction is posted. They note that this could result in the loss of all funds from all channels with all peers. Finally, they agree with the points made by David A. Harding about side-channels being effective tools to reveal whether a node has had data loss or not.</summary>
+    <published>2020-12-15T03:43:46+00:00</published>
+  </entry>
+</feed>

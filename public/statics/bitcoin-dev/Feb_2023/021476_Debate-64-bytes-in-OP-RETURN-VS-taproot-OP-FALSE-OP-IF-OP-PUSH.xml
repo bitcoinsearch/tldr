@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Debate: 64 bytes in OP_RETURN VS taproot OP_FALSE OP_IF OP_PUSH</title>
+  <updated>2023-05-22T23:26:12.968073+00:00</updated>
+  <author>
+    <name>Anthony Towns 2023-02-17 12:49:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Debate: 64 bytes in OP_RETURN VS taproot OP_FALSE OP_IF OP_PUSH</title>
+    <updated>2023-05-22T23:26:12.968073+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-February/021476.html" rel="alternate"/>
+    <summary>In a recent post on the Bitcoin Development mailing list, Russell O'Connor raised an interesting point about the cost of using bytes in the witness versus bytes in the script pubkey. According to O'Connor, there is a crossover point in data size where it becomes cheaper to use witness data as compared to bytes in the script pubkey. However, this is only true given today's standardness constraints. O'Connor suggests that allowing a data carrier entry in the annex would enable publishing data with a single transaction, with malleability prevented because the annex content is committed to by the signature. The cost for publishing data via the witness today is roughly 115 vb for the commitment tx and 115 vb + datalen/4 for the publication tx. On the other hand, a tx with an OP_RETURN output costs around 125 vb + datalen, making it more expensive than the witness for datalengths greater than 140 bytes.Furthermore, using the witness for random data has another advantage over OP_RETURN. The txid commits to the OP_RETURN output, so all OP_RETURN data must be downloaded to validate a block's merkle tree. In contrast, you can partially validate a block without downloading witness data. Overall, these findings suggest that a datacarrier in the annex with similar or higher limits than OP_RETURN would make OP_RETURN obsolete.</summary>
+    <published>2023-02-17T12:49:41+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Stamping transaction</title>
+  <updated>2023-06-14T02:15:26.681544+00:00</updated>
+  <author>
+    <name>Mostafa Sedaghat joo 2020-06-07 07:27:48</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Stamping transaction</title>
+    <updated>2023-06-14T02:15:26.681544+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-June/017932.html" rel="alternate"/>
+    <summary>The proposal is to decouple transactions from the block by stamping transactions, which would keep the size of the blockchain as small as possible. While data storage is cheap and easy, the need for a data-center to keep a copy of a blockchain can lead to a far from a decentralization system. The proposed mechanism can be made into a softfork, but it is not possible because the transaction will not be saved inside the block (only transaction hashes). Engineering-wise, block validation now needs to memorize the last N block hashes. However, the mempool design currently assumes that a transaction that enters the mempool is always valid unless any UTXOs it spends have been removed. Thus, there is the additional need to drop transactions from the mempool if they are stamped with a block that has dropped from the stamp TTL.Another issue is incentives. The stamp takes up blockchain space that is paid for by the creator of the transaction. Further, the creator of the transaction gains no advantage from the stamped transaction; it is others who gain an advantage (the stamped transaction is more likely to be dropped from the mempool). Discounting the stamp somehow will probably make this into a hardfork. It might be sneaked into the witness somehow by adding it as a field somewhere in the new parts of Taproot. Finally, it is expected to increase bandwidth use since a dropped stamped transaction will probably be rebroadcast with a new stamp, so effectively the transaction is retransmitted again with a different stamp.</summary>
+    <published>2020-06-07T07:27:48+00:00</published>
+  </entry>
+</feed>

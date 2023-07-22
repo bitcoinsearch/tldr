@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>SPV bitcoind? (was: Introducing BitcoinKit.framework)</title>
+  <updated>2023-06-06T20:07:42.636362+00:00</updated>
+  <author>
+    <name>Peter Todd 2013-07-17 10:58:53</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>SPV bitcoind? (was: Introducing BitcoinKit.framework)</title>
+    <updated>2023-06-06T20:07:42.637364+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-July/002917.html" rel="alternate"/>
+    <summary>An individual expressed interest in seeing an SPV bitcoind, stating that they would fund such work. Mike Hearn followed up with some of Satoshi's old code for this, which is now quite broken. The offer and interest on the individual's side still stand, as more diversity in SPV options seems like the right way to go. However, SPV nodes have serious privacy issues because their peers know that any transaction sent to them by the SPV node is guaranteed to be from the node rather than relayed and bloom filters are only really helpful with payment protocols that don't exist yet and don't apply to merchants. In addition, the Bitcoin codebase will have to implement much better anti-DoS attack defenses soon and in a decentralized system there aren't any options other than requiring peers to either do work (useful or not) or sacrifice something of value. It will be a while before we know how serious these issues are in practice, and we're likely to find new issues we didn't think of too. In any case, Bitcoin is far better off if we make it easy to run a full node, donating whatever resources you can. Fortunately, there's a whole continuum between SPV and full nodes.The way you maintain partial UTXO sets, and if you have verified every block in some range i to j, every time you see a txout created by a transaction, and not subsequently spent, you can be sure that at height j the txout existed. If height j is the current block, you can be sure the txout exists provided that the chain itself is valid. Any transaction that only spends txouts in this partial set is a transaction you can fully verify and safely relay; for other transactions, you just don't know and have to wait until you see them in a block. Nodes now advertise this new variable to their peers: nOldestBlock - The oldest block that we've validated. (and all subsequent blocks). We'll also want the ability to advertise what sub-ranges of the blockchain data we have on hand: listArchivedBlockRanges - lists of (begin, end pairs). Nodes with partial peers should only relay transactions to those peers if the transactions spend inputs the peers know about - remember how even an SPV node has that information if it's not spending unconfirmed inputs it didn't create. On startup, you can act as an SPV node temporarily, grabbing asking for filtered blocks matching your wallet, and then go back and get the full blocks, or just download the full blocks right away. That's a tradeoff on how long the node has been off. Anyway, it's a bit more code compared to pure-SPV, but it results in a much more scalable Bitcoin, and if you can spare the modest bandwidth requirements to keep up with the blockchain, it'll result in much better robustness against DoS attacks for you and Bitcoin in general.</summary>
+    <published>2013-07-17T10:58:53+00:00</published>
+  </entry>
+</feed>

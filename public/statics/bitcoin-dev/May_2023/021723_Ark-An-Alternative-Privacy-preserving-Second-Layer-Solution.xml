@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Ark: An Alternative Privacy-preserving Second Layer Solution</title>
+  <updated>2023-06-16T18:31:44.331130+00:00</updated>
+  <author>
+    <name>Ali Sherief 2023-05-28 06:02:58</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Ark: An Alternative Privacy-preserving Second Layer Solution</title>
+    <updated>2023-06-16T18:31:44.331130+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-May/021723.html" rel="alternate"/>
+    <summary>The Ark protocol requires users to refresh their coins every few weeks, otherwise the ASP can sweep the funds. To mitigate this disadvantage, a watchtower program for Ark has been proposed that runs on an internet-connected server and inputs the user's wallet password and the date in the future to perform the refreshing. The watchtower child process will attempt to decrypt the password using the current ISO 8601 time as the key every second until it succeeds at the requisite time to unlock the wallet. The key feature is that nobody will be able to decrypt the password unless they know the exact time it is to be unlocked as an ISO 8601 string. Even if the watchtower is hacked after the task has been made, the hacker still won't be able to decrypt the wallet password unless they brute-force the encryption key by exhaustively trying all timestamps in the future.Alternatively, the watchtower program could encrypt a signed transaction which is used by Ark to refresh the coins. In this case, the wallet password would still need to be collected, but only for the purpose of signing the transaction, after which the password is promptly erased from memory. It is suggested to take note of the UTXOs created by the coin refreshing transaction, use those as inputs to a second refreshing transaction that is created immediately after the first one, sign it, and similarly create a third, fourth, etc. as many as are desirable for the user. Then every 4 weeks, one of these transactions can be broadcasted, in the order that they were created.If the user comes online by themselves, they can simply cancel the watchtower refreshing task, which will terminate the watchtower child process without opening the wallet and refreshing coins. Memory scrubbing should be applied to the region that has the decrypted wallet password. The scheme works similar to LN watchtowers and aims to make the process of refreshing coins more secure.</summary>
+    <published>2023-05-28T06:02:58+00:00</published>
+  </entry>
+</feed>

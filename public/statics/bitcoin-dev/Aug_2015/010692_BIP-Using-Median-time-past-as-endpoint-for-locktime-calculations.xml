@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP: Using Median time-past as endpoint for locktime calculations</title>
+  <updated>2023-06-10T20:14:59.639935+00:00</updated>
+  <author>
+    <name>jl2012 at xbt.hk 2015-08-28 15:27:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP: Using Median time-past as endpoint for locktime calculations</title>
+    <updated>2023-06-10T20:14:59.639935+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/010692.html" rel="alternate"/>
+    <summary>A proposed solution to the problem with minimal change to the current softfork logic has been suggested. The solution still allows all features described in sipa's Version bits BIP. The solution sets the xVersion equal to nVersion AND 0b10000000000000000000000000011000, and miners supporting BIP65 will set xVersion to 8 or greater. If 750 of the last 1000 blocks are xVersion &gt;= 8, invalid xVersion 8 (or greater) blocks will be rejected. If 950 of the last 1000 blocks are xVersion &gt;= 8, all blocks with xVersion will be rejected. In a discussion about this proposal, it was noted that XT nodes are producing blocks with nVersion=0b001...111. The proposed solution would apply a mask of ~0b001...111 and trigger the soft-fork on nVersion &gt;= 0b0...100 == 4, with miners producing blocks with nVersion=0b0...1000. However, this approach uses up a version bit unnecessarily because blocks with nVersion=0b001...000 - the intended deployment of the nVersion bits proposal - will be rejected by the nVersion &gt;= 4 rule, hard-forking them off the network. Alternative solutions were also proposed, including a stateless nVersion bits w/ time-expiration proposal and implementing the original stateful nVersion bits proposal. The former only leads to a hard-fork if a soft-fork has been rejected by the time the upgrade deadline is reached, while the latter is higher risk due to the extra complexity of tracking soft-fork state.</summary>
+    <published>2015-08-28T15:27:23+00:00</published>
+  </entry>
+</feed>

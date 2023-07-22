@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - Commitment transaction format suggestions/proposals.</title>
+  <updated>2023-05-24T00:55:54.232362+00:00</updated>
+  <author>
+    <name>Rusty Russell 2017-01-25 00:53:24</name>
+  </author>
+  <author>
+    <name>Fabrice Drouin 2017-01-25 21:27:52</name>
+  </author>
+  <link href="lightning-dev/Jan_2017/000663_Commitment-transaction-format-suggestions-proposals-.xml" rel="alternate"/>
+  <link href="lightning-dev/Jan_2017/000664_Commitment-transaction-format-suggestions-proposals-.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - Commitment transaction format suggestions/proposals.</title>
+    <updated>2023-05-24T00:55:54.232362+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2017-January/000663.html" rel="alternate"/>
+    <summary>Proposals for proposed changes to the commitment transactions of Lightning Network were discussed outside of Github. The first proposal is regarding whether or not to make To-remote output P2WPKH instead of P2PKH, in order to save bytes. The second and more interesting proposal made by Fabrice Drouin involves making commitment transaction outputs directly spendable by penalty transactions. This would include the HTLC outputs which can only currently be spent using the revocation key with the HTLC-success or HTLC-timeout transactions. The proposal would simplify BOLT2, remove the burden of storing signatures and generating them, and relieve the penalty of waiting. The changes to the offered HTLC output script proposes a multisig 2-of-3 with localkey, remotekey, and revocationkey for the script. It can be spent with remote key and payment preimage, or with remote key and local key, but it can also be spent with remote key and revocation key. The received HTLC output script change adds an additional IF branch. Now, it can be spent with the payment preimage and the remote and local keys, with the remote key after a delay, but it can also be spent with the remote key and revocation key. While the complexity will still remain, this proposal will improve the efficiency of the system. The current design penalizes nodes that do their own monitoring because they have to generate and send signatures. By implementing these changes, nodes will no longer need to wait for htlc timeout refund to claim the funds and watch for HTLC-success transactions, thus simplifying the BOLT2 and saving the burden of storing the signatures.</summary>
+    <published>2017-01-25T00:53:24+00:00</published>
+  </entry>
+</feed>

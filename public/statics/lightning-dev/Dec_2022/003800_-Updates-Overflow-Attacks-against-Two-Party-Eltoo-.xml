@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>"Updates Overflow" Attacks against Two-Party Eltoo ?</title>
+  <updated>2023-06-03T11:15:14.638589+00:00</updated>
+  <author>
+    <name>Anthony Towns 2022-12-13 03:51:40</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>"Updates Overflow" Attacks against Two-Party Eltoo ?</title>
+    <updated>2023-06-03T11:15:14.638589+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-December/003800.html" rel="alternate"/>
+    <summary>In this email exchange, Antoine Riard discusses a potential attack on the final settlement transaction S to double-spend a HTLC forwarded by a routing hop. Mallory has two channels with Bob: M1 and M2, both of which have a to_self_delay of 144 blocks. Mallory forwards a large payment from M1-&gt;Bob-&gt;M2 and claims the funds on M2 just prior to the timeout while going offline on M1. Bob chose the timeout for M2 via cltv_expiry_delay, giving him 154 blocks before the CLTV on the M1-&gt;Bob payment expires. Under the two-party eltoo scheme, Bob should broadcast the most recent UB.n state for M1/Bob immediately aiming for it to be confirmed within five blocks, wait 144 blocks for the relative timelock to expire, broadcast SB.n to finalize the funds, and immediately claim the large HTLC. Mallory can only broadcast prior to UA.k, and after confirmation, she can only broadcast SA.k after a 144 block relative timelock. The attack scenario works by Malicia updating the Eltoo channel N times, getting possession of N update transactions. At block A, she breaks the channel and confirms the update transaction 0 by attaching a feerate equal to or superior to top mempool block space + 1 sat. For each new block, she iterates by confirming the next update transaction. Traditional eltoo is incompatible with version 3 relay rules and would hit ancestor limits. To avoid this problem, eltoo nodes should have a priority tx relay network. From Ned's viewpoint, there is limited rationality of the network mempools; therefore, each punishment transaction R could have been delayed due to "honest" slow propagation on the network and is likely pre-signed with top mempool block space feerate, but not more to save on fees. Transaction RN.0 should fail to punish update transaction 0 as it's double-spent by update transaction 1, transaction RN.1 should fail to punish update transaction 1 as it's double-spent by update transaction 2, and transaction RN.2 should fail to punish update transaction 2 as it's double-spent by update transaction 3.</summary>
+    <published>2022-12-13T03:51:40+00:00</published>
+  </entry>
+</feed>

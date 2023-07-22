@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - The TXO bitfield</title>
+  <updated>2023-06-11T23:26:42.079046+00:00</updated>
+  <author>
+    <name>Bram Cohen 2017-03-31 22:05:07</name>
+  </author>
+  <author>
+    <name>Bram Cohen 2017-03-31 22:05:07</name>
+  </author>
+  <author>
+    <name>Bram Cohen 2017-03-31 22:05:07</name>
+  </author>
+  <link href="bitcoin-dev/March_2017/013928_The-TXO-bitfield.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2017/013928_The-TXO-bitfield.xml" rel="alternate"/>
+  <link href="bitcoin-dev/March_2017/013928_The-TXO-bitfield.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - The TXO bitfield</title>
+    <updated>2023-06-11T23:26:42.079046+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-March/013928.html" rel="alternate"/>
+    <summary>In the future of node scaling, blocks may need to come with proofs of their validity and nodes can be run entirely in memory without hitting disk. These proofs will be larger than the blocks they prove, but can be stored in client wallets or a full node can make a single disk access to form the proof which can then be passed along to other peers. The vision can be implemented efficiently by playing some games with the semantics of the term 'proof'. Maintaining a hash root of everything leads to complexity of the proof and simplicity of the checker, at the expense of forcing the root to be maintained at all times and the proof to be reasonably fresh. An alternative approach exists where the amount of data necessary to do validation is much larger but still reasonable to keep in memory, and the sizes of proofs and their required freshness are much smaller.In the previous discussion on Merkle sets, insertion ordering's main practical utility was that it allows for compression. Once you have an insertion ordering, a bitfield of all transactions can be stored, which is entirely reasonable to hold in memory. This approach meets all the design goals, even allowing wallets to remember their own 'proofs', which are just proofs of insertion ordering. Those don't even change once the risk of reorgs has passed, so they can be stored for years without being maintained.Proofs of insertion ordering can be made by having a canonical way of calculating a root of position commitments for each block. Nodes calculate those roots when evaluating the block history and store them all in memory. A proof of position is a path to one of those roots. The author intentionally skipped over most of the details as it's probably best to have a high level discussion of this as a general approach before getting lost in the weeds.</summary>
+    <published>2017-03-31T22:05:07+00:00</published>
+  </entry>
+</feed>

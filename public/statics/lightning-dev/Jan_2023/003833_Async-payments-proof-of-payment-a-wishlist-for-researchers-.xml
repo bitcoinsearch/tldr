@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Async payments proof-of-payment: a wishlist for researchers]</title>
+  <updated>2023-06-01T19:16:33.206681+00:00</updated>
+  <author>
+    <name>Anthony Towns 2023-01-30 04:27:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Async payments proof-of-payment: a wishlist for researchers]</title>
+    <updated>2023-06-01T19:16:33.206681+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2023-January/003833.html" rel="alternate"/>
+    <summary>The article discusses a payment scenario where Alice wants to pay Bob, but Bob is offline and has entrusted his LSP, Larry, to manage the payment. To ensure the security of the payment, a unique invoice ID called S is created, which is shared between Alice and Larry. Once Bob comes online, Louise, Alice's LSP, sends the payment to Bob conditional on S.To guarantee that the receipts are different and after the fact, they can prove that the receipt was theirs, not someone else's, a signature is used instead of just a hash/preimage. The article suggests using the schnorr signatures approach to generate nonces that can't be easily reused. Bob pre-generates a set of nonces and shares the public part with Larry, who can then share them with potential payers.The payment process is as follows: Alice gets AddrBob, decodes Bob's pubkey, Larry's pubkey, and the route to Larry. Alice communicates with Larry about the payment and confirms the nonce for the payment will be R. Alice calculates m and S, where S = R+H(R,P,m)*P. Alice passes "m" and "S" onto Louise and starts the payment, locking up her funds. Louise passes "m", "R1", "R2" onto Bob once he's online and sends the payment to Bob. Bob checks that R1/R2 were what he generated and haven't already been used; Bob checks that "m" is something he's willing to sign; Bob calculates s and S, and accepts the payment for S, provided it's the correct amount as specified in "m," by revealing s. Alice already calculated R and now receives s from Louise when Louise claims her funds, and (R,s) is a BIP340 signature of m by Bob, satisfying s*G = R + H(R,P,m)*P, and that signature serves as her payment receipt from Bob.The message also discusses the process of claiming a conditional payment using a PTLC. The sender calculates R, m, s and checks that s*G = S. Bob claims $50 from PTLC by revealing s to Alice who receives it. (R,s) serves as Bob's signature confirming payment. The identity of the sender is committed in every "S" so there is no way for Larry to get two different payers to use the same S. Using the same nonce twice will result in the rejection of payment.A micropayment may be required by Alice to claim a nonce. It is suggested that separate LSPs could be used; one to issue nonces while offline and the other to hold onto incoming PTLCs while offline. The message also provides links to previous discussions regarding the subject.</summary>
+    <published>2023-01-30T04:27:23+00:00</published>
+  </entry>
+</feed>

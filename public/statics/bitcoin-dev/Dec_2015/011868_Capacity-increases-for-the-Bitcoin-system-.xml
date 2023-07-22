@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Capacity increases for the Bitcoin system.</title>
+  <updated>2023-05-19T22:35:53.160626+00:00</updated>
+  <author>
+    <name>Anthony Towns 2015-12-08 02:42:24</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Capacity increases for the Bitcoin system.</title>
+    <updated>2023-05-19T22:35:53.160626+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-December/011868.html" rel="alternate"/>
+    <summary>On December 7, 2015, Gregory Maxwell proposed a SegWit soft fork for Bitcoin that would amount to a 4MB block size increase at worst. The proposal gives up to a 2x increase for ordinary pay to public key transactions and up to a 3x increase for 2/2 multisig and (on-chain) lightning transactions, which could mean lightning could scale to ~20M users with 1MB block sizes based on the estimates from Tadge Dryja's talk. Combining segwit with other proposals would allow derating them by a factor of 2.5, giving BIP-100 a maximum of 12.8MB, BIP-101 with 3.2MB in 2016, 6.4MB in 2018, 12.8MB in 2020, 25.6MB in 2022, 2-4-8 with 800kB in 2016, 1.6MB in 2018, 3.2MB in 2020, and BIP-103 with 400kB in 2016, 470kB in 2018, 650kB in 2020, and 1MB in 2023. SegWit effectively introduces two additional dimensions for working out how to optimally pack transactions into a block. There are existing constraints on block bytes, locktime, and coinbase external information. A standard pay to public key hash would have a 25 byte output script instead of 34 bytes, but also a 105 bytes of input script, so about 10+146i+34o bytes, while over enough transactions inputs and outputs are about equal, so that's 10+84o versus 10+180o, so a factor of 2x-2.14x in the usual case.With a P2SH to a 2-of-2 multisig address, the output script would be 23 bytes, and the input script would be a 71B redeem script, plus two signatures and an OP_0 for about 215B, so totalling 10+256i+32o. Again treating i=o over the long term, that's 10+84o version 10+288o, so that's a 3.2x-3.4x improvement. A basic HTLC done by P2SH has about 98B of redeem script and either ~105B of signature or ~72B of signature for a total of 203B or 170B of input script, resulting in 10+244i+32o or 10+211i+32o. Segwit gives an improvement of 3x-3.3x or 2.7x-2.9x there. A lightning-style HTLC adds an extra 25 bytes or so to the redeem script, changing those numbers to 10+270i+32o and 10+236i+32o, and an improvement of 3.3x-3.6x or 2.9x-3.2x. A lightning-style HTLC that also uses ecc private keys as the secret preimages to be revealed might use an additional ~260 bytes of redeem script / script signature, which would make the worst-case numbers be 10+530i+32o, so 10+562o versus 10+84o, which would be a 6x-6.7x improvement.</summary>
+    <published>2015-12-08T02:42:24+00:00</published>
+  </entry>
+</feed>

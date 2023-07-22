@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Bait for reusable addresses</title>
+  <updated>2023-05-19T18:01:55.945136+00:00</updated>
+  <author>
+    <name>Gregory Maxwell 2014-01-16 01:23:04</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Bait for reusable addresses</title>
+    <updated>2023-05-19T18:01:55.946137+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-January/004112.html" rel="alternate"/>
+    <summary>One of the challenges with reusable addresses is that, while they create a small overhead for full nodes in searching for transactions, they result in large overheads for Simplified Payment Verification (SPV) nodes. A possible solution is for SPV nodes to give their blinding private key to servers so that the server may test addresses on their behalf. However, this approach has privacy issues as it is non-reputable and thus makes privacy brittle. Furthermore, it isn't indexable for the server, and requires the server to do O(clients * reusable-address-txn) work, which includes an elliptic curve cryptography (ECC) multiply.Adam Back had originally proposed using "bloom bait" to address this issue. This involves including an optional small token, such as 8 bits, that distinguishes transactions that allow an anonymity set vs filtering trade-off. However, bloom bait has more severe privacy problems than the current SPV bloom filtering, as the whole network can see the relation. An alternative suggestion is to include optional bait in an address, where the sender computes H(nonce-pubkey), picks one byte at random out of the first 16, XORS it with the specified bait, and stores the result in the transaction. An SPV server can then index the bait as it comes in by extracting 16 8-bit keys from each transaction. When the client wants to search for transactions, it can give the server a list of keys it's interested in, including their real key and a number of random cover keys.This approach is a specific instance of a general class of solutions related to locally decodable error-correcting codes. The transaction data represents a codeword in a vector space, and the degree of freedom provided by the adjustable prefix ensures that the codeword is never more than a certain distance from a specified point. The point isn't made public in the transaction, and it's hidden from the server by providing several points. However, there is still an information leak as if someone believes a set of transactions are related, they can intersect their radiuses and test if the intersection is empty. The author did not give any thought into the parameters 8-bits and 16 dimensions, but suggested that schemes loosely based on fountain codes should only require picking some things and XORing, so they should be simple enough. Systems derived from more complex linear codes might give better performance, such as two secret bloom baits, two prefixes in the transaction bait0^random_char[0-8], bait1^random_char[0-8], and the server extracts 16 keys, returning to the client transactions which have at least two key matches with their list.</summary>
+    <published>2014-01-16T01:23:04+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BloomFilter issue with segwit addresses</title>
+  <updated>2023-06-13T01:32:17.677050+00:00</updated>
+  <author>
+    <name>Luke Dashjr 2018-04-13 22:52:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BloomFilter issue with segwit addresses</title>
+    <updated>2023-06-13T01:32:17.677050+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-April/015897.html" rel="alternate"/>
+    <summary>A compatibility issue between SegWit and BIP37 (Bloom Filtering) has been brought to light by Anton, a developer on the bitcoinj mailing list. The issue affects only P2WPKH and the special case of transactions without change outputs. In this case, neither inputs nor outputs contain any data elements that would cause a match for the filter. The public key, which would match, goes to the witness but not to the input. OP_RETURN output with a matching public key is suggested as a workaround in such transactions. Bitcoin Core has been asked to extend the BIP37 matching rules such that data elements in the witness are also matched against. Bitcoin Knots supports the MSG_FILTERED_WITNESS_BLOCK extension to download witness data while BIP158 is still being implemented and deployed. However, light clients currently have no way to verify the witness data is correct. It is suggested to look for specific COutPoints for matching, which should work already with standard BIP37.  It is understood that the plan is to deprecate and remove BIP37 entirely once BIP158 is implemented and deployed.</summary>
+    <published>2018-04-13T22:52:23+00:00</published>
+  </entry>
+</feed>

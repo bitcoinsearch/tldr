@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Multi-frame sphinx onion format</title>
+  <updated>2023-06-02T17:37:57.016654+00:00</updated>
+  <author>
+    <name>Christian Decker 2019-02-18 18:39:25</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Multi-frame sphinx onion format</title>
+    <updated>2023-06-02T17:37:57.016654+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-February/001875.html" rel="alternate"/>
+    <summary>During a spec meeting in Adelaide, it was decided to extend the current onion-routing capabilities with new features such as rendezvous routing, spontaneous payments, multi-part payments and more. These features rely on two changes to the current onion format: bigger per-hop payloads in the form of multi-frame payloads and a more modern encoding given by the TLV encoding. The proposal is to extend the per-hop payload from the current 65 bytes to multiples. The proposal suggests calling the 65 byte segment a frame to differentiate it from a hop in the route, hence the name multi-frame onion. To construct the onion, the sender currently always right-shifts by a single 65 byte frame, serializes the payload, and encrypts using the ChaCha20 stream. In parallel, it also generates fillers that get appended and encrypted by processing nodes to get matching HMACs. The change in generation comes in the form of variable shifts for both the payload serialization and filler generation, depending on the payload size. If the payload fits into 32 bytes, nothing changes; if it is bigger, additional frames are used until it fits. The realm byte encodes both the payload format and how many additional frames were used to encode the payload. The decoding of an onion packet pretty much stays the same, the receiving node generates the shared secret, then generates the ChaCha20 stream, and decrypts the packet (and additional padding that matches the filler the sender generated for HMACs). It can then read the realm byte, and knows how many frames to read, and how many frames it needs to left-shift to derive the next onion.This proposal is a competing proposal with the proposal by roasbeef on the lightning-onion repo, but the author of this proposal thinks it is superior in many ways. The major advantage of this proposal is that the payload is in one contiguous memory region after decryption, avoiding re-assembly of multiple parts and allowing zero-copy processing of the data. It also avoids multiple decryption steps, and does not waste space on multiple, useless, HMACs. The author believes that this proposal is simpler than the competing proposal, as it doesn't require re-assembly and creates a clear distinction between payload units and hops.The author has implemented this proposal for c-lightning and lnd. Most of the code changes are preparation for variable-sized payloads alongside the legacy v0 payloads used so far; the relevant commits that actually change the generation of the onion are in the links provided. The author hopes that this proposal will prove to be useful and that others will agree with the advantages outlined above.</summary>
+    <published>2019-02-18T18:39:25+00:00</published>
+  </entry>
+</feed>

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - BIP 9 style version bits for txns</title>
+  <updated>2023-06-11T01:53:31.281871+00:00</updated>
+  <author>
+    <name>Vincent Truong 2015-12-08 12:27:27</name>
+  </author>
+  <author>
+    <name>Chris Priest 2015-12-08 19:40:36</name>
+  </author>
+  <author>
+    <name>Vincent Truong 2015-12-08 21:02:55</name>
+  </author>
+  <author>
+    <name>Chris Priest 2015-12-08 22:27:48</name>
+  </author>
+  <author>
+    <name>Chris Priest 2015-12-08 19:40:36</name>
+  </author>
+  <author>
+    <name>Vincent Truong 2015-12-08 21:02:55</name>
+  </author>
+  <author>
+    <name>Chris Priest 2015-12-08 22:27:48</name>
+  </author>
+  <author>
+    <name>Vincent Truong 2015-12-08 12:27:27</name>
+  </author>
+  <author>
+    <name>Chris Priest 2015-12-08 19:40:36</name>
+  </author>
+  <author>
+    <name>Vincent Truong 2015-12-08 12:27:27</name>
+  </author>
+  <author>
+    <name>Vincent Truong 2015-12-08 21:02:55</name>
+  </author>
+  <author>
+    <name>Chris Priest 2015-12-08 22:27:48</name>
+  </author>
+  <link href="bitcoin-dev/Dec_2015/011876_BIP-9-style-version-bits-for-txns.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2015/011886_BIP-9-style-version-bits-for-txns.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2015/011888_BIP-9-style-version-bits-for-txns.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2015/011891_BIP-9-style-version-bits-for-txns.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2015/011886_BIP-9-style-version-bits-for-txns.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2015/011888_BIP-9-style-version-bits-for-txns.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2015/011891_BIP-9-style-version-bits-for-txns.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2015/011876_BIP-9-style-version-bits-for-txns.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2015/011886_BIP-9-style-version-bits-for-txns.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2015/011876_BIP-9-style-version-bits-for-txns.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2015/011888_BIP-9-style-version-bits-for-txns.xml" rel="alternate"/>
+  <link href="bitcoin-dev/Dec_2015/011891_BIP-9-style-version-bits-for-txns.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - BIP 9 style version bits for txns</title>
+    <updated>2023-06-11T01:53:31.281871+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-December/011876.html" rel="alternate"/>
+    <summary>In the world of Bitcoin, nodes receive transactions from other wallets rather than the wallets themselves. However, most wallets in use today are not nodes. Nodes must broadcast what features they support and whether they are ready for soft forks, hard forks or new features. Vincent Truong proposed wallet developers indicate their readiness by testing and validating that new features do not break their nodes or wallet software.Chris Priest suggested splitting the version field into two, with the first 4 bytes used for version number and the second 4 bits used for transaction type. This way, any new transaction feature would get a new "type" number, ensuring it cannot happen until nodes support it. Meanwhile, enthusiasts outside the network may need to monitor transactions instead, as running this process is computationally expensive for Bitcoin Core.Vincent Truong suggested extending/copying isSupermajority() for a new secondary/non-critical function to also look for a similar BIP 9 style version bit in txns. If a majority of transactions have been sent and flagged as ready, it would indicate that they are good to go. These discussions revolved around finding ways to implement new features as politically correct as possible while ensuring readiness for change.The author of this post delves into the use of a signal for readiness in Bitcoin soft and hard forks. They note that while the announcement in blocks is not technically a vote, it serves as a signal for readiness which can be used to determine if a certain percentage of blocks have been flagged with the version up to signal their readiness; failure to do so could be seen as a vote against implementation. The author suggests extending/copying isSupermajority() to also look for a similar BIP 9 style version bit in transactions to ensure wallets and exchanges are ready for changes. The author argues that it is unfair to wallet developers and exchanges that they are unable to signal if they too are ready for a change, especially given the increasing number of users using SPV or SPV-like wallets. They suggest using three bits for versioning and 29 bits for flags to index every transaction, which may be computationally expensive for Bitcoin Core to run but can be watched outside the network. This approach would allow wallet developers and exchanges to be involved, and miners can watch for readiness flagged by wallets before they themselves flag ready.The author proposed splitting the version field in their Wildcard Inputs BIP, which would separate the first four bytes for the version number and the second four bits for transaction type. They argued that the BIP9 mechanism does not apply to transactions because a block is a collection of transactions that affect many parties, while a transaction only affects at most two parties. Additionally, new transaction features require a new "type" number and cannot happen until nodes support it.In a discussion among Bitcoin developers regarding the implementation of soft forks, hard forks or new features, it was suggested that wallet developers need only indicate their readiness for the change rather than actually implementing it. The proposal to split the version field in two - with the first four bytes dedicated to the version number and the second four bits set aside for transaction type - was also discussed. The nature of soft forks means that wallets can choose whether to implement a new feature or not. Any new transaction feature should get a new "type" number and cannot happen until the nodes support it.</summary>
+    <published>2015-12-08T12:27:27+00:00</published>
+  </entry>
+</feed>

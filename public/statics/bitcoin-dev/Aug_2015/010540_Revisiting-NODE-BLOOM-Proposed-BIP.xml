@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Revisiting NODE_BLOOM: Proposed BIP</title>
+  <updated>2023-06-10T20:45:49.533375+00:00</updated>
+  <author>
+    <name>Jeff Garzik 2015-08-21 05:48:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Revisiting NODE_BLOOM: Proposed BIP</title>
+    <updated>2023-06-10T20:45:49.533375+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-August/010540.html" rel="alternate"/>
+    <summary>This document is a proposal by Matt Corallo and Peter Todd to extend BIP 37, Connection Bloom filtering. The proposal defines a new service bit called NODE_BLOOM which enables peers to explicitly advertise their support for bloom filters. The protocol version is also increased from 70002 to 70011 in the reference implementation. This will allow nodes to identify old nodes that lack the new service bit but still allow bloom filtering of the connection. BIP 37 did not specify a service bit for the bloom filter service, thus implicitly assuming that all nodes that serve peers data support it. However, the connection filtering algorithm proposed in BIP 37 has been shown to provide little to no privacy and poses a large DoS risk on some nodes. Thus, allowing node operators to disable connection bloom filtering is a much-needed feature.NODE_BLOOM is distinct from NODE_NETWORK, and it is legal to advertise NODE_BLOOM but not NODE_NETWORK. If a node does not support bloom filters but receives a "filterload", "filteradd", or "filterclear" message from a peer, the node should disconnect that peer immediately. For backwards compatibility, in initial implementations, nodes may choose to only disconnect nodes which have the new protocol version set and attempt to send a filter command.The increase in protocol version is for backwards compatibility. In initial implementations, old nodes which are not yet aware of NODE_BLOOM and use a protocol version &lt; 70011 will be treated as a node without NODE_BLOOM. This feature may be removed after there are sufficient NODE_BLOOM nodes available and SPV clients have upgraded, allowing node operators to fully close the bloom-related DoS vectors.The proposal suggests that DNS seeds and other peer discovery mechanisms should support the ability to specify the services required. Current implementations simply check only that NODE_NETWORK is set. Overall, the proposal aims to address the lack of privacy and DoS risks associated with connection bloom filtering in BIP 37 by introducing a new service bit called NODE_BLOOM which allows nodes to explicitly advertise their support for bloom filters.</summary>
+    <published>2015-08-21T05:48:23+00:00</published>
+  </entry>
+</feed>

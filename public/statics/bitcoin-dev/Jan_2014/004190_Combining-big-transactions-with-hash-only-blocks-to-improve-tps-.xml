@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Combining big transactions with hash-only blocks to improve tps.</title>
+  <updated>2023-06-08T00:36:17.377597+00:00</updated>
+  <author>
+    <name>Jorge Timón 2014-01-22 22:10:16</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Combining big transactions with hash-only blocks to improve tps.</title>
+    <updated>2023-06-08T00:36:17.377597+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-January/004190.html" rel="alternate"/>
+    <summary>On January 22, 2014, Bitcoin developer Jorge Timón proposed two optimizations to improve the transaction processing rate and anonymity of the network. The first optimization involves keeping only hashes of transactions in a block, reducing redundancy and keeping block propagation time from increasing. By keeping only hashes in a block, it allows for 50tps in a 1MiB block. This method also removes redundancy since every transaction has to be transmitted only once. The second optimization is CoinJoin, which allows many people to send coins with one transaction, thus increasing the effective transaction rate. For example, a limit of 50 KiB allows for a CoinJoin transaction between 170 participants, allowing for 50 tps * 170 effective transactions/tx = 8500 tps in a 1MiB block. However, CoinJoin requires collaboration between many users in real-time, which can induce delays that can take some time. By using a bigger CoinJoin user base for online payments (with smaller fees) and a smaller one for POS payments (with larger fees), this issue can be resolved. Other issues include signing a CoinJoin transaction requiring a whole transaction for a user to sign, and CoinJoin transactions being limited. A potential solution is to use Jumbo transactions as a fallback where CoinJoin is not applicable. Jumbo transactions do not mix coins, so anonymity of the network is not increased. However, there would be an incentive to use this transaction type by default (compared to CoinJoin). A way to resolve this issue is to make the Jumbo transaction size limit lower than CoinJoin, making fees for these transactions higher and creating an incentive to only use them when necessary. Transaction joiner has to wait for a Jumbo transaction to be big enough before it gets released, which is not a big problem. When the network load is low, the fee required for a tx to be included should be lower, allowing for smaller Jumbo transactions. When the network load is high, it takes less time to fill a Jumbo transaction.</summary>
+    <published>2014-01-22T22:10:16+00:00</published>
+  </entry>
+</feed>

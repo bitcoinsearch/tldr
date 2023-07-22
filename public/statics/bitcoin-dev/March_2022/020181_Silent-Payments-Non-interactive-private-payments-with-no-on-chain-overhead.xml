@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Silent Payments – Non-interactive private payments with no on-chain overhead</title>
+  <updated>2023-06-15T18:25:59.732882+00:00</updated>
+  <author>
+    <name>Billy 2022-03-29 14:57:33</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Silent Payments – Non-interactive private payments with no on-chain overhead</title>
+    <updated>2023-06-15T18:25:59.732882+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-March/020181.html" rel="alternate"/>
+    <summary>A new scheme for private non-interactive address generation without on-chain overhead has been proposed by Ruben Somsen. The idea is to allow the recipient to generate a silent payment address and make it publicly known, while the sender takes a public key from one of their chosen inputs for the payment and uses it to derive a shared secret that is then used to tweak the silent payment address. Compared to previous schemes, this scheme avoids using the Bitcoin blockchain as a messaging layer and requires no interaction between sender and recipient. However, the main downsides are the scanning requirement, the lack of light client support, and the requirement to control your own input(s). There are a few improvements that can be made to the basic scheme, such as UTXO set scanning, variant using all inputs, scanning key, address reuse prevention, and more.While the simplest thing would be to only support one input type (e.g. taproot key spend), this would also mean only a subset of users can make payments to silent addresses. Therefore, the protocol should ideally support any input containing at least one public key and simply pick the first key if more than one is present. Additionally, there is a potential weakness of Silent Payments where the input is linked to the output.A coinjoin transaction with multiple inputs from other users can normally obfuscate the sender input from the recipient, but Silent Payments reveal that link. To mitigate this privacy concern, a blinding scheme exists that allows us to hide the silent payment address from the other participants. However, the sender must control one of the inputs in order to be fully private, making it a limitation of the protocol.The article discusses different protocols that provide fresh address generation with slightly different tradeoffs. These protocols don't require scanning and have better light client support. The first protocol discussed is Payment code sharing, which establishes a shared secret prior to making payments by sending an OP_RETURN message on-chain to the recipient. It can be considered an inefficient use of on-chain resources, and data availability needs to be guaranteed to ensure the recipient doesn’t lose access to the funds.The second protocol is Xpub sharing, where an xpub is handed out instead of an address upon first payment to enable repeat payments. The third protocol is Regular address sharing, which is commonly used today but requires interaction for every single payment.There are some open questions regarding these protocols, such as the speed of required database lookups, making light client support more viable, preferred input tweaking, any security issues in proposed cryptography, and whether this scheme is worth the added complexity. The author acknowledges the help of others in the development of these protocols and provides references to related articles and schemes.</summary>
+    <published>2022-03-29T14:57:33+00:00</published>
+  </entry>
+</feed>

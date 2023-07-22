@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Multi-frame sphinx onion format</title>
+  <updated>2023-06-02T17:39:08.727377+00:00</updated>
+  <author>
+    <name>Rusty Russell 2019-02-22 03:50:59</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Multi-frame sphinx onion format</title>
+    <updated>2023-06-02T17:39:08.727377+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-February/001880.html" rel="alternate"/>
+    <summary>Christian Decker proposed extending the per-hop payload from the current 65 bytes to multiples, due to new features such as rendezvous routing, spontaneous payments, multiparty payments, etc. The changes to the current onion format require a bigger per-hop payload and a more modern encoding given by the TLV encoding. Christian suggested that the sender should shift by a single 65 byte frame, serialize the payload, and encrypt it using the ChaCha20 stream when constructing the onion. He also proposed variable shifts for both the payload serialization and filler generation, depending on the payload size, with additional frames used until it fits. The realm byte encodes both the payload format and how many additional frames were used to encode the payload. The decoding of an onion packet stays almost the same - the receiving node generates the shared secret, then generates the ChaCha20 stream and decrypts the packet (and additional padding that matches the filler the sender generated for HMACs). It can then read the realm byte, know how many frames to read, and how many frames it needs to left-shift in order to derive the next onion. This is a competing proposal with the proposal by roasbeef on the lightning-onion repo but Christian thinks it is superior in a number of ways. In his opinion, the major advantage of this proposal is that the payload is in one contiguous memory region after decryption, avoiding re-assembly of multiple parts and allowing zero-copy processing of the data. It also avoids multiple decryption steps, and does not waste space on multiple, useless HMACs. Christian implemented this proposal in c-lightning and lnd, and most of the code changes are preparation for variable size payloads alongside the legacy v0 payloads they used so far. The relevant commits that actually change the generation of the onion are cited and linked to in the email. For final hops, they do not use short_channel_id, hence saving significantly there. Many proposals to add information go into the final hop, so it sways him in the direction of making TLV take the entire room.</summary>
+    <published>2019-02-22T03:50:59+00:00</published>
+  </entry>
+</feed>

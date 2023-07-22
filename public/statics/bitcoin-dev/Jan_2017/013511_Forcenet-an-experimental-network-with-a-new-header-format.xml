@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Forcenet: an experimental network with a new header format</title>
+  <updated>2023-05-20T00:14:44.899742+00:00</updated>
+  <author>
+    <name>Matt Corallo 2017-01-28 02:32:26</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Forcenet: an experimental network with a new header format</title>
+    <updated>2023-05-20T00:14:44.899742+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-January/013511.html" rel="alternate"/>
+    <summary>In an email exchange between Matt and Johnson Lau, the latter revealed his second version of forcenet with more experimental features. Matt suggested that the header size must be minimized, proposing that one merkle tree with two ways of hashing should be used instead of duplicating it. He also questioned the need to duplicate nBits and have variable-length header fields. Matt recommended that merkle branches be left as opaque commitment headers and that the transaction merkle root of the "old-style" (now PoW) header should simply be the hash of the new header. Johnson Lau introduced anti-tx-replay, in which signatures are invalid for legacy nodes. Block sighashlimit was also proposed, while a new way to define tx weight was introduced based on SigHashSize, witness serialized size, adjusted size, and nSigOps. However, Matt believed that such complexity should be avoided as it could make coin selection super complicated.The proposed changes in the Bitcoin network include a maximum limit on block resources, which indirectly sets an upper block resource for every metric and makes transaction fee estimation a linear function. The current BIP141 limit is 360,000,000, equivalent to 360MB of sighashing, 2MB of serialized size, 4MB of adjusted size, or 80,000 nSigOp. Any new block-level limit metrics could be added to tx weight using soft forks.A smooth halving mechanism is also proposed where the reward of the last 2016 blocks in a halving cycle will be reduced by 25%, which is contributed to the first 2016 blocks of the new halving cycle. A new coinbase tx format is suggested, where BIP34 is removed and coinbase tx may have more than one input. The prevout hash of the first input must be the hash of the previous block, and index must be 0xffffffff. Spending of previous coinbase outputs in a coinbase tx is exempted from the 100 block maturity requirement. Merkle sum tree is another proposal, which allows generating fraud-proof for fee and weight. A special softfork is defined, and when this softfork is activated, the full node will not validate the sum tree. It is still not possible to create fraud proof for spending of non-existing UTXO. Codes are provided at https://github.com/jl2012/bitcoin/tree/forcenet2, which can be joined by starting with "bitcoind —forcenet". Mining support is only basic internal mining support, and to use the internal miner, write a shell script to repeatedly call “bitcoin-cli —forcenet generate 1”.</summary>
+    <published>2017-01-28T02:32:26+00:00</published>
+  </entry>
+</feed>

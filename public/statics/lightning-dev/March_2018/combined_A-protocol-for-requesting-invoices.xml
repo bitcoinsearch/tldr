@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>2</id>
+  <title>Combined summary - A protocol for requesting invoices</title>
+  <updated>2023-05-24T21:48:43.079553+00:00</updated>
+  <author>
+    <name>Corné Plooy 2018-03-08 15:19:56</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-03-09 04:28:34</name>
+  </author>
+  <author>
+    <name>Corné Plooy 2018-03-15 15:48:32</name>
+  </author>
+  <author>
+    <name>Melvin Carvalho 2018-03-20 13:11:16</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-03-21 04:02:39</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-03-16 10:56:36</name>
+  </author>
+  <author>
+    <name>Corné Plooy 2018-03-19 12:06:03</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-03-19 14:27:00</name>
+  </author>
+  <author>
+    <name>Corné Plooy 2018-03-20 12:59:28</name>
+  </author>
+  <author>
+    <name>Andy Schroder 2018-03-21 05:45:44</name>
+  </author>
+  <author>
+    <name>Andy Schroder 2018-03-10 05:16:14</name>
+  </author>
+  <author>
+    <name>Corné Plooy 2018-03-15 14:29:30</name>
+  </author>
+  <author>
+    <name>ZmnSCPxj 2018-03-16 00:31:28</name>
+  </author>
+  <author>
+    <name>Andy Schroder 2018-03-16 04:11:31</name>
+  </author>
+  <author>
+    <name>Corné Plooy 2018-03-19 13:59:11</name>
+  </author>
+  <author>
+    <name>Andy Schroder 2018-03-21 05:50:43</name>
+  </author>
+  <link href="lightning-dev/March_2018/001077_A-protocol-for-requesting-invoices.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001078_A-protocol-for-requesting-invoices.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001088_A-protocol-for-requesting-invoices.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001112_A-protocol-for-requesting-invoices.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001113_A-protocol-for-requesting-invoices.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001092_A-protocol-for-requesting-invoices.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001102_A-protocol-for-requesting-invoices.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001105_A-protocol-for-requesting-invoices.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001111_A-protocol-for-requesting-invoices.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001114_A-protocol-for-requesting-invoices.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001079_A-protocol-for-requesting-invoices.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001087_A-protocol-for-requesting-invoices.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001089_A-protocol-for-requesting-invoices.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001091_A-protocol-for-requesting-invoices.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001104_A-protocol-for-requesting-invoices.xml" rel="alternate"/>
+  <link href="lightning-dev/March_2018/001115_A-protocol-for-requesting-invoices.xml" rel="alternate"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>2</id>
+    <title>Combined summary - A protocol for requesting invoices</title>
+    <updated>2023-05-24T21:48:43.079553+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-March/001077.html" rel="alternate"/>
+    <summary>On March 8, 2018, Corné Plooy proposed an idea for using Lightning for various types of payments on the Lightning-dev mailing list. The proposal involves having a direct line of communication between payer and payee instead of BOLT11-style interaction. Although the proposal is still in its early stages, Plooy registered Bolt #12 for his proposal. ZmnSCPxj suggested that the Web Payments Working Group of W3C may provide better perspective on various payment use cases, including Lightning invoice payments.In a conversation about privacy concerns surrounding Lightning Network transactions, it was noted that channels can be brought on-chain at any time, which potentially allows a payer to determine the neighborhood of the payee. Using non-public channels helps here, but there is unlikely a truly private channel. The conversation also touches on the idea of using TOR hidden services or other pseudonymous communication methods for added privacy.The BOLT12 protocol may not require returning to null state, but some suppliers may want to require it. The format of the "description" field is unspecified for now, and should be human-readable with an ambiguous MIME type. Different TOR addresses can be used for things you want to keep separated, and any pseudonymous communication method can be used. Depending on the transport layer used, the URL will be different. Partial onion routes can be used for payments in the opposite direction to keep the original payer anonymous.Corné Plooy's proposal aims to address some issues with Lightning Network for various types of payments, such as salary payments or direct pay-out of cryptocurrency bought on exchanges. The proposal specifies that payees give URLs to potential payers along with payment amount and timeout which allows the payer to know under what conditions the payee is likely to release the preimage. Additionally, the partial onion route can be used as a destination for payee to send invoices to the payer.The author is considering simplifying BOLT 12 by removing the possibility of refunds, which can be added back later as an optional feature. A discussion on refund payment onion routes follows, with concerns about capacity and the use of partial onion routes. Another section discusses a URL that contains an optional invoice ID for payees to request payments for specific transactions, with the option to hand over the URL without an invoice ID for one or more payers to use. The issue of how the payer derives the payment hash is also addressed.The use of a TOR hidden service and partially payee-determined routes in the Lightning Network can potentially compromise user privacy. If a user does not use a payee-determined route, they may need to reveal their node ID to the payer, which increases the risk of identifying information being leaked over time. Overall, the use of TOR and partially payee-determined routes are necessary to protect against IP addresses and node IDs being linked to users.</summary>
+    <published>2018-03-08T15:19:56+00:00</published>
+  </entry>
+</feed>

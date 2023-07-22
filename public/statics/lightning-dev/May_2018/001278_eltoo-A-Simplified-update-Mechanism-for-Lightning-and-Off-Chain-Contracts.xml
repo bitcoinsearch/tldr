@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>eltoo: A Simplified update Mechanism for Lightning and Off-Chain Contracts</title>
+  <updated>2023-05-24T23:49:21.819780+00:00</updated>
+  <author>
+    <name>Corné Plooy 2018-05-15 13:22:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>eltoo: A Simplified update Mechanism for Lightning and Off-Chain Contracts</title>
+    <updated>2023-05-24T23:49:21.819780+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-May/001278.html" rel="alternate"/>
+    <summary>The discussion involves CSV-encumbrance on settlement transactions, which affects absolute-timelocked contracts transported on the channel. The use of eltoo is roughly equivalent to adding another hop to the path in the network of today. In case of a unilateral close while there are HTLCs present, the trigger transaction is broadcasted first, followed by one or more update transactions that are not affected by the CSV condition and can be confirmed immediately. Once the last update transaction gets confirmed, its CSV clock for the settlement transaction starts, and the settlement transaction containing HTLCs can be broadcasted. However, it will not be confirmed before the CSV time-out of the last update transaction. Before the HTLC time-out, the receiving side can access the funds with the preimage; after the timeout, the sending side can access the funds without the preimage. If the HTLC time-out is before the start of step 4, then the receiving side of an HTLC must drop the channel on-chain before T - S - C, where T is the absolute HTLC time-out, S is the CSV time-out period, and C is the expected worst-case time involved in confirming everything.In case of a transaction time-out, if node n becomes unresponsive after accepting its incoming HTLC, then two moments in time are relevant: T(n-1) and T(n-2) - S - C. If T(n-1) happens first, node n-1 knows it doesn't have to pay outgoing funds, so it can cooperatively cancel the incoming HTLC. In case T(n-2) - S - C happens first, node n-1 has to close its channel with n-2. The HTLC conditions continue to apply on-chain, so for the rest, nothing changes. As soon as T(n-1) is reached, node n-1 knows the transaction has timed out, but it no longer has a way to propagate this knowledge to node n-2. Therefore, T(n-1) must be set &gt; T(n-2) - S - C, and the HTLC time-out increment must be at least S+C.Theoretically, the discussion seems workable. However, a practical value for S (the CSV time-out) needs to be determined. In the absence of watchtowers, it is recommended to set it to at least a couple of weeks to allow oneself to go off-line on holiday without worrying about computer issues. However, a time-out increment of a couple of weeks per hop for the HTLCs adds up really quickly to unpractical values. Maybe the conclusion is that watchtowers are necessary. Otherwise, only professional parties that can manage near-100% uptime can safely perform transaction routing.</summary>
+    <published>2018-05-15T13:22:44+00:00</published>
+  </entry>
+</feed>

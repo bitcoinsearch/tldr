@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Merkle trees and mountain ranges</title>
+  <updated>2023-06-11T05:42:55.287614+00:00</updated>
+  <author>
+    <name>Bram Cohen 2016-06-15 00:14:23</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Merkle trees and mountain ranges</title>
+    <updated>2023-06-11T05:42:55.287614+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2016-June/012758.html" rel="alternate"/>
+    <summary>In response to Peter Todd's proposal for Merkle Mountain Range commitments in blocks, the author agrees that there is a need to put UTXO commitments in blocks but disagrees with the details of the proposal. The author argues that STXO commitments are unnecessary and a performance problem due to their larger size compared to UTXO and the amount of memory and horsepower required to maintain them. Instead, the author suggests generating proofs of inclusion and exclusion using UTXO sets, which can be done efficiently without requiring a complete STXO set. To handle the latency problem, the author proposes having trailing UTXO commitments by a fixed amount, which would prevent latency from becoming an issue. Additionally, smaller commitments for the UTXOs added and removed in each block could be added without significant performance penalty. The author also suggests that the use of mountain ranges for Merkle trees is unnecessary and that a raw Merkle tree can be made serviceable by addressing hashing operations and memory cache misses. The author proposes implementing a bunch of subtle implementation details to keep cache coherence down, which should get the number of cache misses per transaction down under one. There is an implementation in the works, which the author has been working on, called MerkleSet, that addresses these issues. It features lazy root calculation, few L1 and L2 cache misses, small proofs of inclusion/exclusion, a reasonably simple implementation, reasonable efficiency in memory, and a reasonable defense against malicious insertion attacks. The author believes that their underlying Merkle tree is unambiguously superior in every way, but the question of whether a mountain range is worth it can only be answered empirically. This requires a lot of implementation work, including finishing the Merkle tree implementation and porting it to C and optimizing it.</summary>
+    <published>2016-06-15T00:14:23+00:00</published>
+  </entry>
+</feed>

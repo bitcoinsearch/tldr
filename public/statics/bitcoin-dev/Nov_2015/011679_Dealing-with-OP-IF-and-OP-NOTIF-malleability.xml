@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Dealing with OP_IF and OP_NOTIF malleability</title>
+  <updated>2023-06-11T00:55:51.067341+00:00</updated>
+  <author>
+    <name>Nick ODell 2015-11-06 09:22:27</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Dealing with OP_IF and OP_NOTIF malleability</title>
+    <updated>2023-06-11T00:55:51.067341+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-November/011679.html" rel="alternate"/>
+    <summary>The context discusses a BIP draft created by jl2012 for fixing malleability of transactions with OP_IF and OP_NOTIF. These codes are flow control codes in the Bitcoin script system that decide the programme flow based on whether the top stack value is 0 or not. However, this behavior opens a source of malleability as a third party may alter a non-zero flow control value to any other non-zero value without invalidating the transaction.As of November 2015, OP_IF and OP_NOTIF were not commonly used in the blockchain. However, as more sophisticated functions such as OP_CHECKLOCKTIMEVERITY are being introduced, OP_IF and OP_NOTIF will become more popular and the related malleability should be fixed. This proposal serves as a supplement to BIP62 and should be implemented with other malleability fixes together.If the transaction version is 3 or above, then the flow control value for OP_IF and OP_NOTIF must be either 0 or 1, or the transaction fails. This is a soft fork, and to ensure OP_IF and OP_NOTIF transactions created before the introduction of this BIP will still be accepted by the network, the new rules only apply to transactions of version 3 or above.For people who want to preserve the original behavior of OP_IF and OP_NOTIF, an OP_0NOTEQUAL could be used before the flow control code to transform any non-zero value to 1. A suggested modification was also provided wherein a script author could do something similar right now by prefacing his IF with a set of instructions that check whether the input is 0 or 1 and runs OP_RETURN if not.</summary>
+    <published>2015-11-06T09:22:27+00:00</published>
+  </entry>
+</feed>

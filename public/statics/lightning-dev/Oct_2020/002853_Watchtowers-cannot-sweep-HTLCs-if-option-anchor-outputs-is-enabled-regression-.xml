@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Watchtowers cannot sweep HTLCs if option_anchor_outputs is enabled (regression)</title>
+  <updated>2023-06-01T18:32:19.036475+00:00</updated>
+  <author>
+    <name>SomberNight 2020-10-19 20:31:15</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Watchtowers cannot sweep HTLCs if option_anchor_outputs is enabled (regression)</title>
+    <updated>2023-06-01T18:32:19.036475+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002853.html" rel="alternate"/>
+    <summary>The author of a recent post on the Electrum code for watchtowers has discovered that, with option_anchor_outputs enabled for the channel, there is no way for a watchtower to trustlessly sweep HTLCs. This is because the txid of the second-stage HTLC tx can no longer be predicted due to the use of SIGHASH_SINGLE|SIGHASH_ANYONECANPAY for the signature in the input. Without option_anchor_outputs, the Electrum watchtower is currently given a complete pre-signed transaction that spends the (revoked) second-stage output to a user wallet address whenever the commitment tx is updated off-chain. However, with option_anchor_outputs enabled, a watchtower would have to react within the relative timelock (CSV) and spend the output using the branch that requires revocationpubkey. The author notes that "the watchtower cannot be given (the privkey for) revocationpubkey as then it would be able to spend the output to any address (such as their own)". A watchtower that does not sweep HTLC outputs seems to be of limited utility. Although some have called this regression a "clear" tradeoff of using option_anchor_outputs, the author wanted to explicitly point it out for the benefit of others. If we had sighash_noinput (or similar), some care would need to be taken, given the address-reuse between each second-stage HTLC output. Also, as noinput/anyprevout as per current proposal will only work with witness v1 outputs, the current tx template will need to be changed to use those.</summary>
+    <published>2020-10-19T20:31:15+00:00</published>
+  </entry>
+</feed>

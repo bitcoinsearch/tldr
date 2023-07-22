@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Properties of an ideal PoW algorithm &amp; implementation</title>
+  <updated>2023-06-12T00:30:04.613572+00:00</updated>
+  <author>
+    <name>praxeology_guy 2017-04-18 19:14:05</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Properties of an ideal PoW algorithm &amp; implementation</title>
+    <updated>2023-06-12T00:30:04.613572+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-April/014209.html" rel="alternate"/>
+    <summary>The cost of producing a chip is dependent on the number of metal layers required to route interconnects in a particular area. Fewer layers mean quicker and easier manufacturing, and fewer patentable costs. A paper discussing various factors impacting chip design costs has been linked, although its validity cannot be vouched for.To minimize asicboost-like optimizations, there needs to be early nonce mixing with variable-length input that has near-constant work. The entirety of the input should be mixed with the nonce data as soon as possible to prevent unexpected optimizations. A hash algorithm with more linear computation time versus input size would be ideal. It would consist of a first-stage Merkle tree hash to pre-lossy-mix-compress the variable length input stream to the size of the second-stage state vector. Each bit of input should have about equal influence on each of the output bits. Then there would be multi-round mixing of the second stage, which would be significantly more work than the first stage.This two-stage algorithm is similar to what is currently done in Bitcoin by the PoW doing SHA256 twice in serial. However, if Bitcoin did SHA256 three or four times or more, then ASICBoost like optimizations would have less of an effect. Designing hardware that can handle a variable-length input is challenging, so it's better to make assumptions about block header size, such as being exactly 80 bytes or something reasonable. Supporting very large input sizes requires a tradeoff between memory/parallelization and die space.</summary>
+    <published>2017-04-18T19:14:05+00:00</published>
+  </entry>
+</feed>

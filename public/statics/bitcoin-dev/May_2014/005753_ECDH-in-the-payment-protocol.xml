@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>ECDH in the payment protocol</title>
+  <updated>2023-06-08T22:28:32.129971+00:00</updated>
+  <author>
+    <name>Peter Todd 2014-05-12 13:07:44</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>ECDH in the payment protocol</title>
+    <updated>2023-06-08T22:28:32.129971+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-May/005753.html" rel="alternate"/>
+    <summary>In a conversation between Peter Todd and Pieter Wuille, Wuille proposed an idea for making payments more atomic and avoiding edge cases. The idea involves having PaymentACK messages signed with the same key as the payment request, or using some delegation mechanism. Instead of a full Bitcoin transaction, a Payment message would contain a scriptSig-less Bitcoin transaction along with a limit on its byte size and sigop count. The sender would send the Payment to the receiver before signing the transaction, and the receiver would only ACK if the transaction satisfies the request, is within time limits, and isn't unlikely to confirm. If the sender likes the ACK, he either sends the full transaction (with the receiver taking responsibility for broadcasting) or broadcasts it himself. This method would completely remove the chance that the Bitcoin transaction gets broadcast without the receiver liking it. It's also compatible with doing multiple payments in one Bitcoin transaction. However, the sender can still withhold the signed transaction, and the receiver can always claim to have never received the transaction.</summary>
+    <published>2014-05-12T13:07:44+00:00</published>
+  </entry>
+</feed>

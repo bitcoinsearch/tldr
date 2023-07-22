@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proposal: Extended serialization format for BIP-32</title>
+  <updated>2023-06-12T18:37:24.327803+00:00</updated>
+  <author>
+    <name>shiva sitamraju 2017-09-09 14:08:21</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proposal: Extended serialization format for BIP-32</title>
+    <updated>2023-06-12T18:37:24.327803+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-September/014966.html" rel="alternate"/>
+    <summary>The email thread on the Bitcoin-dev mailing list starts with a proposal to add an extended serialization format for BIP-32 wallets. The proposal suggests adding a new byte field, OutputType, for wallets that do not follow BIP43. However, Thomas Voegtlin points out that this value should be user-visible, which is why he used version bytes in his initial proposal.Voegtlin argues that if an extra byte field is added and then encoded using base58 or bech32 encoding, the value will no longer be visible to users. He experimented with an invisible flag for more than six months for the initial implementation of SegWit xpub/xprv in Electrum. However, he now believes that it is better to make the flag user-visible because users who create wallets with multisig scripts need to combine several master public keys. All these master public keys should be of the same type, so exposing users to master keys and letting them manipulate them would be beneficial. It would ensure that all cosigners agree on the script type that will be used to derive addresses. On the other hand, if users are not exposed to these keys, there might not be a need for a serialization format.The group agrees to use Thomas' proposal of {x,y,z} instead of adding more bytes to the already big enough version field in bip32. There is also a discussion on having a different version for P2WPKH or P2WSH versus (P2WPKH or P2WSH) nested in P2SH, and whether they would have the same output bitcoin address and under the same account. Another email discusses the issue of fast Merkle Trees and how to prevent attacks by requiring a 'delinearization' step that proves knowledge of information necessary to complete each part of the script. There is a proposed attack that requires finding a collision between padding-SHA256(innocuous) and fast-SHA256(double-SHA256(malign) || r2), and the group discusses possible solutions to prevent such attacks, including using a different IV for hash tree updates.</summary>
+    <published>2017-09-09T14:08:21+00:00</published>
+  </entry>
+</feed>

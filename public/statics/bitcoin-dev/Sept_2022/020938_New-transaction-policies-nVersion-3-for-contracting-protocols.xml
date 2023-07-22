@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>New transaction policies (nVersion=3) for contracting protocols</title>
+  <updated>2023-06-16T00:25:49.335679+00:00</updated>
+  <author>
+    <name>Greg Sanders 2022-09-23 18:48:39</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>New transaction policies (nVersion=3) for contracting protocols</title>
+    <updated>2023-06-16T00:25:49.335679+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-September/020938.html" rel="alternate"/>
+    <summary>The email proposes a set of mempool/transaction relay policies to aid L2/contract protocols. The proposal incorporates feedback on the PR from Suhas Daftuar, Gregory Sanders, Bastien Teinturier, Anthony Towns, and others. Existing standardness rules apply to V3 transactions. A V3 transaction can be replaced even if it does not signal BIP125 replaceability. An unconfirmed V3 transaction cannot have more than 1 descendant and the child can have 6-15 UTXOs, which should be enough to fund a fee-bump without requiring a carefully-managed UTXO pool. The package may still include new unconfirmed inputs. However, the new rule is modified to be "The minimum between package feerate and ancestor feerate of the child is not lower than the individual feerates of all directly conflicting transactions and the ancestor feerates of all original transactions." Finally, a couple of suggestions are made elsewhere.Commitment transactions for the Lightning Network should be V3 and have one anchor output. These transactions can be signed with zero fees, or 1sat/vbyte, once package relay is deployed on a significant portion of the network. If the commitment transaction must be broadcasted, then the desired fee rate at broadcast time should be determined, and the anchor output should be spent in a high feerate transaction. The broadcasted commitment transaction is referred to as "the parent," and the attached fee-bumping transaction is referred to as "the child."The child must also be V3 and at most 1000vB, which limits the number of inputs that can be used to fund the fee bump. Batched fee-bumping is possible, meaning that one child may fund fees for multiple commitment transactions. To add more fees, replace the child with a higher-feerate transaction instead of attaching a grandchild.It is important to note that unconfirmed V3 transactions should never be spent from, as the descendant limits for V3 transactions are very restrictive. This new policy will fix Rule 3 Pinning by restricting both you and your counterparty. Assuming nodes adopt this policy, you may reasonably assume that you only need to replace the commitment transaction + up to 1000vB.Regarding privacy concerns, it may be unrealistic to assume that V3 transactions will be in widespread use outside of L2. Unilateral closes are already obvious LN transactions because of the HTLC inputs, and cooperative closes and opens should continue to use V2.Feedback and review are appreciated for this policy. More information can be found in the links provided in the original post.</summary>
+    <published>2022-09-23T18:48:39+00:00</published>
+  </entry>
+</feed>

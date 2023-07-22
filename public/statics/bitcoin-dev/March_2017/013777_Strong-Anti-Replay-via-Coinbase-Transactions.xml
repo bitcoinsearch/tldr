@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>Strong Anti-Replay via Coinbase Transactions</title>
+  <updated>2023-05-20T01:09:42.879804+00:00</updated>
+  <author>
+    <name>Cameron Garnham 2017-03-25 03:30:22</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>Strong Anti-Replay via Coinbase Transactions</title>
+    <updated>2023-05-20T01:09:42.879804+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-March/013777.html" rel="alternate"/>
+    <summary>This document discusses a soft fork for the Bitcoin Network that enables users to make transactions with a strong expectation that they cannot be replayed on a different chain. The motivation behind this proposal is to protect users from potential loss of funds due to transaction replay attacks in case of a chain split. The soft fork includes new rules such as defining an unused NoOp as ‘OP_ANTI_REPLAY’ and only allowing it to be created in a coinbase transaction with the value of 1 Satoshi. Moreover, every block's coinbase transaction will be required to create exactly 1000 new OP_ANTI_REPLAY outputs up to the total of 100,000. If a OP_ANTI_REPLAY is spent in a block, a corresponding new OP_ANTI_REPLAY must be included in the same block. It is recommended that miners account for the size of a OP_ANTI_REPLAY transaction as a transaction size plus the size of an OP_ANTI_REPLAY output in the coinbase. In case of a chain split after activation of this soft fork, miners should recycle all the OP_ANTI_REPLAY outputs via spending and recreating them in new blocks. The proposal is compatible with all existing bitcoin software, and upon activation, all deployed Bitcoin Full Nodes will enforce the anti-replay projections for Bitcoin Users. However, only upgraded nodes will enforce the other OP_ANTI_REPLAY requirements. The rationale behind this proposal is to guarantee that a transaction cannot be replayed by including an input that cannot exist, by definition, on the alternative chain, which is possible only through coinbase transactions.This BIP is expected to have Opt-In-RBF enforcement, where in case of conflicting spends of OP_ANTI_REPLAY outputs, the higher-fee transaction should take priority, and users must compete for this resource. The document does not discuss SegWit Compatibility and is dual licensed as BSD 3-clause and Creative Commons CC0 1.0 Universal.</summary>
+    <published>2017-03-25T03:30:22+00:00</published>
+  </entry>
+</feed>

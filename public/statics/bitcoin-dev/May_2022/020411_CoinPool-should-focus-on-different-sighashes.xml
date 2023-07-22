@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>0</id>
+  <title>CoinPool should focus on different sighashes</title>
+  <updated>2023-05-22T19:56:15.998830+00:00</updated>
+  <author>
+    <name>vjudeu at gazeta.pl 2022-05-03 09:15:36</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>0</id>
+    <title>CoinPool should focus on different sighashes</title>
+    <updated>2023-05-22T19:56:15.998830+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-May/020411.html" rel="alternate"/>
+    <summary>The Taproot consensus is sufficient to implement CoinPool without any necessary changes, according to the author. The process involves six participants moving their coins to a 6-of-6 multisig channel to form a basic version of the protocol. The transactions will be signed backwards to make it trustless. The first transaction could be signed later with SIGHASH_ALL, but the author suggests using SIGHASH_ANYONECANPAY instead to allow anyone to attach additional inputs if needed. To close the channel, a group should still exist, and just detach some participant. Closing the whole group is not an option as the goal is to encourage CoinPool formation. It is suggested that Alice wants to leave, so the group of five participants and Alice detaches themselves. They use SIGHASH_SINGLE | SIGHASH_ANYONECANPAY, and just bind that to the first output. However, Alice cannot use the same sighash as her funds could be stolen by miners; she can use SIGHASH_ANYONECANPAY instead, then all outputs will be protected by her signature.The missing part here is of course SIGHASH_ANYPREVOUT, then fewer transactions are needed. But even without that, the basic protocol can be deployed here and now, the only overhead will be transaction storage. When it comes to handling costs, the cost of leaving the channel is paid by the detached person. By having different sighashes for different signatures, it is possible to restrict outputs to any scripts we want and every participant can collect other signatures and decide where to send their own coins. Therefore, changing sighashes is far easier and more powerful than the author's previous idea of "paying to signatures".</summary>
+    <published>2022-05-03T09:15:36+00:00</published>
+  </entry>
+</feed>

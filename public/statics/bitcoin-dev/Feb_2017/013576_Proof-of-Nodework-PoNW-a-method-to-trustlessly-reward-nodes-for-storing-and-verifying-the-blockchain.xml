@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Proof of Nodework (PoNW) - a method to trustlessly reward nodes for storing and verifying the blockchain</title>
+  <updated>2023-06-11T21:29:36.995396+00:00</updated>
+  <author>
+    <name>John Hardy 2017-02-13 11:58:09</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Proof of Nodework (PoNW) - a method to trustlessly reward nodes for storing and verifying the blockchain</title>
+    <updated>2023-06-11T21:29:36.995396+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2017-February/013576.html" rel="alternate"/>
+    <summary>John Hardy sent a proposal to reward individual nodes for keeping a full copy of and verifying the blockchain. The Proof of Nodework (PoNW) would require a new separate area of block space, a nodeblock, purely concerned with administering the system. A recent history of nodeblocks needs to be stored by nodes, however, the data eventually becomes obsolete and so does not need to be retained forever. In order to prevent Sybil, a node must register a Bitcoin address by submitting an addNode transaction - along with a security deposit to prevent cheating. The process of calculating the reward each node is due can begin at the end of an epoch, with a wait period for any delayed or censored transactions or challenges to be included and settled up. RSK platform (a Bitcoin sidechain) is already prepared to do something similar to this, although very efficiently. They set apart 1% of the block reward to automatically reward full nodes. They have two systems being evaluated: the first is based on PoUBS (Proof of Unique Blockchain Storage) which uses asymmetric-time operations to encode the blockchain based on each user public key such that decoding is fast, but encoding is slow. The second is more traditional proof of retrievability, but it requires some ASIC-resistance assumptions. In both cases, a special smart contract is called at every block that creates periodic challenges. Every full node that wants to participate can submit a commitment to the Merkle hash root of a pseudo-random sequence of encoded blocks. Then the smart contract chooses random elements from the committed dataset, and each full node has a period to submit Merkle-proofs that such random elements belong to the commitment. To prevent blockchain bloat, they designed a new type of transaction payload: Ephemeral Payload. Ephemeral payload is a payload in a transaction that gets discarded after N blocks if no smart contract does reference it. If is does, it's solidified forever in the blockchain. Then there is a challenge phase where other full nodes can inform the smart contract if they find an error in the submitted responses. Then the smart contract ONLY evaluates the responses which have been questioned by users. This way the smart contract does very little computation (only when a user misbehaves) and the blockchain normally does not store any proof forever (only the ones created by misbehaving users). Because RSK/Rootstock has a very short block interval (10 seconds), all this happens very quickly and does not require much computation.</summary>
+    <published>2017-02-13T11:58:09+00:00</published>
+  </entry>
+</feed>

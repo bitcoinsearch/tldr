@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>Ephemeral Anchors: Fixing V3 Package RBF against package limit pinning</title>
+  <updated>2023-06-16T01:57:38.176299+00:00</updated>
+  <author>
+    <name>Greg Sanders 2022-10-19 13:22:08</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>Ephemeral Anchors: Fixing V3 Package RBF against package limit pinning</title>
+    <updated>2023-06-16T01:57:38.176299+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-October/021052.html" rel="alternate"/>
+    <summary>A group of individuals were discussing V3 transactions and pinning attacks. Greg Sanders suggested a solution called "Ephemeral Anchors", which involves marking an output as an anchor that must be spent within a V3 package with a 0-fee parent transaction. This method simplifies mempool reasoning and allows anyone to bump the transaction without any transaction key material. The Lightning Carve-out is superseded by this logic, allowing for robust multi-party fee bumping. However, there are concerns about whether allowing non-zero value in ephemeral outputs would open up MEV concerns and how SIGHASH_GROUP like constructs would work.Gloria proposed a solution for ln-penalty, reducing the number of anchors per commitment transaction to 1 and each version of the commitment transaction has a unique party's key on it worked around the problem. Antoine Riard suggested that package relay should be included in addition to package RBF, otherwise if Lightning transactions are still relayed one by one, the version of the commitment transaction won't replace the counterparties's commitments sleeping in network mempools. If non-zero value is allowed in ephemeral outputs, it could modify the incentives games of the channels counterparties.</summary>
+    <published>2022-10-19T13:22:08+00:00</published>
+  </entry>
+</feed>

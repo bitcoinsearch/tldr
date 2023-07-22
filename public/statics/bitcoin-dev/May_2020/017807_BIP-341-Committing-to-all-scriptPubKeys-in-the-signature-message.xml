@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>1</id>
+  <title>BIP-341: Committing to all scriptPubKeys in the signature message</title>
+  <updated>2023-06-14T01:04:04.988579+00:00</updated>
+  <author>
+    <name>Andrew Kozlik 2020-05-01 08:48:41</name>
+  </author>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>1</id>
+    <title>BIP-341: Committing to all scriptPubKeys in the signature message</title>
+    <updated>2023-06-14T01:04:04.988579+00:00</updated>
+    <link href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-May/017807.html" rel="alternate"/>
+    <summary>In a discussion on the bitcoin-dev mailing list, Andrew Kozlik proposed that in the current draft of BIP-0341, the signature message should commit to the scriptPubKeys of all transaction inputs instead of just the output being spent by the input. This is because in certain applications like CoinJoin, when a wallet has to deal with transactions containing external inputs, it needs to reliably determine for each input whether it belongs to the wallet or not. Without such a mechanism, an adversary can fool the wallet into displaying incorrect information about the amount being spent, which can result in theft of user funds. To ascertain non-ownership of an input which is claimed to be external, the wallet needs the scriptPubKey of the previous output spent by this input. Acquiring and verifying the hash of the entire previous transaction places a significant burden on offline signing devices and hardware wallets in general. Committing only to the scriptPubKey of the output being spent is insufficient for this application because the scriptPubKeys which are needed to ascertain non-ownership of external inputs are precisely the ones that would not be included in any of the signature messages produced by the wallet. The proposal suggests that adding another hash to the signature message, sha_scriptPubKeys (32), which is the SHA256 of the serialization of all scriptPubKeys of the previous outputs spent by this transaction, would solve this issue. Jeremy Rubin, in response, suggested that using SIGHASH_ALL would sign the COutPoints of all inputs which commit to the scriptPubKeys of the txn, eliminating the need for the metadata protocol. However, Andrew explained that his proposal is about avoiding the need for the metadata protocol altogether, as it has been a design goal in both BIP-143 and BIP-341.</summary>
+    <published>2020-05-01T08:48:41+00:00</published>
+  </entry>
+</feed>
