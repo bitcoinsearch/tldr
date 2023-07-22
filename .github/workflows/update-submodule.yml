@@ -1,0 +1,23 @@
+name: Update Submodules
+
+on: 
+  schedule:
+    # This will run the workflow every day at 00:00 UTC.
+    - cron: '0 0 * * *'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        # Fetch all history so we can push to the repo
+        fetch-depth: 0
+
+    - name: Update submodules
+      run: |
+        git submodule update --remote --merge
+        git commit -m "Updated submodules" || echo "No changes to commit"
+        git push
