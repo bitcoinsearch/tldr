@@ -17,17 +17,6 @@ async function getSearchData({ path, query }: SearchDataParams) {
 
 export default async function Home() {
   const data = FakeData;
-  const response = await getSearchData({
-    path: "bitcoin-dev",
-    query: {
-      author: "Jeremy",
-      keyword: "legal defense",
-    },
-  });
-  if (response instanceof Error) {
-    console.error(response);
-  }
-  console.log(response);
 
   return <Homepage data={data} />;
 }

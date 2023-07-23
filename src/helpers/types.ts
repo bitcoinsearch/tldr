@@ -25,6 +25,7 @@ type SearchIndexData = {
   title: string;
   authors: string[];
   summary: string;
+  link?: string;
   path: string;
 };
 

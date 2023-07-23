@@ -37,12 +37,15 @@ const indexData = (data: any[]) => {
   data.forEach((entry) => {
     if (entry.data && entry.data.title && entry.data.authors) {
       const title = entry.data.title;
+      const link = entry.data.entry.link;
+      const summary = entry.data.entry.summary;
       const authors = Object.keys(entry.data.authors);
 
       indexedEntries.push({
         title,
         authors,
-        summary: entry.data.entry.summary,
+        summary,
+        link,
         path: entry.path,
       });
     }
