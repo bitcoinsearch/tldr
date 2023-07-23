@@ -1,9 +1,14 @@
-"use server"
+"use server";
 
-import { indexAndSearch } from "@/helpers/search-data";
-import { SearchDataParams } from "@/helpers/types";
+import { indexAndSearch, searchIndexForData } from "@/helpers/search-data";
+import { SearchDataParams, SearchIndexData } from "@/helpers/types";
+import searchDataIndex from "../../../../public/search-index.json";
 
-async function getSearchData({ path, query }: SearchDataParams) {
+type SearchDataType = {
+  entries: SearchIndexData[];
+};
+
+async function getSearchDataFromDirectory({ path, query }: SearchDataParams) {
   const directory = `public/static/static${path ? "/" + path : "/"}`;
   const data = await indexAndSearch(directory, query);
   if (data) {
@@ -13,4 +18,13 @@ async function getSearchData({ path, query }: SearchDataParams) {
   }
 }
 
-export default getSearchData;
+async function getDataFromCachedIndex({ query }: SearchDataParams) {
+  const data = searchDataIndex as SearchDataType;
+  if (data) {
+    const filteredData = searchIndexForData(data.entries, query);
+    return { filteredData, filteredDataLength: filteredData.length };
+  } else {
+    throw new Error("No data found");
+  }
+}
+export { getSearchDataFromDirectory, getDataFromCachedIndex };

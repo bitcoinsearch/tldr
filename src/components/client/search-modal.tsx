@@ -4,12 +4,12 @@ import Image from "next/image";
 import React, { useTransition } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
-import getSearchData from "@/components/client/actions/get-search-data";
 import { SearchDataParams, SearchIndexData } from "@/helpers/types";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 
 import { defaultFilter, filterReducer } from "./actions/filter-reducer";
+import { getDataFromCachedIndex } from "./actions/get-search-data";
 import SearchResult from "./search-result-ui";
 import Spinner from "./spinner";
 
@@ -35,6 +35,7 @@ const SearchBox = () => {
   );
   const [searchResults, setSearchResults] = React.useState<SearchResults>();
   const [error, setError] = React.useState<Error>();
+
   const [filter, dispatch] = React.useReducer(filterReducer, defaultFilter);
   const [isPending, startTransition] = useTransition();
 
@@ -63,19 +64,16 @@ const SearchBox = () => {
 
   const getData = React.useCallback(async () => {
     if (searchQuery) {
-      const data = await getSearchData({
-        path: searchQuery?.path,
-        query: {
-          author: searchQuery?.query.author,
-          keyword: searchQuery?.query.keyword,
-        },
-      });
+      const data = await getDataFromCachedIndex(searchQuery);
+      if (data) {
+        setSearchResults({
+          searchResults: data.filteredData,
+          totalSearchResults: data.filteredDataLength,
+        });
+      }
       if (data instanceof Error) {
         setError(data);
         return;
-      }
-      if (data) {
-        setSearchResults(data);
       }
     }
   }, [searchQuery]);
