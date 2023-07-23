@@ -7,12 +7,16 @@ type SearchResultProps = {
   searchResults: SearchResults | undefined;
   isPending: boolean;
   searchQuery: SearchQuery | null;
+  showMoreResults: () => void;
+  limit: number;
 };
 
 function SearchResult({
   searchResults,
   searchQuery,
   isPending,
+  showMoreResults,
+  limit,
 }: SearchResultProps) {
   if (isPending || !searchQuery) return null;
 
@@ -47,8 +51,10 @@ function SearchResult({
         break;
     }
 
-    return searchData;
+    return searchData.slice(0, limit);
   }
+
+  const showMore = searchResults && limit >= searchResults?.totalSearchResults;
 
   return (
     <div className="w-full">
@@ -83,6 +89,16 @@ function SearchResult({
           );
         })}
       </ul>
+      <div className="flex items-center justify-center gap-2 mb-1">
+        <button
+          className={`text-sm text-center font-semibold text-[#B06B03] hover:underline ${
+            showMore && "hidden"
+          }`}
+          onClick={showMoreResults}
+        >
+          See more results
+        </button>
+      </div>
     </div>
   );
 }
