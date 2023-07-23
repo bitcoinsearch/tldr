@@ -96,7 +96,7 @@ function SearchResult({
           }`}
           onClick={showMoreResults}
         >
-          See more results
+          See more results (+{searchResults?.totalSearchResults})
         </button>
       </div>
     </div>
