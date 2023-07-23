@@ -47,7 +47,8 @@ type SearchIndexData = {
   title: string;
   authors: string[];
   summary: string;
-  path?: string;
+  link?: string;
+  path: string;
 };
 
 type SearchDataParams = {
