@@ -7,6 +7,7 @@ import { convertXmlToText } from "./convert-from-xml";
 
 const readdir = util.promisify(fs.readdir);
 const stat = util.promisify(fs.stat);
+const writeFile = util.promisify(fs.writeFile);
 
 const handleFile = async (file: any, directory: string) => {
   const fullPath = path.join(directory, file);
@@ -54,7 +55,7 @@ const indexData = (data: any[]) => {
   return indexedEntries;
 };
 
-const searchData = (
+export const searchIndexForData = (
   indexedData: SearchIndexData[],
   query: SearchDataParams["query"]
 ) => {
@@ -87,11 +88,45 @@ export const indexAndSearch = async (
   query: SearchDataParams["query"]
 ) => {
   const data = await readStaticDir(directory);
+  const pathToSearchIndex = "public/search.json";
 
   // Index the data
   const index = indexData(data);
 
+  let existingData;
+
+  if (index && index.length > 0) {
+    if (!fs.existsSync(pathToSearchIndex)) {
+      console.log("File does not exist");
+      await saveJson(index);
+    } else {
+      console.log("File exists");
+      try {
+        existingData = JSON.parse(fs.readFileSync(pathToSearchIndex, "utf8"));
+        const mergedData = [...existingData, ...index];
+        await saveJson(mergedData);
+      } catch (error) {
+        console.log("Failed to parse JSON", error);
+      }
+    }
+  }
+
   // Search the data
-  const searchResults = searchData(index, query);
+  const searchResults = searchIndexForData(index, query);
+
   return { searchResults, totalSearchResults: searchResults.length };
+};
+
+const saveJson = async (data: any) => {
+  if (!data) return console.log("No data to save");
+  const dataToSave = { entries: data };
+  const json = JSON.stringify(dataToSave, null, 2);
+  await writeFile("public/search-index.json", json, "utf8")
+    .then(() => {
+      console.log("JSON file has been saved.");
+    })
+    .catch((err) => {
+      console.log("An error occurred while writing JSON Object to File.");
+      console.log(err);
+    });
 };
