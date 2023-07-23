@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React, { useTransition } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 import getSearchData from "@/components/client/actions/get-search-data";
 import { SearchDataParams, SearchIndexData } from "@/helpers/types";
@@ -9,9 +10,8 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 
 import { defaultFilter, filterReducer } from "./actions/filter-reducer";
-import Spinner from "./spinner";
-import { useDebouncedCallback } from "use-debounce";
 import SearchResult from "./search-result-ui";
+import Spinner from "./spinner";
 
 export type SearchResults = {
   searchResults: SearchIndexData[];
@@ -23,11 +23,15 @@ export type SearchQuery = {
 } & SearchDataParams;
 
 const DEBOUNCE_DELAY = 1200;
+const DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY = 4;
 
 const SearchBox = () => {
   const [open, setOpen] = React.useState(false);
   const [searchQuery, setSearchQuery] = React.useState<SearchQuery | null>(
     null
+  );
+  const [limit, setLimit] = React.useState<number>(
+    DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY
   );
   const [searchResults, setSearchResults] = React.useState<SearchResults>();
   const [error, setError] = React.useState<Error>();
@@ -43,6 +47,11 @@ const SearchBox = () => {
   const prevQueryRef = React.useRef(searchQuery);
   const searchFeedInputRef = React.useRef<HTMLInputElement>(null);
 
+  const showMoreResults = () => {
+    if (searchResults && limit >= searchResults?.totalSearchResults) return;
+    setLimit((prev) => prev + 5);
+  };
+
   const setSearchQueryPath = (path: string) => {
     setSearchQuery((prev) => ({
       path,
@@ -54,16 +63,13 @@ const SearchBox = () => {
 
   const getData = React.useCallback(async () => {
     if (searchQuery) {
-      const data = await getSearchData(
-        {
-          path: searchQuery?.path,
-          query: {
-            author: searchQuery?.query.author,
-            keyword: searchQuery?.query.keyword,
-          },
+      const data = await getSearchData({
+        path: searchQuery?.path,
+        query: {
+          author: searchQuery?.query.author,
+          keyword: searchQuery?.query.keyword,
         },
-        5
-      );
+      });
       if (data instanceof Error) {
         setError(data);
         return;
@@ -137,6 +143,10 @@ const SearchBox = () => {
       searchFeedInputRef.current?.focus();
     }, 100);
 
+    if (!open) {
+      setLimit(4);
+    }
+
     return () => clearTimeout(timer);
   }, [open]);
 
@@ -160,7 +170,7 @@ const SearchBox = () => {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="bg-slate-400 opacity-50 data-[state=open]:animate-overlayShow fixed inset-0" />
-        <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none">
+        <Dialog.Content className="data-[state=open]:animate-contentShow overflow-y-auto fixed top-[50%] left-[50%] max-h-[65vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none">
           <Dialog.Title className="m-0 text-[16px] font-medium flex items-center gap-x-4">
             <span>Filter results by: </span>
             <div className="flex items-center gap-x-2">
@@ -242,6 +252,8 @@ const SearchBox = () => {
               searchResults={searchResults}
               searchQuery={searchQuery}
               isPending={isPending}
+              showMoreResults={showMoreResults}
+              limit={limit}
             />
           </div>
           <Dialog.Close asChild>
@@ -251,6 +263,7 @@ const SearchBox = () => {
               onClick={() => {
                 setSearchQuery(null);
                 setSearchResults({ searchResults: [], totalSearchResults: 0 });
+                setLimit(DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY);
                 dispatch({ type: "clear" });
               }}
             >
