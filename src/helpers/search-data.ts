@@ -2,12 +2,14 @@ import * as fs from "fs";
 import path from "path";
 import util from "util";
 
-import { SearchDataParams, SearchIndexData } from "./types";
 import { convertXmlToText } from "./convert-from-xml";
+import { SearchDataParams, SearchIndexData } from "./types";
 
 const readdir = util.promisify(fs.readdir);
 const stat = util.promisify(fs.stat);
 const writeFile = util.promisify(fs.writeFile);
+
+const pathToSearchIndex = "public/search-index.json";
 
 const handleFile = async (file: any, directory: string) => {
   const fullPath = path.join(directory, file);
@@ -88,27 +90,35 @@ export const indexAndSearch = async (
   query: SearchDataParams["query"]
 ) => {
   const data = await readStaticDir(directory);
-  const pathToSearchIndex = "public/search.json";
 
   // Index the data
   const index = indexData(data);
 
   let existingData;
 
-  if (index && index.length > 0) {
+  if (
+    index &&
+    index !== null &&
+    typeof index !== undefined &&
+    index.length > 0
+  ) {
     if (!fs.existsSync(pathToSearchIndex)) {
       console.log("File does not exist");
       await saveJson(index);
     } else {
       console.log("File exists");
+
       try {
-        existingData = JSON.parse(fs.readFileSync(pathToSearchIndex, "utf8"));
-        const mergedData = [...existingData, ...index];
+        const data = fs.readFileSync(pathToSearchIndex, "utf8");
+        existingData = JSON.parse(data);
+        const mergedData = mergeData(existingData.entries, index);
         await saveJson(mergedData);
       } catch (error) {
         console.log("Failed to parse JSON", error);
       }
     }
+  } else {
+    console.log("No data to index");
   }
 
   // Search the data
@@ -121,7 +131,7 @@ const saveJson = async (data: any) => {
   if (!data) return console.log("No data to save");
   const dataToSave = { entries: data };
   const json = JSON.stringify(dataToSave, null, 2);
-  await writeFile("public/search-index.json", json, "utf8")
+  await writeFile(pathToSearchIndex, json, "utf8")
     .then(() => {
       console.log("JSON file has been saved.");
     })
@@ -129,4 +139,29 @@ const saveJson = async (data: any) => {
       console.log("An error occurred while writing JSON Object to File.");
       console.log(err);
     });
+};
+
+const mergeData = (existingData: any, newData: any) => {
+  const idSet = new Set();
+  existingData.forEach((item: any) =>
+    idSet.add(item.title + item.authors + item.summary + item.link + item.path)
+  );
+
+  // Use a set to avoid duplicates
+  const mergedData = [...existingData];
+
+  newData.forEach((newItem: any) => {
+    const id =
+      newItem.title +
+      newItem.authors +
+      newItem.summary +
+      newItem.link +
+      newItem.path;
+    if (!idSet.has(id)) {
+      mergedData.push(newItem);
+      idSet.add(id);
+    }
+  });
+
+  return mergedData;
 };
