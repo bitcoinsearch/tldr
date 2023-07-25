@@ -48,6 +48,8 @@ type SearchIndexData = {
   authors: string[];
   summary: string;
   link?: string;
+  updatedAt: string;
+  startedBy: string;
   path: string;
 };
 

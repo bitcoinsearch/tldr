@@ -22,6 +22,9 @@ async function getDataFromCachedIndex({ query }: SearchDataParams) {
   const data = searchDataIndex as SearchDataType;
   if (data) {
     const filteredData = searchIndexForData(data.entries, query);
+    filteredData.sort((a, b) => {
+      return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+    });
     return { filteredData, filteredDataLength: filteredData.length };
   } else {
     throw new Error("No data found");

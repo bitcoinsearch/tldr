@@ -4,7 +4,12 @@ import Image from "next/image";
 import React, { useTransition } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
-import { SearchDataParams, SearchIndexData } from "@/helpers/types";
+import {
+  BITCOINDEV,
+  LIGHTNINGDEV,
+  SearchDataParams,
+  SearchIndexData,
+} from "@/helpers/types";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 
@@ -174,22 +179,22 @@ const SearchBox = () => {
             <div className="flex items-center gap-x-2">
               <button
                 className={`border rounded py-1 px-2 text-xs hover:bg-slate-100 ${
-                  filter.bitcoinDev && "bg-slate-100"
+                  filter.bitcoinDev && "bg-slate-200"
                 }`}
                 onClick={() => {
                   dispatch({ type: "bitcoinDev" });
-                  setSearchQueryPath("bitcoin-dev");
+                  setSearchQueryPath(BITCOINDEV);
                 }}
               >
                 bitcoin-dev
               </button>
               <button
                 className={`border rounded py-1 px-2 text-xs hover:bg-slate-100 ${
-                  filter.lightningDev && "bg-slate-100"
+                  filter.lightningDev && "bg-slate-200"
                 }`}
                 onClick={() => {
                   dispatch({ type: "lightningDev" });
-                  setSearchQueryPath("lightning-dev");
+                  setSearchQueryPath(LIGHTNINGDEV);
                 }}
               >
                 lightning-dev

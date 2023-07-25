@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import Fuse from "fuse.js";
 import path from "path";
 import util from "util";
 
@@ -38,18 +39,35 @@ const indexData = (data: any[]) => {
   const indexedEntries: any = [];
 
   data.forEach((entry) => {
+    if (!entry.data.title.startsWith("Combined summary")) return;
+    if (!entry.data.entry.summary) return;
     if (entry.data && entry.data.title && entry.data.authors) {
+      let startedBy = "";
+      if (entry.data.authors) {
+        const authors = entry.data.authors;
+        for (const author in authors) {
+          const authorDateAndTime = authors[author][0];
+          const authorPublishedDate = authorDateAndTime.split(" ").join("T");
+          const entryDate = entry.data.entry.published.split("+")[0];
+          if (authorPublishedDate === entryDate) {
+            startedBy = author + " on " + authorDateAndTime;
+          }
+        }
+      }
+
       const title = entry.data.title;
       const link = entry.data.entry.link;
-      const summary = entry.data.entry.summary;
+      const summary = entry.data.entry.summary.split(".")[0] + ".";
       const authors = Object.keys(entry.data.authors);
+      const updatedAt = entry.data.updatedAt;
 
       indexedEntries.push({
         title,
         authors,
+        startedBy,
         summary,
         link,
-        path: entry.path,
+        updatedAt,
       });
     }
   });
@@ -61,29 +79,60 @@ export const searchIndexForData = (
   indexedData: SearchIndexData[],
   query: SearchDataParams["query"]
 ) => {
-  let result: boolean = true;
-  return indexedData.filter((entry) => {
-    if (query.author && query.keyword) {
-      return (result =
-        entry.authors.some((author) =>
-          author.toLowerCase().includes(query.author!.toLowerCase())
-        ) && entry.title.toLowerCase().includes(query.keyword.toLowerCase()));
-    } else if (query.author) {
-      return (result = entry.authors.some((author) =>
-        author.toLowerCase().includes(query.author!.toLowerCase())
-      ));
-    } else if (query.keyword) {
-      return (
-        (result = entry.title
-          .toLowerCase()
-          .includes(query.keyword.toLowerCase())) ||
-        entry.summary.toLowerCase().includes(query.keyword.toLowerCase())
-      );
-    } else {
-      return result;
-    }
+  const fuse = new Fuse(indexedData, {
+    keys: ["title", "summary", "authors", "updatedAt", "startedBy"],
+    includeScore: true,
+    shouldSort: true,
+    distance: 100,
   });
+
+  if (query.keyword && query.author) {
+    const results = fuse.search(
+      `${query.keyword.toLowerCase()} ${query.author.toLowerCase()}`
+    );
+    return results.map((result) => result.item);
+  }
+  if (query.keyword) {
+    const results = fuse.search(query.keyword.toLowerCase());
+    return results.map((result) => result.item);
+  }
+
+  if (query.author) {
+    const results = fuse.search(query.author.toLowerCase());
+    return results.map((result) => result.item);
+  }
+
+  return indexedData;
 };
+
+// keeping this here as a reference. Remove when we've finalized on the search path
+// export const searchIndexForData = (
+//   indexedData: SearchIndexData[],
+//   query: SearchDataParams["query"]
+// ) => {
+//   let result: boolean = true;
+//   return indexedData.filter((entry) => {
+//     if (query.author && query.keyword) {
+//       return (result =
+//         entry.authors.some((author) =>
+//           author.toLowerCase().includes(query.author!.toLowerCase())
+//         ) && entry.title.toLowerCase().includes(query.keyword.toLowerCase()));
+//     } else if (query.author) {
+//       return (result = entry.authors.some((author) =>
+//         author.toLowerCase().includes(query.author!.toLowerCase())
+//       ));
+//     } else if (query.keyword) {
+//       return (
+//         (result = entry.title
+//           .toLowerCase()
+//           .includes(query.keyword.toLowerCase())) ||
+//         entry.summary.toLowerCase().includes(query.keyword.toLowerCase())
+//       );
+//     } else {
+//       return result;
+//       }
+//   });
+// };
 
 export const indexAndSearch = async (
   directory: string,
