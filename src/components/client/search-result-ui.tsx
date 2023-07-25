@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 import { SearchQuery, SearchResults } from "./search-modal";
+import { BITCOINDEV, LIGHTNINGDEV } from "@/helpers/types";
 
 type SearchResultProps = {
   searchResults: SearchResults | undefined;
@@ -38,12 +39,12 @@ function SearchResult({
     switch (searchQuery?.path) {
       case "bitcoin-dev":
         searchData = searchResults?.searchResults.filter((result) => {
-          return result.path.includes("bitcoin-dev");
+          return result.link?.includes(BITCOINDEV);
         });
         break;
       case "lightning-dev":
         searchData = searchResults?.searchResults.filter((result) => {
-          return result.path.includes("lightning-dev");
+          return result.link?.includes(LIGHTNINGDEV);
         });
         break;
       default:
@@ -55,17 +56,20 @@ function SearchResult({
   }
 
   const showMore = searchResults && limit >= searchResults?.totalSearchResults;
+  const totalSearchResultsCount = searchResults?.totalSearchResults ? `See more results (+${searchResults?.totalSearchResults - limit})` : ""
 
   return (
     <div className="w-full">
       <ul className="mt-0">
         {sortData()?.map((result, index) => {
-          const headerText = result.path.includes("bitcoin-dev")
+          const headerText = result.link?.includes("bitcoin-dev")
             ? "bitcoin-dev"
             : "lightning-dev";
-          const headerImageSrc = result.path.includes("bitcoin-dev")
+          const headerImageSrc = result.link?.includes("bitcoin-dev")
             ? "/images/btc.svg"
             : "/images/lightning-dev.svg";
+
+          const originalAuthor = result.startedBy.split(" ").slice(0, -1).join(" ")
 
           return (
             <li key={`${index}-${result.link}`} className="mb-6">
@@ -85,6 +89,7 @@ function SearchResult({
               >
                 {result.title}
               </a>
+              <p className="text-sm mt-1">Started by: <span className="font-medium">{originalAuthor}</span></p>
             </li>
           );
         })}
@@ -96,7 +101,7 @@ function SearchResult({
           }`}
           onClick={showMoreResults}
         >
-          See more results (+{searchResults?.totalSearchResults})
+          {totalSearchResultsCount}
         </button>
       </div>
     </div>
