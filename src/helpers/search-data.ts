@@ -87,9 +87,13 @@ export const searchIndexForData = (
   });
 
   if (query.keyword && query.author) {
-    const results = fuse.search(
-      `${query.keyword.toLowerCase()} ${query.author.toLowerCase()}`
+    const keywordResults = fuse.search(query.keyword.toLowerCase());
+    const authorResults = fuse.search(query.author.toLowerCase());
+  
+    const results = keywordResults.filter((result) =>
+      authorResults.some((authorResult) => authorResult.item === result.item)
     );
+  
     return results.map((result) => result.item);
   }
   if (query.keyword) {
