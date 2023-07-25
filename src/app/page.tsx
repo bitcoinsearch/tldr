@@ -1,33 +1,22 @@
 import { indexAndSearch } from "../helpers/search-data";
-import FakeData from "../../data.json";
 import Homepage from "@/components/client/homepage";
-import { SearchDataParams } from "@/helpers/types";
+import { HomepageData, SearchDataParams } from "@/helpers/types";
+import * as fs from "fs"
 
-export type FakeDataType = typeof FakeData;
-
-async function getSearchData({ path, query }: SearchDataParams) {
-  const directory = `public/static/static${path ? "/" + path : "/"}`;
-  const data = await indexAndSearch(directory, query);
-  if (data) {
-    return data;
-  } else {
-    throw new Error("No data found");
+async function getHomepageData() {
+  try {
+    const data = fs.readFileSync("public/static/static/homepage.json", "utf-8")
+    const parsedData = JSON.parse(data) as HomepageData
+    return parsedData;
+  } catch (err) {
+    return null
   }
 }
 
 export default async function Home() {
-  const data = FakeData;
-  const response = await getSearchData({
-    path: "bitcoin-dev",
-    query: {
-      author: "Jeremy",
-      keyword: "legal defense",
-    },
-  });
-  if (response instanceof Error) {
-    console.error(response);
-  }
-  console.log(response);
+  const data = await getHomepageData()
+
+  if (!data) return null;
 
   return <Homepage data={data} />;
 }
