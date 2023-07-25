@@ -1,10 +1,9 @@
-import { FakeDataType } from '@/app/page'
-import { LIGHTNINGDEV, MailingListType } from '@/helpers/types'
+import { HomepageData, LIGHTNINGDEV, MailingListType } from '@/helpers/types'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const Post = ({entry}: {entry: FakeDataType["enteries"][number]}) => {
+const Post = ({entry}: {entry: HomepageData["enteries"][number]}) => {
   const type = entry.dev_name
   return (
     <article className='flex flex-col gap-4 my-8'>

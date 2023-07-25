@@ -1,11 +1,10 @@
 "use client";
-import { FakeDataType } from "@/app/page";
-import { BITCOINDEV, LIGHTNINGDEV, MailingListType } from "@/helpers/types";
+import { BITCOINDEV, HomepageData, LIGHTNINGDEV, MailingListType } from "@/helpers/types";
 import Image from "next/image";
 import React, { useState } from "react";
 import Post from "./post";
 
-const Homepage = ({ data }: { data: FakeDataType }) => {
+const Homepage = ({ data }: { data: HomepageData }) => {
   const [mailingListSelection, setMailingListSelection] = useState<
     Record<MailingListType, boolean>
   >({
@@ -13,7 +12,7 @@ const Homepage = ({ data }: { data: FakeDataType }) => {
     [LIGHTNINGDEV]: true,
   });
 
-  const getSelectionList = (data: FakeDataType) => {
+  const getSelectionList = (data: HomepageData) => {
     if (
       mailingListSelection[BITCOINDEV] &&
       mailingListSelection[LIGHTNINGDEV]
