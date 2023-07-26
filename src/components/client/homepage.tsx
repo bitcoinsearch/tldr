@@ -2,7 +2,7 @@
 import { BITCOINDEV, HomepageData, LIGHTNINGDEV, MailingListType } from "@/helpers/types";
 import Image from "next/image";
 import React, { useState } from "react";
-import Post from "./post";
+import Post from "../server/post";
 
 const Homepage = ({ data }: { data: HomepageData }) => {
   const [mailingListSelection, setMailingListSelection] = useState<
