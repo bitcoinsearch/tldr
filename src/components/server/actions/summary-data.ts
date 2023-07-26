@@ -16,14 +16,6 @@ export const getRelativePathFromLink = (link: string) => {
   const dirPath = [list_type, `${month}_${year}`].join("/")
   const finalRelativePath = [dirPath, index].join("/")
   return finalRelativePath
-  // const dirContent = await readdir(`public/static/static/${dirPath}`);
-  
-  // const foundFileName = dirContent.find((filename) => filename.split("_")[0] === index)
-  // if (foundFileName) {
-  //   const finalRelativePath = [dirPath, foundFileName].join("/")
-  //   console.log(finalRelativePath)
-  //   return finalRelativePath
-  // }
 }
 
 export const getRelativePathFromInternalLink = (link: string) => {
