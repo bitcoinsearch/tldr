@@ -7,6 +7,20 @@ type Feed = {
   entry: EntryData;
 };
 
+type AuthorData = {
+  name: string;
+  date: string;
+  time: string;
+}
+type FeedPage = {
+  id: string;
+  title: string;
+  updatedAt: string;
+  authors: AuthorData[];
+  generatedUrl?: string;
+  entry: EntryData;
+};
+
 type EntryData = {
   id: string;
   title: string;
@@ -17,7 +31,7 @@ type EntryData = {
 };
 
 type ConvertedXML = {
-  data: Feed;
+  data: FeedPage;
   month: string;
   year: number;
   path: string | undefined;
@@ -62,6 +76,7 @@ type HomepageData = {
 
 export type {
   Feed,
+  FeedPage,
   EntryData,
   MailingListType,
   SearchIndexData,

@@ -1,6 +1,6 @@
 import * as Cheerio from "cheerio";
 
-import { ConvertedXML, Feed } from "./types";
+import { ConvertedXML, Feed, FeedPage } from "./types";
 
 const xmlElements = {
   id: "id",
@@ -22,7 +22,7 @@ export const convertXmlToText = async (xml: any, path?: string) :Promise<Convert
     },
   });
 
-  let formattedData: Feed = {} as Feed;
+  let formattedData: FeedPage = {} as FeedPage;
   $("entry").each((_index, element) => {
     const author = $(xmlElements.author).children(xmlElements.name).text();
     const entry = {
@@ -41,7 +41,7 @@ export const convertXmlToText = async (xml: any, path?: string) :Promise<Convert
         published: $(element).find(xmlElements.published).text(),
       },
     };
-    const threadAuthors = extractAuthorsAndDates(author);
+    const threadAuthors = extractAuthorsDateTime(author);
     const newEntry = { ...entry, authors: threadAuthors };
     formattedData = newEntry;
   });
@@ -79,3 +79,17 @@ export const extractAuthorsAndDates = (str: string) => {
 
   return authors;
 };
+
+export const extractAuthorsDateTime = (str: string) => {
+  const regex = /([\w\s]+) (\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}:\d{2}(?:(?:\+\d{2}:\d{2})|(?:\s*\+\d{2}:\d{2})|))/g;
+
+  const groups:FeedPage["authors"] = [];
+  let match;
+  while ((match = regex.exec(str)) !== null) {
+    const name = match[1];
+    const date = match[2];
+    const time = match[3];
+    groups.push({ name, date, time });
+  }
+  return groups;
+}
