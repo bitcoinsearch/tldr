@@ -23,6 +23,7 @@ export const convertXmlToText = async (xml: any, path?: string) :Promise<Convert
   });
 
   let formattedData: FeedPage = {} as FeedPage;
+  const immediateLinkELements = $("feed").children(xmlElements.link)
   $("entry").each((_index, element) => {
     const author = $(xmlElements.author).children(xmlElements.name).text();
     const entry = {
@@ -41,8 +42,13 @@ export const convertXmlToText = async (xml: any, path?: string) :Promise<Convert
         published: $(element).find(xmlElements.published).text(),
       },
     };
+
+    let historyLinks: string[] = []
+    immediateLinkELements.each((_index, el) => {
+      historyLinks.push(el.attribs["href"])
+    }) 
     const threadAuthors = extractAuthorsDateTime(author);
-    const newEntry = { ...entry, authors: threadAuthors };
+    const newEntry = { ...entry, authors: threadAuthors, historyLinks };
     formattedData = newEntry;
   });
 
