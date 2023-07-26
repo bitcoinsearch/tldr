@@ -8,7 +8,7 @@ import util from "util";
 
 const readdir = util.promisify(fs.readdir);
 
-export const getSummaryData = async (path: string[]) => {
+const getSummaryData = async (path: string[]) => {
   const index = path.pop();
   const pathStringNoIndex = path.join("/");
   const dirContent = await readdir(`public/static/static/${pathStringNoIndex}`);
