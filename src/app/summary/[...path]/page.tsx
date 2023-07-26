@@ -16,8 +16,9 @@ export const getSummaryData = async (path: string[]) => {
     try {
       const finalRelativePath = [pathStringNoIndex, foundFileName].join("/")
       const fileContent = fs.readFileSync(`public/static/static/${finalRelativePath}`, "utf-8")
-      console.log({fileContent})
+      // console.log({fileContent})
       const data = await convertXmlToText(fileContent, finalRelativePath)
+      // console.log(data.data.authors)
       return data
     } catch (err) {
       throw err
@@ -38,6 +39,7 @@ export default async function Page({ params }: { params: { path: string[] } }) {
   const firstSentence = splitSentences[0]
   // splitSentences.shift()
   const newSummary = summaryData.data.entry.summary.replace(firstSentence, "")
+
   return (
     <main>
       <div className="flex flex-col gap-4 my-10 ">
@@ -51,7 +53,9 @@ export default async function Page({ params }: { params: { path: string[] } }) {
         <p className="text-2xl font-inika my-2">{firstSentence}</p>
         <p>{newSummary}</p>
       </section>
-      <div></div>
+      <div>
+        
+      </div>
     </main>
   )
 }
