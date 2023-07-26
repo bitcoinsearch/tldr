@@ -17,6 +17,7 @@ type FeedPage = {
   title: string;
   updatedAt: string;
   authors: AuthorData[];
+  historyLinks?: string[];
   generatedUrl?: string;
   entry: EntryData;
 };
@@ -75,6 +76,7 @@ type HomepageData = {
 };
 
 export type {
+  AuthorData,
   Feed,
   FeedPage,
   EntryData,

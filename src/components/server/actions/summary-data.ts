@@ -2,6 +2,7 @@
 // import util from "util";
 
 const baseUrl = "https://lists.linuxfoundation.org/pipermail/"
+const internalPath = "/summary/"
 
 // const readdir = util.promisify(fs.readdir);
 
@@ -23,4 +24,9 @@ export const getRelativePathFromLink = (link: string) => {
   //   console.log(finalRelativePath)
   //   return finalRelativePath
   // }
+}
+
+export const getRelativePathFromInternalLink = (link: string) => {
+  const relativePath = internalPath + link.replace(/\.xml$/, '')
+  return relativePath
 }
