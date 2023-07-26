@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body className={`${inter.variable} ${inika.variable} font-inter h-full`}>
         <div className="flex flex-col min-h-full">
-          <div className="fixed bg-white w-full h-[76px] flex items-end">
+          <div className="fixed bg-white w-full h-[76px] flex items-end z-10">
             <Navbar />
           </div>
           <div className="pt-[76px] w-full max-w-5xl mx-auto px-4 flex-grow">
