@@ -2,9 +2,11 @@ import { HomepageData, LIGHTNINGDEV, MailingListType } from '@/helpers/types'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { getRelativePathFromLink } from './actions/summary-data'
 
 const Post = ({entry}: {entry: HomepageData["enteries"][number]}) => {
   const type = entry.dev_name
+  const path = `summary/${getRelativePathFromLink(entry.link)}`
   return (
     <article className='flex flex-col gap-4 my-8'>
       <div className='flex flex-col md:gap-2'>
@@ -12,7 +14,7 @@ const Post = ({entry}: {entry: HomepageData["enteries"][number]}) => {
           <Image src={`/icons/${type}_icon.svg`} width={16} height={16} alt=""/>
           <p className="font-semibold">{type}</p>
         </div>
-        <Link href={entry.link} target='_blank' >
+        <Link href={path} target='_blank' >
           <p className='font-inika text-lg md:text-2xl underline'>{entry.title}</p>
         </Link>
       </div>
@@ -20,7 +22,7 @@ const Post = ({entry}: {entry: HomepageData["enteries"][number]}) => {
       <div className="flex gap-8 text-sm">
         <div className="flex basis-1/3 flex-col gap-1">
           <p className='font-semibold'>Started by</p>
-          <Link href={entry.link}>
+          <Link href={path}>
             <p className="text-brand-secondary underline">
               {entry.authors[0]}
             </p>
