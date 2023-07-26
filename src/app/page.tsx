@@ -15,7 +15,6 @@ async function getHomepageData() {
 
 export default async function Home() {
   const data = await getHomepageData()
-
   if (!data) return null;
 
   return <Homepage data={data} />;
