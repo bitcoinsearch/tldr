@@ -16,6 +16,13 @@ type EntryData = {
   published: string;
 };
 
+type ConvertedXML = {
+  data: Feed;
+  month: string;
+  year: number;
+  path: string | undefined;
+}
+
 type MailingListType = typeof BITCOINDEV | typeof LIGHTNINGDEV;
 
 export const BITCOINDEV = "bitcoin-dev";
@@ -26,7 +33,7 @@ type SearchIndexData = {
   authors: string[];
   summary: string;
   link?: string;
-  path: string;
+  path?: string;
 };
 
 type SearchDataParams = {
@@ -60,5 +67,6 @@ export type {
   MailingListType,
   SearchIndexData,
   SearchDataParams,
-  HomepageData
+  HomepageData,
+  ConvertedXML,
 };

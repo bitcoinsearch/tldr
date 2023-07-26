@@ -1,6 +1,6 @@
 import * as Cheerio from "cheerio";
 
-import { Feed } from "./types";
+import { ConvertedXML, Feed } from "./types";
 
 const xmlElements = {
   id: "id",
@@ -15,7 +15,7 @@ const xmlElements = {
   name: "name",
 };
 
-export const convertXmlToText = async (xml: any, path?: string) => {
+export const convertXmlToText = async (xml: any, path?: string) :Promise<ConvertedXML> => {
   const $ = Cheerio.load(xml, {
     xml: {
       xmlMode: true,
