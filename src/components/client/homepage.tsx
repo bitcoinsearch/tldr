@@ -13,15 +13,20 @@ const Homepage = ({ data }: { data: HomepageData }) => {
   });
 
   const getSelectionList = (data: HomepageData) => {
+    let filteredSelection = data
     if (
       mailingListSelection[BITCOINDEV] &&
       mailingListSelection[LIGHTNINGDEV]
     ) {
-      return data.enteries;
+      return data;
     } else if (mailingListSelection[BITCOINDEV]) {
-      return data.enteries.filter((entry) => entry.dev_name === BITCOINDEV);
+      filteredSelection.recent_posts = data.recent_posts.filter((entry) => entry.dev_name === BITCOINDEV)
+      filteredSelection.active_posts = data.recent_posts.filter((entry) => entry.dev_name === BITCOINDEV)
+      return filteredSelection;
     } else {
-      return data.enteries.filter((entry) => entry.dev_name === LIGHTNINGDEV);
+      filteredSelection.recent_posts = data.recent_posts.filter((entry) => entry.dev_name === LIGHTNINGDEV);
+      filteredSelection.active_posts = data.recent_posts.filter((entry) => entry.dev_name === LIGHTNINGDEV);
+      return filteredSelection;
     }
   };
 
@@ -53,7 +58,7 @@ const Homepage = ({ data }: { data: HomepageData }) => {
         <section>
           <h2 className="text-xl md:text-4xl font-semibold">Active Discussions 🔥</h2>
           <div>
-            {homepageData.map((entry) => (
+            {homepageData.active_posts.map((entry) => (
               <Post key={entry.id} entry={entry} />
             ))}
           </div>
@@ -61,7 +66,7 @@ const Homepage = ({ data }: { data: HomepageData }) => {
         <section>
           <h2 className="text-xl md:text-4xl font-semibold">Recent Discussions 🪄</h2>
           <div>
-            {homepageData.map((entry, idx) => (
+            {homepageData.recent_posts.map((entry, idx) => (
               <Post key={idx} entry={entry} />
             ))}
           </div>

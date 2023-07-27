@@ -4,33 +4,18 @@ import { AuthorData } from "@/helpers/types";
 import * as fs from "fs";
 import Image from "next/image";
 import Link from "next/link";
-// import util from "util";
-
-// const readdir = util.promisify(fs.readdir);
 
 const getSummaryData = async (path: string[]) => {
-  const index = path.pop();
-  const pathStringNoIndex = path.join("/");
-  const dirContent = fs.readdirSync(`${process.cwd()}/public/static/static/${pathStringNoIndex}`)
-  // const dirContent = await readdir(`public/static/static/${pathStringNoIndex}`);
-
-  const foundFileName = dirContent.find(
-    (filename) => filename.split("_")[0] === index
-  );
-  if (foundFileName) {
-    try {
-      const finalRelativePath = [pathStringNoIndex, foundFileName].join("/");
-      const fileContent = fs.readFileSync(
-        `public/static/static/${finalRelativePath}`,
-        "utf-8"
-      );
-      const data = await convertXmlToText(fileContent, finalRelativePath);
-      return data;
-    } catch (err) {
-      throw err;
-    }
-  } else {
-    return null;
+  const pathString = path.join("/")
+  try {
+    const fileContent = fs.readFileSync(
+      `public/static/static/${pathString}.xml`,
+      "utf-8"
+    );
+    const data = await convertXmlToText(fileContent, pathString);
+    return data;
+  } catch (err) {
+    return null
   }
 };
 
@@ -99,7 +84,7 @@ const SingleHistoryThread = ({
         <div className="flex gap-2">
           <Link href={path}>
             <span className="pb-[2px] border-b-2 border-brand-secondary leading-relaxed text-brand-secondary font-semibold">
-              {author.name}
+              {author?.name ?? "regex fail placeholder name"}
             </span>
           </Link>
           {index === 0 && (
@@ -108,7 +93,7 @@ const SingleHistoryThread = ({
             </span>
           )}
         </div>
-        <div className="py-2">{author.date}</div>
+        <div className="py-2">{author?.date ?? "regex fail placeholder date"}</div>
       </div>
     </div>
   );
