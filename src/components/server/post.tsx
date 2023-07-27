@@ -14,7 +14,7 @@ const Post = ({entry}: {entry: HomepageData["enteries"][number]}) => {
           <Image src={`/icons/${type}_icon.svg`} width={16} height={16} alt=""/>
           <p className="font-semibold">{type}</p>
         </div>
-        <Link href={path} target='_blank' >
+        <Link href={path}>
           <p className='font-inika text-lg md:text-2xl underline'>{entry.title}</p>
         </Link>
       </div>
