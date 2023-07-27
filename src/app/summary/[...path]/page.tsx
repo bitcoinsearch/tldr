@@ -9,7 +9,7 @@ const getSummaryData = async (path: string[]) => {
   const pathString = path.join("/")
   try {
     const fileContent = fs.readFileSync(
-      `public/static/static/${pathString}.xml`,
+      `${process.cwd()}/public/static/static/${pathString}.xml`,
       "utf-8"
     );
     const data = await convertXmlToText(fileContent, pathString);
