@@ -68,11 +68,13 @@ type HomepageEntryData = {
   n_threads: number;
   dev_name: string;
   contributors: string[];
+  file_path: string;
 };
 
 type HomepageData = {
   header_summary: string;
-  enteries: HomepageEntryData[];
+  recent_posts: HomepageEntryData[];
+  active_posts: HomepageEntryData[];
 };
 
 export type {
@@ -84,5 +86,6 @@ export type {
   SearchIndexData,
   SearchDataParams,
   HomepageData,
+  HomepageEntryData,
   ConvertedXML,
 };

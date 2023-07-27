@@ -1,12 +1,12 @@
-import { HomepageData, LIGHTNINGDEV, MailingListType } from '@/helpers/types'
+import { HomepageEntryData } from '@/helpers/types'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { getRelativePathFromLink } from './actions/summary-data'
+import { getRouteFromPath } from './actions/summary-data'
 
-const Post = ({entry}: {entry: HomepageData["enteries"][number]}) => {
+const Post = ({entry}: {entry: HomepageEntryData }) => {
   const type = entry.dev_name
-  const path = `summary/${getRelativePathFromLink(entry.link)}`
+  const path = `summary/${getRouteFromPath(entry.file_path)}`
   return (
     <article className='flex flex-col gap-4 my-8'>
       <div className='flex flex-col md:gap-2'>
