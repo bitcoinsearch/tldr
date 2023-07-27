@@ -4,14 +4,15 @@ import { AuthorData } from "@/helpers/types";
 import * as fs from "fs";
 import Image from "next/image";
 import Link from "next/link";
-import util from "util";
+// import util from "util";
 
-const readdir = util.promisify(fs.readdir);
+// const readdir = util.promisify(fs.readdir);
 
 const getSummaryData = async (path: string[]) => {
   const index = path.pop();
   const pathStringNoIndex = path.join("/");
-  const dirContent = await readdir(`public/static/static/${pathStringNoIndex}`);
+  const dirContent = fs.readdirSync(`public/static/static/${pathStringNoIndex}`)
+  // const dirContent = await readdir(`public/static/static/${pathStringNoIndex}`);
 
   const foundFileName = dirContent.find(
     (filename) => filename.split("_")[0] === index
