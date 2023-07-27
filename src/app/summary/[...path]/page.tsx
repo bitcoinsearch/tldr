@@ -11,7 +11,7 @@ import Link from "next/link";
 const getSummaryData = async (path: string[]) => {
   const index = path.pop();
   const pathStringNoIndex = path.join("/");
-  const dirContent = fs.readdirSync(`public/static/static/${pathStringNoIndex}`)
+  const dirContent = fs.readdirSync(`${process.cwd()}/public/static/static/${pathStringNoIndex}`)
   // const dirContent = await readdir(`public/static/static/${pathStringNoIndex}`);
 
   const foundFileName = dirContent.find(
