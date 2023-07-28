@@ -15,7 +15,10 @@ const xmlElements = {
   name: "name",
 };
 
-export const convertXmlToText = async (xml: any, path?: string) :Promise<ConvertedXML> => {
+export const convertXmlToText = async (
+  xml: any,
+  path?: string
+): Promise<ConvertedXML> => {
   const $ = Cheerio.load(xml, {
     xml: {
       xmlMode: true,
@@ -23,7 +26,7 @@ export const convertXmlToText = async (xml: any, path?: string) :Promise<Convert
   });
 
   let formattedData: FeedPage = {} as FeedPage;
-  const immediateLinkELements = $("feed").children(xmlElements.link)
+  const immediateLinkELements = $("feed").children(xmlElements.link);
   $("entry").each((_index, element) => {
     const author = $(xmlElements.author).children(xmlElements.name).text();
     const entry = {
@@ -43,10 +46,10 @@ export const convertXmlToText = async (xml: any, path?: string) :Promise<Convert
       },
     };
 
-    let historyLinks: string[] = []
+    let historyLinks: string[] = [];
     immediateLinkELements.each((_index, el) => {
-      historyLinks.push(el.attribs["href"])
-    }) 
+      historyLinks.push(el.attribs["href"]);
+    });
     const threadAuthors = extractAuthorsDateTime(author);
     const newEntry = { ...entry, authors: threadAuthors, historyLinks };
     formattedData = newEntry;
@@ -87,15 +90,24 @@ export const extractAuthorsAndDates = (str: string) => {
 };
 
 export const extractAuthorsDateTime = (str: string) => {
-  const regex = /([\w\s]+) (\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}:\d{2}(?:(?:\+\d{2}:\d{2})|(?:\s*\+\d{2}:\d{2})|))/g;
+  const regex =
+  /([\p{L}0-9\s]+) (\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}:\d{2}(?:(?:\+\d{2}:\d{2})|(?:\s*\+\d{2}:\d{2})|))/gu;
 
-  const groups:FeedPage["authors"] = [];
+  const groups: FeedPage["authors"] = [];
   let match;
   while ((match = regex.exec(str)) !== null) {
-    const name = match[1];
+    let name = match[1];
     const date = match[2];
     const time = match[3];
+
+    // sanitize the author name
+    // check if the naame starts with two numbers
+    // Todo: this is a hack, we should fix the regex instead
+    // Exclude names with two consecutive digits
+    if (/^\d{2}/.test(name)) {
+      continue;
+    }
     groups.push({ name, date, time });
   }
   return groups;
-}
+};
