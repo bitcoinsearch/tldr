@@ -193,7 +193,7 @@ const SearchBox = () => {
         <Dialog.Content className="data-[state=open]:animate-contentShow overflow-y-auto fixed top-[50%] left-[50%] max-h-[65vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none">
           <Dialog.Title className="m-0 text-[16px] font-medium flex items-center gap-x-4">
             <span>Filter results by: </span>
-            <div className="flex items-center gap-x-2">
+            <span className="flex items-center gap-x-2">
               <button
                 className={`border rounded py-1 px-2 text-xs hover:bg-slate-100 ${
                   filter.bitcoinDev && "bg-slate-200"
@@ -226,7 +226,7 @@ const SearchBox = () => {
               >
                 <Cross2Icon />
               </button>
-            </div>
+            </span>
           </Dialog.Title>
           <Dialog.Description
             className={`flex justify-between mt-[10px] mb-5 text-[15px] leading-normal ${
@@ -297,14 +297,17 @@ const SearchBox = () => {
           </fieldset>
           <div className="mt-[25px] flex flex-col justify-center items-center">
             <Spinner isPending={isPending} />
-            <SearchResult
-              searchResults={searchResults}
-              searchQuery={searchQuery}
-              isPending={isPending}
-              showMoreResults={showMoreResults}
-              limit={limit}
-              setOpen={setOpen}
-            />
+            {searchResults?.totalSearchResults &&
+            searchResults?.totalSearchResults > 0 ? (
+              <SearchResult
+                searchResults={searchResults}
+                searchQuery={searchQuery}
+                isPending={isPending}
+                showMoreResults={showMoreResults}
+                limit={limit}
+                setOpen={setOpen}
+              />
+            ) : null}
           </div>
           <Dialog.Close asChild>
             <button
