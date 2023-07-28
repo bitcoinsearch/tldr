@@ -47,10 +47,10 @@ type SearchIndexData = {
   title: string;
   authors: string[];
   summary: string;
-  link?: string;
   updatedAt: string;
   startedBy: string;
   path: string;
+  score: number;
 };
 
 type SearchDataParams = {
@@ -59,6 +59,7 @@ type SearchDataParams = {
     keyword?: string;
     author?: string;
   };
+  relevance?: "old-new" | "new-old";
 };
 
 type HomepageEntryData = {

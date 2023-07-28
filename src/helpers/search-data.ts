@@ -4,7 +4,7 @@ import path from "path";
 import util from "util";
 
 import { convertXmlToText } from "./convert-from-xml";
-import { SearchDataParams, SearchIndexData } from "./types";
+import { AuthorData, SearchDataParams, SearchIndexData } from "./types";
 
 const readdir = util.promisify(fs.readdir);
 const stat = util.promisify(fs.stat);
@@ -42,32 +42,39 @@ const indexData = (data: any[]) => {
     if (!entry.data.title.startsWith("Combined summary")) return;
     if (!entry.data.entry.summary) return;
     if (entry.data && entry.data.title && entry.data.authors) {
+      let authorNames: string[] = [];
       let startedBy = "";
-      if (entry.data.authors) {
+      if (entry.data.authors && entry.data.authors.length > 0) {
         const authors = entry.data.authors;
-        for (const author in authors) {
-          const authorDateAndTime = authors[author][0];
-          const authorPublishedDate = authorDateAndTime.split(" ").join("T");
-          const entryDate = entry.data.entry.published.split("+")[0];
-          if (authorPublishedDate === entryDate) {
-            startedBy = author + " on " + authorDateAndTime;
-          }
+        authors.sort((a: AuthorData, b: AuthorData) => {
+          const aDate = new Date(a.date + "T" + a.time);
+          const bDate = new Date(b.date + "T" + b.time);
+          return aDate.getTime() - bDate.getTime();
+        });
+        if (!authors[0]) {
+          return;
         }
+        startedBy =
+          authors[0].name + " on " + authors[0].date + " " + authors[0].time;
+        authorNames = Array.from(
+          new Set(authors.map((a: AuthorData) => a.name))
+        );
       }
 
       const title = entry.data.title;
-      const link = entry.data.entry.link;
       const summary = entry.data.entry.summary.split(".")[0] + ".";
-      const authors = Object.keys(entry.data.authors);
       const updatedAt = entry.data.updatedAt;
+      const path = entry.path
+        .replace("public/static/static", "/summary")
+        .replace(".xml", "/");
 
       indexedEntries.push({
         title,
-        authors,
+        authors: authorNames,
         startedBy,
         summary,
-        link,
         updatedAt,
+        path,
       });
     }
   });
@@ -80,17 +87,44 @@ export const searchIndexForData = (
   query: SearchDataParams["query"]
 ) => {
   const fuse = new Fuse(indexedData, {
-    keys: ["title", "summary", "authors", "updatedAt", "startedBy"],
+    keys: ["title", "summary", "updatedAt", "authors", "startedBy"],
     includeScore: true,
+    useExtendedSearch: true,
     shouldSort: true,
     distance: 100,
   });
 
   if (query.keyword && query.author) {
     const results = fuse.search(
-      `${query.keyword.toLowerCase()} ${query.author.toLowerCase()}`
+      `${query.keyword.toLowerCase()} ${query.author}`
     );
-    return results.map((result) => result.item);
+
+    results.forEach((result) => {
+      result.item.score = result.score || 0.9;
+      if (
+        result.item.authors.some(
+          (author) =>
+            query.author && author.toLowerCase().includes(query.author)
+        )
+      ) {
+        result.item.score = 0.1;
+      }
+      if (
+        query.author &&
+        result.item.startedBy.toLowerCase().includes(query.author)
+      ) {
+        if (result.score) {
+          result.item.score = 0.01;
+        }
+      }
+    });
+
+    results.sort((a, b) => {
+      if (a.item.score && b.item.score) {
+        return a.item.score - b.item.score;
+      }
+      return 0;
+    });
   }
   if (query.keyword) {
     const results = fuse.search(query.keyword.toLowerCase());
@@ -98,7 +132,7 @@ export const searchIndexForData = (
   }
 
   if (query.author) {
-    const results = fuse.search(query.author.toLowerCase());
+    const results = fuse.search(query.author);
     return results.map((result) => result.item);
   }
 
@@ -142,6 +176,11 @@ export const indexAndSearch = async (
 
   // Index the data
   const index = indexData(data);
+  const uniqueEntriesMap = new Map<string, SearchIndexData>();
+  index.forEach((entry: SearchIndexData) => {
+    uniqueEntriesMap.set(entry.title, entry);
+  });
+  const uniqueEntries = Array.from(uniqueEntriesMap.values());
 
   let existingData;
 
@@ -153,14 +192,14 @@ export const indexAndSearch = async (
   ) {
     if (!fs.existsSync(pathToSearchIndex)) {
       console.log("File does not exist");
-      await saveJson(index);
+      await saveJson(uniqueEntries);
     } else {
       console.log("File exists");
 
       try {
         const data = fs.readFileSync(pathToSearchIndex, "utf8");
         existingData = JSON.parse(data);
-        const mergedData = mergeData(existingData.entries, index);
+        const mergedData = mergeData(existingData.entries, uniqueEntries);
         await saveJson(mergedData);
       } catch (error) {
         console.log("Failed to parse JSON", error);

@@ -11,7 +11,7 @@ import {
   SearchIndexData,
 } from "@/helpers/types";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Cross2Icon } from "@radix-ui/react-icons";
+import { ArrowDownIcon, ArrowUpIcon, Cross2Icon } from "@radix-ui/react-icons";
 
 import { defaultFilter, filterReducer } from "./actions/filter-reducer";
 import { getDataFromCachedIndex } from "./actions/get-search-data";
@@ -64,6 +64,23 @@ const SearchBox = () => {
       query: {
         ...prev?.query,
       },
+    }));
+  };
+
+  const resetToDefault = () => {
+    setSearchQuery(null);
+    setSearchResults({ searchResults: [], totalSearchResults: 0 });
+    setLimit(DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY);
+    dispatch({ type: "clear" });
+  };
+
+  const setRelevance = (type: "old-new" | "new-old") => {
+    setSearchQuery((prev) => ({
+      path: prev?.path || "",
+      query: {
+        ...prev?.query,
+      },
+      relevance: type,
     }));
   };
 
@@ -147,7 +164,7 @@ const SearchBox = () => {
     }, 100);
 
     if (!open) {
-      setLimit(4);
+      resetToDefault();
     }
 
     return () => clearTimeout(timer);
@@ -212,25 +229,54 @@ const SearchBox = () => {
             </div>
           </Dialog.Title>
           <Dialog.Description
-            className={`mt-[10px] mb-5 text-[15px] leading-normal ${
+            className={`flex justify-between mt-[10px] mb-5 text-[15px] leading-normal ${
               showDescription ? "visible" : "hidden"
             }`}
           >
-            Search results for{" "}
-            {searchQuery?.query.keyword && (
-              <span className="font-medium italic">
-                {searchQuery.query.keyword}
-              </span>
-            )}
-            {searchQuery?.query.author && (
-              <span>
-                {" "}
-                {searchQuery?.query.keyword && "by"}{" "}
+            <div>
+              Search results for{" "}
+              {searchQuery?.query.keyword && (
                 <span className="font-medium italic">
-                  {searchQuery.query.author}
+                  {searchQuery.query.keyword}
                 </span>
-              </span>
-            )}
+              )}
+              {searchQuery?.query.author && (
+                <span>
+                  {" "}
+                  {searchQuery?.query.keyword && "by"}{" "}
+                  <span className="font-medium italic">
+                    {searchQuery.query.author}
+                  </span>
+                </span>
+              )}
+            </div>
+            <div className="font-medium flex gap-x-3 text-sm text-right items-center justify-center">
+              <span>relevance</span>
+              <div className="flex items-center gap-x-1">
+                <button
+                  className={`${
+                    filter.old && "bg-slate-200 border-slate-500"
+                  }}`}
+                  onClick={() => {
+                    dispatch({ type: "old-new" });
+                    setRelevance("old-new");
+                  }}
+                >
+                  <ArrowUpIcon />
+                </button>
+                <button
+                  className={`${
+                    filter.new && "bg-slate-200 border-slate-500"
+                  }}`}
+                  onClick={() => {
+                    dispatch({ type: "new-old" });
+                    setRelevance("new-old");
+                  }}
+                >
+                  <ArrowDownIcon />
+                </button>
+              </div>
+            </div>
           </Dialog.Description>
           <fieldset className="my-[15px] flex flex-col items-start gap-2">
             <label htmlFor="search"></label>
@@ -257,18 +303,14 @@ const SearchBox = () => {
               isPending={isPending}
               showMoreResults={showMoreResults}
               limit={limit}
+              setOpen={setOpen}
             />
           </div>
           <Dialog.Close asChild>
             <button
               className="text-[10px] hover:bg-slate-300 bg-slate-200 focus:shadow-slate-300 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded focus:outline-none"
               aria-label="Close"
-              onClick={() => {
-                setSearchQuery(null);
-                setSearchResults({ searchResults: [], totalSearchResults: 0 });
-                setLimit(DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY);
-                dispatch({ type: "clear" });
-              }}
+              onClick={resetToDefault}
             >
               esc
             </button>
