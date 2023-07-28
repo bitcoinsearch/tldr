@@ -47,8 +47,11 @@ const SearchBox = () => {
   const showDescription =
     !isPending &&
     !error &&
-    searchResults?.totalSearchResults &&
-    searchResults?.totalSearchResults > 0;
+    Boolean(
+      searchResults?.totalSearchResults && searchResults?.totalSearchResults > 0
+    );
+
+  const showSpinner = isPending && !error;
 
   const prevQueryRef = React.useRef(searchQuery);
   const searchFeedInputRef = React.useRef<HTMLInputElement>(null);
@@ -140,8 +143,8 @@ const SearchBox = () => {
       ) {
         return;
       }
-      startTransition(() => {
-        getData();
+      startTransition(async () => {
+        await getData();
       });
       return () => {
         debouncedSearch.cancel();
@@ -250,7 +253,7 @@ const SearchBox = () => {
                 </span>
               )}
             </div>
-            <div className="font-medium flex gap-x-3 text-sm text-right items-center justify-center">
+            {/* <div className="font-medium flex gap-x-3 text-sm text-right items-center justify-center">
               <span>relevance</span>
               <div className="flex items-center gap-x-1">
                 <button
@@ -276,7 +279,7 @@ const SearchBox = () => {
                   <ArrowDownIcon />
                 </button>
               </div>
-            </div>
+            </div> */}
           </Dialog.Description>
           <fieldset className="my-[15px] flex flex-col items-start gap-2">
             <label htmlFor="search"></label>
@@ -296,18 +299,15 @@ const SearchBox = () => {
             />
           </fieldset>
           <div className="mt-[25px] flex flex-col justify-center items-center">
-            <Spinner isPending={isPending} />
-            {searchResults?.totalSearchResults &&
-            searchResults?.totalSearchResults > 0 ? (
-              <SearchResult
-                searchResults={searchResults}
-                searchQuery={searchQuery}
-                isPending={isPending}
-                showMoreResults={showMoreResults}
-                limit={limit}
-                setOpen={setOpen}
-              />
-            ) : null}
+            <Spinner isPending={showSpinner} />
+            <SearchResult
+              searchResults={searchResults}
+              searchQuery={searchQuery}
+              isPending={isPending}
+              showMoreResults={showMoreResults}
+              limit={limit}
+              setOpen={setOpen}
+            />
           </div>
           <Dialog.Close asChild>
             <button

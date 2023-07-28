@@ -86,15 +86,19 @@ export const searchIndexForData = (
   indexedData: SearchIndexData[],
   query: SearchDataParams["query"]
 ) => {
-  const fuse = new Fuse(indexedData, {
-    keys: ["title", "summary", "updatedAt", "authors", "startedBy"],
+  const fuseOptions = {
     includeScore: true,
     useExtendedSearch: true,
     shouldSort: true,
-    distance: 100,
-  });
+    distance: 50,
+    threshold: 1,
+  };
 
   if (query.keyword && query.author) {
+    const fuse = new Fuse(indexedData, {
+      keys: ["title", "authors", "startedBy"],
+      ...fuseOptions,
+    });
     const results = fuse.search(
       `${query.keyword.toLowerCase()} ${query.author}`
     );
@@ -127,11 +131,20 @@ export const searchIndexForData = (
     });
   }
   if (query.keyword) {
+    const fuse = new Fuse(indexedData, {
+      keys: ["title"],
+      ...fuseOptions,
+      location: 15,
+    });
     const results = fuse.search(query.keyword.toLowerCase());
     return results.map((result) => result.item);
   }
 
   if (query.author) {
+    const fuse = new Fuse(indexedData, {
+      keys: ["authors", "startedBy"],
+      ...fuseOptions,
+    });
     const results = fuse.search(query.author);
     return results.map((result) => result.item);
   }

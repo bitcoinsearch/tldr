@@ -105,7 +105,7 @@ export const extractAuthorsDateTime = (str: string) => {
     // Todo: this is a hack, we should fix the regex instead
     // Exclude names with two consecutive digits
     if (/^\d{2}/.test(name)) {
-      continue;
+      name = name.replace(/^\d{2}/, "");
     }
     groups.push({ name, date, time });
   }
