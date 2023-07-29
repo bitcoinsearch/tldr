@@ -1,9 +1,10 @@
-import { getRelativePathFromInternalLink } from "@/app/components/server/actions/summary-data";
 import { convertXmlToText } from "@/helpers/convert-from-xml";
 import { AuthorData } from "@/helpers/types";
 import * as fs from "fs";
 import Image from "next/image";
-import Link from "next/link";
+import DiscussionHistory from "./components/historythread";
+
+export type sortedAuthorData = AuthorData & {initialIndex: number, dateInMS: number}
 
 const getSummaryData = async (path: string[]) => {
   const pathString = path.join("/")
@@ -13,7 +14,31 @@ const getSummaryData = async (path: string[]) => {
       "utf-8"
     );
     const data = await convertXmlToText(fileContent, pathString);
-    return data;
+    const linksCopy = data.data?.historyLinks
+    console.log("fetch", data.data.historyLinks)
+
+    const authorsFormatted: sortedAuthorData[] = data.data.authors.map((author, index) => ({...author, initialIndex: index, dateInMS: Date.parse(author.date + "T" + author.time)}))
+    const chronologicalAuthors = authorsFormatted.sort((a, b) => {
+      if (a.dateInMS < b.dateInMS) {
+        return -1
+      }
+      if (a.dateInMS > b.dateInMS) {
+        return 1
+      }
+      else {
+        return 0
+      }
+    })
+    const chronologicalLinksBasedOffAuthors = linksCopy?.length ? chronologicalAuthors.map((author) => linksCopy[author.initialIndex]) : []
+    
+    return {
+      ...data,
+      "data": {
+        ...data.data,
+        authors: chronologicalAuthors,
+        historyLinks: chronologicalLinksBasedOffAuthors
+      }
+    };
   } catch (err) {
     return null
   }
@@ -47,54 +72,8 @@ export default async function Page({ params }: { params: { path: string[] } }) {
         <p>{newSummary}</p>
       </section>
       {historyLinks && historyLinks?.length > 0 ? (
-        <div>
-          <p>Discussion History</p>
-          <div className="mt-6">
-            {historyLinks.map((link, index) => {
-              return (
-                <SingleHistoryThread key={index} index={index} historyLink={link} author={authors[index]} length={historyLinks.length} />
-              );
-            })}
-          </div>
-        </div>
+        <DiscussionHistory historyLinks={historyLinks} authors={authors} />
       ) : null}
     </main>
   );
 }
-
-const SingleHistoryThread = ({
-  historyLink,
-  author,
-  index,
-  length,
-}: {
-  historyLink: string;
-  author: AuthorData;
-  index: number;
-  length: number
-}) => {
-  const path = getRelativePathFromInternalLink(historyLink)
-  return (
-    <div key={index} className="flex relative pb-8 gap-4">
-      {length-1 !== index && <div className="absolute bg-gray-200 left-4 -translate-x-1/2 z-[-1] top-0 w-1 h-full"></div>}
-      <div className="w-8 h-8 bg-gray-200 text-gray-600 rounded-full flex items-center justify-center">
-        <span>{index}</span>
-      </div>
-      <div>
-        <div className="flex gap-2">
-          <Link href={path}>
-            <span className="pb-[2px] border-b-2 border-brand-secondary leading-relaxed text-brand-secondary font-semibold">
-              {author?.name ?? "regex fail placeholder name"}
-            </span>
-          </Link>
-          {index === 0 && (
-            <span className="py-1 px-1 font-inika text-sm bg-yellow-100 text-gray-900">
-              Original Post
-            </span>
-          )}
-        </div>
-        <div className="py-2">{author?.date ?? "regex fail placeholder date"}</div>
-      </div>
-    </div>
-  );
-};
