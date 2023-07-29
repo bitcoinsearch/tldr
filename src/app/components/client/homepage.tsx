@@ -10,53 +10,38 @@ import React, { useState } from "react";
 import Post from "../server/post";
 
 const Homepage = ({ data }: { data: HomepageData }) => {
-  const [mailingListSelection, setMailingListSelection] = useState<
-    Record<MailingListType, boolean>
-  >({
-    [BITCOINDEV]: true,
-    [LIGHTNINGDEV]: true,
-  });
+  const [mailingListSelection, setMailingListSelection] = useState<MailingListType | null>(null);
 
   const getSelectionList = (data: HomepageData) => {
     let filteredSelection = {
       recent_posts: [...data.recent_posts],
       active_posts: [...data.active_posts],
     };
-    if (
-      mailingListSelection[BITCOINDEV] &&
-      mailingListSelection[LIGHTNINGDEV]
-    ) {
-      return data;
-    } else if (mailingListSelection[BITCOINDEV]) {
+
+    if (mailingListSelection === BITCOINDEV) {
       filteredSelection.recent_posts = data.recent_posts.filter(
         (entry) => entry.dev_name === BITCOINDEV
       );
       filteredSelection.active_posts = data.active_posts.filter(
         (entry) => entry.dev_name === BITCOINDEV
       );
-      return filteredSelection;
-    } else {
+    } else if (mailingListSelection === LIGHTNINGDEV) {
       filteredSelection.recent_posts = data.recent_posts.filter(
         (entry) => entry.dev_name === LIGHTNINGDEV
       );
       filteredSelection.active_posts = data.active_posts.filter(
         (entry) => entry.dev_name === LIGHTNINGDEV
       );
-      return filteredSelection;
     }
+    return filteredSelection;
   };
 
   const homepageData = getSelectionList(data);
 
   const handleMailingListToggle = (name: MailingListType) => {
-    // prevent toggling off both
-    if (name === BITCOINDEV && mailingListSelection[LIGHTNINGDEV] === false) {
-      return;
-    }
-    if (name === LIGHTNINGDEV && mailingListSelection[BITCOINDEV] === false) {
-      return;
-    }
-    setMailingListSelection((prev) => ({ ...prev, [name]: !prev[name] }));
+    setMailingListSelection((prev) =>
+      prev === name ? null : name
+    );
   };
   return (
     <main className="">
@@ -65,8 +50,7 @@ const Homepage = ({ data }: { data: HomepageData }) => {
       </h1>
       <div className="my-8">
         <MailingListToggle
-          bitcoinDev={mailingListSelection[BITCOINDEV]}
-          lightningDev={mailingListSelection[LIGHTNINGDEV]}
+          selectedList={mailingListSelection}
           handleToggle={handleMailingListToggle}
         />
       </div>
@@ -97,14 +81,12 @@ const Homepage = ({ data }: { data: HomepageData }) => {
 };
 
 type ToggleButtonProps = {
-  bitcoinDev: boolean;
-  lightningDev: boolean;
+  selectedList: MailingListType | null;
   handleToggle: (name: MailingListType) => void;
 };
 
 const MailingListToggle = ({
-  bitcoinDev,
-  lightningDev,
+  selectedList,
   handleToggle,
 }: ToggleButtonProps) => {
   return (
@@ -112,8 +94,10 @@ const MailingListToggle = ({
       <button
         onClick={() => handleToggle(BITCOINDEV)}
         className={`flex gap-2 p-2 ${
-          bitcoinDev ? "bg-gray-800 text-gray-300" : "bg-gray-100 text-gray-400"
-        }  items-center rounded-md`}
+          selectedList === BITCOINDEV
+            ? "bg-gray-300 text-gray-500"
+            : "bg-gray-100 text-gray-500"
+        } items-center rounded-md`}
       >
         <Image src="/images/btc.svg" alt="" width={16} height={16} />
         <p className="text-sm">Bitcoin-dev</p>
@@ -121,10 +105,10 @@ const MailingListToggle = ({
       <button
         onClick={() => handleToggle(LIGHTNINGDEV)}
         className={`flex gap-2 p-2 ${
-          lightningDev
-            ? "bg-gray-800 text-gray-300"
-            : "bg-gray-100 text-gray-400"
-        } bg-gray-100  items-center rounded-md`}
+          selectedList === LIGHTNINGDEV
+            ? "bg-gray-300 text-gray-500"
+            : "bg-gray-100 text-gray-500"
+        } items-center rounded-md`}
       >
         <Image src="/images/lightning-dev.svg" alt="" width={16} height={16} />
         <p className="text-sm">Lightning-dev</p>
