@@ -1,4 +1,4 @@
-import Homepage from "@/components/client/homepage";
+import Homepage from "@/app/components/client/homepage";
 import { HomepageData } from "@/helpers/types";
 import * as fs from "fs";
 

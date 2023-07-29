@@ -1,4 +1,4 @@
-import Navbar from "@/components/server/navbar";
+import Navbar from "@/app/components/server/navbar";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter, Inika } from "next/font/google";

@@ -2,7 +2,7 @@
 
 import { indexAndSearch, searchIndexForData } from "@/helpers/search-data";
 import { SearchDataParams, SearchIndexData } from "@/helpers/types";
-import searchDataIndex from "../../../../public/search-index.json";
+import searchDataIndex from "../../../../../public/search-index.json";
 
 async function getSearchDataFromDirectory({ path, query }: SearchDataParams) {
   const directory = `public/static/static${path ? "/" + path : "/"}`;

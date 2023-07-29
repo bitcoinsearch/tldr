@@ -1,4 +1,4 @@
-import { getRelativePathFromInternalLink } from "@/components/server/actions/summary-data";
+import { getRelativePathFromInternalLink } from "@/app/components/server/actions/summary-data";
 import { convertXmlToText } from "@/helpers/convert-from-xml";
 import { AuthorData } from "@/helpers/types";
 import * as fs from "fs";
