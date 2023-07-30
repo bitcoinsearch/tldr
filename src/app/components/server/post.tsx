@@ -34,11 +34,7 @@ const Post = ({entry}: {entry: HomepageEntryData }) => {
         </div>
       </div>
       <div>
-        <ul>
-          <li>
-            {entry.summary}
-          </li>
-        </ul>
+        <SummaryList summary={entry.summary} />
       </div>
     </article>
   )
@@ -53,5 +49,14 @@ export const ContributorsList = ({contributors}: {contributors: string[]}) => {
       {finalList.map((contributor, index) => (<span key={index} className="">{` ${contributor}, `}</span>))}
       {contributors.length > 2 && <span>+{contributors.length - 2} others</span>}
     </p>
+  )
+}
+
+export const SummaryList = ({summary}: {summary: string}) => {
+  const items: string[] = summary.split('-').filter((item: string) => item.trim() !== '');
+  return (
+    <ul>
+      {items.map((item: string, index: number) => <li key={index}>{item.trim()}</li>)}
+    </ul>
   )
 }
