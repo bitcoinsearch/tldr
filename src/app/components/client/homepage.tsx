@@ -83,7 +83,7 @@ const Homepage = ({ data }: { data: HomepageData }) => {
         </section>
         <section>
           <h2 className="text-xl md:text-4xl font-semibold">
-            Recent Discussions 🪄
+            Recent Posts 🪄
           </h2>
           <div>
             {homepageData.recent_posts.map((entry, idx) => (
