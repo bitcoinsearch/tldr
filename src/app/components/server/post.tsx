@@ -21,17 +21,12 @@ const Post = ({entry}: {entry: HomepageEntryData }) => {
       <p className='font-inter text-sm md:text-base font-bold'>{entry.n_threads} replies</p>
       <div className="flex gap-8 text-sm">
         <div className="flex basis-1/3 flex-col gap-1">
-          <p className='font-semibold'>Started by</p>
-          <Link href={path}>
-            <p className="text-brand-secondary underline">
-              {entry.authors[0]}
-            </p>
-          </Link>
+          <p className='font-semibold'>Authored by</p>
+          <p>
+            {entry.authors[0]}
+          </p>
         </div>
-        <div className="flex basis-2/3 flex-col gap-1">
-          <p className='font-semibold'>Involving</p>
-          <ContributorsList contributors={entry.contributors} />
-        </div>
+        <ContributorsList contributors={entry.contributors} />
       </div>
       <div>
         <SummaryList summary={entry.summary} />
@@ -43,12 +38,24 @@ const Post = ({entry}: {entry: HomepageEntryData }) => {
 export default Post
 
 export const ContributorsList = ({contributors}: {contributors: string[]}) => {
+  // If contributors array is empty or undefined, return null so nothing is rendered
+  if (!contributors || contributors.length === 0) {
+    return null;
+  }
+
   const finalList = contributors.slice(0, 2)
   return (
-    <p className="inline-flex gap-x-2 flex-wrap text-gray-600">
-      {finalList.map((contributor, index) => (<span key={index} className="">{` ${contributor}, `}</span>))}
-      {contributors.length > 2 && <span>+{contributors.length - 2} others</span>}
-    </p>
+    <div className="flex basis-2/3 flex-col gap-1">
+      <p className='font-semibold involving'>Involving</p>
+      <p className="inline-flex gap-x-2 flex-wrap text-gray-600">
+        {finalList.map((contributor, index) => {
+          // if it's the last item, don't add a comma
+          const addComma = (index < finalList.length - 1) ? ', ' : '';
+          return (<span key={index} className="">{` ${contributor}${addComma}`}</span>);
+        })}
+        {contributors.length > 2 && <span>+{contributors.length - 2} others</span>}
+      </p>
+    </div>
   )
 }
 
