@@ -53,9 +53,9 @@ export const ContributorsList = ({contributors}: {contributors: string[]}) => {
 }
 
 export const SummaryList = ({summary}: {summary: string}) => {
-  const items: string[] = summary.split('-').filter((item: string) => item.trim() !== '');
+  const items: string[] = summary.split('- ').filter((item: string) => item.trim() !== '');
   return (
-    <ul>
+    <ul className="summary-bullets">
       {items.map((item: string, index: number) => <li key={index}>{item.trim()}</li>)}
     </ul>
   )
