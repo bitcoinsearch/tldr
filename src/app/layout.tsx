@@ -15,11 +15,11 @@ const inika = Inika({
 
 export const metadata: Metadata = {
   title: "Bitcoin TLDR",
-  description: "A place to learn about bitcoin development",
+  description: "Bitcoin-dev and Lightning-dev mailing list summaries and discoveries",
   keywords: "bitcoin, bitcoin development, bitcoin tldr, bitcoin tl;dr, bitcoin learning, bitcoin resources, bitcoin resources for beginners, bitcoin resources for developers, bitcoin resources for beginners and developers, bitcoin resources for beginners and developers",
   openGraph: {
     title: "Bitcoin TLDR",
-    description: "A place to learn about bitcoin development",
+    description: "Bitcoin-dev and Lightning-dev mailing list summaries and discoveries",
     url: "https://tldr.bitcoinsearch.xyz",
     type: "website",
     images: [
