@@ -17,4 +17,17 @@ jobs:
       with:
         # Fetch all history so we can push to the repo
         fetch-depth: 0
-        submodules: true
+        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+    - name: Checkout submodules
+      run: |
+        git submodule update --init --recursive
+        git config --file=.gitmodules submodule.public/static.branch main
+        git submodule update --remote public/static
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.email "${{secrets.EMAIL}}"
+        git config --global user.name "${{secrets.NAME}}"
+        git commit -am "Update submodules" || echo "No changes to commit"
+        git push
