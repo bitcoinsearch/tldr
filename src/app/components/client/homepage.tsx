@@ -5,6 +5,7 @@ import {
   LIGHTNINGDEV,
   MailingListType,
 } from "@/helpers/types";
+import { addSpaceAfterPeriods } from "@/helpers/utils";
 import Image from "next/image";
 import React, { useState } from "react";
 import Post from "../server/post";
@@ -46,7 +47,7 @@ const Homepage = ({ data }: { data: HomepageData }) => {
   return (
     <main className="">
       <h1 className="font-inika my-8 md:my-20 text-lg md:text-2xl text-gray-800">
-        {data.header_summary}
+        {addSpaceAfterPeriods(data.header_summary)}
       </h1>
       <div className="my-8">
         <MailingListToggle

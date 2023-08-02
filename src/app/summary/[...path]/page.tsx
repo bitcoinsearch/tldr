@@ -1,4 +1,5 @@
 import { convertXmlToText } from "@/helpers/convert-from-xml";
+import { addSpaceAfterPeriods } from "@/helpers/utils";
 import { AuthorData } from "@/helpers/types";
 import * as fs from "fs";
 import Image from "next/image";
@@ -69,7 +70,7 @@ export default async function Page({ params }: { params: { path: string[] } }) {
       </div>
       <section className="my-10">
         <p className="text-2xl font-inika my-2">{firstSentence}</p>
-        <p>{newSummary}</p>
+        <p>{addSpaceAfterPeriods(newSummary)}</p>
       </section>
       {historyLinks && historyLinks?.length > 0 ? (
         <DiscussionHistory historyLinks={historyLinks} authors={authors} />
