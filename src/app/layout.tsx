@@ -50,6 +50,27 @@ export default function RootLayout({
           <div className="pt-[76px] w-full max-w-5xl mx-auto px-4 flex-grow">
             {children}
           </div>
+          <footer style={{padding: '15px', backgroundColor: 'black', color: 'white', textAlign: 'center'}}>
+            <p style={{fontSize: '16px', color: 'lightgray'}}>
+              Built with ❤️ by{" "}
+              <a
+                href="https://bitcoindevs.xyz"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{color: 'orange'}}
+              >
+                The Bitcoin Dev Project
+              </a>
+            </p>
+            <a
+              href="https://cryptpad.fr/form/#/2/form/view/3P2CsohsHOkcH7C+WdtX0-tvqjBHqXnAmz5D9yx0e04/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{fontSize: '14px', color: 'orange'}}
+            >
+              Submit Feedback
+            </a>
+          </footer>
         </div>
       </body>
     </html>
