@@ -19,6 +19,7 @@ jobs:
         # Fetch all history so we can push to the repo
         fetch-depth: 0
         token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        ref: main
 
     - name: Configure git
       run: |
@@ -26,7 +27,10 @@ jobs:
           git config --global user.name "${{secrets.NAME}}"
 
     - name: Update submodules
-      run: |
-        git submodule update --remote --merge
-        git commit -m "Updated submodules" || echo "No changes to commit"
-        git push
+      run: git submodule update --remote --merge
+
+    - name: Commit changes
+      run: git commit -m "Updated submodules" || echo "No changes to commit"
+
+    - name: Push changes
+      run: git push
