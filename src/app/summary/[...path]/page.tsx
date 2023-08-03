@@ -4,6 +4,7 @@ import { AuthorData } from "@/helpers/types";
 import * as fs from "fs";
 import Image from "next/image";
 import DiscussionHistory from "./components/historythread";
+import Link from "next/link";
 
 export type sortedAuthorData = AuthorData & {initialIndex: number, dateInMS: number}
 
@@ -52,7 +53,8 @@ export default async function Page({ params }: { params: { path: string[] } }) {
   const splitSentences = summaryData.data.entry.summary.split(/(?<=[.!?])\s+/);
   const firstSentence = splitSentences[0];
   const newSummary = summaryData.data.entry.summary.replace(firstSentence, "");
-  const { authors, historyLinks } = summaryData.data;
+  const { authors, historyLinks, entry } = summaryData.data;
+  const { link } = entry;
 
   return (
     <main>
@@ -67,6 +69,13 @@ export default async function Page({ params }: { params: { path: string[] } }) {
           <p className="font-semibold font-inter text-[12px]">{type}</p>
         </div>
         <h2 className="font-inika text-4xl">{summaryData.data.title}</h2>
+        {historyLinks && historyLinks?.length == 0 && link ? (
+          <Link href={link} target="_blank">
+            <span className="pb-[2px] border-b-2 border-brand-secondary leading-relaxed text-brand-secondary font-semibold">
+              Original Post
+            </span>
+          </Link>
+        ) : null}
       </div>
       <section className="my-10">
         <p className="text-2xl font-inika my-2">{firstSentence}</p>
