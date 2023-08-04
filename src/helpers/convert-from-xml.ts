@@ -1,6 +1,6 @@
 import * as Cheerio from "cheerio";
 
-import { ConvertedXML, Feed, FeedPage } from "./types";
+import {ConvertedXML, FeedPage } from "./types";
 
 const xmlElements = {
   id: "id",
@@ -91,7 +91,7 @@ export const extractAuthorsAndDates = (str: string) => {
 
 export const extractAuthorsDateTime = (str: string) => {
   const regex =
-  /([\p{L}0-9\s]+) (\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}:\d{2}(?:(?:\+\d{2}:\d{2})|(?:\s*\+\d{2}:\d{2})|))/gu;
+  /(.*?) (\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}:\d{2}(?:(?:\+\d{2}:\d{2})|(?:\s*\+\d{2}:\d{2})|))/gu;
 
   const groups: FeedPage["authors"] = [];
   let match;
