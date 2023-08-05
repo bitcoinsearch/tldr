@@ -62,7 +62,7 @@ const Homepage = ({ data }: { data: HomepageData }) => {
           </h2>
           <div>
             {homepageData.active_posts.map((entry) => (
-              <Post key={entry.id} entry={entry} />
+              <Post key={entry.id} entry={entry} isActivePost={true}/>
             ))}
           </div>
         </section>
@@ -72,7 +72,7 @@ const Homepage = ({ data }: { data: HomepageData }) => {
           </h2>
           <div>
             {homepageData.recent_posts.map((entry, idx) => (
-              <Post key={idx} entry={entry} />
+              <Post key={idx} entry={entry} isActivePost={false}/>
             ))}
           </div>
         </section>

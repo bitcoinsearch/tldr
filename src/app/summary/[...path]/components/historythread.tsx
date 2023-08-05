@@ -1,3 +1,4 @@
+import { formattedDate } from '@/helpers/utils'
 import { getRelativePathFromInternalLink } from "@/app/components/server/actions/summary-data";
 import React from "react";
 import { sortedAuthorData } from "../page";
@@ -45,11 +46,8 @@ const SingleHistoryThread = ({
 }) => {
   const path = getRelativePathFromInternalLink(historyLink);
   const dateObj = new Date(author.dateInMS);
-  const dateDisplay = new Intl.DateTimeFormat("en-US", {
-    dateStyle: "medium",
-    timeStyle: "short",
-    timeZone: "UTC",
-  }).format(dateObj);
+  const dateString = dateObj.toISOString();
+  const publishedAtDateDisplay = formattedDate(dateString)
   return (
     <div key={index} className="flex relative pb-8 gap-4">
       {length - 1 !== index && (
@@ -72,7 +70,7 @@ const SingleHistoryThread = ({
           )}
         </div>
         <div className="py-2">
-          {dateDisplay ?? "regex fail placeholder date"}
+          {publishedAtDateDisplay ?? "regex fail placeholder date"}
         </div>
       </div>
     </div>
