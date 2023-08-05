@@ -55,7 +55,7 @@ const Homepage = ({ data }: { data: HomepageData }) => {
           handleToggle={handleMailingListToggle}
         />
       </div>
-      <div className="grid grid-cols-2 gap-12 break-words">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 break-words">
         <section>
           <h2 className="text-xl md:text-4xl font-semibold">
             Active Discussions 🔥
