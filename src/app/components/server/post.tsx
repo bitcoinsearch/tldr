@@ -1,12 +1,14 @@
 import { HomepageEntryData } from '@/helpers/types'
+import { formattedDate } from '@/helpers/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { getRouteFromPath } from './actions/summary-data'
 
-const Post = ({entry}: {entry: HomepageEntryData }) => {
+const Post = ({entry, isActivePost}: {entry: HomepageEntryData; isActivePost: boolean}) => {
   const type = entry.dev_name
   const path = `summary/${getRouteFromPath(entry.file_path)}`
+  const publishedAtDateDisplay = formattedDate(entry.published_at)
   return (
     <article className='flex flex-col gap-4 my-8'>
       <div className='flex flex-col md:gap-2'>
@@ -18,7 +20,11 @@ const Post = ({entry}: {entry: HomepageEntryData }) => {
           <p className='font-inika text-lg md:text-2xl underline'>{entry.title}</p>
         </Link>
       </div>
-      <p className='font-inter text-sm md:text-base font-bold'>{entry.n_threads} replies</p>
+      {isActivePost ? (
+        <p className='font-inter text-sm md:text-base font-bold'>{entry.n_threads} replies</p>
+      ) : (
+        <p className='font-inter text-sm md:text-base font-bold'>Posted {publishedAtDateDisplay}</p>
+      )}
       <div className="flex gap-8 text-sm">
         <div className="flex basis-1/3 flex-col gap-1">
           <p className='font-semibold'>Authored by</p>
@@ -26,7 +32,7 @@ const Post = ({entry}: {entry: HomepageEntryData }) => {
             {entry.authors[0]}
           </p>
         </div>
-        <ContributorsList contributors={entry.contributors} />
+        {isActivePost && <ContributorsList contributors={entry.contributors} />}
       </div>
       <div>
         <SummaryList summary={entry.summary} />
