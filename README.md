@@ -1,4 +1,4 @@
-![Bitcoin TLDR](./public/images/rabbit_landscape.jpg)
+![Bitcoin TLDR](./public/images/laughing_cat_landscape.jpg)
 
 # Bitcoin TLDR
 
