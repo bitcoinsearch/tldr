@@ -17,7 +17,6 @@ const getSummaryData = async (path: string[]) => {
     );
     const data = await convertXmlToText(fileContent, pathString);
     const linksCopy = data.data?.historyLinks
-    console.log("fetch", data.data.historyLinks)
 
     const authorsFormatted: sortedAuthorData[] = data.data.authors.map((author, index) => ({...author, initialIndex: index, dateInMS: Date.parse(author.date + "T" + author.time)}))
     const chronologicalAuthors = authorsFormatted.sort((a, b) => {
@@ -69,13 +68,18 @@ export default async function Page({ params }: { params: { path: string[] } }) {
           <p className="font-semibold font-inter text-[12px]">{type}</p>
         </div>
         <h2 className="font-inika text-4xl">{summaryData.data.title}</h2>
-        {historyLinks && historyLinks?.length == 0 && link ? (
-          <Link href={link} target="_blank">
-            <span className="pb-[2px] border-b-2 border-brand-secondary leading-relaxed text-brand-secondary font-semibold">
-              Original Post
-            </span>
-          </Link>
-        ) : null}
+        <div className="flex items-center gap-2">
+          {historyLinks && historyLinks?.length == 0 && link ? (
+            <Link href={link} target="_blank">
+              <span className="pb-[2px] border-b-2 border-brand-secondary leading-relaxed text-brand-secondary font-semibold">
+                Original Post
+              </span>
+            </Link>
+          ) : null}
+          {authors.length === 1 ? (
+            <span className="text-gray-600 font-semibold">by {authors[0].name}</span>
+          ) : null}
+        </div>
       </div>
       <section className="my-10">
         <p className="text-2xl font-inika my-2">{firstSentence}</p>
