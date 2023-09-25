@@ -11,7 +11,8 @@ type AuthorData = {
   name: string;
   date: string;
   time: string;
-}
+};
+
 type FeedPage = {
   id: string;
   title: string;
@@ -36,7 +37,7 @@ type ConvertedXML = {
   month: string;
   year: number;
   path: string | undefined;
-}
+};
 
 type MailingListType = typeof BITCOINDEV | typeof LIGHTNINGDEV;
 
@@ -81,6 +82,13 @@ type HomepageData = {
   active_posts: HomepageEntryData[];
 };
 
+type XmlDataType = {
+  data: Omit<FeedPage, "entry"> & { entry: Omit<EntryData, "link"> & { link: string } };
+  month: string;
+  path: string;
+  year: number;
+};
+
 export type {
   AuthorData,
   Feed,
@@ -92,4 +100,5 @@ export type {
   HomepageData,
   HomepageEntryData,
   ConvertedXML,
+  XmlDataType,
 };
