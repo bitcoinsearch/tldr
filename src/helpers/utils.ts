@@ -17,3 +17,27 @@ export function formattedDate(date: string): string {
      .replace('at', '');
   return formattedDate;
 }
+
+export const createPath = (path: string) => {
+  const pathIndex = path.split("/").findIndex((x) => x === "static");
+  const sliced_path = path.split("/").slice(pathIndex);
+  sliced_path.shift();
+  return sliced_path.join("/");
+};
+
+export const getContributors = (authors: Array<string>) => {
+  return authors.length <= 1 ? [] : authors.slice(1);
+};
+
+export const createSummary = (summary: string) => {
+  return summary.split(".").slice(0, 2).join(".\n -");
+};
+
+export const headerSummary = (args: string) => {
+  args = addSpaceAfterPeriods(args);
+  const substringIndex = args.split("").findIndex((i) => i === ".");
+
+  return args.substring(0, substringIndex + 1);
+};
+
+
