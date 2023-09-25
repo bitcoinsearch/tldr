@@ -25,10 +25,10 @@ const Post = ({entry, isActivePost}: {entry: HomepageEntryData; isActivePost: bo
       ) : (
         <p className='font-inter text-sm md:text-base font-bold'>Posted {publishedAtDateDisplay}</p>
       )}
-      <div className="flex gap-8 text-sm">
+      <div className="grid gap-8 grid-cols-2 text-sm">
         <div className="flex basis-1/3 flex-col gap-1">
           <p className='font-semibold'>Authored by</p>
-          <p>
+          <p className=' text-brand-secondary underline'>
             {entry.authors[0]}
           </p>
         </div>
@@ -68,7 +68,7 @@ export const ContributorsList = ({contributors}: {contributors: string[]}) => {
 export const SummaryList = ({summary}: {summary: string}) => {
   const items: string[] = summary.split('- ').filter((item: string) => item.trim() !== '');
   return (
-    <ul className="summary-bullets">
+    <ul className="list-disc pl-4 flex flex-col gap-1">
       {items.map((item: string, index: number) => <li key={index}>{item.trim()}</li>)}
     </ul>
   )
