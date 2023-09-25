@@ -12,7 +12,6 @@ const inika = Inika({
   variable: "--font-inika"
 });
 
-
 export const metadata: Metadata = {
   title: "Bitcoin TLDR",
   description: "Bitcoin-dev and Lightning-dev mailing list summaries and discoveries",
@@ -35,42 +34,33 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="h-full">
+    <html lang='en' className='h-full'>
       <body className={`${inter.variable} ${inika.variable} font-inter h-full`}>
-        <div className="flex flex-col min-h-full">
-          <div className="fixed bg-white w-full h-[76px] flex items-end z-10">
-            <Navbar />
-          </div>
-          <div className="pt-[76px] w-full max-w-5xl mx-auto px-4 flex-grow">
-            {children}
-          </div>
-          <footer style={{padding: '15px', backgroundColor: 'black', color: 'white', textAlign: 'center'}}>
-            <p style={{fontSize: '16px', color: 'lightgray'}}>
-              Built with ❤️ by{" "}
+        <div className='pt-[76px] flex flex-col min-h-full w-full items-center'>
+          <div className='relative max-w-2xl px-4'>
+            <div className='sticky top-0 bg-white w-full h-[76px] flex items-center z-10'>
+              <Navbar />
+            </div>
+            <div className='w-full max-w-5xl mx-auto flex-grow'>{children}</div>
+            <footer style={{ padding: "15px", backgroundColor: "black", color: "white", textAlign: "center" }}>
+              <p style={{ fontSize: "16px", color: "lightgray" }}>
+                Built with ❤️ by{" "}
+                <a href='https://bitcoindevs.xyz' target='_blank' rel='noopener noreferrer' style={{ color: "orange" }}>
+                  The Bitcoin Dev Project
+                </a>
+              </p>
               <a
-                href="https://bitcoindevs.xyz"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{color: 'orange'}}
+                href='https://cryptpad.fr/form/#/2/form/view/3P2CsohsHOkcH7C+WdtX0-tvqjBHqXnAmz5D9yx0e04/'
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ fontSize: "14px", color: "orange" }}
               >
-                The Bitcoin Dev Project
+                Submit Feedback
               </a>
-            </p>
-            <a
-              href="https://cryptpad.fr/form/#/2/form/view/3P2CsohsHOkcH7C+WdtX0-tvqjBHqXnAmz5D9yx0e04/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{fontSize: '14px', color: 'orange'}}
-            >
-              Submit Feedback
-            </a>
-          </footer>
+            </footer>
+          </div>
         </div>
       </body>
     </html>
