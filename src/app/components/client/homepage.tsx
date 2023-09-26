@@ -6,11 +6,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import Post from "../server/post";
 import "../../globals.css";
 
-const Homepage = ({ data, fetchDataInBatches }: { data: HomepageData; fetchDataInBatches: (count: number) => Promise<HomepageEntryData[]> }) => {
+const Homepage = ({ data, batch }: { data: HomepageData; batch: Array<HomepageEntryData> }) => {
   const [mailingListSelection, setMailingListSelection] = useState<MailingListType | null>(null);
-  const [batch, setBatch] = useState<Array<HomepageEntryData>>([]);
-  const [count, setCount] = useState(0);
-  const [loading, setloading] = useState(false);
 
   const getSelectionList = (data: HomepageData) => {
     let filteredSelection = {
@@ -33,40 +30,6 @@ const Homepage = ({ data, fetchDataInBatches }: { data: HomepageData; fetchDataI
   const handleMailingListToggle = (name: MailingListType) => {
     setMailingListSelection((prev) => (prev === name ? null : name));
   };
-
-  // fetch batch on initial render
-  useEffect(() => {
-    const getBatches = async () => {
-      try {
-        setloading(true);
-        const res = await fetchDataInBatches(count);
-        setBatch((prev) => [...prev, ...res]);
-        setloading(false);
-      } catch (error) {
-        console.error(error);
-        setloading(false);
-      }
-    };
-
-    getBatches();
-  }, [count, fetchDataInBatches]);
-
-  //update article list when the user is at the bottom of the screen
-  useEffect(() => {
-    if (loading) return;
-    const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight) {
-        setCount((x) => x + 1);
-        fetchDataInBatches(count);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [count, fetchDataInBatches, loading]);
 
   const memoizedBatches = useMemo(() => {
     if (mailingListSelection === BITCOINDEV) {
@@ -92,21 +55,20 @@ const Homepage = ({ data, fetchDataInBatches }: { data: HomepageData; fetchDataI
             ))}
           </div>
         </section>
-        <section>
+        {/* <section>
           <h2 className='text-xl md:text-4xl font-semibold'>All Activity</h2>
           <div>
             {homepageData.recent_posts.map((entry, idx) => (
               <Post key={idx} entry={entry} isActivePost={false} />
             ))}
           </div>
-        </section>
+        </section> */}
         <div className=''>
-          <h1 style={{ fontSize: "42px" }}>New All Activity</h1>
+          <h2 className='text-xl md:text-4xl font-semibold'>All Activity</h2>
           {memoizedBatches?.map((entry, idx) => (
             <Post key={`${entry.id}_${idx}`} entry={entry} isActivePost={false} />
           ))}
         </div>
-        <section className='flex items-center justify-center pb-7'>{!loading ? <span className='loader'></span> : null}</section>
       </div>
     </main>
   );
