@@ -19,7 +19,7 @@ async function getHomepageData() {
   }
 }
 
-export const fetchDataInBatches = async (count: number): Promise<HomepageEntryData[]> => {
+export const fetchDataInBatches = async (): Promise<HomepageEntryData[]> => {
   const folders = ["lightning-dev", "bitcoin-dev"];
   let result: HomepageEntryData[] = [];
 
@@ -29,10 +29,8 @@ export const fetchDataInBatches = async (count: number): Promise<HomepageEntryDa
 
       const DIRECTORY = `${process.cwd()}/public/static/static/${folder}`;
       const files = fs.readdirSync(DIRECTORY).reverse();
-      const dir = files[count];
+      const dir = files[0];
       const path = DIRECTORY + `/${dir}`;
-      console.log(path, "current:path");
-      console.log(count, "current:count");
 
       const folderData = await readStaticDir(path);
 
@@ -78,19 +76,20 @@ export const fetchDataInBatches = async (count: number): Promise<HomepageEntryDa
 
     return 0;
   });
-  console.log(".....>>>>");
 
   return result;
 };
 
 export default async function Home() {
   const data = await getHomepageData();
+  const batch = await fetchDataInBatches();
 
   if (!data) return null;
+  if (!batch) return null;
 
   return (
     <>
-      <Homepage data={data} fetchDataInBatches={fetchDataInBatches} />
+      <Homepage data={data} batch={batch} />
     </>
   );
 }
