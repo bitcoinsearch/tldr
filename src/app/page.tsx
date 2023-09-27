@@ -1,5 +1,3 @@
-"use server";
-
 import Homepage from "@/app/components/client/homepage";
 import { readStaticDir } from "@/helpers/search-data";
 import { HomepageData, HomepageEntryData, XmlDataType } from "@/helpers/types";
@@ -19,7 +17,7 @@ async function getHomepageData() {
   }
 }
 
-export const fetchDataInBatches = async (): Promise<HomepageEntryData[]> => {
+const fetchDataInBatches = async (): Promise<HomepageEntryData[]> => {
   const folders = ["lightning-dev", "bitcoin-dev"];
   let result: HomepageEntryData[] = [];
 
