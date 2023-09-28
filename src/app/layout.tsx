@@ -39,12 +39,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='en' className='h-full'>
       <body className={`${inter.variable} ${inika.variable} font-inter h-full`}>
         <div className='pt-[76px] flex flex-col min-h-full w-full items-center'>
-          <div className='relative max-w-2xl px-4'>
-            <div className='sticky top-0 bg-white w-full h-[76px] flex items-center z-10'>
+          <div className='relative w-full'>
+            <div className='sticky top-0 bg-white w-full h-[76px] flex items-center z-10 px-4'>
               <Navbar />
             </div>
-            <div className='w-full max-w-5xl mx-auto flex-grow'>{children}</div>
-            <footer style={{ padding: "15px", backgroundColor: "black", color: "white", textAlign: "center" }}>
+            <div className='w-full mx-auto flex-grow max-w-2xl pb-8 px-4 md:px-0'>{children}</div>
+            <footer style={{ padding: "24px", backgroundColor: "black", color: "white", textAlign: "center", width: "100%" }}>
               <p style={{ fontSize: "16px", color: "lightgray" }}>
                 Built with ❤️ by{" "}
                 <a href='https://bitcoindevs.xyz' target='_blank' rel='noopener noreferrer' style={{ color: "orange" }}>
