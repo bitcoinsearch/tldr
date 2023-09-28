@@ -6,10 +6,7 @@ import * as fs from "fs";
 
 async function getHomepageData() {
   try {
-    const data = fs.readFileSync(
-      `${process.cwd()}/public/static/static/homepage.json`,
-      "utf-8"
-    );
+    const data = fs.readFileSync(`${process.cwd()}/public/static/static/homepage.json`, "utf-8");
     const parsedData = JSON.parse(data) as HomepageData;
     return parsedData;
   } catch (err) {
@@ -70,45 +67,25 @@ const fetchDataInBatches = async (): Promise<HomepageEntryData[]> => {
     return { ...acc, [key]: [...currentGroup, obj] };
   }, {});
 
-  const singleBlock = Object.keys(groupedDuplicates)
-    .filter((post) => !post.toLowerCase().startsWith("combined summary"))
-    .map((x) => x.toLowerCase());
+  const entries = Object.values(groupedDuplicates) as Array<HomepageEntryData[]>;
+  console.log(entries, "entries");
 
-  const combinedBlock = Object.keys(groupedDuplicates)
-    .filter((post) => post.toLowerCase().startsWith("combined summary"))
-    .map((x) => x.toLowerCase());
+  const singleEntries = entries
+    .filter((i) => i.length === 1)
+    .flat()
+    .sort((a, b) => {
+      if (b.published_at < a.published_at) {
+        return -1;
+      }
+      if (b.published_at > a.published_at) {
+        return 1;
+      }
 
-  const cleanedCombinedBlock = combinedBlock.map((x) => {
-    const element = x.split("combined summary ");
-    const lastElem = element[element.length - 1].substring(1).trim();
+      return 0;
+    });
+  console.log(singleEntries, "singularItems");
 
-    return lastElem;
-  });
-
-  const isAlone = singleBlock.filter((x) => !cleanedCombinedBlock.includes(x));
-
-  const allSections = [...combinedBlock, ...isAlone];
-
-  const finalValues = [];
-  for (const [key, value] of Object.entries(groupedDuplicates)) {
-    if (allSections.includes(key.toLowerCase().trim())) {
-      finalValues.push(value);
-    }
-  }
-  const flatten = finalValues.flat() as HomepageEntryData[];
-
-  flatten.sort((a, b) => {
-    if (b.published_at < a.published_at) {
-      return -1;
-    }
-    if (b.published_at > a.published_at) {
-      return 1;
-    }
-
-    return 0;
-  });
-
-  return flatten;
+  return singleEntries;
 };
 
 export default async function Home() {
