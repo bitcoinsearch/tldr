@@ -10,7 +10,7 @@ const Post = ({entry, isActivePost}: {entry: HomepageEntryData; isActivePost: bo
   const path = `summary/${getRouteFromPath(entry.file_path)}`
   const publishedAtDateDisplay = formattedDate(entry.published_at)
   return (
-    <article className='flex flex-col gap-4 my-8'>
+    <article className='flex flex-col gap-4 mb-8'>
       <div className='flex flex-col md:gap-2'>
         <div className='flex items-center gap-2'>
           <Image src={`/icons/${type}_icon.svg`} width={16} height={16} alt=""/>
@@ -28,7 +28,7 @@ const Post = ({entry, isActivePost}: {entry: HomepageEntryData; isActivePost: bo
       <div className="grid gap-8 grid-cols-2 text-sm">
         <div className="flex basis-1/3 flex-col gap-1">
           <p className='font-semibold'>Authored by</p>
-          <p className=' text-brand-secondary underline'>
+          <p className=''>
             {entry.authors[0]}
           </p>
         </div>
@@ -67,6 +67,11 @@ export const ContributorsList = ({contributors}: {contributors: string[]}) => {
 
 export const SummaryList = ({summary}: {summary: string}) => {
   const items: string[] = summary.split('- ').filter((item: string) => item.trim() !== '');
+
+  if(!summary.startsWith("-")){
+    return <p>{summary}.</p>
+  }
+
   return (
     <ul className="list-disc pl-4 flex flex-col gap-1">
       {items.map((item: string, index: number) => <li key={index}>{item.trim()}</li>)}
