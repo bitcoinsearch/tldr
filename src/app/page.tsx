@@ -68,7 +68,6 @@ const fetchDataInBatches = async (): Promise<HomepageEntryData[]> => {
   }, {});
 
   const entries = Object.values(groupedDuplicates) as Array<HomepageEntryData[]>;
-  console.log(entries, "entries");
 
   const singleEntries = entries
     .filter((i) => i.length === 1)
@@ -83,7 +82,6 @@ const fetchDataInBatches = async (): Promise<HomepageEntryData[]> => {
 
       return 0;
     });
-  console.log(singleEntries, "singularItems");
 
   return singleEntries;
 };
