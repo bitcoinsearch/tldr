@@ -64,7 +64,40 @@ const fetchDataInBatches = async (): Promise<HomepageEntryData[]> => {
     })
   );
 
-  result.sort((a, b) => {
+  const groupedDuplicates = result.reduce((acc: any, obj) => {
+    const key = obj.title;
+    const currentGroup = acc[key] ?? [];
+    return { ...acc, [key]: [...currentGroup, obj] };
+  }, {});
+
+  const singleBlock = Object.keys(groupedDuplicates)
+    .filter((post) => !post.toLowerCase().startsWith("combined summary"))
+    .map((x) => x.toLowerCase());
+
+  const combinedBlock = Object.keys(groupedDuplicates)
+    .filter((post) => post.toLowerCase().startsWith("combined summary"))
+    .map((x) => x.toLowerCase());
+
+  const cleanedCombinedBlock = combinedBlock.map((x) => {
+    const element = x.split("combined summary ");
+    const lastElem = element[element.length - 1].substring(1).trim();
+
+    return lastElem;
+  });
+
+  const isAlone = singleBlock.filter((x) => !cleanedCombinedBlock.includes(x));
+
+  const allSections = [...combinedBlock, ...isAlone];
+
+  const finalValues = [];
+  for (const [key, value] of Object.entries(groupedDuplicates)) {
+    if (allSections.includes(key.toLowerCase().trim())) {
+      finalValues.push(value);
+    }
+  }
+  const flatten = finalValues.flat() as HomepageEntryData[];
+
+  flatten.sort((a, b) => {
     if (b.published_at < a.published_at) {
       return -1;
     }
@@ -75,7 +108,7 @@ const fetchDataInBatches = async (): Promise<HomepageEntryData[]> => {
     return 0;
   });
 
-  return result;
+  return flatten;
 };
 
 export default async function Home() {
