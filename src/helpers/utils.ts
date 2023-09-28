@@ -30,14 +30,7 @@ export const getContributors = (authors: Array<string>) => {
 };
 
 export const createSummary = (summary: string) => {
-  return summary.split(".").slice(0, 2).join(".\n -");
-};
-
-export const headerSummary = (args: string) => {
-  args = addSpaceAfterPeriods(args);
-  const substringIndex = args.split("").findIndex((i) => i === ".");
-
-  return args.substring(0, substringIndex + 1);
+  return summary.split(".").slice(0, 2).join(".");
 };
 
 
