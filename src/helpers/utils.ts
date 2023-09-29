@@ -30,7 +30,20 @@ export const getContributors = (authors: Array<string>) => {
 };
 
 export const createSummary = (summary: string) => {
-  return summary.split(".").slice(0, 2).join(".");
+  const findIndex = summary.split(". ").slice(0, 2);
+
+  const line1 = findIndex[0].split(" ");
+  const line2 = findIndex[1].split(" ");
+
+  const line1LastItem = line1[line1.length - 1];
+  const line2LastItem = line2[line2.length - 1];
+
+  if (
+    (line1LastItem.length <= 2 && line1LastItem.charAt(0) === line1LastItem.charAt(0).toUpperCase()) ||
+    (line2LastItem.length <= 2 && line2LastItem.charAt(0) === line2LastItem.charAt(0).toUpperCase())
+  ) {
+    return summary.split(". ").slice(0, 3).join(". ");
+  } else {
+    return summary.split(". ").slice(0, 2).join(". ");
+  }
 };
-
-
