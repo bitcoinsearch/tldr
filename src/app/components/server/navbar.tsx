@@ -5,7 +5,7 @@ import SearchBox from "../client/search-modal";
 
 const Navbar = () => {
   return (
-    <div className="relative w-full max-w-5xl mx-auto h-[44px] px-4 mb-2 flex justify-between items-center">
+    <div className="relative w-full max-w-3xl mx-auto h-[44px] mb-2 flex justify-between items-center">
       <Link href="/">
         <p className=" text-xl md:text-4xl font-[600] ">Bitcoin TLDR</p>
       </Link>

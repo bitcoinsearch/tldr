@@ -1,3 +1,5 @@
+import { HomepageEntryData, XmlDataType } from "./types";
+
 export function addSpaceAfterPeriods(text: string): string {
   return text.replace(/\.(\S)/g, '. $1');
 }
@@ -17,3 +19,87 @@ export function formattedDate(date: string): string {
      .replace('at', '');
   return formattedDate;
 }
+
+export const createPath = (path: string) => {
+  const pathIndex = path.split("/").findIndex((x) => x === "static");
+  const sliced_path = path.split("/").slice(pathIndex);
+  sliced_path.shift();
+  return sliced_path.join("/");
+};
+
+export const getContributors = (authors: Array<string>) => {
+  return authors.length <= 1 ? [] : authors.slice(1);
+};
+
+export const createSummary = (summary: string) => {
+  const findIndex = summary.split(". ").slice(0, 2);
+
+  const line1 = findIndex[0].split(" ");
+  const line2 = findIndex[1].split(" ");
+
+  const line1LastItem = line1[line1.length - 1];
+  const line2LastItem = line2[line2.length - 1];
+
+  if (
+    (line1LastItem.length <= 2 && line1LastItem.charAt(0) === line1LastItem.charAt(0).toUpperCase()) ||
+    (line2LastItem.length <= 2 && line2LastItem.charAt(0) === line2LastItem.charAt(0).toUpperCase())
+  ) {
+    return summary.split(". ").slice(0, 3).join(". ");
+  } else {
+    return summary.split(". ").slice(0, 2).join(". ");
+  }
+};
+
+export const groupDuplicates = (result: HomepageEntryData[]) => {
+  return result.reduce((acc: any, obj) => {
+    const key = obj.title;
+    const currentGroup = acc[key] ?? [];
+    return { ...acc, [key]: [...currentGroup, obj] };
+  }, {});
+};
+
+export const flattenEntries = (entries: Array<HomepageEntryData[]>) => {
+  return entries
+    .filter((i) => i.length === 1)
+    .flat()
+    .sort((a, b) => {
+      if (b.published_at < a.published_at) {
+        return -1;
+      }
+      if (b.published_at > a.published_at) {
+        return 1;
+      }
+
+      return 0;
+    });
+};
+
+export const createArticlesFromFolder = (folderData: any[], folder: string) => {
+  return folderData.map((xml: XmlDataType) => {
+    const {
+      path,
+      data: {
+        entry: { id, title, link, published },
+        authors,
+      },
+    } = xml;
+
+    const authorList = authors.map((author) => author.name);
+    const newPath = createPath(path);
+    const contributorsList = getContributors(authorList);
+    const summary = createSummary(xml.data?.entry.summary);
+
+    return {
+      id,
+      title,
+      link,
+      authors: authorList,
+      published_at: published,
+      summary,
+      n_threads: 3,
+      dev_name: `${folder}`,
+      contributors: contributorsList,
+      file_path: newPath,
+    };
+  });
+};
