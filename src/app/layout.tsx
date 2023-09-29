@@ -40,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.variable} ${inika.variable} font-inter h-full`}>
         <div className='pt-[76px] flex flex-col min-h-full w-full items-center'>
           <div className='relative w-full'>
-            <div className='sticky top-0 bg-white w-full h-[76px] flex items-center px-4'>
+            <div className='sticky top-0 bg-white w-full h-[76px] flex items-center px-4 z-10'>
               <Navbar />
             </div>
             <div className='w-full mx-auto flex-grow max-w-3xl pb-8 px-4 lg:px-0'>{children}</div>
