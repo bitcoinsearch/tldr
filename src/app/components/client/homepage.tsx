@@ -55,14 +55,6 @@ const Homepage = ({ data, batch }: { data: HomepageData; batch: Array<HomepageEn
             ))}
           </div>
         </section>
-        {/* <section>
-          <h2 className='text-xl md:text-4xl font-semibold'>All Activity</h2>
-          <div>
-            {homepageData.recent_posts.map((entry, idx) => (
-              <Post key={idx} entry={entry} isActivePost={false} />
-            ))}
-          </div>
-        </section> */}
         <div className=''>
           <h2 className='text-xl md:text-4xl font-semibold pb-[60px]'>All Activity</h2>
           <>
