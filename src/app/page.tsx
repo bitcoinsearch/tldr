@@ -1,7 +1,7 @@
 import Homepage from "@/app/components/client/homepage";
 import { readStaticDir } from "@/helpers/search-data";
 import { HomepageData, HomepageEntryData } from "@/helpers/types";
-import { flattenEntries, groupDuplicates, createArticlesFromFolder } from "@/helpers/utils";
+import { flattenEntries, groupDuplicates, createArticlesFromFolder, createYearlySet } from "@/helpers/utils";
 import * as fs from "fs";
 
 async function getHomepageData() {
@@ -17,7 +17,7 @@ async function getHomepageData() {
 const fetchDataInBatches = async (count: number): Promise<{ batch: HomepageEntryData[]; count: number }> => {
   "use server";
   const folders = ["lightning-dev", "bitcoin-dev"];
-  let result: HomepageEntryData[] = [];
+  let groupedResults: HomepageEntryData[] = [];
 
   await Promise.allSettled(
     folders.map(async (folder) => {
@@ -26,19 +26,32 @@ const fetchDataInBatches = async (count: number): Promise<{ batch: HomepageEntry
       const DIRECTORY = `${process.cwd()}/public/static/static/${folder}`;
       const files = fs.readdirSync(DIRECTORY).reverse();
 
-      const dir = files[count];
+      const years = createYearlySet(files);
 
-      const path = DIRECTORY + `/${dir}`;
-      const folderData = await readStaticDir(path);
-      const data = createArticlesFromFolder(folderData, folder);
+      const createDirectorySet = files.map((year) => `${DIRECTORY}/${year}`).filter((year) => year.endsWith(years[count]));
 
-      result.push(...data);
+      console.log(createDirectorySet, `createDirectorySet`);
+      console.log(count, `COUNT`);
+
+      /**
+       * split into chunks and send until a single year is exhausted
+       */
+      await Promise.allSettled(
+        createDirectorySet.map(async (path) => {
+          const res = await readStaticDir(path);
+          const data = createArticlesFromFolder(res, folder);
+          groupedResults.push(...data);
+        })
+      );
     })
   );
 
-  const groups = groupDuplicates(result);
-  const entries = Object.values(groups) as Array<HomepageEntryData[]>;
-  const batch = flattenEntries(entries);
+  const groupYears = groupDuplicates(groupedResults);
+  const entryYears = Object.values(groupYears) as Array<HomepageEntryData[]>;
+  const batch = flattenEntries(entryYears);
+
+  const divideBatch = batch.slice(batch.length / 2);
+  const cache = new WeakMap();
 
   return { batch, count };
 };
