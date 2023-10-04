@@ -55,6 +55,7 @@ const Homepage = ({
   }, [mailingListSelection, batch, batch.length]);
 
   const outsideCount = count;
+  const outSideServerCount = serverCount;
 
   const getNextBatch = async () => {
     setloading(true);
@@ -63,11 +64,14 @@ const Homepage = ({
       const countValue =
         outsideCount === 1 && outsideCount <= serverCount[serverCount.length - 1]
           ? count + serverCount[serverCount.length - 1]
-          : outsideCount === 1 && serverCount[serverCount.length - 1] === 0
+          : outsideCount === 1 && outSideServerCount[outSideServerCount.length - 1] >= 2
           ? count + 1
           : count;
 
-      if (outsideCount === 1 && outsideCount < serverCount[serverCount.length - 1]) {
+      if (
+        (outsideCount === 1 && outsideCount <= serverCount[serverCount.length - 1]) ||
+        (outsideCount === 1 && outSideServerCount[outSideServerCount.length - 1] >= 2)
+      ) {
         setCount((c) => c + serverCount[serverCount.length - 1]);
       }
 
@@ -111,7 +115,11 @@ const Homepage = ({
           </div>
         </div>
         <section>
-          <button className='border-2 border-black p-6 py-2 flex items-center justify-center text-lg font-medium ' onClick={getNextBatch}>
+          <button
+            className='border-2 border-black p-6 py-2 flex items-center justify-center text-lg font-medium'
+            style={{ cursor: loading ? "not-allowed" : "pointer", pointerEvents: loading ? "none" : "visible" }}
+            onClick={getNextBatch}
+          >
             Next {loading ? <span className='ml-2 loader'></span> : null}
           </button>
         </section>
