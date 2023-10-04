@@ -61,7 +61,11 @@ const Homepage = ({
 
     try {
       const countValue =
-        outsideCount === 1 && outsideCount < serverCount[serverCount.length - 1] ? count + serverCount[serverCount.length - 1] : count;
+        outsideCount === 1 && outsideCount <= serverCount[serverCount.length - 1]
+          ? count + serverCount[serverCount.length - 1]
+          : outsideCount === 1 && serverCount[serverCount.length - 1] === 0
+          ? count + 1
+          : count;
 
       if (outsideCount === 1 && outsideCount < serverCount[serverCount.length - 1]) {
         setCount((c) => c + serverCount[serverCount.length - 1]);
