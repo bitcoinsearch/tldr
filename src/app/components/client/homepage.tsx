@@ -88,8 +88,6 @@ const Homepage = ({
         setCount((c) => c + 1);
 
         setloading(false);
-
-        return res;
       }
     } catch (error) {
       setloading(false);
