@@ -52,9 +52,5 @@ export default async function Home() {
   if (!data) return null;
   if (!batch) return null;
 
-  return (
-    <>
-      <Homepage data={data} batch={batch} next={fetchDataInBatches} serverCount={serverCount} />
-    </>
-  );
+  return <Homepage data={data} batch={batch} fetchMore={fetchDataInBatches} serverCount={serverCount} />;
 }
