@@ -9,12 +9,12 @@ import "../../globals.css";
 const Homepage = ({
   data,
   batch,
-  next,
+  fetchMore,
   serverCount,
 }: {
   data: HomepageData;
   batch: Array<HomepageEntryData>;
-  next: (count: number) => Promise<{ batch: HomepageEntryData[]; count: number }>;
+  fetchMore: (count: number) => Promise<{ batch: HomepageEntryData[]; count: number }>;
   serverCount: number[];
 }) => {
   const [mailingListSelection, setMailingListSelection] = useState<MailingListType | null>(null);
@@ -54,37 +54,43 @@ const Homepage = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mailingListSelection, batch, batch.length]);
 
-  const outsideCount = count;
-  const outSideServerCount = serverCount;
+  const initialCount = count;
+  const fetchCountArr = serverCount;
 
   const getNextBatch = async () => {
     setloading(true);
 
     try {
-      const countValue =
-        outsideCount === 1 && outsideCount <= serverCount[serverCount.length - 1]
-          ? count + serverCount[serverCount.length - 1]
-          : outsideCount === 1 && outSideServerCount[outSideServerCount.length - 1] >= 2
-          ? count + 1
-          : count;
+      const lastClickCount = serverCount[serverCount.length - 1];
+      const lastFetchCount = fetchCountArr[fetchCountArr.length - 1];
+      const isLastClickCountGreater = initialCount === 1 && initialCount <= lastClickCount;
+      const isLastFectchCountGreater = initialCount === 1 && lastFetchCount >= 2;
 
-      if (
-        (outsideCount === 1 && outsideCount <= serverCount[serverCount.length - 1]) ||
-        (outsideCount === 1 && outSideServerCount[outSideServerCount.length - 1] >= 2)
-      ) {
-        setCount((c) => c + serverCount[serverCount.length - 1]);
+      let countValue;
+      if (isLastClickCountGreater) {
+        countValue = count + lastClickCount;
+      } else if (isLastFectchCountGreater) {
+        countValue = count + 1;
+      } else {
+        countValue = count;
       }
 
-      const res = await next(countValue);
-      const { batch: currentBatch, count: funcCount } = res;
-      batch.push(...currentBatch);
+      if (isLastClickCountGreater || isLastFectchCountGreater) {
+        setCount((c) => c + lastClickCount);
+      }
 
-      serverCount.push(funcCount);
-      setCount((c) => c + 1);
+      const res = await fetchMore(countValue);
+      if (res) {
+        const { batch: currentBatch, count: funcCount } = res;
+        batch.push(...currentBatch);
 
-      setloading(false);
+        serverCount.push(funcCount);
+        setCount((c) => c + 1);
 
-      return res;
+        setloading(false);
+
+        return res;
+      }
     } catch (error) {
       setloading(false);
       console.error(error);
@@ -116,11 +122,12 @@ const Homepage = ({
         </div>
         <section>
           <button
-            className='border-2 border-black p-6 py-2 flex items-center justify-center text-lg font-medium'
-            style={{ cursor: loading ? "not-allowed" : "pointer", pointerEvents: loading ? "none" : "visible" }}
+            className={`border-2 border-black p-6 py-2 flex items-center justify-center text-lg font-medium ${
+              loading ? `cursor-not-allowed pointer-events-none` : `cursor-pointer pointer-events-auto`
+            }`}
             onClick={getNextBatch}
           >
-            Next {loading ? <span className='ml-2 loader'></span> : null}
+            Fetch more {loading ? <span className='ml-2 loader'></span> : null}
           </button>
         </section>
       </div>
