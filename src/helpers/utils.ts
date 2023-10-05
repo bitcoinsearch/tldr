@@ -1,22 +1,23 @@
 import { HomepageEntryData, XmlDataType } from "./types";
 
 export function addSpaceAfterPeriods(text: string): string {
-  return text.replace(/\.(\S)/g, '. $1');
+  return text.replace(/\.(\S)/g, ". $1");
 }
 
 export function formattedDate(date: string): string {
   const dateObj = new Date(date);
   const formattedDate = new Intl.DateTimeFormat("en-US", {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      timeZone: 'UTC',
-      hourCycle: 'h23',
-      timeZoneName: 'short'
-    }).format(dateObj)
-     .replace('at', '');
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: "UTC",
+    hourCycle: "h23",
+    timeZoneName: "short",
+  })
+    .format(dateObj)
+    .replace("at", "");
   return formattedDate;
 }
 
@@ -102,4 +103,42 @@ export const createArticlesFromFolder = (folderData: any[], folder: string) => {
       file_path: newPath,
     };
   });
+};
+
+export const groupAccordingToYears = (files: string[]) => {
+  return files.reduce((acc: any, curr) => {
+    const key = curr.slice(curr.length - 4);
+    const currentGroup = acc[key] ?? [];
+
+    return { ...acc, [key]: [...currentGroup, curr] };
+  }, {});
+};
+
+export const sortAccordingToMonths = (groupedYears: Array<Array<string>>) => {
+  const monthsInOrder: any = {
+    Jan: 11,
+    Feb: 10,
+    March: 9,
+    April: 8,
+    May: 7,
+    June: 6,
+    July: 5,
+    Aug: 4,
+    Sept: 3,
+    Oct: 2,
+    Nov: 1,
+    Dec: 0,
+  };
+
+  return groupedYears
+    .map((groupedYear) =>
+      groupedYear.sort((a, b) => {
+        const monthA = a.slice(0, -5);
+        const monthB = b.slice(0, -5);
+
+        return monthsInOrder[monthA] - monthsInOrder[monthB];
+      })
+    )
+    .reverse()
+    .flat();
 };
