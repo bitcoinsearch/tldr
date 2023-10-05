@@ -118,7 +118,7 @@ const Homepage = ({
             ))}
           </div>
         </div>
-        <section>
+        <section className='flex justify-center'>
           <button
             className={`border-2 border-black p-6 py-2 flex items-center justify-center text-lg font-medium ${
               loading ? `cursor-not-allowed pointer-events-none` : `cursor-pointer pointer-events-auto`
