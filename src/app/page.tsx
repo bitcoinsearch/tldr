@@ -1,7 +1,7 @@
 import Homepage from "@/app/components/client/homepage";
 import { readStaticDir } from "@/helpers/search-data";
 import { HomepageData, HomepageEntryData } from "@/helpers/types";
-import { flattenEntries, groupDuplicates, createArticlesFromFolder } from "@/helpers/utils";
+import { flattenEntries, groupDuplicates, createArticlesFromFolder, groupAccordingToYears, sortAccordingToMonths } from "@/helpers/utils";
 import * as fs from "fs";
 
 async function getHomepageData() {
@@ -26,7 +26,11 @@ const fetchDataInBatches = async (count: number): Promise<{ batch: HomepageEntry
       const DIRECTORY = `${process.cwd()}/public/static/static/${folder}`;
       const files = fs.readdirSync(DIRECTORY).reverse();
 
-      const dir = files[count];
+      const groupYears = groupAccordingToYears(files);
+      const getGroupedYears = Object.values(groupYears) as Array<Array<string>>;
+
+      const sortYears = sortAccordingToMonths(getGroupedYears);
+      const dir = sortYears[count];
 
       const path = DIRECTORY + `/${dir}`;
       const folderData = await readStaticDir(path);
