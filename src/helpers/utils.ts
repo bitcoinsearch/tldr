@@ -36,14 +36,14 @@ export const createSummary = (summary: string) => {
   const findIndex = summary.split(". ").slice(0, 2);
 
   const line1 = findIndex[0].split(" ");
-  const line2 = findIndex[1].split(" ");
+  const line2 = findIndex[1]?.split(" ");
 
   const line1LastItem = line1[line1.length - 1];
-  const line2LastItem = line2[line2.length - 1];
+  const line2LastItem = line2?.[line2?.length - 1];
 
   if (
     (line1LastItem.length <= 2 && line1LastItem.charAt(0) === line1LastItem.charAt(0).toUpperCase()) ||
-    (line2LastItem.length <= 2 && line2LastItem.charAt(0) === line2LastItem.charAt(0).toUpperCase())
+    (line2LastItem?.length <= 2 && line2LastItem?.charAt(0) === line2LastItem?.charAt(0).toUpperCase())
   ) {
     return summary.split(". ").slice(0, 3).join(". ");
   } else {
@@ -73,6 +73,33 @@ export const flattenEntries = (entries: Array<HomepageEntryData[]>) => {
 
       return 0;
     });
+};
+
+export const getBatchesInSameMonth = (entries: Array<HomepageEntryData>, currMonth: string) => {
+  const monthsInOrder: Record<string, string> = {
+    Jan: "01",
+    Feb: "02",
+    March: "03",
+    April: "04",
+    May: "05",
+    June: "06",
+    July: "07",
+    Aug: "08",
+    Sept: "09",
+    Oct: "10",
+    Nov: "11",
+    Dec: "12",
+  };
+  const currentMonth = currMonth.slice(0, -5);
+
+  return entries.filter((entry) => {
+    const date = entry.published_at.slice(5, 7);
+    const dummyAuthor = entry.authors[0].toLowerCase() !== "victor umobi";
+    const noCombinedSummaryTitle = entry.title !== "combined summary - (no subject)";
+    const noSummaryTitle = entry.title !== "(no subject)";
+
+    return date === monthsInOrder[currentMonth] && dummyAuthor && noSummaryTitle && noCombinedSummaryTitle;
+  });
 };
 
 export const createArticlesFromFolder = (folderData: any[], folder: string) => {
@@ -115,7 +142,7 @@ export const groupAccordingToYears = (files: string[]) => {
 };
 
 export const sortAccordingToMonths = (groupedYears: Array<Array<string>>) => {
-  const monthsInOrder: any = {
+  const monthsInOrder: Record<string, number> = {
     Jan: 11,
     Feb: 10,
     March: 9,
