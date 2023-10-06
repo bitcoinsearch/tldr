@@ -34,7 +34,7 @@ const fetchDataInBatches = async (count: number): Promise<{ batch: HomepageEntry
       const files = fs.readdirSync(DIRECTORY);
 
       const groupYears = groupAccordingToYears(files);
-      const getGroupedYears = Object.values(groupYears) as Array<Array<string>>;
+      const getGroupedYears = Object.values(groupYears) as Array<Array<string>>;  
 
       const sortYears = sortAccordingToMonths(getGroupedYears);
       const dir = sortYears[count];
