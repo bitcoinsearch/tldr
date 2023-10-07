@@ -132,40 +132,30 @@ export const createArticlesFromFolder = (folderData: any[], folder: string) => {
   });
 };
 
-export const groupAccordingToYears = (files: string[]) => {
-  return files.reduce((acc: any, curr) => {
-    const key = curr.slice(curr.length - 4);
-    const currentGroup = acc[key] ?? [];
-
-    return { ...acc, [key]: [...currentGroup, curr] };
-  }, {});
+export const monthsInOrder: Record<string, string> = {
+  "0": "Jan",
+  "1": "Feb",
+  "2": "March",
+  "3": "April",
+  "4": "May",
+  "5": "June",
+  "6": "July",
+  "7": "Aug",
+  "8": "Sept",
+  "9": "Oct",
+  "10": "Nov",
+  "11": "Dec",
 };
 
-export const sortAccordingToMonths = (groupedYears: Array<Array<string>>) => {
-  const monthsInOrder: Record<string, number> = {
-    Jan: 11,
-    Feb: 10,
-    March: 9,
-    April: 8,
-    May: 7,
-    June: 6,
-    July: 5,
-    Aug: 4,
-    Sept: 3,
-    Oct: 2,
-    Nov: 1,
-    Dec: 0,
-  };
+export const createMonthsFromKeys = (startYear: number, endYear: number) => {
+  const years = Array.from({ length: startYear - endYear + 1 }, (_, index) => (startYear - index).toString());
+  const months = ["Dec", "Nov", "Oct", "Sept", "Aug", "July", "June", "May", "April", "March", "Feb", "Jan"];
 
-  return groupedYears
-    .map((groupedYear) =>
-      groupedYear.sort((a, b) => {
-        const monthA = a.slice(0, -5);
-        const monthB = b.slice(0, -5);
-
-        return monthsInOrder[monthA] - monthsInOrder[monthB];
-      })
-    )
-    .reverse()
+  return years
+    .map((key) => {
+      return months.map((month) => {
+        return `${month}_${key}`;
+      });
+    })
     .flat();
 };

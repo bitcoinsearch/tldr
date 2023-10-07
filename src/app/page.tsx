@@ -5,9 +5,9 @@ import {
   flattenEntries,
   groupDuplicates,
   createArticlesFromFolder,
-  groupAccordingToYears,
-  sortAccordingToMonths,
   getBatchesInSameMonth,
+  monthsInOrder,
+  createMonthsFromKeys,
 } from "@/helpers/utils";
 import * as fs from "fs";
 
@@ -26,25 +26,48 @@ const fetchDataInBatches = async (count: number): Promise<{ batch: HomepageEntry
   const folders = ["lightning-dev", "bitcoin-dev"];
   let result: HomepageEntryData[] = [];
 
+  const currentDate = new Date();
+
+  const startYear = currentDate.getFullYear();
+  const endYear = 2010;
+  const startMonth = currentDate.getMonth().toString();
+  const currentMonth = monthsInOrder[startMonth];
+
+  const allpossibleMonths = createMonthsFromKeys(startYear, endYear);
+  const sliceIndex = allpossibleMonths.findIndex((month) => month.slice(0, -5) === currentMonth);
+
+  let monthsToBegin = allpossibleMonths.slice(sliceIndex);
+
+  const LTDIRECTORY = `${process.cwd()}/public/static/static/${folders[0]}/${monthsToBegin[count]}`;
+  const BTDIRECTORY = `${process.cwd()}/public/static/static/${folders[1]}/${monthsToBegin[count]}`;
+
+  const isFolderPresent = fs.existsSync(LTDIRECTORY) || fs.existsSync(BTDIRECTORY);
+
+  if (!isFolderPresent) {
+    monthsToBegin = allpossibleMonths.slice(sliceIndex + 1);
+  }
+
   await Promise.all(
     folders.map(async (folder) => {
       if (!folder) return [];
 
-      const DIRECTORY = `${process.cwd()}/public/static/static/${folder}`;
-      const files = fs.readdirSync(DIRECTORY);
+      const DIRECTORY = `${process.cwd()}/public/static/static/${folder}/${monthsToBegin[count]}`;
 
-      const groupYears = groupAccordingToYears(files);
-      const getGroupedYears = Object.values(groupYears) as Array<Array<string>>;  
+      try {
+        const isExists = fs.existsSync(DIRECTORY);
+        if (!isExists) {
+          result.push(...[]);
+        } else {
+          const folderData = await readStaticDir(DIRECTORY);
+          const data = createArticlesFromFolder(folderData, folder);
+          const getSameMonth = getBatchesInSameMonth(data, monthsToBegin[count]);
 
-      const sortYears = sortAccordingToMonths(getGroupedYears);
-      const dir = sortYears[count];
-      const path = DIRECTORY + `/${dir}`;
-
-      const folderData = await readStaticDir(path);
-      const data = createArticlesFromFolder(folderData, folder);
-      const isSameMonth = getBatchesInSameMonth(data, dir);
-
-      result.push(...isSameMonth);
+          return result.push(...getSameMonth);
+        }
+      } catch (error) {
+        console.error(error);
+        return result.push(...[]);
+      }
     })
   );
 
@@ -60,7 +83,7 @@ export default async function Home() {
   let serverCount = [0];
 
   const data = await getHomepageData();
-  const { batch } = await fetchDataInBatches(serverCount[0]);
+  const { batch } = await fetchDataInBatches(0);
 
   if (!data) return null;
   if (!batch) return null;
