@@ -1,22 +1,23 @@
 import { HomepageEntryData, XmlDataType } from "./types";
 
 export function addSpaceAfterPeriods(text: string): string {
-  return text.replace(/\.(\S)/g, '. $1');
+  return text.replace(/\.(\S)/g, ". $1");
 }
 
 export function formattedDate(date: string): string {
   const dateObj = new Date(date);
   const formattedDate = new Intl.DateTimeFormat("en-US", {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      timeZone: 'UTC',
-      hourCycle: 'h23',
-      timeZoneName: 'short'
-    }).format(dateObj)
-     .replace('at', '');
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: "UTC",
+    hourCycle: "h23",
+    timeZoneName: "short",
+  })
+    .format(dateObj)
+    .replace("at", "");
   return formattedDate;
 }
 
@@ -35,14 +36,14 @@ export const createSummary = (summary: string) => {
   const findIndex = summary.split(". ").slice(0, 2);
 
   const line1 = findIndex[0].split(" ");
-  const line2 = findIndex[1].split(" ");
+  const line2 = findIndex[1]?.split(" ");
 
   const line1LastItem = line1[line1.length - 1];
-  const line2LastItem = line2[line2.length - 1];
+  const line2LastItem = line2?.[line2?.length - 1];
 
   if (
     (line1LastItem.length <= 2 && line1LastItem.charAt(0) === line1LastItem.charAt(0).toUpperCase()) ||
-    (line2LastItem.length <= 2 && line2LastItem.charAt(0) === line2LastItem.charAt(0).toUpperCase())
+    (line2LastItem?.length <= 2 && line2LastItem?.charAt(0) === line2LastItem?.charAt(0).toUpperCase())
   ) {
     return summary.split(". ").slice(0, 3).join(". ");
   } else {
@@ -74,6 +75,33 @@ export const flattenEntries = (entries: Array<HomepageEntryData[]>) => {
     });
 };
 
+export const getBatchesInSameMonth = (entries: Array<HomepageEntryData>, currMonth: string) => {
+  const monthsInOrder: Record<string, string> = {
+    Jan: "01",
+    Feb: "02",
+    March: "03",
+    April: "04",
+    May: "05",
+    June: "06",
+    July: "07",
+    Aug: "08",
+    Sept: "09",
+    Oct: "10",
+    Nov: "11",
+    Dec: "12",
+  };
+  const currentMonth = currMonth.slice(0, -5);
+
+  return entries.filter((entry) => {
+    const date = entry.published_at.slice(5, 7);
+    const dummyAuthor = entry.authors[0].toLowerCase() !== "victor umobi";
+    const noCombinedSummaryTitle = entry.title !== "combined summary - (no subject)";
+    const noSummaryTitle = entry.title !== "(no subject)";
+
+    return date === monthsInOrder[currentMonth] && dummyAuthor && noSummaryTitle && noCombinedSummaryTitle;
+  });
+};
+
 export const createArticlesFromFolder = (folderData: any[], folder: string) => {
   return folderData.map((xml: XmlDataType) => {
     const {
@@ -102,4 +130,32 @@ export const createArticlesFromFolder = (folderData: any[], folder: string) => {
       file_path: newPath,
     };
   });
+};
+
+export const monthsInOrder: Record<string, string> = {
+  "0": "Jan",
+  "1": "Feb",
+  "2": "March",
+  "3": "April",
+  "4": "May",
+  "5": "June",
+  "6": "July",
+  "7": "Aug",
+  "8": "Sept",
+  "9": "Oct",
+  "10": "Nov",
+  "11": "Dec",
+};
+
+export const createMonthsFromKeys = (startYear: number, endYear: number) => {
+  const years = Array.from({ length: startYear - endYear + 1 }, (_, index) => (startYear - index).toString());
+  const months = ["Dec", "Nov", "Oct", "Sept", "Aug", "July", "June", "May", "April", "March", "Feb", "Jan"];
+
+  return years
+    .map((key) => {
+      return months.map((month) => {
+        return `${month}_${key}`;
+      });
+    })
+    .flat();
 };

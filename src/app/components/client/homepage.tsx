@@ -6,8 +6,20 @@ import React, { useMemo, useState } from "react";
 import Post from "../server/post";
 import "../../globals.css";
 
-const Homepage = ({ data, batch }: { data: HomepageData; batch: Array<HomepageEntryData> }) => {
+const Homepage = ({
+  data,
+  batch,
+  fetchMore,
+  serverCount,
+}: {
+  data: HomepageData;
+  batch: Array<HomepageEntryData>;
+  fetchMore: (count: number) => Promise<{ batch: HomepageEntryData[]; count: number }>;
+  serverCount: number[];
+}) => {
   const [mailingListSelection, setMailingListSelection] = useState<MailingListType | null>(null);
+  const [count, setCount] = useState(1);
+  const [loading, setloading] = useState(false);
 
   const getSelectionList = (data: HomepageData) => {
     let filteredSelection = {
@@ -38,7 +50,50 @@ const Homepage = ({ data, batch }: { data: HomepageData; batch: Array<HomepageEn
       return batch.filter((batch) => batch.dev_name === LIGHTNINGDEV);
     }
     return batch;
-  }, [mailingListSelection, batch]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mailingListSelection, batch, batch.length]);
+
+  const initialCount = count;
+  const fetchCountArr = serverCount;
+
+  const getNextBatch = async () => {
+    setloading(true);
+
+    try {
+      const lastClickCount = serverCount[serverCount.length - 1];
+      const lastFetchCount = fetchCountArr[fetchCountArr.length - 1];
+      const isLastClickCountGreater = initialCount === 1 && initialCount <= lastClickCount;
+      const isLastFectchCountGreater = initialCount === 1 && lastFetchCount >= 2;
+
+      let countValue;
+      if (isLastClickCountGreater) {
+        countValue = count + lastClickCount;
+      } else if (isLastFectchCountGreater) {
+        countValue = count + 1;
+      } else {
+        countValue = count;
+      }
+
+      if (isLastClickCountGreater || isLastFectchCountGreater) {
+        setCount((c) => c + lastClickCount);
+      }
+
+      const res = await fetchMore(countValue);
+      if (res) {
+        const { batch: currentBatch, count: funcCount } = res;
+        batch.push(...currentBatch);
+
+        serverCount.push(funcCount);
+        setCount((c) => c + 1);
+
+        setloading(false);
+      }
+    } catch (error) {
+      setloading(false);
+      console.error(error);
+    }
+  };
 
   return (
     <main className=''>
@@ -57,12 +112,22 @@ const Homepage = ({ data, batch }: { data: HomepageData; batch: Array<HomepageEn
         </section>
         <div className=''>
           <h2 className='text-xl md:text-4xl font-semibold pb-[60px]'>All Activity</h2>
-          <>
+          <div>
             {memoizedBatches?.map((entry, idx) => (
               <Post key={`${entry.id}_${idx}`} entry={entry} isActivePost={false} />
             ))}
-          </>
+          </div>
         </div>
+        <section className='flex justify-center'>
+          <button
+            className={`border-2 border-black p-6 py-2 flex items-center justify-center text-lg font-medium ${
+              loading ? `cursor-not-allowed pointer-events-none` : `cursor-pointer pointer-events-auto`
+            }`}
+            onClick={getNextBatch}
+          >
+            Fetch more {loading ? <span className='ml-2 loader'></span> : null}
+          </button>
+        </section>
       </div>
     </main>
   );
@@ -81,9 +146,7 @@ const MailingListToggle = ({ selectedList, handleToggle }: ToggleButtonProps) =>
         <button
           onClick={() => handleToggle(BITCOINDEV)}
           className={`flex gap-2 p-2 ${
-            selectedList === BITCOINDEV
-              ? "bg-gray-300 text-gray-500"
-              : "bg-gray-100 text-gray-500"
+            selectedList === BITCOINDEV ? "bg-gray-300 text-gray-500" : "bg-gray-100 text-gray-500"
           } items-center rounded-md`}
         >
           <Image src='/icons/bitcoin-dev_icon.svg' alt='' width={16} height={16} />
@@ -92,9 +155,7 @@ const MailingListToggle = ({ selectedList, handleToggle }: ToggleButtonProps) =>
         <button
           onClick={() => handleToggle(LIGHTNINGDEV)}
           className={`flex gap-2 p-2 ${
-            selectedList === LIGHTNINGDEV
-              ? "bg-gray-300 text-gray-500"
-              : "bg-gray-100 text-gray-500"
+            selectedList === LIGHTNINGDEV ? "bg-gray-300 text-gray-500" : "bg-gray-100 text-gray-500"
           } items-center rounded-md`}
         >
           <Image src='/images/lightning-dev.svg' alt='' width={13.16} height={15.66} />
