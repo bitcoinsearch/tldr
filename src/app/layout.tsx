@@ -60,9 +60,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               >
                 Submit Feedback
               </a>
+              <p style={{ fontSize: "14px", color: "lightgray" }}>
+                Vistor counts publicly available via {" "}
+                <a
+                  href='https://visits.bitcoindevs.xyz/share/btDhVSkbULr146OJ/tldr'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  style={{ fontSize: "14px", color: "orange" }}
+                >
+                  umami
+                </a>
+              </p>
             </footer>
           </div>
         </div>
+        <script async src="https://visits.bitcoindevs.xyz/script.js" data-website-id="a711d1d5-764e-461e-83bd-d715c5b8cb29"></script>
       </body>
     </html>
   );
