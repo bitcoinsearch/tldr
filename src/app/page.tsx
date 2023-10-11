@@ -8,6 +8,7 @@ import {
   getBatchesInSameMonth,
   monthsInOrder,
   createMonthsFromKeys,
+  removeDuplicateSummaries,
 } from "@/helpers/utils";
 import * as fs from "fs";
 
@@ -71,10 +72,10 @@ const fetchDataInBatches = async (count: number): Promise<{ batch: HomepageEntry
     })
   );
 
-  const groups = groupDuplicates(result);
-  const entries = Object.values(groups) as Array<HomepageEntryData[]>;
+  const groups: Record<string, Array<HomepageEntryData>> = groupDuplicates(result);
 
-  const batch = flattenEntries(entries);
+  const finalValues = removeDuplicateSummaries(groups);
+  const batch = flattenEntries(finalValues);
 
   return { batch, count };
 };
