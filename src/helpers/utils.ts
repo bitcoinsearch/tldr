@@ -158,11 +158,20 @@ export const createMonthsFromKeys = (startYear: number, endYear: number) => {
 };
 
 export const removeDuplicateSummaries = (groups: Record<string, Array<HomepageEntryData>>) => {
-  const singleSummaries = Object.keys(groups)
+  const finalValues: HomepageEntryData[] = [];
+  const cleanedGroups: Record<string, Array<HomepageEntryData>> = {};
+
+  for (const [key, value] of Object.entries(groups)) {
+    if (value.length === 1 || key.toLowerCase().startsWith("combined summary")) {
+      cleanedGroups[key] = value;
+    }
+  }
+
+  const singleSummaries = Object.keys(cleanedGroups)
     .filter((post) => !post.toLowerCase().startsWith("combined summary"))
     .map((x) => x.toLowerCase());
 
-  const combinedSummaries = Object.keys(groups)
+  const combinedSummaries = Object.keys(cleanedGroups)
     .filter((post) => post.toLowerCase().startsWith("combined summary"))
     .map((x) => x.toLowerCase());
 
@@ -177,8 +186,7 @@ export const removeDuplicateSummaries = (groups: Record<string, Array<HomepageEn
 
   const allSections = [...combinedSummaries, ...getSingleSummaries];
 
-  const finalValues: HomepageEntryData[] = [];
-  for (const [key, value] of Object.entries(groups)) {
+  for (const [key, value] of Object.entries(cleanedGroups)) {
     if (allSections.includes(key.toLowerCase().trim())) {
       finalValues.push(value as unknown as HomepageEntryData);
     }
