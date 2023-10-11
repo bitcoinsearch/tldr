@@ -59,20 +59,17 @@ export const groupDuplicates = (result: HomepageEntryData[]) => {
   }, {});
 };
 
-export const flattenEntries = (entries: Array<HomepageEntryData[]>) => {
-  return entries
-    .filter((i) => i.length === 1)
-    .flat()
-    .sort((a, b) => {
-      if (b.published_at < a.published_at) {
-        return -1;
-      }
-      if (b.published_at > a.published_at) {
-        return 1;
-      }
+export const flattenEntries = (entries: Array<HomepageEntryData>) => {
+  return entries.flat().sort((a, b) => {
+    if (b.published_at < a.published_at) {
+      return -1;
+    }
+    if (b.published_at > a.published_at) {
+      return 1;
+    }
 
-      return 0;
-    });
+    return 0;
+  });
 };
 
 export const getBatchesInSameMonth = (entries: Array<HomepageEntryData>, currMonth: string) => {
@@ -158,4 +155,34 @@ export const createMonthsFromKeys = (startYear: number, endYear: number) => {
       });
     })
     .flat();
+};
+
+export const removeDuplicateSummaries = (groups: Record<string, Array<HomepageEntryData>>) => {
+  const singleSummaries = Object.keys(groups)
+    .filter((post) => !post.toLowerCase().startsWith("combined summary"))
+    .map((x) => x.toLowerCase());
+
+  const combinedSummaries = Object.keys(groups)
+    .filter((post) => post.toLowerCase().startsWith("combined summary"))
+    .map((x) => x.toLowerCase());
+
+  const splitCombSummaries = combinedSummaries.map((x) => {
+    const element = x.split("combined summary ");
+    const lastElem = element[element.length - 1].substring(1).trim();
+
+    return lastElem;
+  });
+
+  const getSingleSummaries = singleSummaries.filter((x) => !splitCombSummaries.includes(x));
+
+  const allSections = [...combinedSummaries, ...getSingleSummaries];
+
+  const finalValues: HomepageEntryData[] = [];
+  for (const [key, value] of Object.entries(groups)) {
+    if (allSections.includes(key.toLowerCase().trim())) {
+      finalValues.push(value as unknown as HomepageEntryData);
+    }
+  }
+
+  return finalValues;
 };
