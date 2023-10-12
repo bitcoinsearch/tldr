@@ -22,7 +22,7 @@ function SearchResult({
   limit,
   setOpen,
 }: SearchResultProps) {
-  if (isPending || !searchQuery) return null;
+  if (isPending || !searchQuery?.query?.keyword && !searchQuery?.query?.author) return null;
 
   if (
     searchResults?.searchResults.length === 0 ||
