@@ -1,6 +1,6 @@
 import Homepage from "@/app/components/client/homepage";
 import { readStaticDir } from "@/helpers/search-data";
-import { HomepageData, HomepageEntryData } from "@/helpers/types";
+import { BATCHSIZE, HomepageData, HomepageEntryData } from "@/helpers/types";
 import {
   flattenEntries,
   groupDuplicates,
@@ -48,12 +48,12 @@ const fetchDataInBatches = async (count: number): Promise<{ batch: HomepageEntry
     monthsToBegin = allpossibleMonths.slice(sliceIndex + 1);
   }
 
-  const batchSize = 3;
+  const batchSize = BATCHSIZE;
   let groupedBy3: Record<string, Array<string>> = {};
 
   for (let idx = 0; idx < monthsToBegin.length; idx += batchSize) {
     const monthsBatch = monthsToBegin.slice(idx, idx + batchSize);
-    groupedBy3[idx / 3] = monthsBatch;
+    groupedBy3[idx / BATCHSIZE] = monthsBatch;
   }
 
   await Promise.all(
