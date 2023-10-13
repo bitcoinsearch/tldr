@@ -43,6 +43,7 @@ type MailingListType = typeof BITCOINDEV | typeof LIGHTNINGDEV;
 
 export const BITCOINDEV = "bitcoin-dev";
 export const LIGHTNINGDEV = "lightning-dev";
+export const BATCHSIZE = 3
 
 type SearchIndexData = {
   title: string;
