@@ -167,14 +167,17 @@ export const removeDuplicateSummaries = (groups: Record<string, Array<HomepageEn
     }
   }
 
+  // get summaries that are not combined summaries
   const singleSummaries = Object.keys(cleanedGroups)
     .filter((post) => !post.toLowerCase().startsWith("combined summary"))
     .map((x) => x.toLowerCase());
 
+  // get combined summaries from list
   const combinedSummaries = Object.keys(cleanedGroups)
     .filter((post) => post.toLowerCase().startsWith("combined summary"))
     .map((x) => x.toLowerCase());
 
+  // extract title from combined summaries
   const splitCombSummaries = combinedSummaries.map((x) => {
     const element = x.split("combined summary ");
     const lastElem = element[element.length - 1].substring(1).trim();
@@ -182,6 +185,7 @@ export const removeDuplicateSummaries = (groups: Record<string, Array<HomepageEn
     return lastElem;
   });
 
+  // check for summaries which doesn't have combined summaries
   const getSingleSummaries = singleSummaries.filter((x) => !splitCombSummaries.includes(x));
 
   const allSections = [...combinedSummaries, ...getSingleSummaries];
