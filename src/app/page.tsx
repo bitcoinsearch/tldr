@@ -96,10 +96,15 @@ export default async function Home() {
   let serverCount = [0];
 
   const data = await getHomepageData();
-  const { batch } = await fetchDataInBatches(0);
+  let batchData = [];
+
+  if (data) {
+    const { batch } = await fetchDataInBatches(0);
+    batchData.push(...batch);
+  }
 
   if (!data) return null;
-  if (!batch) return null;
+  if (!batchData) return null;
 
-  return <Homepage data={data} batch={batch} fetchMore={fetchDataInBatches} serverCount={serverCount} />;
+  return <Homepage data={data} batch={batchData} fetchMore={fetchDataInBatches} serverCount={serverCount} />;
 }
