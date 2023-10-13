@@ -48,12 +48,12 @@ const fetchDataInBatches = async (count: number): Promise<{ batch: HomepageEntry
     monthsToBegin = allpossibleMonths.slice(sliceIndex + 1);
   }
 
-  const batchSize = 6;
+  const batchSize = 3;
   let groupedBy3: Record<string, Array<string>> = {};
 
   for (let idx = 0; idx < monthsToBegin.length; idx += batchSize) {
     const monthsBatch = monthsToBegin.slice(idx, idx + batchSize);
-    groupedBy3[idx / 6] = monthsBatch;
+    groupedBy3[idx / 3] = monthsBatch;
   }
 
   await Promise.all(
