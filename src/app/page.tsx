@@ -48,27 +48,39 @@ const fetchDataInBatches = async (count: number): Promise<{ batch: HomepageEntry
     monthsToBegin = allpossibleMonths.slice(sliceIndex + 1);
   }
 
+  const batchSize = 3;
+  let groupedBy3: Record<string, Array<string>> = {};
+
+  for (let idx = 0; idx < monthsToBegin.length; idx += batchSize) {
+    const monthsBatch = monthsToBegin.slice(idx, idx + batchSize);
+    groupedBy3[idx / 3] = monthsBatch;
+  }
+
   await Promise.all(
     folders.map(async (folder) => {
-      if (!folder) return [];
+      await Promise.all(
+        groupedBy3[count].map(async (month) => {
+          if (!folder) return [];
 
-      const DIRECTORY = `${process.cwd()}/public/static/static/${folder}/${monthsToBegin[count]}`;
+          const DIRECTORY = `${process.cwd()}/public/static/static/${folder}/${month}`;
 
-      try {
-        const isExists = fs.existsSync(DIRECTORY);
-        if (!isExists) {
-          result.push(...[]);
-        } else {
-          const folderData = await readStaticDir(DIRECTORY);
-          const data = createArticlesFromFolder(folderData, folder);
-          const getSameMonth = getBatchesInSameMonth(data, monthsToBegin[count]);
+          try {
+            const isExists = fs.existsSync(DIRECTORY);
+            if (!isExists) {
+              result.push(...[]);
+            } else {
+              const folderData = await readStaticDir(DIRECTORY);
+              const data = createArticlesFromFolder(folderData, folder);
+              const getSameMonth = getBatchesInSameMonth(data, month);
 
-          return result.push(...getSameMonth);
-        }
-      } catch (error) {
-        console.error(error);
-        return result.push(...[]);
-      }
+              return result.push(...getSameMonth);
+            }
+          } catch (error) {
+            console.error(error);
+            return result.push(...[]);
+          }
+        })
+      );
     })
   );
 
