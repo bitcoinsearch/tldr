@@ -109,7 +109,7 @@ export const createArticlesFromFolder = (folderData: any[], folder: string) => {
       },
     } = xml;
 
-    const authorList = authors.map((author) => author.name);
+    const authorList = authors.map((author) => author.name).reverse();
     const newPath = createPath(path);
     const contributorsList = getContributors(authorList);
     const summary = createSummary(xml.data?.entry.summary);
