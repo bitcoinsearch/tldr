@@ -97,7 +97,8 @@ const Homepage = ({
 
   return (
     <main className=''>
-      <h1 className='font-inika my-8 md:my-20 text-lg md:text-2xl text-gray-800'>{addSpaceAfterPeriods(data.header_summary)}</h1>
+      <p className='text-2xl font-semibold md:mt-20 leading-normal'>Your daily summary</p>
+      <h2 className='font-inika my-8 md:mb-20 text-lg md:text-2xl text-gray-800'>{addSpaceAfterPeriods(data.header_summary)}</h2>
       <div className='my-8'>
         <MailingListToggle selectedList={mailingListSelection} handleToggle={handleMailingListToggle} />
       </div>
