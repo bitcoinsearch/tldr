@@ -29,7 +29,7 @@ export const createPath = (path: string) => {
 };
 
 export const getContributors = (authors: Array<string>) => {
-  return authors.length <= 1 ? [] : authors.slice(1);
+  return authors.length <= 1 ? [] : Array.from(new Set(authors.slice(1))).filter((author) => author !== authors[0]);
 };
 
 export const createSummary = (summary: string) => {

@@ -32,7 +32,7 @@ const Post = ({entry, isActivePost}: {entry: HomepageEntryData; isActivePost: bo
             {entry.authors[0]}
           </p>
         </div>
-        {isActivePost && <ContributorsList contributors={entry.contributors} />}
+        <ContributorsList contributors={entry.contributors} />
       </div>
       <div>
         <SummaryList summary={entry.summary} />
