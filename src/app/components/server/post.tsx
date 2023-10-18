@@ -25,7 +25,7 @@ const Post = ({entry, isActivePost}: {entry: HomepageEntryData; isActivePost: bo
       ) : (
         <p className='font-inter text-sm md:text-base font-bold'>Posted {publishedAtDateDisplay}</p>
       )}
-      <div className="grid gap-8 grid-cols-2 text-sm">
+      <div className="grid grid-cols-2 text-sm">
         <div className="flex basis-1/3 flex-col gap-1">
           <p className='font-semibold'>Authored by</p>
           <p className=''>
