@@ -97,14 +97,16 @@ const Homepage = ({
 
   return (
     <main className=''>
-      <p className='text-2xl font-semibold md:mt-20 leading-normal'>Your daily summary</p>
-      <h2 className='font-inika my-8 md:mb-20 text-lg md:text-2xl text-gray-800'>{addSpaceAfterPeriods(data.header_summary)}</h2>
-      <div className='my-8'>
+      <div className="flex flex-col gap-6 md:gap-8 my-8 md:my-14">
+        <p className='text-2xl font-semibold leading-normal'>Your daily summary</p>
+        <h2 className='font-inika text-lg md:text-2xl text-gray-800'>{addSpaceAfterPeriods(data.header_summary)}</h2>
+      </div>
+      <div className='mb-14'>
         <MailingListToggle selectedList={mailingListSelection} handleToggle={handleMailingListToggle} />
       </div>
       <div className='flex flex-col gap-12 break-words'>
         <section>
-          <h2 className='text-xl md:text-4xl font-semibold pb-[60px]'>Active Discussions 🔥</h2>
+          <h2 className='text-xl md:text-4xl font-semibold pb-8'>Active Discussions 🔥</h2>
           <div>
             {homepageData.active_posts.map((entry) => (
               <Post key={entry.id} entry={entry} isActivePost={true} />
@@ -112,7 +114,7 @@ const Homepage = ({
           </div>
         </section>
         <div className=''>
-          <h2 className='text-xl md:text-4xl font-semibold pb-[60px]'>All Activity</h2>
+          <h2 className='text-xl md:text-4xl font-semibold pb-8'>All Activity</h2>
           <div>
             {memoizedBatches?.map((entry, idx) => (
               <Post key={`${entry.id}_${idx}`} entry={entry} isActivePost={false} />

@@ -37,9 +37,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='en' className='h-full'>
-      <body className={`${inter.variable} ${inika.variable} font-inter h-full`}>
-        <div className='pt-[0px] md:pt-[76px] flex flex-col min-h-full w-full items-center'>
+    <html lang='en' className=''>
+      <body className={`${inter.variable} ${inika.variable} font-inter`}>
+        <div className='pt-2 md:pt-[56px] flex flex-col w-full items-center'>
           <div className='relative w-full'>
             <div className='sticky top-0 bg-white w-full h-[76px] flex items-center px-4 z-10'>
               <Navbar />
