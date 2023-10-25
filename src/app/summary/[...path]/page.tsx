@@ -83,7 +83,7 @@ export default async function Page({ params }: { params: { path: string[] } }) {
       </div>
       <section className="my-10">
         <p className="text-2xl font-inika my-2">{firstSentence}</p>
-        <p>{addSpaceAfterPeriods(newSummary)}</p>
+        <p className="whitespace-pre-line">{addSpaceAfterPeriods(newSummary)}</p>
       </section>
       {historyLinks && historyLinks?.length > 0 ? (
         <DiscussionHistory historyLinks={historyLinks} authors={authors} />
