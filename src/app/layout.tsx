@@ -37,14 +37,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='en' className=''>
-      <body className={`${inter.variable} ${inika.variable} font-inter`}>
-        <div className='pt-2 md:pt-[56px] flex flex-col w-full items-center'>
-          <div className='relative w-full'>
+    <html lang='en' className='h-full'>
+      <body className={`${inter.variable} ${inika.variable} font-inter h-full`}>
+        <div className='pt-2 md:pt-[56px] w-full items-center h-full flex flex-col'>
+          <div className='w-full grow flex flex-col'>
             <div className='sticky top-0 bg-white w-full h-[76px] flex items-center px-4 z-10'>
               <Navbar />
             </div>
-            <div className='w-full mx-auto flex-grow max-w-3xl pb-8 px-4 lg:px-0'>{children}</div>
+            <div className='w-full mx-auto grow max-w-3xl pb-8 px-4 lg:px-0'>{children}</div>
             <footer style={{ padding: "24px", backgroundColor: "black", color: "white", textAlign: "center", width: "100%" }}>
               <p style={{ fontSize: "16px", color: "lightgray" }}>
                 Built with ❤️ by{" "}
