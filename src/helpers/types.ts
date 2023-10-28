@@ -1,3 +1,7 @@
+const AUTHOR = "authors" as const
+const DOMAIN = "domain" as const
+const TAGS = "tags" as const
+
 type Feed = {
   id: string;
   title: string;
@@ -43,7 +47,7 @@ type MailingListType = typeof BITCOINDEV | typeof LIGHTNINGDEV;
 
 export const BITCOINDEV = "bitcoin-dev";
 export const LIGHTNINGDEV = "lightning-dev";
-export const BATCHSIZE = 3
+export const BATCHSIZE = 3;
 
 type SearchIndexData = {
   title: string;
@@ -84,7 +88,9 @@ type HomepageData = {
 };
 
 type XmlDataType = {
-  data: Omit<FeedPage, "entry"> & { entry: Omit<EntryData, "link"> & { link: string } };
+  data: Omit<FeedPage, "entry"> & {
+    entry: Omit<EntryData, "link"> & { link: string };
+  };
   month: string;
   path: string;
   year: number;
@@ -102,4 +108,22 @@ export type {
   HomepageEntryData,
   ConvertedXML,
   XmlDataType,
+};
+
+export type FacetKeys = typeof AUTHOR | typeof DOMAIN | typeof TAGS;
+
+export type Facet = {
+  field: FacetKeys;
+  value: string;
+};
+
+export type SortOption = "asc" | "desc";
+
+export type SearchQuery = {
+  queryString: string;
+  size: number;
+  page: number;
+  filterFields: Facet[];
+  sortFields: any[];
+  mailListType: MailingListType
 };
