@@ -2,15 +2,16 @@ import { SearchQuery } from "../helpers/types";
 import { AggregationsAggregate, SearchResponse } from "@elastic/elasticsearch/lib/api/types";
 import { useQuery } from "@tanstack/react-query";
 
-type BuildQuery = ({queryString, size, page, filterFields, sortFields}: SearchQuery) => Promise<SearchResponse<unknown, Record<string, AggregationsAggregate>>>
+type BuildQuery = ({queryString, size, page, filterFields, sortFields, mailListType}: SearchQuery) => Promise<SearchResponse<unknown, Record<string, AggregationsAggregate>>>
 
-const buildQueryCall: BuildQuery = async ({queryString, size, page, filterFields, sortFields}) => {
+const buildQueryCall: BuildQuery = async ({queryString, size, page, filterFields, sortFields,  mailListType}) => {
   const body = {
     queryString,
     size,
     page,
     filterFields,
     sortFields,
+    mailListType
   };
   
   const jsonBody = JSON.stringify(body);
@@ -36,12 +37,12 @@ const buildQueryCall: BuildQuery = async ({queryString, size, page, filterFields
 };
 
 export const useSearch = ({
-  queryString, size, page, filterFields, sortFields
+  queryString, size, page, filterFields, sortFields, mailListType
 }: SearchQuery) => {
   const hasFilters = Boolean(filterFields.length)
   const queryResult = useQuery({
-    queryKey: ["query", queryString, filterFields, page, sortFields],
-    queryFn: () => buildQueryCall({queryString, size, page, filterFields, sortFields}),
+    queryKey: ["query", queryString, filterFields, page, sortFields, mailListType],
+    queryFn: () => buildQueryCall({queryString, size, page, filterFields, sortFields, mailListType}),
     staleTime: Infinity,
     refetchOnWindowFocus: false,
     enabled: true,
