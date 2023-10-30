@@ -1,15 +1,13 @@
 import { SearchQuery } from "../helpers/types";
 import { AggregationsAggregate, SearchResponse } from "@elastic/elasticsearch/lib/api/types";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 
-type BuildQuery = ({queryString, size, page, filterFields, sortFields, mailListType}: SearchQuery) => Promise<SearchResponse<unknown, Record<string, AggregationsAggregate>>>
+type BuildQuery = ({queryString, page,sortFields, mailListType}: Omit<SearchQuery, "size">) => Promise<SearchResponse<unknown, Record<string, AggregationsAggregate>>>
 
-const buildQueryCall: BuildQuery = async ({queryString, size, page, filterFields, sortFields,  mailListType}) => {
+export const buildQueryCall: BuildQuery = async ({queryString, page, sortFields, mailListType}) => {
   const body = {
     queryString,
-    size,
     page,
-    filterFields,
     sortFields,
     mailListType
   };
@@ -37,12 +35,11 @@ const buildQueryCall: BuildQuery = async ({queryString, size, page, filterFields
 };
 
 export const useSearch = ({
-  queryString, size, page, filterFields, sortFields, mailListType
+  queryString, size, page,sortFields, mailListType
 }: SearchQuery) => {
-  const hasFilters = Boolean(filterFields.length)
-  const queryResult = useQuery({
-    queryKey: ["query", queryString, filterFields, page, sortFields, mailListType],
-    queryFn: () => buildQueryCall({queryString, size, page, filterFields, sortFields, mailListType}),
+  const queryResult = useInfiniteQuery({
+    queryKey: ["query", queryString,page, sortFields, mailListType],
+    queryFn: () => buildQueryCall({queryString, size, page,sortFields, mailListType}),
     staleTime: Infinity,
     refetchOnWindowFocus: false,
     enabled: true,

@@ -198,3 +198,48 @@ export const removeDuplicateSummaries = (groups: Record<string, Array<HomepageEn
 
   return finalValues;
 };
+
+const mappingMonths= {
+  "January": "Jan",
+  "February": "Feb",
+  "March": "March",
+  "April": "April",
+  "May": "May",
+  "June": "June",
+  "July": "July",
+  "August": "Aug",
+  "September": "Sept",
+  "October": "Oct",
+  "November": "Nov",
+  "December": "Dec"
+}
+
+export const getStaticPathFromURL = (url: string, id: string) => {
+  const baseLink = "https://lists.linuxfoundation.org/pipermail/"
+  const strippedLink = url.split(baseLink)[1].split("/")
+
+  try {
+    // return list, year_month
+    const [list, year_month] = strippedLink
+  
+    // separate month and year from year_month string with the right tldr mapping
+    const [year, month] = year_month.split("-").map((i, index) => {
+      if (index === 0) return i
+      else {
+        const monthIndex = i as keyof typeof mappingMonths
+        return mappingMonths?.[monthIndex] ?? ""
+      }
+    })
+  
+    if (!month || !year || !list || !id) {
+      return {url}
+    } 
+  
+    return {
+      url: `/summary/${list}/${month}_${year}/${id}`,
+      list
+    }
+  } catch {
+    return {url}
+  }
+}

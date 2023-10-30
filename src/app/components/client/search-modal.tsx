@@ -6,10 +6,14 @@ import { useDebouncedCallback } from "use-debounce";
 
 import {
   BITCOINDEV,
+  DEBOUNCE_DELAY,
   LIGHTNINGDEV,
+  MailingListType,
   SearchDataParams,
   SearchIndexData,
+  EsSearchResult,
 } from "@/helpers/types";
+import { urlMapping } from "@/helpers/api-functions";
 import * as Dialog from "@radix-ui/react-dialog";
 import { ArrowDownIcon, ArrowUpIcon, Cross2Icon } from "@radix-ui/react-icons";
 
@@ -18,27 +22,33 @@ import { getDataFromCachedIndex } from "./actions/get-search-data";
 import SearchResult from "./search-result-ui";
 import Spinner from "./spinner";
 
+import { buildQueryCall } from "@/services/search-service";
+import {
+  SearchTotalHits,
+  SearchResponseBody,
+  SearchHit,
+} from "@elastic/elasticsearch/lib/api/types";
+
 export type SearchResults = {
-  searchResults: SearchIndexData[];
+  // searchResults: SearchHit<unknown>[];
+  searchResults: SearchResponseBody["hits"]["hits"];
   totalSearchResults: number;
+  bitcoinDevCount: number;
+  lightningDevCount: number;
 };
-
-export type SearchQuery = {
-  limit?: number;
-} & SearchDataParams;
-
-const DEBOUNCE_DELAY = 1200;
-const DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY = 4;
 
 const SearchBox = () => {
   const [open, setOpen] = React.useState(false);
-  const [searchQuery, setSearchQuery] = React.useState<SearchQuery | null>(
+  const [searchQuery, setSearchQuery] = React.useState<SearchDataParams | null>(
     null
   );
-  const [limit, setLimit] = React.useState<number>(
-    DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY
-  );
-  const [searchResults, setSearchResults] = React.useState<SearchResults>();
+  const [page, setPage] = React.useState(0);
+  const [searchResults, setSearchResults] = React.useState<SearchResults>({
+    searchResults: [],
+    totalSearchResults: 0,
+    bitcoinDevCount: 0,
+    lightningDevCount: 0,
+  });
   const [error, setError] = React.useState<Error>();
 
   const [filter, dispatch] = React.useReducer(filterReducer, defaultFilter);
@@ -56,12 +66,14 @@ const SearchBox = () => {
   const prevQueryRef = React.useRef(searchQuery);
   const searchFeedInputRef = React.useRef<HTMLInputElement>(null);
 
+  const currentPageRef = React.useRef(0);
+
   const showMoreResults = () => {
-    if (searchResults && limit >= searchResults?.totalSearchResults) return;
-    setLimit((prev) => prev + 5);
+    // if (searchResults && limit >= searchResults?.totalSearchResults) return;
+    setPage((prev) => prev + 1);
   };
 
-  const setSearchQueryPath = (path: string) => {
+  const setSearchQueryPath = (path: MailingListType | null) => {
     setSearchQuery((prev) => ({
       path,
       query: {
@@ -72,29 +84,53 @@ const SearchBox = () => {
 
   const resetToDefault = () => {
     setSearchQuery(null);
-    setSearchResults({ searchResults: [], totalSearchResults: 0 });
-    setLimit(DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY);
-    dispatch({ type: "clear" });
+    setSearchResults({
+      searchResults: [],
+      totalSearchResults: 0,
+      bitcoinDevCount: 0,
+      lightningDevCount: 0,
+    });
+    // dispatch({ type: "clear" });
   };
 
   const setRelevance = (type: "old-new" | "new-old") => {
     setSearchQuery((prev) => ({
-      path: prev?.path || "",
+      path: prev?.path ?? null,
       query: {
-        ...prev?.query,
+        keyword: prev?.query.keyword,
+        author: prev?.query.author,
       },
       relevance: type,
     }));
   };
 
   const getData = React.useCallback(async () => {
-    if (searchQuery) {
-      const data = await getDataFromCachedIndex(searchQuery);
+    if (searchQuery && (page === 0 || page > currentPageRef.current)) {
+      const data = await buildQueryCall({
+        queryString: searchQuery.query.keyword ?? "",
+        mailListType: searchQuery.path ?? null,
+        page,
+        sortFields: [],
+      });
+      currentPageRef.current = page;
       if (data) {
-        setSearchResults({
-          searchResults: data.filteredData,
-          totalSearchResults: data.filteredDataLength,
-        });
+        const totalHitsAsSearchTotalHits = data?.hits?.total as SearchTotalHits;
+        console.log("es data", data.hits.hits)
+        const domainAggregations = data.aggregations?.domain as unknown as any;
+        const bitcoinDevCount =
+          domainAggregations?.buckets.find(
+            (url: string) => url === urlMapping["bitcoin-dev"]
+          )?.doc_count ?? 0;
+        const lightningDevCount =
+          domainAggregations?.buckets.find(
+            (url: string) => url === urlMapping["bitcoin-dev"]
+          )?.doc_count ?? 0;
+        setSearchResults((prev) => ({
+          searchResults: [...prev.searchResults, ...data.hits.hits],
+          totalSearchResults: totalHitsAsSearchTotalHits.value ?? 0,
+          bitcoinDevCount,
+          lightningDevCount,
+        }));
       }
       if (data instanceof Error) {
         setError(data);
@@ -105,7 +141,7 @@ const SearchBox = () => {
 
   const debouncedSearch = useDebouncedCallback((value) => {
     setSearchQuery((prev) => ({
-      path: prev?.path || "",
+      path: prev?.path || null,
       query: {
         ...prev?.query,
         keyword: value,
@@ -115,7 +151,7 @@ const SearchBox = () => {
 
   const debouncedSearchAuthor = useDebouncedCallback((value) => {
     setSearchQuery((prev) => ({
-      path: prev?.path || "",
+      path: prev?.path || null,
       query: {
         ...prev?.query,
         author: value,
@@ -224,7 +260,7 @@ const SearchBox = () => {
                 aria-label="clear-filter"
                 onClick={() => {
                   dispatch({ type: "clear" });
-                  setSearchQueryPath("");
+                  setSearchQueryPath(null);
                 }}
               >
                 <Cross2Icon />
@@ -305,7 +341,7 @@ const SearchBox = () => {
               searchQuery={searchQuery}
               isPending={isPending}
               showMoreResults={showMoreResults}
-              limit={limit}
+              limit={page}
               setOpen={setOpen}
             />
           </div>

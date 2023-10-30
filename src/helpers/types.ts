@@ -48,6 +48,8 @@ type MailingListType = typeof BITCOINDEV | typeof LIGHTNINGDEV;
 export const BITCOINDEV = "bitcoin-dev";
 export const LIGHTNINGDEV = "lightning-dev";
 export const BATCHSIZE = 3;
+export const DEBOUNCE_DELAY = 1200;
+export const DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY = 10;
 
 type SearchIndexData = {
   title: string;
@@ -60,7 +62,7 @@ type SearchIndexData = {
 };
 
 type SearchDataParams = {
-  path?: string;
+  path: MailingListType | null;
   query: {
     keyword?: string;
     author?: string;
@@ -123,7 +125,23 @@ export type SearchQuery = {
   queryString: string;
   size: number;
   page: number;
-  filterFields: Facet[];
   sortFields: any[];
-  mailListType: MailingListType
+  mailListType: MailingListType | null;
 };
+
+export type EsSearchResult = {
+  _id: string;
+  _index: string;
+  _source: {
+    id: string;
+    title: string;
+    summary: string;
+    author_list: Array<string>;
+    body: string;
+    body_type: string;
+    created_at: Date;
+    domain: string;
+    indexed_at: string;
+    url: string;
+  } 
+}

@@ -7,11 +7,11 @@ import {
 
 const FIELDS_TO_SEARCH = ["authors", "title", "body"];
 
-type BuildQueryForElaSticClient = Omit<SearchQuery, "page"> & {
+type BuildQueryForElaSticClient = Omit<SearchQuery,"page"> & {
   from: number;
 };
 
-let urlMapping = {
+export const urlMapping = {
   "bitcoin-dev": "https://lists.linuxfoundation.org/pipermail/bitcoin-dev",
   "lightning-dev": "https://lists.linuxfoundation.org/pipermail/lightning-dev",
 };
@@ -20,7 +20,6 @@ export const buildQuery = ({
   queryString,
   size,
   from,
-  filterFields,
   sortFields,
   mailListType,
 }: BuildQueryForElaSticClient) => {
@@ -81,13 +80,6 @@ export const buildQuery = ({
       urlMapping["lightning-dev"];
   }
 
-  if (filterFields && filterFields.length) {
-    for (let facet of filterFields) {
-      let mustClause: any = buildFilterQueryClause(facet);
-      baseQuery.query.bool.must.push(mustClause);
-    }
-  }
-
   if (sortFields && sortFields.length) {
     for (let field of sortFields) {
       const sortClause = buildSortClause(field);
@@ -107,16 +99,6 @@ const buildShouldQueryClause = (queryString: string) => {
   };
 
   return shouldQueryClause;
-};
-
-const buildFilterQueryClause = ({ field, value }: Facet) => {
-  let filterQueryClause = {
-    term: {
-      [`${field}.keyword`]: { value },
-    },
-  };
-
-  return filterQueryClause;
 };
 
 const buildSortClause = ({ field, value }: { field: any; value: any }) => {
