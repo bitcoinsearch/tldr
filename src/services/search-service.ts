@@ -1,5 +1,5 @@
-import { SearchQuery } from "../helpers/types";
-import { AggregationsAggregate, SearchResponse } from "@elastic/elasticsearch/lib/api/types";
+import { DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY, SearchQuery } from "../helpers/types";
+import { AggregationsAggregate, SearchResponse, SearchTotalHits } from "@elastic/elasticsearch/lib/api/types";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 
 type BuildQuery = ({queryString, page,sortFields, mailListType}: Omit<SearchQuery, "size">) => Promise<SearchResponse<unknown, Record<string, AggregationsAggregate>>>
@@ -35,15 +35,20 @@ export const buildQueryCall: BuildQuery = async ({queryString, page, sortFields,
 };
 
 export const useSearch = ({
-  queryString, size, page,sortFields, mailListType
-}: SearchQuery) => {
+  queryString,sortFields, mailListType
+}: Omit<SearchQuery, "size" | "page">) => {
   const queryResult = useInfiniteQuery({
-    queryKey: ["query", queryString,page, sortFields, mailListType],
-    queryFn: () => buildQueryCall({queryString, size, page,sortFields, mailListType}),
-    staleTime: Infinity,
-    refetchOnWindowFocus: false,
-    enabled: true,
-    // enabled: !!queryString?.trim() || hasFilters,
+    queryKey: ["query", queryString, sortFields, mailListType],
+    queryFn: ({pageParam}) => buildQueryCall({queryString, page: pageParam, sortFields, mailListType}),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, pages, lastPageParam) => {
+      const totalHitsAsSearchTotalHits = lastPage?.hits?.total as SearchTotalHits;
+      const totalDocs = totalHitsAsSearchTotalHits.value;
+      const totalPages = Math.floor(totalDocs/DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY)
+      if (lastPageParam + 1 <= totalPages) return lastPageParam + 1
+      else return undefined
+    },
+    enabled: !!queryString?.trim(),
   });
 
   return queryResult

@@ -10,8 +10,6 @@ import {
   LIGHTNINGDEV,
   MailingListType,
   SearchDataParams,
-  SearchIndexData,
-  EsSearchResult,
 } from "@/helpers/types";
 import { urlMapping } from "@/helpers/api-functions";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -22,7 +20,7 @@ import { getDataFromCachedIndex } from "./actions/get-search-data";
 import SearchResult from "./search-result-ui";
 import Spinner from "./spinner";
 
-import { buildQueryCall } from "@/services/search-service";
+import { buildQueryCall, useSearch } from "@/services/search-service";
 import {
   SearchTotalHits,
   SearchResponseBody,
@@ -30,8 +28,7 @@ import {
 } from "@elastic/elasticsearch/lib/api/types";
 
 export type SearchResults = {
-  // searchResults: SearchHit<unknown>[];
-  searchResults: SearchResponseBody["hits"]["hits"];
+  searchResults: SearchResponseBody[];
   totalSearchResults: number;
   bitcoinDevCount: number;
   lightningDevCount: number;
@@ -42,36 +39,56 @@ const SearchBox = () => {
   const [searchQuery, setSearchQuery] = React.useState<SearchDataParams | null>(
     null
   );
-  const [page, setPage] = React.useState(0);
-  const [searchResults, setSearchResults] = React.useState<SearchResults>({
+
+  const [filter, dispatch] = React.useReducer(filterReducer, defaultFilter);
+
+  const searchFeedInputRef = React.useRef<HTMLInputElement>(null);
+
+  const { data, fetchNextPage, isFetching, isFetchingNextPage, isError } = useSearch({
+    queryString: searchQuery?.query.keyword ?? "",
+    mailListType: searchQuery?.path ?? null,
+    sortFields: [],
+  });
+
+  let results: SearchResults = {
     searchResults: [],
     totalSearchResults: 0,
     bitcoinDevCount: 0,
     lightningDevCount: 0,
-  });
-  const [error, setError] = React.useState<Error>();
+  };
 
-  const [filter, dispatch] = React.useReducer(filterReducer, defaultFilter);
-  const [isPending, startTransition] = useTransition();
+  if (data) {
+    const pageLength = data.pages.length;
+    const domainAggregations = data?.pages[pageLength - 1].aggregations
+      ?.domain as unknown as any;
+    const totalHitsAsSearchTotalHits = data?.pages[pageLength - 1].hits
+      ?.total as SearchTotalHits;
+    const bitcoinDevCount =
+      domainAggregations?.buckets.find(
+        (url: string) => url === urlMapping["bitcoin-dev"]
+      )?.doc_count ?? 0;
+    const lightningDevCount =
+      domainAggregations?.buckets.find(
+        (url: string) => url === urlMapping["bitcoin-dev"]
+      )?.doc_count ?? 0;
+
+    results = {
+      searchResults: data.pages,
+      totalSearchResults: totalHitsAsSearchTotalHits.value,
+      bitcoinDevCount: 0,
+      lightningDevCount: 0,
+    };
+  }
 
   const showDescription =
-    !isPending &&
-    !error &&
+    !isFetching &&
+    !isFetchingNextPage &&
+    !isError &&
     Boolean(
-      searchResults?.totalSearchResults && searchResults?.totalSearchResults > 0
+      results?.totalSearchResults && results?.totalSearchResults > 0
     );
 
-  const showSpinner = isPending && !error;
-
-  const prevQueryRef = React.useRef(searchQuery);
-  const searchFeedInputRef = React.useRef<HTMLInputElement>(null);
-
-  const currentPageRef = React.useRef(0);
-
-  const showMoreResults = () => {
-    // if (searchResults && limit >= searchResults?.totalSearchResults) return;
-    setPage((prev) => prev + 1);
-  };
+  const showSpinner = (isFetching || isFetchingNextPage) && !isError;
 
   const setSearchQueryPath = (path: MailingListType | null) => {
     setSearchQuery((prev) => ({
@@ -84,13 +101,6 @@ const SearchBox = () => {
 
   const resetToDefault = () => {
     setSearchQuery(null);
-    setSearchResults({
-      searchResults: [],
-      totalSearchResults: 0,
-      bitcoinDevCount: 0,
-      lightningDevCount: 0,
-    });
-    // dispatch({ type: "clear" });
   };
 
   const setRelevance = (type: "old-new" | "new-old") => {
@@ -103,41 +113,6 @@ const SearchBox = () => {
       relevance: type,
     }));
   };
-
-  const getData = React.useCallback(async () => {
-    if (searchQuery && (page === 0 || page > currentPageRef.current)) {
-      const data = await buildQueryCall({
-        queryString: searchQuery.query.keyword ?? "",
-        mailListType: searchQuery.path ?? null,
-        page,
-        sortFields: [],
-      });
-      currentPageRef.current = page;
-      if (data) {
-        const totalHitsAsSearchTotalHits = data?.hits?.total as SearchTotalHits;
-        console.log("es data", data.hits.hits)
-        const domainAggregations = data.aggregations?.domain as unknown as any;
-        const bitcoinDevCount =
-          domainAggregations?.buckets.find(
-            (url: string) => url === urlMapping["bitcoin-dev"]
-          )?.doc_count ?? 0;
-        const lightningDevCount =
-          domainAggregations?.buckets.find(
-            (url: string) => url === urlMapping["bitcoin-dev"]
-          )?.doc_count ?? 0;
-        setSearchResults((prev) => ({
-          searchResults: [...prev.searchResults, ...data.hits.hits],
-          totalSearchResults: totalHitsAsSearchTotalHits.value ?? 0,
-          bitcoinDevCount,
-          lightningDevCount,
-        }));
-      }
-      if (data instanceof Error) {
-        setError(data);
-        return;
-      }
-    }
-  }, [searchQuery]);
 
   const debouncedSearch = useDebouncedCallback((value) => {
     setSearchQuery((prev) => ({
@@ -159,6 +134,10 @@ const SearchBox = () => {
     }));
   }, DEBOUNCE_DELAY);
 
+  const handleFetchMore = () => {
+    fetchNextPage();
+  };
+
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "k" && e.which === 75 && (e.metaKey || e.ctrlKey)) {
@@ -168,34 +147,6 @@ const SearchBox = () => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
-
-  React.useEffect(() => {
-    if (searchQuery !== prevQueryRef.current) {
-      if (
-        (searchQuery?.query?.author === "" ||
-          searchQuery?.query?.author === undefined) &&
-        (searchQuery?.query?.keyword === "" ||
-          searchQuery?.query?.keyword === undefined)
-      ) {
-        return;
-      }
-      startTransition(async () => {
-        await getData();
-      });
-      return () => {
-        debouncedSearch.cancel();
-        debouncedSearchAuthor.cancel();
-      };
-    }
-
-    prevQueryRef.current = searchQuery;
-  }, [
-    searchQuery,
-    startTransition,
-    getData,
-    debouncedSearch,
-    debouncedSearchAuthor,
-  ]);
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -337,11 +288,10 @@ const SearchBox = () => {
           <div className="mt-[25px] flex flex-col justify-center items-center">
             <Spinner isPending={showSpinner} />
             <SearchResult
-              searchResults={searchResults}
+              searchResults={results}
               searchQuery={searchQuery}
-              isPending={isPending}
-              showMoreResults={showMoreResults}
-              limit={page}
+              isPending={isFetching || isFetchingNextPage}
+              showMoreResults={handleFetchMore}
               setOpen={setOpen}
             />
           </div>
