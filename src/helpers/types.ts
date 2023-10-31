@@ -1,3 +1,9 @@
+import { BITCOINDEV, LIGHTNINGDEV } from "@/config/config";
+
+const AUTHOR = "authors" as const
+const DOMAIN = "domain" as const
+const TAGS = "tags" as const
+
 type Feed = {
   id: string;
   title: string;
@@ -41,10 +47,6 @@ type ConvertedXML = {
 
 type MailingListType = typeof BITCOINDEV | typeof LIGHTNINGDEV;
 
-export const BITCOINDEV = "bitcoin-dev";
-export const LIGHTNINGDEV = "lightning-dev";
-export const BATCHSIZE = 3
-
 type SearchIndexData = {
   title: string;
   authors: string[];
@@ -56,7 +58,7 @@ type SearchIndexData = {
 };
 
 type SearchDataParams = {
-  path?: string;
+  path: MailingListType | null;
   query: {
     keyword?: string;
     author?: string;
@@ -84,7 +86,9 @@ type HomepageData = {
 };
 
 type XmlDataType = {
-  data: Omit<FeedPage, "entry"> & { entry: Omit<EntryData, "link"> & { link: string } };
+  data: Omit<FeedPage, "entry"> & {
+    entry: Omit<EntryData, "link"> & { link: string };
+  };
   month: string;
   path: string;
   year: number;
@@ -103,3 +107,38 @@ export type {
   ConvertedXML,
   XmlDataType,
 };
+
+export type FacetKeys = typeof AUTHOR | typeof DOMAIN | typeof TAGS;
+
+export type Facet = {
+  field: FacetKeys;
+  value: string;
+};
+
+export type SortOption = "asc" | "desc";
+
+export type SearchQuery = {
+  queryString: string;
+  authorString: string;
+  size: number;
+  page: number;
+  sortFields: any[];
+  mailListType: MailingListType | null;
+};
+
+export type EsSearchResult = {
+  _id: string;
+  _index: string;
+  _source: {
+    id: string;
+    title: string;
+    summary: string;
+    author_list: Array<string>;
+    body: string;
+    body_type: string;
+    created_at: Date;
+    domain: string;
+    indexed_at: string;
+    url: string;
+  } 
+}

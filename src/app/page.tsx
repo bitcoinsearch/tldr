@@ -1,6 +1,7 @@
 import Homepage from "@/app/components/client/homepage";
+import { BATCHSIZE } from "@/config/config";
 import { readStaticDir } from "@/helpers/search-data";
-import { BATCHSIZE, HomepageData, HomepageEntryData } from "@/helpers/types";
+import { HomepageData, HomepageEntryData } from "@/helpers/types";
 import {
   flattenEntries,
   groupDuplicates,

@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 
 import SearchBox from "../client/search-modal";
+import TanstackProvider from "@/app/provider";
 
 const Navbar = () => {
   return (
@@ -9,7 +10,9 @@ const Navbar = () => {
       <Link href="/">
         <p className=" text-xl md:text-4xl font-[600] ">Bitcoin TLDR</p>
       </Link>
-      <SearchBox />
+      <TanstackProvider>
+        <SearchBox />
+      </TanstackProvider>
     </div>
   );
 };

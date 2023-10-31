@@ -1,69 +1,101 @@
 "use client";
 
 import Image from "next/image";
-import React, { useTransition } from "react";
+import React from "react";
 import { useDebouncedCallback } from "use-debounce";
 
 import {
-  BITCOINDEV,
-  LIGHTNINGDEV,
+  MailingListType,
   SearchDataParams,
-  SearchIndexData,
 } from "@/helpers/types";
+import { urlMapping } from "@/config/config";
 import * as Dialog from "@radix-ui/react-dialog";
 import { ArrowDownIcon, ArrowUpIcon, Cross2Icon } from "@radix-ui/react-icons";
 
 import { defaultFilter, filterReducer } from "./actions/filter-reducer";
-import { getDataFromCachedIndex } from "./actions/get-search-data";
 import SearchResult from "./search-result-ui";
 import Spinner from "./spinner";
 
+import { useSearch } from "@/services/search-service";
+import {
+  SearchTotalHits,
+  SearchResponseBody,
+} from "@elastic/elasticsearch/lib/api/types";
+import { BITCOINDEV, DEBOUNCE_DELAY, LIGHTNINGDEV } from "@/config/config";
+
 export type SearchResults = {
-  searchResults: SearchIndexData[];
+  searchResults: SearchResponseBody[];
   totalSearchResults: number;
+  bitcoinDevCount: number;
+  lightningDevCount: number;
 };
-
-export type SearchQuery = {
-  limit?: number;
-} & SearchDataParams;
-
-const DEBOUNCE_DELAY = 1200;
-const DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY = 4;
 
 const SearchBox = () => {
   const [open, setOpen] = React.useState(false);
-  const [searchQuery, setSearchQuery] = React.useState<SearchQuery | null>(
+  const [searchQuery, setSearchQuery] = React.useState<SearchDataParams | null>(
     null
   );
-  const [limit, setLimit] = React.useState<number>(
-    DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY
-  );
-  const [searchResults, setSearchResults] = React.useState<SearchResults>();
-  const [error, setError] = React.useState<Error>();
 
   const [filter, dispatch] = React.useReducer(filterReducer, defaultFilter);
-  const [isPending, startTransition] = useTransition();
 
-  const showDescription =
-    !isPending &&
-    !error &&
-    Boolean(
-      searchResults?.totalSearchResults && searchResults?.totalSearchResults > 0
-    );
-
-  const showSpinner = isPending && !error;
-
-  const prevQueryRef = React.useRef(searchQuery);
   const searchFeedInputRef = React.useRef<HTMLInputElement>(null);
 
-  const showMoreResults = () => {
-    if (searchResults && limit >= searchResults?.totalSearchResults) return;
-    setLimit((prev) => prev + 5);
+  const { data, fetchNextPage, isFetching, isFetchingNextPage, isError } = useSearch({
+    queryString: searchQuery?.query.keyword ?? "",
+    authorString: searchQuery?.query.author ?? "",
+    mailListType: searchQuery?.path ?? null,
+    sortFields: [],
+  });
+
+  let results: SearchResults = {
+    searchResults: [],
+    totalSearchResults: 0,
+    bitcoinDevCount: 0,
+    lightningDevCount: 0,
   };
 
-  const setSearchQueryPath = (path: string) => {
+  if (data) {
+    const pageLength = data.pages.length;
+    const domainAggregations = data?.pages[pageLength - 1].aggregations
+      ?.domain as unknown as any;
+    const totalHitsAsSearchTotalHits = data?.pages[pageLength - 1].hits
+      ?.total as SearchTotalHits;
+    const bitcoinDevCount =
+      domainAggregations?.buckets.find(
+        (url: string) => url === urlMapping[BITCOINDEV]
+      )?.doc_count ?? 0;
+    const lightningDevCount =
+      domainAggregations?.buckets.find(
+        (url: string) => url === urlMapping[LIGHTNINGDEV]
+      )?.doc_count ?? 0;
+
+    results = {
+      searchResults: data.pages,
+      totalSearchResults: totalHitsAsSearchTotalHits.value,
+      bitcoinDevCount,
+      lightningDevCount,
+    };
+  }
+
+  const showDescription =
+    !isFetching &&
+    !isFetchingNextPage &&
+    !isError &&
+    Boolean(
+      results?.totalSearchResults && results?.totalSearchResults > 0
+    );
+
+  const showSpinner = (isFetching || isFetchingNextPage) && !isError;
+
+  const setSearchQueryPath = (path: MailingListType | null) => {
+    const managePathSelection = (prevPath: MailingListType | null | undefined) => {
+      if (searchQuery?.path === path) {
+        return null
+      }
+      return path
+    }
     setSearchQuery((prev) => ({
-      path,
+      path: managePathSelection(prev?.path),
       query: {
         ...prev?.query,
       },
@@ -72,40 +104,22 @@ const SearchBox = () => {
 
   const resetToDefault = () => {
     setSearchQuery(null);
-    setSearchResults({ searchResults: [], totalSearchResults: 0 });
-    setLimit(DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY);
-    dispatch({ type: "clear" });
   };
 
   const setRelevance = (type: "old-new" | "new-old") => {
     setSearchQuery((prev) => ({
-      path: prev?.path || "",
+      path: prev?.path ?? null,
       query: {
-        ...prev?.query,
+        keyword: prev?.query.keyword,
+        author: prev?.query.author,
       },
       relevance: type,
     }));
   };
 
-  const getData = React.useCallback(async () => {
-    if (searchQuery) {
-      const data = await getDataFromCachedIndex(searchQuery);
-      if (data) {
-        setSearchResults({
-          searchResults: data.filteredData,
-          totalSearchResults: data.filteredDataLength,
-        });
-      }
-      if (data instanceof Error) {
-        setError(data);
-        return;
-      }
-    }
-  }, [searchQuery]);
-
   const debouncedSearch = useDebouncedCallback((value) => {
     setSearchQuery((prev) => ({
-      path: prev?.path || "",
+      path: prev?.path || null,
       query: {
         ...prev?.query,
         keyword: value,
@@ -115,13 +129,17 @@ const SearchBox = () => {
 
   const debouncedSearchAuthor = useDebouncedCallback((value) => {
     setSearchQuery((prev) => ({
-      path: prev?.path || "",
+      path: prev?.path || null,
       query: {
         ...prev?.query,
         author: value,
       },
     }));
   }, DEBOUNCE_DELAY);
+
+  const handleFetchMore = () => {
+    fetchNextPage();
+  };
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -132,34 +150,6 @@ const SearchBox = () => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
-
-  React.useEffect(() => {
-    if (searchQuery !== prevQueryRef.current) {
-      if (
-        (searchQuery?.query?.author === "" ||
-          searchQuery?.query?.author === undefined) &&
-        (searchQuery?.query?.keyword === "" ||
-          searchQuery?.query?.keyword === undefined)
-      ) {
-        return;
-      }
-      startTransition(async () => {
-        await getData();
-      });
-      return () => {
-        debouncedSearch.cancel();
-        debouncedSearchAuthor.cancel();
-      };
-    }
-
-    prevQueryRef.current = searchQuery;
-  }, [
-    searchQuery,
-    startTransition,
-    getData,
-    debouncedSearch,
-    debouncedSearchAuthor,
-  ]);
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -199,10 +189,9 @@ const SearchBox = () => {
             <span className="flex items-center gap-x-2">
               <button
                 className={`border rounded py-1 px-2 text-xs hover:bg-slate-100 ${
-                  filter.bitcoinDev && "bg-slate-200"
+                  searchQuery?.path === BITCOINDEV && "bg-slate-200"
                 }`}
                 onClick={() => {
-                  dispatch({ type: "bitcoinDev" });
                   setSearchQueryPath(BITCOINDEV);
                 }}
               >
@@ -210,10 +199,9 @@ const SearchBox = () => {
               </button>
               <button
                 className={`border rounded py-1 px-2 text-xs hover:bg-slate-100 ${
-                  filter.lightningDev && "bg-slate-200"
+                  searchQuery?.path === LIGHTNINGDEV && "bg-slate-200"
                 }`}
                 onClick={() => {
-                  dispatch({ type: "lightningDev" });
                   setSearchQueryPath(LIGHTNINGDEV);
                 }}
               >
@@ -223,8 +211,7 @@ const SearchBox = () => {
                 className={`border p-[6px] hover:bg-slate-100 focus:bg-slate-100 inline-flex h-[25px] w-[25px] appearance-none items-center justify-center focus:outline-none`}
                 aria-label="clear-filter"
                 onClick={() => {
-                  dispatch({ type: "clear" });
-                  setSearchQueryPath("");
+                  setSearchQueryPath(null);
                 }}
               >
                 <Cross2Icon />
@@ -301,11 +288,10 @@ const SearchBox = () => {
           <div className="mt-[25px] flex flex-col justify-center items-center">
             <Spinner isPending={showSpinner} />
             <SearchResult
-              searchResults={searchResults}
+              searchResults={results}
               searchQuery={searchQuery}
-              isPending={isPending}
-              showMoreResults={showMoreResults}
-              limit={limit}
+              isPending={isFetching || isFetchingNextPage}
+              showMoreResults={handleFetchMore}
               setOpen={setOpen}
             />
           </div>
