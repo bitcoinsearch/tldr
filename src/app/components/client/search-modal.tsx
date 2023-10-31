@@ -8,7 +8,7 @@ import {
   MailingListType,
   SearchDataParams,
 } from "@/helpers/types";
-import { urlMapping } from "@/helpers/api-functions";
+import { urlMapping } from "@/config/config";
 import * as Dialog from "@radix-ui/react-dialog";
 import { ArrowDownIcon, ArrowUpIcon, Cross2Icon } from "@radix-ui/react-icons";
 
@@ -61,11 +61,11 @@ const SearchBox = () => {
       ?.total as SearchTotalHits;
     const bitcoinDevCount =
       domainAggregations?.buckets.find(
-        (url: string) => url === urlMapping["bitcoin-dev"]
+        (url: string) => url === urlMapping[BITCOINDEV]
       )?.doc_count ?? 0;
     const lightningDevCount =
       domainAggregations?.buckets.find(
-        (url: string) => url === urlMapping["bitcoin-dev"]
+        (url: string) => url === urlMapping[LIGHTNINGDEV]
       )?.doc_count ?? 0;
 
     results = {
