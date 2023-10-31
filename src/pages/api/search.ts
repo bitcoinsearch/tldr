@@ -18,7 +18,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       mailListType,
     } = req.body;
 
-
     const size = DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY
 
     const from = page * size;
@@ -30,8 +29,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       size,
       mailListType,
     });
-
-    console.log(searchQuery.query.bool.filter)
 
     const result = await client.search({
       index: INDEX,

@@ -58,8 +58,7 @@ export const buildQuery = ({
 
   
   if (mailListType) {
-    baseQuery.query.bool.filter[0].terms["domain.keyword"] =
-    urlMapping[mailListType];
+    baseQuery.query.bool.filter[0].terms["domain.keyword"] = [urlMapping[mailListType]]
   }
 
   if (authorString) {

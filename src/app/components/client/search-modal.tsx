@@ -88,8 +88,14 @@ const SearchBox = () => {
   const showSpinner = (isFetching || isFetchingNextPage) && !isError;
 
   const setSearchQueryPath = (path: MailingListType | null) => {
+    const managePathSelection = (prevPath: MailingListType | null | undefined) => {
+      if (searchQuery?.path === path) {
+        return null
+      }
+      return path
+    }
     setSearchQuery((prev) => ({
-      path,
+      path: managePathSelection(prev?.path),
       query: {
         ...prev?.query,
       },
@@ -183,10 +189,9 @@ const SearchBox = () => {
             <span className="flex items-center gap-x-2">
               <button
                 className={`border rounded py-1 px-2 text-xs hover:bg-slate-100 ${
-                  filter.bitcoinDev && "bg-slate-200"
+                  searchQuery?.path === BITCOINDEV && "bg-slate-200"
                 }`}
                 onClick={() => {
-                  dispatch({ type: "bitcoinDev" });
                   setSearchQueryPath(BITCOINDEV);
                 }}
               >
@@ -194,10 +199,9 @@ const SearchBox = () => {
               </button>
               <button
                 className={`border rounded py-1 px-2 text-xs hover:bg-slate-100 ${
-                  filter.lightningDev && "bg-slate-200"
+                  searchQuery?.path === LIGHTNINGDEV && "bg-slate-200"
                 }`}
                 onClick={() => {
-                  dispatch({ type: "lightningDev" });
                   setSearchQueryPath(LIGHTNINGDEV);
                 }}
               >
@@ -207,7 +211,6 @@ const SearchBox = () => {
                 className={`border p-[6px] hover:bg-slate-100 focus:bg-slate-100 inline-flex h-[25px] w-[25px] appearance-none items-center justify-center focus:outline-none`}
                 aria-label="clear-filter"
                 onClick={() => {
-                  dispatch({ type: "clear" });
                   setSearchQueryPath(null);
                 }}
               >
