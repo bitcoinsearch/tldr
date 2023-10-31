@@ -3,11 +3,12 @@ import { SearchQuery } from "../helpers/types";
 import { AggregationsAggregate, SearchResponse, SearchTotalHits } from "@elastic/elasticsearch/lib/api/types";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 
-type BuildQuery = ({queryString, page,sortFields, mailListType}: Omit<SearchQuery, "size">) => Promise<SearchResponse<unknown, Record<string, AggregationsAggregate>>>
+type BuildQuery = ({queryString, authorString, page,sortFields, mailListType}: Omit<SearchQuery, "size">) => Promise<SearchResponse<unknown, Record<string, AggregationsAggregate>>>
 
-export const buildQueryCall: BuildQuery = async ({queryString, page, sortFields, mailListType}) => {
+export const buildQueryCall: BuildQuery = async ({queryString, authorString, page, sortFields, mailListType}) => {
   const body = {
     queryString,
+    authorString,
     page,
     sortFields,
     mailListType
@@ -36,11 +37,11 @@ export const buildQueryCall: BuildQuery = async ({queryString, page, sortFields,
 };
 
 export const useSearch = ({
-  queryString,sortFields, mailListType
+  queryString, authorString, sortFields, mailListType
 }: Omit<SearchQuery, "size" | "page">) => {
   const queryResult = useInfiniteQuery({
-    queryKey: ["query", queryString, sortFields, mailListType],
-    queryFn: ({pageParam}) => buildQueryCall({queryString, page: pageParam, sortFields, mailListType}),
+    queryKey: ["query", queryString, authorString, sortFields, mailListType],
+    queryFn: ({pageParam}) => buildQueryCall({queryString, authorString, page: pageParam, sortFields, mailListType}),
     initialPageParam: 0,
     getNextPageParam: (lastPage, pages, lastPageParam) => {
       const totalHitsAsSearchTotalHits = lastPage?.hits?.total as SearchTotalHits;
@@ -49,7 +50,7 @@ export const useSearch = ({
       if (lastPageParam + 1 <= totalPages) return lastPageParam + 1
       else return undefined
     },
-    enabled: !!queryString?.trim(),
+    enabled: !!queryString?.trim() || !!authorString?.trim(),
   });
 
   return queryResult

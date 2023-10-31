@@ -42,6 +42,7 @@ const SearchBox = () => {
 
   const { data, fetchNextPage, isFetching, isFetchingNextPage, isError } = useSearch({
     queryString: searchQuery?.query.keyword ?? "",
+    authorString: searchQuery?.query.author ?? "",
     mailListType: searchQuery?.path ?? null,
     sortFields: [],
   });

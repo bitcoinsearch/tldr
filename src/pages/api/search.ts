@@ -12,6 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const {
       queryString,
+      authorString,
       page,
       sortFields,
       mailListType,
@@ -23,11 +24,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const from = page * size;
     const searchQuery = buildQuery({
       queryString,
+      authorString,
       sortFields,
       from,
       size,
       mailListType,
     });
+
+    console.log(searchQuery.query.bool.filter)
 
     const result = await client.search({
       index: INDEX,

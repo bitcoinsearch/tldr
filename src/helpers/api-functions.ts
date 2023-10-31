@@ -9,6 +9,7 @@ type BuildQueryForElaSticClient = Omit<SearchQuery, "page"> & {
 
 export const buildQuery = ({
   queryString,
+  authorString,
   size,
   from,
   sortFields,
@@ -23,8 +24,8 @@ export const buildQuery = ({
           {
             terms: {
               "domain.keyword": [
-                urlMapping["bitcoin-dev"],
-                urlMapping["lightning-dev"],
+                urlMapping[BITCOINDEV],
+                urlMapping[LIGHTNINGDEV],
               ],
             },
           },
@@ -33,12 +34,6 @@ export const buildQuery = ({
     },
     sort: [] as any[],
     aggs: {
-      authors: {
-        terms: {
-          field: "authors.keyword",
-          size: 15,
-        },
-      },
       domains: {
         terms: {
           field: "domain.keyword",
@@ -61,9 +56,18 @@ export const buildQuery = ({
 
   baseQuery.query.bool.must.push(shouldClause);
 
+  
   if (mailListType) {
     baseQuery.query.bool.filter[0].terms["domain.keyword"] =
-      urlMapping[mailListType];
+    urlMapping[mailListType];
+  }
+
+  if (authorString) {
+    baseQuery.query.bool.filter[1] = {
+      match: {
+        "author_list": authorString
+      }
+    }
   }
 
   if (sortFields && sortFields.length) {

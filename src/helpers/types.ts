@@ -119,6 +119,7 @@ export type SortOption = "asc" | "desc";
 
 export type SearchQuery = {
   queryString: string;
+  authorString: string;
   size: number;
   page: number;
   sortFields: any[];
