@@ -1,19 +1,10 @@
-import {
-  BITCOINDEV,
-  LIGHTNINGDEV,
-  type Facet,
-  type SearchQuery,
-} from "./types";
+import { BITCOINDEV, LIGHTNINGDEV, urlMapping } from "@/config/config";
+import type { SearchQuery } from "./types";
 
 const FIELDS_TO_SEARCH = ["authors", "title", "body"];
 
-type BuildQueryForElaSticClient = Omit<SearchQuery,"page"> & {
+type BuildQueryForElaSticClient = Omit<SearchQuery, "page"> & {
   from: number;
-};
-
-export const urlMapping = {
-  "bitcoin-dev": "https://lists.linuxfoundation.org/pipermail/bitcoin-dev",
-  "lightning-dev": "https://lists.linuxfoundation.org/pipermail/lightning-dev",
 };
 
 export const buildQuery = ({
@@ -23,7 +14,7 @@ export const buildQuery = ({
   sortFields,
   mailListType,
 }: BuildQueryForElaSticClient) => {
-  let baseQuery = {
+  const baseQuery = {
     query: {
       bool: {
         must: [] as any[],
@@ -70,14 +61,9 @@ export const buildQuery = ({
 
   baseQuery.query.bool.must.push(shouldClause);
 
-  if (mailListType === BITCOINDEV) {
+  if (mailListType) {
     baseQuery.query.bool.filter[0].terms["domain.keyword"] =
-      urlMapping["bitcoin-dev"];
-  }
-
-  if (mailListType === LIGHTNINGDEV) {
-    baseQuery.query.bool.filter[0].terms["domain.keyword"] =
-      urlMapping["lightning-dev"];
+      urlMapping[mailListType];
   }
 
   if (sortFields && sortFields.length) {

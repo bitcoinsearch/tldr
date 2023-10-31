@@ -5,11 +5,11 @@ import { SearchResults } from "./search-modal";
 import {
   SearchDataParams,
   EsSearchResult,
-  DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY,
 } from "@/helpers/types";
 import { getStaticPathFromURL } from "@/helpers/utils";
 import { extractAuthorsAndDates } from "@/helpers/convert-from-xml";
 import Link from "next/link";
+import { DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY } from "@/config/config";
 
 type SearchResultProps = {
   searchResults: SearchResults;

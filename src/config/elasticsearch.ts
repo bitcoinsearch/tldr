@@ -1,8 +1,9 @@
 import { Client } from "@elastic/elasticsearch";
+import { API_KEY, CLOUD_ID } from "./process";
 
 export const client = new Client({
   cloud: {
-    id: process.env.CLOUD_ID || "",
+    id: CLOUD_ID || "",
   },
-  auth: { apiKey: process.env.API_KEY || "" },
+  auth: { apiKey: API_KEY || "" },
 });

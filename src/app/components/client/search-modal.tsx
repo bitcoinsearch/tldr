@@ -1,13 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import React, { useTransition } from "react";
+import React from "react";
 import { useDebouncedCallback } from "use-debounce";
 
 import {
-  BITCOINDEV,
-  DEBOUNCE_DELAY,
-  LIGHTNINGDEV,
   MailingListType,
   SearchDataParams,
 } from "@/helpers/types";
@@ -16,16 +13,15 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { ArrowDownIcon, ArrowUpIcon, Cross2Icon } from "@radix-ui/react-icons";
 
 import { defaultFilter, filterReducer } from "./actions/filter-reducer";
-import { getDataFromCachedIndex } from "./actions/get-search-data";
 import SearchResult from "./search-result-ui";
 import Spinner from "./spinner";
 
-import { buildQueryCall, useSearch } from "@/services/search-service";
+import { useSearch } from "@/services/search-service";
 import {
   SearchTotalHits,
   SearchResponseBody,
-  SearchHit,
 } from "@elastic/elasticsearch/lib/api/types";
+import { BITCOINDEV, DEBOUNCE_DELAY, LIGHTNINGDEV } from "@/config/config";
 
 export type SearchResults = {
   searchResults: SearchResponseBody[];
@@ -75,8 +71,8 @@ const SearchBox = () => {
     results = {
       searchResults: data.pages,
       totalSearchResults: totalHitsAsSearchTotalHits.value,
-      bitcoinDevCount: 0,
-      lightningDevCount: 0,
+      bitcoinDevCount,
+      lightningDevCount,
     };
   }
 

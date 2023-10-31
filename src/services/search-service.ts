@@ -1,4 +1,5 @@
-import { DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY, SearchQuery } from "../helpers/types";
+import { DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY } from "@/config/config";
+import { SearchQuery } from "../helpers/types";
 import { AggregationsAggregate, SearchResponse, SearchTotalHits } from "@elastic/elasticsearch/lib/api/types";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 

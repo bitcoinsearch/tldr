@@ -1,11 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { client } from "../../config/elasticsearch";
 import { buildQuery } from "../../helpers/api-functions";
-import { DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY } from "@/helpers/types";
+import { DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY } from "@/config/config";
+import { INDEX } from "@/config/process";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
-    return res.status(400).json({ success: false, message: 'Invalid request method. The endpoint only supports POST requests.' });
+    return res.status(405).json({ success: false, message: 'Invalid request method. The endpoint only supports POST requests.' });
   }
 
   try {
@@ -29,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
 
     const result = await client.search({
-      index: process.env.INDEX,
+      index: INDEX,
       ...searchQuery,
     });
 

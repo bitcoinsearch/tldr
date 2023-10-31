@@ -1,10 +1,11 @@
 "use client";
-import { BITCOINDEV, HomepageData, HomepageEntryData, LIGHTNINGDEV, MailingListType } from "@/helpers/types";
+import { HomepageData, HomepageEntryData, MailingListType } from "@/helpers/types";
 import { addSpaceAfterPeriods } from "@/helpers/utils";
 import Image from "next/image";
 import React, { useMemo, useState } from "react";
 import Post from "../server/post";
 import "../../globals.css";
+import { BITCOINDEV, LIGHTNINGDEV } from "@/config/config";
 
 const Homepage = ({
   data,
