@@ -37,6 +37,7 @@ const Post = ({entry, isActivePost}: {entry: HomepageEntryData; isActivePost: bo
       <div>
         <SummaryList summary={entry.summary} />
       </div>
+      <hr className='my-6'/>
     </article>
   )
 }
