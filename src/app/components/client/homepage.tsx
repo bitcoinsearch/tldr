@@ -99,8 +99,10 @@ const Homepage = ({
   return (
     <main className=''>
       <div className="flex flex-col gap-6 md:gap-8 my-8 md:my-14">
-        <p className='text-2xl font-semibold leading-normal'>Your daily summary</p>
-        <h2 className='font-inika text-lg md:text-2xl text-gray-800'>{addSpaceAfterPeriods(data.header_summary)}</h2>
+        <h2 className='text-2xl font-semibold leading-normal'>Your daily summary</h2>
+        <div>
+          {formatTextToParagraphs(data.header_summary)}
+        </div>
       </div>
       <div className='mb-14'>
         <MailingListToggle selectedList={mailingListSelection} handleToggle={handleMailingListToggle} />
@@ -140,6 +142,17 @@ const Homepage = ({
 type ToggleButtonProps = {
   selectedList: MailingListType | null;
   handleToggle: (name: MailingListType) => void;
+};
+
+
+const formatTextToParagraphs = (text: string) => {
+  const spacedText = addSpaceAfterPeriods(text);
+
+  return spacedText.split(/\n\n+/).map((paragraph, index) => (
+    <p key={index} className="font-inika text-sm md:text-lg text-gray-800 my-4">
+      {paragraph}
+    </p>
+  ));
 };
 
 const MailingListToggle = ({ selectedList, handleToggle }: ToggleButtonProps) => {
