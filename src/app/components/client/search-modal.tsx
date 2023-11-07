@@ -36,8 +36,6 @@ const SearchBox = () => {
     null
   );
 
-  const [filter, dispatch] = React.useReducer(filterReducer, defaultFilter);
-
   const searchFeedInputRef = React.useRef<HTMLInputElement>(null);
 
   const { data, fetchNextPage, isFetching, isFetchingNextPage, isError } = useSearch({
