@@ -36,13 +36,23 @@ const Post = ({
       {isActivePost ? (
         <p className="font-inter text-sm md:text-base font-bold hover:text-slate-600 hover:underline hover:underline-offset-2">
           <Link href={`/${path}/#discussion-history`}>
-            {entry.n_threads} replies
+            {entry.n_threads === 1
+              ? `${entry.n_threads} reply`
+              : `${entry.n_threads} replies`}
           </Link>
         </p>
       ) : (
-        <p className="font-inter text-sm md:text-base font-bold">
-          Posted {publishedAtDateDisplay}
-        </p>
+        <div className="font-inter text-sm md:text-base font-bold ">
+          <Link
+            href={`/${path}/#discussion-history`}
+            className="hover:text-slate-600 hover:underline hover:underline-offset-2"
+          >
+            {entry.authors.length === 1
+              ? `${entry.authors.length} reply`
+              : `${entry.authors.length} replies`}
+          </Link>
+          <p className="mt-[14px]">Posted {publishedAtDateDisplay}</p>
+        </div>
       )}
       <div className="grid grid-cols-2 text-sm">
         <div className="flex basis-1/3 flex-col gap-1">
