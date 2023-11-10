@@ -1,8 +1,10 @@
-import { formattedDate } from '@/helpers/utils'
-import { getRelativePathFromInternalLink } from "@/app/components/server/actions/summary-data";
-import React from "react";
-import { sortedAuthorData } from "../page";
 import Link from "next/link";
+import React from "react";
+
+import { getRelativePathFromInternalLink } from "@/app/components/server/actions/summary-data";
+import { formattedDate } from "@/helpers/utils";
+
+import { sortedAuthorData } from "../page";
 
 const DiscussionHistory = ({
   historyLinks,
@@ -16,7 +18,7 @@ const DiscussionHistory = ({
       <h2 className="font-inika text-3xl sticky top-[76px] py-6 bg-gradient-to-b from-[#fff] via-[#fff] via-70% to-[rgba(256,0,0, 1)] z-10 border-t-2">
         Discussion History
       </h2>
-      <div className="">
+      <div id="discussion-history" className="pt-[76px] mt-[-76px]">
         {historyLinks.map((link, index) => {
           return (
             <SingleHistoryThread
@@ -47,7 +49,7 @@ const SingleHistoryThread = ({
   const path = getRelativePathFromInternalLink(historyLink);
   const dateObj = new Date(author.dateInMS);
   const dateString = dateObj.toISOString();
-  const publishedAtDateDisplay = formattedDate(dateString)
+  const publishedAtDateDisplay = formattedDate(dateString);
   return (
     <div key={index} className="flex relative pb-8 gap-4">
       {length - 1 !== index && (

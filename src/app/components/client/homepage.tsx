@@ -6,6 +6,7 @@ import React, { useMemo, useState } from "react";
 import Post from "../server/post";
 import "../../globals.css";
 import { BITCOINDEV, LIGHTNINGDEV } from "@/config/config";
+import ScrollToTopButton from "./scroll-to-top";
 
 const Homepage = ({
   data,
@@ -135,6 +136,7 @@ const Homepage = ({
           </button>
         </section>
       </div>
+      <ScrollToTopButton />
     </main>
   );
 };
