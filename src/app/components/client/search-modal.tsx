@@ -172,7 +172,7 @@ const SearchBox = () => {
           <Dialog.Content
             className={`dialogContent fixed rounded-[5px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none overflow-y-auto ${
               isMobile
-                ? "mx-auto my-0 top-[50%] left-[50%] max-h-[65vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%]"
+                ? "mx-auto my-0 top-[50%] left-[50%] max-h-[65vh] translate-x-[-50%] translate-y-[-50%]"
                 : "absolute left-[48.5%]"
             } p-4 bg-white shadow-xl z-20 ${
               open ? "animate-slideIn" : "animate-slideOut"
@@ -184,7 +184,7 @@ const SearchBox = () => {
                     inputContainerRef.current?.getBoundingClientRect().bottom
                   }px + 10px)`,
               transform: isMobile ? "translate(-50%, -50%)" : "none",
-              width: isMobile ? "90vw" : "70vw",
+              width: isMobile ? "85vw" : "70vw",
               maxWidth: isMobile ? "450px" : "420px",
               maxHeight: isMobile ? "60vh" : "calc(70vh - 100px)",
             }}
@@ -249,7 +249,7 @@ const SearchBox = () => {
             <fieldset className="my-[15px] flex flex-col items-start gap-2">
               <label htmlFor="search"></label>
               <input
-                className="inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] p-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_1.5px]"
+                className="inline-flex h-[35px] w-full border border-slate-300 md:border-none flex-1 items-center justify-center rounded-[4px] p-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_1.5px]"
                 id="search"
                 ref={searchFeedInputRef}
                 placeholder="Search feed"
@@ -257,7 +257,7 @@ const SearchBox = () => {
               />
               <label htmlFor="search-author"></label>
               <input
-                className="inline-flex h-[35px] w-[50%] flex-1 items-center justify-center rounded-[4px] p-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
+                className="inline-flex h-[35px] w-[80%] sm:w-[55%] border border-slate-300 md:border-none flex-1 items-center justify-center rounded-[4px] p-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
                 id="search-author"
                 placeholder="Optional: author name"
                 onChange={(e) => debouncedSearchAuthor(e.target.value)}
