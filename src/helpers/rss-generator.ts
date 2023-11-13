@@ -4,14 +4,12 @@ import { createArticlesFromFolder, createMonthsFromKeys, monthsInOrder } from ".
 import { Feed } from "feed";
 import { readStaticDir } from "./search-data";
 
-// var RSS = require('rss');
-
 const numberOfMonths = 2;
 
 export const generateRSSFeed = async () => {
   const folders = [
     "lightning-dev", 
-    // "bitcoin-dev"
+    "bitcoin-dev"
   ];
   let result: HomepageEntryData[] = [];
 
@@ -32,11 +30,6 @@ export const generateRSSFeed = async () => {
     sliceIndex,
     numberOfMonths + 1
   );
-  // console.log(monthsToGenerate);
-
-  
- 
-  // var feed = new RSS(feedOptions);
 
   const feed = new Feed({
     title: "TLDR RSS Feed",
@@ -70,10 +63,7 @@ export const generateRSSFeed = async () => {
               result.push(...[]);
             } else {
               const folderData = await readStaticDir(DIRECTORY);
-              const data = createArticlesFromFolder(folderData, folder);
-              // console.log({data})
-              // const cleanData = removeBadData(data);
-
+              const data = createArticlesFromFolder(folderData, folder)
               return result.push(...data);
             }
           } catch (error) {
@@ -85,12 +75,11 @@ export const generateRSSFeed = async () => {
     })
   )
 
-  result.slice(0, 50).map((item) => {
+  result.map((item) => {
     feed.addItem({
       title: item.title,
       id: item.id,
       link: item.link,
-      // description: "desc",
       content: item.summary,
       author: item.authors.map((author) => ({name: author})),
       contributor: item.contributors.map((contributor) => ({name: contributor})),
@@ -99,40 +88,4 @@ export const generateRSSFeed = async () => {
   })
 
   return feed
-
-  // feed.addItem({
-  //   title: "title",
-  //   id: "rand",
-  //   link: "link",
-  //   description: "desc",
-  //   content: "rand",
-  //   author: [
-  //     {
-  //       name: "Jane Doe",
-  //       email: "janedoe@example.com",
-  //       link: "https://example.com/janedoe",
-  //     },
-  //   ],
-  //   contributor: [
-  //     {
-  //       name: "Shawn Kemp",
-  //       email: "shawnkemp@example.com",
-  //       link: "https://example.com/shawnkemp",
-  //     },
-  //   ],
-  //   date: new Date(),
-  //   image: "https://example.com/reggiemiller",
-  // });
-
-  // feed.addCategory("Technologie");
-
-  // feed.addContributor({
-  //   name: "Johan Cruyff",
-  //   email: "johancruyff@example.com",
-  //   link: "https://example.com/johancruyff",
-  // });
-
-  // console.log("atom", feed.atom1());
 };
-
-// const removeBadData
