@@ -1,6 +1,5 @@
 import Homepage from "@/app/components/client/homepage";
 import { BATCHSIZE } from "@/config/config";
-import { generateRSSFeed } from "@/helpers/rss-generator";
 import { readStaticDir } from "@/helpers/search-data";
 import { HomepageData, HomepageEntryData } from "@/helpers/types";
 import {
