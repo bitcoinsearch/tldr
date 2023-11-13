@@ -3,8 +3,7 @@ import { HomepageEntryData } from "./types";
 import { createArticlesFromFolder, createMonthsFromKeys, monthsInOrder } from "./utils";
 import { Feed } from "feed";
 import { readStaticDir } from "./search-data";
-
-const numberOfMonths = 2;
+import { RSS_FEED_IN_MONTHS } from "@/config/config";
 
 export const generateRSSFeed = async () => {
   const folders = [
@@ -26,15 +25,18 @@ export const generateRSSFeed = async () => {
     (month) => month.slice(0, -5) === currentMonth
   );
 
+  const endMonth = RSS_FEED_IN_MONTHS < 2 ? null : allpossibleMonths[sliceIndex + RSS_FEED_IN_MONTHS].slice(0, -5)
+  const monthRange = endMonth ? `${endMonth} to ${currentMonth}` : currentMonth
+
   const monthsToGenerate = allpossibleMonths.slice(
     sliceIndex,
-    numberOfMonths + 1
+    RSS_FEED_IN_MONTHS + 1
   );
 
   const feed = new Feed({
     title: "TLDR RSS Feed",
     description: "Bitcoin and Lightning mailing list summaries",
-    id: `Feed for month of ${currentMonth}`,
+    id: `Feed for month of ${monthRange}`,
     link: "https://tldr.bitcoinsearch.xyz/feed/rss",
     language: "en", // optional, used only in RSS 2.0, possible values: http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
     image: "https://tldr.bitcoinsearch.xyz/images/laughing_cat_sq.jpg",
@@ -43,12 +45,7 @@ export const generateRSSFeed = async () => {
     feedLinks: {
       json: "https://tldr.bitcoinsearch.xyz/feed/rss?format=json",
       atom: "https://tldr.bitcoinsearch.xyz/feed/rss?format=atom",
-    },
-    author: {
-      name: "John Doe",
-      email: "johndoe@example.com",
-      link: "https://example.com/johndoe",
-    },
+    }
   });
 
   await Promise.all(
