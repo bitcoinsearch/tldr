@@ -2,6 +2,8 @@ import Navbar from "@/app/components/server/navbar";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter, Inika } from "next/font/google";
+import Link from "next/link";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const inika = Inika({
@@ -14,6 +16,11 @@ const inika = Inika({
 
 export const metadata: Metadata = {
   title: "Bitcoin TLDR",
+  alternates: {
+    types: {
+      'application/rss+xml': './rss.xml',
+    }
+  },
   description: "Presents summaries of the bitcoin-dev and lightning-dev mailing lists. We intend to add other sources like StackExchange in the future.",
   keywords:
     "bitcoin, bitcoin development, bitcoin tldr, bitcoin tl;dr, bitcoin learning, bitcoin resources, bitcoin resources for beginners, bitcoin resources for developers, bitcoin resources for beginners and developers, bitcoin resources for beginners and developers",
@@ -33,6 +40,7 @@ export const metadata: Metadata = {
     creator: "@chaincodelabs",
     images: ["https://tldr.bitcoinsearch.xyz/images/laughing_cat_landscape.jpg"],
   },
+  
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -45,7 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Navbar />
             </div>
             <div className='w-full mx-auto grow max-w-3xl pb-8 px-4 lg:px-0'>{children}</div>
-            <footer style={{ padding: "24px", backgroundColor: "black", color: "white", textAlign: "center", width: "100%" }}>
+            <footer className="p-[24px] bg-black text-white text-center w-full">
               <p style={{ fontSize: "16px", color: "lightgray" }}>
                 Built with ❤️ by{" "}
                 <a href='https://bitcoindevs.xyz' target='_blank' rel='noopener noreferrer' style={{ color: "orange" }}>
@@ -71,6 +79,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   umami
                 </a>
               </p>
+              <Link href="/rss.xml" target="_blank" about="tldr-rss-feed">
+                <div className="flex mx-auto gap-2 items-end">
+                  <Image className="fill-orange-400" src="/icons/rss.svg" alt="tldr-rss-feed" width={18} height={18} />
+                  <p className="text-orange-400">TLDR Feed</p>
+                </div>
+              </Link>
             </footer>
           </div>
         </div>
