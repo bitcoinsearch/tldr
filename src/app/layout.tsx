@@ -49,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.variable} ${inika.variable} font-inter h-full`}>
         <div className='pt-2 md:pt-[56px] w-full items-center h-full flex flex-col'>
           <div className='w-full grow flex flex-col'>
-            <div className='sticky top-0 bg-white w-full h-[76px] flex items-center px-4 z-10'>
+            <div className='sticky top-0 bg-white w-full h-[98px] flex flex-col items-center px-4 z-10'>
               <Navbar />
             </div>
             <div className='w-full mx-auto grow max-w-3xl pb-8 px-4 lg:px-0'>{children}</div>
@@ -79,12 +79,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   umami
                 </a>
               </p>
-              <Link href="/rss.xml" target="_blank" about="tldr-rss-feed">
-                <div className="flex mx-auto gap-2 items-end">
-                  <Image className="fill-orange-400" src="/icons/rss.svg" alt="tldr-rss-feed" width={18} height={18} />
-                  <p className="text-orange-400">TLDR Feed</p>
-                </div>
-              </Link>
             </footer>
           </div>
         </div>

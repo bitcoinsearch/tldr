@@ -7,14 +7,14 @@ import Image from "next/image";
 
 const Navbar = () => {
   return (
-    <div className="w-full max-w-3xl mx-auto h-[44px] mb-2">
+    <div className="w-full max-w-3xl mx-auto mt-2">
       <Link href="/rss.xml" target="_blank" about="tldr-rss-feed">
         <Image
           src="/icons/feed_icon.svg"
           alt="tldr-rss-feed"
-          width={24}
-          height={24}
-          className="mb-2"
+          width={22}
+          height={22}
+          className="mb-1"
         />
       </Link>
       <div className="flex justify-between items-center">
