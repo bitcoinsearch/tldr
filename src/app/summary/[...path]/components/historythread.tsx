@@ -15,10 +15,10 @@ const DiscussionHistory = ({
 }) => {
   return (
     <div className="relative">
-      <h2 className="font-inika text-3xl sticky top-[76px] py-6 bg-gradient-to-b from-[#fff] via-[#fff] via-70% to-[rgba(256,0,0, 1)] z-10 border-t-2">
+      <h2 className="font-inika text-3xl sticky top-[98px] py-6 bg-gradient-to-b from-[#fff] via-[#fff] via-70% to-[rgba(256,0,0, 1)] z-10 border-t-2">
         Discussion History
       </h2>
-      <div id="discussion-history" className="pt-[76px] mt-[-76px]">
+      <div id="discussion-history" className="pt-[98px] mt-[-98px]">
         {historyLinks.map((link, index) => {
           return (
             <SingleHistoryThread
