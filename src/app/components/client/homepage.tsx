@@ -1,5 +1,5 @@
 "use client";
-import { HomepageData, HomepageEntryData, MailingListType } from "@/helpers/types";
+import { HomepageData, HomepageEntryData, MailingListType, NewsLetterData } from "@/helpers/types";
 import { addSpaceAfterPeriods } from "@/helpers/utils";
 import Image from "next/image";
 import React, { useMemo, useState } from "react";
@@ -99,18 +99,28 @@ const Homepage = ({
 
   return (
     <main className=''>
-      <div className="flex flex-col gap-6 md:gap-8 my-8 md:my-14">
+      <div className='flex flex-col gap-6 md:gap-8 my-8 md:my-14'>
         <h2 className='text-2xl font-semibold leading-normal'>Your daily summary</h2>
-        <div>
-          {formatTextToParagraphs(data.header_summary)}
-        </div>
+        <div>{formatTextToParagraphs(data.header_summary)}</div>
       </div>
       <div className='mb-14'>
         <MailingListToggle selectedList={mailingListSelection} handleToggle={handleMailingListToggle} />
       </div>
       <div className='flex flex-col gap-12 break-words'>
         <section>
-          <h2 className='text-xl md:text-4xl font-semibold pb-8'>Active Discussions 🔥</h2>
+          <h2 className='text-xl md:text-4xl font-semibold pb-8' id='active_discussions'>
+            Active Discussions 🔥
+          </h2>
+          <div>
+            {homepageData.active_posts.map((entry) => (
+              <Post key={entry.id} entry={entry} isActivePost={true} />
+            ))}
+          </div>
+        </section>
+        <section>
+          <h2 className='text-xl md:text-4xl font-semibold pb-8' id='today_in_history'>
+            Today in Bitcoin/LN History
+          </h2>
           <div>
             {homepageData.active_posts.map((entry) => (
               <Post key={entry.id} entry={entry} isActivePost={true} />
@@ -118,7 +128,9 @@ const Homepage = ({
           </div>
         </section>
         <div className=''>
-          <h2 className='text-xl md:text-4xl font-semibold pb-8'>All Activity</h2>
+          <h2 className='text-xl md:text-4xl font-semibold pb-8' id='all_activity'>
+            All Activity
+          </h2>
           <div>
             {memoizedBatches?.map((entry, idx) => (
               <Post key={`${entry.id}_${idx}`} entry={entry} isActivePost={false} />
@@ -145,7 +157,6 @@ type ToggleButtonProps = {
   selectedList: MailingListType | null;
   handleToggle: (name: MailingListType) => void;
 };
-
 
 const formatTextToParagraphs = (text: string) => {
   const spacedText = addSpaceAfterPeriods(text);
