@@ -153,18 +153,20 @@ const SearchBox = () => {
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger asChild>
           <div className="relative">
-            <input
-              name="searchbox"
-              className="border-[1px] rounded-md border-[#ccc] w-[200px] md:w-[274px] py-2 pl-9"
-              placeholder="search [cmd/ctrl+k]"
-            />
-            <Image
-              className="absolute top-1/2 left-0 -translate-y-1/2 ml-2 pointer-events-none"
-              src="/icons/search_icon.svg"
-              alt="search_icon"
-              width={24}
-              height={24}
-            />
+              {isMobile ? null : 
+                <input
+                  name="searchbox"
+                  className="border-[1px] rounded-md border-[#ccc] w-[200px] md:w-[274px] py-2 pl-9"
+                  placeholder="search [cmd/ctrl+k]"
+                />
+              }
+              <Image
+                className={`${isMobile ? 'relative -translate-y-0' : 'absolute'} top-1/2 left-0 -translate-y-1/2 ml-2 pointer-events-none`}
+                src="/icons/search_icon.svg"
+                alt="search_icon"
+                width={24}
+                height={24}
+              />
           </div>
         </Dialog.Trigger>
         <Dialog.Portal>
