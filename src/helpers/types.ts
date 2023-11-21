@@ -1,8 +1,8 @@
 import { BITCOINDEV, LIGHTNINGDEV } from "@/config/config";
 
-const AUTHOR = "authors" as const
-const DOMAIN = "domain" as const
-const TAGS = "tags" as const
+const AUTHOR = "authors" as const;
+const DOMAIN = "domain" as const;
+const TAGS = "tags" as const;
 
 type Feed = {
   id: string;
@@ -140,5 +140,25 @@ export type EsSearchResult = {
     domain: string;
     indexed_at: string;
     url: string;
-  } 
-}
+  };
+};
+
+export type NewsLetterData = {
+  summary_of_threads_started_this_week: string;
+  new_threads_this_week: Array<NewsLetter>;
+  active_posts_this_week: Array<NewsLetter>;
+};
+
+export type NewsLetter = {
+  id: string;
+  title: string;
+  link: string;
+  authors: Array<string>;
+  published_at: string;
+  summary: string;
+  n_threads: number;
+  dev_name: string;
+  contributors: Array<string>;
+  file_path: string;
+  combined_summ_file_path: string;
+};
