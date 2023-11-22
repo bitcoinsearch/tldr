@@ -143,7 +143,7 @@ export type EsSearchResult = {
   };
 };
 
-export type NewsLetterData = {
+export type NewsLetterDataType = {
   summary_of_threads_started_this_week: string;
   new_threads_this_week: Array<NewsLetter>;
   active_posts_this_week: Array<NewsLetter>;
@@ -161,4 +161,10 @@ export type NewsLetter = {
   contributors: Array<string>;
   file_path: string;
   combined_summ_file_path: string;
+};
+
+export type NewsLetterSet = {
+  year: string;
+  week_0: { title: string; link: string };
+  week_1: { title: string; link: string };
 };
