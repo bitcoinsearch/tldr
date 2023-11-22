@@ -1,5 +1,5 @@
 "use client";
-import { HomepageData, HomepageEntryData, MailingListType, NewsLetterData } from "@/helpers/types";
+import { HomepageData, HomepageEntryData, MailingListType } from "@/helpers/types";
 import { addSpaceAfterPeriods } from "@/helpers/utils";
 import Image from "next/image";
 import React, { useMemo, useState } from "react";
@@ -117,7 +117,7 @@ const Homepage = ({
             ))}
           </div>
         </section>
-        <section>
+        {/* <section>
           <h2 className='text-xl md:text-4xl font-semibold pb-8' id='today_in_history'>
             Today in Bitcoin/LN History
           </h2>
@@ -126,7 +126,7 @@ const Homepage = ({
               <Post key={entry.id} entry={entry} isActivePost={true} />
             ))}
           </div>
-        </section>
+        </section> */}
         <div className=''>
           <h2 className='text-xl md:text-4xl font-semibold pb-8' id='all_activity'>
             All Activity
@@ -162,7 +162,7 @@ const formatTextToParagraphs = (text: string) => {
   const spacedText = addSpaceAfterPeriods(text);
 
   return spacedText.split(/\n\n+/).map((paragraph, index) => (
-    <p key={index} className="font-inika text-sm md:text-lg text-gray-800 my-4">
+    <p key={index} className='font-inika text-sm md:text-lg text-gray-800 my-4'>
       {paragraph}
     </p>
   ));
