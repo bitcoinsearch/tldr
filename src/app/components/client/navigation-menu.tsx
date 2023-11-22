@@ -27,7 +27,7 @@ const Menu = () => {
         <>
           <div className='fixed top-0 right-0 left-0 bottom-0 bg-slate-300 h-full opacity-50 overflow-hidden' onClick={toggle}></div>
           <div className='max-w-xs w-80 bg-white h-full fixed top-0 right-0 border rounded-l-lg opacity-100 z-50 p-4 transition delay-500 ease-in-out overflow-hidden'>
-            <section className='flex justify-end items-end'>
+            <section className='flex justify-end items-end p-[10px] pb-0'>
               <button className='self-end'>
                 <Cross2Icon cursor='pointer' className='h-6 w-6 p-1 bg-[#eeeeee] rounded' onClick={toggle} />
               </button>
