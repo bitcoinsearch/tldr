@@ -50,7 +50,7 @@ const getAllNewsLetters = () => {
   }
 };
 
-export async function Page() {
+export default async function Page() {
   const newsletters = getCurrentNewsletter();
   const newsletter_sets = getAllNewsLetters();
 
@@ -88,5 +88,3 @@ export async function Page() {
     </div>
   );
 }
-
-export default Page;
