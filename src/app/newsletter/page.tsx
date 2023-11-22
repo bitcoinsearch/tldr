@@ -1,64 +1,92 @@
 import * as fs from "fs";
-import { NewsLetter as NewsLetterType, NewsLetterData } from "@/helpers/types";
-import { formattedDate } from "@/helpers/utils";
+import { NewsLetterDataType, NewsLetterSet } from "@/helpers/types";
+import { NewsletterPage } from "../components/server/newsletter";
 import Link from "next/link";
-import { SummaryList } from "../components/server/post";
 
-const getNewsLetterData = async () => {
-  "use server";
+// get most recent newsletter from newsletter.json
+const getCurrentNewsletter = () => {
   try {
-    const dir = `${process.cwd()}/public/static/static/newsletters`;
-    const folderData = fs.readdirSync(dir);
-
-    const monthlyBatch = [];
-    for (let index = 0; index < folderData.length; index++) {
-      const element = folderData[index];
-
-      const json_dir = `${dir}/${element}`;
-      const json_path = fs.readdirSync(json_dir)[index];
-      const data = fs.readFileSync(`${process.cwd()}/public/static/static/newsletters/${element}/${json_path}`, "utf-8");
-
-      const parsedData = JSON.parse(data) as NewsLetterData;
-      monthlyBatch.push(parsedData);
-    }
-
-    return monthlyBatch;
+    const data = fs.readFileSync(`${process.cwd()}/public/static/static/newsletters/newsletter.json`, "utf-8");
+    const parsedData = JSON.parse(data) as NewsLetterDataType;
+    return parsedData;
   } catch (err) {
     return null;
   }
 };
 
-export async function NewsLetterPage() {
-  const newsletters = await getNewsLetterData();
+// extract all newsletters
+const getAllNewsLetters = () => {
+  let newsletter_sets = [];
+  let dataObject: any = {};
+
+  try {
+    const dir = `${process.cwd()}/public/static/static/newsletters`;
+    const folder = fs.readdirSync(dir);
+    const getfolders = folder.slice(0, folder.length - 1);
+
+    for (let i = 0; i < getfolders.length; i++) {
+      const month_batch = getfolders[i];
+      dataObject[`year`] = month_batch.replace("_", " ");
+      const json_dir = `${dir}/${month_batch}`;
+      const json_path = fs.readdirSync(json_dir);
+
+      for (let j = 0; j < json_path.length; j++) {
+        const weekly_newsletter = json_path[j];
+
+        const file_path = `month/newsletters/${month_batch}/${weekly_newsletter}`;
+        const data = fs.readFileSync(`${process.cwd()}/public/static/static/newsletters/${month_batch}/${weekly_newsletter}`, "utf-8");
+
+        const parsedData = JSON.parse(data) as NewsLetterDataType;
+        const get_title = parsedData.summary_of_threads_started_this_week.split(".")[0];
+
+        dataObject[`week_${j}`] = { title: get_title, link: file_path };
+      }
+      newsletter_sets.push(dataObject);
+    }
+
+    return newsletter_sets as NewsLetterSet[];
+  } catch (err) {
+    return null;
+  }
+};
+
+export async function Page() {
+  const newsletters = getCurrentNewsletter();
+  const newsletter_sets = getAllNewsLetters();
+
+  if (!newsletter_sets) return null;
   if (!newsletters) return null;
 
   return (
     <div>
-      <h2 className='text-xl md:text-4xl font-normal pb-8 pt-10'>Newsletters </h2>
-      <div>
-        <p className='pb-12'>{newsletters[0].summary_of_threads_started_this_week}</p>
-        <section className='flex flex-col gap-9'>
-          {newsletters[0].new_threads_this_week.map((entry) => (
-            <NewsLetter entry={entry} key={entry.id} />
+      <NewsletterPage newsletter={newsletters} />
+      <section>
+        <h2 className='text-xl md:text-4xl font-normal pb-8 pt-10'>Monthly Newsletters </h2>
+        <div className='flex flex-col gap-5'>
+          {newsletter_sets.map((set, index) => (
+            <>
+              <div key={`${index}_${set.week_0.link}`}>
+                <h2 className='text-lg font-normal pb-2'>{set.year}</h2>
+
+                <ul className='list-disc pl-4 flex flex-col gap-1'>
+                  <li>
+                    <Link className='text-sm underline cursor-pointer' href={set.week_0.link}>
+                      {set.week_0.title}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className='text-sm underline cursor-pointer' href={set.week_1.link}>
+                      {set.week_1.title}
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </>
           ))}
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }
 
-export default NewsLetterPage;
-
-export const NewsLetter = ({ entry }: { entry: NewsLetterType }) => {
-  const publishedAtDateDisplay = formattedDate(entry.published_at);
-
-  return (
-    <div key={`${entry.id}_${entry.title}`} className='flex flex-col gap-2'>
-      <p className='text-sm'>{publishedAtDateDisplay}</p>
-      <Link href={entry.combined_summ_file_path} className='font-inika text-lg md:text-2xl underline cursor-pointer capitalize pb-3'>
-        {entry.title}
-      </Link>
-      <SummaryList summary={entry.summary} />
-    </div>
-  );
-};
+export default Page;
