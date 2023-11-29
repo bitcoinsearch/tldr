@@ -34,7 +34,7 @@ const Menu = () => {
             </section>
             <section className='flex flex-col gap-[2px] pt-8'>
               <LinkComponent title='Active Discussions' href='/#active_discussions' />
-              <LinkComponent title='Today in Bitcoin/LN History' href='/#today_in_history' />
+              {/* <LinkComponent title='Today in Bitcoin/LN History' href='/#today_in_history' /> */}
               <LinkComponent title='All Activity' href='/#all_activity' />
               <LinkComponent title='Newsletter' href='/newsletter' />
               <LinkComponent title='RSS feed' href='/rss.xml' target='_blank' />
