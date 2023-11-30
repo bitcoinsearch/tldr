@@ -21,7 +21,7 @@ export const metadata: Metadata = {
       'application/rss+xml': './rss.xml',
     }
   },
-  description: "Presents summaries of the bitcoin-dev and lightning-dev mailing lists. We intend to add other sources like StackExchange in the future.",
+  description: "Bitcoin-dev and Lightning-dev mailing list summaries and discoveries",
   keywords:
     "bitcoin, bitcoin development, bitcoin tldr, bitcoin tl;dr, bitcoin learning, bitcoin resources, bitcoin resources for beginners, bitcoin resources for developers, bitcoin resources for beginners and developers, bitcoin resources for beginners and developers",
   openGraph: {
