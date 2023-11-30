@@ -25,12 +25,12 @@ export const NewsletterPage = ({ newsletter }: { newsletter: NewsLetterDataType 
   return (
       <div>
         <section>
-          <h2 className='text-xl md:text-4xl font-normal pb-8 pt-10'>Summary of Newsletters </h2>
+          <h2 className='text-xl md:text-4xl font-normal pb-8 pt-10'>Summary</h2>
           <p className='pb-12'>{newsletter.summary_of_threads_started_this_week}</p>
         </section>
 
         <section className='pb-12'>
-          <h2 className='text-xl md:text-4xl font-normal pb-8 pt-10'>New posts this week</h2>
+          <h2 className='text-xl md:text-4xl font-normal pb-8 pt-10'>New posts</h2>
           <section className='flex flex-col gap-9'>
             {newsletter.new_threads_this_week.map((entry) => (
               <NewsletterCard entry={entry} key={entry.id} />
@@ -39,7 +39,7 @@ export const NewsletterPage = ({ newsletter }: { newsletter: NewsLetterDataType 
         </section>
 
         <section className='pb-12'>
-          <h2 className='text-xl md:text-4xl font-normal pb-8 pt-10'>Active posts this week</h2>
+          <h2 className='text-xl md:text-4xl font-normal pb-8 pt-10'>Ongoing Discussions</h2>
           <section className='flex flex-col gap-9'>
             {newsletter.active_posts_this_week.map((entry) => (
               <NewsletterCard entry={entry} key={entry.id} />
