@@ -16,8 +16,9 @@ const getCurrentNewsletter = () => {
 
 // extract all newsletters
 const getAllNewsLetters = () => {
-  let newsletter_sets = [];
-  let dataObject: any = {};
+  let newsletter_set = [];
+  let all_newsletters = [];
+  let newsletter_section: any = {};
 
   try {
     const dir = `${process.cwd()}/public/static/static/newsletters`;
@@ -26,7 +27,7 @@ const getAllNewsLetters = () => {
 
     for (let i = 0; i < getfolders.length; i++) {
       const month_batch = getfolders[i];
-      dataObject[`year`] = month_batch.replace("_", " ");
+      newsletter_section[`year`] = month_batch.replace("_", " ");
       const json_dir = `${dir}/${month_batch}`;
       const json_path = fs.readdirSync(json_dir);
 
@@ -39,12 +40,13 @@ const getAllNewsLetters = () => {
         const parsedData = JSON.parse(data) as NewsLetterDataType;
         const get_title = parsedData.summary_of_threads_started_this_week.split(".")[0];
 
-        dataObject[`week_${j}`] = { title: get_title, link: file_path };
+        newsletter_set.push({ title: get_title, link: file_path });
       }
-      newsletter_sets.push(dataObject);
+      newsletter_section[`newsletters`] = newsletter_set;
     }
+    all_newsletters.push(newsletter_section);
 
-    return newsletter_sets as NewsLetterSet[];
+    return all_newsletters as NewsLetterSet[];
   } catch (err) {
     return null;
   }
@@ -65,21 +67,20 @@ export default async function Page() {
         <div className='flex flex-col gap-5'>
           {newsletter_sets.map((set, index) => (
             <>
-              <div key={`${index}_${set.week_0.link}`}>
+              <div key={`${index}_${set.year}`}>
                 <h2 className='text-lg font-normal pb-2'>{set.year}</h2>
 
-                <ul className='list-disc pl-4 flex flex-col gap-1'>
-                  <li>
-                    <Link className='text-sm underline cursor-pointer' href={set.week_0.link}>
-                      {set.week_0.title}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className='text-sm underline cursor-pointer' href={set.week_1.link}>
-                      {set.week_1.title}
-                    </Link>
-                  </li>
-                </ul>
+                {set.newsletters.length
+                  ? set.newsletters.map((newsletter, index) => (
+                      <ul className='list-disc pl-4 flex flex-col gap-1' key={`${index}_${newsletter.link}`}>
+                        <li>
+                          <Link className='text-sm underline cursor-pointer' href={newsletter.link}>
+                            {newsletter.title}
+                          </Link>
+                        </li>
+                      </ul>
+                    ))
+                  : null}
               </div>
             </>
           ))}
