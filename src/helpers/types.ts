@@ -165,6 +165,5 @@ export type NewsLetter = {
 
 export type NewsLetterSet = {
   year: string;
-  week_0: { title: string; link: string };
-  week_1: { title: string; link: string };
+  newsletters: Array<{ title: string; link: string }>;
 };
