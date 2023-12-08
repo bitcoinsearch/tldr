@@ -175,7 +175,7 @@ const SearchBox = () => {
             className={`dialogContent fixed rounded-[5px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none overflow-y-auto ${
               isMobile
                 ? "mx-auto my-0 top-[50%] left-[50%] max-h-[65vh] translate-x-[-50%] translate-y-[-50%]"
-                : "absolute left-[48.5%]"
+                : "left-[48.5%]"
             } p-4 bg-white shadow-xl z-20 ${
               open ? "animate-slideIn" : "animate-slideOut"
             }`}
