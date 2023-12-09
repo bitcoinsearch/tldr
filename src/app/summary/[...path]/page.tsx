@@ -5,6 +5,7 @@ import * as fs from "fs";
 import Image from "next/image";
 import DiscussionHistory from "./components/historythread";
 import Link from "next/link";
+import BreadCrumbs from "./components/BreadCrumb";
 
 export type sortedAuthorData = AuthorData & {initialIndex: number, dateInMS: number}
 
@@ -48,27 +49,18 @@ const getSummaryData = async (path: string[]) => {
 export default async function Page({ params }: { params: { path: string[] } }) {
   const summaryData = await getSummaryData(params.path);
   if (!summaryData) return <h1>No data found</h1>;
-  const type = params.path[0];
   const splitSentences = summaryData.data.entry.summary.split(/(?<=[.!?])\s+/);
   const firstSentence = splitSentences[0];
   const newSummary = summaryData.data.entry.summary.replace(firstSentence, "");
   const { authors, historyLinks, entry } = summaryData.data;
   const { link } = entry;
-
+  
   return (
     <main>
-      <div className="flex flex-col gap-4 my-10 ">
-        <div className="flex items-center gap-3">
-          <Image
-            src={`/icons/${type}_icon.svg`}
-            width={18}
-            height={18}
-            alt=""
-          />
-          <p className="font-semibold font-inter text-[12px]">{type}</p>
-        </div>
-        <h2 className="font-inika text-4xl">{summaryData.data.title}</h2>
-        <div className="flex items-center gap-2">
+      <div className='flex flex-col gap-4 my-10'>
+        <BreadCrumbs params={params} summaryData={summaryData} />
+        <h2 className='font-inika text-4xl'>{summaryData.data.title}</h2>
+        <div className='flex items-center gap-2'>
           {historyLinks && historyLinks?.length == 0 && link ? (
             <Link href={link} target="_blank">
               <span className="pb-[2px] border-b-2 border-brand-secondary leading-relaxed text-brand-secondary font-semibold">
