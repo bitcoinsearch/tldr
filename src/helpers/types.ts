@@ -1,3 +1,4 @@
+import { sortedAuthorData } from '@/app/summary/[...path]/page';
 import { BITCOINDEV, LIGHTNINGDEV } from "@/config/config";
 
 const AUTHOR = "authors" as const;
@@ -166,4 +167,19 @@ export type NewsLetter = {
 export type NewsLetterSet = {
   year: string;
   newsletters: Array<{ title: string; link: string }>;
+};
+
+export type SummaryData = {
+  data: {
+    authors: sortedAuthorData[];
+    historyLinks: string[];
+    id: string;
+    title: string;
+    updatedAt: string;
+    generatedUrl?: string | undefined;
+    entry: EntryData;
+  };
+  month: string;
+  year: number;
+  path: string | undefined;
 };
