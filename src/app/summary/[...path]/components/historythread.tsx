@@ -9,9 +9,11 @@ import { sortedAuthorData } from "../page";
 const DiscussionHistory = ({
   historyLinks,
   authors,
+  replies
 }: {
   historyLinks: string[];
   authors: sortedAuthorData[];
+  replies: string
 }) => {
   return (
     <div className="relative">
@@ -27,6 +29,7 @@ const DiscussionHistory = ({
               historyLink={link}
               author={authors[index]}
               length={historyLinks.length}
+              replies={replies}
             />
           );
         })}
@@ -40,11 +43,13 @@ const SingleHistoryThread = ({
   author,
   index,
   length,
+  replies
 }: {
   historyLink: string;
   author: sortedAuthorData;
   index: number;
   length: number;
+  replies: string;
 }) => {
   const path = getRelativePathFromInternalLink(historyLink);
   const dateObj = new Date(author.dateInMS);
@@ -60,7 +65,7 @@ const SingleHistoryThread = ({
       </div>
       <div>
         <div className="flex gap-2">
-          <Link href={path}>
+          <Link href={{ pathname: path, query: { replies }}}>
             <span className="pb-[2px] border-b-2 border-brand-secondary leading-relaxed text-brand-secondary font-semibold">
               {author?.name ?? "regex fail placeholder name"}
             </span>

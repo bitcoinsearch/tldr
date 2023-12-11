@@ -27,7 +27,7 @@ const Post = ({
           />
           <p className="font-semibold">{type}</p>
         </div>
-        <Link href={path}>
+        <Link href={{ pathname:path, query:{ replies: entry.n_threads }}}>
           <p className="font-inika text-lg md:text-2xl underline">
             {entry.title}
           </p>

@@ -121,7 +121,7 @@ export const createArticlesFromFolder = (folderData: any[], folder: string) => {
       authors: authorList,
       published_at: published,
       summary,
-      n_threads: 3,
+      n_threads: authors.length,
       dev_name: `${folder}`,
       contributors: contributorsList,
       file_path: newPath,
