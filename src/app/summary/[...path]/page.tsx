@@ -46,7 +46,7 @@ const getSummaryData = async (path: string[]) => {
   }
 };
 
-export default async function Page({ params }: { params: { path: string[] } }) {
+export default async function Page({ params, searchParams }: { params: { path: string[] }, searchParams: { replies: string } }) {
   const summaryData = await getSummaryData(params.path);
   if (!summaryData) return <h1>No data found</h1>;
   const splitSentences = summaryData.data.entry.summary.split(/(?<=[.!?])\s+/);
@@ -58,7 +58,7 @@ export default async function Page({ params }: { params: { path: string[] } }) {
   return (
     <main>
       <div className='flex flex-col gap-4 my-10'>
-        <BreadCrumbs params={params} summaryData={summaryData} />
+        <BreadCrumbs params={params} summaryData={summaryData} replies={searchParams.replies} />
         <h2 className='font-inika text-4xl'>{summaryData.data.title}</h2>
         <div className='flex items-center gap-2'>
           {historyLinks && historyLinks?.length == 0 && link ? (
@@ -78,7 +78,7 @@ export default async function Page({ params }: { params: { path: string[] } }) {
         <p className="whitespace-pre-line">{addSpaceAfterPeriods(newSummary)}</p>
       </section>
       {historyLinks && historyLinks?.length > 0 ? (
-        <DiscussionHistory historyLinks={historyLinks} authors={authors} />
+        <DiscussionHistory historyLinks={historyLinks} authors={authors} replies={searchParams.replies} />
       ) : null}
     </main>
   );

@@ -7,14 +7,14 @@ import { CaretRightIcon } from "@radix-ui/react-icons";
 import { usePathname, useRouter } from "next/navigation";
 import { SummaryData } from "@/helpers/types";
 
-const BreadCrumbs = ({ params, summaryData }: { params: { path: string[] }; summaryData: SummaryData }) => {
+const BreadCrumbs = ({ params, summaryData, replies }: { params: { path: string[] }; summaryData: SummaryData; replies: string }) => {
   const Router = useRouter();
   const pathname = usePathname();
   const type = params.path[0];
 
   const [activePath, setActivePath] = useState<{ [key: string]: boolean }>({ ["title"]: false, ["reply"]: false });
   const [routePath, setRoutePath] = useState(pathname);
-  const { authors, historyLinks } = summaryData.data;
+  const { authors } = summaryData.data;
 
   useEffect(() => {
     const evaluatePath = () => {
@@ -43,20 +43,21 @@ const BreadCrumbs = ({ params, summaryData }: { params: { path: string[] }; summ
         <Image src={`/icons/${type}_icon.svg`} width={18} height={18} alt='' />
         <p className='font-semibold font-inter text-[12.5px] whitespace-nowrap'>{type}</p>
       </div>
+      {Number(replies) === 1 ? null : (
+        <>
+          <CaretRightIcon />
+          <Link
+            className={`font-semibold font-inter text-[12.5px] whitespace-nowrap break-words ${
+              activePath["title"] ? "text-brand-secondary underline" : " text-brand-secondary underline opacity-75"
+            }`}
+            href={{ pathname: routePath, query: { replies } }}
+          >
+            {summaryData.data.title}
+          </Link>
+        </>
+      )}
 
-      <>
-        <CaretRightIcon />
-        <Link
-          className={`font-semibold font-inter text-[12.5px] whitespace-nowrap break-words ${
-            activePath["title"] ? " text-brand-secondary underline" : "text-black no-underline"
-          }`}
-          href={routePath as string}
-        >
-          {summaryData.data.title}
-        </Link>
-      </>
-
-      {activePath["reply"] ? (
+      {activePath["reply"] && Number(replies) > 1 ? (
         <>
           <CaretRightIcon />
           <section className='flex items-center gap-1'>
