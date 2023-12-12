@@ -38,6 +38,7 @@ const Menu = () => {
               <LinkComponent title='All Activity' href='/#all_activity' />
               <LinkComponent title='Newsletter' href='/newsletter' />
               <LinkComponent title='RSS feed' href='/rss.xml' target='_blank' />
+              <LinkComponent title='About TLDR' href='/about' />
             </section>
           </div>
         </>
