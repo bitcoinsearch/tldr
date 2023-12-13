@@ -126,6 +126,18 @@ const SearchBox = () => {
     fetchNextPage();
   };
 
+  const clearInputMobile = () => {
+    clearInputDesktop()
+    setOpen(false)
+  };
+
+  const clearInputDesktop = () => {
+    setSearchQueryPath(null);
+    return searchFeedInputRef.current?.value && searchFeedInputRef.current.value
+      ? (searchFeedInputRef.current.value = "" ?? null)
+      : searchFeedInputRef.current?.value;
+  };
+
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "k" && e.which === 75 && (e.metaKey || e.ctrlKey)) {
@@ -217,9 +229,7 @@ const SearchBox = () => {
                 <button
                   className={`border p-[6px] hover:bg-slate-100 focus:bg-slate-100 inline-flex h-[25px] w-[25px] appearance-none items-center justify-center focus:outline-none`}
                   aria-label="clear-filter"
-                  onClick={() => {
-                    setSearchQueryPath(null);
-                  }}
+                  onClick={isMobile ? clearInputMobile : clearInputDesktop}
                 >
                   <Cross2Icon />
                 </button>
