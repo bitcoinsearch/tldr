@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter, Inika } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
+import QueuerBanner from "./components/client/queuer-banner";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const inika = Inika({
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.variable} ${inika.variable} font-inter h-full`}>
         <div className='pt-2 md:pt-[56px] w-full items-center h-full flex flex-col'>
           <div className='w-full grow flex flex-col'>
+            <QueuerBanner />
             <div className='sticky top-0 bg-white w-full max-h-[98px] flex flex-col items-center p-2 md:p-4 px-4 z-10 justify-center'>
               <Navbar />
             </div>
