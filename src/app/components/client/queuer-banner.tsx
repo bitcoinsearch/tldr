@@ -30,17 +30,19 @@ const QueuerBanner = () => {
   return (
     <div className="bg-orange-100 flex items-center w-full sticky top-20 -translate-y-20 z-[99]">
       <div className="flex grow items-center text-sm md:text-base justify-between px-2 md:px-4">
-        <div className="text-gray-600 flex-[1_1_100%] font-medium underline text-center">
-          <Link href="https://review.btctranscripts.com/transcripts" target="_blank" className="text-center">
-            <span>{`Get `}</span>
+        <div className="text-gray-600 flex-[1_1_100%] font-medium text-center">
+        <Link href="https://learning.chaincode.com/#FOSS" target="_blank">
+            <span>{`Start Your Career in Bitcoin Open Source`}</span>
+            <br />
+            <span>{`Development with Chaincode Labs `}</span>
             <span
               style={{
                 fontWeight: "medium",
                 textTransform: "uppercase",
                 color: "#ED8936",
+                textDecoration: "underline",
               }}
-            >{`paid `}</span>
-            <span>{`to review technical Bitcoin transcripts`}</span>
+            >{`Apply Today!`}</span>
           </Link>
         </div>
         <button onClick={handleClose} className="relative h-[18px] w-[18px] grid place-items-center rounded-full hover:bg-orange-300">
