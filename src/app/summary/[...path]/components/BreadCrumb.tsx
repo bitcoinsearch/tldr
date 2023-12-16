@@ -48,7 +48,7 @@ const BreadCrumbs = ({ params, summaryData, replies }: { params: { path: string[
           <CaretRightIcon />
           <Link
             className={`font-semibold font-inter text-[12.5px] whitespace-nowrap break-words ${
-              activePath["title"] ? "text-brand-secondary underline" : " text-brand-secondary underline opacity-75"
+              activePath["title"] ? "text-brand-secondary underline" : " text-brand-secondary underline"
             }`}
             href={{ pathname: routePath, query: { replies } }}
           >
