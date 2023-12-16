@@ -2,8 +2,6 @@ import Navbar from "@/app/components/server/navbar";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter, Inika } from "next/font/google";
-import Link from "next/link";
-import Image from "next/image";
 import QueuerBanner from "./components/client/queuer-banner";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -49,9 +47,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.variable} ${inika.variable} font-inter h-full`}>
         <div className='pt-2 md:pt-[56px] w-full items-center h-full flex flex-col'>
           <div className='w-full grow flex flex-col'>
-            <QueuerBanner />
-            <div className='sticky top-0 bg-white w-full max-h-[98px] flex flex-col items-center p-2 md:p-4 px-4 z-10 justify-center'>
-              <Navbar />
+            <div className='sticky top-0 z-50'>
+              <div className='sticky top-0 z-[99]'>
+                <QueuerBanner />
+                <div className='sticky top-0 bg-white w-full max-h-[98px] flex flex-col items-center p-2 md:p-4 px-4 z-[99] justify-center'>
+                  <Navbar />
+                </div>
+              </div>
             </div>
             <div className='w-full mx-auto grow max-w-3xl pb-8 px-4 lg:px-0'>{children}</div>
             <footer className="p-[24px] bg-black text-white text-center w-full">

@@ -28,10 +28,10 @@ const QueuerBanner = () => {
   // if (queuerBanner == "hidden") return null;
   if (!isOpen) return null;
   return (
-    <div className="bg-orange-100 flex items-center w-full sticky top-20 -translate-y-20 z-[99]">
-      <div className="flex grow items-center text-sm md:text-base justify-between px-2 md:px-4">
-        <div className="text-gray-600 flex-[1_1_100%] font-medium text-center">
-        <Link href="https://learning.chaincode.com/#FOSS" target="_blank">
+    <div className='bg-orange-100 flex items-center w-full sticky top-[40px] md:top-20 -translate-y-[40px] md:-translate-y-20 z-[99]'>
+      <div className='flex grow items-center text-sm md:text-base justify-between px-2 md:px-4'>
+        <div className='text-gray-600 flex-[1_1_100%] font-medium text-center'>
+          <Link href='https://learning.chaincode.com/#FOSS' target='_blank'>
             <span>{`Start Your Career in Bitcoin Open Source`}</span>
             <br />
             <span>{`Development with Chaincode Labs `}</span>
