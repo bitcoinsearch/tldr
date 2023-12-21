@@ -1,26 +1,31 @@
+"use client";
 import Link from "next/link";
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+// import { cookies } from "next/headers";
 import { getRelativePathFromInternalLink } from "@/app/components/server/actions/summary-data";
 import { formattedDate } from "@/helpers/utils";
+import { getCookie } from "cookies-next";
 
 import { sortedAuthorData } from "../page";
+const BANNER_KEY = "queuer-banner";
 
-const DiscussionHistory = ({
-  historyLinks,
-  authors,
-  replies
-}: {
-  historyLinks: string[];
-  authors: sortedAuthorData[];
-  replies: string
-}) => {
+const DiscussionHistory = ({ historyLinks, authors, replies }: { historyLinks: string[]; authors: sortedAuthorData[]; replies: string }) => {
+  const cookies_store = getCookie(BANNER_KEY);
+  const [cookie, setCookie] = useState(cookies_store);
+
+  useEffect(() => {
+    setCookie(cookies_store);
+  }, [cookies_store, cookie]);
   return (
-    <div className="relative">
-      <h2 className="font-inika text-3xl sticky top-[64px] md:top-[80px] py-6 bg-gradient-to-b from-[#fff] via-[#fff] via-70% to-[rgba(256,0,0, 1)] z-10 border-t-2">
+    <div className='relative'>
+      <h2
+        className={`font-inika text-3xl sticky ${
+          cookie === "hidden" ? "top-[64px] md:top-[80px]" : "top-[80px] md:top-[128px]"
+        } py-6 bg-gradient-to-b from-[#fff] via-[#fff] via-70% to-[rgba(256,0,0, 1)] z-10 border-t-2`}
+      >
         Discussion History
       </h2>
-      <div id="discussion-history" className="pt-[98px] mt-[-98px]">
+      <div id='discussion-history' className='pt-[98px] mt-[-98px]'>
         {historyLinks.map((link, index) => {
           return (
             <SingleHistoryThread
@@ -43,7 +48,7 @@ const SingleHistoryThread = ({
   author,
   index,
   length,
-  replies
+  replies,
 }: {
   historyLink: string;
   author: sortedAuthorData;
@@ -56,29 +61,21 @@ const SingleHistoryThread = ({
   const dateString = dateObj.toISOString();
   const publishedAtDateDisplay = formattedDate(dateString);
   return (
-    <div key={index} className="flex relative pb-8 gap-4">
-      {length - 1 !== index && (
-        <div className="absolute bg-gray-200 left-4 -translate-x-1/2 z-[-1] top-0 w-1 h-full"></div>
-      )}
-      <div className="w-8 h-8 bg-gray-200 text-gray-600 rounded-full flex items-center justify-center">
+    <div key={index} className='flex relative pb-8 gap-4'>
+      {length - 1 !== index && <div className='absolute bg-gray-200 left-4 -translate-x-1/2 z-[-1] top-0 w-1 h-full'></div>}
+      <div className='w-8 h-8 bg-gray-200 text-gray-600 rounded-full flex items-center justify-center'>
         <span>{index}</span>
       </div>
       <div>
-        <div className="flex gap-2">
-          <Link href={{ pathname: path, query: { replies }}}>
-            <span className="pb-[2px] border-b-2 border-brand-secondary leading-relaxed text-brand-secondary font-semibold">
+        <div className='flex gap-2'>
+          <Link href={{ pathname: path, query: { replies } }}>
+            <span className='pb-[2px] border-b-2 border-brand-secondary leading-relaxed text-brand-secondary font-semibold'>
               {author?.name ?? "regex fail placeholder name"}
             </span>
           </Link>
-          {index === 0 && (
-            <span className="py-1 px-1 font-inika text-sm bg-yellow-100 text-gray-900">
-              Original Post
-            </span>
-          )}
+          {index === 0 && <span className='py-1 px-1 font-inika text-sm bg-yellow-100 text-gray-900'>Original Post</span>}
         </div>
-        <div className="py-2">
-          {publishedAtDateDisplay ?? "regex fail placeholder date"}
-        </div>
+        <div className='py-2'>{publishedAtDateDisplay ?? "regex fail placeholder date"}</div>
       </div>
     </div>
   );
