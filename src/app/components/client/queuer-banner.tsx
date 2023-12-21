@@ -3,15 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { getCookie, setCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 const BANNER_KEY = "queuer-banner";
 
 const QueuerBanner = () => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = () => {
     setCookie(BANNER_KEY, "hidden");
     setIsOpen(false);
+    router.refresh();
   };
 
   useEffect(() => {
