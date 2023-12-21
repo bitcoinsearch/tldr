@@ -84,6 +84,7 @@ type HomepageData = {
   header_summary: string;
   recent_posts: HomepageEntryData[];
   active_posts: HomepageEntryData[];
+  today_in_history_posts: HomepageEntryData[]
 };
 
 type XmlDataType = {
