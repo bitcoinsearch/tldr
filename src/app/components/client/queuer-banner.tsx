@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import styles from "./banner.module.css";
+import { getCookie, setCookie } from "cookies-next";
 
 const BANNER_KEY = "queuer-banner";
 
@@ -10,22 +10,19 @@ const QueuerBanner = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = () => {
-    if (typeof window !== "undefined") {
-      sessionStorage.setItem(BANNER_KEY, "hidden");
-    }
+    setCookie(BANNER_KEY, "hidden");
     setIsOpen(false);
   };
 
   useEffect(() => {
-    const banner_in_session = window.sessionStorage.getItem(BANNER_KEY);
+    const banner_in_session = getCookie(BANNER_KEY);
     if (banner_in_session === "hidden") {
       setIsOpen(false);
     } else {
-      setIsOpen(true)
+      setIsOpen(true);
     }
   }, []);
 
-  // if (queuerBanner == "hidden") return null;
   if (!isOpen) return null;
   return (
     <div className='bg-orange-100 flex items-center w-full sticky top-[40px] md:top-20 -translate-y-[40px] md:-translate-y-20 z-[99]'>
@@ -45,8 +42,8 @@ const QueuerBanner = () => {
             >{`Apply Today!`}</span>
           </Link>
         </div>
-        <button onClick={handleClose} className="relative h-[18px] w-[18px] grid place-items-center rounded-full hover:bg-orange-300">
-          <Image src="/close_icon.svg" width={10} height={10} alt="close" />
+        <button onClick={handleClose} className='relative h-[18px] w-[18px] grid place-items-center rounded-full hover:bg-orange-300'>
+          <Image src='/close_icon.svg' width={10} height={10} alt='close' />
         </button>
       </div>
     </div>
