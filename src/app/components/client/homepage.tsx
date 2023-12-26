@@ -27,14 +27,17 @@ const Homepage = ({
     let filteredSelection = {
       recent_posts: [...data.recent_posts],
       active_posts: [...data.active_posts],
+      today_in_history_posts: [...data.today_in_history_posts]
     };
 
     if (mailingListSelection === BITCOINDEV) {
       filteredSelection.recent_posts = data.recent_posts.filter((entry) => entry.dev_name === BITCOINDEV);
       filteredSelection.active_posts = data.active_posts.filter((entry) => entry.dev_name === BITCOINDEV);
+      filteredSelection.today_in_history_posts = data.today_in_history_posts.filter((entry) => entry.dev_name === BITCOINDEV);
     } else if (mailingListSelection === LIGHTNINGDEV) {
       filteredSelection.recent_posts = data.recent_posts.filter((entry) => entry.dev_name === LIGHTNINGDEV);
       filteredSelection.active_posts = data.active_posts.filter((entry) => entry.dev_name === LIGHTNINGDEV);
+      filteredSelection.today_in_history_posts = data.today_in_history_posts.filter((entry) => entry.dev_name === LIGHTNINGDEV);
     }
     return filteredSelection;
   };
@@ -117,16 +120,16 @@ const Homepage = ({
             ))}
           </div>
         </section>
-        {/* <section>
+        <section>
           <h2 className='text-xl md:text-4xl font-semibold pb-8' id='today_in_history'>
             Today in Bitcoin/LN History
           </h2>
           <div>
-            {homepageData.active_posts.map((entry) => (
+            {homepageData.today_in_history_posts.map((entry) => (
               <Post key={entry.id} entry={entry} isActivePost={true} />
             ))}
           </div>
-        </section> */}
+        </section>
         <div className=''>
           <h2 className='text-xl md:text-4xl font-semibold pb-8' id='all_activity'>
             All Activity
