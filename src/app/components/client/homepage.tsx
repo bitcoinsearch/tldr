@@ -126,7 +126,7 @@ const Homepage = ({
           </h2>
           <div>
             {homepageData.today_in_history_posts.map((entry) => (
-              <Post key={entry.id} entry={entry} isActivePost={true} />
+              <Post key={entry.id} entry={entry} isActivePost={false} />
             ))}
           </div>
         </section>
