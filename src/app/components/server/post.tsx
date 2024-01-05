@@ -15,6 +15,14 @@ const Post = ({
   const type = entry.dev_name;
   const path = `summary/${getRouteFromPath(entry.file_path)}`;
   const publishedAtDateDisplay = formattedDate(entry.published_at);
+  const threadReplies = () => {
+    if (entry.n_threads === 1) {
+      return `${entry.n_threads} reply`;
+    } else {
+      return `${entry.n_threads} replies`;
+    }
+  }
+
   return (
     <article className="flex flex-col gap-4 mb-8">
       <div className="flex flex-col md:gap-2">
@@ -36,9 +44,7 @@ const Post = ({
       {isActivePost ? (
         <p className="font-inter text-sm md:text-base font-bold hover:text-slate-600 hover:underline hover:underline-offset-2">
           <Link href={`/${path}/#discussion-history`}>
-            {entry.n_threads === 1
-              ? `${entry.n_threads} reply`
-              : `${entry.n_threads} replies`}
+            {threadReplies()}
           </Link>
         </p>
       ) : (
@@ -47,9 +53,7 @@ const Post = ({
             href={`/${path}/#discussion-history`}
             className="hover:text-slate-600 hover:underline hover:underline-offset-2"
           >
-            {entry.authors.length === 1
-              ? `${entry.authors.length} reply`
-              : `${entry.authors.length} replies`}
+            {threadReplies()}
           </Link>
           <p className="mt-[14px]">Posted {publishedAtDateDisplay}</p>
         </div>
