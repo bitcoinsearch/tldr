@@ -2,20 +2,13 @@ import Link from "next/link";
 import React from "react";
 import { getRelativePathFromInternalLink } from "@/app/components/server/actions/summary-data";
 import { formattedDate } from "@/helpers/utils";
-import { cookies } from "next/headers";
 import { sortedAuthorData } from "../page";
-const BANNER_KEY = "queuer-banner";
 
 const DiscussionHistory = ({ historyLinks, authors, replies }: { historyLinks: string[]; authors: sortedAuthorData[]; replies: string }) => {
-  const cookies_store = cookies();
-  const cookie_value = cookies_store.get(BANNER_KEY)?.value;
-
   return (
     <div className='relative'>
       <h2
-        className={`font-inika text-3xl sticky ${
-          cookie_value === "hidden" ? "top-[64px] md:top-[80px]" : "top-[80px] md:top-[128px]"
-        } py-6 bg-gradient-to-b from-[#fff] via-[#fff] via-70% to-[rgba(256,0,0, 1)] z-10 border-t-2`}
+        className={`font-inika text-3xl sticky top-[64px] md:top-[80px] py-6 bg-gradient-to-b from-[#fff] via-[#fff] via-70% to-[rgba(256,0,0, 1)] z-10 border-t-2`}
       >
         Discussion History
       </h2>
