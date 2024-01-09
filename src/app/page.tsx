@@ -25,7 +25,7 @@ async function getHomepageData() {
 
 const fetchDataInBatches = async (count: number): Promise<{ batch: HomepageEntryData[]; count: number }> => {
   "use server";
-  const folders = ["lightning-dev", "bitcoin-dev"];
+  const folders = ["delvingbitcoin", "lightning-dev", "bitcoin-dev"];
   let result: HomepageEntryData[] = [];
 
   const currentDate = new Date();

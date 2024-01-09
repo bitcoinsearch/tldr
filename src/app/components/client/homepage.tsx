@@ -5,7 +5,7 @@ import Image from "next/image";
 import React, { useMemo, useState } from "react";
 import Post from "../server/post";
 import "../../globals.css";
-import { BITCOINDEV, LIGHTNINGDEV } from "@/config/config";
+import { BITCOINDEV, DELVINGBITCOIN, LIGHTNINGDEV } from "@/config/config";
 import ScrollToTopButton from "./scroll-to-top";
 
 const Homepage = ({
@@ -27,7 +27,7 @@ const Homepage = ({
     let filteredSelection = {
       recent_posts: [...data.recent_posts],
       active_posts: [...data.active_posts],
-      today_in_history_posts: [...data.today_in_history_posts]
+      today_in_history_posts: [...data.today_in_history_posts],
     };
 
     if (mailingListSelection === BITCOINDEV) {
@@ -38,6 +38,10 @@ const Homepage = ({
       filteredSelection.recent_posts = data.recent_posts.filter((entry) => entry.dev_name === LIGHTNINGDEV);
       filteredSelection.active_posts = data.active_posts.filter((entry) => entry.dev_name === LIGHTNINGDEV);
       filteredSelection.today_in_history_posts = data.today_in_history_posts.filter((entry) => entry.dev_name === LIGHTNINGDEV);
+    } else if (mailingListSelection === DELVINGBITCOIN) {
+      filteredSelection.recent_posts = data.recent_posts.filter((entry) => entry.dev_name === DELVINGBITCOIN);
+      filteredSelection.active_posts = data.active_posts.filter((entry) => entry.dev_name === DELVINGBITCOIN);
+      filteredSelection.today_in_history_posts = data.today_in_history_posts.filter((entry) => entry.dev_name === DELVINGBITCOIN);
     }
     return filteredSelection;
   };
@@ -53,6 +57,8 @@ const Homepage = ({
       return batch.filter((batch) => batch.dev_name === BITCOINDEV);
     } else if (mailingListSelection === LIGHTNINGDEV) {
       return batch.filter((batch) => batch.dev_name === LIGHTNINGDEV);
+    } else if (mailingListSelection === DELVINGBITCOIN) {
+      return batch.filter((batch) => batch.dev_name === DELVINGBITCOIN);
     }
     return batch;
 
@@ -193,6 +199,15 @@ const MailingListToggle = ({ selectedList, handleToggle }: ToggleButtonProps) =>
         >
           <Image src='/images/lightning-dev.svg' alt='' width={13.16} height={15.66} />
           <p className='text-xs font-semibold text-black'>Lightning-dev</p>
+        </button>
+        <button
+          onClick={() => handleToggle(DELVINGBITCOIN)}
+          className={`flex gap-2 p-2 ${
+            selectedList === DELVINGBITCOIN ? "bg-gray-300 text-gray-500" : "bg-gray-100 text-gray-500"
+          } items-center rounded-md`}
+        >
+          <Image src='/icons/bitcoin-dev_icon.svg' alt='' width={16} height={16} />
+          <p className='text-xs font-semibold text-black'>Delving bitcoin</p>
         </button>
       </div>
     </div>
