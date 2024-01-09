@@ -1,5 +1,5 @@
 import { sortedAuthorData } from '@/app/summary/[...path]/page';
-import { BITCOINDEV, LIGHTNINGDEV } from "@/config/config";
+import { BITCOINDEV, DELVINGBITCOIN, LIGHTNINGDEV } from "@/config/config";
 
 const AUTHOR = "authors" as const;
 const DOMAIN = "domain" as const;
@@ -46,7 +46,7 @@ type ConvertedXML = {
   path: string | undefined;
 };
 
-type MailingListType = typeof BITCOINDEV | typeof LIGHTNINGDEV;
+type MailingListType = typeof BITCOINDEV | typeof LIGHTNINGDEV | typeof DELVINGBITCOIN;
 
 type SearchIndexData = {
   title: string;
