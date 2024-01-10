@@ -1,45 +1,32 @@
 "use client";
 
-import React, { useEffect } from "react";
-
-declare global {
-  interface Window {
-    jQuery: any;
-    fnames: any;
-    ftypes: any;
-  }
-}
-
-const action = process.env.NEWSLETTER_FORM_URL;
+import React from "react";
+import * as cheerio from "cheerio";
 
 const MailchimpSubscribeForm = () => {
   const [email, setEmail] = React.useState("");
+  const [mailchimpResponse, setMailchimpResponse] = React.useState("");
 
-  const loadMailchimpScript = () => {
-    const script = document.createElement("script");
-    script.src = "//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    script.onload = () => {
-      if (typeof window.jQuery !== "undefined") {
-        (function ($) {
-          window.fnames = new Array();
-          window.ftypes = new Array();
-          window.fnames[0] = "EMAIL";
-          window.ftypes[0] = "email";
-        })(window.jQuery);
-        var $mcj = window.jQuery.noConflict(true);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setMailchimpResponse("");
+    try {
+      const response = await fetch("/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({ EMAIL: email }).toString(),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setMailchimpResponse(data);
+        setEmail("");
       }
-    };
-  };
-
-  useEffect(() => {
-    // Check if the Mailchimp script is already loaded
-    if (!window.jQuery || !window.jQuery.fn.jquery) {
-      loadMailchimpScript();
+    } catch (error) {
+      console.log({ error });
     }
-  }, []);
+  };
 
   return (
     <div>
@@ -49,12 +36,11 @@ const MailchimpSubscribeForm = () => {
           className="bg-white w-full md:w-[600px] clear-left text-[15px]"
         >
           <form
-            action={action as string}
+            onSubmit={handleSubmit}
             method="post"
             id="mc-embedded-subscribe-form"
             name="mc-embedded-subscribe-form"
             className="validate"
-            target="_blank"
           >
             <div id="mc_embed_signup_scroll">
               <div className="mc-field-group">
@@ -83,21 +69,19 @@ const MailchimpSubscribeForm = () => {
                 <input type="hidden" name="tags" value="6514641" />
               </div>
               <div id="mce-responses" className="clear">
-                <div
-                  className="response"
-                  id="mce-error-response"
-                  style={{ display: "none" }}
-                ></div>
-                <div
-                  className="response"
-                  id="mce-success-response"
-                  style={{ display: "none" }}
-                ></div>
+                <div className="px-2 pb-4">
+                  {parseMailchimpResponse(mailchimpResponse).success ? (
+                    <p className="text-green-500">
+                      {parseMailchimpResponse(mailchimpResponse).successText}
+                    </p>
+                  ) : (
+                    <p className="text-red-500">
+                      {parseMailchimpResponse(mailchimpResponse).errorText}
+                    </p>
+                  )}{" "}
+                </div>
               </div>
-              <div
-                aria-hidden="true"
-                className="absolute left-[-5000px]"
-              >
+              <div aria-hidden="true" className="absolute left-[-5000px]">
                 <input
                   type="text"
                   name="b_718f9c0ab4af9b4acf93a8e6f_6d27e4b5b0"
@@ -123,3 +107,28 @@ const MailchimpSubscribeForm = () => {
 };
 
 export default MailchimpSubscribeForm;
+
+const parseMailchimpResponse = (response: string) => {
+  const $ = cheerio.load(response);
+  const successH2Text = $("h2").text().includes("Subscription Confirmed");
+  const hasSuccessPText = $("p")
+    .text()
+    .includes("Your subscription to our list has been confirmed.");
+  const successText = hasSuccessPText && $("p").text();
+
+  const errorDiv = $("div").hasClass("formstatus error");
+  const errorDivText = $("div.formstatus.error")
+    .text()
+    .includes("There are errors below");
+  const hasErrorText = $("div").hasClass("errorText");
+  const errorText = hasErrorText && $("div.errorText").text();
+
+  const error = errorDiv && errorText && hasErrorText && errorDivText;
+  const success = successH2Text && successText && !error;
+  return {
+    success: !!success,
+    successText,
+    error: !!error,
+    errorText,
+  };
+};
