@@ -32,6 +32,20 @@ export const NewsletterPage = ({
   newsletter: NewsLetterDataType;
 }) => {
   if (!newsletter) return null;
+  const sortedActiveThreadData = newsletter.active_posts_this_week.sort(
+    (a, b) => {
+      return (
+        new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
+      );
+    }
+  );
+  const sortedNewThreadData = newsletter.new_threads_this_week.sort((a, b) => {
+    return (
+      new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
+    );
+  });
+  newsletter.active_posts_this_week = sortedActiveThreadData;
+  newsletter.new_threads_this_week = sortedNewThreadData;
 
   return (
     <div>
