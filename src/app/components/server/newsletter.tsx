@@ -3,6 +3,8 @@ import Link from "next/link";
 import { SummaryList } from "./post";
 import { formattedDate } from "@/helpers/utils";
 import { NewsLetter, NewsLetterDataType } from "@/helpers/types";
+import MailchimpSubscribeForm from "@/app/components/client/subscribe-to-newsletter";
+import ScrollToTopButton from "@/app/components/client/scroll-to-top";
 
 export const NewsletterCard = ({ entry }: { entry: NewsLetter }) => {
   const publishedAtDateDisplay = formattedDate(entry.published_at);
@@ -35,9 +37,10 @@ export const NewsletterPage = ({
     <div>
       <section>
         <h2 className="text-xl md:text-4xl font-normal pb-8 pt-10">Summary</h2>
-        <p className="pb-12">
+        <p className="pb-4">
           {newsletter.summary_of_threads_started_this_week}
         </p>
+        <MailchimpSubscribeForm />
       </section>
 
       <section className="pb-12">
@@ -46,7 +49,10 @@ export const NewsletterPage = ({
         </h2>
         <section className="flex flex-col gap-9">
           {!newsletter.new_threads_this_week.length ? (
-            <p>Oops! No new posts this week. Explore the ongoing discussions below.</p>
+            <p>
+              Oops! No new posts this week. Explore the ongoing discussions
+              below.
+            </p>
           ) : (
             newsletter.new_threads_this_week.map((entry) => {
               return <NewsletterCard entry={entry} key={entry.id} />;
@@ -65,6 +71,7 @@ export const NewsletterPage = ({
           ))}
         </section>
       </section>
+      <ScrollToTopButton />
     </div>
   );
 };
