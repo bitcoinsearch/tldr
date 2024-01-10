@@ -1,4 +1,7 @@
+import { PageConfig } from "next";
 import { type NextRequest } from "next/server";
+
+export const runtime = "edge"
 
 const url = process.env.NEWSLETTER_FORM_URL || "";
 
