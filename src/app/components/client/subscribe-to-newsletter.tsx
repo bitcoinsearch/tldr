@@ -46,7 +46,7 @@ const MailchimpSubscribeForm = () => {
       <div id="mc_embed_shell">
         <div
           id="mc_embed_signup"
-          className="bg-white w-[600px] clear-left text-[15px]"
+          className="bg-white w-full md:w-[600px] clear-left text-[15px]"
         >
           <form
             action={action as string}
