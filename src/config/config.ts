@@ -8,4 +8,5 @@ export const RSS_FEED_IN_MONTHS = 3;
 export const urlMapping = {
   "bitcoin-dev": "https://lists.linuxfoundation.org/pipermail/bitcoin-dev",
   "lightning-dev": "https://lists.linuxfoundation.org/pipermail/lightning-dev",
+  "delvingbitcoin": "https://delvingbitcoin.org/"
 };
