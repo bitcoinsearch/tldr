@@ -1,5 +1,5 @@
 import { convertXmlToText } from "@/helpers/convert-from-xml";
-import { addSpaceAfterPeriods } from "@/helpers/utils";
+import { addSpaceAfterPeriods, removeZeros } from "@/helpers/utils";
 import { AuthorData } from "@/helpers/types";
 import * as fs from "fs";
 import Image from "next/image";
@@ -18,8 +18,9 @@ const getSummaryData = async (path: string[]) => {
     );
     const data = await convertXmlToText(fileContent, pathString);
     const linksCopy = data.data?.historyLinks
-
-    const authorsFormatted: sortedAuthorData[] = data.data.authors.map((author, index) => ({...author, initialIndex: index, dateInMS: Date.parse(author.date + "T" + author.time)}))
+    
+    const authorsFormatted: sortedAuthorData[] = data.data.authors.map((author, index) => ({...author, name: removeZeros(author), initialIndex: index, dateInMS: Date.parse(author.date + "T" + author.time)}))
+    
     const chronologicalAuthors = authorsFormatted.sort((a, b) => {
       if (a.dateInMS < b.dateInMS) {
         return -1
