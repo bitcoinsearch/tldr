@@ -8,7 +8,8 @@ import { RSS_FEED_IN_MONTHS } from "@/config/config";
 export const generateRSSFeed = async () => {
   const folders = [
     "lightning-dev", 
-    "bitcoin-dev"
+    "bitcoin-dev",
+    "delvingbitcoin"
   ];
   let result: HomepageEntryData[] = [];
 
