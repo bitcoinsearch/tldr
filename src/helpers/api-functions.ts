@@ -1,4 +1,4 @@
-import { BITCOINDEV, LIGHTNINGDEV, urlMapping } from "@/config/config";
+import { BITCOINDEV, DELVINGBITCOIN, LIGHTNINGDEV, urlMapping } from "@/config/config";
 import type { SearchQuery } from "./types";
 
 const FIELDS_TO_SEARCH = ["authors", "title", "body"];
@@ -26,6 +26,7 @@ export const buildQuery = ({
               "domain.keyword": [
                 urlMapping[BITCOINDEV],
                 urlMapping[LIGHTNINGDEV],
+                urlMapping[DELVINGBITCOIN]
               ],
             },
           },
