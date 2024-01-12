@@ -1,4 +1,5 @@
-import { AuthorData, HomepageEntryData, XmlDataType } from "./types";
+import { AuthorData, EsSearchResult, HomepageEntryData, XmlDataType } from "./types";
+import { domainFunctionMapper } from "./path-mappers";
 
 export function addSpaceAfterPeriods(text: string): string {
   return text.replace(/\.(\S)/g, ". $1");
@@ -200,7 +201,7 @@ export const removeDuplicateSummaries = (groups: Record<string, Array<HomepageEn
   return finalValues;
 };
 
-const mappingMonths = {
+export const mappingMonths = {
   January: "Jan",
   February: "Feb",
   March: "March",
@@ -215,35 +216,12 @@ const mappingMonths = {
   December: "Dec",
 };
 
-export const getStaticPathFromURL = (url: string, id: string) => {
-  const baseLink = "https://lists.linuxfoundation.org/pipermail/";
-  const strippedLink = url.split(baseLink)[1].split("/");
-
-  try {
-    // return list, year_month
-    const [list, year_month] = strippedLink;
-
-    // separate month and year from year_month string with the right tldr mapping
-    const [year, month] = year_month.split("-").map((i, index) => {
-      if (index === 0) return i;
-      else {
-        const monthIndex = i as keyof typeof mappingMonths;
-        return mappingMonths?.[monthIndex] ?? "";
-      }
-    });
-
-    if (!month || !year || !list || !id) {
-      return { url };
-    }
-
-    return {
-      url: `/summary/${list}/${month}_${year}/${id}`,
-      list,
-    };
-  } catch {
-    return { url };
-  }
+export const getStaticPathFromURL = (data: EsSearchResult["_source"]) => {
+  const domainFunction = domainFunctionMapper[data.domain]
+  const path = domainFunction(data)
+  return path
 };
+
 
 export const removeZeros = (author: AuthorData) => {
   if (author.name.startsWith(".")) {

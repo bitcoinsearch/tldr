@@ -1,5 +1,5 @@
 import { sortedAuthorData } from '@/app/summary/[...path]/page';
-import { BITCOINDEV, DELVINGBITCOIN, LIGHTNINGDEV } from "@/config/config";
+import { urlMapping } from "@/config/config";
 
 const AUTHOR = "authors" as const;
 const DOMAIN = "domain" as const;
@@ -46,7 +46,7 @@ type ConvertedXML = {
   path: string | undefined;
 };
 
-type MailingListType = typeof BITCOINDEV | typeof LIGHTNINGDEV | typeof DELVINGBITCOIN;
+type MailingListType = keyof typeof urlMapping
 
 type SearchIndexData = {
   title: string;
@@ -135,7 +135,7 @@ export type EsSearchResult = {
     id: string;
     title: string;
     summary: string;
-    author_list: Array<string>;
+    authors: Array<string>;
     body: string;
     body_type: string;
     created_at: Date;
