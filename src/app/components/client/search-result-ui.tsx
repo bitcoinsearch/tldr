@@ -59,16 +59,12 @@ function SearchResult({
         {searchResults.searchResults?.map((page, index) =>
           page?.hits.hits.map((result, index) => {
             const data = result._source as EsSearchResult["_source"];
-            const { id, author_list, title, summary, body, url } = data;
+            const { id, authors, title, body, url, domain } = data;
             return (
               <SearchPost
                 key={`${index}_${id}`}
-                id={id}
-                authors={author_list}
-                body={body}
+                data={data}
                 setOpen={setOpen}
-                title={title}
-                url={url}
               />
             );
           })
@@ -91,23 +87,16 @@ function SearchResult({
 export default SearchResult;
 
 type SearchPostProps = {
-  id: string;
-  authors: string[];
-  title: string;
-  body: string;
-  url: string;
+  data: EsSearchResult["_source"];
   setOpen: (x: boolean) => void;
 };
 
 const SearchPost = ({
-  id,
-  authors,
-  title,
-  body,
-  url,
+  data,
   setOpen,
 }: SearchPostProps) => {
-  const path = getStaticPathFromURL(url, id);
+  const {id, authors, title} = data
+  const path = getStaticPathFromURL(data);
   const type = path?.list;
   if (!type) return null;
 

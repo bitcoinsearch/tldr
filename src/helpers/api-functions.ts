@@ -18,7 +18,13 @@ export const buildQuery = ({
   const baseQuery = {
     query: {
       bool: {
-        must: [] as any[],
+        must: [
+          {
+            match: {
+              type: "combined-summary",
+            },
+          },
+        ] as any[],
         should: [] as any[],
         filter: [
           {
