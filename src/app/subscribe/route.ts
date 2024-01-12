@@ -1,35 +1,42 @@
-import { PageConfig } from "next";
-import { type NextRequest } from "next/server";
+import { NextRequest } from "next/server";
 
-export const runtime = "edge"
+import configureMailchimp from "@/config/mailchimp";
+import { MAILCHIMP_LIST_ID } from "@/config/process";
+import mailchimp from "@mailchimp/mailchimp_marketing";
 
-const url = process.env.NEWSLETTER_FORM_URL || "";
+configureMailchimp();
 
 export async function POST(request: NextRequest) {
   try {
-    const reqBody = new URLSearchParams(await request.text());
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: reqBody,
-    });
-
-    let data;
-    const contentType = res.headers.get("content-type");
-    if (contentType && contentType.includes("application/json")) {
-      data = await res.json();
-    } else {
-      data = await res.text();
+    const body = await request.json();
+    if (!body.email) {
+      throw new Error("Email is required");
     }
 
-    return new Response(JSON.stringify(data), {
-      status: res.ok ? 200 : 500,
+    const res = await mailchimp.lists.addListMember(MAILCHIMP_LIST_ID, {
+      email_address: body.email,
+      status: "subscribed",
+    });
+
+    const data = res as any;
+    const clientResponse = {
+      status: "success",
+      message: `${data.email_address} has been successfully ${data.status}!`,
+    };
+
+    return new Response(JSON.stringify(clientResponse), {
+      status: 200,
       headers: { "content-type": "application/json" },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
+    if (error.status === 400) {
+      return new Response(error.response.text, {
+        status: 400,
+        headers: { "content-type": "application/json" },
+      });
+    }
+
     return new Response(
       JSON.stringify({
         error: error instanceof Error ? error.message : "An Error Occurred",

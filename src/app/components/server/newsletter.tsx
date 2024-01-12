@@ -54,7 +54,7 @@ export const NewsletterPage = ({
         <p className="pb-4">
           {newsletter.summary_of_threads_started_this_week}
         </p>
-        {/* <MailchimpSubscribeForm /> */}
+        <MailchimpSubscribeForm />
       </section>
 
       <section className="pb-12">
