@@ -7,6 +7,7 @@ import Post from "../server/post";
 import "../../globals.css";
 import { BITCOINDEV, DELVINGBITCOIN, LIGHTNINGDEV } from "@/config/config";
 import ScrollToTopButton from "./scroll-to-top";
+import MailchimpSubscribeForm from './subscribe-to-newsletter';
 
 const Homepage = ({
   data,
@@ -111,6 +112,7 @@ const Homepage = ({
       <div className='flex flex-col gap-6 md:gap-8 my-8 md:my-14'>
         <h2 className='text-2xl font-semibold leading-normal'>Your daily summary</h2>
         <div>{formatTextToParagraphs(data.header_summary)}</div>
+        <MailchimpSubscribeForm />
       </div>
       <div className='mb-14'>
         <MailingListToggle selectedList={mailingListSelection} handleToggle={handleMailingListToggle} />

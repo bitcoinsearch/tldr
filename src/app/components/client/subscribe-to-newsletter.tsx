@@ -24,7 +24,7 @@ const MailchimpSubscribeForm = () => {
       setLoading(false);
       if (response.ok) {
         const data = await response.json();
-        console.log({ data });
+        // console.log({ data });
         setMailchimpResponse(data.message);
         setEmail("");
         return;
@@ -47,12 +47,12 @@ const MailchimpSubscribeForm = () => {
   };
 
   return (
-    <div>
+    <div className='mt-4 sm:p-0 px-3'>
       <div id="mc_embed_shell">
         <div
           id="mc_embed_signup"
           className="bg-white w-full md:w-[600px] clear-left text-[15px]"
-        >
+        > 
           <form
             onSubmit={handleSubmit}
             method="post"
@@ -62,7 +62,7 @@ const MailchimpSubscribeForm = () => {
           >
             <div id="mc_embed_signup_scroll">
               <div className="mc-field-group">
-                <h2>Subscribe to our monthly newsletter</h2>
+                <h2>Subscribe to our weekly newsletter</h2>
                 <p className="text-[15px] leading-6">
                   Get the latest updates on the community, upcoming topics, and
                   new discussions in your inbox every month.

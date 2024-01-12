@@ -50,11 +50,11 @@ export const NewsletterPage = ({
   return (
     <div>
       <section>
+        <MailchimpSubscribeForm />
         <h2 className="text-xl md:text-4xl font-normal pb-8 pt-10">Summary</h2>
         <p className="pb-4">
           {newsletter.summary_of_threads_started_this_week}
         </p>
-        <MailchimpSubscribeForm />
       </section>
 
       <section className="pb-12">
