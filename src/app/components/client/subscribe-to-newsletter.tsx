@@ -24,7 +24,6 @@ const MailchimpSubscribeForm = () => {
       setLoading(false);
       if (response.ok) {
         const data = await response.json();
-        // console.log({ data });
         setMailchimpResponse(data.message);
         setEmail("");
         return;
@@ -65,7 +64,7 @@ const MailchimpSubscribeForm = () => {
                 <h2>Subscribe to our weekly newsletter</h2>
                 <p className="text-[15px] leading-6">
                   Get the latest updates on the community, upcoming topics, and
-                  new discussions in your inbox every month.
+                  new discussions in your inbox every week.
                 </p>
               </div>
               <div className="mc-field-group">
