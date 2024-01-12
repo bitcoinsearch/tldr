@@ -47,12 +47,12 @@ const MailchimpSubscribeForm = () => {
   };
 
   return (
-    <div>
+    <div className='mt-4 sm:p-0 px-3'>
       <div id="mc_embed_shell">
         <div
           id="mc_embed_signup"
           className="bg-white w-full md:w-[600px] clear-left text-[15px]"
-        >
+        > 
           <form
             onSubmit={handleSubmit}
             method="post"
