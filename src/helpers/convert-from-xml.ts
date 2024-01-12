@@ -86,6 +86,10 @@ export const extractAuthorsAndDates = (str: string) => {
     }
   });
 
+  if (Object.keys(authors).length === 0) {
+    return str
+  }
+
   return authors;
 };
 

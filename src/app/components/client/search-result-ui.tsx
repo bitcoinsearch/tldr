@@ -101,7 +101,7 @@ const SearchPost = ({
   if (!type) return null;
 
   const isBitcoinDev = type === "bitcoin-dev";
-  const headerText = isBitcoinDev ? "bitcoin-dev" : "lightning-dev";
+  const headerText = type;
   const headerImageSrc = isBitcoinDev
     ? "/images/btc.svg"
     : "/images/lightning-dev.svg";
@@ -109,7 +109,7 @@ const SearchPost = ({
   const extractedOriginalAuthor = extractAuthorsAndDates(
     authors[authors.length - 1]
   );
-  const originalAuthor = Object.keys(extractedOriginalAuthor)[0];
+  const originalAuthor = typeof extractedOriginalAuthor === "string" ? extractedOriginalAuthor: Object.keys(extractedOriginalAuthor)[0];
 
   return (
     <li key={id} className="mb-6">
