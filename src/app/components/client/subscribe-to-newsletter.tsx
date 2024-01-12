@@ -1,30 +1,48 @@
 "use client";
 
 import React from "react";
-import * as cheerio from "cheerio";
 
 const MailchimpSubscribeForm = () => {
   const [email, setEmail] = React.useState("");
   const [mailchimpResponse, setMailchimpResponse] = React.useState("");
+  const [error, setError] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setMailchimpResponse("");
+    setError("");
+    setLoading(true);
     try {
       const response = await fetch("/subscribe", {
         method: "POST",
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": "application/json",
         },
-        body: new URLSearchParams({ EMAIL: email }).toString(),
+        body: JSON.stringify({ email }),
       });
+      setLoading(false);
       if (response.ok) {
         const data = await response.json();
-        setMailchimpResponse(data);
+        console.log({ data });
+        setMailchimpResponse(data.message);
         setEmail("");
+        return;
       }
-    } catch (error) {
-      console.log({ error });
+      if (response.status === 400) {
+        const data = await response.json();
+        if (data?.title?.toLowerCase().includes("member exists")) {
+          setError("You are already subscribed to our newsletter");
+          return;
+        }
+      }
+      throw new Error("Something went wrong. Please try again later.");
+    } catch (error: any) {
+      setLoading(false);
+      console.error({ error });
+      if (error instanceof Error) {
+        setError(error.message);
+      }
     }
   };
 
@@ -70,15 +88,10 @@ const MailchimpSubscribeForm = () => {
               </div>
               <div id="mce-responses" className="clear">
                 <div className="px-2 pb-4">
-                  {parseMailchimpResponse(mailchimpResponse).success ? (
-                    <p className="text-green-500">
-                      {parseMailchimpResponse(mailchimpResponse).successText}
-                    </p>
-                  ) : (
-                    <p className="text-red-500">
-                      {parseMailchimpResponse(mailchimpResponse).errorText}
-                    </p>
-                  )}{" "}
+                  {mailchimpResponse && (
+                    <p className="text-green-500">{mailchimpResponse}</p>
+                  )}
+                  {error && <p className="text-red-500">{error}</p>}{" "}
                 </div>
               </div>
               <div aria-hidden="true" className="absolute left-[-5000px]">
@@ -94,8 +107,11 @@ const MailchimpSubscribeForm = () => {
                   type="submit"
                   name="subscribe"
                   id="mc-embedded-subscribe"
-                  className="button"
+                  className={`button ${
+                    loading ? "cursor-not-allowed opacity-50" : ""
+                  }`}
                   value="Subscribe"
+                  disabled={loading}
                 />
               </div>
             </div>
@@ -107,28 +123,3 @@ const MailchimpSubscribeForm = () => {
 };
 
 export default MailchimpSubscribeForm;
-
-const parseMailchimpResponse = (response: string) => {
-  const $ = cheerio.load(response);
-  const successH2Text = $("h2").text().includes("Subscription Confirmed");
-  const hasSuccessPText = $("p")
-    .text()
-    .includes("Your subscription to our list has been confirmed.");
-  const successText = hasSuccessPText && $("p").text();
-
-  const errorDiv = $("div").hasClass("formstatus error");
-  const errorDivText = $("div.formstatus.error")
-    .text()
-    .includes("There are errors below");
-  const hasErrorText = $("div").hasClass("errorText");
-  const errorText = hasErrorText && $("div.errorText").text();
-
-  const error = errorDiv && errorText && hasErrorText && errorDivText;
-  const success = successH2Text && successText && !error;
-  return {
-    success: !!success,
-    successText,
-    error: !!error,
-    errorText,
-  };
-};
