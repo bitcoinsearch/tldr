@@ -31,7 +31,7 @@ export const generateRSSFeed = async () => {
 
   const monthsToGenerate = allpossibleMonths.slice(
     sliceIndex,
-    RSS_FEED_IN_MONTHS + 1
+    RSS_FEED_IN_MONTHS + 1 + sliceIndex
   );
 
   const feed = new Feed({
