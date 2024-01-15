@@ -46,7 +46,7 @@ const MailchimpSubscribeForm = () => {
   };
 
   return (
-    <div className='mt-4 sm:p-0 px-3'>
+    <div className='mt-4'>
       <div id="mc_embed_shell">
         <div
           id="mc_embed_signup"
@@ -57,7 +57,7 @@ const MailchimpSubscribeForm = () => {
             method="post"
             id="mc-embedded-subscribe-form"
             name="mc-embedded-subscribe-form"
-            className="validate"
+            className="validate sm:p-0 px-3"
           >
             <div id="mc_embed_signup_scroll">
               <div className="mc-field-group">
