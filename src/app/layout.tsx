@@ -54,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
             </div>
             <div className='w-full mx-auto grow max-w-3xl pb-8 px-4 lg:px-0'>{children}</div>
-            <footer className="p-[24px] bg-black text-white text-center w-full">
+            <footer className="p-[24px] bg-black dark:bg-black text-white text-center w-full">
               <p style={{ fontSize: "16px", color: "lightgray" }}>
                 Built with ❤️ by{" "}
                 <a href='https://bitcoindevs.xyz' target='_blank' rel='noopener noreferrer' style={{ color: "orange" }}>

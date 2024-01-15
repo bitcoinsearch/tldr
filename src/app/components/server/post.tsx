@@ -29,8 +29,8 @@ const Post = ({
         <div className="flex items-center gap-2">
           <Image
             src={`/icons/${type}_icon.svg`}
-            width={16}
-            height={16}
+            width={type === "delvingbitcoin" ? 20 : 16}
+            height={type === "delvingbitcoin" ? 20 : 16}
             alt=""
           />
           <p className="font-semibold">{type}</p>
@@ -117,7 +117,7 @@ export const SummaryList = ({ summary }: { summary: string }) => {
   return (
     <ul className="list-disc pl-4 flex flex-col gap-1">
       {items.map((item: string, index: number) => (
-        <li key={index}>{item.trim()}</li>
+        <li key={index} className='break-words'>{item.trim()}</li>
       ))}
     </ul>
   );

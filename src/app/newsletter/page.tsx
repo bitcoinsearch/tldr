@@ -2,6 +2,7 @@ import * as fs from "fs";
 import { NewsLetterDataType, NewsLetterSet } from "@/helpers/types";
 import { NewsletterPage } from "../components/server/newsletter";
 import Link from "next/link";
+import { formattedDate } from "@/helpers/utils";
 
 // get most recent newsletter from newsletter.json
 const getCurrentNewsletter = () => {
@@ -50,18 +51,13 @@ const getAllNewsLetters = () => {
       for (let j = 0; j < json_path.length; j++) {
         const weekly_newsletter = json_path[j];
         const file_path = `month/newsletters/${month_batch}/${weekly_newsletter}`;
-        const data = fs.readFileSync(
-          `${process.cwd()}/public/static/static/newsletters/${month_batch}/${weekly_newsletter}`,
-          "utf-8"
-        );
 
-        const parsedData = JSON.parse(data) as NewsLetterDataType;
-        const get_title =
-          parsedData.summary_of_threads_started_this_week.split(".")[0];
-        const existingNewsletter = newsletter_set.find(
-          (newsletter) =>
-            newsletter.title === get_title && newsletter.link === file_path
-        );
+        const get_title = formattedDate(new Date(weekly_newsletter.split("-newsletter")[0]).toISOString())
+          .split(":")[0]
+          .slice(0, -2)
+          .trim();
+
+        const existingNewsletter = newsletter_set.find((newsletter) => newsletter.title === get_title && newsletter.link === file_path);
         if (!existingNewsletter) {
           newsletter_set.push({ title: get_title, link: file_path });
         }
@@ -93,29 +89,21 @@ export default async function Page() {
         </h2>
         <div className="flex flex-col gap-5">
           {newsletter_sets.map((set, index) => (
-            <>
-              <div key={`${index}_${set.year}`}>
-                <h2 className="text-lg font-normal pb-2">{set.year}</h2>
+            <div key={`${index}_${set.year}`}>
+              <h2 className='text-lg font-normal pb-2'>{set.year}</h2>
 
-                {set.newsletters.length
-                  ? set.newsletters.map((newsletter, index) => (
-                      <ul
-                        className="list-disc pl-4 flex flex-col gap-1"
-                        key={`${index}_${newsletter.link}`}
-                      >
-                        <li>
-                          <Link
-                            className="text-sm underline cursor-pointer"
-                            href={newsletter.link}
-                          >
-                            {newsletter.title}
-                          </Link>
-                        </li>
-                      </ul>
-                    ))
-                  : null}
-              </div>
-            </>
+              {set.newsletters.length
+                ? set.newsletters.map((newsletter, index) => (
+                    <ul className='list-disc pl-4 flex flex-col gap-1' key={`${index}_${newsletter.link}`}>
+                      <li>
+                        <Link className='text-sm underline cursor-pointer' href={newsletter.link}>
+                          {newsletter.title}
+                        </Link>
+                      </li>
+                    </ul>
+                  ))
+                : null}
+            </div>
           ))}
         </div>
       </section>

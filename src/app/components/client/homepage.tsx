@@ -208,7 +208,7 @@ const MailingListToggle = ({ selectedList, handleToggle }: ToggleButtonProps) =>
             selectedList === DELVINGBITCOIN ? "bg-gray-300 text-gray-500" : "bg-gray-100 text-gray-500"
           } items-center rounded-md`}
         >
-          <Image src='/icons/bitcoin-dev_icon.svg' alt='' width={16} height={16} />
+          <Image src='/icons/delvingbitcoin_icon.svg' alt='' width={20} height={20} />
           <p className='text-xs font-semibold text-black'>Delving bitcoin</p>
         </button>
       </div>
