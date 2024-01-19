@@ -78,6 +78,7 @@ type HomepageEntryData = {
   dev_name: string;
   contributors: string[];
   file_path: string;
+  combined_summ_file_path: string
 };
 
 type HomepageData = {

@@ -127,6 +127,7 @@ export const createArticlesFromFolder = (folderData: any[], folder: string) => {
       dev_name: `${folder}`,
       contributors: contributorsList,
       file_path: newPath,
+      combined_summ_file_path: newPath,
     };
   });
 };
