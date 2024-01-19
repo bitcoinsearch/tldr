@@ -7,8 +7,8 @@ import { getRouteFromPath } from "./actions/summary-data";
 
 const Post = ({ entry, isActivePost }: { entry: HomepageEntryData; isActivePost: boolean }) => {
   const type = entry.dev_name;
-  const path = `summary/${getRouteFromPath(entry.file_path)}`;
-  const replyPath = `summary/${getRouteFromPath(entry.combined_summ_file_path ?? entry.file_path)}`;
+  const path = `summary/${getRouteFromPath(entry.combined_summ_file_path ?? entry.file_path)}`;
+
   const publishedAtDateDisplay = formattedDate(entry.published_at);
 
   const threadReplies = () => {
@@ -34,14 +34,14 @@ const Post = ({ entry, isActivePost }: { entry: HomepageEntryData; isActivePost:
         <>
           {entry.n_threads - 1 !== 0 && (
             <p className='font-inter text-sm md:text-base font-bold hover:text-slate-600 hover:underline hover:underline-offset-2'>
-              <Link href={`/${replyPath}/#discussion-history`}>{threadReplies()}</Link>
+              <Link href={`/${path}/#discussion-history`}>{threadReplies()}</Link>
             </p>
           )}
         </>
       ) : (
         <div className='font-inter text-sm md:text-base font-bold '>
           {entry.n_threads - 1 !== 0 && (
-            <Link href={`/${replyPath}/#discussion-history`} className='hover:text-slate-600 hover:underline hover:underline-offset-2'>
+            <Link href={`/${path}/#discussion-history`} className='hover:text-slate-600 hover:underline hover:underline-offset-2'>
               {threadReplies()}
             </Link>
           )}
