@@ -6,7 +6,7 @@ import { addSpaceAfterPeriods, formattedDate } from "@/helpers/utils";
 import { NewsLetter, NewsLetterDataType } from "@/helpers/types";
 import MailchimpSubscribeForm from "@/app/components/client/subscribe-to-newsletter";
 import ScrollToTopButton from "@/app/components/client/scroll-to-top";
-import { MarkdownWrapper } from '../client/MarkdownWrapper';
+import { MarkdownWrapper } from "./MarkdownWrapper";
 
 export const NewsletterCard = ({ entry }: { entry: NewsLetter }) => {
   const publishedAtDateDisplay = formattedDate(entry.published_at);
