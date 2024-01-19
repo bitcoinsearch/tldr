@@ -6,6 +6,7 @@ import { addSpaceAfterPeriods, formattedDate } from "@/helpers/utils";
 import { NewsLetter, NewsLetterDataType } from "@/helpers/types";
 import MailchimpSubscribeForm from "@/app/components/client/subscribe-to-newsletter";
 import ScrollToTopButton from "@/app/components/client/scroll-to-top";
+import { MarkdownWrapper } from "./MarkdownWrapper";
 
 export const NewsletterCard = ({ entry }: { entry: NewsLetter }) => {
   const publishedAtDateDisplay = formattedDate(entry.published_at);
@@ -13,10 +14,10 @@ export const NewsletterCard = ({ entry }: { entry: NewsLetter }) => {
   const type = entry.dev_name;
 
   const threadReplies = () => {
-    if (entry.n_threads === 1) {
-      return `${entry.n_threads} reply`;
+    if (entry.n_threads - 1 === 1) {
+      return `${entry.n_threads - 1} reply`;
     } else {
-      return `${entry.n_threads} replies`;
+      return `${entry.n_threads - 1} replies`;
     }
   };
 
@@ -30,9 +31,12 @@ export const NewsletterCard = ({ entry }: { entry: NewsLetter }) => {
       <Link href={path} className='font-inika text-lg md:text-2xl underline cursor-pointer capitalize pb-3'>
         {entry.title}
       </Link>
-      <p className='font-inter text-sm md:text-base font-bold hover:text-slate-600 hover:underline hover:underline-offset-2'>
-        <Link href={`${path}`}>{threadReplies()}</Link>
-      </p>
+
+      {entry.n_threads - 1 !== 0 && (
+        <p className='font-inter text-sm md:text-base font-bold hover:text-slate-600 hover:underline hover:underline-offset-2'>
+          <Link href={`${path}`}>{threadReplies()}</Link>
+        </p>
+      )}
       <SummaryList summary={entry.summary} />
     </div>
   );
@@ -64,7 +68,7 @@ export const NewsletterPage = ({ newsletter }: { newsletter: NewsLetterDataType 
       <section>
         <MailchimpSubscribeForm />
         <h2 className='text-xl md:text-4xl font-normal pb-8 pt-10'>Summary</h2>
-        <div className='pb-4'>{formatTextToParagraphs(newsletter.summary_of_threads_started_this_week)}</div>
+        <MarkdownWrapper summary={newsletter.summary_of_threads_started_this_week} />
       </section>
 
       <section className='pb-12'>

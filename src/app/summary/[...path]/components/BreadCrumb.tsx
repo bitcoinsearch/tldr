@@ -48,9 +48,7 @@ const BreadCrumbs = ({ params, summaryData, replies }: { params: { path: string[
           <CaretRightIcon />
           <Link
             className={`font-semibold font-inter text-[12.5px] break-words 
-            ${
-              activePath["title"] ? "text-brand-secondary underline" : " text-brand-secondary underline"
-            }`}
+            ${activePath["title"] ? "text-brand-secondary underline" : "text-brand-secondary underline"}`}
             href={{ pathname: routePath, query: { replies } }}
           >
             {summaryData.data.title}
@@ -62,15 +60,14 @@ const BreadCrumbs = ({ params, summaryData, replies }: { params: { path: string[
         <>
           <CaretRightIcon />
           <section className='flex items-center gap-1'>
-            <span className='text-black no-underline font-semibold font-inter text-[12.5px]'>Reply: </span>
-            <Link
+            <span className='text-black no-underline font-semibold font-inter text-[12.5px]'>reply: </span>
+            <p
               className={`font-semibold font-inter text-[12.5px] whitespace-nowrap ${
-                activePath["reply"] ? " text-brand-secondary underline" : "text-black no-underline"
+                activePath["reply"] ? " text-black" : "text-black no-underline"
               }`}
-              href={""}
             >
               {authors.length === 1 ? authors[0].name : null}
-            </Link>
+            </p>
           </section>
         </>
       ) : null}
