@@ -34,7 +34,7 @@ export const NewsletterCard = ({ entry }: { entry: NewsLetter }) => {
 
       {entry.n_threads - 1 !== 0 && (
         <p className='font-inter text-sm md:text-base font-bold hover:text-slate-600 hover:underline hover:underline-offset-2'>
-          <Link href={`${path}`}>{threadReplies()}</Link>
+          <Link href={`${path}/#discussion-history`}>{threadReplies()}</Link>
         </p>
       )}
       <SummaryList summary={entry.summary} />
