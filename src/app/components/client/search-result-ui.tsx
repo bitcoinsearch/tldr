@@ -9,7 +9,7 @@ import {
 import { getStaticPathFromURL } from "@/helpers/utils";
 import { extractAuthorsAndDates } from "@/helpers/convert-from-xml";
 import Link from "next/link";
-import { DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY } from "@/config/config";
+import { DEFAULT_LIMIT_OF_RESULTS_TO_DISPLAY, DELVINGBITCOIN } from "@/config/config";
 
 type SearchResultProps = {
   searchResults: SearchResults;
@@ -103,7 +103,8 @@ const SearchPost = ({
   const isBitcoinDev = type === "bitcoin-dev";
   const headerText = type;
   const headerImageSrc = isBitcoinDev
-    ? "/images/btc.svg"
+    ? "/images/btc.svg" 
+    : type === DELVINGBITCOIN ? '/icons/delvingbitcoin_icon.svg'
     : "/images/lightning-dev.svg";
 
   const extractedOriginalAuthor = extractAuthorsAndDates(
