@@ -1,7 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import '../../globals.css'
+import "../../globals.css";
 
-export const MarkdownWrapper = ({ summary }: { summary: string }) => {
-  return <ReactMarkdown className='font-inika text-sm md:text-lg text-gray-800 markdownStyles'>{summary}</ReactMarkdown>;
+export const MarkdownWrapper = ({ summary, className }: { summary: string; className?: string | null | undefined }) => {
+  return <ReactMarkdown className={`markdownStyles ${className}`} >{summary}</ReactMarkdown>;
 };
