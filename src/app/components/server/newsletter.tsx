@@ -68,7 +68,7 @@ export const NewsletterPage = ({ newsletter }: { newsletter: NewsLetterDataType 
       <section>
         <MailchimpSubscribeForm />
         <h2 className='text-xl md:text-4xl font-normal pb-8 pt-10'>Summary</h2>
-        <MarkdownWrapper summary={newsletter.summary_of_threads_started_this_week} />
+        <MarkdownWrapper summary={newsletter.summary_of_threads_started_this_week} className={`font-inika text-sm md:text-lg text-gray-800 my-4`} />
       </section>
 
       <section className='pb-12'>

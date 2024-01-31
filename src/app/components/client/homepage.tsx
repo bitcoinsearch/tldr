@@ -112,7 +112,7 @@ const Homepage = ({
     <main className=''>
       <div className='flex flex-col gap-6 md:gap-8 my-8 md:my-14'>
         <h2 className='text-2xl font-semibold leading-normal'>Your daily summary</h2>
-        <MarkdownWrapper summary={data.header_summary} />
+        <MarkdownWrapper summary={data.header_summary} className={`font-inika text-sm md:text-lg text-gray-800`}  />
         <MailchimpSubscribeForm />
       </div>
       <div className='mb-14'>

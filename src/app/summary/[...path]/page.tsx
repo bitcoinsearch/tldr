@@ -6,6 +6,7 @@ import Image from "next/image";
 import DiscussionHistory from "./components/historythread";
 import Link from "next/link";
 import BreadCrumbs from "./components/BreadCrumb";
+import { MarkdownWrapper } from "@/app/components/server/MarkdownWrapper";
 
 export type sortedAuthorData = AuthorData & {initialIndex: number, dateInMS: number}
 
@@ -74,9 +75,9 @@ export default async function Page({ params, searchParams }: { params: { path: s
           ) : null}
         </div>
       </div>
-      <section className="my-10">
-        <p className="text-2xl font-inika my-2">{firstSentence}</p>
-        <p className="whitespace-pre-line">{addSpaceAfterPeriods(newSummary)}</p>
+      <section className='my-10'>
+        <p className='text-2xl font-inika my-2'>{firstSentence}</p>
+        <MarkdownWrapper summary={newSummary} className='whitespace-pre-line summaryTags' />
       </section>
       {historyLinks && historyLinks?.length > 0 ? (
         <DiscussionHistory historyLinks={historyLinks} authors={authors} replies={searchParams.replies} />

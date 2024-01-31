@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { getRouteFromPath } from "./actions/summary-data";
+import { MarkdownWrapper } from "./MarkdownWrapper";
 
 const Post = ({ entry, isActivePost }: { entry: HomepageEntryData; isActivePost: boolean }) => {
   const type = entry.dev_name;
@@ -91,7 +92,7 @@ export const SummaryList = ({ summary }: { summary: string }) => {
   const items: string[] = summary.split("- ").filter((item: string) => item.trim() !== "");
 
   if (!summary.startsWith("-")) {
-    return <p>{summary}.</p>;
+    return <MarkdownWrapper summary={`${summary}.`} className='font-inter text-base md:text-base summaryTags' />;
   }
 
   return (
