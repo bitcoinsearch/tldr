@@ -47,12 +47,35 @@ const getCurrentNewsletter = (): NewsLetterDataType | null => {
   }
 };
 
+
+function generateHTMLForPost(post: NewsLetter) {
+  const summary = marked(post.summary);
+  const link = post.combined_summ_file_path;
+  const datePublished = new Date(post.published_at).toDateString();
+  const authors = post.authors.join(', ');
+  const contributors = post.contributors.join(', ');
+  const replies = post.n_threads;
+
+  return `
+    <div>
+      <h3>${post.title}</h3>
+      <p>${summary}</p>
+      <p><strong>Source:</strong> ${post.dev_name}</p>
+      <p><strong>Date of Original Post:</strong> ${datePublished}</p>
+      <p><strong>Number of Replies:</strong> ${replies}</p>
+      <p><strong>Authors:</strong> ${authors}</p>
+      <p><strong>Contributors:</strong> ${contributors}</p>
+      <a href="${link}">Read more</a>
+    </div>
+  `;
+}
+
 // This funtion creates the HTML content for the newsletter
 function generateHTMLTemplate(data: NewsLetterDataType) {
   // Split the summary into words
   let words = data.summary_of_threads_started_this_week.split(" ");
   // Take the first 300 words
-  let summary = words.slice(0, 100).join(" ");
+  let summary = words.slice(0, 300).join(" ");
   // Convert the summary to HTML using marked
   let summaryHtml = marked(summary);
 
@@ -64,14 +87,14 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
     body {
       font-family: Arial, sans-serif;
       color: #ddd;
-      background-color: #333;
+      background-color: #000; 
       margin: 0;
       padding: 0;
     }
     
     h1 {
-      background-color: #EEC759;
-      color: #333;
+      background-color: #ddd; 
+      color: #000; /* black text */
       padding: 10px 0;
       text-align: center;
       font-size: 2em;
@@ -79,7 +102,7 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
     }
     
     h2 {
-      color: #EEC759;
+      color: #ddd; 
       margin-top: 40px;
       margin-bottom: 20px;
     }
@@ -91,7 +114,7 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
     }
     
     a {
-      color: #EEC759;
+      color: #ddd; 
       text-decoration: none;
     }
     
@@ -100,7 +123,7 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
     }
     
     div {
-      border-bottom: 1px solid #555;
+      border-bottom: 1px solid #555; 
       padding-bottom: 20px;
     }
     
@@ -117,18 +140,18 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
       <h2>New Threads This Week</h2>
   `;
 
-  // This loop add each new thread to the HTML
-  data.new_threads_this_week.forEach(thread => {
-    const summary = marked(thread.summary);
-    const link = thread.combined_summ_file_path;
-    html += `
-      <div>
-        <h3>${thread.title}</h3>
-        <p>${summary}</p>
-        <a href="${link}">Read more</a>
-      </div>
-    `;
-  });
+    // This loop add each new thread to the HTML
+    data.new_threads_this_week.forEach((thread) => {
+      html += generateHTMLForPost(thread);
+    });
+  
+    // section for active posts
+    html += '<h2>Active Posts This Week</h2>';
+  
+    // This loop add each active post to the HTML
+    data.active_posts_this_week.forEach((post) => {
+      html += generateHTMLForPost(post);
+    });
 
   html += `
     </body>
@@ -137,7 +160,6 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
 
   return html;
 }
-
 
 // send newsletter to mailchimp list
 const sendNewsletter = async (): Promise<void> => {
@@ -150,29 +172,34 @@ const sendNewsletter = async (): Promise<void> => {
 
     const htmlContent = generateHTMLTemplate(currentNewsletter);
 
-    const campaignResponse = await mailchimp.campaigns.create({
-      type: "regular",
-      recipients: {
-        list_id: process.env.MAILCHIMP_LIST_ID,
-      },
-      settings: {
-        subject_line: "TLDR Newsletter",
-        title: "Your weekly newsletter is here",
-        from_name: "Chaincode Labs",
-        reply_to: process.env.MAILCHIMP_REPLY_TO,
-        auto_footer: false,
-      },
-    });
+    // Only send the newsletter if the environment is production
+    if (process.env.NODE_ENV === "production") {
+      const campaignResponse = await mailchimp.campaigns.create({
+        type: "regular",
+        recipients: {
+          list_id: process.env.MAILCHIMP_LIST_ID,
+        },
+        settings: {
+          subject_line: "TLDR Newsletter",
+          title: "Your weekly newsletter is here",
+          from_name: "Chaincode Labs",
+          reply_to: process.env.MAILCHIMP_REPLY_TO,
+          auto_footer: false,
+        },
+      });
 
-    await mailchimp.campaigns.setContent(campaignResponse.id, {
-      html: htmlContent,
-    });
+      await mailchimp.campaigns.setContent(campaignResponse.id, {
+        html: htmlContent,
+      });
 
-    // await mailchimp.campaigns.send(campaignResponse.id);
+      await mailchimp.campaigns.send(campaignResponse.id);
 
-    console.log("Newsletter sent successfully");
-  } catch (error) {
-    console.error(`Failed to send newsletter: ${error}`);
+      console.log("Newsletter sent successfully");
+    } else {
+      console.log("Not in production environment, skipping email send");
+    }
+  } catch (err: any) {
+    throw new Error(err);
   }
 };
 
