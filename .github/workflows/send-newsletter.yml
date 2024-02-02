@@ -1,0 +1,33 @@
+name: Send Newsletter
+
+on: 
+  workflow_dispatch:
+  repository_dispatch:
+  schedule:
+    - cron: "0 3 * * *"   # This line sets the action to run at 3AM every day
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - name: Use Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Send newsletter
+      run: npx ts-node ./src/helpers/send-newsletter.ts
+      env:
+        MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
+        MAILCHIMP_LIST_ID: ${{ secrets.MAILCHIMP_LIST_ID }}
+        MAILCHIMP_SERVER_PREFIX: ${{ secrets.MAILCHIMP_SERVER_PREFIX }}
+        MAILCHIMP_REPLY_TO: ${{ secrets.MAILCHIMP_REPLY_TO }}
