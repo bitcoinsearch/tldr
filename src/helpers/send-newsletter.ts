@@ -47,116 +47,207 @@ const getCurrentNewsletter = (): NewsLetterDataType | null => {
   }
 };
 
+function getWeekCovered() {
+  const endDate = new Date();
+  const startDate = new Date();
+  startDate.setDate(endDate.getDate() - 7);
 
+  const options: Intl.DateTimeFormatOptions = { month: "long", day: "numeric" };
+
+  const startFormatted = new Intl.DateTimeFormat("en-US", options).format(
+    startDate
+  );
+  const endFormatted = new Intl.DateTimeFormat("en-US", options).format(
+    endDate
+  );
+
+  return `${startFormatted} - ${endFormatted}`;
+}
+
+// Function to generate HTML for each post
 function generateHTMLForPost(post: NewsLetter) {
   const summary = marked(post.summary);
   const link = post.combined_summ_file_path;
   const datePublished = new Date(post.published_at).toDateString();
-  const authors = post.authors.join(', ');
-  const contributors = post.contributors.join(', ');
+  const authors = post.authors.join(", ");
+  const contributors = post.contributors.join(", ");
   const replies = post.n_threads;
+  const originalPostLink = post.link;
 
   return `
-    <div>
-      <h3>${post.title}</h3>
-      <p>${summary}</p>
+    <div class="thread">
+      <h3><strong>Title:</strong> <a href="${link}">${post.title}</a></h3>
+      <h4>Summary of thread</h4>
+      <p class="summary">${summary}</p>
       <p><strong>Source:</strong> ${post.dev_name}</p>
       <p><strong>Date of Original Post:</strong> ${datePublished}</p>
       <p><strong>Number of Replies:</strong> ${replies}</p>
       <p><strong>Authors:</strong> ${authors}</p>
       <p><strong>Contributors:</strong> ${contributors}</p>
-      <a href="${link}">Read more</a>
+      <button class="read-more-btn"><a href="${originalPostLink}">Read More</a></button>
     </div>
   `;
 }
 
-// This funtion creates the HTML content for the newsletter
+// Function to generate the HTML content for the newsletter
 function generateHTMLTemplate(data: NewsLetterDataType) {
-  // Split the summary into words
   let words = data.summary_of_threads_started_this_week.split(" ");
-  // Take the first 300 words
   let summary = words.slice(0, 300).join(" ");
-  // Convert the summary to HTML using marked
   let summaryHtml = marked(summary);
 
   let html = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <style>
-    body {
-      font-family: Arial, sans-serif;
-      color: #ddd;
-      background-color: #000; 
-      margin: 0;
-      padding: 0;
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <style>
+  /* Reset some default styles */
+  body, h1, h2, h3, h4, p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f4f4f4;
+    text-align: justify;
+  }
+  
+  .container {
+    width: 95%;
+    margin: auto;
+  }
+  
+  /* Headings */
+  h1 {
+    font-weight: bold;
+    font-size: 28px;
+    background-color: #444; /* Darker background for contrast */
+    color: #fff;
+    padding: 15px 0;
+    text-align: center;
+    border-radius: 10px 10px 0 0; /* Rounded top corners */
+  }
+  
+  h2 {
+    color: #333;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 500;
+  }
+  
+  /* Cards */
+  .card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px; 
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .card p {
+    color: #666;
+    line-height: 1.5;
+  }
+  .card:hover {
+    border-color: #999;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Threads */
+  .thread {
+    display: grid;
+    align-items: start;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px 0;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .thread h3 {
+    color: #444;
+    margin-bottom: 5px;
+  }
+
+  .thread p {
+    color: #666;
+    margin-left: 10px; 
+    margin-bottom: 8px;
+    margin-top: 0;
+    line-height: 1.2;
+  }
+  
+  .thread a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+  
+  .thread a:hover {
+    text-decoration: underline;
+  }
+  
+  h4 {
+    color: #333;
+    margin-top: 3px;
+  }
+
+  h4 + .summary {
+    font-size: 12px;
+    color: #666;
+    margin-top: 0;
+    line-height: 1.5;
+  }
+
+  .read-more-btn {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  /* Media query for smaller screens */
+  @media (max-width: 600px) {
+    .thread {
+      width: 100%;
+      padding: 10px;
     }
-    
-    h1 {
-      background-color: #ddd; 
-      color: #000; /* black text */
-      padding: 10px 0;
-      text-align: center;
-      font-size: 2em;
-      margin-bottom: 20px;
-    }
-    
-    h2 {
-      color: #ddd; 
-      margin-top: 40px;
-      margin-bottom: 20px;
-    }
-    
-    p {
-      font-size: 1em;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-    
-    a {
-      color: #ddd; 
-      text-decoration: none;
-    }
-    
-    a:hover {
-      text-decoration: underline;
-    }
-    
-    div {
-      border-bottom: 1px solid #555; 
-      padding-bottom: 20px;
-    }
-    
-    h3 {
-      font-size: 1.5em;
-      margin-bottom: 10px;
-    }
-    </style>
-    </head>
-    <body>
-      <h1>TLDR Newsletter</h1>
-      <h2>Summary of Threads Started This Week</h2>
-      <p>${summaryHtml}</p>
+  }
+  </style>
+  </head>
+  <body>
+  <div class="container">
+  <h1> TLDR Newsletter for ${getWeekCovered()}</h1>
+      <div>
+          <h2>Summary of Threads Started This Week</h2>
+          <div class="card">
+              <p>${summaryHtml}</p>
+          </div>
+      </div>
+
       <h2>New Threads This Week</h2>
-  `;
+      <!-- Loop through new threads -->
+      ${data.new_threads_this_week
+        .map(
+          (thread) => `<div class="card">${generateHTMLForPost(thread)}</div>`
+        )
+        .join("")}
 
-    // This loop add each new thread to the HTML
-    data.new_threads_this_week.forEach((thread) => {
-      html += generateHTMLForPost(thread);
-    });
-  
-    // section for active posts
-    html += '<h2>Active Posts This Week</h2>';
-  
-    // This loop add each active post to the HTML
-    data.active_posts_this_week.forEach((post) => {
-      html += generateHTMLForPost(post);
-    });
-
-  html += `
-    </body>
-    </html>
-  `;
+      <h2>Active Posts This Week</h2>
+      <!-- Loop through active posts -->
+      ${data.active_posts_this_week
+        .map((post) => `<div class="card">${generateHTMLForPost(post)}</div>`)
+        .join("")}
+  </div>
+</body>
+</html>`;
 
   return html;
 }
