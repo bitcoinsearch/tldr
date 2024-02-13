@@ -1,0 +1,40 @@
+name: Send Newsletter
+
+on:
+  schedule:
+    - cron: "0 12 * * 1" # This line sets the action to run at 12pm every Monday
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Check branch
+        run: |
+          if [[ "${{ github.ref }}" != "refs/heads/main" ]]; then
+            echo "This workflow run is not on main branch, cancelling..."
+            exit 1
+          fi
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Send newsletter
+        run: npx ts-node ./src/helpers/send-newsletter.ts
+        env:
+          MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
+          MAILCHIMP_LIST_ID: ${{ secrets.MAILCHIMP_LIST_ID }}
+          MAILCHIMP_SERVER_PREFIX: ${{ secrets.MAILCHIMP_SERVER_PREFIX }}
+          MAILCHIMP_REPLY_TO: ${{ secrets.MAILCHIMP_REPLY_TO }}
+          NODE_ENV: ${{ secrets.NODE_ENV }}
