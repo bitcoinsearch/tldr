@@ -76,7 +76,7 @@ export default async function Page({ params, searchParams }: { params: { path: s
         </div>
       </div>
       <section className='my-10'>
-        <p className='text-2xl font-inika my-2'>{firstSentence}</p>
+        <MarkdownWrapper summary={firstSentence} className='text-2xl font-inika my-2' />
         <MarkdownWrapper summary={newSummary} className='whitespace-pre-line summaryTags' />
       </section>
       {historyLinks && historyLinks?.length > 0 ? (
