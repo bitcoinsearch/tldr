@@ -1,5 +1,5 @@
 import { convertXmlToText } from "@/helpers/convert-from-xml";
-import { addSpaceAfterPeriods, removeZeros } from "@/helpers/utils";
+import { addSpaceAfterPeriods, formattedDate, removeZeros } from "@/helpers/utils";
 import { AuthorData } from "@/helpers/types";
 import * as fs from "fs";
 import Image from "next/image";
@@ -8,47 +8,48 @@ import Link from "next/link";
 import BreadCrumbs from "./components/BreadCrumb";
 import { MarkdownWrapper } from "@/app/components/server/MarkdownWrapper";
 
-export type sortedAuthorData = AuthorData & {initialIndex: number, dateInMS: number}
+export type sortedAuthorData = AuthorData & { initialIndex: number; dateInMS: number };
 
 const getSummaryData = async (path: string[]) => {
-  const pathString = path.join("/")
+  const pathString = path.join("/");
   try {
-    const fileContent = fs.readFileSync(
-      `${process.cwd()}/public/static/static/${pathString}.xml`,
-      "utf-8"
-    );
+    const fileContent = fs.readFileSync(`${process.cwd()}/public/static/static/${pathString}.xml`, "utf-8");
     const data = await convertXmlToText(fileContent, pathString);
-    const linksCopy = data.data?.historyLinks
-    
-    const authorsFormatted: sortedAuthorData[] = data.data.authors.map((author, index) => ({...author, name: removeZeros(author), initialIndex: index, dateInMS: Date.parse(author.date + "T" + author.time)}))
-    
+    const linksCopy = data.data?.historyLinks;
+
+    const authorsFormatted: sortedAuthorData[] = data.data.authors.map((author, index) => ({
+      ...author,
+      name: removeZeros(author),
+      initialIndex: index,
+      dateInMS: Date.parse(author.date + "T" + author.time),
+    }));
+
     const chronologicalAuthors = authorsFormatted.sort((a, b) => {
       if (a.dateInMS < b.dateInMS) {
-        return -1
+        return -1;
       }
       if (a.dateInMS > b.dateInMS) {
-        return 1
+        return 1;
+      } else {
+        return 0;
       }
-      else {
-        return 0
-      }
-    })
-    const chronologicalLinksBasedOffAuthors = linksCopy?.length ? chronologicalAuthors.map((author) => linksCopy[author.initialIndex]) : []
-    
+    });
+    const chronologicalLinksBasedOffAuthors = linksCopy?.length ? chronologicalAuthors.map((author) => linksCopy[author.initialIndex]) : [];
+
     return {
       ...data,
-      "data": {
+      data: {
         ...data.data,
         authors: chronologicalAuthors,
-        historyLinks: chronologicalLinksBasedOffAuthors
-      }
+        historyLinks: chronologicalLinksBasedOffAuthors,
+      },
     };
   } catch (err) {
-    return null
+    return null;
   }
 };
 
-export default async function Page({ params, searchParams }: { params: { path: string[] }, searchParams: { replies: string } }) {
+export default async function Page({ params, searchParams }: { params: { path: string[] }; searchParams: { replies: string } }) {
   const summaryData = await getSummaryData(params.path);
   if (!summaryData) return <h1>No data found</h1>;
   const splitSentences = summaryData.data.entry.summary.split(/(?<=[.!?])\s+/);
@@ -56,23 +57,29 @@ export default async function Page({ params, searchParams }: { params: { path: s
   const newSummary = summaryData.data.entry.summary.replace(firstSentence, "");
   const { authors, historyLinks, entry } = summaryData.data;
   const { link } = entry;
-  
+  const publishedAtDateDisplay = formattedDate(entry.published);
+  const isCombinedPage = params.path[2].startsWith("combined");
+
   return (
     <main>
       <div className='flex flex-col gap-4 my-10'>
         <BreadCrumbs params={params} summaryData={summaryData} replies={searchParams.replies} />
         <h2 className='font-inika text-4xl'>{summaryData.data.title}</h2>
-        <div className='flex items-center gap-2'>
-          {historyLinks && historyLinks?.length == 0 && link ? (
-            <Link href={link} target="_blank">
-              <span className="pb-[2px] border-b-2 border-brand-secondary leading-relaxed text-brand-secondary font-semibold">
-                Original Post
-              </span>
-            </Link>
-          ) : null}
-          {authors.length === 1 ? (
-            <span className="text-gray-600 font-semibold">by {authors[0].name}</span>
-          ) : null}
+        <div className={`flex flex-col`}>
+          <div className='flex items-center gap-2'>
+            {historyLinks && historyLinks?.length == 0 && link ? (
+              <Link href={link} target='_blank'>
+                <span className='pb-[2px] border-b-2 border-brand-secondary leading-relaxed text-brand-secondary font-semibold'>Original Post</span>
+              </Link>
+            ) : null}
+            {authors.length === 1 ? <span className='text-gray-600 font-semibold'>by {authors[0].name}</span> : null}
+          </div>
+          {isCombinedPage ? null : (
+            <h3 className=' text- font-medium pt-3'>
+              <span className=' mr-1 font- text-gray-600'>Posted on: </span>
+              {publishedAtDateDisplay}
+            </h3>
+          )}
         </div>
       </div>
       <section className='my-10'>
