@@ -12,14 +12,6 @@ const Post = ({ entry, isActivePost }: { entry: HomepageEntryData; isActivePost:
 
   const publishedAtDateDisplay = formattedDate(entry.published_at);
 
-  const threadReplies = () => {
-    if (entry.n_threads - 1 === 1) {
-      return `${entry.n_threads - 1} reply`;
-    } else {
-      return `${entry.n_threads - 1} replies`;
-    }
-  };
-
   return (
     <article className='flex flex-col gap-4 mb-8'>
       <div className='flex flex-col md:gap-2'>
@@ -33,17 +25,17 @@ const Post = ({ entry, isActivePost }: { entry: HomepageEntryData; isActivePost:
       </div>
       {isActivePost ? (
         <>
-          {entry.n_threads - 1 !== 0 && (
+          {entry.n_threads !== 0 && (
             <p className='font-inter text-sm md:text-base font-bold hover:text-slate-600 hover:underline hover:underline-offset-2'>
-              <Link href={`/${path}/#discussion-history`}>{threadReplies()}</Link>
+              <Link href={`/${path}/#discussion-history`}>{entry.n_threads} replies</Link>
             </p>
           )}
         </>
       ) : (
         <div className='font-inter text-sm md:text-base font-bold '>
-          {entry.n_threads - 1 !== 0 && (
+          {entry.n_threads !== 0 && (
             <Link href={`/${path}/#discussion-history`} className='hover:text-slate-600 hover:underline hover:underline-offset-2'>
-              {threadReplies()}
+              {entry.n_threads} replies
             </Link>
           )}
           <p className='mt-[14px]'>Posted {publishedAtDateDisplay}</p>
