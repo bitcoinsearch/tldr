@@ -8,7 +8,8 @@ import { MarkdownWrapper } from "./MarkdownWrapper";
 
 const Post = ({ entry, isActivePost }: { entry: HomepageEntryData; isActivePost: boolean }) => {
   const type = entry.dev_name;
-  const path = `summary/${getRouteFromPath(entry.combined_summ_file_path ?? entry.file_path)}`;
+  const filePath = entry.n_threads !== 0 ? entry.combined_summ_file_path : entry.file_path;
+  const path = `summary/${getRouteFromPath(filePath)}`;
 
   const publishedAtDateDisplay = formattedDate(entry.published_at);
 
