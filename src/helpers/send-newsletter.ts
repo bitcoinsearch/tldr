@@ -164,6 +164,7 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
     .card p {
       color: #666;
       line-height: 1.5;
+      margin-bottom: 20px;
     }
     .card:hover {
       border-color: #999;
@@ -180,12 +181,12 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
     }
   
     .thread h2 {
-      margin: 0 0 10px 0;
+      margin: 0 0 10px ;
       color: #333;
     }
   
     .thread h2 a {
-      text-decoration: none;
+      text-decoration: underline;
       color: #333;
     }
   
@@ -226,23 +227,26 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
         <div>
             <h2>Summary of Threads Started This Week</h2>
             <div class="card">
-                <p>${summaryHtml}</p>
+                <p style="margin-bottom: 20px;">${summaryHtml}</p>
             </div>
         </div>
   
-        <h2>New Threads This Week</h2>
-        <!-- Loop through new threads -->
-        ${data.new_threads_this_week
-          .map(
-            (thread) => `<div class="card">${generateHTMLForPost(thread)}</div>`
-          )
-          .join("")}
+        <!-- New Threads This Week -->
+        ${data.new_threads_this_week.length > 0
+          ? `<h2>New Threads This Week</h2>` +
+            data.new_threads_this_week
+              .map((thread) => `<div class="card">${generateHTMLForPost(thread)}</div>`)
+              .join("")
+          : '<p>No new threads this week.</p>'}
+
   
-        <h2>Active Posts This Week</h2>
-        <!-- Loop through active posts -->
-        ${data.active_posts_this_week
-          .map((post) => `<div class="card">${generateHTMLForPost(post)}</div>`)
-          .join("")}
+        <!-- Active Posts This Week -->
+          ${data.active_posts_this_week.length > 0
+            ? `<h2>Active Posts This Week</h2>` +
+              data.active_posts_this_week
+                .map((post) => `<div class="card">${generateHTMLForPost(post)}</div>`)
+                .join("")
+            : '<p>No active posts this week.</p>'}
     </div>
   </body>
   </html>`;
@@ -271,8 +275,7 @@ const sendNewsletter = async (): Promise<void> => {
         settings: {
           subject_line: "TLDR Newsletter",
           title: "Your weekly newsletter is here",
-          from_name: "Chaincode Labs",
-          reply_to: process.env.MAILCHIMP_REPLY_TO,
+          from_name: "The Bitcoin Dev Project",
           auto_footer: false,
         },
       });
