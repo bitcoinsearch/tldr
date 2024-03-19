@@ -93,8 +93,8 @@ function generateHTMLForPost(post: NewsLetter) {
           ${generateKeyValueHTML(undefined, post.dev_name)}
           ${generateKeyValueHTML(undefined, datePublished)}
           ${generateKeyValueHTML("Replies", replies)}
-          ${generateKeyValueHTML("Authors", authors)}
-          ${generateKeyValueHTML("Contributors", contributors)}
+          ${generateKeyValueHTML("Author(s)", authors)}
+          ${generateKeyValueHTML("Contributor(s)", contributors)}
         </div>
         <a href="${originalPostLink}" class="read-more-btn">Original Post</a>
       </div>
@@ -275,7 +275,8 @@ const sendNewsletter = async (): Promise<void> => {
         settings: {
           subject_line: "TLDR Newsletter",
           title: "Your weekly newsletter is here",
-          from_name: "The Bitcoin Dev Project",
+          from_name: "Bitcoin Dev Project",
+          reply_to: process.env.MAILCHIMP_REPLY_TO,
           auto_footer: false,
         },
       });
