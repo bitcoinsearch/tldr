@@ -13,14 +13,6 @@ export const NewsletterCard = ({ entry }: { entry: NewsLetter }) => {
   const path = entry.combined_summ_file_path.length ? entry.combined_summ_file_path : entry.file_path;
   const type = entry.dev_name;
 
-  const threadReplies = () => {
-    if (entry.n_threads - 1 === 1) {
-      return `${entry.n_threads - 1} reply`;
-    } else {
-      return `${entry.n_threads - 1} replies`;
-    }
-  };
-
   return (
     <div key={`${entry.id}_${entry.title}`} className='flex flex-col gap-2'>
       <p className='text-sm'>{publishedAtDateDisplay}</p>
@@ -32,9 +24,9 @@ export const NewsletterCard = ({ entry }: { entry: NewsLetter }) => {
         {entry.title}
       </Link>
 
-      {entry.n_threads - 1 !== 0 && (
+      {entry.n_threads !== 0 && (
         <p className='font-inter text-sm md:text-base font-bold hover:text-slate-600 hover:underline hover:underline-offset-2'>
-          <Link href={`${path}/#discussion-history`}>{threadReplies()}</Link>
+          <Link href={`${path}/#discussion-history`}>{entry.n_threads}</Link>
         </p>
       )}
       <SummaryList summary={entry.summary} />
