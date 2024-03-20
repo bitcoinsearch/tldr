@@ -28,7 +28,9 @@ const Post = ({ entry, isActivePost }: { entry: HomepageEntryData; isActivePost:
         <>
           {entry.n_threads !== 0 && (
             <p className='font-inter text-sm md:text-base font-bold hover:text-slate-600 hover:underline hover:underline-offset-2'>
-              <Link href={`/${path}/#discussion-history`}>{entry.n_threads} replies</Link>
+              <Link href={`/${path}/#discussion-history`}>
+                {entry.n_threads} {entry.n_threads === 1 ? "reply" : "replies"}
+              </Link>
             </p>
           )}
         </>
@@ -36,7 +38,7 @@ const Post = ({ entry, isActivePost }: { entry: HomepageEntryData; isActivePost:
         <div className='font-inter text-sm md:text-base font-bold '>
           {entry.n_threads !== 0 && (
             <Link href={`/${path}/#discussion-history`} className='hover:text-slate-600 hover:underline hover:underline-offset-2'>
-              {entry.n_threads} replies
+              {entry.n_threads} {entry.n_threads === 1 ? "reply" : "replies"}
             </Link>
           )}
           <p className='mt-[14px]'>Posted {publishedAtDateDisplay}</p>

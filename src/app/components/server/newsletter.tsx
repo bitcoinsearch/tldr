@@ -26,7 +26,9 @@ export const NewsletterCard = ({ entry }: { entry: NewsLetter }) => {
 
       {entry.n_threads !== 0 && (
         <p className='font-inter text-sm md:text-base font-bold hover:text-slate-600 hover:underline hover:underline-offset-2'>
-          <Link href={`${path}/#discussion-history`}>{entry.n_threads}</Link>
+          <Link href={`${path}/#discussion-history`}>
+            {entry.n_threads} {entry.n_threads === 1 ? "reply" : "replies"}
+          </Link>
         </p>
       )}
       <SummaryList summary={entry.summary} />
