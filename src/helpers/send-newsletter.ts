@@ -265,7 +265,7 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
 
         <!-- Survey Button -->
         <div>
-        <a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" class="centered-button">Could you please rate this newsletter</a> 
+        <a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" class="centered-button">Could you please rate this newsletter?</a> 
         <div/>
 
         <!-- Active Posts This Week -->
@@ -280,6 +280,11 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
                   .join("")
               : "<p>No active posts this week.</p>"
           }
+
+          <!-- Survey Button -->
+          <div>
+          <a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" class="centered-button">Could you please rate this newsletter?</a> 
+          <div/>
     </div>
   </body>
   </html>`;
