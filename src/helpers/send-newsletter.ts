@@ -212,6 +212,25 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
     .thread .read-more-btn:hover {
       background-color: #0056b3;
     }
+
+    /* Button */
+    .centered-button {
+      display: block;
+      margin: 20px auto;
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 10px 15px;
+      border-radius: 5px;
+      line-height: 50px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .centered-button:hover {
+      background-color: #0056b3;
+    }
+
     /* Media query for smaller screens */
     @media (max-width: 600px) {
       .thread {
@@ -232,21 +251,35 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
         </div>
   
         <!-- New Threads This Week -->
-        ${data.new_threads_this_week.length > 0
-          ? `<h2>New Threads This Week</h2>` +
-            data.new_threads_this_week
-              .map((thread) => `<div class="card">${generateHTMLForPost(thread)}</div>`)
-              .join("")
-          : '<p>No new threads this week.</p>'}
-
-  
-        <!-- Active Posts This Week -->
-          ${data.active_posts_this_week.length > 0
-            ? `<h2>Active Posts This Week</h2>` +
-              data.active_posts_this_week
-                .map((post) => `<div class="card">${generateHTMLForPost(post)}</div>`)
+        ${
+          data.new_threads_this_week.length > 0
+            ? `<h2>New Threads This Week</h2>` +
+              data.new_threads_this_week
+                .map(
+                  (thread) =>
+                    `<div class="card">${generateHTMLForPost(thread)}</div>`
+                )
                 .join("")
-            : '<p>No active posts this week.</p>'}
+            : "<p>No new threads this week.</p>"
+        }
+
+        <!-- Survey Button -->
+        <div>
+        <a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" class="centered-button">Could you please rate this newsletter</a> 
+        <div/>
+
+        <!-- Active Posts This Week -->
+          ${
+            data.active_posts_this_week.length > 0
+              ? `<h2>Active Posts This Week</h2>` +
+                data.active_posts_this_week
+                  .map(
+                    (post) =>
+                      `<div class="card">${generateHTMLForPost(post)}</div>`
+                  )
+                  .join("")
+              : "<p>No active posts this week.</p>"
+          }
     </div>
   </body>
   </html>`;
@@ -258,42 +291,46 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
 const sendNewsletter = async (): Promise<void> => {
   try {
     const currentNewsletter = getCurrentNewsletter();
+
     if (!currentNewsletter) {
       console.error("Failed to get current newsletter");
       return;
     }
 
     const htmlContent = generateHTMLTemplate(currentNewsletter);
+    const campaignConfig = {
+      type: "regular",
+      recipients: {
+        list_id: process.env.MAILCHIMP_LIST_ID,
+      },
+      settings: {
+        subject_line: "TLDR Newsletter",
+        title: "Your weekly newsletter is here",
+        from_name: "Bitcoin Dev Project",
+        reply_to: process.env.MAILCHIMP_REPLY_TO,
+        auto_footer: false,
+      },
+    };
 
-    // Only send the newsletter if the environment is production
+    const campaignResponse = await mailchimp.campaigns.create(campaignConfig);
+    await mailchimp.campaigns.setContent(campaignResponse.id, {
+      html: htmlContent,
+    });
+
     if (process.env.NODE_ENV === "production") {
-      const campaignResponse = await mailchimp.campaigns.create({
-        type: "regular",
-        recipients: {
-          list_id: process.env.MAILCHIMP_LIST_ID,
-        },
-        settings: {
-          subject_line: "TLDR Newsletter",
-          title: "Your weekly newsletter is here",
-          from_name: "Bitcoin Dev Project",
-          reply_to: process.env.MAILCHIMP_REPLY_TO,
-          auto_footer: false,
-        },
-      });
-
-      await mailchimp.campaigns.setContent(campaignResponse.id, {
-        html: htmlContent,
-      });
-
       await mailchimp.campaigns.send(campaignResponse.id);
-
       console.log("Newsletter sent successfully");
+    } else if (process.env.NODE_ENV === "development") {
+      await mailchimp.campaigns.sendTestEmail(campaignResponse.id, {
+        test_emails: [process.env.MAILCHIMP_TEST_EMAIL],
+        send_type: "html",
+      });
+      console.log("Test email sent successfully");
     } else {
-      console.log("Not in production environment, skipping email send");
+      console.log("unknown environment, not sending newsletter");
     }
   } catch (err: any) {
     throw new Error(err);
   }
 };
-
 sendNewsletter();
