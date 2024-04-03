@@ -217,8 +217,8 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
     .centered-button {
       display: block;
       margin: 20px auto;
-      background-color: #000;
-      color: #fff;
+      background-color: #087099;
+      color: #ffffff;
       text-align: center;
       padding: 10px 15px;
       border-radius: 5px;
