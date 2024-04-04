@@ -38,7 +38,10 @@ const getAllNewsLetters = () => {
 
     // loop through each folder and extract the newsletters
     for (let i = 0; i < getfolders.length; i++) {
-      let newsletter_set = [];
+      let newsletter_set: {
+        title: string;
+        link: string;
+      }[] = [];
       let newsletter_section: NewsLetterSet = {
         year: "",
         newsletters: [],
