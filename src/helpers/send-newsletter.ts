@@ -231,6 +231,29 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
       background-color: #0056b3;
     }
 
+        /* Fun Button */
+    .fun-button {
+      display: inline-block;
+      background-color: #087099;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 30px; /* Rounded button */
+      font-weight: bold;
+      transition: all 0.3s ease; /* Smooth transition */
+    }
+
+    .fun-button:hover {
+      background-color: #0056b3;
+      transform: scale(1.05); /* Slightly scale up on hover */
+    }
+
+    .emoji {
+      font-size: 1.2em; /* Increase emoji size */
+      vertical-align: middle; /* Align emojis vertically */
+      margin: 0 5px; /* Add some spacing around emojis */
+    }
+
     /* Media query for smaller screens */
     @media (max-width: 600px) {
       .thread {
@@ -264,9 +287,22 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
         }
 
         <!-- Survey Button -->
-        <div>
-        <a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" class="centered-button">Could you please rate this newsletter?</a> 
-        <div/>
+        <div style="text-align: center; padding: 24px;">
+         <div class="iterateQuestionPrompt" style="font-size: 16px; line-height: 24px; text-align: center; margin-bottom: 10px;">
+            <p style="text-align: center;">Did you find the information in this email helpful?</p>
+         </div>
+         <table style="margin: 0 auto; text-align: center;">
+            <tr>
+                <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">😒</span></a></td>
+                <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">😐</span></a></td>
+                <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">🙁</span></a></td>
+                <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">🙂</span></a></td>
+                <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">😀</span></a></td>
+            </tr>
+         </table>
+        </div>
+        
+        
 
         <!-- Active Posts This Week -->
           ${
@@ -282,9 +318,23 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
           }
 
           <!-- Survey Button -->
-          <div>
-          <a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" class="centered-button">Could you please rate this newsletter?</a> 
-          <div/>
+          <div style="text-align: center; padding: 24px;">
+           <div class="iterateQuestionPrompt" style="font-size: 16px; line-height: 24px; text-align: center; margin-bottom: 10px;">
+              <p style="text-align: center;">Did you find the information in this email helpful?</p>
+           </div>
+           <table style="margin: 0 auto; text-align: center;">
+              <tr>
+                  <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">😒</span></a></td>
+                  <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">😐</span></a></td>
+                  <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">🙁</span></a></td>
+                  <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">🙂</span></a></td>
+                  <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">😀</span></a></td>
+              </tr>
+           </table>
+          </div>
+          
+          
+
     </div>
   </body>
   </html>`;
