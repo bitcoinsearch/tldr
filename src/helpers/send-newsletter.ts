@@ -103,6 +103,33 @@ function generateHTMLForPost(post: NewsLetter) {
   return htmlContent;
 }
 
+function generateSurveyButton(emojis: string[]): string {
+  let emojiHtml = emojis.map(emoji => `
+    <td>
+      <a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;">
+        <span style="font-size: 36px; padding: 8px;">${emoji}</span>
+      </a>
+    </td>
+  `).join('');
+
+  return `
+    <!-- Survey Button -->
+    <div style="text-align: center; padding: 24px;">
+      <div class="iterateQuestionPrompt" style="font-size: 16px; line-height: 24px; text-align: center; margin-bottom: 10px;">
+        <p style="text-align: center;">Did you find the information in this email helpful?</p>
+      </div>
+      <table style="margin: 0 auto; text-align: center;">
+        <tr>
+          ${emojiHtml}
+        </tr>
+      </table>
+    </div>
+  `;
+}
+
+let emojis = ['😒', '😐', '🙁', '🙂', '😀'];
+let surveyButtonHtml = generateSurveyButton(emojis);
+
 // Function to generate the HTML content for the newsletter
 function generateHTMLTemplate(data: NewsLetterDataType) {
   let words = data.summary_of_threads_started_this_week.split(" ");
@@ -287,21 +314,7 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
         }
 
         <!-- Survey Button -->
-        <div style="text-align: center; padding: 24px;">
-         <div class="iterateQuestionPrompt" style="font-size: 16px; line-height: 24px; text-align: center; margin-bottom: 10px;">
-            <p style="text-align: center;">Did you find the information in this email helpful?</p>
-         </div>
-         <table style="margin: 0 auto; text-align: center;">
-            <tr>
-                <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">😒</span></a></td>
-                <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">😐</span></a></td>
-                <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">🙁</span></a></td>
-                <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">🙂</span></a></td>
-                <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">😀</span></a></td>
-            </tr>
-         </table>
-        </div>
-        
+        ${surveyButtonHtml}
         
 
         <!-- Active Posts This Week -->
@@ -318,22 +331,7 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
           }
 
           <!-- Survey Button -->
-          <div style="text-align: center; padding: 24px;">
-           <div class="iterateQuestionPrompt" style="font-size: 16px; line-height: 24px; text-align: center; margin-bottom: 10px;">
-              <p style="text-align: center;">Did you find the information in this email helpful?</p>
-           </div>
-           <table style="margin: 0 auto; text-align: center;">
-              <tr>
-                  <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">😒</span></a></td>
-                  <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">😐</span></a></td>
-                  <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">🙁</span></a></td>
-                  <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">🙂</span></a></td>
-                  <td><a href="https://us17.list-manage.com/survey?u=718f9c0ab4af9b4acf93a8e6f&id=c2c0b80d59&attribution=false" style="text-decoration: none; color: inherit;"><span style="font-size: 36px; padding: 8px;">😀</span></a></td>
-              </tr>
-           </table>
-          </div>
-          
-          
+          ${surveyButtonHtml}
 
     </div>
   </body>
