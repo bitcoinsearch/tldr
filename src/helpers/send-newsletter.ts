@@ -66,7 +66,7 @@ function getWeekCovered() {
 
 function generateHTMLForPost(post: NewsLetter) {
   const summary = marked(post.summary);
-  const link = post.combined_summ_file_path;
+  const link = post.combined_summ_file_path || post.file_path; // Using file_path if combined_summ_file_path is missing
   const datePublished = new Date(post.published_at).toDateString();
   const authors = post.authors.join(", ");
   const contributors = post.contributors.join(", ");
