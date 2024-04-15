@@ -124,9 +124,15 @@ const Homepage = ({
             Active Discussions 🔥
           </h2>
           <div>
-            {homepageData.active_posts.map((entry) => (
-              <Post key={entry.id} entry={entry} isActivePost={true} />
-            ))}
+            {homepageData.active_posts.length ? (
+              <>
+                {homepageData.active_posts.map((entry) => (
+                  <Post key={entry.id} entry={entry} isActivePost={true} />
+                ))}
+              </>
+            ) : (
+              <p>No active discussions available, kindly explore other sections.</p>
+            )}
           </div>
         </section>
         <section>
@@ -134,9 +140,15 @@ const Homepage = ({
             Today in Bitcoin/LN History
           </h2>
           <div>
-            {homepageData.today_in_history_posts.map((entry) => (
-              <Post key={entry.id} entry={entry} isActivePost={false} />
-            ))}
+            {homepageData.today_in_history_posts.length ? (
+              <>
+                {homepageData.today_in_history_posts.map((entry) => (
+                  <Post key={entry.id} entry={entry} isActivePost={false} />
+                ))}
+              </>
+            ) : (
+              <p>Posts in this section are currently unavailable. Kindly explore other sections.</p>
+            )}
           </div>
         </section>
         <div className=''>
@@ -144,9 +156,15 @@ const Homepage = ({
             All Activity
           </h2>
           <div>
-            {memoizedBatches?.map((entry, idx) => (
-              <Post key={`${entry.id}_${idx}`} entry={entry} isActivePost={false} />
-            ))}
+            {memoizedBatches.length ? (
+              <>
+                {memoizedBatches?.map((entry, idx) => (
+                  <Post key={`${entry.id}_${idx}`} entry={entry} isActivePost={false} />
+                ))}
+              </>
+            ) : (
+              <p>Posts in this section are currently unavailable. Kindly explore other sections.</p>
+            )}
           </div>
         </div>
         <section className='flex justify-center'>
