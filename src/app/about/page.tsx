@@ -11,11 +11,17 @@ export default function Page() {
             <Link href='https://lists.linuxfoundation.org/pipermail/bitcoin-dev/' target='_blank' className='underline text-brand-secondary'>
               bitcoin-dev
             </Link>
-          </span>{" "}
-          and{" "}
+          </span>
+          ,{" "}
           <span>
             <Link href='https://lists.linuxfoundation.org/pipermail/lightning-dev/' target='_blank' className='underline text-brand-secondary'>
               lightning-dev
+            </Link>
+          </span>{" "}
+          and{" "}
+          <span>
+            <Link href='https://https://delvingbitcoin.org/' target='_blank' className='underline text-brand-secondary'>
+              delving bitcoin
             </Link>
           </span>{" "}
           mailing lists.{"\n"}
