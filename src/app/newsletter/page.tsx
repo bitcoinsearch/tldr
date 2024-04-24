@@ -3,6 +3,7 @@ import { NewsLetterDataType, NewsLetterSet } from "@/helpers/types";
 import { NewsletterPage } from "../components/server/newsletter";
 import Link from "next/link";
 import { formattedDate } from "@/helpers/utils";
+import { getSummaryData } from "../summary/[...path]/page";
 
 // get most recent newsletter from newsletter.json
 const getCurrentNewsletter = () => {
@@ -12,6 +13,39 @@ const getCurrentNewsletter = () => {
       "utf-8"
     );
     const parsedData = JSON.parse(data) as NewsLetterDataType;
+    // console.log(parsedData.active_posts_this_week[0].file_path);
+      // get file path if present. if absent use combined_summ_file_path.
+      const getFilePath = () => {
+        // merge all posts into one array
+        const allPosts = [...parsedData.active_posts_this_week, ...parsedData.new_threads_this_week];
+        // get the file path of all posts in the array
+        const filePaths = allPosts.map((post) => {
+          console.log({ post });
+          if (post.contributors.length > 0) return post.combined_summ_file_path
+          return post.file_path
+      });
+        // console.log(filePaths);
+        // read the content of the file in the file path
+        for (let i = 0; i < filePaths.length; i++) {
+          // remove https://tldr.bitcoinsearch.xyz/summary/ from the file path if present
+          const file = filePaths[i].replace("https://tldr.bitcoinsearch.xyz/summary/", "");
+          // const path = `${process.cwd()}/public/static/static/${file}.xml`;
+          // // console.log({path});
+          // if (fs.existsSync(path)) {
+          //   const data = fs.readFileSync(path, "utf-8");
+          //   return data;
+          // }
+          // console.log({file});
+          const summaryData = getSummaryData([file]).then((data) => {
+            const authorLength = data?.data.authors.length;
+            const title = data?.data.title;
+            console.log("length", data?.month, data?.year, data?.data.authors.length, data?.data.title)
+            // console.log({authorLength, title});
+          });
+          // console.log({summaryData});
+        }
+      };
+      console.log("post got here", getFilePath());
     return parsedData;
   } catch (err) {
     return null;

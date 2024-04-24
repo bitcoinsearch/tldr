@@ -1,8 +1,7 @@
 import { convertXmlToText } from "@/helpers/convert-from-xml";
-import { addSpaceAfterPeriods, formattedDate, removeZeros } from "@/helpers/utils";
+import { formattedDate, removeZeros } from "@/helpers/utils";
 import { AuthorData } from "@/helpers/types";
 import * as fs from "fs";
-import Image from "next/image";
 import DiscussionHistory from "./components/historythread";
 import Link from "next/link";
 import BreadCrumbs from "./components/BreadCrumb";
@@ -10,7 +9,7 @@ import { MarkdownWrapper } from "@/app/components/server/MarkdownWrapper";
 
 export type sortedAuthorData = AuthorData & { initialIndex: number; dateInMS: number };
 
-const getSummaryData = async (path: string[]) => {
+export const getSummaryData = async (path: string[]) => {
   const pathString = path.join("/");
   try {
     const fileContent = fs.readFileSync(`${process.cwd()}/public/static/static/${pathString}.xml`, "utf-8");
