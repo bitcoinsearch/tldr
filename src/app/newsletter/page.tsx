@@ -6,7 +6,7 @@ import { formattedDate } from "@/helpers/utils";
 import { PRODUCTION_URL } from '@/config/config';
 import { getSummaryData } from '../summary/[...path]/page';
 
-/** get most recent newsletter from newsletter.json **/
+// get most recent newsletter from newsletter.json
 const getCurrentNewsletter = async () => {
   try {
     const data = fs.readFileSync(`${process.cwd()}/public/static/static/newsletters/newsletter.json`, "utf-8");
@@ -17,11 +17,11 @@ const getCurrentNewsletter = async () => {
       if (Array.isArray(value)) {
         const processedValue = await Promise.all(
           value.map(async (post) => {
-            /**  get the file path of all posts in the array **/
+            // get the file path of all posts in the array
             const filePath = post.contributors.length > 0 ? post.combined_summ_file_path : post.file_path;
             const file = filePath.replace(PRODUCTION_URL, "");
 
-            // /**  read the content of the file in the file path  **/
+            // read the content of the file in the file path
             const replies = await getSummaryData([file]).then((data) => Number(data?.data.authors.length) - 1);
             return { ...post, n_threads: replies };
           })
