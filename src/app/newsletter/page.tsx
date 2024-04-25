@@ -2,17 +2,48 @@ import * as fs from "fs";
 import { NewsLetterDataType, NewsLetterSet } from "@/helpers/types";
 import { NewsletterPage } from "../components/server/newsletter";
 import Link from "next/link";
-import { formattedDate } from "@/helpers/utils";
+import { formattedDate, getSummaryDataInfo } from "@/helpers/utils";
+import { PRODUCTION_URL } from "@/config/config";
+
+const getSummaryData = async (path: string[]) => {
+  const pathString = path.join("/");
+  try {
+    const fileContent = fs.readFileSync(`${process.cwd()}/public/static/static/${pathString}.xml`, "utf-8");
+    const summaryInfo = getSummaryDataInfo(path, fileContent);
+    return summaryInfo;
+  } catch (err) {
+    return null;
+  }
+};
 
 // get most recent newsletter from newsletter.json
-const getCurrentNewsletter = () => {
+const getCurrentNewsletter = async () => {
   try {
-    const data = fs.readFileSync(
-      `${process.cwd()}/public/static/static/newsletters/newsletter.json`,
-      "utf-8"
-    );
+    const data = fs.readFileSync(`${process.cwd()}/public/static/static/newsletters/newsletter.json`, "utf-8");
     const parsedData = JSON.parse(data) as NewsLetterDataType;
-    return parsedData;
+    let postParsedData: any = {};
+
+    for (const [key, value] of Object.entries(parsedData)) {
+      if (Array.isArray(value)) {
+        const processedValue = await Promise.all(
+          value.map(async (post) => {
+            // get the file path of all posts in the array
+            const filePath = post.contributors.length > 0 ? post.combined_summ_file_path : post.file_path;
+            const file = filePath.replace(PRODUCTION_URL, "");
+
+            // read the content of the file in the file path
+            const replies = await getSummaryData([file]).then((data) => Number(data?.data.authors.length) - 1);
+            return { ...post, n_threads: replies };
+          })
+        );
+
+        postParsedData[key] = processedValue;
+      } else {
+        postParsedData[key] = value;
+      }
+    }
+
+    return postParsedData;
   } catch (err) {
     return null;
   }
@@ -77,7 +108,7 @@ const getAllNewsLetters = () => {
 };
 
 export default async function Page() {
-  const newsletters = getCurrentNewsletter();
+  const newsletters = await getCurrentNewsletter();
   const newsletter_sets = getAllNewsLetters();
 
   if (!newsletter_sets) return null;

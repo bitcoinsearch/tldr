@@ -1,49 +1,17 @@
-import { convertXmlToText } from "@/helpers/convert-from-xml";
-import { addSpaceAfterPeriods, formattedDate, removeZeros } from "@/helpers/utils";
-import { AuthorData } from "@/helpers/types";
+import { formattedDate, getSummaryDataInfo } from "@/helpers/utils";
 import * as fs from "fs";
-import Image from "next/image";
 import DiscussionHistory from "./components/historythread";
 import Link from "next/link";
 import BreadCrumbs from "./components/BreadCrumb";
 import { MarkdownWrapper } from "@/app/components/server/MarkdownWrapper";
 
-export type sortedAuthorData = AuthorData & { initialIndex: number; dateInMS: number };
-
 const getSummaryData = async (path: string[]) => {
   const pathString = path.join("/");
   try {
     const fileContent = fs.readFileSync(`${process.cwd()}/public/static/static/${pathString}.xml`, "utf-8");
-    const data = await convertXmlToText(fileContent, pathString);
-    const linksCopy = data.data?.historyLinks;
+    const summaryInfo = getSummaryDataInfo(path, fileContent);
+    return summaryInfo;
 
-    const authorsFormatted: sortedAuthorData[] = data.data.authors.map((author, index) => ({
-      ...author,
-      name: removeZeros(author),
-      initialIndex: index,
-      dateInMS: Date.parse(author.date + "T" + author.time),
-    }));
-
-    const chronologicalAuthors = authorsFormatted.sort((a, b) => {
-      if (a.dateInMS < b.dateInMS) {
-        return -1;
-      }
-      if (a.dateInMS > b.dateInMS) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
-    const chronologicalLinksBasedOffAuthors = linksCopy?.length ? chronologicalAuthors.map((author) => linksCopy[author.initialIndex]) : [];
-
-    return {
-      ...data,
-      data: {
-        ...data.data,
-        authors: chronologicalAuthors,
-        historyLinks: chronologicalLinksBasedOffAuthors,
-      },
-    };
   } catch (err) {
     return null;
   }

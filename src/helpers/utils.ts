@@ -1,5 +1,6 @@
-import { AuthorData, EsSearchResult, HomepageEntryData, XmlDataType } from "./types";
+import { AuthorData, EsSearchResult, HomepageEntryData, XmlDataType, sortedAuthorData } from "./types";
 import { domainFunctionMapper } from "./path-mappers";
+import { convertXmlToText } from './convert-from-xml';
 
 export function addSpaceAfterPeriods(text: string): string {
   return text.replace(/\.(\S)/g, ". $1");
@@ -235,4 +236,40 @@ export const removeZeros = (author: AuthorData) => {
   } else {
     return author.name.endsWith(".") ? author.name.slice(0, -1) : author.name;
   }
+};
+
+export const getSummaryDataInfo = async (path: string[], fileContent: any) => {
+  const pathString = path.join("/");
+
+    const data = await convertXmlToText(fileContent, pathString);
+    const linksCopy = data.data?.historyLinks;
+
+    const authorsFormatted: sortedAuthorData[] = data.data.authors.map((author, index) => ({
+      ...author,
+      name: removeZeros(author),
+      initialIndex: index,
+      dateInMS: Date.parse(author.date + "T" + author.time),
+    }));
+
+    const chronologicalAuthors = authorsFormatted.sort((a, b) => {
+      if (a.dateInMS < b.dateInMS) {
+        return -1;
+      }
+      if (a.dateInMS > b.dateInMS) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+    const chronologicalLinksBasedOffAuthors = linksCopy?.length ? chronologicalAuthors.map((author) => linksCopy[author.initialIndex]) : [];
+
+    return {
+      ...data,
+      data: {
+        ...data.data,
+        authors: chronologicalAuthors,
+        historyLinks: chronologicalLinksBasedOffAuthors,
+      },
+    };
+
 };
