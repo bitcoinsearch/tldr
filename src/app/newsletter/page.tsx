@@ -2,9 +2,8 @@ import * as fs from "fs";
 import { NewsLetterDataType, NewsLetterSet } from "@/helpers/types";
 import { NewsletterPage } from "../components/server/newsletter";
 import Link from "next/link";
-import { formattedDate } from "@/helpers/utils";
+import { formattedDate, getSummaryData } from "@/helpers/utils";
 import { PRODUCTION_URL } from '@/config/config';
-import { getSummaryData } from '../summary/[...path]/page';
 
 // get most recent newsletter from newsletter.json
 const getCurrentNewsletter = async () => {

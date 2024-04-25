@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { getRelativePathFromInternalLink } from "@/app/components/server/actions/summary-data";
 import { formattedDate } from "@/helpers/utils";
-import { sortedAuthorData } from "../page";
+import { sortedAuthorData } from '@/helpers/types';
 
 const DiscussionHistory = ({ historyLinks, authors, replies }: { historyLinks: string[]; authors: sortedAuthorData[]; replies: string }) => {
   return (

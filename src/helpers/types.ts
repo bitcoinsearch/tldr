@@ -1,4 +1,3 @@
-import { sortedAuthorData } from '@/app/summary/[...path]/page';
 import { urlMapping } from "@/config/config";
 
 const AUTHOR = "authors" as const;
@@ -185,3 +184,5 @@ export type SummaryData = {
   year: number;
   path: string | undefined;
 };
+
+export type sortedAuthorData = AuthorData & { initialIndex: number; dateInMS: number };
