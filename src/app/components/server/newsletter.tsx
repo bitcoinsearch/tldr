@@ -11,7 +11,6 @@ import { MarkdownWrapper } from "./MarkdownWrapper";
 export const NewsletterCard = ({ entry }: { entry: NewsLetter }) => {
   const publishedAtDateDisplay = formattedDate(entry.published_at);
   const path = entry.combined_summ_file_path.length ? entry.combined_summ_file_path : entry.file_path;
-  // console.log({path});
   const type = entry.dev_name;
 
   return (

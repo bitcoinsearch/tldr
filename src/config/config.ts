@@ -10,3 +10,4 @@ export const urlMapping = {
   [LIGHTNINGDEV]: "https://lists.linuxfoundation.org/pipermail/lightning-dev/",
   [DELVINGBITCOIN]: "https://delvingbitcoin.org/"
 };
+export const PRODUCTION_URL = "https://tldr.bitcoinsearch.xyz/summary/"
