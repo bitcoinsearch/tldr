@@ -1,8 +1,21 @@
-import { formattedDate, getSummaryData } from "@/helpers/utils";
+import { formattedDate, getSummaryDataInfo } from "@/helpers/utils";
+import * as fs from "fs";
 import DiscussionHistory from "./components/historythread";
 import Link from "next/link";
 import BreadCrumbs from "./components/BreadCrumb";
 import { MarkdownWrapper } from "@/app/components/server/MarkdownWrapper";
+
+const getSummaryData = async (path: string[]) => {
+  const pathString = path.join("/");
+  try {
+    const fileContent = fs.readFileSync(`${process.cwd()}/public/static/static/${pathString}.xml`, "utf-8");
+    const summaryInfo = getSummaryDataInfo(path, fileContent);
+    return summaryInfo;
+
+  } catch (err) {
+    return null;
+  }
+};
 
 export default async function Page({ params, searchParams }: { params: { path: string[] }; searchParams: { replies: string } }) {
   const summaryData = await getSummaryData(params.path);

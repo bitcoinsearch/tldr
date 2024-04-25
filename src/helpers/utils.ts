@@ -238,10 +238,9 @@ export const removeZeros = (author: AuthorData) => {
   }
 };
 
-export const getSummaryData = async (path: string[]) => {
+export const getSummaryDataInfo = async (path: string[], fileContent: any) => {
   const pathString = path.join("/");
-  try {
-    const fileContent = fs.readFileSync(`${process.cwd()}/public/static/static/${pathString}.xml`, "utf-8");
+
     const data = await convertXmlToText(fileContent, pathString);
     const linksCopy = data.data?.historyLinks;
 
@@ -272,7 +271,5 @@ export const getSummaryData = async (path: string[]) => {
         historyLinks: chronologicalLinksBasedOffAuthors,
       },
     };
-  } catch (err) {
-    return null;
-  }
+
 };

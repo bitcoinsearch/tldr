@@ -2,8 +2,19 @@ import * as fs from "fs";
 import { NewsLetterDataType, NewsLetterSet } from "@/helpers/types";
 import { NewsletterPage } from "../components/server/newsletter";
 import Link from "next/link";
-import { formattedDate, getSummaryData } from "@/helpers/utils";
-import { PRODUCTION_URL } from '@/config/config';
+import { formattedDate, getSummaryDataInfo } from "@/helpers/utils";
+import { PRODUCTION_URL } from "@/config/config";
+
+const getSummaryData = async (path: string[]) => {
+  const pathString = path.join("/");
+  try {
+    const fileContent = fs.readFileSync(`${process.cwd()}/public/static/static/${pathString}.xml`, "utf-8");
+    const summaryInfo = getSummaryDataInfo(path, fileContent);
+    return summaryInfo;
+  } catch (err) {
+    return null;
+  }
+};
 
 // get most recent newsletter from newsletter.json
 const getCurrentNewsletter = async () => {
