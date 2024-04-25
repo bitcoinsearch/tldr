@@ -10,7 +10,7 @@ import { MarkdownWrapper } from "@/app/components/server/MarkdownWrapper";
 
 export type sortedAuthorData = AuthorData & { initialIndex: number; dateInMS: number };
 
-const getSummaryData = async (path: string[]) => {
+export const getSummaryData = async (path: string[]) => {
   const pathString = path.join("/");
   try {
     const fileContent = fs.readFileSync(`${process.cwd()}/public/static/static/${pathString}.xml`, "utf-8");
