@@ -10,14 +10,49 @@ import {
   monthsInOrder,
   createMonthsFromKeys,
   removeDuplicateSummaries,
+  getSummaryDataInfo,
 } from "@/helpers/utils";
 import * as fs from "fs";
+import { getRouteFromPath } from "./components/server/actions/summary-data";
+
+const getSummaryData = async (path: string[]) => {
+  const pathString = path.join("/");
+  try {
+    const fileContent = fs.readFileSync(`${process.cwd()}/public/static/static/${pathString}.xml`, "utf-8");
+    const summaryInfo = getSummaryDataInfo(path, fileContent);
+    return summaryInfo;
+  } catch (err) {
+    return null;
+  }
+};
 
 async function getHomepageData() {
   try {
     const data = fs.readFileSync(`${process.cwd()}/public/static/static/homepage.json`, "utf-8");
     const parsedData = JSON.parse(data) as HomepageData;
-    return parsedData;
+    let postParsedData: any = {};
+
+    for (const [key, value] of Object.entries(parsedData)) {
+      if (Array.isArray(value)) {
+        const processedValue = await Promise.all(
+          value.map(async (post) => {
+            // get the file path of all posts in the array
+            const filePath = post.contributors.length > 0 ? post.combined_summ_file_path : post.file_path;
+            const path = getRouteFromPath(filePath)
+
+            // read the content of the file in the file path
+            const replies = await getSummaryData([path]).then((data) => Number(data?.data.authors.length) - 1);
+            return { ...post, n_threads: replies };
+          })
+        );
+
+        postParsedData[key] = processedValue;
+      } else {
+        postParsedData[key] = value;
+      }
+    }
+
+    return postParsedData;
   } catch (err) {
     return null;
   }
