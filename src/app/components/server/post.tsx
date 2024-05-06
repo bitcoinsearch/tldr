@@ -77,7 +77,11 @@ export const ContributorsList = ({ contributors }: { contributors: string[] }) =
           const addComma = index < finalList.length - 1 ? ", " : "";
           return <span key={index} className=''>{` ${contributor}${addComma}`}</span>;
         })}
-        {contributors.length > 2 && <span>+{contributors.length - 2} others</span>}
+        {contributors.length > 2 && (
+          <span>
+            +{contributors.length - 2} {contributors.length - 2 === 1 ? "other" : "others"}
+          </span>
+        )}
       </p>
     </div>
   );
