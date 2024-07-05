@@ -181,10 +181,10 @@ function generateHTMLForPost(post: NewsLetter) {
                 <table cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
                   <tr>
                     ${post.contributors.length ? `
-                    <td class="contributor" style="width: fit-content;">
-                      <span style="display: inline-block; width: fit-content; text-wrap: no-wrap; font-size: 14px; font-weight: 400; color: #000; background-color: #FFF8EB; padding: 2px 8px; border-radius: 16px;">
+                    <td class="contributor" style="width: fit-content; display: none;">
+                      <p style="display: inline-block; width: fit-content; text-wrap: no-wrap; font-size: 14px; font-weight: 400; color: #000; background-color: #FFF8EB; padding: 2px 8px; border-radius: 16px;">
                         ${contributors}
-                      </span>
+                      </p>
                     </td>
                     ` : ''}
                   </tr>
@@ -254,6 +254,11 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
 
   .container p, .container h2 {
     color: #000 !important;
+  }
+
+  .conatiner table, .container tbody, .container tr, .container td {
+    margin: 0;
+    padding: 0;
   }
 
   /* Cards */
@@ -334,7 +339,7 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
       display: block !important;
     }
     .contributor {
-      display: inline-block;
+      display: inline-block !important;
     }
     .dev_name_desktop, .contributor_desktop {
       display: none !important;
