@@ -46,10 +46,6 @@ const dev_name_config = {
   },
 };
 
-// --brand-bg: #FFFAF0;
-// --brand-hero: #FDE9C8;
-// --brand-author: #FFF8EB;
-
 type DevName = keyof typeof dev_name_config;
 
 // get most recent newsletter from newsletter.json
@@ -290,29 +286,6 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
   }
 
-  .thread .summary {
-    color: #666 !important;
-    margin-bottom: 10px;
-  }
-
-  .thread p {
-    margin: 0 0 10px 0;
-  }
-
-  .thread .read-more-btn {
-    display: inline-block;
-    background-color: #000;
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-
-  .thread .read-more-btn:hover {
-    background-color: #0056b3;
-  }
-
   .column {
     display: inline-block;
     width: 48%;
@@ -425,7 +398,6 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
     </div>
   </body>
   </html>`;
-  fs.writeFileSync("./newsletter.html", html);
   return html;
 }
 
@@ -465,6 +437,7 @@ const sendNewsletter = async (): Promise<void> => {
       console.log("Newsletter sent successfully");
     } else {
       console.log("Not in production environment, skipping email send");
+      fs.writeFileSync("./newsletter.html", htmlContent);
     }
   } catch (err: any) {
     throw new Error(err);
