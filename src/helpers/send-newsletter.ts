@@ -109,55 +109,79 @@ function generateHTMLForPost(post: NewsLetter) {
   // Generate HTML for each key-value pair, excluding empty values
   //undefined key means we don't want to display the key
   const htmlContent = `
-      <div class="card" style="margin-top: 16px;">
-        <a href="${link}" style="text-decoration: none; color: #000;">
-          <table cellpadding="0" cellspacing="0" border="0" width="100%">
-            <tr>
-              <td style="width: 100%; white-space: nowrap; vertical-align: top;">
-                <table class="dev_name" cellpadding="0" cellspacing="0" border="0" style="font-size: 14px; margin-bottom: 8px; display: none;">
-                  <tr style="width: 100%";>
-                    <td style="width: 24px; padding-right: 4px; vertical-align: middle;">
-                      <img src="${dev_name_config[post.dev_name].icon}" alt="" style="display: block; width: 24px; height: auto; margin-left: auto;" />
+      <table cellpadding="0" cellspacing="0" border="0" width="100%">
+        <tr>
+          <td style="width: 100%;">
+            <div class="card" style="margin-top: 16px;">
+              <a href="${link}" style="text-decoration: none; color: #000;">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                  <tr>
+                    <td style="width: 100%; white-space: nowrap; vertical-align: top;">
+                      <table class="dev_name" cellpadding="0" cellspacing="0" border="0" style="font-size: 14px; margin-bottom: 8px; display: none;">
+                        <tr style="width: 100%";>
+                          <td style="width: 24px; padding-right: 4px; vertical-align: middle;">
+                            <img src="${dev_name_config[post.dev_name].icon}" alt="" style="display: block; width: 24px; height: auto; margin-left: auto;" />
+                          </td>
+                          <td style="width: 1%; vertical-align: middle; white-space: nowrap; margin-left: auto;">
+                            ${dev_name_config[post.dev_name].name}
+                          </td>
+                        </tr>
+                      </table>
                     </td>
-                    <td style="width: 1%; vertical-align: middle; white-space: nowrap; margin-left: auto;">
-                      ${dev_name_config[post.dev_name].name}
+                  </tr>
+                  <tr>
+                    <td style="padding-right: 8px;">
+                      <h3 style="font-size: 18px; font-weight: 500; margin: 0;">
+                        <a id="title_link" href="${link}" style="text-decoration: none; color: #000000;">${post.title}</a>
+                      </h3>
+                    </td>
+                    <td style="vertical-align: top;">
+                      <table class="dev_name_desktop" cellpadding="0" cellspacing="0" border="0" style="font-size: 14px; margin-bottom: 8px;">
+                        <tr style="width: 100%";>
+                          <td style="width: 24px; padding-right: 4px; vertical-align: middle;">
+                            <img src="${dev_name_config[post.dev_name].icon}" alt="" style="display: block; width: 24px; height: auto; margin-left: auto;" />
+                          </td>
+                          <td style="width: 1%; vertical-align: middle; white-space: nowrap; margin-left: auto;">
+                            ${dev_name_config[post.dev_name].name}
+                          </td>
+                        </tr>
+                      </table>
                     </td>
                   </tr>
                 </table>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding-right: 8px;">
-                <h3 style="font-size: 18px; font-weight: 500; margin: 0;">
-                  <a id="title_link" href="${link}" style="text-decoration: none; color: #000000;">${post.title}</a>
-                </h3>
-              </td>
-              <td style="vertical-align: top;">
-                <table class="dev_name_desktop" cellpadding="0" cellspacing="0" border="0" style="font-size: 14px; margin-bottom: 8px;">
-                  <tr style="width: 100%";>
-                    <td style="width: 24px; padding-right: 4px; vertical-align: middle;">
-                      <img src="${dev_name_config[post.dev_name].icon}" alt="" style="display: block; width: 24px; height: auto; margin-left: auto;" />
+                <table cellpadding="0" cellspacing="0" border="0" style="width: 100%; margin-top: 16px;">
+                  <tr width="100%">
+                    <td style="width: 100%; padding-right: 8px;">
+                      <table cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
+                        <tr>
+                          <td class="column first" style="width: fit-content; margin-right: 8px;">
+                            <span style="display: inline-block; width: fit-content; text-wrap: no-wrap; font-size: 14px; font-weight: 400; color: #fff; background-color: #000; padding: 2px 8px; border-radius: 16px;">
+                              By ${authors}
+                            </span> 
+                          </td>
+                          ${post.contributors.length ? `
+                          <td class="column contributor_desktop" style="width: fit-content;">
+                            <span style="display: inline-block; width: fit-content; text-wrap: no-wrap; font-size: 14px; font-weight: 400; color: #000; background-color: #FFF8EB; padding: 2px 8px; border-radius: 16px;">
+                              ${contributors}
+                            </span>
+                          </td>
+                          ` : ''}
+                        </tr>
+                      </table>
                     </td>
-                    <td style="width: 1%; vertical-align: middle; white-space: nowrap; margin-left: auto;">
-                      ${dev_name_config[post.dev_name].name}
+                    ${replies > 0 && combinedSummaryLink ? `
+                    <td style="white-space: nowrap; font-size: 14px; font-weight: 400; vertical-align: top; margin-top: 4px;">
+                      <a href="${combinedSummaryLink}">
+                        ${replies > 1 ? `${replies} replies` : `${replies} reply`}
+                      </a>
                     </td>
+                    ` : '<td></td>'}
                   </tr>
                 </table>
-              </td>
-            </tr>
-          </table>
-          <table cellpadding="0" cellspacing="0" border="0" style="width: 100%; margin-top: 16px;">
-            <tr>
-              <td style="width: 100%; padding-right: 8px;">
                 <table cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
                   <tr>
-                    <td class="column first" style="width: fit-content; margin-right: 8px;">
-                      <span style="display: inline-block; width: fit-content; text-wrap: no-wrap; font-size: 14px; font-weight: 400; color: #fff; background-color: #000; padding: 2px 8px; border-radius: 16px;">
-                        By ${authors}
-                      </span> 
-                    </td>
                     ${post.contributors.length ? `
-                    <td class="column contributor_desktop" style="width: fit-content;">
+                    <td class="contributor" style="width: fit-content;">
                       <span style="display: inline-block; width: fit-content; text-wrap: no-wrap; font-size: 14px; font-weight: 400; color: #000; background-color: #FFF8EB; padding: 2px 8px; border-radius: 16px;">
                         ${contributors}
                       </span>
@@ -165,28 +189,14 @@ function generateHTMLForPost(post: NewsLetter) {
                     ` : ''}
                   </tr>
                 </table>
-              </td>
-              ${replies > 0 && combinedSummaryLink ? `
-              <td style="white-space: nowrap; font-size: 14px; font-weight: 400; vertical-align: top; margin-top: 4px;">
-                <a href="${combinedSummaryLink}">
-                  ${replies > 1 ? `${replies} replies` : `${replies} reply`}
-                </a>
-              </td>
-              ` : ''}
-            </tr>
-            <tr>
-              ${post.contributors.length ? `
-              <td class="" style="text-wrap: no-wrap; font-size: 14px; font-weight: 400; color: #000; background-color: #FFF8EB; padding: 2px 8px; border-radius: 16px;">
-                ${contributors}
-              </td>
-              ` : ''}
-            </tr>
-          </table>
-          <div id="post_summary" style="padding-top: 20px;">
-            ${summary}
-          </div>
-        </a>
-      </div>
+                <div id="post_summary" style="padding-top: 20px;">
+                  ${summary}
+                </div>
+              </a>
+            </div>
+          </td>
+        </tr>
+      </table>
   `;
 
   return htmlContent;
@@ -384,9 +394,11 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
           ${
             data.new_threads_this_week.length > 0
               ? `<h2 style="font-size: 28px; font-weight: 500;">Recent Threads</h2>` +
+              '<table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td style="width: 100%;>' +
                 data.new_threads_this_week
                   .map((thread) => generateHTMLForPost(thread))
                   .join("")
+                + "</td></tr></table>"
               : "<p>No new threads this week.</p>"
           }
         </div>
@@ -396,9 +408,11 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
           ${
             data.active_posts_this_week.length > 0
               ? `<h2 style="font-size: 28px; font-weight: 500;">Active Discussions</h2>` +
+              '<table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td style="width: 100%;>' +
                 data.active_posts_this_week
                   .map((post) => generateHTMLForPost(post))
                   .join("")
+                + "</td></tr></table>"
               : "<p>No active posts this week.</p>"
           }
         </div>
