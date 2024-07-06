@@ -112,7 +112,7 @@ function generateHTMLForPost(post: NewsLetter) {
             <tr>
               <td style="width: 100%;">
                 <div class="card">
-                  <a href="${link}" style="text-decoration: none; color: #000;">
+                  <a href="${combinedSummaryLink}" style="text-decoration: none; color: #000;">
                     <table cellpadding="0" cellspacing="0" border="0" width="100%">
                       <tr>
                         <td style="width: 100%; white-space: nowrap; vertical-align: top;">
@@ -170,9 +170,7 @@ function generateHTMLForPost(post: NewsLetter) {
                         </td>
                         ${replies > 0 && combinedSummaryLink ? `
                         <td style="white-space: nowrap; font-size: 14px; font-weight: 400; vertical-align: top; margin-top: 4px;">
-                          <a href="${combinedSummaryLink}">
-                            ${replies > 1 ? `${replies} replies` : `${replies} reply`}
-                          </a>
+                          ${replies > 1 ? `${replies} replies` : `${replies} reply`}
                         </td>
                         ` : '<td></td>'}
                       </tr>
@@ -229,6 +227,11 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
     padding: 0;
   }
   
+  /* Override mailchimp styles */
+  .im {
+    color: #000;
+  }
+
   * {
     box-sizing: border-box;
   }
