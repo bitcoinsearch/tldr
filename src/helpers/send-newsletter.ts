@@ -119,7 +119,7 @@ function generateHTMLForPost(post: NewsLetter) {
                           <table class="dev_name" cellpadding="0" cellspacing="0" border="0" style="font-size: 14px; margin-bottom: 8px; display: none;">
                             <tr style="width: 100%";>
                               <td style="width: 24px; padding-right: 4px; vertical-align: middle;">
-                                <img src="${dev_name_config[post.dev_name].icon}" alt="" style="display: block; width: 24px; height: auto; margin-left: auto;" />
+                                <img src="${dev_name_config[post.dev_name].icon}" alt="${dev_name_config[post.dev_name].name} icon" style="display: block; width: 24px; height: auto; margin-left: auto;" />
                               </td>
                               <td style="width: 1%; vertical-align: middle; white-space: nowrap; margin-left: auto;">
                                 ${dev_name_config[post.dev_name].name}
@@ -138,7 +138,7 @@ function generateHTMLForPost(post: NewsLetter) {
                           <table class="dev_name_desktop" cellpadding="0" cellspacing="0" border="0" style="font-size: 14px; margin-bottom: 8px;">
                             <tr style="width: 100%";>
                               <td style="width: 24px; padding-right: 4px; vertical-align: middle;">
-                                <img src="${dev_name_config[post.dev_name].icon}" alt="" style="display: block; width: 24px; height: auto; margin-left: auto;" />
+                                <img src="${dev_name_config[post.dev_name].icon}" alt="${dev_name_config[post.dev_name].name} icon" style="display: block; width: 24px; height: auto; margin-left: auto;" />
                               </td>
                               <td style="width: 1%; vertical-align: middle; white-space: nowrap; margin-left: auto;">
                                 ${dev_name_config[post.dev_name].name}
@@ -266,6 +266,11 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
     padding: 0;
   }
 
+  #summary {
+    font-size: 18px;
+    font-weight: 400;
+  }
+
   /* Cards */
   .card {
     background-color: #fff !important;
@@ -308,6 +313,12 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
     .container {
       padding: 12px;
     }
+    .container h1 {
+      font-size: 24px !important;
+    }
+    .container h2 {
+      font-size: 22px !important;
+    }
     .thread {
       width: 100%;
       padding: 10px;
@@ -328,20 +339,23 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
     .dev_name_desktop, .contributor_desktop {
       display: none !important;
     }
+
+    #summary {
+      font-size: 16px;
+    }
   }
   </style>
   </head>
   <body>
     <div class="container">
-
       <table style="padding-bottom: 24px;" cellpadding="0" cellspacing="0" border="0" width="100%">
         <tr style="width: 100%">
           <td style="width: 1%; vertical-align: middle;">
             <img src="https://mcusercontent.com/5ed3a24c2a06c817a3182bbcb/images/b7ee5bb5-1250-0f03-932a-c33e7c38be0d.png"
-            style="display: block; width:32px; max-width: 32px; height: auto; vertical-align: bottom;" />
+            style="display: block; width:32px; max-width: 32px; height: auto; vertical-align: bottom;" alt="Logo" />
           </td>
           <td style="vertical-align: middle;">
-            <p style="font-size: 20px; font-weight:500; color: #000;">TLDR</p>
+            <p aria-hidden="true" style="font-size: 20px; font-weight:500; color: #000;">TLDR</p>
           </td>
         </tr>
       </table>
@@ -357,7 +371,7 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
                     TLDR Newsletter for ${getWeekCovered()}
                   </h1>
                 </td>
-                <td style="width: 163px; padding-left: 8px; vertical-align: middle;">
+                <td style="width: 30%; padding-left: 16px; vertical-align: top;">
                   <img src="https://mcusercontent.com/5ed3a24c2a06c817a3182bbcb/images/0c6ad3a1-8519-f850-031c-2b215745ceee.png" alt="Newsletter Logo" style="display: block; width: 100%; max-width: 163px; height: auto;" />
                 </td>
               </tr>
@@ -372,7 +386,7 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
             <h2 style="margin-bottom: 16px; font-size: 28px; font-weight: 500;">
               Catch Up on This Week's Activity
             </h2>
-            <div style="font-size: 18px; font-weight: 400;">${summaryHtml}</div>
+            <div id="summary">${summaryHtml}</div>
         </div>
       </div>
 
