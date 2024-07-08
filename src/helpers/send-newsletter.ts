@@ -112,7 +112,7 @@ function generateHTMLForPost(post: NewsLetter) {
             <tr>
               <td style="width: 100%;">
                 <div class="card">
-                  <a href="${combinedSummaryLink}" style="text-decoration: none; color: #000;">
+                  <a href="${combinedSummaryLink || link}" style="text-decoration: none; color: #000;">
                     <table cellpadding="0" cellspacing="0" border="0" width="100%">
                       <tr>
                         <td style="width: 100%; white-space: nowrap; vertical-align: top;">
@@ -131,7 +131,7 @@ function generateHTMLForPost(post: NewsLetter) {
                       <tr>
                         <td style="padding-right: 8px;">
                           <h3 style="font-size: 18px; font-weight: 500; margin: 0;">
-                            <a id="title_link" href="${link}" style="text-decoration: none; color: #000000;">${post.title}</a>
+                            <a id="title_link" href="${combinedSummaryLink ||link}" style="text-decoration: none; color: #000000;">${post.title}</a>
                           </h3>
                         </td>
                         <td style="vertical-align: top;">
@@ -348,6 +348,11 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
   </head>
   <body>
     <div class="container">
+      <!-- Hidden text for summary -->
+      <div style="display:none;visibility:hidden;height:0px;width:0px;opacity:0;overflow:hidden;">
+        Catch Up on This Week's Activity. ${summary.slice(0, 300)}
+      </div>
+
       <table style="padding-bottom: 24px;" cellpadding="0" cellspacing="0" border="0" width="100%">
         <tr style="width: 100%">
           <td style="width: 1%; vertical-align: middle;">
@@ -355,7 +360,9 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
             style="display: block; width:32px; max-width: 32px; height: auto; vertical-align: bottom;" alt="Logo" />
           </td>
           <td style="vertical-align: middle;">
-            <p aria-hidden="true" style="font-size: 20px; font-weight:500; color: #000;">TLDR</p>
+            <div>
+              <span aria-hidden="true" style="font-size: 20px; font-weight:500; color: #000;">TLDR</span>
+            </div>
           </td>
         </tr>
       </table>
@@ -445,7 +452,7 @@ const sendNewsletter = async (): Promise<void> => {
           list_id: process.env.MAILCHIMP_LIST_ID,
         },
         settings: {
-          subject_line: "TLDR Newsletter",
+          subject_line: `TLDR Newsletter for ${getWeekCovered()}`,
           title: "Your weekly newsletter is here",
           from_name: "Bitcoin Dev Project",
           reply_to: process.env.MAILCHIMP_REPLY_TO,
