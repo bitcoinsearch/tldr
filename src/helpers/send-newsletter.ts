@@ -38,7 +38,7 @@ const dev_name_config = {
   },
   "lightning-dev": {
     name: "Lightning-dev",
-    icon: "lightning-dev_icon.svg",
+    icon: "https://mcusercontent.com/5ed3a24c2a06c817a3182bbcb/images/47f429fa-95fd-c3d1-7215-a427911a135e.png",
   },
   delvingbitcoin: {
     name: "Delving bitcoin",
