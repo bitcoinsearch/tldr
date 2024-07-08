@@ -34,15 +34,15 @@ type NewsLetterDataType = {
 const dev_name_config = {
   "bitcoin-dev": {
     name: "Bitcoin-dev",
-    icon: "https://mcusercontent.com/5ed3a24c2a06c817a3182bbcb/images/b7ee5bb5-1250-0f03-932a-c33e7c38be0d.png",
+    icon: "https://mcusercontent.com/5ed3a24c2a06c817a3182bbcb/images/fb34a5dc-29c7-b127-61ef-56973f4a48f2.png",
   },
   "lightning-dev": {
     name: "Lightning-dev",
-    icon: "https://mcusercontent.com/5ed3a24c2a06c817a3182bbcb/images/47f429fa-95fd-c3d1-7215-a427911a135e.png",
+    icon: "https://mcusercontent.com/5ed3a24c2a06c817a3182bbcb/images/12d364c1-0bae-0223-56a0-e4d225de09cc.png",
   },
   delvingbitcoin: {
     name: "Delving bitcoin",
-    icon: "https://mcusercontent.com/5ed3a24c2a06c817a3182bbcb/images/e6db0370-ed7c-249b-75b4-d8ebfdfc357c.png",
+    icon: "https://mcusercontent.com/5ed3a24c2a06c817a3182bbcb/images/620edda5-51f3-113c-d9ab-e58e7e1cb36f.png",
   },
 };
 
