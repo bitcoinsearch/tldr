@@ -81,9 +81,13 @@ export const NewsletterPage = ({ newsletter }: { newsletter: NewsLetterDataType 
       <section className='pb-12'>
         <h2 className='text-xl md:text-4xl font-normal pb-8 pt-10'>Ongoing Discussions</h2>
         <section className='flex flex-col gap-9'>
-          {newsletter.active_posts_this_week.map((entry) => (
-            <NewsletterCard entry={entry} key={entry.id} />
-          ))}
+          {!newsletter.active_posts_this_week.length ? (
+            <p>Oops! No ongoing discussions this week. Check out the new posts above.</p>
+          ) : (
+            newsletter.active_posts_this_week.map((entry) => {
+              return <NewsletterCard entry={entry} key={entry.id} />;
+            })
+          )}
         </section>
       </section>
       <ScrollToTopButton />
