@@ -34,15 +34,15 @@ type NewsLetterDataType = {
 const dev_name_config = {
   "bitcoin-dev": {
     name: "Bitcoin-dev",
-    icon: "https://mcusercontent.com/5ed3a24c2a06c817a3182bbcb/images/fb34a5dc-29c7-b127-61ef-56973f4a48f2.png",
+    icon: "https://tldr.bitcoinsearch.xyz/images/newsletter/bitcoin.png",
   },
   "lightning-dev": {
     name: "Lightning-dev",
-    icon: "https://mcusercontent.com/5ed3a24c2a06c817a3182bbcb/images/12d364c1-0bae-0223-56a0-e4d225de09cc.png",
+    icon: "https://tldr.bitcoinsearch.xyz/images/newsletter/lightning.png",
   },
   delvingbitcoin: {
     name: "Delving bitcoin",
-    icon: "https://mcusercontent.com/5ed3a24c2a06c817a3182bbcb/images/620edda5-51f3-113c-d9ab-e58e7e1cb36f.png",
+    icon: "https://tldr.bitcoinsearch.xyz/images/newsletter/delving.png",
   },
 };
 
@@ -356,7 +356,7 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
       <table style="padding-bottom: 24px;" cellpadding="0" cellspacing="0" border="0" width="100%">
         <tr style="width: 100%">
           <td style="width: 1%; vertical-align: middle;">
-            <img src="https://mcusercontent.com/5ed3a24c2a06c817a3182bbcb/images/b7ee5bb5-1250-0f03-932a-c33e7c38be0d.png"
+            <img src="https://tldr.bitcoinsearch.xyz/images/newsletter/btc.png"
             style="display: block; width:32px; max-width: 32px; height: auto; vertical-align: bottom;" alt="Logo" />
           </td>
           <td style="vertical-align: middle;">
@@ -379,7 +379,7 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
                   </h1>
                 </td>
                 <td style="width: 30%; padding-left: 16px; vertical-align: top;">
-                  <img src="https://mcusercontent.com/5ed3a24c2a06c817a3182bbcb/images/0c6ad3a1-8519-f850-031c-2b215745ceee.png" alt="Newsletter Logo" style="display: block; width: 100%; max-width: 163px; height: auto;" />
+                  <img src="https://tldr.bitcoinsearch.xyz/images/newsletter/hero.png" alt="Newsletter Logo" style="display: block; width: 100%; max-width: 163px; height: auto;" />
                 </td>
               </tr>
             </table>
