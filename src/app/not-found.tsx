@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function notfound() {
+export default function NotFound() {
   return (
     <main id='main' className='flex w-full items-center justify-center h-full pb-[60px]'>
       <div className='w-full'>
