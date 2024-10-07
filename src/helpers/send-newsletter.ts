@@ -86,7 +86,12 @@ function generateHTMLForPost(post: NewsLetter) {
   const link = post.file_path;
   const combinedSummaryLink = post.combined_summ_file_path;
   const datePublished = new Date(post.published_at).toDateString();
-  const authors = post.authors.join(", ");
+
+  const authorsList = post.authors.slice(0, 2)
+  if (post.authors.length > 2) {
+    authorsList.push(`+${post.authors.length - 2} more`)
+  }
+
   const contributors_rendered = post.contributors.slice(0, 2).join(", ");
   const contributors = post.contributors.length > 2 ? `${contributors_rendered} +${post.contributors.length - 2} ${post.contributors.length - 2 > 1 ? 'others': 'other'} ` : contributors_rendered;
   const replies = post.n_threads;
@@ -151,20 +156,15 @@ function generateHTMLForPost(post: NewsLetter) {
                     <table cellpadding="0" cellspacing="0" border="0" style="width: 100%; margin-top: 16px;">
                       <tr width="100%">
                         <td style="width: 100%; padding-right: 8px;">
-                          <table cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
+                          <table cellpadding="0" cellspacing="0" border="0">
                             <tr>
-                              <td class="column first" style="width: fit-content; margin-right: 8px;">
-                                <span style="display: inline-block; width: fit-content; text-wrap: no-wrap; font-size: 14px; font-weight: 400; color: #fff; background-color: #000; padding: 2px 8px; border-radius: 16px;">
-                                  By ${authors}
-                                </span> 
-                              </td>
-                              ${post.contributors.length ? `
-                              <td class="column contributor_desktop" style="width: fit-content;">
-                                <span style="display: inline-block; width: fit-content; text-wrap: no-wrap; font-size: 14px; font-weight: 400; color: #000; background-color: #FFF8EB; padding: 2px 8px; border-radius: 16px;">
-                                  ${contributors}
-                                </span>
-                              </td>
-                              ` : ''}
+                              ${authorsList.map(author => `
+                                <td class="" style="width: fit-content; padding-right: 8px;">
+                                  <span style="display: inline-block; width: fit-content; text-wrap: no-wrap; font-size: 14px; font-weight: 400; color: #fff; background-color: #000; padding: 2px 8px; border-radius: 16px;">
+                                    ${author}
+                                  </span> 
+                                </td>
+                              `).join("")}
                             </tr>
                           </table>
                         </td>
@@ -175,11 +175,11 @@ function generateHTMLForPost(post: NewsLetter) {
                         ` : '<td></td>'}
                       </tr>
                     </table>
-                    <table cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
+                    <table cellpadding="0" cellspacing="0" border="0" style="width: 100%; margin-top: 10px;">
                       <tr>
                         ${post.contributors.length ? `
-                        <td class="contributor" style="width: fit-content; display: none;">
-                          <p style="display: inline-block; width: fit-content; text-wrap: no-wrap; font-size: 14px; font-weight: 400; color: #000; background-color: #FFF8EB; padding: 2px 8px; border-radius: 16px;">
+                        <td class="contributor" style="width: fit-content;">
+                          <p style="display: inline-block; width: fit-content; text-wrap: no-wrap; font-size: 14px; font-weight: 400; color: #000; background-color: #F7931A; padding: 2px 8px; border-radius: 16px;">
                             ${contributors}
                           </p>
                         </td>
@@ -274,8 +274,8 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
   /* Cards */
   .card {
     background-color: #fff !important;
-    border: 1px solid #000;
-    border-radius: 4px; 
+    border: 1px solid #3D3D3D;
+    border-radius: 6px; 
     padding: 24px;
     box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 1);
   }
