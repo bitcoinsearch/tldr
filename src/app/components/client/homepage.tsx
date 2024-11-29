@@ -4,7 +4,6 @@ import { addSpaceAfterPeriods } from "@/helpers/utils";
 import Image from "next/image";
 import React, { useMemo, useState } from "react";
 import Post from "../server/post";
-import "../../globals.css";
 import { BITCOINDEV, DELVINGBITCOIN, LIGHTNINGDEV } from "@/config/config";
 import ScrollToTopButton from "./scroll-to-top";
 import MailchimpSubscribeForm from "./subscribe-to-newsletter";
