@@ -9,7 +9,7 @@ const BossBanner = () => {
 
   return (
     <div
-      className={`w-full bg-white sticky top-0 z-[100] ${
+      className={`w-full bg-white sticky top-0 z-[1] ${
         isHomePage ? "block" : "hidden"
       }`}
     >
