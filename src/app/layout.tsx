@@ -3,7 +3,6 @@ import "@bitcoin-dev-project/bdp-ui/styles.css";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter, Inika } from "next/font/google";
-import BossBanner from "./components/client/banners/BossBanner";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const inika = Inika({
@@ -53,7 +52,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <div className='sticky top-0 bg-white w-full max-h-[98px] flex flex-col items-center p-2 md:p-4 px-4 z-[99] justify-center'>
                   <Navbar />
                 </div>
-                <BossBanner />
               </div>
             </div>
             <div className='w-full mx-auto grow max-w-3xl pb-8 px-4 lg:px-0'>{children}</div>
