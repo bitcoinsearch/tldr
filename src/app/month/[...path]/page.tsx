@@ -16,7 +16,6 @@ const monthlyNewsletter = async (path: string[]) => {
 };
 
 export default async function Page({ params }: { params: { path: string[] } }) {
-
   const data = await monthlyNewsletter(params.path);
   if (!data) return <h1>No Data found</h1>;
 
@@ -29,9 +28,8 @@ export default async function Page({ params }: { params: { path: string[] } }) {
   data.new_threads_this_week = sortedNewThreadData;
   data.active_posts_this_week = sortedActiveThreadData;
 
-
   return (
-    <div>
+    <div className='w-full mx-auto grow max-w-3xl pb-8 px-4 lg:px-0'>
       <NewsletterPage newsletter={data} />
     </div>
   );
