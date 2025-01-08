@@ -115,13 +115,11 @@ export default async function Page() {
   if (!newsletters) return null;
 
   return (
-    <div>
+    <div className='w-full mx-auto grow max-w-3xl pb-8 px-4 lg:px-0'>
       <NewsletterPage newsletter={newsletters} />
       <section>
-        <h2 className="text-xl md:text-4xl font-normal pb-8 pt-10">
-          Monthly Newsletters{" "}
-        </h2>
-        <div className="flex flex-col gap-5">
+        <h2 className='text-xl md:text-4xl font-normal pb-8 pt-10'>Monthly Newsletters </h2>
+        <div className='flex flex-col gap-5'>
           {newsletter_sets.map((set, index) => (
             <div key={`${index}_${set.year}`}>
               <h2 className='text-lg font-normal pb-2'>{set.year}</h2>
