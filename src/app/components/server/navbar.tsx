@@ -1,24 +1,33 @@
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import Wrapper from "./wrapper";
 
-import SearchBox from "../client/search-modal";
+import AppMenu from "../client/navigation-menu";
 import TanstackProvider from "@/app/provider";
-import Menu from "../client/navigation-menu";
+import SearchBox from "../client/search-modal";
 
 const Navbar = () => {
   return (
-    <div className='w-full max-w-3xl mx-auto mt-2'>
-      <div className='flex justify-between items-center'>
-        <Link href='/'>
-          <p className='text-xl md:text-4xl font-[600]'>Bitcoin TLDR</p>
+    <div className='bg-gray-custom-20 -z-10 bg-orange-custom-200'>
+      <Wrapper className='flex items-center justify-between py-8 z-50'>
+        <Link href='/' className='flex items-center'>
+          <Image src='/icons/bitcoin-logo-icon.svg' alt='Bitcoin Logo' width={32} height={32} />
+          <p className='text-xl font-medium font-gt-walsheim'>TLDR</p>
         </Link>
-        <div className='flex gap-4 items-center justify-center'>
-          <TanstackProvider>
-            <SearchBox />
-          </TanstackProvider>
-          <Menu />
+
+        <div className='flex gap-10 items-center justify-center font-gt-walsheim font-medium text-lg leading-[20.61px]'>
+          <Link href='/newsletter'>Newsletters</Link>
+          <Link href='/posts'>Posts</Link>
+          <Link href='/about'>About</Link>
+          <section className='flex items-center gap-6'>
+            <TanstackProvider>
+              <SearchBox />
+            </TanstackProvider>
+            <AppMenu />
+          </section>
         </div>
-      </div>
+      </Wrapper>
     </div>
   );
 };
