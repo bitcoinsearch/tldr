@@ -45,7 +45,7 @@ type ConvertedXML = {
   path: string | undefined;
 };
 
-type MailingListType = keyof typeof urlMapping
+type MailingListType = keyof typeof urlMapping;
 
 type SearchIndexData = {
   title: string;
@@ -77,14 +77,14 @@ type HomepageEntryData = {
   dev_name: string;
   contributors: string[];
   file_path: string;
-  combined_summ_file_path: string
+  combined_summ_file_path: string;
 };
 
 type HomepageData = {
   header_summary: string;
   recent_posts: HomepageEntryData[];
   active_posts: HomepageEntryData[];
-  today_in_history_posts: HomepageEntryData[]
+  today_in_history_posts: HomepageEntryData[];
 };
 
 type XmlDataType = {
@@ -186,3 +186,19 @@ export type SummaryData = {
 };
 
 export type sortedAuthorData = AuthorData & { initialIndex: number; dateInMS: number };
+
+export type NewsletterData = {
+  summary: string;
+  url: string;
+  dateRange: string;
+  publishedAt: string;
+  issueNumber: number;
+};
+
+export type Tweet = {
+  tweet: string;
+  name: string;
+  username: string;
+  profileImage: string;
+  url: string;
+};
