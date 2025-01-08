@@ -1,8 +1,7 @@
 "use client";
-
 import React from "react";
 
-const MailchimpSubscribeForm = () => {
+const MailchimpSubscribeForm = ({ className }: { className?: string }) => {
   const [email, setEmail] = React.useState("");
   const [mailchimpResponse, setMailchimpResponse] = React.useState("");
   const [error, setError] = React.useState("");
@@ -46,78 +45,37 @@ const MailchimpSubscribeForm = () => {
   };
 
   return (
-    <div className='mt-4'>
-      <div id="mc_embed_shell">
-        <div
-          id="mc_embed_signup"
-          className="bg-white w-full md:w-[600px] clear-left text-[15px]"
-        > 
-          <form
-            onSubmit={handleSubmit}
-            method="post"
-            id="mc-embedded-subscribe-form"
-            name="mc-embedded-subscribe-form"
-            className="validate sm:p-0 px-3"
-          >
-            <div id="mc_embed_signup_scroll">
-              <div className="mc-field-group">
-                <h2>Subscribe to our weekly newsletter</h2>
-                <p className="text-[15px] leading-6">
-                  Get the latest updates on the community, upcoming topics, and
-                  new discussions in your inbox every week.
-                </p>
-              </div>
-              <div className="mc-field-group">
-                <label htmlFor="mce-EMAIL">
-                  Email Address <span className="asterisk">*</span>
-                </label>
-                <input
-                  type="email"
-                  name="EMAIL"
-                  className="required email"
-                  id="mce-EMAIL"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <span id="mce-EMAIL-HELPERTEXT" className="helper_text"></span>
-              </div>
-              <div hidden>
-                <input type="hidden" name="tags" value="6514641" />
-              </div>
-              <div id="mce-responses" className="clear">
-                <div className="px-2 pb-4">
-                  {mailchimpResponse && (
-                    <p className="text-green-500">{mailchimpResponse}</p>
-                  )}
-                  {error && <p className="text-red-500">{error}</p>}{" "}
-                </div>
-              </div>
-              <div aria-hidden="true" className="absolute left-[-5000px]">
-                <input
-                  type="text"
-                  name="b_718f9c0ab4af9b4acf93a8e6f_6d27e4b5b0"
-                  tabIndex={-1}
-                  readOnly
-                />
-              </div>
-              <div className="clear">
-                <input
-                  type="submit"
-                  name="subscribe"
-                  id="mc-embedded-subscribe"
-                  className={`button ${
-                    loading ? "cursor-not-allowed opacity-50" : ""
-                  }`}
-                  value="Subscribe"
-                  disabled={loading}
-                />
-              </div>
-            </div>
-          </form>
+    <form onSubmit={handleSubmit} method='post' id='mc-embedded-subscribe-form' name='mc-embedded-subscribe-form'>
+      <div className={`relative w-full max-w-[530px] flex items-center justify-center ${className}`}>
+        <input
+          className={`rounded-full bg-gray-custom-300 border border-gray-custom-400 h-14 w-full max-w-[530px] placeholder:text-gray-custom-500 placeholder:font-normal text-base pl-4 ${className}`}
+          placeholder='Enter your email'
+          type='email'
+          name='EMAIL'
+          id='mce-EMAIL'
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          className={`text-base leading-[18.32px] font-medium text-white bg-orange-custom-100 rounded-full py-4 px-6 w-fit text-nowrap absolute right-1 ${
+            loading ? "cursor-not-allowed opacity-50" : ""
+          }`}
+          type='submit'
+          name='subscribe'
+          id='mc-embedded-subscribe'
+          value='Subscribe Now'
+          disabled={loading}
+        />
+      </div>
+      <div id='mce-responses' className='pt-2 max-w-[530px]'>
+        <div className='px-2 pb-4'>
+          {mailchimpResponse && <p className='text-green-500 font-gt-walsheim'>{mailchimpResponse}</p>}
+          {error && <p className='text-red-500 font-gt-walsheim'>{error}</p>}
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 
