@@ -1,6 +1,6 @@
-import { AuthorData, EsSearchResult, HomepageEntryData, XmlDataType, sortedAuthorData } from "./types";
+import { AuthorData, EsSearchResult, HomepageEntryData, NewsletterData, XmlDataType, sortedAuthorData } from "./types";
 import { domainFunctionMapper } from "./path-mappers";
-import { convertXmlToText } from './convert-from-xml';
+import { convertXmlToText } from "./convert-from-xml";
 
 export function addSpaceAfterPeriods(text: string): string {
   return text.replace(/\.(\S)/g, ". $1");
@@ -219,11 +219,10 @@ export const mappingMonths = {
 };
 
 export const getStaticPathFromURL = (data: EsSearchResult["_source"]) => {
-  const domainFunction = domainFunctionMapper[data.domain]
-  const path = domainFunction(data)
-  return path
+  const domainFunction = domainFunctionMapper[data.domain];
+  const path = domainFunction(data);
+  return path;
 };
-
 
 export const removeZeros = (author: AuthorData) => {
   if (author.name.startsWith(".")) {
@@ -241,35 +240,51 @@ export const removeZeros = (author: AuthorData) => {
 export const getSummaryDataInfo = async (path: string[], fileContent: any) => {
   const pathString = path.join("/");
 
-    const data = await convertXmlToText(fileContent, pathString);
-    const linksCopy = data.data?.historyLinks;
+  const data = await convertXmlToText(fileContent, pathString);
+  const linksCopy = data.data?.historyLinks;
 
-    const authorsFormatted: sortedAuthorData[] = data.data.authors.map((author, index) => ({
-      ...author,
-      name: removeZeros(author),
-      initialIndex: index,
-      dateInMS: Date.parse(author.date + "T" + author.time),
-    }));
+  const authorsFormatted: sortedAuthorData[] = data.data.authors.map((author, index) => ({
+    ...author,
+    name: removeZeros(author),
+    initialIndex: index,
+    dateInMS: Date.parse(author.date + "T" + author.time),
+  }));
 
-    const chronologicalAuthors = authorsFormatted.sort((a, b) => {
-      if (a.dateInMS < b.dateInMS) {
-        return -1;
-      }
-      if (a.dateInMS > b.dateInMS) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
-    const chronologicalLinksBasedOffAuthors = linksCopy?.length ? chronologicalAuthors.map((author) => linksCopy[author.initialIndex]) : [];
+  const chronologicalAuthors = authorsFormatted.sort((a, b) => {
+    if (a.dateInMS < b.dateInMS) {
+      return -1;
+    }
+    if (a.dateInMS > b.dateInMS) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+  const chronologicalLinksBasedOffAuthors = linksCopy?.length ? chronologicalAuthors.map((author) => linksCopy[author.initialIndex]) : [];
 
-    return {
-      ...data,
-      data: {
-        ...data.data,
-        authors: chronologicalAuthors,
-        historyLinks: chronologicalLinksBasedOffAuthors,
-      },
-    };
+  return {
+    ...data,
+    data: {
+      ...data.data,
+      authors: chronologicalAuthors,
+      historyLinks: chronologicalLinksBasedOffAuthors,
+    },
+  };
+};
 
+/**
+ * @param date - The date to format
+ * @param year - Whether to include the year in the formatted date
+ * @returns The formatted date string in the format of "Jan 1, 2024"
+ */
+
+export const formatDateString = (date: string, year: boolean): string => {
+  const dateObj = new Date(date);
+  const formattedDate = new Intl.DateTimeFormat("en-US", {
+    year: year ? "numeric" : undefined,
+    month: "short",
+    day: "numeric",
+  }).format(dateObj);
+
+  return formattedDate;
 };
