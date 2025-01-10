@@ -6,71 +6,30 @@ import React, { useEffect, useRef, useState } from "react";
 import NewsletterStars from "@/public/icons/newsletter-stars";
 import { MarkdownWrapper } from "@/app/components/server/MarkdownWrapper";
 import MailchimpSubscribeForm from "../../subscribe-to-newsletter";
+import { useMediaQuery } from "../../hooks/use-media-query";
 
 const HeroNewsletterDisplay = ({ latestNewsletter }: { latestNewsletter: NewsletterData }) => {
   const [isArticleScrolled, setIsArticleScrolled] = useState(false);
   const articleRef = React.useRef<HTMLDivElement>(null);
   const heroSectionRef = React.useRef<HTMLDivElement>(null);
-  const touchStartY = React.useRef<number>(0);
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
-  // React.useEffect(() => {
-  //   const handleWheel = (e: WheelEvent) => {
-  //     if (!articleRef.current || !heroSectionRef.current) return;
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
-  //     // Check if we're within the hero section bounds
-  //     const heroRect = heroSectionRef.current.getBoundingClientRect();
-  //     const isInHeroSection = heroRect.top <= 0 && heroRect.bottom >= 0;
+  useEffect(() => {
+    if (window.pageYOffset > window.innerHeight * 0.3) {
+      scrollToTop();
+    }
 
-  //     if (!isInHeroSection) return;
-
-  //     const article = articleRef.current;
-  //     const isAtBottom = Math.abs(article.scrollHeight - article.scrollTop - article.clientHeight) < 1;
-
-  //     if (!isArticleScrolled && !isAtBottom) {
-  //       e.preventDefault();
-  //       article.scrollTop += e.deltaY;
-  //     } else if (isAtBottom) {
-  //       setIsArticleScrolled(true);
-  //     }
-  //   };
-
-  //   const handleTouchStart = (e: TouchEvent) => {
-  //     touchStartY.current = e.touches[0].clientY;
-  //   };
-
-  //   const handleTouchMove = (e: TouchEvent) => {
-  //     if (!articleRef.current || !heroSectionRef.current) return;
-
-  //     // Check if we're within the hero section bounds
-  //     const heroRect = heroSectionRef.current.getBoundingClientRect();
-  //     const isInHeroSection = heroRect.top <= 0 && heroRect.bottom >= 0;
-
-  //     if (!isInHeroSection) return;
-
-  //     const article = articleRef.current;
-  //     const touchDelta = touchStartY.current - e.touches[0].clientY;
-  //     const isAtBottom = Math.abs(article.scrollHeight - article.scrollTop - article.clientHeight) < 1;
-
-  //     if (!isArticleScrolled && !isAtBottom) {
-  //       e.preventDefault();
-  //       article.scrollTop += touchDelta;
-  //       touchStartY.current = e.touches[0].clientY;
-  //     } else if (isAtBottom) {
-  //       setIsArticleScrolled(true);
-  //     }
-  //   };
-
-  //   // Add event listeners
-  //   window.addEventListener("wheel", handleWheel, { passive: false });
-  //   window.addEventListener("touchstart", handleTouchStart, { passive: true });
-  //   window.addEventListener("touchmove", handleTouchMove, { passive: false });
-
-  //   return () => {
-  //     window.removeEventListener("wheel", handleWheel);
-  //     window.removeEventListener("touchstart", handleTouchStart);
-  //     window.removeEventListener("touchmove", handleTouchMove);
-  //   };
-  // }, [isArticleScrolled]);
+    return () => {
+      window.removeEventListener("scroll", scrollToTop);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = (e: WheelEvent) => {
@@ -96,7 +55,7 @@ const HeroNewsletterDisplay = ({ latestNewsletter }: { latestNewsletter: Newslet
 
   return (
     <div
-      ref={heroSectionRef}
+      ref={isMobile ? null : heroSectionRef}
       className='w-full md:h-[calc(100vh-81px)] flex flex-col md:flex-row items-center xl:justify-between gap-10 md:gap-6 xl:gap-[53px] py-7 md:py-0'
     >
       <div className='max-w-full md:max-w-[50%] lg:max-w-[741px] flex flex-col gap-6 md:gap-[35px]'>
@@ -115,7 +74,7 @@ const HeroNewsletterDisplay = ({ latestNewsletter }: { latestNewsletter: Newslet
 
       <div className='max-w-full md:max-w-[49%] lg:max-w-[40%] xl:max-w-[37%] h-[470px] md:h-[650px] xl:h-[673px] bg-black rounded-[18px] xl:rounded-[30px] p-3 xl:p-[27px] relative'>
         <div
-          ref={articleRef}
+          ref={isMobile ? null : articleRef}
           className='h-full w-full bg-cream-custom-100 rounded-[10px] p-2 md:p-3 xl:p-3.5 overflow-scroll custom-scrollbar flex flex-col gap-2'
         >
           <div className='h-[110px] md:h-[120px] xl:h-[148px] w-full rounded-[5.61px] bg-black flex items-center justify-between'>
