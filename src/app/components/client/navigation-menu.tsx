@@ -24,11 +24,11 @@ const AppMenu = () => {
   }, []);
 
   return (
-    <div className='relative flex flex-col'>
+    <div className='relative hidden md:flex flex-col'>
       <button ref={buttonRef} onClick={() => setIsOpen((v) => !v)}>
         <div>
           <div
-            className={`flex flex-col rounded-lg border border-orange-custom-100 w-12 h-12 items-center justify-center max-xl:w-9 max-xl:h-9 transition-[background-color] duration-200 ${
+            className={`flex flex-col rounded-lg border border-orange-custom-100 w-12 h-12 lg:w-12 lg:h-12 items-center justify-center transition-[background-color] duration-200 ${
               open ? "bg-custom-hover-state shadow-custom-sm" : "bg-custom-background"
             }`}
           >

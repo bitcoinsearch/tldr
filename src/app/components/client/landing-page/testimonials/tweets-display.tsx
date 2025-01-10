@@ -9,6 +9,8 @@ import { MarkdownWrapper } from "@/app/components/server/MarkdownWrapper";
 const TweetsDisplay = ({ tweetsFromFile }: { tweetsFromFile: Tweet[] }) => {
   const [tweets, setTweets] = useState<Tweet[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+  const [sliceIndex, setSliceIndex] = useState(3);
 
   useEffect(() => {
     const fetchTweets = async () => {
@@ -33,12 +35,28 @@ const TweetsDisplay = ({ tweetsFromFile }: { tweetsFromFile: Tweet[] }) => {
   }, [tweetsFromFile]);
 
   return (
-    <div className='columns-1 sm:columns-2 lg:columns-3 gap-4 max-w-[947px] mx-auto w-full'>
-      {tweets.map((tweet) => (
-        <div key={tweet.url} className='mb-4 break-inside-avoid'>
-          <TweetCard {...tweet} />
-        </div>
-      ))}
+    <div className='w-full'>
+      <div className='columns-1 sm:columns-2 lg:columns-3 gap-4 max-w-[947px] mx-auto w-full'>
+        {isMobile
+          ? tweets.slice(0, sliceIndex).map((tweet) => (
+              <div key={tweet.url} className='mb-4 break-inside-avoid'>
+                <TweetCard {...tweet} />
+              </div>
+            ))
+          : tweets.map((tweet) => (
+              <div key={tweet.url} className='mb-4 break-inside-avoid'>
+                <TweetCard {...tweet} />
+              </div>
+            ))}
+      </div>
+      <div className='flex justify-center pt-6'>
+        <button
+          className='flex md:hidden text-sm font-medium leading-[19.74px] py-4 px-6 border border-black rounded-full text-black font-gt-walsheim'
+          onClick={() => setSliceIndex(sliceIndex + 3)}
+        >
+          Load More
+        </button>
+      </div>
     </div>
   );
 };

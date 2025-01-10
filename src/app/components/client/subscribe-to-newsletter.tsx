@@ -48,7 +48,7 @@ const MailchimpSubscribeForm = ({ className }: { className?: string }) => {
     <form onSubmit={handleSubmit} method='post' id='mc-embedded-subscribe-form' name='mc-embedded-subscribe-form'>
       <div className={`relative w-full max-w-[530px] flex items-center justify-center ${className}`}>
         <input
-          className={`rounded-full bg-gray-custom-300 border border-gray-custom-400 h-14 w-full max-w-[530px] placeholder:text-gray-custom-500 placeholder:font-normal text-base pl-4 ${className}`}
+          className={`rounded-full bg-gray-custom-300 border border-gray-custom-400 h-[46px] md:h-14 w-full max-w-[530px] placeholder:text-gray-custom-500 placeholder:font-normal text-base pl-4 ${className}`}
           placeholder='Enter your email'
           type='email'
           name='EMAIL'
@@ -59,7 +59,7 @@ const MailchimpSubscribeForm = ({ className }: { className?: string }) => {
         />
 
         <input
-          className={`text-base leading-[18.32px] font-medium text-white bg-orange-custom-100 rounded-full py-4 px-6 w-fit text-nowrap absolute right-1 ${
+          className={`text-sm md:text-base leading-4 md:leading-[18.32px] font-medium text-white bg-orange-custom-100 rounded-full py-[11px] md:py-4 px-4 md:px-6 w-fit text-nowrap absolute font-gt-walsheim right-1 ${
             loading ? "cursor-not-allowed opacity-50" : ""
           }`}
           type='submit'
@@ -69,12 +69,15 @@ const MailchimpSubscribeForm = ({ className }: { className?: string }) => {
           disabled={loading}
         />
       </div>
-      <div id='mce-responses' className='pt-2 max-w-[530px]'>
-        <div className='px-2 pb-4'>
-          {mailchimpResponse && <p className='text-green-500 font-gt-walsheim'>{mailchimpResponse}</p>}
-          {error && <p className='text-red-500 font-gt-walsheim'>{error}</p>}
-        </div>
-      </div>
+      {mailchimpResponse ||
+        (error && (
+          <div id='mce-responses' className='pt-2 max-w-[530px]'>
+            <div className='px-2 pb-4'>
+              {mailchimpResponse && <p className='text-green-500 font-gt-walsheim'>{mailchimpResponse}</p>}
+              {error && <p className='text-red-500 font-gt-walsheim'>{error}</p>}
+            </div>
+          </div>
+        ))}
     </form>
   );
 };

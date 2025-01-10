@@ -115,3 +115,27 @@ export const tweetUrls = [
   "https://x.com/BotanixLabs/status/1714264279388426689",
   "https://x.com/aassoiants/status/1713997638129856611",
 ];
+
+export const MobileNavLinks = [
+  { title: "Newsletters", href: "/newsletter", sublinks: [], isSubMenu: false },
+  {
+    title: "Posts",
+    href: "/posts",
+    sublinks: [
+      {
+        title: "Active Discussions",
+        href: "/posts#active-discussions",
+      },
+      {
+        title: "Historic Conversations",
+        href: "/posts#historic-conversations",
+      },
+      {
+        title: "All Activity",
+        href: "/posts#all-activity",
+      },
+    ],
+    isSubMenu: true,
+  },
+  { title: "About", href: "/about", sublinks: [], isSubMenu: false },
+];

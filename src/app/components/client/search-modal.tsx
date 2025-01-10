@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import React from "react";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -148,14 +147,18 @@ const SearchBox = () => {
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger asChild>
           <div className={`${isMobile ? "flex flex-col items-center justify-center" : "relative"}`}>
-            {isMobile ? null : (
-              <div className='w-[411px] h-[49px] border border-gray-custom-400 rounded-full flex items-center justify-between'>
+            {isMobile ? (
+              <div className='py-1.5 px-3 rounded-full bg-orange-custom-100'>
+                <SearchIcon className='text-white h-6 w-6' />
+              </div>
+            ) : (
+              <div className='hidden md:flex w-[320px] lg:w-[411px] h-[49px] border border-gray-custom-400 rounded-full items-center justify-between'>
                 <section className='w-fit absolute left-4'>
                   <SearchIcon className='text-gray-custom-500' />
                 </section>
                 <input
                   name='searchbox'
-                  className='w-full flex-1 h-full focus:outline-none pl-12 rounded-full bg-gray-custom-100 placeholder:text-gray-custom-500 placeholder:font-normal text-base'
+                  className='w-full h-full focus:outline-none pl-12 rounded-full bg-gray-custom-100 placeholder:text-gray-custom-500 placeholder:font-normal text-base'
                   placeholder='Search'
                   value={""}
                   readOnly
@@ -169,7 +172,7 @@ const SearchBox = () => {
         </Dialog.Trigger>
 
         <Dialog.Portal>
-          <Dialog.Overlay className='bg-slate-400 opacity-50 lg:bg-none lg:opacity-0 data-[state=open]:animate-overlayShow fixed inset-0 z-50' />
+          <Dialog.Overlay className='bg-slate-400 opacity-50 lg:bg-none lg:opacity-0 data-[state=open]:animate-overlayShow fixed inset-0' />
           <Dialog.Content
             className={`dialogContent fixed rounded-[5px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none overflow-y-auto ${
               isMobile ? "mx-auto my-0 top-[50%] left-[50%] max-h-[65vh] translate-x-[-50%] translate-y-[-50%]" : "left-[48.5%]"
@@ -182,7 +185,7 @@ const SearchBox = () => {
               maxHeight: isMobile ? "60vh" : "calc(70vh - 100px)",
             }}
           >
-            <Dialog.Title className='m-0 text-[16px] font-medium flex items-center gap-x-4'>
+            <Dialog.Title className='m-0 text-[16px] font-medium flex items-center gap-x-4 z-50'>
               <span>Filter results by: </span>
               <span className='flex items-center gap-x-2'>
                 <button

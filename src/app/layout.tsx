@@ -1,8 +1,8 @@
-import "./globals.css";
 import type { Metadata } from "next";
 import Footer from "./components/client/footer";
 import { Inter, Inika, IBM_Plex_Serif } from "next/font/google";
 import "@bitcoin-dev-project/bdp-ui/styles.css";
+import "./globals.css";
 import Navbar from "@/app/components/server/navbar";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
