@@ -10,17 +10,17 @@ import MailchimpSubscribeForm from "./subscribe-to-newsletter";
 
 const CustomFooter = () => {
   return (
-    <Wrapper className='py-16 flex flex-col gap-10'>
-      <div className='flex flex-col gap-8'>
+    <Wrapper className='py-8 md:py-16 px-4 md:px-8 flex flex-col gap-6 md:gap-10'>
+      <div className='flex flex-col gap-6 md:gap-8'>
         <Link href='/' className='flex items-center'>
           <Image src='/icons/bitcoin-logo-icon.svg' alt='Bitcoin Logo' width={32} height={32} />
           <p className='text-xl font-medium font-gt-walsheim'>TLDR</p>
         </Link>
 
-        <section className='flex flex-col gap-4 max-w-[689px]'>
+        <section className='flex flex-col gap-4 max-w-[480px] md:max-w-[689px]'>
           <section className='flex flex-col gap-2'>
-            <h4 className='text-2xl leading-[36px] font-medium font-test-signifier'>Join Our Newsletter</h4>
-            <p className='text-base font-gt-walsheim font-normal'>
+            <h4 className='text-lg md:text-2xl leading-[27px] md:leading-[36px] font-medium font-test-signifier'>Join Our Newsletter</h4>
+            <p className='text-sm md:text-base font-gt-walsheim font-normal'>
               We’ll email you summaries of the latest discussions from authoritative bitcoin sources, like bitcoin-dev, lightning-dev, and Delving
               Bitcoin.
             </p>
@@ -37,7 +37,7 @@ const CustomFooter = () => {
           {menuApps.slice(1).map(({ href, image, alt }) => (
             <Link href={href} target='_blank' rel='noopener noreferrer' key={alt}>
               <Image
-                className={`rounded-xl w-[54px] h-[54px] lg:w-20 lg:h-20 border border-gray-custom-200 ${
+                className={`rounded-xl w-[54px] h-[54px] md:w-20 md:h-20 border border-gray-custom-200 ${
                   alt === "Bitcoin search" || alt === "Bitcoin TLDR" ? "border border-grey-custom-900" : ""
                 }`}
                 src={image}
@@ -56,7 +56,7 @@ const CustomFooter = () => {
         className='px-0 bg-white dark:bg-white font-gt-walsheim'
         separator={<div className='h-5 border-r xl:h-6 xl:border-r border-r-black hidden xl:block' />}
       >
-        <div className='flex gap-[34px] items-center'>
+        <div className='flex flex-col md:flex-row gap-6 md:gap-[34px] items-start md:items-center'>
           <Footer.Socials
             className='flex items-center gap-5 text-black'
             platforms={[
@@ -101,7 +101,7 @@ const CustomFooter = () => {
           className='font-medium text-gray-custom-900 dark:text-gray-custom-900'
         />
 
-        <div className='flex flex-row gap-[34px] items-center'>
+        <div className='flex flex-col md:flex-row gap-6 md:gap-[34px] items-star md:items-center'>
           <p className='font-medium text-gray-custom-900 dark:text-gray-custom-900'>
             <span className='leading-none md:leading-tight flex flex-col sm:flex-row items-stretch sm:items-center text-sm text-gray-custom-900 dark:text-gray-custom-900 gap-[20px] md:gap-[24px]'>
               We&apos;d love to hear your feedback on this project?
@@ -110,7 +110,7 @@ const CustomFooter = () => {
           <Link
             href='https://cryptpad.fr/form/#/2/form/view/3P2CsohsHOkcH7C+WdtX0-tvqjBHqXnAmz5D9yx0e04/'
             target='_blank'
-            className='text-white text-sm leading-[14px] font-gt-walsheim font-medium bg-orange-custom-100 rounded-full px-6 py-5'
+            className='text-white text-sm leading-[14px] font-gt-walsheim font-medium bg-orange-custom-100 rounded-full px-6 py-4 md:py-5 text-nowrap w-fit self-center'
           >
             Give Feedback
           </Link>

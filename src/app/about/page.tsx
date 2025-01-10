@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function Page() {
   return (
-    <div>
-      <section className=''>
+    <div className='w-full mx-auto grow max-w-3xl pb-8 px-4 lg:px-0'>
+      <section>
         <h2 className='text-2xl md:text-3xl font-normal pb-7 pt-10'>About</h2>
         <p className='whitespace-pre-line'>
           This website summarizes the{" "}
@@ -29,10 +29,15 @@ export default function Page() {
           June 2011. There is a problem though, not enough people read it.{"\n"}
           {"\n"} Bitcoin TLDR is designed to help keep you up to date with the latest posts as well as surface active discussions from the past.
           {"\n"}
-          {"\n"} We summarize every post and then summarize the summaries so that every thread summary remains fresh based on the replies. These run on nightly cron jobs to produce{" "}
+          {"\n"} We summarize every post and then summarize the summaries so that every thread summary remains fresh based on the replies. These run
+          on nightly cron jobs to produce{" "}
           <span>
-            <Link href='https://github.com/bitcoinsearch/mailing-list-summaries/tree/main/static' target='_blank' className='underline text-brand-secondary'>
-            static files
+            <Link
+              href='https://github.com/bitcoinsearch/mailing-list-summaries/tree/main/static'
+              target='_blank'
+              className='underline text-brand-secondary'
+            >
+              static files
             </Link>
           </span>{" "}
           that we encourage you to use for your own projects.

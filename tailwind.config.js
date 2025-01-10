@@ -22,6 +22,7 @@ module.exports = {
         orange: {
           "custom-100": "#F7931A",
           "custom-200": "#FEF6EB",
+          "custom-300": "#FEF8F0",
         },
         gray: {
           "custom-100": "#FAFAFA",
