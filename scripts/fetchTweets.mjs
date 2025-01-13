@@ -1,33 +1,44 @@
-import { tweetUrls } from "@/data";
-import { NextResponse } from "next/server";
-import { TwitterApi } from "twitter-api-v2";
-import { TWITTER_BEARER_TOKEN } from "@/config/process";
-import * as fs from "fs";
+import fs from "fs";
 import path from "path";
-import { Tweet } from "@/helpers/types";
+import dotenv from "dotenv";
+import { TwitterApi } from "twitter-api-v2";
 
-// Initialize Twitter API client
+dotenv.config();
+const TWITTER_BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN;
 const twitterClient = new TwitterApi(TWITTER_BEARER_TOKEN);
 
+const tweetUrls = [
+  "https://x.com/bergealex4/status/1713969652991168655",
+  "https://x.com/satsie/status/1714017569726706162",
+  "https://x.com/aaaljaz/status/1713969266448347235",
+  "https://x.com/callebtc/status/1713964494487994658",
+  "https://x.com/moneyball/status/1714089589605077025",
+  "https://x.com/mehmehturtle/status/1714150769321030030",
+  "https://x.com/timechain_/status/1713990636024606790",
+  "https://x.com/BotanixLabs/status/1714264279388426689",
+  "https://x.com/aassoiants/status/1713997638129856611",
+];
+
 // Utility function to extract tweet IDs from URLs
-const extractTweetId = (url: string): string | null => {
+const extractTweetId = (url) => {
   const match = url.match(/status\/(\d+)/);
   return match ? match[1] : null;
 };
 
-export async function GET() {
+export async function fetchTweets() {
   // Extract tweet IDs
-  const tweetIds = tweetUrls.map(extractTweetId).filter(Boolean) as string[];
+  const tweetIds = tweetUrls.map(extractTweetId).filter(Boolean);
 
   if (tweetIds.length === 0) {
-    return NextResponse.json({ error: "No valid tweet IDs found in URLs" }, { status: 400 });
+    throw new Error("No valid tweet IDs found in URLs");
   }
 
   const readTweetsFile = fs.readFileSync(path.join(process.cwd(), "public", "tweets.json"), "utf8");
-  const tweetsFromFile = JSON.parse(readTweetsFile) as Tweet[];
+  const tweetsFromFile = JSON.parse(readTweetsFile);
 
   if (tweetsFromFile.length === tweetIds.length) {
-    return NextResponse.json(tweetsFromFile);
+    console.log("Fetching tweets from file");
+    return tweetsFromFile;
   }
 
   try {
@@ -42,7 +53,7 @@ export async function GET() {
 
     // Construct response with user image, username, text, and URL
     const tweetsWithDetails = tweets.data.map((tweet) => {
-      const user = usersById[tweet.author_id!];
+      const user = usersById[tweet.author_id];
 
       return {
         tweet: tweet.text,
@@ -53,10 +64,13 @@ export async function GET() {
       };
     });
 
+    console.log("Writing tweets from API to file");
     fs.writeFileSync(`./public/tweets.json`, JSON.stringify(tweetsWithDetails, null, 2));
 
-    return NextResponse.json(tweetsWithDetails);
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return tweetsWithDetails;
+  } catch (error) {
+    throw new Error(error.message);
   }
 }
+
+fetchTweets();

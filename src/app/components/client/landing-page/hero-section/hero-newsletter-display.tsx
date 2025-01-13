@@ -3,15 +3,16 @@
 import Image from "next/image";
 import { NewsletterData } from "@/helpers/types";
 import React, { useEffect, useRef, useState } from "react";
-import NewsletterStars from "@/public/icons/newsletter-stars";
 import { MarkdownWrapper } from "@/app/components/server/MarkdownWrapper";
 import MailchimpSubscribeForm from "../../subscribe-to-newsletter";
 import { useMediaQuery } from "../../hooks/use-media-query";
+import Link from "next/link";
+import { newsLetterIconMap } from "@/data";
 
 const HeroNewsletterDisplay = ({ latestNewsletter }: { latestNewsletter: NewsletterData }) => {
   const [isArticleScrolled, setIsArticleScrolled] = useState(false);
-  const articleRef = React.useRef<HTMLDivElement>(null);
-  const heroSectionRef = React.useRef<HTMLDivElement>(null);
+  const articleRef = useRef<HTMLDivElement>(null);
+  const heroSectionRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const scrollToTop = () => {
@@ -72,7 +73,7 @@ const HeroNewsletterDisplay = ({ latestNewsletter }: { latestNewsletter: Newslet
         <MailchimpSubscribeForm />
       </div>
 
-      <div className='max-w-full md:max-w-[49%] lg:max-w-[40%] xl:max-w-[37%] h-[470px] md:h-[650px] xl:h-[673px] bg-black rounded-[18px] xl:rounded-[30px] p-3 xl:p-[27px] relative'>
+      <div className='max-w-full md:max-w-[49%] lg:max-w-[40%] xl:max-w-[37%] h-[470px] md:h-[650px] xl:h-[673px] max-h-[673px] bg-black rounded-[18px] xl:rounded-[30px] p-3 xl:p-[27px] relative'>
         <div
           ref={isMobile ? null : articleRef}
           className='h-full w-full bg-cream-custom-100 rounded-[10px] p-2 md:p-3 xl:p-3.5 overflow-scroll custom-scrollbar flex flex-col gap-2'
@@ -91,7 +92,7 @@ const HeroNewsletterDisplay = ({ latestNewsletter }: { latestNewsletter: Newslet
               </p>
               <p className='text-xs md:text-sm font-medium leading-[19.74px] font-gt-walsheim'>{latestNewsletter.dateRange}</p>
             </section>
-            <NewsletterStars className={`text-peach-custom-100 h-[110px] xl:h-[168px] w-[110px] xl:w-[168px]`} fill={"#F39595"} />
+            <Image src={newsLetterIconMap[0]} alt='curly arrow' width={148} height={148} className={`text-peach-custom-100 h-full w-fit`} />
           </div>
 
           <div className='flex flex-col gap-[11.23px] font-gt-walsheim'>
@@ -103,6 +104,13 @@ const HeroNewsletterDisplay = ({ latestNewsletter }: { latestNewsletter: Newslet
               />
             </article>
           </div>
+
+          <Link
+            href={latestNewsletter.url}
+            className='font-test-signifier text-sm lg:text-base leading-6 p-4 w-full rounded-full bg-black text-white text-center'
+          >
+            Read This Week&apos;s Newsletters
+          </Link>
         </div>
 
         <div className='absolute top-[-24px] left-[-16px] w-full min-w-fit 2xl:min-w-[520px] -z-10 hidden md:block'>

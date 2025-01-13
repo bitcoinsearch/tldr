@@ -5,7 +5,7 @@ import Wrapper from "@/app/components/server/wrapper";
 import { getTweetsFromFile } from "@/helpers/fs-functions";
 
 const Testimonials = async () => {
-  const tweetsFromFile = await getTweetsFromFile();
+  const tweets = await getTweetsFromFile();
 
   return (
     <div className='py-8 md:py-20 relative bg-orange-custom-200 md:bg-gray-custom-700 z-10 overflow-hidden'>
@@ -17,7 +17,7 @@ const Testimonials = async () => {
         <h5 className='text-[32px] md:text-[56px] lg:text-[64px] font-normal font-test-signifier leading-[41.38px] md:leading-[82.75px] text-center'>
           What People Have to Say
         </h5>
-        <TweetsDisplay tweetsFromFile={tweetsFromFile} />
+        <TweetsDisplay tweets={tweets} />
       </Wrapper>
     </div>
   );

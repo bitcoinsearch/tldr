@@ -3,36 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Tweet } from "@/helpers/types";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { MarkdownWrapper } from "@/app/components/server/MarkdownWrapper";
+import { useMediaQuery } from "../../hooks/use-media-query";
 
-const TweetsDisplay = ({ tweetsFromFile }: { tweetsFromFile: Tweet[] }) => {
-  const [tweets, setTweets] = useState<Tweet[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+const TweetsDisplay = ({ tweets }: { tweets: Tweet[] }) => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const [sliceIndex, setSliceIndex] = useState(3);
-
-  useEffect(() => {
-    const fetchTweets = async () => {
-      if (tweetsFromFile.length > 0) {
-        setTweets(tweetsFromFile);
-        return;
-      } else {
-        try {
-          const response = await fetch("/api/fetchTweets");
-          if (!response.ok) {
-            throw new Error("Failed to fetch tweets");
-          }
-          const data: Tweet[] = await response.json();
-          setTweets(data);
-        } catch (err: any) {
-          setError(err.message);
-        }
-      }
-    };
-
-    fetchTweets();
-  }, [tweetsFromFile]);
 
   return (
     <div className='w-full'>

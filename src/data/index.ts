@@ -134,8 +134,14 @@ export const MobileNavLinks = [
         title: "All Activity",
         href: "/posts#all-activity",
       },
+      {
+        title: "RSS Feed",
+        href: "/rss.xml",
+      },
     ],
     isSubMenu: true,
   },
   { title: "About", href: "/about", sublinks: [], isSubMenu: false },
 ];
+
+export const newsLetterIconMap = ["/icons/curly-arrow.svg", "/icons/thick-stroke.svg", "/icons/thick-net.svg"];

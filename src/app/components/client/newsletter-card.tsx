@@ -1,7 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowLinkUpRight } from "@bitcoin-dev-project/bdp-ui/icons";
-import NewsletterStars from "@/public/icons/newsletter-stars";
+import { newsLetterIconMap } from "@/data";
+import Image from "next/image";
 
 const NewsletterCard = ({
   summary,
@@ -36,7 +37,9 @@ const NewsletterCard = ({
             #{issueNumber}
           </p>
         </section>
-        <NewsletterStars className={`text-[${colorTheme}] h-[115px] md:h-[138px] w-[115px] md:w-[138px]`} fill={colorTheme} />
+        <div className='relative h-[110px] md:h-full w-[110px] md:w-full max-w-[167px]'>
+          <Image src={newsLetterIconMap[index]} alt='curly arrow' layout='fill' objectFit='contain' />
+        </div>
       </div>
 
       <div className='flex flex-col justify-between flex-1 w-full'>
