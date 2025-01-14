@@ -10,6 +10,7 @@ import { useMediaQuery } from "../../hooks/use-media-query";
 const TweetsDisplay = ({ tweets }: { tweets: Tweet[] }) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const [sliceIndex, setSliceIndex] = useState(3);
+  // console.log({ tweetsLength: tweets.length, sliceIndex });
 
   return (
     <div className='w-full'>
@@ -26,14 +27,16 @@ const TweetsDisplay = ({ tweets }: { tweets: Tweet[] }) => {
               </div>
             ))}
       </div>
-      <div className='flex justify-center pt-6'>
-        <button
-          className='flex md:hidden text-sm font-medium leading-[19.74px] py-4 px-6 border border-black rounded-full text-black font-gt-walsheim'
-          onClick={() => setSliceIndex(sliceIndex + 3)}
-        >
-          Load More
-        </button>
-      </div>
+      {sliceIndex >= 9 ? null : (
+        <div className='flex justify-center pt-6'>
+          <button
+            className='flex md:hidden text-sm font-medium leading-[19.74px] py-4 px-6 border border-black rounded-full text-black font-gt-walsheim'
+            onClick={() => setSliceIndex(sliceIndex + 3)}
+          >
+            Load More
+          </button>
+        </div>
+      )}
     </div>
   );
 };

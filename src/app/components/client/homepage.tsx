@@ -201,7 +201,9 @@ const formatTextToParagraphs = (text: string) => {
 const MailingListToggle = ({ selectedList, handleToggle }: ToggleButtonProps) => {
   return (
     <div className='flex flex-col gap-3'>
-      <p className='text-2xl font-semibold leading-normal'>Filter by List</p>
+      <p className='text-2xl font-semibold leading-normal' id='source'>
+        Filter by List
+      </p>
       <div className='flex gap-6 items-center'>
         <button
           onClick={() => handleToggle(BITCOINDEV)}

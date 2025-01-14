@@ -62,7 +62,7 @@ const CustomFooter = () => {
             platforms={[
               {
                 entity: "github",
-                entityLink: "https://github.com/bitcointranscripts/registry",
+                entityLink: "https://github.com/bitcoinsearch/tldr",
                 iconProps: {
                   className: "hover:text-orange-400 text-black",
                 },
@@ -97,7 +97,7 @@ const CustomFooter = () => {
           />
         </div>
         <Footer.Public
-          dashboardLink='https://visits.bitcoindevs.xyz/share/7hL0ysupLrZQsKRw/btc-transcripts'
+          dashboardLink='https://visits.bitcoindevs.xyz/share/btDhVSkbULr146OJ/tldr'
           className='font-medium text-gray-custom-900 dark:text-gray-custom-900'
         />
 

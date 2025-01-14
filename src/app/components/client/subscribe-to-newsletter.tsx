@@ -48,7 +48,7 @@ const MailchimpSubscribeForm = ({ className }: { className?: string }) => {
     <form onSubmit={handleSubmit} method='post' id='mc-embedded-subscribe-form' name='mc-embedded-subscribe-form'>
       <div className={`relative w-full max-w-[530px] flex items-center justify-center ${className}`}>
         <input
-          className={`rounded-full bg-gray-custom-300 border border-gray-custom-400 h-[46px] md:h-14 w-full max-w-[530px] placeholder:text-gray-custom-500 placeholder:font-normal text-base pl-4 ${className}`}
+          className={`rounded-full bg-gray-custom-300 border border-gray-custom-400 h-[46px] md:h-14 w-full max-w-[530px] placeholder:text-gray-custom-500 placeholder:font-normal placeholder:text-sm md:placeholder:text-base text-base pl-4 ${className}`}
           placeholder='Enter your email'
           type='email'
           name='EMAIL'

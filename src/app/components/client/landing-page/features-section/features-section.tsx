@@ -5,7 +5,7 @@ import { featuresSectionData } from "@/data";
 const FeaturesSection = () => {
   return (
     <div className='w-full flex items-center justify-center'>
-      <div className='flex flex-col md:flex-row gap-6 items-center justify-between max-w-[1130px] py-[32px] md:py-[90px] w-full flex-'>
+      <div className='flex flex-col md:flex-row gap-6 items-center justify-between max-w-[1130px] py-[32px] md:py-[64px] w-full flex-'>
         {featuresSectionData.map((item) => (
           <FeatureCard {...item} key={item.icon} />
         ))}

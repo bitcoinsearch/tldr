@@ -62,7 +62,7 @@ const HeroNewsletterDisplay = ({ latestNewsletter }: { latestNewsletter: Newslet
       <div className='max-w-full md:max-w-[50%] lg:max-w-[741px] flex flex-col gap-6 md:gap-[35px]'>
         <section className='flex flex-col gap-4'>
           <h1 className='text-[32px] md:text-[48px] lg:text-[60px] xl:text-[72px] leading-[41.38px] md:leading-[64.64px] lg:leading-[78.1px] xl:leading-[93.1px] font-test-signifier font-normal'>
-            Stay up to Date on the Latest in <span className='text-orange-custom-100'>Bitcoin Tech</span>
+            Stay up to Date on the Latest in <span className='text-orange-custom-100 text-nowrap'>Bitcoin Tech</span>
           </h1>
           <ol className='list-disc text-sm md:text-base lg:text-lg leading-6 lg:leading-8 font-gt-walsheim font-normal list-inside flex flex-col gap-1'>
             <li>Weekly summaries of bitcoin-dev, lightning-dev, and delving bitcoin mailing lists</li>

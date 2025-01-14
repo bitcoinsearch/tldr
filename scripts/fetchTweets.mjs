@@ -13,9 +13,11 @@ const tweetUrls = [
   "https://x.com/aaaljaz/status/1713969266448347235",
   "https://x.com/callebtc/status/1713964494487994658",
   "https://x.com/moneyball/status/1714089589605077025",
+  "https://x.com/callebtc/status/1713963375254777963",
   "https://x.com/mehmehturtle/status/1714150769321030030",
   "https://x.com/timechain_/status/1713990636024606790",
   "https://x.com/BotanixLabs/status/1714264279388426689",
+  "https://x.com/SimplyBitcoinTV/status/1714219210425971193",
   "https://x.com/aassoiants/status/1713997638129856611",
 ];
 
@@ -37,7 +39,7 @@ export async function fetchTweets() {
   const tweetsFromFile = JSON.parse(readTweetsFile);
 
   if (tweetsFromFile.length === tweetIds.length) {
-    console.log("Tweets also exist in file");
+    console.log("Tweets already exist in file");
     return;
   }
 
