@@ -37,8 +37,8 @@ export async function fetchTweets() {
   const tweetsFromFile = JSON.parse(readTweetsFile);
 
   if (tweetsFromFile.length === tweetIds.length) {
-    console.log("Fetching tweets from file");
-    return tweetsFromFile;
+    console.log("Tweets also exist in file");
+    return;
   }
 
   try {
@@ -66,8 +66,6 @@ export async function fetchTweets() {
 
     console.log("Writing tweets from API to file");
     fs.writeFileSync(`./public/tweets.json`, JSON.stringify(tweetsWithDetails, null, 2));
-
-    return tweetsWithDetails;
   } catch (error) {
     throw new Error(error.message);
   }
