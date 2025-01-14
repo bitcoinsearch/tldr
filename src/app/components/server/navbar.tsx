@@ -7,10 +7,10 @@ import { usePathname, useRouter } from "next/navigation";
 import TanstackProvider from "@/app/provider";
 import SearchBox from "../client/search-modal";
 import AppMenu from "../client/navigation-menu";
-import React, { SetStateAction, useState } from "react";
+import React, { SetStateAction, useState, useRef } from "react";
 import { CaretDownIcon, CaretUpIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { MobileNavLinks } from "@/data";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { useMediaQuery } from "../client/hooks/use-media-query";
 
 const Navbar = () => {
   const router = useRouter();
@@ -68,7 +68,14 @@ const Navbar = () => {
 
         {open ? (
           <div className='w-full bg-white top-[86px] left-0 right-0 bottom-0 p-4 z-40 pt-3 pb-8 overflow-scroll md:hidden max-md:fixed'>
-            <MobileMenu setOpen={setOpen} router={router} hash={hash} currentPath={currentPath!} />
+            <MobileMenu
+              setOpen={setOpen}
+              hash={hash}
+              currentPath={currentPath!}
+              handleClick={handleClick}
+              subMenu={subMenu}
+              setSubMenu={setSubMenu}
+            />
           </div>
         ) : null}
       </Wrapper>
@@ -78,27 +85,23 @@ const Navbar = () => {
 
 const MobileMenu = ({
   setOpen,
-  router,
   hash,
   currentPath,
+  handleClick,
+  subMenu,
+  setSubMenu,
 }: {
   setOpen: React.Dispatch<SetStateAction<boolean>>;
-  router: AppRouterInstance;
   hash: string;
   currentPath: string;
+  handleClick: (href: string, isSubMenu: boolean, index: string) => void;
+  subMenu: { [key: string]: boolean };
+  setSubMenu: React.Dispatch<
+    React.SetStateAction<{
+      [key: string]: boolean;
+    }>
+  >;
 }) => {
-  const [subMenu, setSubMenu] = useState<{ [key: string]: boolean }>({ "0": false, "1": false, "2": false });
-
-  const handleClick = (href: string, isSubMenu: boolean, index: string) => {
-    if (isSubMenu) {
-      setSubMenu((prev) => ({ ...prev, [index]: !prev[index] }));
-    } else {
-      setSubMenu((prev) => ({ ...prev, [index]: false }));
-      router.push(href);
-      setOpen(false);
-    }
-  };
-
   return (
     <div className='flex flex-col gap-6 bg-white min-h-full overflow-y-scroll'>
       <section className='flex-col gap-2'>
@@ -170,11 +173,34 @@ const MenuGroup = ({
   hash: string;
   currentPath: string;
 }) => {
+  const contentRef = useRef<any>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  React.useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (
+        contentRef.current &&
+        !contentRef.current.contains(event.target as Node) &&
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
+        setSubMenu((prev) => ({ ...prev, ["1"]: false }));
+      }
+    });
+    return () => {
+      document.removeEventListener("mousedown", () => {
+        setSubMenu((prev) => ({ ...prev, ["1"]: false }));
+      });
+    };
+  }, [subMenu["1"]]);
+
   return (
     <>
       {MobileNavLinks.map((link, index) => (
-        <div key={link.title} className='md:relative'>
+        <div key={link.title} className='md:relative' ref={link.isSubMenu && !isMobile ? wrapperRef : null}>
           <button
+            ref={link.isSubMenu && !isMobile ? contentRef : null}
             key={link.title}
             onClick={() => handleClick(link.href, link.isSubMenu, String(index))}
             className={`text-black font-medium text-lg leading-[20.61px] font-gt-walsheim text-start flex items-center justify-between w-full max-w-[253px] ${
