@@ -14,37 +14,36 @@ const Homepage = ({
   batch,
   fetchMore,
   serverCount,
+  searchParams,
 }: {
   data: HomepageData;
   batch: Array<HomepageEntryData>;
   fetchMore: (count: number) => Promise<{ batch: HomepageEntryData[]; count: number }>;
   serverCount: number[];
+  searchParams: { [key: string]: string | undefined };
 }) => {
-  const [mailingListSelection, setMailingListSelection] = useState<MailingListType | null>(null);
+  const [mailingListSelection, setMailingListSelection] = useState<MailingListType | null>(searchParams.dev as MailingListType);
   const [count, setCount] = useState(1);
   const [loading, setloading] = useState(false);
 
   const getSelectionList = (data: HomepageData) => {
-    let filteredSelection = {
-      recent_posts: [...data.recent_posts],
-      active_posts: [...data.active_posts],
-      today_in_history_posts: [...data.today_in_history_posts],
-    };
-
-    if (mailingListSelection === BITCOINDEV) {
-      filteredSelection.recent_posts = data.recent_posts.filter((entry) => entry.dev_name === BITCOINDEV);
-      filteredSelection.active_posts = data.active_posts.filter((entry) => entry.dev_name === BITCOINDEV);
-      filteredSelection.today_in_history_posts = data.today_in_history_posts.filter((entry) => entry.dev_name === BITCOINDEV);
-    } else if (mailingListSelection === LIGHTNINGDEV) {
-      filteredSelection.recent_posts = data.recent_posts.filter((entry) => entry.dev_name === LIGHTNINGDEV);
-      filteredSelection.active_posts = data.active_posts.filter((entry) => entry.dev_name === LIGHTNINGDEV);
-      filteredSelection.today_in_history_posts = data.today_in_history_posts.filter((entry) => entry.dev_name === LIGHTNINGDEV);
-    } else if (mailingListSelection === DELVINGBITCOIN) {
-      filteredSelection.recent_posts = data.recent_posts.filter((entry) => entry.dev_name === DELVINGBITCOIN);
-      filteredSelection.active_posts = data.active_posts.filter((entry) => entry.dev_name === DELVINGBITCOIN);
-      filteredSelection.today_in_history_posts = data.today_in_history_posts.filter((entry) => entry.dev_name === DELVINGBITCOIN);
+    // If no mailing list selected, return shallow copy of original data
+    if (!mailingListSelection || searchParams.dev === undefined) {
+      return {
+        active_posts: [...data.active_posts],
+        today_in_history_posts: [...data.today_in_history_posts],
+        recent_posts: [...data.recent_posts],
+      };
     }
-    return filteredSelection;
+
+    // Single filter operation per category using the selected mailing list
+    const filterByMailingList = (posts: any[]) => posts.filter((entry) => entry.dev_name === mailingListSelection);
+
+    return {
+      active_posts: filterByMailingList(data.active_posts),
+      today_in_history_posts: filterByMailingList(data.today_in_history_posts),
+      recent_posts: filterByMailingList(data.recent_posts),
+    };
   };
 
   const homepageData = getSelectionList(data);
@@ -54,6 +53,8 @@ const Homepage = ({
   };
 
   const memoizedBatches = useMemo(() => {
+    const filterBatch = batch.filter((batch) => batch.dev_name === mailingListSelection);
+
     if (mailingListSelection === BITCOINDEV) {
       return batch.filter((batch) => batch.dev_name === BITCOINDEV);
     } else if (mailingListSelection === LIGHTNINGDEV) {
@@ -111,7 +112,7 @@ const Homepage = ({
     <main className=''>
       <div className='flex flex-col gap-6 md:gap-8 my-8 md:my-14'>
         <h2 className='text-2xl font-semibold leading-normal'>Your daily summary</h2>
-        <MarkdownWrapper summary={data.header_summary} className={`font-inika text-sm md:text-lg text-gray-800`}  />
+        <MarkdownWrapper summary={data.header_summary} className={`font-inika text-sm md:text-lg text-gray-800`} />
         <MailchimpSubscribeForm />
       </div>
       <div className='mb-14'>
@@ -119,7 +120,7 @@ const Homepage = ({
       </div>
       <div className='flex flex-col gap-12 break-words'>
         <section>
-          <h2 className='text-xl md:text-4xl font-semibold pb-8' id='active_discussions'>
+          <h2 className='text-xl md:text-4xl font-semibold pb-8' id='active-discussions'>
             Active Discussions 🔥
           </h2>
           <div>
@@ -135,7 +136,7 @@ const Homepage = ({
           </div>
         </section>
         <section>
-          <h2 className='text-xl md:text-4xl font-semibold pb-8' id='today_in_history'>
+          <h2 className='text-xl md:text-4xl font-semibold pb-8' id='historic-conversations'>
             Today in Bitcoin/LN History
           </h2>
           <div>
@@ -151,7 +152,7 @@ const Homepage = ({
           </div>
         </section>
         <div className=''>
-          <h2 className='text-xl md:text-4xl font-semibold pb-8' id='all_activity'>
+          <h2 className='text-xl md:text-4xl font-semibold pb-8' id='all-activity'>
             All Activity
           </h2>
           <div>
@@ -200,7 +201,9 @@ const formatTextToParagraphs = (text: string) => {
 const MailingListToggle = ({ selectedList, handleToggle }: ToggleButtonProps) => {
   return (
     <div className='flex flex-col gap-3'>
-      <p className='text-2xl font-semibold leading-normal'>Filter by List</p>
+      <p className='text-2xl font-semibold leading-normal' id='source'>
+        Filter by List
+      </p>
       <div className='flex gap-6 items-center'>
         <button
           onClick={() => handleToggle(BITCOINDEV)}
