@@ -1,144 +1,46 @@
-import * as fs from "fs";
-import { NewsLetterDataType, NewsLetterSet } from "@/helpers/types";
-import { NewsletterPage } from "../components/server/newsletter";
 import Link from "next/link";
-import { formattedDate, getSummaryDataInfo } from "@/helpers/utils";
-import { PRODUCTION_URL } from "@/config/config";
-
-const getSummaryData = async (path: string[]) => {
-  const pathString = path.join("/");
-  try {
-    const fileContent = fs.readFileSync(`${process.cwd()}/public/static/static/${pathString}.xml`, "utf-8");
-    const summaryInfo = getSummaryDataInfo(path, fileContent);
-    return summaryInfo;
-  } catch (err) {
-    return null;
-  }
-};
-
-// get most recent newsletter from newsletter.json
-const getCurrentNewsletter = async () => {
-  try {
-    const data = fs.readFileSync(`${process.cwd()}/public/static/static/newsletters/newsletter.json`, "utf-8");
-    const parsedData = JSON.parse(data) as NewsLetterDataType;
-    let postParsedData: any = {};
-
-    for (const [key, value] of Object.entries(parsedData)) {
-      if (Array.isArray(value)) {
-        const processedValue = await Promise.all(
-          value.map(async (post) => {
-            // get the file path of all posts in the array
-            const filePath = post.contributors.length > 0 ? post.combined_summ_file_path : post.file_path;
-            const file = filePath.replace(PRODUCTION_URL, "");
-
-            // read the content of the file in the file path
-            const replies = await getSummaryData([file]).then((data) => Number(data?.data.authors.length) - 1);
-            return { ...post, n_threads: replies };
-          })
-        );
-
-        postParsedData[key] = processedValue;
-      } else {
-        postParsedData[key] = value;
-      }
-    }
-
-    return postParsedData;
-  } catch (err) {
-    return null;
-  }
-};
-
-// extract all newsletters
-const getAllNewsLetters = () => {
-  let all_newsletters: NewsLetterSet[] = [];
-
-  try {
-    const dir = `${process.cwd()}/public/static/static/newsletters`;
-    const folder = fs.readdirSync(dir);
-    const getfolders = folder.slice(0, folder.length - 1);
-
-    // Sort folders by date to arrange them in descending order
-    const folderNameToDate = (folderName: string) => {
-      const [month, year] = folderName.split("_");
-      return new Date(`${month} 1, ${year}`);
-    };
-    getfolders.sort((a, b) => {
-      return Number(folderNameToDate(b)) - Number(folderNameToDate(a));
-    });
-
-    // loop through each folder and extract the newsletters
-    for (let i = 0; i < getfolders.length; i++) {
-      let newsletter_set: {
-        title: string;
-        link: string;
-      }[] = [];
-      let newsletter_section: NewsLetterSet = {
-        year: "",
-        newsletters: [],
-      };
-      const month_batch = getfolders[i];
-      newsletter_section["year"] = month_batch.replace("_", ", ");
-      const json_dir = `${dir}/${month_batch}`;
-      const json_path = fs.readdirSync(json_dir);
-
-      for (let j = 0; j < json_path.length; j++) {
-        const weekly_newsletter = json_path[j];
-        const file_path = `month/newsletters/${month_batch}/${weekly_newsletter}`;
-
-        const get_title = formattedDate(new Date(weekly_newsletter.split("-newsletter")[0]).toISOString())
-          .split(":")[0]
-          .slice(0, -2)
-          .trim();
-
-        const existingNewsletter = newsletter_set.find((newsletter) => newsletter.title === get_title && newsletter.link === file_path);
-        if (!existingNewsletter) {
-          newsletter_set.push({ title: get_title, link: file_path });
-        }
-      }
-      newsletter_section["newsletters"] = newsletter_set;
-      all_newsletters.push(newsletter_section);
-    }
-
-    return all_newsletters as NewsLetterSet[];
-  } catch (err) {
-    console.error(err);
-    return null;
-  }
-};
+import Wrapper from "../components/server/wrapper";
+import { ArrowLeftIcon } from "@radix-ui/react-icons";
+import { getAllNewsletters } from "@/helpers/fs-functions";
+import NewsletterCard from "../components/client/newsletter-card";
 
 export default async function Page() {
-  const newsletters = await getCurrentNewsletter();
-  const newsletter_sets = getAllNewsLetters();
+  const getNewsletters = getAllNewsletters();
+  if (!getNewsletters) return null;
 
-  if (!newsletter_sets) return null;
-  if (!newsletters) return null;
+  const allNewsletters = getNewsletters?.reverse();
 
   return (
-    <div className='w-full mx-auto grow max-w-3xl pb-8 px-4 lg:px-0'>
-      <NewsletterPage newsletter={newsletters} />
-      <section>
-        <h2 className='text-xl md:text-4xl font-normal pb-8 pt-10'>Monthly Newsletters </h2>
-        <div className='flex flex-col gap-5'>
-          {newsletter_sets.map((set, index) => (
-            <div key={`${index}_${set.year}`}>
-              <h2 className='text-lg font-normal pb-2'>{set.year}</h2>
+    <Wrapper className=''>
+      <div className='pt-[54px] pb-8'>
+        <Link href='/' className='flex items-center gap-2 py-2 px-6 rounded-full border border-black w-fit'>
+          <ArrowLeftIcon className='w-4 h-4 md:w-6 md:h-6' />
+          <span className='text-sm md:text-base font-gt-walsheim leading-[18.32px]'>Back Home</span>
+        </Link>
+      </div>
 
-              {set.newsletters.length
-                ? set.newsletters.map((newsletter, index) => (
-                    <ul className='list-disc pl-4 flex flex-col gap-1' key={`${index}_${newsletter.link}`}>
-                      <li>
-                        <Link className='text-sm underline cursor-pointer' href={newsletter.link}>
-                          {newsletter.title}
-                        </Link>
-                      </li>
-                    </ul>
-                  ))
-                : null}
-            </div>
-          ))}
+      <div className='flex flex-col gap-8'>
+        <h1 className='text-center text-[32px] md:text-[48px] xl:text-[64px] font-normal font-test-signifier leading-[41.38px] md:leading-[60px] xl:leading-[82.75px]'>
+          Latest Bitcoin TLDR Newsletters
+        </h1>
+
+        <div className='flex flex-col gap-6'>
+          <section className='text-base font-gt-walsheim leading-[22.56px] flex items-center gap-4'>
+            <button className='text-white bg-orange-custom-100 px-4 py-1 rounded-full'>Newest First</button>
+            <button className='text-black bg-gray-custom-1000 px-4 py-1 rounded-full '>Oldest First</button>
+          </section>
+
+          <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 xl:gap-6 self-center justify-center'>
+            {allNewsletters === null ? (
+              <div className='flex items-center justify-center w-full h-full'>
+                <p className='text-lg leading-[25.38px] font-gt-walsheim'>No newsletters found</p>
+              </div>
+            ) : (
+              allNewsletters.map((newsletter, index) => <NewsletterCard key={newsletter.issueNumber} index={index} {...newsletter} />)
+            )}
+          </section>
         </div>
-      </section>
-    </div>
+      </div>
+    </Wrapper>
   );
 }
