@@ -35,6 +35,7 @@ module.exports = {
           "custom-700": "#F4F5F7",
           "custom-800": "#969696",
           "custom-900": "#292929",
+          "custom-1000": "#F7F7F7",
         },
         cream: {
           "custom-100": "#FFFAF0",
