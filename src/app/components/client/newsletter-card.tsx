@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowLinkUpRight } from "@bitcoin-dev-project/bdp-ui/icons";
-import { newsLetterIconMap } from "@/data";
 import Image from "next/image";
+import { ArrowLinkUpRight } from "@bitcoin-dev-project/bdp-ui/icons";
+import { colorThemes, newsLetterIconMap } from "@/data";
 
 const NewsletterCard = ({
   summary,
@@ -17,8 +17,8 @@ const NewsletterCard = ({
   issueNumber: number;
   index: number;
 }) => {
-  const theme = ["#F39595", "#FAE1DD", "#F1F8B5"];
-  const colorTheme = theme[index];
+  const selectionIndex = issueNumber % 10;
+  const colorTheme = colorThemes[selectionIndex];
 
   return (
     <div className='flex flex-col gap-6 p-4 xl:p-6 border border-gray-custom-600 rounded-lg h-[354px] md:h-[454px] w-full max-w-[421px] bg-white'>
@@ -38,7 +38,7 @@ const NewsletterCard = ({
           </p>
         </section>
         <div className='relative h-[110px] md:h-full w-[110px] md:w-full max-w-[167px]'>
-          <Image src={newsLetterIconMap[index]} alt='curly arrow' layout='fill' objectFit='contain' />
+          <Image src={newsLetterIconMap[selectionIndex]} alt='newsletter icon' layout='fill' objectFit='contain' />
         </div>
       </div>
 

@@ -69,9 +69,9 @@ export const ContributorsList = ({ contributors }: { contributors: string[] }) =
 
   const finalList = contributors.slice(0, 2);
   return (
-    <div className='flex basis-2/3 flex-col gap-1'>
-      <p className='font-semibold involving'>Involving</p>
-      <p className='inline-flex gap-x-2 flex-wrap text-gray-600'>
+    <div className='flex flex-row gap-1'>
+      <p className=''>Involving</p>
+      <p className='inline-flex gap-x-2 flex-wrap'>
         {finalList.map((contributor, index) => {
           // if it's the last item, don't add a comma
           const addComma = index < finalList.length - 1 ? ", " : "";
@@ -97,7 +97,7 @@ export const SummaryList = ({ summary }: { summary: string }) => {
   return (
     <ul className='list-disc pl-4 flex flex-col gap-1'>
       {items.map((item: string, index: number) => (
-        <li key={index} className='break-words'>
+        <li key={index} className='break-words text-base font-gt-walsheim leading-[22.56px]'>
           {item.trim()}
         </li>
       ))}
