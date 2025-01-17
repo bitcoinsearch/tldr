@@ -146,4 +146,17 @@ export const MobileNavLinks = [
   { title: "About", href: "/about", sublinks: [], isSubMenu: false },
 ];
 
-export const newsLetterIconMap = ["/icons/curly-arrow.svg", "/icons/thick-stroke.svg", "/icons/thick-net.svg"];
+export const newsLetterIconMap = [
+  "/icons/curly-arrow.svg",
+  "/icons/thick-stroke.svg",
+  "/icons/thick-net.svg",
+  "/icons/block-and-circles-icon.svg",
+  "/icons/circular-waves-icon.svg",
+  "/icons/scattered-shape-icon.svg",
+  "/icons/controls-icon.svg",
+  "/icons/thick-circles-icon.svg",
+  "/icons/bulb-icon.svg",
+  "/icons/irregular-stars-icon.svg",
+];
+
+export const colorThemes = ["#F39595", "#FAE1DD", "#F1F8B5", "#A8D2D1", "#DBEDF7", "#EECEDB", "#DED5CE", "#9EA1D4", "#9EA1D4", "#F1F8B5"];
