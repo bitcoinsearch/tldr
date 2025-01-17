@@ -11,7 +11,6 @@ const getSummaryData = async (path: string[]) => {
     const fileContent = fs.readFileSync(`${process.cwd()}/public/static/static/${pathString}.xml`, "utf-8");
     const summaryInfo = getSummaryDataInfo(path, fileContent);
     return summaryInfo;
-
   } catch (err) {
     return null;
   }
@@ -29,7 +28,7 @@ export default async function Page({ params, searchParams }: { params: { path: s
   const isCombinedPage = params.path[2].startsWith("combined");
 
   return (
-    <main>
+    <main className='max-w-[866px] mx-auto'>
       <div className='flex flex-col gap-4 my-10'>
         <BreadCrumbs params={params} summaryData={summaryData} replies={searchParams.replies} />
         <h2 className='font-inika text-4xl'>{summaryData.data.title}</h2>
