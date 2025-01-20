@@ -55,7 +55,7 @@ export const MonthlyNewsletterDisplay = ({
           <section className='flex flex-col gap-4 max-w-[866px] mx-auto w-full'>
             {/* header */}
             <div className='h-[120px] md:h-[278px] w-full bg-black rounded-lg flex items-center justify-between'>
-              <section className='py-[26px] md:py-[21.5px] pl-12'>
+              <section className='py-[26px] md:py-[21.5px] p-4 lg:pl-12'>
                 <p
                   className={`font-test-signifier text-base md:text-[32px] leading-[22.56px] md:leading-[45.12px] text-nowrap text-[${colorTheme}]`}
                   style={{ color: colorTheme }}
@@ -63,7 +63,7 @@ export const MonthlyNewsletterDisplay = ({
                   Bitcoin TLDR
                 </p>
                 <p
-                  className={`font-test-signifier text-[32px] md:text-[88px] font-medium leading-[124.08px] md:leading-[90.24px] text-[${colorTheme}]`}
+                  className={`font-test-signifier text-[32px] md:text-[88px] font-medium leading-[50.76px] md:leading-[124.08px]  text-[${colorTheme}]`}
                   style={{ color: colorTheme }}
                 >
                   #{currentNewsletter?.issueNumber}
@@ -79,12 +79,12 @@ export const MonthlyNewsletterDisplay = ({
             <article className='max-w-[712px] mx-auto pt-2'>
               <MarkdownWrapper
                 summary={newsletter.summary_of_threads_started_this_week}
-                className={`font-gt-walsheim text-sm md:text-lg leading-[20.61px] text-gray-800 my-4`}
+                className={`font-gt-walsheim text-sm md:text-lg leading-8 text-gray-800 my-4`}
               />
             </article>
             <div className='flex flex-col gap-6 pt-6'>
-              <h2 className='text-xl md:text-[40px] leading-[51.72px] font-normal font-test-signifier'>Active Discussions</h2>
-              <section className='flex flex-col gap-6'>
+              <h2 className='text-2xl md:text-[40px] leading-[31.03px] md:leading-[51.72px] font-normal font-test-signifier'>Active Discussions</h2>
+              <section className='flex flex-col gap-4 md:gap-6 pb-[44px]'>
                 {!activeDiscussions.length ? (
                   <p>Oops! No ongoing discussions this week. Check out the new posts above.</p>
                 ) : (

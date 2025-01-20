@@ -97,7 +97,7 @@ export const SummaryList = ({ summary }: { summary: string }) => {
   return (
     <ul className='list-disc pl-4 flex flex-col gap-1'>
       {items.map((item: string, index: number) => (
-        <li key={index} className='break-words text-base font-gt-walsheim leading-[22.56px]'>
+        <li key={index} className='break-words text-sm md:text-base font-gt-walsheim leading-[19.74px] md:leading-[22.56px]'>
           {item.trim()}
         </li>
       ))}

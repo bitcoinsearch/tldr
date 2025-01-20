@@ -63,8 +63,8 @@ const NewsletterPageClient = ({ newsletters }: { newsletters: NewsletterData[] }
               </div>
             ) : (
               <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 xl:gap-6 self-center justify-center'>
-                {paginatedResult.map((newsletter, index) => (
-                  <NewsletterCard key={newsletter.issueNumber} index={index} {...newsletter} />
+                {paginatedResult.map((newsletter) => (
+                  <NewsletterCard key={newsletter.issueNumber} {...newsletter} />
                 ))}
               </section>
             )}
