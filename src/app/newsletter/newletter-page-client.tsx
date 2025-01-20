@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { NewsletterData } from "@/helpers/types";
@@ -75,7 +75,9 @@ const NewsletterPageClient = ({ newsletters }: { newsletters: NewsletterData[] }
       {paginatedResult.length && (
         <div className='flex justify-center items-center pt-10 md:pt-8 pb-[50px]'>
           <div className='bg-white flex flex-wrap overflow-x-auto no-scrollbar max-w-2xl max-md:max-w-full'>
-            <Pagination currentPage={currentPage} pages={pages} setCurrentPage={setCurrentPage} />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Pagination currentPage={currentPage} pages={pages} setCurrentPage={setCurrentPage} />
+            </Suspense>
           </div>
         </div>
       )}
