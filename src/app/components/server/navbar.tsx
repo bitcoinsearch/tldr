@@ -176,6 +176,7 @@ const MenuGroup = ({
   const contentRef = useRef<any>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const isChecked = subMenu["1"];
 
   React.useEffect(() => {
     document.addEventListener("mousedown", (event) => {
@@ -193,7 +194,7 @@ const MenuGroup = ({
         setSubMenu((prev) => ({ ...prev, ["1"]: false }));
       });
     };
-  }, [subMenu["1"]]);
+  }, [isChecked, setSubMenu]);
 
   return (
     <>
