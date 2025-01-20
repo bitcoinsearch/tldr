@@ -36,6 +36,7 @@ export default async function Page({ params }: { params: { path: string[] } }) {
 
   const sortedNewThreadData = data.new_threads_this_week.sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
 
+  // Get active discussions and add first and last post date
   const activeDiscussions = await Promise.all(
     data.active_posts_this_week.map(async (post) => {
       const filePath = post.combined_summ_file_path || post.file_path;

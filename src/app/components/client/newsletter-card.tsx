@@ -4,19 +4,7 @@ import Image from "next/image";
 import { ArrowLinkUpRight } from "@bitcoin-dev-project/bdp-ui/icons";
 import { colorThemes, newsLetterIconMap } from "@/data";
 
-const NewsletterCard = ({
-  summary,
-  url,
-  dateRange,
-  issueNumber,
-  index,
-}: {
-  summary: string;
-  url: string;
-  dateRange: string;
-  issueNumber: number;
-  index: number;
-}) => {
+const NewsletterCard = ({ summary, url, dateRange, issueNumber }: { summary: string; url: string; dateRange: string; issueNumber: number }) => {
   const selectionIndex = issueNumber % 10;
   const colorTheme = colorThemes[selectionIndex];
 
