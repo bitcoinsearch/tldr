@@ -13,6 +13,8 @@ const HeroNewsletterDisplay = ({ latestNewsletter }: { latestNewsletter: Newslet
   const [isArticleScrolled, setIsArticleScrolled] = useState(false);
   const articleRef = useRef<HTMLDivElement>(null);
   const heroSectionRef = useRef<HTMLDivElement>(null);
+  const initialScreenHeight = typeof window !== "undefined" ? window.innerHeight : 0;
+  const [screenHeight, setScreenHeight] = useState<number>(initialScreenHeight);
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const scrollToTop = () => {
@@ -54,6 +56,17 @@ const HeroNewsletterDisplay = ({ latestNewsletter }: { latestNewsletter: Newslet
     return () => window.removeEventListener("wheel", handleScroll);
   }, [isArticleScrolled]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenHeight(window.innerHeight);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup listener on component unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div
       ref={isMobile ? null : heroSectionRef}
@@ -73,7 +86,11 @@ const HeroNewsletterDisplay = ({ latestNewsletter }: { latestNewsletter: Newslet
         <MailchimpSubscribeForm />
       </div>
 
-      <div className='max-w-full md:max-w-[49%] lg:max-w-[40%] xl:max-w-[37%] h-[470px] md:h-[650px] xl:h-[673px] max-h-[673px] bg-black rounded-[18px] xl:rounded-[30px] p-3 xl:p-[27px] relative'>
+      <div
+        className={`max-w-full md:max-w-[49%] lg:max-w-[40%] xl:max-w-[37%] h-[470px] ${
+          screenHeight >= 799 ? "max-h-[673px] md:h-[650px] xl:h-[673px]" : "h-[86%] max-h-[600px]"
+        } bg-black rounded-[18px] xl:rounded-[30px] p-3 xl:p-[27px] relative`}
+      >
         <div
           ref={isMobile ? null : articleRef}
           className='h-full w-full bg-cream-custom-100 rounded-[10px] p-2 md:p-3 xl:p-3.5 overflow-scroll custom-scrollbar flex flex-col gap-2'
