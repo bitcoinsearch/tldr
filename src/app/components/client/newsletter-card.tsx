@@ -35,7 +35,7 @@ const NewsletterCard = ({ summary, url, dateRange, issueNumber }: { summary: str
           <p className='text-base md:text-2xl font-normal leading-[22.56px] md:leading-[33.84px] font-gt-walsheim text-gray-custom-400'>
             {dateRange}
           </p>
-          <p className='text-base md:text-lg font-normal leading-[22.56px] md:leading-[28.2px] text-black font-test-signifier line-clamp-4'>
+          <p className='text-base md:text-lg font-light leading-[22.56px] md:leading-[28.2px] text-black font-test-signifier line-clamp-4'>
             {summary}
           </p>
         </section>
