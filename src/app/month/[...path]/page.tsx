@@ -1,7 +1,7 @@
 import React from "react";
 import * as fs from "fs";
 import { MonthlyNewsletterDisplay } from "@/app/components/server/monthly-newsletter-display";
-import { NewsLetterDataType, sortedAuthorData } from "@/helpers/types";
+import { NewsLetter, NewsLetterDataType, sortedAuthorData } from "@/helpers/types";
 import Wrapper from "@/app/components/server/wrapper";
 import { formattedDate, getSummaryDataInfo } from "@/helpers/utils";
 
@@ -36,41 +36,46 @@ export default async function Page({ params }: { params: { path: string[] } }) {
 
   const sortedNewThreadData = data.new_threads_this_week.sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
 
-  // Get active discussions and add first and last post date
-  const activeDiscussions = await Promise.all(
-    data.active_posts_this_week.map(async (post) => {
-      const filePath = post.combined_summ_file_path || post.file_path;
-      const pathArray = filePath.split("summary/");
-      const pathString = pathArray[1].split("/");
+  // Get posts and add first and last post date
+  const addDateToPosts = async (posts: NewsLetter[]) => {
+    const datedPosts = await Promise.all(
+      posts.map(async (post) => {
+        const filePath = post.combined_summ_file_path || post.file_path;
+        const pathArray = filePath.split("/");
+        const pathString = pathArray.slice(pathArray.length - 3);
 
-      const summaryData = await getSummaryData(pathString);
-      const { authors } = summaryData?.data!;
-      const [firstPostAuthor, lastPostAuthor] = [authors[0], authors[authors.length - 1]];
+        const summaryData = await getSummaryData(pathString);
+        const { authors } = summaryData?.data!;
+        const [firstPostAuthor, lastPostAuthor] = [authors[0], authors[authors.length - 1]];
 
-      const createDate = (author: sortedAuthorData) => {
-        const dateObj = new Date(author.dateInMS);
-        const dateString = dateObj.toISOString();
-        const publishedAtDateDisplay = formattedDate(dateString);
+        const createDate = (author: sortedAuthorData) => {
+          const dateObj = new Date(author.dateInMS);
+          const dateString = dateObj.toISOString();
+          const publishedAtDateDisplay = formattedDate(dateString);
 
-        return publishedAtDateDisplay;
-      };
+          return publishedAtDateDisplay;
+        };
 
-      const firstPostDate = createDate(firstPostAuthor);
-      const lastPostDate = createDate(lastPostAuthor);
+        const firstPostDate = createDate(firstPostAuthor);
+        const lastPostDate = createDate(lastPostAuthor);
 
-      return {
-        ...post,
-        firstPostDate,
-        lastPostDate,
-      };
-    })
-  );
+        return {
+          ...post,
+          firstPostDate,
+          lastPostDate,
+        };
+      })
+    );
 
+    return { datedPosts };
+  };
+
+  const { datedPosts } = await addDateToPosts(data.active_posts_this_week);
   data.new_threads_this_week = sortedNewThreadData;
 
   return (
     <Wrapper>
-      <MonthlyNewsletterDisplay newsletter={data} url={`/month/${url}`} activeDiscussions={activeDiscussions} />
+      <MonthlyNewsletterDisplay newsletter={data} url={`/month/${url}`} activeDiscussions={datedPosts} />
     </Wrapper>
   );
 }

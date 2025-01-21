@@ -27,22 +27,13 @@ const Homepage = ({
   const [loading, setloading] = useState(false);
 
   const getSelectionList = (data: HomepageData) => {
-    // If no mailing list selected, return shallow copy of original data
-    if (!mailingListSelection || searchParams.dev === undefined) {
-      return {
-        active_posts: [...data.active_posts],
-        today_in_history_posts: [...data.today_in_history_posts],
-        recent_posts: [...data.recent_posts],
-      };
-    }
-
-    // Single filter operation per category using the selected mailing list
-    const filterByMailingList = (posts: any[]) => posts.filter((entry) => entry.dev_name === mailingListSelection);
+    const filterByMailingList = (posts: HomepageEntryData[]) =>
+      mailingListSelection ? posts.filter((entry) => entry.dev_name === mailingListSelection) : posts;
 
     return {
-      active_posts: filterByMailingList(data.active_posts),
-      today_in_history_posts: filterByMailingList(data.today_in_history_posts),
-      recent_posts: filterByMailingList(data.recent_posts),
+      recent_posts: filterByMailingList([...data.recent_posts]),
+      active_posts: filterByMailingList([...data.active_posts]),
+      today_in_history_posts: filterByMailingList([...data.today_in_history_posts]),
     };
   };
 
