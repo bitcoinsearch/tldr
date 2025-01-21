@@ -70,18 +70,20 @@ export const ContributorsList = ({ contributors }: { contributors: string[] }) =
   const finalList = contributors.slice(0, 2);
   return (
     <div className='flex flex-row gap-1'>
-      <p className=''>Involving</p>
-      <p className='inline-flex gap-x-2 flex-wrap'>
-        {finalList.map((contributor, index) => {
-          // if it's the last item, don't add a comma
-          const addComma = index < finalList.length - 1 ? ", " : "";
-          return <span key={index} className=''>{` ${contributor}${addComma}`}</span>;
-        })}
-        {contributors.length > 2 && (
-          <span>
-            +{contributors.length - 2} {contributors.length - 2 === 1 ? "other" : "others"}
-          </span>
-        )}
+      <p className='flex-wrap'>
+        Involving{" "}
+        <span className='inline-fle space-x-1 flex-wrap break-words'>
+          {finalList.map((contributor, index) => {
+            // if it's the last item, don't add a comma
+            const addComma = index < finalList.length - 1 ? ", " : "";
+            return <span key={index} className=''>{` ${contributor}${addComma}`}</span>;
+          })}
+          {contributors.length > 2 && (
+            <span>
+              +{contributors.length - 2} {contributors.length - 2 === 1 ? "other" : "others"}
+            </span>
+          )}
+        </span>{" "}
       </p>
     </div>
   );
@@ -91,7 +93,12 @@ export const SummaryList = ({ summary }: { summary: string }) => {
   const items: string[] = summary.split("- ").filter((item: string) => item.trim() !== "");
 
   if (!summary.startsWith("-")) {
-    return <MarkdownWrapper summary={`${summary}.`} className='font-inter text-base md:text-base summaryTags' />;
+    return (
+      <MarkdownWrapper
+        summary={`${summary}.`}
+        className='font-gt-walsheim text-sm md:text-base leading-[19.74px] md:leading-[22.56px] summaryTags break-words'
+      />
+    );
   }
 
   return (
