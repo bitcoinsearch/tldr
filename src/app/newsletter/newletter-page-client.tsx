@@ -22,10 +22,7 @@ const NewsletterPageClient = ({ newsletters }: { newsletters: NewsletterData[] }
     }
   }, [newsletters, sortKey]);
 
-  const { currentPage, paginatedResult, setCurrentPage } = usePaginatedResult(memoizedNewsletters, 9);
-  const pageSize = 9;
-
-  const pages = React.useMemo(() => Math.ceil((memoizedNewsletters?.length ?? 0) / pageSize), [memoizedNewsletters?.length]);
+  const { currentPage, paginatedResult, setCurrentPage, pages } = usePaginatedResult(memoizedNewsletters, 9);
 
   return (
     <div>
