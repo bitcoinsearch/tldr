@@ -9,7 +9,10 @@ const NewsletterCard = ({ summary, url, dateRange, issueNumber }: { summary: str
   const colorTheme = colorThemes[selectionIndex];
 
   return (
-    <div className='flex flex-col gap-6 p-4 xl:p-6 border border-gray-custom-600 rounded-lg h-[354px] md:h-[454px] w-full max-w-[421px] bg-white'>
+    <Link
+      href={`${url}`}
+      className='flex flex-col gap-6 p-4 xl:p-6 border border-gray-custom-600 rounded-lg h-[354px] md:h-[454px] w-full max-w-[421px] bg-white'
+    >
       <div className='h-[120px] md:h-[167px] w-full bg-black rounded-lg flex items-center justify-between'>
         <section className='py-[26px] md:py-[21.5px] pl-6'>
           <p
@@ -39,12 +42,12 @@ const NewsletterCard = ({ summary, url, dateRange, issueNumber }: { summary: str
             {summary}
           </p>
         </section>
-        <Link href={`${url}`} className='flex items-center gap-1 md:gap-2 border-b-[0.5px] border-black w-fit'>
+        <button className='flex items-center gap-1 md:gap-2 border-b-[0.5px] border-black w-fit'>
           <span className='text-sm md:text-base font-medium font-gt-walsheim leading-[22.56px]'>Read more</span>
           <ArrowLinkUpRight className='w-4 h-4 md:w-5 md:h-5' />
-        </Link>
+        </button>
       </div>
-    </div>
+    </Link>
   );
 };
 
