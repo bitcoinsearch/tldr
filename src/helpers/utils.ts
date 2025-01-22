@@ -288,3 +288,15 @@ export const formatDateString = (date: string, year: boolean): string => {
 
   return formattedDate;
 };
+
+export function shuffle(data: (HomepageEntryData & { firstPostDate: string; lastPostDate: string })[]) {
+  let currIndex = data.length;
+
+  while (currIndex !== 0) {
+    let randomIndex = Math.floor(Math.random() * currIndex);
+    currIndex--;
+    [data[currIndex], data[randomIndex]] = [data[randomIndex], data[currIndex]];
+  }
+
+  return data;
+}

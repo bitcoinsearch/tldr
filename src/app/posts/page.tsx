@@ -3,30 +3,24 @@ import * as fs from "fs";
 import Homepage from "@/app/components/client/homepage";
 import { fetchAllActivityPosts, fetchAndProcessPosts } from "@/helpers/fs-functions";
 import { HomepageData, HomepageEntryData, MailingListType, sortedAuthorData } from "@/helpers/types";
-import Wrapper from "../../components/server/wrapper";
 import Link from "next/link";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
-import { DynamicHeader } from "./acitve-discussions";
 import { PostsCard } from "@/app/components/client/post-card";
 import { formattedDate } from "@/helpers/utils";
 import { getSummaryDataInfo } from "@/helpers/utils";
+import Wrapper from "../components/server/wrapper";
+import { ActiveDiscussions } from "./acitve-discussions";
+import HistoricConversations from "./historic-converstions";
+import AllActivity from "./all-activity";
 
-/**Please do not delete this code, this is for future iteration of the posts page */
 const getSelectionList = (data: HomepageData, mailingListSelection: MailingListType | null) => {
-  // If no mailing list selected, return shallow copy of original data
-  if (!mailingListSelection) {
-    return {
-      active_posts: [...data.active_posts],
-      today_in_history_posts: [...data.today_in_history_posts],
-    };
-  }
-
-  // Single filter operation per category using the selected mailing list
-  const filterByMailingList = (posts: any[]) => posts.filter((entry) => entry.dev_name === mailingListSelection);
+  const filterByMailingList = (posts: HomepageEntryData[]) =>
+    mailingListSelection ? posts.filter((entry) => entry.dev_name === mailingListSelection) : posts;
 
   return {
-    active_posts: filterByMailingList(data.active_posts),
-    today_in_history_posts: filterByMailingList(data.today_in_history_posts),
+    recent_posts: filterByMailingList([...data.recent_posts]),
+    active_posts: filterByMailingList([...data.active_posts]),
+    today_in_history_posts: filterByMailingList([...data.today_in_history_posts]),
   };
 };
 
@@ -41,7 +35,11 @@ const getSummaryData = async (path: string[]) => {
   }
 };
 
-const page = async ({ params }: { params: { path: string[] } }) => {
+const page = async ({ params, searchParams }: { params: { path: string[] }; searchParams: { [key: string]: string | undefined } }) => {
+  console.log(searchParams);
+  // NOTE: account for scenarios when source is not provided
+  const source = searchParams.source;
+
   const posts = await fetchAndProcessPosts();
   const { batch: allActivity, count } = await fetchAllActivityPosts(0);
 
@@ -63,7 +61,7 @@ const page = async ({ params }: { params: { path: string[] } }) => {
     },
   };
 
-  const pageData = dataSelectionMap[params.path[0]];
+  const pageData = dataSelectionMap[source!];
 
   const createPostData = async (data: HomepageEntryData[]) => {
     const allPosts = await Promise.all(
@@ -100,25 +98,40 @@ const page = async ({ params }: { params: { path: string[] } }) => {
 
   const postsToDisplay = await createPostData(pageData.posts);
 
+  const contentSection: { [key: string]: React.JSX.Element } = {
+    "active-discussions": <ActiveDiscussions posts={postsToDisplay} />,
+    "historic-conversations": <HistoricConversations posts={postsToDisplay} />,
+    "all-activity": <AllActivity posts={postsToDisplay} />,
+  };
+
   return (
     <Wrapper>
       <div className='min-h-[calc(100vh-113px)] flex flex-col gap-8'>
         <DynamicHeader title={pageData.title} subtitle={pageData.subtitle} />
 
-        <div className='flex items-center justify-between max-w-[866px] mx-auto w-full h-full'>
-          <section className='flex flex-col gap-4 md:gap-6 pb-[44px]'>
-            {!postsToDisplay.length ? (
-              <p>Oops! No ongoing discussions this week. Check out the new posts above.</p>
-            ) : (
-              postsToDisplay.map((entry) => {
-                return <PostsCard entry={entry} key={entry.id} />;
-              })
-            )}
-          </section>
-        </div>
+        <div>{contentSection[source!]}</div>
       </div>
     </Wrapper>
   );
 };
 
 export default page;
+
+const DynamicHeader = ({ title, subtitle }: { title: string; subtitle: string }) => {
+  return (
+    <div>
+      <div className='pt-5 md:pt-[54px] pb-8'>
+        <Link href='/' className='flex items-center gap-2 py-2 px-4 md:px-6 rounded-full border border-black w-fit'>
+          <ArrowLeftIcon className='w-5 h-5 md:w-6 md:h-6' strokeWidth={4} />
+          <span className='text-sm md:text-base font-medium md:font-normal font-gt-walsheim leading-[18.32px]'>Back Home</span>
+        </Link>
+      </div>
+      <div className='flex flex-col gap-2'>
+        <h1 className='text-center text-[32px] md:text-[48px] xl:text-[64px] font-normal font-test-signifier leading-[41.38px] md:leading-[60px] xl:leading-[82.75px]'>
+          {title}
+        </h1>
+        <p className='text-base font-gt-walsheim leading-[22.56px] text-center'>{subtitle}</p>
+      </div>
+    </div>
+  );
+};
