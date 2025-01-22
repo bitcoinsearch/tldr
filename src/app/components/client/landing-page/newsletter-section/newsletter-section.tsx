@@ -33,7 +33,7 @@ const NewsletterSection = () => {
               <p className='text-lg leading-[25.38px] font-gt-walsheim'>No newsletters found</p>
             </div>
           ) : (
-            latestNewsletters.map((newsletter, index) => <NewsletterCard key={newsletter.issueNumber} index={index} {...newsletter} />)
+            latestNewsletters.map((newsletter) => <NewsletterCard key={newsletter.issueNumber} {...newsletter} />)
           )}
         </section>
 

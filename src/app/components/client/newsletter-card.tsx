@@ -1,27 +1,18 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowLinkUpRight } from "@bitcoin-dev-project/bdp-ui/icons";
-import { newsLetterIconMap } from "@/data";
 import Image from "next/image";
+import { ArrowLinkUpRight } from "@bitcoin-dev-project/bdp-ui/icons";
+import { colorThemes, newsLetterIconMap } from "@/data";
 
-const NewsletterCard = ({
-  summary,
-  url,
-  dateRange,
-  issueNumber,
-  index,
-}: {
-  summary: string;
-  url: string;
-  dateRange: string;
-  issueNumber: number;
-  index: number;
-}) => {
-  const theme = ["#F39595", "#FAE1DD", "#F1F8B5"];
-  const colorTheme = theme[index];
+const NewsletterCard = ({ summary, url, dateRange, issueNumber }: { summary: string; url: string; dateRange: string; issueNumber: number }) => {
+  const selectionIndex = issueNumber % 10;
+  const colorTheme = colorThemes[selectionIndex];
 
   return (
-    <div className='flex flex-col gap-6 p-4 xl:p-6 border border-gray-custom-600 rounded-lg h-[354px] md:h-[454px] w-full max-w-[421px] bg-white'>
+    <Link
+      href={`${url}`}
+      className='flex flex-col gap-6 p-4 xl:p-6 border border-gray-custom-600 rounded-lg h-[354px] md:h-[454px] w-full max-w-[421px] bg-white'
+    >
       <div className='h-[120px] md:h-[167px] w-full bg-black rounded-lg flex items-center justify-between'>
         <section className='py-[26px] md:py-[21.5px] pl-6'>
           <p
@@ -38,7 +29,7 @@ const NewsletterCard = ({
           </p>
         </section>
         <div className='relative h-[110px] md:h-full w-[110px] md:w-full max-w-[167px]'>
-          <Image src={newsLetterIconMap[index]} alt='curly arrow' layout='fill' objectFit='contain' />
+          <Image src={newsLetterIconMap[selectionIndex]} alt='newsletter icon' layout='fill' objectFit='contain' />
         </div>
       </div>
 
@@ -47,16 +38,16 @@ const NewsletterCard = ({
           <p className='text-base md:text-2xl font-normal leading-[22.56px] md:leading-[33.84px] font-gt-walsheim text-gray-custom-400'>
             {dateRange}
           </p>
-          <p className='text-base md:text-lg font-normal leading-[22.56px] md:leading-[28.2px] text-black font-test-signifier line-clamp-4'>
+          <p className='text-base md:text-lg font-light leading-[22.56px] md:leading-[28.2px] text-black font-test-signifier line-clamp-4'>
             {summary}
           </p>
         </section>
-        <Link href={`${url}`} className='flex items-center gap-1 md:gap-2 border-b-[0.5px] border-black w-fit'>
+        <button className='flex items-center gap-1 md:gap-2 border-b-[0.5px] border-black w-fit'>
           <span className='text-sm md:text-base font-medium font-gt-walsheim leading-[22.56px]'>Read more</span>
           <ArrowLinkUpRight className='w-4 h-4 md:w-5 md:h-5' />
-        </Link>
+        </button>
       </div>
-    </div>
+    </Link>
   );
 };
 
