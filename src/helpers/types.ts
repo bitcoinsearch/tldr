@@ -202,3 +202,5 @@ export type Tweet = {
   profileImage: string;
   url: string;
 };
+
+export type SortKey = "newest" | "oldest" | "bitcoin-dev" | "delvingbitcoin" | "all";
