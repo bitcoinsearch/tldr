@@ -1,30 +1,29 @@
 "use client";
 
-import { HomepageEntryData } from "@/helpers/types";
+import React, { useState } from "react";
 import Image from "next/image";
-import React from "react";
 import { PostsCard } from "../components/client/post-card";
+import { HomepageEntryData, SortKey } from "@/helpers/types";
+import { getSortedPosts } from "@/helpers/utils";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import dayjs from "dayjs";
+import { DateRange } from "react-date-range";
 
 const AllActivity = ({ posts }: { posts: (HomepageEntryData & { firstPostDate: string; lastPostDate: string })[] }) => {
-  const [sortKey, setSortKey] = React.useState<"newest" | "oldest" | "bitcoin-dev" | "delvingbitcoin" | "all">("newest");
-  const [openSortDialog, setOpenSortDialog] = React.useState<boolean>(false);
-  const [dateRangeDialog, setDateRangeDialog] = React.useState<boolean>(false);
-  const memoizedPosts = React.useMemo(() => {
-    switch (sortKey) {
-      case "newest":
-        return posts.sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
-      case "oldest":
-        return posts.sort((a, b) => new Date(a.published_at).getTime() - new Date(b.published_at).getTime());
-      case "bitcoin-dev":
-        return posts.filter((post) => post.dev_name === "bitcoin-dev");
-      case "delvingbitcoin":
-        return posts.filter((post) => post.dev_name === "delvingbitcoin");
-      case "all":
-        return posts;
-      default:
-        return posts;
-    }
-  }, [posts, sortKey]);
+  const [sortKey, setSortKey] = useState<SortKey>("newest");
+  const [openSortDialog, setOpenSortDialog] = useState<boolean>(false);
+  const [dateRangeDialog, setDateRangeDialog] = useState<boolean>(false);
+  const [date, setDate] = useState<{ selection: { startDate?: Date; endDate?: Date; key: string } }>({
+    selection: {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  });
+  const [clearDates, setClearDates] = useState({ clear: false, startDate: new Date() });
+
+  const memoizedPosts = React.useMemo(() => getSortedPosts(posts, sortKey), [posts, sortKey]);
 
   return (
     <div className='flex flex-col gap-6 max-w-[866px] mx-auto '>
@@ -88,9 +87,8 @@ const AllActivity = ({ posts }: { posts: (HomepageEntryData & { firstPostDate: s
               </section>
             )}
           </div>
-
-          {/* TODO: Date range dialog */}
-          <div className='flex items-center gap-4 relative'>
+          {/* shelfed for now */}
+          {/* <div className='flex items-center gap-4 relative'>
             <button
               className='text-base leading-[22.56px] border border-black px-4 py-[3px] rounded-full flex items-center gap-2'
               onClick={() => setDateRangeDialog(!dateRangeDialog)}
@@ -103,28 +101,19 @@ const AllActivity = ({ posts }: { posts: (HomepageEntryData & { firstPostDate: s
 
             {dateRangeDialog && (
               <section className='flex flex-col gap-3 bg-white p-6 rounded absolute top-10 right-0 shadow-sm border border-gray-custom-200'>
-                <p className='text-base leading-[22.56px]'>Sort by</p>
-                <section className='flex items-center gap-4'>
-                  <button
-                    className={`px-4 py-1 rounded-full text-sm text-nowrap leading-[19.74px]  ${
-                      sortKey === "newest" ? "bg-orange-custom-100 text-white" : "bg-gray-custom-1000 text-black"
-                    }`}
-                    onClick={() => setSortKey("newest")}
-                  >
-                    Newest First
-                  </button>
-                  <button
-                    className={`px-4 py-1 rounded-full text-sm text-nowrap leading-[19.74px]  ${
-                      sortKey === "oldest" ? "bg-orange-custom-100 text-white" : "bg-gray-custom-1000 text-black"
-                    }`}
-                    onClick={() => setSortKey("oldest")}
-                  >
-                    Oldest First
-                  </button>
-                </section>
+                <p className='text-base leading-[22.56px]'>Date range</p>
+                <>
+                  <DateRangeDialog
+                    date={date.selection}
+                    setDate={setDate}
+                    clearDates={clearDates}
+                    setClearDates={setClearDates}
+                    className='justify-center flex'
+                  />
+                </>
               </section>
             )}
-          </div>
+          </div> */}
         </section>
       </section>
 
@@ -144,3 +133,65 @@ const AllActivity = ({ posts }: { posts: (HomepageEntryData & { firstPostDate: s
 };
 
 export default AllActivity;
+
+const DateRangeDialog = ({
+  date,
+  setDate,
+  className,
+  clearDates,
+  setClearDates,
+  ...props
+}: {
+  date: {
+    startDate?: Date;
+    endDate?: Date;
+    key: string;
+  };
+  setDate: React.Dispatch<
+    React.SetStateAction<{
+      selection: {
+        startDate?: Date;
+        endDate?: Date;
+        key: string;
+      };
+    }>
+  >;
+  className?: string;
+  clearDates: {
+    clear: boolean;
+    startDate: Date;
+  };
+  setClearDates: React.Dispatch<
+    React.SetStateAction<{
+      clear: boolean;
+      startDate: Date;
+    }>
+  >;
+  props?: any;
+}) => {
+  const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches;
+
+  return (
+    <div className={`text-secondary-black ${className}`}>
+      <DateRange
+        onChange={(item) => {
+          setDate({
+            selection: {
+              startDate: item.selection.startDate || new Date(),
+              endDate: item.selection.endDate || new Date(),
+              key: "selection",
+            },
+          });
+        }}
+        showPreview={true}
+        months={isMobile ? 1 : 2}
+        // min date should be Feb 1st of 2024 (beta launch date)
+        minDate={dayjs().year(2024).startOf("year").add(1, "month").toDate()}
+        maxDate={new Date()}
+        direction={isMobile ? "vertical" : "horizontal"}
+        rangeColors={["#F7931A"]}
+        ranges={[date]}
+      />
+    </div>
+  );
+};

@@ -217,3 +217,5 @@ export type PostSummaryData = {
   year: number;
   path: string | undefined;
 };
+
+export type SortKey = "newest" | "oldest" | "bitcoin-dev" | "delvingbitcoin" | "all";

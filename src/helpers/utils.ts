@@ -1,4 +1,4 @@
-import { AuthorData, EsSearchResult, HomepageEntryData, NewsletterData, XmlDataType, sortedAuthorData } from "./types";
+import { AuthorData, EsSearchResult, HomepageEntryData, NewsletterData, SortKey, XmlDataType, sortedAuthorData } from "./types";
 import { domainFunctionMapper } from "./path-mappers";
 import { convertXmlToText } from "./convert-from-xml";
 import Image from "next/image";
@@ -304,6 +304,10 @@ export function getUtcTime(date: string): string {
   return formattedDate;
 }
 
+/**
+ * @param data - The data to shuffle
+ * @returns The shuffled data
+ */
 export function shuffle(data: (HomepageEntryData & { firstPostDate: string; lastPostDate: string })[]) {
   let currIndex = data.length;
 
@@ -314,4 +318,27 @@ export function shuffle(data: (HomepageEntryData & { firstPostDate: string; last
   }
 
   return data;
+}
+
+/**
+ * @param posts - The posts to sort
+ * @param sortKey - The key to sort by
+ * @returns The sorted posts according to the sort key
+ */
+
+export function getSortedPosts(posts: (HomepageEntryData & { firstPostDate: string; lastPostDate: string })[], sortKey: SortKey) {
+  switch (sortKey) {
+    case "newest":
+      return posts.sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
+    case "oldest":
+      return posts.sort((a, b) => new Date(a.published_at).getTime() - new Date(b.published_at).getTime());
+    case "bitcoin-dev":
+      return posts.filter((post) => post.dev_name === "bitcoin-dev");
+    case "delvingbitcoin":
+      return posts.filter((post) => post.dev_name === "delvingbitcoin");
+    case "all":
+      return posts;
+    default:
+      return posts;
+  }
 }

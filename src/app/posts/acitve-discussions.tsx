@@ -1,30 +1,16 @@
 "use client";
 
 import React from "react";
-import { NewsLetter } from "@/helpers/types";
-import { PostsCard } from "../components/client/post-card";
 import Image from "next/image";
+import { HomepageEntryData, SortKey } from "@/helpers/types";
+import { getSortedPosts } from "@/helpers/utils";
+import { PostsCard } from "../components/client/post-card";
 
-export const ActiveDiscussions = ({ posts }: { posts: (NewsLetter & { firstPostDate: string; lastPostDate: string })[] }) => {
-  const [sortKey, setSortKey] = React.useState<"newest" | "oldest" | "bitcoin-dev" | "delvingbitcoin" | "all">("newest");
+export const ActiveDiscussions = ({ posts }: { posts: (HomepageEntryData & { firstPostDate: string; lastPostDate: string })[] }) => {
+  const [sortKey, setSortKey] = React.useState<SortKey>("newest");
   const [openPopUp, setOpenPopUp] = React.useState<boolean>(false);
 
-  const memoizedPosts = React.useMemo(() => {
-    switch (sortKey) {
-      case "newest":
-        return posts.sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
-      case "oldest":
-        return posts.sort((a, b) => new Date(a.published_at).getTime() - new Date(b.published_at).getTime());
-      case "bitcoin-dev":
-        return posts.filter((post) => post.dev_name === "bitcoin-dev");
-      case "delvingbitcoin":
-        return posts.filter((post) => post.dev_name === "delvingbitcoin");
-      case "all":
-        return posts;
-      default:
-        return posts;
-    }
-  }, [posts, sortKey]);
+  const memoizedPosts = React.useMemo(() => getSortedPosts(posts, sortKey), [posts, sortKey]);
 
   return (
     <div className='flex flex-col gap-6 max-w-[866px] mx-auto '>
