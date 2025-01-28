@@ -13,19 +13,19 @@ export default function Page() {
             </h1>
             <p className='text-sm md:text-lg leading-[32px] font-normal font-gt-walsheim text-black w-full'>
               This website summarizes the{" "}
-              <span className='underline'>
+              <span className='underline text-orange-custom-100'>
                 <Link href='https://lists.linuxfoundation.org/pipermail/bitcoin-dev/' target='_blank'>
                   bitcoin-dev
                 </Link>
               </span>
               ,{" "}
-              <span className='underline'>
+              <span className='underline text-orange-custom-100'>
                 <Link href='https://www.mail-archive.com/lightning-dev@lists.linuxfoundation.org/' target='_blank'>
                   lightning-dev
                 </Link>
               </span>{" "}
               and{" "}
-              <span className='underline'>
+              <span className='underline text-orange-custom-100'>
                 <Link href='https://delvingbitcoin.org/' target='_blank'>
                   delving bitcoin
                 </Link>
@@ -35,7 +35,11 @@ export default function Page() {
               the latest posts as well as surface active discussions from the past.We summarize every post and then summarize the summaries so that
               every thread summary remains fresh based on the replies. These run on nightly cron jobs to produce{" "}
               <span>
-                <Link href='https://github.com/bitcoinsearch/mailing-list-summaries/tree/main/static' target='_blank' className='underline'>
+                <Link
+                  href='https://github.com/bitcoinsearch/mailing-list-summaries/tree/main/static'
+                  target='_blank'
+                  className='underline text-orange-custom-100'
+                >
                   static files
                 </Link>
               </span>{" "}
