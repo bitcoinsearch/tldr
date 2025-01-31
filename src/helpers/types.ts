@@ -202,3 +202,18 @@ export type Tweet = {
   profileImage: string;
   url: string;
 };
+
+export type PostSummaryData = {
+  data: {
+    authors: sortedAuthorData[];
+    historyLinks: string[];
+    id: string;
+    title: string;
+    updatedAt: string;
+    generatedUrl?: string;
+    entry: EntryData;
+  };
+  month: string;
+  year: number;
+  path: string | undefined;
+};

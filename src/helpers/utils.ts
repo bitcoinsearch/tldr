@@ -1,6 +1,7 @@
 import { AuthorData, EsSearchResult, HomepageEntryData, NewsletterData, XmlDataType, sortedAuthorData } from "./types";
 import { domainFunctionMapper } from "./path-mappers";
 import { convertXmlToText } from "./convert-from-xml";
+import Image from "next/image";
 
 export function addSpaceAfterPeriods(text: string): string {
   return text.replace(/\.(\S)/g, ". $1");
@@ -288,3 +289,17 @@ export const formatDateString = (date: string, year: boolean): string => {
 
   return formattedDate;
 };
+
+export function getUtcTime(date: string): string {
+  const dateObj = new Date(date);
+  const formattedDate = new Intl.DateTimeFormat("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: "UTC",
+    hourCycle: "h23",
+    timeZoneName: "short",
+  })
+    .format(dateObj)
+    .replace("at", "");
+  return formattedDate;
+}
