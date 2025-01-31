@@ -45,26 +45,38 @@ export const ThreadReply = ({
           <section className='flex flex-col gap-1'>
             <section className='flex items-center gap-4'>
               <p
-                className={`font-test-signifier text-lg font-medium leading-[23.27px] underline capitalize ${
+                className={`font-test-signifier text-sm md:text-lg font-medium leading-[18.1px] md:leading-[23.27px] underline capitalize ${
                   isActive ? "text-orange-custom-100" : "text-black"
                 }`}
               >
                 {author.name}
               </p>
               {isOriginalPost && (
-                <p className={`text-sm font-test-signifier leading-[18.1px] ${isActive ? "text-orange-custom-100" : "text-black"}`}>
+                <p
+                  className={`text-xs md:text-sm font-test-signifier leading-[15.52px] md:leading-[18.1px] ${
+                    isActive ? "text-orange-custom-100" : "text-black"
+                  }`}
+                >
                   {replies} replies
                 </p>
               )}
             </section>
-            <p className={`font-gt-walsheim text-base leading-[22.56px] font-light ${isActive ? "text-orange-custom-100" : "text-[#8B8B8B]"}`}>
+            <p
+              className={`font-gt-walsheim text-sm md:text-sm leading-[19.74px] md:leading-[22.56px] font-light text-nowrap ${
+                isActive ? "text-orange-custom-100" : "text-[#8B8B8B]"
+              }`}
+            >
               <span>{formatDateString(author.date, true)}</span> <span className='px-2'>/</span>
               <span>{formattedTime}</span>
             </p>
           </section>
 
           {isOriginalPost && (
-            <p className={`font-gt-walsheim text-sm leading-[16.92px] font-normal ${isActive ? "text-orange-custom-100" : "text-black"}`}>
+            <p
+              className={`font-gt-walsheim text-xs md:text-sm leading-[16.92px] md:leading-[16.92px] font-normal ${
+                isActive ? "text-orange-custom-100" : "text-black"
+              }`}
+            >
               Original Post
             </p>
           )}
