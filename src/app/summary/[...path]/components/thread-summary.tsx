@@ -151,13 +151,13 @@ export const ThreadSummary = ({
   return (
     <div>
       {/* breadcrumb */}
-      <section className='flex items-center py-6'>
+      <section className='flex items-center py-6 flex-wrap'>
         {routes.map((link, index) => (
           <div key={`${link.link}-${index}`} className='flex items-center'>
             {index !== 0 && link.link !== null && <p className='text-gray-custom-1200 px-[5px]'>/</p>}
             <Link
               href={link.link ?? "#"}
-              className='text-sm md:text-base font-medium md:font-normal font-gt-walsheim leading-[18.32px] text-gray-custom-1100'
+              className='text-sm md:text-base font-medium md:font-normal font-gt-walsheim leading-[18.06px] md:leading-[18.32px] text-gray-custom-1100 text-nowrap'
             >
               {link.name}
             </Link>
@@ -167,21 +167,23 @@ export const ThreadSummary = ({
 
       <div className='flex flex-col max-w-[866px] mx-auto'>
         <section className='flex flex-col gap-4'>
-          <h1 className='text-[36px] font-normal font-test-signifier leading-[46.55px]'>{title}</h1>
+          <h1 className='text-2xl md:text-[36px] font-normal font-test-signifier leading-[31.03px] md:leading-[46.55px]'>{title}</h1>
           {replySummary.author.name && !isPostSummary && (
-            <p className='font-gt-walsheim text-xl leading-[22.9px] font-medium capitalize'>Posted by {replySummary.author.name}</p>
+            <p className='font-gt-walsheim text-base md:text-xl leading-[18.32px] md:leading-[22.9px] font-medium capitalize'>
+              Posted by {replySummary.author.name}
+            </p>
           )}
 
           {replySummary.author.date && !isPostSummary ? (
             <>
-              <p className='font-gt-walsheim text-base leading-[22.56px] font-light text-[#8B8B8B]'>
+              <p className='font-gt-walsheim text-sm md:text-base leading-[19.74px] md:leading-[22.56px] font-light text-[#8B8B8B]'>
                 <span>{formatDateString(replySummary.author.date, true)}</span>
                 <span className='px-2'>/</span>
                 <span>{replyTime}</span>
               </p>
             </>
           ) : (
-            <p className='font-gt-walsheim text-base leading-[22.56px] font-light text-[#8B8B8B]'>{dateRange}</p>
+            <p className='font-gt-walsheim text-sm md:text-base leading-[19.74px] md:leading-[22.56px] font-light text-[#8B8B8B]'>{dateRange}</p>
           )}
         </section>
 
@@ -189,7 +191,7 @@ export const ThreadSummary = ({
         <section className={"py-6"}>
           <div className='flex flex-col gap-6'>
             {isPostSummary && (
-              <section className='bg-orange-custom-200 rounded-lg p-6 w-full border-l-2 border-l-orange-custom-100 flex flex-col gap-2'>
+              <section className='bg-orange-custom-200 rounded-lg p-5 py-6 md:p-6 w-full border-l-2 border-l-orange-custom-100 flex flex-col gap-2'>
                 <aside className='flex items-center gap-1'>
                   <Image src='/icons/page-icon.svg' alt='page icon' width={20} height={20} className='w-5 h-5' />
                   <p className='text-lg font-gt-walsheim leading-[22.9px] font-medium'>At a Glance</p>
@@ -197,7 +199,7 @@ export const ThreadSummary = ({
 
                 <ul className='list-disc pl-6'>
                   <li className='list-disc'>
-                    <span className='font-normal text-base font-gt-walsheim leading-[18.32px]'>{firstSentence}</span>
+                    <span className='font-normal text-sm md:text-base font-gt-walsheim leading-[18.32px] md:leading-[18.32px]'>{firstSentence}</span>
                   </li>
                 </ul>
               </section>
@@ -205,9 +207,12 @@ export const ThreadSummary = ({
 
             <section className='max-w-[712px] mx-auto'>
               {isPostSummary ? (
-                <MarkdownWrapper className='font-gt-walsheim text-base leading-[22.56px] font-normal' summary={newSummary} />
+                <MarkdownWrapper className='font-gt-walsheim text-sm md:text-base leading-8 md:leading-[22.56px] font-normal' summary={newSummary} />
               ) : (
-                <MarkdownWrapper className='font-gt-walsheim text-base leading-[22.56px] font-normal' summary={replySummary.summary} />
+                <MarkdownWrapper
+                  className='font-gt-walsheim text-sm md:text-base leading-8 md:leading-[22.56px] font-normal'
+                  summary={replySummary.summary}
+                />
               )}
             </section>
 
@@ -225,7 +230,7 @@ export const ThreadSummary = ({
           </div>
         </section>
 
-        <div className='bg-orange-custom-200 rounded-lg p-6 w-full'>
+        <div className='bg-orange-custom-200 rounded-lg p-4 py-6 md:p-6 w-full'>
           {/* Thread summary control */}
           <button
             onClick={() => {
@@ -236,11 +241,19 @@ export const ThreadSummary = ({
           >
             <section className='flex items-center gap-1'>
               <ThreadIcon className={`w-5 h-5 ${isPostSummary ? "text-orange-custom-100" : "text-black"}`} />
-              <p className={`text-lg font-test-signifier leading-[23.27px] underline ${isPostSummary ? "text-orange-custom-100" : "text-black"}`}>
+              <p
+                className={`text-sm md:text-lg font-test-signifier leading-[18.1px] md:leading-[23.27px] underline ${
+                  isPostSummary ? "text-orange-custom-100" : "text-black"
+                }`}
+              >
                 Thread Summary ({searchParams.replies} replies)
               </p>
             </section>
-            <p className={`font-gt-walsheim text-base leading-[22.56px] font-light ${isPostSummary ? "text-orange-custom-100" : "text-[#8B8B8B]"}`}>
+            <p
+              className={`font-gt-walsheim text-sm md:text-base leading-[19.74px] md:leading-[22.56px] font-light ${
+                isPostSummary ? "text-orange-custom-100" : "text-[#8B8B8B]"
+              }`}
+            >
               {dateRange}
             </p>
           </button>
