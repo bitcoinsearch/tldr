@@ -31,9 +31,6 @@ export const ThreadReply = ({
 
   return (
     <div className='flex items-start w-full'>
-      <section className='pt-[10px]'>
-        <Image src='/icons/circular-plus-icon.svg' alt='reply icon' width={16} height={16} className='w-4 h-4' />
-      </section>
       <button
         onClick={() => {
           setIsReplyOpen({ [String(index)]: true });

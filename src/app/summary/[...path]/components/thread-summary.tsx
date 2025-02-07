@@ -45,6 +45,7 @@ export const ThreadSummary = ({
   });
 
   const isPostSummary = isReplyOpen[String(historyLinks.length)];
+  const correctedTitle = title.replace("Combined summary - ", "");
 
   /**
    * get breadcrumb data
@@ -60,8 +61,7 @@ export const ThreadSummary = ({
      */
 
     const devName = params.path[0];
-    const splitTitle = title.replace("Combined summary - ", "");
-    const trimmedTitle = `${splitTitle.substring(0, 30)}...`;
+    const trimmedTitle = `${correctedTitle.substring(0, 30)}...`;
 
     const displayedAuthor = replySummary.author.name;
 
@@ -75,7 +75,7 @@ export const ThreadSummary = ({
         link: `/posts?source=all-activity&dev=${devName}`,
       },
       {
-        name: trimmedTitle,
+        name: isPostSummary || replySummary.author.name ? trimmedTitle : correctedTitle,
         link: `/summary/${params.path.join("/")}?replies=${searchParams.replies}`,
       },
 
@@ -167,7 +167,7 @@ export const ThreadSummary = ({
 
       <div className='flex flex-col max-w-[866px] mx-auto'>
         <section className='flex flex-col gap-4'>
-          <h1 className='text-2xl md:text-[36px] font-normal font-test-signifier leading-[31.03px] md:leading-[46.55px]'>{title}</h1>
+          <h1 className='text-2xl md:text-[36px] font-normal font-test-signifier leading-[31.03px] md:leading-[46.55px]'>{correctedTitle}</h1>
           {replySummary.author.name && !isPostSummary && (
             <p className='font-gt-walsheim text-base md:text-xl leading-[18.32px] md:leading-[22.9px] font-medium capitalize'>
               Posted by {replySummary.author.name}
