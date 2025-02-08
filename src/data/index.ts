@@ -126,15 +126,15 @@ export const MobileNavLinks = [
     sublinks: [
       {
         title: "Active Discussions",
-        href: "/posts#active-discussions",
+        href: "/posts?source=active-discussions",
       },
       {
         title: "Historic Conversations",
-        href: "/posts#historic-conversations",
+        href: "/posts?source=historic-conversations",
       },
       {
         title: "All Activity",
-        href: "/posts#all-activity",
+        href: "/posts?source=all-activity",
       },
       {
         title: "RSS Feed",
