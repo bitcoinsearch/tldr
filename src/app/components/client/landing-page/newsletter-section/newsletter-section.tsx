@@ -22,7 +22,7 @@ const NewsletterSection = () => {
           <h5 className='text-start text-[32px] md:text-[56px] xl:text-[64px] font-normal font-test-signifier leading-[41.38px] md:leading-[65.52px] lg:leading-[82.75px]'>
             Latest Bitcoin TLDR Newsletters
           </h5>
-          <Link href='/newsletter' className='hidden md:flex items-center gap-2 border-b border-black w-fit'>
+          <Link href='/newsletters' className='hidden md:flex items-center gap-2 border-b border-black w-fit'>
             <span className='text-lg leading-[25.38px] font-gt-walsheim text-nowrap'>View All Newsletters</span>
           </Link>
         </section>
@@ -39,7 +39,7 @@ const NewsletterSection = () => {
 
         <div className='flex justify-center pt-6'>
           <Link
-            href='/newsletter'
+            href='/newsletters'
             className='flex md:hidden text-sm font-medium leading-[19.74px] py-4 px-6 border border-black rounded-full text-black font-gt-walsheim items-center gap-2'
           >
             <span className='text-sm font-medium leading-[19.74px]'>View all Newsletters</span>
