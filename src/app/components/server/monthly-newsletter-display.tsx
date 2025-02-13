@@ -2,12 +2,12 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { NewsLetter, NewsLetterDataType } from "@/helpers/types";
-import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { getAllNewsletters } from "@/helpers/fs-functions";
 import { colorThemes, newsLetterIconMap } from "@/data";
 import NewsletterPopup from "../client/newsletter-popup";
 import { MarkdownWrapper } from "./MarkdownWrapper";
 import { PostsCard } from "../client/post-card";
+import NewsletterNavigation from "../client/newsletter-navigation";
 
 export const MonthlyNewsletterDisplay = ({
   newsletter,
@@ -28,12 +28,7 @@ export const MonthlyNewsletterDisplay = ({
 
   return (
     <div>
-      <div className='pt-5 md:pt-[54px]'>
-        <Link href='/newsletter' className='flex items-center gap-2 py-2 px-4 md:px-6 rounded-full border border-black w-fit cursor-pointer'>
-          <ArrowLeftIcon className='w-5 h-5 md:w-6 md:h-6' strokeWidth={4} />
-          <span className='text-sm md:text-base font-medium md:font-normal font-gt-walsheim leading-[18.32px]'>Back to Newsletters</span>
-        </Link>
-      </div>
+      <NewsletterNavigation />
       <div>
         <section className='text-base font-gt-walsheim leading-[22.56px] flex items-center gap-4 py-6'>
           {/* breadcrumb */}
@@ -43,7 +38,7 @@ export const MonthlyNewsletterDisplay = ({
               <p>Home</p>
             </Link>
             <p className='text-gray-custom-1200 px-[5px]'>/</p>
-            <Link href='/newsletter' className='cursor-pointer'>
+            <Link href='/newsletters' className='cursor-pointer'>
               Newsletters
             </Link>
             <p className='text-gray-custom-1200 px-[5px]'>/</p>
