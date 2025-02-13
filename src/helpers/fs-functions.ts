@@ -40,9 +40,13 @@ export const getAllNewsletters = () => {
         const startDate = getDateRange[0];
         const endDate = getDateRange[getDateRange.length - 1];
 
+        const splitNewsletterPath = newsletterPath.split("/");
+
+        const newsletterMonth = splitNewsletterPath[splitNewsletterPath.length - 1].split("-newsletter")[0];
+
         newsletterData.push({
           summary: parseWeeklyNewsletter.summary_of_threads_started_this_week,
-          url: `/month/${newsletterPath}`,
+          url: `/newsletters/${newsletterMonth}`,
           dateRange: `${formatDateString(startDate, false)} - ${formatDateString(endDate, true)}`,
           publishedAt: endDate,
           issueNumber: 0,
