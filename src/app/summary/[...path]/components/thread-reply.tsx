@@ -22,6 +22,8 @@ export const ThreadReply = ({
 }) => {
   const isOriginalPost = index === 0;
 
+  // The regex is looking for a .xml at the end of the string
+  // If it finds it, it will replace it with an empty string
   const path = link.replace(/\.xml$/, "");
   const dateObj = new Date(author.dateInMS);
   const dateString = dateObj.toISOString();
