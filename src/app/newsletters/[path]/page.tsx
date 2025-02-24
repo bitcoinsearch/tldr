@@ -5,11 +5,9 @@ import { NewsLetter, NewsLetterDataType, sortedAuthorData } from "@/helpers/type
 import Wrapper from "@/app/components/server/wrapper";
 import { formattedDate, getSummaryDataInfo } from "@/helpers/utils";
 
-const monthlyNewsletter = async (path: string[]) => {
-  const pathString = path.join("/").replace("month/", "/");
-
+const monthlyNewsletter = async (path: string) => {
   try {
-    const data = fs.readFileSync(`${process.cwd()}/public/static/static/${pathString}`, "utf-8");
+    const data = fs.readFileSync(`${process.cwd()}/public/static/static/${path}`, "utf-8");
     const parsedData = JSON.parse(data) as NewsLetterDataType;
     return parsedData;
   } catch (err) {
@@ -28,10 +26,28 @@ const getSummaryData = async (path: string[]) => {
   }
 };
 
-export default async function Page({ params }: { params: { path: string[] } }) {
-  const url = params.path.join("/").replace("month/", "/");
+export default async function Page({ params }: { params: { path: string } }) {
+  const url = params.path;
+  const splitUrl = url.split("-");
+  const monthsInOrder: Record<string, string> = {
+    "01": "Jan",
+    "02": "Feb",
+    "03": "March",
+    "04": "April",
+    "05": "May",
+    "06": "June",
+    "07": "July",
+    "08": "Aug",
+    "09": "Sept",
+    "10": "Oct",
+    "11": "Nov",
+    "12": "Dec",
+  };
 
-  const data = await monthlyNewsletter(params.path);
+  const [year, month, _day] = splitUrl;
+  const newsletterPath = `/newsletters/${`${monthsInOrder[month]}_${year}`}/${url}-newsletter.json`;
+
+  const data = await monthlyNewsletter(newsletterPath);
   if (!data) return <h1>No Data found</h1>;
 
   const sortedNewThreadData = data.new_threads_this_week.sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
@@ -75,7 +91,7 @@ export default async function Page({ params }: { params: { path: string[] } }) {
 
   return (
     <Wrapper>
-      <MonthlyNewsletterDisplay newsletter={data} url={`/month/${url}`} activeDiscussions={datedPosts} />
+      <MonthlyNewsletterDisplay newsletter={data} url={`/newsletters/${url}`} activeDiscussions={datedPosts} />
     </Wrapper>
   );
 }
