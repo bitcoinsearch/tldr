@@ -119,7 +119,7 @@ export const tweetUrls = [
 ];
 
 export const MobileNavLinks = [
-  { title: "Newsletters", href: "/newsletter", sublinks: [], isSubMenu: false },
+  { title: "Newsletters", href: "/newsletters", sublinks: [], isSubMenu: false },
   {
     title: "Posts",
     href: "/posts",
