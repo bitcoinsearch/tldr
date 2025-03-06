@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 import Wrapper from "./components/server/wrapper";
 import HeroSection from "./components/client/landing-page/hero-section/hero-section";
 import FeaturesSection from "./components/client/landing-page/features-section/features-section";
@@ -7,13 +6,6 @@ import NewsletterSection from "./components/client/landing-page/newsletter-secti
 import SummariesSection from "./components/client/landing-page/summaries-section/summaries-section";
 import Testimonials from "./components/client/landing-page/testimonials/testimonials";
 
-export const metadata: Metadata = {
-  title: "Bitcoin TLDR",
-  description: "Stay up to Date on the Latest in Bitcoin Tech",
-  openGraph: {
-    images: "/images/og-image.png"
-  }
-}
 
 export default async function Home() {
   return (
