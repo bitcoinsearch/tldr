@@ -6,6 +6,7 @@ import NewsletterSection from "./components/client/landing-page/newsletter-secti
 import SummariesSection from "./components/client/landing-page/summaries-section/summaries-section";
 import Testimonials from "./components/client/landing-page/testimonials/testimonials";
 
+
 export default async function Home() {
   return (
     <div>

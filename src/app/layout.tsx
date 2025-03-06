@@ -39,14 +39,14 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://tldr.bitcoinsearch.xyz/images/laughing_cat_sq.jpg",
+        url: "/images/og-image.png",
       },
     ],
   },
   twitter: {
     card: "summary",
     creator: "@chaincodelabs",
-    images: ["https://tldr.bitcoinsearch.xyz/images/laughing_cat_landscape.jpg"],
+    images: ["/images/og-image.png"],
   },
 };
 
