@@ -65,6 +65,7 @@ export const ThreadSummary = ({
 
     const displayedAuthor = replySummary.author.name;
 
+
     const routes = [
       {
         name: "Home",
@@ -75,10 +76,17 @@ export const ThreadSummary = ({
         link: `/posts?source=all-activity&dev=${devName}`,
       },
       {
-        name: isPostSummary || replySummary.author.name ? trimmedTitle : correctedTitle,
+        name:isPostSummary || replySummary.author.name ? trimmedTitle : correctedTitle,
         link: `/summary/${params.path.join("/")}?replies=${searchParams.replies}`,
       },
-
+      replySummary.author.name && !isPostSummary
+        ? {
+            name: (
+              <span className={`${replySummary.author.name ? "text-orange-custom-100" : "text-gray-custom-1100"} capitalize`}>{displayedAuthor}</span>
+            ),
+            link: `#`,
+          }
+        : { name: null, link: null },
       isPostSummary || replySummary.author.name
         ? {
             name: (
@@ -88,15 +96,6 @@ export const ThreadSummary = ({
               >
                 <ThreadIcon className='w-4 h-4' /> Thread Summary
               </span>
-            ),
-            link: `#`,
-          }
-        : { name: null, link: null },
-
-      replySummary.author.name && !isPostSummary
-        ? {
-            name: (
-              <span className={`${replySummary.author.name ? "text-orange-custom-100" : "text-gray-custom-1100"} capitalize`}>{displayedAuthor}</span>
             ),
             link: `#`,
           }
@@ -142,7 +141,13 @@ export const ThreadSummary = ({
     setReplySummary({ summary, generatedUrl: generatedUrl || "", author: authors[0] });
     scrollToSummary();
   };
+  const onTitleClick = (name: string)=>{
+    if (name === mainTitle) {
+      setIsReplyOpen({ ["0"]: true });
+      setReplySummary((prev)=>({generatedUrl:"", summary:"", author:{}}));
+  }}
 
+  const mainTitle = routes[2].name;
   const dateRange = getDateRange();
   const replyDateInMS = replySummary.author.dateInMS ? new Date(replySummary.author.dateInMS) : new Date();
   const replyDateString = replyDateInMS.toISOString();
@@ -157,6 +162,7 @@ export const ThreadSummary = ({
             {index !== 0 && link.link !== null && <p className='text-gray-custom-1200 px-[5px]'>/</p>}
             <Link
               href={link.link ?? "#"}
+              onClick={() =>onTitleClick(String(link.name)) }
               className='text-sm md:text-base font-medium md:font-normal font-gt-walsheim leading-[18.06px] md:leading-[18.32px] text-gray-custom-1100 text-nowrap'
             >
               {link.name}
