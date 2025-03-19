@@ -5,14 +5,14 @@ import { ContributorsList } from "../server/post";
 import { NewsLetter } from "@/helpers/types";
 
 export const PostsCard = ({ entry }: { entry: NewsLetter & { firstPostDate: string; lastPostDate: string } }) => {
-  const path = entry.combined_summ_file_path.length ? entry.combined_summ_file_path : entry.file_path;
+  let path = entry.combined_summ_file_path.length ? entry.combined_summ_file_path : entry.file_path;
+  path = path.replace("https://tldr.bitcoinsearch.xyz","");
   const type = entry.dev_name;
-
   return (
     <div className='flex flex-col gap-2 border border-gray-custom-600 rounded-xl p-4 md:p-6'>
       <section className='flex flex-col md:flex-row gap-2 items-start md:items-center justify-between'>
         <Link
-          href={path}
+          href={`${path}?replies=${entry.n_threads}`}
           className='font-test-signifier text-lg md:text-2xl font-medium cursor-pointer capitalize leading-[25.38px] md:leading-[33.84px] line-clamp-2 w-full'
         >
           {entry.title}
