@@ -53,7 +53,7 @@ const AllActivity = ({ posts }: { posts: (HomepageEntryData & { firstPostDate: s
 
         <section className='flex gap-2'>
           <div className='flex items-center gap-4 relative'>
-            <button
+            {/* <button
               className='text-base leading-[22.56px] border border-black px-4 py-[3px] rounded-full flex items-center gap-2'
               onClick={() => setOpenSortDialog(!openSortDialog)}
             >
@@ -61,7 +61,7 @@ const AllActivity = ({ posts }: { posts: (HomepageEntryData & { firstPostDate: s
                 <Image src={`/icons/sort-icon.svg`} width={16} height={17} alt='' />
               </span>
               Sort by
-            </button>
+            </button> */}
 
             {openSortDialog && (
               <section className='flex flex-col gap-3 bg-white p-6 rounded absolute top-10 right-0 shadow-sm border border-gray-custom-200'>

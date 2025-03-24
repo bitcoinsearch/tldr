@@ -1,6 +1,5 @@
 import React from "react";
 import * as fs from "fs";
-import Homepage from "@/app/components/client/homepage";
 import { fetchAllActivityPosts, fetchAndProcessPosts } from "@/helpers/fs-functions";
 import { HomepageData, HomepageEntryData, MailingListType, sortedAuthorData } from "@/helpers/types";
 import Link from "next/link";
@@ -9,7 +8,7 @@ import { PostsCard } from "@/app/components/client/post-card";
 import { formattedDate } from "@/helpers/utils";
 import { getSummaryDataInfo } from "@/helpers/utils";
 import Wrapper from "../components/server/wrapper";
-import { ActiveDiscussions } from "./acitve-discussions";
+import { ActiveDiscussions } from "./active-discussions";
 import HistoricConversations from "./historic-converstions";
 import AllActivity from "./all-activity";
 
@@ -36,9 +35,9 @@ const getSummaryData = async (path: string[]) => {
 };
 
 const page = async ({ params, searchParams }: { params: { path: string[] }; searchParams: { [key: string]: string | undefined } }) => {
-  console.log(searchParams);
+
   // NOTE: account for scenarios when source is not provided
-  const source = searchParams.source;
+  const source = searchParams.source || "active-discussions";
 
   const posts = await fetchAndProcessPosts();
   const { batch: allActivity, count } = await fetchAllActivityPosts(0);
@@ -66,12 +65,13 @@ const page = async ({ params, searchParams }: { params: { path: string[] }; sear
   const createPostData = async (data: HomepageEntryData[]) => {
     const allPosts = await Promise.all(
       data.map(async (post) => {
-        const filePath = post.combined_summ_file_path || post.file_path;
+        let filePath = (post.combined_summ_file_path || post.file_path);
+        filePath = filePath.includes(".xml") ? filePath : filePath + ".xml"
         const pathArray = filePath.split("/");
         const pathString = pathArray.slice(pathArray.length - 3);
 
         const summaryData = await getSummaryData(pathString);
-        const { authors } = summaryData?.data!;
+        const authors = summaryData?.data.authors || [];
         const [firstPostAuthor, lastPostAuthor] = [authors[0], authors[authors.length - 1]];
 
         const createDate = (author: sortedAuthorData) => {
@@ -85,8 +85,10 @@ const page = async ({ params, searchParams }: { params: { path: string[] }; sear
         const firstPostDate = createDate(firstPostAuthor);
         const lastPostDate = createDate(lastPostAuthor);
 
+        const cleanedUpPost  = post.title.replace("Combined summary - ", "")
         return {
           ...post,
+          title: cleanedUpPost,
           firstPostDate,
           lastPostDate,
         };

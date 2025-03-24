@@ -26,9 +26,19 @@ export function formattedDate(date: string): string {
 
 export const createPath = (path: string) => {
   const pathIndex = path.split("/").findIndex((x) => x === "static");
-  const sliced_path = path.split("/").slice(pathIndex);
-  sliced_path.shift();
-  return sliced_path.join("/");
+  
+  if(pathIndex !== -1){
+    const sliced_path = path.split("/").slice(pathIndex);
+    sliced_path.shift();
+    const fullPath = sliced_path.join("/").replace(".xml","")
+    return fullPath;
+  }
+  else {
+     const fullPath = path.replace("https://tldr.bitcoinsearch.xyz/summary/","")
+    return fullPath;
+  }
+
+
 };
 
 export const getContributors = (authors: Array<string>) => {
@@ -341,4 +351,12 @@ export function getSortedPosts(posts: (HomepageEntryData & { firstPostDate: stri
     default:
       return posts;
   }
+}
+
+export function stringToHex(str:string) {
+  return Buffer.from(str, 'utf8').toString('hex');
+}
+
+export function hexToString(hex: string) {
+  return Buffer.from(hex, 'hex').toString('utf8');
 }

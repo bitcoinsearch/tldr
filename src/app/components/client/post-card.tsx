@@ -3,11 +3,13 @@ import Image from "next/image";
 import { SummaryList } from "../server/post";
 import { ContributorsList } from "../server/post";
 import { NewsLetter } from "@/helpers/types";
+import { createPath } from "@/helpers/utils";
 
 export const PostsCard = ({ entry }: { entry: NewsLetter & { firstPostDate: string; lastPostDate: string } }) => {
-  const path = entry.combined_summ_file_path.length ? entry.combined_summ_file_path : entry.file_path;
+  const path = entry.combined_summ_file_path.length ? createPath(entry.combined_summ_file_path) : createPath(entry.file_path);
   const type = entry.dev_name;
 
+  
   const breakWords = (text: string) => {
     const words = text.split(" ");
 
@@ -31,8 +33,8 @@ export const PostsCard = ({ entry }: { entry: NewsLetter & { firstPostDate: stri
 
   return (
     <article className='flex flex-col gap-2 border border-gray-custom-600 rounded-xl p-4 md:p-6'>
-      <section className='flex flex-col md:flex-row gap-2 items-start md:items-center justify-between flex-wrap'>
-        <Link href={path}>
+      <section className='flex flex-col md:flex-row gap-2 items-start md:items-center justify-between'>
+        <Link href={`/summary/${path}`}>
           <p className='font-test-signifier text-lg md:text-2xl font-medium cursor-pointer capitalize leading-[25.38px] md:leading-[33.84px] break-words whitespace-pre-wrap hidden sm:block'>
             {entry.title}
           </p>
@@ -43,8 +45,8 @@ export const PostsCard = ({ entry }: { entry: NewsLetter & { firstPostDate: stri
 
         {entry.n_threads !== 0 && (
           <Link
-            href={`${path}/#discussion-history`}
-            className='font-gt-walsheim text-sm md:text-base font-medium  hover:underline hover:underline-offset-2 text-nowra break-words'
+            href={`/summary/${path}/#discussion-history`}
+            className='font-gt-walsheim text-sm text-nowrap md:text-base font-medium  hover:underline hover:underline-offset-2 text-nowra break-words'
           >
             {entry.n_threads} {entry.n_threads === 1 ? "reply" : "replies"}
           </Link>

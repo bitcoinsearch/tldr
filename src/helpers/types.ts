@@ -1,4 +1,5 @@
 import { urlMapping } from "@/config/config";
+import { NextPage } from "next";
 
 const AUTHOR = "authors" as const;
 const DOMAIN = "domain" as const;
@@ -36,6 +37,7 @@ type EntryData = {
   link?: string;
   summary: string;
   published: string;
+  historyLinks: string[];
 };
 
 type ConvertedXML = {
@@ -65,6 +67,7 @@ type SearchDataParams = {
   };
   relevance?: "old-new" | "new-old";
 };
+
 
 type HomepageEntryData = {
   id: string;
@@ -219,3 +222,8 @@ export type PostSummaryData = {
 };
 
 export type SortKey = "newest" | "oldest" | "bitcoin-dev" | "delvingbitcoin" | "all";
+
+
+// For params
+
+export type NextParamsPage = { params: { path: string[], "reply-id"?:string }; searchParams: { replies: string } }
