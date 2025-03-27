@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import { HomepageData, HomepageEntryData, NewsletterData, Tweet } from "./types";
+import { HomepageData, HomepageEntryData, NewsletterData, PostSummaryData, Tweet } from "./types";
 import {
   createArticlesFromFolder,
   createMonthsFromKeys,
@@ -65,7 +65,7 @@ export const getAllNewsletters = () => {
   }
 };
 
-const getSummaryData = async (path: string[]) => {
+export const getSummaryData = async (path: string[]): Promise<PostSummaryData | null> => {
   const pathString = path.join("/");
   try {
     const fileContent = fs.readFileSync(`${process.cwd()}/public/static/static/${pathString}.xml`, "utf-8");

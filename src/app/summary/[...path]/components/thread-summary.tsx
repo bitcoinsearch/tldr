@@ -13,18 +13,22 @@ import Link from "next/link";
 
 export const ThreadSummary = ({
   summaryData,
-  searchParams,
-  handleRepliesCallback,
+  originalPostLink,
+  currentReplyLink,
+  currentReplyData,
+  isPostSummary,
   params,
+  children,
 }: {
   summaryData: PostSummaryData;
-  searchParams: {
-    replies: string;
-  };
-  handleRepliesCallback: (path: string) => Promise<PostSummaryData | null>;
+  currentReplyData?: PostSummaryData;
+  originalPostLink: string;
+  isPostSummary ?: boolean;
+  currentReplyLink?: string;
   params: {
     path: string[];
   };
+  children?: React.ReactNode;
 }) => {
   const {
     title,
@@ -35,16 +39,14 @@ export const ThreadSummary = ({
 
   const splitSentences = summary.split(/(?<=[.!?])\s+/);
   const firstSentence = splitSentences[0];
+ 
   const newSummary = summary.replace(firstSentence, "");
 
-  const [isReplyOpen, setIsReplyOpen] = useState<{ [key: string]: boolean }>({ "0": false });
-  const [replySummary, setReplySummary] = useState<{ summary: string; generatedUrl: string; author: Partial<sortedAuthorData> }>({
-    summary: "",
-    generatedUrl: "",
-    author: {},
+  const [isReplyOpen, setIsReplyOpen] = useState<{ [key: string]: boolean }>({
+    "0": false,
   });
+  const currentReply = currentReplyData?.data;
 
-  const isPostSummary = isReplyOpen[String(historyLinks.length)];
   const correctedTitle = title.replace("Combined summary - ", "");
 
   /**
@@ -63,8 +65,7 @@ export const ThreadSummary = ({
     const devName = params.path[0];
     const trimmedTitle = `${correctedTitle.substring(0, 30)}...`;
 
-    const displayedAuthor = replySummary.author.name;
-
+    const displayedAuthor = currentReply?.authors[0].name ?? "";
 
     const routes = [
       {
@@ -76,25 +77,39 @@ export const ThreadSummary = ({
         link: `/posts?source=all-activity&dev=${devName}`,
       },
       {
-        name:isPostSummary || replySummary.author.name ? trimmedTitle : correctedTitle,
-        link: `/summary/${params.path.join("/")}?replies=${searchParams.replies}`,
+        name: isPostSummary || displayedAuthor ? trimmedTitle : correctedTitle,
+        link: `/summary/${params.path.join("/")}`,
       },
-      replySummary.author.name && !isPostSummary
+      displayedAuthor && !isPostSummary
         ? {
             name: (
-              <span className={`${replySummary.author.name ? "text-orange-custom-100" : "text-gray-custom-1100"} capitalize`}>{displayedAuthor}</span>
+              <span
+                className={`${
+                  displayedAuthor
+                    ? "text-orange-custom-100"
+                    : "text-gray-custom-1100"
+                } capitalize`}
+              >
+                {displayedAuthor}
+              </span>
             ),
             link: `#`,
           }
         : { name: null, link: null },
-      isPostSummary || replySummary.author.name
+      isPostSummary && !displayedAuthor
         ? {
             name: (
               <span
-                onClick={() => setIsReplyOpen({ [String(historyLinks.length)]: true })}
-                className={`${isPostSummary ? "text-orange-custom-100" : "text-gray-custom-1100"} flex items-center gap-1`}
+                onClick={() =>
+                  setIsReplyOpen({ [String(historyLinks.length)]: true })
+                }
+                className={`${
+                  isPostSummary
+                    ? "text-orange-custom-100"
+                    : "text-gray-custom-1100"
+                } flex items-center gap-1`}
               >
-                <ThreadIcon className='w-4 h-4' /> Thread Summary
+                <ThreadIcon className="w-4 h-4" /> Thread Summary
               </span>
             ),
             link: `#`,
@@ -125,45 +140,35 @@ export const ThreadSummary = ({
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  /**
-   * @param path
-   * @returns author reply summary data
-   */
-  const getReplyData = async (path: string) => {
-    const summaryData = await handleRepliesCallback(path);
-    if (!summaryData) return;
-    const {
-      entry: { summary },
-      generatedUrl,
-      authors,
-    } = summaryData.data;
-
-    setReplySummary({ summary, generatedUrl: generatedUrl || "", author: authors[0] });
-    scrollToSummary();
-  };
-  const onTitleClick = (name: string)=>{
+  const onTitleClick = (name: string) => {
     if (name === mainTitle) {
       setIsReplyOpen({ ["0"]: true });
-      setReplySummary((prev)=>({generatedUrl:"", summary:"", author:{}}));
-  }}
+    }
+  };
 
+  const displayedAuthor = currentReply?.authors[0].name ?? "";
+  const displayedAuthorDate = currentReply?.authors[0].date ?? "";
   const mainTitle = routes[2].name;
   const dateRange = getDateRange();
-  const replyDateInMS = replySummary.author.dateInMS ? new Date(replySummary.author.dateInMS) : new Date();
+  const replyDateInMS = currentReply?.authors[0].dateInMS
+    ? new Date(currentReply?.authors[0].dateInMS)
+    : new Date();
   const replyDateString = replyDateInMS.toISOString();
   const replyTime = getUtcTime(replyDateString);
 
   return (
     <div>
       {/* breadcrumb */}
-      <section className='flex items-center py-6 flex-wrap'>
+      <section className="flex items-center py-6 flex-wrap">
         {routes.map((link, index) => (
-          <div key={`${link.link}-${index}`} className='flex items-center'>
-            {index !== 0 && link.link !== null && <p className='text-gray-custom-1200 px-[5px]'>/</p>}
+          <div key={`${link.link}-${index}`} className="flex items-center">
+            {index !== 0 && link.link !== null && (
+              <p className="text-gray-custom-1200 px-[5px]">/</p>
+            )}
             <Link
               href={link.link ?? "#"}
-              onClick={() =>onTitleClick(String(link.name)) }
-              className='text-sm md:text-base font-medium md:font-normal font-gt-walsheim leading-[18.06px] md:leading-[18.32px] text-gray-custom-1100 text-nowrap'
+              onClick={() => onTitleClick(String(link.name))}
+              className="text-sm md:text-base font-medium md:font-normal font-gt-walsheim leading-[18.06px] md:leading-[18.32px] text-gray-custom-1100 text-nowrap"
             >
               {link.name}
             </Link>
@@ -171,63 +176,80 @@ export const ThreadSummary = ({
         ))}
       </section>
 
-      <div className='flex flex-col max-w-[866px] mx-auto'>
-        <section className='flex flex-col gap-4'>
-          <h1 className='text-2xl md:text-[36px] font-normal font-test-signifier leading-[31.03px] md:leading-[46.55px]'>{correctedTitle}</h1>
-          {replySummary.author.name && !isPostSummary && (
-            <p className='font-gt-walsheim text-base md:text-xl leading-[18.32px] md:leading-[22.9px] font-medium capitalize'>
-              Posted by {replySummary.author.name}
+      <div className="flex flex-col max-w-[866px] mx-auto">
+        <section className="flex flex-col gap-4">
+          <h1 className="text-2xl md:text-[36px] font-normal font-test-signifier leading-[31.03px] md:leading-[46.55px]">
+            {correctedTitle}
+          </h1>
+          {displayedAuthor && !isPostSummary && (
+            <p className="font-gt-walsheim text-base md:text-xl leading-[18.32px] md:leading-[22.9px] font-medium capitalize">
+              Posted by {displayedAuthor}
             </p>
           )}
 
-          {replySummary.author.date && !isPostSummary ? (
+          {displayedAuthorDate && !isPostSummary ? (
             <>
-              <p className='font-gt-walsheim text-sm md:text-base leading-[19.74px] md:leading-[22.56px] font-light text-[#8B8B8B]'>
-                <span>{formatDateString(replySummary.author.date, true)}</span>
-                <span className='px-2'>/</span>
+              <p className="font-gt-walsheim text-sm md:text-base leading-[19.74px] md:leading-[22.56px] font-light text-[#8B8B8B]">
+                <span>{formatDateString(displayedAuthorDate, true)}</span>
+                <span className="px-2">/</span>
                 <span>{replyTime}</span>
               </p>
             </>
           ) : (
-            <p className='font-gt-walsheim text-sm md:text-base leading-[19.74px] md:leading-[22.56px] font-light text-[#8B8B8B]'>{dateRange}</p>
+            <p className="font-gt-walsheim text-sm md:text-base leading-[19.74px] md:leading-[22.56px] font-light text-[#8B8B8B]">
+              {dateRange}
+            </p>
           )}
         </section>
 
         {/* Summary / Replies display section */}
         <section className={"py-6"}>
-          <div className='flex flex-col gap-6'>
+          <div className="flex flex-col gap-6">
             {isPostSummary && (
-              <section className='bg-orange-custom-200 rounded-lg p-5 py-6 md:p-6 w-full border-l-2 border-l-orange-custom-100 flex flex-col gap-2'>
-                <aside className='flex items-center gap-1'>
-                  <Image src='/icons/page-icon.svg' alt='page icon' width={20} height={20} className='w-5 h-5' />
-                  <p className='text-lg font-gt-walsheim leading-[22.9px] font-medium'>At a Glance</p>
+              <section className="bg-orange-custom-200 rounded-lg p-5 py-6 md:p-6 w-full border-l-2 border-l-orange-custom-100 flex flex-col gap-2">
+                <aside className="flex items-center gap-1">
+                  <Image
+                    src="/icons/page-icon.svg"
+                    alt="page icon"
+                    width={20}
+                    height={20}
+                    className="w-5 h-5"
+                  />
+                  <p className="text-lg font-gt-walsheim leading-[22.9px] font-medium">
+                    At a Glance
+                  </p>
                 </aside>
 
-                <ul className='list-disc pl-6'>
-                  <li className='list-disc'>
-                    <span className='font-normal text-sm md:text-base font-gt-walsheim leading-[18.32px] md:leading-[18.32px]'>{firstSentence}</span>
+                <ul className="list-disc pl-6">
+                  <li className="list-disc">
+                    <span className="font-normal text-sm md:text-base font-gt-walsheim leading-[18.32px] md:leading-[18.32px]">
+                      {firstSentence}
+                    </span>
                   </li>
                 </ul>
               </section>
             )}
-
-            <section className='max-w-[712px] mx-auto'>
+            {children && children}
+            <section className="max-w-[712px] mx-auto">
               {isPostSummary ? (
-                <MarkdownWrapper className='font-gt-walsheim text-sm md:text-base leading-8 md:leading-[22.56px] font-normal' summary={newSummary} />
+                <MarkdownWrapper
+                  className="font-gt-walsheim text-sm md:text-base leading-8 md:leading-[22.56px] font-normal"
+                  summary={newSummary}
+                />
               ) : (
                 <MarkdownWrapper
-                  className='font-gt-walsheim text-sm md:text-base leading-8 md:leading-[22.56px] font-normal'
-                  summary={replySummary.summary}
+                  className="font-gt-walsheim text-sm md:text-base leading-8 md:leading-[22.56px] font-normal"
+                  summary={currentReply?.entry.summary || ""}
                 />
               )}
             </section>
 
-            {replySummary.generatedUrl && !isPostSummary && (
-              <section className='flex justify-center'>
+            {currentReply?.generatedUrl && !isPostSummary && (
+              <section className="flex justify-center">
                 <Link
-                  href={replySummary.generatedUrl}
-                  target='_blank'
-                  className='text-sm font-medium font-gt-walsheim leading-[19.74px] py-1.5 px-4 bg-gray-custom-700 rounded-full p-2 w-fit underline'
+                  href={currentReply?.generatedUrl || ""}
+                  target="_blank"
+                  className="text-sm font-medium font-gt-walsheim leading-[19.74px] py-1.5 px-4 bg-gray-custom-700 rounded-full p-2 w-fit underline"
                 >
                   Link to Raw Post
                 </Link>
@@ -236,23 +258,26 @@ export const ThreadSummary = ({
           </div>
         </section>
 
-        <div className='bg-orange-custom-200 rounded-lg p-4 py-6 md:p-6 w-full'>
+        <div className="bg-orange-custom-200 rounded-lg p-4 py-6 md:p-6 w-full">
           {/* Thread summary control */}
-          <button
-            onClick={() => {
-              setIsReplyOpen({ [String(historyLinks.length)]: true });
-              scrollToSummary();
-            }}
-            className={`flex flex-col gap-1 w-full max-w-[381px] rounded-lg p-2 justify-between items-start ${isPostSummary ? "bg-black" : ""}`}
+          <Link
+            href={`/posts/${originalPostLink}-${currentReplyLink||""}/summary`}
+            className={`flex flex-col gap-1 w-full max-w-[381px] rounded-lg p-2 justify-between items-start ${
+              isPostSummary ? "bg-black" : ""
+            }`}
           >
-            <section className='flex items-center gap-1'>
-              <ThreadIcon className={`w-5 h-5 ${isPostSummary ? "text-orange-custom-100" : "text-black"}`} />
+            <section className="flex items-center gap-1">
+              <ThreadIcon
+                className={`w-5 h-5 ${
+                  isPostSummary ? "text-orange-custom-100" : "text-black"
+                }`}
+              />
               <p
                 className={`text-sm md:text-lg font-test-signifier leading-[18.1px] md:leading-[23.27px] underline ${
                   isPostSummary ? "text-orange-custom-100" : "text-black"
                 }`}
               >
-                Thread Summary ({searchParams.replies} replies)
+                Thread Summary ({(historyLinks.length || 1) - 1} replies)
               </p>
             </section>
             <p
@@ -262,22 +287,23 @@ export const ThreadSummary = ({
             >
               {dateRange}
             </p>
-          </button>
+          </Link>
 
-          <section className='border-b border-[#979797] my-2'></section>
+          <section className="border-b border-[#979797] my-2"></section>
 
           {/* Thread Replies */}
-          <section className='flex flex-col gap-2'>
+          <section className="flex flex-col gap-2">
             {historyLinks.map((link, index) => (
               <ThreadReply
                 key={index}
-                author={authors[index]}
-                replies={searchParams.replies}
-                index={index}
-                link={link}
-                isReplyOpen={isReplyOpen}
                 setIsReplyOpen={setIsReplyOpen}
-                callback={getReplyData}
+                author={authors[index]}
+                index={index}
+                currentReplyUrl={currentReplyLink || ""}
+                originalPostLink={originalPostLink}
+                length={historyLinks.length}
+                link={link}
+                isPostSummary={isPostSummary || false}
               />
             ))}
           </section>

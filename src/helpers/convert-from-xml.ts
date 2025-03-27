@@ -29,6 +29,11 @@ export const convertXmlToText = async (
   const immediateLinkELements = $("feed").children(xmlElements.link);
   $("entry").each((_index, element) => {
     const author = $(xmlElements.author).children(xmlElements.name).text();
+    let historyLinks: string[] = [];
+    immediateLinkELements.each((_index, el) => {
+      historyLinks.push(el.attribs["href"]);
+    });
+
     const entry = {
       id: $(element).find(xmlElements.id).text(),
       title: $(element).find(xmlElements.title).text(),
@@ -43,13 +48,10 @@ export const convertXmlToText = async (
         link: $(element).find(xmlElements.generatedUrl).attr(xmlElements.href),
         summary: $(element).find(xmlElements.summary).text(),
         published: $(element).find(xmlElements.published).text(),
+        historyLinks: historyLinks,
       },
     };
 
-    let historyLinks: string[] = [];
-    immediateLinkELements.each((_index, el) => {
-      historyLinks.push(el.attribs["href"]);
-    });
     const threadAuthors = extractAuthorsDateTime(author);
     const newEntry = { ...entry, authors: threadAuthors, historyLinks };
     formattedData = newEntry;
