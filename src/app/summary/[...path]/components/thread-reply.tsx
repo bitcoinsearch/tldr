@@ -38,8 +38,7 @@ export const ThreadReply = ({
   const hexLink = stringToHex(path)
 
   const isActive = isPostSummary ? false : hexLink === currentReplyUrl;
-
- console.log(isActive, path, currentReplyUrl )
+  
   return (
     <div className='flex items-start w-full'>
       <Link

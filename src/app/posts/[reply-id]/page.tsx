@@ -4,6 +4,7 @@ import { ThreadSummary } from "@/app/summary/[...path]/components/thread-summary
 import { getSummaryData } from "@/helpers/fs-functions";
 import { PostSummaryData } from "@/helpers/types";
 import { hexToString } from "@/helpers/utils";
+import { notFound } from "next/navigation";
 import { split } from "postcss/lib/list";
 import Markdown from "react-markdown";
 
@@ -17,6 +18,10 @@ const ReplyPage = async ({ params }: any) => {
   const singleReplyData = await getSummaryData(currReply.split("/"));
 
   const fullPath = [...originalPostPath.split("/")]
+
+   if((currReply === "404" && originalPostPath === "404") || !originalPostData?.data){
+      return notFound();
+    }
   return (
     <Wrapper>
       <section>

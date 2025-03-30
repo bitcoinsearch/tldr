@@ -110,7 +110,6 @@ const page = async ({ params, searchParams }: { params: { path: string[] }; sear
     <Wrapper>
       <div className='min-h-[calc(100vh-113px)] flex flex-col gap-8'>
         <DynamicHeader title={pageData.title} subtitle={pageData.subtitle} />
-
         <div>{contentSection[source!]}</div>
       </div>
     </Wrapper>

@@ -358,5 +358,8 @@ export function stringToHex(str:string) {
 }
 
 export function hexToString(hex: string) {
+  if (typeof hex !== 'string' || !hex.match(/^[0-9a-fA-F]+$/) || hex.length % 2 !== 0) {
+    return "404";
+  }
   return Buffer.from(hex, 'hex').toString('utf8');
 }
