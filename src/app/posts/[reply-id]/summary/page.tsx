@@ -3,6 +3,7 @@ import { ThreadSummary } from '@/app/summary/[...path]/components/thread-summary
 import { getSummaryData } from '@/helpers/fs-functions';
 import { NextParamsPage, PostSummaryData } from '@/helpers/types';
 import { hexToString } from '@/helpers/utils';
+import { notFound } from 'next/navigation';
 import React from 'react'
 
 const SummaryPage = async ({params}:NextParamsPage ) => {
@@ -13,8 +14,12 @@ const SummaryPage = async ({params}:NextParamsPage ) => {
 
   const originalPostData = await getSummaryData(originalPostPath.split("/"));
   const singleReplyData = await getSummaryData(currReply.split("/"));
-
   const fullPath = [...originalPostPath.split("/")]
+
+  if((currReply === "404" && originalPostPath === "404") || !originalPostData?.data){
+    return notFound();
+  }
+
   return (
     <Wrapper>
       <section>

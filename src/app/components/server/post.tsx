@@ -72,7 +72,7 @@ export const ContributorsList = ({ contributors }: { contributors: string[] }) =
     <div className='flex flex-row gap-1'>
       <p className='flex-wrap'>
         Involving{" "}
-        <span className='inline-fle space-x-1 flex-wrap break-words'>
+        <span className='inline-flex space-x-1 flex-wrap break-words'>
           {finalList.map((contributor, index) => {
             // if it's the last item, don't add a comma
             const addComma = index < finalList.length - 1 ? ", " : "";

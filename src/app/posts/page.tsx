@@ -60,7 +60,7 @@ const page = async ({ params, searchParams }: { params: { path: string[] }; sear
     },
   };
 
-  const pageData = dataSelectionMap[source!];
+  const pageData = dataSelectionMap[source] ? dataSelectionMap[source] : dataSelectionMap["all-activity"];
 
   const createPostData = async (data: HomepageEntryData[]) => {
     const allPosts = await Promise.all(
@@ -106,12 +106,12 @@ const page = async ({ params, searchParams }: { params: { path: string[] }; sear
     "all-activity": <AllActivity posts={postsToDisplay} />,
   };
 
+  const contentToRender = contentSection[source] ?  contentSection[source] : contentSection["all-activity"]
   return (
     <Wrapper>
       <div className='min-h-[calc(100vh-113px)] flex flex-col gap-8'>
         <DynamicHeader title={pageData.title} subtitle={pageData.subtitle} />
-
-        <div>{contentSection[source!]}</div>
+        <div>{contentToRender}</div>
       </div>
     </Wrapper>
   );

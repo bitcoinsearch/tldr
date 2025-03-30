@@ -5,14 +5,14 @@ import Wrapper from "@/app/components/server/wrapper";
 import { hexToString, stringToHex } from "@/helpers/utils";
 import { ThreadSummary } from "./components/thread-summary";
 import { getSummaryData } from "@/helpers/fs-functions";
+import { notFound } from "next/navigation";
 
 
-export default async function Page({ params, searchParams }: { params: { path: string[] }; searchParams: { replies: string } }) {
+export default async function Page({ params }: { params: { path: string[] }; searchParams: { replies: string } }) {
   const summaryData = await getSummaryData(params.path);
   const hexString = stringToHex(params.path.join("/"));
 
-  if (!summaryData) return <h1>No data found</h1>;
-
+  if (!summaryData) return notFound();
 
   return (
     <Wrapper>

@@ -339,9 +339,9 @@ export function shuffle(data: (HomepageEntryData & { firstPostDate: string; last
 export function getSortedPosts(posts: (HomepageEntryData & { firstPostDate: string; lastPostDate: string })[], sortKey: SortKey) {
   switch (sortKey) {
     case "newest":
-      return posts.sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
+      return [...posts].sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
     case "oldest":
-      return posts.sort((a, b) => new Date(a.published_at).getTime() - new Date(b.published_at).getTime());
+      return [...posts].sort((a, b) => new Date(a.published_at).getTime() - new Date(b.published_at).getTime());
     case "bitcoin-dev":
       return posts.filter((post) => post.dev_name === "bitcoin-dev");
     case "delvingbitcoin":
@@ -358,5 +358,8 @@ export function stringToHex(str:string) {
 }
 
 export function hexToString(hex: string) {
+  if (typeof hex !== 'string' || !hex.match(/^[0-9a-fA-F]+$/) || hex.length % 2 !== 0) {
+    return "404";
+  }
   return Buffer.from(hex, 'hex').toString('utf8');
 }
