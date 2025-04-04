@@ -1,4 +1,4 @@
-import { AuthorData, EsSearchResult, HomepageEntryData, NewsletterData, XmlDataType, sortedAuthorData } from "./types";
+import { AuthorData, EsSearchResult, HomepageEntryData, NewsletterData, SortKey, XmlDataType, sortedAuthorData } from "./types";
 import { domainFunctionMapper } from "./path-mappers";
 import { convertXmlToText } from "./convert-from-xml";
 import Image from "next/image";
@@ -26,9 +26,19 @@ export function formattedDate(date: string): string {
 
 export const createPath = (path: string) => {
   const pathIndex = path.split("/").findIndex((x) => x === "static");
-  const sliced_path = path.split("/").slice(pathIndex);
-  sliced_path.shift();
-  return sliced_path.join("/");
+  
+  if(pathIndex !== -1){
+    const sliced_path = path.split("/").slice(pathIndex);
+    sliced_path.shift();
+    const fullPath = sliced_path.join("/").replace(".xml","")
+    return fullPath;
+  }
+  else {
+     const fullPath = path.replace("https://tldr.bitcoinsearch.xyz/summary/","")
+    return fullPath;
+  }
+
+
 };
 
 export const getContributors = (authors: Array<string>) => {
@@ -302,4 +312,54 @@ export function getUtcTime(date: string): string {
     .format(dateObj)
     .replace("at", "");
   return formattedDate;
+}
+
+/**
+ * @param data - The data to shuffle
+ * @returns The shuffled data
+ */
+export function shuffle(data: (HomepageEntryData & { firstPostDate: string; lastPostDate: string })[]) {
+  let currIndex = data.length;
+
+  while (currIndex !== 0) {
+    let randomIndex = Math.floor(Math.random() * currIndex);
+    currIndex--;
+    [data[currIndex], data[randomIndex]] = [data[randomIndex], data[currIndex]];
+  }
+
+  return data;
+}
+
+/**
+ * @param posts - The posts to sort
+ * @param sortKey - The key to sort by
+ * @returns The sorted posts according to the sort key
+ */
+
+export function getSortedPosts(posts: (HomepageEntryData & { firstPostDate: string; lastPostDate: string })[], sortKey: SortKey) {
+  switch (sortKey) {
+    case "newest":
+      return [...posts].sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
+    case "oldest":
+      return [...posts].sort((a, b) => new Date(a.published_at).getTime() - new Date(b.published_at).getTime());
+    case "bitcoin-dev":
+      return posts.filter((post) => post.dev_name === "bitcoin-dev");
+    case "delvingbitcoin":
+      return posts.filter((post) => post.dev_name === "delvingbitcoin");
+    case "all":
+      return posts;
+    default:
+      return posts;
+  }
+}
+
+export function stringToHex(str:string) {
+  return Buffer.from(str, 'utf8').toString('hex');
+}
+
+export function hexToString(hex: string) {
+  if (typeof hex !== 'string' || !hex.match(/^[0-9a-fA-F]+$/) || hex.length % 2 !== 0) {
+    return "404";
+  }
+  return Buffer.from(hex, 'hex').toString('utf8');
 }

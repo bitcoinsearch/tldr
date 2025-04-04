@@ -2,31 +2,17 @@ import * as fs from "fs";
 import Link from "next/link";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import Wrapper from "@/app/components/server/wrapper";
-import { getSummaryDataInfo } from "@/helpers/utils";
+import { hexToString, stringToHex } from "@/helpers/utils";
 import { ThreadSummary } from "./components/thread-summary";
+import { getSummaryData } from "@/helpers/fs-functions";
+import { notFound } from "next/navigation";
 
-const getSummaryData = async (path: string[]) => {
-  const pathString = path.join("/");
-  try {
-    const fileContent = fs.readFileSync(`${process.cwd()}/public/static/static/${pathString}.xml`, "utf-8");
-    const summaryInfo = getSummaryDataInfo(path, fileContent);
-    return summaryInfo;
-  } catch (err) {
-    return null;
-  }
-};
 
-export default async function Page({ params, searchParams }: { params: { path: string[] }; searchParams: { replies: string } }) {
+export default async function Page({ params }: { params: { path: string[] }; searchParams: { replies: string } }) {
   const summaryData = await getSummaryData(params.path);
-  if (!summaryData) return <h1>No data found</h1>;
+  const hexString = stringToHex(params.path.join("/"));
 
-  const handleRepliesCallback = async (path: string) => {
-    "use server";
-    const summaryData = await getSummaryData(path.split("/"));
-    if (!summaryData) return null;
-
-    return summaryData;
-  };
+  if (!summaryData) return notFound();
 
   return (
     <Wrapper>
@@ -39,7 +25,7 @@ export default async function Page({ params, searchParams }: { params: { path: s
         </div>
       </div>
 
-      <ThreadSummary summaryData={summaryData} searchParams={searchParams} handleRepliesCallback={handleRepliesCallback} params={params} />
+      <ThreadSummary summaryData={summaryData}  originalPostLink={hexString} params={params} />
     </Wrapper>
   );
 }

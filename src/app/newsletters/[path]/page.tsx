@@ -4,6 +4,7 @@ import { MonthlyNewsletterDisplay } from "@/app/components/server/monthly-newsle
 import { NewsLetter, NewsLetterDataType, sortedAuthorData } from "@/helpers/types";
 import Wrapper from "@/app/components/server/wrapper";
 import { formattedDate, getSummaryDataInfo } from "@/helpers/utils";
+import { notFound } from "next/navigation";
 
 const monthlyNewsletter = async (path: string) => {
   try {
@@ -48,7 +49,7 @@ export default async function Page({ params }: { params: { path: string } }) {
   const newsletterPath = `/newsletters/${`${monthsInOrder[month]}_${year}`}/${url}-newsletter.json`;
 
   const data = await monthlyNewsletter(newsletterPath);
-  if (!data) return <h1>No Data found</h1>;
+  if (!data) return notFound();
 
   const sortedNewThreadData = data.new_threads_this_week.sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
 
