@@ -1,11 +1,10 @@
-import * as fs from "fs";
 import Link from "next/link";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import Wrapper from "@/app/components/server/wrapper";
 import { hexToString, stringToHex } from "@/helpers/utils";
 import { ThreadSummary } from "./components/thread-summary";
 import { getSummaryData } from "@/helpers/fs-functions";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 
 export default async function Page({ params }: { params: { path: string[] }; searchParams: { replies: string } }) {
@@ -13,6 +12,12 @@ export default async function Page({ params }: { params: { path: string[] }; sea
   const hexString = stringToHex(params.path.join("/"));
 
   if (!summaryData) return notFound();
+
+  console.log()
+  // if(summaryData.data.historyLinks.length < 2){
+
+  //  return redirect(`/posts/${hexString}`)
+  // }
 
   return (
     <Wrapper>
