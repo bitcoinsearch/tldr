@@ -9,13 +9,16 @@ import CategoriesNavigation from "../components/client/categories-navigation";
 
 export const ActiveDiscussions = ({
   posts,
+  dev,
 }: {
   posts: (HomepageEntryData & {
     firstPostDate: string;
     lastPostDate: string;
-  })[];
+  })[],
+  dev?:SortKey;
 }) => {
-  const [sortKey, setSortKey] = React.useState<SortKey>("all");
+
+  const [sortKey, setSortKey] = React.useState<SortKey>( dev ? dev : "all");
   const [openPopUp, setOpenPopUp] = React.useState<boolean>(false);
 
   const memoizedPosts = React.useMemo(

@@ -17,8 +17,11 @@ const AllActivity = ({
   posts: (HomepageEntryData & {
     firstPostDate: string;
     lastPostDate: string;
-  })[];
-}) => {
+  })[],
+  dev?:string,
+},
+
+) => {
   const [sortKey, setSortKey] = useState<SortKey>("all");
   const [openSortDialog] = useState<boolean>(false);
 
