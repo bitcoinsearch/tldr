@@ -89,11 +89,11 @@ const HeroNewsletterDisplay = ({ latestNewsletter }: { latestNewsletter: Newslet
       <div
         className={`max-w-full md:max-w-[49%] lg:max-w-[40%] xl:max-w-[37%] h-[470px] ${
           screenHeight >= 799 ? "max-h-[673px] md:h-[650px] xl:h-[673px]" : "h-[86%] max-h-[600px]"
-        } bg-black rounded-[18px] xl:rounded-[30px] p-3 xl:p-[27px] relative`}
+        } bg-black rounded-[18px] xl:rounded-[30px] p-3 xl:p-[27px] relative `}
       >
         <div
           ref={isMobile ? null : articleRef}
-          className='h-full w-full bg-cream-custom-100 rounded-[10px] p-2 md:p-3 xl:p-3.5 overflow-scroll custom-scrollbar flex flex-col gap-2'
+          className='h-full w-full max-h-[550px] md:max-h-full bg-cream-custom-100 rounded-[10px] p-2 md:p-3 xl:p-3.5 overflow-auto md:overflow-scroll custom-scrollbar flex flex-col gap-2'
         >
           <div className='h-[110px] md:h-[120px] xl:h-[148px] w-full rounded-[5.61px] bg-black flex items-center justify-between'>
             <section className='my-4 pl-4 flex flex-col text-peach-custom-100'>

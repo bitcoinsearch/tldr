@@ -22,21 +22,21 @@ export const exploreSectionData = [
     subtext: "Check out posts actively getting replies and inspiring conversations.",
     icon: "/icons/wavy-lines.svg",
     backgroundColor: "#CF661A",
-    route: "#active-discussions",
+    route: "?source=active-discussions",
   },
   {
     title: "Historic Conversations",
     subtext: "Explore posts from past years in this historic deep dive.",
     icon: "/icons/brushy-circles.svg",
     backgroundColor: "#1486B2",
-    route: "#historic-conversations",
+    route: "?source=historic-conversations",
   },
   {
     title: "All Activity",
     subtext: "Read the most recent individual posts in chronological order.",
     icon: "/icons/brushy-love-icon.svg",
     backgroundColor: "#68910E",
-    route: "#all-activity",
+    route: "?source=all-activity",
   },
 ];
 

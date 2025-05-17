@@ -14,12 +14,12 @@ const CategoriesNavigation: React.FC<CategoriesProps> = ({
   sortKey,
   setSortKey,
 }) => {
+  
   const getActiveClass = useCallback((key: SortKey) => {
     if (sortKey === key) return "bg-orange-custom-100 text-white";
     return "bg-gray-custom-1000";
   }, [sortKey]);
 
-  console.log(sortKey)
   return (
     <section className="flex items-center gap-2">
       <button
