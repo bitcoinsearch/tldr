@@ -1,4 +1,12 @@
-import { AuthorData, EsSearchResult, HomepageEntryData, NewsletterData, SortKey, XmlDataType, sortedAuthorData } from "./types";
+import {
+  AuthorData,
+  EsSearchResult,
+  HomepageEntryData,
+  NewsletterData,
+  SortKey,
+  XmlDataType,
+  sortedAuthorData,
+} from "./types";
 import { domainFunctionMapper } from "./path-mappers";
 import { convertXmlToText } from "./convert-from-xml";
 import Image from "next/image";
@@ -26,23 +34,27 @@ export function formattedDate(date: string): string {
 
 export const createPath = (path: string) => {
   const pathIndex = path.split("/").findIndex((x) => x === "static");
-  
-  if(pathIndex !== -1){
+
+  if (pathIndex !== -1) {
     const sliced_path = path.split("/").slice(pathIndex);
     sliced_path.shift();
-    const fullPath = sliced_path.join("/").replace(".xml","")
+    const fullPath = sliced_path.join("/").replace(".xml", "");
+    return fullPath;
+  } else {
+    const fullPath = path.replace(
+      "https://tldr.bitcoinsearch.xyz/summary/",
+      ""
+    );
     return fullPath;
   }
-  else {
-     const fullPath = path.replace("https://tldr.bitcoinsearch.xyz/summary/","")
-    return fullPath;
-  }
-
-
 };
 
 export const getContributors = (authors: Array<string>) => {
-  return authors.length <= 1 ? [] : Array.from(new Set(authors.slice(1))).filter((author) => author !== authors[0]);
+  return authors.length <= 1
+    ? []
+    : Array.from(new Set(authors.slice(1))).filter(
+        (author) => author !== authors[0]
+      );
 };
 
 export const createSummary = (summary: string) => {
@@ -55,8 +67,10 @@ export const createSummary = (summary: string) => {
   const line2LastItem = line2?.[line2?.length - 1];
 
   if (
-    (line1LastItem.length <= 2 && line1LastItem.charAt(0) === line1LastItem.charAt(0).toUpperCase()) ||
-    (line2LastItem?.length <= 2 && line2LastItem?.charAt(0) === line2LastItem?.charAt(0).toUpperCase())
+    (line1LastItem.length <= 2 &&
+      line1LastItem.charAt(0) === line1LastItem.charAt(0).toUpperCase()) ||
+    (line2LastItem?.length <= 2 &&
+      line2LastItem?.charAt(0) === line2LastItem?.charAt(0).toUpperCase())
   ) {
     return summary.split(". ").slice(0, 3).join(". ");
   } else {
@@ -85,7 +99,10 @@ export const flattenEntries = (entries: Array<HomepageEntryData>) => {
   });
 };
 
-export const getBatchesInSameMonth = (entries: Array<HomepageEntryData>, currMonth: string) => {
+export const getBatchesInSameMonth = (
+  entries: Array<HomepageEntryData>,
+  currMonth: string
+) => {
   const monthsInOrder: Record<string, string> = {
     Jan: "01",
     Feb: "02",
@@ -105,10 +122,16 @@ export const getBatchesInSameMonth = (entries: Array<HomepageEntryData>, currMon
   return entries.filter((entry) => {
     const date = entry.published_at.slice(5, 7);
     const dummyAuthor = entry.authors[0].toLowerCase() !== "victor umobi";
-    const noCombinedSummaryTitle = entry.title !== "combined summary - (no subject)";
+    const noCombinedSummaryTitle =
+      entry.title !== "combined summary - (no subject)";
     const noSummaryTitle = entry.title !== "(no subject)";
 
-    return date === monthsInOrder[currentMonth] && dummyAuthor && noSummaryTitle && noCombinedSummaryTitle;
+    return (
+      date === monthsInOrder[currentMonth] &&
+      dummyAuthor &&
+      noSummaryTitle &&
+      noCombinedSummaryTitle
+    );
   });
 };
 
@@ -160,8 +183,23 @@ export const monthsInOrder: Record<string, string> = {
 };
 
 export const createMonthsFromKeys = (startYear: number, endYear: number) => {
-  const years = Array.from({ length: startYear - endYear + 1 }, (_, index) => (startYear - index).toString());
-  const months = ["Dec", "Nov", "Oct", "Sept", "Aug", "July", "June", "May", "April", "March", "Feb", "Jan"];
+  const years = Array.from({ length: startYear - endYear + 1 }, (_, index) =>
+    (startYear - index).toString()
+  );
+  const months = [
+    "Dec",
+    "Nov",
+    "Oct",
+    "Sept",
+    "Aug",
+    "July",
+    "June",
+    "May",
+    "April",
+    "March",
+    "Feb",
+    "Jan",
+  ];
 
   return years
     .map((key) => {
@@ -172,12 +210,17 @@ export const createMonthsFromKeys = (startYear: number, endYear: number) => {
     .flat();
 };
 
-export const removeDuplicateSummaries = (groups: Record<string, Array<HomepageEntryData>>) => {
+export const removeDuplicateSummaries = (
+  groups: Record<string, Array<HomepageEntryData>>
+) => {
   const finalValues: HomepageEntryData[] = [];
   const cleanedGroups: Record<string, Array<HomepageEntryData>> = {};
 
   for (const [key, value] of Object.entries(groups)) {
-    if (value.length === 1 || key.toLowerCase().startsWith("combined summary")) {
+    if (
+      value.length === 1 ||
+      key.toLowerCase().startsWith("combined summary")
+    ) {
       cleanedGroups[key] = value;
     }
   }
@@ -201,7 +244,9 @@ export const removeDuplicateSummaries = (groups: Record<string, Array<HomepageEn
   });
 
   // check for summaries which doesn't have combined summaries
-  const getSingleSummaries = singleSummaries.filter((x) => !splitCombSummaries.includes(x));
+  const getSingleSummaries = singleSummaries.filter(
+    (x) => !splitCombSummaries.includes(x)
+  );
 
   const allSections = [...combinedSummaries, ...getSingleSummaries];
 
@@ -254,12 +299,14 @@ export const getSummaryDataInfo = async (path: string[], fileContent: any) => {
   const data = await convertXmlToText(fileContent, pathString);
   const linksCopy = data.data?.historyLinks;
 
-  const authorsFormatted: sortedAuthorData[] = data.data.authors.map((author, index) => ({
-    ...author,
-    name: removeZeros(author),
-    initialIndex: index,
-    dateInMS: Date.parse(author.date + "T" + author.time),
-  }));
+  const authorsFormatted: sortedAuthorData[] = data.data.authors.map(
+    (author, index) => ({
+      ...author,
+      name: removeZeros(author),
+      initialIndex: index,
+      dateInMS: Date.parse(author.date + "T" + author.time),
+    })
+  );
 
   const chronologicalAuthors = authorsFormatted.sort((a, b) => {
     if (a.dateInMS < b.dateInMS) {
@@ -271,7 +318,9 @@ export const getSummaryDataInfo = async (path: string[], fileContent: any) => {
       return 0;
     }
   });
-  const chronologicalLinksBasedOffAuthors = linksCopy?.length ? chronologicalAuthors.map((author) => linksCopy[author.initialIndex]) : [];
+  const chronologicalLinksBasedOffAuthors = linksCopy?.length
+    ? chronologicalAuthors.map((author) => linksCopy[author.initialIndex])
+    : [];
 
   return {
     ...data,
@@ -318,7 +367,9 @@ export function getUtcTime(date: string): string {
  * @param data - The data to shuffle
  * @returns The shuffled data
  */
-export function shuffle(data: (HomepageEntryData & { firstPostDate: string; lastPostDate: string })[]) {
+export function shuffle(
+  data: (HomepageEntryData & { firstPostDate: string; lastPostDate: string })[]
+) {
   let currIndex = data.length;
 
   while (currIndex !== 0) {
@@ -336,12 +387,26 @@ export function shuffle(data: (HomepageEntryData & { firstPostDate: string; last
  * @returns The sorted posts according to the sort key
  */
 
-export function getSortedPosts(posts: (HomepageEntryData & { firstPostDate: string; lastPostDate: string })[], sortKey: SortKey) {
+export function getSortedPosts(
+  posts: (HomepageEntryData & {
+    firstPostDate: string;
+    lastPostDate: string;
+  })[],
+  sortKey: SortKey
+) {
   switch (sortKey) {
     case "newest":
-      return [...posts].sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
+      return [...posts].sort(
+        (a, b) =>
+          new Date(b.published_at).getTime() -
+          new Date(a.published_at).getTime()
+      );
     case "oldest":
-      return [...posts].sort((a, b) => new Date(a.published_at).getTime() - new Date(b.published_at).getTime());
+      return [...posts].sort(
+        (a, b) =>
+          new Date(a.published_at).getTime() -
+          new Date(b.published_at).getTime()
+      );
     case "bitcoin-dev":
       return posts.filter((post) => post.dev_name === "bitcoin-dev");
     case "delvingbitcoin":
@@ -353,13 +418,31 @@ export function getSortedPosts(posts: (HomepageEntryData & { firstPostDate: stri
   }
 }
 
-export function stringToHex(str:string) {
-  return Buffer.from(str, 'utf8').toString('hex');
+export function stringToHex(str: string) {
+  return Buffer.from(str, "utf8").toString("hex");
 }
 
 export function hexToString(hex: string) {
-  if (typeof hex !== 'string' || !hex.match(/^[0-9a-fA-F]+$/) || hex.length % 2 !== 0) {
+  if (
+    typeof hex !== "string" ||
+    !hex.match(/^[0-9a-fA-F]+$/) ||
+    hex.length % 2 !== 0
+  ) {
     return "404";
   }
-  return Buffer.from(hex, 'hex').toString('utf8');
+  return Buffer.from(hex, "hex").toString("utf8");
 }
+
+export const baseUrl = (query: string) => {
+  const base = "https://bitcoinsearch.xyz/";
+  const encodedQuery = encodeURIComponent(query);
+  const domains = [
+    "https://mailing-list.bitcoindevs.xyz/bitcoindev/",
+    "https://lists.linuxfoundation.org/pipermail/bitcoin-dev/",
+    "https://delvingbitcoin.org/",
+    "https://lists.linuxfoundation.org/pipermail/lightning-dev/"
+  ];
+  const filters = domains.map(domain => `filter_domain=${encodeURIComponent(domain)}`).join("&");
+
+  return `${base}?search=${encodedQuery}&utm_source=tldr.bitcoinsearch.xyz&${filters}`;
+};
