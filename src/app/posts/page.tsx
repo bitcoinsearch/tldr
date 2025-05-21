@@ -1,7 +1,7 @@
 import React from "react";
 import * as fs from "fs";
 import { fetchAllActivityPosts, fetchAndProcessPosts } from "@/helpers/fs-functions";
-import { HomepageData, HomepageEntryData, MailingListType, sortedAuthorData } from "@/helpers/types";
+import { HomepageData, HomepageEntryData, MailingListType, sortedAuthorData, SortKey } from "@/helpers/types";
 import Link from "next/link";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { PostsCard } from "@/app/components/client/post-card";
@@ -38,6 +38,7 @@ const page = async ({ params, searchParams }: { params: { path: string[] }; sear
 
   // NOTE: account for scenarios when source is not provided
   const source = searchParams.source || "active-discussions";
+  const dev: SortKey = (searchParams.dev || "all") as SortKey;
 
   const posts = await fetchAndProcessPosts();
   const { batch: allActivity, count } = await fetchAllActivityPosts(0);
@@ -101,9 +102,9 @@ const page = async ({ params, searchParams }: { params: { path: string[] }; sear
   const postsToDisplay = await createPostData(pageData.posts);
 
   const contentSection: { [key: string]: React.JSX.Element } = {
-    "active-discussions": <ActiveDiscussions posts={postsToDisplay} />,
-    "historic-conversations": <HistoricConversations posts={postsToDisplay} />,
-    "all-activity": <AllActivity posts={postsToDisplay} />,
+    "active-discussions": <ActiveDiscussions dev={dev} posts={postsToDisplay} />,
+    "historic-conversations": <HistoricConversations dev={dev} posts={postsToDisplay} />,
+    "all-activity": <AllActivity dev={dev} posts={postsToDisplay} />,
   };
 
   const contentToRender = contentSection[source] ?  contentSection[source] : contentSection["all-activity"]
