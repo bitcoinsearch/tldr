@@ -1,8 +1,7 @@
-import * as fs from "fs";
 import Link from "next/link";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import Wrapper from "@/app/components/server/wrapper";
-import { hexToString, stringToHex } from "@/helpers/utils";
+import { stringToHex } from "@/helpers/utils";
 import { ThreadSummary } from "./components/thread-summary";
 import { getSummaryData } from "@/helpers/fs-functions";
 import { notFound } from "next/navigation";
