@@ -13,6 +13,8 @@ export default async function Page({ params }: { params: { path: string[] }; sea
 
   if (!summaryData) return notFound();
 
+  console.log(summaryData, "summaryData")
+
   return (
     <Wrapper>
       <div>
