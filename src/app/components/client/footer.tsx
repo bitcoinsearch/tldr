@@ -108,7 +108,7 @@ const CustomFooter = () => {
             </span>
           </p>
           <Link
-            href='https://cryptpad.fr/form/#/2/form/view/3P2CsohsHOkcH7C+WdtX0-tvqjBHqXnAmz5D9yx0e04/'
+            href='https://forms.gle/aLtBMjAeLZiKCFxn8'
             target='_blank'
             className='text-white text-sm leading-[14px] font-gt-walsheim font-medium bg-orange-custom-100 rounded-full px-6 py-4 md:py-5 text-nowrap w-fit self-center'
           >
