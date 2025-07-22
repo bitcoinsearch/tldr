@@ -229,6 +229,20 @@ export const ThreadSummary = ({
                 </ul>
               </section>
             )}
+            
+            {/* Related Delving Bitcoin Posts Section */}
+            {isPostSummary && summaryData.data.generatedUrl && (
+              <section className="flex justify-center">
+                <Link
+                  href={summaryData.data.generatedUrl}
+                  target="_blank"
+                  className="text-sm font-medium font-gt-walsheim leading-[19.74px] py-1.5 px-4 bg-gray-custom-700 rounded-full p-2 w-fit underline"
+                >
+                  Link to Raw Post
+                </Link>
+              </section>
+            )}
+            
             {children && children}
             <section className="max-w-[712px] mx-auto">
               {isPostSummary ? (
