@@ -231,7 +231,7 @@ export const ThreadSummary = ({
             )}
             
             {/* Related Delving Bitcoin Posts Section */}
-            {isPostSummary && summaryData.data.generatedUrl && (
+            {summaryData.data.generatedUrl && (
               <section className="flex justify-center">
                 <Link
                   href={summaryData.data.generatedUrl}
