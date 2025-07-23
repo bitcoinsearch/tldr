@@ -19,6 +19,8 @@ const ReplyPage = async ({ params }: any) => {
    if((currReply === "404" && originalPostPath === "404") || !originalPostData?.data){
       return notFound();
     }
+    const firstPost = originalPostData.data.historyLinks[0] || undefined
+  
   return (
     <Wrapper>
       <section>
@@ -26,6 +28,7 @@ const ReplyPage = async ({ params }: any) => {
           summaryData={originalPostData as PostSummaryData}
           originalPostLink={allPath[0]}
           params={{ path: fullPath }}
+          firstPost={firstPost}
           currentReplyLink={allPath[1]}
           currentReplyData={singleReplyData as PostSummaryData}
         />

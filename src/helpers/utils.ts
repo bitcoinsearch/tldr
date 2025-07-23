@@ -298,6 +298,7 @@ export const getSummaryDataInfo = async (path: string[], fileContent: any) => {
   const pathString = path.join("/");
 
   const data = await convertXmlToText(fileContent, pathString);
+
   const linksCopy = data.data?.historyLinks;
 
   const authorsFormatted: sortedAuthorData[] = data.data.authors.map(

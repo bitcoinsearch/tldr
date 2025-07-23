@@ -51,10 +51,12 @@ export const convertXmlToText = async (
         historyLinks: historyLinks,
       },
     };
-
+   
     const threadAuthors = extractAuthorsDateTime(author);
+    
     const newEntry = { ...entry, authors: threadAuthors, historyLinks };
     formattedData = newEntry;
+    
   });
 
   const date = new Date(formattedData.entry.published);
