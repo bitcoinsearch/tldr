@@ -9,13 +9,14 @@ import React from 'react'
 const SummaryPage = async ({params}:NextParamsPage ) => {
   const replyId = params["reply-id"] ? params["reply-id"].split("/")[0] : "";
   const allPath = replyId.split("-");
+
   const originalPostPath = hexToString(allPath[0]);
   const currReply = hexToString(allPath[1]);
 
   const originalPostData = await getSummaryData(originalPostPath.split("/"));
   const singleReplyData = await getSummaryData(currReply.split("/"));
   const fullPath = [...originalPostPath.split("/")]
-
+  
   if((currReply === "404" && originalPostPath === "404") || !originalPostData?.data){
     return notFound();
   }
@@ -27,7 +28,7 @@ const SummaryPage = async ({params}:NextParamsPage ) => {
           summaryData={originalPostData as PostSummaryData}
           originalPostLink={allPath[0]}
           params={{ path: fullPath }}
-          currentReplyLink={currReply}
+          currentReplyLink={allPath[1]}
           isPostSummary
           currentReplyData={singleReplyData as PostSummaryData}
         />

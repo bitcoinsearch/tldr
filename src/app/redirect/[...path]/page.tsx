@@ -1,21 +1,18 @@
-import { getSummaryData } from '@/helpers/fs-functions';
-import { convertMailingListUrlToPath } from '@/helpers/redirect-search';
-import { redirect } from 'next/navigation';
-import React from 'react'
+import { convertMailingListUrlToPath } from "@/helpers/redirect-search";
+import { redirect } from "next/navigation";
+import React from "react";
 
 const RedirectPage = async ({ params }: { params: { path: string[] } }) => {
-    const fullPath = params.path.join('/');
-  
-    const decodedPath = decodeURIComponent(fullPath);
-    const baseLink = convertMailingListUrlToPath(decodedPath);
-    const summaryData = await getSummaryData(baseLink.split("/"));
+  const [combinedPath, replyPath] = await convertMailingListUrlToPath(
+    params.path.join("/")
+  );
 
-    if(summaryData){
-        return redirect(`/summary/${summaryData.path}`);
-    }
-    return (
-        <div>Redirecting,{fullPath}</div>
-    )
-}
+  if (combinedPath) {
+    return redirect(`/posts/${combinedPath}-${replyPath}/`);
+  } else if (replyPath) {
+    return redirect(`/posts/${replyPath}-${replyPath}/`);
+  }
+  return <div>Redirecting...</div>;
+};
 
 export default RedirectPage;

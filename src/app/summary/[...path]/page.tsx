@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: { path: string[] }; sea
 
   if (!summaryData) return notFound();
 
-  console.log(summaryData, "summaryData")
+
 
   return (
     <Wrapper>
@@ -26,7 +26,7 @@ export default async function Page({ params }: { params: { path: string[] }; sea
         </div>
       </div>
 
-      <ThreadSummary summaryData={summaryData}  originalPostLink={hexString} params={params} />
+      <ThreadSummary isPostSummary summaryData={summaryData}  originalPostLink={hexString} params={params} />
     </Wrapper>
   );
 }

@@ -70,7 +70,7 @@ const page = async ({ params, searchParams }: { params: { path: string[] }; sear
         filePath = filePath.includes(".xml") ? filePath : filePath + ".xml"
         const pathArray = filePath.split("/");
         const pathString = pathArray.slice(pathArray.length - 3);
-        // console.log(pathString, "pathString")
+       
         const summaryData = await getSummaryData(pathString);
         const authors = summaryData?.data.authors || [];
         const [firstPostAuthor, lastPostAuthor] = [authors[0], authors[authors.length - 1]];
