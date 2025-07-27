@@ -30,9 +30,9 @@ export default function Page() {
                   delving bitcoin
                 </Link>
               </span>{" "}
-              mailing lists.The bitcoin-dev and lightning-dev mailing lists are treasure troves of information. Bitcoin-dev alone has 20,000+ posts
-              going back to June 2011. There is a problem though, not enough people read it.Bitcoin TLDR is designed to help keep you up to date with
-              the latest posts as well as surface active discussions from the past.We summarize every post and then summarize the summaries so that
+              mailing lists. The bitcoin-dev and lightning-dev mailing lists are treasure troves of information. Bitcoin-dev alone has 20,000+ posts
+              going back to June 2011. There is a problem though, not enough people read it. Bitcoin TLDR is designed to help keep you up to date with
+              the latest posts as well as surface active discussions from the past. We summarize every post and then summarize the summaries so that
               every thread summary remains fresh based on the replies. These run on nightly cron jobs to produce{" "}
               <span>
                 <Link
