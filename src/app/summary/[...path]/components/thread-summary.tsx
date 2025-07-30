@@ -18,6 +18,7 @@ export const ThreadSummary = ({
   currentReplyData,
   isPostSummary,
   params,
+  firstPost,
   children,
 }: {
   summaryData: PostSummaryData;
@@ -25,6 +26,7 @@ export const ThreadSummary = ({
   originalPostLink: string;
   isPostSummary ?: boolean;
   currentReplyLink?: string;
+  firstPost?: string
   params: {
     path: string[];
   };
@@ -33,6 +35,7 @@ export const ThreadSummary = ({
   const {
     title,
     authors,
+    generatedUrl,
     historyLinks,
     entry: { summary },
   } = summaryData.data;
@@ -147,6 +150,7 @@ export const ThreadSummary = ({
   };
 
   const displayedAuthor = currentReply?.authors[0].name ?? "";
+ 
   const displayedAuthorDate = currentReply?.authors[0].date ?? "";
   const mainTitle = routes[2].name;
   const dateRange = getDateRange();
@@ -244,10 +248,10 @@ export const ThreadSummary = ({
               )}
             </section>
 
-            {currentReply?.generatedUrl && !isPostSummary && (
+            {generatedUrl &&  !isPostSummary && (
               <section className="flex justify-center">
                 <Link
-                  href={currentReply?.generatedUrl || ""}
+                  href={generatedUrl || ""}
                   target="_blank"
                   className="text-sm font-medium font-gt-walsheim leading-[19.74px] py-1.5 px-4 bg-gray-custom-700 rounded-full p-2 w-fit underline"
                 >
@@ -303,6 +307,7 @@ export const ThreadSummary = ({
                 originalPostLink={originalPostLink}
                 length={historyLinks.length}
                 link={link}
+                firstPost={firstPost}
                 isPostSummary={isPostSummary || false}
               />
             ))}
