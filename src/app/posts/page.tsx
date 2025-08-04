@@ -4,7 +4,7 @@ import { fetchAllActivityPosts, fetchAndProcessPosts } from "@/helpers/fs-functi
 import { HomepageData, HomepageEntryData, MailingListType, sortedAuthorData, SortKey } from "@/helpers/types";
 import Link from "next/link";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
-import { PostsCard } from "@/app/components/client/post-card";
+
 import { formattedDate } from "@/helpers/utils";
 import { getSummaryDataInfo } from "@/helpers/utils";
 import Wrapper from "../components/server/wrapper";
@@ -70,7 +70,7 @@ const page = async ({ params, searchParams }: { params: { path: string[] }; sear
         filePath = filePath.includes(".xml") ? filePath : filePath + ".xml"
         const pathArray = filePath.split("/");
         const pathString = pathArray.slice(pathArray.length - 3);
-
+       
         const summaryData = await getSummaryData(pathString);
         const authors = summaryData?.data.authors || [];
         const [firstPostAuthor, lastPostAuthor] = [authors[0], authors[authors.length - 1]];

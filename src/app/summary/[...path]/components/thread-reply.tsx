@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { sortedAuthorData } from "@/helpers/types";
 import { formatDateString, getUtcTime, stringToHex } from "@/helpers/utils";
@@ -11,6 +10,7 @@ export const ThreadReply = ({
   currentReplyUrl,
   originalPostLink,
   isPostSummary,
+  firstPost,
   link,
   length,
 }: {
@@ -19,6 +19,7 @@ export const ThreadReply = ({
   originalPostLink:string;
   length: number;
   isPostSummary : boolean;
+  firstPost?:string;
   setIsReplyOpen: Dispatch<SetStateAction<{
     [key: string]: boolean;
 }>>;
@@ -30,6 +31,7 @@ export const ThreadReply = ({
   // The regex is looking for a .xml at the end of the string
   // If it finds it, it will replace it with an empty string
   const path = link.replace(/\.xml$/, "");
+  const firstPostPath = firstPost?.replace(/\.xml$/, "")
   const dateObj = new Date(author.dateInMS);
   const dateString = dateObj.toISOString();
 
@@ -38,13 +40,15 @@ export const ThreadReply = ({
   const hexLink = stringToHex(path)
 
   const isActive = isPostSummary ? false : hexLink === currentReplyUrl;
-  
+
+  const isOriginalPost = firstPostPath && hexLink === stringToHex(firstPostPath);
+
   return (
-    <div className='flex items-start w-full'>
+    <div className={`flex items-start  p-2 justify-between rounded-lg max-w-[393px] w-full ${isActive ? isOriginalPost?"bg-black ":"bg-black" : ""}`}>
       <Link
       onClick={()=>{index === 0 && setIsReplyOpen({[length]:false}) }}
       href={`/posts/${originalPostLink}-${hexLink}`}
-        className={`flex gap-1 p-2 rounded-lg items-start w-full max-w-[373px] cursor-pointer ${isActive ? "bg-black" : ""}`}
+        className={`flex gap-1 items-start max-w-[max-content] w-full cursor-pointer`}
       >
         <div className='w-full flex max-w-[373px] justify-between'>
           <section className='flex flex-col gap-1'>
@@ -69,6 +73,8 @@ export const ThreadReply = ({
           </section>
         </div>
       </Link>
+
+      {isOriginalPost && <p className={`font-gt-walsheim pt-1 whitespace-nowrap text-xs ${isActive ? "text-orange-custom-100": "text-black"}`}>Original Post</p>}
     </div>
   );
 };

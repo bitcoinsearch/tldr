@@ -280,6 +280,7 @@ export const getStaticPathFromURL = (data: EsSearchResult["_source"]) => {
   return path;
 };
 
+
 export const removeZeros = (author: AuthorData) => {
   if (author.name.startsWith(".")) {
     const name = author.name.split(":")[1].slice(2).trim();
@@ -297,6 +298,7 @@ export const getSummaryDataInfo = async (path: string[], fileContent: any) => {
   const pathString = path.join("/");
 
   const data = await convertXmlToText(fileContent, pathString);
+
   const linksCopy = data.data?.historyLinks;
 
   const authorsFormatted: sortedAuthorData[] = data.data.authors.map(
