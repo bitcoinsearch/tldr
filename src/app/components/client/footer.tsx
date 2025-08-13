@@ -88,6 +88,13 @@ const CustomFooter = () => {
                   className: "hover:text-orange-400 text-black",
                 },
               },
+              {
+                entity: "linkedin",
+                entityLink: "https://www.linkedin.com/company/bitcoin-dev-project/",
+                iconProps: {
+                  className: "hover:text-orange-400 text-black",
+                },
+              },
             ]}
           />
           <Footer.About
