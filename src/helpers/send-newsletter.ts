@@ -204,8 +204,8 @@ function generateHTMLForPost(post: NewsLetter) {
 
 // Function to generate the HTML content for the newsletter
 function generateHTMLTemplate(data: NewsLetterDataType) {
-  let words = data.summary_of_threads_started_this_week.split(" ");
-  let summary = words.slice(0, 300).join(" ").replaceAll("\n", "<br/>");
+   let words = data.summary_of_threads_started_this_week.split("\n\n");
+  let summary = words.slice(0,4).join(" ").replaceAll("\n", "<br/>");
   let summaryHtml = marked(summary);
 
   let html = `
