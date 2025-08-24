@@ -29,22 +29,26 @@ export const metadata: Metadata = {
       "application/rss+xml": "./rss.xml",
     },
   },
-  description: "Bitcoin-dev and Lightning-dev mailing list summaries and discoveries",
+  description: " Bitcoin tech mailing list summaries at your fingertips",
   keywords:
     "bitcoin, bitcoin development, bitcoin tldr, bitcoin tl;dr, bitcoin learning, bitcoin resources, bitcoin resources for beginners, bitcoin resources for developers, bitcoin resources for beginners and developers, bitcoin resources for beginners and developers",
   openGraph: {
     title: "Bitcoin TLDR",
-    description: "Bitcoin-dev and Lightning-dev mailing list summaries and discoveries",
+    description: "Bitcoin tech mailing list summaries at your fingertips",
     url: "https://tldr.bitcoinsearch.xyz",
     type: "website",
+    
     images: [
       {
         url: "/images/og-image.png",
+        width: 1200,
+        height: 538,
+        alt: "Bitcoin TLDR",
       },
     ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     creator: "@chaincodelabs",
     images: ["/images/og-image.png"],
   },
