@@ -45,7 +45,7 @@ const NewsletterPopup = () => {
                   Join Our Newsletter
                 </h4>
                 <p className='text-sm md:text-base font-gt-walsheim font-normal text-center md:text-start'>
-                  We’ll email you summaries of the latest discussions from authoritative bitcoin sources, like bitcoin-dev, lightning-dev, and Delving
+                  We’ll email you summaries of the latest discussions from high signal bitcoin sources, like bitcoin-dev, lightning-dev, and Delving
                   Bitcoin.
                 </p>
               </section>

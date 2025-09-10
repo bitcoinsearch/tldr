@@ -21,7 +21,7 @@ const CustomFooter = () => {
           <section className='flex flex-col gap-2'>
             <h4 className='text-lg md:text-2xl leading-[27px] md:leading-[36px] font-medium font-test-signifier'>Join Our Newsletter</h4>
             <p className='text-sm md:text-base font-gt-walsheim font-normal'>
-              We’ll email you summaries of the latest discussions from authoritative bitcoin sources, like bitcoin-dev, lightning-dev, and Delving
+              We’ll email you summaries of the latest discussions from high signal bitcoin sources, like bitcoin-dev, lightning-dev, and Delving
               Bitcoin.
             </p>
           </section>
@@ -111,7 +111,7 @@ const CustomFooter = () => {
         <div className='flex flex-col md:flex-row gap-6 md:gap-[34px] items-star md:items-center'>
           <p className='font-medium text-gray-custom-900 dark:text-gray-custom-900'>
             <span className='leading-none md:leading-tight flex flex-col sm:flex-row items-stretch sm:items-center text-sm text-gray-custom-900 dark:text-gray-custom-900 gap-[20px] md:gap-[24px]'>
-              We&apos;d love to hear your feedback on this project?
+              We&apos;d love to hear your feedback on this project.
             </span>
           </p>
           <Link

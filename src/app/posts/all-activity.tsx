@@ -13,16 +13,17 @@ import CategoriesNavigation from "../components/client/categories-navigation";
 
 const AllActivity = ({
   posts,
+  dev
 }: {
   posts: (HomepageEntryData & {
     firstPostDate: string;
     lastPostDate: string;
   })[],
-  dev?:string,
+  dev?:SortKey,
 },
 
 ) => {
-  const [sortKey, setSortKey] = useState<SortKey>("all");
+  const [sortKey, setSortKey] = useState<SortKey>( dev || "all");
   const [openSortDialog] = useState<boolean>(false);
 
   const memoizedPosts = React.useMemo(

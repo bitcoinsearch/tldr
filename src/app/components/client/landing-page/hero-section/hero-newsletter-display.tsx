@@ -78,7 +78,7 @@ const HeroNewsletterDisplay = ({ latestNewsletter }: { latestNewsletter: Newslet
             Stay up to Date on the Latest in <span className='text-orange-custom-100 text-nowrap'>Bitcoin Tech</span>
           </h1>
           <ol className='list-disc text-sm md:text-base lg:text-lg leading-6 lg:leading-8 font-gt-walsheim font-normal list-inside flex flex-col gap-1'>
-            <li>Weekly summaries of bitcoin-dev, lightning-dev, and delving bitcoin mailing lists</li>
+            <li>Weekly summaries of bitcoin-dev, lightning-dev, and Delving Bitcoin mailing lists</li>
             <li>Keep your finger on the pulse of bitcoin tech development and conversations</li>
             <li>Perfect for bitcoin builders, educators, and contributors to stay on top of a growing field</li>
           </ol>
@@ -93,7 +93,7 @@ const HeroNewsletterDisplay = ({ latestNewsletter }: { latestNewsletter: Newslet
       >
         <div
           ref={isMobile ? null : articleRef}
-          className='h-full w-full max-h-[550px] md:max-h-full bg-cream-custom-100 rounded-[10px] p-2 md:p-3 xl:p-3.5 overflow-auto md:overflow-scroll custom-scrollbar flex flex-col gap-2'
+          className='h-full w-full max-h-[550px] md:max-h-full bg-cream-custom-100 rounded-[10px] p-2 md:p-3 xl:p-3.5 overflow-auto md:overflow-auto custom-scrollbar flex flex-col gap-2'
         >
           <div className='h-[110px] md:h-[120px] xl:h-[148px] w-full rounded-[5.61px] bg-black flex items-center justify-between'>
             <section className='my-4 pl-4 flex flex-col text-peach-custom-100'>
@@ -114,7 +114,7 @@ const HeroNewsletterDisplay = ({ latestNewsletter }: { latestNewsletter: Newslet
 
           <div className='flex flex-col gap-[11.23px] font-gt-walsheim'>
             <p className='text-[19.65px] leading-[27.7px] font-medium'>Catch up on This Week&apos;s Activity</p>
-            <article className='text-[12.63px] leading-[17.81px] tracking-[1%] overflow-scroll custom-scrollbar'>
+            <article className='text-[12.63px] leading-[17.81px] tracking-[1%] overflow-auto custom-scrollbar'>
               <MarkdownWrapper
                 summary={latestNewsletter.summary}
                 className={`font-gt-walsheim text-[12.63px] leading-[17.81px] tracking-wide pb-0`}
@@ -124,9 +124,9 @@ const HeroNewsletterDisplay = ({ latestNewsletter }: { latestNewsletter: Newslet
 
           <Link
             href={latestNewsletter.url}
-            className='font-test-signifier text-sm lg:text-base leading-6 p-4 w-full rounded-full bg-black text-white text-center'
+            className='font-gt-walsheim text-sm lg:text-base leading-6 p-4 w-full rounded-full bg-black text-white text-center'
           >
-            Read This Week&apos;s Newsletters
+            Read This Week&apos;s Newsletter
           </Link>
         </div>
 
