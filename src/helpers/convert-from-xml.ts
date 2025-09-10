@@ -1,6 +1,6 @@
 import * as Cheerio from "cheerio";
 
-import {ConvertedXML, FeedPage } from "./types";
+import {ConvertedXML, FeedPage, ThreadNode, sortedAuthorData } from "./types";
 
 const xmlElements = {
   id: "id",
@@ -105,6 +105,21 @@ export const extractAuthorsDateTime = (str: string) => {
     let name = match[1];
     const date = match[2];
     const time = match[3];
+    let threadDepth = 0;
+    let messageId = "";
+
+    // Extract threading information if present
+    const depthMatch = name.match(/\[depth:(\d+)\]/);
+    if (depthMatch) {
+      threadDepth = parseInt(depthMatch[1], 10);
+      name = name.replace(/\[depth:\d+\]/, "").trim();
+    }
+
+    const idMatch = name.match(/\[id:([^\]]+)\]/);
+    if (idMatch) {
+      messageId = idMatch[1];
+      name = name.replace(/\[id:[^\]]+\]/, "").trim();
+    }
 
     // sanitize the author name
     // check if the naame starts with two numbers
@@ -113,7 +128,49 @@ export const extractAuthorsDateTime = (str: string) => {
     if (/^\d{2}/.test(name)) {
       name = name.replace(/^\d{2}/, "");
     }
-    groups.push({ name, date, time });
+    
+    groups.push({ 
+      name, 
+      date, 
+      time, 
+      threadDepth,
+      messageId: messageId || undefined
+    });
   }
   return groups;
+};
+
+export const buildThreadTree = (authors: sortedAuthorData[], historyLinks: string[]): ThreadNode[] => {
+  const nodes: ThreadNode[] = authors.map((author, index) => ({
+    author,
+    link: historyLinks[index],
+    index,
+    depth: author.threadDepth || 0,
+    children: [],
+  }));
+
+  const rootNodes: ThreadNode[] = [];
+  const stack: ThreadNode[] = [];
+  
+  // Build tree based on depth levels
+  for (const node of nodes) {
+    // Remove nodes from stack that are at same or higher depth
+    while (stack.length > 0 && stack[stack.length - 1].depth >= node.depth) {
+      stack.pop();
+    }
+    
+    if (stack.length === 0) {
+      // This is a root node
+      rootNodes.push(node);
+    } else {
+      // This is a child of the last node in stack
+      const parent = stack[stack.length - 1];
+      parent.children.push(node);
+      node.parent = parent;
+    }
+    
+    stack.push(node);
+  }
+
+  return rootNodes;
 };

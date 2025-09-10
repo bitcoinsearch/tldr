@@ -10,6 +10,8 @@ import { useCallback } from "react";
 import { MarkdownWrapper } from "@/app/components/server/MarkdownWrapper";
 import { ThreadReply } from "./thread-reply";
 import Link from "next/link";
+import { buildThreadTree } from "@/helpers/convert-from-xml";
+import { ThreadNode } from "@/helpers/types";
 
 export const ThreadSummary = ({
   summaryData,
@@ -293,19 +295,31 @@ export const ThreadSummary = ({
 
           {/* Thread Replies */}
           <section className="flex flex-col gap-2">
-            {historyLinks.map((link, index) => (
-              <ThreadReply
-                key={index}
-                setIsReplyOpen={setIsReplyOpen}
-                author={authors[index]}
-                index={index}
-                currentReplyUrl={currentReplyLink || ""}
-                originalPostLink={originalPostLink}
-                length={historyLinks.length}
-                link={link}
-                isPostSummary={isPostSummary || false}
-              />
-            ))}
+            {(() => {
+              const threadTree = buildThreadTree(authors, historyLinks);
+              
+              const renderThreadNode = (node: ThreadNode, depth: number = 0) => (
+                <div key={node.index} className={`${depth > 0 ? 'ml-4 border-l-2 border-gray-200 pl-3' : ''}`}>
+                  <ThreadReply
+                    setIsReplyOpen={setIsReplyOpen}
+                    author={node.author}
+                    index={node.index}
+                    currentReplyUrl={currentReplyLink || ""}
+                    originalPostLink={originalPostLink}
+                    length={historyLinks.length}
+                    link={node.link}
+                    isPostSummary={isPostSummary || false}
+                  />
+                  {node.children.length > 0 && (
+                    <div className="mt-1">
+                      {node.children.map((child: ThreadNode) => renderThreadNode(child, depth + 1))}
+                    </div>
+                  )}
+                </div>
+              );
+              
+              return threadTree.map(rootNode => renderThreadNode(rootNode));
+            })()}
           </section>
         </div>
       </div>

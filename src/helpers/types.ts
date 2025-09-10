@@ -18,6 +18,9 @@ type AuthorData = {
   name: string;
   date: string;
   time: string;
+  messageId?: string;
+  threadDepth?: number;
+  threadParent?: string;
 };
 
 type FeedPage = {
@@ -189,6 +192,15 @@ export type SummaryData = {
 };
 
 export type sortedAuthorData = AuthorData & { initialIndex: number; dateInMS: number };
+
+export type ThreadNode = {
+  author: sortedAuthorData;
+  link: string;
+  index: number;
+  depth: number;
+  children: ThreadNode[];
+  parent?: ThreadNode;
+};
 
 export type NewsletterData = {
   summary: string;

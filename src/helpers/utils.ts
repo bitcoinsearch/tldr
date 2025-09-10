@@ -339,9 +339,9 @@ export function shuffle(data: (HomepageEntryData & { firstPostDate: string; last
 export function getSortedPosts(posts: (HomepageEntryData & { firstPostDate: string; lastPostDate: string })[], sortKey: SortKey) {
   switch (sortKey) {
     case "newest":
-      return posts.sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
+      return [...posts].sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
     case "oldest":
-      return posts.sort((a, b) => new Date(a.published_at).getTime() - new Date(b.published_at).getTime());
+      return [...posts].sort((a, b) => new Date(a.published_at).getTime() - new Date(b.published_at).getTime());
     case "bitcoin-dev":
       return posts.filter((post) => post.dev_name === "bitcoin-dev");
     case "delvingbitcoin":
