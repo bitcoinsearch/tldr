@@ -9,7 +9,7 @@ export default function NewsletterNavigation() {
   return (
     <div className='pt-5 md:pt-[54px]'>
       <button
-        onClick={() => router.back()}
+        onClick={() => router.push("/newsletters")}
         className='flex items-center gap-2 py-2 px-4 md:px-6 rounded-full border border-black w-fit cursor-pointer'
       >
         <ArrowLeftIcon className='w-5 h-5 md:w-6 md:h-6' strokeWidth={4} />

@@ -1,17 +1,21 @@
+import { title } from "process";
+
 export const featuresSectionData = [
   {
     title: "FOCUSED ON BITCOIN",
-    subtext: "100% concentrated on bitcoin and related technologies",
+    subtext: "100% concentrated on bitcoin and related technologies.",
     icon: "/icons/grey-bitcoin-icon.svg",
   },
   {
     title: "OPEN SOURCE",
-    subtext: "Everything we do is open source. We want your reviews and contributions",
+    subtext:
+      "Everything we do is open source. We want your reviews and contributions.",
     icon: "/icons/grey-github-icon.svg",
   },
   {
     title: "BITCOIN TECH",
-    subtext: "We focus on enabling devs to learn, practice, and build with bitcoin.",
+    subtext:
+      "We focus on enabling devs to learn, practice, and build with bitcoin.",
     icon: "/icons/grey-code-icon.svg",
   },
 ];
@@ -19,7 +23,8 @@ export const featuresSectionData = [
 export const exploreSectionData = [
   {
     title: "Active Discussions",
-    subtext: "Check out posts actively getting replies and inspiring conversations.",
+    subtext:
+      "Check out posts actively getting replies and inspiring conversations.",
     icon: "/icons/wavy-lines.svg",
     backgroundColor: "#CF661A",
     route: "?source=active-discussions",
@@ -75,7 +80,8 @@ export const menuApps = [
     href: "https://chat.bitcoinsearch.xyz",
     image: "/images/chat-btc.jpg",
     alt: "ChatBTC image",
-    title: "Interactive AI chat to learn about bitcoin technology and its history",
+    title:
+      "Interactive AI chat to learn about bitcoin technology and its history",
   },
   {
     href: "https://bitcoinsearch.xyz/",
@@ -94,14 +100,30 @@ export const menuApps = [
     href: "https://savingsatoshi.com",
     image: "/images/saving-satoshi.jpg",
     alt: "Saving Satoshi",
-    title: "Engaging bitcoin dev intro for coders using technical texts and code challenges",
+    title:
+      "Engaging bitcoin dev intro for coders using technical texts and code challenges",
   },
   {
-    href: "https://review.btctranscripts.com/",
-    image: "/images/bitcoin-transcripts-review.jpg",
-    alt: "Bitcoin Transcripts Review",
-    title: "Review technical bitcoin transcripts and earn sats",
+    id: "decoding-bitcoin",
+    href: "https://bitcoindevs.xyz/decoding",
+    image: "/images/decoding-bitcoin.png",
+    alt: "Decoding Bitcoin",
+    title:
+      "Hands on, guided learning to make you confident in bitcoin development.",
   },
+  {
+    id: "warnet",
+    href: "https://warnet.dev/",
+    image: "/images/warnet.jpg",
+    alt: "Warnet",
+    title: "Monitor and analyze the emergent behaviors of P2P networks",
+  },
+  // {
+  //   href: "https://review.btctranscripts.com/",
+  //   image: "/images/bitcoin-transcripts-review.jpg",
+  //   alt: "Bitcoin Transcripts Review",
+  //   title: "Review technical bitcoin transcripts and earn sats",
+  // },
 ];
 
 export const tweetUrls = [
@@ -119,7 +141,12 @@ export const tweetUrls = [
 ];
 
 export const MobileNavLinks = [
-  { title: "Newsletters", href: "/newsletters", sublinks: [], isSubMenu: false },
+  {
+    title: "Newsletters",
+    href: "/newsletters",
+    sublinks: [],
+    isSubMenu: false,
+  },
   {
     title: "Posts",
     href: "/posts",
@@ -159,4 +186,15 @@ export const newsLetterIconMap = [
   "/icons/irregular-stars-icon.svg",
 ];
 
-export const colorThemes = ["#F39595", "#FAE1DD", "#F1F8B5", "#A8D2D1", "#DBEDF7", "#EECEDB", "#DED5CE", "#9EA1D4", "#9EA1D4", "#F1F8B5"];
+export const colorThemes = [
+  "#F39595",
+  "#FAE1DD",
+  "#F1F8B5",
+  "#A8D2D1",
+  "#DBEDF7",
+  "#EECEDB",
+  "#DED5CE",
+  "#9EA1D4",
+  "#9EA1D4",
+  "#F1F8B5",
+];

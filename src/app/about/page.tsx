@@ -27,7 +27,7 @@ export default function Page() {
               and{" "}
               <span className='underline text-orange-custom-100'>
                 <Link href='https://delvingbitcoin.org/' target='_blank'>
-                  delving bitcoin
+                  Delving Bitcoin
                 </Link>
               </span>{" "}
               mailing lists. The bitcoin-dev and lightning-dev mailing lists are treasure troves of information. Bitcoin-dev alone has 20,000+ posts
@@ -73,7 +73,7 @@ export default function Page() {
                   A valuable contribution would be to review one or several discussion threads and provide feedback on your overall experience using
                   this{" "}
                   <span className='underline text-orange-custom-100'>
-                    <Link href='https://cryptpad.fr/form/#/2/form/view/3P2CsohsHOkcH7C+WdtX0-tvqjBHqXnAmz5D9yx0e04/' target='_blank'>
+                    <Link href='https://forms.gle/aLtBMjAeLZiKCFxn8' target='_blank'>
                       form
                     </Link>
                   </span>

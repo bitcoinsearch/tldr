@@ -18,7 +18,7 @@ export const ActiveDiscussions = ({
   dev?:SortKey;
 }) => {
 
-  const [sortKey, setSortKey] = React.useState<SortKey>( dev ? dev : "all");
+  const [sortKey, setSortKey] = React.useState<SortKey>( dev ||  "all");
   const [openPopUp, setOpenPopUp] = React.useState<boolean>(false);
 
   const memoizedPosts = React.useMemo(
