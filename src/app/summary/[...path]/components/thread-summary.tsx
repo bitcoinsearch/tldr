@@ -248,7 +248,7 @@ export const ThreadSummary = ({
               )}
             </section>
 
-            {generatedUrl &&  !isPostSummary && (
+            {generatedUrl && (
               <section className="flex justify-center">
                 <Link
                   href={generatedUrl || ""}
