@@ -6,6 +6,9 @@ _Because someone should be reading it_
 
 This application presents summaries of the [bitcoin-dev](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/) and [lightning-dev](https://lists.linuxfoundation.org/pipermail/lightning-dev/) mailing lists. We intend to add other sources like StackExchange in the future.
 
+
+<video src="./public/images/TLDR-v2-demo.mp4" width="800" controls></video>
+
 ## To run this locally
 
 The statically generated content in this repo is extracted from [mailing list summaries](https://github.com/bitcoinsearch/mailing-list-summaries), which runs a nightly cron job to update the static xml files that we use as the data source. We employ a git submodule in the public folder to keep this material up to date. The easiest way to pull down everything is to run `git clone --recurse-submodules` rather than the standard `git clone`.
