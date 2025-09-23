@@ -87,13 +87,18 @@ function generateHTMLForPost(post: NewsLetter) {
   const combinedSummaryLink = post.combined_summ_file_path;
   const datePublished = new Date(post.published_at).toDateString();
 
-  const authorsList = post.authors.slice(0, 2)
+  const authorsList = post.authors.slice(0, 2);
   if (post.authors.length > 2) {
-    authorsList.push(`+${post.authors.length - 2} more`)
+    authorsList.push(`+${post.authors.length - 2} more`);
   }
 
   const contributors_rendered = post.contributors.slice(0, 2).join(", ");
-  const contributors = post.contributors.length > 2 ? `${contributors_rendered} +${post.contributors.length - 2} ${post.contributors.length - 2 > 1 ? 'others': 'other'} ` : contributors_rendered;
+  const contributors =
+    post.contributors.length > 2
+      ? `${contributors_rendered} +${post.contributors.length - 2} ${
+          post.contributors.length - 2 > 1 ? "others" : "other"
+        } `
+      : contributors_rendered;
   const replies = post.n_threads;
   const originalPostLink = post.link;
 
@@ -117,14 +122,20 @@ function generateHTMLForPost(post: NewsLetter) {
             <tr>
               <td style="width: 100%;">
                 <div class="card">
-                  <a href="${combinedSummaryLink || link}" style="text-decoration: none; color: #000;">
+                  <a href="${
+                    combinedSummaryLink || link
+                  }" style="text-decoration: none; color: #000;">
                     <table cellpadding="0" cellspacing="0" border="0" width="100%">
                       <tr>
                         <td style="width: 100%; white-space: nowrap; vertical-align: top;">
                           <table class="dev_name" cellpadding="0" cellspacing="0" border="0" style="font-size: 14px; margin-bottom: 8px; display: none;">
                             <tr style="width: 100%";>
                               <td style="width: 24px; padding-right: 4px; vertical-align: middle;">
-                                <img src="${dev_name_config[post.dev_name].icon}" alt="${dev_name_config[post.dev_name].name} icon" style="display: block; width: 24px; height: auto; margin-left: auto;" />
+                                <img src="${
+                                  dev_name_config[post.dev_name].icon
+                                }" alt="${
+    dev_name_config[post.dev_name].name
+  } icon" style="display: block; width: 24px; height: auto; margin-left: auto;" />
                               </td>
                               <td style="width: 1%; vertical-align: middle; white-space: nowrap; margin-left: auto;">
                                 ${dev_name_config[post.dev_name].name}
@@ -136,14 +147,22 @@ function generateHTMLForPost(post: NewsLetter) {
                       <tr>
                         <td style="padding-right: 8px;">
                           <h3 style="font-size: 18px; font-weight: 500; margin: 0;">
-                            <a id="title_link" href="${combinedSummaryLink ||link}" style="text-decoration: none; color: #000000;">${post.title}</a>
+                            <a id="title_link" href="${
+                              combinedSummaryLink || link
+                            }" style="text-decoration: none; color: #000000;">${
+    post.title
+  }</a>
                           </h3>
                         </td>
                         <td style="vertical-align: top;">
                           <table class="dev_name_desktop" cellpadding="0" cellspacing="0" border="0" style="font-size: 14px; margin-bottom: 8px;">
                             <tr style="width: 100%";>
                               <td style="width: 24px; padding-right: 4px; vertical-align: middle;">
-                                <img src="${dev_name_config[post.dev_name].icon}" alt="${dev_name_config[post.dev_name].name} icon" style="display: block; width: 24px; height: auto; margin-left: auto;" />
+                                <img src="${
+                                  dev_name_config[post.dev_name].icon
+                                }" alt="${
+    dev_name_config[post.dev_name].name
+  } icon" style="display: block; width: 24px; height: auto; margin-left: auto;" />
                               </td>
                               <td style="width: 1%; vertical-align: middle; white-space: nowrap; margin-left: auto;">
                                 ${dev_name_config[post.dev_name].name}
@@ -158,32 +177,48 @@ function generateHTMLForPost(post: NewsLetter) {
                         <td style="width: 100%; padding-right: 8px;">
                           <table cellpadding="0" cellspacing="0" border="0">
                             <tr>
-                              ${authorsList.map(author => `
+                              ${authorsList
+                                .map(
+                                  (author) => `
                                 <td class="" style="width: fit-content; padding-right: 8px;">
                                   <span style="display: inline-block; width: fit-content; text-wrap: no-wrap; font-size: 14px; font-weight: 400; color: #fff; background-color: #000; padding: 2px 8px; border-radius: 16px;">
                                     ${author}
                                   </span> 
                                 </td>
-                              `).join("")}
+                              `
+                                )
+                                .join("")}
                             </tr>
                           </table>
                         </td>
-                        ${replies > 0 && combinedSummaryLink ? `
+                        ${
+                          replies > 0 && combinedSummaryLink
+                            ? `
                         <td style="white-space: nowrap; font-size: 14px; font-weight: 400; vertical-align: top; margin-top: 4px;">
-                          ${replies > 1 ? `${replies} replies` : `${replies} reply`}
+                          ${
+                            replies > 1
+                              ? `${replies} replies`
+                              : `${replies} reply`
+                          }
                         </td>
-                        ` : '<td></td>'}
+                        `
+                            : "<td></td>"
+                        }
                       </tr>
                     </table>
                     <table cellpadding="0" cellspacing="0" border="0" style="width: 100%; margin-top: 10px;">
                       <tr>
-                        ${post.contributors.length ? `
+                        ${
+                          post.contributors.length
+                            ? `
                         <td class="contributor" style="width: fit-content;">
                           <p style="display: inline-block; width: fit-content; text-wrap: no-wrap; font-size: 14px; font-weight: 400; color: #000; background-color: #F7931A; padding: 2px 8px; border-radius: 16px;">
                             ${contributors}
                           </p>
                         </td>
-                        ` : ''}
+                        `
+                            : ""
+                        }
                       </tr>
                     </table>
                     <div id="post_summary" style="padding-top: 18px;">
@@ -204,8 +239,9 @@ function generateHTMLForPost(post: NewsLetter) {
 
 // Function to generate the HTML content for the newsletter
 function generateHTMLTemplate(data: NewsLetterDataType) {
-   let words = data.summary_of_threads_started_this_week.split("\n\n");
-  let summary = words.slice(0,4).join(" ").replaceAll("\n", "<br/>");
+  let words = data.summary_of_threads_started_this_week.split("\n\n");
+
+  let summary = words.slice(0, 4).join(" <br/> <br/> ");
   let summaryHtml = marked(summary);
 
   let html = `
@@ -404,11 +440,11 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
           ${
             data.new_threads_this_week.length > 0
               ? `<h2 style="font-size: 28px; font-weight: 500;">Recent Threads</h2>` +
-              `<table cellpadding="0" cellspacing="0" border="0" width="100%">` +
+                `<table cellpadding="0" cellspacing="0" border="0" width="100%">` +
                 data.new_threads_this_week
                   .map((thread) => generateHTMLForPost(thread))
-                  .join("")
-                + `</table>`
+                  .join("") +
+                `</table>`
               : "<p>No new threads this week.</p>"
           }
         </div>
@@ -418,11 +454,11 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
           ${
             data.active_posts_this_week.length > 0
               ? `<h2 style="font-size: 28px; font-weight: 500;">Active Discussions</h2>` +
-              `<table cellpadding="0" cellspacing="0" border="0" width="100%">` +
+                `<table cellpadding="0" cellspacing="0" border="0" width="100%">` +
                 data.active_posts_this_week
                   .map((post) => generateHTMLForPost(post))
-                  .join("")
-                  + `</table>`
+                  .join("") +
+                `</table>`
               : "<p>No active posts this week.</p>"
           }
         </div>
