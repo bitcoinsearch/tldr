@@ -43,8 +43,11 @@ export const ThreadReply = ({
 
   const isOriginalPost = firstPostPath && hexLink === stringToHex(firstPostPath);
 
+  // Indentation by depth (new threaded structure)
+  const depthPadding = Math.min((author.depth ?? 0) * 20, 200); // increased max limit and adjusted multiplier
+
   return (
-    <div className={`flex items-start  p-2 justify-between rounded-lg max-w-[393px] w-full ${isActive ? isOriginalPost?"bg-black ":"bg-black" : ""}`}>
+    <div className={`flex items-start  p-2 justify-between rounded-lg max-w-[393px] w-full ${isActive ? isOriginalPost?"bg-black ":"bg-black" : ""}`} style={{ paddingLeft: depthPadding }}>
       <Link
       onClick={()=>{index === 0 && setIsReplyOpen({[length]:false}) }}
       href={`/posts/${originalPostLink}-${hexLink}`}
@@ -69,6 +72,9 @@ export const ThreadReply = ({
             >
               <span>{formatDateString(author.date, true)}</span> <span className='px-2'>/</span>
               <span>{formattedTime}</span>
+              {author.reply_to && (
+                <span className='pl-2'>↳ replying to {author.reply_to}</span>
+              )}
             </p>
           </section>
         </div>
