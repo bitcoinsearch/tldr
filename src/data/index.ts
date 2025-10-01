@@ -1,5 +1,3 @@
-import { title } from "process";
-
 export const featuresSectionData = [
   {
     title: "FOCUSED ON BITCOIN",
