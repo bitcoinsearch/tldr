@@ -30,6 +30,15 @@ export const CollapsibleThread = ({
   isPostSummary,
   firstPost,
 }: CollapsibleThreadProps) => {
+  // Keep a generous max indent; horizontal scroll will handle overflow on mobile
+  const [maxIndentPx, setMaxIndentPx] = useState<number>(2000);
+
+  useEffect(() => {
+    const update = () => setMaxIndentPx(2000);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
   // Map each displayed author (in current order) to its corresponding link
   const linkMap = new Map<string, string>();
   authors.forEach((author, i) => {
@@ -198,7 +207,7 @@ export const CollapsibleThread = ({
           className={`flex items-center gap-2 p-2 rounded-lg transition-colors ${
             isActive ? "bg-orange-custom-200 border-l-4 border-orange-custom-100" : "hover:bg-gray-custom-100"
           }`}
-          style={{ marginLeft: hasThreadingData ? `${depth * 20}px` : '0px' }}
+          style={{ marginLeft: hasThreadingData ? `${Math.min(depth * 20, maxIndentPx)}px` : '0px' }}
         >
           {/* Expand/Collapse Button - show space for consistent alignment */}
           {hasThreadingData && (
@@ -231,7 +240,7 @@ export const CollapsibleThread = ({
                 {node.author.name}
               </span>
               {isOriginalPost && (
-                <span className="px-2 py-1 text-xs bg-blue-custom-100 text-white rounded-full">
+                <span className="px-2 py-1 text-xs text-white rounded-full" style={{ backgroundColor: "#f6931b" }}>
                   Original Post
                 </span>
               )}
@@ -301,8 +310,8 @@ export const CollapsibleThread = ({
         </div>
       </div>
 
-      {/* Thread Tree */}
-      <div className="space-y-1">
+      {/* Thread Tree - allow horizontal scroll on small screens for deep nesting */}
+      <div className="space-y-1 overflow-x-auto">
         {tree.map(rootNode => renderThreadNode(rootNode))}
       </div>
     </div>
