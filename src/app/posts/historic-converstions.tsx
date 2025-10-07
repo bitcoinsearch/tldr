@@ -23,7 +23,7 @@ const HistoricConversations = ({
     setMemoizedPosts(shuffle(postsJson as any).slice(0, 20));
   };
 
-  console.log(memoizedPosts)
+ 
   return (
     <div className="flex flex-col gap-6 max-w-[866px] mx-auto ">
       <div className="flex items-end justify-end w-ful">

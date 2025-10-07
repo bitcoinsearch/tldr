@@ -29,7 +29,7 @@ export const exploreSectionData = [
   },
   {
     title: "Historic Conversations",
-    subtext: "Explore posts from past years in this historic deep dive.",
+    subtext: "Explore posts in this historic deep dive. Surfacing posts where the last reply is in the current month.",
     icon: "/icons/brushy-circles.svg",
     backgroundColor: "#1486B2",
     route: "?source=historic-conversations",

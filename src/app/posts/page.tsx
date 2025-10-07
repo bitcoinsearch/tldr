@@ -51,7 +51,7 @@ const page = async ({ params, searchParams }: { params: { path: string[] }; sear
     },
     "historic-conversations": {
       title: "Historic Conversations",
-      subtitle: "Explore posts from past years in this historic deep dive.",
+      subtitle: "Explore posts in this historic deep dive. Surfacing posts where the last reply is in the current month.",
       posts: allActivity,
     },
     "all-activity": {
