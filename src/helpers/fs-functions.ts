@@ -194,3 +194,15 @@ export const getTweetsFromFile = async () => {
     return [];
   }
 };
+
+
+export const getHistoricalConversations = async () => {
+  try {
+    const fileContent = fs.readFileSync(`${process.cwd()}/public/historical.json`, "utf-8");
+    const historicalJson = JSON.parse(fileContent).historicaldata as HomepageEntryData[];
+
+    return historicalJson;
+  } catch (err) {
+    return [];
+  }
+};
