@@ -25,7 +25,7 @@ const AllActivity = ({
 ) => {
   const [sortKey, setSortKey] = useState<SortKey>( dev || "all");
   const [openSortDialog] = useState<boolean>(false);
-
+console.log(posts)
   const memoizedPosts = React.useMemo(
     () => getSortedPosts(posts, sortKey),
     [posts, sortKey]
