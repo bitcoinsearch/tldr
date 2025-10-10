@@ -300,6 +300,7 @@ export const getSummaryDataInfo = async (path: string[], fileContent: any) => {
   const data = await convertXmlToText(fileContent, pathString);
 
   const linksCopy = data.data?.historyLinks;
+  const linkByAnchor = (data.data as any).linkByAnchor as Record<string, string> | undefined;
 
   const authorsFormatted: sortedAuthorData[] = data.data.authors.map(
     (author, index) => ({
@@ -310,26 +311,107 @@ export const getSummaryDataInfo = async (path: string[], fileContent: any) => {
     })
   );
 
-  const chronologicalAuthors = authorsFormatted.sort((a, b) => {
-    if (a.dateInMS < b.dateInMS) {
-      return -1;
+  // Build proper thread tree structure and traverse depth-first to match mailing list order
+  const orderedAuthors = (() => {
+    const hasThreadingData = authorsFormatted.some(a => 
+      typeof a.position === "number" || typeof a.depth === "number"
+    );
+    
+    if (!hasThreadingData) {
+      // Fallback to chronological sorting for legacy data
+      return authorsFormatted.sort((a, b) => a.dateInMS - b.dateInMS);
     }
-    if (a.dateInMS > b.dateInMS) {
-      return 1;
-    } else {
-      return 0;
+
+    // Build tree structure
+    const messageMap = new Map<string, sortedAuthorData>();
+    const childrenMap = new Map<string, sortedAuthorData[]>();
+    
+    // First pass: create message map and identify children
+    authorsFormatted.forEach(author => {
+      const msgId = author.anchor || `${author.name}-${author.dateInMS}`;
+      messageMap.set(msgId, author);
+      
+      // Also map by parent_id for easier lookup
+      if (author.parent_id) {
+        // Extract the anchor from parent_id (format: mailing-list-2025-07-m376871ab5341f27343e4e85b66d86ca373a5b857)
+        const parentAnchor = author.parent_id.split('-').slice(-1)[0]; // Get the last part after the last dash
+        if (!childrenMap.has(parentAnchor)) {
+          childrenMap.set(parentAnchor, []);
+        }
+        childrenMap.get(parentAnchor)!.push(author);
+      }
+    });
+
+    // Second pass: sort children by timestamp within each parent
+    childrenMap.forEach(children => {
+      children.sort((a, b) => a.dateInMS - b.dateInMS);
+    });
+
+    // Third pass: depth-first traversal starting from root messages (depth=0)
+    const result: sortedAuthorData[] = [];
+    const visited = new Set<string>();
+    
+    const traverse = (msgId: string, currentDepth: number = 0) => {
+      if (visited.has(msgId)) return;
+      visited.add(msgId);
+      
+      const message = messageMap.get(msgId);
+      if (message) {
+        // Override the depth with the actual traversal depth
+        const messageWithCorrectDepth = { ...message, depth: currentDepth };
+        result.push(messageWithCorrectDepth);
+        
+        // Add all children in chronological order
+        const children = childrenMap.get(msgId) || [];
+        children.forEach(child => {
+          const childId = child.anchor || `${child.name}-${child.dateInMS}`;
+          traverse(childId, currentDepth + 1);
+        });
+      }
+    };
+
+    // Find root messages (depth=0 or no parent_id) and traverse
+    const rootMessages = authorsFormatted.filter(a => 
+      a.depth === 0 || !a.parent_id
+    ).sort((a, b) => a.dateInMS - b.dateInMS);
+    
+    rootMessages.forEach(root => {
+      const rootId = root.anchor || `${root.name}-${root.dateInMS}`;
+      traverse(rootId);
+    });
+    return result;
+  })();
+
+  // Produce links in the exact thread order; prefer anchor mapping when available
+  const linksInThreadOrder = orderedAuthors.map((author) => {
+    const byAnchorKey = author.anchor;
+    const byLegacyKey = `${author.name}-${author.dateInMS}`;
+    if (linkByAnchor) {
+      if (byAnchorKey && linkByAnchor[byAnchorKey]) {
+        return linkByAnchor[byAnchorKey] + ".xml";
+      }
+      if (linkByAnchor[byLegacyKey]) {
+        return linkByAnchor[byLegacyKey] + ".xml";
+      }
     }
+    // Fallback: align by current display index if available
+    const idx = orderedAuthors.indexOf(author);
+    if (idx !== -1 && linksCopy && linksCopy[idx]) return linksCopy[idx];
+    // Final fallback: old initialIndex
+    return linksCopy?.[author.initialIndex] ?? "";
   });
-  const chronologicalLinksBasedOffAuthors = linksCopy?.length
-    ? chronologicalAuthors.map((author) => linksCopy[author.initialIndex])
-    : [];
+
+  try {
+    console.log("[utils] linksInThreadOrder preview:", linksInThreadOrder.slice(0, 5));
+    console.log("[utils] orderedAuthors anchors preview:", orderedAuthors.slice(0,5).map(a => a.anchor || `${a.name}-${a.dateInMS}`));
+  } catch (e) {}
 
   return {
     ...data,
     data: {
       ...data.data,
-      authors: chronologicalAuthors,
-      historyLinks: chronologicalLinksBasedOffAuthors,
+      authors: orderedAuthors,
+      historyLinks: linksInThreadOrder,
     },
   };
 };

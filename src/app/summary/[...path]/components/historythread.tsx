@@ -60,7 +60,11 @@ const SingleHistoryThread = ({
               {author?.name ?? "regex fail placeholder name"}
             </span>
           </Link>
-          {index === 0 && <span className='py-1 px-1 font-inika text-sm bg-yellow-100 text-gray-900'>Original Post</span>}
+          {index === 0 && (
+            <span className='py-1 px-1 font-inika text-sm text-white' style={{ backgroundColor: '#f6931b' }}>
+              Original Post
+            </span>
+          )}
         </div>
         <div className='py-2'>{publishedAtDateDisplay ?? "regex fail placeholder date"}</div>
       </div>

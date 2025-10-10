@@ -76,11 +76,17 @@ const page = async ({ params, searchParams }: { params: { path: string[] }; sear
         const [firstPostAuthor, lastPostAuthor] = [authors[0], authors[authors.length - 1]];
 
         const createDate = (author: sortedAuthorData) => {
-          const dateObj = new Date(author.dateInMS);
-          const dateString = dateObj.toISOString();
-          const publishedAtDateDisplay = formattedDate(dateString);
-
-          return publishedAtDateDisplay;
+          try {
+            const dateObj = new Date(author.dateInMS);
+            if (isNaN(dateObj.getTime())) {
+              return 'Invalid Date';
+            }
+            const dateString = dateObj.toISOString();
+            const publishedAtDateDisplay = formattedDate(dateString);
+            return publishedAtDateDisplay;
+          } catch (error) {
+            return 'Invalid Date';
+          }
         };
 
         const firstPostDate = createDate(firstPostAuthor);

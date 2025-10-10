@@ -18,6 +18,12 @@ type AuthorData = {
   name: string;
   date: string;
   time: string;
+  // Threading metadata (new XML structure)
+  depth?: number;
+  parent_id?: string;
+  reply_to?: string;
+  position?: number;
+  anchor?: string;
 };
 
 type FeedPage = {
@@ -26,6 +32,8 @@ type FeedPage = {
   updatedAt: string;
   authors: AuthorData[];
   historyLinks?: string[];
+  // Optional mapping from message anchor => history link path (without .xml)
+  linkByAnchor?: Record<string, string>;
   generatedUrl?: string;
   entry: EntryData;
 };
