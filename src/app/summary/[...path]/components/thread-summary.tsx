@@ -38,7 +38,6 @@ export const ThreadSummary = ({
     authors,
     generatedUrl,
     historyLinks,
-    linkByAnchor,
     entry: { summary },
   } = summaryData.data;
 
@@ -306,7 +305,6 @@ export const ThreadSummary = ({
               currentReplyLink={currentReplyLink}
               isPostSummary={isPostSummary}
               firstPost={firstPost}
-              linkByAnchor={linkByAnchor}
             />
           </section>
         </div>

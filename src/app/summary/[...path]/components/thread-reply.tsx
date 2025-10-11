@@ -60,37 +60,59 @@ export const ThreadReply = ({
           href={`/posts/${originalPostLink}-${hexLink}`}
           className={`flex gap-1 items-start max-w-[max-content] w-full cursor-pointer`}
         >
-      ) : (
-        <div className={`flex gap-1 items-start max-w-[max-content] w-full cursor-not-allowed`}>
-      )}
-        <div className='w-full flex max-w-[373px] justify-between'>
-          <section className='flex flex-col gap-1'>
-            <section className='flex items-center gap-4'>
+          <div className='w-full flex max-w-[373px] justify-between'>
+            <section className='flex flex-col gap-1'>
+              <section className='flex items-center gap-4'>
+                <p
+                  className={`font-test-signifier text-sm md:text-lg font-medium leading-[18.1px] md:leading-[23.27px] underline capitalize ${
+                    isActive ? "text-orange-custom-100" : "text-black"
+                  }`}
+                >
+                  {author.name}
+                </p>
+
+              </section>
               <p
-                className={`font-test-signifier text-sm md:text-lg font-medium leading-[18.1px] md:leading-[23.27px] underline capitalize ${
-                  isActive ? "text-orange-custom-100" : "text-black"
+                className={`font-gt-walsheim text-sm md:text-sm leading-[19.74px] md:leading-[22.56px] font-light text-nowrap ${
+                  isActive ? "text-orange-custom-100" : "text-[#8B8B8B]"
                 }`}
               >
-                {author.name}
+                <span>{formatDateString(author.date, true)}</span> <span className='px-2'>/</span>
+                <span>{formattedTime}</span>
+                {author.reply_to && (
+                  <span className='pl-2'>↳ replying to {author.reply_to}</span>
+                )}
               </p>
-
             </section>
-            <p
-              className={`font-gt-walsheim text-sm md:text-sm leading-[19.74px] md:leading-[22.56px] font-light text-nowrap ${
-                isActive ? "text-orange-custom-100" : "text-[#8B8B8B]"
-              }`}
-            >
-              <span>{formatDateString(author.date, true)}</span> <span className='px-2'>/</span>
-              <span>{formattedTime}</span>
-              {author.reply_to && (
-                <span className='pl-2'>↳ replying to {author.reply_to}</span>
-              )}
-            </p>
-          </section>
-        </div>
-      {hasValidLink ? (
+          </div>
         </Link>
       ) : (
+        <div className={`flex gap-1 items-start max-w-[max-content] w-full cursor-not-allowed`}>
+          <div className='w-full flex max-w-[373px] justify-between'>
+            <section className='flex flex-col gap-1'>
+              <section className='flex items-center gap-4'>
+                <p
+                  className={`font-test-signifier text-sm md:text-lg font-medium leading-[18.1px] md:leading-[23.27px] underline capitalize ${
+                    isActive ? "text-orange-custom-100" : "text-black"
+                  }`}
+                >
+                  {author.name}
+                </p>
+
+              </section>
+              <p
+                className={`font-gt-walsheim text-sm md:text-sm leading-[19.74px] md:leading-[22.56px] font-light text-nowrap ${
+                  isActive ? "text-orange-custom-100" : "text-[#8B8B8B]"
+                }`}
+              >
+                <span>{formatDateString(author.date, true)}</span> <span className='px-2'>/</span>
+                <span>{formattedTime}</span>
+                {author.reply_to && (
+                  <span className='pl-2'>↳ replying to {author.reply_to}</span>
+                )}
+              </p>
+            </section>
+          </div>
         </div>
       )}
 
