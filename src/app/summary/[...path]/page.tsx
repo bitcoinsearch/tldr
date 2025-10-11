@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: { path: string[] }; sea
 
   if (!summaryData) return notFound();
 
-
+  const firstPost = summaryData.data.historyLinks[0] || undefined;
 
   return (
     <Wrapper>
@@ -26,7 +26,7 @@ export default async function Page({ params }: { params: { path: string[] }; sea
         </div>
       </div>
 
-      <ThreadSummary isPostSummary summaryData={summaryData}  originalPostLink={hexString} params={params} />
+      <ThreadSummary isPostSummary summaryData={summaryData}  originalPostLink={hexString} params={params} firstPost={firstPost} />
     </Wrapper>
   );
 }

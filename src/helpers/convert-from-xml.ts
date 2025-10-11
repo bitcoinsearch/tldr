@@ -133,10 +133,6 @@ export const convertXmlToText = async (
           }
         }
       });
-      try {
-        const preview = Object.entries(linkByAnchor).slice(0, 5);
-        console.log("[convert-from-xml] linkByAnchor size:", Object.keys(linkByAnchor).length, preview);
-      } catch (e) {}
     }
 
     const entry = {

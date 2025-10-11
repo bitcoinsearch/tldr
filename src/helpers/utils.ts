@@ -394,17 +394,11 @@ export const getSummaryDataInfo = async (path: string[], fileContent: any) => {
         return linkByAnchor[byLegacyKey] + ".xml";
       }
     }
-    // Fallback: align by current display index if available
-    const idx = orderedAuthors.indexOf(author);
-    if (idx !== -1 && linksCopy && linksCopy[idx]) return linksCopy[idx];
-    // Final fallback: old initialIndex
-    return linksCopy?.[author.initialIndex] ?? "";
+    // For missing links, return empty string to indicate no XML available
+    // This will be handled in the UI to show reduced opacity
+    return "";
   });
 
-  try {
-    console.log("[utils] linksInThreadOrder preview:", linksInThreadOrder.slice(0, 5));
-    console.log("[utils] orderedAuthors anchors preview:", orderedAuthors.slice(0,5).map(a => a.anchor || `${a.name}-${a.dateInMS}`));
-  } catch (e) {}
 
   return {
     ...data,

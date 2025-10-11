@@ -21,6 +21,8 @@ const SummaryPage = async ({params}:NextParamsPage ) => {
     return notFound();
   }
 
+  const firstPost = originalPostData.data.historyLinks[0] || undefined;
+
   return (
     <Wrapper>
       <section>
@@ -31,6 +33,7 @@ const SummaryPage = async ({params}:NextParamsPage ) => {
           currentReplyLink={allPath[1]}
           isPostSummary
           currentReplyData={singleReplyData as PostSummaryData}
+          firstPost={firstPost}
         />
       </section>
     </Wrapper>

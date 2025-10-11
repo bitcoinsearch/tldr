@@ -38,6 +38,7 @@ export const ThreadSummary = ({
     authors,
     generatedUrl,
     historyLinks,
+    linkByAnchor,
     entry: { summary },
   } = summaryData.data;
 
@@ -263,7 +264,7 @@ export const ThreadSummary = ({
           </div>
         </section>
 
-        <div className="bg-orange-custom-200 rounded-lg p-4 py-6 md:p-6 w-full">
+        <div className="bg-orange-custom-200 rounded-lg p-4 py-6 md:p-6 w-full overflow-x-auto">
           {/* Thread summary control */}
           <Link
             href={`/posts/${originalPostLink}-${currentReplyLink||""}/summary`}
@@ -297,7 +298,7 @@ export const ThreadSummary = ({
           <section className="border-b border-[#979797] my-2"></section>
 
           {/* Thread Replies */}
-          <section>
+          <section className="min-w-full">
             <CollapsibleThread
               authors={authors}
               historyLinks={historyLinks}
@@ -305,6 +306,7 @@ export const ThreadSummary = ({
               currentReplyLink={currentReplyLink}
               isPostSummary={isPostSummary}
               firstPost={firstPost}
+              linkByAnchor={linkByAnchor}
             />
           </section>
         </div>

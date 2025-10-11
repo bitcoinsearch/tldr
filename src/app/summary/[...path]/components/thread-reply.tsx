@@ -39,20 +39,30 @@ export const ThreadReply = ({
 
   const hexLink = stringToHex(path)
 
-  const isActive = isPostSummary ? false : hexLink === currentReplyUrl;
+  // Check if this author has a valid link (XML file available)
+  const hasValidLink = link && link.trim() !== "";
+
+
+  // Only consider active if we have a valid link and it matches the current reply
+  const isActive = isPostSummary ? false : (hasValidLink && hexLink === currentReplyUrl);
 
   const isOriginalPost = firstPostPath && hexLink === stringToHex(firstPostPath);
 
   // Indentation by depth (new threaded structure)
   const depthPadding = Math.min((author.depth ?? 0) * 20, 200); // increased max limit and adjusted multiplier
 
+
   return (
-    <div className={`flex items-start  p-2 justify-between rounded-lg max-w-[393px] w-full ${isActive ? isOriginalPost?"bg-black ":"bg-black" : ""}`} style={{ paddingLeft: depthPadding }}>
-      <Link
-      onClick={()=>{index === 0 && setIsReplyOpen({[length]:false}) }}
-      href={`/posts/${originalPostLink}-${hexLink}`}
-        className={`flex gap-1 items-start max-w-[max-content] w-full cursor-pointer`}
-      >
+    <div className={`flex items-start  p-2 justify-between rounded-lg max-w-[393px] w-full ${isActive ? isOriginalPost?"bg-black ":"bg-black" : ""} ${!hasValidLink ? "opacity-50" : ""}`} style={{ paddingLeft: depthPadding }}>
+      {hasValidLink ? (
+        <Link
+          onClick={()=>{index === 0 && setIsReplyOpen({[length]:false}) }}
+          href={`/posts/${originalPostLink}-${hexLink}`}
+          className={`flex gap-1 items-start max-w-[max-content] w-full cursor-pointer`}
+        >
+      ) : (
+        <div className={`flex gap-1 items-start max-w-[max-content] w-full cursor-not-allowed`}>
+      )}
         <div className='w-full flex max-w-[373px] justify-between'>
           <section className='flex flex-col gap-1'>
             <section className='flex items-center gap-4'>
@@ -78,7 +88,11 @@ export const ThreadReply = ({
             </p>
           </section>
         </div>
-      </Link>
+      {hasValidLink ? (
+        </Link>
+      ) : (
+        </div>
+      )}
 
       {isOriginalPost && <p className={`font-gt-walsheim pt-1 whitespace-nowrap text-xs ${isActive ? "text-orange-custom-100": "text-black"}`}>Original Post</p>}
     </div>
