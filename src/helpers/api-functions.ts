@@ -87,11 +87,58 @@ export const buildQuery = ({
 };
 
 const buildShouldQueryClause = (queryString: string) => {
+  // Create a compound query that prioritizes exact matches and phrases
   let shouldQueryClause = {
-    multi_match: {
-      query: queryString,
-      fields: FIELDS_TO_SEARCH,
-    },
+    bool: {
+      should: [
+        // Exact phrase match in title (highest priority)
+        {
+          match_phrase: {
+            title: {
+              query: queryString,
+              boost: 10
+            }
+          }
+        },
+        // Exact phrase match in summary
+        {
+          match_phrase: {
+            summary: {
+              query: queryString,
+              boost: 5
+            }
+          }
+        },
+        // Exact phrase match in body
+        {
+          match_phrase: {
+            body: {
+              query: queryString,
+              boost: 3
+            }
+          }
+        },
+        // Multi-match for broader matching (lower priority)
+        {
+          multi_match: {
+            query: queryString,
+            fields: FIELDS_TO_SEARCH,
+            type: "best_fields",
+            boost: 1
+          }
+        },
+        // Fuzzy matching for typos (lowest priority)
+        {
+          multi_match: {
+            query: queryString,
+            fields: FIELDS_TO_SEARCH,
+            fuzziness: "AUTO",
+            boost: 0.5
+          }
+        }
+      ],
+      minimum_should_match: 1
+    }
   };
 
   return shouldQueryClause;

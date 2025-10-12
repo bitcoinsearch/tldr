@@ -9,6 +9,7 @@ import { ThreadIcon } from "@/public/icons/thread-icon";
 import { useCallback } from "react";
 import { MarkdownWrapper } from "@/app/components/server/MarkdownWrapper";
 import { ThreadReply } from "./thread-reply";
+import { CollapsibleThread } from "./collapsible-thread";
 import Link from "next/link";
 
 export const ThreadSummary = ({
@@ -262,7 +263,7 @@ export const ThreadSummary = ({
           </div>
         </section>
 
-        <div className="bg-orange-custom-200 rounded-lg p-4 py-6 md:p-6 w-full">
+        <div className="bg-orange-custom-200 rounded-lg p-4 py-6 md:p-6 w-full overflow-x-auto">
           {/* Thread summary control */}
           <Link
             href={`/posts/${originalPostLink}-${currentReplyLink||""}/summary`}
@@ -296,21 +297,15 @@ export const ThreadSummary = ({
           <section className="border-b border-[#979797] my-2"></section>
 
           {/* Thread Replies */}
-          <section className="flex flex-col gap-2">
-            {historyLinks.map((link, index) => (
-              <ThreadReply
-                key={index}
-                setIsReplyOpen={setIsReplyOpen}
-                author={authors[index]}
-                index={index}
-                currentReplyUrl={currentReplyLink || ""}
-                originalPostLink={originalPostLink}
-                length={historyLinks.length}
-                link={link}
-                firstPost={firstPost}
-                isPostSummary={isPostSummary || false}
-              />
-            ))}
+          <section className="min-w-full">
+            <CollapsibleThread
+              authors={authors}
+              historyLinks={historyLinks}
+              originalPostLink={originalPostLink}
+              currentReplyLink={currentReplyLink}
+              isPostSummary={isPostSummary}
+              firstPost={firstPost}
+            />
           </section>
         </div>
       </div>

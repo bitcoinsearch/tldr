@@ -8,7 +8,7 @@ export function usePaginatedResult<T>(result: T[] | undefined, pageSize = 10) {
   const endIndex = currentPage * pageSize;
   const defaultResult = result ?? emptyArray;
 
-  const pages = useMemo(() => Math.ceil((defaultResult?.length ?? 0) / pageSize), [defaultResult?.length]);
+  const pages = useMemo(() => Math.ceil((defaultResult?.length ?? 0) / pageSize), [defaultResult?.length, pageSize]);
 
   return {
     currentPage,

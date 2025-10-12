@@ -4,6 +4,7 @@ import { Inter, Inika, IBM_Plex_Serif } from "next/font/google";
 import "@bitcoin-dev-project/bdp-ui/styles.css";
 import "./globals.css";
 import Navbar from "@/app/components/server/navbar";
+import TanstackProvider from "./provider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const inika = Inika({
@@ -58,15 +59,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='en' className='h-full'>
       <body className={`${inter.variable} ${inika.variable} ${ibmPlexSerif.variable} font-inter h-full`}>
-        <div className='w-full items-center h-full flex flex-col'>
-          <div className='w-full grow flex flex-col'>
-            <div className='z-10'>
-              <Navbar />
+        <TanstackProvider>
+          <div className='w-full items-center h-full flex flex-col'>
+            <div className='w-full grow flex flex-col'>
+              <div className='z-10'>
+                <Navbar />
+              </div>
+              <div>{children}</div>
+              <Footer />
             </div>
-            <div>{children}</div>
-            <Footer />
           </div>
-        </div>
+        </TanstackProvider>
         <script async src='https://visits.bitcoindevs.xyz/script.js' data-website-id='a711d1d5-764e-461e-83bd-d715c5b8cb29'></script>
       </body>
     </html>

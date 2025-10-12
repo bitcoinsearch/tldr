@@ -27,12 +27,113 @@ export const convertXmlToText = async (
 
   let formattedData: FeedPage = {} as FeedPage;
   const immediateLinkELements = $("feed").children(xmlElements.link);
+  const linkByAnchor: Record<string, string> = {};
+  
+  // Check for thread structure at feed level first
+  const threadMessages = $("feed > thread > message");
+  let authorsForFeed: FeedPage["authors"] = [];
+
+  if (threadMessages.length > 0) {
+    // Build a flat list preserving position, with depth/parent/reply metadata
+    const messages: Array<{
+      name: string;
+      date: string;
+      time: string;
+      depth?: number;
+      parent_id?: string;
+      reply_to?: string;
+      position?: number;
+      anchor?: string;
+    }> = [];
+
+    threadMessages.each((_i, msg) => {
+      const $msg = $(msg);
+      const authorName = $msg.find("author").first().text();
+      const timestamp = $msg.find("timestamp").first().text();
+      // timestamp format: YYYY-MM-DDTHH:MM:SS.000Z or YYYY-MM-DD HH:MM:SS+00:00
+      let date = "";
+      let time = "";
+      if (timestamp) {
+        if (timestamp.includes("T")) {
+          // ISO format: YYYY-MM-DDTHH:MM:SS.000Z
+          const parts = timestamp.split("T");
+          date = parts[0] || "";
+          time = parts[1] ? parts[1].replace(/\.\d{3}Z$/, "") : "";
+        } else {
+          // Legacy format: YYYY-MM-DD HH:MM:SS+00:00
+          const parts = timestamp.split(" ");
+          date = parts[0] || "";
+          time = parts.slice(1).join(" ") || "";
+        }
+      }
+
+      // Create a more specific reply_to identifier
+      let replyToText = $msg.attr("reply_to");
+      if (replyToText && $msg.attr("parent_id")) {
+        // Extract the parent anchor from parent_id to make it more specific
+        const parentAnchor = $msg.attr("parent_id")?.split('-').slice(-1)[0];
+        if (parentAnchor) {
+          // Find the parent message to get its timestamp for more context
+          let parentTimestamp = "";
+          threadMessages.each((_, msgEl) => {
+            const $msgEl = $(msgEl);
+            if ($msgEl.attr("anchor") === parentAnchor) {
+              parentTimestamp = $msgEl.find("timestamp").first().text();
+              return false; // Break out of loop
+            }
+          });
+          
+          if (parentTimestamp) {
+            const parentDate = parentTimestamp.split(" ")[0];
+            const parentTime = parentTimestamp.split(" ")[1]?.split(":")[0] + ":" + parentTimestamp.split(" ")[1]?.split(":")[1];
+            replyToText = `${replyToText} (${parentDate} ${parentTime})`;
+          }
+        }
+      }
+
+      const messageData = {
+        name: authorName,
+        date,
+        time,
+        depth: Number($msg.attr("depth")) || 0,
+        parent_id: $msg.attr("parent_id"),
+        reply_to: replyToText,
+        position: Number($msg.attr("position")) || 0,
+        anchor: $msg.attr("anchor"),
+      };
+
+      messages.push(messageData);
+    });
+
+    // Sort by position to match chronological thread overview
+    messages.sort((a, b) => (a.position ?? 0) - (b.position ?? 0));
+
+    authorsForFeed = messages as any;
+  } else {
+  }
+
   $("entry").each((_index, element) => {
-    const author = $(xmlElements.author).children(xmlElements.name).text();
+    // New: collect all alternate links (per-message historical links)
     let historyLinks: string[] = [];
     immediateLinkELements.each((_index, el) => {
       historyLinks.push(el.attribs["href"]);
     });
+
+    // Build anchor->link mapping by matching anchors in filenames
+    // Instead of using index position, match the anchor in the filename to the message anchor
+    const normalizedLinks = historyLinks.map(l => l.replace(/\.xml$/, ""));
+    if (threadMessages.length > 0) {
+      threadMessages.each((i, msg) => {
+        const anchor = $(msg).attr("anchor");
+        if (anchor) {
+          // Find the link that contains this anchor in its filename
+          const matchingLink = normalizedLinks.find(link => link.includes(anchor));
+          if (matchingLink) {
+            linkByAnchor[anchor] = matchingLink;
+          }
+        }
+      });
+    }
 
     const entry = {
       id: $(element).find(xmlElements.id).text(),
@@ -51,10 +152,69 @@ export const convertXmlToText = async (
         historyLinks: historyLinks,
       },
     };
-   
-    const threadAuthors = extractAuthorsDateTime(author);
-    
-    const newEntry = { ...entry, authors: threadAuthors, historyLinks };
+
+    // Use thread authors if found, otherwise fall back to legacy parsing
+    if (authorsForFeed.length === 0) {
+      console.log("No thread structure found, parsing legacy flat author structure");
+      
+      // Handle old flat structure with multiple <author> elements
+      const legacyAuthors = $("author > name");
+      if (legacyAuthors.length > 0) {
+        const messages: Array<{
+          name: string;
+          date: string;
+          time: string;
+          depth?: number;
+          parent_id?: string;
+          reply_to?: string;
+          position?: number;
+          anchor?: string;
+        }> = [];
+
+        legacyAuthors.each((_i, authorEl) => {
+          const authorText = $(authorEl).text();
+          const threadAuthors = extractAuthorsDateTime(authorText);
+          
+          // Convert legacy authors to new format
+          threadAuthors.forEach((author, index) => {
+            messages.push({
+              name: author.name,
+              date: author.date,
+              time: author.time,
+              depth: 0, // All legacy authors are treated as root level
+              parent_id: undefined,
+              reply_to: undefined,
+              position: index,
+              anchor: undefined,
+            });
+          });
+        });
+
+        authorsForFeed = messages as any;
+        console.log(`Parsed ${authorsForFeed.length} authors from legacy flat structure`);
+
+        // Build name-date key → link mapping aligned by DOM order of <link> elements
+        try {
+          const normalizedLegacy = historyLinks.map(l => l.replace(/\.xml$/, ""));
+          (messages as any[]).forEach((m, i) => {
+            const key = `${m.name}-${Date.parse(m.date + "T" + m.time)}`;
+            if (normalizedLegacy[i]) {
+              linkByAnchor[key] = normalizedLegacy[i];
+            }
+          });
+          const preview = Object.entries(linkByAnchor).slice(0, 5);
+          console.log("[convert-from-xml] legacy key->link size:", Object.keys(linkByAnchor).length, preview);
+        } catch (e) {}
+      } else {
+        // Fallback to old single author parsing
+        const author = $(xmlElements.author).children(xmlElements.name).text();
+        const threadAuthors = extractAuthorsDateTime(author);
+        authorsForFeed = threadAuthors;
+        console.log(`Parsed ${authorsForFeed.length} authors from single author fallback`);
+      }
+    }
+    const newEntry = { ...entry, authors: authorsForFeed, historyLinks } as any;
+    (newEntry as any).linkByAnchor = linkByAnchor;
     formattedData = newEntry;
     
   });
