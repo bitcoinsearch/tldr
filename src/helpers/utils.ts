@@ -393,6 +393,13 @@ export const getSummaryDataInfo = async (path: string[], fileContent: any) => {
       if (linkByAnchor[byLegacyKey]) {
         return linkByAnchor[byLegacyKey] + ".xml";
       }
+      // Try with the original name from the XML data (before removeZeros processing)
+      // The linkByAnchor keys are created with the original names that include spaces and dots
+      const originalName = data.data.authors[author.initialIndex]?.name || author.name;
+      const originalKey = `${originalName}-${author.dateInMS}`;
+      if (linkByAnchor[originalKey]) {
+        return linkByAnchor[originalKey] + ".xml";
+      }
     }
     // For missing links, return empty string to indicate no XML available
     // This will be handled in the UI to show reduced opacity
@@ -406,6 +413,7 @@ export const getSummaryDataInfo = async (path: string[], fileContent: any) => {
       ...data.data,
       authors: orderedAuthors,
       historyLinks: linksInThreadOrder,
+      linkByAnchor: linkByAnchor,
     },
   };
 };

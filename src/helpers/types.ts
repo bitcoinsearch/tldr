@@ -222,6 +222,7 @@ export type PostSummaryData = {
     title: string;
     updatedAt: string;
     generatedUrl?: string;
+    linkByAnchor?: Record<string, string>;
     entry: EntryData;
   };
   month: string;

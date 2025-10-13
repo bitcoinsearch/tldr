@@ -305,6 +305,7 @@ export const ThreadSummary = ({
               currentReplyLink={currentReplyLink}
               isPostSummary={isPostSummary}
               firstPost={firstPost}
+              linkByAnchor={summaryData.data.linkByAnchor}
             />
           </section>
         </div>
