@@ -133,6 +133,29 @@ export const convertXmlToText = async (
           }
         }
       });
+
+      // Fallback: some delvingbitcoin threads omit the `anchor` attribute on messages.
+      // When that happens, populate the mapping by index using a stable name-date key.
+      if (Object.keys(linkByAnchor).length === 0) {
+        const messages: Array<{ name: string; date: string; time: string; anchor?: string }> = [];
+        threadMessages.each((_i, msg) => {
+          const $msg = $(msg);
+          messages.push({
+            name: $msg.find("author").first().text(),
+            date: ($msg.find("timestamp").first().text() || "").split(" ")[0] || "",
+            time: ($msg.find("timestamp").first().text() || "").split(" ")[1] || "",
+            anchor: $msg.attr("anchor") || undefined,
+          });
+        });
+
+        messages.forEach((m, i) => {
+          const ms = Date.parse(`${m.date}T${m.time}`);
+          const key = m.anchor ? m.anchor : `${m.name}-${ms}`;
+          if (normalizedLinks[i]) {
+            linkByAnchor[key] = normalizedLinks[i];
+          }
+        });
+      }
     }
 
     const entry = {

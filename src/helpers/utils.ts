@@ -302,6 +302,41 @@ export const getSummaryDataInfo = async (path: string[], fileContent: any) => {
   const linksCopy = data.data?.historyLinks;
   const linkByAnchor = (data.data as any).linkByAnchor as Record<string, string> | undefined;
 
+  // Expand linkByAnchor to also include keys using normalized author names used in UI
+  // This ensures components that reference `${author.name}-${dateInMS}` after name cleanup
+  // still find the correct link that was keyed with the original XML author string.
+  const expandedLinkByAnchor: Record<string, string> | undefined = (() => {
+    if (!linkByAnchor) return linkByAnchor;
+
+    const map: Record<string, string> = { ...linkByAnchor };
+    try {
+      // authors as they came from XML (raw) and after formatting (normalized)
+      const rawAuthors = (data.data as any).authors as Array<{ name: string; date: string; time: string }>;
+      const normalizedAuthors = rawAuthors.map((author, index) => ({
+        // reuse the same normalization used below for authorsFormatted
+        name: removeZeros(author),
+        index,
+        dateInMS: Date.parse(author.date + "T" + author.time),
+      }));
+
+      normalizedAuthors.forEach(({ name, index, dateInMS }) => {
+        const rawName = rawAuthors[index]?.name;
+        if (!rawName) return;
+        const rawKey = `${rawName}-${dateInMS}`;
+        const normalizedKey = `${name}-${dateInMS}`;
+
+        const target = linkByAnchor[rawKey];
+        if (target && !map[normalizedKey]) {
+          map[normalizedKey] = target;
+        }
+      });
+    } catch (_) {
+      // best-effort expansion; ignore if structure unexpected
+    }
+
+    return map;
+  })();
+
   const authorsFormatted: sortedAuthorData[] = data.data.authors.map(
     (author, index) => ({
       ...author,
@@ -386,25 +421,57 @@ export const getSummaryDataInfo = async (path: string[], fileContent: any) => {
   const linksInThreadOrder = orderedAuthors.map((author) => {
     const byAnchorKey = author.anchor;
     const byLegacyKey = `${author.name}-${author.dateInMS}`;
-    if (linkByAnchor) {
-      if (byAnchorKey && linkByAnchor[byAnchorKey]) {
-        return linkByAnchor[byAnchorKey] + ".xml";
+    if (expandedLinkByAnchor) {
+      if (byAnchorKey && expandedLinkByAnchor[byAnchorKey]) {
+        return expandedLinkByAnchor[byAnchorKey] + ".xml";
       }
-      if (linkByAnchor[byLegacyKey]) {
-        return linkByAnchor[byLegacyKey] + ".xml";
+      if (expandedLinkByAnchor[byLegacyKey]) {
+        return expandedLinkByAnchor[byLegacyKey] + ".xml";
       }
       // Try with the original name from the XML data (before removeZeros processing)
       // The linkByAnchor keys are created with the original names that include spaces and dots
       const originalName = data.data.authors[author.initialIndex]?.name || author.name;
       const originalKey = `${originalName}-${author.dateInMS}`;
-      if (linkByAnchor[originalKey]) {
-        return linkByAnchor[originalKey] + ".xml";
+      if (expandedLinkByAnchor[originalKey]) {
+        return expandedLinkByAnchor[originalKey] + ".xml";
       }
     }
     // For missing links, return empty string to indicate no XML available
     // This will be handled in the UI to show reduced opacity
     return "";
   });
+
+  // Fallback for single-message threads (no historyLinks provided by feed)
+  try {
+    const isSingleMessageThread = orderedAuthors.length === 1;
+    const hasAnyLinks = Array.isArray(linksCopy) && linksCopy.some(l => l && l.trim() !== "");
+    if (isSingleMessageThread && !hasAnyLinks) {
+      const only = orderedAuthors[0];
+      const filePathNoXml = (data.path || pathString); // prefer upstream path if present
+      const linkPath = filePathNoXml.endsWith('.xml') ? filePathNoXml : `${filePathNoXml}.xml`;
+
+      const normalizedKey = `${only.name}-${only.dateInMS}`;
+      const rawName = data.data.authors[only.initialIndex]?.name || only.name;
+      const rawKey = `${rawName}-${only.dateInMS}`;
+
+      // Ensure mapping exists for both raw and normalized keys
+      if (expandedLinkByAnchor) {
+        if (!expandedLinkByAnchor[normalizedKey]) {
+          expandedLinkByAnchor[normalizedKey] = linkPath.replace(/\.xml$/, "");
+        }
+        if (!expandedLinkByAnchor[rawKey]) {
+          expandedLinkByAnchor[rawKey] = linkPath.replace(/\.xml$/, "");
+        }
+      }
+
+      // Ensure linksInThreadOrder has the link
+      if (!linksInThreadOrder[0] || linksInThreadOrder[0].trim() === "") {
+        linksInThreadOrder[0] = linkPath;
+      }
+    }
+  } catch (_) {
+    // best-effort fallback; ignore errors
+  }
 
 
   return {
@@ -413,7 +480,7 @@ export const getSummaryDataInfo = async (path: string[], fileContent: any) => {
       ...data.data,
       authors: orderedAuthors,
       historyLinks: linksInThreadOrder,
-      linkByAnchor: linkByAnchor,
+        linkByAnchor: expandedLinkByAnchor,
     },
   };
 };
