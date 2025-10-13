@@ -41,19 +41,31 @@ export const CollapsibleThread = ({
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);
   }, []);
-  // Map each displayed author (in current order) to its corresponding link
-  // Use the historyLinks array directly since it's already in the correct order
+  // Map each displayed author to its corresponding link using linkByAnchor when available
   const linkMap = new Map<string, string>();
-  
   
   authors.forEach((author, i) => {
     const key = author.anchor || `${author.name}-${author.dateInMS}`;
     
-    // Use the historyLinks array directly since it's already in the correct order
-    // This is more reliable than trying to match by anchor
-    const link = historyLinks[i] || "";
-    linkMap.set(key, link);
-    
+    // First try to use linkByAnchor mapping if available
+    if (linkByAnchor) {
+      const byAnchorKey = author.anchor;
+      const byLegacyKey = `${author.name}-${author.dateInMS}`;
+      
+      if (byAnchorKey && linkByAnchor[byAnchorKey]) {
+        linkMap.set(key, linkByAnchor[byAnchorKey] + ".xml");
+      } else if (linkByAnchor[byLegacyKey]) {
+        linkMap.set(key, linkByAnchor[byLegacyKey] + ".xml");
+      } else {
+        // Fallback to index-based mapping
+        const link = historyLinks[i] || "";
+        linkMap.set(key, link);
+      }
+    } else {
+      // Fallback to index-based mapping when linkByAnchor is not available
+      const link = historyLinks[i] || "";
+      linkMap.set(key, link);
+    }
   });
   // Initialize expanded nodes to show the current active message and its ancestors
   const getInitialExpandedNodes = (): Set<string> => {
