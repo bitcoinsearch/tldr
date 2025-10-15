@@ -230,7 +230,7 @@ export type PostSummaryData = {
   path: string | undefined;
 };
 
-export type SortKey = "newest" | "oldest" | "bitcoin-dev" | "delvingbitcoin" | "all";
+export type SortKey = "newest" | "oldest" | "bitcoin-dev" | "delvingbitcoin" | "lightning-dev" | "all";
 
 
 // For params
