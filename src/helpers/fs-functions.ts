@@ -1,5 +1,11 @@
 import * as fs from "fs";
-import { HomepageData, HomepageEntryData, NewsletterData, PostSummaryData, Tweet } from "./types";
+import {
+  HomepageData,
+  HomepageEntryData,
+  NewsletterData,
+  PostSummaryData,
+  Tweet,
+} from "./types";
 import {
   createArticlesFromFolder,
   createMonthsFromKeys,
@@ -21,33 +27,53 @@ export const getAllNewsletters = () => {
   try {
     const newsletterDir = `${process.cwd()}/public/static/static/newsletters`;
     const readNewsletterDir = fs.readdirSync(newsletterDir);
-    const newsletterFolders = readNewsletterDir.slice(0, readNewsletterDir.length - 1);
+    const newsletterFolders = readNewsletterDir.slice(
+      0,
+      readNewsletterDir.length - 1
+    );
 
     // loop through each folder and extract the newsletters
     for (let i = 0; i < newsletterFolders.length; i++) {
-      const readMonthlyNewsletter = fs.readdirSync(`${newsletterDir}/${newsletterFolders[i]}`);
+      const readMonthlyNewsletter = fs.readdirSync(
+        `${newsletterDir}/${newsletterFolders[i]}`
+      );
 
       for (let j = 0; j < readMonthlyNewsletter.length; j++) {
         const weeklyNewsletter = readMonthlyNewsletter[j];
         const newsletterPath = `newsletters/${newsletterFolders[i]}/${weeklyNewsletter}`;
 
-        const readWeeklyNewsletter = fs.readFileSync(`${process.cwd()}/public/static/static/${newsletterPath}`, "utf-8");
-        const parseWeeklyNewsletter: NewsLetterDataType = JSON.parse(readWeeklyNewsletter);
-        const weeklyNewsletterData = [...parseWeeklyNewsletter.active_posts_this_week, ...parseWeeklyNewsletter.new_threads_this_week];
+        const readWeeklyNewsletter = fs.readFileSync(
+          `${process.cwd()}/public/static/static/${newsletterPath}`,
+          "utf-8"
+        );
+        const parseWeeklyNewsletter: NewsLetterDataType =
+          JSON.parse(readWeeklyNewsletter);
+        const weeklyNewsletterData = [
+          ...parseWeeklyNewsletter.active_posts_this_week,
+          ...parseWeeklyNewsletter.new_threads_this_week,
+        ];
 
-        const getDateRange = weeklyNewsletterData.map((post) => post.published_at).sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+        const getDateRange = weeklyNewsletterData
+          .map((post) => post.published_at)
+          .sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
 
         const startDate = getDateRange[0];
         const endDate = getDateRange[getDateRange.length - 1];
 
         const splitNewsletterPath = newsletterPath.split("/");
 
-        const newsletterMonth = splitNewsletterPath[splitNewsletterPath.length - 1].split("-newsletter")[0];
+        const newsletterMonth =
+          splitNewsletterPath[splitNewsletterPath.length - 1].split(
+            "-newsletter"
+          )[0];
 
         newsletterData.push({
           summary: parseWeeklyNewsletter.summary_of_threads_started_this_week,
           url: `/newsletters/${newsletterMonth}`,
-          dateRange: `${formatDateString(startDate, false)} - ${formatDateString(endDate, true)}`,
+          dateRange: `${formatDateString(
+            startDate,
+            false
+          )} - ${formatDateString(endDate, true)}`,
           publishedAt: endDate,
           issueNumber: 0,
         });
@@ -55,7 +81,10 @@ export const getAllNewsletters = () => {
     }
 
     newsletterData = newsletterData
-      .sort((a, b) => new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime())
+      .sort(
+        (a, b) =>
+          new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime()
+      )
       .map((newsletter, index) => ({ ...newsletter, issueNumber: index + 1 }));
 
     return newsletterData;
@@ -65,10 +94,15 @@ export const getAllNewsletters = () => {
   }
 };
 
-export const getSummaryData = async (path: string[]): Promise<PostSummaryData | null> => {
+export const getSummaryData = async (
+  path: string[]
+): Promise<PostSummaryData | null> => {
   const pathString = path.join("/");
   try {
-    const fileContent = fs.readFileSync(`${process.cwd()}/public/static/static/${pathString}.xml`, "utf-8");
+    const fileContent = fs.readFileSync(
+      `${process.cwd()}/public/static/static/${pathString}.xml`,
+      "utf-8"
+    );
     const summaryInfo = getSummaryDataInfo(path, fileContent);
     return summaryInfo;
   } catch (err) {
@@ -79,7 +113,10 @@ export const getSummaryData = async (path: string[]): Promise<PostSummaryData | 
 export async function fetchAndProcessPosts(): Promise<HomepageData> {
   try {
     // Read and parse homepage data once
-    const readHomePageJson = await fs.promises.readFile(`${process.cwd()}/public/static/static/homepage.json`, "utf-8");
+    const readHomePageJson = await fs.promises.readFile(
+      `${process.cwd()}/public/static/static/homepage.json`,
+      "utf-8"
+    );
     const parseHomePageJson = JSON.parse(readHomePageJson) as HomepageData;
 
     // Process homepageJson entries in  using Object.fromEntries and Promise.all
@@ -93,10 +130,15 @@ export async function fetchAndProcessPosts(): Promise<HomepageData> {
         const processedValue = await Promise.all(
           value.map(async (post) => {
             // get the file path of all posts in the array
-            const filePath = post.contributors.length > 0 ? post.combined_summ_file_path : post.file_path;
+            const filePath =
+              post.contributors.length > 0
+                ? post.combined_summ_file_path
+                : post.file_path;
             const route = getRouteFromPath(filePath);
             const summaryData = await getSummaryData([route]);
-            const replies = summaryData ? Number(summaryData.data.authors.length) - 1 : 0;
+            const replies = summaryData
+              ? Number(summaryData.data.authors.length) - 1
+              : 0;
 
             return { ...post, n_threads: replies };
           })
@@ -114,7 +156,9 @@ export async function fetchAndProcessPosts(): Promise<HomepageData> {
   }
 }
 
-export const fetchAllActivityPosts = async (count: number): Promise<{ batch: HomepageEntryData[]; count: number }> => {
+export const fetchAllActivityPosts = async (
+  count: number
+): Promise<{ batch: HomepageEntryData[]; count: number }> => {
   "use server";
   const folders = ["delvingbitcoin", "lightning-dev", "bitcoin-dev"];
   let result: HomepageEntryData[] = [];
@@ -127,14 +171,24 @@ export const fetchAllActivityPosts = async (count: number): Promise<{ batch: Hom
   const currentMonth = monthsInOrder[startMonth];
 
   const allpossibleMonths = createMonthsFromKeys(startYear, endYear);
-  const sliceIndex = allpossibleMonths.findIndex((month) => month.slice(0, -5) === currentMonth);
+  const sliceIndex = allpossibleMonths.findIndex(
+    (month) => month.slice(0, -5) === currentMonth
+  );
 
   let monthsToBegin = allpossibleMonths.slice(sliceIndex);
 
-  const LTDIRECTORY = `${process.cwd()}/public/static/static/${folders[0]}/${monthsToBegin[count]}`;
-  const BTDIRECTORY = `${process.cwd()}/public/static/static/${folders[1]}/${monthsToBegin[count]}`;
+  const LTDIRECTORY = `${process.cwd()}/public/static/static/${folders[0]}/${
+    monthsToBegin[count]
+  }`;
+  const BTDIRECTORY = `${process.cwd()}/public/static/static/${folders[1]}/${
+    monthsToBegin[count]
+  }`;
+// Note: We can’t display all months in lightning-dev.
+// Only the last 5–6 months will be shown in the "All Activity" section.
+  const LIGHTNINGLEGACY =  ['April_2024', 'March_2024', 'Feb_2024','Jan_2024', 'Dec_2023', 'Nov_2023' ]
 
-  const isFolderPresent = fs.existsSync(LTDIRECTORY) || fs.existsSync(BTDIRECTORY);
+  const isFolderPresent =
+    fs.existsSync(LTDIRECTORY) || fs.existsSync(BTDIRECTORY);
 
   if (!isFolderPresent) {
     monthsToBegin = allpossibleMonths.slice(sliceIndex + 1);
@@ -148,35 +202,43 @@ export const fetchAllActivityPosts = async (count: number): Promise<{ batch: Hom
     groupedBy3[idx / BATCHSIZE] = monthsBatch;
   }
 
+  let mappedBy = groupedBy3[count]
   await Promise.all(
+
     folders.map(async (folder) => {
-      await Promise.all(
-        groupedBy3[count].map(async (month) => {
-          if (!folder) return [];
+      if (folder === "lightning-dev") {
+          mappedBy = LIGHTNINGLEGACY
+      
+      } 
+        await Promise.all(
+          mappedBy.map(async (month) => {
+            if (!folder) return [];
 
-          const DIRECTORY = `${process.cwd()}/public/static/static/${folder}/${month}`;
+            const DIRECTORY = `${process.cwd()}/public/static/static/${folder}/${month}`;
 
-          try {
-            const isExists = fs.existsSync(DIRECTORY);
-            if (!isExists) {
-              result.push(...[]);
-            } else {
-              const folderData = await readStaticDir(DIRECTORY);
-              const data = createArticlesFromFolder(folderData, folder);
-              const getSameMonth = getBatchesInSameMonth(data, month);
+            try {
+              const isExists = fs.existsSync(DIRECTORY);
+              if (!isExists) {
+                result.push(...[]);
+              } else {
+                const folderData = await readStaticDir(DIRECTORY);
+                const data = createArticlesFromFolder(folderData, folder);
+                const getSameMonth = getBatchesInSameMonth(data, month);
 
-              return result.push(...getSameMonth);
+                return result.push(...getSameMonth);
+              }
+            } catch (error) {
+              console.error(error);
+              return result.push(...[]);
             }
-          } catch (error) {
-            console.error(error);
-            return result.push(...[]);
-          }
-        })
-      );
+          })
+        );
     })
   );
 
-  const groups: Record<string, Array<HomepageEntryData>> = groupDuplicates(result);
+  const groups: Record<string, Array<HomepageEntryData>> = groupDuplicates(
+    result
+  );
 
   const finalValues = removeDuplicateSummaries(groups);
   const batch = flattenEntries(finalValues);
@@ -186,7 +248,10 @@ export const fetchAllActivityPosts = async (count: number): Promise<{ batch: Hom
 
 export const getTweetsFromFile = async () => {
   try {
-    const fileContent = fs.readFileSync(`${process.cwd()}/public/tweets.json`, "utf-8");
+    const fileContent = fs.readFileSync(
+      `${process.cwd()}/public/tweets.json`,
+      "utf-8"
+    );
     const tweetsFromFile = JSON.parse(fileContent) as Tweet[];
 
     return tweetsFromFile;

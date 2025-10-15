@@ -201,7 +201,7 @@ export const convertXmlToText = async (
 
     // Use thread authors if found, otherwise fall back to legacy parsing
     if (authorsForFeed.length === 0) {
-      console.log("No thread structure found, parsing legacy flat author structure");
+      // console.log("No thread structure found, parsing legacy flat author structure");
       
       // Handle old flat structure with multiple <author> elements
       const legacyAuthors = $("author > name");
@@ -274,7 +274,7 @@ export const convertXmlToText = async (
         });
 
         authorsForFeed = messages as any;
-        console.log(`Parsed ${authorsForFeed.length} authors from legacy flat structure`);
+        // console.log(`Parsed ${authorsForFeed.length} authors from legacy flat structure`);
 
         // Build name-date key → link mapping aligned by DOM order of <link> elements
         try {
@@ -286,7 +286,7 @@ export const convertXmlToText = async (
             }
           });
           const preview = Object.entries(linkByAnchor).slice(0, 5);
-          console.log("[convert-from-xml] legacy key->link size:", Object.keys(linkByAnchor).length, preview);
+          // console.log("[convert-from-xml] legacy key->link size:", Object.keys(linkByAnchor).length, preview);
         } catch (e) {}
       } else {
         // Fallback to old single author parsing
