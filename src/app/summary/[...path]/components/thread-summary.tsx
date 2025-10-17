@@ -249,10 +249,10 @@ export const ThreadSummary = ({
               )}
             </section>
 
-            {generatedUrl && (
+            {((isPostSummary && generatedUrl) || (!isPostSummary && currentReply?.generatedUrl)) && (
               <section className="flex justify-center">
                 <Link
-                  href={generatedUrl || ""}
+                  href={(isPostSummary ? generatedUrl : currentReply?.generatedUrl) || ""}
                   target="_blank"
                   className="text-sm font-medium font-gt-walsheim leading-[19.74px] py-1.5 px-4 bg-gray-custom-700 rounded-full p-2 w-fit underline"
                 >
