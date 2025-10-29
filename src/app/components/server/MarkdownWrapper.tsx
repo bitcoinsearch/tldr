@@ -2,6 +2,9 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 
 export const MarkdownWrapper = ({ summary, className }: { summary: string; className?: string | null | undefined }) => {
+  // convert single newlines to double newlines for paragraph breaks
+  const processedSummary = summary.replace(/\n(?!\n)/g, '\n\n');
+  
   return (
     <ReactMarkdown
       components={{
@@ -11,7 +14,7 @@ export const MarkdownWrapper = ({ summary, className }: { summary: string; class
       }}
       className={`markdownStyles break-words ${className}`}
     >
-      {summary}
+      {processedSummary}
     </ReactMarkdown>
   );
 };
