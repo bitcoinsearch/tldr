@@ -3,10 +3,9 @@
 import { HomepageEntryData, SortKey } from "@/helpers/types";
 import Image from "next/image";
 import React from "react";
-import { PostsCard } from "../components/client/post-card";
 import { shuffle } from "@/helpers/utils";
-
-// TODO: render all posts
+import historicalConversations from "../../../public/historical.json"
+import { PostsCard } from "../components/client/post-card";
 const HistoricConversations = ({
   posts,
   dev,
@@ -17,12 +16,13 @@ const HistoricConversations = ({
   })[];
   dev?: SortKey;
 }) => {
-  const [memoizedPosts, setMemoizedPosts] = React.useState(posts.slice(0, 5));
+  const [memoizedPosts, setMemoizedPosts] = React.useState(posts.slice(0, 20));
 
   const randomizePosts = () => {
-    setMemoizedPosts(shuffle(posts).slice(0, 5));
+    setMemoizedPosts(shuffle(posts).slice(0, 20));
   };
 
+ 
   return (
     <div className="flex flex-col gap-6 max-w-[866px] mx-auto ">
       <div className="flex items-end justify-end w-ful">
@@ -44,14 +44,14 @@ const HistoricConversations = ({
 
       <div className="flex items-center justify-between max-w-[866px] mx-auto w-full h-full">
         <section className="flex flex-col gap-4 md:gap-6 pb-[44px]">
-          {!memoizedPosts.length ? (
+   {!memoizedPosts.length ? (
             <p>
               Oops! No ongoing discussions this week. Check out the new posts
               above.
             </p>
           ) : (
             memoizedPosts.map((entry, index) => {
-              return <PostsCard entry={entry} key={`${entry.id}-${index}`} />;
+              return <PostsCard entry={entry as any} key={`${entry.id}-${index}`} />;
             })
           )}
         </section>
