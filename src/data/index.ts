@@ -27,13 +27,13 @@ export const exploreSectionData = [
     backgroundColor: "#CF661A",
     route: "?source=active-discussions",
   },
-  {
-    title: "Historic Conversations",
-    subtext: "Explore posts in this historic deep dive. Surfacing posts where the last reply is in the current month.",
-    icon: "/icons/brushy-circles.svg",
-    backgroundColor: "#1486B2",
-    route: "?source=historic-conversations",
-  },
+  // {
+  //   title: "Historic Conversations",
+  //   subtext: "Explore posts in this historic deep dive. Surfacing posts where the last reply is in the current month.",
+  //   icon: "/icons/brushy-circles.svg",
+  //   backgroundColor: "#1486B2",
+  //   route: "?source=historic-conversations",
+  // },
   {
     title: "All Activity",
     subtext: "Read the most recent individual posts in chronological order.",
@@ -153,10 +153,10 @@ export const MobileNavLinks = [
         title: "Active Discussions",
         href: "/posts?source=active-discussions",
       },
-      {
-        title: "Historic Conversations",
-        href: "/posts?source=historic-conversations",
-      },
+      // {
+      //   title: "Historic Conversations",
+      //   href: "/posts?source=historic-conversations",
+      // },
       {
         title: "All Activity",
         href: "/posts?source=all-activity",

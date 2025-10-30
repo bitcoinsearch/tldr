@@ -50,11 +50,11 @@ const page = async ({ params, searchParams }: { params: { path: string[] }; sear
       subtitle: "Check out posts actively getting replies and inspiring conversations.",
       posts: posts.active_posts,
     },
-    "historic-conversations": {
-      title: "Historic Conversations",
-      subtitle: "Explore posts in this historic deep dive. Surfacing posts where the last reply is in the current month.",
-      posts: historicalPosts,
-    },
+    // "historic-conversations": {
+    //   title: "Historic Conversations",
+    //   subtitle: "Explore posts in this historic deep dive. Surfacing posts where the last reply is in the current month.",
+    //   posts: historicalPosts,
+    // },
     "all-activity": {
       title: "All Activity",
       subtitle: "Read the most recent individual posts in chronological order.",
