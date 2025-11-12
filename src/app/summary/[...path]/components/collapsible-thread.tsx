@@ -32,6 +32,43 @@ export const CollapsibleThread = ({
   firstPost,
   linkByAnchor,
 }: CollapsibleThreadProps) => {
+  // Helper to extract date from author (handles both old and new formats)
+  const extractAuthorDate = (author: sortedAuthorData): string => {
+    if (author.date) {
+      return author.date;
+    }
+    // Old format: date is embedded in name like "Name YYYY-MM-DD HH:MM:SS+00:00"
+    if (author.name) {
+      const dateMatch = author.name.match(/(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2})/);
+      if (dateMatch) {
+        return dateMatch[1].replace(' ', 'T'); // Convert to ISO format
+      }
+    }
+    return "";
+  };
+
+  // Helper to extract just the name (without date) from author
+  const extractAuthorName = (author: sortedAuthorData): string => {
+    if (author.name) {
+      // Remove date from name if present
+      return author.name.split(' 20')[0];
+    }
+    return "";
+  };
+
+  // Helper to get dateInMS from author (handles both old and new formats)
+  const extractDateInMS = (author: sortedAuthorData): number => {
+    if (author.dateInMS) {
+      return author.dateInMS;
+    }
+    // Try to extract from date field or name
+    const dateStr = extractAuthorDate(author);
+    if (dateStr) {
+      return new Date(dateStr).getTime();
+    }
+    return Date.now();
+  };
+
   // Keep a generous max indent; horizontal scroll will handle overflow on mobile
   const [maxIndentPx, setMaxIndentPx] = useState<number>(2000);
 
@@ -45,12 +82,14 @@ export const CollapsibleThread = ({
   const linkMap = new Map<string, string>();
   
   authors.forEach((author, i) => {
-    const key = author.anchor || `${author.name}-${author.dateInMS}`;
+    const cleanName = extractAuthorName(author);
+    const dateMS = extractDateInMS(author);
+    const key = author.anchor || `${cleanName}-${dateMS}`;
     
     // First try to use linkByAnchor mapping if available
     if (linkByAnchor) {
       const byAnchorKey = author.anchor;
-      const byLegacyKey = `${author.name}-${author.dateInMS}`;
+      const byLegacyKey = `${cleanName}-${dateMS}`;
       
       if (byAnchorKey && linkByAnchor[byAnchorKey]) {
         linkMap.set(key, linkByAnchor[byAnchorKey] + ".xml");
@@ -77,7 +116,7 @@ export const CollapsibleThread = ({
     
     // Find the current active message
     const activeAuthor = authors.find(author => {
-      const key = author.anchor || `${author.name}-${author.dateInMS}`;
+      const key = author.anchor || `${extractAuthorName(author)}-${extractDateInMS(author)}`;
       const link = linkMap.get(key) || "";
       const path = link.replace(/\.xml$/, "");
       const hexLink = stringToHex(path);
@@ -87,14 +126,14 @@ export const CollapsibleThread = ({
     if (activeAuthor) {
       // Expand all ancestors of the active message
       const expandAncestors = (author: sortedAuthorData) => {
-        const nodeId = author.anchor || `${author.name}-${author.dateInMS}`;
+        const nodeId = author.anchor || `${extractAuthorName(author)}-${extractDateInMS(author)}`;
         expandedNodes.add(nodeId);
         
         // Find parent and expand it recursively
         if (author.parent_id) {
           const parentAnchor = author.parent_id.split('-').slice(-1)[0];
           const parentAuthor = authors.find(a => 
-            (a.anchor || `${a.name}-${a.dateInMS}`) === parentAnchor
+            (a.anchor || `${extractAuthorName(a)}-${extractDateInMS(a)}`) === parentAnchor
           );
           if (parentAuthor) {
             expandAncestors(parentAuthor);
@@ -175,7 +214,7 @@ export const CollapsibleThread = ({
 
     // Create nodes for all authors
     authors.forEach((author, index) => {
-      const nodeId = author.anchor || `${author.name}-${author.dateInMS}`;
+      const nodeId = author.anchor || `${extractAuthorName(author)}-${extractDateInMS(author)}`;
       nodeMap.set(nodeId, {
         author,
         children: [],
@@ -187,7 +226,7 @@ export const CollapsibleThread = ({
     if (hasThreadingData) {
       // Build parent-child relationships for threaded structure
       authors.forEach((author) => {
-        const nodeId = author.anchor || `${author.name}-${author.dateInMS}`;
+        const nodeId = author.anchor || `${extractAuthorName(author)}-${extractDateInMS(author)}`;
         const node = nodeMap.get(nodeId);
         
         if (node && author.parent_id) {
@@ -206,7 +245,7 @@ export const CollapsibleThread = ({
 
       // Sort children by timestamp
       const sortChildren = (node: ThreadNode) => {
-        node.children.sort((a, b) => a.author.dateInMS - b.author.dateInMS);
+        node.children.sort((a, b) => extractDateInMS(a.author) - extractDateInMS(b.author));
         node.children.forEach(sortChildren);
       };
       
@@ -214,7 +253,7 @@ export const CollapsibleThread = ({
     } else {
       // For legacy flat structure, all authors are root nodes
       authors.forEach((author) => {
-        const nodeId = author.anchor || `${author.name}-${author.dateInMS}`;
+        const nodeId = author.anchor || `${extractAuthorName(author)}-${extractDateInMS(author)}`;
         const node = nodeMap.get(nodeId);
         if (node) {
           rootNodes.push(node);
@@ -222,7 +261,7 @@ export const CollapsibleThread = ({
       });
       
       // Sort by timestamp
-      rootNodes.sort((a, b) => a.author.dateInMS - b.author.dateInMS);
+      rootNodes.sort((a, b) => extractDateInMS(a.author) - extractDateInMS(b.author));
     }
 
     return rootNodes;
@@ -241,9 +280,9 @@ export const CollapsibleThread = ({
   };
 
   const renderThreadNode = (node: ThreadNode, depth: number = 0): JSX.Element => {
-    const nodeId = node.author.anchor || `${node.author.name}-${node.author.dateInMS}`;
+    const nodeId = node.author.anchor || `${extractAuthorName(node.author)}-${extractDateInMS(node.author)}`;
     const isExpanded = expandedNodes.has(nodeId) || depth === 0; // Root always expanded
-    const keyForLink = node.author.anchor || `${node.author.name}-${node.author.dateInMS}`;
+    const keyForLink = node.author.anchor || `${extractAuthorName(node.author)}-${extractDateInMS(node.author)}`;
     const link = linkMap.get(keyForLink) || "";
     const path = link.replace(/\.xml$/, "");
     const hexLink = stringToHex(path);
@@ -256,8 +295,8 @@ export const CollapsibleThread = ({
     
     // Check if this node is the original post by comparing with the identified original post author
     const isOriginalPost = originalPostAuthor && 
-                          node.author.dateInMS === originalPostAuthor.dateInMS &&
-                          node.author.name === originalPostAuthor.name;
+                          extractDateInMS(node.author) === extractDateInMS(originalPostAuthor) &&
+                          extractAuthorName(node.author) === extractAuthorName(originalPostAuthor);
 
     return (
       <div key={nodeId} className="thread-node">
@@ -297,7 +336,7 @@ export const CollapsibleThread = ({
             >
               <div className="flex items-center gap-2 flex-wrap">
                 <span className={`font-test-signifier font-medium whitespace-nowrap ${isActive ? "text-orange-custom-100" : "text-gray-custom-1200"}`}>
-                  {node.author.name}
+                  {extractAuthorName(node.author)}
                 </span>
                 {isOriginalPost && (
                   <span className="px-2 py-1 text-xs text-white rounded-full whitespace-nowrap" style={{ backgroundColor: "#f6931b" }}>
@@ -307,11 +346,11 @@ export const CollapsibleThread = ({
               </div>
               
               <div className="flex items-center gap-2 text-sm text-gray-custom-1100 font-gt-walsheim flex-wrap">
-                <span className="whitespace-nowrap">{formatDateString(node.author.date, true)}</span>
+                <span className="whitespace-nowrap">{formatDateString(extractAuthorDate(node.author), true)}</span>
                 <span className="text-gray-custom-1200">/</span>
                 <span className="whitespace-nowrap">{(() => {
                   try {
-                    const date = new Date(node.author.dateInMS);
+                    const date = new Date(extractDateInMS(node.author));
                     if (isNaN(date.getTime())) {
                       return 'Invalid Date';
                     }
@@ -326,7 +365,7 @@ export const CollapsibleThread = ({
             <div className="flex-1 flex flex-col gap-1 min-w-0 cursor-not-allowed">
               <div className="flex items-center gap-2 flex-wrap">
                 <span className={`font-test-signifier font-medium whitespace-nowrap ${isActive ? "text-orange-custom-100" : "text-gray-custom-1200"}`}>
-                  {node.author.name}
+                  {extractAuthorName(node.author)}
                 </span>
                 {isOriginalPost && (
                   <span className="px-2 py-1 text-xs text-white rounded-full whitespace-nowrap" style={{ backgroundColor: "#f6931b" }}>
@@ -336,11 +375,11 @@ export const CollapsibleThread = ({
               </div>
               
               <div className="flex items-center gap-2 text-sm text-gray-custom-1100 font-gt-walsheim flex-wrap">
-                <span className="whitespace-nowrap">{formatDateString(node.author.date, true)}</span>
+                <span className="whitespace-nowrap">{formatDateString(extractAuthorDate(node.author), true)}</span>
                 <span className="text-gray-custom-1200">/</span>
                 <span className="whitespace-nowrap">{(() => {
                   try {
-                    const date = new Date(node.author.dateInMS);
+                    const date = new Date(extractDateInMS(node.author));
                     if (isNaN(date.getTime())) {
                       return 'Invalid Date';
                     }

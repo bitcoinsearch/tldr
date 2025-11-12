@@ -126,14 +126,33 @@ export const ThreadSummary = ({
 
   const routes = postBreadcrumbData();
 
+  // Helper to extract date from author (handles both old and new formats)
+  const extractAuthorDate = (author: any): string => {
+    if (author?.date) {
+      return author.date;
+    }
+    // Old format: date is embedded in name like "Name YYYY-MM-DD HH:MM:SS+00:00"
+    if (author?.name) {
+      const dateMatch = author.name.match(/(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2})/);
+      if (dateMatch) {
+        return dateMatch[1].replace(' ', 'T'); // Convert to ISO format
+      }
+    }
+    return "";
+  };
+
   /**
    * get date range
    */
   const getDateRange = () => {
     const firstAuthor = authors[0];
     const lastAuthor = authors[authors.length - 1];
-    const firstAuthorDate = formatDateString(firstAuthor.date, false);
-    const lastAuthorDate = formatDateString(lastAuthor.date, true);
+    
+    const firstDate = extractAuthorDate(firstAuthor);
+    const lastDate = extractAuthorDate(lastAuthor);
+    
+    const firstAuthorDate = formatDateString(firstDate, false);
+    const lastAuthorDate = formatDateString(lastDate, true);
     return `${firstAuthorDate} - ${lastAuthorDate}`;
   };
 
@@ -150,14 +169,20 @@ export const ThreadSummary = ({
     }
   };
 
-  const displayedAuthor = currentReply?.authors[0].name ?? "";
- 
-  const displayedAuthorDate = currentReply?.authors[0].date ?? "";
+  const displayedAuthor = currentReply?.authors?.[0]?.name?.split(' 20')[0] ?? "";
+  const displayedAuthorDate = extractAuthorDate(currentReply?.authors?.[0]);
   const mainTitle = routes[2].name;
   const dateRange = getDateRange();
-  const replyDateInMS = currentReply?.authors[0].dateInMS
-    ? new Date(currentReply?.authors[0].dateInMS)
-    : new Date();
+  
+  // Get reply date for timestamp
+  let replyDateInMS: Date;
+  if (currentReply?.authors?.[0]?.dateInMS) {
+    replyDateInMS = new Date(currentReply.authors[0].dateInMS);
+  } else if (displayedAuthorDate) {
+    replyDateInMS = new Date(displayedAuthorDate);
+  } else {
+    replyDateInMS = new Date();
+  }
   const replyDateString = replyDateInMS.toISOString();
   const replyTime = getUtcTime(replyDateString);
 
