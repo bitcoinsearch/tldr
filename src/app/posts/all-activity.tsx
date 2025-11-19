@@ -34,7 +34,7 @@ console.log(posts)
   return (
     <div className="flex flex-col gap-6 max-w-[866px] mx-auto ">
       <section className="text-base font-gt-walsheim leading-[22.56px] flex items-center gap-4 justify-between">
-        <CategoriesNavigation sortKey={sortKey} setSortKey={setSortKey} />
+        <CategoriesNavigation isAllActivities sortKey={sortKey} setSortKey={setSortKey} />
         <section className="flex gap-2">
           <div className="flex items-center gap-4 relative">
             {openSortDialog && (
