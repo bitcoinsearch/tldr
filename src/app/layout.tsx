@@ -5,6 +5,7 @@ import "@bitcoin-dev-project/bdp-ui/styles.css";
 import "./globals.css";
 import Navbar from "@/app/components/server/navbar";
 import TanstackProvider from "./provider";
+import BossBanner from "./components/client/banners/BossBanner";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const inika = Inika({
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <TanstackProvider>
           <div className='w-full items-center h-full flex flex-col'>
             <div className='w-full grow flex flex-col'>
+              <BossBanner />
               <div className='z-10'>
                 <Navbar />
               </div>
