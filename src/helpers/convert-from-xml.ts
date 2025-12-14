@@ -198,19 +198,56 @@ export const convertXmlToText = async (
           const authorText = $(authorEl).text();
           const threadAuthors = extractAuthorsDateTime(authorText);
           
-          // Convert legacy authors to new format
-          threadAuthors.forEach((author, index) => {
+          // If extractAuthorsDateTime found datetime in the text, use it
+          if (threadAuthors.length > 0) {
+            // Convert legacy authors to new format
+            threadAuthors.forEach((author, index) => {
+              messages.push({
+                name: author.name,
+                date: author.date,
+                time: author.time,
+                depth: 0, // All legacy authors are treated as root level
+                parent_id: undefined,
+                reply_to: undefined,
+                position: index,
+                anchor: undefined,
+              });
+            });
+          } else {
+            // New structure: author name is plain text, timestamp is a separate element
+            // Look for a sibling <timestamp> element at feed level
+            const feedTimestamp = $("feed > timestamp").first().text();
+            // Also check for entry > published as fallback
+            const entryPublished = $(element).find(xmlElements.published).text();
+            const timestamp = feedTimestamp || entryPublished || "";
+            
+            let date = "";
+            let time = "";
+            if (timestamp) {
+              if (timestamp.includes("T")) {
+                // ISO format: YYYY-MM-DDTHH:MM:SS+00:00 or YYYY-MM-DDTHH:MM:SS.000Z
+                const parts = timestamp.split("T");
+                date = parts[0] || "";
+                time = parts[1] ? parts[1].replace(/\.\d{3}Z$/, "").replace(/\+\d{2}:\d{2}$/, "") : "";
+              } else if (timestamp.includes(" ")) {
+                // Legacy format: YYYY-MM-DD HH:MM:SS+00:00
+                const parts = timestamp.split(" ");
+                date = parts[0] || "";
+                time = parts.slice(1).join(" ").replace(/\+\d{2}:\d{2}$/, "") || "";
+              }
+            }
+            
             messages.push({
-              name: author.name,
-              date: author.date,
-              time: author.time,
-              depth: 0, // All legacy authors are treated as root level
+              name: authorText.trim(),
+              date,
+              time,
+              depth: 0,
               parent_id: undefined,
               reply_to: undefined,
-              position: index,
+              position: messages.length,
               anchor: undefined,
             });
-          });
+          }
         });
 
         authorsForFeed = messages as any;
@@ -232,8 +269,37 @@ export const convertXmlToText = async (
         // Fallback to old single author parsing
         const author = $(xmlElements.author).children(xmlElements.name).text();
         const threadAuthors = extractAuthorsDateTime(author);
-        authorsForFeed = threadAuthors;
-        console.log(`Parsed ${authorsForFeed.length} authors from single author fallback`);
+        
+        if (threadAuthors.length > 0) {
+          authorsForFeed = threadAuthors;
+          console.log(`Parsed ${authorsForFeed.length} authors from single author fallback`);
+        } else if (author.trim()) {
+          // New structure: author name without datetime, get timestamp from separate element
+          const feedTimestamp = $("feed > timestamp").first().text();
+          const entryPublished = $(element).find(xmlElements.published).text();
+          const timestamp = feedTimestamp || entryPublished || "";
+          
+          let date = "";
+          let time = "";
+          if (timestamp) {
+            if (timestamp.includes("T")) {
+              const parts = timestamp.split("T");
+              date = parts[0] || "";
+              time = parts[1] ? parts[1].replace(/\.\d{3}Z$/, "").replace(/\+\d{2}:\d{2}$/, "") : "";
+            } else if (timestamp.includes(" ")) {
+              const parts = timestamp.split(" ");
+              date = parts[0] || "";
+              time = parts.slice(1).join(" ").replace(/\+\d{2}:\d{2}$/, "") || "";
+            }
+          }
+          
+          authorsForFeed = [{
+            name: author.trim(),
+            date,
+            time,
+          }];
+          console.log(`Parsed 1 author from new structure with separate timestamp`);
+        }
       }
     }
     const newEntry = { ...entry, authors: authorsForFeed, historyLinks } as any;
