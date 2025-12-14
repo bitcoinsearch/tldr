@@ -69,7 +69,7 @@ export const ThreadSummary = ({
     const devName = params.path[0];
     const trimmedTitle = `${correctedTitle.substring(0, 30)}...`;
 
-    const displayedAuthor = currentReply?.authors[0].name ?? "";
+    const displayedAuthor = currentReply?.authors?.[0]?.name ?? "";
 
     const routes = [
       {
@@ -130,10 +130,13 @@ export const ThreadSummary = ({
    * get date range
    */
   const getDateRange = () => {
+    if (!authors || authors.length === 0) {
+      return "";
+    }
     const firstAuthor = authors[0];
     const lastAuthor = authors[authors.length - 1];
-    const firstAuthorDate = formatDateString(firstAuthor.date, false);
-    const lastAuthorDate = formatDateString(lastAuthor.date, true);
+    const firstAuthorDate = formatDateString(firstAuthor?.date, false);
+    const lastAuthorDate = formatDateString(lastAuthor?.date, true);
     return `${firstAuthorDate} - ${lastAuthorDate}`;
   };
 
@@ -152,11 +155,11 @@ export const ThreadSummary = ({
 
   const displayedAuthor = currentReply?.authors[0].name ?? "";
  
-  const displayedAuthorDate = currentReply?.authors[0].date ?? "";
+  const displayedAuthorDate = currentReply?.authors?.[0]?.date ?? "";
   const mainTitle = routes[2].name;
   const dateRange = getDateRange();
-  const replyDateInMS = currentReply?.authors[0].dateInMS
-    ? new Date(currentReply?.authors[0].dateInMS)
+  const replyDateInMS = currentReply?.authors?.[0]?.dateInMS
+    ? new Date(currentReply?.authors?.[0]?.dateInMS)
     : new Date();
   const replyDateString = replyDateInMS.toISOString();
   const replyTime = getUtcTime(replyDateString);
