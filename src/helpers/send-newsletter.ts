@@ -511,6 +511,17 @@ const sendNewsletter = async (): Promise<void> => {
         type: "regular",
         recipients: {
           list_id: process.env.MAILCHIMP_LIST_ID,
+          segment_opts: {
+            match: "all",
+            conditions: [
+              {
+                condition_type: "StaticSegment",
+                field: "static_segment",
+                op: "static_is",
+                value: process.env.MAILCHIMP_TLDR_TAG_ID,
+              },
+            ],
+          },
         },
         settings: {
           subject_line: `TLDR Newsletter for ${getWeekCovered()}`,
