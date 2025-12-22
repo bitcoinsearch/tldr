@@ -253,7 +253,7 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
 
       <div style="background:#fff7d6;border:1px solid #ffe9a8;border-radius:8px;padding:16px;">
         <p style="margin:0 0 12px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;color:#1f2937;">
-          <strong>Start your career in bitcoin open source development.</strong>
+          <strong>Start your career in bitcoin open source development</strong>
         </p>
 
         <a href="https://bosschallenge.xyz"
@@ -262,7 +262,7 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
                   font-size:14px;font-weight:bold;
                   color:#111827;text-decoration:none;
                   background:#ffb200;border-radius:6px;">
-          Visit bosschallenge.xyz
+          Apply Now
         </a>
       </div>
     </td>
