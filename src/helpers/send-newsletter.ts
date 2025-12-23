@@ -515,10 +515,10 @@ const sendNewsletter = async (): Promise<void> => {
             match: "all",
             conditions: [
               {
-                condition_type: "StaticSegment",
-                field: "static_segment",
-                op: "static_is",
-                value: process.env.MAILCHIMP_TLDR_TAG_ID,
+                condition_type: "TextMerge",
+                field: "tags",
+                op: "contains",
+                value: "tldr",
               },
             ],
           },
