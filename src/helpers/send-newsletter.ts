@@ -515,10 +515,10 @@ const sendNewsletter = async (): Promise<void> => {
             match: "all",
             conditions: [
               {
-                condition_type: "TextMerge",
-                field: "tags",
-                op: "contains",
-                value: "tldr",
+                condition_type: "StaticSegment",
+                field: "static_segment",
+                op: "static_is",
+                value: parseInt(process.env.MAILCHIMP_TLDR_TAG_ID || '0'),
               },
             ],
           },
@@ -544,7 +544,12 @@ const sendNewsletter = async (): Promise<void> => {
       fs.writeFileSync("./newsletter.html", htmlContent);
     }
   } catch (err: any) {
-    throw new Error(err);
+    if (err.response) {
+      console.error("Mailchimp Error:", err.response.body);
+    } else {
+      console.error("Error:", err);
+    }
+    process.exit(1);
   }
 };
 
