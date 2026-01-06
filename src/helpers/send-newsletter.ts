@@ -518,7 +518,7 @@ const sendNewsletter = async (): Promise<void> => {
                 condition_type: "StaticSegment",
                 field: "static_segment",
                 op: "static_is",
-                value: process.env.MAILCHIMP_TLDR_TAG_ID,
+                value: parseInt(process.env.MAILCHIMP_TLDR_TAG_ID || '0'),
               },
             ],
           },
