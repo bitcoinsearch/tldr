@@ -268,7 +268,7 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
     </td>
   </tr>
 </table>
-`
+`;
   let html = `
   <!DOCTYPE html>
   <html lang="en">
@@ -507,20 +507,18 @@ const sendNewsletter = async (): Promise<void> => {
 
     // Only send the newsletter if the environment is production
     if (process.env.NODE_ENV === "production") {
+      const SEGMENT_ID = Number(process.env.MAILCHIMP_TLDR_TAG_ID);
+
+      if (!SEGMENT_ID) {
+        throw new Error("MAILCHIMP_TLDR_TAG_ID is not set or invalid");
+      }
+      
       const campaignResponse = await mailchimp.campaigns.create({
         type: "regular",
         recipients: {
           list_id: process.env.MAILCHIMP_LIST_ID,
           segment_opts: {
-            match: "all",
-            conditions: [
-              {
-                condition_type: "StaticSegment",
-                field: "static_segment",
-                op: "static_is",
-                value: parseInt(process.env.MAILCHIMP_TLDR_TAG_ID || '0'),
-              },
-            ],
+            saved_segment_id: SEGMENT_ID,
           },
         },
         settings: {
@@ -532,13 +530,16 @@ const sendNewsletter = async (): Promise<void> => {
         },
       });
 
+      console.log(campaignResponse?.recipients?.segment_text || campaignResponse); // temporary just to log
+
       await mailchimp.campaigns.setContent(campaignResponse.id, {
         html: htmlContent,
       });
 
-      await mailchimp.campaigns.send(campaignResponse.id);
+      // temporary do not send tldr newsletter yet
+      // await mailchimp.campaigns.send(campaignResponse.id);
 
-      console.log("Newsletter sent successfully");
+      // console.log("Newsletter sent successfully");
     } else {
       console.log("Not in production environment, skipping email send");
       fs.writeFileSync("./newsletter.html", htmlContent);
