@@ -512,7 +512,7 @@ const sendNewsletter = async (): Promise<void> => {
       if (!SEGMENT_ID) {
         throw new Error("MAILCHIMP_TLDR_TAG_ID is not set or invalid");
       }
-      
+ 
       const campaignResponse = await mailchimp.campaigns.create({
         type: "regular",
         recipients: {
@@ -530,16 +530,14 @@ const sendNewsletter = async (): Promise<void> => {
         },
       });
 
-      console.log(campaignResponse?.recipients?.segment_text || campaignResponse); // temporary just to log
-
+     
       await mailchimp.campaigns.setContent(campaignResponse.id, {
         html: htmlContent,
       });
 
-      // temporary do not send tldr newsletter yet
-      // await mailchimp.campaigns.send(campaignResponse.id);
-
-      // console.log("Newsletter sent successfully");
+      await mailchimp.campaigns.send(campaignResponse.id);
+      
+      console.log("Newsletter sent successfully");
     } else {
       console.log("Not in production environment, skipping email send");
       fs.writeFileSync("./newsletter.html", htmlContent);
