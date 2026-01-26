@@ -243,32 +243,6 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
 
   let summary = words.slice(0, 4).join(" <br/> <br/> ");
   let summaryHtml = marked(summary);
-  let tempHtml = `<!-- Content -->
-<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-  <tr>
-    <td style="padding:24px 0;">
-      <h2 style="margin:0 0 12px 0;font-family:Arial,Helvetica,sans-serif;font-size:20px;color:#111827;">
-        Take the 2026 BOSS challenge
-      </h2>
-
-      <div style="background:#fff7d6;border:1px solid #ffe9a8;border-radius:8px;padding:16px;">
-        <p style="margin:0 0 12px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;color:#1f2937;">
-          <strong>Start your career in bitcoin open source development</strong>
-        </p>
-
-        <a href="https://bosschallenge.xyz"
-           style="display:inline-block;padding:10px 16px;
-                  font-family:Arial,Helvetica,sans-serif;
-                  font-size:14px;font-weight:bold;
-                  color:#111827;text-decoration:none;
-                  background:#ffb200;border-radius:6px;">
-          Apply Now
-        </a>
-      </div>
-    </td>
-  </tr>
-</table>
-`;
   let html = `
   <!DOCTYPE html>
   <html lang="en">
@@ -427,7 +401,7 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
           </td>
         </tr>
       </table>
-      ${tempHtml}
+
       <!-- Hero -->
       <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #000; border-radius: 8px;">
         <tr>
