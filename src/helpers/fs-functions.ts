@@ -104,7 +104,11 @@ export const getSummaryData = async (
       "utf-8"
     );
     const summaryInfo = getSummaryDataInfo(path, fileContent);
-    return summaryInfo;
+    const result = await summaryInfo;
+    if (result.data.generatedUrl && result.data.generatedUrl.includes("lightning-dev")) {
+      result.data.generatedUrl = "https://www.mail-archive.com/lightning-dev@lists.linuxfoundation.org/";
+    }
+    return result;
   } catch (err) {
     return null;
   }
