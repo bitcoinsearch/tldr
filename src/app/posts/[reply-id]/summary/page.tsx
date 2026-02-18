@@ -6,6 +6,8 @@ import { hexToString } from '@/helpers/utils';
 import { notFound } from 'next/navigation';
 import React from 'react'
 
+export const dynamic = "force-dynamic";
+
 const SummaryPage = async ({params}:NextParamsPage ) => {
   const replyId = params["reply-id"] ? params["reply-id"].split("/")[0] : "";
   const allPath = replyId.split("-");

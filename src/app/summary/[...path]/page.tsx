@@ -6,6 +6,8 @@ import { ThreadSummary } from "./components/thread-summary";
 import { getSummaryData } from "@/helpers/fs-functions";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 
 export default async function Page({ params }: { params: { path: string[] }; searchParams: { replies: string } }) {
   const summaryData = await getSummaryData(params.path);

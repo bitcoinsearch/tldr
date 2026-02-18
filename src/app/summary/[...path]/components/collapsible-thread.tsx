@@ -197,6 +197,9 @@ export const CollapsibleThread = ({
           if (parentNode) {
             parentNode.children.push(node);
             parentNode.hasChildren = true;
+          } else {
+            // If parent cannot be resolved (incomplete metadata), keep message visible.
+            rootNodes.push(node);
           }
         } else if (node) {
           // Root node

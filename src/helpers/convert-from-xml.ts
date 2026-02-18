@@ -119,43 +119,66 @@ export const convertXmlToText = async (
       historyLinks.push(el.attribs["href"]);
     });
 
-    // Build anchor->link mapping by matching anchors in filenames
-    // Instead of using index position, match the anchor in the filename to the message anchor
+    // Build anchor->link mapping by matching anchors in filenames.
+    // Always add an index-based fallback so messages without anchors still get links.
     const normalizedLinks = historyLinks.map(l => l.replace(/\.xml$/, ""));
+    const extractAnchorFromLink = (link: string): string | undefined => {
+      const match = link.match(/\/(m[0-9a-f]+)_[^/]+$/i);
+      return match?.[1];
+    };
+
+    // Ensure authors have a stable anchor whenever possible, even when XML omits it.
+    if (authorsForFeed.length > 0) {
+      authorsForFeed = authorsForFeed.map((author, idx) => {
+        if (author.anchor) return author;
+        const linkIndex = typeof author.position === "number" ? author.position : idx;
+        const derivedAnchor = extractAnchorFromLink(normalizedLinks[linkIndex] || "");
+        return derivedAnchor ? { ...author, anchor: derivedAnchor } : author;
+      });
+    }
+
     if (threadMessages.length > 0) {
+      const threadMessageList: Array<{ name: string; date: string; time: string; anchor?: string }> = [];
+
       threadMessages.each((i, msg) => {
-        const anchor = $(msg).attr("anchor");
-        if (anchor) {
-          // Find the link that contains this anchor in its filename
-          const matchingLink = normalizedLinks.find(link => link.includes(anchor));
-          if (matchingLink) {
-            linkByAnchor[anchor] = matchingLink;
-          }
+        const $msg = $(msg);
+        const timestamp = $msg.find("timestamp").first().text() || "";
+        const parts = timestamp.includes("T")
+          ? timestamp.replace(/\.\d{3}Z$/, "").split("T")
+          : timestamp.split(" ");
+        const anchorFromXml = $msg.attr("anchor") || undefined;
+        const anchorFromLink = extractAnchorFromLink(normalizedLinks[i] || "");
+
+        threadMessageList.push({
+          name: $msg.find("author").first().text(),
+          date: parts[0] || "",
+          time: parts[1] || "",
+          anchor: anchorFromXml || anchorFromLink,
+        });
+      });
+
+      // First pass: map by anchor when available.
+      threadMessageList.forEach((m) => {
+        if (!m.anchor) return;
+        const matchingLink = normalizedLinks.find(link => link.includes(m.anchor!));
+        if (matchingLink) {
+          linkByAnchor[m.anchor] = matchingLink;
         }
       });
 
-      // Fallback: some delvingbitcoin threads omit the `anchor` attribute on messages.
-      // When that happens, populate the mapping by index using a stable name-date key.
-      if (Object.keys(linkByAnchor).length === 0) {
-        const messages: Array<{ name: string; date: string; time: string; anchor?: string }> = [];
-        threadMessages.each((_i, msg) => {
-          const $msg = $(msg);
-          messages.push({
-            name: $msg.find("author").first().text(),
-            date: ($msg.find("timestamp").first().text() || "").split(" ")[0] || "",
-            time: ($msg.find("timestamp").first().text() || "").split(" ")[1] || "",
-            anchor: $msg.attr("anchor") || undefined,
-          });
-        });
-
-        messages.forEach((m, i) => {
-          const ms = Date.parse(`${m.date}T${m.time}`);
-          const key = m.anchor ? m.anchor : `${m.name}-${ms}`;
-          if (normalizedLinks[i]) {
-            linkByAnchor[key] = normalizedLinks[i];
-          }
-        });
-      }
+      // Second pass: fill any unmapped message using stable index order.
+      threadMessageList.forEach((m, i) => {
+        const ms = Date.parse(`${m.date}T${m.time}`);
+        const fallbackKey = `${m.name}-${ms}`;
+        const primaryKey = m.anchor || fallbackKey;
+        if (!linkByAnchor[primaryKey] && normalizedLinks[i]) {
+          linkByAnchor[primaryKey] = normalizedLinks[i];
+        }
+        // Also seed the name-date key to support components that use legacy lookup.
+        if (!linkByAnchor[fallbackKey] && normalizedLinks[i]) {
+          linkByAnchor[fallbackKey] = normalizedLinks[i];
+        }
+      });
     }
 
     const entry = {
