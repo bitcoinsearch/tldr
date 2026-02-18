@@ -5,6 +5,8 @@ import { PostSummaryData } from "@/helpers/types";
 import { hexToString } from "@/helpers/utils";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 const ReplyPage = async ({ params }: any) => {
   const replyId = params["reply-id"].split("/")[0];
   const allPath = replyId.split("-");
