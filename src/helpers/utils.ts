@@ -564,6 +564,8 @@ export function getSortedPosts(
       return posts.filter((post) => post.dev_name === "bitcoin-dev");
     case "delvingbitcoin":
       return posts.filter((post) => post.dev_name === "delvingbitcoin");
+    case "lightning-dev":
+      return posts.filter((post) => post.dev_name === "lightning-dev");
     case "all":
       return posts;
     default:

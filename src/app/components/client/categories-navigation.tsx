@@ -5,14 +5,17 @@ import Image from "next/image";
 import React, { useCallback } from "react";
 import BitcoinDevIcon from "./icons/bitcoin-dev-icon";
 import DelvingBitcoinIcon from "./icons/delving-bitcoin-icon";
+import LightningDevIcon from "./icons/lightning-dev-icon";
 
 type CategoriesProps = {
   setSortKey: React.Dispatch<React.SetStateAction<SortKey>>;
   sortKey: SortKey;
+  isAllActivities?: boolean;
 };
 const CategoriesNavigation: React.FC<CategoriesProps> = ({
   sortKey,
   setSortKey,
+  isAllActivities,
 }) => {
   
   const getActiveClass = useCallback((key: SortKey) => {
@@ -50,6 +53,15 @@ const CategoriesNavigation: React.FC<CategoriesProps> = ({
         <BitcoinDevIcon className={`${sortKey === "bitcoin-dev" ? "" : "text-orange-custom-100"}`}/>
         <p className="text-base leading-[22.56px] capitalize">Bitcoin Dev</p>
       </button>
+      {isAllActivities && <button
+        className={`hidden sm:flex items-center gap-1 bg-gray-custom-1000 rounded-full px-2 py-[2.5px] w-fit ${getActiveClass(
+          "lightning-dev"
+        )}`}
+        onClick={() => setSortKey("lightning-dev")}
+      >
+        <LightningDevIcon className={`${sortKey === "lightning-dev" ? "" : "text-orange-custom-100"}`}/>
+        <p className="text-base leading-[22.56px] capitalize">Lightning Dev</p>
+      </button>}
     </section>
   );
 };

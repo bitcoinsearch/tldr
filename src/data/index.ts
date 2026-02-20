@@ -63,7 +63,7 @@ export const summariesSectionData = [
     subtext: "",
     icon: "/icons/lightning-icon.svg",
     backgroundColor: "#000000",
-    route: "?dev=lightning-dev#source",
+    route: "?dev=lightning-dev&source=all-activity",
   },
 ];
 
