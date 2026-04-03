@@ -11,6 +11,60 @@ mailchimp.setConfig({
   server: process.env.MAILCHIMP_SERVER_PREFIX,
 });
 
+type NewsletterHighlight = {
+  id: string;
+  type: string;
+  title: string;
+  content: string;
+  link?: string;
+  start_date: string; // YYYY-MM-DD
+  end_date: string;   // YYYY-MM-DD
+};
+
+const getActiveHighlights = (): NewsletterHighlight[] => {
+  try {
+    const highlightsPath = path.resolve(__dirname, "../../newsletter-events.json");
+    const data = fs.readFileSync(highlightsPath, "utf-8");
+    const highlights = JSON.parse(data) as NewsletterHighlight[];
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return highlights.filter((h) => {
+      const start = new Date(h.start_date);
+      const end = new Date(h.end_date);
+      end.setHours(23, 59, 59, 999);
+      return today >= start && today <= end;
+    });
+  } catch (err) {
+    console.error("Failed to load newsletter-highlights.json:", err);
+    return [];
+  }
+};
+
+function generateHighlightsHTML(highlights: NewsletterHighlight[]): string {
+  if (highlights.length === 0) return "";
+
+  const items = highlights
+    .map(
+      (h) => `
+      <tr>
+        <td style="padding-bottom: 12px;">
+          <div style="background-color: #FDE9C8; border: 1px solid #3D3D3D; border-radius: 6px; padding: 16px 20px;">
+            <p style="font-size: 16px; font-weight: 600; margin: 0 0 4px 0;">${h.title}</p>
+            <p style="font-size: 15px; margin: 0; line-height: 1.5;">${h.content}${h.link ? ` <a href="${h.link}" style="color: #000; text-decoration: underline;">Learn more →</a>` : ""}</p>
+          </div>
+        </td>
+      </tr>`
+    )
+    .join("");
+
+  return `
+  <div style="padding-top: 24px;">
+    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+      ${items}
+    </table>
+  </div>`;
+}
+
 type NewsLetter = {
   id: string;
   title: string;
@@ -238,7 +292,7 @@ function generateHTMLForPost(post: NewsLetter) {
 }
 
 // Function to generate the HTML content for the newsletter
-function generateHTMLTemplate(data: NewsLetterDataType) {
+function generateHTMLTemplate(data: NewsLetterDataType, highlights: NewsletterHighlight[] = []) {
   let words = data.summary_of_threads_started_this_week.split("\n\n");
 
   let summary = words.slice(0, 4).join(" <br/> <br/> ");
@@ -422,6 +476,8 @@ function generateHTMLTemplate(data: NewsLetterDataType) {
         </tr>
       </table>
 
+      ${generateHighlightsHTML(highlights)}
+
       <!-- Summary -->
       <div style="padding-top: 24px">
         <div>
@@ -477,7 +533,8 @@ const sendNewsletter = async (): Promise<void> => {
       return;
     }
 
-    const htmlContent = generateHTMLTemplate(currentNewsletter);
+    const highlights = getActiveHighlights();
+    const htmlContent = generateHTMLTemplate(currentNewsletter, highlights);
 
     // Only send the newsletter if the environment is production
     if (process.env.NODE_ENV === "production") {
