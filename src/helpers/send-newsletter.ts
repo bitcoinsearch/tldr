@@ -23,7 +23,7 @@ type NewsletterHighlight = {
 
 const getActiveHighlights = (): NewsletterHighlight[] => {
   try {
-    const highlightsPath = path.resolve(__dirname, "../../newsletter-events.json");
+    const highlightsPath = path.resolve(__dirname, "../../newsletter-highlights.json");
     const data = fs.readFileSync(highlightsPath, "utf-8");
     const highlights = JSON.parse(data) as NewsletterHighlight[];
     const today = new Date();
@@ -35,7 +35,7 @@ const getActiveHighlights = (): NewsletterHighlight[] => {
       return today >= start && today <= end;
     });
   } catch (err) {
-    console.error("Failed to load newsletter-highlights.json:", err);
+    console.error("Failed to load newsletter-hightlights.json:", err);
     return [];
   }
 };

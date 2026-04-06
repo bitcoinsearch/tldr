@@ -1,6 +1,6 @@
 # How to Add Events to the Newsletter
 
-Edit `newsletter-events.json` at the root of the repo to announce events BDP is attending. The entry appears as a banner at the top of the weekly newsletter and is automatically shown/hidden based on the date range.
+Edit `newsletter-highlights.json` at the root of the repo to announce events BDP is attending. The entry appears as a banner at the top of the weekly newsletter and is automatically shown/hidden based on the date range.
 
 ## Example entry
 
