@@ -106,7 +106,14 @@ export const getSummaryData = async (
     const summaryInfo = getSummaryDataInfo(path, fileContent);
     const result = await summaryInfo;
     if (result.data.generatedUrl && result.data.generatedUrl.includes("lightning-dev")) {
-      result.data.generatedUrl = "https://www.mail-archive.com/lightning-dev@lists.linuxfoundation.org/";
+      const title = result.data.title.replace("Combined summary - ", "");
+      const firstAuthor = result.data.authors.find((a) => a.name.length > 1)?.name ?? "";
+      const query = firstAuthor ? `${title} ${firstAuthor}` : title;
+      const searchParams = new URLSearchParams({
+        q: query,
+        l: "lightning-dev@lists.linuxfoundation.org",
+      });
+      result.data.generatedUrl = `https://www.mail-archive.com/search?${searchParams}`;
     }
     return result;
   } catch (err) {
