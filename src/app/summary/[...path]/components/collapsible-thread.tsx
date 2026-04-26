@@ -113,19 +113,6 @@ export const CollapsibleThread = ({
   
   
 
-  // Scroll to active message when component mounts
-  useEffect(() => {
-    if (activeMessageRef.current && currentReplyLink && !isPostSummary) {
-      // Small delay to ensure the tree is fully rendered
-      setTimeout(() => {
-        activeMessageRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center'
-        });
-      }, 100);
-    }
-  }, [currentReplyLink, isPostSummary]);
-
   // Check if this is a legacy flat structure (no threading data)
   const hasThreadingData = authors.some(author => 
     author.depth !== undefined && author.depth > 0
@@ -174,7 +161,7 @@ export const CollapsibleThread = ({
     const rootNodes: ThreadNode[] = [];
 
     // Create nodes for all authors
-    authors.forEach((author, index) => {
+    authors.forEach((author) => {
       const nodeId = author.anchor || `${author.name}-${author.dateInMS}`;
       nodeMap.set(nodeId, {
         author,
