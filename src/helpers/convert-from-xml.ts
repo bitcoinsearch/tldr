@@ -325,6 +325,18 @@ export const convertXmlToText = async (
         }
       }
     }
+    // Last resort: if no author data was found at all, synthesise one entry from
+    // the entry's <published> date so the date range is never "Invalid Date".
+    if (authorsForFeed.length === 0) {
+      const published = $(element).find(xmlElements.published).text();
+      if (published) {
+        const parts = published.includes("T")
+          ? published.replace(/\.\d{3}Z$/, "").replace(/\+\d{2}:\d{2}$/, "").split("T")
+          : published.split(" ");
+        authorsForFeed = [{ name: "", date: parts[0] || "", time: parts[1] || "" }];
+      }
+    }
+
     const newEntry = { ...entry, authors: authorsForFeed, historyLinks } as any;
     (newEntry as any).linkByAnchor = linkByAnchor;
     formattedData = newEntry;

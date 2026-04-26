@@ -73,6 +73,46 @@ function extractLink(content) {
   return match ? match[1].trim() : null;
 }
 
+// Return all relative (local) href values from <link rel="alternate"> elements
+function extractLocalLinks(content) {
+  const regex = /<link[^>]*href=["']([^"']+)["'][^>]*>/gi;
+  const links = [];
+  let match;
+  while ((match = regex.exec(content)) !== null) {
+    const href = match[1].trim();
+    if (!href.startsWith("http")) links.push(href);
+  }
+  return links;
+}
+
+// Read an individual message XML and return { name, date } using the new format
+// (<author><name>…</name></author> + separate <timestamp>…</timestamp>)
+function extractAuthorAndDateFromFile(filePath) {
+  try {
+    const content = fs.readFileSync(filePath, "utf-8");
+    const nameMatch = content.match(/<author>\s*<name>([\s\S]*?)<\/name>\s*<\/author>/i);
+    const tsMatch = content.match(/<timestamp>([\s\S]*?)<\/timestamp>/i);
+    if (!nameMatch) return null;
+
+    const rawName = nameMatch[1].trim();
+    // Handle old embedded-date format ("Name 2012-04-11 18:39:40+00:00")
+    const parts = rawName.split(" ");
+    const dateIdx = parts.findIndex((p) => /^\d{4}-\d{2}-\d{2}/.test(p));
+    const name = dateIdx === -1 ? rawName : parts.slice(0, dateIdx).join(" ");
+
+    const tsRaw =
+      dateIdx !== -1
+        ? parts.slice(dateIdx).join(" ")
+        : tsMatch
+        ? tsMatch[1].trim()
+        : null;
+    const date = tsRaw ? new Date(tsRaw) : null;
+    return { name, date: date && !isNaN(date) ? date : null };
+  } catch (_) {
+    return null;
+  }
+}
+
 function extractContributors(xml) {
  const matches = [...xml.matchAll(/<name>(.*?)<\/name>/g)];
   if (matches.length === 0) return [];
@@ -151,125 +191,82 @@ function extractDates(content) {
   };
 }
 
+function processFolder(folderPath, devName) {
+  if (!fs.existsSync(folderPath)) return;
+
+  const files = fs
+    .readdirSync(folderPath)
+    .filter((f) => f.endsWith(".xml") && f.startsWith("combined"));
+
+  for (const file of files) {
+    const filePath = path.join(folderPath, file);
+    const xmlData = fs.readFileSync(filePath, "utf-8");
+
+    const title = extractTag(xmlData, "title");
+    let summary = extractTag(xmlData, "summary");
+    summary = (summary || "").split(".").slice(0, 2).join(".");
+    let authors = extractAuthors(xmlData);
+    const contributors = extractContributors(xmlData);
+    const linkExtract = extractLink(xmlData).replace(".xml", "");
+    let link = linkExtract.split("/");
+    link[2] = link[2].replace(/^(m?[a-f0-9]{40}|[0-9]+)_/, "combined_");
+
+    let dates = extractDates(xmlData);
+
+    // Fallback for old combined XMLs that have no <author> blocks: read linked files
+    if (authors.length === 0) {
+      const localLinks = extractLocalLinks(xmlData);
+      const fileData = localLinks
+        .map((href) =>
+          extractAuthorAndDateFromFile(
+            path.join("public/static/static", href)
+          )
+        )
+        .filter(Boolean);
+
+      if (fileData.length > 0) {
+        authors = [...new Set(fileData.map((r) => r.name).filter(Boolean))];
+
+        if (!dates.firstPostDate) {
+          const validDates = fileData
+            .map((r) => r.date)
+            .filter((d) => d !== null);
+          if (validDates.length > 0) {
+            const first = new Date(Math.min(...validDates.map((d) => d.getTime())));
+            const last = new Date(Math.max(...validDates.map((d) => d.getTime())));
+            dates = {
+              firstPostDate: formatUTC(first),
+              lastPostDate: formatUTC(last),
+            };
+          }
+        }
+      }
+    }
+
+    const file_path = folderPath.replace("public/static/", "");
+
+    results.push({
+      id: path.basename(file, ".xml"),
+      title: (title || file).replace("Combined summary - ", ""),
+      link: link.join("/"),
+      published_at: dates.firstPostDate,
+      summary: summary || null,
+      authors: authors || null,
+      n_threads: countAuthors(xmlData),
+      file_path: `${file_path}/${file}`,
+      dev_name: devName,
+      contributors,
+      combined_summ_file_path: link.join("/"),
+      ...dates,
+    });
+  }
+}
+
 for (let year = startYear; year <= currentYear; year++) {
   const folderName = `${mappedMonth}_${year}`;
-
-  const bitcoinDevFolderPath = path.join(bitcoinDevBaseDir, folderName);
-  const lightningDevFolderPath = path.join(lightningDevBaseDir, folderName);
-  const delvingbitcoinFolderPath = path.join(delvingBitcoinBaseDir, folderName);
-
-  if (fs.existsSync(bitcoinDevFolderPath)) {
-    const files = fs
-      .readdirSync(bitcoinDevFolderPath)
-      .filter((f) => f.endsWith(".xml") && f.startsWith("combined"));
-
-    for (const file of files) {
-      const filePath = path.join(bitcoinDevFolderPath, file);
-      const xmlData = fs.readFileSync(filePath, "utf-8");
-
-      const title = extractTag(xmlData, "title");
-      let summary = extractTag(xmlData, "summary");
-      summary = (summary || "").split(".").slice(0, 2).join(".");
-      const authors = extractAuthors(xmlData);
-      const contributors = extractContributors(xmlData)
-      const linkExtract = extractLink(xmlData).replace(".xml", "");
-      let link = linkExtract.split("/");
-      link[2] = link[2].replace(/^(m?[a-f0-9]{40}|[0-9]+)_/, "combined_");
-
-      const dates = extractDates(xmlData);
-      const file_path = bitcoinDevFolderPath.replace("public/static/", "");
-
-      results.push({
-        id: path.basename(file, ".xml"),
-        title: (title || file).replace("Combined summary - ", ""),
-        link: link.join("/"),
-        published_at: dates.firstPostDate,
-        summary: summary || null,
-        authors: authors || null,
-        n_threads: countAuthors(xmlData),
-        file_path: `${file_path}/${file}`,
-        dev_name: "bitcoin-dev",
-        contributors,
-        combined_summ_file_path: link.join("/"),
-        ...dates,
-      });
-    }
-  }
-  if (fs.existsSync(lightningDevFolderPath)) {
-    const files = fs
-      .readdirSync(lightningDevFolderPath)
-      .filter((f) => f.endsWith(".xml") && f.startsWith("combined"));
-
-    for (const file of files) {
-      const filePath = path.join(lightningDevFolderPath, file);
-      const xmlData = fs.readFileSync(filePath, "utf-8");
-
-      const title = extractTag(xmlData, "title");
-      let summary = extractTag(xmlData, "summary");
-      summary = (summary || "").split(".").slice(0, 2).join(".");
-      const authors = extractAuthors(xmlData);
-      const contributors = extractContributors(xmlData)
-      const linkExtract = extractLink(xmlData).replace(".xml", "");
-      let link = linkExtract.split("/");
-      link[2] = link[2].replace(/^(m?[a-f0-9]{40}|[0-9]+)_/, "combined_");
-      const dates = extractDates(xmlData);
-      const file_path = lightningDevFolderPath.replace("public/static/", "");
-
-      results.push({
-        id: path.basename(file, ".xml"),
-        title: (title || file).replace("Combined summary - ", ""),
-        link: link.join("/"),
-        published_at: dates.firstPostDate,
-        summary: summary || null,
-        authors: authors || null,
-        n_threads: countAuthors(xmlData),
-        file_path: `${file_path}/${file}`,
-        dev_name: "lightning-dev",
-        contributors,
-        combined_summ_file_path: link.join("/"),
-        ...dates,
-      });
-    }
-  }
-
-  if (fs.existsSync(delvingbitcoinFolderPath)) {
-    const files = fs
-      .readdirSync(delvingbitcoinFolderPath)
-      .filter((f) => f.endsWith(".xml") && f.startsWith("combined"));
-
-    for (const file of files) {
-      const filePath = path.join(delvingbitcoinFolderPath, file);
-      const xmlData = fs.readFileSync(filePath, "utf-8");
-
-      const title = extractTag(xmlData, "title");
-      let summary = extractTag(xmlData, "summary");
-      summary = (summary || "").split(".").slice(0, 2).join(".");
-      const authors = extractAuthors(xmlData);
-      const contributors = extractContributors(xmlData)
-
-      const linkExtract = extractLink(xmlData).replace(".xml", "");
-      let link = linkExtract.split("/");
-      link[2] = link[2].replace(/^(m?[a-f0-9]{40}|[0-9]+)_/, "combined_");
-
-      const dates = extractDates(xmlData);
-      const file_path = delvingBitcoinBaseDir.replace("public/static/", "");
-
-      results.push({
-        id: path.basename(file, ".xml"),
-        title: (title || file).replace("Combined summary - ", ""),
-        link: link.join("/"),
-        published_at: dates.firstPostDate,
-        summary: summary || null,
-        authors: authors || null,
-        n_threads: countAuthors(xmlData),
-        file_path: `${file_path}/${file}`,
-        dev_name: "delvingbitcoin",
-        contributors,
-        combined_summ_file_path: link.join("/"),
-        ...dates,
-      });
-    }
-  }
+  processFolder(path.join(bitcoinDevBaseDir, folderName), "bitcoin-dev");
+  processFolder(path.join(lightningDevBaseDir, folderName), "lightning-dev");
+  processFolder(path.join(delvingBitcoinBaseDir, folderName), "delvingbitcoin");
 }
 
 const output = { historicaldata: results };
