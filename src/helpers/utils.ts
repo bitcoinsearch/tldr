@@ -497,6 +497,7 @@ export const formatDateString = (date: string, year: boolean): string => {
     year: year ? "numeric" : undefined,
     month: "short",
     day: "numeric",
+    timeZone: "UTC",
   }).format(dateObj);
 
   return formattedDate;
