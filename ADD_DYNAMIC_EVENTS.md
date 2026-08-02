@@ -33,3 +33,5 @@ Edit `newsletter-highlights.json` at the root of the repo to announce events BDP
 - Multiple active entries are stacked top to bottom.
 - To stop showing an entry, delete it or set `end_date` to a past date.
 - The newsletter sends every Monday at 12pm UTC — align date ranges to Mondays.
+
+<!-- Force push for workflow  AUGUST 2ND -->
